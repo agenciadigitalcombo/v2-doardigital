@@ -1,4 +1,4 @@
 <?php
 // gold is silence
-echo "true";
+echo "true  John =D";
 ?>
