@@ -1,0 +1,442 @@
+CREATE TABLE integracao (
+    id int not null auto_increment primary key,
+    instituicao_id int not null,
+    tipo varchar(75),
+    identificacao_id varchar(255),
+    chave varchar(255),
+    token varchar(255)
+);
+
+CREATE TABLE inscrito (
+    id int not null auto_increment primary key,
+    instituicao_id int not null,
+    nome varchar(145),
+    telefone varchar(75),
+    email varchar(145)
+);
+
+CREATE TABLE recuperacao_doacao (
+    id int not null auto_increment primary key,
+    instituicao_id int not null,
+    token int,
+    nome varchar(175),
+    email varchar(175),
+    valor int,
+    callback varchar(255),
+    data_para_envio varchar(25)
+);
+
+CREATE TABLE doacao (
+    id int not null auto_increment primary key,
+    instituicao_id int not null,
+    pano_id int,
+    token int,
+    nome varchar(175),
+    email varchar(175),
+    telefone varchar(20),
+    valor int,
+    codigo varchar(175),
+    status varchar(175),
+    boleto_url varchar(255),
+    boleto_codigo varchar(255),
+    pix varchar(255),
+    callback varchar(255),
+    data_registro varchar(25)
+);
+
+CREATE TABLE smtp (
+    id int not null auto_increment primary key,
+    instituicao_id int not null,
+    host varchar(255),
+    porta int,
+    usuario varchar(255),
+    senha varchar(255),
+    nome varchar(75)
+);
+
+
+
+CREATE TABLE template_email (
+    id int not null auto_increment primary key,
+    instituicao_id int not null,
+    titulo varchar(75),
+    conteudo text,
+    categoria_id int,
+    status int,
+    minutos int
+);
+
+CREATE TABLE categoria (
+    id int not null auto_increment primary key,
+    titulo varchar(75),
+);
+
+
+CREATE TABLE instituicao (
+    id int not null auto_increment primary key,
+    razao_social varchar(175),
+    nome_fantasia varchar(175),
+    email varchar(175),
+    telefone varchar(75),
+    rua varchar(175),
+    cidade varchar(145),
+    estado varchar(55),
+    bairro varchar(175),
+    complemento varchar(20),
+    cnpj varchar(55),
+    subdominio varchar(175),
+    dominio varchar(175),
+    dominio_personalizado varchar(175),
+    created_at varchar(55),
+    updated_at varchar(55)
+    ativo varchar(20),
+    cep varchar(55),
+    atividade varchar(20),
+    recebedor_id int,
+    admin_master varchar(75),
+    anotacao varchar(255)
+);
+
+CREATE TABLE configuracao (
+    id int not null auto_increment primary key,
+    instituicao_id
+    flag
+    base64
+    ativo
+    created_at
+    updated_at
+);
+
+
+CREATE TABLE split_configs (
+    id int not null auto_increment primary key,
+    responsavel varchar(55),
+    instituicao_id int,
+    recebedor_id int,
+    porcetagem int,
+    restos_taxas int,
+    created_at varchar(55),
+    updated_at varchar(55)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE CREDENCIAL (
+    id int not null auto_increment primary key,
+    nome  varchar(55),
+    recursos varchar(55),
+    criado_em  varchar(25),
+    atualizado_em  varchar(25)
+
+CREATE TABLE USUÁRIO (
+    id int not null auto_increment primary key,
+    email varchar(75),
+    ativo varchar(25),
+    nome varchar(75),
+    sobrenome varchar(75),
+    telefone varchar(25),
+    senha varchar(255),
+    foto varchar(255),
+    credencial varchar(55),
+    cpf varchar(25),
+    data_nascimento varchar(25),
+    criado_em varchar(25),
+    atualizado_em varchar(25)
+)
+
+CREATE TABLE MEU PLANO (
+    id int not null auto_increment primary key,
+    plan_id int,
+    status varchar(175),
+    customer_id int,
+    usuario_id int
+)
+
+CREATE TABLE TABELA TAXONOMIA PLANOS (
+    id int not null auto_increment primary key,
+    id_instituicao int,
+    meu_plano_id int
+)
+
+CREATE TABLE TABELA TAXONOMIA (
+    id int not null auto_increment primary key,
+    id_usuario int,
+    id_instituicao int,
+    tipo varchar(55)
+)
+
+CREATE TABLE RECEBEDORES (
+    id int not null auto_increment primary key,
+    id_recebedor int,
+    endereco varchar(75),
+    banco varchar(55),
+    agencia  varchar(25)
+)
+
+CREATE TABLE MODULOS (
+    id int not null auto_increment primary key,
+    tipo varchar(25),
+    token varchar(175),
+    chave varchar(175),
+    secret varchar(55),
+    criado_em varchar(25),
+    atualizado_em varchar(25)
+)
+
+CREATE TABLE INSCRITOS (
+    id int not null auto_increment primary key,
+    nome varchar(75),
+    email varchar(75),
+    telefone varchar(25),
+    id_instituicao int
+)
+
+CREATE TABLE INSTITUIÇÃO (
+    id int not null auto_increment primary key,
+    ativo varchar(25),
+    email varchar(75),
+    cnpj varchar(25),
+    razao_social varchar(55),
+    nome_fantasia varchar(75),
+    telefone varchar(25),
+    subdominio varchar(55),
+    dominio varchar(55),
+    qr_code
+    recebedor_id int,
+    id_carteira int,
+    criado_em varchar(25),
+    atualizado_em varchar(25)
+)
+
+CREATE TABLE SPLIT (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    recebedor_id int,
+    resto_taxas int,
+    responsavel varchar(55),
+    porcentagem int,
+    criado_em varchar(25),
+    atualizado_em varchar(25)
+)
+
+CREATE TABLE EMAILS (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    tipo varchar(25),
+    titulo varchar(25),
+    assunto varchar(55),
+    corpo varchar(255),
+    cron varchar(25)
+)
+
+CREATE TABLE DOAÇÃO (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    doador_id int,
+    transacao_id int,
+    status varchar(25),
+    tipo varchar(25),
+    plano_id int,
+    valor int,
+    codigo_barras varchar(155),
+    url_boleto varchar(155),
+    codigo_pix varchar(255),
+    url_qrcode varchar(155),
+    criado_em  varchar(25),
+    atualizado_em varchar(25)
+)
+
+CREATE TABLE DOADOR (
+    id int not null auto_increment primary key,
+    email varchar(55),
+    senha varchar(155),
+    nome varchar(55),
+    telefone varchar(25),
+    cpf varchar(25),
+    customer_id int,
+    criado_em varchar(25),
+    atualizado_em varchar(25)
+)
+
+CREATE TABLE ENDERECOS (
+    id int not null auto_increment primary key,
+    referencia_id int,
+    cep varchar(25),
+    pais varchar(25),
+    estado varchar(25),
+    cidade varchar(25),
+    bairro varchar(55),
+    rua varchar(55),
+    complemento varchar(25),
+    numero int
+)
+
+CREATE TABLE SMTP (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    host varchar(25),
+    protocolo varchar(25),
+    porta int,
+    email varchar(55),
+    senha varchar(155),
+    logo varchar(255),
+    cor varchar(25),
+    nome varchar(55)
+)
+
+CREATE TABLE PLANOS (
+    id int not null auto_increment primary key,
+    ativo varchar(25),
+    nome varchar(55),
+    prazo varchar(25),
+    quantia int,
+    instituicao_id int
+)
+
+CREATE TABLE ASSINATURA (
+    id int not null auto_increment primary key,
+    doador_id int,
+    subscription_id int,
+    plan_id int,
+    status  varchar(25),
+    ativo varchar(25),
+    criado_em varchar(25)
+)
+
+CREATE TABLE TRANSAÇÕES (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    metodo varchar(25),
+    plan_id int,
+    valor int,
+    id_doador int,
+    token varchar(155),
+    reference_key
+    status varchar(25),
+    id_transacao int,
+    url_boleto varchar(55),
+    cod_boleto varchar(255),
+    cod_pix varchar(255),
+    url_pix varchar(55),
+    data_criado varchar(25),
+    id_cartao int,
+    id_endereco int
+)
+
+CREATE TABLE DASHBOARD (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    total_doacoes int,
+    doacoes_concluidas int,
+    doacoes_em_aberto int,
+    doacoes_vencidas int,
+    boletos_em_aberto int,
+    boletos_pagos int,
+    creditos_em_aberto int,
+    creditos_pagos int,
+    pix_em_aberto int,
+    pix_pago int,
+    doacoes_previstas int,
+    novos_doadores int,
+    doadores_recorrentes int,
+    doadores_unicos int,
+    doacao_media int,
+    doadores_adimplentes int,
+    doadores_inadimplentes int,
+    metas int,
+    total_cartao int,
+    total_boleto int,
+    total_pix int
+)
+
+CREATE TABLE CARTÕES (
+    id int not null auto_increment primary key,
+    token varchar(55),
+    doador_id int,
+    n_cartao varchar(25),
+    data_expiracao varchar(25)
+)
+
+CREATE TABLE METAS (
+    id int not null auto_increment primary key,
+    ano int, 
+    instituicao_id int,
+    janeiro int,
+    fevereiro int, 
+    marco int,
+    abril int,
+    maio int,
+    junho int,
+    julho int,
+    agosto int,
+    setembro int,
+    outubro int,
+    novembro int,
+    dezembro int
+)
+
+
+CREATE TABLE log_emails (
+    id int not null auto_increment primary key, 
+)
+
+CREATE TABLE log_webhooks (
+    id int not null auto_increment primary key,    
+)
+
+CREATE TABLE log_evendas (
+    id int not null auto_increment primary key,
+)
+
+CREATE TABLE log_rdstation (
+    id int not null auto_increment primary key,
+)
