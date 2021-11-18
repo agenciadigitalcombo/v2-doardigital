@@ -60,24 +60,24 @@ CREATE TABLE INSTITUIÇÃO (
 );
 
 
-recebedor (
-    id
-    recebedor_id
-    nome_referencia
-    nome
-    anticipatable_volume_percentage
-    automatic_anticipation_enabled
-    bank_account_id
-    transfer_day
-    transfer_enabled
-    transfer_interval
-    type
-    document_number
-    name
-    email
-    ddd
-    number
-)
+CREATE TABLE recebedor (
+    id int not null auto_increment primary key,
+    recebedor_id int, 
+    nome_referencia varchar(55),
+    nome varchar(75),
+    anticipatable_volume_percentage varchar(25),
+    automatic_anticipation_enabled varchar(25),
+    bank_account_id int,
+    transfer_day varchar(55),
+    transfer_enabled varchar(55),
+    transfer_interval varchar(55),
+    type varchar(55),
+    document_number int,
+    name varchar(75),
+    email varchar(75),
+    ddd varchar(25),
+    number int 
+);
 
 
 
