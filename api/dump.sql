@@ -1,26 +1,85 @@
-CREATE TABLE CREDENCIAL (
-    id int not null auto_increment primary key,
-    nome  varchar(55),
-    recursos varchar(55),
-    criado_em  varchar(25),
-    atualizado_em  varchar(25)
-);
-
-CREATE TABLE USUÁRIO (
+CREATE TABLE adm (
     id int not null auto_increment primary key,
     email varchar(75),
-    ativo varchar(25),
+    status
     nome varchar(75),
-    sobrenome varchar(75),
+    telefone varchar(25),
+    pass
+    foto varchar(255),
+    step
+    cpf varchar(25),
+    data_registro
+    secret
+    super_adm int
+);
+
+
+CREATE TABLE sub_adm (
+    id int not null auto_increment primary key,
+    email varchar(75),
+    status
+    nome varchar(75),
     telefone varchar(25),
     senha varchar(255),
     foto varchar(255),
+    secret
     credencial varchar(55),
-    cpf varchar(25),
-    data_nascimento varchar(25),
-    criado_em varchar(25),
-    atualizado_em varchar(25)
 );
+
+
+CREATE TABLE CREDENCIAL (
+    id int not null auto_increment primary key,
+    nome  varchar(55),
+);
+
+
+CREATE TABLE recursos_painel (
+    id int not null auto_increment primary key,
+    nome  varchar(55),
+);
+
+
+CREATE TABLE  TAXONOMIA (
+    from_id int,
+    to_id int,
+    tipo_relacao 
+)
+
+
+CREATE TABLE INSTITUIÇÃO (
+    id int not null auto_increment primary key,
+    status
+    email varchar(75),
+    cnpj varchar(25),
+    razao_social varchar(55),
+    nome_fantasia varchar(75),
+    telefone varchar(25),
+    sub_dominio ,
+    dominio varchar(55),
+    recebedor_id int,
+);
+
+
+recebedor (
+    id
+    recebedor_id
+    nome_referencia
+    nome
+    anticipatable_volume_percentage
+    automatic_anticipation_enabled
+    bank_account_id
+    transfer_day
+    transfer_enabled
+    transfer_interval
+    type
+    document_number
+    name
+    email
+    ddd
+    number
+)
+
+
 
 CREATE TABLE MEU PLANO (
     id int not null auto_increment primary key,
@@ -36,12 +95,7 @@ CREATE TABLE TABELA TAXONOMIA PLANOS (
     meu_plano_id int
 );
 
-CREATE TABLE TABELA TAXONOMIA (
-    id int not null auto_increment primary key,
-    id_usuario int,
-    id_instituicao int,
-    tipo varchar(55)
-)
+
 
 CREATE TABLE RECEBEDORES (
     id int not null auto_increment primary key,
@@ -69,22 +123,7 @@ CREATE TABLE INSCRITOS (
     id_instituicao int
 );
 
-CREATE TABLE INSTITUIÇÃO (
-    id int not null auto_increment primary key,
-    ativo varchar(25),
-    email varchar(75),
-    cnpj varchar(25),
-    razao_social varchar(55),
-    nome_fantasia varchar(75),
-    telefone varchar(25),
-    subdominio varchar(55),
-    dominio varchar(55),
-    qr_code
-    recebedor_id int,
-    id_carteira int,
-    criado_em varchar(25),
-    atualizado_em varchar(25)
-);
+
 
 CREATE TABLE SPLIT (
     id int not null auto_increment primary key,
