@@ -57,6 +57,9 @@ CREATE TABLE INSTITUIÇÃO (
     sub_dominio ,
     dominio varchar(55),
     recebedor_id int,
+    titulo
+    cor
+    logo
 );
 
 
