@@ -4,6 +4,7 @@ CREATE TABLE CREDENCIAL (
     recursos varchar(55),
     criado_em  varchar(25),
     atualizado_em  varchar(25)
+);
 
 CREATE TABLE USUÁRIO (
     id int not null auto_increment primary key,
@@ -19,7 +20,7 @@ CREATE TABLE USUÁRIO (
     data_nascimento varchar(25),
     criado_em varchar(25),
     atualizado_em varchar(25)
-)
+);
 
 CREATE TABLE MEU PLANO (
     id int not null auto_increment primary key,
@@ -27,13 +28,13 @@ CREATE TABLE MEU PLANO (
     status varchar(175),
     customer_id int,
     usuario_id int
-)
+);
 
 CREATE TABLE TABELA TAXONOMIA PLANOS (
     id int not null auto_increment primary key,
     id_instituicao int,
     meu_plano_id int
-)
+);
 
 CREATE TABLE TABELA TAXONOMIA (
     id int not null auto_increment primary key,
@@ -48,7 +49,7 @@ CREATE TABLE RECEBEDORES (
     endereco varchar(75),
     banco varchar(55),
     agencia  varchar(25)
-)
+);
 
 CREATE TABLE MODULOS (
     id int not null auto_increment primary key,
@@ -58,7 +59,7 @@ CREATE TABLE MODULOS (
     secret varchar(55),
     criado_em varchar(25),
     atualizado_em varchar(25)
-)
+);
 
 CREATE TABLE INSCRITOS (
     id int not null auto_increment primary key,
@@ -66,7 +67,7 @@ CREATE TABLE INSCRITOS (
     email varchar(75),
     telefone varchar(25),
     id_instituicao int
-)
+);
 
 CREATE TABLE INSTITUIÇÃO (
     id int not null auto_increment primary key,
@@ -83,7 +84,7 @@ CREATE TABLE INSTITUIÇÃO (
     id_carteira int,
     criado_em varchar(25),
     atualizado_em varchar(25)
-)
+);
 
 CREATE TABLE SPLIT (
     id int not null auto_increment primary key,
@@ -94,7 +95,7 @@ CREATE TABLE SPLIT (
     porcentagem int,
     criado_em varchar(25),
     atualizado_em varchar(25)
-)
+);
 
 CREATE TABLE EMAILS (
     id int not null auto_increment primary key,
@@ -104,7 +105,7 @@ CREATE TABLE EMAILS (
     assunto varchar(55),
     corpo varchar(255),
     cron varchar(25)
-)
+);
 
 CREATE TABLE DOAÇÃO (
     id int not null auto_increment primary key,
@@ -121,7 +122,7 @@ CREATE TABLE DOAÇÃO (
     url_qrcode varchar(155),
     criado_em  varchar(25),
     atualizado_em varchar(25)
-)
+);
 
 CREATE TABLE DOADOR (
     id int not null auto_increment primary key,
@@ -133,7 +134,7 @@ CREATE TABLE DOADOR (
     customer_id int,
     criado_em varchar(25),
     atualizado_em varchar(25)
-)
+);
 
 CREATE TABLE ENDERECOS (
     id int not null auto_increment primary key,
@@ -146,7 +147,7 @@ CREATE TABLE ENDERECOS (
     rua varchar(55),
     complemento varchar(25),
     numero int
-)
+);
 
 CREATE TABLE SMTP (
     id int not null auto_increment primary key,
@@ -168,7 +169,7 @@ CREATE TABLE PLANOS (
     prazo varchar(25),
     quantia int,
     instituicao_id int
-)
+);
 
 CREATE TABLE ASSINATURA (
     id int not null auto_increment primary key,
@@ -178,7 +179,7 @@ CREATE TABLE ASSINATURA (
     status  varchar(25),
     ativo varchar(25),
     criado_em varchar(25)
-)
+);
 
 CREATE TABLE TRANSAÇÕES (
     id int not null auto_increment primary key,
@@ -198,7 +199,7 @@ CREATE TABLE TRANSAÇÕES (
     data_criado varchar(25),
     id_cartao int,
     id_endereco int
-)
+);
 
 CREATE TABLE DASHBOARD (
     id int not null auto_increment primary key,
@@ -224,7 +225,7 @@ CREATE TABLE DASHBOARD (
     total_cartao int,
     total_boleto int,
     total_pix int
-)
+);
 
 CREATE TABLE CARTÕES (
     id int not null auto_increment primary key,
@@ -232,7 +233,7 @@ CREATE TABLE CARTÕES (
     doador_id int,
     n_cartao varchar(25),
     data_expiracao varchar(25)
-)
+);
 
 CREATE TABLE METAS (
     id int not null auto_increment primary key,
@@ -250,21 +251,21 @@ CREATE TABLE METAS (
     outubro int,
     novembro int,
     dezembro int
-)
+);
 
 
 CREATE TABLE log_emails (
     id int not null auto_increment primary key, 
-)
+);
 
 CREATE TABLE log_webhooks (
     id int not null auto_increment primary key,    
-)
+);
 
 CREATE TABLE log_evendas (
     id int not null auto_increment primary key,
-)
+);
 
 CREATE TABLE log_rdstation (
     id int not null auto_increment primary key,
-)
+);
