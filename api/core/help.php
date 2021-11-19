@@ -2,7 +2,7 @@
 
 function router($path, $action_hook)
 {
-    $black_list = ['/api', '/doardigital'];
+    $black_list = ['/api', '/doardigital', '/v2-doardigital'];
     $corruente_uri = $_SERVER['REQUEST_URI'];
     $corruente_path = parse_url($corruente_uri, PHP_URL_PATH);
     $corruente_quary = parse_url($corruente_uri, PHP_URL_QUERY);

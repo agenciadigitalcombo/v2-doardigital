@@ -1,4 +1,4 @@
-POST http://doardigital.tk/api/criar-adm
+POST http://localhost/v2-doardigital/api/criar-adm
 
 {
     "nome": "Bruno Vieira",
@@ -8,7 +8,7 @@ POST http://doardigital.tk/api/criar-adm
 }
 
 ###
-POST http://doardigital.tk/api/login
+POST http://localhost/v2-doardigital/api/login
 
 {
     "email": "br.rafael@outlook.com",
@@ -16,14 +16,14 @@ POST http://doardigital.tk/api/login
 }
 
 ###
-POST http://doardigital.tk/api/recuperar-senha
+POST http://localhost/v2-doardigital/api/recuperar-senha
 
 {
     "email": "br.rafael@outlook.com",
 }
 
 ###
-POST http://doardigital.tk/api/alterar-senha
+POST http://localhost/v2-doardigital/api/alterar-senha
 
 {
     "senha": "123123",
@@ -31,7 +31,7 @@ POST http://doardigital.tk/api/alterar-senha
 }
 
 ###
-POST http://doardigital.tk/api/atualizar-adm
+POST http://localhost/v2-doardigital/api/atualizar-adm
 
 {
     "nome": "Bruno Vieira",
@@ -40,5 +40,5 @@ POST http://doardigital.tk/api/atualizar-adm
 }
 
 ###
-GET http://doardigital.tk/api/gravatar/?email=br.rafael@outlook.com
+GET http://localhost/v2-doardigital/api/gravatar?email=br.rafael@outlook.com
 
