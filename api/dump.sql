@@ -1,37 +1,34 @@
 CREATE TABLE adm (
     id int not null auto_increment primary key,
-    email varchar(75),
-    status
     nome varchar(75),
-    telefone varchar(25),
-    pass
-    foto varchar(255),
-    step
     cpf varchar(25),
-    data_registro
-    secret
+    email varchar(75),
+    pass varchar(255),
+    telefone varchar(25),
+    foto varchar(255),
+    secret varchar(255),
+    data_registro varchar(18),
+    step int,
+    status int,
     super_adm int
 );
-
 
 CREATE TABLE sub_adm (
     id int not null auto_increment primary key,
     email varchar(75),
-    status
+    status int,
     nome varchar(75),
     telefone varchar(25),
     senha varchar(255),
     foto varchar(255),
-    secret
-    credencial varchar(55),
+    secret varchar(255),
+    credenvial_id int,
 );
 
-
-CREATE TABLE CREDENCIAL (
+CREATE TABLE credenvial (
     id int not null auto_increment primary key,
     nome  varchar(55),
 );
-
 
 CREATE TABLE recursos_painel (
     id int not null auto_increment primary key,

@@ -1,0 +1,44 @@
+POST http://doardigital.tk/api/criar-adm
+
+{
+    "nome": "Bruno Vieira",
+    "email": "br.rafael@outlook.com",
+    "senha": "123123",
+    "telefone": "(82) 9 9977-6698"
+}
+
+###
+POST http://doardigital.tk/api/login
+
+{
+    "email": "br.rafael@outlook.com",
+    "senha": "123123",
+}
+
+###
+POST http://doardigital.tk/api/recuperar-senha
+
+{
+    "email": "br.rafael@outlook.com",
+}
+
+###
+POST http://doardigital.tk/api/alterar-senha
+
+{
+    "senha": "123123",
+    "token": ""
+}
+
+###
+POST http://doardigital.tk/api/atualizar-adm
+
+{
+    "nome": "Bruno Vieira",
+    "telefone": "(82) 9 9977-6698",
+    "token": ""
+}
+
+###
+GET http://doardigital.tk/api/gravatar/?email=br.rafael@outlook.com
+
