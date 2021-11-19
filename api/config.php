@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "host" => "auth-db451.hostinger.com.br",
+    "host" => "sql451.main-hosting.eu",
     "banco" => "u437875510_doardigitalv2",
     "user" => "u437875510_digitalcombo",
     "senha" => "^2hqx&rS",

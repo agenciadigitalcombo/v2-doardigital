@@ -6,14 +6,14 @@ class Adm implements IAdm{
        $banco = new Banco();
        $sql = "SELECT * FROM adm WHERE email='$email'";
        $guard = $banco->query($sql);
-       var_dump($sql);
+       
        return !empty($guard);
          
     }
 
     public function nova_senha(int $id): string
     {
-        $senha = null;
+        $senha = '123';
         $banco = new Banco();
         $sql = "UPDATE adm SET pass='$senha' WHERE id='$id'";
         $banco->exec($sql);
@@ -64,6 +64,7 @@ class Adm implements IAdm{
         $banco = new Banco();
         $sql = "SELECT * FROM adm";
         $guard = $banco->query($sql);
+        var_dump($guard);
         return $guard;
     }
 
@@ -77,7 +78,7 @@ class Adm implements IAdm{
 
     static function teste(){
        $instacia = new Adm();
-       $instacia->exist("victorbaala@gmail.com");
+       $instacia->list_all();
     }
 }
 
