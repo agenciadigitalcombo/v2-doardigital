@@ -9,4 +9,5 @@ date_default_timezone_set('America/Sao_Paulo');
 
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/core/help.php";
+include __DIR__ . "/core/Jwt.php";
 include __DIR__ . "/core/autoload.php";
