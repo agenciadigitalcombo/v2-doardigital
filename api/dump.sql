@@ -201,6 +201,13 @@ CREATE TABLE evendas (
     canal varchar(255)
 );
 
+CREATE TABLE mailing_boss (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    token varchar(255),
+    token_uid varchar(255)
+);
+
 CREATE TABLE atlassian_correio (
     id int not null auto_increment primary key,
     instituicao_id int,
