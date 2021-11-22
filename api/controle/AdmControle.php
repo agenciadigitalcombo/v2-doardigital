@@ -18,20 +18,16 @@ class AdmControle
         $nome = $_REQUEST['nome'];
         $email = $_REQUEST['email'];
         $senha = $_REQUEST['senha'];
+        $min_num = preg_match('@[0-9]@', $senha);
+        $cripto = md5($senha);
+
+        
         $telefone = $_REQUEST['telefone'];
         $caracter = array("(", ")", " ", "-");
         $transform_tel = str_replace($caracter, "", $telefone);
-        $min_num    = preg_match('@[0-9]@', $senha);
-
-        if($adm->exist($email)){
-            echo json_encode([
-                "next" => false,
-                "message" => "Email já em uso"
-            ]);
-            return null;
-        }
-
-        if(empty($nome) and empty($email) and empty($telefone)){
+        
+        
+        if(empty($nome) or empty($email) or empty($telefone)){
             echo json_encode([
                 "next" => false,
                 "message" => "Preencha todos os campos"
@@ -46,21 +42,42 @@ class AdmControle
             ]);
             return null;
         }
+
+        if($adm->exist($email)){
+            echo json_encode([
+                "next" => false,
+                "message" => "Email já em uso"
+            ]);
+            return null;
+        } 
         
 
-        $adm->create($nome, $email, $senha, $telefone);
+        $adm->create($nome, $email, $cripto, $telefone);
         echo json_encode([
             "next" => true,
-            "message" => "Usuário logado com sucesso"
+            "message" => "Usuário criado com sucesso"
         ]);
         
         
     }
     static function login()
     {
+        $adm = new Adm();
+        $email = $_REQUEST['email'];
+        $senha = $_REQUEST['senha'];
+        $cripto = md5($senha);
+        if($adm->login($email, $senha)){
+            echo json_encode([
+                "next" => false,
+                "message" => "Email ou senha incorreto"
+            ]);
+            return null;
+        }
+
+        $adm->login($email, $senha);
         echo json_encode([
-            "next" => false,
-            "message" => "Email ou senha estão errados"
+            "next" => true,
+            "message" => "Usuário logado com sucesso"
         ]);
     }
     static function recuperar_senha()

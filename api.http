@@ -3,7 +3,7 @@ POST http://localhost/v2-doardigital/api/criar-adm
 {
     "nome": "Bruno Vieira",
     "email": "br.rafael@outlook.com",
-    "senha": "123123",
+    "senha": "12312345",
     "telefone": "(82) 9 9977-6698"
 }
 
@@ -12,7 +12,7 @@ POST http://localhost/v2-doardigital/api/login
 
 {
     "email": "br.rafael@outlook.com",
-    "senha": "123123",
+    "senha": "12312345",
 }
 
 ###
