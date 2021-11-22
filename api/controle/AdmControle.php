@@ -11,10 +11,50 @@ class AdmControle
     }
     static function criar_adm()
     {
+        //header('Content-Type: text/html; charset=utf-8');
+        
+        
+        $adm = new Adm();
+        $nome = $_REQUEST['nome'];
+        $email = $_REQUEST['email'];
+        $senha = $_REQUEST['senha'];
+        $telefone = $_REQUEST['telefone'];
+        $caracter = array("(", ")", " ", "-");
+        $transform_tel = str_replace($caracter, "", $telefone);
+        $min_num    = preg_match('@[0-9]@', $senha);
+
+        if($adm->exist($email)){
+            echo json_encode([
+                "next" => false,
+                "message" => "Email já em uso"
+            ]);
+            return null;
+        }
+
+        if(empty($nome) and empty($email) and empty($telefone)){
+            echo json_encode([
+                "next" => false,
+                "message" => "Preencha todos os campos"
+            ]);
+            return null;
+        }
+
+        if(!$min_num || strlen($senha) < 8) {
+            echo json_encode([
+                "next" => false,
+                "message" => "A senha deve ter no minimo 8 Caracters"
+            ]);
+            return null;
+        }
+        
+
+        $adm->create($nome, $email, $senha, $telefone);
         echo json_encode([
-            "next" => false,
-            "message" => "Email já em uso"
+            "next" => true,
+            "message" => "Usuário logado com sucesso"
         ]);
+        
+        
     }
     static function login()
     {
