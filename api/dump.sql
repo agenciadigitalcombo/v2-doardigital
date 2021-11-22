@@ -224,6 +224,15 @@ CREATE TABLE email_notificao (
     cron varchar(25)
 );
 
+CREATE TABLE no_replay (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    doacao_id varchar(55),
+    doacao_token varchar(255),
+    status_pagamento varchar(75),
+    data varchar(9)
+);
+
 -- acima ja foi implementado
 
 
