@@ -51,11 +51,21 @@ class AdmControle
             return null;
         } 
         
+        $jwt = new Jwt();
 
         $adm->create($nome, $email, $cripto, $transform_tel);
+        $usuario_logado = $adm->get_by_email($email);
+        $payload = [
+            'secret' => $usuario_logado['secret'],
+            'nome' => $usuario_logado['nome'],
+            'email' => $usuario_logado['email'],
+            'super_adm' => $usuario_logado['super_adm'],
+            'step' => $usuario_logado['step']
+        ];
         echo json_encode([
             "next" => true,
-            "message" => "Usuário criado com sucesso"
+            "message" => "Usuário criado com sucesso",
+            "token" => $jwt->maker($payload)
         ]);
         
         
@@ -66,7 +76,7 @@ class AdmControle
         $email = $_REQUEST['email'];
         $senha = $_REQUEST['senha'];
         $cripto = md5($senha);
-        if($adm->login($email, $senha)){
+        if($adm->login($email, $cripto)){
             echo json_encode([
                 "next" => false,
                 "message" => "Email ou senha incorreto"
@@ -74,10 +84,20 @@ class AdmControle
             return null;
         }
 
-        $adm->login($email, $senha);
+        $adm->login($email, $cripto);
+        $jwt = new Jwt();
+        $usuario_logado = $adm->get_by_email($email);
+        $payload = [
+            'secret' => $usuario_logado['secret'],
+            'nome' => $usuario_logado['nome'],
+            'email' => $usuario_logado['email'],
+            'super_adm' => $usuario_logado['super_adm'],
+            'step' => $usuario_logado['step']
+        ];
         echo json_encode([
             "next" => true,
-            "message" => "Usuário logado com sucesso"
+            "message" => "Usuário logado com sucesso",
+            'token' => $jwt->maker($payload)
         ]);
     }
     static function recuperar_senha()
@@ -113,27 +133,24 @@ class AdmControle
     static function atualizar_adm()
     {
         $adm = new Adm();
+        $jwt = new Jwt();
         $nome = $_REQUEST['nome'];
-        $id = $_REQUEST['id'];
-        $transform_id = intval($id);
+        $token = $_REQUEST['token'];
+        $token_parce = $jwt->ler($token);
         $telefone = $_REQUEST['telefone'];
         $caracter = array("(", ")", " ", "-");
         $transform_tel = str_replace($caracter, "", $telefone);
-        var_dump($_REQUEST);
+        $token_parce = $jwt->ler($token);
+        $secret = $token_parce['secret'];
+       
         
-        if($adm->get_by_id($transform_id)){
                 
-                $adm->update($nome,  $transform_tel);
-                    echo json_encode([
-                    "next" => true,
-                    "message" => "Dados atualizados"
-                ]);
-        }else{
-            echo json_encode([
-                "next" => false,
-                "message" => "Error ao atualizar"
+            $adm->update($nome,  $transform_tel, $secret);
+                echo json_encode([
+                "next" => true,
+                "message" => "Dados atualizados"
             ]);
-        }
+        
        
             
       

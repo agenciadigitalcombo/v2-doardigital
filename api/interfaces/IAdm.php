@@ -19,7 +19,8 @@ interface IAdm
 
     public function update(
         string $nome,
-        string $telefone
+        string $telefone,
+        string $secret
     ): void;
 
     public function nova_senha(
