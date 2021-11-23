@@ -82,6 +82,8 @@ class AdmControle
     }
     static function recuperar_senha()
     {
+        
+
         echo json_encode([
             "next" => true,
             "message" => "Nova senha enviada por email"
@@ -89,10 +91,24 @@ class AdmControle
     }
     static function alterar_senha()
     {
-        echo json_encode([
-            "next" => false,
-            "message" => "Error ao atualizar"
-        ]);
+
+        $adm = new Adm();
+        $senha = $_REQUEST['senha'];
+        $cripto = md5($senha);
+        $id = $_REQUEST['id'];
+        $transform_id = intval($id);
+        if($adm->get_by_id($transform_id)){
+            $adm->alterar_senha($transform_id, $cripto);
+            echo json_encode([
+                "next" => true,
+                "message" => "Senha atualizada"
+            ]);
+        }else{
+            echo json_encode([
+                "next" => false,
+                "message" => "Error ao atualizar"
+            ]);
+        }
     }
     static function atualizar_adm()
     {

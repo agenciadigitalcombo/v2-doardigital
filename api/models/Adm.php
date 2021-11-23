@@ -25,7 +25,7 @@ class Adm implements IAdm{
         $banco = new Banco();
         $sql = "SELECT * FROM adm WHERE id='$id'";
         $guard = $banco->query($sql);
-        return !empty($guard);
+        return $guard;
     }
 
     public function set_step(int $id, int $step): void
