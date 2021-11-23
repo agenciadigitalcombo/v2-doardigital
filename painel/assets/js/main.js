@@ -8,8 +8,11 @@ import routes from './domain/list-router.js'
 const router = new Router({ routes })
 
 
-import login from '../../painel/assets/js/views/login.js'
-Vue.component('c-login', login )
+import login from './views/login.js'
+Vue.component('c-login', login)
+
+// import whatsapp from './views/whatsapp'
+// Vue.component('c-whatsapp', whatsapp )
 
 const app = new Vue({
     store,
