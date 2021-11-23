@@ -52,7 +52,7 @@ class AdmControle
         } 
         
 
-        $adm->create($nome, $email, $cripto, $telefone);
+        $adm->create($nome, $email, $cripto, $transform_tel);
         echo json_encode([
             "next" => true,
             "message" => "Usuário criado com sucesso"
@@ -96,10 +96,48 @@ class AdmControle
     }
     static function atualizar_adm()
     {
-        echo json_encode([
-            "next" => false,
-            "message" => "Error ao atualizar"
-        ]);
+        $adm = new Adm();
+        $nome = $_REQUEST['nome'];
+        $email = $_REQUEST['email'];
+        $telefone = $_REQUEST['telefone'];
+        $caracter = array("(", ")", " ", "-");
+        $transform_tel = str_replace($caracter, "", $telefone);
+        var_dump($nome, $email, $telefone);
+        
+        if($adm->exist($email)){
+            if(empty($nome) or empty($email) or empty($telefone)){
+                echo json_encode([
+                    "next" => false,
+                    "message" => "Preencha todos os campos"
+                ]);
+                return null;
+            }else{
+                if($adm->update($nome,  $transform_tel)){
+                    echo json_encode([
+                    "next" => true,
+                    "message" => "Dados atualizados"
+                ]);
+                }else{
+                    $adm->update($nome,  $transform_tel);
+                    echo json_encode([
+                        "next" => false,
+                        "message" => "Error ao atualizar"
+                    ]);
+                }
+                
+            }
+
+            
+        }else{
+            echo json_encode([
+                "next" => false,
+                "message" => "Usuario nao existe"
+            ]);
+        }
+       
+            
+      
+        
     }
     static function gravatar()
     {
