@@ -63,10 +63,10 @@ class Adm implements IAdm{
         $banco->exec($sql);
     }
 
-    public function alterar_senha(int $id, string $senha): void
+    public function alterar_senha(string $secret, string $senha): void
     {
         $banco = new Banco();
-        $sql = "UPDATE adm SET pass='$senha' WHERE id='$id'";
+        $sql = "UPDATE adm SET pass='$senha' WHERE secret='$secret'";
         $banco->exec($sql);
     }
 

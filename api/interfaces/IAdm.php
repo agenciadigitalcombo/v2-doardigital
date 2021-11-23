@@ -28,7 +28,7 @@ interface IAdm
     ): string;
 
     public function alterar_senha(
-        int $id,
+        string $secret,
         string $senha
     ): void;
 

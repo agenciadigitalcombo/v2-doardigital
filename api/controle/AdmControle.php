@@ -113,22 +113,18 @@ class AdmControle
     {
 
         $adm = new Adm();
+        $jwt = new Jwt();
         $senha = $_REQUEST['senha'];
+        $token = $_REQUEST['token'];
         $cripto = md5($senha);
-        $id = $_REQUEST['id'];
-        $transform_id = intval($id);
-        if($adm->get_by_id($transform_id)){
-            $adm->alterar_senha($transform_id, $cripto);
+        $token_parce = $jwt->ler($token);
+        $secret = $token_parce['secret'];
+        
+        $adm->alterar_senha($secret, $cripto);
             echo json_encode([
                 "next" => true,
                 "message" => "Senha atualizada"
             ]);
-        }else{
-            echo json_encode([
-                "next" => false,
-                "message" => "Error ao atualizar"
-            ]);
-        }
     }
     static function atualizar_adm()
     {
