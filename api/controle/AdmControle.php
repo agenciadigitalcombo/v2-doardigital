@@ -114,40 +114,24 @@ class AdmControle
     {
         $adm = new Adm();
         $nome = $_REQUEST['nome'];
-        $email = $_REQUEST['email'];
+        $id = $_REQUEST['id'];
+        $transform_id = intval($id);
         $telefone = $_REQUEST['telefone'];
         $caracter = array("(", ")", " ", "-");
         $transform_tel = str_replace($caracter, "", $telefone);
         var_dump($_REQUEST);
         
-        if($adm->exist($email)){
-            if(empty($nome) or empty($email) or empty($telefone)){
-                echo json_encode([
-                    "next" => false,
-                    "message" => "Preencha todos os campos"
-                ]);
-                return null;
-            }else{
-                if($adm->update($nome,  $transform_tel)){
+        if($adm->get_by_id($transform_id)){
+                
+                $adm->update($nome,  $transform_tel);
                     echo json_encode([
                     "next" => true,
                     "message" => "Dados atualizados"
                 ]);
-                }else{
-                    $adm->update($nome,  $transform_tel);
-                    echo json_encode([
-                        "next" => false,
-                        "message" => "Error ao atualizar"
-                    ]);
-                }
-                
-            }
-
-            
         }else{
             echo json_encode([
                 "next" => false,
-                "message" => "Usuario nao existe"
+                "message" => "Error ao atualizar"
             ]);
         }
        
