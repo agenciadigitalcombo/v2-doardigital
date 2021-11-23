@@ -102,7 +102,7 @@ class AdmControle
         $telefone = $_REQUEST['telefone'];
         $caracter = array("(", ")", " ", "-");
         $transform_tel = str_replace($caracter, "", $telefone);
-        var_dump($nome, $email, $telefone);
+        var_dump($_REQUEST);
         
         if($adm->exist($email)){
             if(empty($nome) or empty($email) or empty($telefone)){

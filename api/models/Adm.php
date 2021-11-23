@@ -48,7 +48,7 @@ class Adm implements IAdm{
     public function update(string $nome, string $telefone): void
     {
         $banco = new Banco();
-        $sql = "UPDATE adm SET nome='$nome' AND telefone='$telefone'";
+        $sql = "UPDATE adm SET nome='$nome' OR telefone='$telefone'";
         $banco->exec($sql);
     }
 
