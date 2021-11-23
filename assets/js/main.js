@@ -7,7 +7,8 @@ Vue.use(Router)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
 
-
+import login from './views/login.js'
+Vue.component('c-login', login )
 
 const app = new Vue({
     store,
