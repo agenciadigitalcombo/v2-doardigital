@@ -111,7 +111,7 @@ export default {
                 return null
             }
             localStorage.setItem('token', res.token)
-            window.location.href = `painel/dash`
+            window.location.href = `painel/#/dash`
         },
         updateForm(event) {
             this[event.name] = event.value
