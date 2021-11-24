@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Doar Digital</title>
+    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <script src="./assets/js/index.js" defer></script>
+</head>
+
+<body>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSXHHTJP1X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-CSXHHTJP1X');
+    </script>
+    <div class="inner-box">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l6">
+                    <img src="./assets/logo/logo.svg" alt="Doar Digital" class="logo">
+                    <h1 class="branco-text">Faça seu cadastro no Doar Digital</h1>
+                    <p class="branco-text">
+                        A Doar Digital já nasceu para ser o melhor e maior sistema de Doações Cristãs da América Latina.
+                    </p>
+                    <p class="branco-text">
+                        Com tecnologia avançada e ferramentas super profissionais aliada aos mais fortes sistemas de segurança existentes hoje.
+                    </p>
+                    <p class="branco-text">
+                        Contando com a possibilidade de disparos automatizados de Whatsapp para aumentar a eficiência de todo sistema.
+                    </p>
+                    <p class="branco-text">
+                        Além disso contamos com Treinamentos exclusivos para divulgações em todos os setores sendo eles Facebook, Instagram, Google e lives.
+                    </p>
+                    <div class="box">
+                        <h4 class="branco-text">Começe agora a mudar o rumo de suas doações!</h4>
+                        <p class="branco-text">
+                            Obtenha o melhor sistema que chegou para ser o maior da America Latina. Vantagens exclusivas
+                            que você só terá aqui!
+                        </p>
+                    </div>
+                </div>
+                <div class="col s12 m12 l6">
+                    <div class="space"></div>
+                    <form action="javascript:void(0)" autocomplete="off" name="formulario"
+                        onsubmit="globalThis.cadastrar()" class="form">
+                        <input value="" type="text" name="name" placeholder="Nome" required>
+                        <input value="" type="email" name="email" placeholder="Email" required>
+                        <input value="" oninput="globalThis.maskTel(this)" type="text" name="phone"
+                            placeholder="Telefone" required>
+                        <input value="" type="password" name="password" placeholder="Senha" required>
+                        <input value="" type="password" name="password_confirm" placeholder="Confirmar senha" required>
+                        <label class="cinza-text">
+                            <input type="checkbox" required>
+                            Eu aceito todos os termos
+                        </label> <br>
+                        <div hidden>
+                            <label class="cinza-text">
+                                <input type="checkbox" name="notification_sms">
+                                Desejo receber informação via <b>WhatsApp</b>
+                            </label> <br>
+                            <label class="cinza-text">
+                                <input type="checkbox" name="notification_email">
+                                Desejo receber informação via <b>email</b>
+                            </label> <br>
+                        </div>
+                        <p class="cinza-text">
+                            Ao se cadastar você ira para uma lista de aprovação
+                            isso pode demorar 48hs, todos os termos você encontrar
+                            <a href="./termos.html" target="_blank"> clicando aqui </a>.
+                        </p>
+                        <input type="submit" value="ME CADASTRAR AGORA!">
+                        <div class="js-alert"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading js-loading" hidden></div>
+</body>
+
+</html>
