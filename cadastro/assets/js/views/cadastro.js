@@ -36,13 +36,12 @@ export default {
                     <form action="javascript:void(0)" autocomplete="off" name="formulario"
                     @submit="cadastrar" class="form">
 
-                  
-                        <input v-model="nome" value="" type="text" name="name" placeholder="Nome" required>
-                        <input v-model="email" value="" type="email" name="email" placeholder="Email" required>
-                        <input v-model="telefone" value="" oninput="globalThis.maskTel(this)" type="text" name="phone"
+                        <input v-model="nome" type="text" name="name" placeholder="Nome" required>
+                        <input v-model="email" type="email" name="email" placeholder="Email" required>
+                        <input v-model="telefone" oninput="globalThis.maskTel(this)" type="text" name="phone"
                             placeholder="Telefone" required>
-                        <input v-model="senha" value="" type="password" name="password" placeholder="Senha" required>
-                        <input  value="" type="password" name="password_confirm" placeholder="Confirmar senha" required>
+                        <input v-model="senha" type="password" name="password" placeholder="Senha" required>
+                        <input type="password" name="password_confirm" placeholder="Confirmar senha" required>
                         <label class="cinza-text">
                             <input type="checkbox" required>
                             Eu aceito todos os termos
@@ -90,7 +89,7 @@ export default {
 		return {
             nome: null,
             telefone: null,
-            email: null,
+            email: "",
             senha: null,
             error: null
         }
