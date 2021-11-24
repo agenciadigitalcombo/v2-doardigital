@@ -63,7 +63,20 @@ export default {
                             <a href="./termos.html" target="_blank"> clicando aqui </a>.
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!">
-                        <div class="js-alert"></div>
+                       	
+						<div  class="alert alert-danger" v-if="error!=null">
+						
+                        <span class="svg-icon svg-icon-2hx svg-icon-danger me-3"><i
+                                class="bi bi-droplet-half text-danger"></i></span>
+        
+
+                        <div class="d-flex flex-column" >
+        
+                            <h4 class="mb-1 text-dark">{{error}}</h4>
+                    
+                        </div>
+            
+                    </div>
                     </form>
                 </div>
             </div>
