@@ -1,3 +1,3 @@
 export default {
-    path: 'http://doardigital.tk/api'
+    path: 'https://doardigital.tk/api'
 }

@@ -38,25 +38,16 @@ function obj_to_url(obj, next_level = null) {
 async function post(path, data) {
     let base = config.path
     options.body = obj_to_url(data)
-
-    try {
-        let res = await fetch(`${base}${path}`, options)
-        let status_code = res.status
-        return await res.json()
-    } catch (error) {
-        return error_default
-    }
+    let res = await fetch(`${base}${path}`, options)
+    let status_code = res.status
+    return await res.json()
 }
 
 async function get(path, data = {}) {
     let base = config.path
-    try {
-        let res = await fetch(`${base}${path}?${obj_to_url(data)}`)
-        let res_in_json = await res.json()
-        return res_in_json
-    } catch (error) {
-        return error_default
-    }
+    let res = await fetch(`${base}${path}?${obj_to_url(data)}`)
+    let res_in_json = await res.json()
+    return res_in_json
 }
 
 export default {
