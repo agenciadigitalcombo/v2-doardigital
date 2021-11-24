@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+// import adm from "../../../../static/js/api/adm.js"
+import adm from '../../../../static/js/api/adm.js'
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Doar Digital</title>
-    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <script src="./assets/js/index.js" defer></script>
-</head>
-
-<body>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSXHHTJP1X"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-CSXHHTJP1X');
-    </script>
-    <div class="inner-box">
+export default {
+    template: `
+    
+    <div>
+        <div class="inner-box">
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l6">
@@ -48,13 +34,15 @@
                 <div class="col s12 m12 l6">
                     <div class="space"></div>
                     <form action="javascript:void(0)" autocomplete="off" name="formulario"
-                        onsubmit="globalThis.cadastrar()" class="form">
-                        <input value="" type="text" name="name" placeholder="Nome" required>
-                        <input value="" type="email" name="email" placeholder="Email" required>
-                        <input value="" oninput="globalThis.maskTel(this)" type="text" name="phone"
+                    @submit="cadastrar" class="form">
+
+                  
+                        <input v-model="nome" value="" type="text" name="name" placeholder="Nome" required>
+                        <input v-model="email" value="" type="email" name="email" placeholder="Email" required>
+                        <input v-model="telefone" value="" oninput="globalThis.maskTel(this)" type="text" name="phone"
                             placeholder="Telefone" required>
-                        <input value="" type="password" name="password" placeholder="Senha" required>
-                        <input value="" type="password" name="password_confirm" placeholder="Confirmar senha" required>
+                        <input v-model="senha" value="" type="password" name="password" placeholder="Senha" required>
+                        <input  value="" type="password" name="password_confirm" placeholder="Confirmar senha" required>
                         <label class="cinza-text">
                             <input type="checkbox" required>
                             Eu aceito todos os termos
@@ -81,7 +69,46 @@
             </div>
         </div>
     </div>
-    <div class="loading js-loading" hidden></div>
-</body>
+        </div>
 
-</html>
+
+    `,
+    data: function () {
+		return {
+            nome: null,
+            telefone: null,
+            email: null,
+            senha: null,
+            error: null
+        }
+    },
+	methods: {
+
+   async cadastrar() {
+			this.error = null
+
+            let res = await adm.cadastrar(
+           this.nome,
+           this.telefone,
+        this.email,
+        this.senha,
+        this.error
+            )
+            if (!res.next) {
+				console.log(res)
+                this.error = res.message
+                return null
+            }
+            localStorage.setItem('token', res.token)
+            window.location.href = `#/dash`
+        },
+        updateForm(event) {
+            this[event.name] = event.value
+        }
+    },
+	mounted() {
+        this.nome = localStorage.getItem('nome')
+		
+    }
+   
+}
