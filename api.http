@@ -1,22 +1,25 @@
 POST http://localhost/v2-doardigital/api/criar-adm
+Content-Type: multipart/form-data;
 
 {
     "nome": "Bruno Vieira",
     "email": "br.rafael@outlook.com",
-    "senha": "123123",
+    "senha": "12312345",
     "telefone": "(82) 9 9977-6698"
 }
 
 ###
 POST http://localhost/v2-doardigital/api/login
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {
     "email": "br.rafael@outlook.com",
-    "senha": "123123",
+    "senha": "12312345",
 }
 
 ###
 POST http://localhost/v2-doardigital/api/recuperar-senha
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {
     "email": "br.rafael@outlook.com",
@@ -24,6 +27,7 @@ POST http://localhost/v2-doardigital/api/recuperar-senha
 
 ###
 POST http://localhost/v2-doardigital/api/alterar-senha
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {
     "senha": "123123",
@@ -32,6 +36,7 @@ POST http://localhost/v2-doardigital/api/alterar-senha
 
 ###
 POST http://localhost/v2-doardigital/api/atualizar-adm
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {
     "nome": "Bruno Vieira",

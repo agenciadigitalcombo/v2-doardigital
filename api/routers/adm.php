@@ -8,4 +8,5 @@ router('/recuperar-senha', 'AdmControle@recuperar_senha');
 router('/alterar-senha', 'AdmControle@alterar_senha');
 router('/atualizar-adm', 'AdmControle@atualizar_adm');
 router('/gravatar', 'AdmControle@gravatar');
+router('/validar', 'AdmControle@validar_token');
 router('/teste', 'Adm@teste');
