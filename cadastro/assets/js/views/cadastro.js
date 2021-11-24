@@ -100,9 +100,9 @@ export default {
 
             let res = await adm.cadastrar(
            this.nome,
-           this.telefone,
         this.email,
         this.senha,
+           this.telefone,
         this.error
             )
             if (!res.next) {

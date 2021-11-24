@@ -1,7 +1,4 @@
 
-A senha deve ter no minimo 8 Caracters
-
-
 function getDados() {
     let form = document.formulario
     return {
