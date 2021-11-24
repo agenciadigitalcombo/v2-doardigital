@@ -5,8 +5,8 @@ const options = {
         'Content-Type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
-    mode: 'no-cors',
-    // cache: 'default',
+    mode: 'cors',
+    cache: 'default',
     body: null
 }
 
@@ -38,6 +38,7 @@ function obj_to_url(obj, next_level = null) {
 async function post(path, data) {
     let base = config.path
     options.body = obj_to_url(data)
+
     try {
         let res = await fetch(`${base}${path}`, options)
         let status_code = res.status
