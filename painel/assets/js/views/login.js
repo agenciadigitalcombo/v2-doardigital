@@ -17,7 +17,7 @@ export default {
 
 			<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 	
-				<form action="javascript:void(0)" class="form w-100" novalidate="novalidate"
+				<form action="javascript:void(0)" @submit="logar" class="form w-100" novalidate="novalidate"
 					id="kt_sign_in_form">
 	
 					<div class="text-center mb-10">
@@ -30,7 +30,7 @@ export default {
 						<label class="form-label fs-6 fw-bolder text-dark">Email</label>
 				
 						<input v-model="user"  class="form-control form-control-lg form-control-solid"
-							type="text" name="email" autocomplete="off" />
+							type="text" name="email" autocomplete="off" required />
 			
 					</div>
 			
@@ -46,12 +46,11 @@ export default {
 						</div>
 			
 						<input v-model="senha" class="form-control form-control-lg form-control-solid"
-							type="password" name="password" autocomplete="off" />
+							type="password" name="password" autocomplete="off" required />
 		
 					</div>
 					<div class="text-center">
-				
-						<button @click="logar" type="submit" id="kt_sign_in_submit"
+						<button type="submit" id="kt_sign_in_submit"
 							class="btn btn-lg btn-primary w-100 mb-5">
 							<span class="indicator-label">Continue</span>
 							<span class="indicator-progress">Please wait...
@@ -60,15 +59,15 @@ export default {
 						</button>
 
 					
-						<div  class="alert alert-danger">
+						<div  class="alert alert-danger" v-if="error!=null">
 						
 							<span class="svg-icon svg-icon-2hx svg-icon-danger me-3"><i
 									class="bi bi-droplet-half text-danger"></i></span>
 			
 
-							<div class="d-flex flex-column">
+							<div class="d-flex flex-column" >
 			
-								<h4 class="mb-1 text-dark">E-mail ou senha inválidos</h4>
+								<h4 class="mb-1 text-dark">{{error}}</h4>
 						
 							</div>
 				
@@ -107,19 +106,21 @@ export default {
     },
 	methods: {
         async logar() {
-            localStorage.removeItem('token')
+			this.error = null
+			
+			localStorage.removeItem('token')
             let res = await adm.login(
                 this.user,
                 this.senha
             )
-			console.log(res)
-            if (res.status === false) {
-                this.error = res.mensagem
+            if (!res.next) {
+				console.log(res)
+                this.error = res.message
                 return null
             }
             localStorage.setItem('user', this.user)
             localStorage.setItem('token', res.token)
-            // window.location.href = `#/adm`
+            window.location.href = `#/adm`
         },
         updateForm(event) {
             this[event.name] = event.value
