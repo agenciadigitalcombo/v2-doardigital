@@ -37,7 +37,7 @@ export default {
                     @submit="cadastrar" class="form">
 
                         <input v-model="nome" type="text" name="name" placeholder="Nome" required>
-                        <input v-model="email" type="email" name="email" placeholder="Email" required>
+                        <input v-model="email" type="text" name="email" placeholder="Email" required>
                         <input v-model="telefone" oninput="globalThis.maskTel(this)" type="text" name="phone"
                             placeholder="Telefone" required>
                         <input v-model="senha" type="password" name="password" placeholder="Senha" required>
