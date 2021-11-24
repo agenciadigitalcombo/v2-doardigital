@@ -1,7 +1,5 @@
-<?php
-
+<?php header('Access-Control-Allow-Origin: *');
 header('Content-Type: text/html; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
 date_default_timezone_set('America/Sao_Paulo');
 
 error_reporting(E_ALL);

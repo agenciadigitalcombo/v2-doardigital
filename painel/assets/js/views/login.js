@@ -112,6 +112,7 @@ export default {
                 this.user,
                 this.senha
             )
+			console.log(res)
             if (res.status === false) {
                 this.error = res.mensagem
                 return null
