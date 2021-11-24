@@ -5,8 +5,8 @@ const options = {
         'Content-Type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
-    mode: 'cors',
-    cache: 'default',
+    mode: 'no-cors',
+    // cache: 'default',
     body: null
 }
 

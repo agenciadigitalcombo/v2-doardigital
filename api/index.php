@@ -1,5 +1,8 @@
-<?php header('Access-Control-Allow-Origin: *');
-header('Content-Type: text/html; charset=utf-8');
+<?php 
+
+header("Access-Control-Allow-Headers: Authorization, Content-Type");
+header("Access-Control-Allow-Origin: *");
+header('content-type: application/json; charset=utf-8');
 date_default_timezone_set('America/Sao_Paulo');
 
 error_reporting(E_ALL);
