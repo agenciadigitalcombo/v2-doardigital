@@ -6,10 +6,9 @@ export default {
             nome, email, senha, telefone
         })
     },
-    
-    async login(nome, senha) {
+    async login(email, senha) {
         return await http.post('/login', {
-            nome, senha
+            email, senha
         })
     },
 
