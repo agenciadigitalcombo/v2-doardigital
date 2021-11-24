@@ -119,7 +119,7 @@ export default {
                 return null
             }
             localStorage.setItem('token', res.token)
-            window.location.href = `#/adm`
+            window.location.href = `#/dash`
         },
         updateForm(event) {
             this[event.name] = event.value
@@ -127,6 +127,7 @@ export default {
     },
 	mounted() {
         this.user = localStorage.getItem('user')
+		
     }
    
 }

@@ -19,5 +19,13 @@ const app = new Vue({
     router,
     data: {},
     computed: { },
-    methods: { }
+    methods: { },
+    mounted() {
+        let is_token = localStorage.getItem('token')
+		if(is_token) {
+			window.location.href = `#/dash`
+		}else {
+            window.location.href = `#/`
+        }
+    }
 }).$mount('#app')

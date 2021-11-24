@@ -160,4 +160,17 @@ class AdmControle
         $img = "https://www.gravatar.com/avatar/{$email}";
         echo file_get_contents($img);
     }
+    
+    static function validar_token()
+    {
+        $jwt = new Jwt();
+        $token = $_REQUEST['token'] ?? '';
+        $status = $jwt->valid($token);
+        $token_parse = $jwt->ler($token);
+        echo json_encode([
+            "next" => $status,
+            "message" => null,
+            "token_parse" => $token_parse
+        ]);
+    }
 }
