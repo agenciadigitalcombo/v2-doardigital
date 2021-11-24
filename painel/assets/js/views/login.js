@@ -118,7 +118,6 @@ export default {
                 this.error = res.message
                 return null
             }
-            localStorage.setItem('user', this.user)
             localStorage.setItem('token', res.token)
             window.location.href = `#/adm`
         },
