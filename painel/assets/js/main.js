@@ -11,8 +11,8 @@ const router = new Router({ routes })
 import login from './views/login.js'
 Vue.component('c-login', login)
 
-// import whatsapp from './views/whatsapp'
-// Vue.component('c-whatsapp', whatsapp )
+import dash from './views/dash.js'
+Vue.component('c-dash', dash )
 
 const app = new Vue({
     store,

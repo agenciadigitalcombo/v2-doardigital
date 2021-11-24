@@ -1,7 +1,7 @@
 export default {
     template: `
     <div>
-   olaaaaa
+   olaaaaa dash
 	</div>
     `,
     data: function () {
