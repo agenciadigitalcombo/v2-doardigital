@@ -87,9 +87,9 @@ export default {
     data: function () {
 		return {
             nome: null,
-            telefone: null,
             email: null,
             senha: null,
+            telefone: null,
             error: null
         }
     },
