@@ -1,9 +1,14 @@
-// import adm from "../../../../stat"
+
 
 export default {
     template: `
     <div>
     <div>
+ 
+    <c-header></c-header>
+    <c-aside></c-aside>
+
+
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
@@ -4715,6 +4720,8 @@ export default {
         <!--end::Svg Icon-->
     </div>
     <!--end::Scrolltop-->
+
+    <c-footer/>
 	</div>
  
 	</div>

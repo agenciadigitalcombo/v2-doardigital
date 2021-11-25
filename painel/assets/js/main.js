@@ -25,6 +25,11 @@ Vue.component('c-texte', texte )
 import header from './componentes/c-header.js'
 Vue.component('c-header', header )
 
+import  aside from './componentes/c-aside.js'
+Vue.component('c-aside', aside )
+
+import footer from './componentes/c-footer.js'
+Vue.component('c-footer', footer )
 
 
 const app = new Vue({
