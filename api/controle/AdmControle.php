@@ -103,11 +103,19 @@ class AdmControle
     static function recuperar_senha()
     {
         
+        $email = new Email();
+        $id_instituicao = $_REQUEST['id'];
+        $endereco = $_REQUEST['endereco'];
+        $assunto = $_REQUEST['assunto'];
+        $content = "";
 
+        $email->send($id_instituicao, $endereco, $assunto, $content);
         echo json_encode([
             "next" => true,
             "message" => "Nova senha enviada por email"
         ]);
+
+
     }
     static function alterar_senha()
     {
@@ -132,7 +140,6 @@ class AdmControle
         $jwt = new Jwt();
         $nome = $_REQUEST['nome'];
         $token = $_REQUEST['token'];
-        $token_parce = $jwt->ler($token);
         $telefone = $_REQUEST['telefone'];
         $caracter = array("(", ")", " ", "-");
         $transform_tel = str_replace($caracter, "", $telefone);
@@ -147,9 +154,26 @@ class AdmControle
                 "message" => "Dados atualizados"
             ]);
         
-       
-            
-      
+    }
+
+    static function update_step()
+    {
+        
+        $jwt = new Jwt();
+        $adm = new Adm();
+        $step = $_REQUEST['step'];
+        $token = $_REQUEST['token'];
+        $token_parce = $jwt->ler($token);
+        $secret = $token_parce['secret'];
+        $adm->update_step($secret, $step);
+        echo json_encode([
+            "next" => true,
+            "message" => "Dados atualizados"
+        ]);
+        
+        
+        
+
         
     }
     static function gravatar()

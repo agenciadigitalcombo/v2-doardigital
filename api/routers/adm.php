@@ -9,4 +9,5 @@ router('/alterar-senha', 'AdmControle@alterar_senha');
 router('/atualizar-adm', 'AdmControle@atualizar_adm');
 router('/gravatar', 'AdmControle@gravatar');
 router('/validar', 'AdmControle@validar_token');
+router('/step-update', 'AdmControle@update_step');
 router('/teste', 'Adm@teste');
