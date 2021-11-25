@@ -39,4 +39,5 @@ interface IDoador
         int $id,
         int $costumer_id_pagar_me
     ): void;
+       
 }

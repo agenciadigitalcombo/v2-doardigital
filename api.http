@@ -14,7 +14,7 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {
     "email": "br.rafael@outlook.com",
-    "senha": "12312345",
+    "senha": "12345678",
 }
 
 ###
@@ -46,4 +46,21 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 ###
 GET http://localhost/v2-doardigital/api/gravatar?email=br.rafael@outlook.com
+
+
+###
+GET http://localhost/v2-doardigital/api/token-valid
+
+{
+    "token": ""
+}
+
+###
+
+POST http://localhost/v2-doardigital/api/step-update
+
+{
+    "step": 2,
+    "token" : ""
+}
 

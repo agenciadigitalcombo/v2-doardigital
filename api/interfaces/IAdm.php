@@ -44,4 +44,9 @@ interface IAdm
     ): bool;
 
     public function list_all(): array;
+
+    public function update_step(
+        string $token,
+        int $step
+    ): void;
 }
