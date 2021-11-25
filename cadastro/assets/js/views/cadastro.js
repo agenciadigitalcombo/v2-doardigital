@@ -115,7 +115,7 @@ export default {
             const prot = window.location.protocol
 			const host = window.location.hostname
 
-            window.location.href = `${prot}//${host}:5500/painel/#/`
+            window.location.href = `#/dash`	`${prot}//${host}/painel/#/`
         },
         updateForm(event) {
             this[event.name] = event.value

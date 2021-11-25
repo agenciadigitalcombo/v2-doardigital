@@ -3,7 +3,11 @@ import Router from './vendor/vue-router.js'
 import store from './domain/store.js'
 import {mapState} from './vendor/vuex.js'
 
+
+// import * as bundle  from './front-js/scripts.bundle.js'
+
 Vue.use(Router)
+// Vue.use(bundle)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
 
@@ -14,7 +18,17 @@ Vue.component('c-login', login)
 import dash from './views/dash.js'
 Vue.component('c-dash', dash )
 
+import texte from './views/texte.js'
+Vue.component('c-texte', texte )
+
+
+import header from './componentes/c-header.js'
+Vue.component('c-header', header )
+
+
+
 const app = new Vue({
+
     store,
     router,
     data: {},
@@ -27,5 +41,11 @@ const app = new Vue({
 		}else {
             window.location.href = `#/`
         }
+
+  
+
+        
     }
 }).$mount('#app')
+
+
