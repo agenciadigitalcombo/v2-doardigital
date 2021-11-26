@@ -1,7 +1,10 @@
 /*
 .text-gray-600 {
     color: #7e8299!important;
+
 }
+    
+aside
 */
 
 @charset "UTF-8";
@@ -48093,7 +48096,7 @@ body {
 .aside {
     display: flex;
     flex-direction: column;
-    background-color: #1e1e2d;
+    background-image: linear-gradient(45deg, blue, #1679bd);
     padding: 0
 }
 

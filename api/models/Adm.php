@@ -87,9 +87,17 @@ class Adm implements IAdm{
         return empty($guard);
     }
 
+    
+    public function update_step(string $token, int $step): void
+    {
+        $banco = new Banco();   
+        $sql = "UPDATE adm SET step='$step' WHERE secret='$token'";
+        $banco->exec($sql);
+    }
+    
     static function teste(){
-       $instacia = new Adm();
-       $instacia->list_all();
+        $instacia = new Adm();
+        $instacia->list_all();
     }
 }
 
