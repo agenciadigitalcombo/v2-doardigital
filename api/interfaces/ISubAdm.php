@@ -41,7 +41,8 @@ interface ISubAdm
         string $senha
     ): void;
 
-    public function list_all(): array;
+    public function list_all(   
+    ): array;
 
     public function list_all_by_adm( 
         int $adm_id 
