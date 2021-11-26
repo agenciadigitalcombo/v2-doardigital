@@ -14,6 +14,19 @@ CREATE TABLE adm (
     super_adm int
 );
 
+CREATE TABLE sub_adm (
+    id int not null auto_increment primary key,
+    adm_id int,
+    nome varchar(75),
+    email varchar(75),
+    senha varchar(255),
+    secret varchar(255),
+    foto varchar(255),
+    telefone varchar(11),
+    credencial_id int,
+    status int
+);
+
 CREATE TABLE taxonomia (
     from_id int,
     to_id int,
@@ -26,11 +39,27 @@ CREATE TABLE meta (
     payload varchar(255)
 );
 
+CREATE TABLE credencial (
+    id int not null auto_increment primary key,
+    nome_identificacao varchar(75),
+    recursos varchar(255),
+);
+
 CREATE TABLE plano (
     id int not null auto_increment primary key,
     instituicao_id int,
     token varchar(255),
     nome varchar(75),
+    amount int,
+    status int
+);
+
+CREATE TABLE plano_digital (
+    id int not null auto_increment primary key,
+    token varchar(255),
+    nome varchar(75),
+    whatsapp int,
+    instituicao_max int, 
     amount int,
     status int
 );
@@ -41,6 +70,14 @@ CREATE TABLE split (
     recebedor_id int,
     responsavel_estorno int,
     porcentagem int
+);
+
+CREATE TABLE inscrito (
+    id int not null auto_increment primary key,
+    instituicao_id int,
+    nome varchar(75),
+    email varchar(75),
+    telefone varchar(11)
 );
 
 CREATE TABLE doador (
@@ -98,33 +135,6 @@ CREATE TABLE instituicao (
     logo varchar(255),
     data_registro varchar(19),
     status int
-);
-
-CREATE TABLE credencial (
-    id int not null auto_increment primary key,
-    nome_identificacao varchar(75),
-    recursos varchar(255)
-);
-
-CREATE TABLE sub_adm (
-    id int not null auto_increment primary key,
-    adm_id int,
-    nome varchar(75),
-    email varchar(75),
-    senha varchar(255),
-    secret varchar(255),
-    foto varchar(255),
-    telefone varchar(11),
-    credencial_id int,
-    status int
-);
-
-CREATE TABLE inscrito (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    nome varchar(75),
-    email varchar(75),
-    telefone varchar(11)
 );
 
 CREATE TABLE meta_mes (
