@@ -1,14 +1,15 @@
-<?php 
+<?php
 
-class Adm implements IAdm{
+class Adm implements IAdm
+{
+
     public function exist(string $email): bool
     {
-       $banco = new Banco();
-       $sql = "SELECT * FROM adm WHERE email='$email'";
-       $guard = $banco->query($sql);
-       
-       return !empty($guard);
-         
+        $banco = new Banco();
+        $sql = "SELECT * FROM adm WHERE email='$email'";
+        $guard = $banco->query($sql);
+
+        return !empty($guard);
     }
 
     public function nova_senha(int $id): string
@@ -17,7 +18,7 @@ class Adm implements IAdm{
         $banco = new Banco();
         $sql = "UPDATE adm SET pass='$senha' WHERE id='$id'";
         $banco->exec($sql);
-        //return $sql;
+        // return $sql;
     }
 
     public function get_by_id(int $id): array
@@ -36,7 +37,6 @@ class Adm implements IAdm{
         return $guard[0] ?? [];
     }
 
-
     public function set_step(int $id, int $step): void
     {
         $banco = new Banco();
@@ -46,7 +46,7 @@ class Adm implements IAdm{
 
     public function create(string $nome, string $email, string $senha, string $telefone): void
     {
-        $secret =  uniqid();
+        $secret = uniqid();
         $data_regis = date("Y-m-d H:i:s");
         $banco = new Banco();
         $sql = "INSERT INTO adm";
@@ -55,7 +55,7 @@ class Adm implements IAdm{
         $sql .= "('$nome', '$email', '$senha', '$telefone', ' $secret', 1, 1, 0, '$data_regis')";
         $banco->exec($sql);
     }
-    
+
     public function update(string $nome, string $telefone, string $secret): void
     {
         $banco = new Banco();
@@ -87,20 +87,18 @@ class Adm implements IAdm{
         return empty($guard);
     }
 
-    
     public function update_step(string $token, int $step): void
     {
-        $banco = new Banco();   
+        $banco = new Banco();
         $sql = "UPDATE adm SET step='$step' WHERE secret='$token'";
         $banco->exec($sql);
     }
-    
-    static function teste(){
+
+    static function teste()
+    {
         $instacia = new Adm();
         $instacia->list_all();
     }
 }
-
-
 
 ?>
