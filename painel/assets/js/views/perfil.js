@@ -172,6 +172,14 @@ export default {
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Alterar Dados</a>
 												</li>
 												<!--end::Nav item-->
+												<!--begin::Nav item-->
+											<li class="nav-item mt-2">
+												<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-local">Meu Endereço</a>
+											</li>
+											<li class="nav-item mt-2">
+												<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Seguranca</a>
+											</li>
+											<!--end::Nav item-->
 											</ul>
 											<!--begin::Navs-->
 										</div>

@@ -5,6 +5,7 @@ export default {
     <c-header></c-header>
     <c-aside></c-aside>
 	
+
 	<!--begin::Root-->
  <div class="d-flex flex-column flex-root">
 	<!--begin::Page-->
@@ -161,11 +162,16 @@ export default {
 										<!--end::Details-->
 										<!--begin::Navs-->
 										<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-											<!--begin::Nav item-->
-											<li class="nav-item mt-2">
-												<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/perfil-editar">Dados do Perfil</a>
-											</li>
-											<!--end::Nav item-->
+										<!--begin::Nav item-->
+												<li class="nav-item mt-2">
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil">Visão geral</a>
+												</li>
+												<!--end::Nav item-->
+												<!--begin::Nav item-->
+												<li class="nav-item mt-2">
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Alterar Dados</a>
+												</li>
+												<!--end::Nav item-->
 											<!--begin::Nav item-->
 											<li class="nav-item mt-2">
 												<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-local">Meu Endereço</a>
@@ -322,6 +328,7 @@ export default {
 		
 		<!--end::Root-->
 
+		<c-footer/>
 </div>
 
     `,
