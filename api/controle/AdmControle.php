@@ -122,7 +122,8 @@ class AdmControle
         
         echo json_encode([
             'next' => true,
-            'message' => 'Dados do Usuario'
+            'message' => 'Dados do Usuario',
+            'dados' => $payload
         ]);
         
     }
