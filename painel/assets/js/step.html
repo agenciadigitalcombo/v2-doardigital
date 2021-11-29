@@ -286,7 +286,8 @@
 
 
    <!-- comeco do cartao -->
-                                                        <svg style="width: 300px; margin: 0 auto;" viewBox="0 0 141.287 88.635"
+   <div  style="text-align:center;">
+                                                        <svg style="width: 300px; margin: 0 auto; " viewBox="0 0 141.287 88.635"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="141.18" height="88.629" x=".054" y=".003" ry="4.572" fill="#0094e8"
                                                             paint-order="stroke markers fill" />
@@ -330,6 +331,8 @@
                                                                 font-family="monospace">{{doacao.cvv||'1234'}}</tspan>
                                                         </text>
                                                     </svg> 
+
+   </div>
                                                     <!-- fim do cartao -->
 
                                                         <div class="card-body border-top p-9">
@@ -370,14 +373,29 @@
                                                             <!--end::Input group-->
                                                             <!--begin::Input group-->
                                                             
-                                                            <div class="row mb-4">
+                                                            <div class="row mb-5">
                                                                 <div class="col-lg-12 fv-row">
                                                                    <label class="col-lg-10 col-form-label required fw-bold fs-6">Nome Completo</label>
                                                                <input v-model="doacao.nome_card" type="text" name="nascimento" class="form-control form-control-lg form-control-solid" placeholder="Nome Completo" required />
                                                                 </div>
                                                                 <!--end::Col-->
                                                             </div>
-                                                            <div class="row mb-6">
+
+                                                            <div class="row mb-2">
+                                                            <div class="form-check form-switch form-check-custom form-check-solid">
+                                                              
+                                                              <label  class="form-check-label col-lg-10 col-form-label required fw-bold fs-6" for="flexSwitchDefault">
+                                                                Você tem um código promocional
+                                                                </label> 
+                                                                <input  @click="jms = !jms"  class="form-check-input" type="checkbox" value="" id="flexSwitchDefault"/>
+                                                             
+                                                             </div>
+                                                        </div>
+
+  <br>
+                                                                <!-- <label for="checkbox"> oii{{ jms }}</label> -->
+
+                                                            <div class="row mb-6" v-if="jms">
                                                                 <div class="col-lg-12 fv-row">
                                                                    <label class="col-lg-10 col-form-label required fw-bold fs-6">Cupom</label>
                                                                <input  v-model="doacao.cupom" type="text" name="cupom" class="form-control form-control-lg form-control-solid" placeholder="?"  />
@@ -417,7 +435,9 @@
             </div>
         </div>
         <!--end::Root-->
-    
+    	<div>
+         
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -440,6 +460,9 @@
                 payment_type: 'card',
                 cupom: ""
             },
+
+            jms: false,
+
             plano_whatsapp: [
                 { id: 0, preco: "00,00", text: "Nenhum disparo"},
                 { id: 1, preco: "69,90", text: "1 mil disparos por mês"},
@@ -495,10 +518,9 @@
         //     if(this.plano_id_zap != 0) return this.lista_whats[`${this.plano_id_zap}${plano.instancias}`].preco
         //     return plano.preco
         // },
+     
 
-                   metodo() {
-                       return 'Futas: ' + this.frutas[2]
-                   }
+
                 },
 
     //             filters: {

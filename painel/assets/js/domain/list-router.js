@@ -8,4 +8,6 @@ export default [
     { path: '/perfil-editar', component: { template: '<c-perfil-editar/>' } }, 
     { path: '/editar-local', component: { template: '<c-editar-local/>' } }, 
     { path: '/editar-securanca', component: { template: '<c-editar-securanca/>' } }, 
+    { path: '/credenciais', component: { template: '<c-credenciais/>' } }, 
+    
 ]

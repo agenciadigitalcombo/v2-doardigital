@@ -2,6 +2,9 @@
 export default {
     template: `
 	<div>
+    <div class="d-flex flex-column flex-root">
+			<div class="page d-flex flex-row flex-column-fluid">
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
     <!--begin::Footer-->
     <div class="footer py-4 d-flex flex-lg-column a-footer" id="kt_footer">
         <!--begin::Container-->
@@ -14,6 +17,7 @@ export default {
             </div>
             <!--end::Copyright-->
             <!--begin::Menu-->
+            <!--
             <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
                 <li class="menu-item">
                     <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
@@ -25,11 +29,15 @@ export default {
                     <a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
                 </li>
             </ul>
+           -->
             <!--end::Menu-->
         </div>
         <!--end::Container-->
     </div>
 	</div>
+    </div>
+	</div>
+    </div>
     `,
     data: function () {
 		return {

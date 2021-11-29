@@ -30,4 +30,11 @@ export default {
             nome, telefone
         })
     },
+
+    
+    async ListarPerfil(token) {
+        return await http.get('/profile', {
+            token
+        })
+    }
 }

@@ -1,3 +1,4 @@
+import adm from "../../../../static/js/api/adm.js"
 
 export default {
     template: `
@@ -375,7 +376,8 @@ export default {
     data: function () {
         
         return {
-			gravatar: '../painel/assets/image/gravatar.png'
+			gravatar: '../painel/assets/image/gravatar.png',
+			token: ''
         }
     
     },
@@ -387,6 +389,28 @@ export default {
         // plugin.async = true;
         // document.head.appendChild(plugin)
     
-    }
+		this.listar();
+    }, 
+
+	methods: {
+		async listar() {
+		
+            let res = await adm.ListarPerfil(
+				console.log(res),
+             this.token
+            )
+			console.log(res)
+            if (!res.next) {
+				console.log(res)
+                this.error = res.message
+                return null
+            }
+            localStorage.setItem('token', res.token)
+            // window.location.href = `#/dash`
+			console.log(this.token)
+        },
+	},
+
+
 }
 

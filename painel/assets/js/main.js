@@ -38,6 +38,9 @@ Vue.component('c-editar-local', EditarLocal )
 import EditarSeguranca from './views/editar-securanca.js'
 Vue.component('c-editar-securanca', EditarSeguranca )
 
+import credenciais from './views/credenciais.js'
+Vue.component('c-credenciais', credenciais )
+
 const app = new Vue({
 
     store,

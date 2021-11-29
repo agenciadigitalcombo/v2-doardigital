@@ -4736,13 +4736,10 @@ export default {
     
     },
     mounted() {
-        // this.user = localStorage.getItem('user')
-		
-        // let plugin = document.createElement('script')
-        // plugin.setAttribute('src', './front-js/scripts.bundle.js')
-        // plugin.async = true;
-        // document.head.appendChild(plugin)
     
-    }
+    
+    },
+    
+   
 }
 
