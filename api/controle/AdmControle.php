@@ -119,7 +119,7 @@ class AdmControle
             'data_registro' => $usuario['data_registro'],
             'step' => $usuario['step']
         ];
-        var_dump($payload);
+        
         echo json_encode([
             'next' => true,
             'message' => 'Dados do Usuario'
