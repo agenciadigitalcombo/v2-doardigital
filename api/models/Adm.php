@@ -70,13 +70,12 @@ class Adm implements IAdm
         $banco->exec($sql);
     }
 
-    public function list_all(): array
+    public function list_all($secret): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM adm";
+        $sql = "SELECT * FROM adm WHERE secret='$secret'";
         $guard = $banco->query($sql);
-        var_dump($guard);
-        return $guard;
+        return $guard[0] ?? [];
     }
 
     public function login(string $email, string $senha): bool

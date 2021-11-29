@@ -2,6 +2,7 @@
 
 class AdmControle
 {
+
     static function start()
     {
         echo json_encode([
@@ -9,11 +10,10 @@ class AdmControle
             "message" => "Você não tem permissão"
         ]);
     }
+
     static function criar_adm()
     {
-        //header('Content-Type: text/html; charset=utf-8');
-        
-        
+        // header('Content-Type: text/html; charset=utf-8');
         $adm = new Adm();
         $nome = $_REQUEST['nome'];
         $email = $_REQUEST['email'];
@@ -21,13 +21,16 @@ class AdmControle
         $min_num = preg_match('@[0-9]@', $senha);
         $cripto = md5($senha);
 
-        
         $telefone = $_REQUEST['telefone'];
-        $caracter = array("(", ")", " ", "-");
+        $caracter = array(
+            "(",
+            ")",
+            " ",
+            "-"
+        );
         $transform_tel = str_replace($caracter, "", $telefone);
-        
-        
-        if(empty($nome) or empty($email) or empty($telefone)){
+
+        if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
                 "next" => false,
                 "message" => "Preencha todos os campos"
@@ -35,7 +38,7 @@ class AdmControle
             return null;
         }
 
-        if(!$min_num || strlen($senha) < 8) {
+        if (! $min_num || strlen($senha) < 8) {
             echo json_encode([
                 "next" => false,
                 "message" => "A senha deve ter no minimo 8 Caracters"
@@ -43,14 +46,14 @@ class AdmControle
             return null;
         }
 
-        if($adm->exist($email)){
+        if ($adm->exist($email)) {
             echo json_encode([
                 "next" => false,
                 "message" => "Email já em uso"
             ]);
             return null;
-        } 
-        
+        }
+
         $jwt = new Jwt();
 
         $adm->create($nome, $email, $cripto, $transform_tel);
@@ -67,16 +70,15 @@ class AdmControle
             "message" => "Usuário criado com sucesso",
             "token" => $jwt->maker($payload)
         ]);
-        
-        
     }
+
     static function login()
     {
         $adm = new Adm();
         $email = $_REQUEST['email'];
         $senha = $_REQUEST['senha'];
         $cripto = md5($senha);
-        if($adm->login($email, $cripto)){
+        if ($adm->login($email, $cripto)) {
             echo json_encode([
                 "next" => false,
                 "message" => "Email ou senha incorreto"
@@ -100,9 +102,33 @@ class AdmControle
             'token' => $jwt->maker($payload)
         ]);
     }
+
+    static function profile()
+    {
+        $adm = new Adm();
+        $jwt = new Jwt();
+        $token = $_REQUEST['token'];
+        $token_parce = $jwt->ler($token);
+        $secret = $token_parce['secret'];
+        $usuario = $adm->list_all($secret);
+        $payload = [
+            'secret' => $usuario['secret'],
+            'nome' => $usuario['nome'],
+            'cpf' => $usuario['cpf'],
+            'email' => $usuario['email'],
+            'data_registro' => $usuario['data_registro'],
+            'step' => $usuario['step']
+        ];
+        var_dump($payload);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Dados do Usuario'
+        ]);
+        
+    }
+
     static function recuperar_senha()
     {
-        
         $email = new Email();
         $id_instituicao = $_REQUEST['id'];
         $endereco = $_REQUEST['endereco'];
@@ -114,12 +140,10 @@ class AdmControle
             "next" => true,
             "message" => "Nova senha enviada por email"
         ]);
-
-
     }
+
     static function alterar_senha()
     {
-
         $adm = new Adm();
         $jwt = new Jwt();
         $senha = $_REQUEST['senha'];
@@ -127,13 +151,14 @@ class AdmControle
         $cripto = md5($senha);
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
-        
+
         $adm->alterar_senha($secret, $cripto);
-            echo json_encode([
-                "next" => true,
-                "message" => "Senha atualizada"
-            ]);
+        echo json_encode([
+            "next" => true,
+            "message" => "Senha atualizada"
+        ]);
     }
+
     static function atualizar_adm()
     {
         $adm = new Adm();
@@ -141,24 +166,25 @@ class AdmControle
         $nome = $_REQUEST['nome'];
         $token = $_REQUEST['token'];
         $telefone = $_REQUEST['telefone'];
-        $caracter = array("(", ")", " ", "-");
+        $caracter = array(
+            "(",
+            ")",
+            " ",
+            "-"
+        );
         $transform_tel = str_replace($caracter, "", $telefone);
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
-       
-        
-                
-            $adm->update($nome,  $transform_tel, $secret);
-                echo json_encode([
-                "next" => true,
-                "message" => "Dados atualizados"
-            ]);
-        
+
+        $adm->update($nome, $transform_tel, $secret);
+        echo json_encode([
+            "next" => true,
+            "message" => "Dados atualizados"
+        ]);
     }
 
     static function update_step()
     {
-        
         $jwt = new Jwt();
         $adm = new Adm();
         $step = $_REQUEST['step'];
@@ -170,12 +196,8 @@ class AdmControle
             "next" => true,
             "message" => "Dados atualizados"
         ]);
-        
-        
-        
-
-        
     }
+
     static function gravatar()
     {
         Header('Content-Type: image/png');
@@ -184,7 +206,7 @@ class AdmControle
         $img = "https://www.gravatar.com/avatar/{$email}";
         echo file_get_contents($img);
     }
-    
+
     static function validar_token()
     {
         $jwt = new Jwt();
