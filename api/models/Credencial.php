@@ -22,6 +22,7 @@ class Credencial implements ICredencial
         $banco = new Banco();
         $sql = "SELECT * FROM credencial";
         $guard = $banco->query($sql);
+        return $guard;
         
     }
 
