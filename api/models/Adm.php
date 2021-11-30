@@ -70,6 +70,14 @@ class Adm implements IAdm
         $banco->exec($sql);
     }
 
+    public function list_profile($secret)
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM adm WHERE secret='$secret'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
     public function list_all(): array
     {
         $banco = new Banco();

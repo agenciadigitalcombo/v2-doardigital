@@ -11,9 +11,9 @@ class PlanoDigital implements IPlanoDigital{
     {
         $banco = new Banco();
         $sql = "INSERT INTO plano_digital";
-        $sql .= "(id, token, nome, whatsapp, instituicao_max, amount)";
+        $sql .= "(token, nome, whatsapp, instituicao_max, amount)";
         $sql .= "VALUES";
-        $sql .= "'$instituicao_id', '$token', '$nome', '$whatsapp', '$instituicao_max', '$amount'";
+        $sql .= "'$token', '$nome', '$whatsapp', '$instituicao_max', '$amount'";
         $banco->exec($sql);
     }
 
