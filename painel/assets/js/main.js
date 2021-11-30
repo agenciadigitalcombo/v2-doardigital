@@ -41,6 +41,9 @@ Vue.component('c-editar-securanca', EditarSeguranca )
 import credenciais from './views/credenciais.js'
 Vue.component('c-credenciais', credenciais )
 
+import credenciaisAdd from './views/credenciaisNova.js'
+Vue.component('c-nova-credenciais', credenciaisAdd )
+
 const app = new Vue({
 
     store,

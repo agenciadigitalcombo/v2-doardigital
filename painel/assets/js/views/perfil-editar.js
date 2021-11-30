@@ -1,4 +1,5 @@
 import adm from "../../../../static/js/api/adm.js" 
+
 export default {
     template: `
 	<div>
@@ -343,8 +344,8 @@ export default {
 			gravatar: '../painel/assets/image/gravatar.png',
 			nome: null,
             token: null,
-            senha: null,
 			email: null,
+			cpf: null,
 			telefone: null,
             error: null
         }
@@ -369,10 +370,23 @@ export default {
         },
         updateForm(event) {
             this[event.name] = event.value
-        }
+        },
+
+		async listar() {
+            let res = await adm.ListarPerfil( localStorage.getItem('token') )
+			return res
+        },
     },
-	mounted() {
-        this.user = localStorage.getItem('user')
+	async mounted() {
+        // this.user = localStorage.getItem('user')
+
+		let dados = (await this.listar()).dados
+
+		console.log(dados)
+		this.nome = dados.nome
+		this.email = dados.email
+		this.cpf = dados.cpf
+		this.telefone = dados.telefone
     },
 
 	

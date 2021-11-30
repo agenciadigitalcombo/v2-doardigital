@@ -43,7 +43,7 @@ export default {
 														<div class="d-flex flex-column">
 															<!--begin::Name-->
 															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">nome</a>
+																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{nome}}</a>
 																<a href="#">
 																	<!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
 																	<span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -85,7 +85,7 @@ export default {
 																			<path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
 																		</svg>
 																	</span>
-																	<!--end::Svg Icon-->email</a>
+																	<!--end::Svg Icon-->{{email}}</a>
 															</div>
 															<!--end::Info-->
 														</div>
@@ -221,21 +221,11 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<span class="fw-bold text-gray-800 fs-6">cpf</span>
+													<span class="fw-bold text-gray-800 fs-6">{{cpf}}</span>
 												</div>
 												<!--end::Col-->
 											</div>
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-bold text-muted">Data Nascimento</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<span class="fw-bold text-gray-800 fs-6">dataNascimento</span>
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Input group-->
+										
 											<!--begin::Input group-->
 											<div class="row mb-7">
 												<!--begin::Label-->
@@ -244,7 +234,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 d-flex align-items-center">
-													<span class="fw-bolder fs-6 text-gray-800 me-2">telefone</span>
+													<span class="fw-bolder fs-6 text-gray-800 me-2">{{telefone}}</span>
 												
 												</div>
 												<!--end::Col-->
@@ -385,6 +375,7 @@ export default {
         }
     
     },
+	
     async mounted() {
         // this.user = localStorage.getItem('user')
 		
@@ -395,15 +386,17 @@ export default {
 
 		let dados = (await this.listar()).dados
 
-		this.nome = dados.nome
 		console.log(dados)
+		this.nome = dados.nome
+		this.email = dados.email
+		this.cpf = dados.cpf
+		this.telefone = dados.telefone
     
 		
     }, 
 
 	methods: {
 		async listar() {
-		
             let res = await adm.ListarPerfil( localStorage.getItem('token') )
 			return res
         },
