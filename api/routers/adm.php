@@ -11,4 +11,5 @@ router('/gravatar', 'AdmControle@gravatar');
 router('/validar', 'AdmControle@validar_token');
 router('/step-update', 'AdmControle@update_step');
 router('/profile', 'AdmControle@profile');
+router('/all-profile', 'AdmControle@all_profile');
 router('/teste', 'Credencial@teste');

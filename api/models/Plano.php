@@ -31,11 +31,14 @@ class Plano implements IPlano{
         $banco = new Banco();
         $sql = "SELECT * FROM plano WHERE instituicao_id='$id'";
         $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
     public function on_off(int $id): void
     {
-        
+        $banco = new Banco();
+        $sql = "UPDATE plano SET id='$id'";
+        $banco->exec($sql);
     }
 
     

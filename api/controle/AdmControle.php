@@ -112,6 +112,7 @@ class AdmControle
             'secret' => $token_parce['secret'],
             'nome' => $token_parce['nome'],
             'email' => $token_parce['email'],
+            'telefone' => $token_parce['telefone'],
             'step' => $token_parce['step']
         ];
         echo json_encode([
@@ -121,6 +122,32 @@ class AdmControle
         ]);
     }
 
+    static function all_profile()
+    {
+        $adm = new Adm();
+        $dados = $adm->list_all();
+        foreach($dados as $g){
+            $payload [] = [
+                'secret' => $g['secret'],
+                'nome' => $g['nome'],
+                'email' => $g['email'],
+                'telefone' => $g['telefone'],
+                'step' => $g['step']
+            ];
+            
+        }   
+        echo json_encode([
+            'next' => true,
+            'message' => 'Dados do Usuario',
+            'dados' => $payload
+        ]);
+
+       
+           
+       
+       
+    }
+    
     static function recuperar_senha()
     {
         $email = new Email();
