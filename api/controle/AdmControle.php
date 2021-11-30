@@ -105,15 +105,20 @@ class AdmControle
 
     static function profile()
     {
+        $adm = new Adm();
         $jwt = new Jwt();
         $token = $_REQUEST['token'];
         $token_parce = $jwt->ler($token);
+        $secret = $token_parce['secret'];
+        
+        $guard = $adm->list_profile($secret);
+       
         $payload = [
-            'secret' => $token_parce['secret'],
-            'nome' => $token_parce['nome'],
-            'email' => $token_parce['email'],
-            'telefone' => $token_parce['telefone'],
-            'step' => $token_parce['step']
+            'secret' => $guard['secret'],
+            'nome' => $guard['nome'],
+            'email' => $guard['email'],
+            'telefone' => $guard['telefone'],
+            'step' => $guard['step']
         ];
         echo json_encode([
             'next' => true,
