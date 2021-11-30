@@ -6,7 +6,6 @@ interface IPlanoDigital
     public function list_all(): array;
 
     public function create(
-        int $instituicao_id,
         string $token,
         string $nome,
         int $whatsapp,
