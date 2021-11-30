@@ -209,7 +209,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<span class="fw-bolder fs-6 text-gray-800">nome sobrenome</span>
+													<span class="fw-bolder fs-6 text-gray-800">{{nome}}</span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -377,37 +377,35 @@ export default {
         
         return {
 			gravatar: '../painel/assets/image/gravatar.png',
-			token: ''
+			token: null,
+			nome: null,
+			cpf: null,
+			telefone: null,
+			email: null
         }
     
     },
-    mounted() {
+    async mounted() {
         // this.user = localStorage.getItem('user')
 		
         // let plugin = document.createElement('script')
         // plugin.setAttribute('src', './front-js/scripts.bundle.js')
         // plugin.async = true;
         // document.head.appendChild(plugin)
+
+		let dados = (await this.listar()).dados
+
+		this.nome = dados.nome
+		console.log(dados)
     
-		this.listar();
+		
     }, 
 
 	methods: {
 		async listar() {
 		
-            let res = await adm.ListarPerfil(
-				console.log(res),
-             this.token
-            )
-			console.log(res)
-            if (!res.next) {
-				console.log(res)
-                this.error = res.message
-                return null
-            }
-            localStorage.setItem('token', res.token)
-            // window.location.href = `#/dash`
-			console.log(this.token)
+            let res = await adm.ListarPerfil( localStorage.getItem('token') )
+			return res
         },
 	},
 
