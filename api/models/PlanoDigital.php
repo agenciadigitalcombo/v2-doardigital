@@ -7,13 +7,13 @@ class PlanoDigital implements IPlanoDigital{
         $guard = $banco->query($sql);
     }
 
-    public function create(int $instituicao_id, string $token, string $nome, int $whatsapp, int $instituicao_max, int $amount): void
+    public function create( string $token, string $nome, int $whatsapp, int $instituicao_max, int $amount): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO plano_digital";
-        $sql .= "(id, token, nome, whatsapp, instituicao_max, amount)";
+        $sql .= "( token, nome, whatsapp, instituicao_max, amount)";
         $sql .= "VALUES";
-        $sql .= "'$instituicao_id', '$token', '$nome', '$whatsapp', '$instituicao_max', '$amount'";
+        $sql .= " '$token', '$nome', '$whatsapp', '$instituicao_max', '$amount'";
         $banco->exec($sql);
     }
 
