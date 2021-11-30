@@ -4736,8 +4736,9 @@ export default {
     
     },
     mounted() {
-    
-    
+        let token = localStorage.getItem('token')
+        let token_payload = token.split('.')[0]
+        let token_parse = JSON.parse( atob(token_payload) )    
     },
     
    

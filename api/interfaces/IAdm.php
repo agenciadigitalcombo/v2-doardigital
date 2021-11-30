@@ -20,6 +20,7 @@ interface IAdm
     public function update(
         string $nome,
         string $telefone,
+        string $cpf,
         string $secret
     ): void;
 
