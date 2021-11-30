@@ -105,26 +105,20 @@ class AdmControle
 
     static function profile()
     {
-        $adm = new Adm();
         $jwt = new Jwt();
         $token = $_REQUEST['token'];
         $token_parce = $jwt->ler($token);
-        $secret = $token_parce['secret'];
-        $usuario = $adm->list_all($secret);
         $payload = [
-            'secret' => $usuario['secret'],
-            'nome' => $usuario['nome'],
-            'cpf' => $usuario['cpf'],
-            'email' => $usuario['email'],
-            'data_registro' => $usuario['data_registro'],
-            'step' => $usuario['step']
+            'secret' => $token_parce['secret'],
+            'nome' => $token_parce['nome'],
+            'email' => $token_parce['email'],
+            'step' => $token_parce['step']
         ];
         echo json_encode([
             'next' => true,
             'message' => 'Dados do Usuario',
             'dados' => $payload
         ]);
-        
     }
 
     static function recuperar_senha()

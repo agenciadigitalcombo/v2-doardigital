@@ -44,7 +44,7 @@ interface IAdm
     ): bool;
 
     public function list_all(
-        string $secret
+        
     ): array;
 
     public function update_step(
