@@ -15,21 +15,21 @@ class Endereco implements IEndereco
         $guard = $banco->query($sql);
     }
 
-    public function create(int $fk_id, string $nome_identificacao, string $cep, string $logadouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
+    public function create(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO endereco";
         $sql .= "(fk_id, nome_identificacao, cep, logadouro, numero, complemento, bairro, cidade, estado)";
         $sql .= "VALUES";
-        $sql .= "'$fk_id', '$nome_identificacao', '$cep', '$logadouro', '$numero', '$complemento', '$bairro', '$cidade', '$estado'";
+        $sql .= "('$fk_id', '$nome_identificacao', '$cep', '$logradouro', '$numero', '$complemento', '$bairro', '$cidade', '$estado')";
         $banco->exec($sql);
     }
 
-    public function update(int $fk_id, string $nome_identificacao, string $cep, string $logadouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
+    public function update(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
     {
         $banco = new Banco();
-        $sql = "UPDATE endereco SET nome_identificacao='$nome_identificacao', cep='$sep', logadouro='$logadouro', numero='$numero', complemento='$complemento', bairro='$bairro', cidade='$cidade', estado='$estado'";
-        $sql .= "WHERE fk_id='$fk_id'";
+        $sql = "UPDATE endereco SET nome_identificacao='$nome_identificacao', cep='$cep', logadouro='$logradouro', numero='$numero', complemento='$complemento', bairro='$bairro', cidade='$cidade', estado='$estado'";
+        $sql .= "WHERE id='$fk_id'";
         $banco->exec($sql);
     }
 

@@ -17,7 +17,7 @@ interface IEndereco
         int $fk_id,
         string $nome_identificacao,
         string $cep,
-        string $logadouro,
+        string $logradouro,
         string $numero,
         string $complemento,
         string $bairro,
