@@ -44,6 +44,25 @@ Vue.component('c-credenciais', credenciais )
 import credenciaisAdd from './views/credenciaisNova.js'
 Vue.component('c-nova-credenciais', credenciaisAdd )
 
+import minhaInstituicao from './views/minhaInstituicao.js'
+Vue.component('c-minhaInstituicao', minhaInstituicao )
+
+
+import addInstituicao from './views/instituicaoAdd.js'
+Vue.component('c-addInstituicao', addInstituicao )
+
+import localInstituicao from './views/instituicaoLoca.js'
+Vue.component('c-localInstituicao', localInstituicao )
+
+import bancoInstituicao from './views/instituicaoBancario.js'
+Vue.component('c-bancoInstituicao', bancoInstituicao )
+
+import dominioInstituicao from './views/instituicaoDominio.js'
+Vue.component('c-dominioInstituicao', dominioInstituicao )
+
+import editarInstituicao from './views/instituicaoEditar.js'
+Vue.component('c-editarInstituicao', editarInstituicao )
+
 const app = new Vue({
 
     store,

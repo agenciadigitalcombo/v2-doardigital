@@ -10,6 +10,11 @@ export default [
     { path: '/editar-securanca', component: { template: '<c-editar-securanca/>' } }, 
     { path: '/credencias', component: { template: '<c-credenciais/>' } }, 
     { path: '/credencias/nova', component: { template: '<c-nova-credenciais>' } }, 
-    
-    
+    { path: '/minha-instituicoes', component: { template: '<c-minhaInstituicao>' } }, 
+    { path: '/add-instituicoes', component: { template: '<c-addInstituicao>' } }, 
+    { path: '/endereco-instituicoes', component: { template: '<c-localInstituicao>' } }, 
+    { path: '/banco-instituicoes', component: { template: '<c-bancoInstituicao>' } },
+    { path: '/dominio-instituicoes', component: { template: '<c-dominioInstituicao>' } },
+    { path: '/editar-instituicoes', component: { template: '<c-editarInstituicao>' } },
+
 ]

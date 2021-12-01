@@ -5,7 +5,7 @@ export default [
     { id: 'doacoes', nome: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true },
     { id: 'credenciais', nome: 'Credenciais', icon: 'credenciais.svg', link: '#/credencias', feature_flag: true },
     { id: 'usuarios', nome: 'Usuários', icon: 'usuarios.svg', link: '#/usuarios', feature_flag: true },
-    { id: 'sass', nome: 'Minhas Instituições', icon: 'instituicai.svg', link: '#/minhas-instituicoes/1', feature_flag: true },
+    { id: 'sass', nome: 'Minhas Instituições', icon: 'instituicai.svg', link: '#/minha-instituicoes', feature_flag: true },
     { id: 'planos', nome: 'Planos', icon: 'planos.svg', link: '#/planos', feature_flag: true },
     { id: 'divisao', nome: 'Divisão Pagamento', icon: 'coins.svg', link: '#/divisao-pagamento', feature_flag: true },
     { id: 'metas', nome: 'Metas', icon: 'metas.svg', link: '#/metas/2021', feature_flag: true },
