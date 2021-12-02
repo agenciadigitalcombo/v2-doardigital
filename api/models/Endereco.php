@@ -13,6 +13,7 @@ class Endereco implements IEndereco
         $banco = new Banco();
         $sql = "SELECT * FROM endereco";
         $guard = $banco->query($sql);
+        return $guard;
     }
 
     public function create(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void

@@ -25,9 +25,17 @@ class EnderecoControle{
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
-
+        $caracter = array(
+            "(",
+            ")",
+            " ",
+            "-",
+            ".",
+            ","
+        );
+        $transform_cep = str_replace($caracter, "", $cep);
         if($valid_token){
-            $endereco->create($fk_id, $nome_identificacao, $cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
+            $endereco->create($fk_id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
             echo json_encode([
             'next' => true,
             'message' => 'Endereco criado'
@@ -56,9 +64,17 @@ class EnderecoControle{
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];   
-
+        $caracter = array(
+            "(",
+            ")",
+            " ",
+            "-",
+            ".",
+            ","
+        );
+        $transform_cep = str_replace($caracter, "", $cep);
         if($token_parce){
-            $endereco->update($fk_id, $nome_identificacao, $cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
+            $endereco->update($fk_id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
             echo json_encode([
                 'next' => true,
                 'message' => 'Endereco atualizado'
@@ -71,16 +87,51 @@ class EnderecoControle{
             ]);
         }
 
-        // var_dump($token_parce);
-        // die();
+        
     }
     static function list_endereco()
     {
+        $endereco = new Endereco();
+        $guard = $endereco->list_all();
+        foreach($guard as $g){
+            $payload [] = [
+                'nome_identificacao' => $g['nome_identificacao'],
+                'cep' => $g['cep'],
+                'logadouro' => $g['logadouro'],
+                'numero' => $g['numero'],
+                'complemento' => $g['complemento'],
+                'bairro' => $g['bairro'],
+                'cidade' => $g['cidade'],
+                'estado' => $g['estado']  
+            ];
+        }
+        
+        echo json_encode([
+            'next' => true,
+            'message' => 'Enderecos',
+            'dados' => $payload
+        ]);
         
     }
     static function detete_endereco()
     {
-        
+        $jwt = new Jwt();
+        $endereco = new Endereco();
+        $token = $_REQUEST['token'];
+        $valid_token = $jwt->valid($token);
+        $id = $_REQUEST['id'];
+        if($valid_token){
+            $endereco->del($id);
+            echo json_encode([
+                'next' => true,
+                'message' => 'Endereco Excluido'
+            ]);
+        }else{
+            echo json_encode([
+                'next' => false,
+                'message' => 'Token Inválido'
+            ]);
+        }
     }
 }
 
