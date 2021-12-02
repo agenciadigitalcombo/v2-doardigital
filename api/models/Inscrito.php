@@ -14,7 +14,8 @@ class Inscrito implements IInscrito{
         $banco = new Banco();
         $sql = "DELETE FROM inscrito WHERE instituicao_id='$instituicao_id' AND email='$email' OR telefone='$telefone'";
         $banco->exec($sql);
-        var_dump($guard);
+        
+        
     }
 
     public function list_all_by_instituicao(int $instituicao_id): array
@@ -26,13 +27,14 @@ class Inscrito implements IInscrito{
 
     public function register(int $instituicao_id, string $nome, string $email, string $telefone): void
     {
-        
-        
+        $banco = new Banco();
+        $insere = "INSERT INTO inscrito (instituicao_id, nome, email, telefone)";
+        $insere .= "VALUES ('$instituicao_id', '$nome', '$email', '$telefone')";
+        $banco->exec($sql);
+        $atualiza = "UPDATE inscrito SET nome='$nome', email='$email', telefone='$telefone' WHERE instituicao_id='$instituicao_id'";
+        $banco->exec($atualiza);
     }
 
-    static function teste()
-    {
-        Credencial::exist(1, "Victor Fernando", "recurso5");
-    }
+    
 }
 ?>
