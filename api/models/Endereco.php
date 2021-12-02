@@ -26,11 +26,11 @@ class Endereco implements IEndereco
         $banco->exec($sql);
     }
 
-    public function update(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
+    public function update(int $id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
     {
         $banco = new Banco();
         $sql = "UPDATE endereco SET nome_identificacao='$nome_identificacao', cep='$cep', logadouro='$logradouro', numero='$numero', complemento='$complemento', bairro='$bairro', cidade='$cidade', estado='$estado'";
-        $sql .= "WHERE id='$fk_id'";
+        $sql .= "WHERE id='$id'";
         $banco->exec($sql);
     }
 

@@ -55,7 +55,7 @@ class EnderecoControle{
         $endereco = new Endereco();
         $token = $_REQUEST['token'];
         $token_parce = $jwt->valid($token);
-        $fk_id = $_REQUEST['fk_id'];
+        $id = $_REQUEST['id'];
         $nome_identificacao = $_REQUEST['nome_identificacao'];
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
@@ -74,7 +74,7 @@ class EnderecoControle{
         );
         $transform_cep = str_replace($caracter, "", $cep);
         if($token_parce){
-            $endereco->update($fk_id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
+            $endereco->update($id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
             echo json_encode([
                 'next' => true,
                 'message' => 'Endereco atualizado'

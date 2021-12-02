@@ -26,7 +26,7 @@ interface IEndereco
     ): void;
 
     public function update(
-        int $fk_id,
+        int $id,
         string $nome_identificacao,
         string $cep,
         string $logadouro,
