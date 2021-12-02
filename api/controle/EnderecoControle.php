@@ -113,6 +113,41 @@ class EnderecoControle{
         ]);
         
     }
+
+    static function endereco()
+    {
+        $jwt = new Jwt();
+        $endereco = new Endereco();
+        $token = $_REQUEST['token'];
+        $id = $_REQUEST['id'];
+        $valid_token = $jwt->valid($token);
+        if($valid_token){
+            
+            $guard = $endereco->get_by_id($id);
+            $payload = [
+                'nome_identificacao' => $guard['nome_identificacao'],
+                'cep' => $guard['cep'],
+                'logadouro' => $guard['logadouro'],
+                'numero' => $guard['numero'],
+                'complemento' => $guard['complemento'],
+                'bairro' => $guard['bairro'],
+                'cidade' => $guard['cidade'],
+                'estado' => $guard['estado']  
+            ];
+
+            echo json_encode([
+                'next' => true,
+                'message' => 'Enderecos',
+                'dados' => $payload
+            ]);
+        }else{
+            echo json_encode([
+                'next' => false,
+                'message' => 'Token Inválido'
+            ]);
+        }
+        
+    }
     static function detete_endereco()
     {
         $jwt = new Jwt();

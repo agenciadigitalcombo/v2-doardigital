@@ -6,6 +6,7 @@ class Endereco implements IEndereco
         $banco = new Banco();
         $sql = "SELECT * FROM endereco WHERE id='$id'";
         $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
     public function list_all(): array
