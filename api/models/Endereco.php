@@ -20,11 +20,26 @@ class Endereco implements IEndereco
     public function create(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
     {
         $banco = new Banco();
-        $sql = "INSERT INTO endereco";
-        $sql .= "(fk_id, nome_identificacao, cep, logadouro, numero, complemento, bairro, cidade, estado)";
-        $sql .= "VALUES";
-        $sql .= "('$fk_id', '$nome_identificacao', '$cep', '$logradouro', '$numero', '$complemento', '$bairro', '$cidade', '$estado')";
-        $banco->exec($sql);
+        $pesquisa = "SELECT * FROM endereco WHERE fk_id='$fk_id'";
+        $guard_pesquisa = $banco->query($pesquisa);
+        if(!empty($guard_pesquisa[0])){
+            $registro = $guard_pesquisa[0];
+            $id = $registro['id'];
+            $sql = "UPDATE endereco SET nome_identificacao='$nome_identificacao', cep='$cep', logadouro='$logradouro', numero='$numero', complemento='$complemento', bairro='$bairro', cidade='$cidade', estado='$estado'";
+            $sql .= "WHERE id='$id'";
+            $banco->exec($sql);
+        }else{
+            $sql = "INSERT INTO endereco";
+            $sql .= "(fk_id, nome_identificacao, cep, logadouro, numero, complemento, bairro, cidade, estado)";
+            $sql .= "VALUES";
+            $sql .= "('$fk_id', '$nome_identificacao', '$cep', '$logradouro', '$numero', '$complemento', '$bairro', '$cidade', '$estado')";
+            $banco->exec($sql);
+
+        }
+
+
+
+
     }
 
     public function update(int $id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
