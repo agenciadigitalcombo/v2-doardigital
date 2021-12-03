@@ -15,9 +15,7 @@
         $instituicao_id = $_REQUEST['instituicao_id'];
         $nome = $_REQUEST['nome'];
         $email = $_REQUEST['email'];
-        $telefone = $_REQUEST['telefone'];
-
-        
+        $telefone = $_REQUEST['telefone'];        
         $inscrito->register($instituicao_id, $nome, $email, $telefone);
         echo json_encode([
             "next" => true,
@@ -77,4 +75,3 @@
     }
     
 }
-?>

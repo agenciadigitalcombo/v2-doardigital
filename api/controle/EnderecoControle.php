@@ -13,10 +13,11 @@ class EnderecoControle{
     {
 
         $jwt = new Jwt();
+        $adm = new Adm();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'] ?? '';
+        $token = $_REQUEST['token'];
         $valid_token = $jwt->valid($token);
-        $fk_id = $_REQUEST['fk_id'];
+        $token_parse = $jwt->ler($token);
         $nome_identificacao = $_REQUEST['nome_identificacao'];
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
@@ -24,7 +25,39 @@ class EnderecoControle{
         $complemento = $_REQUEST['complemento'];
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
-        $estado = $_REQUEST['estado'];
+        $estado = $_REQUEST['estado'];    
+        $campos_obrigatorios = ['token', 'cep', 'logradouro', 'bairro', 'cidade', 'estado', 'numero'];
+        $lb = [
+            'token' => 'Informe o Token',
+            'cep' => 'Informe um CEP',
+            'logadouro'  => 'Digite um endereço', 
+            'bairro'  => 'digite o Bairro', 
+            'cidade'  => 'Informe a Cidade', 
+            'estado'  => 'Informe o estado', 
+            'numero'  => 'Digite o numero'
+        ];
+        foreach($campos_obrigatorios as $campo) {
+            if( empty($_REQUEST[$campo]) ) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+        
+        if(!$valid_token){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Token invalido'
+            ]);
+            return null;
+        }
+        
+        
+        $secret = $token_parse['secret'];
+        $id_adm = $adm->list_profile($secret);
+        $id = $id_adm['id'];
         $caracter = array(
             "(",
             ")",
@@ -34,18 +67,11 @@ class EnderecoControle{
             ","
         );
         $transform_cep = str_replace($caracter, "", $cep);
-        if($valid_token){
-            $endereco->create($fk_id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
-            echo json_encode([
-            'next' => true,
-            'message' => 'Endereco criado'
+        $endereco->create($id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
+        echo json_encode([
+        'next' => true,
+        'message' => 'Endereco criado'
         ]);
-        }else{
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token Inválido'
-            ]);
-        }
        
     }
         
@@ -118,34 +144,43 @@ class EnderecoControle{
     {
         $jwt = new Jwt();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'] ?? '';
-        $id = $_REQUEST['id'];
-        $valid_token = $jwt->valid($token);
-        if($valid_token){
-            
-            $guard = $endereco->get_by_id($id);
-            $payload = [
-                'nome_identificacao' => $guard['nome_identificacao'],
-                'cep' => $guard['cep'],
-                'logadouro' => $guard['logadouro'],
-                'numero' => $guard['numero'],
-                'complemento' => $guard['complemento'],
-                'bairro' => $guard['bairro'],
-                'cidade' => $guard['cidade'],
-                'estado' => $guard['estado']  
-            ];
+        $adm = new Adm();
 
-            echo json_encode([
-                'next' => true,
-                'message' => 'Enderecos',
-                'dados' => $payload
-            ]);
-        }else{
+        $token = $_REQUEST['token'] ?? '';
+        if( $jwt->valid($token) == false ) {
             echo json_encode([
                 'next' => false,
                 'message' => 'Token Inválido'
             ]);
+            return null;
         }
+
+        
+       
+        
+        $adm_parse = $jwt->ler($token);
+        $adm_secret = $adm_parse['sercret'];
+        $adm_logged = $adm->list_profile($adm_secret);
+                    
+        $guard = $endereco->list_all_by_fk($adm_logged['id']);
+        
+        $payload = [
+            'nome_identificacao' => $guard['nome_identificacao'],
+            'cep' => $guard['cep'],
+            'logadouro' => $guard['logadouro'],
+            'numero' => $guard['numero'],
+            'complemento' => $guard['complemento'],
+            'bairro' => $guard['bairro'],
+            'cidade' => $guard['cidade'],
+            'estado' => $guard['estado']  
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Enderecos',
+            'dados' => $payload
+        ]);
+       
         
     }
     static function detete_endereco()
