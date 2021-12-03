@@ -232,52 +232,16 @@ export default {
      data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-			nome: null,
-            token: null,
-			email: null,
-			cpf: null,
-			telefone: null,
-            error: null
+	
         }
     },
 	methods: {
 	
-      async alterarAdm() {
-			this.error = null
-			
-			localStorage.removeItem('token')
-            let res = await adm.atualizar_adm(
-                this.nome,
-                this.telefone,
-            )
-            if (!res.next) {
-				console.log(res)
-                this.error = res.message
-                return null
-            }
-            localStorage.setItem('token', res.token)
-            window.location.href = `#/dash`
-        },
-        updateForm(event) {
-            this[event.name] = event.value
-        },
+     
+       
 
-		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
-			return res
-        },
     },
-	async mounted() {
-        // this.user = localStorage.getItem('user')
-
-		let dados = (await this.listar()).dados
-
-		console.log(dados)
-		this.nome = dados.nome
-		this.email = dados.email
-		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-    },
+	
 
 	
 }

@@ -70,9 +70,18 @@ export default {
 								<form id="kt_account_profile_details_form" class="form">
 									<!--begin::Card body-->
 									<div class="card-body border-top p-9">
-										<!--begin::Input group-->
 									
-										<!--end::Input group-->
+				<div class="row mb-6">
+				<!--begin::Label-->
+				<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome identificacao</label>
+				<!--end::Label-->
+				<!--begin::Col-->
+			
+				<div class="col-lg-8 fv-row">
+					<input v-model="nome_identificacao" type="text" name="nome" class="form-control form-control-lg form-control-solid" placeholder="Nome identificacao"  />
+				</div>
+				<!--end::Col-->
+			</div>
 										<!--begin::Input group-->
 										<div class="row mb-6">
 											<!--begin::Label-->
@@ -81,7 +90,7 @@ export default {
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
 											<div class="input-group mb-3">
-												<input type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
+												<input v-model="cep"  type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
 												<span class="input-group-text" id="basic-addon2">
 													<a href="http://">
 														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -100,11 +109,21 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
+												<input v-model="logradouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
 											</div>
 											<!--end::Col-->
 										</div>
 										<!--end::Input group-->
+										<div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				 <div class="col-lg-8 fv-row">
+					 <input v-model="numero" type="text" name="Numero" class="form-control form-control-lg form-control-solid" placeholder="Numero"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
 										<!--begin::Input group-->
 										<div class="row mb-6">
 											<!--begin::Label-->
@@ -115,7 +134,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
+												<input  v-model="complemento"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -129,7 +148,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="Bairro" class="form-control form-control-lg form-control-solid" />
+												<input  v-model="bairro" type="text" name="Bairro" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -142,7 +161,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="cidade" class="form-control form-control-lg form-control-solid" />
+												<input v-model="cidade" type="text" name="cidade" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -156,7 +175,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="estado" class="form-control form-control-lg form-control-solid" />
+												<input v-model="estado" type="text" name="estado" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -202,6 +221,19 @@ export default {
 			email: null,
 			cpf: null,
 			telefone: null,
+
+			id: null, 
+            nome_identificacao: null,
+            cep: null,
+            logradouro: null,
+            numero: null,
+            complemento: null,
+            bairro: null,
+            cidade: null,
+            estado: null,
+			secret: null,
+			token: null,
+
             error: null
         }
     },

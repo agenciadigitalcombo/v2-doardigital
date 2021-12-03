@@ -201,7 +201,8 @@ export default {
 							<!--begin::Content-->
 							<div id="kt_account_profile_details" >
 								<!--begin::Form-->
-								<form id="kt_account_profile_details_form" class="form">
+								<form action="javascript:void(0)" autocomplete="off" name="formulario"
+							 class="form">
 									<!--begin::Card body-->
 									<div class="card-body border-top p-9">
 										<!--begin::Input group-->
@@ -258,11 +259,7 @@ export default {
 														<input v-model="nome" type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Primeiro nome" />
 													</div>
 													<!--end::Col-->
-													<!--begin::Col-->
-													<div class="col-lg-6 fv-row">
-														<input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Ultimo nome" />
-													</div>
-													<!--end::Col-->
+												
 												</div>
 												<!--end::Row-->
 											</div>
@@ -276,7 +273,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="cpf" class="form-control form-control-lg form-control-solid" placeholder="CPF"  />
+												<input v-model="cpf" type="text" name="cpf" class="form-control form-control-lg form-control-solid" placeholder="CPF"  />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -301,7 +298,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input  v-model="telefone" type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="044 3276 454 935" />
+												<input v-model="telefone" type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -311,7 +308,7 @@ export default {
 									<!--begin::Actions-->
 									<div class="card-footer d-flex justify-content-end py-6 px-9">
 										<button @click="alterarAdm()" type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
-									</div>
+										</div>
 									<!--end::Actions-->
 								</form>
 								<!--end::Form-->
@@ -355,19 +352,19 @@ export default {
       async alterarAdm() {
 			this.error = null
 			
-			localStorage.removeItem('token')
             let res = await adm.atualizar_adm(
                 this.nome,
                 this.telefone,
+				// this.cpf
             )
             if (!res.next) {
 				console.log(res)
                 this.error = res.message
                 return null
             }
-            localStorage.setItem('token', res.token)
-            window.location.href = `#/dash`
+            console.log(" atualizado")
         },
+
         updateForm(event) {
             this[event.name] = event.value
         },

@@ -25,9 +25,9 @@ export default {
         })
     },
 
-    async atualizar_adm(nome, telefone) {
+    async atualizar_adm(nome, telefone, cpf) {
         return await http.post('/atualizar-adm', {
-            nome, telefone
+            nome, telefone, cpf
         })
     },
 
@@ -36,5 +36,57 @@ export default {
         return await http.get('/profile', {
             token
         })
-    }
+    },
+
+    async cadastrarEndereco( 
+         nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+        return await http.post('/create-endereco', {
+            nome_identificacao,
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            token
+            
+         })
+    },
+
+    async atualizarEndereco( 
+   nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+        return await http.post('/update-endereco', {
+            nome_identificacao,
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            token
+         })
+    },
+
+    async listarEndereco(  nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+        return await http.get('/list-endereco', {
+   nome_identificacao,
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            token
+        })
+    },
+
+    async listarEn(token) {
+        return await http.get('/list-endereco', {
+      token
+        })
+    },
 }
+
