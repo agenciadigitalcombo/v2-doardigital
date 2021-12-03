@@ -14,7 +14,7 @@ class EnderecoControle{
 
         $jwt = new Jwt();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $valid_token = $jwt->valid($token);
         $fk_id = $_REQUEST['fk_id'];
         $nome_identificacao = $_REQUEST['nome_identificacao'];
@@ -53,7 +53,7 @@ class EnderecoControle{
     {
         $jwt = new Jwt();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $token_parce = $jwt->valid($token);
         $id = $_REQUEST['id'];
         $nome_identificacao = $_REQUEST['nome_identificacao'];
@@ -118,7 +118,7 @@ class EnderecoControle{
     {
         $jwt = new Jwt();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $id = $_REQUEST['id'];
         $valid_token = $jwt->valid($token);
         if($valid_token){
@@ -152,7 +152,7 @@ class EnderecoControle{
     {
         $jwt = new Jwt();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $valid_token = $jwt->valid($token);
         $id = $_REQUEST['id'];
         if($valid_token){
