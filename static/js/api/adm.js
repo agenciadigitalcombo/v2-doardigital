@@ -39,9 +39,8 @@ export default {
     },
 
     async cadastrarEndereco( 
-        id, nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado) {
+         nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
         return await http.post('/create-endereco', {
-            id, 
             nome_identificacao,
             cep,
             logradouro,
@@ -50,14 +49,14 @@ export default {
             bairro,
             cidade,
             estado,
+            token
             
          })
     },
 
     async atualizarEndereco( 
-        id, nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+   nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
         return await http.post('/update-endereco', {
-            id, 
             nome_identificacao,
             cep,
             logradouro,
@@ -70,10 +69,9 @@ export default {
          })
     },
 
-    async listarEndereco(  id, nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+    async listarEndereco(  nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
         return await http.get('/list-endereco', {
-            id, 
-            nome_identificacao,
+   nome_identificacao,
             cep,
             logradouro,
             numero,
@@ -82,6 +80,12 @@ export default {
             cidade,
             estado,
             token
+        })
+    },
+
+    async listarEn(token) {
+        return await http.get('/list-endereco', {
+      token
         })
     },
 }

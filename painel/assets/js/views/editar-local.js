@@ -197,13 +197,6 @@ export default {
 				<!--end::Input group-->
 				
 
-				<div class="row mb-6">
-					<!--begin::Label-->
-					<div class="col-lg-8 fv-row">
-						<input v-model="id" type="text" name="chave" class="form-control form-control-lg form-control-solid"   />
-					</div>
-					<!--end::Col-->
-				</div>
 
 				<div class="row mb-6">
 				<!--begin::Label-->
@@ -373,7 +366,7 @@ export default {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				this.id, 
+				// this.id, 
 				this.nome_identificacao,
 				this.cep,
 				this.logradouro,
@@ -383,7 +376,7 @@ export default {
 				this.cidade,
 				this.estado,
 				this.token,
-			
+				
 			)
 			if (!res.next) {
 				console.log(res)
@@ -398,22 +391,7 @@ export default {
 			window.location.href = `#/perfil`
 		},
 
-		// async alterarSenha() {
-		// 	this.error = null
-			
-		// 	localStorage.removeItem('token')
-        //     let res = await adm.alterar_senha(
-        //         this.senha,
-        //         this.token,
-        //     )
-        //     if (!res.next) {
-		// 		console.log(res)
-        //         this.error = res.message
-        //         return null
-        //     }
-        //     localStorage.setItem('token', res.token)
-        //     window.location.href = `#/dash`
-        // },
+	
 
 		async eliminaEndereco() { 
 			let res = await adm.eliminaEndereco(
@@ -433,40 +411,30 @@ export default {
         },
 
 		async listarEndereco() {
-            let res = await adm.listarEndereco()
+            let res = await adm.listarEndereco(
+				this.token,
+			)
 			return res
         },
 
-		
-		async listaVitamina() {
-			let res = await adm.listarEndereco()
-				return res,
-				this.listando = res.data,
-				console.log(res.data)
-			
-		  },
+
 	},
 	
 	async mounted() {
-		this.user = localStorage.getItem('user')
 	
-		let dados = (await this.listar()).dados
-		console.log(dados)
-		this.secret = dados.secret
-		
 
 		let enderecoDados = (await this.listarEndereco()).enderecoDados
 		console.log(enderecoDados)
 
 				this.cidade = enderecoDados.cidade
 				this.estado = enderecoDados.estado
-		// this.fk_id = enderecoDados.secret 
-		// 		this.nome_identificacao = enderecoDados.secret
-		// 		this.cep = enderecoDados.secret
-		// 		this.logradouro = enderecoDados.secret
-		// 		this.numero = enderecoDados.secret
-		// 		this.complemento = enderecoDados.secret
-		// 		this.bairro = enderecoDados.secret
+		this.fk_id = enderecoDados.fk_id 
+				this.nome_identificacao = enderecoDados.nome_identificacao
+				this.cep = enderecoDados.cep
+				this.logradouro = enderecoDados.logradouro
+				this.numero = enderecoDados.numero
+				this.complemento = enderecoDados.complemento
+				this.bairro = enderecoDados.bairro
 
 	},
 
