@@ -200,55 +200,48 @@ export default {
 				<div class="row mb-6">
 					<!--begin::Label-->
 					<div class="col-lg-8 fv-row">
-						<input v-model="id" type="text" name="chave" class="form-control form-control-lg form-control-solid"   />
+						<input v-model="fk_id" type="text" name="chave" class="form-control form-control-lg form-control-solid"   />
 					</div>
 					<!--end::Col-->
 				</div>
 
 				<div class="row mb-6">
-				<!--begin::Label-->
-				<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome identificacao</label>
-				<!--end::Label-->
-				<!--begin::Col-->
-			
-				<div class="col-lg-8 fv-row">
-					<input v-model="nome_identificacao" type="text" name="nome" class="form-control form-control-lg form-control-solid" placeholder="Nome identificacao"  />
+					<!--begin::Label-->
+					<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome identificacao</label>
+					<!--end::Label-->
+					<!--begin::Col-->
+				
+					<div class="col-lg-8 fv-row">
+						<input v-model="nome_identificacao" type="text" name="nome" class="form-control form-control-lg form-control-solid" placeholder="CEP"  />
+					</div>
+					<!--end::Col-->
 				</div>
-				<!--end::Col-->
-			</div>
-										<!--begin::Input group-->
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-											<div class="input-group mb-3">
-												<input v-model="cep"  type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
-												<span class="input-group-text" id="basic-addon2">
-													<a href="http://">
-														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-														<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-													  </svg>
-													</a>
-													
-												</span>
-												</div>
-											</div>
-											<!--end::Col-->
-										</div>
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida Nº</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input v-model="logradouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
-											</div>
-											<!--end::Col-->
-										</div>
-										<!--end::Input group-->
-										<div class="row mb-6">
+				<!--begin::Input group-->
+				<div class="row mb-6">
+					<!--begin::Label-->
+					<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
+					<!--end::Label-->
+					<!--begin::Col-->
+				
+					<div class="col-lg-8 fv-row">
+						<input v-model="cep" type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP"  />
+					</div>
+					<!--end::Col-->
+				</div>
+				<div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Rua</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				
+				 <div class="col-lg-8 fv-row">
+					 <input v-model="logradouro" type="text" name="Rua" class="form-control form-control-lg form-control-solid" placeholder="Rua"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
+			 <!--end::Input group-->
+			
+			 <div class="row mb-6">
 				 <!--begin::Label-->
 				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
 				 <!--end::Label-->
@@ -258,69 +251,61 @@ export default {
 				 </div>
 				 <!--end::Col-->
 			 </div>
-										<!--begin::Input group-->
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Complemento</span>
-											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input  v-model="complemento"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
-										</div>
-										
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Bairro</span>
-											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input  v-model="bairro" type="text" name="Bairro" class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
-										</div>
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Cidade</span>
-											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input v-model="cidade" type="text" name="cidade" class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
-										</div>
-										
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Estado</span>
-											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input v-model="estado" type="text" name="estado" class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
-										</div>
-										
+			 <!--end::Input group-->
+
+			 <div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Complemento</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				 <div class="col-lg-8 fv-row">
+					 <input v-model="complemento" type="text" name="Complemento" class="form-control form-control-lg form-control-solid" placeholder="Complemento"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
+			 <!--end::Input group-->
+
+			 <div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Bairro</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				 <div class="col-lg-8 fv-row">
+					 <input v-model="bairro" type="text" name="Bairro" class="form-control form-control-lg form-control-solid" placeholder="Bairro"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
+			 <!--end::Input group-->
+		
+			 <div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Cidade</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				 <div class="col-lg-8 fv-row">
+					 <input v-model="cidade" type="text" name="Cidade" class="form-control form-control-lg form-control-solid" placeholder="Cidade"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
+			 <!--end::Input group-->
+			 <div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Estado</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				 <div class="col-lg-8 fv-row">
+					 <input v-model="estado" type="text" name="Estado" class="form-control form-control-lg form-control-solid" placeholder="Estado"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
+			 
 				
 			</div>
 			<!--end::Card body-->
 			<!--begin::Actions-->
 			<div class="card-footer d-flex justify-content-end py-6 px-9">
-				<button @click="addEndereco()" type="submit" class="btn btn-primary m-2" id="kt_account_profile_details_submit">SALVAR</button>
-				<button @click="eliminaEndereco()" type="submit" class="btn btn-primary  m-2" id="kt_account_profile_details_submit">ELIMINAR</button>
+				<button @click="addEndereco()" type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
+				<button @click="eliminaEndereco()" type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">ELIMINAR</button>
 	{{cidade}}
 			</div>
 			<!--end::Actions-->
@@ -353,7 +338,7 @@ export default {
 	data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-			id: null, 
+			fk_id: null, 
             nome_identificacao: null,
             cep: null,
             logradouro: null,
@@ -362,18 +347,16 @@ export default {
             bairro: null,
             cidade: null,
             estado: null,
-			secret: null,
-			token: null,
 
-			listando: [],
+			secret: null,
 		}
 	},
 	methods: {
 		async addEndereco() {
 			this.error = null
 
-			let res = await adm.atualizarEndereco(
-				this.id, 
+			let res = await adm.cadastrarEndereco(
+				this.fk_id, 
 				this.nome_identificacao,
 				this.cep,
 				this.logradouro,
@@ -382,7 +365,6 @@ export default {
 				this.bairro,
 				this.cidade,
 				this.estado,
-				this.token,
 			
 			)
 			if (!res.next) {
@@ -398,25 +380,8 @@ export default {
 			window.location.href = `#/perfil`
 		},
 
-		// async alterarSenha() {
-		// 	this.error = null
-			
-		// 	localStorage.removeItem('token')
-        //     let res = await adm.alterar_senha(
-        //         this.senha,
-        //         this.token,
-        //     )
-        //     if (!res.next) {
-		// 		console.log(res)
-        //         this.error = res.message
-        //         return null
-        //     }
-        //     localStorage.setItem('token', res.token)
-        //     window.location.href = `#/dash`
-        // },
-
 		async eliminaEndereco() { 
-			let res = await adm.eliminaEndereco(
+			let res = await adm.cadastrarEndereco(
 				this.secret, 
 			)
 			if (!res.next) {
@@ -433,33 +398,22 @@ export default {
         },
 
 		async listarEndereco() {
-            let res = await adm.listarEndereco()
+            let res = await adm.listarEndereco( localStorage.getItem('token') )
 			return res
         },
-
-		
-		async listaVitamina() {
-			let res = await adm.listarEndereco()
-				return res,
-				this.listando = res.data,
-				console.log(res.data)
-			
-		  },
 	},
 	
 	async mounted() {
 		this.user = localStorage.getItem('user')
 	
+		
 		let dados = (await this.listar()).dados
 		console.log(dados)
 		this.secret = dados.secret
-		
 
-		let enderecoDados = (await this.listarEndereco()).enderecoDados
+		let enderecoDados = (await this.listar()).enderecoDados
 		console.log(enderecoDados)
 
-				this.cidade = enderecoDados.cidade
-				this.estado = enderecoDados.estado
 		// this.fk_id = enderecoDados.secret 
 		// 		this.nome_identificacao = enderecoDados.secret
 		// 		this.cep = enderecoDados.secret
@@ -467,6 +421,8 @@ export default {
 		// 		this.numero = enderecoDados.secret
 		// 		this.complemento = enderecoDados.secret
 		// 		this.bairro = enderecoDados.secret
+				this.cidade = enderecoDados.cidade
+				this.estado = enderecoDados.estado
 
 	},
 

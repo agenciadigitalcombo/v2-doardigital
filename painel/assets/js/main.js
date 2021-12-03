@@ -63,6 +63,29 @@ Vue.component('c-dominioInstituicao', dominioInstituicao )
 import editarInstituicao from './views/instituicaoEditar.js'
 Vue.component('c-editarInstituicao', editarInstituicao )
 
+import modulos from './views/modulos.js'
+Vue.component('c-modulos', modulos )
+
+import modulosCorreios from './views/modulosCorreios.js'
+Vue.component('c-modulosCorreios', modulosCorreios )
+
+import modulosEmail from './views/modulosEmail.js'
+Vue.component('c-modulosEmail', modulosEmail )
+
+import modulosEvendas from './views/modulosEvendas.js'
+Vue.component('c-modulosEvendas', modulosEvendas )
+
+import modulosMailing from './views/modulosMailing.js'
+Vue.component('c-modulosMailing', modulosMailing )
+
+import modulosStation from './views/modulosStation.js'
+Vue.component('c-modulosStation', modulosStation )
+
+import assinatura from './views/assinatura.js'
+Vue.component('c-assinatura', assinatura )
+
+
+
 const app = new Vue({
 
     store,
@@ -73,14 +96,14 @@ const app = new Vue({
     mounted() {
         let is_token = localStorage.getItem('token')
 		if(is_token) {
-			window.location.href = `#/dash`
+        if(window.location.hash == `#/` ){
+            window.location.href = `#/dash`
+            }
 		}else {
             window.location.href = `#/`
         }
-
-  
-
         
+
     }
 }).$mount('#app')
 

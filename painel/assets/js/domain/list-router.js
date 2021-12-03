@@ -16,5 +16,13 @@ export default [
     { path: '/banco-instituicoes', component: { template: '<c-bancoInstituicao>' } },
     { path: '/dominio-instituicoes', component: { template: '<c-dominioInstituicao>' } },
     { path: '/editar-instituicoes', component: { template: '<c-editarInstituicao>' } },
+    { path: '/modulos', component: { template: '<c-modulos>' } },
+    { path: '/modulos/correio', component: { template: '<c-modulosCorreios>' } },
+    { path: '/modulos/email', component: { template: '<c-modulosEmail>' } },
+    { path: '/modulos/evenda', component: { template: '<c-modulosEvendas>' } },
+    { path: '/modulos/mailing', component: { template: '<c-modulosMailing>' } },
+    { path: '/modulos/rd-station', component: { template: '<c-modulosStation>' } },
+    { path: '/meu-plano', component: { template: '<c-assinatura>' } },
+    
 
 ]

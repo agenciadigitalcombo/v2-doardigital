@@ -37,6 +37,10 @@ function obj_to_url(obj, next_level = null) {
 
 async function post(path, data) {
     let base = config.path
+    let token = localStorage.getItem('token')
+    if(token){
+        data.token = token
+    }
     options.body = obj_to_url(data)
     let res = await fetch(`${base}${path}`, options)
     let status_code = res.status
@@ -45,6 +49,10 @@ async function post(path, data) {
 
 async function get(path, data = {}) {
     let base = config.path
+    let token = localStorage.getItem('token')
+    if(token){
+        data.token = token
+    }
     let res = await fetch(`${base}${path}?${obj_to_url(data)}`)
     let res_in_json = await res.json()
     return res_in_json
