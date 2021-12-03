@@ -183,10 +183,10 @@ class EnderecoControle
         }
 
         $adm_parse = $jwt->ler($token);
-        $adm_secret = $adm_parse['sercret'];
+        $adm_secret = $adm_parse['secret'];
         $adm_logged = $adm->list_profile($adm_secret);
-
-        $guard = $endereco->list_all_by_fk($adm_logged['id']);
+        $id = $adm_logged['id'];
+        $guard = $endereco->list_all_by_fk($id);
 
         $payload = [
             'nome_identificacao' => $guard['nome_identificacao'],

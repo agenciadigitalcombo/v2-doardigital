@@ -62,6 +62,7 @@ class Endereco implements IEndereco
         $banco = new Banco();
         $sql = "SELECT * FROM endereco WHERE fk_id='$fk_id'";
         $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
 
