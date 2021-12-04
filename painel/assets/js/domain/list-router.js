@@ -23,6 +23,10 @@ export default [
     { path: '/modulos/mailing', component: { template: '<c-modulosMailing>' } },
     { path: '/modulos/rd-station', component: { template: '<c-modulosStation>' } },
     { path: '/meu-plano', component: { template: '<c-assinatura>' } },
+    { path: '/doadores', component: { template: '<c-doadores>' } },
+    { path: '/doacoes', component: { template: '<c-doacoes>' } },
     
-
+    { path: '/doacoesDetalhe', component: { template: '<c-doacoesDetalhe>' } },
+    { path: '/doadorHitorico', component: { template: '<c-doadorHitorico>' } },
+    
 ]

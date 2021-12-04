@@ -115,7 +115,7 @@ export default {
             // const prot = window.location.protocol
 			// const host = window.location.hostname
 
-            window.location.href = `#/perfil`
+            window.location.href = "/painel/index.html#/perfil-editar";
         },
         updateForm(event) {
             this[event.name] = event.value
