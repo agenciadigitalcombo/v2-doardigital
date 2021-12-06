@@ -107,7 +107,7 @@ class AdmControle
     {
         $adm = new Adm();
         $jwt = new Jwt();
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
         
@@ -173,7 +173,7 @@ class AdmControle
         $adm = new Adm();
         $jwt = new Jwt();
         $senha = $_REQUEST['senha'];
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $cripto = md5($senha);
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
@@ -190,7 +190,7 @@ class AdmControle
         $adm = new Adm();
         $jwt = new Jwt();
         $nome = $_REQUEST['nome'];
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $telefone = $_REQUEST['telefone'];
         $caracter = array(
             "(",

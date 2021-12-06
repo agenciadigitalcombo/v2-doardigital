@@ -17,6 +17,13 @@ class Credencial implements ICredencial
         $banco->exec($sql);
     }
 
+    public function list_by_id(int $id): array{
+        $banco = new Banco();
+        $sql = "SELECT * FROM credencial WHERE id='$id'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
     public function list_all(): array
     {
         $banco = new Banco();
