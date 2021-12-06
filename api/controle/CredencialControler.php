@@ -27,10 +27,23 @@ class CredencialControler{
     static function list_credencial()
     {
         $credencial = new Credencial();
+        $lista_todos = $credencial->list_all();
+        foreach($lista_todos as $g){
+            $payload [] = [
+                'nome' =>  $g['nome_identificacao'],
+                'recursos' => $g['recursos']
+            ];
+        }
+        echo json_encode([
+            'next' => true,
+            'message' => 'Credenciais',
+            'dados' => $payload
+        ]);
     }
     static function credencial()
     {
         $credencial = new Credencial();
+        
     }
     static function detete_credencial()
     {

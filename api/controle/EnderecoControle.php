@@ -209,10 +209,17 @@ class EnderecoControle
     static function detete_endereco()
     {
         $jwt = new Jwt();
+        $adm = new Adm();
+
         $endereco = new Endereco();
         $token = $_REQUEST['token'] ?? '';
         $valid_token = $jwt->valid($token);
-        $id = $_REQUEST['id'];
+
+        $adm_parse = $jwt->ler($token);
+        $adm_secret = $adm_parse['secret'];
+        $adm_logged = $adm->list_profile($adm_secret);
+        $id = $adm_logged['id'];
+        
         if ($valid_token) {
             $endereco->del($id);
             echo json_encode([
