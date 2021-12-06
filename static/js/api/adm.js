@@ -69,16 +69,8 @@ export default {
          })
     },
 
-    async listarEndereco(  nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
-        return await http.get('/list-endereco', {
-   nome_identificacao,
-            cep,
-            logradouro,
-            numero,
-            complemento,
-            bairro,
-            cidade,
-            estado,
+    async listarEndereco( token) {
+        return await http.post('/list-endereco', {
             token
         })
     },

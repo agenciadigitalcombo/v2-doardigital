@@ -1,7 +1,7 @@
 /*
 .text-gray-600 {
     color: #7e8299!important;
-
+.symbol.symbol-lg-160px.symbol-fixed>img {
 }
     
 aside
@@ -44291,8 +44291,8 @@ code:not([class*=language-]) {
         height: 160px
     }
     .symbol.symbol-lg-160px.symbol-fixed>img {
-        width: 160px;
-        height: 160px;
+        width: 100px;
+        height: 100px;
         max-width: auto
     }
     .symbol.symbol-lg-160px.symbol-2by3 .symbol-label {

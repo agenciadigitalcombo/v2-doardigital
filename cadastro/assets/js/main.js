@@ -21,8 +21,6 @@ Vue.component('c-footer', footer )
 import cadastrar from './views/cadastro.js'
 Vue.component('c-cadastro', cadastrar )
 
-import perfil from './views/perfil.js'
-Vue.component('c-perfil', perfil )
 
 import EditarLocal from './views/editar-local.js'
 Vue.component('c-editar-local', EditarLocal )

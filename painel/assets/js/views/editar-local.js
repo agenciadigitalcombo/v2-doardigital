@@ -40,8 +40,10 @@ export default {
 														<!--begin::User-->
 														<div class="d-flex flex-column">
 															<!--begin::Name-->
-															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">nome</a>
+															<div class="d-flex align-items-center">
+																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{nome}}</a>
+																
+																<div>
 																<a href="#">
 																	<!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
 																	<span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -54,6 +56,7 @@ export default {
 																</a>
 																<a href="#" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Atualize</a>
 															</div>
+																</div>
 															<!--end::Name-->
 															<!--begin::Info-->
 															<div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
@@ -83,7 +86,7 @@ export default {
 																			<path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
 																		</svg>
 																	</span>
-																	<!--end::Svg Icon-->email</a>
+																	<!--end::Svg Icon-->{{email}}</a>
 															</div>
 															<!--end::Info-->
 														</div>
@@ -94,78 +97,44 @@ export default {
 													<div class="d-flex flex-wrap flex-stack">
 														<!--begin::Wrapper-->
 														<div class="d-flex flex-column flex-grow-1 pe-8">
-															<!--begin::Stats-->
-															<div class="d-flex flex-wrap">
-																<!--begin::Stat-->
-																<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-																	<!--begin::Number-->
-																	<div class="d-flex align-items-center">
-																		<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-																		<span class="svg-icon svg-icon-3 svg-icon-success me-2">
-																				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
-																					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
-																				</svg>
-																			</span>
-																		<!--end::Svg Icon-->
-																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">0</div>
-																	</div>
-																	<!--end::Number-->
-																	<!--begin::Label-->
-																	<div class="fw-bold fs-6 text-gray-400">Paginas</div>
-																	<!--end::Label-->
-																</div>
-																<!--end::Stat-->
-																<!--begin::Stat-->
-															
-																<!--begin::Stat-->
-																<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-																	<!--begin::Number-->
-																	<div class="d-flex align-items-center">
-																		<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-																		<span class="svg-icon svg-icon-3 svg-icon-success me-2">
-																				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
-																					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
-																				</svg>
-																			</span>
-																		<!--end::Svg Icon-->
-																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">0</div>
-																	</div>
-																	<!--end::Number-->
-																	<!--begin::Label-->
-																	<div class="fw-bold fs-6 text-gray-400">Taxa de Doações</div>
-																	<!--end::Label-->
-																</div>
-																<!--end::Stat-->
+														<!--begin::Progress-->
+														<div class="d-flex align-items-center w-200px w-sm-300px flex-column ">
+															<div class="d-flex justify-content-between w-100 mt-auto mb-2">
+																<span class="fw-bold fs-6 text-gray-400">Preenchimento de Perfil</span>
+																<span class="fw-bolder fs-6">50%</span>
 															</div>
-															<!--end::Stats-->
+															<div class="h-5px mx-3 w-100 bg-light mb-3">
+																<div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+														</div>
+														<!--end::Progress-->
 														</div>
 														<!--end::Wrapper-->
-													
+												
 													</div>
 													<!--end::Stats-->
 												</div>
 												<!--end::Info-->
+												
 											</div>
 											<!--end::Details-->
 											<!--begin::Navs-->
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 											<!--begin::Nav item-->
-												<li class="nav-item mt-2">
+												<li class="nav-item mt-2"  v-if="step === 6">
 													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/perfil">Visão geral</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
-												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Alterar Dados</a>
+												<li class="nav-item mt-2" v-if="step === 1 || step === 2 || step === 6">
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Seus Dados</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
-												<li class="nav-item mt-2">
+												<li class="nav-item mt-2" v-if="step === 3 || step === 2  || step === 6">
 													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/editar-local">Meu Endereço</a>
 												</li>
-												<li class="nav-item mt-2">
+												<li class="nav-item mt-2" v-if="step === 3  || step === 6" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Seguranca</a>
 												</li>
 												<!--end::Nav item-->
@@ -359,6 +328,11 @@ export default {
 			token: null,
 
 			listando: [],
+
+			nome: null,
+			cpf: null,
+			telefone: null,
+			email: null
 		}
 	},
 	methods: {
@@ -412,8 +386,10 @@ export default {
 
 		async listarEndereco() {
             let res = await adm.listarEndereco(
-				this.token,
+				(this.token)
 			)
+
+		
 			return res
         },
 
@@ -422,20 +398,17 @@ export default {
 	
 	async mounted() {
 	
+		let dados = (await this.listar()).dados
+		console.log(dados)
+		this.nome = dados.nome
+		this.email = dados.email
+		this.cpf = dados.cpf
+		this.telefone = dados.telefone
+		this.step =   parseInt(dados.step)
 
-		let enderecoDados = (await this.listarEndereco()).enderecoDados
+		let enderecoDados = (await this.listarEndereco(this.token)).enderecoDados
 		console.log(enderecoDados)
-
-				this.cidade = enderecoDados.cidade
-				this.estado = enderecoDados.estado
-		this.fk_id = enderecoDados.fk_id 
-				this.nome_identificacao = enderecoDados.nome_identificacao
-				this.cep = enderecoDados.cep
-				this.logradouro = enderecoDados.logradouro
-				this.numero = enderecoDados.numero
-				this.complemento = enderecoDados.complemento
-				this.bairro = enderecoDados.bairro
-
+           
 	},
 
 	created() {
