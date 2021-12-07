@@ -206,7 +206,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input v-model="logradouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
+												<input v-model="logadouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -325,7 +325,7 @@ export default {
 			id: null,
 			nome_identificacao: null,
 			cep: null,
-			logradouro: null,
+			logadouro: null,
 			numero: null,
 			complemento: null,
 			bairro: null,
@@ -351,7 +351,7 @@ export default {
 				this.id, 
 				this.nome_identificacao,
 				this.cep,
-				this.logradouro,
+				this.logadouro,
 				this.numero,
 				this.complemento,
 				this.bairro,
@@ -410,8 +410,10 @@ export default {
 		this.step = parseInt(dados.step)
 	
 
+		console.log("endeecoDados")
+		
 		let enderecoDados = (await this.listarEndereco()).dados[0] || {}
-        this.logradouro = enderecoDados.logradouro
+        this.logadouro = enderecoDados.logadouro
 		this.cep = enderecoDados.cep
 		this.nome_identificacao = enderecoDados.nome_identificacao
 		this.numero = enderecoDados.numero
@@ -421,7 +423,6 @@ export default {
 		this.estado = enderecoDados.estado
 		this.id = enderecoDados.id
 
-		console.log(enderecoDados)
 
 	},
 
