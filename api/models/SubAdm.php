@@ -40,7 +40,7 @@ class SubAdm implements ISubAdm{
         $banco->query($sql);
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $secret, string $telefone, int $credencial_id): void
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $secret, string $telefone, int $credencial_id = null): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO sub_adm";
