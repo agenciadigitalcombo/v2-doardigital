@@ -96,6 +96,8 @@ Vue.component('c-doacoesDetalhe', doacoesDetalhe )
 import doadorHitorico from './views/doador-hitorico.js'
 Vue.component('c-doadorHitorico', doadorHitorico )
 
+import configuracao from './views/configuracao.js'
+Vue.component('c-configuracao', configuracao )
 
 
 

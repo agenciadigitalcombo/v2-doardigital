@@ -101,17 +101,10 @@ export default {
     // 	}
 
     created() {
-        // <link href="./assets/css/front-css/style.bundle.css" rel="stylesheet" type="text/css" />
-
-        var element = document.createElement("link");
-        element.setAttribute("rel", "stylesheet");
-        element.setAttribute("type", "text/css");
-        element.setAttribute("href", "./assets/css/front-css/style.bundle.css");
-        document.getElementsByTagName("head")[0].appendChild(element);
-
-
-        let jms = document.createElement('script'); jms.setAttribute('src', "./assets/js/front-js/scripts.bundle.js");
+     
+        let jms = document.createElement('script'); jms.setAttribute('src', "../../painel/assets/assets/js/scripts.bundle.js");
         document.head.appendChild(jms);
+
     },
     mounted() {
         this.menus = menus

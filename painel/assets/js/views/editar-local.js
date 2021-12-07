@@ -13,7 +13,6 @@ export default {
 			<!--begin::Wrapper-->
 			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 			
-	
 				<!--begin::Content-->
 				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 					<!--begin::Post-->
@@ -172,6 +171,8 @@ export default {
 				<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome identificacao</label>
 				<!--end::Label-->
 				<!--begin::Col-->
+
+				<input v-model="id" type="hidden" name="nome" class="form-control form-control-lg form-control-solid" placeholder="Nome identificacao"  />
 			
 				<div class="col-lg-8 fv-row">
 					<input v-model="nome_identificacao" type="text" name="nome" class="form-control form-control-lg form-control-solid" placeholder="Nome identificacao"  />
@@ -283,7 +284,13 @@ export default {
 			<div class="card-footer d-flex justify-content-end py-6 px-9">
 				<button @click="addEndereco()" type="submit" class="btn btn-primary m-2" id="kt_account_profile_details_submit">SALVAR</button>
 				<button @click="eliminaEndereco()" type="submit" class="btn btn-primary  m-2" id="kt_account_profile_details_submit">ELIMINAR</button>
-	{{cidade}}
+			
+			
+				<ul>
+				<li v-for="item in items">
+				  {{ item.cidade }}
+				</li>
+			  </ul>
 			</div>
 			<!--end::Actions-->
 
@@ -315,19 +322,20 @@ export default {
 	data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-			id: null, 
-            nome_identificacao: null,
-            cep: null,
-            logradouro: null,
-            numero: null,
-            complemento: null,
-            bairro: null,
-            cidade: null,
-            estado: null,
+			id: null,
+			nome_identificacao: null,
+			cep: null,
+			logradouro: null,
+			numero: null,
+			complemento: null,
+			bairro: null,
+			cidade: null,
+			estado: null,
 			secret: null,
 			token: null,
+			step: null,
 
-			listando: [],
+			items: [],
 
 			nome: null,
 			cpf: null,
@@ -340,7 +348,7 @@ export default {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				// this.id, 
+				this.id, 
 				this.nome_identificacao,
 				this.cep,
 				this.logradouro,
@@ -350,14 +358,13 @@ export default {
 				this.cidade,
 				this.estado,
 				this.token,
-				
 			)
 			if (!res.next) {
 				console.log(res)
 				this.error = res.message
 				return null
 			}
-		
+
 
 			// const prot = window.location.protocol
 			// const host = window.location.hostname
@@ -365,50 +372,57 @@ export default {
 			window.location.href = `#/perfil`
 		},
 
-	
 
-		async eliminaEndereco() { 
+
+		async eliminaEndereco() {
 			let res = await adm.eliminaEndereco(
-				this.secret, 
+				this.secret,
 			)
 			if (!res.next) {
 				console.log(res)
 				this.error = res.message
 				return null
 			}
-		
+
 		},
 
 		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
+			let res = await adm.ListarPerfil(localStorage.getItem('token'))
 			return res
-        },
+		},
 
 		async listarEndereco() {
-            let res = await adm.listarEndereco(
+			let res = await adm.listarEndereco(
 				(this.token)
 			)
-
-		
 			return res
-        },
-
-
+		},
 	},
-	
+
 	async mounted() {
-	
+
 		let dados = (await this.listar()).dados
 		console.log(dados)
 		this.nome = dados.nome
 		this.email = dados.email
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
-		this.step =   parseInt(dados.step)
+		this.step = parseInt(dados.step)
+	
 
-		let enderecoDados = (await this.listarEndereco(this.token)).enderecoDados
+		let enderecoDados = (await this.listarEndereco()).dados[0] || {}
+        this.logradouro = enderecoDados.logradouro
+		this.cep = enderecoDados.cep
+		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.numero = enderecoDados.numero
+		this.complemento = enderecoDados.complemento
+		this.bairro = enderecoDados.bairro
+		this.cidade = enderecoDados.cidade
+		this.estado = enderecoDados.estado
+		this.id = enderecoDados.id
+
 		console.log(enderecoDados)
-           
+
 	},
 
 	created() {

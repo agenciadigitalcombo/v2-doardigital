@@ -28,5 +28,7 @@ export default [
     
     { path: '/doacoesDetalhe', component: { template: '<c-doacoesDetalhe>' } },
     { path: '/doadorHitorico', component: { template: '<c-doadorHitorico>' } },
+    { path: '/configuracao', component: { template: '<c-configuracao>' } },
+    
     
 ]
