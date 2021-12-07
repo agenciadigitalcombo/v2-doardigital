@@ -131,7 +131,7 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 														title="Edit customer details">
 														<a href="#" class="btn btn-sm btn-light-primary"
 															data-bs-toggle="modal"
-															data-bs-target="#kt_modal_update_details">Edit</a>
+															data-bs-target="#kt_modal_update_details">Editar</a>
 													</span>
 												</div>
 												<!--end::Details toggle-->
@@ -196,7 +196,7 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 													href="#kt_user_view_overview_tab">Visão Gera</a>
 											</li>
 											<!--end:::Tab item-->
-											
+
 											<!--begin:::Tab item Security-->
 											<li class="nav-item">
 												<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
@@ -204,11 +204,13 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 													Assinaturas</a>
 											</li>
 											<!--end:::Tab item-->
-<!--begin:::Tab item-->
-<li class="nav-item">
-	<a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#kt_customer_view_overview_statements">Histórico</a>
-</li>
-<!--end:::Tab item-->
+											<!--begin:::Tab item-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true"
+													data-bs-toggle="tab"
+													href="#kt_customer_view_overview_statements">Histórico</a>
+											</li>
+											<!--end:::Tab item-->
 										</ul>
 										<!--end:::Tabs-->
 
@@ -231,471 +233,483 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 
 
 
-										
+
 										<!--begin:::Tab content-->
 										<div class="tab-content" id="myTabContent">
 											<!--begin:::Tab pane-->
 											<div class="tab-pane fade show active" id="kt_user_view_overview_tab"
 												role="tabpanel">
 
-<!--begin::Card-->
-<div class="card pt-4 mb-6 mb-xl-9">
-	<!--begin::Card header-->
-	<div class="card-header border-0">
-		<!--begin::Card title-->
-		<div class="card-title">
-			<h2>Historico de transação</h2>
-		</div>
-		<!--end::Card title-->
-	
-	</div>
-	<!--end::Card header-->
-	<!--begin::Card body-->
-	<div class="card-body pt-0 pb-5">
-		<!--begin::Table-->
-		<table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
-			<!--begin::Table head-->
-			<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-				<!--begin::Table row-->
-				<tr class="text-start text-muted text-uppercase gs-0">
-					<th class="min-w-100px">Invoice No.</th>
-					<th>Status</th>
-					<th>Valor</th>
-					<th class="min-w-100px">Data</th>
-					<th class="text-end min-w-100px pe-4">ação</th>
-				</tr>
-				<!--end::Table row-->
-			</thead>
-			<!--end::Table head-->
-			<!--begin::Table body-->
-			<tbody class="fs-6 fw-bold text-gray-600">
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">7082-6559</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=
-					<div
-					-->
-					<td>
-						<span class="badge badge-light-primary">trialing</span>
-					</td>
-					<!--end::Status=-->  
-					<!--begin::Amount=-->
-					<td>R$1,3333200.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>14 Dec 2020, 8:43 pm</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">2403-1229</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-primary">trialing</span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$79.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>01 Dec 2020, 10:12 am</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">6841-4306</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-success">Pago</span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$5,500.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>12 Nov 2020, 2:01 pm</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">4202-6200</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-warning">Pendente</span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$880.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>21 Oct 2020, 5:54 pm</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">6282-3254</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-success">Pago</span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$7,650.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>19 Oct 2020, 7:32 am</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">8650-4914</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-danger">Não Pago </span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$375.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>23 Sep 2020, 12:38 am</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">3371-5103</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-success">Pago</span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$129.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>11 Sep 2020, 3:18 pm</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">1559-7199</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-danger">Não Pago </span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$450.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>03 Sep 2020, 1:08 am</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-				<!--begin::Table row-->
-				<tr>
-					<!--begin::Invoice=-->
-					<td>
-						<a href="#" class="text-gray-600 text-hover-primary mb-1">6016-9605</a>
-					</td>
-					<!--end::Invoice=-->
-					<!--begin::Status=-->
-					<td>
-						<span class="badge badge-light-warning">Pendente</span>
-					</td>
-					<!--end::Status=-->
-					<!--begin::Amount=-->
-					<td>R$8,700.00</td>
-					<!--end::Amount=-->
-					<!--begin::Date=-->
-					<td>01 Sep 2020, 4:58 pm</td>
-					<!--end::Date=-->
-					<!--begin::Action=-->
-					<td class="pe-0 text-end">
-						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-						<span class="svg-icon svg-icon-5 m-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-							</svg>
-						</span>
-						<!--end::Svg Icon--></a>
-						<!--begin::Menu-->
-						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="../../demo8/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-							</div>
-							<!--end::Menu item-->
-							<!--begin::Menu item-->
-							<div class="menu-item px-3">
-								<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-							</div>
-							<!--end::Menu item-->
-						</div>
-						<!--end::Menu-->
-					</td>
-					<!--end::Action=-->
-				</tr>
-				<!--end::Table row-->
-			</tbody>
-			<!--end::Table body-->
-		</table>
-		<!--end::Table-->
-	</div>
-	<!--end::Card body-->
-</div>
-<!--end::Card-->
+												<!--begin::Card-->
+												<div class="card pt-4 mb-6 mb-xl-9">
+													<!--begin::Card header-->
+													<div class="card-header border-0">
+														<!--begin::Card title-->
+														<div class="card-title">
+															<h2>Historico de transação</h2>
+														</div>
+														<!--end::Card title-->
+
+													</div>
+													<!--end::Card header-->
+													<!--begin::Card body-->
+													<div class="card-body pt-0 pb-5">
+														<!--begin::Table-->
+														<table class="table align-middle table-row-dashed gy-5"
+															id="kt_table_customers_payment">
+															<!--begin::Table head-->
+															<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+																<!--begin::Table row-->
+																<tr class="text-start text-muted text-uppercase gs-0">
+																	<th class="min-w-100px">Data</th>
+																	<th>Valor</th>
+																	<th>Método </th>
+																	<th class="min-w-100px">Status</th>
+																	<th class="text-end min-w-100px pe-4">ação</th>
+																</tr>
+																<!--end::Table row-->
+															</thead>
+															<!--end::Table head-->
+															<!--begin::Table body-->
+															<tbody class="fs-6 fw-bold text-gray-600">
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+		<div
+		-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Pix</td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span
+																			class="badge badge-light-success">Pago</span>
+																	</td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row-->
+
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+	<div
+	-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Cartão </td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span class="badge badge-light-danger"> Vencidos
+																		</span></td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row pago-->
+
+
+
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+	<div
+	-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Boleto</td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span
+																			class="badge badge-light-warning">Aberto</span>
+																	</td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row-->
+
+
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+	<div
+	-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Pix </td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span class="badge badge-light-danger"> Falhado
+																		</span></td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row pago-->
+
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+	<div
+	-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Boleto</td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span
+																			class="badge badge-light-warning">Aberto</span>
+																	</td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row-->
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+	<div
+	-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Pix</td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span
+																			class="badge badge-light-success">Pago</span>
+																	</td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row-->
+
+
+
+																<!--begin::Table row-->
+																<tr>
+																	<!--begin::Invoice=-->
+																	<td>
+																		21/12/2021
+																	</td>
+																	<!--end::Invoice=-->
+																	<!--begin::Status=
+	<div
+	-->
+																	<td>R$1,200.00</td>
+																	<!--end::Status=-->
+																	<!--begin::Amount=-->
+																	<td>Cartão </td>
+																	<!--end::Amount=-->
+																	<!--begin::Date=-->
+																	<td><span class="badge badge-light-danger"> Vencidos
+																		</span></td>
+																	<!--end::Date=-->
+																	<!--begin::Action=-->
+																	<td class="pe-0 text-end">
+																		<a href="#"
+																			class="btn btn-sm btn-light btn-active-light-primary"
+																			data-kt-menu-trigger="click"
+																			data-kt-menu-placement="bottom-end">ação
+																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+																			<span class="svg-icon svg-icon-5 m-0">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+																					width="24" height="24"
+																					viewBox="0 0 24 24" fill="none">
+																					<path
+																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																						fill="black" />
+																				</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</a>
+																		<!--begin::Menu-->
+																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+																			data-kt-menu="true">
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="../../demo8/dist/apps/customers/view.html"
+																					class="menu-link px-3">Ver</a>
+																			</div>
+																			<!--end::Menu item-->
+																			<!--begin::Menu item-->
+																			<div class="menu-item px-3">
+																				<a href="#" class="menu-link px-3"
+																					data-kt-customer-table-filter="delete_row">Deletar</a>
+																			</div>
+																			<!--end::Menu item-->
+																		</div>
+																		<!--end::Menu-->
+																	</td>
+																	<!--end::Action=-->
+																</tr>
+																<!--end::Table row pago-->
+
+															</tbody>
+															<!--end::Table body-->
+														</table>
+														<!--end::Table-->
+													</div>
+													<!--end::Card body-->
+												</div>
+												<!--end::Card-->
 											</div>
 											<!--end:::Tab pane-->
-											
+
 											<!--begin:::Tab pane-->
 											<div class="tab-pane fade" id="kt_user_view_overview_events_and_logs_tab"
 												role="tabpanel">
@@ -708,7 +722,7 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 															<h2>Minhas Assinatura</h2>
 														</div>
 														<!--end::Card title-->
-													
+
 													</div>
 													<!--end::Card header-->
 													<!--begin::Card body-->
@@ -747,14 +761,18 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 																		<!--end::Amount=-->
 																		<!--begin::Date=-->
 																		<td>
-																			<label class="form-check form-switch form-check-custom form-check-solid">
-																			<input class="form-check-input" type="checkbox" />
-																		</label>
-																	</td>
+																			<label
+																				class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input"
+																					type="checkbox" />
+																			</label>
+																		</td>
 																		<!--end::Date=-->
 																		<!--begin::Action=-->
 																		<td>
-																			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+																			<textarea class="form-control"
+																				id="exampleFormControlTextarea1"
+																				rows="3"></textarea>
 																		</td>
 																		<!--end::Action=-->
 																	</tr>
@@ -770,14 +788,18 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 																		<!--end::Amount=-->
 																		<!--begin::Date=-->
 																		<td>
-																			<label class="form-check form-switch form-check-custom form-check-solid">
-																			<input class="form-check-input" type="checkbox" />
-																		</label>
-																	</td>
+																			<label
+																				class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input"
+																					type="checkbox" />
+																			</label>
+																		</td>
 																		<!--end::Date=-->
 																		<!--begin::Action=-->
 																		<td>
-																			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+																			<textarea class="form-control"
+																				id="exampleFormControlTextarea1"
+																				rows="3"></textarea>
 																		</td>
 																		<!--end::Action=-->
 																	</tr>
@@ -793,14 +815,18 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 																		<!--end::Amount=-->
 																		<!--begin::Date=-->
 																		<td>
-																			<label class="form-check form-switch form-check-custom form-check-solid">
-																			<input class="form-check-input" type="checkbox" />
-																		</label>
-																	</td>
+																			<label
+																				class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input"
+																					type="checkbox" />
+																			</label>
+																		</td>
 																		<!--end::Date=-->
 																		<!--begin::Action=-->
 																		<td>
-																			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+																			<textarea class="form-control"
+																				id="exampleFormControlTextarea1"
+																				rows="3"></textarea>
 																		</td>
 																		<!--end::Action=-->
 																	</tr>
@@ -814,244 +840,319 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 													<!--end::Card body-->
 												</div>
 												<!--end::Card-->
-											
+
 											</div>
 											<!--end:::Tab pane-->
 
-												<!--begin:::Tab pane-->
-												<div class="tab-pane fade" id="kt_customer_view_overview_statements" role="tabpanel">
-													<!--begin::Earnings-->
-													<div class="card mb-6 mb-xl-9">
-													
-															<div class="card card-xl-stretch mb-xl-8">
-																<!--begin::Header-->
-																<div class="card-header align-items-center border-0 mt-4">
-																	<h3 class="card-title align-items-start flex-column">
-																		<span class="fw-bolder mb-2 text-dark">Historico </span>
-																	</h3>
-																	<div class="card-toolbar">
-																
-																		<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_615c40205fc45">
-																			<!--begin::Header-->
-																			<div class="px-7 py-5">
-																				<div class="fs-5 text-dark fw-bolder">Filter Options</div>
-																			</div>
-																			<!--end::Header-->
-																			<!--begin::Menu separator-->
-																			<div class="separator border-gray-200"></div>
-																			<!--end::Menu separator-->
-																			<!--begin::Form-->
-																			<div class="px-7 py-5">
-																				<!--begin::Input group-->
-																				<div class="mb-10">
-																					<!--begin::Label-->
-																					<label class="form-label fw-bold">Status:</label>
-																					<!--end::Label-->
-																					<!--begin::Input-->
-																					<div>
-																						<select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_615c40205fc45" data-allow-clear="true">
-																							<option></option>
-																							<option value="1">Approved</option>
-																							<option value="2">Pending</option>
-																							<option value="2">In Process</option>
-																							<option value="2">Rejected</option>
-																						</select>
-																					</div>
-																					<!--end::Input-->
-																				</div>
-																				<!--end::Input group-->
-																				<!--begin::Input group-->
-																				<div class="mb-10">
-																					<!--begin::Label-->
-																					<label class="form-label fw-bold">Member Type:</label>
-																					<!--end::Label-->
-																					<!--begin::Options-->
-																					<div class="d-flex">
-																						<!--begin::Options-->
-																						<label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-																							<input class="form-check-input" type="checkbox" value="1" />
-																							<span class="form-check-label">Author</span>
-																						</label>
-																						<!--end::Options-->
-																						<!--begin::Options-->
-																						<label class="form-check form-check-sm form-check-custom form-check-solid">
-																							<input class="form-check-input" type="checkbox" value="2" checked="checked" />
-																							<span class="form-check-label">Customer</span>
-																						</label>
-																						<!--end::Options-->
-																					</div>
-																					<!--end::Options-->
-																				</div>
-																				<!--end::Input group-->
-																				<!--begin::Input group-->
-																				<div class="mb-10">
-																					<!--begin::Label-->
-																					<label class="form-label fw-bold">Notifications:</label>
-																					<!--end::Label-->
-																					<!--begin::Switch-->
-																					<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-																						<input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-																						<label class="form-check-label">Enabled</label>
-																					</div>
-																					<!--end::Switch-->
-																				</div>
-																				<!--end::Input group-->
-																				<!--begin::Actions-->
-																				<div class="d-flex justify-content-end">
-																					<button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-																					<button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-																				</div>
-																				<!--end::Actions-->
-																			</div>
-																			<!--end::Form-->
-																		</div>
-																		<!--end::Menu 1-->
-																		<!--end::Menu-->
+											<!--begin:::Tab pane-->
+											<div class="tab-pane fade" id="kt_customer_view_overview_statements"
+												role="tabpanel">
+												<!--begin::Earnings-->
+												<div class="card mb-6 mb-xl-9">
+
+													<div class="card card-xl-stretch mb-xl-8">
+														<!--begin::Header-->
+														<div class="card-header align-items-center border-0 mt-4">
+															<h3 class="card-title align-items-start flex-column">
+																<span class="fw-bolder mb-2 text-dark">Historico </span>
+															</h3>
+															<div class="card-toolbar">
+
+																<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
+																	data-kt-menu="true" id="kt_menu_615c40205fc45">
+																	<!--begin::Header-->
+																	<div class="px-7 py-5">
+																		<div class="fs-5 text-dark fw-bolder">Filter
+																			Options</div>
 																	</div>
-																</div>
-																<!--end::Header-->
-																<!--begin::Body-->
-																<div class="card-body pt-5">
-																	<!--begin::Timeline-->
-																	<div class="timeline-label">
-																		<!--begin::Item-->
-																		<div class="timeline-item">
+																	<!--end::Header-->
+																	<!--begin::Menu separator-->
+																	<div class="separator border-gray-200"></div>
+																	<!--end::Menu separator-->
+																	<!--begin::Form-->
+																	<div class="px-7 py-5">
+																		<!--begin::Input group-->
+																		<div class="mb-10">
 																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">08:42</div>
+																			<label
+																				class="form-label fw-bold">Status:</label>
 																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-warning fs-1"></i>
+																			<!--begin::Input-->
+																			<div>
+																				<select
+																					class="form-select form-select-solid"
+																					data-kt-select2="true"
+																					data-placeholder="Select option"
+																					data-dropdown-parent="#kt_menu_615c40205fc45"
+																					data-allow-clear="true">
+																					<option></option>
+																					<option value="1">Approved</option>
+																					<option value="2">Pending</option>
+																					<option value="2">In Process
+																					</option>
+																					<option value="2">Rejected</option>
+																				</select>
 																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Text-->
-																			<div class="fw-mormal timeline-content text-muted ps-3">Outlines keep you honest. And keep structure</div>
-																			<!--end::Text-->
+																			<!--end::Input-->
 																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
+																		<!--end::Input group-->
+																		<!--begin::Input group-->
+																		<div class="mb-10">
 																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">10:00</div>
+																			<label class="form-label fw-bold">Member
+																				Type:</label>
 																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-success fs-1"></i>
+																			<!--begin::Options-->
+																			<div class="d-flex">
+																				<!--begin::Options-->
+																				<label
+																					class="form-check form-check-sm form-check-custom form-check-solid me-5">
+																					<input class="form-check-input"
+																						type="checkbox" value="1" />
+																					<span
+																						class="form-check-label">Author</span>
+																				</label>
+																				<!--end::Options-->
+																				<!--begin::Options-->
+																				<label
+																					class="form-check form-check-sm form-check-custom form-check-solid">
+																					<input class="form-check-input"
+																						type="checkbox" value="2"
+																						checked="checked" />
+																					<span
+																						class="form-check-label">Customer</span>
+																				</label>
+																				<!--end::Options-->
 																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Content-->
-																			<div class="timeline-content d-flex">
-																				<span class="fw-bolder text-gray-800 ps-3">AEOL meeting</span>
-																			</div>
-																			<!--end::Content-->
+																			<!--end::Options-->
 																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
+																		<!--end::Input group-->
+																		<!--begin::Input group-->
+																		<div class="mb-10">
 																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">14:37</div>
+																			<label
+																				class="form-label fw-bold">Notifications:</label>
 																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-danger fs-1"></i>
+																			<!--begin::Switch-->
+																			<div
+																				class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+																				<input class="form-check-input"
+																					type="checkbox" value=""
+																					name="notifications"
+																					checked="checked" />
+																				<label
+																					class="form-check-label">Enabled</label>
 																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Desc-->
-																			<div class="timeline-content fw-bolder text-gray-800 ps-3">Make deposit
-																			<a href="#" class="text-primary">USD 700</a>. to ESL</div>
-																			<!--end::Desc-->
+																			<!--end::Switch-->
 																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
-																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">16:50</div>
-																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-primary fs-1"></i>
-																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Text-->
-																			<div class="timeline-content fw-mormal text-muted ps-3">Indulging in poorly driving and keep structure keep great</div>
-																			<!--end::Text-->
+																		<!--end::Input group-->
+																		<!--begin::ação -->
+																		<div class="d-flex justify-content-end">
+																			<button type="reset"
+																				class="btn btn-sm btn-light btn-active-light-primary me-2"
+																				data-kt-menu-dismiss="true">Reset</button>
+																			<button type="submit"
+																				class="btn btn-sm btn-primary"
+																				data-kt-menu-dismiss="true">Apply</button>
 																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
-																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">21:03</div>
-																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-danger fs-1"></i>
-																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Desc-->
-																			<div class="timeline-content fw-bold text-gray-800 ps-3">New order placed
-																			<a href="#" class="text-primary">#XF-2356</a>.</div>
-																			<!--end::Desc-->
-																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
-																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">16:50</div>
-																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-primary fs-1"></i>
-																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Text-->
-																			<div class="timeline-content fw-mormal text-muted ps-3">Indulging in poorly driving and keep structure keep great</div>
-																			<!--end::Text-->
-																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
-																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">21:03</div>
-																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-danger fs-1"></i>
-																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Desc-->
-																			<div class="timeline-content fw-bold text-gray-800 ps-3">New order placed
-																			<a href="#" class="text-primary">#XF-2356</a>.</div>
-																			<!--end::Desc-->
-																		</div>
-																		<!--end::Item-->
-																		<!--begin::Item-->
-																		<div class="timeline-item">
-																			<!--begin::Label-->
-																			<div class="timeline-label fw-bolder text-gray-800 fs-6">10:30</div>
-																			<!--end::Label-->
-																			<!--begin::Badge-->
-																			<div class="timeline-badge">
-																				<i class="fa fa-genderless text-success fs-1"></i>
-																			</div>
-																			<!--end::Badge-->
-																			<!--begin::Text-->
-																			<div class="timeline-content fw-mormal text-muted ps-3">Finance KPI Mobile app launch preparion meeting</div>
-																			<!--end::Text-->
-																		</div>
-																		<!--end::Item-->
+																		<!--end::ação -->
 																	</div>
-																	<!--end::Timeline-->
+																	<!--end::Form-->
 																</div>
-																<!--end: Card Body-->
+																<!--end::Menu 1-->
+																<!--end::Menu-->
 															</div>
-															<!--end: List Widget 5-->
-													
-													
+														</div>
+														<!--end::Header-->
+														<!--begin::Body-->
+														<div class="card-body pt-5">
+															<!--begin::Timeline-->
+															<div class="timeline-label">
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		08:42</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-warning fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Text-->
+																	<div
+																		class="fw-mormal timeline-content text-muted ps-3">
+																		Outlines keep you honest. And keep structure
+																	</div>
+																	<!--end::Text-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		10:00</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-success fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Content-->
+																	<div class="timeline-content d-flex">
+																		<span class="fw-bolder text-gray-800 ps-3">AEOL
+																			meeting</span>
+																	</div>
+																	<!--end::Content-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		14:37</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-danger fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Desc-->
+																	<div
+																		class="timeline-content fw-bolder text-gray-800 ps-3">
+																		Make deposit
+																		<a href="#" class="text-primary">USD 700</a>. to
+																		ESL
+																	</div>
+																	<!--end::Desc-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		16:50</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-primary fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Text-->
+																	<div
+																		class="timeline-content fw-mormal text-muted ps-3">
+																		Indulging in poorly driving and keep structure
+																		keep great</div>
+																	<!--end::Text-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		21:03</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-danger fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Desc-->
+																	<div
+																		class="timeline-content fw-bold text-gray-800 ps-3">
+																		New order placed
+																		<a href="#" class="text-primary">#XF-2356</a>.
+																	</div>
+																	<!--end::Desc-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		16:50</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-primary fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Text-->
+																	<div
+																		class="timeline-content fw-mormal text-muted ps-3">
+																		Indulging in poorly driving and keep structure
+																		keep great</div>
+																	<!--end::Text-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		21:03</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-danger fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Desc-->
+																	<div
+																		class="timeline-content fw-bold text-gray-800 ps-3">
+																		New order placed
+																		<a href="#" class="text-primary">#XF-2356</a>.
+																	</div>
+																	<!--end::Desc-->
+																</div>
+																<!--end::Item-->
+																<!--begin::Item-->
+																<div class="timeline-item">
+																	<!--begin::Label-->
+																	<div
+																		class="timeline-label fw-bolder text-gray-800 fs-6">
+																		10:30</div>
+																	<!--end::Label-->
+																	<!--begin::Badge-->
+																	<div class="timeline-badge">
+																		<i
+																			class="fa fa-genderless text-success fs-1"></i>
+																	</div>
+																	<!--end::Badge-->
+																	<!--begin::Text-->
+																	<div
+																		class="timeline-content fw-mormal text-muted ps-3">
+																		Finance KPI Mobile app launch preparion meeting
+																	</div>
+																	<!--end::Text-->
+																</div>
+																<!--end::Item-->
+															</div>
+															<!--end::Timeline-->
+														</div>
+														<!--end: Card Body-->
 													</div>
-													<!--end::Earnings-->
-													
+													<!--end: List Widget 5-->
+
+
 												</div>
-												<!--end:::Tab pane-->
+												<!--end::Earnings-->
+
+											</div>
+											<!--end:::Tab pane-->
 										</div>
 										<!--end:::Tab content-->
 									</div>
@@ -1240,7 +1341,7 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 																	<option value="da">Dansk - Danish</option>
 																	<option value="de">Deutsch - German</option>
 																	<option value="en">English</option>
-																	
+
 																</select>
 																<!--end::Input-->
 															</div>
@@ -1330,7 +1431,7 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 																<!--end::Col-->
 															</div>
 															<!--end::Input group-->
-														
+
 														</div>
 														<!--end::Address form-->
 													</div>
@@ -1360,11 +1461,11 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 									</div>
 								</div>
 								<!--end::Modal - Update user details-->
-							
-								
-								
-						
-								
+
+
+
+
+
 								<!--end::Modals-->
 							</div>
 							<!--end::Container-->

@@ -3,7 +3,9 @@
     color: #7e8299!important;
 .symbol.symbol-lg-160px.symbol-fixed>img {
 }
-    
+    .text-gray-600 {
+    color: #d7d7d7!important;
+}
 aside menu-link
 */
 
@@ -29197,7 +29199,7 @@ fieldset:disabled .btn {
 }
 
 .text-gray-600 {
-    color: #d7d7d7!important;
+    color: #a1a5b7 !important;
 }
 
 .text-hover-gray-600 {

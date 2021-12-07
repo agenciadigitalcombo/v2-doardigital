@@ -351,7 +351,10 @@ export default {
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
     
-		let enderecoDados = (await this.listarEndereco()).dados[0] || {}
+		
+		
+		let enderecoDados = (await this.listarEndereco()).dados|| {}
+		
         this.logadouro = enderecoDados.logadouro
 		this.cep = enderecoDados.cep
 		this.nome_identificacao = enderecoDados.nome_identificacao
@@ -361,6 +364,7 @@ export default {
 		this.cidade = enderecoDados.cidade
 		this.estado = enderecoDados.estado
 		this.id = enderecoDados.id
+
 
 		console.log(enderecoDados)
 		

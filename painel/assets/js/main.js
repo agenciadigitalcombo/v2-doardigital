@@ -100,6 +100,9 @@ import configuracao from './views/configuracao.js'
 Vue.component('c-configuracao', configuracao )
 
 
+import carteira from './views/carteira.js'
+Vue.component('c-carteira', carteira )
+
 
 const app = new Vue({
 

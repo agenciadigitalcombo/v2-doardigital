@@ -380,7 +380,8 @@ export default {
     },
 	
 
-mounted() {
+mounted() {  
+	
 	
 },
 	created() {
