@@ -5,6 +5,11 @@ export default {
 
     <c-header></c-header>
     <c-aside></c-aside>
+	
+	<lauyot>
+		<header>
+	</lauyot>
+
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Page-->
@@ -348,7 +353,6 @@ export default {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				this.id, 
 				this.nome_identificacao,
 				this.cep,
 				this.logadouro,
@@ -360,7 +364,6 @@ export default {
 				this.token,
 			)
 			if (!res.next) {
-				console.log(res)
 				this.error = res.message
 				return null
 			}
@@ -400,19 +403,19 @@ export default {
 	},
 
 	async mounted() {
-
-		let dados = (await this.listar()).dados
-		console.log(dados)
-		this.nome = dados.nome
-		this.email = dados.email
-		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-		this.step = parseInt(dados.step)
+		
+		// let dados = (await this.listar()).dados
+		console.log('rafarelllllllllll')
+		// this.nome = dados.nome
+		// this.email = dados.email
+		// this.cpf = dados.cpf
+		// this.telefone = dados.telefone
+		// this.step = parseInt(dados.step)
 	
 
-		console.log("endeecoDados")
 		
-		let enderecoDados = (await this.listarEndereco()).dados[0] || {}
+		let enderecoDados = (await this.listarEndereco()).dados|| {}
+		
         this.logadouro = enderecoDados.logadouro
 		this.cep = enderecoDados.cep
 		this.nome_identificacao = enderecoDados.nome_identificacao

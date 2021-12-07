@@ -31,15 +31,15 @@ export default {
         })
     },
 
-    
+
     async ListarPerfil(token) {
         return await http.get('/profile', {
             token
         })
     },
 
-    async cadastrarEndereco( 
-         nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+    async cadastrarEndereco(
+        nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
         return await http.post('/create-endereco', {
             nome_identificacao,
             cep,
@@ -50,12 +50,15 @@ export default {
             cidade,
             estado,
             token
-            
-         })
+
+        })
     },
 
-    async atualizarEndereco( 
-   nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+    async atualizarEndereco(
+        nome_identificacao, 
+        cep, logradouro, numero, 
+        complemento, bairro, cidade, estado, token
+    ) {
         return await http.post('/update-endereco', {
             nome_identificacao,
             cep,
@@ -66,17 +69,16 @@ export default {
             cidade,
             estado,
             token
-         })
+        })
     },
 
-    async listarEndereco( token) {
-        console.log("olaaa")
+    async listarEndereco(token) {
         return await http.get('/endereco', {
             token
         })
     },
 
-    async listarEn(nome_identificacao,cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+    async listarEn(nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
         return await http.get('/list-endereco', {
             nome_identificacao,
             cep,
@@ -87,7 +89,7 @@ export default {
             cidade,
             estado,
             token
-         })
+        })
     },
 }
 
