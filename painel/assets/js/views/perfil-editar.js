@@ -112,7 +112,8 @@ export default {
 														<!--end::Progress-->
 														</div>
 														<!--end::Wrapper-->
-												
+			
+														
 													</div>
 													<!--end::Stats-->
 												</div>

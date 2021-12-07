@@ -1,7 +1,8 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-    template: `
+    template:`
+
 	
     <div>
     <div>
@@ -66,7 +67,8 @@ export default {
 																			<path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
 																		</svg>
 																	</span>
-																	<!--end::Svg Icon-->cidade, estado bairro</a>
+																	<!--end::Svg Icon-->
+																	{{cidade}}, {{estado}} {{logadouro}}</a>
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 																	<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
 																	<span class="svg-icon svg-icon-4 me-1">
@@ -192,7 +194,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">cep</a>
+													<span class="fw-bold fs-6 text-gray-800 text-hover-primary">{{cep}}</span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -207,7 +209,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<span class="fw-bolder fs-6 text-gray-800">rua</span>
+													<span class="fw-bolder fs-6 text-gray-800">{{logadouro}}</span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -219,7 +221,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<span class="fw-bolder fs-6 text-gray-800">numero</span>
+													<span class="fw-bolder fs-6 text-gray-800">{{numero}}</span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -232,7 +234,7 @@ export default {
 												<!--begin::Label-->
 												<!--begin::Label-->
 												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800">complemento</span>
+													<span class="fw-bold fs-6 text-gray-800">{{complemento}}</span>
 												</div>
 												<!--begin::Label-->
 											</div>
@@ -245,7 +247,7 @@ export default {
 												<!--begin::Label-->
 												<!--begin::Label-->
 												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800">bairro</span>
+													<span class="fw-bold fs-6 text-gray-800">{{bairro}}</span>
 												</div>
 												<!--begin::Label-->
 											</div>
@@ -258,7 +260,7 @@ export default {
 												<!--begin::Label-->
 												<!--begin::Label-->
 												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800"> cidade </span>
+													<span class="fw-bold fs-6 text-gray-800"> {{cidade}} </span>
 												</div>
 												<!--begin::Label-->
 											</div>
@@ -271,7 +273,7 @@ export default {
 												<!--begin::Label-->
 												<!--begin::Label-->
 												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800"> estado</span>
+													<span class="fw-bold fs-6 text-gray-800"> {{estado}}</span>
 												</div>
 												<!--begin::Label-->
 											</div>
@@ -316,7 +318,20 @@ export default {
 			nome: null,
 			cpf: null,
 			telefone: null,
-			email: null
+			email: null,
+
+			id: null,
+			nome_identificacao: null,
+			cep: null,
+			logadouro: null,
+			numero: null,
+			complemento: null,
+			bairro: null,
+			cidade: null,
+			estado: null,
+			secret: null,
+			token: null,
+			step: null,
         }
     
     },
@@ -330,13 +345,24 @@ export default {
         // document.head.appendChild(plugin)
 
 		let dados = (await this.listar()).dados
-
-		console.log(dados)
+	console.log(dados)
 		this.nome = dados.nome
 		this.email = dados.email
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
     
+		let enderecoDados = (await this.listarEndereco()).dados[0] || {}
+        this.logadouro = enderecoDados.logadouro
+		this.cep = enderecoDados.cep
+		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.numero = enderecoDados.numero
+		this.complemento = enderecoDados.complemento
+		this.bairro = enderecoDados.bairro
+		this.cidade = enderecoDados.cidade
+		this.estado = enderecoDados.estado
+		this.id = enderecoDados.id
+
+		console.log(enderecoDados)
 		
     }, 
 
@@ -345,6 +371,12 @@ export default {
             let res = await adm.ListarPerfil( localStorage.getItem('token') )
 			return res
         },
+		async listarEndereco() {
+			let res = await adm.listarEndereco(
+				(this.token)
+			)
+			return res
+		},
 	},
 }
 
