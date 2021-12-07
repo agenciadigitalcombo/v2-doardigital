@@ -70,7 +70,8 @@ export default {
     },
 
     async listarEndereco( token) {
-        return await http.post('/list-endereco', {
+        console.log("olaaa")
+        return await http.get('/endereco', {
             token
         })
     },
