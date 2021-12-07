@@ -69,6 +69,7 @@ class SubAdm implements ISubAdm{
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm";
         $guard = $banco->query($sql);
+        return $guard;
     }
 
     public function list_all_instituicao_by_sub_adm(int $sub_adm_id): array

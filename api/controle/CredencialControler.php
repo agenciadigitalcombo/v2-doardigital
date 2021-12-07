@@ -1,6 +1,15 @@
 <?php
 
 class CredencialControler{
+
+    static function start()
+    {
+        echo json_encode([
+            "next" => false,
+            "message" => "Você não tem permissão"
+        ]);
+    }
+    
     static function create_credencial()
     {
         $credencial = new Credencial();

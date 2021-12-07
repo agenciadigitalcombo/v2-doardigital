@@ -187,16 +187,16 @@ class EnderecoControle
         $adm_logged = $adm->list_profile($adm_secret);
         $id = $adm_logged['id'];
         $guard = $endereco->list_all_by_fk($id);
-
+        
         $payload = [
-            'nome_identificacao' => $guard['nome_identificacao'],
-            'cep' => $guard['cep'],
-            'logadouro' => $guard['logadouro'],
-            'numero' => $guard['numero'],
-            'complemento' => $guard['complemento'],
-            'bairro' => $guard['bairro'],
-            'cidade' => $guard['cidade'],
-            'estado' => $guard['estado']
+            'nome_identificacao' => $guard['nome_identificacao'] ?? '',
+            'cep' => $guard['cep'] ?? '',
+            'logadouro' => $guard['logadouro'] ?? '',
+            'numero' => $guard['numero'] ?? '',
+            'complemento' => $guard['complemento'] ?? '',
+            'bairro' => $guard['bairro'] ?? '',
+            'cidade' => $guard['cidade'] ?? '',
+            'estado' => $guard['estado'] ?? ''
         ];
 
         echo json_encode([
