@@ -87,17 +87,17 @@ class EnderecoControle
         $jwt = new Jwt();
         $adm = new Adm();
         $endereco = new Endereco();
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? '';
         $token_parse = $jwt->ler($token);
         $valid_token = $jwt->valid($token);
-        $nome_identificacao = $_REQUEST['nome_identificacao'];
-        $cep = $_REQUEST['cep'];
-        $logradouro = $_REQUEST['logradouro'];
+        $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
+        $cep = $_REQUEST['cep'] ?? '';
+        $logradouro = $_REQUEST['logradouro'] ?? '';
         $numero = $_REQUEST['numero'];
-        $complemento = $_REQUEST['complemento'];
-        $bairro = $_REQUEST['bairro'];
-        $cidade = $_REQUEST['cidade'];
-        $estado = $_REQUEST['estado'];
+        $complemento = $_REQUEST['complemento'] ?? '';
+        $bairro = $_REQUEST['bairro'] ?? '';
+        $cidade = $_REQUEST['cidade'] ?? '';
+        $estado = $_REQUEST['estado'] ?? '';
         $campos_obrigatorios = [
             'token'
         ];
