@@ -15,7 +15,6 @@ interface ISubAdm
         string $nome,
         string $email,
         string $senha,
-        string $secret,
         string $telefone,
         int $credencial_id
     ): void;

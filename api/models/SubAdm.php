@@ -26,22 +26,42 @@ class SubAdm implements ISubAdm{
         $banco->exec($sql);
     }
 
+
+    public function list_profile(string $secret): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM sub_adm WHERE secret='$secret'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
     public function list_all_by_adm(int $adm_id): array
     {
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE adm_id='$adm_id'";
-        $banco->query($sql);
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
     public function get_by_id(int $id): array
     {
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE id='$id'";
-        $banco->query($sql);
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $secret, string $telefone, int $credencial_id = null): void
+    public function get_by_email(string $email): array
     {
+        $banco = new Banco();
+        $sql = "SELECT * FROM sub_adm WHERE email='$email'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id = null): void
+    {
+        $secret = uniqid();
         $banco = new Banco();
         $sql = "INSERT INTO sub_adm";
         $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id)";
@@ -50,10 +70,10 @@ class SubAdm implements ISubAdm{
         $banco->exec($sql);
     }
 
-    public function update(string $nome, string $secret, string $telefone, int $credencial_id): void
+    public function update(string $nome, string $secret, string $telefone, int $credencial_id=null): void
     {
         $banco = new Banco();
-        $sql = "UPDATE sub_adm SET nome='$nome', telefone='$telefone' WHERE secret='$secret' AND credencial_id='$credencial_id'";
+        $sql = "UPDATE sub_adm SET nome='$nome', telefone='$telefone' WHERE secret='$secret'";
         $banco->exec($sql);
     }
 

@@ -46,19 +46,20 @@ class AdmControle
             return null;
         }
 
-        if ($adm->exist($email)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Email já em uso"
-            ]);
-            return null;
-        }
+        // if ($adm->exist($email)) {
+        //     echo json_encode([
+        //         "next" => false,
+        //         "message" => "Email já em uso"
+        //     ]);
+        //     return null;
+        // }
 
         $jwt = new Jwt();
 
         $adm->create($nome, $email, $cripto, $transform_tel);
         $usuario_logado = $adm->get_by_email($email);
         $payload = [
+
             'secret' => $usuario_logado['secret'],
             'nome' => $usuario_logado['nome'],
             'email' => $usuario_logado['email'],

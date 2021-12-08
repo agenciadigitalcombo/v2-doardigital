@@ -1,4 +1,6 @@
 <?php
 router('/', 'SubAdmControle@start');
 
-router('/criar-subadm', 'SubAdmControler@criar_subadm');
+router('/criate-subadm', 'SubAdmControler@criar_subadm');
+router('/atualizar-subadm', 'SubAdmControler@update_subadm');
+router('/subadm', 'SubAdmControler@subadm');

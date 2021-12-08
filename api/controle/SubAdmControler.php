@@ -87,30 +87,30 @@ class SubAdmControler
             return null;
         }
         
-        $adm_email = $token_parce['email'];
-        $guard_adm_logado = $adm->get_by_email($adm_email);
-        if(empty($guard_adm_logado)){
-            echo json_encode([
-                "next" => false,
-                "message" => "Usuario nao logado"
-            ]);
-            return null;
-        }
-
+        // $adm_email = $token_parce['email'];
+        // $guard_adm_logado = $adm->get_by_email($adm_email);
+        // if(empty($guard_adm_logado)){
+        //     echo json_encode([
+        //         "next" => false,
+        //         "message" => "Usuario nao logado"
+        //     ]);
+        //     return null;
+        // }
         $adm_secret = $token_parce['secret'];
         $busca_id = $adm->list_profile($adm_secret);
         $adm_id = $busca_id['id'];
         
-        $subadm->create($adm_id, $nome, $email, $cripto_senha, $adm_secret, $transform_tel);
-        
 
+        $subadm->create($adm_id, $nome, $email, $cripto_senha, $transform_tel);
+        $create_token = $subadm->get_by_email($email);
         $payload = [
-            'adm_id' => $guard_adm_logado['adm_id'],
-            'nome' => $guard_adm_logado['nome'],
-            'email' => $guard_adm_logado['email'],
-            'senha' => $guard_adm_logado['senha'],
-            'secret' => $guard_adm_logado['secret'],
-            'telefone' => $guard_adm_logado['telefone']
+            
+            'adm_id' => $create_token['adm_id'],
+            'nome' => $create_token['nome'],
+            'email' => $create_token['email'],
+            'senha' => $create_token['senha'],
+            'telefone' => $create_token['telefone'],
+            'secret' => $create_token['secret']
             
             
         ];
@@ -121,6 +121,108 @@ class SubAdmControler
         ]);
 
     }
+
+    static function update_subadm()
+    {
+        $subadm = new SubAdm();
+        $jwt = new Jwt();
+
+        $token = $_REQUEST['token'] ?? '';
+        $valid_token = $jwt->valid($token);
+        $token_parce = $jwt->ler($token);
+
+        $nome = $_REQUEST['nome'] ?? '';
+        $telefone = $_REQUEST['telefone'] ?? '';
+        
+        $telefone = $_REQUEST['telefone'] ?? '';
+        $caracter = array(
+            "(",
+            ")",
+            " ",
+            "-"
+        );
+        $transform_tel = str_replace($caracter, "", $telefone);
+        
+       
+       
+        $campos_obrigatorios = [
+            'token',
+            'nome',
+            'telefone'
+            
+        ];
+        $lb = [
+            'token' => 'Informe o Token',
+            'nome' => 'Informe um nome',
+            'telefone' => 'Informe o telefone'
+            
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+
+        if(!$valid_token){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Token Invalido'
+            ]);
+        }
+        
+        
+        $secret = $token_parce['secret'];
+        $subadm->update($nome, $secret, $transform_tel);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Dados atualizados'
+        ]);
+        
+
+    }
+
+    static function subadm()
+    {
+        $subadm = new SubAdm();
+        $jwt = new Jwt();
+
+        $token = $_REQUEST['token'] ?? '';
+        $valid_token = $jwt->valid($token);
+        $token_parce = $jwt->ler($token);
+
+        if(!$valid_token){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Token Invalido'
+            ]);
+        }
+
+
+        
+        
+        $secret = $token_parce['secret'];
+        $listar = $subadm->list_profile($secret);
+
+        
+        
+        $payload = [
+            'nome' => $listar['nome'] ?? '',
+            'email' => $listar['email'] ?? '',
+            'telefone' => $listar['telefone'] ?? ''
+        ];
+        echo json_encode([
+            'next' => true,
+            'message' => 'Lista do Sub Adm',
+            'dados' => $payload
+        ]);
+
+    }
+
+    
 
 
 
