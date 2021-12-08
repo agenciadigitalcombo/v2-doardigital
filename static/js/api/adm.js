@@ -25,7 +25,7 @@ export default {
         })
     },
 
-    async atualizar_adm(nome, telefone, cpf) {
+    async atualizar(nome, telefone, cpf) {
         return await http.post('/atualizar-adm', {
             nome, telefone, cpf
         })

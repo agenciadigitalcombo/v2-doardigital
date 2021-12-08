@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js" 
 
-export default {
-    template:`
+export default { 
+    template: ` //
 	<div>
     <c-header></c-header>
     <c-aside></c-aside>
@@ -43,7 +43,7 @@ export default {
 												<!--end::Svg Icon-->
 												<input type="text" data-kt-subscription-table-filter="search"
 													class="form-control form-control-solid w-250px ps-14"
-													placeholder="Search Subscriptions" />
+													placeholder="Buscar Doações ..." />
 											</div>
 											<!--end::Search-->
 										</div>
@@ -54,7 +54,7 @@ export default {
 											<div class="d-flex justify-content-end"
 												data-kt-subscription-table-toolbar="base">
 												<!--begin::Filter-->
-												<button type="button" class="btn btn-light-primary me-3"
+												<button type="button" class="btn btn-light-primary me-3" v-once
 													data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 													<!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
 													<span class="svg-icon svg-icon-2">
@@ -240,6 +240,7 @@ export default {
 									<!--begin::Card body-->
 									<div class="card-body pt-0">
 										<!--begin::Table-->
+										<div class="table-responsive">
 										<table class="table align-middle table-row-dashed fs-6 gy-5"
 											id="kt_subscriptions_table">
 											<!--begin::Table head-->
@@ -263,7 +264,7 @@ export default {
 													<th class="min-w-125px">Status</th>
 													<th class="min-w-125px">Data</th>
 													<th class="min-w-125px">Tipo</th>
-													<th class="text-end min-w-70px">Actions</th>
+													 <th class="text-end min-w-70px">Ação</th>
 												</tr>
 												<!--end::Table row-->
 											</thead>
@@ -322,10 +323,10 @@ export default {
 
 													<!--begin::Action=-->
 													<td class="text-end">
-														<a href="#"
+														<a  
 															class="btn btn-light btn-active-light-primary btn-sm"
 															data-kt-menu-trigger="click"
-															data-kt-menu-placement="bottom-end">Actions
+															data-kt-menu-placement="bottom-end">o que fazer
 															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
 															<span class="svg-icon svg-icon-5 m-0">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -416,10 +417,10 @@ export default {
 													<!--end::Billing=-->
 													<!--begin::Action=-->
 													<td class="text-end">
-														<a href="#"
+														<a
 															class="btn btn-light btn-active-light-primary btn-sm"
 															data-kt-menu-trigger="click"
-															data-kt-menu-placement="bottom-end">Actions
+															data-kt-menu-placement="bottom-end">o que fazer
 															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
 															<span class="svg-icon svg-icon-5 m-0">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -461,6 +462,7 @@ export default {
 											</tbody>
 											<!--end::Table body-->
 										</table>
+										</div>
 										<!--end::Table-->
 									</div>
 									<!--end::Card body-->
@@ -496,11 +498,20 @@ export default {
     },
 	methods: {
 	
-     
-       
-
-    },
+   },
 	
+   created() {
+
+	let plugins = document.createElement('script'); plugins.setAttribute('src', "../../painel/assets/assets/plugins/global/plugins.bundle.js");
+	document.head.appendChild(plugins);
+
+	let datatables = document.createElement('script'); datatables.setAttribute('src', "../../painel/assets/assets/plugins/custom/datatables/datatables.bundle.js");
+	document.head.appendChild(datatables);
+
+	let list = document.createElement('script'); list.setAttribute('src', "../../painel/assets/assets/js/custom/apps/subscriptions/list/list.js");
+	document.head.appendChild(list);
+ 
+},
 
 	
 }

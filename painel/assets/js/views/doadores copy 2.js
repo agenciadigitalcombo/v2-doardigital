@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js" 
 
 export default {
-    template:` 
+    template:`  search
 	<div>
 
     <c-header></c-header>
@@ -164,7 +164,6 @@ export default {
 							<!--begin::Card body-->
 							<div class="card-body pt-0">
 								<!--begin::Table-->
-								<div class="table-responsive">
 								<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
 									<!--begin::Table head-->
 									<thead>
@@ -175,11 +174,11 @@ export default {
 													<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_subscriptions_table .form-check-input" value="1" />
 												</div>
 											</th>
-											<th class="min-w-300px">Usuario</th>
-											<th class="min-w-25px"></th>
-											<th class="min-w-200px">Data Cadastro </th>
-											<th class="min-w-25px"></th>
-											<th class="min-w-200px">Tipo</th>
+											<th class="min-w-250px">Usuario</th>
+											<th class="min-w-125px"></th>
+											<th class="min-w-125px">Data Cadastro </th>
+											<th class="min-w-125px"></th>
+											<th class="min-w-125px">Tipo</th>
 											<th class="text-end min-w-70px">Ação</th>
 										</tr>
 										<!--end::Table row-->
@@ -221,7 +220,7 @@ export default {
 												<div class="badge badge-light"></div>
 											</td>
 											<!--begin::Date=-->
-											<td> <div> 07/12/2021 </div></td>
+											<td  class="badge badge-light">Dec 20, 2021</td>
 											<!--end::Date=-->
 											<!--begin::Action=-->
 											<!--begin::Product=-->
@@ -296,7 +295,7 @@ export default {
 												<div class="badge badge-light"></div>
 											</td>
 											<!--begin::Date=-->
-											<td> <div>29/12/2021</div></td>
+											<td class="badge badge-light">Nov 10, 2021</td>
 											<!--end::Date=-->
 											<!--end::Billing=-->
 											<!--begin::Product=-->
@@ -342,7 +341,6 @@ export default {
 									</tbody>
 									<!--end::Table body-->
 								</table>
-								</div>
 								<!--end::Table-->
 							</div>
 							<!--end::Card body-->
@@ -386,20 +384,20 @@ mounted() {
 	
 	
 },
-// 	created() {
-// 		let jms = document.createElement('script'); jms.setAttribute('src', "../../painel/assets/assets/js/scripts.bundle.js");
-// 		document.head.appendChild(jms);
+	created() {
+		let jms = document.createElement('script'); jms.setAttribute('src', "../../painel/assets/assets/js/scripts.bundle.js");
+		document.head.appendChild(jms);
 	
-// 		let plugins = document.createElement('script'); plugins.setAttribute('src', "../../painel/assets/assets/plugins/global/plugins.bundle.js");
-// 		document.head.appendChild(plugins);
+		let plugins = document.createElement('script'); plugins.setAttribute('src', "../../painel/assets/assets/plugins/global/plugins.bundle.js");
+		document.head.appendChild(plugins);
 	
-// 		let datatables = document.createElement('script'); datatables.setAttribute('src', "../../painel/assets/assets/plugins/custom/datatables/datatables.bundle.js");
-// 		document.head.appendChild(datatables);
+		let datatables = document.createElement('script'); datatables.setAttribute('src', "../../painel/assets/assets/plugins/custom/datatables/datatables.bundle.js");
+		document.head.appendChild(datatables);
 	
-// 		let list = document.createElement('script'); list.setAttribute('src', "../../painel/assets/assets/js/custom/apps/subscriptions/list/list.js");
-// 		document.head.appendChild(list);
+		let list = document.createElement('script'); list.setAttribute('src', "../../painel/assets/assets/js/custom/apps/subscriptions/list/list.js");
+		document.head.appendChild(list);
      
-//    },
+   },
 
 	
 }

@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-    template:`
+    template:` telefone de contato
 
 	
     <div>
@@ -152,11 +152,14 @@ export default {
 											<!--begin::Row-->
 											<div class="row mb-7">
 												<!--begin::Label-->
-												<label class="col-lg-4 fw-bold text-muted">Nome completo</label>
+												<label class="col-lg-4 fw-bold text-muted">Nome completo
+												<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Seu nome completo"></i>
+												</label>
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
 													<span class="fw-bolder fs-6 text-gray-800">{{nome}}</span>
+													
 												</div>
 												<!--end::Col-->
 											</div>
@@ -177,7 +180,7 @@ export default {
 											<div class="row mb-7">
 												<!--begin::Label-->
 												<label class="col-lg-4 fw-bold text-muted">telefone de contato
-													<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
+													<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Numero de telefone activado"></i></label>
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 d-flex align-items-center">
@@ -205,7 +208,7 @@ export default {
 												<label class="col-lg-4 fw-bold text-muted">
 													Rua
 												
-													<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i></label>
+													<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Sua atualizado "></i></label>
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
