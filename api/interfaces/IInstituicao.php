@@ -31,11 +31,11 @@ interface IInstituicao
 
     public function get_by_id(
         int $id
-    ): void;
+    ): array;
 
-    public function list_all(): void;
+    public function list_all(): array;
 
-    public function list_all_by_adm_id(): void;
+    public function list_all_by_adm_id(): array;
 
     public function on_off(
         int $id
