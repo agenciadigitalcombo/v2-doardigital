@@ -59,7 +59,7 @@ class SubAdm implements ISubAdm{
         return $guard[0] ?? [];
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id=1): void
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id): void
     {
         $secret = uniqid();
         $banco = new Banco();
@@ -70,10 +70,10 @@ class SubAdm implements ISubAdm{
         $banco->exec($sql);
     }
 
-    public function update(string $nome, string $secret, string $telefone, int $credencial_id=null): void
+    public function update(string $nome, string $secret, string $telefone, int $credencial_id): void
     {
         $banco = new Banco();
-        $sql = "UPDATE sub_adm SET nome='$nome', telefone='$telefone' WHERE secret='$secret'";
+        $sql = "UPDATE sub_adm SET nome='$nome', telefone='$telefone', credencial_id='$credencial_id' WHERE secret='$secret'";
         $banco->exec($sql);
     }
 

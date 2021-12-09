@@ -41,7 +41,7 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 {
     "nome": "Bruno Vieira",
     "telefone": "(82) 9 9977-6698",
-    "cpf": "1365468798",
+    "cpf": "136546",
     "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330"
 }
 

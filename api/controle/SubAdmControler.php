@@ -28,6 +28,8 @@ class SubAdmControler
         $cripto_senha = md5($senha);
         
         $telefone = $_REQUEST['telefone'] ?? '';
+        $credencial_id = $_REQUEST['credencial_id'] ?? '';
+
         $caracter = array(
             "(",
             ")",
@@ -101,7 +103,7 @@ class SubAdmControler
         $busca_id = $adm->list_profile($adm_secret);
         $adm_id = $busca_id['id'];
     
-        $subadm->create($adm_id, $nome, $email, $cripto_senha, $transform_tel);
+        $subadm->create($adm_id, $nome, $email, $cripto_senha, $transform_tel, $credencial_id);
         $create_token = $subadm->get_by_email($email);
         $payload = [
             
@@ -110,6 +112,7 @@ class SubAdmControler
             'email' => $create_token['email'],
             'senha' => $create_token['senha'],
             'telefone' => $create_token['telefone'],
+            'credencial_id' => $create_token['credencial_id'],
             'secret' => $create_token['secret']
             
         ];
@@ -130,10 +133,10 @@ class SubAdmControler
         $valid_token = $jwt->valid($token);
         $token_parce = $jwt->ler($token);
 
-        $nome = $_REQUEST['nome'] ?? '';
-        $telefone = $_REQUEST['telefone'] ?? '';
-        
-        $telefone = $_REQUEST['telefone'] ?? '';
+        $nome = $_REQUEST['nome'];
+        $credencial_id = $_REQUEST['credencial_id'];
+
+        $telefone = $_REQUEST['telefone'];
         $caracter = array(
             "(",
             ")",
@@ -147,12 +150,14 @@ class SubAdmControler
         $campos_obrigatorios = [
             'token',
             'nome',
+            'credencial_id',
             'telefone'
             
         ];
         $lb = [
             'token' => 'Informe o Token',
             'nome' => 'Informe um nome',
+            'credencial_id' => 'Informe uma credencial',
             'telefone' => 'Informe o telefone'
             
         ];
@@ -175,7 +180,7 @@ class SubAdmControler
         
         
         $secret = $token_parce['secret'];
-        $subadm->update($nome, $secret, $transform_tel);
+        $subadm->update($nome, $secret, $transform_tel, $credencial_id);
         echo json_encode([
             'next' => true,
             'message' => 'Dados atualizados'
