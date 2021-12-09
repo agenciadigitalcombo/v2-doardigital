@@ -205,6 +205,31 @@ class AdmControle
         );
         $transform_tel = str_replace($caracter, "", $telefone);
         $transform_cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+        $campos_obrigatorios = [
+            'token',
+            'nome',
+            'telefone',
+            'cpf'
+        ];
+        $lb = [
+            'token' => 'Informe o Token',
+            'nome' => 'Informe um nome',
+            'telefone' => 'Digite o telefone',
+            'cpf' => 'Digite o cpf'
+            
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+
+
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
 
