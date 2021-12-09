@@ -193,9 +193,8 @@ class AdmControle
         $nome = $_REQUEST['nome'];
         $token = $_REQUEST['token'] ?? '';
         $telefone = $_REQUEST['telefone'];
-        $cpf = $_REQUEST['cpf'];
-        var_dump($cpf, $telefone);
-        die;
+        $cpf = "123123123";
+        
         $caracter = array(
             "(",
             ")",
