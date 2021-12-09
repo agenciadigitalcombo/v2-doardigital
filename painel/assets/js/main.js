@@ -6,6 +6,7 @@ import {mapState} from './vendor/vuex.js'
 
 
 
+
 Vue.use(Router)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
@@ -99,9 +100,14 @@ Vue.component('c-doadorHitorico', doadorHitorico )
 import configuracao from './views/configuracao.js'
 Vue.component('c-configuracao', configuracao )
 
-
 import carteira from './views/carteira.js'
 Vue.component('c-carteira', carteira )
+
+import usuarios from './views/usuarios.js'
+Vue.component('c-usuarios', usuarios )
+
+import usuarioNovo from './views/usuarioNovo.js'
+Vue.component('c-usuarioNovo', usuarioNovo )
 
 
 const app = new Vue({
@@ -122,7 +128,9 @@ const app = new Vue({
         }
         
 
-    }
+    },
+
+
 }).$mount('#app')
 
 

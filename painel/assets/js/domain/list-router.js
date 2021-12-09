@@ -31,4 +31,7 @@ export default [
     { path: '/configuracao', component: { template: '<c-configuracao>' } },
     { path: '/carteira', component: { template: '<c-carteira>' } },
     
+    { path: '/usuarios', component: { template: '<c-usuarios>' } },
+    { path: '/usuario-novo', component: { template: '<c-usuarioNovo>' } },
+    
 ]

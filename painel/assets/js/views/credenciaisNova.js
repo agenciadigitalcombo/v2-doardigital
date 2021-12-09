@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-    template: `
+	template: `
     <div>
     <div>
  
@@ -194,23 +194,23 @@ export default {
     `,
 
 
-    
-    data: function () {
-        
-        return {
-		
-        }
-    
-    },
-	
-    async mounted() {
-     
-    
-		
-    }, 
+
+	data: function () {
+
+		return {
+
+		}
+
+	},
+
+	async mounted() {
+
+
+
+	},
 
 	methods: {
-	
+
 	},
 
 

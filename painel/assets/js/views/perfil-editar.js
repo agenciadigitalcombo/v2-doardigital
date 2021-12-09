@@ -167,9 +167,11 @@ export default {
 									
 										<!--begin::Input group-->
 										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome completo</label>
-											<!--end::Label-->
+										<!--begin::Label-->
+										<label class="col-lg-4 fw-bold text-muted">Nome completo
+										<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Preecha o Seu nome completo"></i>
+										</label>
+										<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8">
 												<!--begin::Row-->
@@ -189,7 +191,8 @@ export default {
 										<!--begin::Input group-->
 										<div class="row mb-6">
 											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">CPF</label>
+											<label class="col-lg-4 col-form-label required fw-bold fs-6">CPF
+											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Adicione o seu CPF"></i></label>
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
@@ -213,12 +216,12 @@ export default {
 											<!--begin::Label-->
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
 												<span class="required">Telefone</span>
-												<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
+												<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Adicione o nome de Telefone activo"></i>
 											</label>
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input v-model="telefone" type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" />
+												<input v-model="telefone" type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Numero de Telefone" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -277,17 +280,18 @@ export default {
       async alterarAdm() {
 			this.error = null
 			
-            let res = await adm.atualizar_adm(
+            let res = await adm.atualizar(
                 this.nome,
                 this.telefone,
-				this.cpf
+				// this.cpf,
+				this.token,
             )
             if (!res.next) {
 				console.log(res)
                 this.error = res.message
                 return null
             }
-            console.log(" atualizado")
+            console.log("atualizado")
         },
 
         updateForm(event) {
