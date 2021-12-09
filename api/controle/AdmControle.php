@@ -233,7 +233,7 @@ class AdmControle
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
 
-        $adm->update($nome, $transform_tel, $secret, $transform_cpf);
+        $adm->update($nome, $transform_tel, $transform_cpf, $secret);
         echo json_encode([
             "next" => true,
             "message" => "Dados atualizados"
