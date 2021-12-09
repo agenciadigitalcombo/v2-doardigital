@@ -117,6 +117,7 @@ class AdmControle
         $payload = [
             'secret' => $guard['secret'],
             'nome' => $guard['nome'],
+            'cpf' => $guard['cpf'],
             'email' => $guard['email'],
             'telefone' => $guard['telefone'],
             'step' => $guard['step']
@@ -136,6 +137,7 @@ class AdmControle
             $payload [] = [
                 'secret' => $g['secret'],
                 'nome' => $g['nome'],
+                'cpf' => $g['cpf'],
                 'email' => $g['email'],
                 'telefone' => $g['telefone'],
                 'step' => $g['step']
