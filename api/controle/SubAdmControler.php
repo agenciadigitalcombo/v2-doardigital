@@ -214,9 +214,10 @@ class SubAdmControler
         
         
         $payload = [
-            'nome' => $listar['nome'] ?? '',
-            'email' => $listar['email'] ?? '',
-            'telefone' => $listar['telefone'] ?? ''
+            'nome' => $listar['nome'],
+            'email' => $listar['email'],
+            'telefone' => $listar['telefone'],
+            'credencial_id' => $listar['credencial_id']
         ];
         echo json_encode([
             'next' => true,
@@ -236,7 +237,8 @@ class SubAdmControler
                 'adm_id' => $g['adm_id'],
                 'nome' => $g['nome'],
                 'email' => $g['email'],
-                'telefone' => $g['telefone']
+                'telefone' => $g['telefone'],
+                'credencial_id' => $g['credencial_id']
             ];
         }
 
