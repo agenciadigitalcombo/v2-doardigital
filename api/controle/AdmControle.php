@@ -194,7 +194,7 @@ class AdmControle
         $token = $_REQUEST['token'] ?? '';
         $telefone = $_REQUEST['telefone'];
         $cpf = $_REQUEST['cpf'];
-        var_dump($cpf);
+        var_dump($cpf, $telefone);
         die;
         $caracter = array(
             "(",
