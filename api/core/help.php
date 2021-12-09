@@ -48,3 +48,32 @@ function upload($name)
     }
     return null;
 }
+
+function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
+{
+}
+
+function get_taxonomy_by_from(int $from_id): array
+{
+    return [];
+}
+
+function get_taxonomy_by_relacao(string $tipo_relacao): array
+{
+    return [];
+}
+
+function get_taxonomy_by_to(int $to_id): array
+{
+    return [];
+}
+
+function get_taxonomy_by_to_relacao($to_id, string $tipo_relacao): array
+{
+    return [];
+}
+
+function get_taxonomy_by_from_relacao(int $from_id, string $tipo_relacao): array
+{
+    return [];
+}
