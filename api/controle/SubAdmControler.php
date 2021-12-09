@@ -13,6 +13,7 @@ class SubAdmControler
     {
         $adm = new Adm();
         $subadm = new SubAdm();
+        $credencial = new CredencialControler();
         $jwt = new Jwt();
         
         $token = $_REQUEST['token'] ?? '';
@@ -99,8 +100,7 @@ class SubAdmControler
         $adm_secret = $token_parce['secret'];
         $busca_id = $adm->list_profile($adm_secret);
         $adm_id = $busca_id['id'];
-        
-
+    
         $subadm->create($adm_id, $nome, $email, $cripto_senha, $transform_tel);
         $create_token = $subadm->get_by_email($email);
         $payload = [
@@ -111,7 +111,6 @@ class SubAdmControler
             'senha' => $create_token['senha'],
             'telefone' => $create_token['telefone'],
             'secret' => $create_token['secret']
-            
             
         ];
         echo json_encode([
@@ -222,7 +221,26 @@ class SubAdmControler
 
     }
 
-    
+    static function list_all()
+    {
+        $subAdm = new SubAdm();
+        $guard = $subAdm->list_all();
+        
+        foreach ($guard as $g) {
+            $payload [] = [
+                'adm_id' => $g['adm_id'],
+                'nome' => $g['nome'],
+                'email' => $g['email'],
+                'telefone' => $g['telefone']
+            ];
+        }
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Todos os SubAdm',
+            'dados' => $payload
+        ]);
+    }
 
 
 

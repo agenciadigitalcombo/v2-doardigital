@@ -59,7 +59,7 @@ class SubAdm implements ISubAdm{
         return $guard[0] ?? [];
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id = null): void
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id=1): void
     {
         $secret = uniqid();
         $banco = new Banco();
