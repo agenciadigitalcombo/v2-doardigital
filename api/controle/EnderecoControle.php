@@ -27,6 +27,9 @@ class EnderecoControle
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
+
+        
+
         $campos_obrigatorios = [
             'token',
             'cep',
@@ -66,15 +69,9 @@ class EnderecoControle
         $secret = $token_parse['secret'];
         $id_adm = $adm->list_profile($secret);
         $id = $id_adm['id'];
-        $caracter = array(
-            "(",
-            ")",
-            " ",
-            "-",
-            ".",
-            ","
-        );
-        $transform_cep = str_replace($caracter, "", $cep);
+
+        $transform_cep = preg_replace('/[^0-9]/', '', $cep);
+        
         $endereco->create($id, $nome_identificacao, $transform_cep, $logradouro, $numero, $complemento, $bairro, $cidade, $estado);
         echo json_encode([
             'next' => true,

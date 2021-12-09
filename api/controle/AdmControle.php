@@ -193,21 +193,27 @@ class AdmControle
         $nome = $_REQUEST['nome'];
         $token = $_REQUEST['token'] ?? '';
         $telefone = $_REQUEST['telefone'];
+        $cpf = $_REQUEST['cpf'];
+
         $caracter = array(
             "(",
             ")",
             " ",
-            "-"
+            "-",
+            ".",
+            ","
         );
         $transform_tel = str_replace($caracter, "", $telefone);
+        $transform_cpf = preg_replace('/[^0-9]/', '', $cpf);
         $token_parce = $jwt->ler($token);
         $secret = $token_parce['secret'];
 
-        $adm->update($nome, $transform_tel, $secret);
+        $adm->update($nome, $transform_tel, $secret, $transform_cpf);
         echo json_encode([
             "next" => true,
             "message" => "Dados atualizados"
-        ]);
+        ]); 
+        
     }
 
     static function update_step()

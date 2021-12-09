@@ -10,6 +10,7 @@ function router($path, $action_hook)
     if ($corruente_path == $path) {
         $explode_method_instace = explode('@', $action_hook);
         call_user_func($explode_method_instace, urldecode($corruente_quary));
+        die;
         return;
     }
 }
