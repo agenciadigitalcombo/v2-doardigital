@@ -221,16 +221,14 @@ class InstituicaoControler{
         ]);
     }
 
-    static function delete()
+    static function detete_instituicao()
     {
         $instituicao = new Instituicao();
-        $id = $_REQUEST['id'] ?? '';
+        $id = 2;
         $instituicao->del($id);
-
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao Excluida'
-            
         ]);
 
     }
