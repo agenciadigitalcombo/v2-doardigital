@@ -58,9 +58,6 @@ class CredencialControler
         
         
         $get_credencial = $credencial->list_by_id($id);
-        echo 'tafarel';
-        var_dump($get_credencial);
-        die;
         $payload = [
             'nome_identificacao' => $get_credencial['nome_identificacao'],
             'recursos' => $get_credencial['recursos']
@@ -77,5 +74,13 @@ class CredencialControler
     static function detete_credencial()
     {
         $credencial = new Credencial();
+        $id = $_REQUEST['id'] ?? '';
+        
+        $credencial->del($id);
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Credenciais Excluidas'
+        ]);
     }
 }
