@@ -55,9 +55,11 @@ class CredencialControler
     {
         $credencial = new Credencial();
         $id = $_REQUEST['id'] ?? '';
-        echo 'tafareell';
+        
         
         $get_credencial = $credencial->list_by_id($id);
+        var_dump($get_credencial);
+        die;
         $payload = [
             'nome_identificacao' => $get_credencial['nome_identificacao'],
             'recursos' => $get_credencial['recursos']
