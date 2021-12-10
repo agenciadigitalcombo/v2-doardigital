@@ -24,7 +24,7 @@ class Instituicao implements IInstituicao{
     {
         $banco = new Banco();
         $sql = "INSERT INTO instituicao";
-        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, dominio, email, cnpj, telefone, recebedor_id, cor, logo, data_registro, status)";
+        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, cor, logo)";
         $sql .= "VALUES";
         $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$cor', '$logo')";
         $banco->exec($sql);
@@ -36,6 +36,7 @@ class Instituicao implements IInstituicao{
         $sql = "UPDATE instituicao SET";
         $sql .= "nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
         $sql .= "WHERE adm_id='$adm_id'";
+        $banco->exec($sql);
     }
 
     public function list_all(): array

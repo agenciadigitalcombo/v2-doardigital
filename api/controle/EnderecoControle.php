@@ -16,6 +16,7 @@ class EnderecoControle
         $jwt = new Jwt();
         $adm = new Adm();
         $endereco = new Endereco();
+
         $token = $_REQUEST['token'];
         $valid_token = $jwt->valid($token);
         $token_parse = $jwt->ler($token);
