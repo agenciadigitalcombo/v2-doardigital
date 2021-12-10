@@ -17,6 +17,28 @@ class CredencialControler
         $nome = $_REQUEST['nome'] ?? '';
         $recursos = $_REQUEST['recursos'] ?? '';
         $credencial->create($nome, $recursos);
+
+        $campos_obrigatorios = [
+            'nome',
+            'recursos'
+            
+            
+        ];
+        $lb = [
+            'nome' => 'Informe um nome',
+            'recursos' => 'Informe o recurso',
+            
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+
         echo json_encode([
             'next' => true,
             'message' => 'Credencial criada'
