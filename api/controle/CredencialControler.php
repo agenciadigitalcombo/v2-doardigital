@@ -58,6 +58,7 @@ class CredencialControler
         
         
         $get_credencial = $credencial->list_by_id($id);
+        echo 'tafarel';
         var_dump($get_credencial);
         die;
         $payload = [
