@@ -16,8 +16,10 @@ class CredencialControler
         $credencial = new Credencial();
         $nome = $_REQUEST['nome'] ?? '';
         $recursos = $_REQUEST['recursos'] ?? '';
-        $credencial->create($nome, $recursos);
 
+        $
+        
+        
         $campos_obrigatorios = [
             'nome',
             'recursos'
@@ -38,6 +40,7 @@ class CredencialControler
                 return null;
             }
         }
+        $credencial->create($nome, $recursos);
 
         echo json_encode([
             'next' => true,
