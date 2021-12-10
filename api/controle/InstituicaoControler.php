@@ -185,7 +185,9 @@ class InstituicaoControler{
                 'telefone' => $g['telefone'],
                 'cor' => $g['cor'],
                 'cnpj' => $g['cnpj'],
-                'logo' => $g['logo']
+                'logo' => $g['logo'],
+                'sub_domain' => $g['sub_domain'],
+                'status' => $g['status']
             ];
         }
 
@@ -205,12 +207,7 @@ class InstituicaoControler{
         $payload = [
             'id' => $get_instituicao['id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
-            'razao_social' => $get_instituicao['razao_social'],
-            'email' => $get_instituicao['email'],
-            'telefone' => $get_instituicao['telefone'],
-            'cor' => $get_instituicao['cor'],
-            'cnpj' => $get_instituicao['cnpj'],
-            'logo' => $get_instituicao['logo'],
+            'sub_domain' => $get_instituicao['sub_domain'],
             'status' => $get_instituicao['status']
         ];
 
