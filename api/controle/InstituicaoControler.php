@@ -124,6 +124,7 @@ class InstituicaoControler{
             'email',
             'cor',
             'telefone',
+            'logo',
             'cnpj'
         ];
         $lb = [
@@ -133,6 +134,7 @@ class InstituicaoControler{
             'email' => 'Qual o Email',
             'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
+            'logo' => 'Qual a logo',
             'cnpj' => 'Informe o Cnpj'
             
         ];
@@ -159,14 +161,42 @@ class InstituicaoControler{
         $adm_id = $guard_adm['id'];
         
         
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
+        $instituicao->update($adm_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, $cor, $logo);
         echo json_encode([
             'next' => true,
-            'message' => 'Instituicao criada'
+            'message' => 'Instituicao atualizada'
         ]);
 
     }
     
+    static function list_instituicao()
+    {
 
+        $instituicao = new Instituicao();
 
+        $guard = $instituicao->list_all();
+
+        foreach ($guard as $g) {
+            $payload [] = [
+                'nome_fantasia' => $g['nome_fantasia'],
+                'razao_social' => $g['razao_social'],
+                'email' => $g['email'],
+                'telefone' => $g['telefone'],
+                'cor' => $g['cor'],
+                'cnpj' => $g['cnpj'],
+                'logo' => $g['logo'],
+            ];
+        }
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Todos os SubAdm',
+            'dados' => $payload
+        ]);
+    }
+
+    static function instituicao()
+    {
+        
+    }
 }

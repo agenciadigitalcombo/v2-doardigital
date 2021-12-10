@@ -63,6 +63,7 @@ class CredencialControler
         $lista_todos = $credencial->list_all();
         foreach($lista_todos as $g){
             $payload [] = [
+                'id' => 'id',
                 'nome_identificacao' =>  $g['nome_identificacao'],
                 'recursos' => $g['recursos']
             ];
