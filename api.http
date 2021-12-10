@@ -50,10 +50,10 @@ GET http://localhost/v2-doardigital/api/gravatar?email=br.rafael@outlook.com
 
 
 ###
-GET http://localhost/v2-doardigital/api/token-valid
+GET http://doardigital.tk/api/credencial
 
 {
-    "token": ""
+    
 }
 
 ###
@@ -65,3 +65,8 @@ POST http://localhost/v2-doardigital/api/step-update
     "token" : ""
 }
 
+###
+GET http://doardigital.tk/api/list-endereco
+{
+    "token": ""
+}
