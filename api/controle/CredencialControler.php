@@ -14,8 +14,8 @@ class CredencialControler
     static function create_credencial()
     {
         $credencial = new Credencial();
-        $nome = $_REQUEST['nome'];
-        $recursos = $_REQUEST['recursos'];
+        $nome = $_REQUEST['nome'] ?? '';
+        $recursos = $_REQUEST['recursos'] ?? '';
         $credencial->create($nome, $recursos);
         echo json_encode([
             'next' => true,
@@ -25,7 +25,7 @@ class CredencialControler
     static function update_credencial()
     {
         $credencial = new Credencial();
-        $id = $_REQUEST['id'];
+        $id = $_REQUEST['id'] ?? '';
         $nome = $_REQUEST['nome'];
         $recursos = $_REQUEST['recursos'];
         $credencial->update($id, $nome, $recursos);
