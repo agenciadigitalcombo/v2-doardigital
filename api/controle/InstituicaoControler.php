@@ -204,10 +204,11 @@ class InstituicaoControler{
         $id = $_REQUEST['id'];
 
         $get_instituicao = $instituicao->get_by_id($id);
+        
         $payload = [
             'id' => $get_instituicao['id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
-            'sub_domain' => $get_instituicao['sub_domain'],
+            'subdomaim' => $get_instituicao['subdomaim'],
             'status' => $get_instituicao['status']
         ];
 
@@ -221,7 +222,7 @@ class InstituicaoControler{
     static function detete_instituicao()
     {
         $instituicao = new Instituicao();
-        $id = 2;
+        $id = $_REQUEST['id'];
         $instituicao->del($id);
         echo json_encode([
             'next' => true,
