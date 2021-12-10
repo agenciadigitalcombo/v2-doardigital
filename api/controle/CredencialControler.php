@@ -16,9 +16,6 @@ class CredencialControler
         $credencial = new Credencial();
         $nome = $_REQUEST['nome'] ?? '';
         $recursos = $_REQUEST['recursos'] ?? '';
-
-        $
-        
         
         $campos_obrigatorios = [
             'nome',
@@ -28,7 +25,7 @@ class CredencialControler
         ];
         $lb = [
             'nome' => 'Informe um nome',
-            'recursos' => 'Informe o recurso',
+            'recursos' => 'Informe o recurso'
             
         ];
         foreach ($campos_obrigatorios as $campo) {
