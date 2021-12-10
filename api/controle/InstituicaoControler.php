@@ -178,6 +178,7 @@ class InstituicaoControler{
 
         foreach ($guard as $g) {
             $payload [] = [
+                'id' => $g['id'],
                 'nome_fantasia' => $g['nome_fantasia'],
                 'razao_social' => $g['razao_social'],
                 'email' => $g['email'],
