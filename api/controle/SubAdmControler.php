@@ -13,7 +13,6 @@ class SubAdmControler
     {
         $adm = new Adm();
         $subadm = new SubAdm();
-        $credencial = new CredencialControler();
         $jwt = new Jwt();
         
         $token = $_REQUEST['token'] ?? '';
@@ -46,7 +45,7 @@ class SubAdmControler
             'email',
             'senha',
             'telefone',
-            
+            'credencial_id'
         ];
         $lb = [
             'token' => 'Informe o Token',
@@ -54,6 +53,7 @@ class SubAdmControler
             'email' => 'Digite um email',
             'senha' => 'digite a senha',
             'telefone' => 'Informe o telefone',
+            'credencial_id' => 'Informe uma credencial'
             
         ];
         foreach ($campos_obrigatorios as $campo) {
@@ -149,17 +149,9 @@ class SubAdmControler
        
         $campos_obrigatorios = [
             'token',
-            'nome',
-            'credencial_id',
-            'telefone'
-            
         ];
         $lb = [
             'token' => 'Informe o Token',
-            'nome' => 'Informe um nome',
-            'credencial_id' => 'Informe uma credencial',
-            'telefone' => 'Informe o telefone'
-            
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {

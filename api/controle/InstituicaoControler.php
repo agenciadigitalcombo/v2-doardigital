@@ -185,7 +185,7 @@ class InstituicaoControler{
                 'telefone' => $g['telefone'],
                 'cor' => $g['cor'],
                 'cnpj' => $g['cnpj'],
-                'logo' => $g['logo'],
+                'logo' => $g['logo']
             ];
         }
 
@@ -198,6 +198,41 @@ class InstituicaoControler{
 
     static function instituicao()
     {
-        
+        $instituicao = new Instituicao();
+        $id = $_REQUEST['id'];
+
+        $get_instituicao = $instituicao->get_by_id($id);
+        $payload = [
+            'id' => $get_instituicao['id'],
+            'nome_fantasia' => $get_instituicao['nome_fantasia'],
+            'razao_social' => $get_instituicao['razao_social'],
+            'email' => $get_instituicao['email'],
+            'telefone' => $get_instituicao['telefone'],
+            'cor' => $get_instituicao['cor'],
+            'cnpj' => $get_instituicao['cnpj'],
+            'logo' => $get_instituicao['logo'],
+            'status' => $get_instituicao['status']
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Todas Instituicoes',
+            'dados' => $payload
+        ]);
     }
+
+    static function delete()
+    {
+        $instituicao = new Instituicao();
+        $id = $_REQUEST['id'] ?? '';
+        $instituicao->del($id);
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Instituicao Excluida'
+            
+        ]);
+
+    }
+
 }
