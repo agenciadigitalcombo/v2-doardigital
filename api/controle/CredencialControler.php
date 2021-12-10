@@ -14,17 +14,17 @@ class CredencialControler
     static function create_credencial()
     {
         $credencial = new Credencial();
-        $nome = $_REQUEST['nome'] ?? '';
+        $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
         $recursos = $_REQUEST['recursos'] ?? '';
         
         $campos_obrigatorios = [
-            'nome',
+            'nome_identificacao',
             'recursos'
             
             
         ];
         $lb = [
-            'nome' => 'Informe um nome',
+            'nome_identificacao' => 'Informe um nome',
             'recursos' => 'Informe o recurso'
             
         ];
@@ -37,7 +37,7 @@ class CredencialControler
                 return null;
             }
         }
-        $credencial->create($nome, $recursos);
+        $credencial->create($nome_identificacao, $recursos);
 
         echo json_encode([
             'next' => true,
@@ -48,9 +48,9 @@ class CredencialControler
     {
         $credencial = new Credencial();
         $id = $_REQUEST['id'] ?? '';
-        $nome = $_REQUEST['nome'];
+        $nome_identificacao = $_REQUEST['nome_identificacao'];
         $recursos = $_REQUEST['recursos'];
-        $credencial->update($id, $nome, $recursos);
+        $credencial->update($id, $nome_identificacao, $recursos);
         echo json_encode([
             'next' => true,
             'message' => 'Credencial atualizada'
@@ -63,7 +63,7 @@ class CredencialControler
         $lista_todos = $credencial->list_all();
         foreach($lista_todos as $g){
             $payload [] = [
-                'nome' =>  $g['nome_identificacao'],
+                'nome_identificacao' =>  $g['nome_identificacao'],
                 'recursos' => $g['recursos']
             ];
         }
