@@ -53,7 +53,7 @@ GET http://localhost/v2-doardigital/api/gravatar?email=br.rafael@outlook.com
 GET http://doardigital.tk/api/credencial
 
 {
-    
+    "id": 2
 }
 
 ###

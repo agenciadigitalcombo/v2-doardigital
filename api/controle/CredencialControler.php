@@ -55,6 +55,7 @@ class CredencialControler
     {
         $credencial = new Credencial();
         $id = $_REQUEST['id'] ?? '';
+        echo 'tafareell';
         
         $get_credencial = $credencial->list_by_id($id);
         $payload = [
