@@ -123,24 +123,72 @@ export default {
 
 
     async cadastrarInstituicao(
-        nome_fantasia, 
-        razao_social, 
-        subdomaim, 
+        token,
+        nome_fantasia,
+        razao_social,
+        subdomaim,
         dominio,
-         email, 
-         cnpj,
-          telefone, 
-          recebedor_id,
-           cor, 
-           logo, 
-         
-
+        email,
+        cnpj,
+        telefone,
+        recebedor_id,
+        cor,
+        logo,
     ) {
         return await http.post('/create-instituicao', {
-            nome_fantasia, razao_social, subdomaim, dominio, email, cnpj, telefone, recebedor_id, cor, logo
-      })
+            token,
+            nome_fantasia,
+            razao_social,
+            subdomaim,
+            dominio,
+            email,
+            cnpj,
+            telefone,
+            recebedor_id,
+            cor,
+            logo,
+        })
     },
 
+    async cadastrarSubadm(
+        nome,
+        email,
+        senha,
+        telefone,
+        credencial_id,
+        token,
+    ) {
+        return await http.post('/criate-subadm', {
+            nome,
+            email,
+            senha,
+            telefone,
+            credencial_id,
+            token,
+        })
+    },
+
+    async editarSubadm(
+        nome,
+        telefone,
+        credencial_id,
+        token ="eyJhZG1faWQiOiI3MCIsIm5vbWUiOiJra2trayIsImVtYWlsIjoiZ3VlbEBnbWFpbC5jb20iLCJzZW5oYSI6IjlkY2JmNjQyYzc4MTM3ZjY1NmJhN2MyNDM4MWFjMjViIiwidGVsZWZvbmUiOiJqb2ltQGdtYWlsLiIsImNyZWRlbmNpYWxfaWQiOiI2NSIsInNlY3JldCI6IjYxYjUyNTU0NTY2YjMifQ==.ba36da82a6fd04813101488c0a0d234d5e8be95b",
+    ) {
+        return await http.post('/atualizar-subadm', {
+            nome,
+            telefone,
+            credencial_id,
+            token,
+        })
+    },
+
+    
+
+    async listarSubadm() {
+        return await http.get('/list-subadm', {
+
+        })
+    },
 
 }
 

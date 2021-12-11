@@ -7,9 +7,10 @@ export default {
  
     <c-header></c-header>
     <c-aside></c-aside>
-
+  
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
+    
         <!--begin::Page-->
         <div class="page d-flex flex-row flex-column-fluid">
          
@@ -18,6 +19,11 @@ export default {
             <!--begin::Root-->
             <div class="d-flex flex-column flex-root">
                 <!--begin::Content-->
+
+
+    <c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
+    
+
                     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                         <!--begin::Post-->
                         <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -189,60 +195,64 @@ export default {
     `,
 
     data: function () {
-        
+
         return {
             id: null,
-			nome_identificacao: null,
-			recursos: null,
+            nome_identificacao: null,
+            recursos: null,
             dados: [],
+            msg: null
         }
-    
+
     },
-	
+
     async mounted() {
         this.dados = (await this.listar()).dados
         this.id = dados.id
-         this.nome_identificacao = dados.nome_identificacao
-      this.recursos = dados.recursos
-            console.log(this.dados)
-   }, 
+        this.nome_identificacao = dados.nome_identificacao
+        this.recursos = dados.recursos
+        console.log(this.dados)
+    },
 
-	methods: {
-		async listar() {
-            let res = await adm.listarCredencial( localStorage.getItem('token') )
-			return res
+    methods: {
+        async listar() {
+            let res = await adm.listarCredencial(localStorage.getItem('token'))
+            return res
         },
 
-        
-		async eliminar(dados) {
-			this.error = null
-			let res = await adm.deleterCredencia(
-                this.id = dados.id,
-				console.log("eliminado")
-			)
-			if (!res.next) {
-				console.log(res)
-				this.error = res.message
-				return null
-			}
-			console.log("eliminado")
 
+        async eliminar(dados) {
+            this.error = null
+            let res = await adm.deleterCredencia(
+                this.id = dados.id,
+                
+            )
+            if (!res.next) {
+                console.log(res)
+                this.error = res.message
+                return null
+            }
+
+            this.msg =  res.message,
+            setTimeout(() => this.msg= "", 3000);
+
+         
             this.dados = (await this.listar()).dados
             this.id = dados.id
-             this.nome_identificacao = dados.nome_identificacao
-          this.recursos = dados.recursos
-                console.log(this.dados)
-		},
+            this.nome_identificacao = dados.nome_identificacao
+            this.recursos = dados.recursos
+            console.log(this.dados)
+        },
 
-        editar(dados){       
+        editar(dados) {
             this.id = dados.id
-             this.nome_identificacao = dados.nome_identificacao
-          this.recursos = dados.recursos
+            this.nome_identificacao = dados.nome_identificacao
+            this.recursos = dados.recursos
 
-           
+
         }
 
-	},
+    },
 
 
 }

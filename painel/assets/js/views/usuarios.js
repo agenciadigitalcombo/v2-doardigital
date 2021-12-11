@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-	template: ` table
+	template: `
 	<div>
 
     <c-header></c-header>
@@ -42,7 +42,7 @@ export default {
 										
 									
 										<!--begin::Add subscription-->
-										<a href="../../demo8/dist/apps/subscriptions/add.html" class="btn btn-primary">
+										<a href="#/usuario-novo" class="btn btn-primary">
 										<!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
 										<span class="svg-icon svg-icon-2">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -81,7 +81,7 @@ export default {
 											</th>
 											<th class="min-w-300px">Usuario</th>
 											<th class="min-w-25px"></th>
-											<th class="min-w-200px">Data Cadastro </th>
+											<th class="min-w-200px">Telefone </th>
 											<th class="min-w-25px"></th>
 											<th class="min-w-150px">Credencial </th>
 											<th class="text-end min-w-120px">Ação</th>
@@ -93,7 +93,7 @@ export default {
 									<tbody class="text-gray-600 fw-bold">
 									
 										
-										<tr>
+										<tr v-for="item in dados" :key="item.id" >
 											<!--begin::Checkbox-->
 											<td>
 												<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -114,8 +114,9 @@ export default {
 												<!--end::Avatar-->
 												<!--begin::User details-->
 												<div class="d-flex flex-column">
-													<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-													<span>e.smith@kpmg.com.au</span>
+													<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">  
+													{{item.nome}}</a>
+													<span> {{item.email}}</span>
 												</div>
 												<!--begin::User details-->
 											</td>
@@ -125,7 +126,7 @@ export default {
 												<div class="badge badge-light"></div>
 											</td>
 											<!--begin::Date=-->
-											<td> <div class=""> 10/10/2021</div> </td>
+											<td> <div class=""> {{item.telefone}} </div> </td>
 											<!--end::Date=-->
 											<!--begin::Action=-->
 											<!--begin::Product=-->
@@ -133,7 +134,9 @@ export default {
 											<!--end::Product=-->
 											<!--begin::Status=-->
 											<td>
-												<div class="badge badge-light-success">Consultor</div>
+												<div class="badge badge-light-success">
+												{{item.credencial_id}}
+												</div>
 											</td>
 											<!--end::Status=-->
 											<td class="text-end">
@@ -168,232 +171,7 @@ export default {
 											<!--end::Action=-->
 										</tr>
 									
-										<tr>
-											<!--begin::Checkbox-->
-											<td>
-												<div class="form-check form-check-sm form-check-custom form-check-solid">
-													<input class="form-check-input" type="checkbox" value="1" />
-												</div>
-											</td>
-											<!--end::Checkbox-->
-											<!--begin::Customer=-->
-											<td class="d-flex align-items-center">
-												<!--begin:: Avatar -->
-												<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-													<a href="../../demo8/dist/apps/user-management/users/view.html">
-														<div class="symbol-label">
-															<img src="../painel/assets/image/gravatar.png" alt="Emma Smith" class="w-100" />
-														</div>
-													</a>
-												</div>
-												<!--end::Avatar-->
-												<!--begin::User details-->
-												<div class="d-flex flex-column">
-													<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-													<span>e.smith@kpmg.com.au</span>
-												</div>
-												<!--begin::User details-->
-											</td>
-											<!--end::Customer=-->
-											<!--begin::Billing=-->
-											<td>
-												<div class="badge badge-light"></div>
-											</td>
-											<!--begin::Date=-->
-											<td class=""> <div> 10/10/2021</div></td>
-											<!--end::Date=-->
-											<!--end::Billing=-->
-											<!--begin::Product=-->
-											<td></td>
-											<!--end::Product=-->
-											<!--begin::Status=-->
-											<td>
-												<div class="badge badge-light-danger">Administrativo</div>
-											</td>
-											<!--end::Status=-->
-											<!--begin::Action=-->
-											<td class="text-end">
-												<a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">o que fazer
-												<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-												<span class="svg-icon svg-icon-5 m-0">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-													</svg>
-												</span>
-												<!--end::Svg Icon--></a>
-												<!--begin::Menu-->
-												<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#/doadorHitorico" class="menu-link px-3">ver</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/apps/subscriptions/add.html" class="menu-link px-3">Editar</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" data-kt-subscriptions-table-filter="delete_row" class="menu-link px-3">Delete</a>
-													</div>
-													<!--end::Menu item-->
-												</div>
-												<!--end::Menu-->
-											</td>
-											<!--end::Action=-->
-										</tr>
-
-										
-										<tr>
-											<!--begin::Checkbox-->
-											<td>
-												<div class="form-check form-check-sm form-check-custom form-check-solid">
-													<input class="form-check-input" type="checkbox" value="1" />
-												</div>
-											</td>
-											<!--end::Checkbox-->
-											<!--begin::Customer=-->
-											<td class="d-flex align-items-center">
-												<!--begin:: Avatar -->
-												<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-													<a href="../../demo8/dist/apps/user-management/users/view.html">
-														<div class="symbol-label">
-															<img src="../painel/assets/image/gravatar.png" alt="Emma Smith" class="w-100" />
-														</div>
-													</a>
-												</div>
-												<!--end::Avatar-->
-												<!--begin::User details-->
-												<div class="d-flex flex-column">
-													<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-													<span>e.smith@kpmg.com.au</span>
-												</div>
-												<!--begin::User details-->
-											</td>
-											<!--end::Customer=-->
-											<!--begin::Billing=-->
-											<td>
-												<div class="badge badge-light"></div>
-											</td>
-											<!--begin::Date=-->
-											<td> <div class=""> 10/10/2021</div> </td>
-											<!--end::Date=-->
-											<!--begin::Action=-->
-											<!--begin::Product=-->
-											<td></td>
-											<!--end::Product=-->
-											<!--begin::Status=-->
-											<td>
-												<div class="badge badge-light-warning">Gerente</div>
-											</td>
-											<!--end::Status=-->
-											<td class="text-end">
-												<a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">o que fazer
-												<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-												<span class="svg-icon svg-icon-5 m-0">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-													</svg>
-												</span>
-												<!--end::Svg Icon--></a>
-												<!--begin::Menu-->
-												<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#/doadorHitorico" class="menu-link px-3">ver</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/apps/subscriptions/add.html" class="menu-link px-3">Editar</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" data-kt-subscriptions-table-filter="delete_row" class="menu-link px-3">Delete</a>
-													</div>
-													<!--end::Menu item-->
-												</div>
-												<!--end::Menu-->
-											</td>
-											<!--end::Action=-->
-										</tr>
-
-										<tr>
-											<!--begin::Checkbox-->
-											<td>
-												<div class="form-check form-check-sm form-check-custom form-check-solid">
-													<input class="form-check-input" type="checkbox" value="1" />
-												</div>
-											</td>
-											<!--end::Checkbox-->
-											<!--begin::Customer=-->
-											<td class="d-flex align-items-center">
-												<!--begin:: Avatar -->
-												<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-													<a href="../../demo8/dist/apps/user-management/users/view.html">
-														<div class="symbol-label">
-															<img src="../painel/assets/image/gravatar.png" alt="Emma Smith" class="w-100" />
-														</div>
-													</a>
-												</div>
-												<!--end::Avatar-->
-												<!--begin::User details-->
-												<div class="d-flex flex-column">
-													<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-													<span>e.smith@kpmg.com.au</span>
-												</div>
-												<!--begin::User details-->
-											</td>
-											<!--end::Customer=-->
-											<!--begin::Billing=-->
-											<td>
-												<div class="badge badge-light"></div>
-											</td>
-											<!--begin::Date=-->
-											<td> <div class=""> 10/10/2021</div> </td>
-											<!--end::Date=-->
-											<!--begin::Action=-->
-											<!--begin::Product=-->
-											<td></td>
-											<!--end::Product=-->
-											<!--begin::Status=-->
-											<td>
-												<div class="badge badge-light-info">Diretor </div>
-											</td>
-											<!--end::Status=-->
-											<td class="text-end">
-												<a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">o que fazer
-												<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-												<span class="svg-icon svg-icon-5 m-0">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-													</svg>
-												</span>
-												<!--end::Svg Icon--></a>
-												<!--begin::Menu-->
-												<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#/doadorHitorico" class="menu-link px-3">ver</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/apps/subscriptions/add.html" class="menu-link px-3">Editar</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" data-kt-subscriptions-table-filter="delete_row" class="menu-link px-3">Delete</a>
-													</div>
-													<!--end::Menu item-->
-												</div>
-												<!--end::Menu-->
-											</td>
-											<!--end::Action=-->
-										</tr>
+									
 									</tbody>
 									<!--end::Table body-->
 								</table>
@@ -427,19 +205,32 @@ export default {
 	data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-			jms: false,
+			nome: null,
+			email: null,
+			senha: null,
+			telefone: null,
+			credencial_id: null,
+			dados: []
 		}
 	},
 	methods: {
-
-
-	},
-
-
-	mounted() {
-
+		async listar() {
+			let res = await adm.listarSubadm(localStorage.getItem('token'))
+			return res
+		},
 
 	},
+
+	async mounted() {
+		this.dados = (await this.listar()).dados
+		this.id = dados.id
+		this.nome = dados.nome
+		this.email = dados.email
+		this.telefone = dados.telefone
+		this.credencial_id = dados.credencial_id
+		console.log(this.dados)
+	},
+
 	created() {
 
 

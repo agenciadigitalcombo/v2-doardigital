@@ -19,7 +19,9 @@ export default {
 							<div class="content d-flex flex-column flex-column-fluid">
 								<!--begin::Post-->
 								<div class="post d-flex flex-column-fluid">
-									<!--begin::Container-->
+									<!--begin::Container-->			
+
+
 									<div class="container-xxl">
 										<!--begin::Card-->
 										<div class="card">
@@ -66,6 +68,8 @@ export default {
 															tudo
 															</div>
 
+														<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
+														
 														<button type="submit" @click="adicionaCredencia()"
 															class="btn btn-primary er fs-6 px-8 py-4 col-lg-4">Salvar</button>
 													</form>
@@ -101,9 +105,10 @@ export default {
 			token: null,
 			nome_identificacao: null,
 			// recursos: null,
-
+			msg: null,
 			isCheckAll: false,
-			permisao: ['Atendente', 'atendente 01', 'atendente 02', 'atendente 03'],
+			permisao: ['Inicio', 'Doadores', 'Doações', 'Credenciais', 'Usuários', 'Minhas Instituições', 'Divisão Pagamento',
+				'Metas', 'Modelo de E-mails', 'Configuração', 'Perfil', 'Modulos', 'Meu Plano', 'Carteira', 'QR CODE'],
 			jms: [],
 			recursos: ""
 		}
@@ -120,7 +125,6 @@ export default {
 			this.recursos = "";
 			for (var key in this.jms) {
 				this.recursos += this.jms[key] + ", ";
-
 			}
 
 			let res = await adm.cadastrarCredencia(
@@ -132,7 +136,12 @@ export default {
 				this.error = res.message
 				return null
 			}
-			console.log("cadastrado")
+
+			this.msg = res.message,
+				setTimeout(() => this.msg = "", 3000);
+
+				this.nome_identificacao= ""
+				
 		},
 
 

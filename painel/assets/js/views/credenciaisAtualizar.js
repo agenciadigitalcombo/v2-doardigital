@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-	template:`
+	template: `
 		<div>
 			<div>
 
@@ -48,7 +48,7 @@ export default {
 																		class="form-check form-switch form-check-custom form-check-solid">
 
 																		<input v-bind:value="listar" v-model="jms"
-																			@change='updateCheckall()'
+																			@change='atualizarCheckall()'
 																			class="form-check-input" type="checkbox" />
 																		<span class="form-check-label">
 																			{{ listar }}
@@ -104,8 +104,8 @@ export default {
 		return {
 			id: null,
 			nome_identificacao: null,
-			
-			
+
+
 			isCheckAll: false,
 			permisao: ['Atendente', 'atendente 01', 'atendente 02', 'atendente 03'],
 			jms: [],
@@ -169,7 +169,7 @@ export default {
 				}
 			}
 		},
-		updateCheckall() {
+		atualizarCheckall() {
 			if (this.jms.length == this.permisao.length) {
 				this.isCheckAll = true;
 			} else {
@@ -185,7 +185,7 @@ export default {
 
 			}
 		}
-		
+
 	},
 
 

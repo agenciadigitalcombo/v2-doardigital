@@ -1,14 +1,13 @@
 import adm from "../../../../static/js/api/adm.js"
 export default {
-	template: `
+	template: `  cidade, estado bairro
+
 	<div>
 
     <c-header></c-header>
     <c-aside></c-aside>
 	
-	<lauyot>
-		<header>
-	</lauyot>
+	
 
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root">
@@ -62,7 +61,7 @@ export default {
 															</div>
 																</div>
 															<!--end::Name-->
-															<!--begin::Info-->
+															<!--begin::Info-->  
 															<div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																	<!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
@@ -81,7 +80,7 @@ export default {
 																			<path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
 																		</svg>
 																	</span>
-																	<!--end::Svg Icon-->cidade, estado bairro</a>
+																	<!--end::Svg Icon-->{{cidade}}, {{estado}} {{bairro}}</a>
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 																	<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
 																	<span class="svg-icon svg-icon-4 me-1">
@@ -125,20 +124,20 @@ export default {
 											<!--begin::Navs-->
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 											<!--begin::Nav item-->
-												<li class="nav-item mt-2"  v-if="step === 6">
+												<li class="nav-item mt-2" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/perfil">Visão geral</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
-												<li class="nav-item mt-2" v-if="step === 1 || step === 2 || step === 6">
+												<li class="nav-item mt-2">
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Seus Dados</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
-												<li class="nav-item mt-2" v-if="step === 3 || step === 2  || step === 6">
+												<li class="nav-item mt-2" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/editar-local">Meu Endereço</a>
 												</li>
-												<li class="nav-item mt-2" v-if="step === 3  || step === 6" >
+												<li class="nav-item mt-2" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Seguranca</a>
 												</li>
 												<!--end::Nav item-->
@@ -368,11 +367,6 @@ export default {
 				return null
 			}
 
-
-			// const prot = window.location.protocol
-			// const host = window.location.hostname
-
-			window.location.href = `#/perfil`
 		},
 
 

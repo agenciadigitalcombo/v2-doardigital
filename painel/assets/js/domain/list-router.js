@@ -4,6 +4,8 @@ export default [
     { path: '/texte', component: { template: '<c-texte/>' } }, 
     { path: '/header', component: { template: '<c-header/>' } }, 
     { path: '/aside', component: { template: '<c-aside/>' } }, 
+    { path: '/mensagem', component: { template: '<c-mensagem/>' } }, 
+   
     { path: '/perfil', component: { template: '<c-perfil/>' } }, 
     { path: '/perfil-editar', component: { template: '<c-perfil-editar/>' } }, 
     { path: '/editar-local', component: { template: '<c-editar-local/>' } }, 

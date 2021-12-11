@@ -21,6 +21,9 @@ Vue.component('c-aside', aside )
 import footer from './componentes/c-footer.js'
 Vue.component('c-footer', footer )
 
+import mensagem from './componentes/c-mensagem.js'
+Vue.component('c-mensagem', mensagem )
+
 import login from './views/login.js'
 Vue.component('c-login', login)
 

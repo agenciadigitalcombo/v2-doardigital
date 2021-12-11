@@ -229,6 +229,10 @@ export default {
 									</div>
 									<!--end::Card body-->
 									<!--begin::Actions-->
+									
+
+    <c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
+
 									<div class="card-footer d-flex justify-content-end py-6 px-9">
 										<button @click="alterarAdm()" type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
 									 {{jms}}
@@ -270,7 +274,7 @@ export default {
 			telefone: null,
 			step: null,
             error: null,
-
+msg: "",
 			jms: ""
 
         }
@@ -283,7 +287,7 @@ export default {
             let res = await adm.atualizar(
                 this.nome,
                 this.telefone,
-				// this.cpf,
+				this.cpf,
 				this.token,
             )
             if (!res.next) {
@@ -291,7 +295,8 @@ export default {
                 this.error = res.message
                 return null
             }
-            console.log("atualizado")
+			this.msg = res.message,
+			setTimeout(() => this.msg = "", 3000);
         },
 
         updateForm(event) {
