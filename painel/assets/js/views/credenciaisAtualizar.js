@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-	template: `
+	template:`
 		<div>
 			<div>
 
@@ -28,18 +28,18 @@ export default {
 
 													<h2 class="fs-2x fw-bolder mb-0 fs-4 fw-bold py-7">Adicione uma credencial</h2>
 													<div class="text-center">
-													<form class="form" action="javascript:void(0)">
-														<input v-model="nome_identificacao" type="text"
-															class="form-control form-control-solid"
-															placeholder="informe um nome" required />
+														<form class="form" action="javascript:void(0)" >
+															<input v-model="nome_identificacao" type="text" class="form-control form-control-solid  mb-20"
+																placeholder="informe um nome" required />
 
-													
+																<input v-model="id" type="text" class="form-control form-control-solid  mb-20"
+																placeholder="id" required />
 
 
-														<p class="text-gray-400 fs-4 fw-bold py-7">Poderá acessar em:
-														</p>
+																
+															<p class="text-gray-400 fs-4 fw-bold py-7">Poderá acessar em:</p>
 
-														<div class="row g-5">
+															<div class="row g-5">
 
 
 															<div class="col-lg-4" v-for="listar in permisao">
@@ -65,9 +65,13 @@ export default {
 																@click="checkAll()" v-model="isCheckAll" /> selecionar
 															tudo
 															</div>
+													
 
-														<button type="submit" @click="adicionaCredencia()"
-															class="btn btn-primary er fs-6 px-8 py-4 col-lg-4">Salvar</button>
+															<button type="submit"  @click="alterarCredencia()"
+										class="btn btn-primary er fs-6 px-8 py-4 col-lg-4">Salvar</button>
+
+										<button type="submit"  @click="eliminar()"
+										class="btn btn-danger er fs-6 px-8 py-4 col-lg-4">Eliminar</button>
 													</form>
 												</div>
 											</div>
@@ -98,32 +102,36 @@ export default {
 	data: function () {
 
 		return {
-			token: null,
+			id: null,
 			nome_identificacao: null,
-			// recursos: null,
-
+			
+			
 			isCheckAll: false,
 			permisao: ['Atendente', 'atendente 01', 'atendente 02', 'atendente 03'],
 			jms: [],
 			recursos: ""
 		}
+
 	},
 
 	async mounted() {
 
+
+
 	},
 
 	methods: {
-		async adicionaCredencia() {
+
+		async alterarCredencia() {
 			this.error = null
 
 			this.recursos = "";
 			for (var key in this.jms) {
 				this.recursos += this.jms[key] + ", ";
-
 			}
 
-			let res = await adm.cadastrarCredencia(
+			let res = await adm.atualizarCredencia(
+				this.id,
 				this.nome_identificacao,
 				this.recursos,
 			)
@@ -132,7 +140,22 @@ export default {
 				this.error = res.message
 				return null
 			}
-			console.log("cadastrado")
+			console.log("atualizado")
+		},
+
+		async eliminar() {
+			this.error = null
+
+			let res = await adm.deleterCredencia(
+				this.id,
+				console.log("eliminado")
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			console.log("eliminado")
 		},
 
 
@@ -162,7 +185,7 @@ export default {
 
 			}
 		}
-
+		
 	},
 
 

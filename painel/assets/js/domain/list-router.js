@@ -10,6 +10,8 @@ export default [
     { path: '/editar-securanca', component: { template: '<c-editar-securanca/>' } }, 
     { path: '/credencias', component: { template: '<c-credenciais/>' } }, 
     { path: '/credencias/nova', component: { template: '<c-nova-credenciais>' } }, 
+    { path: '/credencias/editar', component: { template: '<c-credenciaisAtualizar>' } }, 
+    
     { path: '/minha-instituicoes', component: { template: '<c-minhaInstituicao>' } }, 
     { path: '/add-instituicoes', component: { template: '<c-addInstituicao>' } }, 
     { path: '/endereco-instituicoes', component: { template: '<c-localInstituicao>' } }, 

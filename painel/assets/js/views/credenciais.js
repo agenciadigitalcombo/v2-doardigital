@@ -98,15 +98,15 @@ export default {
                                             <!--end::Table head-->
                                             <!--begin::Table body-->
                                             <tbody class="fw-bold text-gray-600">
-                                                <tr >
+                                                <tr v-for="item in dados" :key="item.id">
                                                     <td>
-                                                         credencial id  -
-                                                         credencial nome 
+                                                    {{item.nome_identificacao}}
+		
                                                     </td>
     
                                                     <td>
                                                         <a class="badge badge-light-primary fs-7 m-1">
-                                                             id -  nome 
+                                                             	{{item.recursos}}
                                                         </a>
                                                     </td>
                                                     <!--end::Assigned to=-->
@@ -114,7 +114,7 @@ export default {
                                                     <!--begin::Action=-->
                                                     <td class="text-end">
     
-                                                        <a 
+                                                        <a @click="editar(item)" href="#/credencias/editar"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -129,7 +129,7 @@ export default {
                                                             <!--end::Svg Icon-->
                                                         </a>
     
-                                                        <a 
+                                                        <button @click="eliminar(item)"
                                                             title="Para Apagar de duplo click"
                                                             class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
                                                             style="margin: 2px;">
@@ -141,13 +141,15 @@ export default {
                                                                     d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
                                                             </svg>
                                                             <!--end::Svg Icon-->
-                                                        </a>
+                                                        </button>
     
                                                     </td>
                                                     <!--end::Action=-->
                                                 </tr>
     
-    
+                                                <input v-model="nome_identificacao" type="text"
+                                                class="form-control form-control-solid"
+                                                placeholder="informe um nome" required />
     
                                             </tbody>
                                             <!--end::Table body-->
@@ -186,24 +188,60 @@ export default {
     
     `,
 
-
-    
     data: function () {
         
         return {
-		
+            id: null,
+			nome_identificacao: null,
+			recursos: null,
+            dados: [],
         }
     
     },
 	
     async mounted() {
-     
-    
-		
-    }, 
+        this.dados = (await this.listar()).dados
+        this.id = dados.id
+         this.nome_identificacao = dados.nome_identificacao
+      this.recursos = dados.recursos
+            console.log(this.dados)
+   }, 
 
 	methods: {
-	
+		async listar() {
+            let res = await adm.listarCredencial( localStorage.getItem('token') )
+			return res
+        },
+
+        
+		async eliminar(dados) {
+			this.error = null
+			let res = await adm.deleterCredencia(
+                this.id = dados.id,
+				console.log("eliminado")
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			console.log("eliminado")
+
+            this.dados = (await this.listar()).dados
+            this.id = dados.id
+             this.nome_identificacao = dados.nome_identificacao
+          this.recursos = dados.recursos
+                console.log(this.dados)
+		},
+
+        editar(dados){       
+            this.id = dados.id
+             this.nome_identificacao = dados.nome_identificacao
+          this.recursos = dados.recursos
+
+           
+        }
+
 	},
 
 
