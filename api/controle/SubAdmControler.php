@@ -163,11 +163,12 @@ class SubAdmControler
             }
         }
 
-        if(!$valid_token){
+        if (! $valid_token) {
             echo json_encode([
                 'next' => false,
-                'message' => 'Token Invalido'
+                'message' => 'Token invalido'
             ]);
+            return null;
         }
         
         
