@@ -1,11 +1,57 @@
-import adm from "../../../../static/js/api/adm.js"
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
 
-export default {
-	template: `
-	<div>
 
-    <c-header></c-header>
-    <c-aside></c-aside>
+<html lang="en">
+<!--begin::Head-->
+
+<head>
+	<base href="../../../">
+	<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel
+		by Keenthemes</title>
+	<meta charset="utf-8" />
+	<meta name="description"
+		content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+	<meta name="keywords"
+		content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title"
+		content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+	<meta property="og:url" content="https://keenthemes.com/metronic" />
+	<meta property="og:site_name" content="Keenthemes | Metronic" />
+	<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+	<!--begin::Fonts-->
+	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
+	<!--end::Fonts-->
+	<!--begin::Page Vendor Stylesheets(used by this page)-->
+	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
+
+	<link href="../assets/css/front-css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/css/front-css/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/css/front-css/datatables.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="../painel/assets/css/style.css" rel="stylesheet" type="text/css" />
+	<!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
+
+
+
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Page-->
@@ -13,6 +59,7 @@ export default {
 
 			<!--begin::Wrapper-->
 			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
 
 				<!--begin::Content-->
 				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -67,7 +114,7 @@ export default {
 								<!--begin::Content-->
 								<div id="kt_account_profile_details">
 									<!--begin::Form-->
-									<form  class="form">
+									<form id="kt_account_profile_details_form" class="form">
 										<!--begin::Card body-->
 										<div class="card-body border-top p-9">
 											<!--begin::Input group-->
@@ -148,6 +195,9 @@ export default {
 												</div>
 												<!--end::Col-->
 											</div>
+
+
+
 										</div>
 										<!--end::Card body-->
 
@@ -185,6 +235,8 @@ export default {
 											<!--end::Notice-->
 										</div>
 										<!--end::Basic info-->
+
+
 
 
 										<div class="card-header border-0 cursor-pointer">
@@ -251,6 +303,7 @@ export default {
 							</div>
 							<!--end::Basic info-->
 
+
 						</div>
 						<!--end::Container-->
 					</div>
@@ -264,53 +317,16 @@ export default {
 	<!--end::Root-->
 
 
-		<c-footer/>
-	</div>
-    `,
 
 
-	data: function () {
-		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-			nome_fantasia: null,
-			razao_social: null,
-			subdomaim: null,
-			email: null,
-			telefone: null,
-			cnpj: null,
 
-			cor: null,
-			logo: null,
-			jms: false,
-		}
-	},
+	<script src="../js/front-js/scripts.bundle.js"></script>
+	<script src="../js/front-js/datatables.bundle.js"></script>
+	<script src="../js/front-js/table.js"></script>
+	<script src="front-js/plugins.bundle.js"></script>
+	<!--end::Page Custom Javascript-->
+	<!--end::Javascript-->
+</body>
+<!--end::Body-->
 
-	methods: {
-		async addInstituicao() {
-			this.error = null
-
-			let res = await adm.cadastrarInstituicao(
-				this.nome_fantasia,
-				this.razao_social,
-				this.subdomaim,
-				this.email,
-				this.telefone,
-				this.cnpj,
-			)
-			if (!res.next) {
-				console.log(res)
-				this.error = res.message
-				return null
-			}
-			console.log("cadastrado")
-		},
-
-
-	},
-	async mounted() {
-
-	},
-
-
-}
-
+</html>
