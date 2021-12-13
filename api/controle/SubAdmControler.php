@@ -30,12 +30,11 @@ class SubAdmControler
 
         $telefone = $_REQUEST['telefone'] ?? '';
         $credencial_id = $_REQUEST['credencial_id'] ?? '';
-        $status = $_REQUEST['status'] ?? '';
+        
+
 
         
-        
         $num_tel = preg_replace('/\D/', '', $telefone);
-        $num_status = preg_replace('/\D/', '', $status);
 
         $campos_obrigatorios = [
             'token',
@@ -95,11 +94,12 @@ class SubAdmControler
         // ]);
         // return null;
         // }
+
         $adm_secret = $token_parce['secret'];
         $busca_id = $adm->list_profile($adm_secret);
         $adm_id = $busca_id['id'];
 
-        $subadm->create($adm_id, $nome, $email, $cripto_senha, $num_tel, $credencial_id, $status);
+        $subadm->create($adm_id, $nome, $email, $cripto_senha, $num_tel, $credencial_id);
 
         echo json_encode([
             "next" => true,
@@ -112,7 +112,7 @@ class SubAdmControler
         $subadm = new SubAdm();
         $jwt = new Jwt();
 
-        $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'] ?? [];
         $valid_token = $jwt->valid($token);
 
         $secret = $_REQUEST['secret'];
@@ -125,10 +125,12 @@ class SubAdmControler
         $num_tel = preg_replace('/[^0-9]/', '', $telefone);
 
         $campos_obrigatorios = [
-            'token'
+            'token',
+            'secret'
         ];
         $lb = [
-            'token' => 'Informe o Token'
+            'token' => 'Informe o Token',
+            'secret' => 'Informe o Secret'
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
