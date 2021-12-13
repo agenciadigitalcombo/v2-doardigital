@@ -16,17 +16,14 @@ class CredencialControler
         $credencial = new Credencial();
         $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
         $recursos = $_REQUEST['recursos'] ?? '';
-        
+
         $campos_obrigatorios = [
             'nome_identificacao',
             'recursos'
-            
-            
         ];
         $lb = [
             'nome_identificacao' => 'Informe um nome',
             'recursos' => 'Informe o recurso'
-            
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -44,6 +41,7 @@ class CredencialControler
             'message' => 'Credencial criada'
         ]);
     }
+
     static function update_credencial()
     {
         $credencial = new Credencial();
@@ -56,16 +54,16 @@ class CredencialControler
             'message' => 'Credencial atualizada'
         ]);
     }
+
     static function list_credencial()
     {
-
         $credencial = new Credencial();
         $lista_todos = $credencial->list_all();
-        
-        foreach($lista_todos as $g){
-            $payload [] = [
+
+        foreach ($lista_todos as $g) {
+            $payload[] = [
                 'id' => $g['id'],
-                'nome_identificacao' =>  $g['nome_identificacao'],
+                'nome_identificacao' => $g['nome_identificacao'],
                 'recursos' => $g['recursos']
             ];
         }
@@ -75,12 +73,12 @@ class CredencialControler
             'dados' => $payload
         ]);
     }
+
     static function credencial()
     {
         $credencial = new Credencial();
         $id = $_REQUEST['id'] ?? '';
-        
-        
+
         $get_credencial = $credencial->list_by_id($id);
         $payload = [
             'nome_identificacao' => $get_credencial['nome_identificacao'],
@@ -92,14 +90,13 @@ class CredencialControler
             'message' => 'Credenciais',
             'dados' => $payload
         ]);
-        
-
     }
+
     static function detete_credencial()
     {
         $credencial = new Credencial();
         $id = $_REQUEST['id'] ?? '';
-        
+
         $credencial->del($id);
 
         echo json_encode([

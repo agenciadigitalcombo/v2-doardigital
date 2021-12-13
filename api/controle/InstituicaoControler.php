@@ -1,7 +1,7 @@
 <?php
 
-class InstituicaoControler{
-
+class InstituicaoControler
+{
 
     static function create_instituicao()
     {
@@ -9,7 +9,7 @@ class InstituicaoControler{
         $adm = new Adm();
         $jwt = new Jwt();
 
-        $token =  $_REQUEST['token'] ?? '';
+        $token = $_REQUEST['token'] ?? '';
         $valid_token = $jwt->valid($token);
         $token_parce = $jwt->ler($token);
 
@@ -53,7 +53,6 @@ class InstituicaoControler{
             'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
             'cnpj' => 'Informe o Cnpj'
-            
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -65,25 +64,23 @@ class InstituicaoControler{
             }
         }
 
-        if(!$valid_token){
+        if (! $valid_token) {
             echo json_encode([
                 'next' => false,
                 'message' => 'Token invalido'
             ]);
             return null;
         }
-        
+
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
-        
-        
+
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao criada'
         ]);
-
     }
 
     static function update_instituicao()
@@ -92,7 +89,7 @@ class InstituicaoControler{
         $adm = new Adm();
         $jwt = new Jwt();
 
-        $token =  $_REQUEST['token'] ?? '';
+        $token = $_REQUEST['token'] ?? '';
         $valid_token = $jwt->valid($token);
         $token_parce = $jwt->ler($token);
 
@@ -136,7 +133,6 @@ class InstituicaoControler{
             'telefone' => 'Digite o numero de Telefone',
             'logo' => 'Qual a logo',
             'cnpj' => 'Informe o Cnpj'
-            
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -148,36 +144,33 @@ class InstituicaoControler{
             }
         }
 
-        if(!$valid_token){
+        if (! $valid_token) {
             echo json_encode([
                 'next' => false,
                 'message' => 'Token invalido'
             ]);
             return null;
         }
-        
+
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
-        
-        
+
         $instituicao->update($adm_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, $cor, $logo);
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao atualizada'
         ]);
-
     }
-    
+
     static function list_instituicao()
     {
-
         $instituicao = new Instituicao();
 
         $guard = $instituicao->list_all();
 
         foreach ($guard as $g) {
-            $payload [] = [
+            $payload[] = [
                 'id' => $g['id'],
                 'nome_fantasia' => $g['nome_fantasia'],
                 'razao_social' => $g['razao_social'],
@@ -204,7 +197,7 @@ class InstituicaoControler{
         $id = $_REQUEST['id'];
 
         $get_instituicao = $instituicao->get_by_id($id);
-        
+
         $payload = [
             'id' => $get_instituicao['id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
@@ -228,7 +221,5 @@ class InstituicaoControler{
             'next' => true,
             'message' => 'Instituicao Excluida'
         ]);
-
     }
-
 }

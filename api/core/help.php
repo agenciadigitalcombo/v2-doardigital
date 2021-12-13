@@ -2,7 +2,11 @@
 
 function router($path, $action_hook)
 {
-    $black_list = ['/api', '/doardigital', '/v2-doardigital'];
+    $black_list = [
+        '/api',
+        '/doardigital',
+        '/v2-doardigital'
+    ];
     $corruente_uri = $_SERVER['REQUEST_URI'];
     $corruente_path = parse_url($corruente_uri, PHP_URL_PATH);
     $corruente_quary = parse_url($corruente_uri, PHP_URL_QUERY);
@@ -10,7 +14,7 @@ function router($path, $action_hook)
     if ($corruente_path == $path) {
         $explode_method_instace = explode('@', $action_hook);
         call_user_func($explode_method_instace, urldecode($corruente_quary));
-        die;
+        die();
         return;
     }
 }
@@ -35,7 +39,11 @@ function get_curl($url)
 
 function upload($name)
 {
-    $white_list = ["jpg", "jpeg", "png"];
+    $white_list = [
+        "jpg",
+        "jpeg",
+        "png"
+    ];
     $extensao = pathinfo($_FILES[$name]["name"], PATHINFO_EXTENSION);
     if (in_array($extensao, $white_list)) {
         $name = uniqid() . time() . ".png";
@@ -50,8 +58,7 @@ function upload($name)
 }
 
 function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
-{
-}
+{}
 
 function get_taxonomy_by_from(int $from_id): array
 {
@@ -78,7 +85,8 @@ function get_taxonomy_by_from_relacao(int $from_id, string $tipo_relacao): array
     return [];
 }
 
-function gravatar( string $email ) : string {
+function gravatar(string $email): string
+{
     $email = md5(strtolower(trim($email)));
     return "https://www.gravatar.com/avatar/{$email}";
 }

@@ -1,13 +1,14 @@
-<?php 
+<?php
 
-class SubAdm implements ISubAdm{
-    
+class SubAdm implements ISubAdm
+{
+
     public function exist(string $email): bool
     {
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE email='$email'";
         $guard = $banco->query($sql);
-        return !empty($guard);
+        return ! empty($guard);
     }
 
     public function nova_senha(int $id): string
@@ -25,7 +26,6 @@ class SubAdm implements ISubAdm{
         $sql = "UPDATE sub_adm SET status='$status' WHERE scret='$secret'";
         $banco->exec($sql);
     }
-
 
     public function list_profile(string $secret): array
     {
@@ -59,14 +59,14 @@ class SubAdm implements ISubAdm{
         return $guard[0] ?? [];
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id): void
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id, int $status): void
     {
         $secret = uniqid();
         $banco = new Banco();
         $sql = "INSERT INTO sub_adm";
-        $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id)";
+        $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id, status)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id','$nome','$email','$senha','$secret','$telefone','$credencial_id')";
+        $sql .= "('$adm_id','$nome','$email','$senha','$secret','$telefone','$credencial_id', '$status')";
         $banco->exec($sql);
     }
 
@@ -86,13 +86,12 @@ class SubAdm implements ISubAdm{
 
     public function list_all(): array
     {
-        
         $banco = new Banco();
-        $sql = "SELECT * FROM sub_adm WHERE adm_id='$adm_id'";
+        $sql = "SELECT * FROM sub_adm";
         $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $guard;
     }
-
+    
     public function list_all_instituicao_by_sub_adm(int $sub_adm_id): array
     {
         $banco = new Banco();
@@ -106,7 +105,7 @@ class SubAdm implements ISubAdm{
         $banco = new Banco();
         $sql = "SELECT * FROM adm_id='$instituicao_id'";
         $guard = $banco->query($sql);
-        return $guard[0] ?? []; 
+        return $guard[0] ?? [];
     }
 
     public function set_instituicao(int $instituicao_id, int $sub_adm_id): array
@@ -116,7 +115,5 @@ class SubAdm implements ISubAdm{
         $guard = $banco->query($sql);
         return $guard;
     }
-
-    
 }
 ?>

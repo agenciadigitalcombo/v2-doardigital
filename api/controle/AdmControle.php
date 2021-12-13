@@ -29,6 +29,7 @@ class AdmControle
             "-"
         );
         $transform_tel = str_replace($caracter, "", $telefone);
+        $num_tel = preg_replace('/[^0-9]/', '', $transform_tel);
 
         if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
@@ -56,7 +57,7 @@ class AdmControle
 
         $jwt = new Jwt();
 
-        $adm->create($nome, $email, $cripto, $transform_tel);
+        $adm->create($nome, $email, $cripto, $num_tel);
         $usuario_logado = $adm->get_by_email($email);
         $payload = [
 

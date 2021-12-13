@@ -16,7 +16,8 @@ interface ISubAdm
         string $email,
         string $senha,
         string $telefone,
-        int $credencial_id
+        int $credencial_id,
+        int $status
     ): void;
 
     public function update(
