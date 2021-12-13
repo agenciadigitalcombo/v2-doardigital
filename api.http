@@ -70,3 +70,11 @@ GET http://doardigital.tk/api/list-endereco
 {
     "token": ""
 }
+
+### 
+
+GET http://doardigital.tk/api/list-subadm
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330"
+}

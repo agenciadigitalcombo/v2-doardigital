@@ -77,3 +77,8 @@ function get_taxonomy_by_from_relacao(int $from_id, string $tipo_relacao): array
 {
     return [];
 }
+
+function gravatar( string $email ) : string {
+    $email = md5(strtolower(trim($email)));
+    return "https://www.gravatar.com/avatar/{$email}";
+}
