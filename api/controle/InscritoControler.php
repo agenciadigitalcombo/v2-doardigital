@@ -14,11 +14,14 @@ class InscritoControler
     static function create_inscrito()
     {
         $inscrito = new Inscrito();
+
         $instituicao_id = $_REQUEST['instituicao_id'];
         $nome = $_REQUEST['nome'];
         $email = $_REQUEST['email'];
         $telefone = $_REQUEST['telefone'];
+
         $inscrito->register($instituicao_id, $nome, $email, $telefone);
+
         echo json_encode([
             "next" => true,
             "message" => "Inscrito Criado ou Atualizado"
@@ -36,6 +39,7 @@ class InscritoControler
                 'telefone' => $g['telefone']
             ];
         }
+
         echo json_encode([
             "next" => true,
             "message" => "Inscritos",
@@ -46,7 +50,9 @@ class InscritoControler
     static function inscrito()
     {
         $inscrito = new Inscrito();
+
         $instituicao_id = $_REQUEST['instituicao_id'];
+        
         $guard = $inscrito->list_all_by_instituicao($instituicao_id);
         $payload = [
             'nome' => $guard['nome'],

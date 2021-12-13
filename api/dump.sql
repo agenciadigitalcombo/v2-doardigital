@@ -125,7 +125,7 @@ CREATE TABLE instituicao (
     recebedor_token varchar(255),
     nome_fantasia varchar(75),
     razao_social varchar(75),
-    subdomaim varchar(75),
+    subdomain varchar(75),
     dominio varchar(75),
     email varchar(75),
     cnpj varchar(14),

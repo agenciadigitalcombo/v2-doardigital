@@ -86,10 +86,11 @@ class SubAdm implements ISubAdm{
 
     public function list_all(): array
     {
+        
         $banco = new Banco();
-        $sql = "SELECT * FROM sub_adm";
+        $sql = "SELECT * FROM sub_adm WHERE adm_id='$adm_id'";
         $guard = $banco->query($sql);
-        return $guard;
+        return $guard[0] ?? [];
     }
 
     public function list_all_instituicao_by_sub_adm(int $sub_adm_id): array

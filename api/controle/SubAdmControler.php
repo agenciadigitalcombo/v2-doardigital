@@ -191,13 +191,29 @@ class SubAdmControler
         $valid_token = $jwt->valid($token);
         $token_parce = $jwt->ler($token);
 
+
+        $campos_obrigatorios = [
+            'token',
+        ];
+        $lb = [
+            'token' => 'Informe o Token',
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+        
         if(!$valid_token){
             echo json_encode([
                 'next' => false,
                 'message' => 'Token Invalido'
             ]);
         }
-
 
         
         
@@ -222,8 +238,46 @@ class SubAdmControler
 
     static function list_all()
     {
+        
+
         $subAdm = new SubAdm();
-        $guard = $subAdm->list_all();
+        $jwt = new Jwt();
+        $adm = new Adm();
+
+        $token = $_REQUEST['token'] ?? '';
+        $valid_token = $jwt->valid($token);
+        $token_parce = $jwt->ler($token);
+
+
+        if(!$valid_token){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Token Invalido'
+            ]);
+        }
+
+
+        $campos_obrigatorios = [
+            'token',
+        ];
+        $lb = [
+            'token' => 'Informe o Token',
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+
+        $secret = $token_parce['secret'];
+        $get_adm_id = $adm->list_profile($secret);
+        $adm_id = $get_adm_id['id'];
+
+        $guard = $subAdm->list_all_by_adm($adm_id);
         
         foreach ($guard as $g) {
             $payload [] = [

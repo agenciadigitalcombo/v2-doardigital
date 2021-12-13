@@ -5,6 +5,7 @@ class PlanoDigital implements IPlanoDigital{
         $banco = new Banco();
         $sql = "SELECT * FROM plano_digital";
         $guard = $banco->query($sql);
+        return $guard;
     }
 
     public function create( string $token, string $nome, int $whatsapp, int $instituicao_max, int $amount): void

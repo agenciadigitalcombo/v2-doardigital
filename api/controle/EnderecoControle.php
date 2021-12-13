@@ -85,9 +85,11 @@ class EnderecoControle
         $jwt = new Jwt();
         $adm = new Adm();
         $endereco = new Endereco();
+
         $token = $_REQUEST['token'] ?? '';
         $token_parse = $jwt->ler($token);
         $valid_token = $jwt->valid($token);
+
         $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
         $cep = $_REQUEST['cep'] ?? '';
         $logradouro = $_REQUEST['logradouro'] ?? '';
@@ -96,6 +98,19 @@ class EnderecoControle
         $bairro = $_REQUEST['bairro'] ?? '';
         $cidade = $_REQUEST['cidade'] ?? '';
         $estado = $_REQUEST['estado'] ?? '';
+
+
+        $caracter = array(
+            "(",
+            ")",
+            " ",
+            "-",
+            ".",
+            ","
+        );
+
+        $transform_cep = str_replace($caracter, "", $cep);
+
         $campos_obrigatorios = [
             'token'
         ];
@@ -112,6 +127,7 @@ class EnderecoControle
             }
         }
 
+
         if (! $valid_token) {
             echo json_encode([
                 'next' => false,
@@ -120,16 +136,8 @@ class EnderecoControle
             return null;
         }
 
-        $caracter = array(
-            "(",
-            ")",
-            " ",
-            "-",
-            ".",
-            ","
-        );
 
-        $transform_cep = str_replace($caracter, "", $cep);
+
         $secret = $token_parse['secret'];
         $id_adm = $adm->list_profile($secret);
         $id = $id_adm['id'];
@@ -144,6 +152,7 @@ class EnderecoControle
     static function list_endereco()
     {
         $endereco = new Endereco();
+        
         $guard = $endereco->list_all();
         foreach ($guard as $g) {
             $payload[] = [
