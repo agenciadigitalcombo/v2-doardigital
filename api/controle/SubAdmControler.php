@@ -104,22 +104,11 @@ class SubAdmControler
         $adm_id = $busca_id['id'];
     
         $subadm->create($adm_id, $nome, $email, $cripto_senha, $transform_tel, $credencial_id);
-        $create_token = $subadm->get_by_email($email);
-        $payload = [
-            
-            'adm_id' => $create_token['adm_id'],
-            'nome' => $create_token['nome'],
-            'email' => $create_token['email'],
-            'senha' => $create_token['senha'],
-            'telefone' => $create_token['telefone'],
-            'credencial_id' => $create_token['credencial_id'],
-            'secret' => $create_token['secret']
-            
-        ];
+        
+        
         echo json_encode([
             "next" => true,
-            "message" => 'Sub Adm criado',
-            "token" => $jwt->maker($payload)
+            "message" => 'Sub Adm criado'
         ]);
 
     }
@@ -281,12 +270,14 @@ class SubAdmControler
         
         foreach ($guard as $g) {
             $payload [] = [
-                'adm_id' => $g['adm_id'],
                 'nome' => $g['nome'],
                 'email' => $g['email'],
+                'foto' => gravatar($g['email']),
                 'telefone' => $g['telefone'],
-                'credencial_id' => $g['credencial_id']
+                'credencial_id' => $g['credencial_id'],
+                'status' => $g['status']
             ];
+            
         }
 
         echo json_encode([

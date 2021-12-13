@@ -40,7 +40,7 @@ class SubAdm implements ISubAdm{
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE adm_id='$adm_id'";
         $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $guard ?? [];
     }
 
     public function get_by_id(int $id): array
