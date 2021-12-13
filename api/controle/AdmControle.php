@@ -13,23 +13,17 @@ class AdmControle
 
     static function criar_adm()
     {
-        // header('Content-Type: text/html; charset=utf-8');
         $adm = new Adm();
+        $jwt = new Jwt();
+        
+        
         $nome = $_REQUEST['nome'];
-        $email = $_REQUEST['email'];
-        $senha = $_REQUEST['senha'];
-        $min_num = preg_match('@[0-9]@', $senha);
-        $cripto = md5($senha);
-
+        $email = email();
+        $senha = senha();
         $telefone = $_REQUEST['telefone'];
-        $caracter = array(
-            "(",
-            ")",
-            " ",
-            "-"
-        );
-        $transform_tel = str_replace($caracter, "", $telefone);
-        $num_tel = preg_replace('/[^0-9]/', '', $transform_tel);
+        
+
+        $transform_tel = withdraw_caracter($telefone);
 
         if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
@@ -39,25 +33,8 @@ class AdmControle
             return null;
         }
 
-        if (! $min_num || strlen($senha) < 8) {
-            echo json_encode([
-                "next" => false,
-                "message" => "A senha deve ter no minimo 8 Caracters"
-            ]);
-            return null;
-        }
 
-        // if ($adm->exist($email)) {
-        //     echo json_encode([
-        //         "next" => false,
-        //         "message" => "Email já em uso"
-        //     ]);
-        //     return null;
-        // }
-
-        $jwt = new Jwt();
-
-        $adm->create($nome, $email, $cripto, $num_tel);
+        $adm->create($nome, $email, $senha, $transform_tel);
         $usuario_logado = $adm->get_by_email($email);
         $payload = [
 
@@ -77,10 +54,12 @@ class AdmControle
     static function login()
     {
         $adm = new Adm();
-        $email = $_REQUEST['email'];
-        $senha = $_REQUEST['senha'];
-        $cripto = md5($senha);
-        if ($adm->login($email, $cripto)) {
+        $jwt = new Jwt();
+
+        $email = email();
+        $senha = senha();
+        
+        if ($adm->login($email, $senha)) {
             echo json_encode([
                 "next" => false,
                 "message" => "Email ou senha incorreto"
@@ -88,8 +67,7 @@ class AdmControle
             return null;
         }
 
-        $adm->login($email, $cripto);
-        $jwt = new Jwt();
+        $adm->login($email, $senha);
         $usuario_logado = $adm->get_by_email($email);
         $payload = [
             'secret' => $usuario_logado['secret'],
@@ -108,11 +86,11 @@ class AdmControle
     static function profile()
     {
         $adm = new Adm();
-        $jwt = new Jwt();
-        $token = $_REQUEST['token'] ?? '';
-        $token_parce = $jwt->ler($token);
-        $secret = $token_parce['secret'];
+
+        $token_parce = token();
         
+       
+        $secret = $token_parce['secret'];
         $guard = $adm->list_profile($secret);
        
         $payload = [
@@ -134,6 +112,7 @@ class AdmControle
     {
         $adm = new Adm();
         $dados = $adm->list_all();
+
         foreach($dados as $g){
             $payload [] = [
                 'secret' => $g['secret'],
@@ -160,9 +139,10 @@ class AdmControle
     static function recuperar_senha()
     {
         $email = new Email();
-        $id_instituicao = $_REQUEST['id'];
-        $endereco = $_REQUEST['endereco'];
-        $assunto = $_REQUEST['assunto'];
+        $id_instituicao = $_REQUEST['id'] ?? '';
+
+        $endereco = $_REQUEST['endereco'] ?? '';
+        $assunto = $_REQUEST['assunto'] ?? '';
         $content = "";
 
         $email->send($id_instituicao, $endereco, $assunto, $content);
@@ -175,14 +155,13 @@ class AdmControle
     static function alterar_senha()
     {
         $adm = new Adm();
-        $jwt = new Jwt();
-        $senha = $_REQUEST['senha'];
-        $token = $_REQUEST['token'] ?? '';
-        $cripto = md5($senha);
-        $token_parce = $jwt->ler($token);
+        
+        $token_parce = token();
+        $senha = senha();
+        
         $secret = $token_parce['secret'];
 
-        $adm->alterar_senha($secret, $cripto);
+        $adm->alterar_senha($secret, $senha);
         echo json_encode([
             "next" => true,
             "message" => "Senha atualizada"
@@ -192,30 +171,23 @@ class AdmControle
     static function atualizar_adm()
     {
         $adm = new Adm();
-        $jwt = new Jwt();
+
+        $token_parce = token();
+        
         $nome = $_REQUEST['nome'];
-        $token = $_REQUEST['token'] ?? '';
         $telefone = $_REQUEST['telefone'];
         $cpf = $_REQUEST['cpf'];
-        $caracter = array(
-            "(",
-            ")",
-            " ",
-            "-",
-            ".",
-            ","
-        );
-        $transform_tel = str_replace($caracter, "", $telefone);
-        $transform_cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+        $transform_tel = withdraw_caracter($telefone);
+        $transform_cpf = withdraw_caracter($cpf);
+        
 
         $campos_obrigatorios = [
-            'token',
             'nome',
             'telefone',
             'cpf'
         ];
         $lb = [
-            'token' => 'Informe o Token',
             'nome' => 'Informe um nome',
             'telefone' => 'Digite o telefone',
             'cpf' => 'Digite o cpf'
@@ -232,7 +204,7 @@ class AdmControle
         }
 
 
-        $token_parce = $jwt->ler($token);
+        
         $secret = $token_parce['secret'];
 
         $adm->update($nome, $transform_tel, $transform_cpf, $secret);
@@ -245,13 +217,16 @@ class AdmControle
 
     static function update_step()
     {
-        $jwt = new Jwt();
         $adm = new Adm();
+        
+        $token_parce = token();
+
         $step = $_REQUEST['step'];
-        $token = $_REQUEST['token'];
-        $token_parce = $jwt->ler($token);
+
         $secret = $token_parce['secret'];
+
         $adm->update_step($secret, $step);
+
         echo json_encode([
             "next" => true,
             "message" => "Dados atualizados"
@@ -270,7 +245,9 @@ class AdmControle
     static function validar_token()
     {
         $jwt = new Jwt();
+
         $token = $_REQUEST['token'] ?? '';
+        
         $status = $jwt->valid($token);
         $token_parse = $jwt->ler($token);
         echo json_encode([

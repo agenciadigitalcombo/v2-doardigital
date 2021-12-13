@@ -90,3 +90,91 @@ function gravatar(string $email): string
     $email = md5(strtolower(trim($email)));
     return "https://www.gravatar.com/avatar/{$email}";
 }
+
+function token(): array
+{
+    $jwt = new Jwt();
+    $token = $_REQUEST['token'] ?? '';
+    $campos_obrigatorios = [
+        'token'
+    ];
+    $lb = [
+        'token' => 'Informe o Token'
+    ];
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+
+    $valid_token = $jwt->valid($token);
+    if (! $valid_token) {
+        echo json_encode([
+            'next' => false,
+            'message' => 'Token Invalido'
+        ]);
+        die;
+    }
+    $token_parce = $jwt->ler($token);
+    return $token_parce; 
+    
+}
+
+function withdraw_caracter(string $campo): string
+{
+    return preg_replace('/\D/', '', $campo);
+    
+}
+
+function email(): string
+{
+    $email = $_REQUEST['email'] ?? '';
+    
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        echo json_encode([
+            "next" => false,
+            "message" => "Email inválido"
+        ]);
+        die;
+    }
+    return $email;
+
+}
+
+function senha(): string
+{
+    $senha = $_REQUEST['senha'] ?? '';
+    
+    $campos_obrigatorios = [
+        'senha'
+    ];
+    $lb = [
+        'senha' => 'digite a senha'
+    ];
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+
+    $min_senha = preg_match('@[0-9]@', $senha);
+    if (! $min_senha || strlen($senha) < 8) {
+        echo json_encode([
+            "next" => false,
+            "message" => "A senha deve ter no minimo 8 Caracters"
+        ]);
+        die;
+    }
+
+    $cripto_senha = md5($senha);
+
+    return $cripto_senha;
+}

@@ -15,75 +15,26 @@ class SubAdmControler
     {
         $adm = new Adm();
         $subadm = new SubAdm();
-        $jwt = new Jwt();
+        
 
-        $token = $_REQUEST['token'] ?? '';
-        $token_parce = $jwt->ler($token);
-        $valid_token = $jwt->valid($token);
+        $token_parce = token();
 
         $nome = $_REQUEST['nome'] ?? '';
-        $email = $_REQUEST['email'] ?? '';
 
-        $senha = $_REQUEST['senha'] ?? '';
-        $min_senha = preg_match('@[0-9]@', $senha);
-        $cripto_senha = md5($senha);
+        $email = email();
 
-        $telefone = $_REQUEST['telefone'] ?? '';
-        $credencial_id = $_REQUEST['credencial_id'] ?? '';
+        $telefone_campo = $_REQUEST['telefone'] ?? '';
+        $credencial_id_campo = $_REQUEST['credencial_id'] ?? '';
         
 
 
+        $credencial_id = withdraw_caracter($credencial_id_campo);
+
+        $telefone = withdraw_caracter($telefone_campo);
+
+        $senha = senha();
+
         
-        $num_tel = preg_replace('/\D/', '', $telefone);
-
-        $campos_obrigatorios = [
-            'token',
-            'nome',
-            'email',
-            'senha',
-            'telefone',
-            'credencial_id'
-        ];
-        $lb = [
-            'token' => 'Informe o Token',
-            'nome' => 'Informe um nome',
-            'email' => 'Digite um email',
-            'senha' => 'digite a senha',
-            'telefone' => 'Informe o telefone',
-            'credencial_id' => 'Informe uma credencial'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-
-        if (! $valid_token) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token Invalido'
-            ]);
-        }
-
-        if (! $min_senha || strlen($senha) < 8) {
-            echo json_encode([
-                "next" => false,
-                "message" => "A senha deve ter no minimo 8 Caracters"
-            ]);
-            return null;
-        }
-
-        if ($subadm->exist($email)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Email já em uso"
-            ]);
-            return null;
-        }
 
         // $adm_email = $token_parce['email'];
         // $guard_adm_logado = $adm->get_by_email($adm_email);
@@ -99,7 +50,7 @@ class SubAdmControler
         $busca_id = $adm->list_profile($adm_secret);
         $adm_id = $busca_id['id'];
 
-        $subadm->create($adm_id, $nome, $email, $cripto_senha, $num_tel, $credencial_id);
+        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $credencial_id);
 
         echo json_encode([
             "next" => true,
@@ -110,26 +61,22 @@ class SubAdmControler
     static function update_subadm()
     {
         $subadm = new SubAdm();
-        $jwt = new Jwt();
 
-        $token = $_REQUEST['token'] ?? [];
-        $valid_token = $jwt->valid($token);
-
+        token();
+        
         $secret = $_REQUEST['secret'];
 
         $nome = $_REQUEST['nome'];
         $credencial_id = $_REQUEST['credencial_id'];
 
-        $telefone = $_REQUEST['telefone'];
+        $telefone_campo = $_REQUEST['telefone'];
         
-        $num_tel = preg_replace('/[^0-9]/', '', $telefone);
-
+        $telefone = withdraw_caracter($telefone_campo);
+        
         $campos_obrigatorios = [
-            'token',
             'secret'
         ];
         $lb = [
-            'token' => 'Informe o Token',
             'secret' => 'Informe o Secret'
         ];
         foreach ($campos_obrigatorios as $campo) {
@@ -142,14 +89,7 @@ class SubAdmControler
             }
         }
 
-        if (! $valid_token) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token Invalido'
-            ]);
-        }
-
-        $subadm->update($nome, $secret, $num_tel, $credencial_id);
+        $subadm->update($nome, $secret, $telefone, $credencial_id);
         echo json_encode([
             'next' => true,
             'message' => 'Dados atualizados'
@@ -159,34 +99,8 @@ class SubAdmControler
     static function subadm()
     {
         $subadm = new SubAdm();
-        $jwt = new Jwt();
 
-        $token = $_REQUEST['token'] ?? '';
-        $valid_token = $jwt->valid($token);
-        $token_parce = $jwt->ler($token);
-
-        $campos_obrigatorios = [
-            'token'
-        ];
-        $lb = [
-            'token' => 'Informe o Token'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-
-        if (! $valid_token) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token Invalido'
-            ]);
-        }
+        $token_parce = token();
 
         $secret = $token_parce['secret'];
         $listar = $subadm->list_profile($secret);
@@ -207,35 +121,9 @@ class SubAdmControler
     static function list_all()
     {
         $subAdm = new SubAdm();
-        $jwt = new Jwt();
         $adm = new Adm();
 
-        $token = $_REQUEST['token'] ?? '';
-        $valid_token = $jwt->valid($token);
-        $token_parce = $jwt->ler($token);
-
-        if (! $valid_token) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token Invalido'
-            ]);
-        }
-
-        $campos_obrigatorios = [
-            'token'
-        ];
-        $lb = [
-            'token' => 'Informe o Token'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+        $token_parce = token();
 
         $secret = $token_parce['secret'];
         $get_adm_id = $adm->list_profile($secret);
