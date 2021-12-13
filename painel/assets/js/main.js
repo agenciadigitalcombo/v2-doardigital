@@ -112,6 +112,9 @@ Vue.component('c-usuarios', usuarios )
 import usuarioNovo from './views/usuarioNovo.js'
 Vue.component('c-usuarioNovo', usuarioNovo )
 
+import usuarioEditar from './views/usuarioEditar.js'
+Vue.component('c-usuarioEditar', usuarioEditar )
+
 import credenciaisAtualizar from './views/credenciaisAtualizar.js'
 Vue.component('c-credenciaisAtualizar', credenciaisAtualizar )
 

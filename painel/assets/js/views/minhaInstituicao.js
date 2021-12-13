@@ -99,14 +99,14 @@ export default {
 										<!--end::Table head-->
 										<!--begin::Table body-->
 										<tbody class="fw-bold text-gray-600">
-											<tr >
+											<tr v-for="item in dados" :key="item.id">
 												<td>
-													Doar Digital
+													{{item.nome_fantasia}}
 												</td>
 
 												<td>
 													<a class="badge badge-light-primary fs-5 m-1">
-														.doardigital.com.br
+													 {{item.sub_domain}}
 													</a>
 												</td>
 
@@ -206,19 +206,39 @@ export default {
     data: function () {
         
         return {
-		
+			token: null,
+			gravatar: '../painel/assets/image/gravatar.png',
+			nome_fantasia: null,
+			razao_social: null,
+			sub_domain: null,
+			email: null,
+			cor: null,
+			
+			logo: null,
+			cnpj: null,
+			telefone: null,
+			jms: false,
+			dados:[]
+			// .doardigital.com.br
         }
     
     },
 	
     async mounted() {
      
-    
+    	this.dados = (await this.listar()).dados
+		this.nome_fantasia = this.dados.nome_fantasia,
+		this.sub_domain = this.dados.sub_domain,
+
+		console.log(this.dados)
 		
     }, 
 
 	methods: {
-	
+		async listar() {
+			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
+			return res
+		},
 	},
 
 

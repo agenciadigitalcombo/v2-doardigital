@@ -1,6 +1,6 @@
 import adm from "../../../../static/js/api/adm.js"
 export default {
-	template: `  cidade, estado bairro
+	template: `
 
 	<div>
 
@@ -191,9 +191,9 @@ export default {
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
 											<div class="input-group mb-3">
-												<input v-model="cep"  type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
+												<input id="cep" v-model="cep"  type="number" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
 												<span class="input-group-text" id="basic-addon2">
-													<a href="http://">
+													<a @click="pesquisarCep()">
 														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 														<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 													  </svg>
@@ -210,7 +210,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input v-model="logadouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
+												<input id="logradouro" v-model="logadouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -221,7 +221,7 @@ export default {
 				 <!--end::Label-->
 				 <!--begin::Col-->
 				 <div class="col-lg-8 fv-row">
-					 <input v-model="numero" type="text" name="Numero" class="form-control form-control-lg form-control-solid" placeholder="Numero"  />
+					 <input id="" v-model="numero" type="text" name="Numero" class="form-control form-control-lg form-control-solid" placeholder="Numero"  />
 				 </div>
 				 <!--end::Col-->
 			 </div>
@@ -235,7 +235,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input  v-model="complemento"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
+												<input id="complemento" v-model="complemento"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -249,7 +249,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input  v-model="bairro" type="text" name="Bairro" class="form-control form-control-lg form-control-solid" />
+												<input id="bairro" v-model="bairro" type="text" name="Bairro" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -262,7 +262,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input v-model="cidade" type="text" name="cidade" class="form-control form-control-lg form-control-solid" />
+												<input id="localidade" v-model="cidade" type="text" name="cidade" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -276,7 +276,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input v-model="estado" type="text" name="estado" class="form-control form-control-lg form-control-solid" />
+												<input id="uf" v-model="estado" type="text" name="estado" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -348,6 +348,7 @@ export default {
 		}
 	},
 	methods: {
+		
 		async addEndereco() {
 			this.error = null
 
@@ -398,14 +399,10 @@ export default {
 
 	async mounted() {
 		
-		// let dados = (await this.listar()).dados
-		console.log('rafarelllllllllll')
-		// this.nome = dados.nome
-		// this.email = dados.email
-		// this.cpf = dados.cpf
-		// this.telefone = dados.telefone
-		// this.step = parseInt(dados.step)
 	
+
+		let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
+	document.head.appendChild(cep);
 
 		
 		let enderecoDados = (await this.listarEndereco()).dados|| {}
@@ -425,6 +422,7 @@ export default {
 
 	created() {
 		this.token = localStorage.getItem('token')
+
 	},
 }
 

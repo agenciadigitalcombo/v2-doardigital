@@ -121,32 +121,61 @@ export default {
         })
     },
 
-
     async cadastrarInstituicao(
-        token,
         nome_fantasia,
         razao_social,
-        subdomaim,
-        dominio,
+        sub_domain,
         email,
-        cnpj,
-        telefone,
-        recebedor_id,
         cor,
         logo,
+        cnpj,
+        telefone,
+        token,
+
     ) {
         return await http.post('/create-instituicao', {
-            token,
             nome_fantasia,
-            razao_social,
-            subdomaim,
-            dominio,
-            email,
-            cnpj,
-            telefone,
-            recebedor_id,
-            cor,
-            logo,
+				razao_social,
+				sub_domain,
+				email,
+				cor,
+				logo,
+				cnpj,
+				telefone,
+				token,
+        })
+    },
+    async alterarInstituicao(
+        id,
+        nome_fantasia,
+        razao_social,
+        sub_domain,
+        email,
+        cor,
+        logo,
+        cnpj,
+        telefone,
+        token,
+
+    ) {
+        return await http.post('/update-instituicao', {
+            id,
+            nome_fantasia,
+				razao_social,
+				sub_domain,
+				email,
+				cor,
+				logo,
+				cnpj,
+				telefone,
+				token,
+        })
+    },
+
+    
+    async listarInstutuicao(token) {
+        return await http.get('/list-instituicao', {
+            token
         })
     },
 
@@ -172,17 +201,17 @@ export default {
         nome,
         telefone,
         credencial_id,
-        token ="eyJhZG1faWQiOiI3MCIsIm5vbWUiOiJra2trayIsImVtYWlsIjoiZ3VlbEBnbWFpbC5jb20iLCJzZW5oYSI6IjlkY2JmNjQyYzc4MTM3ZjY1NmJhN2MyNDM4MWFjMjViIiwidGVsZWZvbmUiOiJqb2ltQGdtYWlsLiIsImNyZWRlbmNpYWxfaWQiOiI2NSIsInNlY3JldCI6IjYxYjUyNTU0NTY2YjMifQ==.ba36da82a6fd04813101488c0a0d234d5e8be95b",
+        secret,
     ) {
         return await http.post('/atualizar-subadm', {
             nome,
             telefone,
             credencial_id,
-            token,
+            secret,
         })
     },
 
-    
+
 
     async listarSubadm() {
         return await http.get('/list-subadm', {

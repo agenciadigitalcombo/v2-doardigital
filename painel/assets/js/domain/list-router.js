@@ -37,5 +37,7 @@ export default [
     
     { path: '/usuarios', component: { template: '<c-usuarios>' } },
     { path: '/usuario-novo', component: { template: '<c-usuarioNovo>' } },
+    { path: '/usuario-editar', component: { template: '<c-usuarioEditar>' } },
+   
     
 ]

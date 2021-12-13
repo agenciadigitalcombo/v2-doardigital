@@ -107,7 +107,7 @@ export default {
 												<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
 													<a href="../../demo8/dist/apps/user-management/users/view.html">
 														<div class="symbol-label">
-															<img src="../painel/assets/image/gravatar.png" alt="Emma Smith" class="w-100" />
+															<img :src="item.foto" alt="Emma Smith" class="w-100" />
 														</div>
 													</a>
 												</div>
@@ -135,42 +135,55 @@ export default {
 											<!--begin::Status=-->
 											<td>
 												<div class="badge badge-light-success">
-												{{item.credencial_id}}
+												{{item.credencial_id | nomeCredencial(listaCredencial)}}
 												</div>
 											</td>
 											<!--end::Status=-->
-											<td class="text-end">
-												<a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">o que fazer
-												<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-												<span class="svg-icon svg-icon-5 m-0">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-													</svg>
-												</span>
-												<!--end::Svg Icon--></a>
-												<!--begin::Menu-->
-												<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#/doadorHitorico" class="menu-link px-3">ver</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/apps/subscriptions/add.html" class="menu-link px-3">Editar</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" data-kt-subscriptions-table-filter="delete_row" class="menu-link px-3">Delete</a>
-													</div>
-													<!--end::Menu item-->
-												</div>
-												<!--end::Menu-->
-											</td>
+											<!--end::Status=-->
+													<td class="text-end">
+														<a @click="mostrar()" @blur="fechar"  v-bind:class="jms" 
+															class="btn btn-light btn-active-light-primary btn-sm"
+															data-kt-menu-trigger="click"
+															data-kt-menu-placement="bottom-end">o que fazer
+															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+															<span class="svg-icon svg-icon-5 m-0">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																		fill="black" />
+																</svg>
+															</span>
+															<!--end::Svg Icon-->
+														</a>
+														<!--begin::Menu-->
+														<div @bluer="fechar()" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+														v-bind:class="show" v-bind:style="estilo" 	data-kt-menu="true">
+															<!--begin::Menu item-->
+															<div class="menu-item px-3">
+																<a href="#/doadorHitorico"
+																	class="menu-link px-3">ver</a>
+															</div>
+															<!--end::Menu item-->
+															<!--begin::Menu item-->
+															<div class="menu-item px-3">
+																<a @click="editar(item.secret)"
+																	class="menu-link px-3">Editar</a>
+															</div>
+															<!--end::Menu item-->
+															<!--begin::Menu item-->
+															<div class="menu-item px-3">
+																<a href="#"
+																	data-kt-subscriptions-table-filter="delete_row"
+																	class="menu-link px-3">Delete</a>
+															</div>
+															<!--end::Menu item-->
+														</div>
+														<!--end::Menu-->
+													</td>
+													<!--end::Action=-->
 											<!--end::Action=-->
 										</tr>
-									
 									
 									</tbody>
 									<!--end::Table body-->
@@ -204,38 +217,81 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
+			gravatar: 'https://doardigital.tk/api/gravatar?email=brunnocriacoes@gmail.com',
 			nome: null,
 			email: null,
 			senha: null,
 			telefone: null,
 			credencial_id: null,
-			dados: []
+			dados: [],
+			listaCredencial: [],
+
+			nome_identificacao: null,
+            secret: null,
+			jms: {},
+			estilo: "",
+			show: false,
 		}
 	},
 	methods: {
+
+		mostrar() {
+			this.jms = {
+				"show": true,
+				"menu-dropdown": true
+			} 
+			this.show = {
+				"show": true,
+			}
+
+			this.estilo = "z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-43px, 266px, 0px);"
+		},
+		
+		fechar(){
+			this.jms = {
+				"show": false,
+				"menu-dropdown": false
+			} 
+			this.show = {
+				"show": false,
+			} 
+			this.estilo = ""
+
+		},
+
 		async listar() {
 			let res = await adm.listarSubadm(localStorage.getItem('token'))
 			return res
 		},
 
+		async listar_credencial() {
+            let res = await adm.listarCredencial(localStorage.getItem('token'))
+            return res
+        },
+
+		async editar(secret) {
+			globalThis._usuario = this.dados.find(user => user.secret == secret)
+		window.location.href = "#/usuario-editar"
+        },
 	},
+	
 
 	async mounted() {
 		this.dados = (await this.listar()).dados
-		this.id = dados.id
-		this.nome = dados.nome
-		this.email = dados.email
-		this.telefone = dados.telefone
-		this.credencial_id = dados.credencial_id
-		console.log(this.dados)
+		
+		this.listaCredencial = (await this.listar_credencial()).dados
+		this.nome_identificacao = this.listaCredencial.nome_identificacao
+		console.log(this.listaCredencial)
 	},
 
 	created() {
 
-
 	},
 
-
+filters:{
+	nomeCredencial: (valor, lista) =>  lista.find(
+		credencial => credencial.id == valor
+	).nome_identificacao
+}
 }
 
