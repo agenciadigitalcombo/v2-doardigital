@@ -148,6 +148,23 @@ export default {
 												</div>
 												<!--end::Col-->
 											</div>
+
+											<div class="row mb-6">
+												<!--begin::Label-->
+												<label class="col-lg-4 col-form-label fw-bold fs-6">
+													<span class="required">Cor</span>
+
+												</label>
+												<!--end::Label-->
+
+
+												<!--begin::Col-->
+												<div class="col-lg-8 fv-row">
+													<input v-model="cor" type="text" name="cor"
+														class="form-control form-control-lg form-control-solid" />
+												</div>
+												<!--end::Col-->
+											</div>
 										</div>
 										<!--end::Card body-->
 
@@ -173,7 +190,7 @@ export default {
 												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
 													<!--begin::Content-->
 													<div class="input-group mb-3">
-														<input v-model="subdomaim" type="email" name="email"
+														<input v-model="sub_domain" type="email" name="email"
 															class="form-control form-control-lg " />
 														<span class="input-group-text"
 															id="basic-addon2">.doardigital.com.br</span>
@@ -271,16 +288,17 @@ export default {
 
 	data: function () {
 		return {
+			token: null,
 			gravatar: '../painel/assets/image/gravatar.png',
 			nome_fantasia: null,
 			razao_social: null,
-			subdomaim: null,
+			sub_domain: null,
 			email: null,
-			telefone: null,
-			cnpj: null,
-
 			cor: null,
+			
 			logo: null,
+			cnpj: null,
+			telefone: null,
 			jms: false,
 		}
 	},
@@ -292,10 +310,13 @@ export default {
 			let res = await adm.cadastrarInstituicao(
 				this.nome_fantasia,
 				this.razao_social,
-				this.subdomaim,
+				this.sub_domain,
 				this.email,
-				this.telefone,
+				this.cor,
+				this.logo,
 				this.cnpj,
+				this.telefone,
+				this.token,
 			)
 			if (!res.next) {
 				console.log(res)

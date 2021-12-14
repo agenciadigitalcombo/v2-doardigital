@@ -304,13 +304,11 @@ export default {
 			telefone: null,
 			credencial_id: null,
 			token: null,
-
+			sicret: null,
 			lista_dados: [],
-
 			id: null,
 			nome_identificacao: null,
 		 recursos: null,
-
 
 		}
 	},
@@ -338,10 +336,11 @@ export default {
 			this.error = null
 
 			let res = await adm.editarSubadm(
+				this.email = "j@gmail.com",
+				this.secret = "61b52bb61d57d",
 				this.nome,
 				this.telefone,
 				this.credencial_id,
-				this.token="eyJhZG1faWQiOiI3MCIsIm5vbWUiOiJra2trayIsImVtYWlsIjoiZ3VlbEBnbWFpbC5jb20iLCJzZW5oYSI6IjlkY2JmNjQyYzc4MTM3ZjY1NmJhN2MyNDM4MWFjMjViIiwidGVsZWZvbmUiOiJqb2ltQGdtYWlsLiIsImNyZWRlbmNpYWxfaWQiOiI2NSIsInNlY3JldCI6IjYxYjUyNTU0NTY2YjMifQ==.ba36da82a6fd04813101488c0a0d234d5e8be95b",	
 			)
 			if (!res.next) {
 				this.error = res.message

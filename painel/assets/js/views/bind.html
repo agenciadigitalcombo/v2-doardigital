@@ -4,13 +4,13 @@ Author: Keenthemes
 Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
 Purchase: https://1.envato.market/EA4JP
 Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes  Historico de transação
-Dribbble: www.dribbble.com/keenthemes Activities
+Contact: support@keenthemes.com   Dec 20, 2021
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes actions
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
-Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
-
+Filter Options
+-->
 
 
 <html lang="en">
@@ -26,6 +26,19 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 	<meta name="keywords"
 		content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title"
+		content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+	<meta property="og:url" content="https://keenthemes.com/metronic" />
+	<meta property="og:site_name" content="Keenthemes | Metronic" />
+	<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+	<!--begin::Fonts-->
+	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
+	<!--end::Fonts Dec 20, 2021-->
+	<!--begin::Page Vendor Stylesheets(used by this page)-->
+	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
 
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -38,29 +51,70 @@ Filter Account ID   Filter Options  Overview  	<!--end:::Tab pane-->
 <!--begin::Body-->
 
 <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
-	<div id="">
+	<div id="app">
 
-		<input id="cep" type="text">
-		<input  type="text">
-		<input  type="text">
+		<button @click="falso()"> true </button>
 
-	
-<button onclick="pesquisarCep()"> buscar</button>
+		<button @click="verdade()"> verdade </button>
+
+
+
+
+		<div class="ativados" v-bind:class="jms">
+			<h1> olaaaaa </h1>
+		</div>
 
 	</div>
-	<!-- <link href="../../assets/js/front-js/list/list.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/datatables.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/scripts.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/plugins.bundle.js" rel="stylesheet" type="text/css" /> -->
 
-<script src="../../painel/assets/js/cep.js"></script>
-	<script src="../../painel/assets/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="../../painel/assets/assets/js/scripts.bundle.js"></script>
-	<script src="../../painel/assets/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<script src="../../painel/assets/assets/js/custom/apps/subscriptions/list/list.js"></script>
+
+	<style>
+		.static {
+			background-color: brown;
+
+		}
+
+		.altura {
+			height: 20rem;
+		}
+
+
+		.ativados {
+			width: 50%;
+		}
+	</style>
+
 	<script>
 
+		new Vue({
+			el: '#app',
+			data: {
+				jms: {
+					"static": true,
+					"altura": true,
+				},
+				hasError: false
+			},
+			methods: {
+				falso() {
+					this.jms = {
+						"static": true,
+						"altura": true,
+					}
+				},
+				verdade() {
+					this.jms =  {
+					"static": true,
+				}
+				},
+			},
+
+			mounted() {
+				// this.jms = this.step
+			},
+
+		})
 	</script>
+
 </body>
 <!--end::Body-->
 
