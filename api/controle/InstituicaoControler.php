@@ -7,35 +7,25 @@ class InstituicaoControler
     {
         $instituicao = new Instituicao();
         $adm = new Adm();
-        $jwt = new Jwt();
 
-        $token = $_REQUEST['token'] ?? '';
-        $valid_token = $jwt->valid($token);
-        $token_parce = $jwt->ler($token);
+        $token_parce = token();
 
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['sub_domain'] ?? '';
-        $email = $_REQUEST['email'] ?? '';
+        $email = email();
 
         $cor = $_REQUEST['cor'] ?? '';
         $logo = $_REQUEST['logo'] ?? '';
+        
         $cnpj = $_REQUEST['cnpj'] ?? '';
+        $transform_cnpj = withdraw_caracter($cnpj);
+
         $telefone = $_REQUEST['telefone'] ?? '';
+        $transform_tel = withdraw_caracter($telefone);
 
-        $caracter = array(
-            "(",
-            ")",
-            " ",
-            "-",
-            ".",
-            ","
-        );
-        $transform_tel = str_replace($caracter, "", $telefone);
-        $transform_cnpj = str_replace($caracter, "", $cnpj);
-
+        
         $campos_obrigatorios = [
-            'token',
             'nome_fantasia',
             'razao_social',
             'sub_domain',
@@ -45,7 +35,6 @@ class InstituicaoControler
             'cnpj'
         ];
         $lb = [
-            'token' => 'Informe o Token',
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'sub_domain' => 'Informe o Sub Domain',
@@ -64,14 +53,6 @@ class InstituicaoControler
             }
         }
 
-        if (! $valid_token) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token invalido'
-            ]);
-            return null;
-        }
-
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
@@ -87,15 +68,14 @@ class InstituicaoControler
     {
         $instituicao = new Instituicao();
         $adm = new Adm();
-        $jwt = new Jwt();
 
-        $token = $_REQUEST['token'] ?? '';
-        $valid_token = $jwt->valid($token);
-        $token_parce = $jwt->ler($token);
+        
+        $token_parce = token();
 
         $nome_fantasia = $_REQUEST['nome_fantasia'];
         $razao_social = $_REQUEST['razao_social'];
-        $email = $_REQUEST['email'];
+
+        $email = email();
 
         $cor = $_REQUEST['cor'];
         $logo = $_REQUEST['logo'];
@@ -103,19 +83,11 @@ class InstituicaoControler
         $cnpj = $_REQUEST['cnpj'];
         $telefone = $_REQUEST['telefone'];
 
-        $caracter = array(
-            "(",
-            ")",
-            " ",
-            "-",
-            ".",
-            ","
-        );
-        $transform_tel = str_replace($caracter, "", $telefone);
-        $transform_cnpj = str_replace($caracter, "", $cnpj);
+        $transform_cnpj = withdraw_caracter($cnpj);
+        $transform_tel = withdraw_caracter($telefone);
+
 
         $campos_obrigatorios = [
-            'token',
             'nome_fantasia',
             'razao_social',
             'email',
@@ -125,7 +97,6 @@ class InstituicaoControler
             'cnpj'
         ];
         $lb = [
-            'token' => 'Informe o Token',
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'email' => 'Qual o Email',
@@ -142,14 +113,6 @@ class InstituicaoControler
                 ]);
                 return null;
             }
-        }
-
-        if (! $valid_token) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Token invalido'
-            ]);
-            return null;
         }
 
         $secret = $token_parce['secret'];
@@ -215,6 +178,7 @@ class InstituicaoControler
     static function detete_instituicao()
     {
         $instituicao = new Instituicao();
+       
         $id = $_REQUEST['id'];
         $instituicao->del($id);
         echo json_encode([

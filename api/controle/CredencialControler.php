@@ -46,8 +46,10 @@ class CredencialControler
     {
         $credencial = new Credencial();
         $id = $_REQUEST['id'] ?? '';
+
         $nome_identificacao = $_REQUEST['nome_identificacao'];
         $recursos = $_REQUEST['recursos'];
+        
         $credencial->update($id, $nome_identificacao, $recursos);
         echo json_encode([
             'next' => true,

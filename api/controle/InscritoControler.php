@@ -17,10 +17,12 @@ class InscritoControler
 
         $instituicao_id = $_REQUEST['instituicao_id'];
         $nome = $_REQUEST['nome'];
-        $email = $_REQUEST['email'];
+        $email = email();
         $telefone = $_REQUEST['telefone'];
 
-        $inscrito->register($instituicao_id, $nome, $email, $telefone);
+        $transform_tel = withdraw_caracter($telefone);
+
+        $inscrito->register($instituicao_id, $nome, $email, $transform_tel);
 
         echo json_encode([
             "next" => true,
@@ -31,7 +33,9 @@ class InscritoControler
     static function list_inscrito()
     {
         $inscrito = new Inscrito();
+        
         $guard = $inscrito->list_all();
+        
         foreach ($guard as $g) {
             $payload[] = [
                 'nome' => $g['nome'],
@@ -70,10 +74,15 @@ class InscritoControler
     static function detete_inscrito()
     {
         $inscrito = new Inscrito();
+
         $instituicao_id = $_REQUEST['instituicao_id'];
-        $email = $_REQUEST['email'];
+        
+        $email = email();
+        
         $telefone = $_REQUEST['telefone'];
-        $inscrito->del($instituicao_id, $email, $telefone);
+        $transform_tel = withdraw_caracter($telefone);
+
+        $inscrito->del($instituicao_id, $email, $transform_tel);
         echo json_encode([
             "next" => true,
             "message" => "Inscrito deletado"
