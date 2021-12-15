@@ -6,12 +6,12 @@ class Plano implements IPlano{
     {
         $banco = new Banco();
         $sql = "SELECT * FROM plano";
-        $guard = $banco->exec($sql);
+        $guard = $banco->query($sql);
         return $guard;
         
     }
 
-    public function create(int $instituicao_id, string $token, string $nome, int $amount): void
+    public function create(int $instituicao_id, string $nome, int $amount, string $token = null): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO plano (instituicao_id, token, nome, amount)";

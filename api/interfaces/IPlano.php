@@ -9,10 +9,10 @@ interface IPlano
 
     public function create(
         int $instituicao_id,
-        string $token,
         string $nome,
-        int $amount
-    ): void;
+        int $amount,
+        string $token
+        ): void;
 
     public function update(
         int $id,
