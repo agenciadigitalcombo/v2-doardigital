@@ -107,6 +107,13 @@ class PlanoControler {
                 return null;
             }
         }
+
+        $plano->update($id, $nome);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Plano Atualizado'
+        ]);
+
     }
 
     static function on_off()
