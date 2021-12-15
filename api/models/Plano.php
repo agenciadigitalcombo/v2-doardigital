@@ -38,7 +38,7 @@ class Plano implements IPlano{
     public function on_off(int $id): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano SET id='$id'";
+        $sql = "UPDATE plano SET status='$id'";
         $banco->exec($sql);
     }
 

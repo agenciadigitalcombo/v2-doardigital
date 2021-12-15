@@ -118,6 +118,16 @@ class PlanoControler {
 
     static function on_off()
     {
+        $plano = new Plano();
+
+        $status_campo = $_REQUEST['status'];
+        $status = withdraw_caracter($status_campo);
+
+        $plano->on_off($status);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Status Atualizado'
+        ]);
 
     }
 }
