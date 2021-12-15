@@ -1,31 +1,31 @@
-import adm from "../../../../static/js/api/adm.js" 
-
+import adm from "../../../../static/js/api/adm.js"
 export default {
-    template: `
+	template: `
+
 	<div>
 
     <c-header></c-header>
     <c-aside></c-aside>
+	
 
 	<!--begin::Root-->
- <div class="d-flex flex-column flex-root">
-	<!--begin::Page-->
-	<div class="page d-flex flex-row flex-column-fluid">
-
-		<!--begin::Wrapper-->
-		<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-		
-
-			<!--begin::Content-->
-			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-				<!--begin::Post-->
-				<div class="post d-flex flex-column-fluid" id="kt_post">
-					<!--begin::Container-->
-					<div id="kt_content_container" class="container-xxl">
-						<!--begin::Navbar-->
-						<div class="card mb-5 mb-xl-10">
-							<div class="card-body pt-9 pb-0">
-							<!--begin::Details-->
+	<div class="d-flex flex-column flex-root">
+		<!--begin::Page-->
+		<div class="page d-flex flex-row flex-column-fluid">
+	
+			<!--begin::Wrapper-->
+			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+			
+				<!--begin::Content-->
+				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<!--begin::Post-->
+					<div class="post d-flex flex-column-fluid" id="kt_post">
+						<!--begin::Container-->
+						<div id="kt_content_container" class="container-xxl">
+							<!--begin::Navbar-->
+							<div class="card mb-5 mb-xl-10">
+								<div class="card-body pt-9 pb-0">
+								<!--begin::Details-->
 											<div class="d-flex flex-wrap flex-sm-nowrap mb-3">
 												<!--begin: Pic-->
 												<div class="me-7 mb-4">
@@ -60,7 +60,7 @@ export default {
 															</div>
 																</div>
 															<!--end::Name-->
-															<!--begin::Info-->
+															<!--begin::Info-->  
 															<div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																	<!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
@@ -79,7 +79,7 @@ export default {
 																			<path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
 																		</svg>
 																	</span>
-																	<!--end::Svg Icon-->cidade, estado bairro</a>
+																	<!--end::Svg Icon-->{{cidade}}, {{estado}} {{bairro}}</a>
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 																	<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
 																	<span class="svg-icon svg-icon-4 me-1">
@@ -112,226 +112,318 @@ export default {
 														<!--end::Progress-->
 														</div>
 														<!--end::Wrapper-->
-			
-														
+												
 													</div>
 													<!--end::Stats-->
 												</div>
 												<!--end::Info-->
+												
 											</div>
 											<!--end::Details-->
-										<!--begin::Navs-->
-										<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-										<!--begin::Nav item-->
+											<!--begin::Navs-->
+											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+											<!--begin::Nav item-->
 												<li class="nav-item mt-2" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/perfil">Visão geral</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
-												<li class="nav-item mt-2" >
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/perfil-editar">Seus Dados</a>
+												<li class="nav-item mt-2">
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Seus Dados</a>
 												</li>
 												<!--end::Nav item-->
-											
-											<!--begin::Nav item-->
-											<li class="nav-item mt-2" >
-												<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-local">Meu Endereço</a>
-											</li>
-											<li class="nav-item mt-2" >
-												<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Seguranca</a>
-											</li>
-											<!--end::Nav item-->
-										</ul>
-										<!--begin::Navs-->
-							</div>
-						</div>
-						<!--end::Navbar-->
-						<!--begin::Basic info-->
-						<div class="card mb-5 mb-xl-10">
-							<!--begin::Card header-->
-							<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
-								<!--begin::Card title-->
-								<div class="card-title m-0">
-									<h3 class="fw-bolder m-0">Detalhes de perfil</h3>
+												<!--begin::Nav item-->
+												<li class="nav-item mt-2" >
+													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/editar-local">Meu Endereço</a>
+												</li>
+												<li class="nav-item mt-2" >
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Seguranca</a>
+												</li>
+												<!--end::Nav item-->
+											</ul>
+											<!--begin::Navs-->
 								</div>
-								<!--end::Card title-->
 							</div>
-							<!--begin::Card header-->
-							<!--begin::Content-->
-							<div id="kt_account_profile_details" >
-								<!--begin::Form-->
-								<form action="javascript:void(0)" autocomplete="off" name="formulario"
-							 class="form">
-									<!--begin::Card body-->
-									<div class="card-body border-top p-9">
-									
+							<!--end::Navbar-->
+						
+								<!--begin::Billing Address-->
+								<div class="card mb-5 mb-xl-10">
+									<!--begin::Card header-->
+									<div class="card-header">
+										<!--begin::Title-->
+										<div class="card-title">
+											<h3>Meus Endereço</h3>
+										</div>
+										<!--end::Title-->
+									</div>
+									<!--end::Card header-->
+								
+	<!--begin::Content-->
+	<div id="kt_account_profile_details" >
+		<!--begin::Form-->
+
+		<form id="kt_account_profile_details_form" action="javascript:void(0)" autocomplete="off" name="formulario" class="form">
+			<!--begin::Card body-->
+			<div class="card-body border-top p-9">
+		   
+				<!--end::Input group-->
+				
+
+
+				<div class="row mb-6">
+				<!--begin::Label-->
+				<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome identificacao</label>
+				<!--end::Label-->
+				<!--begin::Col-->
+
+				<input v-model="id" type="hidden" name="nome" class="form-control form-control-lg form-control-solid" placeholder="Nome identificacao"  />
+			
+				<div class="col-lg-8 fv-row">
+					<input v-model="nome_identificacao" type="text" name="nome" class="form-control form-control-lg form-control-solid" placeholder="Nome identificacao"  />
+				</div>
+				<!--end::Col-->
+			</div>
 										<!--begin::Input group-->
 										<div class="row mb-6">
-										<!--begin::Label-->
-										<label class="col-lg-4 fw-bold text-muted">Nome completo
-										<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Preecha o Seu nome completo"></i>
-										</label>
-										<!--end::Label-->
+											<!--begin::Label-->
+											<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
+											<!--end::Label-->
 											<!--begin::Col-->
-											<div class="col-lg-8">
-												<!--begin::Row-->
-												<div class="row">
-													<!--begin::Col-->
-													<div class="col-lg-6 fv-row">
-														<input v-model="nome" type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Primeiro nome" />
-													</div>
-													<!--end::Col-->
-												
+											<div class="col-lg-8 fv-row">
+											<div class="input-group mb-3">
+												<input id="cep" v-model="cep"  type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
+												<span class="input-group-text" id="basic-addon2">
+													<a @click="pesquisarCep()">
+														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+														<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+													  </svg>
+													</a>
+													
+												</span>
 												</div>
-												<!--end::Row-->
-											</div>
-											<!--end::Col-->
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">CPF
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Adicione o seu CPF"></i></label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input v-model="cpf" type="text" name="cpf" class="form-control form-control-lg form-control-solid" v-mask="'###.###.###-##'" placeholder="000.000.000-00"  />
 											</div>
 											<!--end::Col-->
 										</div>
 										<div class="row mb-6">
 											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">Data Nascimento</label>
+											<label class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida Nº</label>
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input  v-model="data" type="text" name="nascimento" class="form-control form-control-lg form-control-solid"  v-mask="'##/##/####'" placeholder="dd/mm/aaaa"  />
+												<input id="logradouro" v-model="logadouro" type="text" name="local" class="form-control form-control-lg form-control-solid" placeholder="Localização" />
 											</div>
 											<!--end::Col-->
 										</div>
 										<!--end::Input group-->
+										<div class="row mb-6">
+				 <!--begin::Label-->
+				 <label class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
+				 <!--end::Label-->
+				 <!--begin::Col-->
+				 <div class="col-lg-8 fv-row">
+					 <input id="" v-model="numero" type="text" name="Numero" class="form-control form-control-lg form-control-solid" placeholder="Numero"  />
+				 </div>
+				 <!--end::Col-->
+			 </div>
 										<!--begin::Input group-->
 										<div class="row mb-6">
 											<!--begin::Label-->
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Telefone</span>
-												<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Adicione o nome de Telefone activo"></i>
+												<span class="required">Complemento</span>
+											
 											</label>
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input v-model="telefone" type="tel" name="phone" class="form-control form-control-lg form-control-solid"  v-mask="'(##) #####-####'" placeholder="(41) 99999-9999"  />
+												<input id="complemento" :value="complemento" @input="complemento = $event"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
 										
-									</div>
-									<!--end::Card body-->
-									<!--begin::Actions-->
-									
-
-    <c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
-
-									<div class="card-footer d-flex justify-content-end py-6 px-9">
-										<button @click="alterarAdm()" type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
-									 {{jms}}
+										<div class="row mb-6">
+											<!--begin::Label-->
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">Bairro</span>
+											
+											</label>
+											<!--end::Label-->
+											<!--begin::Col-->
+											<div class="col-lg-8 fv-row">
+												<input id="bairro" v-model="bairro" type="text" name="Bairro" class="form-control form-control-lg form-control-solid" />
+											</div>
+											<!--end::Col-->
 										</div>
-									<!--end::Actions-->
-								</form>
-								<!--end::Form-->
-							</div>
-							<!--end::Content-->
-						</div>
-						<!--end::Basic info-->
+										<div class="row mb-6">
+											<!--begin::Label-->
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">Cidade</span>
+											
+											</label>
+											<!--end::Label-->
+											<!--begin::Col-->
+											<div class="col-lg-8 fv-row">
+												<input id="localidade" v-model="cidade" type="text" name="cidade" class="form-control form-control-lg form-control-solid" />
+											</div>
+											<!--end::Col-->
+										</div>
+										
+										<div class="row mb-6">
+											<!--begin::Label-->
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">Estado</span>
+											
+											</label>
+											<!--end::Label-->
+											<!--begin::Col-->
+											<div class="col-lg-8 fv-row">
+												<input id="uf" v-model="estado" type="text" name="estado" class="form-control form-control-lg form-control-solid" />
+											</div>
+											<!--end::Col-->
+										</div>
+										
 				
-					
-					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Post-->
 			</div>
-			<!--end::Content-->
+			<!--end::Card body-->
+			<!--begin::Actions-->
+			<div class="card-footer d-flex justify-content-end py-6 px-9">
+				<button @click="addEndereco()" type="submit" class="btn btn-primary m-2" id="kt_account_profile_details_submit">SALVAR</button>
+				<button @click="eliminaEndereco()" type="submit" class="btn btn-primary  m-2" id="kt_account_profile_details_submit">ELIMINAR</button>
+			
+			
+				<ul>
+				<li v-for="item in items">
+				  {{ item.cidade }}
+				</li>
+			  </ul>
+			</div>
+			<!--end::Actions-->
 
-		</div>
+		</form>
+		<!--end::Form-->
 	</div>
-</div>
-		
-		<!--end::Root-->
+	<!--end::Content-->
 
-		<c-footer/>
-	</div>
-    `,
+					</div>
+								<!--end::Billing Address-->
+					
+						
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Post-->
+				</div>
+				<!--end:: Content-- >
+	
+			</div >
+		</div >
+	</div >
+	< !--end:: Root-- >
+
+	</div >
+	`,
 
 
-     data: function () {
+	data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
+			id: null,
+			nome_identificacao: null,
+			cep: null,
+			logadouro: null,
+			numero: null,
+			complemento: null,
+			bairro: null,
+			cidade: null,
+			estado: null,
+			secret: null,
+			token: null,
+
+			items: [],
+
 			nome: null,
-            token: null,
-			email: null,
 			cpf: null,
 			telefone: null,
-			step: null,
-            error: null,
-			data: null,
-			msg: "",
-			jms: ""
-
-        }
-    },
+			email: null
+		}
+	},
 	methods: {
-	
-      async alterarAdm() {
+		
+		async addEndereco() {
 			this.error = null
-			
-            let res = await adm.atualizar(
-                this.nome,
-                this.telefone,
-				this.cpf,
-				this.token,
-            )
-            if (!res.next) {
-				console.log(res)
-                this.error = res.message
-                return null
-            }
-			this.msg = res.message,
-			setTimeout(() => this.msg = "", 3000);
-        },
 
-        updateForm(event) {
-            this[event.name] = event.value
-        },
+			let res = await adm.atualizarEndereco(
+				this.nome_identificacao,
+				this.cep,
+				this.logadouro,
+				this.numero,
+				this.complemento,
+				this.bairro,
+				this.cidade,
+				this.estado,
+				this.token,
+			)
+			if (!res.next) {
+				this.error = res.message
+				return null
+			}
+
+			console.log(this.logadouro)
+		},
+
+
+
+		async eliminaEndereco() {
+			let res = await adm.eliminaEndereco(
+				this.secret,
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+
+		},
 
 		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
+			let res = await adm.ListarPerfil(localStorage.getItem('token'))
 			return res
-        },
-    },
-	async mounted() {
-        // this.user = localStorage.getItem('user')
+		},
 
-
-		let dados = (await this.listar()).dados
-
-		console.log(dados)
-		this.nome = dados.nome
-		this.email = dados.email
-		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-		this.step =   parseInt(dados.step)
-
-	
-		console.log(this.step)
-		// this.jms = parseInt(step)
-
-    },
-
-	created() {
+		async listarEndereco() {
+			let res = await adm.listarEndereco(
+				(this.token)
+			)
+			return res
+		},
 		
 	},
 
-	
+	async mounted() {
+		
+		let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
+	document.head.appendChild(cep);
+
+		
+		let enderecoDados = (await this.listarEndereco()).dados|| {}
+		
+        this.logadouro = enderecoDados.logadouro
+		this.cep = enderecoDados.cep
+		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.numero = enderecoDados.numero
+		this.complemento = enderecoDados.complemento
+		this.bairro = enderecoDados.bairro
+		this.cidade = enderecoDados.cidade
+		this.estado = enderecoDados.estado
+		this.id = enderecoDados.id
+
+
+	},
+
+	created() {
+		this.token = localStorage.getItem('token')
+
+	},
 }
+
+
 

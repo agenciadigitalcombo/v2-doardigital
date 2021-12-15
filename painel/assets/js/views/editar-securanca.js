@@ -121,20 +121,20 @@ export default {
 										<!--begin::Navs-->
 										<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 										<!--begin::Nav item-->
-												<li class="nav-item mt-2"  v-if="step === 6">
+												<li class="nav-item mt-2" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil">Visão geral</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
-												<li class="nav-item mt-2"  v-if="step === 1 || step === 2 ||  step === 3 || step === 6">
+												<li class="nav-item mt-2"  >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/perfil-editar">Seus Dados</a>
 												</li>
 												<!--end::Nav item-->
 											<!--begin::Nav item-->
-											<li class="nav-item mt-2" v-if="step === 3 || step === 2 || step === 6"">
+											<li class="nav-item mt-2" >
 												<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-local">Meu Endereço</a>
 											</li>
-											<li class="nav-item mt-2" v-if="step === 3 || step === 6"">
+											<li class="nav-item mt-2">
 												<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/editar-securanca">Seguranca</a>
 											</li>
 											<!--end::Nav item-->

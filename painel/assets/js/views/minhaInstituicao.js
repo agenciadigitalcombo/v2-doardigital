@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-    template: `
+	template: `
     <div>
     <div>
  
@@ -106,7 +106,7 @@ export default {
 
 												<td>
 													<a class="badge badge-light-primary fs-5 m-1">
-													 {{item.sub_domain}}
+													 {{ item.sub_domain }}
 													</a>
 												</td>
 
@@ -202,10 +202,10 @@ export default {
     `,
 
 
-    
-    data: function () {
-        
-        return {
+
+	data: function () {
+
+		return {
 			token: null,
 			gravatar: '../painel/assets/image/gravatar.png',
 			nome_fantasia: null,
@@ -213,26 +213,26 @@ export default {
 			sub_domain: null,
 			email: null,
 			cor: null,
-			
+
 			logo: null,
 			cnpj: null,
 			telefone: null,
 			jms: false,
-			dados:[]
+			dados: []
 			// .doardigital.com.br
-        }
-    
-    },
-	
-    async mounted() {
-     
-    	this.dados = (await this.listar()).dados
-		this.nome_fantasia = this.dados.nome_fantasia,
-		this.sub_domain = this.dados.sub_domain,
+		}
 
-		console.log(this.dados)
-		
-    }, 
+	},
+
+	async mounted() {
+
+		this.dados = (await this.listar()).dados
+		this.nome_fantasia = this.dados.nome_fantasia,
+			this.sub_domain = this.dados.sub_domain,
+
+			console.log(this.dados)
+
+	},
 
 	methods: {
 		async listar() {

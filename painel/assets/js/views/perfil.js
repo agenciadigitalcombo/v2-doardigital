@@ -356,7 +356,7 @@ export default {
     
 		
 		
-		let enderecoDados = (await this.listarEndereco()).dados|| {}
+		let enderecoDados = (await this.listarEndereco()).dados || {}
 		
         this.logadouro = enderecoDados.logadouro
 		this.cep = enderecoDados.cep

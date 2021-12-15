@@ -176,7 +176,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="CNPJ" class="form-control form-control-lg form-control-solid" />
+												<input type="text" name="CNPJ" class="form-control form-control-lg form-control-solid" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"/>
 											</div>
 											<!--end::Col-->
 										</div>

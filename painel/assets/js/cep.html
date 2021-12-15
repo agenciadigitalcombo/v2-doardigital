@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<title>Step by step</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+
+<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
+
+	<div class="container" id="app">
+		<div class="column is-12">
+			<h3 class="title is-1">CEP</h3>
+			<hr>
+			<div class="notification is-warning" v-if="cep">
+				<pre>{{ data }}</pre>
+		</div>
+
+	<ul>
+		<li v-for="item in data" :key="item">
+			{{ item.logradouro }}
+		</li>
+	</ul>
+
+<!-- {{ logradouro }} -->
+	
+			<input type="text" v-model="cep" @keyup="searchCep()" placeholder="digite o cep aqui">
+			
+			<!-- <div v-for="item in data" :key="item">
+
+
+			<input type="text" v-model="gia"  placeholder="digite o cep aqui">
+			<input type="text" v-model="logradouro"  placeholder="digite o cep aqui">
+			</div> -->
+
+			<button>Buscar</button>
+		</div>
+	</div>
+
+
+	<!-- <script src="../../../static/js/api/cep.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				cep: null,
+				gia: null,
+				logradouro: null,
+				 data: [],
+			},
+			methods: {
+				async searchCep() {
+			if (this.cep.length == 8) {
+				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
+					.then(response => 
+					this.logradouro = response.data.logradouro,
+					// this.gia = response.data.gia,
+					// this.complemento = response.data.complemento,
+					// this.bairro = response.data.bairro,
+					// this.cidade = response.data.localidade,
+					// this.estado = response.data.uf,
+					this.data = response.data,
+					console.log(this.data)
+					
+					)
+					.catch(error => console.log(error))
+			}
+		}
+			},
+
+			mounted() {
+			 
+			},
+		})
+	</script>
+</body>
+
+
+</html>

@@ -7,7 +7,6 @@ export default {
     <c-header></c-header>
     <c-aside></c-aside>
 	
-	
 
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root">
@@ -162,6 +161,7 @@ export default {
 	<!--begin::Content-->
 	<div id="kt_account_profile_details" >
 		<!--begin::Form-->
+
 		<form id="kt_account_profile_details_form" action="javascript:void(0)" autocomplete="off" name="formulario" class="form">
 			<!--begin::Card body-->
 			<div class="card-body border-top p-9">
@@ -191,7 +191,7 @@ export default {
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
 											<div class="input-group mb-3">
-												<input id="cep" v-model="cep"  type="number" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
+												<input id="cep" v-model="cep" @keyup="searchCep()" type="text" name="CEP" class="form-control form-control-lg form-control-solid" v-mask="'###.###.###-##'" placeholder="000.000.000-00"  />
 												<span class="input-group-text" id="basic-addon2">
 													<a @click="pesquisarCep()">
 														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -235,7 +235,7 @@ export default {
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
-												<input id="complemento" v-model="complemento"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
+												<input id="complemento" :value="complemento" @input="complemento = $event"  type="text" name="Complemento" class="form-control form-control-lg form-control-solid" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -286,7 +286,7 @@ export default {
 			<!--end::Card body-->
 			<!--begin::Actions-->
 			<div class="card-footer d-flex justify-content-end py-6 px-9">
-				<button @click="addEndereco()" type="submit" class="btn btn-primary m-2" id="kt_account_profile_details_submit">SALVAR</button>
+				<button @click="aeditarEndereco()" type="submit" class="btn btn-primary m-2" id="kt_account_profile_details_submit">SALVAR</button>
 				<button @click="eliminaEndereco()" type="submit" class="btn btn-primary  m-2" id="kt_account_profile_details_submit">ELIMINAR</button>
 			
 			
@@ -312,15 +312,15 @@ export default {
 					</div>
 					<!--end::Post-->
 				</div>
-				<!--end::Content-->
+				<!--end:: Content-- >
 	
-			</div>
-		</div>
-	</div>
-	<!--end::Root-->
+			</div >
+		</div >
+	</div >
+	< !--end:: Root-- >
 
-	</div>
-    `,
+	</div >
+	`,
 
 
 	data: function () {
@@ -337,19 +337,21 @@ export default {
 			estado: null,
 			secret: null,
 			token: null,
-			step: null,
 
 			items: [],
 
 			nome: null,
 			cpf: null,
 			telefone: null,
-			email: null
+			email: null,
+
+			
+			data: null,
 		}
 	},
 	methods: {
 		
-		async addEndereco() {
+		async aeditarEndereco() {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
@@ -362,12 +364,14 @@ export default {
 				this.cidade,
 				this.estado,
 				this.token,
+
 			)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
 
+			console.log(this.logadouro)
 		},
 
 
@@ -395,27 +399,44 @@ export default {
 			)
 			return res
 		},
+		
+		async searchCep() {
+			if (this.cep.length == 8) {
+				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
+					.then(response => 
+					this.logadouro = response.data.logradouro,
+					this.numero = response.data.ddd,
+					this.complemento = response.data.complemento,
+					this.bairro = response.data.bairro,
+					this.cidade = response.data.localidade,
+					this.estado = response.data.uf,
+					this.data = response.data,
+					console.log(this.data)
+					
+					)
+					.catch(error => console.log(error))
+			}
+		}
+
 	},
 
 	async mounted() {
 		
-	
-
-		let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
-	document.head.appendChild(cep);
+	// 	let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
+	// document.head.appendChild(cep);
 
 		
-		let enderecoDados = (await this.listarEndereco()).dados|| {}
+		// let enderecoDados = (await this.listarEndereco()).dados|| {}
 		
-        this.logadouro = enderecoDados.logadouro
-		this.cep = enderecoDados.cep
-		this.nome_identificacao = enderecoDados.nome_identificacao
-		this.numero = enderecoDados.numero
-		this.complemento = enderecoDados.complemento
-		this.bairro = enderecoDados.bairro
-		this.cidade = enderecoDados.cidade
-		this.estado = enderecoDados.estado
-		this.id = enderecoDados.id
+        // this.logadouro = enderecoDados.logadouro
+		// this.cep = enderecoDados.cep
+		// this.nome_identificacao = enderecoDados.nome_identificacao
+		// this.numero = enderecoDados.numero
+		// this.complemento = enderecoDados.complemento
+		// this.bairro = enderecoDados.bairro
+		// this.cidade = enderecoDados.cidade
+		// this.estado = enderecoDados.estado
+		// this.id = enderecoDados.id
 
 
 	},

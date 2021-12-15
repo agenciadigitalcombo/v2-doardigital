@@ -78,7 +78,7 @@ export default {
 																<div class="fv-row mb-5">
 																	<label for="Telefone"
 																		class="form-label fs-6 fw-bolder mb-3">Telefone</label>
-																	<input type="text" v-model="telefone" 
+																	<input type="text" v-model="telefone"  v-mask="'(##) #####-####'" placeholder="(41) 99999-9999"
 																		class="form-control form-control-lg form-control-solid"
 																		name="Telefone" id="Telefone" />
 																</div>

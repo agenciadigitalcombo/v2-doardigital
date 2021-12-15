@@ -89,7 +89,7 @@ export default {
 											<!--begin::Col-->
 											<div class="col-lg-8 fv-row">
 											<div class="input-group mb-3">
-												<input v-model="cep"  type="text" name="CEP" class="form-control form-control-lg form-control-solid" placeholder="CEP" />
+												<input v-model="cep"  type="text" name="CEP" class="form-control form-control-lg form-control-solid" v-mask="'#####-###'" placeholder="00000-000" />
 												<span class="input-group-text" id="basic-addon2">
 													<a href="http://">
 														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

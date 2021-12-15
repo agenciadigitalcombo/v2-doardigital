@@ -5,7 +5,7 @@ import {mapState} from './vendor/vuex.js'
 
 
 
-
+Vue.use(VueMask.VueMaskPlugin);
 
 Vue.use(Router)
 import routes from './domain/list-router.js'

@@ -95,7 +95,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input v-model="razao_social" type="text" name="social"
+													<input v-model="razao_social" type="text" name="social" placeholder="adicione a Razão Social"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -111,7 +111,7 @@ export default {
 
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input v-model="cnpj" type="tel" name="cnpj"
+													<input v-model="cnpj" type="tel" name="cnpj"  v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -127,7 +127,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input v-model="telefone" type="tel" name="Telefone"
+													<input v-model="telefone" type="tel" name="Telefone" v-mask="'(###) #####-####'" placeholder="(41) 99999-9999"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -143,7 +143,7 @@ export default {
 
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input v-model="email" type="email" name="email"
+													<input v-model="email" type="email" name="email"  placeholder="doardigital@gmail.com"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
