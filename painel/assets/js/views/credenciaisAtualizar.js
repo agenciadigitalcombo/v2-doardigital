@@ -1,3 +1,4 @@
+
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
@@ -19,7 +20,9 @@ export default {
 							<div class="content d-flex flex-column flex-column-fluid">
 								<!--begin::Post-->
 								<div class="post d-flex flex-column-fluid">
-									<!--begin::Container-->
+									<!--begin::Container-->			
+
+
 									<div class="container-xxl">
 										<!--begin::Card-->
 										<div class="card">
@@ -28,18 +31,18 @@ export default {
 
 													<h2 class="fs-2x fw-bolder mb-0 fs-4 fw-bold py-7">Adicione uma credencial</h2>
 													<div class="text-center">
-														<form class="form" action="javascript:void(0)" >
-															<input v-model="nome_identificacao" type="text" class="form-control form-control-solid  mb-20"
-																placeholder="informe um nome" required />
+													<form class="form" action="javascript:void(0)">
+														<input v-model="nome_identificacao" type="text"
+															class="form-control form-control-solid"
+															placeholder="informe um nome" required />
 
-																<input v-model="id" type="text" class="form-control form-control-solid  mb-20"
-																placeholder="id" required />
+													
 
 
-																
-															<p class="text-gray-400 fs-4 fw-bold py-7">Poderá acessar em:</p>
+														<p class="text-gray-400 fs-4 fw-bold py-7">Poderá acessar em:
+														</p>
 
-															<div class="row g-5">
+														<div class="row g-5">
 
 
 															<div class="col-lg-4" v-for="listar in permisao">
@@ -48,7 +51,7 @@ export default {
 																		class="form-check form-switch form-check-custom form-check-solid">
 
 																		<input v-bind:value="listar" v-model="jms"
-																			@change='atualizarCheckall()'
+																			@change='updateCheckall()'
 																			class="form-check-input" type="checkbox" />
 																		<span class="form-check-label">
 																			{{ listar }}
@@ -65,13 +68,11 @@ export default {
 																@click="checkAll()" v-model="isCheckAll" /> selecionar
 															tudo
 															</div>
-													
 
-															<button type="submit"  @click="alterarCredencia()"
-										class="btn btn-primary er fs-6 px-8 py-4 col-lg-4">Salvar</button>
-
-										<button type="submit"  @click="eliminar()"
-										class="btn btn-danger er fs-6 px-8 py-4 col-lg-4">Eliminar</button>
+														<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
+														
+														<button type="submit" @click="alterarCredencia()"
+															class="btn btn-primary er fs-6 px-8 py-4 col-lg-4">Atualizar</button>
 													</form>
 												</div>
 											</div>
@@ -102,26 +103,26 @@ export default {
 	data: function () {
 
 		return {
-			id: null,
+			token: null,
 			nome_identificacao: null,
-
-
+			// recursos: null,
+			msg: null,
 			isCheckAll: false,
-			permisao: ['Atendente', 'atendente 01', 'atendente 02', 'atendente 03'],
+			permisao: ['Inicio', 'Doadores', 'Doações', 'Credenciais', 'Usuários', 'Minhas Instituições', 'Divisão Pagamento',
+				'Metas', 'Modelo de E-mails', 'Configuração', 'Perfil', 'Modulos', 'Meu Plano', 'Carteira', 'QR CODE'],
 			jms: [],
 			recursos: ""
 		}
-
 	},
 
 	async mounted() {
-
-
-
+		this.nome_identificacao = globalThis._usuario.nome_identificacao
 	},
 
 	methods: {
+		
 
+		
 		async alterarCredencia() {
 			this.error = null
 
@@ -140,24 +141,12 @@ export default {
 				this.error = res.message
 				return null
 			}
+			this.msg = res.message,
+			setTimeout(() => this.msg = "", 3000);
+
+			this.nome_identificacao= ""
 			console.log("atualizado")
 		},
-
-		async eliminar() {
-			this.error = null
-
-			let res = await adm.deleterCredencia(
-				this.id,
-				console.log("eliminado")
-			)
-			if (!res.next) {
-				console.log(res)
-				this.error = res.message
-				return null
-			}
-			console.log("eliminado")
-		},
-
 
 		checkAll() {
 			this.isCheckAll = !this.isCheckAll;
@@ -169,7 +158,7 @@ export default {
 				}
 			}
 		},
-		atualizarCheckall() {
+		updateCheckall() {
 			if (this.jms.length == this.permisao.length) {
 				this.isCheckAll = true;
 			} else {
@@ -190,4 +179,5 @@ export default {
 
 
 }
+
 

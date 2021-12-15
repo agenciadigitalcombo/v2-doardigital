@@ -1,7 +1,7 @@
-import adm from "../../../../static/js/api/adm.js"
+import adm from "../../../../static/js/api/adm.js" 
 
 export default {
-	template: `
+    template:`
 	<div>
 
     <c-header></c-header>
@@ -29,7 +29,7 @@ export default {
 									<div class="card-header border-0 cursor-pointer" role="button"
 										data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
 										<div class="card-title m-0">
-											<h3 class="fw-bolder m-0">Novo Usuário</h3>
+											<h3 class="fw-bolder m-0">Editar Plano</h3>
 										</div>
 									</div>
 									<!--end::Card header-->
@@ -50,60 +50,31 @@ export default {
 													<form id="kt_signin_change_password" class="form"
 														novalidate="novalidate">
 														<div class="row mb-1">
-
-
-														<div class="col-lg-6">
-														<div class="fv-row mb-5">
-															<label for="secret"
-																class="form-label fs-6 fw-bolder mb-3">secret</label>
-															<input type="text" v-model="secret" 
-																class="form-control form-control-lg form-control-solid"
-																name="secret" id="secret" />
-														</div>
-													</div>
-
-
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
 																	<label for="nome"
 																		class="form-label fs-6 fw-bolder mb-3">Nome</label>
-																	<input type="text" v-model="nome" 
+																	<input type="text"
 																		class="form-control form-control-lg form-control-solid"
 																		name="nome" id="nome" />
 																</div>
 															</div>
-														
 
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
-																	<label for="Telefone"
-																		class="form-label fs-6 fw-bolder mb-3">Telefone</label>
-																	<input type="text" v-model="telefone"  v-mask="'(##) #####-####'" placeholder="(41) 99999-9999"
+																	<label for="Valor"
+																		class="form-label fs-6 fw-bolder mb-3">Valor</label>
+																	<input type="text" disabled 
 																		class="form-control form-control-lg form-control-solid"
-																		name="Telefone" id="Telefone" />
+																		name="Valor" id="Valor" />
 																</div>
 															</div>
-															<div class="col-lg-6">
-																<div class="fv-row mb-5">
-																	<label for="Credencial"
-																		class="form-label fs-6 fw-bolder mb-3 ">Credencial</label>
-																	<select v-model="credencial_id" class="form-select form-control form-control-lg form-control-solid"
-																		aria-label="Default select example">
-																		<option selected>Qual a sua Credencial</option>
-																		<option v-for="dado in lista_dados" :key="dado.id" :value="dado.id" >{{dado.nome_identificacao}}</option>
-																		
-																	</select>
-																</div>
-															</div>
-				
+														
 														</div>
 
-
-
 														<div class="d-flex">
-																<button @click="editarUsuario()" id="kt_password_submit" type="button"
-																class="btn btn-success me-2 px-6">Alterar</button>
-																
+															<button id="kt_password_submit" type="button"
+																class="btn btn-primary me-2 px-6">SALVAR</button>
 															<button id="kt_password_cancel" type="button"
 																class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
 														</div>
@@ -137,93 +108,17 @@ export default {
 		<!--end::Root-->
 
 		<c-footer/>
-		
 	</div>
     `,
 
-	data: function () {
+
+     data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-			jms: false,
-			id: null,
-			nome: null,
-			email: null,
-			senha: null,
-			telefone: null,
-			credencial_id: null,
-			token: null,
-			secret: null,
-			lista_dados: [],
-			id: null,
-			nome_identificacao: null,
-		 recursos: null,
-
-		}
-	},
+        }
+    },
 	methods: {
-		async addUsuario() {
-			this.error = null
-
-			let res = await adm.cadastrarSubadm(
-				this.nome,
-				this.email,
-				this.senha,
-				this.telefone,
-				this.credencial_id,
-				this.secret,
-				this.token,	
-			)
-			if (!res.next) {
-				this.error = res.message
-				return null
-			}
-
-			console.log(this.telefone,)
-		},
-
-		async editarUsuario() {
-			this.error = null
-
-			let res = await adm.editarSubadm(	
-				this.nome,
-				this.telefone,
-				this.credencial_id ,
-				this.secret ,
-			
-			)
-			if (!res.next) {
-				this.error = res.message
-				return null
-			}
-		
-		},
-
-		// async listar() {
-        //     let res = await adm.listarSubadm( localStorage.getItem('token') )
-		// 	return res
-        // },
-	},
-
-
-	async mounted() {
-
-this.nome = globalThis._usuario.nome
-
-        this.lista_dados = (await this.listar()).dados
-        this.id = lista_dados.id
-         this.nome_identificacao = lista_dados.nome_identificacao
-      this.recursos = lista_dados.recursos
-            console.log(lista_dados)
-   }, 
-
-
-	created() {
-
-
-	},
-
-
+	
+    },	
 }
-
-
 

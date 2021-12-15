@@ -135,14 +135,14 @@ export default {
     ) {
         return await http.post('/create-instituicao', {
             nome_fantasia,
-				razao_social,
-				sub_domain,
-				email,
-				cor,
-				logo,
-				cnpj,
-				telefone,
-				token,
+            razao_social,
+            sub_domain,
+            email,
+            cor,
+            logo,
+            cnpj,
+            telefone,
+            token,
         })
     },
 
@@ -162,18 +162,18 @@ export default {
         return await http.post('/update-instituicao', {
             id,
             nome_fantasia,
-				razao_social,
-				sub_domain,
-				email,
-				cor,
-				logo,
-				cnpj,
-				telefone,
-				token,
+            razao_social,
+            sub_domain,
+            email,
+            cor,
+            logo,
+            cnpj,
+            telefone,
+            token,
         })
     },
 
-    
+
     async listarInstutuicao(token) {
         return await http.get('/list-instituicao', {
             token
@@ -181,9 +181,9 @@ export default {
     },
 
     async enderecoInstituicao(
-       id, nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+        id, nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
         return await http.post('/endereco-instituicao', {
-           id,
+            id,
             nome_identificacao,
             cep,
             logradouro,
@@ -237,5 +237,42 @@ export default {
         })
     },
 
+
+    async cadastrarPlanos(
+        instituicao_id,
+        nome,
+        amount,
+        token,
+    ) {
+        return await http.post('/create-plano', {
+            instituicao_id,
+            nome,
+            amount,
+            token,
+        })
+    },
+
+    async editarPlanos(
+        id,
+        nome,
+        amount,
+        token,
+    ) {
+        return await http.post('/update-plano', {
+            id,
+            nome,
+            amount,
+            token,
+        })
+    },
+
+    async listarPlanos(token) {
+        return await http.get('/list-plano', {
+            token
+        })
+    },
+    
+
 }
+
 
