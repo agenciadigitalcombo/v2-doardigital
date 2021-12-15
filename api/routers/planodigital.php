@@ -1,7 +1,7 @@
 <?php
 
-router('/create-plano', 'PlanoControler@create');
-router('/list-plano', 'PlanoControler@list_plano');
-router('/plano', 'PlanoControler@plano');
-router('/update-plano', 'PlanoControler@update_plano');
-router('/on-off', 'PlanoControler@on_off');
+router('/create-planodigital', 'PlanoDigitalControler@create');
+router('/list-planodigital', 'PlanoDigitalControler@list_planodigital');
+router('/planodigital', 'PlanoDigitalControler@planodigital');
+router('/update-planodigital', 'PlanoDigitalControler@update_planodigital');
+router('/on-off-planodigital', 'PlanoDigitalControler@on_off');

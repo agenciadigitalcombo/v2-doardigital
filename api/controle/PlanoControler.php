@@ -6,6 +6,8 @@ class PlanoControler {
     {
         $plano = new Plano();    
 
+        token();
+
         $instituicao = $_REQUEST['instituicao_id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
         
@@ -13,12 +15,12 @@ class PlanoControler {
         $amount = withdraw_caracter($amount_campo);
 
         $campos_obrigatorios = [
-            'instituicao',
+            'instituicao_id',
             'nome',
             'amount'
         ];
         $lb = [
-            'instituicao' => 'Informe a Instituicao',
+            'instituicao_id' => 'Informe a Instituicao',
             'nome' => 'Informe o nome',
             'amount' => 'Digite o amount'
         ];

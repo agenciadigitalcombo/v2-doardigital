@@ -36,6 +36,8 @@ class PlanoDigitalControler {
             }
         }
 
+       
+
         $plano->create($nome, $whatsapp, $instituicao_max, $amount);
         echo json_encode([
             'next' => true,
@@ -53,6 +55,7 @@ class PlanoDigitalControler {
 
         foreach($list as $g){
             $payload [] = [
+                'id' => $g['id'],
                 'nome' => $g['nome'],
                 'whatsapp' => $g['whatsapp'],
                 'instituicao_max' => $g['instituicao_max'],
@@ -72,10 +75,13 @@ class PlanoDigitalControler {
     static function planodigital()
     {
         $plano = new PlanoDigital();
-        $id = $_REQUEST['id'] ?? '';
+        $id = $_REQUEST['instituicao_max'] ?? '';
 
-        $list_instituicao = $plano->list_all_by_id($id);
+        
+        $list_instituicao = $plano->list_all_by_instituicao_max($id);
+        
         $payload = [
+            'id' => $list_instituicao['id'],
             'nome' => $list_instituicao['nome'],
             'whatsapp' => $list_instituicao['whatsapp'],
             'instituicao_max' => $list_instituicao['instituicao_max'],
@@ -83,27 +89,26 @@ class PlanoDigitalControler {
         ];
         echo json_encode([
             'next' => true,
-            'message' => 'Plano',
+            'message' => 'Plano Digital',
             'dados' => $payload
         ]);
 
     }
 
-    static function update_plano()
+    static function update_planodigital()
     {
         $plano = new PlanoDigital();
 
-        $id = $_REQUEST['id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
         $whatsapp = $_REQUEST['whatsapp'] ?? '';
         $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
 
 
         $campos_obrigatorios = [
-            'id'
+            'instituicao_max'
         ];
         $lb = [
-            'id' => 'Informe o Id'
+            'instituicao_max' => 'Informe o Instituicao Max'
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -115,17 +120,20 @@ class PlanoDigitalControler {
             }
         }
 
+        $get_id = $plano->list_all_by_instituicao_max($instituicao_max);
+        $id = $get_id['id'];
+
         $plano->update($id, $whatsapp, $instituicao_max, $nome);
         echo json_encode([
             'next' => true,
-            'message' => 'Plano Atualizado'
+            'message' => 'Plano Digital Atualizado'
         ]);
 
     }
 
     static function on_off()
     {
-        $plano = new Plano();
+        $plano = new PlanoDigital();
 
         $status_campo = $_REQUEST['status'];
         $status = withdraw_caracter($status_campo);

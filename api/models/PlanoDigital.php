@@ -8,10 +8,10 @@ class PlanoDigital implements IPlanoDigital{
         return $guard;
     }
 
-    public function list_all_by_id(int $id): array
+    public function list_all_by_instituicao_max(int $id): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM plano WHERE id='$id'";
+        $sql = "SELECT * FROM plano_digital WHERE instituicao_max='$id'";
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
     }
@@ -22,7 +22,7 @@ class PlanoDigital implements IPlanoDigital{
         $sql = "INSERT INTO plano_digital";
         $sql .= "( token, nome, whatsapp, instituicao_max, amount)";
         $sql .= "VALUES";
-        $sql .= " '$token', '$nome', '$whatsapp', '$instituicao_max', '$amount'";
+        $sql .= "('$token', '$nome', '$whatsapp', '$instituicao_max', '$amount')";
         $banco->exec($sql);
     }
 
@@ -36,7 +36,7 @@ class PlanoDigital implements IPlanoDigital{
     public function on_off(int $id): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano_digital SET id='$id'";
+        $sql = "UPDATE plano_digital SET status='$id'";
         $banco->exec($sql);
     }
 
