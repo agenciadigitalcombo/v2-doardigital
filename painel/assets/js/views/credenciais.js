@@ -151,11 +151,7 @@ export default {
     
                                                     </td>
                                                     <!--end::Action=-->
-                                                </tr>
-    
-                                                <input v-model="nome_identificacao" type="text"
-                                                class="form-control form-control-solid"
-                                                placeholder="informe um nome" required />
+                                                </tr>  
     
                                             </tbody>
                                             <!--end::Table body-->
@@ -167,11 +163,6 @@ export default {
                                 </div>
                                 <!--end::Card-->
     
-                                <div class="paginacao">
-                                    <a href=""> 
-                                        step + 1 
-                                    </a>
-                                </div>
                             </div>
                             <!--end::Container-->
                         </div>
@@ -244,13 +235,11 @@ export default {
             console.log(this.dados)
         },
 
-        editar(dados) {
-            this.id = dados.id
-            this.nome_identificacao = dados.nome_identificacao
-            this.recursos = dados.recursos
 
-
-        }
+        async editar(id) {
+			globalThis._usuario = this.dados.find(user => user.id == id)
+		window.location.href = "#/usuario-editar"
+        },
 
     },
 

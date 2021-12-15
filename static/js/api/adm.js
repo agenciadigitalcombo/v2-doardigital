@@ -145,6 +145,7 @@ export default {
 				token,
         })
     },
+
     async alterarInstituicao(
         id,
         nome_fantasia,
@@ -176,6 +177,23 @@ export default {
     async listarInstutuicao(token) {
         return await http.get('/list-instituicao', {
             token
+        })
+    },
+
+    async enderecoInstituicao(
+       id, nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
+        return await http.post('/endereco-instituicao', {
+           id,
+            nome_identificacao,
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            token
+
         })
     },
 
