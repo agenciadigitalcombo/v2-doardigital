@@ -17,7 +17,7 @@ class SubAdmControler
         $subadm = new SubAdm();
         
 
-        $cnpj = cnpj();
+        // $cnpj = cnpj();
         // var_dump($cnpj);
         // die;
 

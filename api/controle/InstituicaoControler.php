@@ -64,6 +64,8 @@ class InstituicaoControler
         ]);
     }
 
+    
+
     static function update_instituicao()
     {
         $instituicao = new Instituicao();

@@ -69,6 +69,66 @@ class EnderecoControle
         ]);
     }
 
+    static function create_endereco_instituicao()
+    {
+        $instituicao = new Instituicao();
+        $endereco = new Endereco();
+
+        $id_campo = $_REQUEST['id'] ?? '';
+        $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
+        $logradouro = $_REQUEST['logradouro'] ?? '';
+        $complemento = $_REQUEST['complemento'] ?? '';
+        $bairro = $_REQUEST['bairro'] ?? '';
+        $cidade = $_REQUEST['cidade'] ?? '';
+        $estado = $_REQUEST['estado'] ?? '';
+        
+        $numero = $_REQUEST['numero'] ?? '';
+        $cep = $_REQUEST['cep'] ?? '';
+        
+
+        $transform_numero = withdraw_caracter($numero);
+        $transform_cep = withdraw_caracter($cep);
+
+        $campos_obrigatorios = [
+            'id',
+            'cep',
+            'logradouro',
+            'bairro',
+            'cidade',
+            'estado',
+            'numero'
+        ];
+        $lb = [
+            'id' => 'Informe o ID',
+            'cep' => 'Informe um CEP',
+            'logadouro' => 'Digite um endereço',
+            'bairro' => 'digite o Bairro',
+            'cidade' => 'Informe a Cidade',
+            'estado' => 'Informe o estado',
+            'numero' => 'Digite o numero'
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+
+        $id_instituicao = $instituicao->get_by_id($id_campo);
+        
+        $id = $id_instituicao['id'];
+        
+        $endereco->create($id, $nome_identificacao, $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Endereco criado'
+        ]);
+    }
+
+
     static function update_endereco()
     {
         $adm = new Adm();
