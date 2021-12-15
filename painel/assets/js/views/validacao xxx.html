@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+	<!--begin::Head-->
+	<head><base href="../../../">
+		<title>FormValidation Basic Examples by Keenthemes</title>
+	
+
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="../../painel/assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="../../painel/assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body>
+        <div id="app">
+		<!--begin::Main-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="docs-page d-flex flex-row flex-column-fluid">
+			
+				<!--begin::Wrapper-->
+				<div class="docs-wrapper d-flex flex-column flex-row-fluid" id="kt_docs_wrapper">
+					
+					<!--begin::Content-->
+					<div class="docs-content d-flex flex-column flex-column-fluid" id="kt_docs_content">
+						<!--begin::Container-->
+						<div class="container" id="kt_docs_content_container">
+							<!--begin::Card-->
+							<div class="card card-docs mb-2">
+								<!--begin::Card Body-->
+								<div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
+								
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="text">
+										<a href="#text" data-kt-scroll-toggle=""></a>Text Input</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_text" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-2">Text Input</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<input type="text" name="text_input" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="" value="" />
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc251b9" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc251bc" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc251b9" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_text');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'text_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Text input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_text_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc251bc" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_text" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-2"&gt;Text Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input--&gt;
+        &lt;input type="text" name="text_input" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="" value="" /&gt;
+        &lt;!--end::Input--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="email">
+										<a href="#email" data-kt-scroll-toggle=""></a>Email Input</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_email" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-2">Email Input</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<input type="email" name="email_input" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="" value="" />
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_email_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc25384" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc25387" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc25384" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_email');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'email_input': {
+                validators: {
+                    emailAddress: {
+                        message: 'The value is not a valid email address'
+                    },
+                    notEmpty: {
+                        message: 'Email address is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_email_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc25387" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_email" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-2"&gt;Email Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input--&gt;
+        &lt;input type="email" name="email_input" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="" value="" /&gt;
+        &lt;!--end::Input--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_email_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="textarea">
+										<a href="#textarea" data-kt-scroll-toggle=""></a>Textarea Input</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_textarea" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-2">Textarea Input</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<textarea name="textarea_input" class="form-control form-control-solid"></textarea>
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_textarea_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc2555a" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc2555c" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc2555a" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_textarea');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'textarea_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Textarea input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_textarea_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc2555c" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_textarea" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-2"&gt;Textarea Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input--&gt;
+        &lt;textarea name="textarea_input" class="form-control form-control-solid"&gt;&lt;/textarea&gt;
+        &lt;!--end::Input--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_textarea_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="radio">
+										<a href="#radio" data-kt-scroll-toggle=""></a>Radio Input</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_radio" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-5">Radio Input</label>
+														<!--end::Label-->
+														<!--begin::Input row-->
+														<div class="d-flex flex-column fv-row">
+															<!--begin::Radio-->
+															<div class="form-check form-check-custom form-check-solid mb-5">
+																<!--begin::Input-->
+																<input class="form-check-input me-3" name="radio_input" type="radio" value="1" id="kt_docs_formvalidation_radio_option_1" />
+																<!--end::Input-->
+																<!--begin::Label-->
+																<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+																	<div class="fw-bolder text-gray-800">Radio option 1</div>
+																</label>
+																<!--end::Label-->
+															</div>
+															<!--end::Radio-->
+															<!--begin::Radio-->
+															<div class="form-check form-check-custom form-check-solid mb-5">
+																<!--begin::Input-->
+																<input class="form-check-input me-3" name="radio_input" type="radio" value="2" id="kt_docs_formvalidation_radio_option_2" />
+																<!--end::Input-->
+																<!--begin::Label-->
+																<label class="form-check-label" for="kt_docs_formvalidation_radio_option_2">
+																	<div class="fw-bolder text-gray-800">Radio option 2</div>
+																</label>
+																<!--end::Label-->
+															</div>
+															<!--end::Radio-->
+															<!--begin::Radio-->
+															<div class="form-check form-check-custom form-check-solid">
+																<!--begin::Input-->
+																<input class="form-check-input me-3" name="radio_input" type="radio" value="3" id="kt_docs_formvalidation_radio_option_3" />
+																<!--end::Input-->
+																<!--begin::Label-->
+																<label class="form-check-label" for="kt_docs_formvalidation_radio_option_3">
+																	<div class="fw-bolder text-gray-800">Radio option 3</div>
+																</label>
+																<!--end::Label-->
+															</div>
+															<!--end::Radio-->
+														</div>
+														<!--end::Input row-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_radio_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc2570d" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc25710" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc2570d" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_radio');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'radio_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Radio input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_radio_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc25710" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_radio" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-5"&gt;Radio Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input row--&gt;
+        &lt;div class="d-flex flex-column fv-row"&gt;
+            &lt;!--begin::Radio--&gt;
+            &lt;div class="form-check form-check-custom form-check-solid mb-5"&gt;
+                &lt;!--begin::Input--&gt;
+                &lt;input class="form-check-input me-3" name="radio_input" type="radio" value="1" id="kt_docs_formvalidation_radio_option_1" /&gt;
+                &lt;!--end::Input--&gt;
+
+                &lt;!--begin::Label--&gt;
+                &lt;label class="form-check-label" for="kt_docs_formvalidation_radio_option_1"&gt;
+                    &lt;div class="fw-bolder text-gray-800"&gt;Radio option 1&lt;/div&gt;
+                &lt;/label&gt;
+                &lt;!--end::Label--&gt;
+            &lt;/div&gt;
+            &lt;!--end::Radio--&gt;
+
+            &lt;!--begin::Radio--&gt;
+            &lt;div class="form-check form-check-custom form-check-solid mb-5"&gt;
+                &lt;!--begin::Input--&gt;
+                &lt;input class="form-check-input me-3" name="radio_input" type="radio" value="2" id="kt_docs_formvalidation_radio_option_2" /&gt;
+                &lt;!--end::Input--&gt;
+
+                &lt;!--begin::Label--&gt;
+                &lt;label class="form-check-label" for="kt_docs_formvalidation_radio_option_2"&gt;
+                    &lt;div class="fw-bolder text-gray-800"&gt;Radio option 2&lt;/div&gt;
+                &lt;/label&gt;
+                &lt;!--end::Label--&gt;
+            &lt;/div&gt;
+            &lt;!--end::Radio--&gt;
+
+            &lt;!--begin::Radio--&gt;
+            &lt;div class="form-check form-check-custom form-check-solid"&gt;
+                &lt;!--begin::Input--&gt;
+                &lt;input class="form-check-input me-3" name="radio_input" type="radio" value="3" id="kt_docs_formvalidation_radio_option_3" /&gt;
+                &lt;!--end::Input--&gt;
+
+                &lt;!--begin::Label--&gt;
+                &lt;label class="form-check-label" for="kt_docs_formvalidation_radio_option_3"&gt;
+                    &lt;div class="fw-bolder text-gray-800"&gt;Radio option 3&lt;/div&gt;
+                &lt;/label&gt;
+                &lt;!--end::Label--&gt;
+            &lt;/div&gt;
+            &lt;!--end::Radio--&gt;
+        &lt;/div&gt;
+        &lt;!--end::Input row--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_radio_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="pt-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="checkbox">
+										<a href="#checkbox" data-kt-scroll-toggle=""></a>Checkbox Input</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_checkbox" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-5">Checkbox Input</label>
+														<!--end::Label-->
+														<!--begin::Input row-->
+														<div class="d-flex flex-column fv-row">
+															<!--begin::Checkbox-->
+															<div class="form-check form-check-custom form-check-solid mb-5">
+																<!--begin::Input-->
+																<input class="form-check-input me-3" name="checkbox_input" type="checkbox" value="1" id="kt_docs_formvalidation_checkbox_option_1" />
+																<!--end::Input-->
+																<!--begin::Label-->
+																<label class="form-check-label" for="kt_docs_formvalidation_checkbox_option_1">
+																	<div class="fw-bolder text-gray-800">Checkbox option 1</div>
+																</label>
+																<!--end::Label-->
+															</div>
+															<!--end::Checkbox-->
+															<!--begin::Checkbox-->
+															<div class="form-check form-check-custom form-check-solid mb-5">
+																<!--begin::Input-->
+																<input class="form-check-input me-3" name="checkbox_input" type="checkbox" value="2" id="kt_docs_formvalidation_checkbox_option_2" />
+																<!--end::Input-->
+																<!--begin::Label-->
+																<label class="form-check-label" for="kt_docs_formvalidation_checkbox_option_2">
+																	<div class="fw-bolder text-gray-800">Checkbox option 2</div>
+																</label>
+																<!--end::Label-->
+															</div>
+															<!--end::Checkbox-->
+															<!--begin::Checkbox-->
+															<div class="form-check form-check-custom form-check-solid">
+																<!--begin::Input-->
+																<input class="form-check-input me-3" name="checkbox_input" type="checkbox" value="3" id="kt_docs_formvalidation_checkbox_option_3" />
+																<!--end::Input-->
+																<!--begin::Label-->
+																<label class="form-check-label" for="kt_docs_formvalidation_checkbox_option_3">
+																	<div class="fw-bolder text-gray-800">Checkbox option 3</div>
+																</label>
+																<!--end::Label-->
+															</div>
+															<!--end::Checkbox-->
+														</div>
+														<!--end::Input row-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_checkbox_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="pt-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc258fc" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc258ff" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc258fc" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_checkbox');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'checkbox_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Radio input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_checkbox_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc258ff" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_checkbox" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-5"&gt;Checkbox Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input row--&gt;
+        &lt;div class="d-flex flex-column fv-row"&gt;
+            &lt;!--begin::Checkbox--&gt;
+            &lt;div class="form-check form-check-custom form-check-solid mb-5"&gt;
+                &lt;!--begin::Input--&gt;
+                &lt;input class="form-check-input me-3" name="checkbox_input" type="checkbox" value="1" id="kt_docs_formvalidation_checkbox_option_1" /&gt;
+                &lt;!--end::Input--&gt;
+
+                &lt;!--begin::Label--&gt;
+                &lt;label class="form-check-label" for="kt_docs_formvalidation_checkbox_option_1"&gt;
+                    &lt;div class="fw-bolder text-gray-800"&gt;Checkbox option 1&lt;/div&gt;
+                &lt;/label&gt;
+                &lt;!--end::Label--&gt;
+            &lt;/div&gt;
+            &lt;!--end::Checkbox--&gt;
+
+            &lt;!--begin::Checkbox--&gt;
+            &lt;div class="form-check form-check-custom form-check-solid mb-5"&gt;
+                &lt;!--begin::Input--&gt;
+                &lt;input class="form-check-input me-3" name="checkbox_input" type="checkbox" value="2" id="kt_docs_formvalidation_checkbox_option_2" /&gt;
+                &lt;!--end::Input--&gt;
+
+                &lt;!--begin::Label--&gt;
+                &lt;label class="form-check-label" for="kt_docs_formvalidation_checkbox_option_2"&gt;
+                    &lt;div class="fw-bolder text-gray-800"&gt;Checkbox option 2&lt;/div&gt;
+                &lt;/label&gt;
+                &lt;!--end::Label--&gt;
+            &lt;/div&gt;
+            &lt;!--end::Checkbox--&gt;
+
+            &lt;!--begin::Checkbox--&gt;
+            &lt;div class="form-check form-check-custom form-check-solid"&gt;
+                &lt;!--begin::Input--&gt;
+                &lt;input class="form-check-input me-3" name="checkbox_input" type="checkbox" value="3" id="kt_docs_formvalidation_checkbox_option_3" /&gt;
+                &lt;!--end::Input--&gt;
+
+                &lt;!--begin::Label--&gt;
+                &lt;label class="form-check-label" for="kt_docs_formvalidation_checkbox_option_3"&gt;
+                    &lt;div class="fw-bolder text-gray-800"&gt;Checkbox option 3&lt;/div&gt;
+                &lt;/label&gt;
+                &lt;!--end::Label--&gt;
+            &lt;/div&gt;
+            &lt;!--end::Checkbox--&gt;
+        &lt;/div&gt;
+        &lt;!--end::Input row--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_checkbox_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+								</div>
+								<!--end::Card Body-->
+							</div>
+							<!--end::Card-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Content-->
+				
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Main-->
+	
+	
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+			<span class="svg-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+		<!--end::Scrolltop-->
+    </div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!--begin::Javascript-->
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="../../painel/assets/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="../../painel/assets/assets/js/scripts.bundle.js"></script>
+		<script src="../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js"></script>
+		<script>
+
+            new Vue({
+                el: '#app',
+                data: {
+                    jms: "1",
+                    // step: 1
+                },
+                mounted() {
+                    // this.jms = this.step
+                },
+    
+            })
+        </script>
+	</body>
+	<!--end::Body-->
+</html>
