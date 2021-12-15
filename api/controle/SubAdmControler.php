@@ -18,8 +18,8 @@ class SubAdmControler
         
 
         $cnpj = cnpj();
-        var_dump($cnpj);
-        die;
+        // var_dump($cnpj);
+        // die;
 
         $token_parce = token();
 
