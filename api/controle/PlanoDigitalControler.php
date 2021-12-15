@@ -121,7 +121,10 @@ class PlanoDigitalControler {
         }
 
         $get_id = $plano->list_all_by_instituicao_max($instituicao_max);
+        
+
         $id = $get_id['id'];
+
 
         $plano->update($id, $whatsapp, $instituicao_max, $nome);
         echo json_encode([

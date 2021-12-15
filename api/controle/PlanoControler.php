@@ -89,6 +89,8 @@ class PlanoControler {
 
     static function update_plano()
     {
+        token(); 
+        
         $plano = new Plano();
 
         $id = $_REQUEST['id'] ?? '';

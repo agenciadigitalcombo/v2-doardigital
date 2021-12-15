@@ -29,7 +29,7 @@ class PlanoDigital implements IPlanoDigital{
     public function update(int $id, int $whatsapp, int $instituicao_max, string $nome): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano_digital SET whatsapp='$whatsapp', instituicao_max='$instituicao_max' WHERE id='$id' AND instituicao_max='$instituicao_max'";
+        $sql = "UPDATE plano_digital SET nome='$nome', whatsapp='$whatsapp', instituicao_max='$instituicao_max' WHERE id='$id' AND instituicao_max='$instituicao_max'";
         $banco->exec($sql);
     }
 
