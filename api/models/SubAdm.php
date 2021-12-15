@@ -32,7 +32,7 @@ class SubAdm implements ISubAdm
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE secret='$secret'";
         $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $guard [0] ?? [];
     }
 
     public function list_all_by_adm(int $adm_id): array

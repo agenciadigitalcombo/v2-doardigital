@@ -104,9 +104,9 @@ class SubAdmControler
     {
         $subadm = new SubAdm();
 
-        $token_parce = token();
+        token();
 
-        $secret = $token_parce['secret'];
+        $secret = $_REQUEST['secret'];
         $listar = $subadm->list_profile($secret);
 
         $payload = [
