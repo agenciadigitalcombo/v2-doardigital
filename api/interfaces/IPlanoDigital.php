@@ -6,11 +6,11 @@ interface IPlanoDigital
     public function list_all(): array;
 
     public function create(
-        string $token,
         string $nome,
         int $whatsapp,
         int $instituicao_max,
-        int $amount
+        int $amount,
+        string $token
     ): void;
 
     public function update(

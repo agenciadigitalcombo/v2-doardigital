@@ -13,7 +13,9 @@ interface IInstituicao
 
     public function list_all(): array;
 
-    public function list_all_by_adm_id(): array;
+    public function list_all_by_adm_id(
+        string $adm_id
+    ): array;
 
     public function on_off(int $id): void;
 

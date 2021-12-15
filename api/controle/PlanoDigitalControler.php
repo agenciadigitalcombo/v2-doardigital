@@ -1,25 +1,29 @@
 <?php
 
-class PlanoControler {
+class PlanoDigitalControler {
 
     static function create()
     {
-        $plano = new Plano();    
+        $plano = new PlanoDigital();    
 
-        $instituicao = $_REQUEST['instituicao_id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
-        
+        $whatsapp = $_REQUEST['whatsapp'] ?? '';
+        $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
+
         $amount_campo = $_REQUEST['amount'] ?? '';
         $amount = withdraw_caracter($amount_campo);
 
+
         $campos_obrigatorios = [
-            'instituicao',
             'nome',
+            'whatsapp',
+            'instituicao_max',
             'amount'
         ];
         $lb = [
-            'instituicao' => 'Informe a Instituicao',
             'nome' => 'Informe o nome',
+            'whatsapp' => 'Informe o Whatsapp',
+            'instituicao_max' => 'Informe a Instituicao max',
             'amount' => 'Digite o amount'
         ];
         foreach ($campos_obrigatorios as $campo) {
@@ -32,32 +36,32 @@ class PlanoControler {
             }
         }
 
-        $plano->create($instituicao, $nome, $amount);
+        $plano->create($nome, $whatsapp, $instituicao_max, $amount);
         echo json_encode([
             'next' => true,
-            'message' => 'Plano criado'
+            'message' => 'Plano Digital criado'
         ]);
         
     }
 
 
-    static function list_plano()
+    static function list_planodigital()
     {
-        $plano = new Plano();
+        $plano = new PlanoDigital();
         
         $list = $plano->list_all();
 
         foreach($list as $g){
             $payload [] = [
-                'id' => $g['id'],
-                'instituicao' => $g['instituicao_id'],
                 'nome' => $g['nome'],
+                'whatsapp' => $g['whatsapp'],
+                'instituicao_max' => $g['instituicao_max'],
                 'amount' => $g['amount']
             ];
         }
         echo json_encode([
             'next' => true,
-            'message' => 'Lista de Planos',
+            'message' => 'Lista de Planos Digitais',
             'dados' => $payload
         ]);
 
@@ -65,16 +69,16 @@ class PlanoControler {
 
     }
 
-    static function plano()
+    static function planodigital()
     {
-        $plano = new Plano();
-        $instituicao_id = $_REQUEST['instituicao_id'] ?? '';
+        $plano = new PlanoDigital();
+        $id = $_REQUEST['id'] ?? '';
 
-        $list_instituicao = $plano->list_all_by_instituicao($instituicao_id);
+        $list_instituicao = $plano->list_all_by_id($id);
         $payload = [
-            'id' => $list_instituicao['id'],
-            'instituicao' => $list_instituicao['instituicao_id'],
             'nome' => $list_instituicao['nome'],
+            'whatsapp' => $list_instituicao['whatsapp'],
+            'instituicao_max' => $list_instituicao['instituicao_max'],
             'amount' => $list_instituicao['amount']
         ];
         echo json_encode([
@@ -87,18 +91,19 @@ class PlanoControler {
 
     static function update_plano()
     {
-        $plano = new Plano();
+        $plano = new PlanoDigital();
 
         $id = $_REQUEST['id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
+        $whatsapp = $_REQUEST['whatsapp'] ?? '';
+        $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
+
 
         $campos_obrigatorios = [
-            'id',
-            'nome'
+            'id'
         ];
         $lb = [
-            'id' => 'Informe o Id',
-            'nome' => 'Informe o nome',
+            'id' => 'Informe o Id'
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -110,7 +115,7 @@ class PlanoControler {
             }
         }
 
-        $plano->update($id, $nome);
+        $plano->update($id, $whatsapp, $instituicao_max, $nome);
         echo json_encode([
             'next' => true,
             'message' => 'Plano Atualizado'

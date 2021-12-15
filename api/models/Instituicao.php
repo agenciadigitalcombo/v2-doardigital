@@ -61,13 +61,13 @@ class Instituicao implements IInstituicao
     public function search_by_name_or_id(string $termo): array
     {}
 
-    public function list_all_by_adm_id(): array
+    public function list_all_by_adm_id($adm_id): array
     {
 
-        // $banco = new Banco();
-        // $sql = "SELECT * FROM instituicao WHERE adm_id='$adm_id'";
-        // $guard = $banco->query($sql);
-        // return $guard[0] ?? [];
+        $banco = new Banco();
+        $sql = "SELECT * FROM instituicao WHERE adm_id='$adm_id'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 }
 ?>    

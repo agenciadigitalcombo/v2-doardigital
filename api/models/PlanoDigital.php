@@ -8,7 +8,15 @@ class PlanoDigital implements IPlanoDigital{
         return $guard;
     }
 
-    public function create( string $token, string $nome, int $whatsapp, int $instituicao_max, int $amount): void
+    public function list_all_by_id(int $id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM plano WHERE id='$id'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
+    public function create( string $nome, int $whatsapp, int $instituicao_max, int $amount, string $token = null): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO plano_digital";
@@ -21,7 +29,7 @@ class PlanoDigital implements IPlanoDigital{
     public function update(int $id, int $whatsapp, int $instituicao_max, string $nome): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano_digital whatsapp='$whatsapp', instituicao_max='$instituicao_max' SET WHERE id='$id' AND instituicao_max='$instituicao_max'";
+        $sql = "UPDATE plano_digital SET whatsapp='$whatsapp', instituicao_max='$instituicao_max' WHERE id='$id' AND instituicao_max='$instituicao_max'";
         $banco->exec($sql);
     }
 

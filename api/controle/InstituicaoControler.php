@@ -159,9 +159,19 @@ class InstituicaoControler
     static function instituicao()
     {
         $instituicao = new Instituicao();
-        $id = $_REQUEST['id'];
+        $adm = new Adm();
 
-        $get_instituicao = $instituicao->get_by_id($id);
+        $token_parce = token();
+        
+        $get_secret_adm = $token_parce['secret'];
+        $secret = $adm->list_profile($get_secret_adm);
+        $id = $secret['id']; 
+
+
+
+        $get_instituicao = $instituicao->list_all_by_adm_id($id);
+        
+
 
         $payload = [
             'id' => $get_instituicao['id'],
