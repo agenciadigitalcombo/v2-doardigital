@@ -17,6 +17,10 @@ class SubAdmControler
         $subadm = new SubAdm();
         
 
+        $cnpj = cnpj();
+        var_dump($cnpj);
+        die;
+
         $token_parce = token();
 
         $nome = $_REQUEST['nome'] ?? '';

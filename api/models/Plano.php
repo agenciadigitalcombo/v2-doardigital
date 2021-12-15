@@ -7,6 +7,7 @@ class Plano implements IPlano{
         $banco = new Banco();
         $sql = "SELECT * FROM plano";
         $guard = $banco->exec($sql);
+        return $guard;
         
     }
 
