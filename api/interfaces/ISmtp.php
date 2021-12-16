@@ -11,5 +11,7 @@ interface ISmtp {
         string $senha
     ) : void;
 
-    public function get_by_instituicao_id() : array;
+    public function get_by_instituicao_id(
+        int $id
+    ) : array;
 }
