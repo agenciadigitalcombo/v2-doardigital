@@ -55,5 +55,12 @@ class Doador implements IDoador
         return $guard[0] ?? [];
     }
 
+    public function list_all(): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doador";  
+        $guard = $banco->query($sql);
+        return $guard;
+    }
     
 }

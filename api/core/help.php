@@ -211,6 +211,24 @@ function cnpj(): string
     $cnpj_campo = $_REQUEST['cnpj'];
     $cnpj = withdraw_caracter($cnpj_campo);
     
+
+    $campos_obrigatorios = [
+        'cnpj'
+    ];
+    $lb = [
+        'cnpj' => 'Digite o cnpj'
+    ];
+    
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+
 	if (strlen($cnpj) != 14) {
 		echo json_encode([
             "next" => false,
@@ -257,5 +275,57 @@ function cnpj(): string
 
 
     return $cnpj;
+}
+
+function cpf(): string
+{
+
+    
+    $cpf_campo = $_REQUEST['cpf'] ?? '';
+    $cpf = withdraw_caracter($cpf_campo);
+
+    $campos_obrigatorios = [
+        'cpf'
+    ];
+    $lb = [
+        'cpf' => 'digite o cpf'
+    ];
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+
+    if (strlen($cpf) != 11) {
+		echo json_encode([
+            "next" => false,
+            "message" => "O cpf deve conter 11 Digitos"
+        ]);
+        die;
+	}
+	
+	
+	if ($cpf == '00000000000000' || 
+		$cpf == '11111111111111' || 
+		$cpf == '22222222222222' || 
+		$cpf == '33333333333333' || 
+		$cpf == '44444444444444' || 
+		$cpf == '55555555555555' || 
+		$cpf == '66666666666666' || 
+		$cpf == '77777777777777' || 
+		$cpf == '88888888888888' || 
+		$cpf == '99999999999999') {
+        echo json_encode([
+            "next" => false,
+            "message" => "Cpf Ínvalido"
+        ]);
+        die;
+	 
+    }
+    return $cpf;
 }
 
