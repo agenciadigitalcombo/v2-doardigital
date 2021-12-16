@@ -118,7 +118,14 @@ Vue.component('c-usuarioEditar', usuarioEditar )
 import credenciaisAtualizar from './views/credenciaisAtualizar.js'
 Vue.component('c-credenciaisAtualizar', credenciaisAtualizar )
 
+import planos from './views/planos.js'
+Vue.component('c-planos', planos )
 
+import planoEditar from './views/planoEditar.js'
+Vue.component('c-planoEditar', planoEditar )
+
+import planoNovo from './views/planoNovo.js'
+Vue.component('c-planoNovo', planoNovo )
 
 
 const app = new Vue({

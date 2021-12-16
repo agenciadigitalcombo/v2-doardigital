@@ -120,7 +120,7 @@ export default {
                                                     <!--begin::Action=-->
                                                     <td class="text-end">
     
-                                                        <a @click="editar(item)" href="#/credencias/editar"
+                                                        <a @click="editar(item.id)"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -202,7 +202,7 @@ export default {
         this.id = dados.id
         this.nome_identificacao = dados.nome_identificacao
         this.recursos = dados.recursos
-        console.log(this.dados)
+        console.log(dados)
     },
 
     methods: {
@@ -235,10 +235,9 @@ export default {
             console.log(this.dados)
         },
 
-
         async editar(id) {
 			globalThis._usuario = this.dados.find(user => user.id == id)
-		window.location.href = "#/usuario-editar"
+            window.location.href = "#/credencias/editar"
         },
 
     },

@@ -39,5 +39,8 @@ export default [
     { path: '/usuario-novo', component: { template: '<c-usuarioNovo>' } },
     { path: '/usuario-editar', component: { template: '<c-usuarioEditar>' } },
    
+    { path: '/planos', component: { template: '<c-planos>' } },
+    { path: '/planos/novo', component: { template: '<c-planoNovo>' } },
+    { path: '/planos/editar', component: { template: '<c-planoEditar>' } },
     
 ]
