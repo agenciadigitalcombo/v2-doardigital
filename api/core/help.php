@@ -58,7 +58,9 @@ function upload($name)
 }
 
 function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
-{}
+{
+    
+}
 
 function get_taxonomy_by_from(int $from_id): array
 {

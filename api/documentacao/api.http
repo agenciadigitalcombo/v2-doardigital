@@ -101,3 +101,97 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
     "credencial_id" : "12",
     "secret" : ""
 }
+
+
+
+
+
+
+//ENDERECO
+
+
+
+###
+POST http://localhost/v2-doardigital/api/endereco-instituicao
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330",
+    "id": "5",
+    "nome_identificacao" : "casa",
+    "cep" : "(028.35,090)",
+    "logradouro" : "rua cardoso",
+    "numero" : "76",
+    "complemento" : "AP",
+    "bairro" : "montes claros",
+    "cidade" : "brasilandia",
+    "estado" : "MG"
+
+}
+
+###
+POST http://localhost/v2-doardigital/api/create-endereco
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330",
+    "nome_identificacao" : "casa",
+    "cep" : "(028.35,090)",
+    "logradouro" : "rua cardoso",
+    "numero" : "76",
+    "complemento" : "AP",
+    "bairro" : "montes claros",
+    "cidade" : "brasilandia",
+    "estado" : "MG"
+}
+
+###
+POST http://localhost/v2-doardigital/api/update-endereco
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "nome_identificacao" : "casa",
+    "cep" : "(028.35,090)",
+    "logradouro" : "rua cardoso",
+    "numero" : "76",
+    "complemento" : "AP",
+    "bairro" : "montes claros",
+    "cidade" : "brasilandia",
+    "estado" : "MG"
+}
+
+###
+POST http://localhost/v2-doardigital/api/update-endereco
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    
+}
+
+###
+POST http://localhost/v2-doardigital/api/endereco
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330",
+    "secret": 
+}
+
+###
+POST http://localhost/v2-doardigital/api/delete-endereco
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330",
+    "secret": 
+}
+
+POST http://localhost/v2-doardigital/api/list-endereco
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    
+}
+
+
+
