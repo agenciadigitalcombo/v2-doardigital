@@ -67,6 +67,12 @@ Vue.component('c-dominioInstituicao', dominioInstituicao )
 import editarInstituicao from './views/instituicaoEditar.js'
 Vue.component('c-editarInstituicao', editarInstituicao )
 
+import intituicaoMenu from './views/intituicaoMenu.js'
+Vue.component('c-intituicaoMenu', intituicaoMenu )
+
+
+
+
 import modulos from './views/modulos.js'
 Vue.component('c-modulos', modulos )
 

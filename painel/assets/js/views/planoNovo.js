@@ -131,7 +131,7 @@ export default {
 				this.instituicao_id = "6",
 				this.nome = "jjjj filhos",
 				this.amount = "60",
-				this.token ="eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67",	
+				this.token ,	
 				)
 			if (!res.next) {
 				this.error = res.message

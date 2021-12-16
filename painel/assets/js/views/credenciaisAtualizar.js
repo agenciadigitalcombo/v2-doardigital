@@ -116,12 +116,12 @@ export default {
 	},
 
 	async mounted() {
-		this.nome_identificacao = globalThis._usuario.nome_identificacao
+		this.nome_identificacao = globalThis._usuario.nome_identificacao,
+		this.recursos = globalThis._usuario.recursos
 	},
 
 	methods: {
 		
-
 		
 		async alterarCredencia() {
 			this.error = null

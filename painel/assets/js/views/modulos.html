@@ -59,261 +59,98 @@ License: For each use you must have a valid license purchased only from above li
 
 			<!--begin::Wrapper-->
 			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+				<!--begin::Root-->
+				<div class="d-flex flex-column flex-root">
+					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Post-->
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Card-->
+								<div class="card card-flush">
 
+									<!--begin::Card header-->
+									<div class="card-header mt-5">
 
-				<!--begin::Content-->
-				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-					<!--begin::Post-->
-					<div class="post d-flex flex-column-fluid" id="kt_post">
-						<!--begin::Container-->
-						<div id="kt_content_container" class="container-xxl">
-							<!--begin::Navbar-->
-							<div class="card mb-5 mb-xl-10">
-								<div class="card-body pt-5 pb-0">
+										<div class="card-title flex-column">
+											<h3 class="fw-bolder mb-1"> Minhas Instituições</h3>
+										</div>
 
-									<!--begin::Navs-->
-									<ul
-										class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-										<!--begin::Nav item-->
-										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5 active"
-												href="#/add-instituicoes">Informação da Instituição</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
-										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5 "
-												href="#/endereco-instituicoes">Endereço </a>
-										</li>
-										<!--end::Nav item-->
-
-
-										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5"
-												href="#/banco-instituicoes">Dados Bancario</a>
-										</li>
-										<!--end::Nav item-->
-									</ul>
-									<!--begin::Navs-->
-								</div>
-							</div>
-							<!--end::Navbar-->
-							<!--begin::Basic info-->
-							<div class="card mb-5 mb-xl-10">
-								<!--begin::Card header-->
-								<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
-									data-bs-target="#kt_account_profile_details" aria-expanded="true"
-									aria-controls="kt_account_profile_details">
-									<!--begin::Card title-->
-									<div class="card-title m-0">
-										<h3 class="fw-bolder m-0">Informação da Instituição</h3>
+										<!--begin::Card toolbar-->
+										<div class="card-toolbar">
+											<!--begin::Button-->
+											<a type="button" class="btn btn-light-primary" href="#/add-instituicoes">
+												<!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+												<span class="svg-icon svg-icon-3">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none">
+														<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+															fill="black" />
+														<rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+															transform="rotate(-90 10.8891 17.8033)" fill="black" />
+														<rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+															fill="black" />
+													</svg>
+												</span>
+												Add Instituição
+											</a>
+											<!--end::Button-->
+										</div>
+										<!--end::Card toolbar-->
 									</div>
-									<!--end::Card title-->
-								</div>
-								<!--begin::Card header-->
-								<!--begin::Content-->
-								<div id="kt_account_profile_details">
-									<!--begin::Form-->
-									<form id="kt_account_profile_details_form" class="form">
-										<!--begin::Card body-->
-										<div class="card-body border-top p-9">
-											<!--begin::Input group-->
+									<!--end::Card header-->
+									<!--begin::Card body-->
+									<div class="card-body pt-0">
 
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
-													Fantasia</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="nome_fantasia" type="text" name="Fantasia"
-														class="form-control form-control-lg form-control-solid"
-														placeholder="Nome Fantasia" />
-												</div>
-												<!--end::Col-->
-											</div>
-
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label required fw-bold fs-6">Razão
-													Social</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="razao_social" type="text" name="social"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">CPF/CNPJ</span>
-												</label>
-												<!--end::Label-->
-
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="cnpj" type="tel" name="cnpj"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
-
-
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">Telefone</span>
-
-												</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="telefone" type="tel" name="Telefone"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">E-mail</span>
-
-												</label>
-												<!--end::Label-->
-
-
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="email" type="email" name="email"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
-										</div>
-										<!--end::Card body-->
-
-										<!--begin::Basic info-->
-										<div class="card  mb-xl-5">
-											<!--begin::Card header-->
-											<div class="card-header border-0 cursor-pointer" role="button"
-												data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
-												aria-expanded="true" aria-controls="kt_account_profile_details">
-												<!--begin::Card title-->
-												<div class="card-title m-0">
-													<h3 class="fw-bolder m-0">Subdomínio</h3>
-												</div>
-												<!--end::Card title-->
-											</div>
-											<!--begin::Card header-->
-											<!--begin::Content-->
-
-											<!--begin::Notice-->
-											<div
-												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-												<!--begin::Wrapper-->
-												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-													<!--begin::Content-->
-													<div class="input-group mb-3">
-														<input v-model="subdomaim" type="email" name="email"
-															class="form-control form-control-lg " />
-														<span class="input-group-text"
-															id="basic-addon2">.doardigital.com.br</span>
-													</div>
-													<!--end::Action-->
-												</div>
+										<!--begin::Root-->
+										<div class="d-flex flex-column flex-root">
+											<!--begin::Page-->
+											<div class="page d-flex flex-row flex-column-fluid">
 												<!--end::Wrapper-->
 											</div>
-											<!--end::Notice-->
+											<!--end::Page-->
 										</div>
-										<!--end::Basic info-->
+										<!--end::Root-->
+										<div class="row g-5">
 
 
-										<div class="card-header border-0 cursor-pointer">
-											<div class="form-check form-switch form-check-custom form-check-solid"
-												style="width: 40%; border-radius: 25px;">
+											<div class="col-lg-4" v-for="item in dados" :key="item.id">
+												<a href="ola">
+													<div class="card  card-bordered mb-5">
+														<div class="card-header">
+															<h3 class="card-title">{{item.nome_fantasia}}</h3>
+															{{ item.sub_domain }}
+														</div>
 
-												<label
-													class="form-check-label col-lg-9 col-form-label required fw-bold fs-6"
-													for="flexSwitchDefault">
-													Você tem um código promocional
-
-												</label>
-												<input @click="jms = !jms" class="form-check-input" type="checkbox"
-													value="" id="flexSwitchDefault" />
-
-											</div>
-										</div>
-										<!--begin::Basic info-->
-										<div class="card " v-if="jms">
-											<!--begin::Card header-->
-											<div class="card-header border-0 cursor-pointer">
-												<!--begin::Card title-->
-												<div class="card-title m-0">
-													<h3 class="fw-bolder m-0">Domínio personalizado</h3>
-												</div>
-												<!--end::Card title-->
-											</div>
-											<!--begin::Card header-->
-											<!--begin::Content-->
-
-											<!--begin::Notice-->
-											<div
-												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-												<!--begin::Wrapper-->
-												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-													<!--begin::Content-->
-													<div class="input-group mb-3">
-														<span class="input-group-text" id="basic-addon2">Informe seu
-															Domínio
-														</span>
-														<input type="email" name="email"
-															class="form-control form-control-lg " />
 													</div>
-													<!--end::Action-->
-												</div>
-												<!--end::Wrapper-->
+												</a>
 											</div>
-											<!--end::Notice-->
 
-											<!--end::Content-->
 										</div>
-										<!--end::Basic info-->
-
-										<!--begin::Actions-->
-										<div class="card-footer d-flex justify-content-end py-6 px-9">
-											<button @click="addInstituicao()" type="submit" class="btn btn-primary"
-												id="kt_account_profile_details_submit">SALVAR</button>
-										</div>
-										<!--end::Actions-->
-									</form>
-									<!--end::Form-->
+									</div>
+									<!--end::Card body-->
 								</div>
-								<!--end::Content-->
+								<!--end::Card-->
+
 							</div>
-							<!--end::Basic info-->
-
-
+							<!--end::Container-->
 						</div>
-						<!--end::Container-->
+						<!--end::Post-->
 					</div>
-					<!--end::Post-->
+					<!--end::Content-->
 				</div>
-				<!--end::Content-->
-
+				<!--end::Root-->
 			</div>
+			<!--end::Wrapper-->
 		</div>
+		<!--end::Page-->
 	</div>
-	<!--end::Root-->
 
 
 
-
+<input type="text" v-model="nome_fantasia">
+<button @click="addLocahostore()"></button>
 
 	<script src="../js/front-js/scripts.bundle.js"></script>
 	<script src="../js/front-js/datatables.bundle.js"></script>

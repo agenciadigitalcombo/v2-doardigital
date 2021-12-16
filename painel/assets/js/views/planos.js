@@ -221,7 +221,6 @@ export default {
         this.instituicao_id = dados.instituicao_id
         this.nome = dados.nome
 		this.amount = dados.amount
-		
         console.log(dados)
 	},
 	
