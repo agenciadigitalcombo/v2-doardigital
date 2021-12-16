@@ -5,6 +5,8 @@ class DoadorControler{
     {
         $doador = new Doador();
         
+        token();
+
         $cpf = cpf();
 
         $list_doador = $doador->get_by_cpf($cpf);
@@ -32,6 +34,8 @@ class DoadorControler{
     static function doador()
     {
         $doador = new Doador();
+
+        token();
 
         $dados = $doador->list_all();
 
