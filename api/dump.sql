@@ -72,6 +72,13 @@ CREATE TABLE split (
     porcentagem int
 );
 
+CREATE TABLE split_digital (
+    id int not null auto_increment primary key,
+    recebedor_id int,
+    responsavel_estorno int,
+    porcentagem int
+);
+
 CREATE TABLE inscrito (
     id int not null auto_increment primary key,
     instituicao_id int,
@@ -158,6 +165,20 @@ CREATE TABLE meta_mes (
 CREATE TABLE doacoes (
     id int not null auto_increment primary key,
     instituicao_id int,
+    doador_id int,
+    token varchar(255),
+    tipo varchar(25),
+    status_pagamento varchar(75),
+    plano_id int,
+    valor int,
+    codigo varchar(255),
+    url varchar(255),
+    data varchar(9),
+    hora varchar(8)
+);
+
+CREATE TABLE doacoes_digital (
+    id int not null auto_increment primary key,
     doador_id int,
     token varchar(255),
     tipo varchar(25),

@@ -72,9 +72,32 @@ GET http://doardigital.tk/api/list-endereco
 }
 
 ### 
-
 GET http://doardigital.tk/api/list-subadm
 
 {
-    "token": "eyJzZWNyZXQiOiIgNjFhNjY2N2E4NGFmYyIsIm5vbWUiOiJyYWZhZWwiLCJlbWFpbCI6InJhZmFlbEBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.4659492ae33cb9ca6889fdee955a4ee0b57c5330"
+    "token": "eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67"
+}
+
+###
+POST http://doardigital.tk/api/criate-subadm
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67",
+    "nome" : "Bruno",
+    "senha": "123123",
+    "telefone": "123123",
+    "credencial_id" : "12"
+}
+
+###
+POST http://doardigital.tk/api/atualizar-subadm
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+    "token": "eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67",
+    "nome" : "Bruno",
+    "telefone": "123123",
+    "credencial_id" : "12",
+    "secret" : ""
 }
