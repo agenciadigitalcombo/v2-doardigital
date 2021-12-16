@@ -8,7 +8,7 @@ class PlanoControler {
 
         token();
 
-        $instituicao = $_REQUEST['instituicao_id'] ?? '';
+        $instituicao_id = id();
         $nome = $_REQUEST['nome'] ?? '';
         
         $amount_campo = $_REQUEST['amount'] ?? '';
@@ -34,7 +34,7 @@ class PlanoControler {
             }
         }
 
-        $plano->create($instituicao, $nome, $amount);
+        $plano->create($instituicao_id, $nome, $amount);
         echo json_encode([
             'next' => true,
             'message' => 'Plano criado'
@@ -70,7 +70,7 @@ class PlanoControler {
     static function plano()
     {
         $plano = new Plano();
-        $instituicao_id = $_REQUEST['instituicao_id'] ?? '';
+        $instituicao_id = id();
 
         $list_instituicao = $plano->list_all_by_instituicao($instituicao_id);
         $payload = [
@@ -90,18 +90,16 @@ class PlanoControler {
     static function update_plano()
     {
         token(); 
-        
+
         $plano = new Plano();
 
-        $id = $_REQUEST['id'] ?? '';
+        $id = id();
         $nome = $_REQUEST['nome'] ?? '';
 
         $campos_obrigatorios = [
-            'id',
             'nome'
         ];
         $lb = [
-            'id' => 'Informe o Id',
             'nome' => 'Informe o nome',
         ];
         foreach ($campos_obrigatorios as $campo) {

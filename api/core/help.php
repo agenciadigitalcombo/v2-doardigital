@@ -91,6 +91,14 @@ function gravatar(string $email): string
     return "https://www.gravatar.com/avatar/{$email}";
 }
 
+
+
+function withdraw_caracter(string $campo): string
+{
+    return preg_replace('/\D/', '', $campo);
+    
+}
+
 function token(): array
 {
     $jwt = new Jwt();
@@ -124,10 +132,27 @@ function token(): array
     
 }
 
-function withdraw_caracter(string $campo): string
+function id(): string
 {
-    return preg_replace('/\D/', '', $campo);
-    
+    $id_campo = $_REQUEST['id'] ?? '';
+    $id = withdraw_caracter($id_campo);    
+
+    $campos_obrigatorios = [
+        'id'
+    ];
+    $lb = [
+        'id' => 'Informe o ID'
+    ];
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+    return $id;
 }
 
 function email(): string
@@ -231,3 +256,4 @@ function cnpj(): string
 
     return $cnpj;
 }
+
