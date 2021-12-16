@@ -72,18 +72,22 @@ export default {
 										<div class="row g-5">
 
 
-											<div class="col-lg-4" v-for="item in dados" :key="item.id">
-												<a @click="addLocahostore(item)">
-													<div class="card  card-bordered mb-5">
-														<div class="card-header">
-															<h3 class="card-title">{{item.nome_fantasia}}</h3>
-															{{ item.id }}
-                                                      
-														</div>
+										
 
+
+											<div class="col-lg-4" v-for="item in dados" :key="item.id">
+											<a @click="addLocahostore(item)" >
+												<div class="card  card-bordered mb-5">
+													<div class="card-header">
+														<h3 class="card-title">{{item.nome_fantasia}}</h3>
+														<br>
+														{{ item.id }}
 													</div>
-												</a>
-											</div>
+
+												</div>
+											</a>
+										</div>
+
 
 										</div>
 									</div>
@@ -151,13 +155,12 @@ export default {
 
 
 
-
-
 	methods: {
          addLocahostore(item) {
          this.id = item.id
 
             localStorage.setItem("instituicao", this.id);
+			window.location.href = "#/dash"
         //    localStorage.setItem("razoes", this.razao_social) ;
 			console.log(this.id)
 		},
