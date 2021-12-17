@@ -18,15 +18,15 @@ class EnderecoControle
 
         $token_parse = token();
 
-        $nome_identificacao = $_REQUEST['nome_identificacao'];
-        $logradouro = $_REQUEST['logradouro'];
-        $complemento = $_REQUEST['complemento'];
-        $bairro = $_REQUEST['bairro'];
-        $cidade = $_REQUEST['cidade'];
-        $estado = $_REQUEST['estado'];
+        $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
+        $logradouro = $_REQUEST['logradouro'] ?? '';
+        $complemento = $_REQUEST['complemento'] ?? '';
+        $bairro = $_REQUEST['bairro'] ?? '';
+        $cidade = $_REQUEST['cidade'] ?? '';
+        $estado = $_REQUEST['estado'] ?? '';
         
-        $numero = $_REQUEST['numero'];
-        $cep = $_REQUEST['cep'];
+        $numero = $_REQUEST['numero'] ?? '';
+        $cep = $_REQUEST['cep'] ?? '';
         
 
         $transform_numero = withdraw_caracter($numero);

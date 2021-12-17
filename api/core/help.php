@@ -329,3 +329,14 @@ function cpf(): string
     return $cpf;
 }
 
+
+function telefone($telefone): void
+{
+    if(preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
+        echo json_encode([
+            "next" => false,
+            "message" => "Telefone Ínvalido"
+        ]);
+        die;
+      }
+}

@@ -1,6 +1,16 @@
 <?php
 
 class DoadorControler{
+
+
+    static function create_doador()
+    {
+        echo json_encode([
+            'next' => true,
+            'message' => 'Doador Criado'
+        ]);
+    }
+
     static function list_doador()
     {
         $doador = new Doador();

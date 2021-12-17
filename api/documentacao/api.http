@@ -197,6 +197,7 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 //DOADOR
 
 ###
+
 POST http://localhost/v2-doardigital/api/list-doador
 Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
@@ -204,7 +205,17 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
     "cpf": 
 }
 
+###
 POST http://localhost/v2-doardigital/api/doador
+Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+
+{
+
+}
+
+###
+
+POST http://localhost/v2-doardigital/api/create-doador
 Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {

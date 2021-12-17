@@ -17,10 +17,10 @@ class AdmControle
         $jwt = new Jwt();
         
         
-        $nome = $_REQUEST['nome'];
+        $nome = $_REQUEST['nome'] ?? '';
         $email = email();
         $senha = senha();
-        $telefone = $_REQUEST['telefone'];
+        $telefone = $_REQUEST['telefone'] ?? '';
         
 
         $transform_tel = withdraw_caracter($telefone);
