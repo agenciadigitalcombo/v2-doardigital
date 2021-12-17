@@ -23,7 +23,7 @@ class Plano implements IPlano{
     public function update(int $id, string $nome): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano SET nome='$nome' WHERE instituicao_id='$id'";
+        $sql = "UPDATE plano SET nome='$nome' WHERE id='$id'";
         $banco->exec($sql);
     }
 

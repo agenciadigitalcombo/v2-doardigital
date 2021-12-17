@@ -19,7 +19,12 @@ class Doacao implements IDoacao{
 
     public function create(int $instituicao_id, int $doador_id, string $token, string $tipo, string $status_pagamento, int $plano_id, int $valor, string $codigo, string $url, string $data, string $hora): void
     {
-        
+        $banco = new Banco();
+        $sql = "INSERT INTO doacoes";
+        $sql .= "(instituicao_id, doador_id, token, tipo, status_pagamento, plano_id, valor, codigo, url, data, hora)";
+        $sql .= "VALUES";
+        $sql .= "('$instituicao_id', '$doador_id', '$token', '$tipo', '$status_pagamento', '$plano_id', '$valor', '$codigo', '$url', '$data', '$hora')";
+        $banco->exec($sql);
     }
 
     public function list_all_by_instituicao(int $instituicao_id): array
