@@ -239,12 +239,14 @@ export default {
 
 
     async cadastrarPlanos(
+        id,
         instituicao_id,
         nome,
         amount,
         token,
     ) {
         return await http.post('/create-plano', {
+            id,
             instituicao_id,
             nome,
             amount,

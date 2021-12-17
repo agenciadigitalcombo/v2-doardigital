@@ -89,7 +89,7 @@ export default {
 
 
 												<div class="col-lg-8 fv-row">
-													<input v-model="nome_identificacao" type="text" name="nome"
+													<input v-model="nome_identificacao" type="text" name="text_input" 
 														class="form-control form-control-lg form-control-solid"
 														placeholder="Nome identificacao" />
 												</div>
@@ -103,8 +103,7 @@ export default {
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
 													<div class="input-group mb-3">
-														<input id="cep" v-model="cep" @keyup="searchCep()" type="text"
-															name="CEP"
+														<input id="cep" v-model="cep" @keyup="searchCep()" type="text" name="text_input"
 															class="form-control form-control-lg form-control-solid"
 															v-mask="'###.###.###-##'" placeholder="000.000.000-00" />
 														<span class="input-group-text" id="basic-addon2">
@@ -143,7 +142,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="" v-model="numero" type="text" name="Numero"
+													<input id="" v-model="numero" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid"
 														placeholder="Numero" />
 												</div>
@@ -153,14 +152,13 @@ export default {
 											<div class="row mb-6">
 												<!--begin::Label-->
 												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">Complemento</span>
+													<span >Complemento</span>
 
 												</label>
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="complemento" v-model="complemento" type="text"
-														name="Complemento"
+													<input id="complemento" v-model="complemento" type="text" 
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -175,7 +173,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="bairro" v-model="bairro" type="text" name="Bairro"
+													<input id="bairro" v-model="bairro" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -189,7 +187,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="localidade" v-model="cidade" type="text" name="cidade"
+													<input id="localidade" v-model="cidade" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -204,7 +202,7 @@ export default {
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="uf" v-model="estado" type="text" name="estado"
+													<input id="uf" v-model="estado" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -215,25 +213,18 @@ export default {
 										<!--end::Card body-->
 										<!--begin::Actions-->
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
-											<button @click="cadastrarEndereco()" type="submit" class="btn btn-primary m-2"
-												id="kt_account_profile_details_submit">SALVAR</button>
-										
-										
-												<button id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
-														<span class="indicator-label">Validation Form</span>
-														<span class="indicator-progress">Please wait...
-														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-													</button>
-										
-										
+											
+											<button  id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary" @click="cadastrarEndereco()">
+												<span class="indicator-label">SALVAR</span>
+												<span class="indicator-progress">Por favor, aguarde...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+												</button>
 										
 												<button @click="eliminaEndereco()" type="submit"
 												class="btn btn-primary  m-2"
 												id="kt_account_profile_details_submit">ELIMINAR</button>
 										
-											
-
-										</div>
+												</div>
 										<!--end::Actions-->
 
 									</form>
@@ -243,7 +234,6 @@ export default {
 
 							</div>
 							<!--end::Billing Address-->
-				
 					
 					</div>
 					<!--end::Container-->
@@ -363,6 +353,9 @@ export default {
 
 	async mounted() {
 		
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+		document.head.appendChild(validacao);
+
 	// 	let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
 	// document.head.appendChild(cep);
 

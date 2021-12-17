@@ -47,34 +47,38 @@ export default {
 												<!-- <div id="kt_signin_password_edit" class="flex-row-fluid d-none"> -->
 												<div id="kt_signin_password_edit" class="flex-row-fluid ">
 													<!--begin::Form-->
-													<form id="kt_signin_change_password" class="form"
+													<form id="kt_docs_formvalidation_text" class="form"
 														novalidate="novalidate">
 														<div class="row mb-1">
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
 																	<label for="nome"
-																		class="form-label fs-6 fw-bolder mb-3">Nome</label>
-																	<input type="text"
+																		class="form-label fs-6 fw-bolder mb-3 required">Nome</label>
+																	<input v-model="nome"  type="text"
 																		class="form-control form-control-lg form-control-solid"
-																		name="nome" id="nome" />
+																		name="text_input" id="nome" />
 																</div>
 															</div>
 
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
 																	<label for="Valor"
-																		class="form-label fs-6 fw-bolder mb-3">Valor</label>
-																	<input type="text"  
+																		class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
+																	<input v-model="amount"  type="text"  
 																		class="form-control form-control-lg form-control-solid"
-																		name="Valor" id="Valor" />
+																		name="text_input" id="Valor" />
 																</div>
 															</div>
 														
 														</div>
-{{instituicao_id}}
+
 														<div class="d-flex">
-															<button id="kt_password_submit" type="button" @click="addPlanos()"
-																class="btn btn-primary me-2 px-6">SALVAR</button>
+															<button  id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary" @click="addPlanos()">
+																<span class="indicator-label">SALVAR</span>
+																<span class="indicator-progress">Por favor, aguarde...
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																</button>
+															
 															<button id="kt_password_cancel" type="button"
 																class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
 														</div>
@@ -128,30 +132,16 @@ export default {
 			this.error = null
 
 			let res = await adm.cadastrarPlanos(
-				this.instituicao_id = "6",
-				this.nome = "jjjj filhos",
-				this.amount = "60",
-				this.token ,	
+				this.id,
+				this.instituicao_id,
+				this.nome,
+				this.amount,
+				this.token,						
 				)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
-		},
-
-		async editarPlanos() {
-			this.error = null
-
-			let res = await adm.editarPlanos(
-				this.id = "1",
-				this.nome = "amostizacoa",
-				this.token ="eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67",	
-				)
-			if (!res.next) {
-				this.error = res.message
-				return null
-			}
-
 		},
 
 	
@@ -161,7 +151,13 @@ export default {
 
 
 	async mounted() {
-    
+		this.instituicao_id = window.localStorage.getItem('instituicao_id');
+		this.id = window.localStorage.getItem('instituicao_id');
+
+				
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+	document.head.appendChild(validacao);
+
    }, 
 
 

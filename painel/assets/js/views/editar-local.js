@@ -497,10 +497,10 @@ template: `
 
 	async mounted() {
 		
-	// 	let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
-	// document.head.appendChild(cep);
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+	document.head.appendChild(validacao);
 
-		
+	// Rua/Avenida Nº
 		// let enderecoDados = (await this.listarEndereco()).dados|| {}
 		
         // this.logadouro = enderecoDados.logadouro
@@ -513,6 +513,7 @@ template: `
 		// this.estado = enderecoDados.estado
 		// this.id = enderecoDados.id
 
+		
 
 	},
 

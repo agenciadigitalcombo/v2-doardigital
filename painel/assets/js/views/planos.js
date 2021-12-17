@@ -147,7 +147,7 @@ export default {
 													<!--end::Status=-->
 													<td class="text-end">
 
-														<a href="#/planos/editar"
+														<a @click="editar(item.id)"
 															class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
 															style="margin: 2px;">
 															<!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -212,6 +212,11 @@ export default {
         async listar() {
             let res = await adm.listarPlanos(localStorage.getItem('token'))
             return res
+        },
+
+		async editar(id) {
+			globalThis._planos = this.dados.find(user => user.id == id)
+            window.location.href = "#/planos/editar"
         },
 	},
 

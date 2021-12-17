@@ -88,7 +88,7 @@ export default {
 											</a>
 										</div>
 
-
+{{id}}
 										</div>
 									</div>
 									<!--end::Card body-->
@@ -150,7 +150,6 @@ export default {
             this.id = this.dados.id,
             
 			console.log(this.dados)
-
 	},
 
 
@@ -158,8 +157,11 @@ export default {
 	methods: {
          addLocahostore(item) {
          this.id = item.id
+		 this.nome_fantasia = item.nome_fantasia
 
-            localStorage.setItem("instituicao", this.id);
+            localStorage.setItem("instituicao_id", this.id);
+			localStorage.setItem("instituicao_nome", this.nome_fantasia);
+
 			window.location.href = "#/dash"
         //    localStorage.setItem("razoes", this.razao_social) ;
 			console.log(this.id)
@@ -169,6 +171,7 @@ export default {
 			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
 			return res
 			// console.log(res)
+
 		
 		},
 	},
