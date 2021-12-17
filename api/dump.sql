@@ -115,7 +115,7 @@ CREATE TABLE conta_bancaria (
     documento_numero varchar(14)
 );
 
-CREATE TABLE recebedor (
+CREATE TABLE  (
     id int not null auto_increment primary key,
     adm_id int,
     token varchar(255), 
