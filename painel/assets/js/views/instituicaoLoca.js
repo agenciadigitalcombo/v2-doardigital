@@ -353,7 +353,7 @@ export default {
 
 	async mounted() {
 		
-		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 		document.head.appendChild(validacao);
 
 	// 	let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");

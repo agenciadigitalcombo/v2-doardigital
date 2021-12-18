@@ -1,12 +1,51 @@
-import adm from "../../../../static/js/api/adm.js"
-export default {
-	template: `
-	<div>
-    <c-header></c-header>
-    <c-aside></c-aside>
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+Filter Options act
+-->
 
 
-	<!--begin::Root-->
+<html lang="en">
+<!--begin::Head-->
+
+<head>
+	<base href="../../../">
+	<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel
+		by Keenthemes</title>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+	<!--begin::Fonts-->
+	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
+	<!--end::Fonts-->
+	<!--begin::Page Vendor Stylesheets(used by this page)-->
+	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link href="../../assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="../../assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<!-- <link href="../../assets/css/front-css/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
+	<!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
+	<div id="app">
+
+		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
@@ -203,7 +242,39 @@ export default {
 										<!--begin::Card body-->
 										<div class="card-body border-top p-9">
 											<!--begin::Email Address-->
-											
+											<!-- 	<div class="d-flex flex-wrap align-items-center">
+												
+													<div id="kt_signin_email_edit" class="flex-row-fluid">
+												
+														<form id="kt_signin_change_email" class="form" novalidate="novalidate">
+															<div class="row mb-6">
+																<div class="col-lg-6 mb-4 mb-lg-0">
+																	<div class="fv-row mb-0">
+																		<label for="emailaddress" class="form-label fs-6 fw-bolder mb-3">Digite o novo endereço de e-mail</label>
+																		<input v-model="email" type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="support@keenthemes.com" />
+																	</div>
+																</div>
+																<div class="col-lg-6">
+																	<div class="fv-row mb-0">
+																		<label for="confirmemailpassword" class="form-label fs-6 fw-bolder mb-3">Confirmar Senha</label>
+																		<input type="password" class="form-control form-control-lg form-control-solid" name="confirmemailpassword" id="confirmemailpassword" />
+																	</div>
+																</div>
+															</div>
+															<div class="d-flex">
+																<button  @click="alterarEmail" id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6">Alterar Email</button>
+																<button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
+															</div>
+														</form>
+													
+		
+		
+													</div>
+													
+												
+												</div>
+												<div class="separator separator-dashed my-6"></div>
+												-->
 											<!--begin::Password-->
 											<div class="d-flex flex-wrap align-items-center mb-10">
 
@@ -387,86 +458,34 @@ export default {
 
 		<!--end::Root-->
 
-		<c-footer/>
-</div>
 
-    `,
+	</div>
+	<!-- <link href="../../assets/js/front-js/list/list.js" rel="stylesheet" type="text/css" />
+<link href="../../assets/js/front-js/datatables.bundle.js" rel="stylesheet" type="text/css" />
+<link href="../../assets/js/front-js/scripts.bundle.js" rel="stylesheet" type="text/css" />
+<link href="../../assets/js/front-js/plugins.bundle.js" rel="stylesheet" type="text/css" /> -->
 
+	<script src="../../assets/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="../../assets/assets/js/scripts.bundle.js"></script>
+	<script src="../../assets/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="../../assets/assets/js/custom/apps/subscriptions/list/list.js"></script>
+	<script src="../../assets/assets/js/custom/documentation/forms/formvalidation/password.js"></script>
 
-     data: function () {
-		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-			nome: null,
-            token: null,
-            senha: null,
-			email: null,
-			telefone: null,
-            error: null
-        }
-    },
-	methods: {
-		async alterarSenha() {
-			this.error = null
-			
-			localStorage.removeItem('token')
-            let res = await adm.alterar_senha(
-                this.senha,
-                this.token,
-            )
-            if (!res.next) {
-				console.log(res)
-                this.error = res.message
-                return null
-            }
-            localStorage.setItem('token', res.token)
-            window.location.href = `#/dash`
-        },
+	<script>
 
-        async alterarEmail() {
-			this.error = null
-			
-			localStorage.removeItem('token')
-            let res = await adm.recuperar_email(
-                this.email
-            )
-            if (!res.next) {
-				console.log(res)
-                this.error = res.message
-                return null
-            }
-            localStorage.setItem('token', res.token)
-            window.location.href = `#/dash`
-        },
+		new Vue({
+			el: '#app',
+			data: {
+				jms: "1",
+				// step: 1
+			},
+			mounted() {
+				// this.jms = this.step
+			},
 
-		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
-			return res
-        },
+		})
+	</script>
+</body>
+<!--end::Body-->
 
-        updateForm(event) {
-            this[event.name] = event.value
-        }
-    },
-	async mounted() {
-        this.user = localStorage.getItem('user')
-
-		
-		let dados = (await this.listar()).dados
-		console.log(dados)
-		this.nome = dados.nome
-		this.email = dados.email
-		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-		this.step = parseInt(dados.step)
-
-		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/password.js");
-		document.head.appendChild(validacao);
-    },
-
-	created() {
-		this.token = localStorage.getItem('token')
-	},
-}
-
-
-// Current Password
+</html>

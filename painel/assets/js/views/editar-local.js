@@ -226,7 +226,7 @@ template: `
 													placeholder="Nome identificacao" />
 
 												<div class="col-lg-8 fv-row">
-													<input v-model="nome_identificacao" type="text" name="nome"
+													<input v-model="nome_identificacao" type="text"  name="text_input"
 														class="form-control form-control-lg form-control-solid"
 														placeholder="Nome identificacao" />
 												</div>
@@ -241,7 +241,7 @@ template: `
 												<div class="col-lg-8 fv-row">
 													<div class="input-group mb-3">
 														<input id="cep" v-model="cep" @keyup="searchCep()" type="text"
-															name="CEP"
+														name="text_input"
 															class="form-control form-control-lg form-control-solid"
 															v-mask="'###.###.###-##'" placeholder="000.000.000-00" />
 														<span class="input-group-text" id="basic-addon2">
@@ -280,7 +280,7 @@ template: `
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="" v-model="numero" type="text" name="Numero"
+													<input id="" v-model="numero" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid"
 														placeholder="Numero" />
 												</div>
@@ -312,7 +312,7 @@ template: `
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="bairro" v-model="bairro" type="text" name="Bairro"
+													<input id="bairro" v-model="bairro" type="text" name="Bairro" 
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -326,7 +326,7 @@ template: `
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="localidade" v-model="cidade" type="text" name="cidade"
+													<input id="localidade" v-model="cidade" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -341,7 +341,7 @@ template: `
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<input id="uf" v-model="estado" type="text" name="estado"
+													<input id="uf" v-model="estado" type="text" name="text_input"
 														class="form-control form-control-lg form-control-solid" />
 												</div>
 												<!--end::Col-->
@@ -352,21 +352,19 @@ template: `
 										<!--end::Card body-->
 										<!--begin::Actions-->
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
-											<button @click="aeditarEndereco()" type="submit" class="btn btn-primary m-2"
-												id="kt_account_profile_details_submit">SALVAR</button>
+
 										
 										
-												<button id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
-														<span class="indicator-label">Validation Form</span>
-														<span class="indicator-progress">Please wait...
-														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+										
+													<button  id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary" @click="editarEndereco()">
+													<span class="indicator-label">SALVAR</span>
+													<span class="indicator-progress">Por favor, aguarde...
+													<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 													</button>
 										
-										
-										
 												<button @click="eliminaEndereco()" type="submit"
-												class="btn btn-primary  m-2"
-												id="kt_account_profile_details_submit">ELIMINAR</button>
+												class="btn btn-danger ms-5"
+												id="kt_account_profile_details_submit"> ELIMINAR</button>
 										
 											
 
@@ -426,7 +424,7 @@ template: `
 	},
 	methods: {
 		
-		async aeditarEndereco() {
+		async editarEndereco() {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
@@ -497,7 +495,7 @@ template: `
 
 	async mounted() {
 		
-		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 	document.head.appendChild(validacao);
 
 	// Rua/Avenida Nº
@@ -512,6 +510,7 @@ template: `
 		// this.cidade = enderecoDados.cidade
 		// this.estado = enderecoDados.estado
 		// this.id = enderecoDados.id
+		// Avenida 
 
 		
 
