@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+	<!--begin::Head-->
+	<head><base href="../../../">
+		<title>FormValidation Basic Examples by Keenthemes</title>
+	
+
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="../../painel/assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="../../painel/assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body>
+        <div id="app">
+		<!--begin::Main-->
+	<!--begin::Main-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="docs-page d-flex flex-row flex-column-fluid">
+			
+				<!--begin::Wrapper-->
+				<div class="docs-wrapper d-flex flex-column flex-row-fluid" id="kt_docs_wrapper">
+				
+					<!--begin::Content-->
+					<div class="docs-content d-flex flex-column flex-column-fluid" id="kt_docs_content">
+						<!--begin::Container-->
+						<div class="container" id="kt_docs_content_container">
+							<!--begin::Card-->
+							<div class="card card-docs mb-2">
+								<!--begin::Card Body-->
+								<div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
+								
+								
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="daterangepicker">
+										<a href="#daterangepicker" data-kt-scroll-toggle=""></a>Date range picker</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">For more information on Date Range Pickers, please visit the
+										<a href="https://www.daterangepicker.com/" target="_blank">official website</a>.</div>
+										<!--end::Block-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_daterangepicker" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-2">Date Range Picker Input</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<input class="form-control form-control-solid" name="daterangepicker_input" placeholder="Pick date range" id="kt_daterangepicker" />
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_daterangepicker_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc75e28" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc75e2b" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc75e28" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_daterangepicker');
+
+// Init daterangepicker --- for more info, please visit: https://www.daterangepicker.com/
+$("#kt_daterangepicker").daterangepicker();
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'daterangepicker_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Date range input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_daterangepicker_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc75e2b" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_daterangepicker" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-2"&gt;Date Range Picker Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input--&gt;
+        &lt;input class="form-control form-control-solid" name="daterangepicker_input" placeholder="Pick date range" id="kt_daterangepicker" /&gt;
+        &lt;!--end::Input--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_daterangepicker_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="flatpickr">
+										<a href="#flatpickr" data-kt-scroll-toggle=""></a>Flatpickr</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">For more information on Flatpickr, please visit the
+										<a href="https://flatpickr.js.org/" target="_blank">official website</a>.</div>
+										<!--end::Block-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_flatpickr" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-2">Flatpickr Input</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<input class="form-control" name="flatpickr_input" placeholder="Pick a date" id="kt_flatpickr" />
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_flatpickr_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc75fce" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc75fd0" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc75fce" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_flatpickr');
+
+// Init flatpickr --- for more info, please visit: https://flatpickr.js.org/
+$("#kt_flatpickr").flatpickr();
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'flatpickr_input': {
+                validators: {
+                    date: {
+                        format: 'YYYY-MM-DD',
+                        message: 'The value is not a valid date',
+                    },
+                    notEmpty: {
+                        message: 'Flatpickr input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_flatpickr_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc75fd0" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_flatpickr" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-2"&gt;Flatpickr Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input--&gt;
+        &lt;input class="form-control" name="flatpickr_input" placeholder="Pick a date" id="kt_flatpickr" /&gt;
+        &lt;!--end::Input--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_flatpickr_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="daterangepicker">
+										<a href="#basic" data-kt-scroll-toggle=""></a>Image Input</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">For more information on our exclusive Image Input form, please visit the
+										<a href="../../demo8/dist/documentation/forms/image-input.html" target="_blank">our documentation page</a>.</div>
+										<!--end::Block-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_image_input" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-7">
+														<!--begin::Label-->
+														<label class="d-block fw-bold fs-6 mb-5">Image Input</label>
+														<!--end::Label-->
+														<!--begin::Image input-->
+														<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+															<!--begin::Preview existing avatar-->
+															<div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/blank.png);"></div>
+															<!--end::Preview existing avatar-->
+															<!--begin::Label-->
+															<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+																<i class="bi bi-pencil-fill fs-7"></i>
+																<!--begin::Inputs-->
+																<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+																<input type="hidden" name="avatar_remove" />
+																<!--end::Inputs-->
+															</label>
+															<!--end::Label-->
+															<!--begin::Cancel-->
+															<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+																<i class="bi bi-x fs-2"></i>
+															</span>
+															<!--end::Cancel-->
+															<!--begin::Remove-->
+															<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+																<i class="bi bi-x fs-2"></i>
+															</span>
+															<!--end::Remove-->
+														</div>
+														<!--end::Image input-->
+														<!--begin::Hint-->
+														<div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+														<!--end::Hint-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_image_input_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc76194" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc76196" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc76194" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_image_input');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'avatar': {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select an image'
+                    },
+                    file: {
+                        extension: 'jpg,jpeg,png',
+                        type: 'image/jpeg,image/png',
+                        message: 'The selected file is not valid'
+                    },
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_image_input_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc76196" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_image_input" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-7"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="d-block fw-bold fs-6 mb-5"&gt;Image Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Image input--&gt;
+        &lt;div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(&lt;?php echo Theme::getMediaUrlPath(); ?&gt;avatars/blank.png)"&gt;
+            &lt;!--begin::Preview existing avatar--&gt;
+            &lt;div class="image-input-wrapper w-125px h-125px" style="background-image: url(&lt;?php echo Theme::getMediaUrlPath(); ?&gt;avatars/blank.png);"&gt;&lt;/div&gt;
+            &lt;!--end::Preview existing avatar--&gt;
+
+            &lt;!--begin::Label--&gt;
+            &lt;label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar"&gt;
+                &lt;i class="bi bi-pencil-fill fs-7"&gt;&lt;/i&gt;
+
+                &lt;!--begin::Inputs--&gt;
+                &lt;input type="file" name="avatar" accept=".png, .jpg, .jpeg" /&gt;
+                &lt;input type="hidden" name="avatar_remove" /&gt;
+                &lt;!--end::Inputs--&gt;
+            &lt;/label&gt;
+            &lt;!--end::Label--&gt;
+
+            &lt;!--begin::Cancel--&gt;
+            &lt;span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar"&gt;
+                &lt;i class="bi bi-x fs-2"&gt;&lt;/i&gt;
+            &lt;/span&gt;
+            &lt;!--end::Cancel--&gt;
+
+            &lt;!--begin::Remove--&gt;
+            &lt;span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar"&gt;
+                &lt;i class="bi bi-x fs-2"&gt;&lt;/i&gt;
+            &lt;/span&gt;
+            &lt;!--end::Remove--&gt;
+        &lt;/div&gt;
+        &lt;!--end::Image input--&gt;
+
+        &lt;!--begin::Hint--&gt;
+        &lt;div class="form-text"&gt;Allowed file types: png, jpg, jpeg.&lt;/div&gt;
+        &lt;!--end::Hint--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_image_input_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="password">
+										<a href="#password" data-kt-scroll-toggle=""></a>Password Meter</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">For more information on our exclusive Password Meter, please visit the
+										<a href="../../demo8/dist/documentation/forms/password-meter.html" target="_blank">our documentation page</a>.</div>
+										<!--end::Block-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_password" class="form" action="#" autocomplete="off">
+													<!--begin::Input group=-->
+													<div class="fv-row mb-10">
+														<label class="required form-label fs-6 mb-2">Current Password</label>
+														<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
+													</div>
+													<!--end::Input group=-->
+													<!--begin::Input group-->
+													<div class="mb-10 fv-row" data-kt-password-meter="true">
+														<!--begin::Wrapper-->
+														<div class="mb-1">
+															<!--begin::Label-->
+															<label class="form-label fw-bold fs-6 mb-2 required">New Password</label>
+															<!--end::Label-->
+															<!--begin::Input wrapper-->
+															<div class="position-relative mb-3">
+																<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="new_password" autocomplete="off" />
+																<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+																	<i class="bi bi-eye-slash fs-2"></i>
+																	<i class="bi bi-eye fs-2 d-none"></i>
+																</span>
+															</div>
+															<!--end::Input wrapper-->
+															<!--begin::Meter-->
+															<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+																<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+																<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+																<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+																<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+															</div>
+															<!--end::Meter-->
+														</div>
+														<!--end::Wrapper-->
+														<!--begin::Hint-->
+														<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+														<!--end::Hint-->
+													</div>
+													<!--end::Input group=-->
+													<!--begin::Input group=-->
+													<div class="fv-row mb-10">
+														<label class="form-label fw-bold fs-6 mb-2 required">Confirm New Password</label>
+														<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm_password" autocomplete="off" />
+													</div>
+													<!--end::Input group=-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_password_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc7635e" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc76360" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc7635e" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_password');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'current_password': {
+                validators: {
+                    notEmpty: {
+                        message: 'Current password is required'
+                    }
+                }
+            },
+            'new_password': {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    callback: {
+                        message: 'Please enter valid password',
+                        callback: function (input) {
+                            if (input.value.length &gt; 0) {
+                                return validatePassword();
+                            }
+                        }
+                    }
+                }
+            },
+            'confirm_password': {
+                validators: {
+                    notEmpty: {
+                        message: 'The password confirmation is required'
+                    },
+                    identical: {
+                        compare: function () {
+                            return form.querySelector('[name="new_password"]').value;
+                        },
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_password_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc76360" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_password" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group---&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;label class="required form-label fs-6 mb-2"&gt;Current Password&lt;/label&gt;
+
+        &lt;input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" /&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group---&gt;
+
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="mb-10 fv-row" data-kt-password-meter="true"&gt;
+        &lt;!--begin::Wrapper--&gt;
+        &lt;div class="mb-1"&gt;
+            &lt;!--begin::Label--&gt;
+            &lt;label class="form-label fw-bold fs-6 mb-2 required"&gt;
+                New Password
+            &lt;/label&gt;
+            &lt;!--end::Label--&gt;
+
+            &lt;!--begin::Input wrapper--&gt;
+            &lt;div class="position-relative mb-3"&gt;
+                &lt;input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="new_password" autocomplete="off" /&gt;
+
+                &lt;span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility"&gt;
+                    &lt;i class="bi bi-eye-slash fs-2"&gt;&lt;/i&gt;
+
+                    &lt;i class="bi bi-eye fs-2 d-none"&gt;&lt;/i&gt;
+                &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;!--end::Input wrapper--&gt;
+
+            &lt;!--begin::Meter--&gt;
+            &lt;div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight"&gt;
+                &lt;div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"&gt;&lt;/div&gt;
+                &lt;div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"&gt;&lt;/div&gt;
+                &lt;div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"&gt;&lt;/div&gt;
+                &lt;div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;!--end::Meter--&gt;
+        &lt;/div&gt;
+        &lt;!--end::Wrapper--&gt;
+
+        &lt;!--begin::Hint--&gt;
+        &lt;div class="text-muted"&gt;
+            Use 8 or more characters with a mix of letters, numbers &amp; symbols.
+        &lt;/div&gt;
+        &lt;!--end::Hint--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group---&gt;
+
+    &lt;!--begin::Input group---&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;label class="form-label fw-bold fs-6 mb-2 required"&gt;Confirm New Password&lt;/label&gt;
+
+        &lt;input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm_password" autocomplete="off" /&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group---&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_password_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="py-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="select2">
+										<a href="#select2" data-kt-scroll-toggle=""></a>Select2</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">For more information on Select2, please visit the
+										<a href="https://select2.org/" target="_blank">official website</a>.</div>
+										<!--end::Block-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_select2" class="form" action="#" autocomplete="off">
+													<!--begin::Input group=-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required form-label fs-6 mb-2">Select2 Input</label>
+														<!--end::Label-->
+														<!--begin::Select2-->
+														<select class="form-select" name="select2_input" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
+															<option></option>
+															<option value="1">Option 1</option>
+															<option value="2">Option 2</option>
+															<option value="3">Option 3</option>
+															<option value="4">Option 4</option>
+														</select>
+														<!--begin::Select2-->
+													</div>
+													<!--end::Input group=-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_select2_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="py-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc7651b" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc7651d" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc7651b" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_select2');
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'select2_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Select2 input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Revalidate Select2 input. For more info, plase visit the official plugin site: https://select2.org/
+$(form.querySelector('[name="select2_input"]')).on('change', function () {
+    // Revalidate the field when an option is chosen
+    validator.revalidateField('select2_input');
+});
+
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_select2_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc7651d" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_select2" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group---&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required form-label fs-6 mb-2"&gt;Select2 Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Select2--&gt;
+        &lt;select class="form-select" name="select2_input" data-control="select2" data-placeholder="Select an option"&gt;
+            &lt;option&gt;&lt;/option&gt;
+            &lt;option value="1"&gt;Option 1&lt;/option&gt;
+            &lt;option value="2"&gt;Option 2&lt;/option&gt;
+            &lt;option value="3"&gt;Option 3&lt;/option&gt;
+            &lt;option value="4"&gt;Option 4&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;!--begin::Select2--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group---&gt;
+
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_select2_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="pt-10">
+										<!--begin::Heading-->
+										<h1 class="anchor fw-bolder mb-5" data-kt-scroll-offset="85" id="tagify">
+										<a href="#tagify" data-kt-scroll-toggle=""></a>Tagify</h1>
+										<!--end::Heading-->
+										<!--begin::Block-->
+										<div class="py-5">For more information on Tagify, please visit the
+										<a href="https://yaireo.github.io/tagify/" target="_blank">official website</a>.</div>
+										<!--end::Block-->
+										<!--begin::Block-->
+										<div class="py-5">
+											<div class="rounded border p-10">
+												<!--begin::Form-->
+												<form id="kt_docs_formvalidation_tagify" class="form" action="#" autocomplete="off">
+													<!--begin::Input group-->
+													<div class="fv-row mb-10">
+														<!--begin::Label-->
+														<label class="required fw-bold fs-6 mb-2">Tagify Input</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<input class="form-control" name="tagify_input" value="" id="kt_tagify" />
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<button id="kt_docs_formvalidation_tagify_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">Validation Form</span>
+														<span class="indicator-progress">Please wait...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+										<!--end::Block-->
+										<!--begin::Code-->
+										<div class="pt-5">
+											<!--begin::Highlight-->
+											<div class="highlight">
+												<button class="highlight-copy btn" data-bs-toggle="tooltip" title="Copy code">copy</button>
+												<ul class="nav nav-pills" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#kt_highlight_615c3fdc766b1" role="tab">JAVASCRIPT</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#kt_highlight_615c3fdc766b3" role="tab">HTML</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade show active" id="kt_highlight_615c3fdc766b1" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-javascript" style="height:400px">
+<code class="language-javascript">// Define form element
+const form = document.getElementById('kt_docs_formvalidation_tagify');
+
+// Init tagify --- for more info, please visit: https://yaireo.github.io/tagify/
+new Tagify(document.querySelector("#kt_tagify"), {
+    whitelist: ["Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5", "Tag 6", "Tag 7", "Tag 8", "Tag 9", "Tag 10", "Tag 11", "Tag 12"],
+    maxTags: 6,
+    dropdown: {
+        maxItems: 20,           // &lt;- mixumum allowed rendered suggestions
+        classname: "tagify__inline__suggestions", // &lt;- custom classname for this dropdown, so it could be targeted
+        enabled: 0,             // &lt;- show suggestions on focus
+        closeOnSelect: false    // &lt;- do not hide the suggestions dropdown once an item has been selected
+    }
+});
+
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+var validator = FormValidation.formValidation(
+    form,
+    {
+        fields: {
+            'tagify_input': {
+                validators: {
+                    notEmpty: {
+                        message: 'Tagify input is required'
+                    }
+                }
+            },
+        },
+
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',
+                eleValidClass: ''
+            })
+        }
+    }
+);
+
+// Submit button handler
+const submitButton = document.getElementById('kt_docs_formvalidation_tagify_submit');
+submitButton.addEventListener('click', function (e) {
+    // Prevent default button action
+    e.preventDefault();
+
+    // Validate form before submit
+    if (validator) {
+        validator.validate().then(function (status) {
+            console.log('validated!');
+
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                setTimeout(function () {
+                    // Remove loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    // Show popup confirmation
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+
+                    //form.submit(); // Submit form
+                }, 2000);
+            }
+        });
+    }
+});</code>
+</pre>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="kt_highlight_615c3fdc766b3" role="tabpanel">
+														<div class="highlight-code">
+															<pre class="language-html" style="height:400px">
+<code class="language-html">&lt;!--begin::Form--&gt;
+&lt;form id="kt_docs_formvalidation_tagify" class="form" action="#" autocomplete="off"&gt;
+    &lt;!--begin::Input group--&gt;
+    &lt;div class="fv-row mb-10"&gt;
+        &lt;!--begin::Label--&gt;
+        &lt;label class="required fw-bold fs-6 mb-2"&gt;Tagify Input&lt;/label&gt;
+        &lt;!--end::Label--&gt;
+
+        &lt;!--begin::Input--&gt;
+        &lt;input class="form-control" name="tagify_input" value="" id="kt_tagify" /&gt;
+        &lt;!--end::Input--&gt;
+    &lt;/div&gt;
+    &lt;!--end::Input group--&gt;
+    &lt;!--begin::Actions--&gt;
+    &lt;button id="kt_docs_formvalidation_tagify_submit" type="submit" class="btn btn-primary"&gt;
+        &lt;span class="indicator-label"&gt;
+            Validation Form
+        &lt;/span&gt;
+        &lt;span class="indicator-progress"&gt;
+            Please wait... &lt;span class="spinner-border spinner-border-sm align-middle ms-2"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!--end::Actions--&gt;
+&lt;/form&gt;
+&lt;!--end::Form--&gt;</code>
+</pre>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Highlight-->
+										</div>
+										<!--end::Code-->
+									</div>
+									<!--end::Section-->
+								</div>
+								<!--end::Card Body-->
+							</div>
+							<!--end::Card-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Content-->
+					<!--begin::Footer-->
+					<div class="py-4 d-flex flex-lg-column py-6" id="kt_footer">
+						<!--begin::Container-->
+						<div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+							<!--begin::Copyright-->
+							<div class="text-dark order-2 order-md-1">
+								<span class="text-muted fw-bold me-1">2021©</span>
+								<a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
+							</div>
+							<!--end::Copyright-->
+							<!--begin::Menu-->
+							<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1 align-items-center mb-3 mb-md-0">
+								<!--begin::Menu item-->
+								<li class="menu-item">
+									<!--begin::Menu link-->
+									<a href="https://www.youtube.com/c/KeenThemesTuts/videos" target="_blank" class="menu-link px-3">
+										<img alt="Keenthemes Youtube" src="assets/media/svg/social-logos/youtube.svg" class="h-20px" />
+									</a>
+									<!--end::Menu link-->
+								</li>
+								<!--end::Menu link-->
+								<!--begin::Menu item-->
+								<li class="menu-item">
+									<!--begin::Menu link-->
+									<a href="https://github.com/KeenthemesHub" target="_blank" class="menu-link px-3">
+										<img alt="Keenthemes Github" src="assets/media/svg/social-logos/github.svg" class="h-20px" />
+									</a>
+									<!--end::Menu link-->
+								</li>
+								<!--end::Menu link-->
+								<!--begin::Menu item-->
+								<li class="menu-item">
+									<!--begin::Menu link-->
+									<a href="https://twitter.com/keenthemes" target="_blank" class="menu-link px-3">
+										<img alt="Keenthemes Twitter" src="assets/media/svg/social-logos/twitter.svg" class="h-20px" />
+									</a>
+									<!--end::Menu link-->
+								</li>
+								<!--end::Menu link-->
+								<!--begin::Menu item-->
+								<li class="menu-item">
+									<!--begin::Menu link-->
+									<a href="https://www.instagram.com/keenthemes" target="_blank" class="menu-link px-3">
+										<img alt="Keenthemes Instagram" src="assets/media/svg/social-logos/instagram.svg" class="h-20px" />
+									</a>
+									<!--end::Menu link-->
+								</li>
+								<!--end::Menu link-->
+								<!--begin::Menu item-->
+								<li class="menu-item">
+									<!--begin::Menu link-->
+									<a href="https://www.facebook.com/keenthemes" target="_blank" class="menu-link px-3">
+										<img alt="Keenthemes Facebook" src="assets/media/svg/social-logos/facebook.svg" class="h-20px" />
+									</a>
+									<!--end::Menu link-->
+								</li>
+								<!--end::Menu link-->
+								<!--begin::Menu item-->
+								<li class="menu-item">
+									<!--begin::Menu link-->
+									<a href="https://dribbble.com/keenthemes" target="_blank" class="menu-link px-3">
+										<img alt="Keenthemes Dribbble" src="assets/media/svg/social-logos/dribbble.svg" class="h-20px" />
+									</a>
+									<!--end::Menu link-->
+								</li>
+								<!--end::Menu link-->
+							</ul>
+							<!--end::Menu-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Footer-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Main-->
+		<!--end::Main-->
+	
+	
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+			<span class="svg-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+		<!--end::Scrolltop-->
+    </div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!--begin::Javascript-->
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="../../painel/assets/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="../../painel/assets/assets/js/scripts.bundle.js"></script>
+		<script src="../../painel/assets/assets/js/custom/documentation/forms/formvalidation/advanced.js"></script>
+		<script>
+
+            new Vue({
+                el: '#app',
+                data: {
+                    jms: "1",
+                    // step: 1
+                },
+                mounted() {
+                    // this.jms = this.step
+                },
+    
+            })
+        </script>
+	</body>
+	<!--end::Body-->
+</html>

@@ -1,6 +1,7 @@
 export default [
  
     { id: 'inicio', nome: 'Inicio', icon: 'home.svg', link: '#/dash', feature_flag: true },
+    { id: 'sass', nome: 'Instituições', icon: 'instituicai.svg', link: '#/instituicoes', feature_flag: true },
     { id: 'doadores', nome: 'Doadores', icon: 'doadores.svg', link: '#/doadores', feature_flag: true },
     { id: 'doacoes', nome: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true },
     { id: 'credenciais', nome: 'Credenciais', icon: 'credenciais.svg', link: '#/credencias', feature_flag: true },

@@ -102,7 +102,7 @@ export default {
 
     created() {
      
-        let jms = document.createElement('script'); jms.setAttribute('src', "../../painel/assets/assets/js/scripts.bundle.js");
+        let jms = document.createElement('script'); jms.setAttribute('src', "../../assets/assets/js/scripts.bundle.js");
         document.head.appendChild(jms);
 
     },
