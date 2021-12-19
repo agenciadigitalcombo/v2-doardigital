@@ -32,6 +32,14 @@ class Plano implements IPlano{
         $banco = new Banco();
         $sql = "SELECT * FROM plano WHERE instituicao_id='$id'";
         $guard = $banco->query($sql);
+        return $guard ?? [];
+    }
+
+    public function list_by_id(int $id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM plano WHERE id='$id'";
+        $guard = $banco->query($sql);
         return $guard[0] ?? [];
     }
 

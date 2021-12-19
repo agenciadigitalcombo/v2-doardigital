@@ -17,7 +17,7 @@ class Doacao implements IDoacao{
         return $guard[0] ?? [];
     }
 
-    public function create(int $instituicao_id, int $doador_id, string $token, string $tipo, string $status_pagamento, int $plano_id, int $valor, string $codigo, string $url, string $data, string $hora): void
+    public function create(int $instituicao_id, int $doador_id, string $token, string $tipo = null, string $status_pagamento, int $plano_id, int $valor, string $codigo = null, string $url = null, string $data = null, string $hora = null): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO doacoes";

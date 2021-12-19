@@ -330,13 +330,46 @@ function cpf(): string
 }
 
 
-function telefone($telefone): void
+function telefone(): string
 {
+    $telefone = $_REQUEST['telefone'];
+
     if(preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
         echo json_encode([
             "next" => false,
             "message" => "Telefone Ínvalido"
         ]);
         die;
-      }
+    }
+    return $telefone;
+}
+
+
+function cep(): string
+{
+    $cep = $_REQUEST['cep'] ?? '';
+
+    $campos_obrigatorios = [
+        'cep'
+    ];
+    $lb = [
+        'cep' => 'digite o cep'
+    ];
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+    if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) {
+        echo json_encode([
+            "next" => false,
+            "message" => "CEP inválido."
+        ]);
+        die;
+    }
+    return $cep;
 }

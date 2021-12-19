@@ -135,7 +135,7 @@ class InstituicaoControler
         $guard = $instituicao->list_all();
 
         foreach ($guard as $g) {
-            $payload[] = [
+            $payload [] = [
                 'id' => $g['id'],
                 'nome_fantasia' => $g['nome_fantasia'],
                 'razao_social' => $g['razao_social'],
@@ -175,6 +175,7 @@ class InstituicaoControler
 
         $payload = [
             'id' => $get_instituicao['id'],
+            'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'status' => $get_instituicao['status']
