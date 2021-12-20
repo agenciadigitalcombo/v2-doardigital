@@ -10,7 +10,7 @@ class TransacaoControler{
         $doador = new Doador();
         $instituicao = new Instituicao;
         $plano = new Plano();
-        $endereco = new Endereco;
+        $Endereco = new Endereco;
 
         
 
@@ -48,7 +48,7 @@ class TransacaoControler{
         $doador_id = $doador_dados['id'];
               
         
-        $endereco->create($doador_id, "Endereco Doacao" , $cep, $endereco, $numero, "casa", $bairro, $cidade, $estado);
+        $Endereco->create($doador_id, "Endereco Doacao" , $cep, $endereco, $numero, "casa", $bairro, $cidade, $estado);
         
         
         $doacao->create($instituicao_id, $doador_id, '', $type_pagamento, "await", $planos_id, $planos_valor);
