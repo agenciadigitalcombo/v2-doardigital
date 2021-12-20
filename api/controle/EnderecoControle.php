@@ -128,6 +128,64 @@ class EnderecoControle
         ]);
     }
 
+    static function create_endereco_doador()
+    {
+        $endereco = new Endereco();
+        $doador = new Doador();
+
+        $cpf = $_REQUEST['cpf'] ?? '';
+        $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
+        $logradouro = $_REQUEST['logradouro'] ?? '';
+        $complemento = $_REQUEST['complemento'] ?? '';
+        $bairro = $_REQUEST['bairro'] ?? '';
+        $cidade = $_REQUEST['cidade'] ?? '';
+        $estado = $_REQUEST['estado'] ?? '';
+        
+        $numero = $_REQUEST['numero'] ?? '';
+        $cep = $_REQUEST['cep'] ?? '';
+        
+
+        $transform_numero = withdraw_caracter($numero);
+        $transform_cep = withdraw_caracter($cep);
+
+        $campos_obrigatorios = [
+            'cpf',
+            'cep',
+            'logradouro',
+            'bairro',
+            'cidade',
+            'estado',
+            'numero'
+        ];
+        $lb = [
+            'cpf' => 'Informe o Cpf',
+            'cep' => 'Informe um CEP',
+            'logadouro' => 'Digite um endereço',
+            'bairro' => 'digite o Bairro',
+            'cidade' => 'Informe a Cidade',
+            'estado' => 'Informe o estado',
+            'numero' => 'Digite o numero'
+        ];
+        foreach ($campos_obrigatorios as $campo) {
+            if (empty($_REQUEST[$campo])) {
+                echo json_encode([
+                    'next' => false,
+                    'message' => $lb[$campo]
+                ]);
+                return null;
+            }
+        }
+
+        $id_doador = $doador->get_by_cpf($cpf);
+        
+        $id = $id_doador['id'];
+        
+        $endereco->create($id, $nome_identificacao, $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Endereco criado'
+        ]);
+    }
 
     static function update_endereco()
     {

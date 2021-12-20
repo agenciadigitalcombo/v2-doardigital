@@ -144,7 +144,7 @@ class InstituicaoControler
                 'cor' => $g['cor'],
                 'cnpj' => $g['cnpj'],
                 'logo' => $g['logo'],
-                'sub_domaim' => $g['sub_domaim'],
+                'subdomaim' => $g['subdomaim'],
                 'status' => $g['status']
             ];
         }
