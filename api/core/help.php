@@ -332,7 +332,8 @@ function cpf(): string
 
 function telefone(): string
 {
-    $telefone = $_REQUEST['telefone'];
+    $telefone_campo = $_REQUEST['telefone'];
+    $telefone = withdraw_caracter($telefone_campo);
 
     if(preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
         echo json_encode([

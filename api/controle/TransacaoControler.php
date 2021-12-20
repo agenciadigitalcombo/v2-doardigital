@@ -37,21 +37,21 @@ class TransacaoControler{
         $cart_validade = $_REQUEST['cart_validade'] ?? null;
         $cart_nome = $_REQUEST['cart_nome'] ?? null;
 
+
+        
         $is_doador = $doador->exist($cpf);
         if(!$is_doador){
-            $doador->create($nome, $email, $telefone, $cpf, "", $genero, "", $instituicao_id, []);
+            $doador->create($nome, $email, $telefone, $cpf, "1234567890");
         }
-
+        
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
-
-
-        $endereco-> create($doador_id, "Endereco Doacao" , $cep, $endereco, $numero, "", $bairro, $cidade, $estado);
-
+              
+        
+        $endereco->create($doador_id, "Endereco Doacao" , $cep, $endereco, $numero, "casa", $bairro, $cidade, $estado);
+        
+        
         $doacao->create($instituicao_id, $doador_id, '', $type_pagamento, "await", $planos_id, $planos_valor);
-
-
-    
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',

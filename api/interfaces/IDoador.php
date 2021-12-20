@@ -28,11 +28,7 @@ interface IDoador
         string $email,
         string $phone_numbers,
         string $cpf,
-        string $senha = '',
-        string $genero = '',
-        int $costumer_id = 0,
-        int $instituicao_id = 1,
-        array $options
+        string $senha
     ): void;
 
     public function add_costumer_id(

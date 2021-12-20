@@ -41,10 +41,14 @@ class Doador implements IDoador
         return $guard[0] ?? [];
     }
 
-    public function create(string $name, string $email, string $phone_numbers, string $cpf, string $senha = '', string $genero = '', int $costumer_id = 0, int $instituicao_id = 1, array $options): void
+    public function create(string $name, string $email, string $phone_numbers, string $cpf, string $senha): void
     {
         $banco = new Banco();
-        
+        $sql = "INSERT INTO doador";
+        $sql .= "(nome, email, senha, telefone, cpf)";
+        $sql .= "VALUES";
+        $sql .= "('$name', '$email', '$senha', '$phone_numbers', '$cpf')";
+        $banco->exec($sql);
     }
 
     public function get_by_cpf(string $cpf): array
