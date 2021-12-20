@@ -1,53 +1,9 @@
-<!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
-Purchase: https://1.envato.market/EA4JP
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
-Filter Options act
--->
+import adm from "../../../../static/js/api/adm.js" 
 
-
-<html lang="en">
-<!--begin::Head-->
-
-<head>
-	<base href="../../../">
-	<title>fase1</title>
-
-
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
-
-	<!--begin::Fonts-->
-	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
-	<!--end::Fonts-->
-	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-
-
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<link href="../../assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="../../assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="../../assets/css/front-css/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-	<!--end::Global Stylesheets Bundle-->
-</head>
-<!--end::Head-->
-<!--begin::Body-->
-
-<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
-	<div id="app">
-
-		<!--begin::Root-->
-
-
-		<!--begin::Content-->
+export default {
+    template:`
+	<div>
+	<!--begin::Content-->
 		<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 			<!--begin::Post-->
 			<div class="post d-flex flex-column-fluid" id="kt_post">
@@ -95,7 +51,7 @@ Filter Options act
 													<input v-model="tipo" class="btn-check" type="radio" name="method"
 														value="unica" />
 													<!--end::Input-->
-													<h2 class="text-hover-white text-active-white">DOAÇÃO UNICA </h2>
+													<h2>DOAÇÃO UNICA </h2>
 
 												</label>
 												<!--end::Radio-->
@@ -373,50 +329,32 @@ Filter Options act
 			<!--end::Post-->
 		</div>
 
-
-		<!--end::Root-->
+   
 	</div>
-
-	<c-footer />
-	</div>
-	<!--end::Root-->
+    `,
 
 
-	</div>
-	<!-- <link href="../../assets/js/front-js/list/list.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/datatables.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/scripts.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/plugins.bundle.js" rel="stylesheet" type="text/css" />  img-->
-
-	<script src="../../assets/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="../../assets/assets/js/scripts.bundle.js"></script>
-	<!-- <script src="../../assets/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<script src="../../assets/assets/js/custom/apps/subscriptions/list/list.js"></script> -->
-	<script>
-
-		new Vue({
-			el: '#app',
-			data: {
-				tipo: null,
+     data: function () {
+		return {
+			gravatar: '../painel/assets/image/gravatar.png',
+			tipo: null,
 				valor: null,
 				email: null,
 
-			},
-			methods: {
-				descartavel() {
-					this.tipo = window.localStorage.setItem("tipo", this.tipo)
-					this.valor = window.localStorage.setItem("valor", this.valor)
-					this.email = window.localStorage.setItem("email", this.email)
-				}
+        }
+    },
+	methods: {
+	
+		descartavel() {
+			this.tipo = window.localStorage.setItem("tipo", this.tipo)
+			this.valor = window.localStorage.setItem("valor", this.valor)
+			this.email = window.localStorage.setItem("email", this.email)
+		}
+       
 
-			},
-			mounted() {
-				// this.jms = this.step
-			},
+    },
+	
 
-		})
-	</script>
-</body>
-<!--end::Body-->
+	
+}
 
-</html>

@@ -106,8 +106,8 @@ export default {
 
 												<td>
 													<a class="badge badge-light-primary fs-5 m-1">
-													 {{ item.sub_domain }}
-													</a>
+													 {{ item.subdomaim }} {{ item.id }}
+													</a> 
 												</td>
 
 												<td>
@@ -132,7 +132,7 @@ export default {
 												<!--begin::Action=-->
 												<td class="text-end">
 
-													<a 
+													<a  @click="editar(item.id)"
 														class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
 														style="margin: 2px;">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -210,7 +210,7 @@ export default {
 			gravatar: '../painel/assets/image/gravatar.png',
 			nome_fantasia: null,
 			razao_social: null,
-			sub_domain: null,
+			subdomaim: null,
 			email: null,
 			cor: null,
 
@@ -228,7 +228,7 @@ export default {
 
 		this.dados = (await this.listar()).dados
 		this.nome_fantasia = this.dados.nome_fantasia,
-			this.sub_domain = this.dados.sub_domain,
+			this.subdomaim = this.dados.subdomaim,
 
 			console.log(this.dados)
 
@@ -239,6 +239,11 @@ export default {
 			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
 			return res
 		},
+
+		async editar(id) {
+			globalThis._intituicao = this.dados.find(user => user.id == id)
+            window.location.href = "#/editar-instituicoes"
+        },
 	},
 
 

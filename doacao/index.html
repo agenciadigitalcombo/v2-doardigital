@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
     <link rel="manifest" href="./manifest.json">
+
+    
+    <link href="../../assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="../../assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+
     <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -24,12 +29,16 @@
 
 <body>
 
-
+<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
     <div id="app">
         <router-view></router-view>
     </div>
+</div>
 
 
+
+<script src="../../assets/assets/plugins/global/plugins.bundle.js" ></script>
+<script src="../../assets/assets/js/scripts.bundle.js" ></script>
 </body>
 
 </html>

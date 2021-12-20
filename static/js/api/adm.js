@@ -275,6 +275,54 @@ export default {
     },
     
 
+    async transacaoPlano(
+        token,
+        instituicao_id,
+        mensal,
+        planos_id,
+        planos_valor,
+        email,
+        nome,
+        genero,
+        cpf,
+        telefone,
+        cep,
+        numero,
+        estado,
+        endereco,
+        bairro,
+        cidade,
+        type_pagamento,
+        cart_numero,
+        cart_cvv,
+        cart_validade,
+        cart_nome,
+    ) {
+        return await http.post('/transacao', {
+            token,
+            instituicao_id,
+            mensal,
+            planos_id,
+            planos_valor,
+            email,
+            nome,
+            genero,
+            cpf,
+            telefone,
+            cep,
+            numero,
+            estado,
+            endereco,
+            bairro,
+            cidade,
+            type_pagamento,
+            cart_numero,
+            cart_cvv,
+            cart_validade,
+            cart_nome,
+        })
+    },
+
 }
 
 

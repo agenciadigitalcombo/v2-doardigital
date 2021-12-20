@@ -352,8 +352,12 @@ export default {
 
 
 	},
+	
 	async mounted() {
-
+		this.id = globalThis.instituicao.id,
+		this.nome_fantasia = globalThis.instituicao.nome_fantasia
+		this.email = globalThis.instituicao.email,
+		this.sub_domain = globalThis.instituicao.sub_domain
 	},
 
 

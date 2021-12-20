@@ -1,51 +1,9 @@
-<!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
-Purchase: https://1.envato.market/EA4JP
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
-Filter Options act
--->
+import adm from "../../../../static/js/api/adm.js"
 
-
-<html lang="en">
-<!--begin::Head-->
-
-<head>
-	<base href="../../../">
-	<title>fase 2</title>
-
-
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
-
-	<!--begin::Fonts-->
-	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
-	<!--end::Fonts-->
-	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-
-
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<link href="../../assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="../../assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="../../assets/css/front-css/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-	<!--end::Global Stylesheets Bundle-->
-</head>
-<!--end::Head-->
-<!--begin::Body-->
-
-<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
-	<div id="app">
-
-		<!--begin::Root -->
-      	<!--begin::Root -->
+export default {
+	template: `
+	<div>
+	<!--begin::Root -->
           <div class="d-flex flex-column flex-root">
             <!--begin::Content-->
                      <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -79,26 +37,26 @@ Filter Options act
  
                                                      <div class="mb-7">
                                                          <label for="exampleFormControlInput1" class="required form-label">Nome</label>
-                                                         <input v-model="doacao.nome" type="text" class="form-control form-control-solid" placeholder="Nome"/>
+                                                         <input v-model="nome" type="text" class="form-control form-control-solid" placeholder="Nome"/>
                                                      </div>
                                                      <div class="mb-7">
                                                          <label for="exampleFormControlInput1" class="required form-label">Género</label>
                                                          <select class="form-select form-select-solid" aria-label="Select example">
-                                                            <option v-model="doacao.genero">Masculino</option>
-                                                             <option v-model="doacao.genero">Feminino</option>
+                                                            <option v-model="genero">Masculino</option>
+                                                             <option v-model="genero">Feminino</option>
                                                          </select>
                                                      </div>
                                                      <div class="mb-7">
                                                          <label for="exampleFormControlInput1" class="required form-label">CPF</label>
-                                                         <input v-model="doacao.cpf" type="text" class="form-control form-control-solid" placeholder="CPF"/>
+                                                         <input v-model="cpf" type="text" class="form-control form-control-solid" placeholder="CPF"/>
                                                      </div>
                                                      <div class="mb-7">
                                                          <label for="exampleFormControlInput1" class="required form-label">E-mail</label>
-                                                         <input v-model="doacao.email" type="email" class="form-control form-control-solid" placeholder="Email"/>
+                                                         <input v-model="email" type="email" class="form-control form-control-solid" placeholder="Email"/>
                                                      </div>
                                                      <div class="mb-10">
                                                          <label for="exampleFormControlInput1" class="required form-label">Telefone</label>
-                                                         <input v-model="doacao.telefone" type="text" class="form-control form-control-solid" placeholder="Telefone"/>
+                                                         <input v-model="telefone" type="text" class="form-control form-control-solid" placeholder="Telefone"/>
                                                      </div>
                                                   
  
@@ -118,39 +76,39 @@ Filter Options act
                                                            
                                                      <div class="mb-1">
                                                          <label for="exampleFormControlInput1" class="required form-label">CEP</label>
-                                                         <input v-model="doacao.cep" type="text" class="form-control form-control-solid" placeholder="CEP"/>
+                                                         <input v-model="cep" type="text" class="form-control form-control-solid" placeholder="CEP"/>
                                                      </div>
                                                  </div>
                                                  <div class="col-6">
                                                      <div class="mb-1">
                                                          <label for="exampleFormControlInput1" class="required form-label">Endereço</label>
-                                                         <input v-model="doacao.endereco" type="text" class="form-control form-control-solid" placeholder="Endereço"/>
+                                                         <input v-model="endereco" type="text" class="form-control form-control-solid" placeholder="Endereço"/>
                                                      </div>
                                                     
                                                  </div>
                                                      <div class="col-6">
                                                      <div class="mb-1">
                                                          <label for="exampleFormControlInput1" class="required form-label">Numero</label>
-                                                         <input v-model="doacao.numero" type="text" class="form-control form-control-solid" placeholder="Numero"/>
+                                                         <input v-model="numero" type="text" class="form-control form-control-solid" placeholder="Numero"/>
                                                      </div>
                                                  </div>
                                                  <div class="col-6">
                                                      <div class="mb-1">
                                                          <label for="exampleFormControlInput1" class="required form-label">Bairro</label>
-                                                         <input v-model="doacao.bairro" type="text" class="form-control form-control-solid" placeholder="Bairro"/>
+                                                         <input v-model="bairro" type="text" class="form-control form-control-solid" placeholder="Bairro"/>
                                                      </div>
                                                  </div>
  
                                                  <div class="col-6">
                                                      <div class="mb-1">
                                                          <label for="exampleFormControlInput1" class="required form-label">Estado</label>
-                                                         <input v-model="doacao.estado" type="text" class="form-control form-control-solid" placeholder="Estado"/>
+                                                         <input v-model="estado" type="text" class="form-control form-control-solid" placeholder="Estado"/>
                                                      </div>
                                                  </div>
                                                  <div class="col-6">
                                                      <div class="mb-1">
                                                          <label for="exampleFormControlInput1" class="required form-label">Cidade</label>
-                                                         <input v-model="doacao.cidade" type="text" class="form-control form-control-solid" placeholder="Cidade"/>
+                                                         <input v-model="cidade" type="text" class="form-control form-control-solid" placeholder="Cidade"/>
                                                      </div>
                                                  </div>
  
@@ -163,7 +121,7 @@ Filter Options act
                                              <div class="col-xl-6">
  
                                                  <div class="card-title mb-10" >
-                                                     <h2>Total a Pagar: R$ {{doacao.planos_valor}} Por {{tipo}} </h2>
+                                                     <h2>Total a Pagar: R$ {{planos_valor}} Por {{tipo}} </h2>
                                                  </div>
                                                  <P>
                                                      Todas as transações são segura e cri+tografadas. As informações do cartão de credito nuca são armazenado em nossos servidores
@@ -181,7 +139,7 @@ Filter Options act
                                                                      class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary active "
                                                                      data-kt-button="true">
                                                                      <!--begin::Input-->
-                                                                     <input  class="btn-check"  @click="jms = 'cartao'"
+                                                                     <input  class="btn-check"  @click="jms = 'cartao'" v-model="type_pagamento"  value="CARTÃO" 
                                                                      type="radio" name="method" value="1" />
                                                                      <!--end::Input-->
                                                                      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-credit-card-2-front-fill" viewBox="0 0 16 16">
@@ -195,7 +153,7 @@ Filter Options act
                                                                      class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary "
                                                                      data-kt-button="true">
                                                                      <!--begin::Input-->
-                                                                     <input class="btn-check" @click="jms = 'boleto'"
+                                                                     <input class="btn-check" @click="jms = 'boleto'"  v-model="type_pagamento"  value="BOLETO" 
                                                                          type="radio" name="method" value="2" />
                                                                      <!--end::Input-->
                                                                      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-upc-scan" viewBox="0 0 16 16">
@@ -210,7 +168,7 @@ Filter Options act
                                                                    class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary "
                                                                    data-kt-button="true">
                                                                    <!--begin::Input-->
-                                                                   <input class="btn-check" @click="jms = 'pix'"
+                                                                   <input class="btn-check" @click="jms = 'pix'" v-model="type_pagamento"  value="PIX" 
                                                                        type="radio" name="method" value="3" />
                                                                    <!--end::Input-->
                                                                   
@@ -249,7 +207,7 @@ Filter Options act
                                                                      <tspan
                                                                          style="-inkscape-font-specification:monospace"
                                                                          x="12.994" y="51.352" font-family="monospace">
-                                                                         {{doacao.cart_numero||'0000 0000 0000 0000'}}</tspan>
+                                                                         {{cart_numero||'0000 0000 0000 0000'}}</tspan>
                                                                  </text>
                                                                  <text
                                                                      style="line-height:1.25;-inkscape-font-specification:'Segoe UI'"
@@ -260,7 +218,7 @@ Filter Options act
                                                                      <tspan
                                                                          style="-inkscape-font-specification:monospace"
                                                                          x="13.547" y="79.959" font-family="monospace">
-                                                                         {{doacao.cart_nome||'NOME COMPLETO'}}</tspan>
+                                                                         {{cart_nome||'NOME COMPLETO'}}</tspan>
                                                                  </text>
                                                                  <path
                                                                      d="M17.606 21.77c-.813 0-1.552.305-2.108.81h5.23l-.81-.81zm3.12 0l3.307 3.306 3.306-3.307zm7.422 0l-.824.824h5.227a3.127 3.127 0 00-2.124-.825zM15.002 23.15a3.13 3.13 0 00-.534 1.756v1.078h6.323v.122h.116v6.539h-.125v.144h-6.314v1.2c0 .566.15 1.096.41 1.554h6.307l2.562-2.561v-7.386L21.3 23.151zm11.75.014L24.319 25.6v7.383l2.449 2.448h6.448c.223-.431.349-.92.349-1.441v-1.17H27.33V25.82h6.235v-.914a3.13 3.13 0 00-.525-1.742zm1.15 3.228v2.612h5.663v-2.612zm-13.434.163v2.449h5.867v-2.449zm0 3.021v2.641h5.867v-2.64zm13.434 0v2.67h5.663v-2.67zm-3.869 3.929l-3.622 3.622h7.245zm3.306 2.497l1.125 1.124h1.963c.97 0 1.836-.436 2.41-1.124zm-12.044.113a3.128 3.128 0 002.311 1.011h1.995l1.012-1.011z"
@@ -285,7 +243,7 @@ Filter Options act
                                                                      <tspan
                                                                          style="-inkscape-font-specification:monospace"
                                                                          x="14.101" y="67.018" font-family="monospace">
-                                                                         {{doacao.cart_validade||'02/2027'}}</tspan>
+                                                                         {{cart_validade||'02/2027'}}</tspan>
                                                                  </text>
                                                                  <text
                                                                      style="line-height:1.25;-inkscape-font-specification:'Segoe UI'"
@@ -307,7 +265,7 @@ Filter Options act
                                                                      <tspan
                                                                          style="-inkscape-font-specification:monospace"
                                                                          x="120.401" y="67.018" font-family="monospace">
-                                                                         {{doacao.cart_cvv||'1234'}}</tspan>
+                                                                         {{cart_cvv||'1234'}}</tspan>
                                                                  </text>
                                                              </svg>
  
@@ -320,7 +278,7 @@ Filter Options act
                                                                      <label
                                                                          class="col-lg-10 col-form-label required fw-bold fs-6">Número
                                                                          cartão</label>
-                                                                     <input v-model="doacao.cart_numero" type="text"
+                                                                     <input v-model="cart_numero" type="text"
                                                                          name="cartao"
                                                                          class="form-control form-control-lg form-control-solid"
                                                                          placeholder="0000 0000 0000 0000" required />
@@ -341,7 +299,7 @@ Filter Options act
                                                                          <div class="col-lg-6 fv-row">
                                                                              <label
                                                                                  class="col-lg-12 col-form-label required fw-bold fs-6">Validade</label>
-                                                                             <input v-model="doacao.cart_validade" type="text"
+                                                                             <input v-model="cart_validade" type="text"
                                                                                  name="validar"
                                                                                  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                                                                  placeholder="DD/YY" required />
@@ -351,7 +309,7 @@ Filter Options act
                                                                          <div class="col-lg-6 fv-row">
                                                                              <label
                                                                                  class="col-lg-12 col-form-label required fw-bold fs-6">CVV</label>
-                                                                             <input v-model="doacao.cart_cvv" type="text"
+                                                                             <input v-model="cart_cvv" type="text"
                                                                                  name="cvv"
                                                                                  class="form-control form-control-lg form-control-solid"
                                                                                  placeholder="123" required />
@@ -370,7 +328,7 @@ Filter Options act
                                                                      <label
                                                                          class="col-lg-10 col-form-label required fw-bold fs-6">Nome
                                                                          Completo</label>
-                                                                     <input v-model="doacao.cart_nome" type="text"
+                                                                     <input v-model="cart_nome" type="text"
                                                                          name="nascimento"
                                                                          class="form-control form-control-lg form-control-solid"
                                                                          placeholder="Nome Completo" required />
@@ -383,7 +341,7 @@ Filter Options act
                                                          <!--end::Card body-->
                                                          <!--begin::Actions-->
                                                          <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                                             <button style="width: 100%;" type="submit" class="btn btn-success p-5"
+                                                         <button  @click="addTransacao()" style="width: 100%;" type="submit" class="btn btn-success p-5"
                                                                  id="kt_account_profile_details_submit">
                                                                  DOAR AGORA!
                                                              </button>
@@ -419,7 +377,7 @@ Filter Options act
                                                                          </div>
                                                                      </div>
                                                                 <button style="width: 100%; position:relative; left:10%;" class="btn btn-success p-5">DOAR AGORA!</button>
-                                                            
+                                                        
                                                                  </div>
                                                                
                                                          </div>
@@ -449,70 +407,114 @@ Filter Options act
                
          </div>
          <!--end::Root-->
-        <!--end::Root-->
-	
-
 	</div>
-	<!-- <link href="../../assets/js/front-js/list/list.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/datatables.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/scripts.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/plugins.bundle.js" rel="stylesheet" type="text/css" /> -->
+    `,
 
-	<script src="../../assets/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="../../assets/assets/js/scripts.bundle.js"></script>
-	<script src="../../assets/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<script src="../../assets/assets/js/custom/apps/subscriptions/list/list.js"></script>
-	<script>
 
-		new Vue({
-			el: '#app',
-			data: {
-				
+	data: function () {
+		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-	
-			
+
 			plano_id: "1386061",
 			plano_id_zap: 0,
 
-			doacao: {
-                instituicao_id:  null,
-				mensal: null,
-				planos_id: null,
-				planos_valor: null,
-				email: null,
-				nome: null,
-				genero: null,
-				cpf: null,
-				telefone: null,
-				cep: null,
-				numero: null,
-				estado: null,
-				endereco: null,
-				bairro: null,
-				cidade: null,
-				type_pagamento: null,
-				cart_numero: null,
-				cart_cvv: null,
-				cart_validade: null,
-				cart_nome: null,
-			},
+			token: null,
+			instituicao_id: null,
+			mensal: null,
+			planos_id: null,
+			planos_valor: null,
+			email: null,
+			nome: null,
+			genero: null,
+			cpf: null,
+			telefone: null,
+			cep: null,
+			numero: null,
+			estado: null,
+			endereco: null,
+			bairro: null,
+			cidade: null,
+			type_pagamento: null,
+			cart_numero: null,
+			cart_cvv: null,
+			cart_validade: null,
+			cart_nome: null,
+
 
 			jms: "cartao",
-            tipo: null,
-			valor: null,
-		
-	
-			},
-			mounted() {
-				this.tipo = window.localStorage.getItem("tipo")
- this.valor = window.localStorage.getItem("valor")
- this.email = window.localStorage.getItem("email")
- 
-			},
+			tipo: null,
 
-		})
-	</script>
-</body>
-<!--end::Body-->
+		}
+	},
 
-</html>
+	methods: {
+		async addTransacao() {
+			this.error = null
+
+			let res = await adm.transacaoPlano(
+				this.token,
+				this.instituicao_id = "3",
+				this.mensal = "1",
+				this.planos_id = "12",
+				this.planos_valor ,
+				this.email ,
+				this.nome,
+				this.genero,
+				this.cpf,
+				this.telefone,
+				this.cep ,
+				this.numero ,
+				this.estado,
+				this.endereco,
+				this.bairro,
+				this.cidade ,
+				this.type_pagamento,
+				this.cart_numero,
+				this.cart_cvv,
+				this.cart_validade,
+				this.cart_nome,
+				
+				// this.token,
+				// this.instituicao_id,
+				// this.mensal,
+				// this.planos_id,
+				// this.planos_valor,
+				// this.email,
+				// this.nome,
+				// this.genero,
+				// this.cpf,
+				// this.telefone,
+				// this.cep,
+				// this.numero,
+				// this.estado,
+				// this.endereco,
+				// this.bairro,
+				// this.cidade,
+				// this.type_pagamento,
+				// this.cart_numero,
+				// this.cart_cvv,
+				// this.cart_validade,
+				// this.cart_nome,
+			)
+			if (!res.next) {
+				this.error = res.message
+				return null
+			}
+
+			console.log(res)
+		},
+
+
+	},
+
+	mounted() {
+		this.tipo = window.localStorage.getItem("tipo")
+		this.planos_valor = window.localStorage.getItem("valor")
+		this.email = window.localStorage.getItem("email")
+        this.token = localStorage.getItem('token')
+
+	},
+
+
+}
+
