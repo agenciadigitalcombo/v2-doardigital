@@ -1,3 +1,3 @@
 <?php
 
-router('/create-transacao', 'TransacaoControler@primeira_parte_create_transacao');
+router('/transacao', 'TransacaoControler@primeira_parte_create_transacao');

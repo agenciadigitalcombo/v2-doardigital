@@ -8,7 +8,7 @@ class Doador implements IDoador
         $banco = new Banco();
         $sql = "SELECT * FROM doador WHERE cpf='$cpf'";
         $guard = $banco->query($sql);
-        return $guard;
+        return !empty($guard);
     }
 
     public function get_by_costumer_id(int $id): array

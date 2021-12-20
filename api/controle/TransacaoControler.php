@@ -4,6 +4,7 @@ class TransacaoControler{
     
     static function primeira_parte_create_transacao()
     {
+        header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
         $adm = new Adm(); 
         $doador = new Doador();
@@ -11,79 +12,51 @@ class TransacaoControler{
         $plano = new Plano();
         $endereco = new Endereco;
 
+        
 
-        // Token Adm
         $token_parce = token();
-        
-        // listagem adm
-        $get_secret_adm = $token_parce['secret'];
-        $secret = $adm->list_profile($get_secret_adm);
-        $id = $secret['id']; 
 
-        // Listagem instituicao
-        $get_instituicao_id = $instituicao->list_all_by_adm_id($id);
-        $instituicao_id = $get_instituicao_id['id'];
-        
-        
+        $instituicao_id = $_REQUEST['instituicao_id'];
+        $mensal = $_REQUEST['mensal'] ?? null;
+        $planos_id = $_REQUEST['planos_id'] ?? null;
+        $planos_valor = $_REQUEST['planos_valor'] ?? null;
+        $email = $_REQUEST['email'];
+        $nome = $_REQUEST['nome'] ?? null;
+        $genero = $_REQUEST['genero'] ?? null;
+        $cpf = cpf();
+        $telefone = telefone();
+        $cep = $_REQUEST['cep'];
+        $numero = $_REQUEST['numero'] ?? null;
+        $estado = $_REQUEST['estado'] ?? null;
+        $endereco = $_REQUEST['endereco'] ?? null;
+        $bairro = $_REQUEST['bairro'] ?? null;
+        $cidade = $_REQUEST['cidade'] ?? null;
+        $type_pagamento = $_REQUEST['type_pagamento'] ?? null;
+        $cart_numero = $_REQUEST['cart_numero'] ?? null;
+        $cart_cvv = $_REQUEST['cart_cvv'] ?? null;
+        $cart_validade = $_REQUEST['cart_validade'] ?? null;
+        $cart_nome = $_REQUEST['cart_nome'] ?? null;
 
-        // listagem doador
-        //$cpf = cpf();
-        $cpf = 13213213;
-        $list_doador = $doador->get_by_cpf($cpf);
-        $doador_id = $list_doador['id'];
+        $is_doador = $doador->exist($cpf);
+        if(!$is_doador){
+            $doador->create($nome, $email, $telefone, $cpf, "", $genero, "", $instituicao_id, []);
+        }
 
-        
-        //$tipo = $_REQUEST['tipo'];
-        
-        // $email_notificacao = email();
-        
-        // Cadastro Doador
-        // $nome = $_REQUEST['nome'];
-        // $genero = $_REQUEST['genero'];
-        // $telefone = telefone();
-        // $cpf = "cpf()";
-        // $email_doador = email();
-        //Criar doador-> $doador->create();
-         
-        // Cadastro Endereco
+        $doador_dados = $doador->get_by_cpf($cpf);
+        $doador_id = $doador_dados['id'];
 
-        // $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
-        // $logradouro = $_REQUEST['logradouro'] ?? '';
-        // $complemento = $_REQUEST['complemento'] ?? '';
-        // $bairro = $_REQUEST['bairro'] ?? '';
-        // $cidade = $_REQUEST['cidade'] ?? '';
-        // $estado = $_REQUEST['estado'] ?? '';
-        // $numero = $_REQUEST['numero'] ?? '';
-        // $cep = cep();
-        // $transform_numero = withdraw_caracter($numero);
-        // Criar endereco-> $endereco-> create($id, $nome_identificacao, $cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
 
-        
-        // Plano
+        $endereco-> create($doador_id, "Endereco Doacao" , $cep, $endereco, $numero, "", $bairro, $cidade, $estado);
 
-        // $plano_id = id();
-        $list_instituicao = $plano->list_all_by_instituicao($instituicao_id);
-        // foreach($list_instituicao as $g){
-        //     $payload [] = [
-        //         'id' => $get_plano_id = $g['id'],
-        //         'amount' => $get_plano_amount = $g['amount']
-        //     ];
-        // }
-        
-        // var_dump($get_plano_id, $get_plano_amount);
-        // die;
+        $doacao->create($instituicao_id, $doador_id, '', $type_pagamento, "await", $planos_id, $planos_valor);
 
-        // Pagar-me
-        $status_pagamento = "aguardando";
-        
-        
 
-        
-        $doacao->create($instituicao_id, $doador_id, '', $tipo = "mensal", $status_pagamento, $plano_id = 13, $valor = 1000);
-        
+    
         echo json_encode([
             'next' => true,
-            'message' => 'Transacao'
+            'message' => 'Transacao Concluida',
+            'codigo' => null,
+            'url' => null
         ]);
         
 

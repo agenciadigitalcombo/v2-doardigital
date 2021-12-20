@@ -221,3 +221,30 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 {
 
 }
+
+
+###
+POST http://localhost/v2-doardigital/api/transacao
+Content-Type: application/x-www-form-urlencoded
+
+token= eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&instituicao_id= 5
+&mensal= 1
+&planos_id= 13
+&planos_valor= 1000
+&email= victorfernando@gmail.com
+&nome= victor fernando
+&genero= masculino
+&cpf= 123.123.123-12
+&telefone= (38) 9 9801-9210
+&cep= 02835-090
+&numero= 75 b
+&estado= SP
+&endereco= rua plinio
+&bairro= Serralheiro
+&cidade= Sao paulo
+&type_pagamento= cartao
+&cart_numero= 4568 4568 4568 4568
+&cart_cvv= 0055
+&cart_validade= 12/21
+&cart_nome= victor fernando
