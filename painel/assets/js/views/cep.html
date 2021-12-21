@@ -22,8 +22,8 @@
 
 		 <input type="text" v-model="logradouro" placeholder="rua"> 
 		 <input type="text" v-model="complemento" placeholder="complemento">
-			<input type="text" v-model="bairro" placeholder="digite o cep aqui">
 			<!--
+			<input type="text" v-model="bairro" placeholder="digite o cep aqui">
 			<input type="text" v-model="localidade" placeholder="digite o cep aqui"> -->
 		</div>
 	</div>
@@ -46,14 +46,13 @@
 				bairro: null
 			},
 			methods: {
-			 searchCep() {
+				async searchCep() {
 					if (this.cep.length == 8) {
 						axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 							.then(response => {
 								
 							this.logradouro = response.data.logradouro,
 							this.complemento = response.data.complemento,
-							this.bairro = response.data.bairro,
 							console.log(response.data)
 							}
 							)

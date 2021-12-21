@@ -133,6 +133,16 @@ Vue.component('c-planoEditar', planoEditar )
 import planoNovo from './views/planoNovo.js'
 Vue.component('c-planoNovo', planoNovo )
 
+import qrCode from './views/qr-code.js'
+Vue.component('c-qr-code', qrCode )
+
+import divPagamento from './views/div-pagamento.js'
+Vue.component('c-div-pagamento', divPagamento )
+
+import divPagamentoAdd from './views/div-pagamentoAdd.js'
+Vue.component('c-div-pagamentoAdd', divPagamentoAdd )
+
+
 
 const app = new Vue({
 

@@ -67,8 +67,7 @@ export default {
 								<!--begin::Content-->
 								<div id="kt_account_profile_details">
 									<!--begin::Form-->
-									<form id="kt_docs_formvalidation_text" class="form"
-									novalidate="novalidate">
+									<form id="kt_docs_formvalidation_text" >
 										<!--begin::Card body-->
 										<div class="card-body border-top p-9">
 											<!--begin::Input group-->
@@ -337,7 +336,7 @@ export default {
 	},
 	async mounted() {
 			
-		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../painel/assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 	document.head.appendChild(validacao);
 
 	},

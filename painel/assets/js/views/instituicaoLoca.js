@@ -76,10 +76,6 @@ export default {
 											<!--end::Input group-->
 
 
-											<input v-model="id"  name="ID"
-											class="form-control form-control-lg form-control-solid"
-											placeholder="ID " />
-
 											<div class="row mb-6">
 												<!--begin::Label-->
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
@@ -101,25 +97,28 @@ export default {
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
 												<!--end::Label-->
 												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<div class="input-group mb-3">
-														<input id="cep" v-model="cep" @keyup="searchCep()" type="text" name="text_input"
-															class="form-control form-control-lg form-control-solid"
-															v-mask="'###.###.###-##'" placeholder="000.000.000-00" />
-														<span class="input-group-text" id="basic-addon2">
-															<a @click="pesquisarCep()">
-																<svg xmlns="http://www.w3.org/2000/svg" width="30"
-																	height="30" fill="currentColor" class="bi bi-search"
-																	viewBox="0 0 16 16">
-																	<path
-																		d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-																</svg>
-															</a>
+													<div class="col-lg-8 fv-row">
+														<div class="input-group mb-3">
+															<input v-model="cep" @keyup="searchCep()"
+																type="text" name="text_input"
+																class="form-control form-control-lg form-control-solid"
+																 placeholder="00000-000" />
+															<span class="input-group-text" id="basic-addon2">
+																<a @click="searchCep()" >
+																	<svg xmlns="http://www.w3.org/2000/svg" width="30"
+																		height="30" fill="currentColor"
+																		class="bi bi-search" viewBox="0 0 16 16">
+																		<path
+																			d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+																	</svg>
+																</a>
 
-														</span>
+															</span>
+
+
+														</div>
 													</div>
-												</div>
-												<!--end::Col-->
+													<!--end::Col-->
 											</div>
 											<div class="row mb-6">
 												<!--begin::Label-->
@@ -331,21 +330,23 @@ export default {
 			return res
 		},
 		
-		async searchCep() {
+		searchCep() {
 			if (this.cep.length == 8) {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
-					.then(response => 
-					this.logadouro = response.data.logradouro,
-					this.numero = response.data.ddd,
-					this.complemento = response.data.complemento,
-					this.bairro = response.data.bairro,
-					this.cidade = response.data.localidade,
-					this.estado = response.data.uf,
-					this.data = response.data,
-					console.log(this.data)
-					
+					.then(response => {
+
+						this.logadouro = response.data.logradouro,
+							// this.complemento = response.data.complemento,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf,
+
+							console.log(response.data)
+						
+					}
 					)
 					.catch(error => console.log(error))
+
 			}
 		}
 
@@ -356,6 +357,7 @@ export default {
 		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 		document.head.appendChild(validacao);
 
+		this.id = localStorage.getItem('instituicao_id')
 	// 	let cep = document.createElement('script'); cep.setAttribute('src', "../../painel/assets/js/cep.js");
 	// document.head.appendChild(cep);
 
@@ -380,3 +382,4 @@ export default {
 
 	},
 }
+

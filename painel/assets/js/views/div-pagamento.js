@@ -21,8 +21,6 @@ export default {
                 <!--begin::Content-->
 
 
-    <c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
-    
 
                     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                         <!--begin::Post-->
@@ -36,36 +34,17 @@ export default {
                                     <div class="card-header mt-5">
     
                                         <div class="card-title flex-column">
-                                            <h3 class="fw-bolder mb-1"> Credenciais</h3>
+                                            <h3 class="fw-bolder mb-1"> Divisao de Pagamento</h3>
                                         </div>
                                         <!--begin::Card title-->
                                         <div class="card-title">
-                                            <!--begin::Search-->
-                                            <div class="d-flex align-items-center position-relative my-1 me-5">
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                            height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
-                                                            fill="black" />
-                                                        <path
-                                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                            fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                                <input type="text" data-kt-permissions-table-filter="search"
-                                                    class="form-control form-control-solid w-250px ps-15"
-                                                    placeholder="Buscar Credenciais" />
-                                            </div>
-                                            <!--end::Search-->
+                                          
                                         </div>
                                         <!--end::Card title-->
                                         <!--begin::Card toolbar-->
                                         <div class="card-toolbar">
                                             <!--begin::Button-->
-                                            <a type="button" class="btn btn-light-primary" href="#/credencias/nova">
+                                            <a type="button" class="btn btn-light-primary" href="#/add-pagamento">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -78,7 +57,7 @@ export default {
                                                             fill="black" />
                                                     </svg>
                                                 </span>
-                                                Add Credenciais
+                                               Novo
                                             </a>
                                             <!--end::Button-->
                                         </div>
@@ -95,8 +74,8 @@ export default {
                                             <thead>
                                                 <!--begin::Table row-->
                                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th class="min-w-150px">Tipo</th>
-                                                    <th class="min-w-400px">Acessos Permitido</th>
+                                                    <th class="min-w-200px">Recebedor</th>
+                                                    <th class="min-w-350px">Porcentagem</th>
                                                     <th class="min-w-100px text-end"></th>
                                                 </tr>
                                                 <!--end::Table row-->
@@ -104,15 +83,15 @@ export default {
                                             <!--end::Table head-->
                                             <!--begin::Table body-->
                                             <tbody class="fw-bold text-gray-600">
-                                                <tr v-for="item in dados" :key="item.id">
+                                                <tr >
                                                     <td>
-                                                    {{item.nome_identificacao}}
+                                                    item.nome_identificacao}}
 		
                                                     </td>
     
                                                     <td>
                                                         <a class="badge badge-light-primary fs-7 m-1">
-                                                             	{{item.recursos}}
+                                                             	item.recursos}}
                                                         </a>
                                                     </td>
                                                     <!--end::Assigned to=-->

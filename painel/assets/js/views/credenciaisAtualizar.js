@@ -130,7 +130,6 @@ export default {
 			for (var key in this.jms) {
 				this.recursos += this.jms[key] + ", ";
 			}
-
 			let res = await adm.atualizarCredencia(
 				this.id,
 				this.nome_identificacao,
@@ -141,6 +140,7 @@ export default {
 				this.error = res.message
 				return null
 			}
+				console.log(this.nome_identificacao)
 			this.msg = res.message,
 			setTimeout(() => this.msg = "", 3000);
 

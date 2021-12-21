@@ -29,7 +29,7 @@ export default {
 									<div class="card-header border-0 cursor-pointer" role="button"
 										data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
 										<div class="card-title m-0">
-											<h3 class="fw-bolder m-0">Editar Plano</h3>
+											<h3 class="fw-bolder m-0">Novo Divisao de Pagamento</h3>
 										</div>
 									</div>
 									<!--end::Card header-->
@@ -37,9 +37,7 @@ export default {
 									<div id="kt_account_signin_method">
 										<!--begin::Card body-->
 										<div class="card-body border-top p-9">
-											<!--begin::Email Address-->
-
-											<!--begin::Password-->
+							
 											<div class="d-flex flex-wrap align-items-center mb-10">
 
 												<!--end::Label-->
@@ -47,41 +45,38 @@ export default {
 												<!-- <div id="kt_signin_password_edit" class="flex-row-fluid d-none"> -->
 												<div id="kt_signin_password_edit" class="flex-row-fluid ">
 													<!--begin::Form-->
-													<form id="kt_docs_formvalidation_text"  class="form"
+													<form id="kt_docs_formvalidation_text" class="form"
 														novalidate="novalidate">
 														<div class="row mb-1">
-
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
-																	<label for="nome"
-																		class="form-label fs-6 fw-bolder mb-3">Nome</label>
-																	<input v-model="nome"  type="text"
+																	<label for="Recebedor"
+																		class="form-label fs-6 fw-bolder mb-3 required">Recebedor</label>
+																	<input type="text"
 																		class="form-control form-control-lg form-control-solid"
-																		name="text_input" id="nome" />
+																		name="text_input"/>
 																</div>
 															</div>
 
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
-																	<label for="Valor"
-																		class="form-label fs-6 fw-bolder mb-3">Valor</label>
-																	<input v-model="amount"  type="text" disabled 
+																	<label for="Porcentagem"
+																		class="form-label fs-6 fw-bolder mb-3 required">Porcentagem</label>
+																	<input  type="text"  
 																		class="form-control form-control-lg form-control-solid"
-																		name="text_input"  id="Valor" />
+																		name="text_input" />
 																</div>
 															</div>
 														
 														</div>
 
 														<div class="d-flex">
-															
-																<button  id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary" @click="editarPlanos()">
+															<button  id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
 																<span class="indicator-label">SALVAR</span>
 																<span class="indicator-progress">Por favor, aguarde...
 																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 																</button>
-
-
+															
 															<button id="kt_password_cancel" type="button"
 																class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
 														</div>
@@ -123,29 +118,28 @@ export default {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
-			// instituicao_id: null,
-			nome: null,
+			instituicao_id: null,
+			Recebedor: null,
 			amount: null,
 	          token: null,
 			lista_dados: [],
 		}
 	},
 	methods: {
-
-		async editarPlanos() {
+		async addPlanos() {
 			this.error = null
 
-			let res = await adm.editarPlanos(
+			let res = await adm.cadastrarPlanos(
 				this.id,
-				this.nome,
+				this.instituicao_id,
+				this.Recebedor,
 				this.amount,
-				this.token,	
+				this.token,						
 				)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
-
 		},
 
 	
@@ -155,14 +149,13 @@ export default {
 
 
 	async mounted() {
-		// this.id = window.localStorage.getItem('instituicao_id');
-		this.id = globalThis._planos.id
-		this.nome = globalThis._planos.nome
-		this.amount = globalThis._planos.amount
+		this.instituicao_id = window.localStorage.getItem('instituicao_id');
+		this.id = window.localStorage.getItem('instituicao_id');
 
 				
 		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 	document.head.appendChild(validacao);
+
    }, 
 
 
@@ -173,3 +166,5 @@ export default {
 
 
 }
+
+

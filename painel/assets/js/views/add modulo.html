@@ -49,30 +49,30 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Body-->
 
 <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
-    <div id="app">
+	<div id="app">
 
-   <!--begin::Root-->
-   <div class="d-flex flex-column flex-root">
-	<!--begin::Page-->
-	<div class="page d-flex flex-row flex-column-fluid">
-	 
-		<!--begin::Wrapper-->
-		<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-		  
-		<!--begin::Content-->
+		<!--begin::Root-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="page d-flex flex-row flex-column-fluid">
+
+				<!--begin::Wrapper-->
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
+					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
-							
+
 								<!--begin::details View-->
 								<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
 									<!--begin::Card header-->
 									<div class="card-header cursor-pointer">
 										<!--begin::Card title-->
 										<div class="card-title m-0">
-											<h3 class="fw-bolder m-0">Configuração</h3>
+											<h3 class="fw-bolder m-0">QR CODE</h3>
 										</div>
 									</div>
 									<!--begin::Card header-->
@@ -80,85 +80,66 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="card-body p-9">
 										<!--begin::Row-->
 										<div class="row mb-7">
-											<!--begin::Label-->
-											<div class="col-lg-6">
-												<div class="fv-row mb-10">
-													<label class="required fw-bold fs-6 mb-2">Titulo do Site</label>
-													<input type="text" name="text_input" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="" value="" />
-												</div>
-											</div>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-6">
-												<div class="fv-row mb-10">
-													<label class="required fw-bold fs-6 mb-2">Tags Google</label>
-												<input type="text" name="text_input" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="" value="" />
-												</div>
-											</div>
-											<!--end::Col-->
 
-											<!--begin::Col-->
+
+
+											<div class="m-0">
+												<h3 class="mb-12">QR CODE para ajudar na divulgação !!!</h3>
+											</div>
+
+
+
+
 											<div class="col-lg-12">
-												<div class="fv-row mb-10">
-													<label class="required fw-bold fs-6 mb-2">Descrição Google</label>
-													<textarea name="textarea_input" class="form-control form-control-solid"></textarea>											
+												<div class="fv-row mb-2">
+
+													<img src="../../painel/assets/image/qr.png" style="width: 300px;"
+														alt="" srcset="">
 												</div>
 											</div>
-											<!--end::Col-->
-	<!--begin::Col-->
-	<div class="col-lg-12">
-		<div class="fv-row mb-10">
-			<label class="required fw-bold fs-6 mb-2">Cor de Fundo</label>
-			<br>
-			<input class="" type="color" maxlength="75">										
-		</div>
-	</div>
+											<!--begin::Actions-->
+											<div class="">
+												<button type="submit" class="btn btn-primary m-2">
+													<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+														fill="currentColor" class="bi bi-download p-2"
+														viewBox="0 0 16 16">
+														<path
+															d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+														<path
+															d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+													</svg>
+													Baixar</button>
+											</div>
+											<!--end::Actions-->
 
-	<div class="col-lg-12">
-		<div class="fv-row mb-10">
-				
-	<label>
-		<img src="../painel/assets/image/default.png" width="150">
-		<input type="file" @change="preview" name="images" data-name="my_logo" hidden>
-	</label>
-	<br>
-	<br>
-	<span> 1MB o tamanho máximo da imgem.</span>								
-		</div>
-	</div>
-<!--begin::Actions-->
-<div class="card-footer py-6 px-9">
-	<button  type="submit" class="btn btn-primary m-2">SALVAR</button>
-</div>
-<!--end::Actions-->
-	<!--end::Col-->
+
 										</div>
-									
-									
+
+
 									</div>
 									<!--end::Card body-->
 								</div>
 								<!--end::details View-->
 								<!--begin::Row-->
-							
+
 								<!--end::Row-->
-							
+
 							</div>
 							<!--end::Container-->
 						</div>
 						<!--end::Post-->
 					</div>
 					<!--end::Content-->
-		  
+
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
 		</div>
-		<!--end::Wrapper-->
+
+
+
 	</div>
-	<!--end::Page-->
-</div>
-
-	
-
-</div>
 
 	<script>
 
@@ -166,11 +147,11 @@ License: For each use you must have a valid license purchased only from above li
 			el: '#app',
 			data: {
 				jms: "1",
-		// step: 1
+				// step: 1
 			},
-mounted() {
-	// this.jms = this.step
-},
+			mounted() {
+				// this.jms = this.step
+			},
 
 		})
 	</script>

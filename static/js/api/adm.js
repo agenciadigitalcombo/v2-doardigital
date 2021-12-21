@@ -172,7 +172,7 @@ export default {
             token,
         })
     },
-
+ 
 
     async listarInstutuicao(token) {
         return await http.get('/list-instituicao', {
@@ -220,12 +220,16 @@ export default {
         telefone,
         credencial_id,
         secret,
+        email,
+        token,
     ) {
         return await http.post('/atualizar-subadm', {
             nome,
             telefone,
             credencial_id,
             secret,
+            email,
+            token,
         })
     },
 
@@ -326,3 +330,4 @@ export default {
 }
 
 
+// editarSubadm

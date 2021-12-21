@@ -77,13 +77,16 @@ export default {
 
 											<div class="col-lg-4" v-for="item in dados" :key="item.id">
 											<a @click="addLocahostore(item)" >
-												<div class="card  card-bordered mb-5">
-													<div class="card-header">
+												<div class="card card-bordered mb-5">
+													<div class="card m-5">
 														<h3 class="card-title">{{item.nome_fantasia}}</h3>
 														<br>
-														{{ item.id }}
+														<h5 class="card-title">{{item.subdomaim}}</h5>
 													</div>
-
+												
+												
+												
+											
 												</div>
 											</a>
 										</div>

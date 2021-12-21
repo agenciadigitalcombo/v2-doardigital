@@ -47,29 +47,17 @@ export default {
 												<!-- <div id="kt_signin_password_edit" class="flex-row-fluid d-none"> -->
 												<div id="kt_signin_password_edit" class="flex-row-fluid ">
 													<!--begin::Form-->
-													<form id="kt_signin_change_password" class="form"
+													<form id="kt_docs_formvalidation_text" class="form"
 														novalidate="novalidate">
 														<div class="row mb-1">
-
-
-														<div class="col-lg-12">
-																<div class="fv-row mb-5">
-																	<label for="token"
-																		class="form-label fs-6 fw-bolder mb-3">token</label>
-																	<input type="text" v-model="token" 
-																		class="form-control form-control-lg form-control-solid"
-																		name="token" id="token" />
-																</div>
-															</div>
-
-
+														
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
 																	<label for="nome"
 																		class="form-label fs-6 fw-bolder mb-3">Nome</label>
 																	<input type="text" v-model="nome" 
 																		class="form-control form-control-lg form-control-solid"
-																		name="nome" id="nome" />
+																		name="text_input"  id="nome" />
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -78,7 +66,7 @@ export default {
 																		class="form-label fs-6 fw-bolder mb-3">Email</label>
 																	<input type="email" v-model="email" 
 																		class="form-control form-control-lg form-control-solid"
-																		name="Email" id="Email" />
+																		name="email_input" id="Email" />
 																</div>
 															</div>
 
@@ -90,7 +78,7 @@ export default {
 			</label>
 																	<input type="text" v-model="telefone" v-mask="'(###) #####-####'" placeholder="(41) 99999-9999"
 																		class="form-control form-control-lg form-control-solid"
-																		name="Telefone" id="Telefone" />
+																		name="text_input" id="Telefone" />
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -98,32 +86,113 @@ export default {
 																	<label for="Credencial"
 																		class="form-label fs-6 fw-bolder mb-3 ">Credencial</label>
 																	<select v-model="credencial_id" class="form-select form-control form-control-lg form-control-solid"
-																		aria-label="Default select example">
+																		aria-label="Default select example" name="text_input">
 																		<option selected>Qual a sua Credencial</option>
 																		<option v-for="dado in lista_dados" :key="dado.id" :value="dado.id" >{{dado.nome_identificacao}}</option>
 																		
 																	</select>
 																</div>
 															</div>
+
+
+
+
+
+
+
+
+
+
+
+
+															
+
+
+
+
+
+
+
+
+
+
+
+															<div class="row mb-1">
 															<div class="col-lg-6">
-																<div class="fv-row ">
-																	<label for="confirmpassword" 
-																		class="form-label fs-6 fw-bolder ">Senha</label>
-																	<input type="password" v-model="senha" 
-																		class="form-control form-control-lg form-control-solid"
-																		name="confirmpassword" id="confirmpassword" />
+																<!--begin::Input group  -->
+																<div class="mb-10 fv-row" data-kt-password-meter="true">
+																	<!--begin::Wrapper-->
+																	<div class="mb-1">
+																		<!--begin::Label-->
+																		<label
+																			class="form-label fw-bold  fs-6 mb-2 required  ">
+																			Nova Senha
+																		</label>
+																		<!--end::Label-->
+
+																		<!--begin::Input wrapper-->
+																		<div class="position-relative mb-3">
+																			<input v-model="senha"
+																				class="form-control form-control-lg form-control-solid"
+																				type="password" placeholder=""
+																				name="new_password"
+																				autocomplete="off" />
+
+																			<span
+																				class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+																				data-kt-password-meter-control="visibility">
+																				<i class="bi bi-eye-slash fs-2"></i>
+
+																				<i class="bi bi-eye fs-2 d-none"></i>
+																			</span>
+																		</div>
+																		<!--end::Input wrapper-->
+
+																		<!--begin::Meter-->
+																		<div class="d-flex align-items-center mb-3"
+																			data-kt-password-meter-control="highlight">
+																			<div
+																				class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2">
+																			</div>
+																			<div
+																				class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2">
+																			</div>
+																			<div
+																				class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2">
+																			</div>
+																			<div
+																				class="flex-grow-1 bg-secondary bg-active-success rounded h-5px">
+																			</div>
+																		</div>
+																		<!--end::Meter-->
+																	</div>
+																	<!--end::Wrapper-->
+
+																	<!--begin::Hint-->
+																	<div class="text-muted">
+																		Use 8 ou mais caracteres com uma mistura de
+																		letras, números e símbolos.
+																	</div>
+																	<!--end::Hint-->
 																</div>
+																<!--end::Input group--->
 															</div>
+
 															<div class="col-lg-6">
-																<div class="fv-row ">
-																	<label for="confirmpassword"
-																		class="form-label fs-6 fw-bolder ">Confirma
-																		Senha</label>
-																	<input type="password"
+																<!--begin::Input group--->
+																<div class="fv-row mb-10">
+																	<label
+																		class="form-label fw-bold fs-6 mb-2 required">Confirma
+																		Nova Senha</label>
+
+																	<input
 																		class="form-control form-control-lg form-control-solid"
-																		name="confirmpassword" id="confirmpassword" />
+																		type="password" placeholder=""
+																		name="confirm_password" autocomplete="off" />
 																</div>
+																<!--end::Input group--->
 															</div>
+
 														</div>
 
 
@@ -252,12 +321,16 @@ export default {
 														</div>
 
 														<div class="d-flex">
-															<button @click="addUsuario()" id="kt_password_submit" type="button"
-																class="btn btn-primary me-2 px-6">SALVAR</button>
 
-																<button @click="editarUsuario()" id="kt_password_submit" type="button"
-																class="btn btn-success me-2 px-6">Alterar</button>
-																
+		<!--begin::Actions-->
+													<button @click="addUsuario()" id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
+														<span class="indicator-label">SALVAR</span>
+														<span class="indicator-progress">Por favor, aguarde...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+													<!--end::Actions-->
+
+											
 															<button id="kt_password_cancel" type="button"
 																class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
 														</div>
@@ -334,22 +407,6 @@ export default {
 			console.log(this.telefone,)
 		},
 
-		async editarUsuario() {
-			this.error = null
-
-			let res = await adm.editarSubadm(
-				this.email = "j@gmail.com",
-				this.secret = "61b52bb61d57d",
-				this.nome,
-				this.telefone,
-				this.credencial_id,
-			)
-			if (!res.next) {
-				this.error = res.message
-				return null
-			}
-			console.log(this.token,)
-		},
 
 		async listar() {
             let res = await adm.listarCredencial( localStorage.getItem('token') )
@@ -361,6 +418,11 @@ export default {
 
 
 	async mounted() {
+
+		
+		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
+		document.head.appendChild(validacao);
+
         this.lista_dados = (await this.listar()).dados
         this.id = lista_dados.id
          this.nome_identificacao = lista_dados.nome_identificacao
@@ -378,4 +440,4 @@ export default {
 }
 
 
-
+// confirmButton

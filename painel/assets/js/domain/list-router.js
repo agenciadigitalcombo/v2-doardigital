@@ -48,5 +48,13 @@ export default [
     { path: '/planos', component: { template: '<c-planos>' } },
     { path: '/planos/novo', component: { template: '<c-planoNovo>' } },
     { path: '/planos/editar', component: { template: '<c-planoEditar>' } },
+
+    { path: '/qr-code', component: { template: '<c-qr-code>' } },
+    
+    { path: '/divisao-pagamento', component: { template: '<c-div-pagamento>' } },
+    { path: '/add-pagamento', component: { template: '<c-div-pagamentoAdd>' } },
+    
+
+
     
 ]

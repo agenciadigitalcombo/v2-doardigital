@@ -156,7 +156,7 @@ export default {
 			lista_dados: [],
 			id: null,
 			nome_identificacao: null,
-		 recursos: null,
+			recursos: null,
 
 		}
 	},
@@ -171,7 +171,7 @@ export default {
 				this.telefone,
 				this.credencial_id,
 				this.secret,
-				this.token,	
+				this.token,
 			)
 			if (!res.next) {
 				this.error = res.message
@@ -184,37 +184,46 @@ export default {
 		async editarUsuario() {
 			this.error = null
 
-			let res = await adm.editarSubadm(	
+			let res = await adm.editarSubadm(
 				this.nome,
 				this.telefone,
-				this.credencial_id ,
-				this.secret ,
-			
+				this.credencial_id,
+				this.email = "j@gmail.com",
+				this.secret = "61b52bb61d57d",
+				this.token,
+
 			)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
-		
+
 		},
 
 		// async listar() {
-        //     let res = await adm.listarSubadm( localStorage.getItem('token') )
+		//     let res = await adm.listarSubadm( localStorage.getItem('token') )
 		// 	return res
-        // },
+		// },
 	},
 
 
 	async mounted() {
+		// this.nome = globalThis._usuario.nome
+		// this.telefone = globalThis._usuario.telefone
+		// this.credencial_id = globalThis._usuario.credencial_id
+		// this.secret = globalThis._usuario.secret
+		// this.email = globalThis._usuario.email
 
-this.nome = globalThis._usuario.nome
-
-        this.lista_dados = (await this.listar()).dados
-        this.id = lista_dados.id
-         this.nome_identificacao = lista_dados.nome_identificacao
-      this.recursos = lista_dados.recursos
-            console.log(lista_dados)
-   }, 
+		// this.lista_dados = (await this.listar()).dados
+		// this.id = lista_dados.id
+		// this.nome_identificacao = lista_dados.nome_identificacao
+		// this.recursos = lista_dados.recursos
+		// this.telefone = lista_dados.telefone
+		// this.secret = lista_dados.secret
+		// this.email = lista_dados.email
+	
+		
+	},
 
 
 	created() {
