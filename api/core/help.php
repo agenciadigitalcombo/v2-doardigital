@@ -59,32 +59,53 @@ function upload($name)
 
 function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
 {
+    $banco = new Banco();
+    $sql = "INSERT INTO taxonomia";
+    $sql .= "(from_id, to_id, tipo_relacao)";
+    $sql .= "VALUES";
+    $sql .= "('$from_id', '$to_id', '$tipo_relacao')";
+    $banco->query($sql);
     
 }
 
 function get_taxonomy_by_from(int $from_id): array
 {
-    return [];
+    $banco = new Banco();
+    $sql = "SELECT * FROM taxonomia WHERE from_id='$from_id'";
+    $guard = $banco->query($sql);
+    return $guard;
 }
 
 function get_taxonomy_by_relacao(string $tipo_relacao): array
 {
-    return [];
+    $banco = new Banco();
+    $sql = "SELECT * FROM taxonomia WHERE tipo_relacao='$tipo_relacao'";
+    $guard = $banco->query($sql);
+    return $guard;
 }
 
 function get_taxonomy_by_to(int $to_id): array
 {
-    return [];
+    $banco = new Banco();
+    $sql = "SELECT * FROM taxonomia WHERE to_id='$to_id'";
+    $guard = $banco->query($sql);
+    return $guard;
 }
 
 function get_taxonomy_by_to_relacao($to_id, string $tipo_relacao): array
 {
-    return [];
+    $banco = new Banco();
+    $sql = "SELECT * FROM taxonomia WHERE to_id='$to_id' AND tipo_relacao='$tipo_relacao'";
+    $guard = $banco->query($sql);
+    return $guard;
 }
 
 function get_taxonomy_by_from_relacao(int $from_id, string $tipo_relacao): array
 {
-    return [];
+    $banco = new Banco();
+    $sql = "SELECT * FROM taxonomia WHERE from_id='$from_id' AND tipo_relacao='$tipo_relacao'";
+    $guard = $banco->query($sql);
+    return $guard;
 }
 
 function gravatar(string $email): string
