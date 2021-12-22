@@ -327,7 +327,29 @@ export default {
         })
     },
 
-}
+    async listarPlanoDigital(token) {
+        return await http.get('/plano-digital-list', {
+            token
+        })
+    },
 
+    async cadastrarPlanosDigital(
+        nome,
+        whatsapp,
+        instituicao_max,
+        amount,
+        token,
+    ) {
+        return await http.post('/plano-digital-new', {
+            nome,
+            whatsapp,
+            instituicao_max,
+            amount,
+            token,
+        })
+    },
+
+    
+}
 
 // editarSubadm

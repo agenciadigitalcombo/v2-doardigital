@@ -55,7 +55,7 @@ export default {
 											</div>
 											<!--end::Toolbar-->
 										
-											<a  href="#/planos/novo"
+											<a  href="#/plano-digital/novo"
 											class="btn btn-primary">
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
 											
@@ -88,8 +88,8 @@ export default {
 													<th class="w-10px pe-2">
 
 													</th>
-													<th class="min-w-200px">TIpo</th>
-													<th class="min-w-50px"></th>
+													<th class="min-w-200px">Tipo</th>
+													<th class="min-w-50px">Whatsapp</th>
 													<th class="min-w-200px">Valor </th>
 													<th class="min-w-50px"></th>
 													<th class="min-w-150px">Status </th>
@@ -123,7 +123,7 @@ export default {
 													<!--end::Customer=-->
 													<!--begin::Billing=-->
 													<td>
-														<div class="badge badge-light"></div>
+														<div class="badge badge-light"> {{ item.whatsapp }}</div>
 													</td>
 													<!--begin::Date=-->
 													<td>
@@ -200,8 +200,9 @@ export default {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
-			instituicao_id: null,
 			nome: null,
+			whatsapp: null,
+			instituicao_max: null,
 			amount: null,
 	        token: null,
 		    dados: []
@@ -210,7 +211,7 @@ export default {
 
 	methods: {
         async listar() {
-            let res = await adm.listarPlanos(localStorage.getItem('token'))
+            let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
             return res
         },
 
@@ -221,12 +222,15 @@ export default {
 	},
 
 	async mounted() {
+		
+		// console.log("dados")
 		this.dados = (await this.listar()).dados,
         this.id = dados.id,
-        this.instituicao_id = dados.instituicao_id
         this.nome = dados.nome
+        this.whatsapp = dados.whatsapp
 		this.amount = dados.amount
         console.log(dados)
+		console.log("dados")
 	},
 	
 }

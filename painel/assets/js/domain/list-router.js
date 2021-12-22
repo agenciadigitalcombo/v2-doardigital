@@ -56,6 +56,5 @@ export default [
     
 
     { path: '/plano-digital', component: { template: '<c-planos-digital>' } },
-    
     { path: '/plano-digital/novo', component: { template: '<c-planos-digitalNovo>' } },
 ]
