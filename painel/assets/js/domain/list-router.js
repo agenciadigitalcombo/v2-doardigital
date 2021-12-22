@@ -55,6 +55,7 @@ export default [
     { path: '/add-pagamento', component: { template: '<c-div-pagamentoAdd>' } },
     
 
-
+    { path: '/plano-digital', component: { template: '<c-planos-digital>' } },
     
+    { path: '/plano-digital/novo', component: { template: '<c-planos-digitalNovo>' } },
 ]
