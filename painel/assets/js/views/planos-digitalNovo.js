@@ -64,12 +64,11 @@ export default {
 																<div class="fv-row mb-5">
 																	<label for="Valor"
 																		class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-																	<input v-model="amount"  type="text"  v-mask="'#.###,##'" placeholder="00,00" 
+																	<input v-model="amount"  type="text" id="kt_inputmask_6"  placeholder="00,00" 
 																		class="form-control form-control-lg form-control-solid"
-																		name="text_input" id="Valor" />
+																		name="text_input"  />
 																</div>
 															</div>
-
 
 
 															<div class="col-lg-6">
@@ -188,6 +187,9 @@ export default {
 
 		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 		document.head.appendChild(validacao);
+		
+		let mack = document.createElement('script'); mack.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/inputmask.js");
+		document.head.appendChild(mack);
 
 	},
 
