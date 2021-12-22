@@ -1,5 +1,6 @@
 <?php 
 class PlanoDigital implements IPlanoDigital{
+
     public function list_all(): array
     {
         $banco = new Banco();
@@ -9,6 +10,14 @@ class PlanoDigital implements IPlanoDigital{
     }
 
     public function list_all_by_instituicao_max(int $id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM plano_digital WHERE instituicao_max='$id'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+    public function list_by_id(int $id): array
     {
         $banco = new Banco();
         $sql = "SELECT * FROM plano_digital WHERE instituicao_max='$id'";
@@ -33,13 +42,18 @@ class PlanoDigital implements IPlanoDigital{
         $banco->exec($sql);
     }
 
+    public function update_nome(int $id, string $nome): void
+    {
+        $banco = new Banco();
+        $sql = "UPDATE plano_digital SET nome='$nome' WHERE id='$id'";
+        $banco->exec($sql);
+    }
+
     public function on_off(int $id): void
     {
         $banco = new Banco();
         $sql = "UPDATE plano_digital SET status='$id'";
         $banco->exec($sql);
     }
-
-    
+   
 }
-?>

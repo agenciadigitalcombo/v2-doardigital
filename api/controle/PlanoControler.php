@@ -70,7 +70,7 @@ class PlanoControler {
     static function plano()
     {
         $plano = new Plano();
-        $instituicao_id = id();
+        $instituicao_id = $_REQUEST['instituicao_id'];
 
         $list_instituicao = $plano->list_all_by_instituicao($instituicao_id);
         $payload = [
@@ -86,6 +86,28 @@ class PlanoControler {
         ]);
 
     }
+
+
+    static function instituicao_plano()
+    {
+        $plano = new Plano();
+        $id = $_REQUEST['id'];
+
+        $list_instituicao = $plano->list_by_id($id);
+        $payload = [
+            'id' => $list_instituicao['id'],
+            'instituicao' => $list_instituicao['instituicao_id'],
+            'nome' => $list_instituicao['nome'],
+            'amount' => $list_instituicao['amount']
+        ];
+        echo json_encode([
+            'next' => true,
+            'message' => 'Plano',
+            'dados' => $payload
+        ]);
+
+    }
+
 
     static function update_plano()
     {

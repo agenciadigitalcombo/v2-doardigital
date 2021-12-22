@@ -5,7 +5,8 @@ class Split implements ISplit{
     {
         $banco = new Banco();
         $sql = "SELECT * FROM split";
-        $banco->exec($sql);
+        $guard = $banco->query($sql);
+        return $guard;
     }
 
     public function create(int $instituicao_id, int $recebedor_id, int $responsavel_estorno, int $porcentagem): void
@@ -21,15 +22,24 @@ class Split implements ISplit{
     public function update(int $id, int $instituicao_id, int $recebedor_id, int $responsavel_estorno, int $porcentagem): void
     {
         $banco = new Banco();
-        
+        $sql = "UPDATE split SET instituicao_id='$instituicao_id', recebedor_id='$recebedor_id' WHERE id='$id'";
+        $banco->exec($sql);
     }
 
     public function del(int $id): void
-    {}
+    {
+        $banco = new Banco();
+        $sql = "DELETE FROM split WHERE id='$id'";
+        $banco->exec($sql);
+    }
 
     public function list_all_by_instituicao(int $id): array
-    {}
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM split WHERE instituicao_id='$id'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
 
     
 }
-?>

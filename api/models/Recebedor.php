@@ -16,7 +16,10 @@ class Recebedor implements IRecebedor
 
     public function get_by_adm_id(int $adm_id): array
     {
-        
+        $banco = new Banco();
+        $sql = "SELECT * FROM recebedor WHERE adm_id='$adm_id'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
     public function list_by_adm_id(int $adm_id): array
@@ -24,7 +27,7 @@ class Recebedor implements IRecebedor
         $banco = new Banco();
         $sql = "SELECT * FROM recebedor WHERE adm_id='$adm_id'";
         $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $guard;
     }
 
     

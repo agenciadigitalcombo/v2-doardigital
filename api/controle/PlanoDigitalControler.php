@@ -4,8 +4,10 @@ class PlanoDigitalControler {
 
     static function create()
     {
-        $plano = new PlanoDigital();    
 
+        $plano = new PlanoDigital();    
+        
+        token();
         $nome = $_REQUEST['nome'] ?? '';
         $whatsapp = $_REQUEST['whatsapp'] ?? '';
         $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
@@ -75,17 +77,18 @@ class PlanoDigitalControler {
     static function planodigital()
     {
         $plano = new PlanoDigital();
-        $id = $_REQUEST['instituicao_max'] ?? '';
+    
 
+        $plano_id = $_REQUEST['plano_id'] ?? '';
         
-        $list_instituicao = $plano->list_all_by_instituicao_max($id);
+        $list_plano = $plano->list_by_id($plano_id);
         
         $payload = [
-            'id' => $list_instituicao['id'],
-            'nome' => $list_instituicao['nome'],
-            'whatsapp' => $list_instituicao['whatsapp'],
-            'instituicao_max' => $list_instituicao['instituicao_max'],
-            'amount' => $list_instituicao['amount']
+            'id' => $list_plano['id'],
+            'nome' => $list_plano['nome'],
+            'whatsapp' => $list_plano['whatsapp'],
+            'instituicao_max' => $list_plano['instituicao_max'],
+            'amount' => $list_plano['amount']
         ];
         echo json_encode([
             'next' => true,
@@ -99,9 +102,10 @@ class PlanoDigitalControler {
     {
         $plano = new PlanoDigital();
 
+        token();
+
+        $id = $_REQUEST['id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
-        $whatsapp = $_REQUEST['whatsapp'] ?? '';
-        $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
 
 
         $campos_obrigatorios = [
@@ -120,13 +124,7 @@ class PlanoDigitalControler {
             }
         }
 
-        $get_id = $plano->list_all_by_instituicao_max($instituicao_max);
-        
-
-        $id = $get_id['id'];
-
-
-        $plano->update($id, $whatsapp, $instituicao_max, $nome);
+        $plano->update_nome($id, $nome);
         echo json_encode([
             'next' => true,
             'message' => 'Plano Digital Atualizado'
@@ -137,6 +135,8 @@ class PlanoDigitalControler {
     static function on_off()
     {
         $plano = new PlanoDigital();
+
+        token();
 
         $status_campo = $_REQUEST['status'];
         $status = withdraw_caracter($status_campo);

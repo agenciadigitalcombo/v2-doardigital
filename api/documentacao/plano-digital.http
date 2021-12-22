@@ -1,0 +1,32 @@
+###
+POST http://localhost/v2-doardigital/api/plano-digital-new
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&nome=plano1
+&whatsapp=1
+&instituicao_max=2
+&amount=1000
+
+###
+GET http://localhost/v2-doardigital/api/plano-digital-list
+Content-Type: application/x-www-form-urlencoded
+
+###
+GET http://localhost/v2-doardigital/api/plano-digital-me?plano_id=1
+
+###
+POST http://localhost/v2-doardigital/api/plano-digital-update
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&plano_id=1
+&nome=Melhor do dia
+
+
+###
+POST http://localhost/v2-doardigital/api/plano-digital-on-off
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&plano_id=1
