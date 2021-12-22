@@ -31,7 +31,7 @@ export default {
 										<div class="card-title">
 											<!--begin::Search-->
 											<div class="d-flex align-items-center position-relative my-1">
-												<h1>Planos</h1>
+												<h1>Plano Digital</h1>
 											</div>
 											
 											<!--end::Search-->
@@ -127,7 +127,7 @@ export default {
 													</td>
 													<!--begin::Date=-->
 													<td>
-														<div class=""> R$  {{ item.amount }}</div>
+														<div class=""> R$  {{ item.amount }} </div>
 													</td>
 													<!--end::Date=-->
 													<!--begin::Action=-->
@@ -217,12 +217,11 @@ export default {
 
 		async editar(id) {
 			globalThis._planos = this.dados.find(user => user.id == id)
-            window.location.href = "#/planos/editar"
+            window.location.href = "#/plano-digital/editar"
         },
 	},
 
 	async mounted() {
-		
 		// console.log("dados")
 		this.dados = (await this.listar()).dados,
         this.id = dados.id,

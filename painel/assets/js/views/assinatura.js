@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js" 
 
 export default {
-    template:`
+    template:` checkbox
 	<div>
 
     <c-header></c-header>
@@ -414,7 +414,7 @@ export default {
                                                             </div>
 
                                                             <br>
-                                                            <!-- <label for="checkbox"> oii{{ jms }}</label> -->
+                      
 
                                                             <div class="row mb-6" v-if="jms">
                                                                 <div class="col-lg-12 fv-row">

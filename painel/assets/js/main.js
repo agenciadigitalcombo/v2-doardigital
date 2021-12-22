@@ -148,6 +148,8 @@ Vue.component('c-planos-digital', planosDigital )
 import planosDigitalNovo from './views/planos-digitalNovo.js'
 Vue.component('c-planos-digitalNovo', planosDigitalNovo )
 
+import planosDigitalEditar from './views/planos-digitalEdita.js'
+Vue.component('c-planos-digitalEdita', planosDigitalEditar )
 
 
 const app = new Vue({

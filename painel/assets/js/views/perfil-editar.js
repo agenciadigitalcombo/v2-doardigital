@@ -168,7 +168,7 @@ export default {
 										<!--begin::Input group-->
 										<div class="row mb-6">
 										<!--begin::Label-->
-										<label class="col-lg-4 fw-bold text-muted">Nome completo
+										<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome completo
 										<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Preecha o Seu nome completo"></i>
 										</label>
 										<!--end::Label-->

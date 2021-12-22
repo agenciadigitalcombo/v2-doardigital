@@ -64,7 +64,7 @@ export default {
 																<div class="fv-row mb-5">
 																	<label for="Valor"
 																		class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-																	<input v-model="amount"  type="text"  
+																	<input v-model="amount"  type="text"  v-mask="'R$ #.###,##'" placeholder="R$ 1.000,00" 
 																		class="form-control form-control-lg form-control-solid"
 																		name="text_input" id="Valor" />
 																</div>
@@ -72,11 +72,16 @@ export default {
 
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
+
+															
 																	<label for="whatsapp"
 																		class="form-label fs-6 fw-bolder mb-3 required">Whatsapp</label>
-																	<input v-model="whatsapp"  type="text"
-																		class="form-control form-control-lg form-control-solid"
-																		name="text_input" id="whatsapp" />
+																	<select  v-model="whatsapp" name="text_input" class="form-select form-select-solid" aria-label="Select example">
+																        <option value="1">Sim</option>
+																		<option value="0">Não</option>
+																	
+																	</select>
+
 																</div>
 															</div>
 
@@ -84,7 +89,7 @@ export default {
 																<div class="fv-row mb-5">
 																	<label for="instituicao_max"
 																		class="form-label fs-6 fw-bolder mb-3 required">Instituicao Maxima</label>
-																	<input v-model="instituicao_max"  type="text"  
+																	<input v-model="instituicao_max"  type="number"  
 																		class="form-control form-control-lg form-control-solid"
 																		name="text_input" id="instituicao_max" />
 																</div>
@@ -146,6 +151,8 @@ export default {
 			amount: null,
 			token: null,
 			lista_dados: [],
+
+			// whatsapps: ['Sim','Não' ],
 		}
 	},
 	methods: {

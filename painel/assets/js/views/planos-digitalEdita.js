@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-	template: ` 
+	template: `
 	<div>
 
     <c-header></c-header>
@@ -29,7 +29,7 @@ export default {
 									<div class="card-header border-0 cursor-pointer" role="button"
 										data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
 										<div class="card-title m-0">
-											<h3 class="fw-bolder m-0">Editar Plano</h3>
+											<h3 class="fw-bolder m-0">Editar Plano Digital</h3>
 										</div>
 									</div>
 									<!--end::Card header-->
@@ -51,26 +51,62 @@ export default {
 														novalidate="novalidate">
 														<div class="row mb-1">
 
-															<div class="col-lg-6">
-																<div class="fv-row mb-5">
-																	<label for="nome"
-																		class="form-label fs-6 fw-bolder mb-3">Nome</label>
-																	<input v-model="nome"  type="text"
-																		class="form-control form-control-lg form-control-solid"
-																		name="text_input" id="nome" />
-																</div>
-															</div>
+														<div class="col-lg-6">
+														<div class="fv-row mb-5">
+															<label for="id"
+																class="form-label fs-6 fw-bolder mb-3 required">id</label>
+															<input v-model="id" type="text" 
+																class="form-control form-control-lg form-control-solid"
+																name="text_input" id="id" />
+														</div>
+													</div>
 
-															<div class="col-lg-6">
-																<div class="fv-row mb-5">
-																	<label for="Valor"
-																		class="form-label fs-6 fw-bolder mb-3">Valor</label>
-																	<input v-model="amount"  type="text" disabled 
-																		class="form-control form-control-lg form-control-solid"
-																		name="text_input"  id="Valor" />
-																</div>
-															</div>
+
+
+														<div class="col-lg-6">
+														<div class="fv-row mb-5">
+															<label for="nome"
+																class="form-label fs-6 fw-bolder mb-3 required">Nome</label>
+															<input v-model="nome" type="text" 
+																class="form-control form-control-lg form-control-solid"
+																name="text_input" id="nome" />
+														</div>
+													</div>
+													<div class="col-lg-6">
+													<div class="fv-row mb-5">
+														<label for="Valor"
+															class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
+														<input v-model="amount"  type="text"  v-mask="'R$ #.###,##'" placeholder="R$ 1.000,00" disabled
+															class="form-control form-control-lg form-control-solid"
+															name="text_input" id="Valor" />
+													</div>
+												</div>
+
+												<div class="col-lg-6">
+													<div class="fv-row mb-5">
+
+												
+														<label for="whatsapp"
+															class="form-label fs-6 fw-bolder mb-3 required">Whatsapp</label>
+														<select  v-model="whatsapp" name="text_input" class="form-select form-select-solid" aria-label="Select example" disabled>
+															<option value="1">Sim</option>
+															<option value="0">Não</option>
 														
+														</select>
+
+													</div>
+												</div>
+													<div class="col-lg-6">
+														<div class="fv-row mb-5">
+															<label for="instituicao_max"
+																class="form-label fs-6 fw-bolder mb-3 required">Instituicao Maxima</label>
+															<input v-model="instituicao_max"  type="number" disabled
+																class="form-control form-control-lg form-control-solid"
+																name="text_input" id="instituicao_max" />
+														</div>
+													</div>
+
+
 														</div>
 
 														<div class="d-flex">
@@ -123,8 +159,9 @@ export default {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
-			// instituicao_id: null,
 			nome: null,
+			whatsapp: null,
+			instituicao_max: null,
 			amount: null,
 			token: null,
 			lista_dados: [],
@@ -135,10 +172,9 @@ export default {
 		async editarPlanos() {
 			this.error = null
 
-			let res = await adm.editarPlanos(
-				this.id,
+			let res = await adm.editarPlanosDigital(
+				this.id = "3",
 				this.nome,
-				this.amount,
 				this.token,
 			)
 			if (!res.next) {
@@ -158,8 +194,9 @@ export default {
 		// this.id = window.localStorage.getItem('instituicao_id');
 		this.id = globalThis._planos.id
 		this.nome = globalThis._planos.nome
+		this.whatsapp = globalThis._planos.whatsapp
+		this.instituicao_max = globalThis._planos.instituicao_max
 		this.amount = globalThis._planos.amount
-
 
 		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
 		document.head.appendChild(validacao);

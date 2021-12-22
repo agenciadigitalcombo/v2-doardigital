@@ -350,6 +350,18 @@ export default {
     },
 
     
+    async editarPlanosDigital(
+        id,
+        nome,
+        token,
+    ) {
+        return await http.post('/plano-digital-update', {
+            id,
+            nome,
+            token,
+        })
+    },
+    
 }
 
 // editarSubadm
