@@ -28,10 +28,11 @@ class PlanoDigital implements IPlanoDigital{
     public function create( string $nome, int $whatsapp, int $instituicao_max, int $amount, string $token = null): void
     {
         $banco = new Banco();
+        $status = 1;
         $sql = "INSERT INTO plano_digital";
-        $sql .= "( token, nome, whatsapp, instituicao_max, amount)";
+        $sql .= "( token, nome, whatsapp, instituicao_max, amount, status)";
         $sql .= "VALUES";
-        $sql .= "('$token', '$nome', '$whatsapp', '$instituicao_max', '$amount')";
+        $sql .= "('$token', '$nome', '$whatsapp', '$instituicao_max', '$amount', '$status')";
         $banco->exec($sql);
     }
 
