@@ -64,22 +64,24 @@ export default {
 																<div class="fv-row mb-5">
 																	<label for="Valor"
 																		class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-																	<input v-model="amount"  type="text"  v-mask="'R$ #.###,##'" placeholder="R$ 1.000,00" 
+																	<input v-model="amount"  type="text"  v-mask="'#.###,##'" placeholder="00,00" 
 																		class="form-control form-control-lg form-control-solid"
 																		name="text_input" id="Valor" />
 																</div>
 															</div>
 
+
+
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
 
+														
 															
 																	<label for="whatsapp"
 																		class="form-label fs-6 fw-bolder mb-3 required">Whatsapp</label>
 																	<select  v-model="whatsapp" name="text_input" class="form-select form-select-solid" aria-label="Select example">
-																        <option value="1">Sim</option>
+																	<option value="1">Sim</option>
 																		<option value="0">Não</option>
-																	
 																	</select>
 
 																</div>
@@ -134,11 +136,11 @@ export default {
 			</div>
 		</div>
 
-		<!--end::Root-->
+		<!--end:: Root-- >
 
-		<c-footer/>
-	</div>
-    `,
+	<c-footer />
+	</div >
+	`,
 
 
 	data: function () {
@@ -146,7 +148,7 @@ export default {
 			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			nome: null,
-			whatsapp: null,
+			whatsapp: 1,
 			instituicao_max: null,
 			amount: null,
 			token: null,

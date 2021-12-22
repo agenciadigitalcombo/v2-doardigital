@@ -76,7 +76,7 @@ export default {
 													<div class="fv-row mb-5">
 														<label for="Valor"
 															class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-														<input v-model="amount"  type="text"  v-mask="'R$ #.###,##'" placeholder="R$ 1.000,00" disabled
+														<input v-model="amount"  type="text"  v-mask="'#.###,##'" placeholder="R$ 00,00" disabled
 															class="form-control form-control-lg form-control-solid"
 															name="text_input" id="Valor" />
 													</div>
