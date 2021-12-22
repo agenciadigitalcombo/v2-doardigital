@@ -142,6 +142,12 @@ Vue.component('c-div-pagamento', divPagamento )
 import divPagamentoAdd from './views/div-pagamentoAdd.js'
 Vue.component('c-div-pagamentoAdd', divPagamentoAdd )
 
+import planosDigital from './views/planos-digital.js'
+Vue.component('c-planos-digital', planosDigital )
+
+import planosDigitalNovo from './views/planos-digitalNovo.js'
+Vue.component('c-planos-digitalNovo', planosDigitalNovo )
+
 
 
 const app = new Vue({
