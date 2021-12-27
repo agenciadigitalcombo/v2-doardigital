@@ -61,8 +61,22 @@ class PlanoDigital implements IPlanoDigital{
 
     public function on_off(int $id): void
     {
+        
         $banco = new Banco();
-        $sql = "UPDATE plano_digital SET status='$id'";
+        $get_id = "SELECT * FROM plano_digital WHERE id='$id'";
+        $guard = $banco->query($get_id);
+        $status = $guard['status'];
+        var_dump($guard);
+        die;
+
+
+        if($status == 1){
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        $sql = "UPDATE plano_digital SET status='$status' WHERE id=$id";
+
         $banco->exec($sql);
     }
    

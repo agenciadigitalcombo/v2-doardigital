@@ -148,10 +148,10 @@ class PlanoDigitalControler {
 
         token();
 
-        $status_campo = $_REQUEST['status'];
-        $status = withdraw_caracter($status_campo);
+        $plano_id = $_REQUEST['plano_id'];
+        
 
-        $plano->on_off($status);
+        $plano->on_off($plano_id);
         echo json_encode([
             'next' => true,
             'message' => 'Status Atualizado'
