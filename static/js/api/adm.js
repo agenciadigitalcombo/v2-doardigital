@@ -351,12 +351,12 @@ export default {
 
     
     async editarPlanosDigital(
-        id,
+        plano_id,
         nome,
         token,
     ) {
         return await http.post('/plano-digital-update', {
-            id,
+            plano_id,
             nome,
             token,
         })

@@ -1,10 +1,11 @@
 import Vue from './vendor/vue.js'
 import Router from './vendor/vue-router.js'
 import store from './domain/store.js'
+
 import {mapState} from './vendor/vuex.js'
 
 
-
+Vue.use(window.vuelidate.default)
 Vue.use(VueMask.VueMaskPlugin);
 
 Vue.use(Router)
@@ -24,137 +25,149 @@ Vue.component('c-footer', footer )
 import mensagem from './componentes/c-mensagem.js'
 Vue.component('c-mensagem', mensagem )
 
-import login from './views/login.js'
+import validacao from './componentes/c-validacao.js'
+Vue.component('c-validacao', validacao )
+
+import detalhe from './componentes/c-detalhe.js'
+Vue.component('c-detalhe', detalhe )
+
+
+
+
+
+import login from './views/admin/login.js'
 Vue.component('c-login', login)
 
 import dash from './views/dash.js'
 Vue.component('c-dash', dash )
 
-import perfil from './views/perfil.js'
+import perfil from './views/admin/perfil.js'
 Vue.component('c-perfil', perfil )
 
-import perfilEditar from './views/perfil-editar.js'
+import perfilEditar from './views/admin/perfil-editar.js'
 Vue.component('c-perfil-editar', perfilEditar )
 
-import EditarLocal from './views/editar-local.js'
+import EditarLocal from './views/admin/editar-local.js'
 Vue.component('c-editar-local', EditarLocal )
 
-import EditarSeguranca from './views/editar-securanca.js'
+import EditarSeguranca from './views/admin/editar-securanca.js'
 Vue.component('c-editar-securanca', EditarSeguranca )
 
-import credenciais from './views/credenciais.js'
+import credenciais from './views/admin/credenciais.js'
 Vue.component('c-credenciais', credenciais )
 
-import credenciaisAdd from './views/credenciaisNova.js'
+import credenciaisAdd from './views/admin/credenciaisNova.js'
 Vue.component('c-nova-credenciais', credenciaisAdd )
 
-import minhaInstituicao from './views/minhaInstituicao.js'
+import credenciaisAtualizar from './views/admin/credenciaisAtualizar.js'
+Vue.component('c-credenciaisAtualizar', credenciaisAtualizar )
+
+
+import minhaInstituicao from './views/instituicao/minhaInstituicao.js'
 Vue.component('c-minhaInstituicao', minhaInstituicao )
 
 
-import addInstituicao from './views/instituicaoAdd.js'
+import addInstituicao from './views/instituicao/instituicaoAdd.js'
 Vue.component('c-addInstituicao', addInstituicao )
 
-import localInstituicao from './views/instituicaoLoca.js'
+import localInstituicao from './views/instituicao/instituicaoLoca.js'
 Vue.component('c-localInstituicao', localInstituicao )
 
-import bancoInstituicao from './views/instituicaoBancario.js'
+import bancoInstituicao from './views/instituicao/instituicaoBancario.js'
 Vue.component('c-bancoInstituicao', bancoInstituicao )
 
-import dominioInstituicao from './views/instituicaoDominio.js'
+import dominioInstituicao from './views/instituicao/instituicaoDominio.js'
 Vue.component('c-dominioInstituicao', dominioInstituicao )
 
-import editarInstituicao from './views/instituicaoEditar.js'
+import editarInstituicao from './views/instituicao/instituicaoEditar.js'
 Vue.component('c-editarInstituicao', editarInstituicao )
 
-import intituicaoMenu from './views/intituicaoMenu.js'
+import intituicaoMenu from './views/instituicao/intituicaoMenu.js'
 Vue.component('c-intituicaoMenu', intituicaoMenu )
 
 
 
 
-import modulos from './views/modulos.js'
+import modulos from './views/modulos/modulos.js'
 Vue.component('c-modulos', modulos )
 
-import modulosCorreios from './views/modulosCorreios.js'
+import modulosCorreios from './views/modulos/modulosCorreios.js'
 Vue.component('c-modulosCorreios', modulosCorreios )
 
-import modulosEmail from './views/modulosEmail.js'
+import modulosEmail from './views/modulos/modulosEmail.js'
 Vue.component('c-modulosEmail', modulosEmail )
 
-import modulosEvendas from './views/modulosEvendas.js'
+import modulosEvendas from './views/modulos/modulosEvendas.js'
 Vue.component('c-modulosEvendas', modulosEvendas )
 
-import modulosMailing from './views/modulosMailing.js'
+import modulosMailing from './views/modulos/modulosMailing.js'
 Vue.component('c-modulosMailing', modulosMailing )
 
-import modulosStation from './views/modulosStation.js'
+import modulosStation from './views/modulos/modulosStation.js'
 Vue.component('c-modulosStation', modulosStation )
 
-import assinatura from './views/assinatura.js'
+import assinatura from './views/admin/assinatura.js'
 Vue.component('c-assinatura', assinatura )
 
-import doadores from './views/doadores.js'
+import doadores from './views/instituicao/doadores.js'
 Vue.component('c-doadores', doadores )
 
-import doacoes from './views/doacoes.js'
+import doacoes from './views/instituicao/doacoes.js'
 Vue.component('c-doacoes', doacoes )
 
-import doacoesDetalhe from './views/doacoes-detalhe.js'
+import doacoesDetalhe from './views/instituicao/doacoes-detalhe.js'
 Vue.component('c-doacoesDetalhe', doacoesDetalhe )
 
-import doadorHitorico from './views/doador-hitorico.js'
+import doadorHitorico from './views/instituicao/doador-hitorico.js'
 Vue.component('c-doadorHitorico', doadorHitorico )
 
-import configuracao from './views/configuracao.js'
+import configuracao from './views/usuarios/configuracao.js'
 Vue.component('c-configuracao', configuracao )
 
-import carteira from './views/carteira.js'
+import carteira from './views/admin/carteira.js'
 Vue.component('c-carteira', carteira )
 
-import usuarios from './views/usuarios.js'
+import usuarios from './views/usuarios/usuarios.js'
 Vue.component('c-usuarios', usuarios )
 
-import usuarioNovo from './views/usuarioNovo.js'
+import usuarioNovo from './views/usuarios/usuarioNovo.js'
 Vue.component('c-usuarioNovo', usuarioNovo )
 
-import usuarioEditar from './views/usuarioEditar.js'
+import usuarioEditar from './views/usuarios/usuarioEditar.js'
 Vue.component('c-usuarioEditar', usuarioEditar )
 
-import credenciaisAtualizar from './views/credenciaisAtualizar.js'
-Vue.component('c-credenciaisAtualizar', credenciaisAtualizar )
-
-import planos from './views/planos.js'
+import planos from './views/planos/planos.js'
 Vue.component('c-planos', planos )
 
-import planoEditar from './views/planoEditar.js'
+import planoEditar from './views/planos/planoEditar.js'
 Vue.component('c-planoEditar', planoEditar )
 
-import planoNovo from './views/planoNovo.js'
+import planoNovo from './views/planos/planoNovo.js'
 Vue.component('c-planoNovo', planoNovo )
 
 import qrCode from './views/qr-code.js'
 Vue.component('c-qr-code', qrCode )
 
-import divPagamento from './views/div-pagamento.js'
+import divPagamento from './views/instituicao/div-pagamento.js'
 Vue.component('c-div-pagamento', divPagamento )
 
-import divPagamentoAdd from './views/div-pagamentoAdd.js'
+import divPagamentoAdd from './views/instituicao/div-pagamentoAdd.js'
 Vue.component('c-div-pagamentoAdd', divPagamentoAdd )
 
-import planosDigital from './views/planos-digital.js'
+import planosDigital from './views/planos/planos-digital.js'
 Vue.component('c-planos-digital', planosDigital )
 
-import planosDigitalNovo from './views/planos-digitalNovo.js'
+import planosDigitalNovo from './views/planos/planos-digitalNovo.js'
 Vue.component('c-planos-digitalNovo', planosDigitalNovo )
 
-import planosDigitalEditar from './views/planos-digitalEdita.js'
+import planosDigitalEditar from './views/planos/planos-digitalEdita.js'
 Vue.component('c-planos-digitalEdita', planosDigitalEditar )
 
 
 const app = new Vue({
 
     store,
+    // scriptsbundle,
     router,
     data: {},
     computed: { },
