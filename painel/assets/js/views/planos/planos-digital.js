@@ -89,11 +89,14 @@ export default {
 															</div>
 														</td>
 														<td>
-															<div
-																class="form-check form-switch form-check-custom form-check-solid me-10">
-																<input class="form-check-input h-30px w-50px" v-model="item.whatsapp" true-value="1" false-value="0"
-																	type="checkbox" id="flexSwitch30x50" />
+														<div v-if="whatsapp === item.whatsapp">
+														sim
 															</div>
+
+															<div v-else>
+															Nao
+															</div>
+												
 														</td>
 														<td>
 															<div class=""> R$  {{ item.amount }} </div>
@@ -150,7 +153,7 @@ export default {
 			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			nome: null,
-			whatsapp: null,
+			whatsapp: '1',
 			instituicao_max: null,
 			amount: null,
 	        token: null,
@@ -169,9 +172,13 @@ export default {
 			globalThis._planos = this.dados.find(user => user.id == id)
             window.location.href = "#/plano-digital/editar"
         },
+
+	
 	},
 
 	async mounted() {
+
+
 		// console.log("dados")
 		this.dados = (await this.listar()).dados,
         this.id = dados.id,
