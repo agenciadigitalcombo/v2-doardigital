@@ -34,21 +34,21 @@ class PlanoDigital implements IPlanoDigital{
         return $guard[0] ?? [];
     }
 
-    public function create( string $nome, int $whatsapp, int $instituicao_max, int $amount, string $token = null): void
+    public function create(string $nome, int $whatsapp, int $instituicao_max, int $amount, string $token = null): void
     {
         $banco = new Banco();
         $status = 1;
         $sql = "INSERT INTO plano_digital";
-        $sql .= "( token, nome, whatsapp, instituicao_max, amount, status)";
+        $sql .= "(token, nome, whatsapp, instituicao_max, amount, status)";
         $sql .= "VALUES";
-        $sql .= "('$token', '$nome', '$whatsapp', '$instituicao_max', '$amount', '$status')";
+        $sql .= "('$token', '$nome', $whatsapp, $instituicao_max, $amount, '$status')";
         $banco->exec($sql);
     }
 
     public function update(int $id, int $whatsapp, int $instituicao_max, string $nome): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano_digital SET nome='$nome', whatsapp='$whatsapp', instituicao_max='$instituicao_max' WHERE id='$id' AND instituicao_max='$instituicao_max'";
+        $sql = "UPDATE plano_digital SET nome='$nome', whatsapp=$whatsapp, instituicao_max=$instituicao_max WHERE id=$id AND instituicao_max=$instituicao_max";
         $banco->exec($sql);
     }
 

@@ -208,7 +208,6 @@ class InstituicaoControler
 
         $instituicao_id = $_REQUEST['instituicao_id'];
         
-
         $plano->on_off($instituicao_id);
         echo json_encode([
             'next' => true,
