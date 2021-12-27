@@ -5,6 +5,6 @@ return [
     "banco" => "u437875510_doardigitalv2",
     "user" => "u437875510_digitalcombo",
     "senha" => "^2hqx&rS",
-    "api_key" => "",
-    "post_back_url" => "",
+    "api_key" => "ak_test_zcP5r3XuiDCVdnbcnH5wB2vMOqsPFl",
+    "postback_url" => "https://teste.com",
 ];

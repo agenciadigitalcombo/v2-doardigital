@@ -123,7 +123,7 @@ export default {
 			instituicao_id: null,
 			nome: null,
 			amount: null,
-	          token: null,
+	        token: null,
 			lista_dados: [],
 		}
 	},

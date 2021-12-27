@@ -4,7 +4,7 @@ class PlanoDigitalControler {
 
     static function create()
     {
-
+        $pagarme = new PagarmePlano();
         $plano = new PlanoDigital();    
         
         token();
@@ -39,13 +39,16 @@ class PlanoDigitalControler {
         }
 
        
-
+        $res_pagarme = $pagarme->create($nome, $amount);
+        var_dump($res_pagarme);
+        die;
         $plano->create($nome, $whatsapp, $instituicao_max, $amount);
         echo json_encode([
             'next' => true,
             'message' => 'Plano Digital criado'
         ]);
         
+
     }
 
 
