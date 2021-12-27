@@ -199,4 +199,21 @@ class InstituicaoControler
             'message' => 'Instituicao Excluida'
         ]);
     }
+
+    static function on_off()
+    {
+        $plano = new PlanoDigital();
+
+        token();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+        
+
+        $plano->on_off($instituicao_id);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Status Atualizado'
+        ]);
+
+    }
 }

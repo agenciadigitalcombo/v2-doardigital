@@ -5,6 +5,7 @@ class PlanoControler {
     static function create()
     {
         $plano = new Plano();    
+        $pagarme = new PagarmePlano();
 
         token();
 
@@ -34,7 +35,11 @@ class PlanoControler {
             }
         }
 
-        $plano->create($instituicao_id, $nome, $amount);
+
+        $res_plano = $pagarme->create($nome, $amount);
+        $plano_token = $res_plano['id'];
+
+        $plano->create($instituicao_id, $nome, $amount, $plano_token);
         echo json_encode([
             'next' => true,
             'message' => 'Plano criado'

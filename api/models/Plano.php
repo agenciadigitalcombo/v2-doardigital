@@ -43,10 +43,28 @@ class Plano implements IPlano{
         return $guard[0] ?? [];
     }
 
+    public function get_by_id(int $id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM plano WHERE id='$id'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
     public function on_off(int $id): void
     {
         $banco = new Banco();
-        $sql = "UPDATE plano SET status='$id'";
+
+        $guard = $this->get_by_id($id);
+        $status = $guard['status'];
+        
+        if($status == 1){
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        $sql = "UPDATE plano SET status='$status' WHERE id=$id";
+
         $banco->exec($sql);
     }
 

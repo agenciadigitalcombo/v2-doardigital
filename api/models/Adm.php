@@ -18,7 +18,7 @@ class Adm implements IAdm
         $banco = new Banco();
         $sql = "UPDATE adm SET pass='$senha' WHERE id='$id'";
         $banco->exec($sql);
-        // return $sql;
+        return $senha;
     }
 
     public function get_by_id(int $id): array

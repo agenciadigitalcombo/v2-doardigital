@@ -56,7 +56,21 @@ class Instituicao implements IInstituicao
     }
 
     public function on_off(int $id): void
-    {}
+    {
+        $banco = new Banco();
+
+        $guard = $this->get_by_id($id);
+        $status = $guard['status'];
+        
+        if($status == 1){
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        $sql = "UPDATE instituicao SET status='$status' WHERE id=$id";
+
+        $banco->exec($sql);
+    }
 
     public function search_by_name_or_id(string $termo): array
     {}
