@@ -20,7 +20,16 @@ class PlanoDigital implements IPlanoDigital{
     public function list_by_id(int $id): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM plano_digital WHERE instituicao_max='$id'";
+        $sql = "SELECT * FROM plano_digital WHERE id='$id'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
+
+    public function get_by_id(int $id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM plano_digital WHERE id='$id'";
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
     }

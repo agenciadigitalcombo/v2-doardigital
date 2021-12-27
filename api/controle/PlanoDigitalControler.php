@@ -40,9 +40,9 @@ class PlanoDigitalControler {
 
        
         $res_pagarme = $pagarme->create($nome, $amount);
-        var_dump($res_pagarme);
-        die;
-        $plano->create($nome, $whatsapp, $instituicao_max, $amount);
+        $token_pagarme = $res_pagarme['id'];
+
+        $plano->create($nome, $whatsapp, $instituicao_max, $amount, $token_pagarme);
         echo json_encode([
             'next' => true,
             'message' => 'Plano Digital criado'
@@ -103,14 +103,16 @@ class PlanoDigitalControler {
 
     static function update_planodigital()
     {
+        $pagarme = new PagarmePlano();
         $plano = new PlanoDigital();
-
+        
         token();
-
+        
+        
         $plano_id = $_REQUEST['plano_id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
-
-
+        
+        
         $campos_obrigatorios = [
             'plano_id'
         ];
@@ -126,7 +128,12 @@ class PlanoDigitalControler {
                 return null;
             }
         }
+        
+        $meu_plano = $plano->get_by_id($plano_id);
+        $token_pagarme = $meu_plano['token'];
 
+        $pagarme->update($token_pagarme, $nome);
+        
         $plano->update_nome($plano_id, $nome);
         echo json_encode([
             'next' => true,

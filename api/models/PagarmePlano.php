@@ -14,17 +14,17 @@ class PagarmePlano extends PagarMe implements IPagarMePlano
             "payment_methods" => $payment_methods
         ];
 
-        return $this->post('/1/plans', $payload);
+        return $this->post('/plans', $payload);
     }
 
     public function update(int $plan_id, string $name): void
     {
         $payload = [
-            'id' => $plan_id,
+            // 'id' => $plan_id,
             'name' => $name
         ];
 
-        $this->put("/1/plans/plan_id", $payload);
+        $this->put("/plans/$plan_id", $payload);
     }
 
         
