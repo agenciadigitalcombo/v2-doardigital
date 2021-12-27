@@ -3,7 +3,7 @@ export default {
     template: `
     <div>
     <div>
- 
+
     <c-header></c-header>
     <c-aside></c-aside>
 
