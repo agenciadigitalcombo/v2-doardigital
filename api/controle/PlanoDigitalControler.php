@@ -14,17 +14,14 @@ class PlanoDigitalControler {
 
         $amount_campo = $_REQUEST['amount'] ?? '';
         $amount = withdraw_caracter($amount_campo);
-
-
+        
         $campos_obrigatorios = [
             'nome',
-            'whatsapp',
             'instituicao_max',
             'amount'
         ];
         $lb = [
             'nome' => 'Informe o nome',
-            'whatsapp' => 'Informe o Whatsapp',
             'instituicao_max' => 'Informe a Instituicao max',
             'amount' => 'Digite o amount'
         ];
@@ -37,8 +34,17 @@ class PlanoDigitalControler {
                 return null;
             }
         }
-
-       
+        
+        $whatsapp_msg_campo = "Informe o Whatsapp";
+        if($whatsapp == ''){
+            echo json_encode([
+                'next' => false,
+                'message' => $whatsapp_msg_campo
+            ]);
+            return null;
+        }
+     
+        
         $res_pagarme = $pagarme->create($nome, $amount);
         $token_pagarme = $res_pagarme['id'];
 
