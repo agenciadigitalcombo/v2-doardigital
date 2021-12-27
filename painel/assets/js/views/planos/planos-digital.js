@@ -112,7 +112,6 @@ export default {
 
 														</td>
 														<td class="text-end">
-
 															<a @click="editar(item.id)"
 															class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
 															style="margin: 2px;">
@@ -180,40 +179,7 @@ export default {
             window.location.href = "#/plano-digital/editar"
         },
 
-		money() {
-            let val = this.amount
-            val = val.replace('.', '')
-            val = val.replace(/\D/gi, '')
-            val = val ? val : 0
-            val = `${parseInt(val)}` ?? '0'
-            switch (val.length) {
-                case 0:
-                    val = '00,00'
-                    break;
-                case 1:
-                    val = val.replace(/(\d{1})/gi, '00,0$1')
-                    break;
-                case 2:
-                    val = val.replace(/(\d{2})/gi, '00,$1')
-                    break;
-                case 3:
-                    val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
-                    break;
-                case 4:
-                    val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
-                    break;
-                case 5:
-                    val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
-                    break;
-                case 6:
-                    val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
-                    break;
-                default:
-                    val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
-                    break;
-            }
-            this.amount = val
-        },
+	
 	
 	},
 
