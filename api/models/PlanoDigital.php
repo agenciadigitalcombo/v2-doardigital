@@ -4,7 +4,7 @@ class PlanoDigital implements IPlanoDigital{
     public function list_all(): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM plano_digital";
+        $sql = "SELECT * FROM plano_digital ORDER BY amount";
         $guard = $banco->query($sql);
         return $guard;
     }
