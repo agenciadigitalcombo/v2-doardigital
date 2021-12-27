@@ -64,7 +64,8 @@ class PlanoDigitalControler {
                 'nome' => $g['nome'],
                 'whatsapp' => $g['whatsapp'],
                 'instituicao_max' => $g['instituicao_max'],
-                'amount' => $g['amount']
+                'amount' => $g['amount'],
+                'status' => $g['status']
             ];
         }
         echo json_encode([
@@ -91,7 +92,8 @@ class PlanoDigitalControler {
             'nome' => $list_plano['nome'],
             'whatsapp' => $list_plano['whatsapp'],
             'instituicao_max' => $list_plano['instituicao_max'],
-            'amount' => $list_plano['amount']
+            'amount' => $list_plano['amount'],
+            'status' => $list_plano['status']
         ];
         echo json_encode([
             'next' => true,
