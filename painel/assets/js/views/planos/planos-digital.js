@@ -99,7 +99,7 @@ export default {
 												
 														</td>
 														<td>
-															<div class=""> R$  {{ item.amount }} </div>
+															<span class="w25">{{ item.amount | is_price }}</span>
 														</td>
 														<td></td>
 														<td>
@@ -112,7 +112,6 @@ export default {
 
 														</td>
 														<td class="text-end">
-
 															<a @click="editar(item.id)"
 															class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
 															style="margin: 2px;">
@@ -162,6 +161,13 @@ export default {
         }
     },
 
+	filters: {
+        is_price(price) {
+            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${amount}`
+        }
+    },
+	
 	methods: {
         async listar() {
             let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
@@ -173,6 +179,7 @@ export default {
             window.location.href = "#/plano-digital/editar"
         },
 
+	
 	
 	},
 
