@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-    template:` checkbox
+    template:` 
 	<div>
 
     <c-header></c-header>

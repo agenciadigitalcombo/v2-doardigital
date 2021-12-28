@@ -135,8 +135,7 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-
+		
 			id: null,
 			nome: null,
 			whatsapp: 1,
@@ -230,10 +229,6 @@ export default {
 	},
 
 
-	created() {
-
-
-	},
 
 
 }

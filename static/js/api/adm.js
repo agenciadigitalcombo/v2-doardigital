@@ -361,6 +361,16 @@ export default {
             token,
         })
     },
+
+    async onOff(
+        plano_id,
+        token,
+    ) {
+        return await http.post('/plano-digital-on-off', {
+            plano_id,
+            token,
+        })
+    },
     
 }
 

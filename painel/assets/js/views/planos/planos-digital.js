@@ -103,12 +103,12 @@ export default {
 														</td>
 														<td></td>
 														<td>
-															<div class="">
-																<div
-																	class="form-check form-switch form-check-custom form-check-solid me-10">
-																	<input class="form-check-input h-30px w-50px"
-																		type="checkbox" value="" id="flexSwitch30x50" />
-																</div>
+
+																<div class="form-check form-switch form-check-custom form-check-solid me-10">
+																
+																<input class="form-check-input h-30px w-50px" v-model="item.status" true-value="1" false-value="0" @click="statusx(item.id)"
+																type="checkbox" id="flexSwitch30x50" />
+																	</div>
 
 														</td>
 														<td class="text-end">
@@ -139,8 +139,10 @@ export default {
 			</div>
 		</div>
 		</div>
-		< !--end:: Root-- >
-	< !--end:: Root-- >
+		
+		class="form-control form-control-lg form-control-solid ">
+
+	<!--end:: Root-->
 
 	<c-footer />
 	</div >
@@ -151,12 +153,14 @@ export default {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
+			plano_id: null,
 			nome: null,
-			whatsapp: '1',
+			whatsapp: null,
 			instituicao_max: null,
 			amount: null,
+			status: null,
 	        token: null,
-		    dados: [],
+     	    dados: [],
 			
         }
     },
@@ -179,19 +183,33 @@ export default {
             window.location.href = "#/plano-digital/editar"
         },
 
-	
-	
-	},
+		async statusx(status) {
+			this.error = null
+			this.plano_id= status 
+			let res = await adm.onOff(
+				this.plano_id,
+				this.token,
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			
+		},	},
 
 	async mounted() {
 
 
-		// console.log("dados")
+		console.log(this.dados)
 		this.dados = (await this.listar()).dados,
         this.id = dados.id,
         this.nome = dados.nome
         this.whatsapp = dados.whatsapp
 		this.amount = dados.amount
+		this.status = dados.status
+	   console.log(this.dados);
+		
         console.log(dados)
 		console.log("dados")
 	},
