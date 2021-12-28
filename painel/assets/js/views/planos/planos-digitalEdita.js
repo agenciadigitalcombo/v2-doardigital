@@ -138,12 +138,8 @@ export default {
 				this.error = res.message
 				return null
 			}
-
+			window.location.href = `#/plano-digital`
 		},
-
-
-
-
 	},
 
 
@@ -157,12 +153,6 @@ export default {
 
 	
 	},
-
-
-	created() {
-
-
-	},
-
+	
 
 }
