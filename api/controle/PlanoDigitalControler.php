@@ -120,12 +120,13 @@ class PlanoDigitalControler {
         $plano_id = $_REQUEST['plano_id'] ?? '';
         $nome = $_REQUEST['nome'] ?? '';
         
-        
         $campos_obrigatorios = [
-            'plano_id'
+            'plano_id',
+            'nome'
         ];
         $lb = [
-            'plano_id' => 'Informe o Id do plano'
+            'plano_id' => 'Informe o Id do plano',
+            'nome' => 'Informe o Nome do plano'
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -139,8 +140,18 @@ class PlanoDigitalControler {
         
         $meu_plano = $plano->get_by_id($plano_id);
         $token_pagarme = $meu_plano['token'];
+        
+        if(empty($token_pagarme)){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Informe o token PagarMe'
+            ]);
+            return null;
+        }
 
         $pagarme->update($token_pagarme, $nome);
+        
+
         
         $plano->update_nome($plano_id, $nome);
         echo json_encode([
