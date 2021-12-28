@@ -1,11 +1,6 @@
-// pegar dados de quem esta logado
-
 GET http://doardigital.tk/api/profile?token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67"
 
-
 ###
-// atualizar dados
-
 POST http://doardigital.tk/api/atualizar-adm
 Content-Type: application/x-www-form-urlencoded
 
@@ -14,13 +9,11 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 &cpf=000.000.000-00,
 &telefone=(00) 0 0000-0000
 
-
-// savar ou criar endereço
 ###
 POST http://doardigital.tk/api/create-endereco
 Content-Type: application/x-www-form-urlencoded
 
-&token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
 &cep= 02835-090D,
 &logradouro= rua cardoso,
 &numero= 76,
@@ -29,17 +22,12 @@ Content-Type: application/x-www-form-urlencoded
 &cidade= brasilandia,
 &estado= MG
 
-// alterar senha
 ###
-
 POST http://localhost/v2-doardigital/api/alterar-senha
 Content-Type: application/x-www-form-urlencoded
 
+senha=123123,
+&token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
 
-    &senha= 123123,
-    &token= eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
-
-
-// validar se token é valido
+###
 GET  http://localhost/v2-doardigital/api/valid-token?token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
-Content-Type: application/x-www-form-urlencoded
