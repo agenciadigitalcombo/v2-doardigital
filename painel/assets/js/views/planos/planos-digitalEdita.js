@@ -85,9 +85,6 @@ export default {
 																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 															</button>
 
-
-															<button id="kt_password_cancel" type="button"
-																class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
 													</div>
 												</form>
 											</div>
@@ -138,6 +135,8 @@ export default {
 			}
 			window.location.href = `#/plano-digital`
 		},
+
+		
 	},
 
 
