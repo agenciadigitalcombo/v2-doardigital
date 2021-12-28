@@ -125,7 +125,6 @@ export default {
 	data: function () {
 
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			instituicao_id: null,
 			nome: null,
@@ -178,6 +177,7 @@ export default {
 				setTimeout(() => {
 				  this.submitStatus = 'OK'
 				  this.msg = res.message
+				  window.location.href = `#/planos`
 				}, 500)
 			}
 

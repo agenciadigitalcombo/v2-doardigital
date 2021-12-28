@@ -177,6 +177,7 @@ export default {
 				setTimeout(() => {
 				  this.submitStatus = 'OK'
 				  this.msg = res.message
+				  window.location.href = `#/planos`
 				}, 500)
 			}
 		},
