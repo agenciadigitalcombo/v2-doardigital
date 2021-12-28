@@ -197,19 +197,13 @@ export default {
 		},	},
 
 	async mounted() {
-
-
-		console.log(this.dados)
 		this.dados = (await this.listar()).dados,
         this.id = dados.id,
         this.nome = dados.nome
         this.whatsapp = dados.whatsapp
 		this.amount = dados.amount
 		this.status = dados.status
-	   console.log(this.dados);
-		
-        console.log(dados)
-		console.log("dados")
+	   
 	},
 	
 }

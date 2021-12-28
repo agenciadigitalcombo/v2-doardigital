@@ -140,10 +140,6 @@ export default {
 			}
 			window.location.href = `#/plano-digital`
 		},
-
-
-
-
 	},
 
 
@@ -157,12 +153,6 @@ export default {
 
 	
 	},
-
-
-	created() {
-
-
-	},
-
+	
 
 }
