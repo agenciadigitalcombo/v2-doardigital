@@ -103,8 +103,6 @@ export default {
 														<button class="btn btn-primary"" type=" submit"
 															:disabled="submitStatus === 'PENDING'">SALVAR!</button>
 													
-														<button id="kt_password_cancel" type="button"
-															class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
 													</div>
 													<div>
 													<p class="typo__p" v-if="submitStatus === 'OK'"> 
