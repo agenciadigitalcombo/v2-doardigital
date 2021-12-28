@@ -395,3 +395,35 @@ function cep(): string
     }
     return $cep;
 }
+
+
+function min_amount(): string
+{
+    $amount_campo = $_REQUEST['amount'] ?? null;
+    $amount = withdraw_caracter($amount_campo);
+
+    $campos_obrigatorios = [
+        'amount'
+    ];
+    $lb = [
+        'amount' => 'digite o amount'
+    ];
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $lb[$campo]
+            ]);
+            die;
+        }
+    }
+
+    if($amount < 2500){
+        echo json_encode([
+            'next' => false,
+            'message' => 'Valor minimo é R$25,00'
+        ]);
+        die;
+    }
+    return $amount;
+}
