@@ -138,18 +138,18 @@ class PlanoDigitalControler {
             }
         }
         
-        // $meu_plano = $plano->get_by_id($plano_id);
-        // $token_pagarme = $meu_plano['token'];
+        $meu_plano = $plano->get_by_id($plano_id);
+        $token_pagarme = $meu_plano['token'];
         
-        // if(empty($token_pagarme)){
-        //     echo json_encode([
-        //         'next' => false,
-        //         'message' => 'Informe o token PagarMe'
-        //     ]);
-        //     return null;
-        // }
+        if(empty($token_pagarme)){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Informe o token PagarMe'
+            ]);
+            return null;
+        }
 
-        // $pagarme->update($token_pagarme, $nome);
+        $pagarme->update($token_pagarme, $nome);
         
 
         
