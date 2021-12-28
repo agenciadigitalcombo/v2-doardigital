@@ -140,8 +140,6 @@ export default {
 		</div>
 		</div>
 		
-		class="form-control form-control-lg form-control-solid ">
-
 	<!--end:: Root-->
 
 	<c-footer />
