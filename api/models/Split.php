@@ -38,7 +38,7 @@ class Split implements ISplit{
         $banco = new Banco();
         $sql = "SELECT * FROM split WHERE instituicao_id='$id'";
         $guard = $banco->query($sql);
-        return $guard;
+        return $guard[0] ?? [];
     }
 
     
