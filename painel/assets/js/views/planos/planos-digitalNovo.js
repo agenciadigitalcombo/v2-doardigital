@@ -230,8 +230,8 @@ export default {
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
-					// this.msg = res.message
-					// window.location.href = `#/plano-digital`
+					this.msg = res.message
+					window.location.href = `#/plano-digital`
 				}, 500)
 			}
 			
