@@ -9,33 +9,16 @@ class PlanoControler {
 
         token();
 
-        $instituicao_id = id();
-        $nome = $_REQUEST['nome'] ?? '';
+        $instituicao_id = $_REQUEST['instituicao_id'];
+        $nome = $_REQUEST['nome'] ?? '';        
         
-        $amount_campo = $_REQUEST['amount'] ?? '';
-        $amount = withdraw_caracter($amount_campo);
-
-        $campos_obrigatorios = [
-            'instituicao_id',
-            'nome',
-            'amount'
-        ];
-        $lb = [
+        $amount = min_amount();
+        
+        campo_obrigatorios([
             'instituicao_id' => 'Informe a Instituicao',
-            'nome' => 'Informe o nome',
-            'amount' => 'Digite o amount'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-
-
+            'nome' => 'Informe o nome'
+        ]);
+        
         $res_plano = $pagarme->create($nome, $amount);
         $plano_token = $res_plano['id'];
 

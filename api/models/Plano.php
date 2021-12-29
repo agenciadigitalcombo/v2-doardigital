@@ -13,10 +13,11 @@ class Plano implements IPlano{
 
     public function create(int $instituicao_id, string $nome, int $amount, string $token = null): void
     {
+
         $banco = new Banco();
-        $sql = "INSERT INTO plano (instituicao_id, token, nome, amount)";
+        $sql = "INSERT INTO plano (instituicao_id, token, nome, amount, status)";
         $sql .= "VALUES";
-        $sql .= "('$instituicao_id','$token','$nome','$amount')";
+        $sql .= "('$instituicao_id','$token','$nome','$amount', 1)";
         $banco->exec($sql);
     }
 

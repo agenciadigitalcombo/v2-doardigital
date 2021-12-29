@@ -19,5 +19,8 @@ interface IMetas
         int $dezembro
     ): void;
 
-    public function get_by_instituicao_id(): array;
+    public function get_by_instituicao_id(
+        int $instituicao_id,
+        string $ano
+    ): array;
 }
