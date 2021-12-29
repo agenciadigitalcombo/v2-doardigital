@@ -259,13 +259,13 @@ export default {
     },
 
     async editarPlanos(
-        id,
+        instituicao_id,
         nome,
         amount,
-        token,
+        token, 
     ) {
         return await http.post('/update-plano', {
-            id,
+            instituicao_id,
             nome,
             amount,
             token,
@@ -288,7 +288,6 @@ export default {
             token,
         })
     },
-    
 
     async transacaoPlano(
         token,

@@ -64,7 +64,7 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-																<input type="text" v-model.trin="$v.amount.$model" disabled
+																<input type="text" v-model.trin="$v.amount.$model" disabled id="kt_inputmask_6" @input="masc_money"
 																	:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																
@@ -125,7 +125,6 @@ export default {
 	data: function () {
 
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			instituicao_id: null,
 			nome: null,
@@ -149,12 +148,11 @@ export default {
 
 	methods: {
 
-		status(validation) {
-			return {
-				error: validation.$error,
-				dirty: validation.$dirty
-			}
-		},
+		masc_money() {
+            let valor = this.amount.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.amount = valor
+        },
 
 		async editarPlanos() {
 			this.error = null
@@ -164,7 +162,7 @@ export default {
 				this.submitStatus = 'ERROR'
 			} else {
 				let res = await adm.editarPlanos(
-					this.id,
+					this.instituicao_id,
 					this.nome,
 					this.amount,
 					this.token,
@@ -185,9 +183,9 @@ export default {
 
 
 	async mounted() {
-		this.id = globalThis._planos.id
+		this.instituicao_id = globalThis._planos.id
 		this.nome = globalThis._planos.nome
-		this.amount = globalThis._planos.amount
+		this.amount = (globalThis._planos.amount/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }) 
 	},
 
 

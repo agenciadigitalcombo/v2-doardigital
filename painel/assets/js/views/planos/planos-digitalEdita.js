@@ -55,7 +55,7 @@ export default {
 																	<label for="Valor"
 																		class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
 																	<input type="text" v-model.trin="$v.amount.$model" disabled
-																		id="kt_inputmask_6" @input="money" placeholder="00,00"
+																		id="kt_inputmask_6" @input="masc_money" placeholder="00,00"
 																		:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }"
 																		class="form-control form-control-lg form-control-solid">
 																	
@@ -161,40 +161,12 @@ export default {
 	},
 
 	methods: {
-		money() {
-			let val = this.amount
-			val = val.replace('.', '')
-			val = val.replace(/\D/gi, '')
-			val = val ? val : 0
-			val = `${parseInt(val)}` ?? '0'
-			switch (val.length) {
-				case 0:
-					val = '00,00'
-					break;
-				case 1:
-					val = val.replace(/(\d{1})/gi, '00,0$1')
-					break;
-				case 2:
-					val = val.replace(/(\d{2})/gi, '00,$1')
-					break;
-				case 3:
-					val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
-					break;
-				case 4:
-					val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
-					break;
-				case 5:
-					val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
-					break;
-				case 6:
-					val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
-					break;
-				default:
-					val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
-					break;
-			}
-			this.amount = val
-		},
+	
+		masc_money() {
+            let valor = this.amount.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.amount = valor
+        },	
 
 		async editarPlanos() {
 			this.error = null
@@ -228,7 +200,7 @@ export default {
 		this.nome = globalThis._planos.nome
 		this.whatsapp = globalThis._planos.whatsapp
 		this.instituicao_max = globalThis._planos.instituicao_max
-		this.amount = globalThis._planos.amount	
+		this.amount = (globalThis._planos.amount/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }) 
 	},
 
 }
