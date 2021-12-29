@@ -149,7 +149,6 @@ export default {
 
      data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			plano_id: null,
 			nome: null,
@@ -159,7 +158,6 @@ export default {
 			status: null,
 	        token: null,
      	    dados: [],
-			
         }
     },
 

@@ -113,7 +113,8 @@ export default {
 													<p class="typo__p" v-if="submitStatus === 'ERROR'">
 
 													Por favor, preencha o formulário corretamente.</p>
-													<p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
+													<p class="typo__p" v-if="submitStatus === 'PENDING'">
+													Plano Digital Criado 
 													</p>
 												</div>
 													</form>
