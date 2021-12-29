@@ -65,7 +65,6 @@ function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
     $sql .= "VALUES";
     $sql .= "('$from_id', '$to_id', '$tipo_relacao')";
     $banco->query($sql);
-    
 }
 
 function get_taxonomy_by_from(int $from_id): array
@@ -119,7 +118,6 @@ function gravatar(string $email): string
 function withdraw_caracter(string $campo): string
 {
     return preg_replace('/\D/', '', $campo);
-    
 }
 
 function token(): array
@@ -143,7 +141,7 @@ function token(): array
     }
 
     $valid_token = $jwt->valid($token);
-    if (! $valid_token) {
+    if (!$valid_token) {
         echo json_encode([
             'next' => false,
             'message' => 'Token Invalido'
@@ -151,14 +149,13 @@ function token(): array
         die;
     }
     $token_parce = $jwt->ler($token);
-    return $token_parce; 
-    
+    return $token_parce;
 }
 
 function id(): string
 {
     $id_campo = $_REQUEST['id'] ?? '';
-    $id = withdraw_caracter($id_campo);    
+    $id = withdraw_caracter($id_campo);
 
     $campos_obrigatorios = [
         'id'
@@ -181,8 +178,8 @@ function id(): string
 function email(): string
 {
     $email = $_REQUEST['email'] ?? '';
-    
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode([
             "next" => false,
             "message" => "Email inválido"
@@ -190,13 +187,12 @@ function email(): string
         die;
     }
     return $email;
-
 }
 
 function senha(): string
 {
     $senha = $_REQUEST['senha'] ?? '';
-    
+
     $campos_obrigatorios = [
         'senha'
     ];
@@ -214,7 +210,7 @@ function senha(): string
     }
 
     $min_senha = preg_match('@[0-9]@', $senha);
-    if (! $min_senha || strlen($senha) < 8) {
+    if (!$min_senha || strlen($senha) < 8) {
         echo json_encode([
             "next" => false,
             "message" => "A senha deve ter no minimo 8 Caracters"
@@ -231,7 +227,7 @@ function cnpj(): string
 {
     $cnpj_campo = $_REQUEST['cnpj'];
     $cnpj = withdraw_caracter($cnpj_campo);
-    
+
 
     $campos_obrigatorios = [
         'cnpj'
@@ -239,7 +235,7 @@ function cnpj(): string
     $lb = [
         'cnpj' => 'Digite o cnpj'
     ];
-    
+
     foreach ($campos_obrigatorios as $campo) {
         if (empty($_REQUEST[$campo])) {
             echo json_encode([
@@ -250,40 +246,40 @@ function cnpj(): string
         }
     }
 
-	if (strlen($cnpj) != 14) {
-		echo json_encode([
+    if (strlen($cnpj) != 14) {
+        echo json_encode([
             "next" => false,
             "message" => "O cnpj deve conter 14 Digitos"
         ]);
         die;
-	}
-	
-	
-	if ($cnpj == '00000000000000' || 
-		$cnpj == '11111111111111' || 
-		$cnpj == '22222222222222' || 
-		$cnpj == '33333333333333' || 
-		$cnpj == '44444444444444' || 
-		$cnpj == '55555555555555' || 
-		$cnpj == '66666666666666' || 
-		$cnpj == '77777777777777' || 
-		$cnpj == '88888888888888' || 
-		$cnpj == '99999999999999') {
+    }
+
+
+    if (
+        $cnpj == '00000000000000' ||
+        $cnpj == '11111111111111' ||
+        $cnpj == '22222222222222' ||
+        $cnpj == '33333333333333' ||
+        $cnpj == '44444444444444' ||
+        $cnpj == '55555555555555' ||
+        $cnpj == '66666666666666' ||
+        $cnpj == '77777777777777' ||
+        $cnpj == '88888888888888' ||
+        $cnpj == '99999999999999'
+    ) {
         echo json_encode([
             "next" => false,
             "message" => "Cnpj Ínvalido"
         ]);
         die;
-		
-	 
-     }//else{
+    } //else{
 
-        
+
     //     $numeros = str_split($cnpj);
     //     $tamanho = strlen($cnpj);
     //     var_dump($tamanho);
     //     foreach($numeros as $indice => $num){
-            
+
     //         $num1 = $num * 5;
 
     //         var_dump($num1);
@@ -291,7 +287,7 @@ function cnpj(): string
     //     }
 
     //     die;
-        
+
     // }
 
 
@@ -301,7 +297,7 @@ function cnpj(): string
 function cpf(): string
 {
 
-    
+
     $cpf_campo = $_REQUEST['cpf'] ?? '';
     $cpf = withdraw_caracter($cpf_campo);
 
@@ -322,30 +318,31 @@ function cpf(): string
     }
 
     if (strlen($cpf) != 11) {
-		echo json_encode([
+        echo json_encode([
             "next" => false,
             "message" => "O cpf deve conter 11 Digitos"
         ]);
         die;
-	}
-	
-	
-	if ($cpf == '00000000000000' || 
-		$cpf == '11111111111111' || 
-		$cpf == '22222222222222' || 
-		$cpf == '33333333333333' || 
-		$cpf == '44444444444444' || 
-		$cpf == '55555555555555' || 
-		$cpf == '66666666666666' || 
-		$cpf == '77777777777777' || 
-		$cpf == '88888888888888' || 
-		$cpf == '99999999999999') {
+    }
+
+
+    if (
+        $cpf == '00000000000000' ||
+        $cpf == '11111111111111' ||
+        $cpf == '22222222222222' ||
+        $cpf == '33333333333333' ||
+        $cpf == '44444444444444' ||
+        $cpf == '55555555555555' ||
+        $cpf == '66666666666666' ||
+        $cpf == '77777777777777' ||
+        $cpf == '88888888888888' ||
+        $cpf == '99999999999999'
+    ) {
         echo json_encode([
             "next" => false,
             "message" => "Cpf Ínvalido"
         ]);
         die;
-	 
     }
     return $cpf;
 }
@@ -356,7 +353,7 @@ function telefone(): string
     $telefone_campo = $_REQUEST['telefone'];
     $telefone = withdraw_caracter($telefone_campo);
 
-    if(preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
+    if (preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
         echo json_encode([
             "next" => false,
             "message" => "Telefone Ínvalido"
@@ -386,7 +383,7 @@ function cep(): string
             die;
         }
     }
-    if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) {
+    if (!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) {
         echo json_encode([
             "next" => false,
             "message" => "CEP inválido."
@@ -418,7 +415,7 @@ function min_amount(): string
         }
     }
 
-    if($amount < 2500){
+    if ($amount < 2500) {
         echo json_encode([
             'next' => false,
             'message' => 'Valor minimo é R$25,00'
@@ -426,4 +423,20 @@ function min_amount(): string
         die;
     }
     return $amount;
+}
+
+
+
+function campo_obrigatorios(array $payload): void
+{
+    $campos_obrigatorios = array_keys($payload);
+    foreach ($campos_obrigatorios as $campo) {
+        if (empty($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $payload[$campo]
+            ]);
+            die;
+        }
+    }
 }

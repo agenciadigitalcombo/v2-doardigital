@@ -11,26 +11,14 @@ class PlanoDigitalControler {
         $nome = $_REQUEST['nome'] ?? '';
         $whatsapp = $_REQUEST['whatsapp'] ?? '';
         $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
-
         $amount = min_amount();
         
-        $campos_obrigatorios = [
-            'nome',
-            'instituicao_max'
-        ];
-        $lb = [
+        
+        
+        campo_obrigatorios([
             'nome' => 'Informe o nome',
             'instituicao_max' => 'Informe a Instituicao max'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+        ]);
         
         $whatsapp_msg_campo = "Informe o Whatsapp";
         if($whatsapp == ''){
