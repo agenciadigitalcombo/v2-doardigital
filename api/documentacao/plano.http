@@ -1,7 +1,8 @@
 POST http://localhost/v2-doardigital/api/create-plano
 Content-Type: application/x-www-form-urlencoded
 
-nome=plano 5
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&nome=plano 5
 &instituicao_id=5
 &amount=1000
 
@@ -20,7 +21,8 @@ instituicao_id=5
 POST http://localhost/v2-doardigital/api/update-plano
 Content-Type: application/x-www-form-urlencoded
 
-instituicao_id=1
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&instituicao_id=1
 &nome=Melhor do dia
 
 
@@ -28,4 +30,5 @@ instituicao_id=1
 POST http://localhost/v2-doardigital/api/on-off-plano
 Content-Type: application/x-www-form-urlencoded
 
-id=1
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&plano_id=1
