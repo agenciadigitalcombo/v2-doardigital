@@ -130,6 +130,10 @@ Vue.component('c-carteira', carteira )
 import usuarios from './views/usuarios/usuarios.js'
 Vue.component('c-usuarios', usuarios )
 
+import user from './views/textes/user.js'
+Vue.component('c-user', user )
+
+
 import usuarioNovo from './views/usuarios/usuarioNovo.js'
 Vue.component('c-usuarioNovo', usuarioNovo )
 
