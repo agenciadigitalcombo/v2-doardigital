@@ -20,7 +20,7 @@ instituicao_id=5
 POST http://localhost/v2-doardigital/api/update-plano
 Content-Type: application/x-www-form-urlencoded
 
-id=1
+instituicao_id=1
 &nome=Melhor do dia
 
 

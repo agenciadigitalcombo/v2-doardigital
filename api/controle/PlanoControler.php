@@ -58,15 +58,23 @@ class PlanoControler {
     static function plano()
     {
         $plano = new Plano();
-        $instituicao_id = $_REQUEST['instituicao_id'];
+        $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
 
+        campo_obrigatorios([
+            'instituicao_id' => 'Informe o ID de intituicao'
+        ]);
+    
         $list_instituicao = $plano->list_all_by_instituicao($instituicao_id);
-        $payload = [
-            'id' => $list_instituicao['id'],
-            'instituicao' => $list_instituicao['instituicao_id'],
-            'nome' => $list_instituicao['nome'],
-            'amount' => $list_instituicao['amount']
-        ];
+
+        $payload = array_map(function($inst) {
+            return [
+                'id' => $inst['id'],
+                'instituicao' => $inst['instituicao_id'],
+                'nome' => $inst['nome'],
+                'amount' => $inst['amount']
+            ];
+        },$list_instituicao );
+
         echo json_encode([
             'next' => true,
             'message' => 'Plano',
@@ -103,7 +111,7 @@ class PlanoControler {
 
         $plano = new Plano();
 
-        $instituicao_id = id();
+        $instituicao_id = $_REQUEST['instituicao_id'];
         $nome = $_REQUEST['nome'] ?? '';
 
         $campos_obrigatorios = [
@@ -134,10 +142,11 @@ class PlanoControler {
     {
         $plano = new Plano();
 
-        $status_campo = $_REQUEST['status'];
-        $status = withdraw_caracter($status_campo);
+        token();
 
-        $plano->on_off($status);
+        $plano_id = $_REQUEST['plano_id'] ?? null;
+
+        $plano->on_off($plano_id);
         echo json_encode([
             'next' => true,
             'message' => 'Status Atualizado'
