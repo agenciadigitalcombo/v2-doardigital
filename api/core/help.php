@@ -113,11 +113,19 @@ function gravatar(string $email): string
     return "https://www.gravatar.com/avatar/{$email}";
 }
 
+function valid_int($valor): int {
+    $valor = (int) $valor;
+    if( $valor != NAN) {
+        return $valor;
+    }
+    return 0;
+}
 
-
-function withdraw_caracter(string $campo): string
+function withdraw_caracter($valor): int
 {
-    return preg_replace('/\D/', '', $campo);
+    $transform_valor = preg_replace('/\D/', '', $valor);
+    
+    return intval($transform_valor);
 }
 
 function token(): array
@@ -394,9 +402,9 @@ function cep(): string
 }
 
 
-function min_amount(): string
+function min_amount($valor): int
 {
-    $amount_campo = $_REQUEST['amount'] ?? null;
+    $amount_campo = $valor;
     $amount = withdraw_caracter($amount_campo);
 
     $campos_obrigatorios = [
@@ -439,4 +447,32 @@ function campo_obrigatorios(array $payload): void
             die;
         }
     }
+}
+
+
+function valid_porcentagem( int $procent ) {
+    return $procent >= 1 && $procent <= 100;
+}
+
+
+function min_max_porcentagem($porcentagem): int
+{
+
+    if ($porcentagem < 0) {
+        echo json_encode([
+            'next' => false,
+            'message' => 'Valor minimo é 1%'
+        ]);
+        die;
+    }
+
+    if ($porcentagem > 101) {
+        echo json_encode([
+            'next' => false,
+            'message' => 'Valor maximo é 100%'
+        ]);
+        die;
+    }
+
+    return $porcentagem;
 }

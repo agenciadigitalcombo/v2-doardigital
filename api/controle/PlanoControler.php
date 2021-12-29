@@ -12,7 +12,8 @@ class PlanoControler {
         $instituicao_id = $_REQUEST['instituicao_id'];
         $nome = $_REQUEST['nome'] ?? '';        
         
-        $amount = min_amount();
+        $amount_campo = $_REQUEST['amount'];
+        $amount = min_amount($amount_campo);
         
         campo_obrigatorios([
             'instituicao_id' => 'Informe a Instituicao',

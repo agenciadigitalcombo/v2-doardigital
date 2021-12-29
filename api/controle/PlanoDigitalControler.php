@@ -11,7 +11,8 @@ class PlanoDigitalControler {
         $nome = $_REQUEST['nome'] ?? '';
         $whatsapp = $_REQUEST['whatsapp'] ?? '';
         $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
-        $amount = min_amount();
+        $amount_campo = $_REQUEST['amount'];
+        $amount = min_amount($amount_campo);
         
         
         

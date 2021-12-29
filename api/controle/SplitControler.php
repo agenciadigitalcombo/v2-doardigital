@@ -11,8 +11,14 @@ class SplitControler{
         $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
         $recebedor_id = $_REQUEST['recebedor_id'] ?? null;
         $responsavel_estorno = $_REQUEST['responsavel_estorno'] ?? null;
-        $porcentagem = $_REQUEST['porcentagem'] ?? null;
+        $porcentagem_campo = $_REQUEST['porcentagem'] ?? null;
 
+        $porcentagem_valid_int = valid_int($porcentagem_campo);
+        $porcentagem = min_max_porcentagem($porcentagem_valid_int);
+
+
+        
+        
         $campos_obrigatorios = [
             'instituicao_id',
             'recebedor_id',
@@ -34,8 +40,15 @@ class SplitControler{
                 return null;
             }
         }
-
-
+        
+        if (!valid_porcentagem($porcentagem) ) {
+            echo json_encode([
+                'next' => false,
+                'message' => 'Valor minimo é 1% e o maximo é 100%'
+            ]);
+            return null;
+        }
+        
         $split->create($instituicao_id, $recebedor_id, $responsavel_estorno, $porcentagem);
         echo json_encode([
             'next' => true,
@@ -50,11 +63,16 @@ class SplitControler{
         $split = new Split();
 
         token();
+        
         $id = $_REQUEST['id'] ?? null;
         $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
         $recebedor_id = $_REQUEST['recebedor_id'] ?? null;
         $responsavel_estorno = $_REQUEST['responsavel_estorno'] ?? null;
-        $porcentagem = $_REQUEST['porcentagem'] ?? null;
+        $porcentagem_campo = $_REQUEST['porcentagem'] ?? null;
+        
+        $porcentagem_valid_int = valid_int($porcentagem_campo);
+        $porcentagem = min_max_porcentagem($porcentagem_valid_int);
+
 
         $campos_obrigatorios = [
             'id',
@@ -80,6 +98,13 @@ class SplitControler{
             }
         }
 
+        if (!valid_porcentagem($porcentagem) ) {
+            echo json_encode([
+                'next' => false,
+                'message' => 'Valor minimo é 1% e o maximo é 100%'
+            ]);
+            return null;
+        }
 
         $split->update($id, $instituicao_id, $recebedor_id, $responsavel_estorno, $porcentagem);
         echo json_encode([
