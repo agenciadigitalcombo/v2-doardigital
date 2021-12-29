@@ -54,7 +54,7 @@ export default {
 																<div class="fv-row mb-5">
 																	<label for="Valor"
 																		class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-																	<input type="text" v-model.trin="$v.amount.$model"
+																	<input type="text" v-model.trin="$v.amount.$model" disabled
 																		id="kt_inputmask_6" @input="money" placeholder="00,00"
 																		:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }"
 																		class="form-control form-control-lg form-control-solid">
@@ -74,7 +74,7 @@ export default {
 															<div class="col-lg-6">
 																<div class="fv-row mb-5"> <label for="whatsapp"
 																		class="form-label fs-6 fw-bolder mb-3 required">Whatsapp</label>
-																	<select v-model="whatsapp" name="text_input"
+																	<select v-model="whatsapp" name="text_input" disabled
 																		class="form-select form-select-solid"
 																		aria-label="Select example">
 																		<option value="1">Sim</option>
@@ -87,7 +87,7 @@ export default {
 																	<label for="instituicao_max"
 																		class="form-label fs-6 fw-bolder mb-3 required">Instituicao
 																		Maxima</label>
-																	<input v-model="instituicao_max" type="number" v-model.trin="$v.instituicao_max.$model"
+																	<input v-model="instituicao_max" type="number" v-model.trin="$v.instituicao_max.$model" disabled
 																	:class=" {'is-invalid':$v.instituicao_max.$error, 'is-valid':!$v.instituicao_max.$invalid }"
 																		class="form-control form-control-lg form-control-solid"
 																		name="text_input" id="instituicao_max" />

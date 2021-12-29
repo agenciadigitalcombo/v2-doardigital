@@ -99,6 +99,8 @@ export default {
 																</div>
 															</div>
 														</div>
+														<c-mensagem :msg="msg" ></c-mensagem>
+
 														<div class="d-flex">
 														<button class="btn btn-primary"" type=" submit"
 															:disabled="submitStatus === 'PENDING'">SALVAR!</button>
@@ -106,9 +108,12 @@ export default {
 													</div>
 													<div>
 													<p class="typo__p" v-if="submitStatus === 'OK'"> 
-													<c-mensagem :msg="msg"></c-mensagem>
+													
 													</p>
 													<p class="typo__p" v-if="submitStatus === 'ERROR'">
+
+													<c-mensagem :msg="msg"></c-mensagem>
+
 													Por favor, preencha o formulário corretamente.</p>
 													<p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
 													</p>
@@ -140,7 +145,8 @@ export default {
 			instituicao_max: null,
 			amount: null,
 			token: null,
-			submitStatus: null
+			submitStatus: null,
+			msg: null
 		}
 	},
 
@@ -204,6 +210,7 @@ export default {
 			} else {
 
 				let res = await adm.cadastrarPlanosDigital(
+					
 					this.nome,
 					this.whatsapp,
 					this.instituicao_max,
@@ -211,9 +218,15 @@ export default {
 					this.token,
 				)
 				if (!res.next) {
+					this.msg =  res.message,
+   				 setTimeout(() => this.msg= "", 3000);
+
 					this.error = res.message
 					return null
 				}
+				this.msg =  res.message,
+			
+				
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
@@ -221,6 +234,9 @@ export default {
 					window.location.href = `#/plano-digital`
 				}, 500)
 			}
+			
+			
+		;
 		},
 	},
 

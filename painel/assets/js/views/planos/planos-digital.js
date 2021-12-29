@@ -197,12 +197,8 @@ export default {
 		},	},
 
 	async mounted() {
-		this.dados = (await this.listar()).dados,
-        this.id = dados.id,
-        this.nome = dados.nome
-        this.whatsapp = dados.whatsapp
-		this.amount = dados.amount
-		this.status = dados.status
+		this.dados = (await this.listar()).dados
+       
 	   
 	},
 	
