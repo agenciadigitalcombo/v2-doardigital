@@ -227,7 +227,7 @@ if (confirm( 'deseja excluir a credencial ?' )) {
     }
 
     this.msg =  res.message,
-    setTimeout(() => this.msg= "", 3000);
+    setTimeout(() => this.msg= "", 5000);
 
  
     this.dados = (await this.listar()).dados
