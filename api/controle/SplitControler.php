@@ -7,6 +7,7 @@ class SplitControler{
         $split = new Split();
 
         token();
+       
         $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
         $recebedor_id = $_REQUEST['recebedor_id'] ?? null;
         $responsavel_estorno = $_REQUEST['responsavel_estorno'] ?? null;
@@ -125,32 +126,26 @@ class SplitControler{
     {
         $split = new Split();
 
-        $id = $_REQUEST['id'] ?? null;
-        $campos_obrigatorios = [
-            'id'
-        ];
-        $lb = [
-            'id' => 'Informe o Id'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+        $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
+    
+        
+        campo_obrigatorios([
+            'instituicao_id' => 'Informe o Id da instituicao_id'
+        ]);
+
+        $list = $split->list_all_by_instituicao($instituicao_id);
 
 
-        $list = $split->list_all_by_instituicao($id);
-        $payload = [
-            'id' => $list['id'],
-            'instituicao_id' => $list['instituicao_id'],
-            'recebedor_id' => $list['recebedor_id'],
-            'responsavel_estorno' => $list['responsavel_estorno'],
-            'porcentagem' => $list['porcentagem']
-        ];
+
+        $payload = array_map(function($guard){
+            return [
+                'id' => $guard['id'],
+                'instituicao_id' => $guard['instituicao_id'],
+                'recebedor_id' => $guard['recebedor_id'],
+                'responsavel_estorno' => $guard['responsavel_estorno'],
+                'porcentagem' => $guard['porcentagem']
+            ];
+        }, $list) ; 
 
         echo json_encode([
             'next' => true,

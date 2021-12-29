@@ -71,7 +71,8 @@ class PlanoControler {
                 'id' => $inst['id'],
                 'instituicao' => $inst['instituicao_id'],
                 'nome' => $inst['nome'],
-                'amount' => $inst['amount']
+                'amount' => $inst['amount'],
+                'status' => $inst['status']
             ];
         },$list_instituicao );
 

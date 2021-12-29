@@ -1,6 +1,6 @@
 <?php
 
-router('/split-new ', 'PlanoControler@create');
-router('/split-update ', 'PlanoControler@update');
-router('/split-delete', 'PlanoControler@delete');
-router('/split-list', 'PlanoControler@list_all');
+router('/split-new', 'SplitControler@create');
+router('/split-update', 'SplitControler@update');
+router('/split-delete', 'SplitControler@delete');
+router('/split-list', 'SplitControler@list_all');

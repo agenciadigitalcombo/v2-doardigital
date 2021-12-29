@@ -22,7 +22,7 @@ class Split implements ISplit{
     public function update(int $id, int $instituicao_id, int $recebedor_id, int $responsavel_estorno, int $porcentagem): void
     {
         $banco = new Banco();
-        $sql = "UPDATE split SET instituicao_id='$instituicao_id', recebedor_id='$recebedor_id' WHERE id='$id'";
+        $sql = "UPDATE split SET instituicao_id=$instituicao_id, recebedor_id=$recebedor_id, responsavel_estorno=$responsavel_estorno, porcentagem=$porcentagem WHERE id=$id";
         $banco->exec($sql);
     }
 
@@ -38,7 +38,7 @@ class Split implements ISplit{
         $banco = new Banco();
         $sql = "SELECT * FROM split WHERE instituicao_id='$id'";
         $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $guard ?? [];
     }
 
     
