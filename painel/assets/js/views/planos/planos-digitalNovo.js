@@ -112,8 +112,6 @@ export default {
 													</p>
 													<p class="typo__p" v-if="submitStatus === 'ERROR'">
 
-													<c-mensagem :msg="msg"></c-mensagem>
-
 													Por favor, preencha o formulário corretamente.</p>
 													<p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
 													</p>
@@ -224,9 +222,7 @@ export default {
 					this.error = res.message
 					return null
 				}
-				this.msg =  res.message,
 			
-				
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
