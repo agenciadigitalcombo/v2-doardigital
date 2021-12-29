@@ -64,7 +64,7 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
-																<input type="text" v-model.trin="$v.amount.$model"
+																<input type="text" v-model.trin="$v.amount.$model" id="kt_inputmask_6" @input="money"
 																	:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																
@@ -82,7 +82,7 @@ export default {
 															
 														</div>
 													</div>
-													
+													<c-mensagem :msg="msg" ></c-mensagem>
 													<div class="d-flex">
 														<button class="btn btn-primary"" type=" submit"
 															:disabled="submitStatus === 'PENDING'">SALVAR!</button>
@@ -94,7 +94,7 @@ export default {
 												
 														
 													<p class="typo__p" v-if="submitStatus === 'OK'"> 
-													<c-mensagem :msg="msg"></c-mensagem>
+													
 													</p>
 													<p class="typo__p" v-if="submitStatus === 'ERROR'">
 													Por favor, preencha o formulário corretamente.</p>
@@ -130,7 +130,7 @@ export default {
 			nome: null,
 			amount: null,
 			token: null,
-
+			msg: null,
 			submitStatus: null
 		}
 	},
@@ -147,12 +147,39 @@ export default {
 	},
 
 	methods: {
-
-		status(validation) {
-			return {
-				error: validation.$error,
-				dirty: validation.$dirty
+		money() {
+			let val = this.amount
+			val = val.replace('.', '')
+			val = val.replace(/\D/gi, '')
+			val = val ? val : 0
+			val = `${parseInt(val)}` ?? '0'
+			switch (val.length) {
+				case 0:
+					val = '00,00'
+					break;
+				case 1:
+					val = val.replace(/(\d{1})/gi, '00,0$1')
+					break;
+				case 2:
+					val = val.replace(/(\d{2})/gi, '00,$1')
+					break;
+				case 3:
+					val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
+					break;
+				case 4:
+					val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
+					break;
+				case 5:
+					val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
+					break;
+				case 6:
+					val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
+					break;
+				default:
+					val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
+					break;
 			}
+			this.amount = val
 		},
 
 		async addPlanos() {
@@ -170,14 +197,16 @@ export default {
 					this.token,
 				)
 				if (!res.next) {
+					this.msg = res.message,
+						setTimeout(() => this.msg = "", 5000);
+
 					this.error = res.message
 					return null
 				}
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
-				  this.submitStatus = 'OK'
-				  this.msg = res.message
-				  window.location.href = `#/planos`
+					this.submitStatus = 'OK'
+					window.location.href = `#/planos`
 				}, 500)
 			}
 

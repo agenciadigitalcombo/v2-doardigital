@@ -192,7 +192,9 @@ export default {
 				return null
 			}
 			
-		},	},
+		},	
+	
+	},
 
 	async mounted() {
 		this.dados = (await this.listar()).dados

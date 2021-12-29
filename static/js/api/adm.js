@@ -272,9 +272,20 @@ export default {
         })
     },
 
-    async listarPlanos(token) {
-        return await http.get('/list-plano', {
-            token
+    async listarPlanos(instituicao_id) {
+        return await http.get('/plano', {
+            instituicao_id
+        })
+    },
+
+ 
+    async onoffPlano(
+        plano_id,
+        token,
+    ) {
+        return await http.post('/on-off-plano', {
+            plano_id,
+            token,
         })
     },
     

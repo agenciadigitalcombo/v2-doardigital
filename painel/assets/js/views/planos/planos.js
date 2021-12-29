@@ -29,7 +29,8 @@ export default {
 											</div>
 											
 										</div>
-											<div class="d-flex justify-content-end align-items-center d-none mr-9"
+			
+										<div class="d-flex justify-content-end align-items-center d-none mr-9"
 											data-kt-subscription-table-toolbar="selected">
 											<div class="fw-bolder ">
 												<span class=""
@@ -94,18 +95,19 @@ export default {
 														<div class="badge badge-light"></div>
 													</td>
 													<td>
-														<div class=""> R$  {{ item.amount }}</div>
+														<div class=""> {{ item.amount | is_price }}</div>
 													</td>
 													<td></td>
+												
 													<td>
-														<div class="">
-															<div
-																class="form-check form-switch form-check-custom form-check-solid me-10">
-																<input class="form-check-input h-30px w-50px"
-																	type="checkbox" value="" id="flexSwitch30x50" />
-															</div>
 
-													</td>
+													<div class="form-check form-switch form-check-custom form-check-solid me-10">
+													
+													<input class="form-check-input h-30px w-50px" v-model="item.status" true-value="1" false-value="0" @click="statusx(item.id)"
+													type="checkbox" id="flexSwitch30x50" />
+														</div>
+
+											</td>
 												
 													<td class="text-end">
 
@@ -145,19 +147,27 @@ export default {
 
      data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			instituicao_id: null,
 			nome: null,
 			amount: null,
+			status: null,
 	        token: null,
 		    dados: []
         }
     },
 
+	
+	filters: {
+        is_price(price) {
+            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${amount}`
+        }
+    },
+
 	methods: {
         async listar() {
-            let res = await adm.listarPlanos(localStorage.getItem('token'))
+            let res = await adm.listarPlanos(localStorage.getItem('instituicao_id'))			
             return res
         },
 
@@ -165,15 +175,28 @@ export default {
 			globalThis._planos = this.dados.find(user => user.id == id)
             window.location.href = "#/planos/editar"
         },
+
+		
+		async statusx(status) {
+			this.error = null
+			this.plano_id= status 
+			let res = await adm.onoffPlano(
+				this.plano_id,
+				this.token,
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			
+		},	
+
 	},
 
 	async mounted() {
-		this.dados = (await this.listar()).dados,
-        this.id = dados.id,
-        this.instituicao_id = dados.instituicao_id
-        this.nome = dados.nome
-		this.amount = dados.amount
-        console.log(dados)
+		this.dados = (await this.listar()).dados
+		this.instituicao_id = localStorage.getItem("instituicao_id");
 	},
 	
 }
