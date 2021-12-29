@@ -172,7 +172,7 @@ export default {
             token,
         })
     },
- 
+
 
     async listarInstutuicao(token) {
         return await http.get('/list-instituicao', {
@@ -262,7 +262,7 @@ export default {
         instituicao_id,
         nome,
         amount,
-        token, 
+        token,
     ) {
         return await http.post('/update-plano', {
             instituicao_id,
@@ -278,7 +278,7 @@ export default {
         })
     },
 
- 
+
     async onoffPlano(
         plano_id,
         token,
@@ -359,7 +359,7 @@ export default {
         })
     },
 
-    
+
     async editarPlanosDigital(
         plano_id,
         nome,
@@ -381,7 +381,7 @@ export default {
             token,
         })
     },
-    
+
 }
 
 // editarSubadm
