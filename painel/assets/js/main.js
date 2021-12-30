@@ -152,11 +152,19 @@ Vue.component('c-planoNovo', planoNovo )
 import qrCode from './views/qr-code.js'
 Vue.component('c-qr-code', qrCode )
 
+
 import divPagamento from './views/instituicao/div-pagamento.js'
 Vue.component('c-div-pagamento', divPagamento )
 
 import divPagamentoAdd from './views/instituicao/div-pagamentoAdd.js'
 Vue.component('c-div-pagamentoAdd', divPagamentoAdd )
+
+
+import divPagamentoEditar from './views/instituicao/div-pagamento_editar.js'
+Vue.component('c-div-pagamentoEditar', divPagamentoEditar )
+
+
+
 
 import planosDigital from './views/planos/planos-digital.js'
 Vue.component('c-planos-digital', planosDigital )

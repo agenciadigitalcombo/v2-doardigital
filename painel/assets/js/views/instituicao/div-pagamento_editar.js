@@ -35,7 +35,7 @@ export default {
 
 													<div class="flex-row-fluid ">
 
-														<form class="form" @submit.prevent="addSplit"
+														<form class="form" @submit.prevent="UpdateSplit"
 															novalidate="novalidate">
 															<div class="row mb-1">
 																<div class="col-lg-12">
@@ -112,10 +112,11 @@ export default {
 	},
 
 	methods: {
-		async addSplit() {
+		async UpdateSplit() {
 			this.error = null
 
-			let res = await adm.split(
+			let res = await adm.splitUpdate(
+				this.id,
 				this.instituicao_id,
 				this.recebedor_id,
 				this.responsavel_estorno,
@@ -131,7 +132,11 @@ export default {
 	},
 
 	async mounted() {
-		this.instituicao_id = window.localStorage.getItem('instituicao_id');		
+		this.id = globalThis._divisao.id,
+		this.instituicao_id = globalThis._divisao.instituicao_id,
+		this.recebedor_id = globalThis._divisao.recebedor_id
+		this.responsavel_estorno = globalThis._divisao.responsavel_estorno,
+		this.porcentagem = globalThis._divisao.porcentagem		
    }, 
 
 

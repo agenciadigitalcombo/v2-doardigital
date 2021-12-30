@@ -382,6 +382,58 @@ export default {
         })
     },
 
+
+
+    async split(
+        instituicao_id,
+        recebedor_id,
+        responsavel_estorno,
+        porcentagem,
+        token,
+    ) {
+        return await http.post('/split-new', {
+            instituicao_id,
+            recebedor_id,
+            responsavel_estorno,
+            porcentagem,
+            token,
+        })
+    },
+
+    async splitUpdate(
+       id,
+        instituicao_id,
+        recebedor_id,
+        responsavel_estorno,
+        porcentagem,
+        token,
+    ) {
+        return await http.post('/split-update', {
+           id,
+            instituicao_id,
+            recebedor_id,
+            responsavel_estorno,
+            porcentagem,
+            token,
+        })
+    },
+
+
+    
+
+    async listarSplit(instituicao_id) {
+        return await http.get('/split-list', {
+            instituicao_id
+        })
+    },
+
+    async deleterSplit(token, id) {
+        return await http.post('/split-delete', {
+            token, id,
+        })
+    },
+
+
 }
 
 // editarSubadm

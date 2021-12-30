@@ -75,7 +75,7 @@ export default {
 													</thead>
 													<tbody class="text-gray-600 fw-bold">
 														<tr v-for="item in dados" :key="item.id">
-														<!--begin::Checkbox-->
+													
 														<td>
 
 														</td>

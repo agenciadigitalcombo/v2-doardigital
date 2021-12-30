@@ -83,15 +83,15 @@ export default {
                                             <!--end::Table head-->
                                             <!--begin::Table body-->
                                             <tbody class="fw-bold text-gray-600">
-                                                <tr >
+                                                <tr v-for="item in dados" :key="item.id">
                                                     <td>
-                                                    item.nome_identificacao}}
+                                                   {{ item.recebedor_id }}
 		
                                                     </td>
     
                                                     <td>
                                                         <a class="badge badge-light-primary fs-7 m-1">
-                                                             	item.recursos}}
+                                                        {{ item.porcentagem }}
                                                         </a>
                                                     </td>
                                                     <!--end::Assigned to=-->
@@ -167,59 +167,51 @@ export default {
     data: function () {
 
         return {
-            id: null,
-            nome_identificacao: null,
-            recursos: null,
+            instituicao_id: null,
+			recebedor_id: null,
+			responsavel_estorno: null,
+			porcentagem: null,
+			token: null,
             dados: [],
             msg: null
         }
-
     },
 
     async mounted() {
         this.dados = (await this.listar()).dados
-        this.id = dados.id
-        this.nome_identificacao = dados.nome_identificacao
-        this.recursos = dados.recursos
-        console.log(dados)
+        this.instituicao_id = localStorage.getItem("instituicao_id");
     },
 
     methods: {
         async listar() {
-            let res = await adm.listarCredencial(localStorage.getItem('token'))
+            let res = await adm.listarSplit(localStorage.getItem('instituicao_id'))
             return res
         },
 
-
         async eliminar(dados) {
+            if (confirm('deseja excluir a Divicao de Pagamento ?')) {
+                this.error = null
+                let res = await adm.deleterSplit(
+                    this.id = dados.id,
+                    this.token
+                )
+                if (!res.next) {
+                    console.log(res)
+                    this.error = res.message
+                    return null
+                }
 
-if (confirm( 'deseja excluir a credencial ?' )) {
-    this.error = null
-    let res = await adm.deleterCredencia(
-        this.id = dados.id,
-        
-    )
-    if (!res.next) {
-        console.log(res)
-        this.error = res.message
-        return null
-    }
+                this.msg = res.message,
+                    setTimeout(() => this.msg = "", 3000);
 
-    this.msg =  res.message,
-    setTimeout(() => this.msg= "", 3000);
+                this.dados = (await this.listar()).dados
 
- 
-    this.dados = (await this.listar()).dados
-    this.id = dados.id
-    this.nome_identificacao = dados.nome_identificacao
-    this.recursos = dados.recursos
-    console.log(this.dados)
-}
-      },
+            }
+        },
 
         async editar(id) {
-			globalThis._usuario = this.dados.find(user => user.id == id)
-            window.location.href = "#/credencias/editar"
+            globalThis._divisao = this.dados.find(user => user.id == id)
+            window.location.href = "#/editar-pagamento"
         },
 
     },
