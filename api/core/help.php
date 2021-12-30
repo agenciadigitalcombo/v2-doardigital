@@ -214,9 +214,9 @@ function valid_senha($valor): string
     return $cripto_senha;
 }
 
-function cnpj(): string
+    
+function cnpj($cnpj_campo): string
 {
-    $cnpj_campo = $_REQUEST['cnpj'];
     $cnpj = withdraw_caracter($cnpj_campo);
 
 
@@ -285,11 +285,11 @@ function cnpj(): string
     return $cnpj;
 }
 
-function cpf(): string
+function cpf($cpf_campo): string
 {
 
 
-    $cpf_campo = $_REQUEST['cpf'] ?? '';
+    
     $cpf = withdraw_caracter($cpf_campo);
 
     $campos_obrigatorios = [

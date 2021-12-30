@@ -17,7 +17,10 @@ class InscritoControler
 
         $instituicao_id = $_REQUEST['instituicao_id'];
         $nome = $_REQUEST['nome'];
-        $email = email();
+
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
+
         $telefone = $_REQUEST['telefone'];
 
         $transform_tel = withdraw_caracter($telefone);
@@ -77,7 +80,8 @@ class InscritoControler
 
         $instituicao_id = $_REQUEST['instituicao_id'];
         
-        $email = email();
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
         
         $telefone = $_REQUEST['telefone'];
         $transform_tel = withdraw_caracter($telefone);

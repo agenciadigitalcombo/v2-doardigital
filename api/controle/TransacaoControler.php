@@ -23,8 +23,10 @@ class TransacaoControler{
         $email = $_REQUEST['email'];
         $nome = $_REQUEST['nome'] ?? null;
         $genero = $_REQUEST['genero'] ?? null;
-        $cpf = cpf();
-        $telefone = telefone();
+        $cpf_campo = $_REQUEST['cpf'];
+        $cpf = cpf($cpf_campo);
+        $telefone_campo = $_REQUEST['telefone'];
+        $telefone = withdraw_caracter($telefone_campo);
         $cep = $_REQUEST['cep'];
         $numero = $_REQUEST['numero'] ?? null;
         $estado = $_REQUEST['estado'] ?? null;

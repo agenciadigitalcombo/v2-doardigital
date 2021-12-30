@@ -13,7 +13,9 @@ class InstituicaoControler
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['sub_domain'] ?? '';
-        $email = email();
+        
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
 
         $cor = $_REQUEST['cor'] ?? '';
         $logo = $_REQUEST['logo'] ?? '';
@@ -77,7 +79,8 @@ class InstituicaoControler
         $nome_fantasia = $_REQUEST['nome_fantasia'];
         $razao_social = $_REQUEST['razao_social'];
 
-        $email = email();
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
 
         $cor = $_REQUEST['cor'];
         $logo = $_REQUEST['logo'];
@@ -88,17 +91,8 @@ class InstituicaoControler
         $transform_cnpj = withdraw_caracter($cnpj);
         $transform_tel = withdraw_caracter($telefone);
 
-
-        $campos_obrigatorios = [
-            'nome_fantasia',
-            'razao_social',
-            'email',
-            'cor',
-            'telefone',
-            'logo',
-            'cnpj'
-        ];
-        $lb = [
+        
+        campo_obrigatorios([
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'email' => 'Qual o Email',
@@ -106,17 +100,8 @@ class InstituicaoControler
             'telefone' => 'Digite o numero de Telefone',
             'logo' => 'Qual a logo',
             'cnpj' => 'Informe o Cnpj'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-
+        ]);
+        
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];

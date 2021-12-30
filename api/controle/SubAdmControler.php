@@ -25,7 +25,8 @@ class SubAdmControler
 
         $nome = $_REQUEST['nome'] ?? '';
 
-        $email = email();
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
 
         $telefone_campo = $_REQUEST['telefone'] ?? '';
         $credencial_id_campo = $_REQUEST['credencial_id'] ?? '';
@@ -36,7 +37,8 @@ class SubAdmControler
 
         $telefone = withdraw_caracter($telefone_campo);
 
-        $senha = senha();
+        $campo_senha = $_REQUEST['senha'];
+        $senha = valid_senha($campo_senha);
 
         
 
@@ -77,22 +79,11 @@ class SubAdmControler
         
         $telefone = withdraw_caracter($telefone_campo);
         
-        $campos_obrigatorios = [
-            'secret'
-        ];
-        $lb = [
+        
+        campo_obrigatorios([
             'secret' => 'Informe o Secret'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-
+        ]);
+        
         $subadm->update($nome, $secret, $telefone, $credencial_id);
         echo json_encode([
             'next' => true,
@@ -106,7 +97,7 @@ class SubAdmControler
 
         token();
 
-        $secret = $_REQUEST['secret'];
+        $secret = $_REQUEST['secret'] ?? null;
         $listar = $subadm->list_profile($secret);
 
         $payload = [
