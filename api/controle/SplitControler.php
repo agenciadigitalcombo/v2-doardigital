@@ -170,6 +170,15 @@ class SplitControler
         }, $list);
 
 
+        $total_pessoal = count($payload);
+        if( $total_pessoal != 0 && $total_pessoal < 2 ) {
+            echo json_encode([
+                'next' => false,
+                'message' => 'A divisão de pagamento precisa de no minimo 2 pessoas',
+                'dados' => $payload
+            ]);
+            return null;
+        }
         
 
         if( self::total_responsaveis($payload) > 1 ) {
@@ -181,11 +190,10 @@ class SplitControler
             return null;
         }
 
-
         if( self::total_porcentagem($payload) != 100 ) {
             echo json_encode([
                 'next' => false,
-                'message' => 'a soma total de porcentagem entre os participantes tem que dar 100%',
+                'message' => 'A soma total de porcentagem entre os participantes tem que dar 100%',
                 'dados' => $payload
             ]);
             return null;
