@@ -136,6 +136,13 @@ class SplitControler
             return intval( $pessoa['responsavel_estorno'] ) + $total;
         }, 0 );
     }
+    
+    static function total_porcentagem( array $payload ) : int {        
+        return array_reduce($payload, function( $total, $pessoa ) {            
+            return intval( $pessoa['porcentagem'] ) + $total;
+        }, 0 );
+    }
+
 
     static function list_all()
     {
@@ -169,6 +176,16 @@ class SplitControler
             echo json_encode([
                 'next' => false,
                 'message' => 'So pode haver 1 responsavel',
+                'dados' => $payload
+            ]);
+            return null;
+        }
+
+
+        if( self::total_porcentagem($payload) != 100 ) {
+            echo json_encode([
+                'next' => false,
+                'message' => 'a soma total de porcentagem entre os participantes tem que dar 100%',
                 'dados' => $payload
             ]);
             return null;
