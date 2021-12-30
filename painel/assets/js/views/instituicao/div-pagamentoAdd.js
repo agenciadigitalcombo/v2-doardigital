@@ -43,7 +43,7 @@ export default {
 																	<div class="fv-row mb-5">
 																		<label for="Recebedor"
 																			class="form-label fs-6 fw-bolder mb-3 required">Recebedor</label>
-																		<input type="text"  v-model.trin="$v.recebedor_id.$model"
+																		<input type="number"  v-model.trin="$v.recebedor_id.$model"
 																		:class=" {'is-invalid':$v.recebedor_id.$error, 'is-valid':!$v.recebedor_id.$invalid }"
 																			class="form-control form-control-lg form-control-solid" />
 
@@ -77,7 +77,7 @@ export default {
 																	<div class="fv-row mb-5">
 																		<label for="Porcentagem"
 																			class="form-label fs-6 fw-bolder mb-3 required">Porcentagem</label>
-																		<input type="text"  v-model.trin="$v.porcentagem.$model"
+																		<input type="number"  v-model.trin="$v.porcentagem.$model"
 																		:class=" {'is-invalid':$v.porcentagem.$error, 'is-valid':!$v.porcentagem.$invalid }"
 																			class="form-control form-control-lg form-control-solid"
 																			 />
