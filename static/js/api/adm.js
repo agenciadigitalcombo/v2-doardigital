@@ -427,9 +427,9 @@ export default {
         })
     },
 
-    async deleterSplit(token, id) {
+    async deleterSplit( id, token) {
         return await http.post('/split-delete', {
-            token, id,
+            id, token
         })
     },
 

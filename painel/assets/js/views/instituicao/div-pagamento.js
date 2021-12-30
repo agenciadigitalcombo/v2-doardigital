@@ -75,7 +75,8 @@ export default {
                                                 <!--begin::Table row-->
                                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th class="min-w-200px">Recebedor</th>
-                                                    <th class="min-w-350px">Porcentagem</th>
+                                                    <th class="min-w-150px">responsavel</th>
+                                                    <th class="min-w-200px">Porcentagem</th>
                                                     <th class="min-w-100px text-end"></th>
                                                 </tr>
                                                 <!--end::Table row-->
@@ -88,10 +89,19 @@ export default {
                                                    {{ item.recebedor_id }}
 		
                                                     </td>
-    
+                                                    
+                                                    <td>
+                                                    <div v-if="responsavel_estorno === item.responsavel_estorno">
+														Sim
+															</div>
+
+															<div v-else>
+															Não
+															</div>
+                                                     </td>
                                                     <td>
                                                         <a class="badge badge-light-primary fs-7 m-1">
-                                                        {{ item.porcentagem }}
+                                                        {{ item.porcentagem }}%
                                                         </a>
                                                     </td>
                                                     <!--end::Assigned to=-->
@@ -169,7 +179,7 @@ export default {
         return {
             instituicao_id: null,
 			recebedor_id: null,
-			responsavel_estorno: null,
+			responsavel_estorno: '1',
 			porcentagem: null,
 			token: null,
             dados: [],

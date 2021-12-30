@@ -1,4 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
+const { required, minLength, between } = window.validators
 
 export default {
 	template:`
@@ -42,9 +43,20 @@ export default {
 																	<div class="fv-row mb-5">
 																		<label for="Recebedor"
 																			class="form-label fs-6 fw-bolder mb-3 required">Recebedor</label>
-																		<input type="text" v-model="recebedor_id"
-																			class="form-control form-control-lg form-control-solid"
-																			name="text_input" />
+																		<input type="text"  v-model.trin="$v.recebedor_id.$model"
+																		:class=" {'is-invalid':$v.recebedor_id.$error, 'is-valid':!$v.recebedor_id.$invalid }"
+																			class="form-control form-control-lg form-control-solid" />
+
+																			<div class="erros" v-if="$v.recebedor_id.$error">
+																			<div class="erro_texte" v-if="!$v.recebedor_id.required">O Id do recebedor
+																				é necessária</div>
+																			<div class="erro_texte" v-if="!$v.recebedor_id.minLength">
+																				quantidade deve ter pelo menos 4 caracter.</div>
+																		</div>
+				
+																		<div class="sucesso_texte" v-else> 
+																			</div>
+
 																	</div>
 																</div>
 
@@ -53,34 +65,50 @@ export default {
 																		<label for="Responsavel"
 																			class="form-label fs-6 fw-bolder mb-3 required">Responsavel</label>
 
-																		<select v-model="responsavel_estorno" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
+																		<select v-model="responsavel_estorno" class="form-select form-select-solid" >
 																			<option></option>
-																			<option value="1" selected>Sim</option>
-																			<option value="2">Não</option>
+																			<option value="1">Sim</option>
+																			<option value="0">Não</option>
 																		</select>
 																	</div>
 																</div>
+
 																<div class="col-lg-6">
 																	<div class="fv-row mb-5">
 																		<label for="Porcentagem"
 																			class="form-label fs-6 fw-bolder mb-3 required">Porcentagem</label>
-																		<input type="text" v-model="porcentagem"
+																		<input type="text"  v-model.trin="$v.porcentagem.$model"
+																		:class=" {'is-invalid':$v.porcentagem.$error, 'is-valid':!$v.porcentagem.$invalid }"
 																			class="form-control form-control-lg form-control-solid"
-																			name="text_input" />
+																			 />
+
+																			 <div class="erros" v-if="$v.porcentagem.$error">
+																			 <div class="erro_texte" v-if="!$v.porcentagem.required">Adicione a porcentagem </div>
+																			 <div class="erro_texte" v-if="!$v.porcentagem.between">
+																				 A Porcentagem deve ser de 1 a 100% .</div>
+																		 </div>
+				 
+																		 <div class="sucesso_texte" v-else> 
+																			 </div>
+																			 
 																	</div>
 																</div>
 															</div>
 
+															<c-mensagem :msg="msg" ></c-mensagem>
 															<div class="d-flex">
-																<button id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
-																	<span class="indicator-label">SALVAR</span>
-																	<span class="indicator-progress">Por favor, aguarde...
-																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-																</button>
-
-																<button id="kt_password_cancel" type="button"
-																	class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
+																<button class="btn btn-primary"" type=" submit"
+																	:disabled="submitStatus === 'PENDING'">SALVAR!</button>
 															</div>
+															<div>
+															<p class="typo__p" v-if="submitStatus === 'OK'"> 
+															</p>
+															<p class="typo__p" v-if="submitStatus === 'ERROR'">
+															Por favor, preencha o formulário corretamente.</p>
+															<p class="typo__p" v-if="submitStatus === 'PENDING'">Carregando...
+															</p>
+														</div>
+
 														</form>
 													</div>
 												</div>
@@ -108,13 +136,32 @@ export default {
 			responsavel_estorno: null,
 			porcentagem: null,
 			token: null,
+			submitStatus: null,
+			msg: null
+		}
+	},
+
+	validations: {
+		recebedor_id: {
+			required,
+			minLength: minLength(2)
+		},
+		porcentagem: {
+			required,
+			between: between(0, 100)
 		}
 	},
 
 	methods: {
+
 		async UpdateSplit() {
 			this.error = null
 
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
+				
 			let res = await adm.splitUpdate(
 				this.id,
 				this.instituicao_id,
@@ -126,9 +173,15 @@ export default {
 			if (!res.next) {
 				this.error = res.message
 				return null
+			}				
+				this.submitStatus = 'PENDING'
+				setTimeout(() => {
+					this.submitStatus = 'OK'
+					window.location.href = `#/divisao-pagamento`
+				}, 900)
 			}
-		},
 
+		},
 	},
 
 	async mounted() {
