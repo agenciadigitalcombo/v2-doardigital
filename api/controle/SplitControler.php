@@ -1,13 +1,14 @@
 <?php
 
-class SplitControler{
+class SplitControler
+{
 
     static function create()
     {
         $split = new Split();
 
         token();
-       
+
         $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
         $recebedor_id = $_REQUEST['recebedor_id'] ?? null;
         $responsavel_estorno = $_REQUEST['responsavel_estorno'] ?? null;
@@ -16,42 +17,40 @@ class SplitControler{
         $porcentagem_valid_int = valid_int($porcentagem_campo);
         $porcentagem = min_max_porcentagem($porcentagem_valid_int);
 
-        
-        
-        
-        
+
+
+
+
         campo_obrigatorios([
             'instituicao_id' => 'Informe a Instituicao',
             'recebedor_id' => 'Informe o Recebedor',
             'porcentagem' => 'Informe a Porcentagem'
         ]);
-        
 
-        if($responsavel_estorno == ''){
+
+        if ($responsavel_estorno == '') {
             echo json_encode([
                 'next' => false,
                 'message' => 'Informe o Responsavel pelo estorno'
             ]);
             return null;
         }
-        
-        
 
-        if (!valid_porcentagem($porcentagem) ) {
+
+
+        if (!valid_porcentagem($porcentagem)) {
             echo json_encode([
                 'next' => false,
                 'message' => 'Valor minimo é 1% e o maximo é 100%'
             ]);
             return null;
         }
-        
+
         $split->create($instituicao_id, $recebedor_id, $responsavel_estorno, $porcentagem);
         echo json_encode([
             'next' => true,
             'message' => 'Split criado'
         ]);
-
-
     }
 
     static function update()
@@ -59,42 +58,35 @@ class SplitControler{
         $split = new Split();
 
         token();
-        
+
         $id = $_REQUEST['id'] ?? null;
         $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
         $recebedor_id = $_REQUEST['recebedor_id'] ?? null;
         $responsavel_estorno = $_REQUEST['responsavel_estorno'] ?? null;
         $porcentagem_campo = $_REQUEST['porcentagem'] ?? null;
-        
+
         $porcentagem_valid_int = valid_int($porcentagem_campo);
         $porcentagem = min_max_porcentagem($porcentagem_valid_int);
 
 
-        $campos_obrigatorios = [
-            'id',
-            'instituicao_id',
-            'recebedor_id',
-            'responsavel_estorno',
-            'porcentagem'
-        ];
-        $lb = [
-            'id' => 'Informe o Id',
+        campo_obrigatorios([
+            'id' => 'Informe o ID',
             'instituicao_id' => 'Informe a Instituicao',
             'recebedor_id' => 'Informe o Recebedor',
-            'responsavel_estorno' => 'Informe o Responsavel',
             'porcentagem' => 'Informe a Porcentagem'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
+        ]);
+
+
+        if ($responsavel_estorno == '') {
+            echo json_encode([
+                'next' => false,
+                'message' => 'Informe o Responsavel pelo estorno'
+            ]);
+            return null;
         }
 
-        if (!valid_porcentagem($porcentagem) ) {
+
+        if (!valid_porcentagem($porcentagem)) {
             echo json_encode([
                 'next' => false,
                 'message' => 'Valor minimo é 1% e o maximo é 100%'
@@ -107,9 +99,6 @@ class SplitControler{
             'next' => true,
             'message' => 'Split Atualizado'
         ]);
-
-
-    
     }
 
     static function delete()
@@ -140,7 +129,12 @@ class SplitControler{
             'next' => true,
             'message' => 'Split Deletado'
         ]);
+    }
 
+    static function total_responsaveis( array $payload ) : int {        
+        return array_reduce($payload, function( $total, $pessoa ) {            
+            return intval( $pessoa['responsavel_estorno'] ) + $total;
+        }, 0 );
     }
 
     static function list_all()
@@ -148,8 +142,8 @@ class SplitControler{
         $split = new Split();
 
         $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
-    
-        
+
+
         campo_obrigatorios([
             'instituicao_id' => 'Informe o Id da instituicao_id'
         ]);
@@ -158,7 +152,7 @@ class SplitControler{
 
 
 
-        $payload = array_map(function($guard){
+        $payload = array_map(function ($guard) {
             return [
                 'id' => $guard['id'],
                 'instituicao_id' => $guard['instituicao_id'],
@@ -166,14 +160,24 @@ class SplitControler{
                 'responsavel_estorno' => $guard['responsavel_estorno'],
                 'porcentagem' => $guard['porcentagem']
             ];
-        }, $list) ; 
+        }, $list);
+
+
+        
+
+        if( self::total_responsaveis($payload) > 1 ) {
+            echo json_encode([
+                'next' => false,
+                'message' => 'So pode haver 1 responsavel',
+                'dados' => $payload
+            ]);
+            return null;
+        }
 
         echo json_encode([
             'next' => true,
             'message' => 'Lista Split',
             'dados' => $payload
         ]);
-
-
     }
 }
