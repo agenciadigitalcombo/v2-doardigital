@@ -44,22 +44,22 @@ class Adm implements IAdm
         $banco->exec($sql);
     }
 
-    public function create(string $nome, string $email, string $senha, string $telefone): void
+    public function create(string $nome, string $email, string $senha, string $telefone, string $data_nascimento): void
     {
         $secret = uniqid();
         $data_regis = date("Y-m-d H:i:s");
         $banco = new Banco();
         $sql = "INSERT INTO adm";
-        $sql .= "(nome, email, pass, telefone, secret, step, status, super_adm, data_registro)";
+        $sql .= "(nome, email, pass, telefone, secret, step, status, super_adm, data_registro, data_nascimento)";
         $sql .= "VALUES";
-        $sql .= "('$nome', '$email', '$senha', '$telefone', ' $secret', 1, 1, 0, '$data_regis')";
+        $sql .= "('$nome', '$email', '$senha', '$telefone', ' $secret', 1, 1, 0, '$data_regis', '$data_nascimento')";
         $banco->exec($sql);
     }
 
-    public function update(string $nome, string $telefone, string $cpf, string $secret): void
+    public function update(string $nome, string $telefone, string $cpf, string $secret, string $data_nascimento): void
     {
         $banco = new Banco();
-        $sql = "UPDATE adm SET nome='$nome', telefone='$telefone', cpf='$cpf' WHERE secret='$secret'";
+        $sql = "UPDATE adm SET nome='$nome', telefone='$telefone', cpf='$cpf' data_nascimento='$data_nascimento', WHERE secret='$secret'";
         $banco->exec($sql);
     }
 

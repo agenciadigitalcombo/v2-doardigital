@@ -14,14 +14,16 @@ interface IAdm
         string $nome,
         string $email,
         string $senha,
-        string $telefone
+        string $telefone,
+        string $data_nascimento
     ): void;
 
     public function update(
         string $nome,
         string $telefone,
         string $cpf,
-        string $secret
+        string $secret,
+        string $data_nascimento
     ): void;
 
     public function nova_senha(

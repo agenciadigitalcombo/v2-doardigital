@@ -8,6 +8,7 @@ CREATE TABLE adm (
     foto varchar(255),
     secret varchar(255),
     data_registro varchar(18),
+    data_nascimento varchar(10),
     plano_id varchar(255),
     step int,
     status int,

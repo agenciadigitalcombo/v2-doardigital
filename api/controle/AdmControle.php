@@ -27,10 +27,11 @@ class AdmControle
 
         $telefone = $_REQUEST['telefone'] ?? '';
         
+        $data_nascimento = $_REQUEST['data_nascimento'];
 
         $transform_tel = valid_telefone($telefone);
         
-        if (empty($nome) or empty($email) or empty($telefone)) {
+        if (empty($nome) or empty($email) or empty($telefone) or empty($data_nascimento)) {
             echo json_encode([
                 "next" => false,
                 "message" => "Preencha todos os campos"
@@ -39,7 +40,7 @@ class AdmControle
         }
 
 
-        $adm->create($nome, $email, $senha, $transform_tel);
+        $adm->create($nome, $email, $senha, $transform_tel, $data_nascimento);
         $usuario_logado = $adm->get_by_email($email);
         $payload = [
 
@@ -107,7 +108,9 @@ class AdmControle
             'cpf' => $guard['cpf'],
             'email' => $guard['email'],
             'telefone' => $guard['telefone'],
-            'step' => $guard['step']
+            'step' => $guard['step'],
+            'gravatar' => gravatar($guard['email']),
+            'data_nascimento' => $guard['data_nascimento']
         ];
         echo json_encode([
             'next' => true,
@@ -128,7 +131,8 @@ class AdmControle
                 'cpf' => $g['cpf'],
                 'email' => $g['email'],
                 'telefone' => $g['telefone'],
-                'step' => $g['step']
+                'step' => $g['step'],
+                
             ];
             
         }   
@@ -194,7 +198,7 @@ class AdmControle
         $transform_tel = withdraw_caracter($telefone);
         $transform_cpf = withdraw_caracter($cpf);
         
-
+        $data_nascimento = $_REQUEST['data_nascimento'];
 
         
         campo_obrigatorios([
@@ -206,7 +210,7 @@ class AdmControle
         
         $secret = $token_parce['secret'];
 
-        $adm->update($nome, $transform_tel, $transform_cpf, $secret);
+        $adm->update($nome, $transform_tel, $transform_cpf, $secret, $data_nascimento);
         echo json_encode([
             "next" => true,
             "message" => "Dados atualizados"
