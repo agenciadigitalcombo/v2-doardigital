@@ -90,13 +90,12 @@ export default {
 														</td>
 														<td>
 														<div v-if="whatsapp === item.whatsapp">
-														sim
+														Sim
 															</div>
 
 															<div v-else>
-															Nao
+															Não
 															</div>
-												
 														</td>
 														<td>
 															<span class="w25">{{ item.amount | is_price }}</span>
