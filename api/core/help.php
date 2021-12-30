@@ -183,9 +183,9 @@ function id(): string
     return $id;
 }
 
-function email(): string
+function valid_email($email): string
 {
-    $email = $_REQUEST['email'] ?? '';
+
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode([
@@ -197,28 +197,11 @@ function email(): string
     return $email;
 }
 
-function senha(): string
+function valid_senha($valor): string
 {
-    $senha = $_REQUEST['senha'] ?? '';
-
-    $campos_obrigatorios = [
-        'senha'
-    ];
-    $lb = [
-        'senha' => 'digite a senha'
-    ];
-    foreach ($campos_obrigatorios as $campo) {
-        if (empty($_REQUEST[$campo])) {
-            echo json_encode([
-                'next' => false,
-                'message' => $lb[$campo]
-            ]);
-            die;
-        }
-    }
-
-    $min_senha = preg_match('@[0-9]@', $senha);
-    if (!$min_senha || strlen($senha) < 8) {
+    
+    $min_senha = preg_match('@[0-9]@', $valor);
+    if (!$min_senha || strlen($valor) < 8) {
         echo json_encode([
             "next" => false,
             "message" => "A senha deve ter no minimo 8 Caracters"
@@ -226,7 +209,7 @@ function senha(): string
         die;
     }
 
-    $cripto_senha = md5($senha);
+    $cripto_senha = md5($valor);
 
     return $cripto_senha;
 }
@@ -356,10 +339,10 @@ function cpf(): string
 }
 
 
-function telefone(): string
+function valid_telefone($valor): int
 {
-    $telefone_campo = $_REQUEST['telefone'];
-    $telefone = withdraw_caracter($telefone_campo);
+    
+    $telefone = withdraw_caracter($valor);
 
     if (preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
         echo json_encode([
@@ -372,56 +355,17 @@ function telefone(): string
 }
 
 
-function cep(): string
-{
-    $cep = $_REQUEST['cep'] ?? '';
-
-    $campos_obrigatorios = [
-        'cep'
-    ];
-    $lb = [
-        'cep' => 'digite o cep'
-    ];
-    foreach ($campos_obrigatorios as $campo) {
-        if (empty($_REQUEST[$campo])) {
-            echo json_encode([
-                'next' => false,
-                'message' => $lb[$campo]
-            ]);
-            die;
-        }
-    }
-    if (!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) {
-        echo json_encode([
-            "next" => false,
-            "message" => "CEP inválido."
-        ]);
-        die;
-    }
-    return $cep;
-}
-
 
 function min_amount($valor): int
 {
     $amount_campo = $valor;
     $amount = withdraw_caracter($amount_campo);
 
-    $campos_obrigatorios = [
-        'amount'
-    ];
-    $lb = [
+    
+    campo_obrigatorios([
         'amount' => 'digite o amount'
-    ];
-    foreach ($campos_obrigatorios as $campo) {
-        if (empty($_REQUEST[$campo])) {
-            echo json_encode([
-                'next' => false,
-                'message' => $lb[$campo]
-            ]);
-            die;
-        }
-    }
+
+    ]);
 
     if ($amount < 2500) {
         echo json_encode([
@@ -438,6 +382,7 @@ function min_amount($valor): int
 function campo_obrigatorios(array $payload): void
 {
     $campos_obrigatorios = array_keys($payload);
+    
     foreach ($campos_obrigatorios as $campo) {
         if (empty($_REQUEST[$campo])) {
             echo json_encode([
@@ -458,7 +403,7 @@ function valid_porcentagem( int $procent ) {
 function min_max_porcentagem($porcentagem): int
 {
 
-    if ($porcentagem < 0) {
+    if ($porcentagem <= 0) {
         echo json_encode([
             'next' => false,
             'message' => 'Valor minimo é 1%'
@@ -466,7 +411,7 @@ function min_max_porcentagem($porcentagem): int
         die;
     }
 
-    if ($porcentagem > 101) {
+    if ($porcentagem >= 101) {
         echo json_encode([
             'next' => false,
             'message' => 'Valor maximo é 100%'

@@ -32,31 +32,16 @@ class EnderecoControle
         $transform_numero = withdraw_caracter($numero);
         $transform_cep = withdraw_caracter($cep);
 
-        $campos_obrigatorios = [
-            'cep',
-            'logradouro',
-            'bairro',
-            'cidade',
-            'estado',
-            'numero'
-        ];
-        $lb = [
+        
+        campo_obrigatorios([
             'cep' => 'Informe um CEP',
             'logadouro' => 'Digite um endereço',
             'bairro' => 'digite o Bairro',
             'cidade' => 'Informe a Cidade',
             'estado' => 'Informe o estado',
             'numero' => 'Digite o numero'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+        ]);
+        
 
         $secret = $token_parse['secret'];
         $id_adm = $adm->list_profile($secret);
@@ -89,16 +74,7 @@ class EnderecoControle
         $transform_numero = withdraw_caracter($numero);
         $transform_cep = withdraw_caracter($cep);
 
-        $campos_obrigatorios = [
-            'id',
-            'cep',
-            'logradouro',
-            'bairro',
-            'cidade',
-            'estado',
-            'numero'
-        ];
-        $lb = [
+        campo_obrigatorios([
             'id' => 'Informe o ID',
             'cep' => 'Informe um CEP',
             'logadouro' => 'Digite um endereço',
@@ -106,16 +82,7 @@ class EnderecoControle
             'cidade' => 'Informe a Cidade',
             'estado' => 'Informe o estado',
             'numero' => 'Digite o numero'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+        ]);
 
         $id_instituicao = $instituicao->get_by_id($id_campo);
         
@@ -148,33 +115,15 @@ class EnderecoControle
         $transform_numero = withdraw_caracter($numero);
         $transform_cep = withdraw_caracter($cep);
 
-        $campos_obrigatorios = [
-            'cpf',
-            'cep',
-            'logradouro',
-            'bairro',
-            'cidade',
-            'estado',
-            'numero'
-        ];
-        $lb = [
-            'cpf' => 'Informe o Cpf',
+        campo_obrigatorios([
+            'cpf' => 'Informe o CPF',
             'cep' => 'Informe um CEP',
             'logadouro' => 'Digite um endereço',
             'bairro' => 'digite o Bairro',
             'cidade' => 'Informe a Cidade',
             'estado' => 'Informe o estado',
             'numero' => 'Digite o numero'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+        ]);
 
         $id_doador = $doador->get_by_cpf($cpf);
         
@@ -206,6 +155,15 @@ class EnderecoControle
         $transform_cep = withdraw_caracter($cep);
         $transform_numero = withdraw_caracter($numero);
         
+        campo_obrigatorios([
+            'cep' => 'Informe um CEP',
+            'logadouro' => 'Digite um endereço',
+            'bairro' => 'digite o Bairro',
+            'cidade' => 'Informe a Cidade',
+            'estado' => 'Informe o estado',
+            'numero' => 'Digite o numero'
+        ]);
+
         $secret = $token_parse['secret'];
         $id_adm = $adm->list_profile($secret);
         $id = $id_adm['id'];

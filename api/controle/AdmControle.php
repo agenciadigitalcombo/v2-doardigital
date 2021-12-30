@@ -18,13 +18,18 @@ class AdmControle
         
         
         $nome = $_REQUEST['nome'] ?? '';
-        $email = email();
-        $senha = senha();
+
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
+
+        $campo_senha = $_REQUEST['senha'];
+        $senha = valid_senha($campo_senha);
+
         $telefone = $_REQUEST['telefone'] ?? '';
         
 
-        $transform_tel = withdraw_caracter($telefone);
-
+        $transform_tel = valid_telefone($telefone);
+        
         if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
                 "next" => false,
@@ -56,8 +61,11 @@ class AdmControle
         $adm = new Adm();
         $jwt = new Jwt();
 
-        $email = email();
-        $senha = senha();
+        $campo_email = $_REQUEST['email'];
+        $email = valid_email($campo_email);
+
+        $campo_senha = $_REQUEST['senha'];
+        $senha = valid_senha($campo_senha);
         
         if ($adm->login($email, $senha)) {
             echo json_encode([
@@ -131,9 +139,6 @@ class AdmControle
         ]);
 
        
-           
-       
-       
     }
     
     static function recuperar_senha()
@@ -144,6 +149,12 @@ class AdmControle
         $endereco = $_REQUEST['endereco'] ?? '';
         $assunto = $_REQUEST['assunto'] ?? '';
         $content = "";
+
+        campo_obrigatorios([
+            'id' => 'id',
+            'endereco' => 'Informe o endereco',
+            'assunto' => 'Informe um assunto'
+        ]);
 
         $email->send($id_instituicao, $endereco, $assunto, $content);
         echo json_encode([
@@ -157,7 +168,9 @@ class AdmControle
         $adm = new Adm();
         
         $token_parce = token();
-        $senha = senha();
+        
+        $campo_senha = $_REQUEST['senha'];
+        $senha = valid_senha($campo_senha);
         
         $secret = $token_parce['secret'];
 
@@ -174,36 +187,22 @@ class AdmControle
 
         $token_parce = token();
         
-        $nome = $_REQUEST['nome'];
-        $telefone = $_REQUEST['telefone'];
-        $cpf = $_REQUEST['cpf'];
+        $nome = $_REQUEST['nome'] ?? null;
+        $telefone = $_REQUEST['telefone'] ?? null;
+        $cpf = $_REQUEST['cpf'] ?? null;
 
         $transform_tel = withdraw_caracter($telefone);
         $transform_cpf = withdraw_caracter($cpf);
         
 
-        $campos_obrigatorios = [
-            'nome',
-            'telefone',
-            'cpf'
-        ];
-        $lb = [
+
+        
+        campo_obrigatorios([
             'nome' => 'Informe um nome',
             'telefone' => 'Digite o telefone',
-            'cpf' => 'Digite o cpf'
-            
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-
-
+            'cpf' => 'Digite o cpf'  
+        ]);
+        
         
         $secret = $token_parce['secret'];
 
@@ -222,6 +221,11 @@ class AdmControle
         $token_parce = token();
 
         $step = $_REQUEST['step'];
+
+
+        campo_obrigatorios([
+            'step' => 'Informe o step'
+        ]);
 
         $secret = $token_parce['secret'];
 

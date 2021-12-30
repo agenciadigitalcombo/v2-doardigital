@@ -16,31 +16,27 @@ class SplitControler{
         $porcentagem_valid_int = valid_int($porcentagem_campo);
         $porcentagem = min_max_porcentagem($porcentagem_valid_int);
 
-
         
         
-        $campos_obrigatorios = [
-            'instituicao_id',
-            'recebedor_id',
-            'responsavel_estorno',
-            'porcentagem'
-        ];
-        $lb = [
+        
+        
+        campo_obrigatorios([
             'instituicao_id' => 'Informe a Instituicao',
             'recebedor_id' => 'Informe o Recebedor',
-            'responsavel_estorno' => 'Informe o Responsavel',
             'porcentagem' => 'Informe a Porcentagem'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
+        ]);
+        
+
+        if($responsavel_estorno == ''){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Informe o Responsavel pelo estorno'
+            ]);
+            return null;
         }
         
+        
+
         if (!valid_porcentagem($porcentagem) ) {
             echo json_encode([
                 'next' => false,
