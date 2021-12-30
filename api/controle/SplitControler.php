@@ -181,7 +181,7 @@ class SplitControler
         }
         
 
-        if( self::total_responsaveis($payload) > 1 ) {
+        if( $total_pessoal != 0 && self::total_responsaveis($payload) > 1 ) {
             echo json_encode([
                 'next' => false,
                 'message' => 'So pode haver 1 responsavel',
@@ -190,7 +190,7 @@ class SplitControler
             return null;
         }
 
-        if( self::total_porcentagem($payload) != 100 ) {
+        if( $total_pessoal != 0 && self::total_porcentagem($payload) != 100 ) {
             echo json_encode([
                 'next' => false,
                 'message' => 'A soma total de porcentagem entre os participantes tem que dar 100%',
