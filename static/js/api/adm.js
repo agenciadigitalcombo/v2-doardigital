@@ -25,9 +25,9 @@ export default {
         })
     },
 
-    async atualizar(nome, telefone, cpf) {
+    async atualizar(token, nome, cpf, telefone) {
         return await http.post('/atualizar-adm', {
-            nome, telefone, cpf
+            token, nome, cpf, telefone
         })
     },
 
@@ -55,12 +55,12 @@ export default {
     },
 
     async atualizarEndereco(
-        nome_identificacao,
+        // nome_identificacao,
         cep, logradouro, numero,
         complemento, bairro, cidade, estado, token
     ) {
         return await http.post('/update-endereco', {
-            nome_identificacao,
+            // nome_identificacao,
             cep,
             logradouro,
             numero,

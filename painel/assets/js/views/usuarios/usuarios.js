@@ -96,8 +96,7 @@ export default {
 
                                                         <div
                                                             class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                            <a
-                                                                href="../../demo8/dist/apps/user-management/users/view.html">
+                                                            <a>
                                                                 <div class="symbol-label">
                                                                     <img :src="item.foto" alt="Emma Smith"
                                                                         class="w-100" />
@@ -105,8 +104,7 @@ export default {
                                                             </a>
                                                         </div>
                                                         <div class="d-flex flex-column">
-                                                            <a href="../../demo8/dist/apps/user-management/users/view.html"
-                                                                class="text-gray-800 text-hover-primary mb-1">
+                                                            <a class="text-gray-800 text-hover-primary mb-1">
                                                                 {{item.nome}}</a>
                                                             <span> {{item.email}}</span>
                                                         </div>

@@ -1,6 +1,6 @@
 import adm from "../../../../../static/js/api/adm.js"
 export default {
-	template:`
+	template: `
 
 		<div>
 
@@ -18,7 +18,7 @@ export default {
 
 							<div class="post d-flex flex-column-fluid" id="kt_post">
 
-								<div id="kt_content_container" class="container-xxl">
+								<div class="container-xxl">
 
 									<div class="card mb-5 mb-xl-10">
 										<div class="card-body pt-9 pb-0">
@@ -26,11 +26,6 @@ export default {
 											<c-detalhe></c-detalhe>
 											<ul
 												class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-
-												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 "
-														href="#/perfil">Visão geral</a>
-												</li>
 
 												<li class="nav-item mt-2">
 													<a class="nav-link text-active-primary ms-0 me-10 py-5"
@@ -44,7 +39,7 @@ export default {
 												</li>
 												<li class="nav-item mt-2">
 													<a class="nav-link text-active-primary ms-0 me-10 py-5"
-														href="#/editar-securanca">Seguranca</a>
+														href="#/editar-securanca">Alterar Senha</a>
 												</li>
 
 											</ul>
@@ -77,11 +72,10 @@ export default {
 														</div>
 													</div>
 													<div class="row mb-6">
-														<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP
-															11</label>
+														<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
 														<div class="col-lg-8 fv-row">
 															<div class="input-group mb-3">
-																<input v-model="cep" @keyup="searchCep()" v-mask="'#####-###'"
+																<input v-model="cep" @keyup="searchCep()" v-mask="'########'"
 																type="text" name="text_input"
 																class="form-control form-control-lg form-control-solid"
 																 placeholder="00000-000" />
@@ -188,8 +182,7 @@ export default {
 		</div>
 				</div>
 			</div >
-		</div >
-		< !--end:: Root-- >
+		</div>
 
 	<c-footer />
 	</div >
@@ -198,7 +191,6 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			nome_identificacao: null,
 			cep: null,
@@ -212,23 +204,16 @@ export default {
 			token: null,
 
 			items: [],
-
-			nome: null,
-			cpf: null,
-			telefone: null,
-			email: null,
-
-			
 			data: null,
 		}
 	},
 	methods: {
-		
+
 		async editarEndereco() {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				this.nome_identificacao,
+				// this.nome_identificacao,
 				this.cep,
 				this.logadouro,
 				this.numero,
@@ -243,8 +228,6 @@ export default {
 				this.error = res.message
 				return null
 			}
-
-			console.log(this.logadouro)
 		},
 
 
@@ -254,7 +237,6 @@ export default {
 				this.secret,
 			)
 			if (!res.next) {
-				console.log(res)
 				this.error = res.message
 				return null
 			}
@@ -272,62 +254,54 @@ export default {
 			)
 			return res
 		},
-		
+
 		mask_cep() {
-            let mascara = this.cep
-            mascara = mascara.replace(/\D/gi, '')
-            mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
-            mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
-            this.cep = mascara
-        },
-		
+			let mascara = this.cep
+			mascara = mascara.replace(/\D/gi, '')
+			mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
+			mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
+			this.cep = mascara
+		},
+
 		searchCep() {
-if (this.cep.length == 8) {
+			if (this.cep.length == 8) {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 					.then(response => {
-		this.cep = this.cep.replace(/[^\d]+/g, '')
-		this.logadouro = response.data.logradouro,
-			this.complemento = response.data.complemento,
-			this.bairro = response.data.bairro,
-			this.cidade = response.data.localidade,
-			this.estado = response.data.uf,
-
-			console.log(this.cep)
-
-	}
-	)
-	.catch(error => console.log(error))
-
+						this.cep = this.cep.replace(/[^\d]+/g, '')
+						this.logadouro = response.data.logradouro,
+							this.complemento = response.data.complemento,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf
+					}
+					)
+					.catch(error =>
+						console.log(error)
+					)
 			}
 		}
-
 	},
 
 	async mounted() {
 
-	let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
-	document.head.appendChild(validacao);
-
-	// Rua/Avenida Nº
-	// let enderecoDados = (await this.listarEndereco()).dados|| {}
-
-	// this.logadouro = enderecoDados.logadouro
-	// this.cep = enderecoDados.cep
-	// this.nome_identificacao = enderecoDados.nome_identificacao
-	// this.numero = enderecoDados.numero
-	// this.complemento = enderecoDados.complemento
-	// this.bairro = enderecoDados.bairro
-	// this.cidade = enderecoDados.cidade
-	// this.estado = enderecoDados.estado
-	// this.id = enderecoDados.id
-	// Avenida 
+		// Rua/Avenida Nº
+		let enderecoDados = (await this.listarEndereco()).dados || {}
+		this.logadouro = enderecoDados.logadouro
+		this.cep = enderecoDados.cep
+		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.numero = enderecoDados.numero
+		this.complemento = enderecoDados.complemento
+		this.bairro = enderecoDados.bairro
+		this.cidade = enderecoDados.cidade
+		this.estado = enderecoDados.estado
+		this.id = enderecoDados.id
+		// Avenida 
 
 
 
-},
+	},
 
-created() {
-	this.token = localStorage.getItem('token')
-
-},
+	created() {
+		this.token = localStorage.getItem('token')
+	},
 }
