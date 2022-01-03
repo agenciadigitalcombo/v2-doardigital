@@ -128,6 +128,13 @@ function withdraw_caracter($valor): int
     return intval($transform_valor);
 }
 
+function withdraw_caracter_teste(array $valor): int
+{
+    $transform_valor = preg_replace('/\D/', '', $valor);
+    
+    return intval($transform_valor);
+}
+
 function token(): array
 {
     $jwt = new Jwt();
