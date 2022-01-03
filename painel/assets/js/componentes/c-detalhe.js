@@ -42,7 +42,7 @@ export default {
                         <a href="#"
                             class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3"
                             data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_upgrade_plan">Atualize</a>
+                            data-bs-target="#kt_modal_upgrade_plan">nome do plan0</a>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
@@ -94,27 +94,7 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-wrap flex-stack">
-        
-            <div class="d-flex flex-column flex-grow-1 pe-8">
-                <!--begin::Progress-->
-                <div
-                    class="d-flex align-items-center w-200px w-sm-300px flex-column ">
-                    <div
-                        class="d-flex justify-content-between w-100 mt-auto mb-2">
-                        <span class="fw-bold fs-6 text-gray-400">Preenchimento
-                            de Perfil</span>
-                        <span class="fw-bolder fs-6">50%</span>
-                    </div>
-                    <div class="h-5px mx-3 w-100 bg-light mb-3">
-                        <div class="bg-success rounded h-5px" role="progressbar"
-                            style="width: 50%;" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <!--end::Progress-->
-            </div>
-        </div>
+    
     </div>
 </div>
     `,

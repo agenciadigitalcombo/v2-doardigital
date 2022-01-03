@@ -41,8 +41,6 @@ Vue.component('c-login', login)
 import dash from './views/dash.js'
 Vue.component('c-dash', dash )
 
-import perfil from './views/admin/perfil.js'
-Vue.component('c-perfil', perfil )
 
 import perfilEditar from './views/admin/perfil-editar.js'
 Vue.component('c-perfil-editar', perfilEditar )

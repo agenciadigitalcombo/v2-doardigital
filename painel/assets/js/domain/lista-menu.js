@@ -14,7 +14,7 @@ export default [
     { id: 'modulos', nome: 'Modulos', icon: 'componente.svg', link: '#/modulos', feature_flag: true },
     { id: 'modelo_de_emails', nome: 'Modelo de E-mails', icon: 'email.svg', link: '#/modelo-de-emails', feature_flag: true },
     { id: 'configuracao', nome: 'Configuração', icon: 'gear.svg', link: '#/configuracao', feature_flag: true },
-    { id: 'perfil', nome: 'Perfil', icon: 'perfil.svg', link: '#/perfil', feature_flag: true },
+    { id: 'perfil', nome: 'Perfil', icon: 'perfil.svg', link: '#/perfil-editar', feature_flag: true },
     { id: 'meu_plano', nome: 'Meu Plano', icon: 'doacoes-creditos-249e90.svg', link: '#/meu-plano', feature_flag: true },
     { id: 'wallet', nome: 'Carteira', icon: 'wallet.png', link: '#/carteira', feature_flag: true },
     { id: 'qr_code', nome: 'QR CODE', icon: 'qr.png', link: '#/qr-code', feature_flag: true },

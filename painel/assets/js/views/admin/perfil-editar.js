@@ -27,10 +27,6 @@ export default {
 											<c-detalhe></c-detalhe>
 
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-
-												<li class="nav-item mt-2" >
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/perfil">Visão geral</a>
-												</li>
 												<li class="nav-item mt-2" >
 													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/perfil-editar">Seus Dados</a>
 												</li>
@@ -38,7 +34,7 @@ export default {
 													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-local">Meu Endereço</a>
 												</li>
 												<li class="nav-item mt-2" >
-													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Seguranca</a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/editar-securanca">Alterar Senha </a>
 												</li>
 											</ul>
 										</div>
@@ -60,12 +56,8 @@ export default {
 														<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome completo
 															<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Preecha o Seu nome completo"></i>
 														</label>
-														<div class="col-lg-8">
-															<div class="row">
-																<div class="col-lg-6 fv-row">
-																	<input v-model="nome" type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Primeiro nome" />
-																</div>
-															</div>
+																<div class="col-lg-8 fv-row">
+																	<input v-model="nome" type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Primeiro nome" />							
 														</div>
 													</div>
 													<div class="row mb-6">
@@ -93,6 +85,16 @@ export default {
 														</div>
 													</div>
 
+													<div class="row mb-6">
+														<label class="col-lg-4 col-form-label fw-bold fs-6">
+															<span class="required">Email</span>
+															<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Adicione o nome de Telefone activo"></i>
+														</label>
+														<div class="col-lg-8 fv-row">
+															<input v-model="email" type="email" class="form-control form-control-lg form-control-solid" disabled/>
+														</div>
+													</div>
+
 												</div>
 												<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
 
@@ -110,7 +112,6 @@ export default {
 			</div>
 		</div>
 </div>
-		< !--end:: Root-- >
 	<c-footer />
 	</div >
 	`,
@@ -118,17 +119,16 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			nome: null,
 			token: null,
 			email: null,
 			cpf: null,
 			telefone: null,
-			step: null,
 			error: null,
 			data: null,
 			msg: "",
-			jms: ""
+			jms: "",
+			dados: null,
 
 		}
 	},
@@ -138,13 +138,14 @@ export default {
 			this.error = null
 
 			let res = await adm.atualizar(
-				this.nome,
-				this.telefone,
-				this.cpf,
 				this.token,
+				this.nome,
+				this.cpf,
+				this.telefone,
 			)
 			if (!res.next) {
 				console.log(res)
+				this.msg = res.message,
 				this.error = res.message
 				return null
 			}
@@ -162,7 +163,7 @@ export default {
 		},
 	},
 	async mounted() {
-		// this.user = localStorage.getItem('user')
+		// this.token = localStorage.getItem('token')
 		let dados = (await this.listar()).dados
 
 		console.log(dados)
@@ -170,15 +171,9 @@ export default {
 		this.email = dados.email
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
-		this.step = parseInt(dados.step)
-
-
-		console.log(this.step)
+		this.token = dados.token
 	},
 
-	created() {
-
-	},
 
 
 }

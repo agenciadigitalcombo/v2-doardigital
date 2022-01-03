@@ -28,15 +28,14 @@ input {
   outline-color: #F99;
 }
 
-
 .message-container {
   color: #004085;
-  /* background-color: #CCE5FF;
-  border: 2px solid #B8DAFF; */
+  background-color: #CCE5FF;
+  border: 2px solid #B8DAFF;
   border-radius: 5px;
-  max-width: 40%;
-  /* margin: 1px auto 1px auto; */
+  max-width: 100%;
+  margin: 0px auto 15px auto;
   z-index: 19999999999;
-  /* text-align: center; */
+  text-align: center;
   font-size: 15px;
 }
