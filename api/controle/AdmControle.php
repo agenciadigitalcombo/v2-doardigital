@@ -204,7 +204,8 @@ class AdmControle
         campo_obrigatorios([
             'nome' => 'Informe um nome',
             'telefone' => 'Digite o telefone',
-            'cpf' => 'Digite o cpf'  
+            'cpf' => 'Digite o cpf' ,
+            'data_nascimento' => 'Informe a Data de Nascimento' 
         ]);
         
         
