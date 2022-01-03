@@ -1,4 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
+
 export default {
 	template:`
 
@@ -52,7 +53,7 @@ export default {
 											</div>
 										</div>
 
-										<form autocomplete="off" name="formulario" class="form">
+										<form @submit.prevent="editarEndereco" autocomplete="off" name="formulario" class="form">
 
 											<div class="card-body border-top p-9">
 												<div class="row mb-6">
@@ -104,7 +105,7 @@ export default {
 													class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
 
 												<div class="col-lg-8 fv-row">
-													<input id="" v-model="numero" type="text"
+													<input v-model="numero" type="text"
 														class="form-control form-control-lg form-control-solid"
 														placeholder="Numero" />
 												</div>
@@ -152,15 +153,13 @@ export default {
 												</div>
 											</div>
 
-
 									</div>
+
+									<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
+
 									<div class="card-footer d-flex justify-content-end py-6 px-9">
-										<button id="kt_docs_formvalidation_text_submit" type="submit"
-											class="btn btn-primary" @click="editarEndereco()">
+										<button type="submit" class="btn btn-primary">
 										<span class="indicator-label">SALVAR</span>
-										<span class="indicator-progress">Por favor, aguarde...
-											<span
-												class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
 
 							</div>
@@ -191,7 +190,7 @@ export default {
 			estado: null,
 			secret: null,
 			token: null,
-
+			msg: "",
 			items: [],
 			data: null,
 		}
@@ -217,20 +216,11 @@ export default {
 				this.error = res.message
 				return null
 			}
+			
+			this.msg = res.message,
+			setTimeout(() => this.msg = "", 6000);
 		},
 
-
-
-		async eliminaEndereco() {
-			let res = await adm.eliminaEndereco(
-				this.secret,
-			)
-			if (!res.next) {
-				this.error = res.message
-				return null
-			}
-
-		},
 
 		async listar() {
 			let res = await adm.ListarPerfil(localStorage.getItem('token'))

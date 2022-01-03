@@ -56,7 +56,7 @@ export default {
 
     async atualizarEndereco(
         token,
-        // nome_identificacao,
+        nome_identificacao,
         cep,
         logradouro,
         numero,
@@ -66,7 +66,6 @@ export default {
         estado,
     ) {
         return await http.post('/update-endereco', {
-        // return await http.post('/create-endereco', {
             token,
             nome_identificacao,
             cep,
