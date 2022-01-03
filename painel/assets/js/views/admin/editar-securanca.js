@@ -117,6 +117,7 @@ export default {
 																</div>
 															</div>
 
+															<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
 
 															<button type="submit" class="btn btn-primary">
 																<span class="indicator-label">
@@ -151,7 +152,8 @@ export default {
 			senha: null,
 			repetirsenha: null,
 			mostrarsenha: false,
-			error: null
+			msg: "",
+		   error: null
 		}
 	},
 
@@ -173,8 +175,6 @@ export default {
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
-
-				localStorage.removeItem('token')
 				let res = await adm.alterar_senha(
 					this.senha,
 					this.token,
@@ -184,11 +184,10 @@ export default {
 					this.error = res.message
 					return null
 				}
-				localStorage.setItem('token', res.token)
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
-					window.location.href = `#/`
+					this.msg = res.message
 				}, 500)
 			}
 		},
@@ -206,7 +205,7 @@ export default {
 
 	},
 	created() {
-		this.token = localStorage.getItem('token')
+		// this.token = localStorage.getItem('token')
 	},
 }
 

@@ -103,54 +103,33 @@ export default {
     data: function () {
         
         return {
-			gravatar: '../painel/assets/image/gravatar.png',
+            gravatar: '',
 			token: null,
 			nome: null,
-			cpf: null,
-			telefone: null,
 			email: null,
 
-			id: null,
-			nome_identificacao: null,
-			cep: null,
+			
 			logadouro: null,
-			numero: null,
-			complemento: null,
 			bairro: null,
 			cidade: null,
 			estado: null,
 			secret: null,
 			token: null,
-			step: null,
         }
-    
     },
 	
     async mounted() {
 		let dados = (await this.listar()).dados
-	console.log(dados)
 		this.nome = dados.nome
 		this.email = dados.email
-		this.cpf = dados.cpf
-		this.telefone = dados.telefone
+		this.gravatar = dados.gravatar
     
-		
-		
 		let enderecoDados = (await this.listarEndereco()).dados || {}
-		
         this.logadouro = enderecoDados.logadouro
-		this.cep = enderecoDados.cep
-		this.nome_identificacao = enderecoDados.nome_identificacao
-		this.numero = enderecoDados.numero
-		this.complemento = enderecoDados.complemento
 		this.bairro = enderecoDados.bairro
 		this.cidade = enderecoDados.cidade
-		this.estado = enderecoDados.estado
-		this.id = enderecoDados.id
-
-
-		console.log(enderecoDados)
-		
+		this.estado = enderecoDados.estado 
+ 
     }, 
 
 	methods: {

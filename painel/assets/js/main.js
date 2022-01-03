@@ -104,6 +104,7 @@ Vue.component('c-modulosMailing', modulosMailing )
 import modulosStation from './views/modulos/modulosStation.js'
 Vue.component('c-modulosStation', modulosStation )
 
+
 import assinatura from './views/admin/assinatura.js'
 Vue.component('c-assinatura', assinatura )
 
@@ -151,14 +152,14 @@ import qrCode from './views/qr-code.js'
 Vue.component('c-qr-code', qrCode )
 
 
-import divPagamento from './views/instituicao/div-pagamento.js'
+import divPagamento from './views/split/div-pagamento.js'
 Vue.component('c-div-pagamento', divPagamento )
 
-import divPagamentoAdd from './views/instituicao/div-pagamentoAdd.js'
+import divPagamentoAdd from './views/split/div-pagamentoAdd.js'
 Vue.component('c-div-pagamentoAdd', divPagamentoAdd )
 
 
-import divPagamentoEditar from './views/instituicao/div-pagamento_editar.js'
+import divPagamentoEditar from './views/split/div-pagamento_editar.js'
 Vue.component('c-div-pagamentoEditar', divPagamentoEditar )
 
 

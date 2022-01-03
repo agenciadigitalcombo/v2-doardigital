@@ -60,7 +60,7 @@ export default {
 
     data: function () {
         return {
-            gravatar: '../painel/assets/image/gravatar.png',
+            gravatar: '',
             menus: [],
             nome: null
         }
@@ -84,6 +84,7 @@ export default {
      
         let dados = (await this.listar()).dados
            	this.nome = dados.nome
+               this.gravatar = dados.gravatar
 
         let jms = document.createElement('script'); jms.setAttribute('src', "../../painel/assets/js/vendor/scripts.bundle.js");
         document.head.appendChild(jms);

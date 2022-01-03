@@ -25,9 +25,9 @@ export default {
         })
     },
 
-    async atualizar(token, nome, cpf, telefone) {
+    async atualizar(token, nome, cpf, telefone, data_nascimento) {
         return await http.post('/atualizar-adm', {
-            token, nome, cpf, telefone
+            token, nome, cpf, telefone, data_nascimento
         })
     },
 
@@ -55,12 +55,19 @@ export default {
     },
 
     async atualizarEndereco(
-        // nome_identificacao,
-        cep, logradouro, numero,
-        complemento, bairro, cidade, estado, token
+        token,
+        nome_identificacao,
+        cep,
+        logradouro,
+        numero,
+        complemento,
+        bairro,
+        cidade,
+        estado,
     ) {
         return await http.post('/update-endereco', {
-            // nome_identificacao,
+            token,
+            nome_identificacao,
             cep,
             logradouro,
             numero,
@@ -68,7 +75,6 @@ export default {
             bairro,
             cidade,
             estado,
-            token
         })
     },
 
@@ -401,7 +407,7 @@ export default {
     },
 
     async splitUpdate(
-       id,
+        id,
         instituicao_id,
         recebedor_id,
         responsavel_estorno,
@@ -409,7 +415,7 @@ export default {
         token,
     ) {
         return await http.post('/split-update', {
-           id,
+            id,
             instituicao_id,
             recebedor_id,
             responsavel_estorno,
@@ -419,7 +425,7 @@ export default {
     },
 
 
-    
+
 
     async listarSplit(instituicao_id) {
         return await http.get('/split-list', {
@@ -427,7 +433,7 @@ export default {
         })
     },
 
-    async deleterSplit( id, token) {
+    async deleterSplit(id, token) {
         return await http.post('/split-delete', {
             id, token
         })

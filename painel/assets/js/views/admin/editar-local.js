@@ -1,6 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
+
 export default {
-	template: `
+	template:`
 
 		<div>
 
@@ -51,138 +52,125 @@ export default {
 												<h3>Meus Endereço</h3>
 											</div>
 										</div>
-										<div id="kt_account_profile_details">
 
-											<form id="kt_docs_formvalidation_text" action="javascript:void(0)"
-												autocomplete="off" name="formulario" class="form">
+										<form @submit.prevent="editarEndereco" autocomplete="off" name="formulario" class="form">
 
-												<div class="card-body border-top p-9">
-													<div class="row mb-6">
-														<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
-															identificacao</label>
-														<input v-model="id" type="hidden" name="nome"
+											<div class="card-body border-top p-9">
+												<div class="row mb-6">
+													<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
+														identificacao</label>
+													<input v-model="id" type="hidden" name="nome"
+														class="form-control form-control-lg form-control-solid"
+														placeholder="Nome identificacao" />
+
+													<div class="col-lg-8 fv-row">
+														<input v-model="nome_identificacao" type="text"
 															class="form-control form-control-lg form-control-solid"
 															placeholder="Nome identificacao" />
-
-														<div class="col-lg-8 fv-row">
-															<input v-model="nome_identificacao" type="text"
-																name="text_input"
-																class="form-control form-control-lg form-control-solid"
-																placeholder="Nome identificacao" />
-														</div>
 													</div>
-													<div class="row mb-6">
-														<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
-														<div class="col-lg-8 fv-row">
-															<div class="input-group mb-3">
-																<input v-model="cep" @keyup="searchCep()" v-mask="'########'"
-																type="text" name="text_input"
-																class="form-control form-control-lg form-control-solid"
+												</div>
+												<div class="row mb-6">
+													<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
+													<div class="col-lg-8 fv-row">
+														<div class="input-group mb-3">
+															<input v-model="cep" @keyup="searchCep()" v-mask="'########'" type="text"
+															class="form-control form-control-lg form-control-solid"
 																 placeholder="00000-000" />
-																<span class="input-group-text" id="basic-addon2">
-																	<a @click="searchCep()" >
-																	<svg xmlns="http://www.w3.org/2000/svg" width="30"
-																		height="30" fill="currentColor"
-																		class="bi bi-search" viewBox="0 0 16 16">
-																		<path
-																			d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-																	</svg>
-																</a>
+															<span class="input-group-text" id="basic-addon2">
+																<a @click="searchCep()" >
+																<svg xmlns="http://www.w3.org/2000/svg" width="30"
+																	height="30" fill="currentColor"
+																	class="bi bi-search" viewBox="0 0 16 16">
+																	<path
+																		d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+																</svg>
+															</a>
 
-															</span>
-														</div>
+														</span>
 													</div>
 												</div>
-												<div class="row mb-6">
-													<label
-														class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida
-														Nº</label>
-													<div class="col-lg-8 fv-row">
-														<input id="logradouro" v-model="logadouro" type="text"
-															name="text_input"
-															class="form-control form-control-lg form-control-solid"
-															placeholder="Localização" />
-													</div>
+											</div>
+											<div class="row mb-6">
+												<label
+													class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida
+													Nº</label>
+												<div class="col-lg-8 fv-row">
+													<input id="logradouro" v-model="logadouro" type="text" disabled
+														class="form-control form-control-lg form-control-solid"
+														placeholder="Localização" />
 												</div>
-												<div class="row mb-6">
-													<label
-														class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
+											</div>
+											<div class="row mb-6">
+												<label
+													class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
 
-													<div class="col-lg-8 fv-row">
-														<input id="" v-model="numero" type="text" name="text_input"
-															class="form-control form-control-lg form-control-solid"
-															placeholder="Numero" />
-													</div>
+												<div class="col-lg-8 fv-row">
+													<input v-model="numero" type="text"
+														class="form-control form-control-lg form-control-solid"
+														placeholder="Numero" />
 												</div>
-												<div class="row mb-6">
-													<label class="col-lg-4 col-form-label fw-bold fs-6">
-														<span class="required">Complemento</span>
+											</div>
+											<div class="row mb-6">
+												<label class="col-lg-4 col-form-label fw-bold fs-6">
+													<span class="required">Complemento</span>
 
-													</label>
-													<div class="col-lg-8 fv-row">
-														<input v-model="complemento" type="text"
-															name="Complemento"
-															class="form-control form-control-lg form-control-solid" />
-													</div>
+												</label>
+												<div class="col-lg-8 fv-row">
+													<input v-model="complemento" type="text" name="Complemento"
+														class="form-control form-control-lg form-control-solid" />
 												</div>
+											</div>
 
-												<div class="row mb-6">
-													<label class="col-lg-4 col-form-label fw-bold fs-6">
-														<span class="required">Bairro</span>
+											<div class="row mb-6">
+												<label class="col-lg-4 col-form-label fw-bold fs-6">
+													<span class="required">Bairro</span>
 
-													</label>
-													<div class="col-lg-8 fv-row">
-														<input id="bairro" v-model="bairro" type="text" name="Bairro"
-															class="form-control form-control-lg form-control-solid" />
-													</div>
+												</label>
+												<div class="col-lg-8 fv-row">
+													<input id="bairro" v-model="bairro" type="text" name="Bairro" disabled
+														class="form-control form-control-lg form-control-solid" />
 												</div>
-												<div class="row mb-6">
-													<label class="col-lg-4 col-form-label fw-bold fs-6">
-														<span class="required">Cidade</span>
+											</div>
+											<div class="row mb-6">
+												<label class="col-lg-4 col-form-label fw-bold fs-6">
+													<span class="required">Cidade</span>
 
-													</label>
-													<div class="col-lg-8 fv-row">
-														<input v-model="cidade" type="text"
-															name="text_input"
-															class="form-control form-control-lg form-control-solid" />
-													</div>
+												</label>
+												<div class="col-lg-8 fv-row">
+													<input v-model="cidade" type="text" disabled
+														class="form-control form-control-lg form-control-solid" />
 												</div>
+											</div>
 
-												<div class="row mb-6">
-													<label class="col-lg-4 col-form-label fw-bold fs-6">
-														<span class="required">Estado</span>
+											<div class="row mb-6">
+												<label class="col-lg-4 col-form-label fw-bold fs-6">
+													<span class="required">Estado</span>
 
-													</label>
-													<div class="col-lg-8 fv-row">
-														<input id="uf" v-model="estado" type="text" name="text_input"
-															class="form-control form-control-lg form-control-solid" />
-													</div>
+												</label>
+												<div class="col-lg-8 fv-row">
+													<input id="uf" v-model="estado" type="text" disabled
+														class="form-control form-control-lg form-control-solid" />
 												</div>
+											</div>
 
+									</div>
 
-										</div>
-										<div class="card-footer d-flex justify-content-end py-6 px-9">
-											<button id="kt_docs_formvalidation_text_submit" type="submit"
-												class="btn btn-primary" @click="editarEndereco()">
-											<span class="indicator-label">SALVAR</span>
-											<span class="indicator-progress">Por favor, aguarde...
-												<span
-													class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-										</button>
+									<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
 
-										<button @click="eliminaEndereco()" type="submit"
-													class="btn btn-danger ms-5" id="kt_account_profile_details_submit">
-										ELIMINAR</button>
-								</div>
-							</form>
-						</div>
+									<div class="card-footer d-flex justify-content-end py-6 px-9">
+										<button type="submit" class="btn btn-primary">
+										<span class="indicator-label">SALVAR</span>
+									</button>
+
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 				</div>
 			</div >
-		</div>
+		</div >
 
 	<c-footer />
 	</div >
@@ -202,7 +190,7 @@ export default {
 			estado: null,
 			secret: null,
 			token: null,
-
+			msg: "",
 			items: [],
 			data: null,
 		}
@@ -213,35 +201,26 @@ export default {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				// this.nome_identificacao,
+				this.token,
+				this.nome_identificacao,
 				this.cep,
 				this.logadouro,
 				this.numero,
 				this.complemento,
 				this.bairro,
-				this.cidade,
+				this.cidade, 
 				this.estado,
-				this.token,
 
 			)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
+			
+			this.msg = res.message,
+			setTimeout(() => this.msg = "", 6000);
 		},
 
-
-
-		async eliminaEndereco() {
-			let res = await adm.eliminaEndereco(
-				this.secret,
-			)
-			if (!res.next) {
-				this.error = res.message
-				return null
-			}
-
-		},
 
 		async listar() {
 			let res = await adm.ListarPerfil(localStorage.getItem('token'))
@@ -267,41 +246,40 @@ export default {
 			if (this.cep.length == 8) {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 					.then(response => {
-						this.cep = this.cep.replace(/[^\d]+/g, '')
-						this.logadouro = response.data.logradouro,
-							this.complemento = response.data.complemento,
-							this.bairro = response.data.bairro,
-							this.cidade = response.data.localidade,
-							this.estado = response.data.uf
-					}
-					)
-					.catch(error =>
-						console.log(error)
-					)
+		this.cep = this.cep.replace(/[^\d]+/g, '')
+		this.logadouro = response.data.logradouro,
+			this.bairro = response.data.bairro,
+			this.cidade = response.data.localidade,
+			this.estado = response.data.uf
+	}
+	)
+	.catch(error =>
+		console.log(error)
+	)
 			}
 		}
 	},
 
 	async mounted() {
 
-		// Rua/Avenida Nº
-		let enderecoDados = (await this.listarEndereco()).dados || {}
-		this.logadouro = enderecoDados.logadouro
-		this.cep = enderecoDados.cep
-		this.nome_identificacao = enderecoDados.nome_identificacao
-		this.numero = enderecoDados.numero
-		this.complemento = enderecoDados.complemento
-		this.bairro = enderecoDados.bairro
-		this.cidade = enderecoDados.cidade
-		this.estado = enderecoDados.estado
-		this.id = enderecoDados.id
-		// Avenida 
+	// Rua/Avenida Nº
+	let enderecoDados = (await this.listarEndereco()).dados || {}
+	this.logadouro = enderecoDados.logadouro
+	this.cep = enderecoDados.cep
+	this.nome_identificacao = enderecoDados.nome_identificacao
+	this.numero = enderecoDados.numero
+	this.complemento = enderecoDados.complemento
+	this.bairro = enderecoDados.bairro
+	this.cidade = enderecoDados.cidade
+	this.estado = enderecoDados.estado
+	this.id = enderecoDados.id
+	// Avenida 
 
 
 
-	},
+},
 
-	created() {
-		this.token = localStorage.getItem('token')
-	},
+created() {
+	this.token = localStorage.getItem('token')
+},
 }
