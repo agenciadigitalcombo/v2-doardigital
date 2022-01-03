@@ -174,6 +174,11 @@ Vue.component('c-planos-digitalNovo', planosDigitalNovo )
 import planosDigitalEditar from './views/planos/planos-digitalEdita.js'
 Vue.component('c-planos-digitalEdita', planosDigitalEditar )
 
+import metas from './views/metas.js'
+Vue.component('c-metas', metas )
+
+
+
 
 const app = new Vue({
 
