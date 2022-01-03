@@ -204,9 +204,7 @@ export default {
 		}
 
 	},
-	created() {
-		// this.token = localStorage.getItem('token')
-	},
+
 }
 
 
