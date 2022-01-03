@@ -163,9 +163,6 @@ export default {
 												class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
 
-									<button @click="eliminaEndereco()" type="submit"
-													class="btn btn-danger ms-5" id="kt_account_profile_details_submit">
-									ELIMINAR</button>
 							</div>
 						</form>
 					</div>
