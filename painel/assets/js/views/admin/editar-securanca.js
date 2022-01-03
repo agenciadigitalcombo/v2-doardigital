@@ -184,7 +184,6 @@ export default {
 					this.error = res.message
 					return null
 				}
-				localStorage.setItem('token', res.token)
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
@@ -206,7 +205,7 @@ export default {
 
 	},
 	created() {
-		this.token = localStorage.getItem('token')
+		// this.token = localStorage.getItem('token')
 	},
 }
 
