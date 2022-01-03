@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template:`
+	template: `
 
 		<div>
 
@@ -208,17 +208,18 @@ export default {
 				this.numero,
 				this.complemento,
 				this.bairro,
-				this.cidade, 
+				this.cidade,
 				this.estado,
 
 			)
 			if (!res.next) {
-				this.error = res.message
+				// this.error = res.message
+				this.msg = res.message
 				return null
 			}
-			
+
 			this.msg = res.message,
-			setTimeout(() => this.msg = "", 6000);
+				setTimeout(() => this.msg = "", 6000);
 		},
 
 
@@ -246,40 +247,38 @@ export default {
 			if (this.cep.length == 8) {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 					.then(response => {
-		this.cep = this.cep.replace(/[^\d]+/g, '')
-		this.logadouro = response.data.logradouro,
-			this.bairro = response.data.bairro,
-			this.cidade = response.data.localidade,
-			this.estado = response.data.uf
-	}
-	)
-	.catch(error =>
-		console.log(error)
-	)
+						this.cep = this.cep.replace(/[^\d]+/g, '')
+						this.logadouro = response.data.logradouro,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf
+					}
+					)
+					.catch(error =>
+						console.log(error)
+					)
 			}
 		}
 	},
 
 	async mounted() {
 
-	// Rua/Avenida Nº
-	let enderecoDados = (await this.listarEndereco()).dados || {}
-	this.logadouro = enderecoDados.logadouro
-	this.cep = enderecoDados.cep
-	this.nome_identificacao = enderecoDados.nome_identificacao
-	this.numero = enderecoDados.numero
-	this.complemento = enderecoDados.complemento
-	this.bairro = enderecoDados.bairro
-	this.cidade = enderecoDados.cidade
-	this.estado = enderecoDados.estado
-	this.id = enderecoDados.id
-	// Avenida 
+		// Rua/Avenida Nº
+		let enderecoDados = (await this.listarEndereco()).dados || {}
+		this.logadouro = enderecoDados.logadouro
+		this.cep = enderecoDados.cep
+		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.numero = enderecoDados.numero
+		this.complemento = enderecoDados.complemento
+		this.bairro = enderecoDados.bairro
+		this.cidade = enderecoDados.cidade
+		this.estado = enderecoDados.estado
+		this.id = enderecoDados.id
 
 
+	},
 
-},
-
-created() {
-	this.token = localStorage.getItem('token')
-},
+	created() {
+		this.token = localStorage.getItem('token')
+	},
 }
