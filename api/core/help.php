@@ -428,3 +428,8 @@ function min_max_porcentagem($porcentagem): int
 
     return $porcentagem;
 }
+
+function data_format($data): string
+{
+    return implode("-",array_reverse(explode("/", $data)));
+}

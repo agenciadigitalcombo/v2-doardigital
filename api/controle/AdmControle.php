@@ -28,12 +28,14 @@ class AdmControle
         $telefone = $_REQUEST['telefone'] ?? '';
         
         $data_nascimento_campo = $_REQUEST['data_nascimento'];
-        $data_nascimento = implode("-",array_reverse(explode("/", $data_nascimento_campo)));
+        $data_nascimento = data_format($data_nascimento_campo);
 
 
         $transform_tel = valid_telefone($telefone);
         
-        
+        var_dump($data_nascimento);
+        die;
+
         if (empty($nome) or empty($email) or empty($telefone) or empty($data_nascimento)) {
             echo json_encode([
                 "next" => false,
@@ -201,7 +203,8 @@ class AdmControle
         $transform_tel = withdraw_caracter($telefone);
         $transform_cpf = withdraw_caracter($cpf);
         
-        $data_nascimento = $_REQUEST['data_nascimento'];
+        $data_nascimento_campo = $_REQUEST['data_nascimento'];
+        $data_nascimento = data_format($data_nascimento_campo);
 
         
         campo_obrigatorios([
