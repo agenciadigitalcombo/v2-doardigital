@@ -3,7 +3,6 @@ import adm from "../../../../../static/js/api/adm.js"
 export default {
 	template: `
 		<div>
-
 			<c-header></c-header>
 			<c-aside></c-aside>
 
@@ -48,8 +47,7 @@ export default {
 										</div>
 										<div id="kt_account_profile_details" >
 
-											<form action="javascript:void(0)" autocomplete="off" name="formulario"
-												class="form">
+											<form  @submit.prevent="alterarAdm" class="form">
 												<div class="card-body border-top p-9">
 
 													<div class="row mb-6">
@@ -72,7 +70,7 @@ export default {
 														<label class="col-lg-4 col-form-label required fw-bold fs-6">Data Nascimento</label>
 
 														<div class="col-lg-8 fv-row">
-															<input v-model="data" type="text" name="nascimento" class="form-control form-control-lg form-control-solid" v-mask="'##/##/####'" placeholder="dd/mm/aaaa" />
+															<input v-model="data_nascimento" type="text" name="nascimento" class="form-control form-control-lg form-control-solid" v-mask="'##/##/####'" placeholder="dd/mm/aaaa" />
 														</div>
 													</div>
 													<div class="row mb-6">
@@ -99,7 +97,7 @@ export default {
 												<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
 
 											<div class="card-footer d-flex justify-content-end py-6 px-9">
-												<button @click="alterarAdm()" type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
+												<button type="submit" class="btn btn-primary">SALVAR</button>
 										
 										</div>
 									</form>
@@ -124,6 +122,7 @@ export default {
 			email: null,
 			cpf: null,
 			telefone: null,
+			data_nascimento: null,
 			error: null,
 			data: null,
 			msg: "",
@@ -142,6 +141,8 @@ export default {
 				this.nome,
 				this.cpf,
 				this.telefone,
+				this.data_nascimento,
+				
 			)
 			if (!res.next) {
 				console.log(res)
@@ -163,7 +164,7 @@ export default {
 		},
 	},
 	async mounted() {
-		// this.token = localStorage.getItem('token')
+		this.token = localStorage.getItem('token')
 		let dados = (await this.listar()).dados
 
 		console.log(dados)
@@ -172,6 +173,7 @@ export default {
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
 		this.token = dados.token
+		this.data_nascimento = dados.data_nascimento
 	},
 
 

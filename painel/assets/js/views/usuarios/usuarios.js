@@ -7,7 +7,6 @@ export default {
     <c-header></c-header>
     <c-aside></c-aside>
 
-
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
@@ -119,8 +118,10 @@ export default {
                                                     <td></td>
                                                     <td>
                                                         <div class="badge badge-light-success">
-                                                            {{item.credencial_id }}
-                                                        </div>
+                                                        
+                                                            {{item.credencial_id | nomeCredencial(listaCredencial)}}
+
+                                                            </div>
                                                     </td>
                                                     <td class="text-end">
                                                         <a @click="editar(item.secret)"
@@ -172,6 +173,7 @@ export default {
     `,
 
 	data: function () {
+        
 		return {
 			gravatar: 'https://doardigital.tk/api/gravatar?email=brunnocriacoes@gmail.com',
 			nome: null,
@@ -181,12 +183,9 @@ export default {
 			credencial_id: null,
 			dados: [],
 			listaCredencial: [],
-
 			nome_identificacao: null,
 			secret: null,
 			jms: {},
-			estilo: "",
-			show: false,
 		}
 	},
 	methods: {
@@ -212,23 +211,15 @@ export default {
 
 		this.listaCredencial = (await this.listar_credencial()).dados
 		this.nome_identificacao = this.listaCredencial.nome_identificacao
-		console.log(this.listaCredencial)
-
-
-
 		
-		console.log(this.$refs.pop_1)
 	},
-
-	created() {
-
-	},
-
+     
 	filters: {
 		nomeCredencial: (valor, lista) => lista.find(
 			credencial => credencial.id == valor
-		).nome_identificacao
+		)
 	}
+    
 }
 
 

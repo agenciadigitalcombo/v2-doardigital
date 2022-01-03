@@ -217,9 +217,4 @@ export default {
 		this.instituicao_id = window.localStorage.getItem('instituicao_id');
 		this.id = window.localStorage.getItem('instituicao_id');
 	},
-
-	created() {
-	},
-
-
 }
