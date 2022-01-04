@@ -73,7 +73,7 @@ class Instituicao implements IInstituicao
     }
 
     public function search_by_name_or_id(string $termo): array
-    {}
+    {return [];}
 
     public function list_all_by_adm_id($adm_id): array
     {

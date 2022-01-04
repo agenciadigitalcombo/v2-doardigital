@@ -33,8 +33,7 @@ class AdmControle
 
         $transform_tel = valid_telefone($telefone);
         
-        var_dump($data_nascimento);
-        die;
+        
 
         if (empty($nome) or empty($email) or empty($telefone) or empty($data_nascimento)) {
             echo json_encode([
