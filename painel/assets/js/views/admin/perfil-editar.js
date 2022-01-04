@@ -173,7 +173,9 @@ export default {
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
 		this.token = dados.token
-		this.data_nascimento = dados.data_nascimento
+		 this.data_nascimento =  dados.data_nascimento.split('-').reverse().join('/');
+		
+		
 	},
 
 

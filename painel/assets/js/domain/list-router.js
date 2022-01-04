@@ -22,7 +22,6 @@ export default [
 
     { path: '/instituicoes', component: { template: '<c-intituicaoMenu>' } },
     
-
     { path: '/modulos', component: { template: '<c-modulos>' } },
     { path: '/modulos/correio', component: { template: '<c-modulosCorreios>' } },
     { path: '/modulos/email', component: { template: '<c-modulosEmail>' } },
@@ -58,4 +57,7 @@ export default [
     { path: '/plano-digital', component: { template: '<c-planos-digital>' } },
     { path: '/plano-digital/novo', component: { template: '<c-planos-digitalNovo>' } },
     { path: '/plano-digital/editar', component: { template: '<c-planos-digitalEdita>' } },
+
+    { path: '/metas', component: { template: '<c-metas>' } },
+    
 ]
