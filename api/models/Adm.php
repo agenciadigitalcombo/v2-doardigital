@@ -52,7 +52,7 @@ class Adm implements IAdm
         $sql = "INSERT INTO adm";
         $sql .= "(nome, email, pass, telefone, secret, step, status, super_adm, data_registro)";
         $sql .= "VALUES";
-        $sql .= "('$nome', '$email', '$senha', '$telefone', ' $secret', 1, 1, 0, '$data_regis', '$data_nascimento')";
+        $sql .= "('$nome', '$email', '$senha', '$telefone', ' $secret', 1, 1, 0, '$data_regis')";
         $banco->exec($sql);
     }
 
