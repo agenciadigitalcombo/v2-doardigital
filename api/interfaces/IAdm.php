@@ -14,8 +14,7 @@ interface IAdm
         string $nome,
         string $email,
         string $senha,
-        string $telefone,
-        string $data_nascimento
+        string $telefone
     ): void;
 
     public function update(

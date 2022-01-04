@@ -27,15 +27,13 @@ class AdmControle
 
         $telefone = $_REQUEST['telefone'] ?? '';
         
-        $data_nascimento_campo = $_REQUEST['data_nascimento'];
-        $data_nascimento = data_format($data_nascimento_campo);
-
+        
 
         $transform_tel = valid_telefone($telefone);
         
         
 
-        if (empty($nome) or empty($email) or empty($telefone) or empty($data_nascimento)) {
+        if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
                 "next" => false,
                 "message" => "Preencha todos os campos"
@@ -44,7 +42,7 @@ class AdmControle
         }
 
 
-        $adm->create($nome, $email, $senha, $transform_tel, $data_nascimento);
+        $adm->create($nome, $email, $senha, $transform_tel);
         $usuario_logado = $adm->get_by_email($email);
         $payload = [
 
