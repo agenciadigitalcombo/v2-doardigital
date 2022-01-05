@@ -1,5 +1,5 @@
 <?php
 
 router('/save-metas', 'MetasControler@save_meta');
-router('/list-metas', 'PlanoControler@list_plano');
+router('/list-metas', 'MetasControler@list_metas');
 

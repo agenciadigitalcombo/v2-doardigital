@@ -433,3 +433,8 @@ function data_format($data): string
 {
     return implode("-",array_reverse(explode("/", $data)));
 }
+
+function data_register(): string
+{
+    return $data_regis = date("Y-m-d H:i:s");
+}

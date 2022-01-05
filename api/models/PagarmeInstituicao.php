@@ -2,31 +2,29 @@
 
 class PagarmeInstituicao extends PagarMe
 {
-    public function create(int $instituicao_id, string $data_register, string $data_create, int $status): array
+    public function create(int $instituicao_id,
+    string $conta_banc_id, string $agencia, string $dig_cont, string $conta, string $type_conta,
+    string $type_document = "cpf", string $document_number, string $nome, int $status = 1): array
     {
         $payload = [
-            "id" => $instituicao_id,
+            "external_id" => $instituicao_id,
             "transfer_enabled" => false,
-            "last_transfer" => $data_register,
             "transfer_interval" => false,
             "transfer_day" => false,
-            "date_created" => $data_create,
-            "status" => $status
-            // "bank_account" => 
-            // [
-            //   "id" => null,
-            //   "bank_code" => null,
-            //   "agencia" => null,
-            //   "agencia_dv" => null,
-            //   "conta" => null,
-            //   "conta_dv" => null,
-            //   "type" => null,
-            //   "document_type" => null,
-            //   "document_number" => null,
-            //   "legal_name" => null,
-            //   "charge_transfer_fees" => true,
-            //   "date_created" => null
-            // ]
+            "postback_url" => "doardigital.tk",
+            "status" => $status,
+            "bank_account" => 
+            [
+              "bank_code" => $conta_banc_id,
+              "agencia" => $agencia,
+              "conta" => $conta,
+              "conta_dv" => $type_conta,
+              "type" => $type_conta,
+              "document_type" => $type_document,
+              "conta_dv" => $dig_cont,
+              "document_number" => $document_number,
+              "legal_name" => $nome,
+            ]
         ];
         return $this->post('/recebedor', $payload);
     }

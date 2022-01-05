@@ -6,6 +6,7 @@ class InstituicaoControler
     static function create_instituicao()
     {
         $instituicao = new Instituicao();
+        $instituicaopagarme = new PagarmeInstituicao();
         $adm = new Adm();
 
         $token_parce = token();
@@ -26,6 +27,7 @@ class InstituicaoControler
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
+        $data_register = data_register();
         
         $campos_obrigatorios = [
             'nome_fantasia',
@@ -59,7 +61,16 @@ class InstituicaoControler
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
 
+        $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
+        $instituicao_id = $get_instituicao['id'];
+
+        $res_pagarme_intituicao = $instituicaopagarme->create($instituicao_id, $data_register); 
+        
+        var_dump($res_pagarme_intituicao);
+        die;
+
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
+        
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao criada'
@@ -136,7 +147,7 @@ class InstituicaoControler
 
         echo json_encode([
             'next' => true,
-            'message' => 'Todos os SubAdm',
+            'message' => 'Todas instituicoes',
             'dados' => $payload
         ]);
     }
@@ -168,7 +179,7 @@ class InstituicaoControler
 
         echo json_encode([
             'next' => true,
-            'message' => 'Todas Instituicoes',
+            'message' => 'Instituicao',
             'dados' => $payload
         ]);
     }
