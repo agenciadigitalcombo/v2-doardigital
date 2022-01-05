@@ -23,10 +23,11 @@ class PagarmeInstituicao extends PagarMe
               "document_type" => $type_document,
               "conta_dv" => $dig_cont,
               "document_number" => $document_number,
-              "legal_name" => $nome,
+              "legal_name" => $nome
             ]
         ];
-        return $this->post('/recebedor', $payload);
+        echo "ttaaffaareeeelllll";
+        return $this->post('/recipients', $payload);
     }
 
     public function update(): void
