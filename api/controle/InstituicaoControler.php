@@ -64,10 +64,10 @@ class InstituicaoControler
         $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
         $instituicao_id = $get_instituicao['id'];
 
-        $res_pagarme_intituicao = $instituicaopagarme->create($instituicao_id, $data_register); 
+        // $res_pagarme_intituicao = $instituicaopagarme->create($instituicao_id, $data_register); 
         
-        var_dump($res_pagarme_intituicao);
-        die;
+        // var_dump($res_pagarme_intituicao);
+        // die;
 
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
         
