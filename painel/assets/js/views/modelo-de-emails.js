@@ -1,29 +1,20 @@
-<!DOCTYPE html>
+import tags from '../domain/tag-email.js'
 
-<html lang="en">
+export default {
+	template:`
+		<div>
 
-<head>
+			<c-header></c-header>
+			<c-aside></c-aside>
 
-	<title>Step by step</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<link href="../../painel/assets/css/vendor/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="../../../css/vendor/style.bundle.css" rel="stylesheet" type="text/css" />
-</head>
-
-
-<body class="header-tablet-and-mobile-fixed aside-enabled">
-	<div class="container" id="app">
-		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
+			<div class="d-flex flex-column flex-root">
 			<div class="page d-flex flex-row flex-column-fluid">
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<div id="kt_content_container" class="container-xxl">
 
-				<!--begin::Wrapper-->
-				<div class="wrapper d-flex flex-column flex-row-fluid" >
-					<!--begin::Content-->
-					<div >
-						<!--begin::Inbox App - Compose -->
-						<div class="d-flex flex-column flex-lg-row">
+							<div class="d-flex flex-column flex-lg-row">
 							<!--begin::Content-->
 							<div class="flex-lg-row-fluid ">
 								<!--begin::Card-->
@@ -123,7 +114,12 @@
 												<div class="border-0 h-200px p-8  ql-container ql-snow">
 					
 													<p>Você pode usar as seguintes Tags:</p>
+
 													
+													<span>
+													<span class="tag" v-for="tag in tags">{{tag}}</span>
+												</span>
+
 												</div>
 												<!--end::Message viewBox="0 0 18 18"-->
 
@@ -213,70 +209,35 @@
 							</div>
 							<!--end::Content-->
 						</div>
-						<!--end::Inbox App - Compose -->
+							
+							</div>
+						</div>
 					</div>
-					<!--end:: Content-->
-
 				</div>
 			</div>
 		</div>
+
+
+
+
+
+
 		<!--end:: Root-->
-	</div>
 
-	<!-- <script src="../../../static/js/api/cep.js"></script> -->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script>
-		new Vue({
-			el: '#app',
-			data: {
-				id: null,
-				nome_identificacao: null,
-				cep: null,
-				logadouro: null,
-				numero: null,
-				complemento: null,
-				bairro: null,
-				cidade: null,
-				estado: null,
-				secret: null,
-				token: null,
-
-				items: [],
-
-				nome: null,
-				cpf: null,
-				telefone: null,
-				email: null,
+			<c-footer />
+		</div>
+    `,
 
 
-				data: null,
-			},
-			methods: {
-				searchCep() {
-					if (this.cep.length == 8) {
-						axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
-							.then(response => {
+     data: function () {
+		return {
+			gravatar: '../painel/assets/image/gravatar.png',
+			tags: []
+        }
+    },
+	methods: {
 
-								this.logradouro = response.data.logradouro,
-									this.complemento = response.data.complemento,
-									this.bairro = response.data.bairro,
-									console.log(response.data)
-								alert("olaa")
-							}
-							)
-							.catch(error => console.log(error))
+    },
+	
+}
 
-					}
-				}
-			},
-
-			mounted() {
-
-			},
-		})
-	</script>
-</body>
-
-
-</html>

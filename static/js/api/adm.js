@@ -440,6 +440,58 @@ export default {
     },
 
 
+
+    async addMetas(
+        token,
+        instituicao_id,
+        ano,
+        janeiro,
+        fevereiro,
+        marco,
+        abril,
+        maio,
+        junho,
+        julho,
+        agosto,
+        setembro,
+        outubro,
+        novembro,
+        dezembro
+    ) {
+        return await http.post('/save-metas', {
+            token,
+            instituicao_id,
+            ano,
+            janeiro,
+            fevereiro,
+            marco,
+            abril,
+            maio,
+            junho,
+            julho,
+            agosto,
+            setembro,
+            outubro,
+            novembro,
+            dezembro
+        })
+    },
+
+  
+
+    async listarMetas(
+        token,
+        instituicao_id,
+        ano,
+    ) {
+        return await http.get('/list-metas', {
+            token,
+            instituicao_id,
+            ano,
+
+        })
+    },
+
 }
 
 // editarSubadm

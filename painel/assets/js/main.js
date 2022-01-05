@@ -177,6 +177,8 @@ Vue.component('c-planos-digitalEdita', planosDigitalEditar )
 import metas from './views/metas.js'
 Vue.component('c-metas', metas )
 
+import modeloEmails from './views/modelo-de-emails.js'
+Vue.component('c-modelo-de-emails', modeloEmails )
 
 
 

@@ -39,6 +39,7 @@ export default {
                         <input v-model="email" type="email" name="email" placeholder="Email" required>
                         <input v-model="telefone" oninput="globalThis.maskTel(this)" type="text" name="phone"
                             placeholder="Telefone" required>
+                         <input v-model="data_nascimento" type="text" name="nascimento" placeholder="Data nascimento" required>
                         <input v-model="senha" type="password" name="password" placeholder="Senha" required>
                         <input type="password" name="password_confirm" placeholder="Confirmar senha" required>
                         <label class="cinza-text">
@@ -90,6 +91,7 @@ export default {
             email: null,
             senha: null,
             telefone: null,
+            data_nascimento: null,
             error: null
         }
     },
@@ -103,6 +105,7 @@ export default {
                 this.email,
                 this.senha,
                 this.telefone,
+                // this.data_nascimento,
                 this.error
             )
             if (!res.next) {

@@ -20,8 +20,9 @@
 
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" >
+
 					<!--begin::Content-->
-					<div >
+					<div class="container-xxl">
 						<!--begin::Inbox App - Compose -->
 						<div class="d-flex flex-column flex-lg-row">
 							<!--begin::Content-->
@@ -41,12 +42,18 @@
 												<!--begin::To-->
 												<div class="d-flex align-items-center border-bottom px-8 min-h-50px">
 													<!--begin::Label-->
-													<div class="text-dark fw-bolder w-75px">Para:</div>
+													<div class="text-dark fw-bolder w-75px">To:</div>
 													<!--end::Label-->
 													<!--begin::Input-->
-												
-													<input type="text" class="form-control border-0"
-														name="compose_to" value="" >
+													<tags
+														class="tagify form-control border-0 tagify--noTags tagify--empty"
+														tabindex="-1">
+														<span contenteditable="" tabindex="0" data-placeholder="​"
+															aria-placeholder="" class="tagify__input" role="textbox"
+															aria-autocomplete="both" aria-multiline="false"></span>
+														​
+													</tags><input type="text" class="form-control border-0"
+														name="compose_to" value="" data-kt-inbox-form="tagify">
 													<!--end::Input-->
 													<!--begin::CC & BCC buttons-->
 													<div class="ms-auto w-75px text-end">
@@ -63,7 +70,9 @@
 												<!--begin::CC-->
 												<div class="d-none align-items-center border-bottom ps-8 pe-5 min-h-50px"
 													data-kt-inbox-form="cc">
-													
+													<!--begin::Label-->
+													<div class="text-dark fw-bolder w-75px">Cc:</div>
+													<!--end::Label-->
 													<!--begin::Input-->
 													<tags
 														class="tagify form-control border-0 tagify--noTags tagify--empty"
