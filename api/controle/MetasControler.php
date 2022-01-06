@@ -7,21 +7,35 @@ class MetasControler{
         $metas = new Metas();
         
         token();
-        $instituicao_id = $_REQUEST['instituicao_id'];
-        $janeiro = $_REQUEST['janeiro'];
-        $fevereiro = $_REQUEST['fevereiro'];
-        $marco = $_REQUEST['marco'];
-        $abril = $_REQUEST['abril'];
-        $maio = $_REQUEST['maio'];
-        $junho = $_REQUEST['junho'];
-        $julho = $_REQUEST['julho'];
-        $agosto = $_REQUEST['agosto'];
-        $setembro = $_REQUEST['setembro'];
-        $outubro = $_REQUEST['outubro'];
-        $novembro = $_REQUEST['novembro'];
-        $dezembro = $_REQUEST['dezembro'];
+        $instituicao_id_campo = $_REQUEST['instituicao_id'];
+        $janeiro_campo = $_REQUEST['janeiro'];
+        $fevereiro_campo = $_REQUEST['fevereiro'];
+        $marco_campo = $_REQUEST['marco'];
+        $abril_campo = $_REQUEST['abril'];
+        $maio_campo = $_REQUEST['maio'];
+        $junho_campo = $_REQUEST['junho'];
+        $julho_campo = $_REQUEST['julho'];
+        $agosto_campo = $_REQUEST['agosto'];
+        $setembro_campo = $_REQUEST['setembro'];
+        $outubro_campo = $_REQUEST['outubro'];
+        $novembro_campo = $_REQUEST['novembro'];
+        $dezembro_campo = $_REQUEST['dezembro'];
         $ano = $_REQUEST['ano'];
     
+        $instituicao_id = min_amount($instituicao_id_campo);
+        $janeiro = min_amount($janeiro_campo);
+        $fevereiro = min_amount($fevereiro_campo);
+        $marco = min_amount($marco_campo);
+        $abril = min_amount($abril_campo);
+        $maio = min_amount($maio_campo);
+        $junho = min_amount($junho_campo);
+        $julho = min_amount($julho_campo);
+        $agosto = min_amount($agosto_campo);
+        $setembro = min_amount($setembro_campo);
+        $outubro = min_amount($outubro_campo);
+        $novembro = min_amount($novembro_campo);
+        $dezembro = min_amount($dezembro_campo);
+
         campo_obrigatorios([
             'instituicao_id' => 'Informe a instituicao',
             'janeiro' => 'Informe o mês de janeiro',
@@ -51,7 +65,7 @@ class MetasControler{
         $metas = new Metas();
 
         token();
-        $instituicao_id = $_REQUEST['instituicao_id'];
+        $instituicao_id = $_REQUEST['inostituicao_id'];
         $ano = $_REQUEST['ano'];
         
         campo_obrigatorios([
