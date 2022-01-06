@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template: `
+	template: ` 
 	<div>
 
     <c-header></c-header>
@@ -45,6 +45,10 @@ export default {
 											<a class="nav-link text-active-primary ms-0 me-10 py-5"
 												href="#/banco-instituicoes">Dados Bancario</a>
 										</li>
+
+										<li class="nav-item mt-2">
+												<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/dominio-instituicoes">Domínio</a>
+											</li>
 										<!--end::Nav item-->
 									</ul>
 									<!--begin::Navs-->
@@ -183,7 +187,7 @@ export default {
 											<!--begin::Card header-->
 											<!--begin::Content-->
 
-											<!--begin::Notice-->
+											<!--begin::Notice Você tem um código promocional -->
 											<div
 												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
 												<!--begin::Wrapper-->
@@ -203,57 +207,6 @@ export default {
 										</div>
 										<!--end::Basic info-->
 
-
-										<div class="card-header border-0 cursor-pointer">
-											<div class="form-check form-switch form-check-custom form-check-solid"
-												style="width: 40%; border-radius: 25px;">
-
-												<label
-													class="form-check-label col-lg-9 col-form-label required fw-bold fs-6"
-													for="flexSwitchDefault">
-													Você tem um código promocional
-
-												</label>
-												<input @click="jms = !jms" class="form-check-input" type="checkbox"
-													value="" id="flexSwitchDefault" />
-
-											</div>
-										</div>
-										<!--begin::Basic info-->
-										<div class="card " v-if="jms">
-											<!--begin::Card header-->
-											<div class="card-header border-0 cursor-pointer">
-												<!--begin::Card title-->
-												<div class="card-title m-0">
-													<h3 class="fw-bolder m-0">Domínio personalizado</h3>
-												</div>
-												<!--end::Card title-->
-											</div>
-											<!--begin::Card header-->
-											<!--begin::Content-->
-
-											<!--begin::Notice-->
-											<div
-												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-												<!--begin::Wrapper-->
-												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-													<!--begin::Content-->
-													<div class="input-group mb-3">
-														<span class="input-group-text" id="basic-addon2">Informe seu
-															Domínio
-														</span>
-														<input type="texte" name="Domínio"
-															class="form-control form-control-lg " />
-													</div>
-													<!--end::Action-->
-												</div>
-												<!--end::Wrapper-->
-											</div>
-											<!--end::Notice-->
-
-											<!--end::Content-->
-										</div>
-										<!--end::Basic info-->
 
 										<!--begin::Actions-->
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -335,9 +288,7 @@ export default {
 
 	},
 	async mounted() {
-			
-		let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
-	document.head.appendChild(validacao);
+	
 
 	},
 

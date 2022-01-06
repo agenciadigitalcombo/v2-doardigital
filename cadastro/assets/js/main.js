@@ -22,8 +22,10 @@ import cadastrar from './views/cadastro.js'
 Vue.component('c-cadastro', cadastrar )
 
 
-import EditarLocal from './views/editar-local.js'
-Vue.component('c-editar-local', EditarLocal )
+
+import termos from './views/termos.js'
+Vue.component('c-termos', termos )
+
 
 
 const app = new Vue({

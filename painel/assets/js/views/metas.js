@@ -32,7 +32,7 @@ export default {
 			
 
 												<div class="card-toolbar" data-kt-buttons="true">
-<select @change="setar_ano($event)" v-model="ano" class="form-select form-select-solid" aria-label="Select example">
+<select @change="setar_ano()" v-model="ano" class="form-select form-select-solid" aria-label="Select example">
 <option v-for="dado in ano_aray" >{{ dado }}</option>
   
 </select>
@@ -206,7 +206,7 @@ export default {
 			token: null,
 			instituicao_id: null,
 			ano: '2021',
-			ano_aray: ['2021', '2022', '2013'],
+			ano_aray: [2020,2021, 2022, 2013],
 			janeiro: null,
 			fevereiro: null,
 			marco: null,
@@ -230,55 +230,55 @@ export default {
 	methods: {
 
 		masc_money() {
-			let valor
+		// 	let valor
 
-           valor = this.janeiro.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.janeiro = valor
+        //    valor = this.janeiro.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.janeiro = valor
 
-			valor = this.fevereiro.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.fevereiro = valor
+		// 	valor = this.fevereiro.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.fevereiro = valor
 
-			valor = this.marco.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.marco = valor
+		// 	valor = this.marco.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.marco = valor
 
-			valor = this.abril.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.abril = valor
+		// 	valor = this.abril.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.abril = valor
 
-			valor = this.maio.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.maio = valor
+		// 	valor = this.maio.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.maio = valor
 			
-			valor = this.junho.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.junho = valor
+		// 	valor = this.junho.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.junho = valor
 			
-			valor = this.julho.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.julho = valor
+		// 	valor = this.julho.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.julho = valor
 
-			valor = this.agosto.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.agosto = valor
+		// 	valor = this.agosto.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.agosto = valor
 		
-			valor = this.setembro.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.setembro = valor
+		// 	valor = this.setembro.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.setembro = valor
 
-			valor = this.outubro.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.outubro = valor
+		// 	valor = this.outubro.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.outubro = valor
 
-			valor = this.novembro.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.novembro = valor
+		// 	valor = this.novembro.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.novembro = valor
 
-			valor = this.dezembro.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.dezembro = valor
+		// 	valor = this.dezembro.replace(/\D/gi, '')
+        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        //     this.dezembro = valor
 		
         },
 
@@ -286,7 +286,6 @@ export default {
 
 		async setar_ano() {
 			let dados = (await this.listar()).dados[0] || {}
-			this.ano = dados.ano
 			this.janeiro = dados.janeiro
 			this.fevereiro = dados.fevereiro
 			this.marco = dados.marco
@@ -352,7 +351,6 @@ export default {
 		this.token = window.localStorage.getItem('token');
 
 		let dados = (await this.listar()).dados[0] || {}
-		this.ano = dados.ano
 		this.janeiro = dados.janeiro
 		this.fevereiro = dados.fevereiro
 		this.marco = dados.marco

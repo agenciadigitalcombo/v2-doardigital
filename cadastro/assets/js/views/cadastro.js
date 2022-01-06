@@ -58,7 +58,7 @@ export default {
                         <p class="cinza-text">
                             Ao se cadastar você ira para uma lista de aprovação
                             isso pode demorar 48hs, todos os termos você encontrar
-                            <a href="./termos.html" target="_blank"> clicando aqui </a>.
+                            <a href="#/termos" target="_blank"> clicando aqui </a>.
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!">
                        	
@@ -113,7 +113,7 @@ export default {
             localStorage.setItem('token', res.token)
 
             // const prot = window.location.protocol
-            // const host = window.location.hostname
+            // const host = window.location.hostname  clicando aqui .
 
             window.location.href = "/painel/index.html#/perfil-editar";
         },

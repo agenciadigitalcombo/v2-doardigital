@@ -52,47 +52,49 @@ export default {
 							</div>
 						</div>
 						<!--end::Navbar-->
+					
 						<!--begin::Basic info-->
 						<div class="card mb-5 mb-xl-10">
 							<!--begin::Card header-->
-							<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+							<div class="card-header border-0 cursor-pointer">
 								<!--begin::Card title-->
 								<div class="card-title m-0">
-									<h3 class="fw-bolder m-0">Subdomínio</h3>
+									<h3 class="fw-bolder m-0">Domínio personalizado</h3>
 								</div>
 								<!--end::Card title-->
 							</div>
 							<!--begin::Card header-->
 							<!--begin::Content-->
-							<div id="kt_account_profile_details" >
-								<!--begin::Form-->
-								<form id="kt_account_profile_details_form" class="form">
-									<!--begin::Notice-->
-										<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-											<!--begin::Wrapper-->
-											<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-												<!--begin::Content-->
-												<div class="input-group mb-3">
-												<input type="email" name="email" class="form-control form-control-lg " />
-												<span class="input-group-text" id="basic-addon2">.doardigital.com.br</span>
-											</div>
-												<!--end::Action-->
-											</div>
-											<!--end::Wrapper-->
-										</div>
-										<!--end::Notice-->
-									<!--begin::Actions-->
-									<div class="card-footer d-flex justify-content-end py-6 px-9">
-										<button  type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
+
+							<!--begin::Notice-->
+							<div
+								class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+									<!--begin::Content-->
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon2">Informe seu
+											Domínio
+										</span>
+										<input type="texte" name="Domínio"
+											class="form-control form-control-lg " />
 									</div>
-									<!--end::Actions-->
-								</form>
-								<!--end::Form-->
+									<!--end::Action-->
+								</div>
+								<!--end::Wrapper-->
 							</div>
+							<!--end::Notice-->
+
 							<!--end::Content-->
 						</div>
 						<!--end::Basic info-->
-				
+
+
+
+
+
+
+
 					
 					</div>
 					<!--end::Container-->
