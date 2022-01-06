@@ -39,7 +39,7 @@ class ContaBanc implements IContaBanc{
         $banco = new Banco();
         $sql = "SELECT * FROM conta_bancaria WHERE adm_id='$id'";
         $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $guard ?? [];
     }
     
     public function list_all(): array

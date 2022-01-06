@@ -2,22 +2,24 @@
 class TesteControler{
     static function testecreate(){
 
-        $instituicaopagarme = new PagarmeInstituicao();
+        $banco_cont = new ContaBanc();
 
-        $instituicao_id = "22";
-        $conta_banc_id = "3";
-        $agencia = "2332";
-        $dig_cont = "2";
-        $conta = "223222";
-        $type_conta = "corrente";
-        $digit = "22";
-        $document_number = "233333332";
-        $nome = "victor";
+        $adm_id = 5;
+        $token = "BOM DIA";
+        $nome_identificacao = "BOM DIA";
+        $codigo_banco = "BOM DIA";
+        $agencia = "BOM DIA";
+        $agencia_digito = "BOM DIA";
+        $conta = "BOM DIA";
+        $conta_digito = "BOM DIA";
+        $tipo_conta = "BOM DIA";
+        $nome_completo = "BOM DIA";
+        $documento_numero = "BOM DIA";
 
-        $res_pagarme_intituicao = $instituicaopagarme->create($instituicao_id, $conta_banc_id, $agencia, $dig_cont, $conta, $type_conta, $digit, $document_number, $nome); 
+        $banco_cont->create($adm_id, $token, $nome_identificacao, $codigo_banco, $agencia, $agencia_digito, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero); 
         
-        var_dump($res_pagarme_intituicao);
-        die;
+        // var_dump($res_pagarme_intituicao);
+        // die;
 
     }
 }

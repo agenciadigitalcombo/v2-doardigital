@@ -7,6 +7,7 @@ class InstituicaoControler
     {
         $instituicao = new Instituicao();
         $instituicaopagarme = new PagarmeInstituicao();
+        $banco_cont = new ContaBanc();
         $adm = new Adm();
 
         $token_parce = token();
@@ -27,6 +28,17 @@ class InstituicaoControler
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
+        // $token = "";
+        // $nome_identificacao = "";
+        // $codigo_banco = $_REQUEST['codigo_banco'];
+        // $agencia = $_REQUEST['agencia'];
+        // $agencia_digito = $_REQUEST['agencia_digito'];
+        // $conta = $_REQUEST['conta'];
+        // $conta_digito = $_REQUEST['conta_digito'];
+        // $tipo_conta = $_REQUEST['tipo_conta'];
+        // $nome_completo = $_REQUEST['nome_completo'];
+        // $documento_numero = $_REQUEST['documento_numero'];
+
         $campos_obrigatorios = [
             'nome_fantasia',
             'razao_social',
@@ -34,7 +46,16 @@ class InstituicaoControler
             'email',
             'cor',
             'telefone',
-            'cnpj'
+            'cnpj',
+            //'nome_identificacao',
+            'codigo_banco',
+            'agencia',
+            'agencia_digito',
+            'conta',
+            'conta_digito',
+            'tipo_conta',
+            'nome_completo',
+            'documento_numero'
         ];
         $lb = [
             'nome_fantasia' => 'Informe um Nome Fantasia',
@@ -43,7 +64,16 @@ class InstituicaoControler
             'email' => 'Qual o Email',
             'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
-            'cnpj' => 'Informe o Cnpj'
+            'cnpj' => 'Informe o Cnpj',
+            //'nome_identificacao' => 'Informe o Nome para Identificacao',
+            'codigo_banco' => 'Informe o Codigo do banco',
+            'agencia' => 'Informe o Agencia',
+            'agencia_digito' => 'Informe o Digito da Agencia',
+            'conta' => 'Informe a Conta',
+            'conta_digito' => 'Informe o Digito da Conta',
+            'tipo_conta' => 'Informe o Tipo da conta',
+            'nome_completo' => 'Informe o Nome completo',
+            'documento_numero' => 'Informe o Numero do Documento'
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -59,15 +89,20 @@ class InstituicaoControler
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
 
-        $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
-        $instituicao_id = $get_instituicao['id'];
+        // $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
+        // $instituicao_id = $get_instituicao['id'];
 
-        // $res_pagarme_intituicao = $instituicaopagarme->create($instituicao_id, $data_register); 
-        
-        // var_dump($res_pagarme_intituicao);
-        // die;
+        // $banco_cont->create($adm_id, $token, $nome_identificacao, $codigo_banco, $agencia, $agencia_digito, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero); 
+
+        // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
+        // $banc_id = $get_banc_id['id'];
 
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
+        //$res_pagarme = $instituicaopagarme->create($instituicao_id, $banc_id, $agencia, $conta_digito, $agencia_digito, $conta, $tipo_conta, $documento_numero, $nome_completo, $nome_fantasia, $cnpj, $sub_domain, $email, $transform_tel); 
+        
+        
+
+
         
         echo json_encode([
             'next' => true,

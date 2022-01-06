@@ -2,7 +2,7 @@
 
 class PagarmeInstituicao extends PagarMe
 {
-    public function create(int $recebedor_id,
+    public function create(
     string $banc_id, string $agencia, string $dig_cont, string $dig_agenc, string $conta, string $type_conta,
     string $document_number, string $bank_nome, string $recebedor_nome, string $document_number_recebedor,
     string $site_url, string $email_recebedor, string $telefone_recebedor): array
@@ -57,14 +57,14 @@ class PagarmeInstituicao extends PagarMe
                     "phone_numbers" => [[
                         "ddd" => null,
                         "number" => $telefone_recebedor,
-                        "type" => "mobile"
+                        "type" => null
                     ]]
             ]
         ];
 
         $recebedor = $this->post('/recipients', $payload_recebedor);
 
-        var_dump($recebedor);
+        var_dump($conta_id);
         
         return $recebedor;
 
