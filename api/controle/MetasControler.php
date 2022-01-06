@@ -22,19 +22,19 @@ class MetasControler{
         $dezembro_campo = $_REQUEST['dezembro'];
         $ano = $_REQUEST['ano'];
     
-        $instituicao_id = min_amount($instituicao_id_campo);
-        $janeiro = min_amount($janeiro_campo);
-        $fevereiro = min_amount($fevereiro_campo);
-        $marco = min_amount($marco_campo);
-        $abril = min_amount($abril_campo);
-        $maio = min_amount($maio_campo);
-        $junho = min_amount($junho_campo);
-        $julho = min_amount($julho_campo);
-        $agosto = min_amount($agosto_campo);
-        $setembro = min_amount($setembro_campo);
-        $outubro = min_amount($outubro_campo);
-        $novembro = min_amount($novembro_campo);
-        $dezembro = min_amount($dezembro_campo);
+        $instituicao_id = withdraw_caracter($instituicao_id_campo);
+        $janeiro = withdraw_caracter($janeiro_campo);
+        $fevereiro = withdraw_caracter($fevereiro_campo);
+        $marco = withdraw_caracter($marco_campo);
+        $abril = withdraw_caracter($abril_campo);
+        $maio = withdraw_caracter($maio_campo);
+        $junho = withdraw_caracter($junho_campo);
+        $julho = withdraw_caracter($julho_campo);
+        $agosto = withdraw_caracter($agosto_campo);
+        $setembro = withdraw_caracter($setembro_campo);
+        $outubro = withdraw_caracter($outubro_campo);
+        $novembro = withdraw_caracter($novembro_campo);
+        $dezembro = withdraw_caracter($dezembro_campo);
 
         campo_obrigatorios([
             'instituicao_id' => 'Informe a instituicao',
