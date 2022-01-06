@@ -6,4 +6,4 @@ router('/list-instituicao', 'InstituicaoControler@list_instituicao');
 router('/instituicao-id', 'InstituicaoControler@list_instituicao_by_id');
 router('/instituicao', 'InstituicaoControler@instituicao');
 router('/delete-instituicao', 'InstituicaoControler@detete_instituicao');
-router('/on_off', 'InstituicaoControler@on_off');
+router('/on-off-instituicao', 'InstituicaoControler@on_off_instituicao');

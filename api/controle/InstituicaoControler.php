@@ -286,15 +286,17 @@ class InstituicaoControler
         ]);
     }
 
-    static function on_off()
+    static function on_off_instituicao()
     {
-        $plano = new PlanoDigital();
+        $instituicao = new Instituicao();
+
 
         token();
 
         $instituicao_id = $_REQUEST['instituicao_id'];
         
-        $plano->on_off($instituicao_id);
+
+        $instituicao->on_off($instituicao_id);
         echo json_encode([
             'next' => true,
             'message' => 'Status Atualizado'
