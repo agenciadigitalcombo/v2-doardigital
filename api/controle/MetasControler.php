@@ -7,6 +7,7 @@ class MetasControler{
         $metas = new Metas();
         
         token();
+        
         $instituicao_id_campo = $_REQUEST['instituicao_id'];
         $janeiro_campo = $_REQUEST['janeiro'];
         $fevereiro_campo = $_REQUEST['fevereiro'];
