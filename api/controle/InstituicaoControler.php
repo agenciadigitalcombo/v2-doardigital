@@ -275,7 +275,9 @@ class InstituicaoControler
     static function detete_instituicao()
     {
         $instituicao = new Instituicao();
-       
+        
+        token();
+
         $id = $_REQUEST['id'];
         $instituicao->del($id);
         echo json_encode([
