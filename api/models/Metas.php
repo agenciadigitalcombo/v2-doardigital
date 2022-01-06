@@ -12,7 +12,7 @@ class Metas implements IMetas{
         $set_metas .= "VALUES";
         $set_metas .= "($instituicao_id, '$ano', $janeiro, $fevereiro, $marco, $abril, $maio, $junho, $julho, $agosto, $setembro, $outubro, $novembro, $dezembro)";
         
-        $save_metas = "UPDATE meta_mes SET ano='$ano', janeiro=$janeiro, fevereiro=$fevereiro, marco=$marco, abril=$abril, maio=$maio, junho=$junho, julho=$julho, agosto=$agosto, setembro=$setembro, outubro=$outubro, novembro=$novembro, dezembro=$dezembro";
+        $save_metas = "UPDATE meta_mes SET janeiro=$janeiro, fevereiro=$fevereiro, marco=$marco, abril=$abril, maio=$maio, junho=$junho, julho=$julho, agosto=$agosto, setembro=$setembro, outubro=$outubro, novembro=$novembro, dezembro=$dezembro";
         $save_metas .= "WHERE instituicao_id=$instituicao_id AND ano='$ano'";
         
         $res_exist = $banco->query($exist_id);
