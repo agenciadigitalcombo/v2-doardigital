@@ -65,7 +65,7 @@ class MetasControler{
         $metas = new Metas();
 
         token();
-        $instituicao_id = $_REQUEST['inostituicao_id'];
+        $instituicao_id = $_REQUEST['instituicao_id'];
         $ano = $_REQUEST['ano'];
         
         campo_obrigatorios([
