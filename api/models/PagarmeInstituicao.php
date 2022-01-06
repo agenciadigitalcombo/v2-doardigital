@@ -2,19 +2,20 @@
 
 class PagarmeInstituicao extends PagarMe
 {
-    public function create(int $instituicao_id,
-    string $conta_banc_id, string $agencia, string $dig_cont, string $conta, string $type_conta,
-    string $type_document = "cpf", string $document_number, string $nome, int $status = 1): array
+    public function create(int $recebedor_id,
+    string $banc_id, string $agencia, string $dig_cont, string $dig_agenc, string $conta, string $type_conta,
+    string $document_number, string $bank_nome, string $recebedor_nome, string $document_number_recebedor,
+    string $site_url, string $email_recebedor, string $telefone_recebedor): array
     {
 
         $payload = [
-            "agencia" => "0932", 
-            "agencia_dv" => "5", 
-            "bank_code" => "341", 
-            "conta" => "58054", 
-            "conta_dv" => "1", 
-            "document_number" => "26268738888", 
-            "legal_name" => "API BANK ACCOUNT"
+            "agencia" => $agencia, 
+            "agencia_dv" => $dig_agenc, 
+            "bank_code" => $banc_id, 
+            "conta" => $conta, 
+            "conta_dv" => $dig_cont, 
+            "document_number" => $document_number, 
+            "legal_name" => $bank_nome
         ];
 
         // $payload = [
@@ -42,28 +43,26 @@ class PagarmeInstituicao extends PagarMe
         $conta_id = $conta['id'];
 
         $payload_recebedor = [
-            "anticipatable_volume_percentage" => "85", 
-            "automatic_anticipation_enabled" => "true", 
             "bank_account_id" => $conta_id, 
-            "transfer_day" => "5", 
-            "transfer_enabled" => "true", 
-            "transfer_interval" => "weekly",
+            "transfer_day" => null, 
+            "transfer_enabled" => false, 
+            "transfer_interval" => null,
             "postback_url" => "https://requestb.in/tl0092tl",
             "register_information" => [
                     "type" => "individual",
-                    "document_number" => "92545278157",
-                    "name" => "Someone",
-                    "site_url" =>"http://www.site.com",
-                    "email" => "some@email.com",
+                    "document_number" => $document_number_recebedor,
+                    "name" => $recebedor_nome,
+                    "site_url" => $site_url,
+                    "email" => $email_recebedor,
                     "phone_numbers" => [[
-                        "ddd" => "11",
-                        "number" => "987654321",
+                        "ddd" => null,
+                        "number" => $telefone_recebedor,
                         "type" => "mobile"
                     ]]
             ]
         ];
 
-        $recebedor = $this->post('/recipients', $payload);
+        $recebedor = $this->post('/recipients', $payload_recebedor);
 
         var_dump($recebedor);
         

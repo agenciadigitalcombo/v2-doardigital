@@ -27,8 +27,6 @@ class InstituicaoControler
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
-        $data_register = data_register();
-        
         $campos_obrigatorios = [
             'nome_fantasia',
             'razao_social',
@@ -121,6 +119,32 @@ class InstituicaoControler
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao atualizada'
+        ]);
+    }
+
+
+    static function update_domain_person()
+    {
+        $instituicao = new Instituicao();
+        $adm = new Adm();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        $token_parce = token();
+
+        $dominio = $_REQUEST['dominio'];
+        
+
+        
+        campo_obrigatorios([
+            'dominio' => 'Informe o Dominio',
+            'id' => 'Indoforme o ID da Instituicao'
+        ]);
+
+        $instituicao->set_domain_person($instituicao_id, $dominio);
+        echo json_encode([
+            'next' => true,
+            'message' => 'Dominio atualizado'
         ]);
     }
 
