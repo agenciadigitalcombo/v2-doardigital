@@ -18,8 +18,8 @@ class Metas implements IMetas{
         $res_exist = $banco->query($exist_id);
          
         var_dump(empty($res_exist[0]));
-        die;
         
+
         if(empty($res_exist)) {
             $banco->exec($set_metas);
         }else {
