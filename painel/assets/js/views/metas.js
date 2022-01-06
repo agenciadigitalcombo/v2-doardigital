@@ -51,7 +51,9 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">janeiro</label>
-																<input type="text" v-model="janeiro" @input="masc_money" placeholder="00,00"
+																<input type="text" @input="masc_money1" placeholder="00,00"
+																 v-model.trin="$v.janeiro.$model"
+																:class=" {'is-invalid':$v.janeiro.$error, 'is-valid':!$v.janeiro.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																</div>
 														</div>
@@ -59,7 +61,9 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">fevereiro</label>
-																<input type="text" v-model="fevereiro" @input="masc_money" placeholder="00,00"
+																<input type="text" @input="masc_money2" placeholder="00,00"
+																 v-model.trin="$v.fevereiro.$model"
+																:class=" {'is-invalid':$v.fevereiro.$error, 'is-valid':!$v.fevereiro.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
 														</div>
@@ -67,7 +71,9 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">março</label>
-																<input type="text" v-model="marco" @input="masc_money" placeholder="00,00"
+																<input type="text"  @input="masc_money3" placeholder="00,00"
+																 v-model.trin="$v.marco.$model"
+																:class=" {'is-invalid':$v.marco.$error, 'is-valid':!$v.marco.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
 															
@@ -78,7 +84,9 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">abril</label>
-																<input type="text" v-model="abril" @input="masc_money" placeholder="00,00"
+																<input type="text" @input="masc_money4" placeholder="00,00"
+																 v-model.trin="$v.abril.$model"
+																:class=" {'is-invalid':$v.abril.$error, 'is-valid':!$v.abril.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
 															
@@ -87,7 +95,9 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">maio</label>
-																<input type="text" v-model="maio" @input="masc_money" placeholder="00,00"
+																<input type="text" @input="masc_money5" placeholder="00,00"
+																 v-model.trin="$v.maio.$model"
+																:class=" {'is-invalid':$v.maio.$error, 'is-valid':!$v.maio.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
 															
@@ -96,7 +106,9 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">junho</label>
-																<input type="text" v-model="junho" @input="masc_money" placeholder="00,00"
+																<input type="text" @input="masc_money6" placeholder="00,00"
+																 v-model.trin="$v.junho.$model"
+																:class=" {'is-invalid':$v.junho.$error, 'is-valid':!$v.junho.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
 															
@@ -105,7 +117,9 @@ export default {
 														<div class="fv-row mb-5">
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">julho</label>
-															<input type="text" v-model="julho" @input="masc_money" placeholder="00,00"
+															<input type="text" @input="masc_money7" placeholder="00,00"
+															 v-model.trin="$v.julho.$model"
+																:class=" {'is-invalid':$v.julho.$error, 'is-valid':!$v.julho.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
 																</div>
@@ -115,7 +129,9 @@ export default {
 														<div class="fv-row mb-5">
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">agosto</label>
-															<input type="text" v-model="agosto" @input="masc_money" placeholder="00,00"
+															<input type="text" @input="masc_money8" placeholder="00,00"
+															 v-model.trin="$v.agosto.$model"
+																:class=" {'is-invalid':$v.agosto.$error, 'is-valid':!$v.agosto.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
 																</div>
@@ -125,7 +141,9 @@ export default {
 														<div class="fv-row mb-5">
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">setembro</label>
-															<input type="text" v-model="setembro" @input="masc_money" placeholder="00,00"
+															<input type="text" @input="masc_money9" placeholder="00,00"
+															 v-model.trin="$v.setembro.$model"
+																:class=" {'is-invalid':$v.setembro.$error, 'is-valid':!$v.setembro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
 																</div>
@@ -136,7 +154,9 @@ export default {
 														<div class="fv-row mb-5">
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">outubro</label>
-															<input type="text" v-model="outubro" @input="masc_money" placeholder="00,00"
+															<input type="text" @input="masc_money10" placeholder="00,00"
+															 v-model.trin="$v.outubro.$model"
+																:class=" {'is-invalid':$v.outubro.$error, 'is-valid':!$v.outubro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
 																</div>
@@ -146,7 +166,9 @@ export default {
 														<div class="fv-row mb-5">
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">novembro</label>
-															<input type="text" v-model="novembro" @input="masc_money" placeholder="00,00"
+															<input type="text" @input="masc_money11" placeholder="00,00"
+															 v-model.trin="$v.novembro.$model"
+																:class=" {'is-invalid':$v.novembro.$error, 'is-valid':!$v.novembro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
 																</div>
@@ -156,7 +178,9 @@ export default {
 														<div class="fv-row mb-5">
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">dezembro</label>
-															<input type="text" v-model="dezembro" @input="masc_money" placeholder="00,00"
+															<input type="text" @input="masc_money12" placeholder="00,00"
+															 v-model.trin="$v.dezembro.$model"
+																:class=" {'is-invalid':$v.dezembro.$error, 'is-valid':!$v.dezembro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
 																</div>
@@ -205,7 +229,7 @@ export default {
 		return {
 			token: null,
 			instituicao_id: null,
-			ano: '2021',
+			ano: '2022',
 			ano_aray: [2020,2021, 2022, 2013],
 			janeiro: null,
 			fevereiro: null,
@@ -226,62 +250,166 @@ export default {
 	},
 
 
+	validations: {
+		janeiro: {
+			required,
+			minLength: minLength(2)
+		},
+		fevereiro: {
+			required,
+			minLength: minLength(2)
+		},
+		marco: {
+			required,
+			minLength: minLength(2)
+		},
+		abril: {
+			required,
+			minLength: minLength(2)
+		},
+	
+		maio: {
+			required,
+			minLength: minLength(2)
+		},
+		junho: {
+			required,
+			minLength: minLength(2)
+		},
+		julho: {
+			required,
+			minLength: minLength(2)
+		},
+		agosto: {
+			required,
+			minLength: minLength(2)
+		},
+		setembro: {
+			required,
+			minLength: minLength(2)
+		},
+		outubro: {
+			required,
+			minLength: minLength(4)
+		},
+
+		novembro: {
+			required,
+			minLength: minLength(4)
+		},
+		dezembro: {
+			required,
+			minLength: minLength(2)
+		},
+	},
 
 	methods: {
+	
+		masc_money1() {
+			let valor
+           valor = this.janeiro.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.janeiro = valor
 
-		masc_money() {
-		// 	let valor
-
-        //    valor = this.janeiro.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.janeiro = valor
-
-		// 	valor = this.fevereiro.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.fevereiro = valor
-
-		// 	valor = this.marco.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.marco = valor
-
-		// 	valor = this.abril.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.abril = valor
-
-		// 	valor = this.maio.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.maio = valor
-			
-		// 	valor = this.junho.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.junho = valor
-			
-		// 	valor = this.julho.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.julho = valor
-
-		// 	valor = this.agosto.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.agosto = valor
-		
-		// 	valor = this.setembro.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.setembro = valor
-
-		// 	valor = this.outubro.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.outubro = valor
-
-		// 	valor = this.novembro.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.novembro = valor
-
-		// 	valor = this.dezembro.replace(/\D/gi, '')
-        //     valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        //     this.dezembro = valor
 		
         },
 
+
+		masc_money2() {
+			let valor
+			valor = this.fevereiro.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.fevereiro = valor
+
+		
+        },
+
+		masc_money3() {
+			let valor
+
+			valor = this.marco.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.marco = valor
+
+
+			
+			
+
+			
+		
+        },
+
+		masc_money4() {
+			let valor
+		
+			valor = this.abril.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.abril = valor
+        },
+
+		masc_money5() {
+			let valor
+		
+			valor = this.maio.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.maio = valor
+        },
+
+		masc_money6() {
+			let valor
+			valor = this.junho.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.junho = valor
+			
+        },
+
+		masc_money7() {
+			let valor
+			valor = this.julho.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.julho = valor
+		
+        },
+
+		masc_money8() {
+			let valor
+			valor = this.agosto.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.agosto = valor
+		
+        },
+
+		masc_money9() {
+			let valor
+			valor = this.setembro.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.setembro = valor
+
+		
+        },
+		masc_money10() {
+			let valor
+			valor = this.outubro.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.outubro = valor
+
+		
+        },
+		masc_money11() {
+			let valor
+			valor = this.novembro.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.novembro = valor
+
+		
+        },
+		masc_money12() {
+			let valor
+			valor = this.dezembro.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.dezembro = valor
+		
+        },
 
 
 		async setar_ano() {
@@ -298,42 +426,67 @@ export default {
 			this.outubro = dados.outubro
 			this.novembro = dados.novembro
 			this.dezembro = dados.dezembro
-
-			this.masc_money()
+			this.masc()
 		},
+		async masc() {
 
-
-
+			this.masc_money1()
+			this.masc_money2()
+			this.masc_money3()
+			this.masc_money4()
+			this.masc_money5()
+			this.masc_money6()
+			this.masc_money7()
+			this.masc_money8()
+			this.masc_money9()
+			this.masc_money10()
+			this.masc_money11()
+			this.masc_money12()
+		},
+		
 		async adicionaMetas() {
 			this.error = null
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
+			
 
-			let res = await adm.addMetas(
-				this.token,
-				this.instituicao_id,
-				this.ano,
-				this.janeiro,
-				this.fevereiro,
-				this.marco,
-				this.abril,
-				this.maio,
-				this.junho,
-				this.julho,
-				this.agosto,
-				this.setembro,
-				this.outubro,
-				this.novembro,
-				this.dezembro
-			)
-			if (!res.next) {
-				this.msg = res.message,
-					setTimeout(() => this.msg = "", 5000);
-				this.error = res.message
-				return null
+				let res = await adm.addMetas(
+					this.token,
+					this.instituicao_id,
+					this.ano,
+					this.janeiro,
+					this.fevereiro,
+					this.marco,
+					this.abril,
+					this.maio,
+					this.junho,
+					this.julho,
+					this.agosto,
+					this.setembro,
+					this.outubro,
+					this.novembro,
+					this.dezembro
+				)
+				if (!res.next) {
+					this.msg = res.message,
+						setTimeout(() => this.msg = "", 5000);
+					this.error = res.message
+					return null
+				}
+
+				this.submitStatus = 'PENDING'
+				setTimeout(() => {
+					this.submitStatus = 'OK'
+					this.msg = res.message
+					
+				}, 500)
 			}
-			this.msg = res.message,
-				setTimeout(() => this.msg = "", 5000);
 
 		},
+
+		
 
 		async listar() {
 			let res = await adm.listarMetas(
@@ -363,6 +516,7 @@ export default {
 		this.outubro = dados.outubro
 		this.novembro = dados.novembro
 		this.dezembro = dados.dezembro
- this.masc_money()
+		this.masc()
 	},
 }
+
