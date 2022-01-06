@@ -96,7 +96,7 @@ class MetasControler{
         },$list_metas);
         echo json_encode([
             'next' => true,
-            'message' => 'Metas salvas',
+            'message' => 'Metas',
             'dados' => $payload
         ]);
     }
