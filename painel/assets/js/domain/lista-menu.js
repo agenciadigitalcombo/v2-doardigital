@@ -10,7 +10,7 @@ export default [
     { id: 'planos', nome: 'Planos', icon: 'planos.svg', link: '#/planos', feature_flag: true },
     { id: 'planos_digital', nome: 'Planos Digital', icon: 'planos.svg', link: '#/plano-digital', feature_flag: true },
     { id: 'divisao', nome: 'Divisão Pagamento', icon: 'coins.svg', link: '#/divisao-pagamento', feature_flag: true },
-    { id: 'metas', nome: 'Metas', icon: 'metas.svg', link: '#/metas/2021', feature_flag: true },
+    { id: 'metas', nome: 'Metas', icon: 'metas.svg', link: '#/metas', feature_flag: true },
     { id: 'modulos', nome: 'Modulos', icon: 'componente.svg', link: '#/modulos', feature_flag: true },
     { id: 'modelo_de_emails', nome: 'Modelo de E-mails', icon: 'email.svg', link: '#/modelo-de-emails', feature_flag: true },
     { id: 'configuracao', nome: 'Configuração', icon: 'gear.svg', link: '#/configuracao', feature_flag: true },

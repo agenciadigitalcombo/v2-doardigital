@@ -59,5 +59,8 @@ export default [
     { path: '/plano-digital/editar', component: { template: '<c-planos-digitalEdita>' } },
 
     { path: '/metas', component: { template: '<c-metas>' } },
+
+    { path: '/modelo-de-emails', component: { template: '<c-modelo-de-emails>' } },
+    
     
 ]
