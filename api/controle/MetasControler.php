@@ -37,22 +37,22 @@ class MetasControler{
         $novembro = withdraw_caracter($novembro_campo);
         $dezembro = withdraw_caracter($dezembro_campo);
 
-        // campo_obrigatorios([
-        //     'instituicao_id' => 'Informe a instituicao',
-        //     'janeiro' => 'Informe o mês de janeiro',
-        //     'fevereiro' => 'Informe o mês de fevereiro',
-        //     'marco' => 'Informe o mês de marco',
-        //     'abril' => 'Informe o mês de abril',
-        //     'maio' => 'Informe o mês de maio',
-        //     'junho' => 'Informe o mês de junho',
-        //     'julho' => 'Informe o mês de julho',
-        //     'agosto' => 'Informe o mês de agosto',
-        //     'setembro' => 'Informe o mês de setembro',
-        //     'outubro' => 'Informe o mês de outubro',
-        //     'novembro' => 'Informe o mês de novembro',
-        //     'dezembro' => 'Informe o mês de dezembro',
-        //     'ano' => 'Informe o ano'
-        // ]);
+        campo_obrigatorios([
+            'instituicao_id' => 'Informe a instituicao',
+            'janeiro' => 'Informe o mês de janeiro',
+            'fevereiro' => 'Informe o mês de fevereiro',
+            'marco' => 'Informe o mês de marco',
+            'abril' => 'Informe o mês de abril',
+            'maio' => 'Informe o mês de maio',
+            'junho' => 'Informe o mês de junho',
+            'julho' => 'Informe o mês de julho',
+            'agosto' => 'Informe o mês de agosto',
+            'setembro' => 'Informe o mês de setembro',
+            'outubro' => 'Informe o mês de outubro',
+            'novembro' => 'Informe o mês de novembro',
+            'dezembro' => 'Informe o mês de dezembro',
+            'ano' => 'Informe o ano'
+        ]);
         
         $metas->create_update($instituicao_id, $ano, $janeiro, $fevereiro, $marco, $abril, $maio, $junho, $julho, $agosto, $setembro, $outubro, $novembro, $dezembro);
         echo json_encode([
@@ -60,6 +60,9 @@ class MetasControler{
             'message' => 'Metas salvas'
         ]);
     }
+
+
+
 
     static function list_metas(){
         
@@ -77,29 +80,60 @@ class MetasControler{
 
         $list_metas = $metas->get_by_instituicao_id($instituicao_id, $ano);
 
-        $payload = array_map(function($list){
-            return[
-            'instituicao_id' => $list['instituicao_id'],
-            'janeiro' => $list['janeiro'],
-            'fevereiro' => $list['fevereiro'],
-            'marco' => $list['marco'],
-            'abril' => $list['abril'],
-            'maio' => $list['maio'],
-            'junho' => $list['junho'],
-            'julho' => $list['julho'],
-            'agosto' => $list['agosto'],
-            'setembro' => $list['setembro'],
-            'outubro' => $list['outubro'],
-            'novembro' => $list['novembro'],
-            'dezembro' => $list['dezembro'],
-            'ano' => $list['ano']
+
+        if($list_metas == []){
+            $payload_erro = 
+            [
+            'instituicao_id' => $_REQUEST['instituicao_id'],
+            'ano' => $_REQUEST['ano'],
+            'janeiro' => '0',
+            'fevereiro' => '0',
+            'marco' => '0',
+            'abril' => '0',
+            'maio' => '0',
+            'junho' => '0',
+            'julho' => '0',
+            'agosto' => '0',
+            'setembro' => '0',
+            'outubro' => '0',
+            'novembro' => '0',
+            'dezembro' => '0'
             ];
-        },$list_metas);
-        echo json_encode([
-            'next' => true,
-            'message' => 'Metas',
-            'dados' => $payload
-        ]);
+            echo json_encode([
+                'next' => true,
+                'message' => 'Metas',
+                'dados' => $payload_erro
+            ]);
+        }else{
+
+            $payload = array_map(function($list){
+                return[
+                'instituicao_id' => $list['instituicao_id'],
+                'janeiro' => $list['janeiro'],
+                'fevereiro' => $list['fevereiro'],
+                'marco' => $list['marco'],
+                'abril' => $list['abril'],
+                'maio' => $list['maio'],
+                'junho' => $list['junho'],
+                'julho' => $list['julho'],
+                'agosto' => $list['agosto'],
+                'setembro' => $list['setembro'],
+                'outubro' => $list['outubro'],
+                'novembro' => $list['novembro'],
+                'dezembro' => $list['dezembro'],
+                'ano' => $list['ano']
+                ];
+            },$list_metas);
+            echo json_encode([
+                'next' => true,
+                'message' => 'Metas',
+                'dados' => $payload
+            ]);
+        }
+
+
+        
+        
     }
 
 
