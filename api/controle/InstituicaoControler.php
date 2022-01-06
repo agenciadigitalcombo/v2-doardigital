@@ -48,14 +48,14 @@ class InstituicaoControler
             'telefone',
             'cnpj',
             //'nome_identificacao',
-            'codigo_banco',
-            'agencia',
-            'agencia_digito',
-            'conta',
-            'conta_digito',
-            'tipo_conta',
-            'nome_completo',
-            'documento_numero'
+            // 'codigo_banco',
+            // 'agencia',
+            // 'agencia_digito',
+            // 'conta',
+            // 'conta_digito',
+            // 'tipo_conta',
+            // 'nome_completo',
+            // 'documento_numero'
         ];
         $lb = [
             'nome_fantasia' => 'Informe um Nome Fantasia',
@@ -64,16 +64,16 @@ class InstituicaoControler
             'email' => 'Qual o Email',
             'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
-            'cnpj' => 'Informe o Cnpj',
+            'cnpj' => 'Informe o Cnpj'
             //'nome_identificacao' => 'Informe o Nome para Identificacao',
-            'codigo_banco' => 'Informe o Codigo do banco',
-            'agencia' => 'Informe o Agencia',
-            'agencia_digito' => 'Informe o Digito da Agencia',
-            'conta' => 'Informe a Conta',
-            'conta_digito' => 'Informe o Digito da Conta',
-            'tipo_conta' => 'Informe o Tipo da conta',
-            'nome_completo' => 'Informe o Nome completo',
-            'documento_numero' => 'Informe o Numero do Documento'
+            // 'codigo_banco' => 'Informe o Codigo do banco',
+            // 'agencia' => 'Informe o Agencia',
+            // 'agencia_digito' => 'Informe o Digito da Agencia',
+            // 'conta' => 'Informe a Conta',
+            // 'conta_digito' => 'Informe o Digito da Conta',
+            // 'tipo_conta' => 'Informe o Tipo da conta',
+            // 'nome_completo' => 'Informe o Nome completo',
+            // 'documento_numero' => 'Informe o Numero do Documento'
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
