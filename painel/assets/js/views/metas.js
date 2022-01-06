@@ -52,7 +52,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">janeiro</label>
 																<input type="text" @input="masc_money1" placeholder="00,00"
-																 v-model.trin="$v.janeiro.$model"
+																 v-model.trin="$v.janeiro.$model" required
 																:class=" {'is-invalid':$v.janeiro.$error, 'is-valid':!$v.janeiro.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																</div>
@@ -62,7 +62,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">fevereiro</label>
 																<input type="text" @input="masc_money2" placeholder="00,00"
-																 v-model.trin="$v.fevereiro.$model"
+																 v-model.trin="$v.fevereiro.$model" required
 																:class=" {'is-invalid':$v.fevereiro.$error, 'is-valid':!$v.fevereiro.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
@@ -72,7 +72,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">março</label>
 																<input type="text"  @input="masc_money3" placeholder="00,00"
-																 v-model.trin="$v.marco.$model"
+																 v-model.trin="$v.marco.$model" required
 																:class=" {'is-invalid':$v.marco.$error, 'is-valid':!$v.marco.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
@@ -85,7 +85,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">abril</label>
 																<input type="text" @input="masc_money4" placeholder="00,00"
-																 v-model.trin="$v.abril.$model"
+																 v-model.trin="$v.abril.$model" required
 																:class=" {'is-invalid':$v.abril.$error, 'is-valid':!$v.abril.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
@@ -96,7 +96,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">maio</label>
 																<input type="text" @input="masc_money5" placeholder="00,00"
-																 v-model.trin="$v.maio.$model"
+																 v-model.trin="$v.maio.$model" required
 																:class=" {'is-invalid':$v.maio.$error, 'is-valid':!$v.maio.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
@@ -107,7 +107,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">junho</label>
 																<input type="text" @input="masc_money6" placeholder="00,00"
-																 v-model.trin="$v.junho.$model"
+																 v-model.trin="$v.junho.$model" required
 																:class=" {'is-invalid':$v.junho.$error, 'is-valid':!$v.junho.$invalid }"
 																	class="form-control form-control-lg form-control-solid ">
 																	</div>
@@ -118,7 +118,7 @@ export default {
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">julho</label>
 															<input type="text" @input="masc_money7" placeholder="00,00"
-															 v-model.trin="$v.julho.$model"
+															 v-model.trin="$v.julho.$model" required
 																:class=" {'is-invalid':$v.julho.$error, 'is-valid':!$v.julho.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
@@ -130,7 +130,7 @@ export default {
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">agosto</label>
 															<input type="text" @input="masc_money8" placeholder="00,00"
-															 v-model.trin="$v.agosto.$model"
+															 v-model.trin="$v.agosto.$model" required
 																:class=" {'is-invalid':$v.agosto.$error, 'is-valid':!$v.agosto.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
@@ -142,7 +142,7 @@ export default {
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">setembro</label>
 															<input type="text" @input="masc_money9" placeholder="00,00"
-															 v-model.trin="$v.setembro.$model"
+															 v-model.trin="$v.setembro.$model" required
 																:class=" {'is-invalid':$v.setembro.$error, 'is-valid':!$v.setembro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
@@ -155,7 +155,7 @@ export default {
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">outubro</label>
 															<input type="text" @input="masc_money10" placeholder="00,00"
-															 v-model.trin="$v.outubro.$model"
+															 v-model.trin="$v.outubro.$model" required
 																:class=" {'is-invalid':$v.outubro.$error, 'is-valid':!$v.outubro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
@@ -167,7 +167,7 @@ export default {
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">novembro</label>
 															<input type="text" @input="masc_money11" placeholder="00,00"
-															 v-model.trin="$v.novembro.$model"
+															 v-model.trin="$v.novembro.$model" required
 																:class=" {'is-invalid':$v.novembro.$error, 'is-valid':!$v.novembro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
@@ -179,7 +179,7 @@ export default {
 															<label for="Valor"
 																class="form-label fs-6 fw-bolder mb-3 required">dezembro</label>
 															<input type="text" @input="masc_money12" placeholder="00,00"
-															 v-model.trin="$v.dezembro.$model"
+															 v-model.trin="$v.dezembro.$model" required
 																:class=" {'is-invalid':$v.dezembro.$error, 'is-valid':!$v.dezembro.$invalid }"
 																class="form-control form-control-lg form-control-solid ">
 															
@@ -230,7 +230,7 @@ export default {
 			token: null,
 			instituicao_id: null,
 			ano: '2022',
-			ano_aray: [2020,2021, 2022, 2013],
+			ano_aray: [2021, 2022],
 			janeiro: null,
 			fevereiro: null,
 			marco: null,
@@ -310,8 +310,6 @@ export default {
            valor = this.janeiro.replace(/\D/gi, '')
             valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             this.janeiro = valor
-
-		
         },
 
 
@@ -320,28 +318,17 @@ export default {
 			valor = this.fevereiro.replace(/\D/gi, '')
             valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             this.fevereiro = valor
-
-		
         },
 
 		masc_money3() {
 			let valor
-
 			valor = this.marco.replace(/\D/gi, '')
             valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             this.marco = valor
-
-
-			
-			
-
-			
-		
         },
 
 		masc_money4() {
 			let valor
-		
 			valor = this.abril.replace(/\D/gi, '')
             valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             this.abril = valor
@@ -349,7 +336,6 @@ export default {
 
 		masc_money5() {
 			let valor
-		
 			valor = this.maio.replace(/\D/gi, '')
             valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             this.maio = valor
@@ -429,7 +415,6 @@ export default {
 			this.masc()
 		},
 		async masc() {
-
 			this.masc_money1()
 			this.masc_money2()
 			this.masc_money3()
