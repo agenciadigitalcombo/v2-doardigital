@@ -162,9 +162,9 @@ class InstituicaoControler
     {
         $instituicao = new Instituicao();
 
+        token();
         $instituicao_id = $_REQUEST['instituicao_id'];
 
-        token();
 
         $dominio = $_REQUEST['dominio'];
         
@@ -238,6 +238,36 @@ class InstituicaoControler
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao',
+            'dados' => $payload
+        ]);
+    }
+
+
+    static function list_instituicao_by_id()
+    {
+        $instituicao = new Instituicao();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Indoforme o ID da Instituicao',
+        ]);        
+
+        $get_instituicao = $instituicao->get_by_id($instituicao_id);
+        
+
+
+        $payload = [
+            'id' => $get_instituicao['id'],
+            'adm_id' => $get_instituicao['adm_id'],
+            'nome_fantasia' => $get_instituicao['nome_fantasia'],
+            'subdomaim' => $get_instituicao['subdomaim'],
+            'status' => $get_instituicao['status']
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Instituicao Pelo Id',
             'dados' => $payload
         ]);
     }
