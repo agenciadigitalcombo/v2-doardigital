@@ -182,7 +182,6 @@ export default {
 
 		async addPlanos() {
 			this.error = null
-
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
@@ -205,7 +204,9 @@ export default {
 				setTimeout(() => {
 					this.submitStatus = 'OK'
 					window.location.href = `#/planos`
+					
 				}, 500)
+			console.log(this.amount)
 			}
 
 		},

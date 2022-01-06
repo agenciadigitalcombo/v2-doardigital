@@ -85,7 +85,6 @@ Vue.component('c-intituicaoMenu', intituicaoMenu )
 
 
 
-
 import modulos from './views/modulos/modulos.js'
 Vue.component('c-modulos', modulos )
 

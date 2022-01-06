@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+import adm from '../../../../static/js/api/adm.js'
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dor Digital</title>
-    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/index.css">
-</head>
-
-<body class="body-termo">
-
+export default {
+    template: `
+    
+    
+    <div class="body-termo">
     <div class="termos-header">
         <img src="./assets/logo/logo.svg">
     </div>
@@ -191,8 +184,50 @@
             solicitados.</p>
         <div class="space"></div>
     </div>
+    </div>
 
 
-</body>
+    `,
+    data: function () {
+        return {
+            nome: null,
+            email: null,
+            senha: null,
+            telefone: null,
+            error: null
+        }
+    },
+    methods: {
 
-</html>
+        async cadastrar() {
+            this.error = null
+
+            let res = await adm.cadastrar(
+                this.nome,
+                this.email,
+                this.senha,
+                this.telefone,
+                this.error
+            )
+            if (!res.next) {
+                console.log(res)
+                this.error = res.message
+                return null
+            }
+            localStorage.setItem('token', res.token)
+
+            // const prot = window.location.protocol
+            // const host = window.location.hostname
+
+            window.location.href = "/painel/index.html#/perfil-editar";
+        },
+        updateForm(event) {
+            this[event.name] = event.value
+        }
+    },
+    mounted() {
+        this.nome = localStorage.getItem('nome')
+
+    }
+
+}
