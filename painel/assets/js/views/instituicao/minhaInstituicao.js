@@ -34,13 +34,13 @@ export default {
 														fill="black" />
 												</svg>
 											</span> 
-											<input type="text" data-kt-permissions-table-filter="search"
+											<input type="text" v-model="search"
 												class="form-control form-control-solid w-250px ps-15"
 												placeholder=" o que você procura ?" />
 										</div> 
 									</div> 
 									<div class="card-toolbar"> 
-										<a type="button" class="btn btn-light-primary" href="#/add-instituicoes">
+										<a type="button" class="btn btn-primary" href="#/add-instituicoes">
 											 <span class="svg-icon svg-icon-3">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 													viewBox="0 0 24 24" fill="none">
@@ -63,16 +63,21 @@ export default {
 										<thead> 
 											<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
 												<th class="min-w-150px">Nome Fantazia</th>
-												<th class="min-w-300px">Sub Domain</th>
 												<th class="min-w-100px text-end"></th>
+												<th class="min-w-300px">Sub Domain</th>
 												<th class="min-w-100px text-end"></th>
 												<th class="min-w-100px text-end"></th>
 											</tr> 
 										</thead> 
 										<tbody class="fw-bold text-gray-600">
-											<tr v-for="item in dados" :key="item.id">
+											<tr v-for="item in filtraCredencial" :key="item.id">
 												<td>
 													{{item.nome_fantasia}}
+												</td>
+
+
+												<td>
+												
 												</td>
 
 												<td>
@@ -80,22 +85,12 @@ export default {
 													 {{ item.subdomaim }} {{ item.id }}
 													</a> 
 												</td>
-
 												<td>
-													<a href=""  rel="noopener noreferrer">
-														<svg xmlns="http://www.w3.org/2000/svg" width="26" height="36" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-															<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
-															<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
-														  </svg>
-													</a>
-												</td>
-
-												<td>
-														<label class="form-check form-switch form-check-custom form-check-solid">
-				
-																	<input class="form-check-input" type="checkbox"/>
-																
-																</label>
+												
+												<div class="form-check form-switch form-check-custom form-check-solid me-10">
+												<input class="form-check-input h-30px w-50px" v-model="item.status" true-value="1" false-value="0" @click="statusx(item.id)"
+												type="checkbox" id="flexSwitch30x50" />
+													</div>
 												</td> 
 												<td class="text-end">
 
@@ -146,6 +141,7 @@ export default {
 	data: function () {
 
 		return {
+			id:"",
 			token: null,
 			gravatar: '../painel/assets/image/gravatar.png',
 			nome_fantasia: null,
@@ -157,11 +153,24 @@ export default {
 			logo: null,
 			cnpj: null,
 			telefone: null,
-			jms: false,
-			dados: []
-			// .doardigital.com.br
+			search: "",
+			dados: [],
+
+			sortBy: 'id',
+			sortDirection: 'desc'
 		}
 
+	},
+
+	computed: {
+
+	
+
+      filtraCredencial(){
+		  return this.dados.filter((credencial) =>{
+			  return credencial.nome_fantasia.match(this.search);
+		  })
+	  }
 	},
 
 	async mounted() {
@@ -170,14 +179,32 @@ export default {
 		this.nome_fantasia = this.dados.nome_fantasia,
 			this.subdomaim = this.dados.subdomaim,
 
-			console.log(this.dados)
+			
+			this.filtraCredencial.sort();
+			this.filtraCredencial.reverse();
 
 	},
 
 	methods: {
+
 		async listar() {
 			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
 			return res
+		},
+		
+		async statusx(status) {
+			this.error = null
+			this.instituicao_id= status 
+			let res = await adm.onoffIntituicao(
+				this.instituicao_id,
+				this.token,
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			
 		},
 
 		async editar(id) {
