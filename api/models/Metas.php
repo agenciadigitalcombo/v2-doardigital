@@ -16,8 +16,11 @@ class Metas implements IMetas{
         $save_metas .= "WHERE instituicao_id=$instituicao_id AND ano='$ano'";
         
         $res_exist = $banco->query($exist_id);
-
-        if(empty($res_exist[0])) {
+         
+        var_dump(empty($res_exist[0]));
+        die;
+        
+        if(empty($res_exist)) {
             $banco->exec($set_metas);
         }else {
             $banco->exec($save_metas);

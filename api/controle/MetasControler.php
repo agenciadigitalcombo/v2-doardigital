@@ -36,22 +36,22 @@ class MetasControler{
         $novembro = withdraw_caracter($novembro_campo);
         $dezembro = withdraw_caracter($dezembro_campo);
 
-        campo_obrigatorios([
-            'instituicao_id' => 'Informe a instituicao',
-            'janeiro' => 'Informe o mês de janeiro',
-            'fevereiro' => 'Informe o mês de fevereiro',
-            'marco' => 'Informe o mês de marco',
-            'abril' => 'Informe o mês de abril',
-            'maio' => 'Informe o mês de maio',
-            'junho' => 'Informe o mês de junho',
-            'julho' => 'Informe o mês de julho',
-            'agosto' => 'Informe o mês de agosto',
-            'setembro' => 'Informe o mês de setembro',
-            'outubro' => 'Informe o mês de outubro',
-            'novembro' => 'Informe o mês de novembro',
-            'dezembro' => 'Informe o mês de dezembro',
-            'ano' => 'Informe o ano'
-        ]);
+        // campo_obrigatorios([
+        //     'instituicao_id' => 'Informe a instituicao',
+        //     'janeiro' => 'Informe o mês de janeiro',
+        //     'fevereiro' => 'Informe o mês de fevereiro',
+        //     'marco' => 'Informe o mês de marco',
+        //     'abril' => 'Informe o mês de abril',
+        //     'maio' => 'Informe o mês de maio',
+        //     'junho' => 'Informe o mês de junho',
+        //     'julho' => 'Informe o mês de julho',
+        //     'agosto' => 'Informe o mês de agosto',
+        //     'setembro' => 'Informe o mês de setembro',
+        //     'outubro' => 'Informe o mês de outubro',
+        //     'novembro' => 'Informe o mês de novembro',
+        //     'dezembro' => 'Informe o mês de dezembro',
+        //     'ano' => 'Informe o ano'
+        // ]);
         
         $metas->create_update($instituicao_id, $ano, $janeiro, $fevereiro, $marco, $abril, $maio, $junho, $julho, $agosto, $setembro, $outubro, $novembro, $dezembro);
         echo json_encode([
