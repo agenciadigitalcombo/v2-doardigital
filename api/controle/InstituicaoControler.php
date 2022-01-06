@@ -126,11 +126,10 @@ class InstituicaoControler
     static function update_domain_person()
     {
         $instituicao = new Instituicao();
-        $adm = new Adm();
 
         $instituicao_id = $_REQUEST['instituicao_id'];
 
-        $token_parce = token();
+        token();
 
         $dominio = $_REQUEST['dominio'];
         
