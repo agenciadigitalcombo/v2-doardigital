@@ -206,7 +206,6 @@ export default {
 					window.location.href = `#/planos`
 					
 				}, 500)
-			console.log(this.amount)
 			}
 
 		},
