@@ -95,7 +95,7 @@ export default {
 														<span >Complemento</span>
 													</label>
 													<div class="col-lg-8 fv-row">
-														<input id="complemento" v-model="complemento" type="text" disabled
+														<input id="complemento" v-model="complemento" type="text" 
 															class="form-control form-control-lg form-control-solid" />
 													</div>
 												</div>
@@ -163,7 +163,6 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			nome_identificacao: null,
 			cep: null,
@@ -202,7 +201,6 @@ export default {
 				this.bairro,
 				this.cidade,
 				this.estado,
-				this.token,
 
 			)
 			if (!res.next) {
@@ -245,7 +243,6 @@ export default {
 					.then(response => {
 
 		this.logadouro = response.data.logradouro,
-			// this.complemento = response.data.complemento,
 			this.bairro = response.data.bairro,
 			this.cidade = response.data.localidade,
 			this.estado = response.data.uf,
@@ -263,13 +260,10 @@ export default {
 
 	async mounted() {
 
-	let validacao = document.createElement('script'); validacao.setAttribute('src', "../../assets/assets/js/custom/documentation/forms/formvalidation/basic.js");
-	document.head.appendChild(validacao);
 
 	this.id = localStorage.getItem('instituicao_id')
 
 	// let enderecoDados = (await this.listarEndereco()).dados|| {}
-
 	// this.logadouro = enderecoDados.logadouro
 	// this.cep = enderecoDados.cep
 	// this.nome_identificacao = enderecoDados.nome_identificacao

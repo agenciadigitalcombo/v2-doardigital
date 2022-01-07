@@ -315,7 +315,6 @@ export default {
 	data: function () {
 		return {
 			token: null,
-			gravatar: '../painel/assets/image/gravatar.png',
 			id: null,
 			nome_fantasia: null,
 			razao_social: null,
