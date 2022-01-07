@@ -315,12 +315,7 @@ export default {
 		repetirsenha: {
 			sameAsPassword: sameAs('senha')
 		},
-		// email: {
-		// 	required,
-		// 	email,
-		// 	isUnique ()
-		// 	sameAsPassword: sameAs('senha')
-		// }
+	
 	},
 
 	methods: {

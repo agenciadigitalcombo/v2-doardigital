@@ -82,7 +82,7 @@ export default {
 
 												<td>
 													<a class="badge badge-light-primary fs-5 m-1">
-													 {{ item.subdomaim }} {{ item.id }}
+													 {{ item.id }} - {{ item.subdomaim }}
 													</a> 
 												</td>
 												<td>
@@ -146,6 +146,7 @@ export default {
 			return this.dados.filter((credencial) => {
 				return credencial.nome_fantasia.match(this.search) || credencial.id.match(this.search);
 			})
+			
 		}
 	},
 
@@ -155,10 +156,7 @@ export default {
 		this.nome_fantasia = this.dados.nome_fantasia,
 			this.subdomaim = this.dados.subdomaim,
 
-
-			this.filtraCredencial.sort();
-		this.filtraCredencial.reverse();
-
+			this.filtraCredencial.reverse();
 	},
 
 	methods: {

@@ -1,5 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
-const { required, minLength, between } = window.validators
+const { required, minLength } = window.validators
 
 export default {
 	template: `
@@ -54,20 +54,19 @@ export default {
 													Fantasia</label> 
 												<div class="col-lg-8 fv-row">
 													<input type="text" placeholder="Nome Fantasia"
-														class="form-control form-control-lg form-control-solid" required  v-model="nome_fantasia"
-															 />
+														class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.nome_fantasia.$model"
+																:class=" {'is-invalid':$v.nome_fantasia.$error, 'is-valid':!$v.nome_fantasia.$invalid }"/>
 												</div> 
 		
-												
 												</div>
 
-											<div class="row mb-6">  
+											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">Razão
 													Social</label> 
 												<div class="col-lg-8 fv-row">
 													<input type="text" placeholder="adicione a Razão Social"
-														class="form-control form-control-lg form-control-solid" required  v-model="razao_social"
-																/>
+														class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.razao_social.$model"
+														:class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }"/>
 												</div> 
 											</div> 
 											<div class="row mb-6"> 
@@ -76,8 +75,8 @@ export default {
 												</label> 
 												<div class="col-lg-8 fv-row">
 													<input type="tel"  v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
-														class="form-control form-control-lg form-control-solid" required  v-model="cnpj"
-															 />
+														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
+														:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
 												</div> 
 											</div> 
 											<div class="row mb-6"> 
@@ -87,8 +86,8 @@ export default {
 												</label> 
 												<div class="col-lg-8 fv-row">
 													<input type="tel" name="Telefone" v-mask="'(###) #####-####'" placeholder="(41) 99999-9999"
-														class="form-control form-control-lg form-control-solid" required  v-model="telefone"
-															 />
+														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.telefone.$model"
+														:class=" {'is-invalid':$v.telefone.$error, 'is-valid':!$v.telefone.$invalid }"/>
 												</div> 
 											</div>
 											<div class="row mb-6"> 
@@ -98,8 +97,8 @@ export default {
 												</label> 
 												<div class="col-lg-8 fv-row">
 													<input type="email" placeholder="doardigital@gmail.com"
-														class="form-control form-control-lg form-control-solid" required  v-model="email"
-																 />
+														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.email.$model"
+														:class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"/>
 												</div> 
 											</div>
 
@@ -111,7 +110,7 @@ export default {
 												<div class="col-lg-8 fv-row">
 													<input type="text" name="cor"
 														class="form-control form-control-lg form-control-solid" required  v-model="cor"
-															/>
+															 />
 												</div> 
 											</div>
 										</div> 
@@ -124,24 +123,22 @@ export default {
 													<h3 class="fw-bolder m-0">Subdomínio</h3>
 												</div> 
 											</div> 
-  
-
-
+ 
 											<div
 												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
 										 
 												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
 												 
 													<div class="input-group mb-3">
-														<input type="text" class="form-control form-control-lg " required  v-model="sub_domain"
-														 />
+														<input type="text" class="form-control form-control-lg " required v-model.trin="$v.sub_domain.$model"
+														:class=" {'is-invalid':$v.sub_domain.$error, 'is-valid':!$v.sub_domain.$invalid }"/>
 														<span class="input-group-text" id="basic-addon2">.doardigital.com.br</span>
 													</div> 
 												</div>
 											</div> 
 										</div> 
 								
-
+	
 
 										<c-mensagem :msg="msg" ></c-mensagem>
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -191,7 +188,32 @@ export default {
 	}, 
 
 
-
+	validations: {
+		nome_fantasia: {
+			required,
+			minLength: minLength(2)
+		},
+		razao_social: {
+			required,
+			minLength: minLength(2)
+		},
+		cnpj: {
+			required,
+			minLength: minLength(2)
+		},
+		telefone: {
+			required,
+			minLength: minLength(2)
+		},
+		email: {
+			required,
+			minLength: minLength(2)
+		},
+		sub_domain: {
+			required,
+			minLength: minLength(2)
+		},
+	},
 
 	methods: {
 

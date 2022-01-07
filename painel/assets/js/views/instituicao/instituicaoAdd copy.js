@@ -137,23 +137,26 @@ export default {
 												</div>
 											</div> 
 										</div> 
-								
-
-
+										
 										<c-mensagem :msg="msg" ></c-mensagem>
-										<div class="card-footer d-flex justify-content-end py-6 px-9">
+										<div class="d-flex">
 											<button class="btn btn-primary"" type=" submit"
 												:disabled="submitStatus === 'PENDING'">SALVAR!</button>
 										
 										</div>
-									 
+										<div>
 										<p class="typo__p" v-if="submitStatus === 'OK'"> 
 										</p>
 										<p class="typo__p" v-if="submitStatus === 'ERROR'">
 										Por favor, preencha o formulário corretamente.</p>
 										<p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
 										</p>
-								 
+									</div>
+
+									<div >
+										
+									ivalidoasddddddfaaefwtfg4q3gf4q3g4gt34tg
+									</div>
 									</form> 
 							
 							</div> 
@@ -185,7 +188,7 @@ export default {
 			msg: null,
 			submitStatus: null
 		}
-	}, 
+	},
 
 
 	validations: {
@@ -215,7 +218,7 @@ export default {
 			minLength: minLength(2)
 		},
 		cor: {
-			required, 
+			required,
 			minLength: minLength(2)
 		},
 		logo: {
@@ -232,23 +235,22 @@ export default {
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
-			
-			let res = await adm.cadastrarInstituicao(
-				this.nome_fantasia,
-				this.razao_social,
-				this.sub_domain,
-				this.email,
-				this.cor,
-				this.logo,
-				this.cnpj,
-				this.telefone,
-				this.token,
-			)
-			if (!res.next) {
-				console.log(res)
-				this.error = res.message
-				return null
-			}
+				let res = await adm.cadastrarInstituicao(
+					this.nome_fantasia,
+					this.razao_social,
+					this.sub_domain,
+					this.email,
+					this.cor,
+					this.logo,
+					this.cnpj,
+					this.telefone,
+					this.token,
+				)
+				if (!res.next) {
+					console.log(res)
+					this.error = res.message
+					return null
+				}
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
@@ -262,7 +264,7 @@ export default {
 
 	},
 	async mounted() {
-	
+
 
 	},
 
