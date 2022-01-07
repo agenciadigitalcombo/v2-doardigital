@@ -107,17 +107,6 @@ export default {
 														</span> 
 													</a>
 
-													<!--<a 
-														title="Para Apagar de duplo click"
-														class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-														style="margin: 2px;">
-														<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-															fill="currentColor" class="bi bi-trash2-fill"
-															viewBox="0 0 16 16">
-															<path
-																d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
-														</svg>
-													</a>-->
 												</td> 
 											</tr> 
 										</tbody> 
@@ -141,36 +130,23 @@ export default {
 	data: function () {
 
 		return {
-			id:"",
+			id: "",
 			token: null,
-			gravatar: '../painel/assets/image/gravatar.png',
 			nome_fantasia: null,
-			razao_social: null,
 			subdomaim: null,
-			email: null,
-			cor: null,
-
-			logo: null,
-			cnpj: null,
-			telefone: null,
 			search: "",
 			dados: [],
-
-			sortBy: 'id',
-			sortDirection: 'desc'
 		}
 
 	},
 
 	computed: {
 
-	
-
-      filtraCredencial(){
-		  return this.dados.filter((credencial) =>{
-			  return credencial.nome_fantasia.match(this.search);
-		  })
-	  }
+		filtraCredencial() {
+			return this.dados.filter((credencial) => {
+				return credencial.nome_fantasia.match(this.search) || credencial.id.match(this.search);
+			})
+		}
 	},
 
 	async mounted() {
@@ -179,9 +155,9 @@ export default {
 		this.nome_fantasia = this.dados.nome_fantasia,
 			this.subdomaim = this.dados.subdomaim,
 
-			
+
 			this.filtraCredencial.sort();
-			this.filtraCredencial.reverse();
+		this.filtraCredencial.reverse();
 
 	},
 
@@ -191,10 +167,10 @@ export default {
 			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
 			return res
 		},
-		
+
 		async statusx(status) {
 			this.error = null
-			this.instituicao_id= status 
+			this.instituicao_id = status
 			let res = await adm.onoffIntituicao(
 				this.instituicao_id,
 				this.token,
@@ -204,13 +180,13 @@ export default {
 				this.error = res.message
 				return null
 			}
-			
+
 		},
 
 		async editar(id) {
 			globalThis._intituicao = this.dados.find(user => user.id == id)
-            window.location.href = "#/editar-instituicoes"
-        },
+			window.location.href = "#/editar-instituicoes"
+		},
 	},
 
 

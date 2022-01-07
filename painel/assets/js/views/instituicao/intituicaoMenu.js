@@ -113,9 +113,8 @@ export default {
 		this.dados = (await this.listar()).dados
 		this.nome_fantasia = this.dados.nome_fantasia,
 			this.subdomaim = this.dados.subdomaim,
-			this.id = this.dados.id,
+			this.id = this.dados.id
 
-			console.log(this.dados)
 	},
 
 
