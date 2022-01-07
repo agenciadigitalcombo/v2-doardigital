@@ -69,15 +69,32 @@ export default {
 														:class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }"/>
 												</div> 
 											</div> 
+											
 											<div class="row mb-6"> 
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">CPF/CNPJ</span>
-												</label> 
-												<div class="col-lg-8 fv-row">
-													<input type="tel"  v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
+												<div class="col-lg-4 col-form-label fw-bold fs-6">
+												<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+													<div class="fw-bold text-gray-800">CPF</div>
+												</label>
+												<input checked  @click="jms = true"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+													
+													<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+														<div class="fw-bold text-gray-800">CNPJ</div>
+													</label>
+														<input  @click="jms = false"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+												</div>
+
+												<div class="col-lg-8 fv-row" v-if="jms">
+													<input type="tel"  v-mask="'###.###.###-##'" placeholder="000.000.000-00"
 														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
 														:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
 												</div> 
+
+												<div class="col-lg-8 fv-row" v-else>
+												<input type="tel" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
+													class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
+													:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
+											</div> 
+
 											</div> 
 											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label fw-bold fs-6">
@@ -167,7 +184,8 @@ export default {
 			cnpj: null,
 			telefone: null,
 			msg: null,
-			submitStatus: null
+			submitStatus: null,
+			jms: true,
 		}
 	}, 
 
@@ -240,7 +258,8 @@ export default {
 	},
 	async mounted() {
 	
-
+		this.instituicao_id = globalThis._planos.id
+		this.nome = globalThis._planos.nome
 	},
 
 

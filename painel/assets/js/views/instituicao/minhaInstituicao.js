@@ -182,7 +182,7 @@ export default {
 		},
 
 		async editar(id) {
-			globalThis._intituicao = this.dados.find(user => user.id == id)
+			globalThis._instituicao = this.dados.find(user => user.id == id)
 			window.location.href = "#/editar-instituicoes"
 		},
 	},
