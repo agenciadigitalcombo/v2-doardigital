@@ -3,8 +3,14 @@
 class Instituicao implements IInstituicao
 {
 
-    public function set_token_recebedor(int $recebedor_id, string $recebedor_token): void
-    {}
+    public function set_token_recebedor(int $id, int $recebedor_id, string $recebedor_token): void
+    {
+        $banco = new Banco();
+
+        $banco = new Banco();
+        $sql = "UPDATE instituicao SET recebedor_token='$recebedor_token', recebedor_id=$recebedor_id  WHERE id=$id";
+        $banco->exec($sql);
+    }
 
     public function get_by_id(int $id): array
     {
@@ -24,6 +30,7 @@ class Instituicao implements IInstituicao
     public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
     {   
         $status = 1;
+
         $banco = new Banco();
         $sql = "INSERT INTO instituicao";
         $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, cor, logo, status)";
@@ -85,4 +92,3 @@ class Instituicao implements IInstituicao
         return $guard[0] ?? [];
     }
 }
-?>    

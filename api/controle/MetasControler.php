@@ -109,6 +109,7 @@ class MetasControler{
             $payload = array_map(function($list){
                 return[
                 'instituicao_id' => $list['instituicao_id'],
+                'ano' => $list['ano'],
                 'janeiro' => $list['janeiro'],
                 'fevereiro' => $list['fevereiro'],
                 'marco' => $list['marco'],
@@ -120,8 +121,7 @@ class MetasControler{
                 'setembro' => $list['setembro'],
                 'outubro' => $list['outubro'],
                 'novembro' => $list['novembro'],
-                'dezembro' => $list['dezembro'],
-                'ano' => $list['ano']
+                'dezembro' => $list['dezembro'] 
                 ];
             },$list_metas);
             echo json_encode([

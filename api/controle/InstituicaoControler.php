@@ -92,13 +92,13 @@ class InstituicaoControler
         // $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
         // $instituicao_id = $get_instituicao['id'];
 
-        // $banco_cont->create($adm_id, $token, $nome_identificacao, $codigo_banco, $agencia, $agencia_digito, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero); 
+        
 
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
 
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
-        //$res_pagarme = $instituicaopagarme->create($instituicao_id, $banc_id, $agencia, $conta_digito, $agencia_digito, $conta, $tipo_conta, $documento_numero, $nome_completo, $nome_fantasia, $cnpj, $sub_domain, $email, $transform_tel); 
+        
         
         
 
