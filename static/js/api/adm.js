@@ -185,6 +185,18 @@ export default {
             token
         })
     },
+    
+
+    async onoffIntituicao(
+        instituicao_id,
+        token,
+    ) {
+        return await http.post('/on-off-instituicao', {
+            instituicao_id,
+            token,
+        })
+    },
+
 
     async enderecoInstituicao(
         id, nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {

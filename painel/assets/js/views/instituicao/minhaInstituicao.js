@@ -34,13 +34,13 @@ export default {
 														fill="black" />
 												</svg>
 											</span> 
-											<input type="text" data-kt-permissions-table-filter="search"
+											<input type="text" v-model="search"
 												class="form-control form-control-solid w-250px ps-15"
 												placeholder=" o que você procura ?" />
 										</div> 
 									</div> 
 									<div class="card-toolbar"> 
-										<a type="button" class="btn btn-light-primary" href="#/add-instituicoes">
+										<a type="button" class="btn btn-primary" href="#/add-instituicoes">
 											 <span class="svg-icon svg-icon-3">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 													viewBox="0 0 24 24" fill="none">
@@ -63,39 +63,34 @@ export default {
 										<thead> 
 											<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
 												<th class="min-w-150px">Nome Fantazia</th>
-												<th class="min-w-300px">Sub Domain</th>
 												<th class="min-w-100px text-end"></th>
+												<th class="min-w-300px">Sub Domain</th>
 												<th class="min-w-100px text-end"></th>
 												<th class="min-w-100px text-end"></th>
 											</tr> 
 										</thead> 
 										<tbody class="fw-bold text-gray-600">
-											<tr v-for="item in dados" :key="item.id">
+											<tr v-for="item in filtraCredencial" :key="item.id">
 												<td>
 													{{item.nome_fantasia}}
 												</td>
 
+
+												<td>
+												
+												</td>
+
 												<td>
 													<a class="badge badge-light-primary fs-5 m-1">
-													 {{ item.subdomaim }} {{ item.id }}
+													 {{ item.id }} - {{ item.subdomaim }}
 													</a> 
 												</td>
-
 												<td>
-													<a href=""  rel="noopener noreferrer">
-														<svg xmlns="http://www.w3.org/2000/svg" width="26" height="36" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-															<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
-															<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
-														  </svg>
-													</a>
-												</td>
-
-												<td>
-														<label class="form-check form-switch form-check-custom form-check-solid">
-				
-																	<input class="form-check-input" type="checkbox"/>
-																
-																</label>
+												
+												<div class="form-check form-switch form-check-custom form-check-solid me-10">
+												<input class="form-check-input h-30px w-50px" v-model="item.status" true-value="1" false-value="0" @click="statusx(item.id)"
+												type="checkbox" id="flexSwitch30x50" />
+													</div>
 												</td> 
 												<td class="text-end">
 
@@ -112,17 +107,6 @@ export default {
 														</span> 
 													</a>
 
-													<!--<a 
-														title="Para Apagar de duplo click"
-														class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-														style="margin: 2px;">
-														<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-															fill="currentColor" class="bi bi-trash2-fill"
-															viewBox="0 0 16 16">
-															<path
-																d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
-														</svg>
-													</a>-->
 												</td> 
 											</tr> 
 										</tbody> 
@@ -146,22 +130,24 @@ export default {
 	data: function () {
 
 		return {
+			id: "",
 			token: null,
-			gravatar: '../painel/assets/image/gravatar.png',
 			nome_fantasia: null,
-			razao_social: null,
 			subdomaim: null,
-			email: null,
-			cor: null,
-
-			logo: null,
-			cnpj: null,
-			telefone: null,
-			jms: false,
-			dados: []
-			// .doardigital.com.br
+			search: "",
+			dados: [],
 		}
 
+	},
+
+	computed: {
+
+		filtraCredencial() {
+			return this.dados.filter((credencial) => {
+				return credencial.nome_fantasia.match(this.search) || credencial.id.match(this.search);
+			})
+			
+		}
 	},
 
 	async mounted() {
@@ -170,20 +156,35 @@ export default {
 		this.nome_fantasia = this.dados.nome_fantasia,
 			this.subdomaim = this.dados.subdomaim,
 
-			console.log(this.dados)
-
+			this.filtraCredencial.reverse();
 	},
 
 	methods: {
+
 		async listar() {
 			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
 			return res
 		},
 
+		async statusx(status) {
+			this.error = null
+			this.instituicao_id = status
+			let res = await adm.onoffIntituicao(
+				this.instituicao_id,
+				this.token,
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+
+		},
+
 		async editar(id) {
 			globalThis._intituicao = this.dados.find(user => user.id == id)
-            window.location.href = "#/editar-instituicoes"
-        },
+			window.location.href = "#/editar-instituicoes"
+		},
 	},
 
 

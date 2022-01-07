@@ -89,10 +89,7 @@ export default {
 													
 													</div>
 													<div>
-												
-														
 													<p class="typo__p" v-if="submitStatus === 'OK'"> 
-													
 													</p>
 													<p class="typo__p" v-if="submitStatus === 'ERROR'">
 													Por favor, preencha o formulário corretamente.</p>
@@ -133,7 +130,7 @@ export default {
 		}
 	},
 
-	validations: {
+	validations: { 
 		amount: {
 			required,
 			minLength: minLength(2)
@@ -178,11 +175,11 @@ export default {
 					break;
 			}
 			this.amount = val
-		},
+		},  
 
 		async addPlanos() {
 			this.error = null
-			this.$v.$touch()
+			this.$v.$touch() 
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
