@@ -255,11 +255,10 @@ export default {
 	},
 	async mounted() {
 		this.id = globalThis._instituicao.id,
-		this.nome_fantasia = globalThis._instituicao.nome_fantasia
+		this.nome_fantasia = globalThis._instituicao.nome_fantasia,
 		this.email = globalThis._instituicao.email,
-		this.sub_domain = globalThis._instituicao.sub_domain
-
-		this.telefone = globalThis._instituicao.telefone
+		this.sub_domain = globalThis._instituicao.subdomaim,
+		this.telefone = globalThis._instituicao.telefone,
 		this.razao_social = globalThis._instituicao.razao_social,
 		this.cnpj = globalThis._instituicao.cnpj
 	},

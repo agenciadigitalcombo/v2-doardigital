@@ -70,6 +70,7 @@ export default {
 										<p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
 										</p>
 										</div>
+
 							</form> 
 						</div> 
 					</div> 
@@ -119,7 +120,7 @@ export default {
 	
 	},
 	async mounted() {
-		this.id = localStorage.getItem('instituicao_id')
+		this.instituicao_id = localStorage.getItem('instituicao_id')
 	},
 }
 
