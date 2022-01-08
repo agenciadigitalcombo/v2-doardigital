@@ -1,0 +1,53 @@
+{
+    "short_name": "",
+    "name": "",
+    "theme_color": "#",
+    "background_color": "#",
+    "display": "standalone",
+    "orientation": "portrait",
+    "Scope": "/",
+    "start_url": "/#/",
+    "prefer_related_applications": false,
+    "icons": [
+      {
+        "src": "",
+        "sizes": "72x72",
+        "type": "image/png"
+      },
+      {
+        "src": "",
+        "sizes": "96x96",
+        "type": "image/png"
+      },
+      {
+        "src": "g",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "g",
+        "sizes": "144x144",
+        "type": "image/png"
+      },
+      {
+        "src": "g",
+        "sizes": "152x152",
+        "type": "image/png"
+      },
+      {
+        "src": "g",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "g",
+        "sizes": "384x384",
+        "type": "image/png"
+      },
+      {
+        "src": "g",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
