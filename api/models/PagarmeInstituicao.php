@@ -25,18 +25,18 @@ class PagarmeInstituicao extends PagarMe
             //         "number" => $telefone_recebedor,
             //     ]]
             // ]
-            "register_information" => [
-                "type" => "individual",
-                "document_number" => "92545278157",
-                "name" => "Someone",
-                "site_url" =>"http://www.site.com",
-                "email" => "some@email.com",
-                "phone_numbers" => [[
-                    "ddd" => "11",
-                    "number" => "987654321",
-                    "type" => "mobile"
-                ]]
-            ]
+            // "register_information" => [
+            //     "type" => "individual",
+            //     "document_number" => "92545278157",
+            //     "name" => "Someone",
+            //     "site_url" =>"http://www.site.com",
+            //     "email" => "some@email.com",
+            //     "phone_numbers" => [[
+            //         "ddd" => "11",
+            //         "number" => "987654321",
+            //         "type" => "mobile"
+            //     ]]
+            // ]
         ];
 
         

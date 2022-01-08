@@ -46,7 +46,8 @@ class ContaBancControler{
         var_dump($res_pagarme_instituicao);
         die;
 
-        $instituicao->set_token_recebedor($instituicao_id, $id_instituicao_pagarme, $token_conta);
+
+        $instituicao->set_token_recebedor($instituicao_id, $id_instituicao_pagarme);
 
         echo json_encode([
             'next' => true,

@@ -3,12 +3,10 @@
 class Instituicao implements IInstituicao
 {
 
-    public function set_token_recebedor(int $id, int $recebedor_id, string $recebedor_token): void
+    public function set_token_recebedor(int $recebedor_id, string $recebedor_token): void
     {
         $banco = new Banco();
-
-        $banco = new Banco();
-        $sql = "UPDATE instituicao SET recebedor_token='$recebedor_token', recebedor_id=$recebedor_id  WHERE id=$id";
+        $sql = "UPDATE instituicao SET recebedor_token='$recebedor_token', recebedor_id=$recebedor_id WHERE id=$recebedor_id";
         $banco->exec($sql);
     }
 
@@ -18,6 +16,16 @@ class Instituicao implements IInstituicao
         $sql = "SELECT * FROM instituicao WHERE id='$id'";
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
+    }    
+    
+    public function exist_subdomain(string $subdomain): bool
+    {
+        
+        $banco = new Banco();
+        
+        $sql = "SELECT * FROM instituicao WHERE subdomain = '{$subdomain}' ";
+        $consulta = $banco->query($sql);
+        return !empty($consulta);
     }
 
     public function set_domain_person(int $id, string $dominio): void
