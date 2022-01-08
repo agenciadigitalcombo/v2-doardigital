@@ -69,15 +69,32 @@ export default {
 														:class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }"/>
 												</div> 
 											</div> 
+											
 											<div class="row mb-6"> 
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">CPF/CNPJ</span>
-												</label> 
-												<div class="col-lg-8 fv-row">
-													<input type="tel"  v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
+												<div class="col-lg-4 col-form-label fw-bold fs-6">
+												<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+													<div class="fw-bold text-gray-800">CPF</div>
+												</label>
+												<input checked  @click="jms = true"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+													
+													<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+														<div class="fw-bold text-gray-800">CNPJ</div>
+													</label>
+														<input  @click="jms = false"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+												</div>
+
+												<div class="col-lg-8 fv-row" v-if="jms">
+													<input type="tel"  v-mask="'###.###.###-##'" placeholder="000.000.000-00"
 														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
 														:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
 												</div> 
+
+												<div class="col-lg-8 fv-row" v-else>
+												<input type="tel" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
+													class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
+													:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
+											</div> 
+
 											</div> 
 											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label fw-bold fs-6">
@@ -102,22 +119,9 @@ export default {
 												</div> 
 											</div>
 
-											<div class="row mb-6"> 
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">Cor</span>
-
-												</label> 
-												<div class="col-lg-8 fv-row">
-													<input type="text" name="cor"
-														class="form-control form-control-lg form-control-solid" required  v-model="cor"
-															 />
-												</div> 
-											</div>
 										</div> 
 										<div class="card  mb-xl-5"> 
-											<div class="card-header border-0 cursor-pointer" role="button"
-												data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
-												aria-expanded="true" aria-controls="kt_account_profile_details">
+											<div class="card-header border-0 cursor-pointer">
 											 
 												<div class="card-title m-0">
 													<h3 class="fw-bolder m-0">Subdomínio</h3>
@@ -130,8 +134,8 @@ export default {
 												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
 												 
 													<div class="input-group mb-3">
-														<input type="text" class="form-control form-control-lg " required v-model.trin="$v.sub_domain.$model"
-														:class=" {'is-invalid':$v.sub_domain.$error, 'is-valid':!$v.sub_domain.$invalid }"/>
+														<input type="text" class="form-control form-control-lg " required  @keyup="validDomain()"
+														 v-model.trin="$v.sub_domain.$model" :class=" {'is-invalid':$v.sub_domain.$error, 'is-valid':!$v.sub_domain.$invalid }"/>
 														<span class="input-group-text" id="basic-addon2">.doardigital.com.br</span>
 													</div> 
 												</div>
@@ -146,14 +150,14 @@ export default {
 												:disabled="submitStatus === 'PENDING'">SALVAR!</button>
 										
 										</div>
-									 
+										<div class=" d-flex justify-content-end py-2 px-9">
 										<p class="typo__p" v-if="submitStatus === 'OK'"> 
 										</p>
 										<p class="typo__p" v-if="submitStatus === 'ERROR'">
 										Por favor, preencha o formulário corretamente.</p>
-										<p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
+										<p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
 										</p>
-								 
+										</div>
 									</form> 
 							
 							</div> 
@@ -170,20 +174,18 @@ export default {
 	</div>
     `,
 
-
 	data: function () {
 		return {
 			token: null,
 			nome_fantasia: null,
 			razao_social: null,
 			sub_domain: null,
-			email: null,
-			cor: null,
-			logo: null,
+			email: null, 
 			cnpj: null,
 			telefone: null,
 			msg: null,
-			submitStatus: null
+			submitStatus: null,
+			jms: true,
 		}
 	}, 
 
@@ -217,6 +219,10 @@ export default {
 
 	methods: {
 
+		validDomain(){
+
+		},
+
 		async addInstituicao() {
 			this.error = null
 			this.$v.$touch()
@@ -229,8 +235,6 @@ export default {
 				this.razao_social,
 				this.sub_domain,
 				this.email,
-				this.cor,
-				this.logo,
 				this.cnpj,
 				this.telefone,
 				this.token,
@@ -254,7 +258,8 @@ export default {
 	},
 	async mounted() {
 	
-
+		this.instituicao_id = globalThis._planos.id
+		this.nome = globalThis._planos.nome
 	},
 
 

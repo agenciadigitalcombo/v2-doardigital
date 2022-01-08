@@ -1,4 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
+const { required, minLength } = window.validators
 
 export default {
 	template: `
@@ -7,341 +8,230 @@ export default {
     <c-header></c-header>
     <c-aside></c-aside>
 	<!--begin::Root-->
-	<div class="d-flex flex-column flex-root">
-		<!--begin::Page-->
+	<div class="d-flex flex-column flex-root"> 
 		<div class="page d-flex flex-row flex-column-fluid">
-
-			<!--begin::Wrapper-->
-			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-
-				<!--begin::Content-->
-				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-					<!--begin::Post-->
-					<div class="post d-flex flex-column-fluid" id="kt_post">
-						<!--begin::Container-->
-						<div id="kt_content_container" class="container-xxl">
-							<!--begin::Navbar-->
+ 
+			<div class="wrapper d-flex flex-column flex-row-fluid" > 
+				<div class="content d-flex flex-column flex-column-fluid" >
+				 
+					<div class="post d-flex flex-column-fluid" > 
+						<div class="container-xxl"> 
 							<div class="card mb-5 mb-xl-10">
-								<div class="card-body pt-5 pb-0">
-
-									<!--begin::Navs-->
+								<div class="card-body pt-5 pb-0"> 
 									<ul
 										class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-										<!--begin::Nav item-->
+								
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 active"
 												href="#/add-instituicoes">Informação da Instituição</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
+										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 "
 												href="#/endereco-instituicoes">Endereço </a>
-										</li>
-										<!--end::Nav item-->
-
-
+										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5"
 												href="#/banco-instituicoes">Dados Bancario</a>
 										</li>
 
 										<li class="nav-item mt-2">
-										<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/dominio-instituicoes">Domínio</a>
-									</li>
-										<!--end::Nav item-->
-									</ul>
-									<!--begin::Navs-->
+												<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/dominio-instituicoes">Domínio</a>
+											</li> 
+									</ul> 
 								</div>
-							</div>
-							<!--end::Navbar-->
-							<!--begin::Basic info-->
-							<div class="card mb-5 mb-xl-10">
-								<!--begin::Card header-->
-								<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
-									data-bs-target="#kt_account_profile_details" aria-expanded="true"
-									aria-controls="kt_account_profile_details">
-									<!--begin::Card title-->
+							</div> 
+							<div class="card mb-5 mb-xl-10"> 
+								<div class="card-header border-0 cursor-pointer" > 
 									<div class="card-title m-0">
 										<h3 class="fw-bolder m-0">Informação da Instituição</h3>
-									</div>
-									<!--end::Card title-->
-								</div>
-								<!--begin::Card header-->
-								<!--begin::Content-->
-								<div id="kt_account_profile_details">
-									<!--begin::Form-->
-									<form  class="form">
-										<!--begin::Card body-->
-										<div class="card-body border-top p-9">
-											
-											<div class="row mb-6">
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input v-model="id" type="text" name="id"
-													class="form-control form-control-lg form-control-solid"
-													placeholder=" id" />
-											</div>
-											<!--end::Col-->
-										</div>
-
-
-											<div class="row mb-6">
-												<!--begin::Label-->
+									</div> 
+								</div> 
+							
+								<form class="form" @submit.prevent="editaInstituicao" novalidate="novalidate">
+										<div class="card-body border-top p-9"> 
+											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
-													Fantasia</label>
-												<!--end::Label-->
-												<!--begin::Col-->
+													Fantasia</label> 
 												<div class="col-lg-8 fv-row">
-													<input v-model="nome_fantasia" type="text" name="Fantasia"
-														class="form-control form-control-lg form-control-solid"
-														placeholder="Nome Fantasia" />
+													<input type="text" placeholder="Nome Fantasia"
+														class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.nome_fantasia.$model"
+																:class=" {'is-invalid':$v.nome_fantasia.$error, 'is-valid':!$v.nome_fantasia.$invalid }"/>
+												</div> 
+		
 												</div>
-												<!--end::Col-->
-											</div>
 
-											<div class="row mb-6">
-												<!--begin::Label-->
+											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">Razão
-													Social</label>
-												<!--end::Label-->
-												<!--begin::Col-->
+													Social</label> 
 												<div class="col-lg-8 fv-row">
-													<input v-model="razao_social" type="text" name="social"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">CPF/CNPJ</span>
-												</label>
-												<!--end::Label-->
-
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="cnpj" type="tel" name="cnpj"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
+													<input type="text" placeholder="adicione a Razão Social"
+														class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.razao_social.$model"
+														:class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }"/>
+												</div> 
+											</div> 
 											
+											<div class="row mb-6"> 
+												<div class="col-lg-4 col-form-label fw-bold fs-6">
+												<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+													<div class="fw-bold text-gray-800">CPF</div>
+												</label>
+												<input checked  @click="jms = true"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+													
+													<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
+														<div class="fw-bold text-gray-800">CNPJ</div>
+													</label>
+														<input  @click="jms = false"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+												</div>
 
-											<div class="row mb-6">
-												<!--begin::Label-->
+												<div class="col-lg-8 fv-row" v-if="jms">
+													<input type="tel"  v-mask="'###.###.###-##'" placeholder="000.000.000-00"
+														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
+														:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
+												</div> 
+
+												<div class="col-lg-8 fv-row" v-else>
+												<input type="tel" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
+													class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
+													:class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
+											</div> 
+
+											</div> 
+											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label fw-bold fs-6">
 													<span class="required">Telefone</span>
 
-												</label>
-												<!--end::Label-->
-												<!--begin::Col-->
+												</label> 
 												<div class="col-lg-8 fv-row">
-													<input v-model="telefone" type="tel" name="Telefone"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
+													<input type="tel" name="Telefone" v-mask="'(###) #####-####'" placeholder="(41) 99999-9999"
+														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.telefone.$model"
+														:class=" {'is-invalid':$v.telefone.$error, 'is-valid':!$v.telefone.$invalid }"/>
+												</div> 
 											</div>
-											<div class="row mb-6">
-												<!--begin::Label-->
+											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label fw-bold fs-6">
 													<span class="required">E-mail</span>
 
-												</label>
-												<!--end::Label-->
-
-
-												<!--begin::Col-->
+												</label> 
 												<div class="col-lg-8 fv-row">
-													<input v-model="email" type="email" name="email"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
+													<input type="email" placeholder="doardigital@gmail.com"
+														class="form-control form-control-lg form-control-solid" required v-model.trin="$v.email.$model"
+														:class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"/>
+												</div> 
 											</div>
 
-											<div class="row mb-6">
-												<!--begin::Label-->
-												<label class="col-lg-4 col-form-label fw-bold fs-6">
-													<span class="required">Cor</span>
-
-												</label>
-												<!--end::Label-->
-
-
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<input v-model="cor" type="text" name="cor"
-														class="form-control form-control-lg form-control-solid" />
-												</div>
-												<!--end::Col-->
-											</div>
-
-											<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Logo</span>
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input v-model="logo" type="text" name="logo"
-													class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
-										</div>
-										</div>
-										<!--end::Card body-->
-
-										<!--begin::Basic info-->
-										<div class="card  mb-xl-5">
-											<!--begin::Card header-->
-											<div class="card-header border-0 cursor-pointer" role="button"
-												data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
-												aria-expanded="true" aria-controls="kt_account_profile_details">
-												<!--begin::Card title-->
+										</div> 
+										<div class="card  mb-xl-5"> 
+											<div class="card-header border-0 cursor-pointer">
+											 
 												<div class="card-title m-0">
 													<h3 class="fw-bolder m-0">Subdomínio</h3>
-												</div>
-												<!--end::Card title-->
-											</div>
-											<!--begin::Card header-->
-											<!--begin::Content-->
-
-											<!--begin::Notice-->
+												</div> 
+											</div> 
+ 
 											<div
 												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-												<!--begin::Wrapper-->
+										 
 												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-													<!--begin::Content-->
+												 
 													<div class="input-group mb-3">
-														<input v-model="sub_domain" type="email" name="email"
-															class="form-control form-control-lg " />
-														<span class="input-group-text"
-															id="basic-addon2">.doardigital.com.br</span>
-													</div>
-													<!--end::Action-->
+														<input type="text" class="form-control form-control-lg " required disabled
+														 v-model.trin="$v.sub_domain.$model" :class=" {'is-invalid':$v.sub_domain.$error, 'is-valid':!$v.sub_domain.$invalid }"/>
+														<span class="input-group-text" id="basic-addon2">.doardigital.com.br</span>
+													</div> 
 												</div>
-												<!--end::Wrapper-->
-											</div>
-											<!--end::Notice-->
-										</div>
-										<!--end::Basic info-->
+											</div> 
+										</div> 
+								
+	
 
-
-										<div class="card-header border-0 cursor-pointer">
-											<div class="form-check form-switch form-check-custom form-check-solid"
-												style="width: 40%; border-radius: 25px;">
-
-												<label
-													class="form-check-label col-lg-9 col-form-label required fw-bold fs-6"
-													for="flexSwitchDefault">
-													Você tem um código promocional
-
-												</label>
-												<input @click="jms = !jms" class="form-check-input" type="checkbox"
-													value="" id="flexSwitchDefault" />
-
-											</div>
-										</div>
-										<!--begin::Basic info-->
-										<div class="card " v-if="jms">
-											<!--begin::Card header-->
-											<div class="card-header border-0 cursor-pointer">
-												<!--begin::Card title-->
-												<div class="card-title m-0">
-													<h3 class="fw-bolder m-0">Domínio personalizado</h3>
-												</div>
-												<!--end::Card title-->
-											</div>
-											<!--begin::Card header-->
-											<!--begin::Content-->
-
-											<!--begin::Notice-->
-											<div
-												class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-												<!--begin::Wrapper-->
-												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-													<!--begin::Content-->
-													<div class="input-group mb-3">
-														<span class="input-group-text" id="basic-addon2">Informe seu
-															Domínio
-														</span>
-														<input type="email" name="email"
-															class="form-control form-control-lg " />
-													</div>
-													<!--end::Action-->
-												</div>
-												<!--end::Wrapper-->
-											</div>
-											<!--end::Notice-->
-
-											<!--end::Content-->
-										</div>
-										<!--end::Basic info-->
-
-										<!--begin::Actions-->
+										<c-mensagem :msg="msg" ></c-mensagem>
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
-											<button @click="editaInstituicao()" type="submit" class="btn btn-primary"
-												id="kt_account_profile_details_submit">SALVAR</button>
+											<button class="btn btn-primary"" type=" submit"
+												:disabled="submitStatus === 'PENDING'">SALVAR!</button>
+										
 										</div>
-										<!--end::Actions-->
-									</form>
-									<!--end::Form-->
-								</div>
-								<!--end::Content-->
-							</div>
-							<!--end::Basic info-->
+										<div class=" d-flex justify-content-end py-2 px-9">
+										<p class="typo__p" v-if="submitStatus === 'OK'"> 
+										</p>
+										<p class="typo__p" v-if="submitStatus === 'ERROR'">
+										Por favor, preencha o formulário corretamente.</p>
+										<p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
+										</p>
+										</div>
+									</form> 
+							
+							</div> 
 
-						</div>
-						<!--end::Container-->
-					</div>
-					<!--end::Post-->
-				</div>
-				<!--end::Content-->
-
+						</div> 
+					</div> 
+				</div> 
 			</div>
 		</div>
 	</div>
 	<!--end::Root-->
 
-
 		<c-footer/>
 	</div>
     `,
 
-
 	data: function () {
 		return {
 			token: null,
-			gravatar: '../painel/assets/image/gravatar.png',
-			id: null,
 			nome_fantasia: null,
 			razao_social: null,
 			sub_domain: null,
-			email: null,
-			cor: null,
-			
-			logo: null,
+			email: null, 
 			cnpj: null,
 			telefone: null,
-			jms: false,
+			msg: null,
+			submitStatus: null,
+			jms: true,
 		}
+	}, 
+
+
+	validations: {
+		nome_fantasia: {
+			required,
+			minLength: minLength(2)
+		},
+		razao_social: {
+			required,
+			minLength: minLength(2)
+		},
+		cnpj: {
+			required,
+			minLength: minLength(2)
+		},
+		telefone: {
+			required,
+			minLength: minLength(2)
+		},
+		email: {
+			required,
+			minLength: minLength(2)
+		},
+		sub_domain: {
+			required,
+			minLength: minLength(2)
+		},
 	},
 
 	methods: {
+
+
 		async editaInstituicao() {
 			this.error = null
-
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
+			
 			let res = await adm.alterarInstituicao(
-				this.id,
 				this.nome_fantasia,
 				this.razao_social,
 				this.sub_domain,
 				this.email,
-				this.cor,
-				this.logo,
 				this.cnpj,
 				this.telefone,
 				this.token,
@@ -351,17 +241,27 @@ export default {
 				this.error = res.message
 				return null
 			}
-			console.log("cadastrado")
+				this.submitStatus = 'PENDING'
+				setTimeout(() => {
+					this.submitStatus = 'OK'
+					this.msg = res.message
+				}, 500)
+			}
+
 		},
 
 
+
 	},
-	
 	async mounted() {
-		this.id = globalThis.instituicao.id,
-		this.nome_fantasia = globalThis.instituicao.nome_fantasia
-		this.email = globalThis.instituicao.email,
-		this.sub_domain = globalThis.instituicao.sub_domain
+		this.id = globalThis._instituicao.id,
+		this.nome_fantasia = globalThis._instituicao.nome_fantasia
+		this.email = globalThis._instituicao.email,
+		this.sub_domain = globalThis._instituicao.sub_domain
+
+		this.telefone = globalThis._instituicao.telefone
+		this.razao_social = globalThis._instituicao.razao_social,
+		this.cnpj = globalThis._instituicao.cnpj
 	},
 
 
