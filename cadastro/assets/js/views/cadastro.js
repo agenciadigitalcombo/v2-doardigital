@@ -62,8 +62,13 @@ export default {
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!">
                        	
+                      <a href="/painel/index.html#/perfil-editar" > clicando clicando aqui </a>
+
+                      <button @click="jms()">press</button>
+
 						<div  class="alert alert-danger" v-if="error!=null">
 						
+
                         <span class="svg-icon svg-icon-2hx svg-icon-danger me-3"><i
                                 class="bi bi-droplet-half text-danger"></i></span>
         
@@ -95,6 +100,10 @@ export default {
     },
     methods: {
 
+        async jms() {
+            window.location.href = "/painel/index.html#/perfil-editar";
+        },
+        
         async cadastrar() {
             this.error = null
 
