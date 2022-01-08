@@ -23,7 +23,7 @@ interface IInstituicao
 
     public function search_by_name_or_id(string $termo): array;
 
-    public function set_token_recebedor(int $id, int $recebedor_id, string $recebedor_token): void;
+    public function set_token_recebedor(int $recebedor_id, string $recebedor_token): void;
 }
 
 

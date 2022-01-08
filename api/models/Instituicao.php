@@ -3,12 +3,10 @@
 class Instituicao implements IInstituicao
 {
 
-    public function set_token_recebedor(int $id, int $recebedor_id, string $recebedor_token): void
+    public function set_token_recebedor(int $recebedor_id, string $recebedor_token): void
     {
         $banco = new Banco();
-
-        $banco = new Banco();
-        $sql = "UPDATE instituicao SET recebedor_token='$recebedor_token', recebedor_id=$recebedor_id  WHERE id=$id";
+        $sql = "UPDATE instituicao SET recebedor_token='$recebedor_token', recebedor_id=$recebedor_id WHERE id=$recebedor_id";
         $banco->exec($sql);
     }
 
