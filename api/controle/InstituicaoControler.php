@@ -15,65 +15,35 @@ class InstituicaoControler
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['sub_domain'] ?? '';
-        
-        $campo_email = $_REQUEST['email'];
-        $email = valid_email($campo_email);
+
+        $email = $_REQUEST['email'];
 
         $cor = $_REQUEST['cor'] ?? '';
         $logo = $_REQUEST['logo'] ?? '';
-        
+
         $cnpj = $_REQUEST['cnpj'] ?? '';
         $transform_cnpj = withdraw_caracter($cnpj);
 
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
-        // $token = "";
-        // $nome_identificacao = "";
-        // $codigo_banco = $_REQUEST['codigo_banco'];
-        // $agencia = $_REQUEST['agencia'];
-        // $agencia_digito = $_REQUEST['agencia_digito'];
-        // $conta = $_REQUEST['conta'];
-        // $conta_digito = $_REQUEST['conta_digito'];
-        // $tipo_conta = $_REQUEST['tipo_conta'];
-        // $nome_completo = $_REQUEST['nome_completo'];
-        // $documento_numero = $_REQUEST['documento_numero'];
-
         $campos_obrigatorios = [
             'nome_fantasia',
             'razao_social',
             'sub_domain',
             'email',
-            'cor',
             'telefone',
             'cnpj',
-            //'nome_identificacao',
-            // 'codigo_banco',
-            // 'agencia',
-            // 'agencia_digito',
-            // 'conta',
-            // 'conta_digito',
-            // 'tipo_conta',
-            // 'nome_completo',
-            // 'documento_numero'
+
         ];
         $lb = [
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'sub_domain' => 'Informe o Sub Domain',
             'email' => 'Qual o Email',
-            'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
             'cnpj' => 'Informe o Cnpj'
-            //'nome_identificacao' => 'Informe o Nome para Identificacao',
-            // 'codigo_banco' => 'Informe o Codigo do banco',
-            // 'agencia' => 'Informe o Agencia',
-            // 'agencia_digito' => 'Informe o Digito da Agencia',
-            // 'conta' => 'Informe a Conta',
-            // 'conta_digito' => 'Informe o Digito da Conta',
-            // 'tipo_conta' => 'Informe o Tipo da conta',
-            // 'nome_completo' => 'Informe o Nome completo',
-            // 'documento_numero' => 'Informe o Numero do Documento'
+
         ];
         foreach ($campos_obrigatorios as $campo) {
             if (empty($_REQUEST[$campo])) {
@@ -92,42 +62,38 @@ class InstituicaoControler
         // $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
         // $instituicao_id = $get_instituicao['id'];
 
-        
+
 
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
 
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
-        
-        
-        
+        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "#FFF", "");
 
 
-        
+
+
+
+
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao criada'
         ]);
     }
 
-    
+
 
     static function update_instituicao()
     {
         $instituicao = new Instituicao();
         $adm = new Adm();
 
-        
+
         $token_parce = token();
 
         $nome_fantasia = $_REQUEST['nome_fantasia'];
         $razao_social = $_REQUEST['razao_social'];
 
-        $campo_email = $_REQUEST['email'];
-        $email = valid_email($campo_email);
-
-        $cor = $_REQUEST['cor'];
-        $logo = $_REQUEST['logo'];
+        $email = $_REQUEST['email'];
 
         $cnpj = $_REQUEST['cnpj'];
         $telefone = $_REQUEST['telefone'];
@@ -135,22 +101,20 @@ class InstituicaoControler
         $transform_cnpj = withdraw_caracter($cnpj);
         $transform_tel = withdraw_caracter($telefone);
 
-        
+
         campo_obrigatorios([
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'email' => 'Qual o Email',
-            'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
-            'logo' => 'Qual a logo',
             'cnpj' => 'Informe o Cnpj'
         ]);
-        
+
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
 
-        $instituicao->update($adm_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, $cor, $logo);
+        $instituicao->update($adm_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, "#FFF", "");
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao atualizada'
@@ -167,9 +131,9 @@ class InstituicaoControler
 
 
         $dominio = $_REQUEST['dominio'];
-        
 
-        
+
+
         campo_obrigatorios([
             'dominio' => 'Informe o Dominio',
             'id' => 'Indoforme o ID da Instituicao'
@@ -189,7 +153,7 @@ class InstituicaoControler
         $guard = $instituicao->list_all();
 
         foreach ($guard as $g) {
-            $payload [] = [
+            $payload[] = [
                 'id' => $g['id'],
                 'nome_fantasia' => $g['nome_fantasia'],
                 'razao_social' => $g['razao_social'],
@@ -216,15 +180,15 @@ class InstituicaoControler
         $adm = new Adm();
 
         $token_parce = token();
-        
+
         $get_secret_adm = $token_parce['secret'];
         $secret = $adm->list_profile($get_secret_adm);
-        $id = $secret['id']; 
+        $id = $secret['id'];
 
 
 
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
-        
+
 
 
         $payload = [
@@ -251,10 +215,10 @@ class InstituicaoControler
 
         campo_obrigatorios([
             'instituicao_id' => 'Indoforme o ID da Instituicao',
-        ]);        
+        ]);
 
         $get_instituicao = $instituicao->get_by_id($instituicao_id);
-        
+
 
 
         $payload = [
@@ -275,7 +239,7 @@ class InstituicaoControler
     static function detete_instituicao()
     {
         $instituicao = new Instituicao();
-        
+
         token();
 
         $id = $_REQUEST['id'];
@@ -294,13 +258,34 @@ class InstituicaoControler
         token();
 
         $instituicao_id = $_REQUEST['instituicao_id'];
-        
+
 
         $instituicao->on_off($instituicao_id);
         echo json_encode([
             'next' => true,
             'message' => 'Status Atualizado'
         ]);
+    }
 
+    static function subdominio_disponivel()
+    {
+        campo_obrigatorios([
+            "subdomain" => "informe um subdomínio"
+        ]);
+
+        $instituicao = new Instituicao();
+        $sub_domain = $_REQUEST['subdomain'];
+        if ($instituicao->exist_subdomain($sub_domain)) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Subdomínio já em uso"
+            ]);
+            return null;
+        }
+
+        echo json_encode([
+            "next" => true,
+            "message" => "Subdomínio disponível para uso"
+        ]);
     }
 }
