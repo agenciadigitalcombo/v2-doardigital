@@ -11,13 +11,15 @@ import checkout  from './views/checkout .js'
 Vue.component('c-checkout', checkout  )
 
 
+import checkout_perfil from './views/checkout_perfil.js'
+Vue.component('c-checkout_perfil', checkout_perfil  )
 
-// import minhaInstituicao from './views/minhaInstituicao.js'
-// Vue.component('c-minhaInstituicao', minhaInstituicao )
 
+import checkout_plano from './views/checkout_plano.js'
+Vue.component('c-checkout_plano', checkout_plano  )
 
-// import addInstituicao from './views/instituicaoAdd.js'
-// Vue.component('c-addInstituicao', addInstituicao )
+import checkout_endereco from './views/checkout_endereco.js'
+Vue.component('c-checkout_endereco', checkout_endereco  )
 
 const app = new Vue({
     store,

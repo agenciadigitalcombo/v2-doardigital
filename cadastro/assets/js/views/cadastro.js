@@ -124,7 +124,7 @@ export default {
             // const prot = window.location.protocol
             // const host = window.location.hostname  clicando aqui .
 
-            window.location.href = "/painel/index.html#/perfil-editar";
+            window.location.href = "/finalizar-cadastro/index.html#/";
         },
         updateForm(event) {
             this[event.name] = event.value
