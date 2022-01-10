@@ -59,6 +59,37 @@ class AdmControle
         ]);
     }
 
+
+
+    static function completar_profile(){
+
+        $adm = new Adm();
+
+        $token_parce = token();
+        
+        $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
+        $cpf_cnpj = withdraw_caracter($cpf_cnpj_campo);
+
+        $data_nascimento_campo = $_REQUEST['data_nascimento'];
+        $data_nascimento = data_format($data_nascimento_campo);
+
+        
+        campo_obrigatorios([
+            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
+            'data_nascimento' => 'Informe a Data de nascimento'
+        ]);
+        
+        
+        $secret = $token_parce['secret'];
+        
+        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj);
+        echo json_encode([
+            "next" => true,
+            "message" => "Usuário criado com sucesso"
+        ]);
+    }
+    
+
     static function login()
     {
         $adm = new Adm();

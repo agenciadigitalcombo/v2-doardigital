@@ -21,6 +21,13 @@ class Adm implements IAdm
         return $senha;
     }
 
+    public function complet_profile(string $secret, string $data_nascimento, string $cpf_cnpj): void
+    {
+        $banco = new Banco();
+        $sql = "UPDATE adm SET cpf='$cpf_cnpj', data_nascimento='$data_nascimento' WHERE secret='$secret'";
+        $banco->exec($sql);
+    }
+
     public function get_by_id(int $id): array
     {
         $banco = new Banco();
