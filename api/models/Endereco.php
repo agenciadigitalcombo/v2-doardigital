@@ -36,10 +36,6 @@ class Endereco implements IEndereco
             $banco->exec($sql);
 
         }
-
-
-
-
     }
 
     public function update(int $id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
