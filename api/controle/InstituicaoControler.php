@@ -249,12 +249,19 @@ class InstituicaoControler
 
     static function subdominio_disponivel()
     {
-        campo_obrigatorios([
-            "subdomain" => "informe um subdomínio"
-        ]);
 
         $instituicao = new Instituicao();
-        $sub_domain = $_REQUEST['subdomain'];
+        
+        $sub_domain = $_REQUEST['subdomaim'];
+
+        campo_obrigatorios([
+            "subdomaim" => "informe um subdomínio"
+        ]);
+
+
+        var_dump($instituicao->exist_subdomain($sub_domain));
+        die;
+
         if ($instituicao->exist_subdomain($sub_domain)) {
             echo json_encode([
                 "next" => false,
