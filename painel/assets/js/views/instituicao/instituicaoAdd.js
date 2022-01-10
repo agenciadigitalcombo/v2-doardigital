@@ -219,8 +219,14 @@ export default {
 
 	methods: {
 
-		validDomain(){
-			alert("perdeu o foco")
+		async validDomain(){ 
+			let res = await adm.validarDomain(this.sub_domain)
+			return res	
+		},
+
+
+		async listar() {
+		
 		},
 
 		async addInstituicao() {
@@ -260,7 +266,14 @@ export default {
 	
 		this.instituicao_id = globalThis._planos.id
 		this.nome = globalThis._planos.nome
+
+		// this.dados = (await this.validDomain()).dados
+		// this.nome_fantasia = this.dados.nome_fantasia,
 	},
+
+
+	
+
 
 
 }

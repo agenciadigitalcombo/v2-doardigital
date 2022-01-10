@@ -93,7 +93,7 @@ export default {
                                                                 </svg>
                                                             </span>
                                                         </a>
-    
+
                                                         <button @click="eliminar(item)"
                                                             title="Para Apagar de duplo click"
                                                             class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
@@ -183,20 +183,7 @@ export default {
 
     async mounted() {
         this.dados = (await this.listar()).dados
-        this.instituicao_id = localStorage.getItem("instituicao_id");
-
-       
-
-        // const total = this.dados.map( (percent) => {
-        //     return percent.porcentagem;
-        // })
-
-        // var somar = total.map(Number)
-        // console.log(somar.reduce((previousValue, currentValue) => previousValue + currentValue));
-        // // console.log(somar)
-        // this.totalPercentagem = somar.reduce((previousValue, currentValue) => previousValue + currentValue)
-
+        this.instituicao_id = localStorage.getItem("instituicao_id");  
     },
-
 
 }

@@ -52,6 +52,7 @@ export default {
 											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
 													Fantasia</label> 
+													
 												<div class="col-lg-8 fv-row">
 													<input type="text" placeholder="Nome Fantasia"
 														class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.nome_fantasia.$model"
@@ -141,8 +142,6 @@ export default {
 												</div>
 											</div> 
 										</div> 
-								
-	
 
 										<c-mensagem :msg="msg" ></c-mensagem>
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -176,7 +175,7 @@ export default {
 
 	data: function () {
 		return {
-			token: null,
+			instituicao_id: null, 
 			nome_fantasia: null,
 			razao_social: null,
 			sub_domain: null,
@@ -188,6 +187,7 @@ export default {
 			jms: true,
 		}
 	}, 
+ 
 
 
 	validations: {
@@ -217,9 +217,7 @@ export default {
 		},
 	},
 
-	methods: {
-
-
+	methods: { 
 		async editaInstituicao() {
 			this.error = null
 			this.$v.$touch()
@@ -227,14 +225,14 @@ export default {
 				this.submitStatus = 'ERROR'
 			} else {
 			
-			let res = await adm.alterarInstituicao(
+			let res = await adm.alterarInstituicao(  
+				this.token,
+				this.instituicao_id,
 				this.nome_fantasia,
-				this.razao_social,
-				this.sub_domain,
+				this.razao_social, 
 				this.email,
 				this.cnpj,
-				this.telefone,
-				this.token,
+				this.telefone, 
 			)
 			if (!res.next) {
 				console.log(res)
@@ -254,7 +252,7 @@ export default {
 
 	},
 	async mounted() {
-		this.id = globalThis._instituicao.id,
+		this.instituicao_id = globalThis._instituicao.id,
 		this.nome_fantasia = globalThis._instituicao.nome_fantasia,
 		this.email = globalThis._instituicao.email,
 		this.sub_domain = globalThis._instituicao.subdomaim,

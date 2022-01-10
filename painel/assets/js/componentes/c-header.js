@@ -119,6 +119,8 @@ export default {
 	methods: {
 	  remover(){
         window.localStorage.removeItem('instituicao_id');
+        window.localStorage.removeItem('instituicao_nome');
+        window.location.href = `#/dash`
       }
 	},
 }

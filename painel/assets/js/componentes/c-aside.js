@@ -47,6 +47,17 @@ export default {
                         <span class="menu-title">{{m.nome}}</span>
                     </a>
                 </div>
+                <div class="menu-item" >
+                    <a class="menu-link"  type="button" @click="logout"  >
+                        <span class="menu-icon">
+                           <span class="svg-icon svg-icon-2">
+                           <img class="filter-green" class="menu" src="../painel/assets/icon/logout.svg">
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"> Sair </span>
+                    </a>
+                </div>
              </div>
             </div>
         </div>
@@ -70,13 +81,16 @@ export default {
 			return res
         },
 	
+        async logout() {
+            localStorage.removeItem('token')
+            localStorage.removeItem('instituicao_nome')
+            localStorage.removeItem('instituicao_id')
+            
+            window.location.href = "#/";
+        },
+        
 	},
-
-    created() {
-  
-
-
-    },
+ 
     async mounted() {
         this.menus = menus
      
