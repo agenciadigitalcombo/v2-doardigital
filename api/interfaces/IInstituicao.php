@@ -5,7 +5,7 @@ interface IInstituicao
 
     public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $cor, string $logo): void;
 
-    public function update(int $adm_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void;
+    public function update(int $instituicao_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void;
 
     public function del(int $id): void;
 

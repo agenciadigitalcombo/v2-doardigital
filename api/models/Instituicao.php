@@ -51,7 +51,7 @@ class Instituicao implements IInstituicao
         $banco = new Banco();
         $sql = "UPDATE instituicao SET";
         $sql .= "nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
-        $sql .= "WHERE adm_id='$instituicao_id'";
+        $sql .= "WHERE id='$instituicao_id'";
         $banco->exec($sql);
     }
 
