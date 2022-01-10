@@ -127,6 +127,7 @@ export default {
         })
     },
 
+
     async cadastrarInstituicao(
         nome_fantasia,
         razao_social,
@@ -147,6 +148,11 @@ export default {
             token,
         })
     },
+    async validarDomain(subdomain) {
+        return await http.get('/subdominio-disponivel', {
+            subdomain
+        })
+    },
 
 
     async domainPerson(
@@ -156,36 +162,30 @@ export default {
 
     ) {
         return await http.post('/update-domain-person', {
-             token,
-             instituicao_id,
-             dominio
+            token,
+            instituicao_id,
+            dominio
         })
     },
 
     async alterarInstituicao(
-        id,
+        token,
+        instituicao_id,
         nome_fantasia,
         razao_social,
-        sub_domain,
         email,
-        cor,
-        logo,
         cnpj,
         telefone,
-        token,
 
     ) {
         return await http.post('/update-instituicao', {
-            id,
+            token,
+            instituicao_id,
             nome_fantasia,
             razao_social,
-            sub_domain,
             email,
-            cor,
-            logo,
             cnpj,
             telefone,
-            token,
         })
     },
 
@@ -195,7 +195,7 @@ export default {
             token
         })
     },
-    
+
 
     async onoffIntituicao(
         instituicao_id,
@@ -498,7 +498,7 @@ export default {
         })
     },
 
-  
+
 
     async listarMetas(
         token,

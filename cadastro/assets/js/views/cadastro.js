@@ -60,11 +60,7 @@ export default {
                             isso pode demorar 48hs, todos os termos você encontrar
                             <a href="#/termos" target="_blank"> clicando aqui </a>.
                         </p>
-                        <input type="submit" value="ME CADASTRAR AGORA!">
-                       	
-                      <a href="/painel/index.html#/perfil-editar" > clicando clicando aqui </a>
-
-                      <button @click="jms()">press</button>
+                        <input type="submit" value="ME CADASTRAR AGORA!"> 
 
 						<div  class="alert alert-danger" v-if="error!=null">
 						
@@ -99,10 +95,7 @@ export default {
         }
     },
     methods: {
-
-        async jms() {
-            window.location.href = "/painel/index.html#/perfil-editar";
-        },
+ 
         
         async cadastrar() {
             this.error = null
@@ -120,9 +113,6 @@ export default {
                 return null
             }
             localStorage.setItem('token', res.token)
-
-            // const prot = window.location.protocol
-            // const host = window.location.hostname  clicando aqui .
 
             window.location.href = "/finalizar-cadastro/index.html#/";
         },

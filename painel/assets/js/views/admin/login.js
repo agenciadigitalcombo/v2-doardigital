@@ -108,7 +108,7 @@ export default {
         async logar() {
 			this.error = null
 			
-			localStorage.removeItem('token')
+			// localStorage.removeItem('token')
             let res = await adm.login(
                 this.user,
                 this.senha

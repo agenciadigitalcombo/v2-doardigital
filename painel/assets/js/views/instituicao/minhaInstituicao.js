@@ -73,6 +73,7 @@ export default {
 											<tr v-for="item in filtraCredencial" :key="item.id">
 												<td>
 													{{item.nome_fantasia}}
+													{{item.cnpj}}
 												</td>
 
 
