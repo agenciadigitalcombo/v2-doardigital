@@ -31,7 +31,7 @@ class InstituicaoControler
         campo_obrigatorios([
         'nome_fantasia' => 'Informe um Nome Fantasia',
         'razao_social' => 'Qual a RazaoSocial',
-        'sub_domain' => 'Informe o Sub Domain',
+        'subdomaim' => 'Informe o Sub Domain',
         'email' => 'Qual o Email',
         'telefone' => 'Digite o numero de Telefone',
         'cnpj' => 'Informe o Cnpj']);
