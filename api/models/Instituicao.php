@@ -46,12 +46,12 @@ class Instituicao implements IInstituicao
         $banco->exec($sql);
     }
 
-    public function update(int $adm_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
+    public function update(int $instituicao_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
     {
         $banco = new Banco();
         $sql = "UPDATE instituicao SET";
         $sql .= "nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
-        $sql .= "WHERE adm_id='$adm_id'";
+        $sql .= "WHERE adm_id='$instituicao_id'";
         $banco->exec($sql);
     }
 

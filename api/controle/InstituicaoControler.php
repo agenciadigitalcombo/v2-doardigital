@@ -68,7 +68,9 @@ class InstituicaoControler
         $adm = new Adm();
 
 
-        $token_parce = token();
+        token();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
 
         $nome_fantasia = $_REQUEST['nome_fantasia'];
         $razao_social = $_REQUEST['razao_social'];
@@ -80,9 +82,10 @@ class InstituicaoControler
 
         $transform_cnpj = withdraw_caracter($cnpj);
         $transform_tel = withdraw_caracter($telefone);
-
+        
 
         campo_obrigatorios([
+            'instituicao_id' => 'Informe o ID',
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'email' => 'Qual o Email',
@@ -90,11 +93,7 @@ class InstituicaoControler
             'cnpj' => 'Informe o Cnpj'
         ]);
 
-        $secret = $token_parce['secret'];
-        $guard_adm = $adm->list_profile($secret);
-        $adm_id = $guard_adm['id'];
-
-        $instituicao->update($adm_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, "#FFF", "");
+        $instituicao->update($instituicao_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, "#FFF", "");
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao atualizada'
