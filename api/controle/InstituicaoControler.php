@@ -36,11 +36,7 @@ class InstituicaoControler
         'telefone' => 'Digite o numero de Telefone',
         'cnpj' => 'Informe o Cnpj']);
 
-        
-
-
-
-
+    
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
