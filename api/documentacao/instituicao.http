@@ -14,11 +14,11 @@ GET http://localhost/v2-doardigital/api/instituicao-id?instituicao_id=5
 POST http://localhost/v2-doardigital/api/update-instituicao
 Content-Type: application/x-www-form-urlencoded
 
-nome_fantasia= empresa,
+token=eyJzZWNyZXQiOiIgNjFkYjU1M2I4ODNjMiIsIm5vbWUiOiJqb2FxdWltIE1pZ3VlbCIsImVtYWlsIjoiam9hcXVpbUBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.edb1a7efadc35fa936991c29e23cb34ea8d9ed8e,
+&instituicao_id=8,
+&nome_fantasia= empresa,
 &razao_social=exemplo,
 &email=ezemplo@gmail.com,
-&cor=verde,
-&logo=defout,
 &cnpj=123.456.789.31/2.12,
 &telefone=2123-3344
 
