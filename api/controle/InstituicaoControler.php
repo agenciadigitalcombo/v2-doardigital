@@ -28,7 +28,8 @@ class InstituicaoControler
         $transform_tel = withdraw_caracter($telefone);
 
         
-        campo_obrigatorios(['nome_fantasia' => 'Informe um Nome Fantasia',
+        campo_obrigatorios([
+        'nome_fantasia' => 'Informe um Nome Fantasia',
         'razao_social' => 'Qual a RazaoSocial',
         'sub_domain' => 'Informe o Sub Domain',
         'email' => 'Qual o Email',

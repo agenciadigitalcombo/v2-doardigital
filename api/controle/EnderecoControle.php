@@ -232,6 +232,37 @@ class EnderecoControle
         ]);
     }
 
+    static function endereco_instituicao()
+    {
+        $endereco = new Endereco();
+
+        token();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+        $guard = $endereco->list_all_by_fk($instituicao_id);
+        
+        campo_obrigatorios([
+            'instituicao_id' => 'Informe a Instituicao'
+        ]);
+
+        $payload = [
+            'cep' => $guard['cep'],
+            'logadouro' => $guard['logadouro'],
+            'numero' => $guard['numero'],
+            'complemento' => $guard['complemento'],
+            'bairro' => $guard['bairro'],
+            'cidade' => $guard['cidade'],
+            'estado' => $guard['estado']
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Enderecos',
+            'dados' => $payload
+        ]);
+    }
+
+
     static function detete_endereco()
     {
         $adm = new Adm();
