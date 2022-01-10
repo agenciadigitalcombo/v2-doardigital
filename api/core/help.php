@@ -121,11 +121,11 @@ function valid_int($valor): int {
     return 0;
 }
 
-function withdraw_caracter($valor): int
+function withdraw_caracter($valor): string
 {
     $transform_valor = preg_replace('/\D/', '', $valor);
     
-    return intval($transform_valor);
+    return $transform_valor;
 }
 
 function withdraw_caracter_teste(array $valor): int
