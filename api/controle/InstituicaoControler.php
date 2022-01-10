@@ -14,7 +14,7 @@ class InstituicaoControler
 
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
-        $sub_domain = $_REQUEST['subdomain'] ?? '';
+        $sub_domain = $_REQUEST['subdomaim'] ?? '';
 
         $email = $_REQUEST['email'];
 
