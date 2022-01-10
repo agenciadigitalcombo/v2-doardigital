@@ -18,56 +18,27 @@ class InstituicaoControler
 
         $email = $_REQUEST['email'];
 
-<<<<<<< HEAD
-        // $cor = $_REQUEST['cor'] ?? '';
-        // $logo = $_REQUEST['logo'] ?? '';
-        
-=======
         $cor = $_REQUEST['cor'] ?? '';
         $logo = $_REQUEST['logo'] ?? '';
 
->>>>>>> 358c141093f6b54c7189dddee0249c28e2eca48f
         $cnpj = $_REQUEST['cnpj'] ?? '';
         $transform_cnpj = withdraw_caracter($cnpj);
 
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
-        $campos_obrigatorios = [
-            'nome_fantasia',
-            'razao_social',
-            'sub_domain',
-            'email',
-<<<<<<< HEAD
-            // 'cor',
-=======
->>>>>>> 358c141093f6b54c7189dddee0249c28e2eca48f
-            'telefone',
-            'cnpj',
+        
+        campo_obrigatorios(['nome_fantasia' => 'Informe um Nome Fantasia',
+        'razao_social' => 'Qual a RazaoSocial',
+        'sub_domain' => 'Informe o Sub Domain',
+        'email' => 'Qual o Email',
+        'telefone' => 'Digite o numero de Telefone',
+        'cnpj' => 'Informe o Cnpj']);
 
-        ];
-        $lb = [
-            'nome_fantasia' => 'Informe um Nome Fantasia',
-            'razao_social' => 'Qual a RazaoSocial',
-            'sub_domain' => 'Informe o Sub Domain',
-            'email' => 'Qual o Email',
-<<<<<<< HEAD
-            // 'cor' => 'Informe a Cor',
-=======
->>>>>>> 358c141093f6b54c7189dddee0249c28e2eca48f
-            'telefone' => 'Digite o numero de Telefone',
-            'cnpj' => 'Informe o Cnpj'
+        
 
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
+
+
 
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
@@ -81,19 +52,7 @@ class InstituicaoControler
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
 
-<<<<<<< HEAD
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "", "");
-        
-        
-        
-=======
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "#FFF", "");
-
-
-
-
->>>>>>> 358c141093f6b54c7189dddee0249c28e2eca48f
-
 
         echo json_encode([
             'next' => true,
