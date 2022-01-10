@@ -65,7 +65,6 @@ class InstituicaoControler
     static function update_instituicao()
     {
         $instituicao = new Instituicao();
-        $adm = new Adm();
 
 
         token();
@@ -82,7 +81,7 @@ class InstituicaoControler
 
         $transform_cnpj = withdraw_caracter($cnpj);
         $transform_tel = withdraw_caracter($telefone);
-        
+
 
         campo_obrigatorios([
             'instituicao_id' => 'Informe o ID',
@@ -258,8 +257,7 @@ class InstituicaoControler
         ]);
 
 
-        var_dump($instituicao->exist_subdomain($sub_domain));
-        die;
+        
 
         if ($instituicao->exist_subdomain($sub_domain)) {
             echo json_encode([

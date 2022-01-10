@@ -22,7 +22,7 @@ class Instituicao implements IInstituicao
     {
         
         $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE subdomain='$subdomain'";
+        $sql = "SELECT * FROM instituicao WHERE subdomaim='$subdomain'";
         $consulta = $banco->query($sql);
         return !empty($consulta);
     }
