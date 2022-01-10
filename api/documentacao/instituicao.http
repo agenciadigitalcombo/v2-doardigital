@@ -27,15 +27,16 @@ nome_fantasia= empresa,
 POST http://localhost/v2-doardigital/api/on_off
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67,
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
 &instituicao_id=5
 
 ###
 POST http://localhost/v2-doardigital/api/create-instituicao
 Content-Type: application/x-www-form-urlencoded
 
-nome_fantasia=empresa,
-&sub_domain=exemplo.com,
+token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+&nome_fantasia=empresa,
+&sub_domain=teste,
 &razao_social=exemplo,
 &email=ezemplo@gmail.com,
 &cnpj=123.456.789.31/2.12,
@@ -63,5 +64,7 @@ id=4,
 &numero=33,
 &cep=12332344
 
-
+###
+GET http://localhost/v2-doardigital/api/subdominio-disponivel?subdomain=teste
+Content-Type: application/x-www-form-urlencoded
 // criar ou salvar dados bancario 

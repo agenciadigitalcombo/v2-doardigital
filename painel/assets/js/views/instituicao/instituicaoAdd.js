@@ -134,7 +134,7 @@ export default {
 												<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
 												 
 													<div class="input-group mb-3">
-														<input type="text" class="form-control form-control-lg " required  @keyup="validDomain()"
+														<input type="text" class="form-control form-control-lg " required v-on:blur="validDomain"
 														 v-model.trin="$v.sub_domain.$model" :class=" {'is-invalid':$v.sub_domain.$error, 'is-valid':!$v.sub_domain.$invalid }"/>
 														<span class="input-group-text" id="basic-addon2">.doardigital.com.br</span>
 													</div> 
@@ -220,7 +220,7 @@ export default {
 	methods: {
 
 		validDomain(){
-
+			alert("perdeu o foco")
 		},
 
 		async addInstituicao() {
