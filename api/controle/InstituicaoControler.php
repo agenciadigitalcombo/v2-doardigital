@@ -19,8 +19,8 @@ class InstituicaoControler
         $campo_email = $_REQUEST['email'];
         $email = valid_email($campo_email);
 
-        $cor = $_REQUEST['cor'] ?? '';
-        $logo = $_REQUEST['logo'] ?? '';
+        // $cor = $_REQUEST['cor'] ?? '';
+        // $logo = $_REQUEST['logo'] ?? '';
         
         $cnpj = $_REQUEST['cnpj'] ?? '';
         $transform_cnpj = withdraw_caracter($cnpj);
@@ -44,7 +44,7 @@ class InstituicaoControler
             'razao_social',
             'sub_domain',
             'email',
-            'cor',
+            // 'cor',
             'telefone',
             'cnpj',
             //'nome_identificacao',
@@ -62,7 +62,7 @@ class InstituicaoControler
             'razao_social' => 'Qual a RazaoSocial',
             'sub_domain' => 'Informe o Sub Domain',
             'email' => 'Qual o Email',
-            'cor' => 'Informe a Cor',
+            // 'cor' => 'Informe a Cor',
             'telefone' => 'Digite o numero de Telefone',
             'cnpj' => 'Informe o Cnpj'
             //'nome_identificacao' => 'Informe o Nome para Identificacao',
@@ -97,7 +97,7 @@ class InstituicaoControler
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
 
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $cor, $logo);
+        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "", "");
         
         
         
