@@ -43,19 +43,14 @@ export default {
 										<form @submit.prevent="cadastrarEndereco" autocomplete="off" name="formulario" class="form">
 
 										<div class="card-body border-top p-9">
-											<div class="row mb-6">
-												<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
-													identificacao</label>
+											 
 												<input v-model="id" type="hidden" name="nome"
-													class="form-control form-control-lg form-control-solid"
-													placeholder="Nome identificacao" />
-
-												<div class="col-lg-8 fv-row">
-													<input v-model="nome_identificacao" type="text"
+													class="form-control form-control-lg form-control-solid"  />
+ 
+													<input v-model="nome_identificacao" type="hidden"
 														class="form-control form-control-lg form-control-solid"
 														placeholder="Nome identificacao" />
-												</div>
-											</div>
+											 
 											<div class="row mb-6">
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
 												<div class="col-lg-8 fv-row">
@@ -180,7 +175,7 @@ export default {
 	data: function () {
 		return {
 			id: null,
-			nome_identificacao: null,
+			nome_identificacao: "instituicao",
 			cep: null,
 			logadouro: null,
 			numero: null,
