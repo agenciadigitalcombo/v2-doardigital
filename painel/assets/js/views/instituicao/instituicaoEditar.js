@@ -185,6 +185,9 @@ export default {
 			msg: null,
 			submitStatus: null,
 			jms: true,
+
+			tamanho:"11211",
+			xx:""
 		}
 	}, 
  
@@ -252,6 +255,9 @@ export default {
 
 	},
 	async mounted() {
+
+
+
 		this.instituicao_id = globalThis._instituicao.id,
 		this.nome_fantasia = globalThis._instituicao.nome_fantasia,
 		this.email = globalThis._instituicao.email,
@@ -259,8 +265,26 @@ export default {
 		this.telefone = globalThis._instituicao.telefone,
 		this.razao_social = globalThis._instituicao.razao_social,
 		this.cnpj = globalThis._instituicao.cnpj
+	
+
+	
+
 	},
 
+	created() {
+	
+
+		// this.xx = this.cnpj.length 
+		// console.log("valor e "+ this.xx);
+		// 	if(this.xx < 11){
+		// 		alert("cpf")
+		// 		console.log( "cpf");
+		// 		} else if(this.xx >= 11){
+		// 			alert("cnpj")
+		// 			console.log( "cnpj xx");
+		// 		}
+		
+	},
 
 }
 

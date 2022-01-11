@@ -201,6 +201,15 @@ export default {
         })
     },
 
+    async listarEnderecoInst( 
+        token,
+        instituicao_id,) {
+        return await http.get('/list-endereco-instituicao', {
+            token,
+            instituicao_id,
+        })
+    },
+
 
     async onoffIntituicao(
         instituicao_id,
@@ -214,17 +223,28 @@ export default {
 
 
     async enderecoInstituicao(
-        id, nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado) {
-        return await http.post('/endereco-instituicao', {
+        token,
+        id,
+        nome_identificacao,
+        logradouro,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+        numero,
+        cep,
+        ) {
+        return await http.post('/create-endereco', {
+            token,
             id,
             nome_identificacao,
-            cep,
             logradouro,
-            numero,
             complemento,
             bairro,
             cidade,
-            estado
+            estado,
+            numero,
+            cep,
 
         })
     },

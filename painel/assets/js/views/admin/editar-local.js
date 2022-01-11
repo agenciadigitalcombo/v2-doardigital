@@ -236,12 +236,6 @@ export default {
 				setTimeout(() => this.msg = "", 6000);
 		},
 
-
-		async listar() {
-			let res = await adm.ListarPerfil(localStorage.getItem('token'))
-			return res
-		},
-
 		async listarEndereco() {
 			let res = await adm.listarEndereco(
 				(this.token)
