@@ -122,12 +122,30 @@ export default {
 
      data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-	
+			cpf: null,
+			data_nascimento: null,
+			token: null,
         }
     },
 	methods: {
 	
+		async alterarAdm() {
+			this.error = null
+
+			let res = await adm.atualizar(
+				this.cpf,
+				this.data_nascimento,
+				this.token
+				
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			this.msg = res.message,
+				setTimeout(() => this.msg = "", 3000);
+		},
      
        
 

@@ -1,4 +1,4 @@
-
+import adm from "../../../../../static/js/api/adm.js"
 
 export default {
     template:`
@@ -72,13 +72,9 @@ export default {
 	<div class="d-flex flex-column flex-lg-row-fluid py-10"> 
 		<div class="d-flex flex-center flex-column flex-column-fluid"> 
 			<div class="w-lg-700px p-10 p-lg-15 mx-auto"> 
-				<form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
-				 
-				
 
-
-
-				 <div class="current" data-kt-stepper-element="content">
+			<form @submit.prevent="finalizarAdm" autocomplete="off" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+			 	 <div class="current" data-kt-stepper-element="content">
 						 <div class="w-100">
 							 <div class="pb-10 pb-lg-15">
 								 <h2 class="fw-bolder text-dark">Completar Perfil</h2>
@@ -89,11 +85,12 @@ export default {
 									<span class="required">Data de Nascimento</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Selecione o tipo de conta conforme documento utilizado"></i></h2>
 								</label>
-								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" value="20/06/1986" />
-						 </div>
+								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" v-model="data_nascimento" placeholder="29/10/1685"/>
+						 </div>	
+						 
 						 <div class="mb-10 fv-row">
 								 <label class="form-label mb-3">CNPJ</label>
-							 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" placeholder="" value="28.893.699/0001-85" />
+							 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" v-model="cpf_cnpj" placeholder="28.893.699/0001-85" />
 						 </div>
 						 <div class="mb-0 fv-row">
 								 <label class="d-flex align-items-center form-label mb-5">Selecione em qual 
@@ -178,14 +175,14 @@ export default {
 						</div>
 						<div>
 						
-							<a type="button" class="btn btn-lg btn-primary" href="#/checkout_endereco" >Continuar
+							<button type="submit" class="btn btn-lg btn-primary">Continuar
 						 <span class="svg-icon svg-icon-4 ms-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 									<rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
 									<path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black" />
 								</svg>
 							</span>
-						 </a>
+						 </button>
 						</div>
 					</div> 
 				</form> 
@@ -207,23 +204,39 @@ export default {
      data: function () {
 		return {
 			
-			tipo: null,
-				valor: null,
-				email: null,
+			cpf_cnpj: null,
+			data_nascimento: null,
+			token: null,
 
         }
     },
 	methods: {
-	
-		descartavel() {
-			this.tipo = window.localStorage.setItem("tipo", this.tipo)
-			this.valor = window.localStorage.setItem("valor", this.valor)
-			this.email = window.localStorage.setItem("email", this.email)
-		}
-       
+		async finalizarAdm() {
+			this.error = null
+
+			let res = await adm.atualizarFinaliza(
+				this.cpf_cnpj,
+				this.data_nascimento,
+				this.token
+				
+			)
+			if (!res.next) {
+				console.log(res)
+				this.error = res.message
+				return null
+			}
+			window.location.href = `#/checkout_endereco`
+		},
+	 
 
     },
 	
+
+	async mounted() {
+		this.token = localStorage.getItem('token') 
+	
+	},
+
 
 	
 }

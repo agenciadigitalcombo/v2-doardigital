@@ -74,8 +74,6 @@ Vue.component('c-localInstituicao', localInstituicao )
 import bancoInstituicao from './views/instituicao/instituicaoBancario.js'
 Vue.component('c-bancoInstituicao', bancoInstituicao )
 
-import dominioInstituicao from './views/instituicao/instituicaoDominio.js'
-Vue.component('c-dominioInstituicao', dominioInstituicao )
 
 import editarInstituicao from './views/instituicao/instituicaoEditar.js'
 Vue.component('c-editarInstituicao', editarInstituicao )
@@ -119,8 +117,17 @@ Vue.component('c-doacoesDetalhe', doacoesDetalhe )
 import doadorHitorico from './views/instituicao/doador-hitorico.js'
 Vue.component('c-doadorHitorico', doadorHitorico )
 
-import configuracao from './views/usuarios/configuracao.js'
+
+import configuracao from './views/configuracao/configuracao.js'
 Vue.component('c-configuracao', configuracao )
+
+import dominio from './views/configuracao/dominio.js'
+Vue.component('c-dominio', dominio )
+
+import script from './views/configuracao/script.js'
+Vue.component('c-script', script )
+
+
 
 import carteira from './views/admin/carteira.js'
 Vue.component('c-carteira', carteira )
