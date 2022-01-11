@@ -27,6 +27,8 @@ class InstituicaoControler
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
+
+
         
         campo_obrigatorios([
         'nome_fantasia' => 'Informe um Nome Fantasia',
@@ -37,6 +39,8 @@ class InstituicaoControler
         'cnpj' => 'Informe o Cnpj']);
 
     
+
+
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
@@ -48,6 +52,16 @@ class InstituicaoControler
 
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
+
+
+        if ($instituicao->exist_subdomain($sub_domain)) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Subdomínio já em uso"
+            ]);
+            return null;
+        }
+
 
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "#FFF", "");
 
