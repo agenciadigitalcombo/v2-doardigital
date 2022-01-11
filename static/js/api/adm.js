@@ -249,6 +249,32 @@ export default {
         })
     },
 
+    
+    async EditarEnderecoInstituicao(
+        id,
+        nome_identificacao,
+        logradouro,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+        numero,
+        cep,
+        ) {
+        return await http.post('/endereco-instituicao', {
+            id,
+            nome_identificacao,
+            logradouro,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            numero,
+            cep,
+
+        })
+    },
+
     async cadastrarSubadm(
         nome,
         email,

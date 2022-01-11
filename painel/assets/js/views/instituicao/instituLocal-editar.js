@@ -40,7 +40,7 @@ export default {
 											</div>
 										</div>
 				
-										<form @submit.prevent="cadastrarEndereco" autocomplete="off" name="formulario" class="form">
+										<form @submit.prevent="editarEndereco" autocomplete="off" name="formulario" class="form">
 
 										<div class="card-body border-top p-9">
 											 
@@ -153,10 +153,10 @@ export default {
 									</div>
 
 									<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
-
+{{id}}
 								<div class="card-footer d-flex justify-content-end py-6 px-9">
 									<button type="submit" class="btn btn-primary">
-										<span class="indicator-label">SALVAR</span>
+										<span class="indicator-label">ALTERAR</span>
 									</button>
 
 								</div>
@@ -203,11 +203,10 @@ export default {
 
 	methods: {
 
-		async cadastrarEndereco() {
+		async editarEndereco() {
 			this.error = null
 
-			let res = await adm.enderecoInstituicao(
-				this.token,
+			let res = await adm.EditarEnderecoInstituicao(			
 				this.id,
 				this.nome_identificacao,
 				this.logradouro,
@@ -284,6 +283,7 @@ export default {
 	},
 
 	created() {
+		this.id = localStorage.getItem('instituicao_id')
 		this.instituicao_id = localStorage.getItem('instituicao_id')
 	},
 }
