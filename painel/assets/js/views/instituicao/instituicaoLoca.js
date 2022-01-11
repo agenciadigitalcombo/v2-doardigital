@@ -178,6 +178,7 @@ export default {
 	data: function () {
 		return {
 			id: null,
+			instituicao_id: null,
 			nome_identificacao: "instituicao",
 			cep: null,
 			logradouro: null,
@@ -237,10 +238,10 @@ export default {
 
 		async listarEndereco() {
 			let res = await adm.listarEnderecoInst(
-				(
+				
 					this.token,
 					this.instituicao_id
-				)
+				
 			)
 			return res
 		},
@@ -284,6 +285,7 @@ export default {
 
 	created() {
 		this.instituicao_id = localStorage.getItem('instituicao_id')
+		alert(this.instituicao_id)
 	},
 }
 
