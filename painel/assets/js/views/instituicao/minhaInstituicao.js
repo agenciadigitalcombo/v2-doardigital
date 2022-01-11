@@ -72,13 +72,10 @@ export default {
 										<tbody class="fw-bold text-gray-600">
 											<tr v-for="item in filtraCredencial" :key="item.id">
 												<td>
-													{{item.nome_fantasia}}
-													{{item.cnpj}}
-												</td>
+													{{item.nome_fantasia}} 
+												</td> 
 
-
-												<td>
-												
+												<td> 
 												</td>
 
 												<td>

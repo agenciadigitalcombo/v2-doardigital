@@ -7,6 +7,12 @@ export default {
     <p> {{msg}} </p>
     </div>
 	</div>
+
+    <div class="erro"> 
+    <div class="erro-container"> 
+    <p> {{error}} </p>
+    </div>
+	</div>
     </div>
     `,
 
@@ -18,7 +24,8 @@ export default {
         }
     },
    props:{
-       msg: String
+       msg: String,
+       error: String
    }
 }  
 

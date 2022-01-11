@@ -166,8 +166,7 @@ export default {
 	async mounted() {
 		this.token = localStorage.getItem('token')
 		let dados = (await this.listar()).dados
-
-		console.log(dados)
+ 
 		this.nome = dados.nome
 		this.email = dados.email
 		this.cpf = dados.cpf

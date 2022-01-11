@@ -31,6 +31,11 @@ export default {
         })
     },
 
+    async atualizarFinaliza(cpf_cnpj, data_nascimento, token) {
+        return await http.post('/completar-profile', {
+            cpf_cnpj, data_nascimento, token
+        })
+    },
 
     async ListarPerfil(token) {
         return await http.get('/profile', {
@@ -131,7 +136,7 @@ export default {
     async cadastrarInstituicao(
         nome_fantasia,
         razao_social,
-        sub_domain,
+        subdomaim,
         email,
         cnpj,
         telefone,
@@ -141,16 +146,16 @@ export default {
         return await http.post('/create-instituicao', {
             nome_fantasia,
             razao_social,
-            sub_domain,
+            subdomaim,
             email,
             cnpj,
             telefone,
             token,
         })
     },
-    async validarDomain(subdomain) {
+    async validarDomain(subdomaim) {
         return await http.get('/subdominio-disponivel', {
-            subdomain
+            subdomaim
         })
     },
 

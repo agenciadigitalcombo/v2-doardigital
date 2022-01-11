@@ -84,7 +84,7 @@ export default {
 							<div class="fv-row mb-10"> 
 								<label class="form-label required">CEP</label>
 								 
-								<input v-model="nome_identificacao" type="text"/>
+								<input v-model="nome_identificacao" type="hidden"/>
 						 <input v-model="cep" @keyup="searchCep()" name="business_name" class="form-control form-control-lg form-control-solid" value="sem registro"/>
 								
 					 
@@ -180,7 +180,7 @@ export default {
 		return {
 			
 			id: null,
-			nome_identificacao: null,
+			nome_identificacao: 'admin',
 			cep: null,
 			logadouro: null,
 			numero: null,
