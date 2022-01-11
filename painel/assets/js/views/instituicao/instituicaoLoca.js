@@ -2,7 +2,7 @@ import adm from "../../../../../static/js/api/adm.js"
 const { required, minLength, between } = window.validators
 
 export default {
-	template:`
+	template: `
 
 		<div>
 
@@ -69,6 +69,7 @@ export default {
 														</a>
 
 													</span>
+												
 												</div>
 
 												<div class="erros" v-if="$v.cep.$error">
@@ -81,7 +82,9 @@ export default {
 												<div class="sucesso_texte" v-else>
 
 												</div>
-												
+												<div style="color: rgb(233, 5, 5);"> 
+												<p> {{error}} </p>
+												</div>
 											</div>
 										</div>
 										<div class="row mb-6">
@@ -89,7 +92,7 @@ export default {
 												class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida
 												Nº</label>
 											<div class="col-lg-8 fv-row">
-												<input id="logradouro" v-model="logadouro" type="text" disabled
+												<input id="logradouro" v-model="logradouro" type="text" disabled
 													class="form-control form-control-lg form-control-solid"
 													placeholder="Localização" />
 											</div>
@@ -106,7 +109,7 @@ export default {
 										</div>
 										<div class="row mb-6">
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Complemento</span>
+												<span class="">Complemento</span>
 
 											</label>
 											<div class="col-lg-8 fv-row">
@@ -177,7 +180,7 @@ export default {
 			id: null,
 			nome_identificacao: "instituicao",
 			cep: null,
-			logadouro: null,
+			logradouro: null,
 			numero: null,
 			complemento: null,
 			bairro: null,
@@ -186,8 +189,7 @@ export default {
 			secret: null,
 			token: null,
 			msg: "",
-			items: [],
-			data: null,
+			error: null,
 		}
 	},
 
@@ -199,31 +201,27 @@ export default {
 	},
 
 	methods: {
-		
+
 		async cadastrarEndereco() {
 			this.error = null
 
 			let res = await adm.enderecoInstituicao(
+				this.token,
 				this.id,
 				this.nome_identificacao,
-				this.cep,
-				this.logadouro,
-				this.numero,
+				this.logradouro,
 				this.complemento,
 				this.bairro,
 				this.cidade,
 				this.estado,
-
+				this.numero,
+				this.cep,
 			)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
-
-			console.log(this.logadouro)
 		},
-
-
 
 		async eliminaEndereco() {
 			let res = await adm.eliminaEndereco(
@@ -237,34 +235,34 @@ export default {
 
 		},
 
-		async listar() {
-			let res = await adm.ListarPerfil(localStorage.getItem('token'))
-			return res
-		},
-
 		async listarEndereco() {
-			let res = await adm.listarEndereco(
-				(this.token)
+			let res = await adm.listarEnderecoInst(
+				(
+					this.token,
+					this.instituicao_id
+				)
 			)
 			return res
 		},
-		
+
 		searchCep() {
 			if (this.cep.length == 8) {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 					.then(response => {
+						this.error = ""
+						this.logradouro = response.data.logradouro,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf
 
-		this.logadouro = response.data.logradouro,
-			this.bairro = response.data.bairro,
-			this.cidade = response.data.localidade,
-			this.estado = response.data.uf,
-
-			console.log(response.data)
-
-	}
-	)
-	.catch(error => console.log(error))
-
+						if (response.data.erro) {
+							this.error = "Número do CEP inválido pretendes Preecher manualmente ?? "
+						}
+					}
+					)
+					.catch(error =>
+						error
+					)
 			}
 		}
 
@@ -272,26 +270,20 @@ export default {
 
 	async mounted() {
 
+		let enderecoDados = (await this.listarEndereco()).dados || {}
+		this.logradouro = enderecoDados.logradouro
+		this.cep = enderecoDados.cep
+		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.numero = enderecoDados.numero
+		this.complemento = enderecoDados.complemento
+		this.bairro = enderecoDados.bairro
+		this.cidade = enderecoDados.cidade
+		this.estado = enderecoDados.estado
+		this.id = enderecoDados.id
+	},
 
-	this.id = localStorage.getItem('instituicao_id')
-
-	// let enderecoDados = (await this.listarEndereco()).dados|| {}
-	// this.logadouro = enderecoDados.logadouro
-	// this.cep = enderecoDados.cep
-	// this.nome_identificacao = enderecoDados.nome_identificacao
-	// this.numero = enderecoDados.numero
-	// this.complemento = enderecoDados.complemento
-	// this.bairro = enderecoDados.bairro
-	// this.cidade = enderecoDados.cidade
-	// this.estado = enderecoDados.estado
-	// this.id = enderecoDados.id
-
-
-},
-
-created() {
-	this.token = localStorage.getItem('token')
-
-},
+	created() {
+		this.instituicao_id = localStorage.getItem('instituicao_id')
+	},
 }
 

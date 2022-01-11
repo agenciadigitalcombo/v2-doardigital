@@ -138,7 +138,6 @@ export default {
 												</div>
 											</div> 
 										</div> 
-							
 	
 										<div v-if="jms===true"> 
 										<c-mensagem :msg="msg" ></c-mensagem>
@@ -227,11 +226,13 @@ export default {
 			this.error = null
 			let res = await adm.validarDomain(this.subdomaim)
 			if (!res.next) {
-				this.jms= false,
+				// this.next = res.next
+				this.jms= res.next,
 				this.error = res.message
 				return null
 			}
-			this.jms= true,
+			// this.next = res.next
+			this.jms= res.next,
 			this.msg = res.message
 			return res
 		},
@@ -247,7 +248,9 @@ export default {
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
-			} else {
+			}else if (this.jms === false) {
+				this.error = "Porfavor adicione um subdominio valido "
+			  } else {
 
 				let res = await adm.cadastrarInstituicao(
 					this.nome_fantasia,
@@ -271,17 +274,10 @@ export default {
 			}
 
 		},
-
-
-
 	},
 	async mounted() {
-
 		this.instituicao_id = globalThis._planos.id
 		this.nome = globalThis._planos.nome
-
-		// this.dados = (await this.validDomain()).dados
-		// this.nome_fantasia = this.dados.nome_fantasia,
 	},
 
 
