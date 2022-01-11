@@ -85,7 +85,7 @@ class AdmControle
         $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj);
         echo json_encode([
             "next" => true,
-            "message" => "Admin atualizado com sucesso"
+            "message" => "Admin atualizado"
         ]);
     }
     

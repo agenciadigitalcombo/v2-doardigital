@@ -35,7 +35,7 @@ class EnderecoControle
         
         campo_obrigatorios([
             'cep' => 'Informe um CEP',
-            'logadouro' => 'Digite um endereço',
+            'logradouro' => 'Digite um endereço',
             'bairro' => 'digite o Bairro',
             'cidade' => 'Informe a Cidade',
             'estado' => 'Informe o estado',
@@ -47,7 +47,7 @@ class EnderecoControle
         $id_adm = $adm->list_profile($secret);
         $id = $id_adm['id'];
         
-        $endereco->create($id, $nome_identificacao, $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+        $endereco->create($id, "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
         echo json_encode([
             'next' => true,
             'message' => 'Endereco criado'
