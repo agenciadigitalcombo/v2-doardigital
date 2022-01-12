@@ -1,3 +1,3 @@
 <?php
 
-router('/create-conta', 'ContaBancControler@create_cont_instituicao');
+router('/create-conta-instituicao', 'ContaBancControler@create_cont_instituicao');

@@ -27,6 +27,14 @@ class ContaBanc implements IContaBanc{
         $banco->exec($sql);
     }
 
+    public function valid_type_conta(string $conta): bool
+    {
+        $lb = [
+            'conta_corrente', 'conta_poupanca', 'conta_corrente_conjunta', 'conta_poupanca_conjunta'
+        ];
+        return in_array($conta, $lb);
+    }
+
     public function update(int $id, string $nome_identificacao): void
     {
         $banco = new Banco();
