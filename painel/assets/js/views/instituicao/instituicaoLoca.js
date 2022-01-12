@@ -21,13 +21,13 @@ export default {
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/add-instituicoes">Informação da Instituição</a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5 ">Informação da Instituição</a>
 												</li>
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/endereco-instituicoes">Endereço </a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5 active">Endereço </a>
 												</li>
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/banco-instituicoes">Dados Bancario</a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5">Dados Bancario</a>
 												</li>
  
 											</ul>
@@ -208,7 +208,7 @@ export default {
 
 			let res = await adm.enderecoInstituicao(
 				this.token,
-				this.id,
+				await this.infoSubdomain(globalThis._subdomaim),
 				this.nome_identificacao,
 				this.logradouro,
 				this.complemento,
@@ -221,9 +221,19 @@ export default {
 			if (!res.next) {
 				this.error = res.message
 				return null
-			}
+			} 
+			localStorage.setItem("instituicao_id", await this.infoSubdomain(globalThis._subdomaim)); 
+			this.msg = res.message
 		},
 
+		async infoSubdomain(subdomaim) {
+			let res = await adm.todoSubdomain(
+				subdomaim
+			)
+
+			return res.dados.id
+		},
+		 
 		async eliminaEndereco() {
 			let res = await adm.eliminaEndereco(
 				this.secret,
@@ -235,16 +245,7 @@ export default {
 			}
 
 		},
-
-		async listarEndereco() {
-			let res = await adm.listarEnderecoInst(
-				
-					this.token,
-					this.instituicao_id
-				
-			)
-			return res
-		},
+ 
 
 		searchCep() {
 			if (this.cep.length == 8) {
@@ -269,19 +270,7 @@ export default {
 
 	},
 
-	async mounted() {
-
-		let enderecoDados = (await this.listarEndereco()).dados || {}
-		this.logradouro = enderecoDados.logradouro
-		this.cep = enderecoDados.cep
-		this.nome_identificacao = enderecoDados.nome_identificacao
-		this.numero = enderecoDados.numero
-		this.complemento = enderecoDados.complemento
-		this.bairro = enderecoDados.bairro
-		this.cidade = enderecoDados.cidade
-		this.estado = enderecoDados.estado
-		this.id = enderecoDados.id
-	},
+ 
 
 	created() {
 		this.instituicao_id = localStorage.getItem('instituicao_id')

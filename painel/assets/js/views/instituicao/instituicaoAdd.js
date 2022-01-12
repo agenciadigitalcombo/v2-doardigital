@@ -22,16 +22,13 @@ export default {
 										class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 								
 										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5 active"
-												href="#/add-instituicoes">Informação da Instituição</a>
+											<a class="nav-link text-active-primary ms-0 me-10 py-5 active" >Informação da Instituição</a>
 										</li> 
 										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5 "
-												href="#/endereco-instituicoes">Endereço </a>
+											<a class="nav-link text-active-primary ms-0 me-10 py-5 " title="Cadastra primeiro a Instituição para prosseguir " >Endereço </a>
 										</li> 
 										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5"
-												href="#/banco-instituicoes">Dados Bancario</a>
+											<a class="nav-link text-active-primary ms-0 me-10 py-5" >Dados Bancario</a>
 										</li>
   
 									</ul> 
@@ -266,24 +263,22 @@ export default {
 					this.error = res.message
 					return null
 				}
+
+				globalThis._subdomaim =  this.subdomaim  
+
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
-					this.submitStatus = 'OK'
-					this.msg = res.message
+					this.submitStatus = 'OK' 
+		        	window.location.href = "#/endereco-instituicoes"
 				}, 500)
 			}
 
 		},
 	},
-	async mounted() {
-		this.instituicao_id = globalThis._planos.id
-		this.nome = globalThis._planos.nome
-	},
-
-
-
-
-
+	// async mounted() {
+	// 	this.instituicao_id = globalThis._planos.id
+	// 	this.nome = globalThis._planos.nome
+	// }, 
 
 }
 

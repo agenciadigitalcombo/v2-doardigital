@@ -23,11 +23,11 @@ export default {
 								
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 active"
-												href="#/add-instituicoes">Editar Informação da Instituição</a>
+												href="#/editar-instituicoes">Informação da Instituição</a>
 										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 "
-												href="#/endereco-instituicoes">Endereço </a>
+												href="#/endereco-editar">Endereço </a>
 										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5"
@@ -40,7 +40,7 @@ export default {
 							<div class="card mb-5 mb-xl-10"> 
 								<div class="card-header border-0 cursor-pointer" > 
 									<div class="card-title m-0">
-										<h3 class="fw-bolder m-0">Informação da Instituição</h3>
+										<h3 class="fw-bolder m-0">Editar Informação da Instituição</h3>
 									</div> 
 								</div> 
 							

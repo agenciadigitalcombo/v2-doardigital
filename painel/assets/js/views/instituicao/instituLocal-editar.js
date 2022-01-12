@@ -36,7 +36,7 @@ export default {
 									<div class="card mb-5 mb-xl-10">
 										<div class="card-header">
 											<div class="card-title">
-												<h3>Meus Endereço</h3>
+												<h3>Editar Meus Endereço</h3>
 											</div>
 										</div>
 				
@@ -152,8 +152,8 @@ export default {
 
 									</div>
 
-									<c-mensagem :msg="msg" v-show="msg" ></c-mensagem>
-{{id}}
+									<c-mensagem :msg="msg" v-show="msg" ></c-mensagem> 
+
 								<div class="card-footer d-flex justify-content-end py-6 px-9">
 									<button type="submit" class="btn btn-primary">
 										<span class="indicator-label">ALTERAR</span>
@@ -206,9 +206,9 @@ export default {
 		async editarEndereco() {
 			this.error = null
 
-			let res = await adm.EditarEnderecoInstituicao(		
-					
-				this.id = 7,
+			let res = await adm.enderecoInstituicao(
+				this.token,
+				this.id ,
 				this.nome_identificacao,
 				this.logradouro,
 				this.complemento,
@@ -222,26 +222,23 @@ export default {
 				this.error = res.message
 				return null
 			}
+			this.msg = res.message
 		},
 
 		async eliminaEndereco() {
 			let res = await adm.eliminaEndereco(
 				this.secret,
 			)
-			if (!res.next) {
-				console.log(res)
+			if (!res.next) { 
 				this.error = res.message
 				return null
 			}
-
 		},
 
 		async listarEndereco() {
 			let res = await adm.listarEnderecoInst(
-				
-					this.token,
-					this.instituicao_id
-				
+				this.token,
+				this.instituicao_id
 			)
 			return res
 		},
@@ -269,10 +266,10 @@ export default {
 
 	},
 
-	async mounted() {
+	async mounted() { 
 
 		let enderecoDados = (await this.listarEndereco()).dados || {}
-		this.logradouro = enderecoDados.logradouro
+		this.logradouro = enderecoDados.logadouro   
 		this.cep = enderecoDados.cep
 		this.nome_identificacao = enderecoDados.nome_identificacao
 		this.numero = enderecoDados.numero
@@ -280,7 +277,6 @@ export default {
 		this.bairro = enderecoDados.bairro
 		this.cidade = enderecoDados.cidade
 		this.estado = enderecoDados.estado
-		this.id = enderecoDados.id
 	},
 
 	created() {
