@@ -23,7 +23,7 @@ export default {
 								
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 active"
-												href="#/add-instituicoes">Informação da Instituição</a>
+												href="#/add-instituicoes">Editar Informação da Instituição</a>
 										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 "
