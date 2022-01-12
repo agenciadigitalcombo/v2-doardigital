@@ -21,13 +21,13 @@ export default {
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/add-instituicoes">Informação da Instituição</a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/editar-instituicoes">Informação da Instituição</a>
 												</li>
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/endereco-instituicoes">Endereço </a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#/endereco-editar">Endereço </a>
 												</li>
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/banco-instituicoes">Dados Bancario</a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5" href="#/bancario-editar">Dados Bancario</a>
 												</li>
  
 											</ul>
@@ -280,8 +280,8 @@ export default {
 	},
 
 	created() {
-		this.id = localStorage.getItem('instituicao_id')
-		this.instituicao_id = localStorage.getItem('instituicao_id')
+		this.instituicao_id = globalThis._instituicao.id
+		this.id = globalThis._instituicao.id
 	},
 }
 
