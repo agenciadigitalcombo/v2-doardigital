@@ -16,7 +16,6 @@ class ContaBancControler{
         $instituicao_id = $_REQUEST['instituicao_id'];
         $codigo_banco = $_REQUEST['codigo_banco'];
         $agencia = $_REQUEST['agencia'];
-        $agencia_digito = $_REQUEST['agencia_digito'];
         $conta = $_REQUEST['conta'];
         $conta_digito = $_REQUEST['conta_digito'];
         $tipo_conta = $_REQUEST['tipo_conta'];
@@ -40,10 +39,10 @@ class ContaBancControler{
             return null;
         }
         
-        $res_pagarme_conta = $banck_pagarme->create_conta($codigo_banco, $agencia, $conta_digito, $agencia_digito, $conta, $tipo_conta, $documento_numero, $nome_completo); 
+        $res_pagarme_conta = $banck_pagarme->create_conta($codigo_banco, $agencia, $conta_digito, $conta, $tipo_conta, $documento_numero, $nome_completo); 
         $token_conta = $res_pagarme_conta['id'];
         
-        $contaBanc->create($adm_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $agencia_digito, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero); 
+        $contaBanc->create($adm_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, "", $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero); 
 
         $res_pagarme_instituicao = $recebedor_pagarme->create_instituicao($token_conta, $recebedor_nome, $document_number_recebedor, $site_url, $email_recebedor, $telefone_recebedor);
         $id_instituicao_pagarme = $res_pagarme_instituicao['id'];

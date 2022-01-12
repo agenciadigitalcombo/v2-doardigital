@@ -7,7 +7,5 @@ router('/instituicao-id', 'InstituicaoControler@list_instituicao_by_id');
 router('/instituicao', 'InstituicaoControler@instituicao');
 router('/delete-instituicao', 'InstituicaoControler@detete_instituicao');
 router('/on-off-instituicao', 'InstituicaoControler@on_off_instituicao');
-
 router('/info-subdomaim', 'InstituicaoControler@list_instituicao_by_subdomaim');
-
 router('/subdominio-disponivel', 'InstituicaoControler@subdominio_disponivel');

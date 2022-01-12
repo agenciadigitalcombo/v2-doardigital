@@ -5,7 +5,6 @@ class PagarmeContaBanc extends PagarMe{
     public function create_conta(string $banc_cod,
     string $agencia,
     string $dig_cont,
-    string $dig_agenc,
     string $conta,
     string $tipo_conta,
     string $document_number,
@@ -13,7 +12,6 @@ class PagarmeContaBanc extends PagarMe{
 
         $payload = [
             "agencia" => $agencia, 
-            "agencia_dv" => $dig_agenc, 
             "bank_code" => $banc_cod, 
             "conta" => $conta, 
             "conta_dv" => $dig_cont, 
