@@ -206,8 +206,9 @@ export default {
 		async editarEndereco() {
 			this.error = null
 
-			let res = await adm.EditarEnderecoInstituicao(			
-				this.id,
+			let res = await adm.EditarEnderecoInstituicao(		
+					
+				this.id = 7,
 				this.nome_identificacao,
 				this.logradouro,
 				this.complemento,

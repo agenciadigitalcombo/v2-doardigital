@@ -34,9 +34,6 @@ export default {
 												href="#/banco-instituicoes">Dados Bancario</a>
 										</li>
 
-										<li class="nav-item mt-2">
-												<a class="nav-link text-active-primary ms-0 me-10 py-5 " href="#/dominio-instituicoes">Domínio</a>
-											</li> 
 									</ul> 
 								</div>
 							</div> 
@@ -76,12 +73,12 @@ export default {
 												<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
 													<div class="fw-bold text-gray-800">CPF</div>
 												</label>
-												<input checked  @click="jms = true"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+												<input v-bind:checked="radioFalse" @click="jms = true" class="form-check-input me-3" name="radio_input" type="radio" value="1" />
 													
 													<label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
 														<div class="fw-bold text-gray-800">CNPJ</div>
 													</label>
-														<input  @click="jms = false"  class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+														<input v-bind:checked="radioTrue" @click="jms = false" class="form-check-input me-3" name="radio_input" type="radio" value="1" />
 												</div>
 
 												<div class="col-lg-8 fv-row" v-if="jms">
@@ -175,22 +172,22 @@ export default {
 
 	data: function () {
 		return {
-			instituicao_id: null, 
+			instituicao_id: null,
 			nome_fantasia: null,
 			razao_social: null,
 			sub_domain: null,
-			email: null, 
+			email: null,
 			cnpj: null,
 			telefone: null,
 			msg: null,
 			submitStatus: null,
 			jms: true,
-
-			tamanho:"11211",
-			xx:""
+			radioFalse: false,
+			radioTrue: false,
+			tamanho: "",
 		}
-	}, 
- 
+	},
+
 
 
 	validations: {
@@ -220,28 +217,28 @@ export default {
 		},
 	},
 
-	methods: { 
+	methods: {
 		async editaInstituicao() {
 			this.error = null
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
-			
-			let res = await adm.alterarInstituicao(  
-				this.token,
-				this.instituicao_id,
-				this.nome_fantasia,
-				this.razao_social, 
-				this.email,
-				this.cnpj,
-				this.telefone, 
-			)
-			if (!res.next) {
-				console.log(res)
-				this.error = res.message
-				return null
-			}
+
+				let res = await adm.alterarInstituicao(
+					this.token,
+					this.instituicao_id,
+					this.nome_fantasia,
+					this.razao_social,
+					this.email,
+					this.cnpj,
+					this.telefone,
+				)
+				if (!res.next) {
+					console.log(res)
+					this.error = res.message
+					return null
+				}
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
@@ -255,36 +252,24 @@ export default {
 
 	},
 	async mounted() {
-
-
-
 		this.instituicao_id = globalThis._instituicao.id,
-		this.nome_fantasia = globalThis._instituicao.nome_fantasia,
-		this.email = globalThis._instituicao.email,
-		this.sub_domain = globalThis._instituicao.subdomaim,
-		this.telefone = globalThis._instituicao.telefone,
-		this.razao_social = globalThis._instituicao.razao_social,
-		this.cnpj = globalThis._instituicao.cnpj
-	
+			this.nome_fantasia = globalThis._instituicao.nome_fantasia,
+			this.email = globalThis._instituicao.email,
+			this.sub_domain = globalThis._instituicao.subdomaim,
+			this.telefone = globalThis._instituicao.telefone,
+			this.razao_social = globalThis._instituicao.razao_social,
+			this.cnpj = globalThis._instituicao.cnpj
 
-	
-
+		this.tamanho = this.cnpj.length
+		if (this.tamanho < 12) {
+			this.jms = true
+			this.radioFalse= true
+		} else if (this.tamanho >= 12) {
+			this.jms = false
+			this.radioTrue= true
+		} 
 	},
-
-	created() {
-	
-
-		// this.xx = this.cnpj.length 
-		// console.log("valor e "+ this.xx);
-		// 	if(this.xx < 11){
-		// 		alert("cpf")
-		// 		console.log( "cpf");
-		// 		} else if(this.xx >= 11){
-		// 			alert("cnpj")
-		// 			console.log( "cnpj xx");
-		// 		}
-		
-	},
+ 
 
 }
 
