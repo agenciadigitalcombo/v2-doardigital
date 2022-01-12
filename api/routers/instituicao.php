@@ -8,6 +8,6 @@ router('/instituicao', 'InstituicaoControler@instituicao');
 router('/delete-instituicao', 'InstituicaoControler@detete_instituicao');
 router('/on-off-instituicao', 'InstituicaoControler@on_off_instituicao');
 
-router('/list-instituicao-subdomaim', 'InstituicaoControler@list_instituicao_by_subdomaim');
+router('/info-subdomaim', 'InstituicaoControler@list_instituicao_by_subdomaim');
 
 router('/subdominio-disponivel', 'InstituicaoControler@subdominio_disponivel');
