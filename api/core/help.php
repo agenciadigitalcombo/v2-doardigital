@@ -440,3 +440,7 @@ function data_format($data): string
 // }
 
 
+function space_sanitize($campo): string
+{
+    return preg_replace('/\s+/', '', $campo);
+}

@@ -17,7 +17,7 @@ class ContaBanc implements IContaBanc{
         $banco->exec($sql);
     }
 
-    public function create(int $adm_id, string $token, string $nome_identificacao, string $codigo_banco, string $agencia, string $agencia_digito, string $conta, string $conta_digito, string $tipo_conta, string $nome_completo, string $documento_numero): void
+    public function create(int $adm_id, string $token, string $nome_identificacao, string $codigo_banco, string $agencia, string $conta, string $conta_digito, string $tipo_conta, string $nome_completo, string $documento_numero, string $agencia_digito): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO conta_bancaria";

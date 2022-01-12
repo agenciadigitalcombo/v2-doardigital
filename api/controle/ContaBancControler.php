@@ -24,12 +24,15 @@ class ContaBancControler{
 
         $recebedor_nome = $_REQUEST['recebedor_nome'];
         $document_number_recebedor = $_REQUEST['document_number_recebedor'];
-        $site_url = $_REQUEST['site_url'];
+        $site_url = "doardigital.tk";
         $email_recebedor = $_REQUEST['email_recebedor'];
         $telefone_recebedor = $_REQUEST['telefone_recebedor'];
         
-        $secret = $token_parce['secret'];
-        $adm_id = $adm->list_profile($secret);
+        $secret_campo = $token_parce['secret'];
+        $secret = space_sanitize($secret_campo);
+        $get_id = $adm->list_profile($secret);
+        $adm_id = $get_id['id'];
+        
 
         if(!$contaBanc->valid_type_conta($tipo_conta)){
             echo json_encode([
@@ -38,11 +41,12 @@ class ContaBancControler{
             ]); 
             return null;
         }
+
         
         $res_pagarme_conta = $banck_pagarme->create_conta($codigo_banco, $agencia, $conta_digito, $conta, $tipo_conta, $documento_numero, $nome_completo); 
         $token_conta = $res_pagarme_conta['id'];
         
-        $contaBanc->create($adm_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, "", $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero); 
+        $contaBanc->create($adm_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero, ""); 
 
         $res_pagarme_instituicao = $recebedor_pagarme->create_instituicao($token_conta, $recebedor_nome, $document_number_recebedor, $site_url, $email_recebedor, $telefone_recebedor);
         $id_instituicao_pagarme = $res_pagarme_instituicao['id'];

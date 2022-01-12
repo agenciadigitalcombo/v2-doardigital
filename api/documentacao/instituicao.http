@@ -86,7 +86,6 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 &instituicao_id= 27,
 &codigo_banco= "341",
 &agencia= "0932",
-&agencia_digito= "5",
 &conta= "58054",
 &conta_digito= "2",
 &tipo_conta= "conta_poupanca",
