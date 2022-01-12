@@ -77,7 +77,7 @@ class EnderecoControle
         campo_obrigatorios([
             'id' => 'Informe o ID',
             'cep' => 'Informe um CEP',
-            'logadouro' => 'Digite um endereço',
+            'logradouro' => 'Digite um endereço',
             'bairro' => 'digite o Bairro',
             'cidade' => 'Informe a Cidade',
             'estado' => 'Informe o estado',
