@@ -269,7 +269,7 @@ export default {
 	async mounted() { 
 
 		let enderecoDados = (await this.listarEndereco()).dados || {}
-		this.logradouro = enderecoDados.logradouro
+		this.logradouro = enderecoDados.logadouro   
 		this.cep = enderecoDados.cep
 		this.nome_identificacao = enderecoDados.nome_identificacao
 		this.numero = enderecoDados.numero

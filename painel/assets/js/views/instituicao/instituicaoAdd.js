@@ -25,7 +25,7 @@ export default {
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 active" >Informação da Instituição</a>
 										</li> 
 										<li class="nav-item mt-2">
-											<a class="nav-link text-active-primary ms-0 me-10 py-5 " >Endereço </a>
+											<a class="nav-link text-active-primary ms-0 me-10 py-5 " title="Cadastra primeiro a Instituição para prosseguir " >Endereço </a>
 										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5" >Dados Bancario</a>
