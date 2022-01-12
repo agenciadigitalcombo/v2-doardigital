@@ -31,7 +31,7 @@ export default {
 										</li> 
 										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5"
-												href="#/banco-instituicoes">Dados Bancario</a>
+												href="#/bancario-editar">Dados Bancario</a>
 										</li>
 
 									</ul> 
@@ -244,15 +244,12 @@ export default {
 					this.submitStatus = 'OK'
 					this.msg = res.message
 				}, 500)
-			}
-
-		},
-
-
-
+			} 
+		},  
 	},
+
 	async mounted() {
-		this.instituicao_id = globalThis._instituicao.id,
+	     	this.instituicao_id = globalThis._instituicao.id,
 			this.nome_fantasia = globalThis._instituicao.nome_fantasia,
 			this.email = globalThis._instituicao.email,
 			this.sub_domain = globalThis._instituicao.subdomaim,

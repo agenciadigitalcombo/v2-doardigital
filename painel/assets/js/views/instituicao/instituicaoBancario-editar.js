@@ -30,20 +30,19 @@ export default {
 										<!--begin::Navs-->
 										<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 										<!--begin::Nav item-->
-												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 ">Informação da Instituição</a>
-												</li>
-												<!--end::Nav item-->
-												<!--begin::Nav item-->
-												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 ">Endereço </a>
-												</li>
-												<!--end::Nav item-->
-											
-										
-											<li class="nav-item mt-2">
-												<a class="nav-link text-active-primary ms-0 me-10 py-5 active">Dados Bancario</a>
-											</li>
+												
+										<li class="nav-item mt-2">
+										<a class="nav-link text-active-primary ms-0 me-10 py-5"
+											href="#/editar-instituicoes">Informação da Instituição</a>
+									</li> 
+									<li class="nav-item mt-2">
+										<a class="nav-link text-active-primary ms-0 me-10 py-5 "
+											href="#/endereco-editar">Endereço </a>
+									</li> 
+									<li class="nav-item mt-2">
+										<a class="nav-link text-active-primary ms-0 me-10 py-5 active"
+											href="#/bancario-editar">Dados Bancario</a>
+									</li>
  
 										</ul>
 										<!--begin::Navs-->
@@ -56,7 +55,7 @@ export default {
 							<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 								<!--begin::Card title-->
 								<div class="card-title m-0">
-									<h3 class="fw-bolder m-0">Dados Bancario</h3>
+									<h3 class="fw-bolder m-0">Editar Dados Bancario</h3>
 								</div>
 								<!--end::Card title-->
 							</div>

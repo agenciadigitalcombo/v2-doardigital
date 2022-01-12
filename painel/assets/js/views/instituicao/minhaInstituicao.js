@@ -151,10 +151,11 @@ export default {
 	async mounted() {
 
 		this.dados = (await this.listar()).dados
+		this.id = this.dados.id,
 		this.nome_fantasia = this.dados.nome_fantasia,
-			this.subdomaim = this.dados.subdomaim,
+		this.subdomaim = this.dados.subdomaim,
 
-			this.filtraCredencial.reverse();
+		this.filtraCredencial.reverse();
 	},
 
 	methods: {
@@ -179,8 +180,8 @@ export default {
 
 		},
 
-		async editar(id) {
-			globalThis._instituicao = this.dados.find(user => user.id == id)
+		async editar(id) { 
+			globalThis._instituicao = this.dados.find(user => user.id == id);
 			window.location.href = "#/editar-instituicoes"
 		},
 	},

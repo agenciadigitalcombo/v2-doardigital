@@ -74,6 +74,8 @@ Vue.component('c-localInstituicao', localInstituicao )
 import instituLocaleditar from './views/instituicao/instituLocal-editar.js'
 Vue.component('c-instituLocal-editar', instituLocaleditar )
 
+import instituicaoBancoeditar from './views/instituicao/instituicaoBancario-editar.js'
+Vue.component('c-instituicaoBancario-editar', instituicaoBancoeditar ) 
 
 import bancoInstituicao from './views/instituicao/instituicaoBancario.js'
 Vue.component('c-bancoInstituicao', bancoInstituicao )
