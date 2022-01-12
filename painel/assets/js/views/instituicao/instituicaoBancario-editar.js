@@ -1,7 +1,8 @@
-
+import adm from "../../../../../static/js/api/adm.js"
+const { required, minLength } = window.validators
 
 export default {
-    template:` 
+	template: `
 	Domínio
 	<div>
 
@@ -9,28 +10,18 @@ export default {
     <c-aside></c-aside>
 
 	<!--begin::Root-->
- <div class="d-flex flex-column flex-root">
-	<!--begin::Page-->
-	<div class="page d-flex flex-row flex-column-fluid">
-
-		<!--begin::Wrapper-->
-		<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-		
-
-			<!--begin::Content-->
-			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-				<!--begin::Post-->
-				<div class="post d-flex flex-column-fluid" id="kt_post">
-					<!--begin::Container-->
-					<div id="kt_content_container" class="container-xxl">
-						<!--begin::Navbar-->
+ <div class="d-flex flex-column flex-root"> 
+	<div class="page d-flex flex-row flex-column-fluid"> 
+		<div class="wrapper d-flex flex-column flex-row-fluid" >
+		 
+			<div class="content d-flex flex-column flex-column-fluid"  > 
+				<div class="post d-flex flex-column-fluid" > 
+					<div id="kt_content_container" class="container-xxl"> 
 						<div class="card mb-5 mb-xl-10">
 							<div class="card-body pt-5 pb-0">
-						
-										<!--begin::Navs-->
+						 
 										<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-										<!--begin::Nav item-->
-												
+									 
 										<li class="nav-item mt-2">
 										<a class="nav-link text-active-primary ms-0 me-10 py-5"
 											href="#/editar-instituicoes">Informação da Instituição</a>
@@ -44,37 +35,25 @@ export default {
 											href="#/bancario-editar">Dados Bancario</a>
 									</li>
  
-										</ul>
-										<!--begin::Navs-->
+										</ul> 
 							</div>
-						</div>
-						<!--end::Navbar-->
-						<!--begin::Basic info-->
-						<div class="card mb-5 mb-xl-10">
-							<!--begin::Card header-->
+						</div> 
+						<div class="card mb-5 mb-xl-10"> 
 							<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
-								<!--begin::Card title-->
+							 
 								<div class="card-title m-0">
 									<h3 class="fw-bolder m-0">Editar Dados Bancario</h3>
-								</div>
-								<!--end::Card title-->
-							</div>
-							<!--begin::Card header-->
-							<!--begin::Content-->
+								</div> 
+							</div> 
 							<div id="kt_account_profile_details" >
-								<!--begin::Form-->
-								<form id="kt_account_profile_details_form" class="form">
-									<!--begin::Card body-->
+							 
+								<form @submit.prevent="contaBancario" autocomplete="off" name="formulario" class="form">
+								 
 									<div class="card-body border-top p-9">
-										<!--begin::Input group-->
-									
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="row mb-6">
-											<!--begin::Label-->
+										 
+										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label required fw-bold fs-6">Código Banco</label>
-											<!--end::Label-->
-											<!--begin::Col-->
+										 
 											<div class="col-lg-8 fv-row">
 											<div class="input-group mb-3">
 												<span class="input-group-text" id="basic-addon2">
@@ -83,149 +62,197 @@ export default {
 														<path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
 													  </svg>
 												</span>
-												<input type="text" name="codigo" class="form-control form-control-lg form-control-solid" placeholder="Código Banco" />
+												<input v-model="codigo_banco" type="text" name="codigo" class="form-control form-control-lg form-control-solid" placeholder="Código Banco" />
 												
 												</div>
-											</div>
-											<!--end::Col-->
+											</div> 
 										</div>
 										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label required fw-bold fs-6">Agencia</label>
-											<!--end::Label-->
-											<!--begin::Col-->
+										 <label class="col-lg-4 col-form-label required fw-bold fs-6">Agencia</label>
+ 
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="agencia" class="form-control form-control-lg form-control-solid" placeholder="Agencia " />
-											</div>
-											<!--end::Col-->
-										</div>
-										<!--end::Input group-->
+												<input v-model="agencia" type="text" name="agencia" class="form-control form-control-lg form-control-solid" placeholder="Agencia " />
+											</div> 
+										</div> 
 									
-										<div class="row mb-6">
-											<!--begin::Label-->
+										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
 												<span class="required">Conta</span>
 											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
+											</label> 
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="conta" class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
+												<input v-model="conta" type="text" name="conta" class="form-control form-control-lg form-control-solid" />
+											</div> 
 										</div>
-										<div class="row mb-6">
-											<!--begin::Label-->
+										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
 												<span class="required">Conta Dígito</span>
 											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
+											</label> 
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="cDigito" class="form-control form-control-lg form-control-solid" value="1" />
-											</div>
-											<!--end::Col-->
+												<input v-model="conta_digito" type="text" name="cDigito" class="form-control form-control-lg form-control-solid" value="1" />
+											</div> 
 										</div>
 										
-										<div class="row mb-6">
-											<!--begin::Label-->
+										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
 												<span class="required">Tipo</span>
 											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
+											</label> 
 											<div class="col-lg-8 fv-row">
-												<select class="form-select form-control form-control-lg form-control-solid" aria-label="Default select example">
+												<select v-model="tipo_conta" class="form-select form-control form-control-lg form-control-solid" aria-label="Default select example">
 													<option selected>seleciono o tipo de conta </option>
-													<option value="Conta Corrente">Conta Corrente</option>
-													<option value="Conta Poupança">Conta Poupança</option>
-													<option value="Conta Corrente Conjunta">Conta Corrente Conjunta</option>
-													<option value="Conta Poupança Conjunta">Conta Poupança Conjunta</option>
-												 </select>
+													<option value="conta_corrente">Conta Corrente</option>
+													<option value="conta_poupanca">Conta Poupança</option>
+													<option value="conta_corrente_conjunta">Conta Corrente Conjunta</option>
+													<option value="conta_poupanca_conjunta">Conta Poupança Conjunta</option>
+												</select>
 											
-											</div>
-											<!--end::Col-->
+											</div> 
 										</div>
+ 
 
-
-
-										<div class="row mb-6">
-											<!--begin::Label-->
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">CNPJ</span>
-											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
-											<div class="col-lg-8 fv-row">
-												<input type="text" name="CNPJ" class="form-control form-control-lg form-control-solid" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"/>
-											</div>
-											<!--end::Col-->
-										</div>
-
-										<div class="row mb-6">
-											<!--begin::Label-->
+										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
 												<span class="required">Nome</span>
 											
-											</label>
-											<!--end::Label-->
-											<!--begin::Col-->
+											</label> 
 											<div class="col-lg-8 fv-row">
-												<input type="text" name="nome" class="form-control form-control-lg form-control-solid" />
-											</div>
-											<!--end::Col-->
+												<input v-model="nome_completo" type="text" name="nome" class="form-control form-control-lg form-control-solid" />
+											</div> 
+										</div>
+
+										
+										<div class="row mb-6"> 
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">Documento numero</span> 
+											</label> 
+											<div class="col-lg-8 fv-row">
+												<input v-model="documento_numero" type="text" name="documento_numero" class="form-control form-control-lg form-control-solid" />
+											</div> 
+										</div>
+
+
+										
+										<div class="row mb-6"> 
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">Recebedor Nome</span> 
+											</label> 
+											<div class="col-lg-8 fv-row">
+												<input v-model="recebedor_nome" type="text" name="recebedor" class="form-control form-control-lg form-control-solid" />
+											</div> 
+										</div>
+
+										
+										<div class="row mb-6"> 
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">N Documento do Recebedor</span> 
+											</label> 
+											<div class="col-lg-8 fv-row">
+												<input v-model="document_number_recebedor" type="text" name="ndocumento" class="form-control form-control-lg form-control-solid" />
+											</div> 
+										</div>
+										<div class="row mb-6"> 
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">Telefone</span> 
+											</label> 
+											<div class="col-lg-8 fv-row">
+												<input v-model="telefone_recebedor" type="text" name="telefone" class="form-control form-control-lg form-control-solid" />
+											</div> 
 										</div>
 										
+										<div class="row mb-6"> 
+											<label class="col-lg-4 col-form-label fw-bold fs-6">
+												<span class="required">URL Site</span> 
+											</label> 
+											<div class="col-lg-8 fv-row">
+												<input v-model="site_url" type="text" name="url" class="form-control form-control-lg form-control-solid" />
+											</div> 
+										</div>
 									</div>
-									<!--end::Card body-->
-								
-									<!--begin::Actions-->
+									
 									<div class="card-footer d-flex justify-content-end py-6 px-9">
 										<button  type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
-									</div>
-									<!--end::Actions-->
-								</form>
-								<!--end::Form-->
-							</div>
-							<!--end::Content-->
-						</div>
-						<!--end::Basic info-->
-				
-					
+									</div> 
+								</form> 
+							</div> 
+						</div> 
 					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Post-->
-			</div>
-			<!--end::Content-->
+				 
+				</div> 
+			</div> 
 
 		</div>
 	</div>
-</div>	
-		<!--end::Root-->
+</div>	 
 
 		<c-footer/>
 	</div>
     `,
 
 
-     data: function () {
+	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-	
-        }
-    },
+			token: null,
+			instituicao_id: null,
+			codigo_banco: null,
+			agencia: null, 
+			conta: null,
+			conta_digito: null,
+			tipo_conta: null,
+			nome_completo: null,
+			documento_numero: null,
+			recebedor_nome: null,
+			document_number_recebedor: null,
+			site_url: null,
+			telefone_recebedor: null,
+
+			msg: "",
+			items: [],
+			data: null,
+
+		}
+	},
+
 	methods: {
-	
-     
-       
+ 
+		async contaBancario() {
+			this.error = null
 
-    },
-	
+			let res = await adm.cotaInstituicao(
+				this.token,
+				this.instituicao_id,
+				this.codigo_banco,
+				this.agencia,
+				this.agencia_digito,
+				this.conta,
+				this.conta_digito,
+				this.tipo_conta,
+				this.nome_completo,
+				this.documento_numero,
+				this.recebedor_nome,
+				this.document_number_recebedor,
+				this.site_url,
+				this.telefone_recebedor,
 
-	
+			)
+			if (!res.next) {
+				// this.error = res.message
+				this.msg = res.message
+				return null
+			}
+
+			this.msg = res.message,
+				setTimeout(() => this.msg = "", 6000);
+		},
+
+	},
+
+	async mounted() {
+		this.instituicao_id = localStorage.getItem("instituicao_id"); 
+	 },
+ 
+ 
+
 }
 

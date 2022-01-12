@@ -201,7 +201,7 @@ export default {
         })
     },
 
-    async listarEnderecoInst( 
+    async listarEnderecoInst(
         token,
         instituicao_id,) {
         return await http.get('/list-endereco-instituicao', {
@@ -221,7 +221,7 @@ export default {
         })
     },
 
- 
+
 
     async enderecoInstituicao(
         token,
@@ -234,7 +234,7 @@ export default {
         estado,
         numero,
         cep,
-        ) {
+    ) {
         return await http.post('/endereco-instituicao', {
             token,
             id,
@@ -248,14 +248,14 @@ export default {
             cep,
 
         })
-    }, 
+    },
 
     async todoSubdomain(subdomaim) {
         return await http.get('/info-subdomaim', {
             subdomaim
         })
     },
- 
+
 
     async cadastrarSubadm(
         nome,
@@ -543,6 +543,41 @@ export default {
             instituicao_id,
             ano,
 
+        })
+    },
+
+    async cotaInstituicao(
+        token,
+        instituicao_id,
+        codigo_banco,
+        agencia,
+        agencia_digito,
+        conta,
+        conta_digito,
+        tipo_conta,
+        nome_completo,
+        documento_numero,
+        recebedor_nome,
+        document_number_recebedor,
+        site_url,
+        telefone_recebedor,
+
+    ) {
+        return await http.post('/create-conta-instituicao', {
+            token,
+            instituicao_id,
+            codigo_banco,
+            agencia,
+            agencia_digito,
+            conta,
+            conta_digito,
+            tipo_conta,
+            nome_completo,
+            documento_numero,
+            recebedor_nome,
+            document_number_recebedor,
+            site_url,
+            telefone_recebedor,
         })
     },
 
