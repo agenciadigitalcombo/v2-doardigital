@@ -11,22 +11,7 @@ class ContaBancControler{
 
         $token_parce = token();
 
-        $instituicao_id = 27;
-        $codigo_banco = "341";
-        $agencia = "0932";
-        $agencia_digito = "5";
-        $conta = "58054";
-        $conta_digito = "2";
-        $tipo_conta = "conta_poupanca";
-        $nome_completo = "Victor Teste";
-        $documento_numero = "26268738888";
-        
-        $recebedor_nome = "Someone";
-        $document_number_recebedor = "92545278157";
-        $site_url = "digital.tk";
-        $email_recebedor = "some@email.com";
-        $telefone_recebedor = "11987654321";
-        
+
         $nome_identificacao = "";
         $instituicao_id = $_REQUEST['instituicao_id'];
         $codigo_banco = $_REQUEST['codigo_banco'];
