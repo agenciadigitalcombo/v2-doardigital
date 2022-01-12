@@ -221,6 +221,7 @@ export default {
         })
     },
 
+ 
 
     async enderecoInstituicao(
         token,
@@ -234,7 +235,7 @@ export default {
         numero,
         cep,
         ) {
-        return await http.post('/create-endereco', {
+        return await http.post('/endereco-instituicao', {
             token,
             id,
             nome_identificacao,
@@ -247,33 +248,14 @@ export default {
             cep,
 
         })
-    },
+    }, 
 
- 
-    async EditarEnderecoInstituicao(
-        id,
-        nome_identificacao,
-        logradouro,
-        complemento,
-        bairro,
-        cidade,
-        estado,
-        numero,
-        cep,
-        ) {
-        return await http.post('/endereco-instituicao', {
-            id,
-            nome_identificacao,
-            logradouro,
-            complemento,
-            bairro,
-            cidade,
-            estado,
-            numero,
-            cep,
-
+    async todoSubdomain(subdomaim) {
+        return await http.get('/info-subdomaim', {
+            subdomaim
         })
     },
+ 
 
     async cadastrarSubadm(
         nome,

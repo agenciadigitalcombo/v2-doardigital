@@ -208,7 +208,7 @@ export default {
 
 			let res = await adm.enderecoInstituicao(
 				this.token,
-				this.id,
+				await this.infoSubdomain(globalThis._subdomaim),
 				this.nome_identificacao,
 				this.logradouro,
 				this.complemento,
@@ -222,8 +222,19 @@ export default {
 				this.error = res.message
 				return null
 			}
+			
+			
+			localStorage.setItem("instituicao_id", await this.infoSubdomain(globalThis._subdomaim)); 
 		},
 
+		async infoSubdomain(subdomaim) {
+			let res = await adm.todoSubdomain(
+				subdomaim
+			)
+
+			return res.dados.id
+		},
+		 
 		async eliminaEndereco() {
 			let res = await adm.eliminaEndereco(
 				this.secret,
@@ -238,10 +249,10 @@ export default {
 
 		async listarEndereco() {
 			let res = await adm.listarEnderecoInst(
-				
-					this.token,
-					this.instituicao_id
-				
+
+				this.token,
+				this.instituicao_id
+
 			)
 			return res
 		},
