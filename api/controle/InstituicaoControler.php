@@ -227,6 +227,35 @@ class InstituicaoControler
         ]);
     }
 
+    static function list_instituicao_by_subdomaim()
+    {
+        $instituicao = new Instituicao();
+
+        $subdomaim = $_REQUEST['subdomaim'];
+
+        campo_obrigatorios([
+            'subdomaim' => 'Indoforme o Sub-domaim',
+        ]);
+
+        $get_instituicao = $instituicao->get_by_subdomaim($subdomaim);
+
+
+
+        $payload = [
+            'id' => $get_instituicao['id'],
+            'adm_id' => $get_instituicao['adm_id'],
+            'nome_fantasia' => $get_instituicao['nome_fantasia'],
+            'subdomaim' => $get_instituicao['subdomaim'],
+            'status' => $get_instituicao['status']
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Instituicao Pelo Subdomaim',
+            'dados' => $payload
+        ]);
+    }
+
     static function detete_instituicao()
     {
         $instituicao = new Instituicao();

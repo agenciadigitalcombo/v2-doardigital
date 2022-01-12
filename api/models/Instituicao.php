@@ -16,7 +16,15 @@ class Instituicao implements IInstituicao
         $sql = "SELECT * FROM instituicao WHERE id='$id'";
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
-    }    
+    } 
+    
+    public function get_by_subdomaim(string $subdomaim): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM instituicao WHERE subdomaim='$subdomaim'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
     
     public function exist_subdomain(string $subdomain): bool
     {
