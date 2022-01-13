@@ -274,11 +274,7 @@ export default {
 			}
 
 		},
-	},
-	// async mounted() {
-	// 	this.instituicao_id = globalThis._planos.id
-	// 	this.nome = globalThis._planos.nome
-	// }, 
+	}, 
 
 }
 
