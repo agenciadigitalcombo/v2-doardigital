@@ -230,8 +230,11 @@ class InstituicaoControler
     static function list_instituicao_by_subdomaim()
     {
         $instituicao = new Instituicao();
+        $plano = new Plano();
+        $endereco = new Endereco();
 
         $subdomaim = $_REQUEST['subdomaim'];
+        $logo = __DIR__ . '/api/upload/logo.jpeg';
 
         campo_obrigatorios([
             'subdomaim' => 'Indoforme o Sub-domaim',
@@ -239,20 +242,47 @@ class InstituicaoControler
 
         $get_instituicao = $instituicao->get_by_subdomaim($subdomaim);
 
+        $get_instituicao_id = $get_instituicao['id'];
+        $get_plano = $plano->list_all_by_instituicao($get_instituicao_id);
 
+        $get_endereco = $endereco->list_all_by_fk($get_instituicao_id);
 
-        $payload = [
+        $payload_endereco = [
+            'cep' => $get_endereco['cep'],
+            'logadouro' => $get_endereco['logadouro'],
+            'numero' => $get_endereco['numero'],
+            'complemento' => $get_endereco['complemento'],
+            'bairro' => $get_endereco['bairro'],
+            'cidade' => $get_endereco['cidade'],
+            'estado' => $get_endereco['estado']
+        ];
+
+        $payload_plano = array_map(function($plano) {
+            return [
+                'id' => $plano['id'],
+                'nome' => $plano['nome'],
+                'amount' => $plano['amount'],
+                'status' => $plano['status']
+            ];
+        },$get_plano );
+
+        $payload_instituicao = [
+            'logo' => $logo,
+            'cor' => '#c00',
             'id' => $get_instituicao['id'],
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
-            'status' => $get_instituicao['status']
+            'status' => $get_instituicao['status'],
+            'plano' => $payload_plano,
+            'endereco' => $payload_endereco
         ];
+
 
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao Pelo Subdomaim',
-            'dados' => $payload
+            'dados da instituicao' => $payload_instituicao
         ]);
     }
 

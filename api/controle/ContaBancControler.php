@@ -13,14 +13,20 @@ class ContaBancControler{
 
 
         $nome_identificacao = "";
-        $instituicao_id = $_REQUEST['instituicao_id'];
-        $codigo_banco = $_REQUEST['codigo_banco'];
-        $agencia = $_REQUEST['agencia'];
-        $conta = $_REQUEST['conta'];
-        $conta_digito = $_REQUEST['conta_digito'];
+        $instituicao_id_campo = $_REQUEST['instituicao_id'];
+        $codigo_banco_campo = $_REQUEST['codigo_banco'];
+        $agencia_campo = $_REQUEST['agencia'];
+        $conta_campo = $_REQUEST['conta'];
+        $conta_digito_campo = $_REQUEST['conta_digito'];
         $tipo_conta = $_REQUEST['tipo_conta'];
         $nome_completo = $_REQUEST['nome_completo'];
-        $documento_numero = $_REQUEST['documento_numero'];
+
+        $instituicao_id = withdraw_caracter($instituicao_id_campo);
+        $codigo_banco = withdraw_caracter($codigo_banco_campo);
+        $agencia = withdraw_caracter($agencia_campo);
+        $conta = withdraw_caracter($conta_campo);
+        $conta_digito = withdraw_caracter($conta_digito_campo);
+
 
         // var_dump($document_number_recebedor);
         // die;
@@ -37,11 +43,17 @@ class ContaBancControler{
         // $telefone_recebedor = valid_telefone($telefone_recebedor_campo);
 
 
+
+
         $secret_campo = $token_parce['secret'];
         $secret = space_sanitize($secret_campo);
         $get_id = $adm->list_profile($secret);
         $adm_id = $get_id['id'];
 
+
+        $get_id_instituicao = $instituicao->get_by_id($instituicao_id);
+        $documento_numero = $get_id_instituicao['cnpj'];
+        
         
         campos_numericos([
             'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
@@ -49,14 +61,12 @@ class ContaBancControler{
             'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
             'conta' => 'Campo inválido, Apenas Numeros em Conta',
             'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
-            'documento_numero' => 'Campo inválido, Apenas Numeros em Documento numero'
-            
         ]);
         
         campos_string([
             'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
-        ]);
-
+        ]);        
+        
         
 
         if(!$contaBanc->valid_type_conta($tipo_conta)){

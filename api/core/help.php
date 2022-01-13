@@ -391,7 +391,7 @@ function campo_obrigatorios(array $payload): void
 function campos_numericos(array $valores): void
 {
     $campos_inteiros = array_keys($valores);
-
+    
     foreach ($campos_inteiros as $campo) {
         if (!is_numeric($_REQUEST[$campo])) {
             echo json_encode([
@@ -421,6 +421,8 @@ function campos_string(array $valores): void
     }
 
 }
+
+
 
 function valid_porcentagem( int $procent ) {
     return $procent >= 1 && $procent <= 100;
