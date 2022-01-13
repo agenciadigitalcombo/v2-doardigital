@@ -50,12 +50,12 @@ class ContaBancControler{
 
         
         campos_numericos([
-            'instituicao_id' => 'Campo inválido, Apenas Numeros',
-            'codigo_banco' => 'Campo inválido, Apenas Numeros',
-            'agencia' => 'Campo inválido, Apenas Numeros',
-            'conta' => 'Campo inválido, Apenas Numeros',
-            'conta_digito' => 'Campo inválido, Apenas Numeros',
-            'documento_numero' => 'Campo inválido, Apenas Numeros',
+            'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
+            'codigo_banco' => 'Campo inválido, Apenas Numeros em Codigo banco',
+            'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
+            'conta' => 'Campo inválido, Apenas Numeros em Conta',
+            'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
+            'documento_numero' => 'Campo inválido, Apenas Numeros em Documento numero'
             
         ]);
 
