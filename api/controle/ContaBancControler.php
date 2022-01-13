@@ -24,17 +24,17 @@ class ContaBancControler{
 
         // var_dump($document_number_recebedor);
         // die;
-        $recebedor_nome = $_REQUEST['recebedor_nome'];
-        $document_number_recebedor_campo = $_REQUEST['document_number_recebedor'];
-        $document_number_recebedor = cnpj($document_number_recebedor_campo);
-        $site_url = "doardigital.tk";
-        $email_recebedor_campo = $_REQUEST['email_recebedor'];
-        $email_recebedor = valid_email($email_recebedor_campo);
+        // $recebedor_nome = $_REQUEST['recebedor_nome'];
+        // $document_number_recebedor_campo = $_REQUEST['document_number_recebedor'];
+        // $document_number_recebedor = cnpj($document_number_recebedor_campo);
+        // $site_url = "doardigital.tk";
+        // $email_recebedor_campo = $_REQUEST['email_recebedor'];
+        // $email_recebedor = valid_email($email_recebedor_campo);
         
         
 
-        $telefone_recebedor_campo = $_REQUEST['telefone_recebedor'];
-        $telefone_recebedor = valid_telefone($telefone_recebedor_campo);
+        // $telefone_recebedor_campo = $_REQUEST['telefone_recebedor'];
+        // $telefone_recebedor = valid_telefone($telefone_recebedor_campo);
 
 
         $secret_campo = $token_parce['secret'];
@@ -46,7 +46,6 @@ class ContaBancControler{
         
         campos_string([
             'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
-            'recebedor_nome' => 'Campo inválido, nao aceita caracters especiais'
         ]);
 
         
@@ -75,7 +74,7 @@ class ContaBancControler{
         
         $contaBanc->create($adm_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero, ""); 
 
-        $res_pagarme_instituicao = $recebedor_pagarme->create_instituicao($token_conta, $recebedor_nome, $document_number_recebedor, $site_url, $email_recebedor, $telefone_recebedor);
+        $res_pagarme_instituicao = $recebedor_pagarme->create_instituicao($token_conta);
         $id_instituicao_pagarme = $res_pagarme_instituicao['id'];
 
         

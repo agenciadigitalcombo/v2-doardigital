@@ -3,9 +3,7 @@
 class PagarmeInstituicao extends PagarMe
 {
     public function create_instituicao(
-    string $conta_id,
-    string $recebedor_nome, string $document_number_recebedor,
-    string $site_url, string $email_recebedor, string $telefone_recebedor): array
+    string $conta_id): array
     {
 
         
