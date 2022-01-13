@@ -396,7 +396,8 @@ function campos_numericos(array $valores): void
         if (!is_numeric($_REQUEST[$campo])) {
             echo json_encode([
                 'next' => false,
-                'message' => $valores[$campo]
+                'message' => $valores[$campo],
+                'payload' => $_REQUEST
             ]);
             die;
         }
@@ -407,7 +408,7 @@ function campos_numericos(array $valores): void
 function campos_string(array $valores): void
 {
     $campos_inteiros = array_keys($valores);
-
+    
     foreach ($campos_inteiros as $campo) {
         $valid_campo = withdraw_caracter($_REQUEST[$campo]);
         if (is_numeric($_REQUEST[$campo])) {

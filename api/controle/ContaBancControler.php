@@ -43,12 +43,6 @@ class ContaBancControler{
         $adm_id = $get_id['id'];
 
         
-        
-        campos_string([
-            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
-        ]);
-
-        
         campos_numericos([
             'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
             'codigo_banco' => 'Campo inválido, Apenas Numeros em Codigo banco',
@@ -58,6 +52,12 @@ class ContaBancControler{
             'documento_numero' => 'Campo inválido, Apenas Numeros em Documento numero'
             
         ]);
+        
+        campos_string([
+            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
+        ]);
+
+        
 
         if(!$contaBanc->valid_type_conta($tipo_conta)){
             echo json_encode([
