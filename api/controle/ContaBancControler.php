@@ -22,17 +22,43 @@ class ContaBancControler{
         $nome_completo = $_REQUEST['nome_completo'];
         $documento_numero = $_REQUEST['documento_numero'];
 
+        // var_dump($document_number_recebedor);
+        // die;
         $recebedor_nome = $_REQUEST['recebedor_nome'];
-        $document_number_recebedor = $_REQUEST['document_number_recebedor'];
+        $document_number_recebedor_campo = $_REQUEST['document_number_recebedor'];
+        $document_number_recebedor = cnpj($document_number_recebedor_campo);
         $site_url = "doardigital.tk";
-        $email_recebedor = $_REQUEST['email_recebedor'];
-        $telefone_recebedor = $_REQUEST['telefone_recebedor'];
+        $email_recebedor_campo = $_REQUEST['email_recebedor'];
+        $email_recebedor = valid_email($email_recebedor_campo);
         
+        
+
+        $telefone_recebedor_campo = $_REQUEST['telefone_recebedor'];
+        $telefone_recebedor = valid_telefone($telefone_recebedor_campo);
+
+
         $secret_campo = $token_parce['secret'];
         $secret = space_sanitize($secret_campo);
         $get_id = $adm->list_profile($secret);
         $adm_id = $get_id['id'];
+
         
+        
+        campos_string([
+            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
+            'recebedor_nome' => 'Campo inválido, nao aceita caracters especiais'
+        ]);
+
+        
+        campos_numericos([
+            'instituicao_id' => 'Campo inválido, Apenas Numeros',
+            'codigo_banco' => 'Campo inválido, Apenas Numeros',
+            'agencia' => 'Campo inválido, Apenas Numeros',
+            'conta' => 'Campo inválido, Apenas Numeros',
+            'conta_digito' => 'Campo inválido, Apenas Numeros',
+            'documento_numero' => 'Campo inválido, Apenas Numeros',
+            
+        ]);
 
         if(!$contaBanc->valid_type_conta($tipo_conta)){
             echo json_encode([
@@ -41,8 +67,9 @@ class ContaBancControler{
             ]); 
             return null;
         }
-
         
+        
+
         $res_pagarme_conta = $banck_pagarme->create_conta($codigo_banco, $agencia, $conta_digito, $conta, $tipo_conta, $documento_numero, $nome_completo); 
         $token_conta = $res_pagarme_conta['id'];
         

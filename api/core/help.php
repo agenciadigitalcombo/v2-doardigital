@@ -128,9 +128,11 @@ function withdraw_caracter($valor): string
     return $transform_valor;
 }
 
-function withdraw_caracter_teste(array $valor): int
+
+
+function withdraw_caracter_teste($valor): string
 {
-    $transform_valor = preg_replace('/\D/', '', $valor);
+    $transform_valor = preg_replace('/\-/'/'/\_/'/'/\D/', '', $valor);
     
     return intval($transform_valor);
 }
@@ -225,24 +227,6 @@ function valid_senha($valor): string
 function cnpj($cnpj_campo): string
 {
     $cnpj = withdraw_caracter($cnpj_campo);
-
-
-    $campos_obrigatorios = [
-        'cnpj'
-    ];
-    $lb = [
-        'cnpj' => 'Digite o cnpj'
-    ];
-
-    foreach ($campos_obrigatorios as $campo) {
-        if (empty($_REQUEST[$campo])) {
-            echo json_encode([
-                'next' => false,
-                'message' => $lb[$campo]
-            ]);
-            die;
-        }
-    }
 
     if (strlen($cnpj) != 14) {
         echo json_encode([
@@ -346,19 +330,21 @@ function cpf($cpf_campo): string
 }
 
 
-function valid_telefone($valor): int
+function valid_telefone($valor): string
 {
     
     $telefone = withdraw_caracter($valor);
 
-    if (preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefone)) {
+    $tamanho_telefone = strlen($telefone);
+
+    if ($tamanho_telefone < 11 and $tamanho_telefone > 8 ) {
         echo json_encode([
             "next" => false,
             "message" => "Telefone Ínvalido"
         ]);
         die;
     }
-    return $telefone;
+    return $valor;
 }
 
 
@@ -401,6 +387,39 @@ function campo_obrigatorios(array $payload): void
     }
 }
 
+
+function campos_numericos(array $valores): void
+{
+    $campos_inteiros = array_keys($valores);
+
+    foreach ($campos_inteiros as $campo) {
+        if (!is_numeric($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $valores[$campo]
+            ]);
+            die;
+        }
+    }
+
+}
+
+function campos_string(array $valores): void
+{
+    $campos_inteiros = array_keys($valores);
+
+    foreach ($campos_inteiros as $campo) {
+        $valid_campo = withdraw_caracter($_REQUEST[$campo]);
+        if (is_numeric($_REQUEST[$campo])) {
+            echo json_encode([
+                'next' => false,
+                'message' => $valores[$valid_campo]
+            ]);
+            die;
+        }
+    }
+
+}
 
 function valid_porcentagem( int $procent ) {
     return $procent >= 1 && $procent <= 100;
