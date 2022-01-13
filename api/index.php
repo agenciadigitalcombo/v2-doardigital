@@ -5,8 +5,12 @@ header("Access-Control-Allow-Origin: *");
 // header('content-type: application/json; charset=utf-8');
 date_default_timezone_set('America/Sao_Paulo');
 
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+if(!empty($_REQUEST['debug']))
+{
+    
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
 
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/core/help.php";
