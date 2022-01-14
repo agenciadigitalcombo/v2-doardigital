@@ -143,6 +143,15 @@ export default {
 											</div> 
 										</div>
 
+										<div class="row mb-6"> 
+										<label class="col-lg-4 col-form-label fw-bold fs-6">
+											<span class="required">Recebedor Email</span> 
+										</label> 
+										<div class="col-lg-8 fv-row">
+											<input v-model="email_recebedor" type="text" name="recebedoremail" class="form-control form-control-lg form-control-solid" />
+										</div> 
+									</div>
+										
 										
 										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
@@ -193,6 +202,9 @@ export default {
 
 	data: function () {
 		return {
+			 
+
+
 			token: null,
 			instituicao_id: null,
 			codigo_banco: null,
@@ -203,9 +215,11 @@ export default {
 			nome_completo: null,
 			documento_numero: null,
 			recebedor_nome: null,
+			email_recebedor: null,
 			document_number_recebedor: null,
 			site_url: null,
 			telefone_recebedor: null,
+			 
 
 			msg: "",
 			items: [],
@@ -231,10 +245,10 @@ export default {
 				this.nome_completo,
 				this.documento_numero,
 				this.recebedor_nome,
+				this.email_recebedor, 
 				this.document_number_recebedor,
 				this.site_url,
 				this.telefone_recebedor,
-
 			)
 			if (!res.next) {
 				// this.error = res.message
