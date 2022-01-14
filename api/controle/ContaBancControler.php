@@ -8,10 +8,10 @@ class ContaBancControler{
         $recebedor_pagarme = new PagarmeInstituicao();
         $banck_pagarme = new PagarmeContaBanc();
         $contaBanc = new ContaBanc();
-
+        
         $token_parce = token();
-
-
+        
+        
         $nome_identificacao = "";
         $instituicao_id_campo = $_REQUEST['instituicao_id'];
         $codigo_banco_campo = $_REQUEST['codigo_banco'];
@@ -19,8 +19,10 @@ class ContaBancControler{
         $conta_campo = $_REQUEST['conta'];
         $conta_digito_campo = $_REQUEST['conta_digito'];
         $tipo_conta = $_REQUEST['tipo_conta'];
+        $documento_numero_campo = $_REQUEST['documento_numero'];
         $nome_completo = $_REQUEST['nome_completo'];
 
+        $documento_numero = cnpj($documento_numero_campo);
         $instituicao_id = withdraw_caracter($instituicao_id_campo);
         $codigo_banco = withdraw_caracter($codigo_banco_campo);
         $agencia = withdraw_caracter($agencia_campo);
@@ -32,7 +34,6 @@ class ContaBancControler{
         // die;
         // $recebedor_nome = $_REQUEST['recebedor_nome'];
         // $document_number_recebedor_campo = $_REQUEST['document_number_recebedor'];
-        // $document_number_recebedor = cnpj($document_number_recebedor_campo);
         // $site_url = "doardigital.tk";
         // $email_recebedor_campo = $_REQUEST['email_recebedor'];
         // $email_recebedor = valid_email($email_recebedor_campo);
@@ -50,9 +51,6 @@ class ContaBancControler{
         $get_id = $adm->list_profile($secret);
         $adm_id = $get_id['id'];
 
-
-        $get_id_instituicao = $instituicao->get_by_id($instituicao_id);
-        $documento_numero = $get_id_instituicao['cnpj'];
         
         
         campos_numericos([
@@ -61,6 +59,7 @@ class ContaBancControler{
             'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
             'conta' => 'Campo inválido, Apenas Numeros em Conta',
             'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
+            'documento_numero' =>'Campo inválido, Apenas Numeros no Numero do documento'
         ]);
         
         campos_string([

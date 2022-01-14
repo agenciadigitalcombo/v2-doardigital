@@ -228,13 +228,13 @@ function cnpj($cnpj_campo): string
 {
     $cnpj = withdraw_caracter($cnpj_campo);
 
-    if (strlen($cnpj) != 14) {
-        echo json_encode([
-            "next" => false,
-            "message" => "O cnpj deve conter 14 Digitos"
-        ]);
-        die;
-    }
+    // if (strlen($cnpj) != 14) {
+    //     echo json_encode([
+    //         "next" => false,
+    //         "message" => "O cnpj deve conter 14 Digitos"
+    //     ]);
+    //     die;
+    // }
 
 
     if (
