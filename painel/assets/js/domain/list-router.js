@@ -18,9 +18,9 @@ export default [
     { path: '/endereco-instituicoes', component: { template: '<c-localInstituicao>' } },
     { path: '/endereco-editar', component: { template: '<c-instituLocal-editar>' } },
     { path: '/bancario-editar', component: { template: '<c-instituicaoBancario-editar>' } },
+     { path: '/banco-instituicoes', component: { template: '<c-bancoInstituicao>' } },
     
-    
-    { path: '/banco-instituicoes', component: { template: '<c-bancoInstituicao>' } },
+   
     { path: '/dominio-instituicoes', component: { template: '<c-dominioInstituicao>' } },
     { path: '/editar-instituicoes', component: { template: '<c-editarInstituicao>' } },
 
