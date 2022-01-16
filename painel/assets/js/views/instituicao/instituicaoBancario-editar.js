@@ -1,5 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
-const { required, minLength } = window.validators
+const { required, minLength, maxLength  } = window.validators
 
 export default {
 	template: `
@@ -62,8 +62,19 @@ export default {
 														<path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
 													  </svg>
 												</span>
-												<input v-model="codigo_banco" type="text" name="codigo" class="form-control form-control-lg form-control-solid" placeholder="Código Banco" />
 												
+												<input  type="number" name="codigo" v-model.trin="$v.codigo_banco.$model" required placeholder="Código Banco"
+												 class="form-control form-control-lg form-control-solid" placeholder="codigo_banco"
+												:class=" {'is-invalid':$v.codigo_banco.$error, 'is-valid':!$v.codigo_banco.$invalid }" />
+											
+												</div>	
+												<div class="erros" v-if="$v.codigo_banco.$error">
+												<div class="erro_texte" v-if="!$v.codigo_banco.required">Valor
+													é necessária</div>
+												<div class="erro_texte" v-if="!$v.codigo_banco.maxLength">
+													adicione no maximo 3 numero para codigo banco.</div>
+											</div>
+											<div class="sucesso_texte" v-else>  
 												</div>
 											</div> 
 										</div>
@@ -71,7 +82,19 @@ export default {
 										 <label class="col-lg-4 col-form-label required fw-bold fs-6">Agencia</label>
  
 											<div class="col-lg-8 fv-row">
-												<input v-model="agencia" type="text" name="agencia" class="form-control form-control-lg form-control-solid" placeholder="Agencia " />
+												<input  type="number" name="agencia" v-model.trin="$v.agencia.$model" required
+												 class="form-control form-control-lg form-control-solid" placeholder="Agencia"
+												:class=" {'is-invalid':$v.agencia.$error, 'is-valid':!$v.agencia.$invalid }" />
+												
+												<div class="erros" v-if="$v.agencia.$error">
+												<div class="erro_texte" v-if="!$v.agencia.required">Valor
+													é necessária</div>
+												<div class="erro_texte" v-if="!$v.agencia.maxLength">
+													adicione no maximo 4 numero para agencia.</div>
+											</div>
+											<div class="sucesso_texte" v-else>  
+												</div>
+
 											</div> 
 										</div> 
 									
@@ -80,9 +103,21 @@ export default {
 												<span class="required">Conta</span>
 											
 											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="conta" type="text" name="conta" class="form-control form-control-lg form-control-solid" />
-											</div> 
+											<div class="col-lg-8 fv-row"> 
+												<input  type="number" name="conta" v-model.trin="$v.conta.$model" required
+												 class="form-control form-control-lg form-control-solid" placeholder="conta"
+												:class=" {'is-invalid':$v.conta.$error, 'is-valid':!$v.conta.$invalid }" />
+												
+												<div class="erros" v-if="$v.conta.$error">
+												<div class="erro_texte" v-if="!$v.conta.required">Valor
+													é necessária</div>
+												<div class="erro_texte" v-if="!$v.conta.maxLength">
+													adicione no maximo 13 numero para conta.</div>
+											</div>
+											<div class="sucesso_texte" v-else>  
+												</div> 
+
+												</div> 
 										</div>
 										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
@@ -90,8 +125,21 @@ export default {
 											
 											</label> 
 											<div class="col-lg-8 fv-row">
-												<input v-model="conta_digito" type="text" name="cDigito" class="form-control form-control-lg form-control-solid" value="1" />
-											</div> 
+												 
+												<input  type="number" name="cDigito" v-model.trin="$v.conta_digito.$model" required
+												 class="form-control form-control-lg form-control-solid" placeholder="conta_digito"
+												:class=" {'is-invalid':$v.conta_digito.$error, 'is-valid':!$v.conta_digito.$invalid }" />
+												
+												<div class="erros" v-if="$v.conta_digito.$error">
+												<div class="erro_texte" v-if="!$v.conta_digito.required">Valor
+													é necessária</div>
+												<div class="erro_texte" v-if="!$v.conta_digito.maxLength">
+													adicione no maximo 2 numero .</div>
+											</div>
+											<div class="sucesso_texte" v-else>  
+												</div>
+											
+												</div> 
 										</div>
 										
 										<div class="row mb-6"> 
@@ -101,7 +149,7 @@ export default {
 											</label> 
 											<div class="col-lg-8 fv-row">
 												<select v-model="tipo_conta" class="form-select form-control form-control-lg form-control-solid" aria-label="Default select example">
-													<option selected>seleciono o tipo de conta </option>
+													<option value="">seleciono o tipo de conta </option>
 													<option value="conta_corrente">Conta Corrente</option>
 													<option value="conta_poupanca">Conta Poupança</option>
 													<option value="conta_corrente_conjunta">Conta Corrente Conjunta</option>
@@ -117,9 +165,21 @@ export default {
 												<span class="required">Nome</span>
 											
 											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="nome_completo" type="text" name="nome" class="form-control form-control-lg form-control-solid" />
-											</div> 
+											<div class="col-lg-8 fv-row"> 
+												<input  type="text" name="nome" v-model.trin="$v.nome_completo.$model" required
+												class="form-control form-control-lg form-control-solid" placeholder="nome_completo"
+											   :class=" {'is-invalid':$v.nome_completo.$error, 'is-valid':!$v.nome_completo.$invalid }" />
+											   
+											   <div class="erros" v-if="$v.nome_completo.$error">
+											   <div class="erro_texte" v-if="!$v.nome_completo.required">Valor
+												   é necessária</div>
+											   <div class="erro_texte" v-if="!$v.nome_completo.maxLength">
+												   O nome deve ter no maximo 30 caracteres .</div>
+										   </div>
+										   <div class="sucesso_texte" v-else>  
+											   </div>
+										 
+												</div> 
 										</div>
 
 										
@@ -128,7 +188,7 @@ export default {
 												<span class="required">Documento numero</span> 
 											</label> 
 											<div class="col-lg-8 fv-row">
-												<input v-model="documento_numero" type="text" name="documento_numero" class="form-control form-control-lg form-control-solid" />
+												<input v-model="documento_numero" type="text" name="documento_numero" class="form-control form-control-lg form-control-solid" required/>
 											</div> 
 										</div>
 
@@ -139,7 +199,7 @@ export default {
 												<span class="required">Recebedor Nome</span> 
 											</label> 
 											<div class="col-lg-8 fv-row">
-												<input v-model="recebedor_nome" type="text" name="recebedor" class="form-control form-control-lg form-control-solid" />
+												<input v-model="recebedor_nome" type="text" name="recebedor" class="form-control form-control-lg form-control-solid" required/>
 											</div> 
 										</div>
 
@@ -148,17 +208,17 @@ export default {
 											<span class="required">Recebedor Email</span> 
 										</label> 
 										<div class="col-lg-8 fv-row">
-											<input v-model="email_recebedor" type="text" name="recebedoremail" class="form-control form-control-lg form-control-solid" />
+											<input v-model="email_recebedor" type="text" name="recebedoremail" class="form-control form-control-lg form-control-solid" required/>
 										</div> 
 									</div>
 										
 										
 										<div class="row mb-6"> 
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">N Documento do Recebedor</span> 
+												<span class="required">CNPJ</span> 
 											</label> 
 											<div class="col-lg-8 fv-row">
-												<input v-model="document_number_recebedor" type="text" name="ndocumento" class="form-control form-control-lg form-control-solid" />
+												<input v-model="cnpj" type="text" name="ndocumento" class="form-control form-control-lg form-control-solid" required/>
 											</div> 
 										</div>
 										<div class="row mb-6"> 
@@ -166,7 +226,7 @@ export default {
 												<span class="required">Telefone</span> 
 											</label> 
 											<div class="col-lg-8 fv-row">
-												<input v-model="telefone_recebedor" type="text" name="telefone" class="form-control form-control-lg form-control-solid" />
+												<input v-model="telefone_recebedor" type="text" name="telefone" class="form-control form-control-lg form-control-solid" required/>
 											</div> 
 										</div>
 										
@@ -175,7 +235,7 @@ export default {
 												<span class="required">URL Site</span> 
 											</label> 
 											<div class="col-lg-8 fv-row">
-												<input v-model="site_url" type="text" name="url" class="form-control form-control-lg form-control-solid" />
+												<input v-model="site_url" type="text" name="url" class="form-control form-control-lg form-control-solid" required/>
 											</div> 
 										</div>
 									</div>
@@ -201,26 +261,22 @@ export default {
 
 
 	data: function () {
-		return {
-			 
-
-
+		return { 
 			token: null,
 			instituicao_id: null,
 			codigo_banco: null,
 			agencia: null, 
 			conta: null,
 			conta_digito: null,
-			tipo_conta: null,
+			tipo_conta: "",
 			nome_completo: null,
 			documento_numero: null,
 			recebedor_nome: null,
 			email_recebedor: null,
-			document_number_recebedor: null,
+			cnpj: null,
 			site_url: null,
 			telefone_recebedor: null,
-			 
-
+			  
 			msg: "",
 			items: [],
 			data: null,
@@ -228,37 +284,66 @@ export default {
 		}
 	},
 
+	validations: {
+		codigo_banco: {
+			required,
+			maxLength: maxLength(3)
+		},
+		agencia: {
+			required,
+			maxLength: maxLength(4)
+		},
+		conta: {
+			required,
+			maxLength: maxLength(13)
+		},
+		conta_digito: {
+			required,
+			maxLength: maxLength(2)
+		},
+		nome_completo: {
+			required,
+			maxLength: maxLength(30)
+		}
+	},
+
 	methods: {
- 
 		async contaBancario() {
 			this.error = null
-
-			let res = await adm.cotaInstituicao(
-				this.token,
-				this.instituicao_id,
-				this.codigo_banco,
-				this.agencia,
-				this.agencia_digito,
-				this.conta,
-				this.conta_digito,
-				this.tipo_conta,
-				this.nome_completo,
-				this.documento_numero,
-				this.recebedor_nome,
-				this.email_recebedor, 
-				this.document_number_recebedor,
-				this.site_url,
-				this.telefone_recebedor,
-			)
-			if (!res.next) {
-				// this.error = res.message
-				this.msg = res.message
-				return null
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
+				let res = await adm.cotaInstituicao(
+					this.token,
+					this.instituicao_id,
+					this.codigo_banco,
+					this.agencia,
+					this.agencia_digito,
+					this.conta,
+					this.conta_digito,
+					this.tipo_conta,
+					this.nome_completo,
+					this.documento_numero,
+					this.recebedor_nome,
+					this.email_recebedor, 
+					this.cnpj,
+					this.site_url,
+					this.telefone_recebedor,
+				)
+				if (!res.next) {
+					// this.error = res.message
+					this.msg = res.message
+					return null
+				} 
+				this.submitStatus = 'PENDING'
+				setTimeout(() => {
+				  this.submitStatus = 'OK'
+				  this.msg = res.message 
+				}, 500)
 			}
-
-			this.msg = res.message,
-				setTimeout(() => this.msg = "", 6000);
 		},
+ 
 
 	},
 

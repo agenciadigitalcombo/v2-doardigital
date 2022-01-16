@@ -62,18 +62,18 @@ export default {
 														<div class="row mt-5">
 
 															<div class="col-lg-4 mb-10 mb-lg-0" v-for="listar in dados" :key="listar.id">
-
-															<label 
+															<label
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
 																<div class="d-flex align-items-center me-2">
+
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)"
-																			class="form-check-input" type="radio" name="plan" />
-										</div>
+																		<input v-bind:value="listar.amount" v-model="valor" class="form-check-input"
+																			type="radio" name="plan" />
+																	</div>
 
 																	<div class="flex-grow-1">
-																		<div class="fw-bold opacity-100">R$  {{ listar.amount }} e {{ listar.id }}</div>
+																		<div class="fw-bold opacity-100">R$  {{ listar.amount }}</div>
 																	</div>
 																</div>
 															</label>
@@ -110,7 +110,7 @@ export default {
 													<h3>Informe um valor, mínimo R$ 25,00. (Pix máximo R$ 1000,00 dia)</h3>
 												</div>
 
-												<input v-model="valor_digitado" type="text" class="form-control form-control-solid p-5"
+												<input v-model="amount" type="text" class="form-control form-control-solid p-5"
 													placeholder="00.00" />
 											</div>
 											<div class="card-title mb-10">
@@ -121,6 +121,7 @@ export default {
 												<input v-model="email" type="email" class="form-control form-control-solid p-5"
 													placeholder="Email" />
 											</div>
+											{{valor}}
 											<div>
 												<button @click="descartavel()" style="width: 100%;"
 										 class="btn btn-success p-5">PROSEGUIR...</button>
@@ -151,8 +152,6 @@ export default {
 			tipo: "mes",
 			amount: null,
 			valor: null,
-			valor_digitado: null,
-			planos_id: null,
 			email: null,
 			outro: null,
 			subdomaim: null,
@@ -161,22 +160,15 @@ export default {
 	},
 	methods: {
 		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
 			return res
 		},
 
-		setarPlano(jms) {
-			this.valor = jms.amount
-			this.planos_id = jms.id
-		},
 
 		descartavel() {
-			window.localStorage.setItem("tipo", this.tipo)
-			window.localStorage.setItem("amount", this.valor)
-			window.localStorage.setItem("planos_id", this.planos_id)
-			window.localStorage.setItem("amount_digitado", this.valor_digitado)
-			window.localStorage.setItem("email", this.email)
-			window.location.href = "#/finalizar"
+			this.tipo = window.localStorage.setItem("tipo", this.tipo)
+			this.valor = window.localStorage.setItem("amount", this.amount)
+			this.email = window.localStorage.setItem("email", this.email)
 		}
 	},
 
@@ -186,6 +178,7 @@ export default {
 
 		// let gravatar = (await this.infoSubdomain()).dados_instituicao
 		//  this.gravatar = gravatar.logo
+
 	},
 
 

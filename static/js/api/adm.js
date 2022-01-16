@@ -559,7 +559,7 @@ export default {
         documento_numero,
         recebedor_nome,
         email_recebedor,
-        document_number_recebedor,
+        cnpj,
         site_url,
         telefone_recebedor,
 
@@ -577,7 +577,7 @@ export default {
             documento_numero,
             recebedor_nome,
             email_recebedor,
-            document_number_recebedor,
+            cnpj,
             site_url,
             telefone_recebedor,
         })

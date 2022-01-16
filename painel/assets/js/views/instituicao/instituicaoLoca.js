@@ -203,7 +203,7 @@ export default {
 
 	methods: {
 
-		async cadastrarEndereco() {
+		async cadastrarEndereco() { 
 			this.error = null
 
 			let res = await adm.enderecoInstituicao(
@@ -228,10 +228,10 @@ export default {
 
 		async infoSubdomain(subdomaim) {
 			let res = await adm.todoSubdomain(
-				subdomaim
+				subdomaim  
 			)
 
-			return res.dados.id
+			return res.dados_instituicao.id
 		},
 		 
 		async eliminaEndereco() {
@@ -270,8 +270,7 @@ export default {
 
 	},
 
- 
-
+  
 	created() {
 		this.instituicao_id = localStorage.getItem('instituicao_id')
 	},

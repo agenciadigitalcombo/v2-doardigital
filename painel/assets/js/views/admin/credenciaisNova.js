@@ -42,7 +42,7 @@ export default {
 														</p>
 
 														<div class="row g-5">
-
+																		{{jms}}
 
 															<div class="col-lg-4" v-for="listar in permisao">
 																<div class="card card-stretch mb-5">
@@ -138,10 +138,8 @@ export default {
 			}
 
 			this.msg = res.message,
-				setTimeout(() => this.msg = "", 3000);
-
-				this.nome_identificacao= ""
-				
+				setTimeout(() => this.msg = "", 3000); 
+				this.nome_identificacao= "" 	
 		},
 
 
