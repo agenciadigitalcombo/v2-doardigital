@@ -16,6 +16,9 @@ Vue.component('c-checkout', checkout  )
 import finalizar from './views/finalizar.js'
 Vue.component('c-finalizar', finalizar )
 
+import obrigado from './views/obrigado.js'
+Vue.component('c-obrigado', obrigado )
+
 import mensagem from './componentes/c-mensagem.js'
 Vue.component('c-mensagem', mensagem )
 

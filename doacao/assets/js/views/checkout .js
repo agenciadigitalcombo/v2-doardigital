@@ -6,7 +6,6 @@ export default {
 		<div>
 
 			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-
 				<div class="post d-flex flex-column-fluid" id="kt_post">
 					<div id="kt_content_container" class="container-xxl">
 						<div class="text-center mb-20 mb-xl-5">
@@ -64,7 +63,7 @@ export default {
 															<div class="col-lg-4 mb-10 mb-lg-0" v-for="listar in dados" :key="listar.id">
 
 															<label 
-																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
+																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-5 mb-5">
 																<div class="d-flex align-items-center me-2">
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
@@ -73,7 +72,7 @@ export default {
 										</div>
 
 																	<div class="flex-grow-1">
-																		<div class="fw-bold opacity-100">R$  {{ listar.amount }} e {{ listar.id }}</div>
+																		<div class="fw-bold opacity-100">R$  {{ listar.amount }}</div>
 																	</div>
 																</div>
 															</label>
