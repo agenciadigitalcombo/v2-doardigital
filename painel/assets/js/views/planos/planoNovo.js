@@ -43,7 +43,7 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="nome"
 																	class="form-label fs-6 fw-bolder mb-3 required">Nome</label>
-																<input type="text" v-model.trin="$v.nome.$model"
+																<input type="text" v-model.trin="$v.nome.$model" required
 																:class=" {'is-invalid':$v.nome.$error, 'is-valid':!$v.nome.$invalid }"
 																	class="form-control form-control-lg form-control-solid" />
 															
@@ -65,7 +65,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
 																<input type="text" v-model.trin="$v.amount.$model" id="kt_inputmask_6" @input="money"
-																	:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }"
+																	:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }" required
 																	class="form-control form-control-lg form-control-solid ">
 																
 																	<div class="erros" v-if="$v.amount.$error">

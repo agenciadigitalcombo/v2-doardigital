@@ -65,7 +65,7 @@ export default {
 																<label for="Valor"
 																	class="form-label fs-6 fw-bolder mb-3 required">Valor</label>
 																<input type="text" v-model.trin="$v.amount.$model" disabled id="kt_inputmask_6" @input="masc_money"
-																	:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }"
+																	:class=" {'is-invalid':$v.amount.$error, 'is-valid':!$v.amount.$invalid }" 
 																	class="form-control form-control-lg form-control-solid ">
 																
 																	<div class="erros" v-if="$v.amount.$error">

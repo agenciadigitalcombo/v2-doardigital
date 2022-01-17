@@ -21,6 +21,7 @@ Vue.component('c-checkout_plano', checkout_plano  )
 import checkout_endereco from './views/checkout_endereco.js'
 Vue.component('c-checkout_endereco', checkout_endereco  )
 
+
 const app = new Vue({
     store,
     router,

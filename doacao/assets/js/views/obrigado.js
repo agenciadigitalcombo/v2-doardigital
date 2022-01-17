@@ -1,53 +1,9 @@
-<!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
-Purchase: https://1.envato.market/EA4JP
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
-Filter Options act
--->
+import adm from "../../../../../static/js/api/adm.js"
 
-
-<html lang="en">
-<!--begin::Head-->
-
-<head>
-	<base href="../../../">
-	<title>fase 3</title>
-
-
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
-
-	<!--begin::Fonts-->
-	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
-	<!--end::Fonts-->
-	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-
-
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-	
-	<link href="../../painel/assets/css/vendor/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="../../assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="../../assets/css/front-css/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-	<!--end::Global Stylesheets Bundle-->
-</head>
-<!--end::Head-->
-<!--begin::Body-->
-
-<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
-	<div id="app">
-
-		<!--begin::Main-->
-		<div class="d-flex flex-column flex-root"> 
+export default {
+	template: `
+		<div>
+	<div class="d-flex flex-column flex-root"> 
 			<div class="mb-0" id="home"> 
 				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
 					style="background-image: url(assets/media/svg/illustrations/landing.svg)">
@@ -177,11 +133,11 @@ Filter Options act
 								<div class="text-center mb-5 mb-lg-10 py-10 py-lg-2">
 									<a href="#" class="btn btn-light w-15 mx-6 text-white text-hover-dark"
 										style="background-color: #085a97;">
-										<img alt="Logo" src="../../assets/assets/media/svg/social-logos/facebook.svg"
+										<img alt="Logo" src="../../doacao/assets/image/facebook.svg"
 											class="h-20px me-3"> Facebook </a>
 									<a href="#" class="btn btn-light w-15 text-white text-hover-dark"
 										style="background-color: #429813;">
-										<img alt="Logo" src="../../assets/assets/media/svg/social-logos/whatsap.svg"
+										<img alt="Logo" src="../../doacao/assets/image/whatsap.svg"
 											class="h-20px me-3">Whatsapp</a>
 
 								</div>
@@ -208,7 +164,7 @@ Filter Options act
 						<div class="fs-5 text-muted fw-bold  flex-center ">
 							<p>
 								{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
-								Endereço: {{inst.rua}} , {{inst.complemento}} - {{inst.bairro}}, <br>
+								Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
 								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
 								Para dúvidas e cancelamentos entre em contato com nossa <br>
 								central de relacionamento no telefone {{inst.telefone}}
@@ -222,23 +178,12 @@ Filter Options act
 			</div>  
 		</div> 
 	</div>
-	<!-- <link href="../../assets/js/front-js/list/list.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/datatables.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/scripts.bundle.js" rel="stylesheet" type="text/css" />
-<link href="../../assets/js/front-js/plugins.bundle.js" rel="stylesheet" type="text/css" /> -->
+	`,
 
-	<script src="../../assets/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="../../assets/assets/js/scripts.bundle.js"></script>
-	<script src="../../assets/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<script src="../../assets/assets/js/custom/apps/subscriptions/list/list.js"></script>
-	<script src="../../assets/assets/js/custom/modals/share-earn.js"></script>
-	<script>
 
-		new Vue({
-			el: '#app',
-			data: {
-
-				gravatar: '../painel/assets/image/gravatar.png',
+	data: function () {
+		return {
+			gravatar: '../painel/assets/image/gravatar.png',
 
 				inst: {
 					bairro: null,
@@ -250,23 +195,36 @@ Filter Options act
 					estado: null,
 					nome_fantasia: null,
 					razao_social: null,
-					rua: null,
+					endereco: null,
 					telefone: null,
 				},
 
-				type: 'pix',
+				type: '',
 				jms: false,
+		}
+	},
+	methods: {
+		async infoSubdomain() {
+			let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			return res
+		},
+ 
+	},
+
+	async mounted() {  
+        let dados = (await this.infoSubdomain()).dados_instituicao
+		this.inst.cep = dados.endereco.cep
+		this.inst.endereco = dados.endereco.logadouro
+		this.inst.numero = dados.endereco.numero 
+		this.inst.bairro = dados.endereco.bairro
+        this.inst.cidade = dados.endereco.cidade
+		this.inst.estado = dados.endereco.estado 
+		this.inst.complemento = dados.endereco.complemento 
+
+		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
+		this.type = localStorage.getItem('type_pagamento')
+	},
 
 
+}
 
-			},
-			mounted() {
-				// this.jms = this.step
-			},
-
-		})
-	</script>
-</body>
-<!--end::Body-->
-
-</html>

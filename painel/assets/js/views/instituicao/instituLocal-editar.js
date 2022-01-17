@@ -173,8 +173,6 @@ export default {
 	</div >
 	`,
 
-
-
 	data: function () {
 		return {
 			id: null,
