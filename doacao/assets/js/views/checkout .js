@@ -1,5 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
-// const { required, minLength, between } = window.validators
+const { required, minLength, between } = window.validators
 
 export default {
 	template: `
@@ -8,11 +8,8 @@ export default {
 			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 				<div class="post d-flex flex-column-fluid" id="kt_post">
 					<div id="kt_content_container" class="container-xxl">
-						<div class="text-center mb-20 mb-xl-5">
-							<img style="width: 15%;" src="../../doacao/assets/image/1633726236.png" class="rounded"
-								alt="...">
-
-								<img class="rounded" style="width: 15%;" v-bind:src="gravatar">
+						<div class="text-center mb-8 mb-xl-5">
+								<img class="rounded" style="width: 150px;" v-bind:src="logo">
 								</div>
 								<div class="card mb-5 mb-xl-10">
 									<div class="card-body">
@@ -69,7 +66,7 @@ export default {
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
 																		<input v-on:click="setarPlano(listar)"
 																			class="form-check-input" type="radio" name="plan" />
-										</div>
+																			</div>
 
 																	<div class="flex-grow-1">
 																		<div class="fw-bold opacity-100">R$  {{ listar.amount }}</div>
@@ -108,21 +105,41 @@ export default {
 												<div class="card-title mb-5">
 													<h3>Informe um valor, mínimo R$ 25,00. (Pix máximo R$ 1000,00 dia)</h3>
 												</div>
-
-												<input v-model="valor_digitado" type="text" class="form-control form-control-solid p-5"
-													placeholder="00.00" />
+												
+												<input v-model.trin="$v.valor_digitado.$model" type="text" @input="money" required @input="money"
+												:class=" {'is-invalid':$v.valor_digitado.$error, 'is-valid':!$v.valor_digitado.$invalid }"
+												 class="form-control form-control-solid p-5" placeholder="00.00"/>
+												
 											</div>
-											<div class="card-title mb-10">
+											<div class="card-title mb-5">
 												<h3>Informacao</h3>
 											</div>
 											<div class="mb-10">
 												<label for="exampleFormControlInput1" class="required form-label">E-mail</label>
-												<input v-model="email" type="email" class="form-control form-control-solid p-5"
-													placeholder="Email" />
+												<input v-model.trin="$v.email.$model" type="email" class="form-control form-control-solid p-5"
+												:class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"
+												placeholder="Email" />
 											</div>
 											<div>
-												<button @click="descartavel()" style="width: 100%;"
-										 class="btn btn-success p-5">PROSEGUIR...</button>
+										
+									 <div>
+									 <p class="typo__p" v-if="submitStatus === 'OK'"> 
+									 </p>
+									 <p class="erro_texte" v-if="submitStatus === 'ERROR'">
+									 Por favor, preencha o valor e o E-email.</p>
+									 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
+									 </p>
+
+									 <p class="erro_texte">
+									{{minimoalerta}}
+									</p>
+								 </div>
+								 
+
+										 <div class="d-flex"> 
+										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
+											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
+									 </div>
 										</div>
 									</div>
 								</div>
@@ -134,9 +151,10 @@ export default {
 
 		<div class="footer py-4 d-flex flex-lg-column a-footer">
 			<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-				<div class="text-dark order-2 order-md-1"><span class="text-muted fw-bold me-1">2021©</span> <a
-						href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">- Digital
-						Combo</a></div>
+				<div class="text-dark order-2 order-md-1"><span class="text-muted fw-bold me-1">2022©</span> <a
+						href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">- 
+						 Doar digital
+						 </a></div>
 			</div>
 		</div>
  
@@ -145,8 +163,8 @@ export default {
 
 
 	data: function () {
-		return {
-			gravatar: '',
+		return { 
+			logo: '',
 			tipo: "mes",
 			amount: null,
 			valor: null,
@@ -155,21 +173,91 @@ export default {
 			email: null,
 			outro: null,
 			subdomaim: null,
-			dados: []
+			submitStatus: null,
+			minimoalerta: null,
+			dados: [],
+			
 		}
 	},
+
+	
+	validations: { 
+		valor_digitado: {
+			required,
+		},
+		valor: {
+			required,
+		},
+		email: {
+			required,
+		}
+	},
+
+
 	methods: {
 		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			// let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
 		},
 
 		setarPlano(jms) {
 			this.valor = jms.amount
 			this.planos_id = jms.id
+
+			this.valor_digitado="0"
 		},
 
+		money() {
+			let val = this.valor_digitado
+			val = val.replace('.', '')
+			val = val.replace(/\D/gi, '')
+			val = val ? val : 0
+			val = `${parseInt(val)}` ?? '0'
+			switch (val.length) {
+				case 0:
+					val = '00,00'
+					break;
+				case 1:
+					val = val.replace(/(\d{1})/gi, '00,0$1')
+					break;
+				case 2:
+					val = val.replace(/(\d{2})/gi, '00,$1')
+					break;
+				case 3:
+					val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
+					break;
+				case 4:
+					val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
+					break;
+				case 5:
+					val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
+					break;
+				case 6:
+					val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
+					break;
+				default:
+					val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
+					break;
+			}
+			this.valor_digitado = val
+		},  
+
 		descartavel() {
+
+            let cunston_valor = parseInt( `${this.valor_digitado}`.replace(/\D/gi, '') )
+
+			this.error = null
+			
+			this.$v.$touch() 
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} 
+			else if(cunston_valor <= "2499"){
+               
+				this.minimoalerta= "Valor minimo deve ser 25,00"
+			}
+			else {
 			window.localStorage.setItem("tipo", this.tipo)
 			window.localStorage.setItem("amount", this.valor)
 			window.localStorage.setItem("planos_id", this.planos_id)
@@ -177,14 +265,15 @@ export default {
 			window.localStorage.setItem("email", this.email)
 			window.location.href = "#/finalizar"
 		}
+	}
 	},
 
 	async mounted() {
-		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
-		this.amount = dados.amount
+		let logo = (await this.infoSubdomain()).dados_instituicao
+		 this.logo = logo.logo
 
-		// let gravatar = (await this.infoSubdomain()).dados_instituicao
-		//  this.gravatar = gravatar.logo
+		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
+		// this.amount = dados.amount 
 	},
 
 

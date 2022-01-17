@@ -10,8 +10,8 @@ export default {
                         <div id="kt_content_container" class="container-xxl">
 
                             <div class="text-center mb-20 mb-xl-5">
-                                <img style="width: 15%;" src="../../doacao/assets/image/1633726236.png" class="rounded"
-                                    alt="...">
+                            <img class="rounded" style="width: 150px;" v-bind:src="logo">
+             
                             </div>
 
                             <div class="card mb-5 mb-xl-10">
@@ -57,7 +57,7 @@ export default {
                                                 <div class="mb-10">
                                                     <label for="exampleFormControlInput1"
                                                         class="required form-label">Telefone</label>
-                                                    <input v-model="telefone" type="text"
+                                                    <input v-model="telefone" type="text"  v-mask="'(##) ####-####'"
                                                         class="form-control form-control-solid"
                                                         placeholder="Telefone" />
                                                 </div>
@@ -72,10 +72,11 @@ export default {
                                                         <div class="mb-1">
                                                             <label for="exampleFormControlInput1"
                                                                 class="required form-label">CEP</label>
-                                                            <input v-model="cep" type="text"
-                                                                class="form-control form-control-solid"
-                                                                placeholder="CEP" />
+                                                            <input v-model="cep" type="text" @blur="searchCep" @input="mask_cep" 
+                                                                class="form-control form-control-solid" 
+                                                                v-mask="'########'" placeholder="00000-000"/>
                                                         </div>
+                                                    
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="mb-1">
@@ -152,7 +153,7 @@ export default {
                                                             <label
                                                                 class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
                                                                 for="kt_radio_buttons_2_option_1">
-                                                                <span class="d-block fw-bold text-start">
+                                                                <span class="d-block fw-bold text-start text-center">
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                         width="60" height="60" fill="currentColor"
                                                                         class="bi bi-credit-card-2-front-fill"
@@ -160,7 +161,7 @@ export default {
                                                                         <path
                                                                             d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
                                                                     </svg>
-                                                                    <p>CARTÃO</p>
+                                                                    <p classe="mt-3">CARTÃO</p>
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -171,14 +172,14 @@ export default {
                                                             <label
                                                                 class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
                                                                 for="kt_radio_buttons_2_option_2">
-                                                                <span class="d-block fw-bold text-start">
+                                                                <span class="d-block fw-bold text-start text-center">
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                         width="60" height="60" fill="currentColor"
                                                                         class="bi bi-upc-scan" viewBox="0 0 16 16">
                                                                         <path
                                                                             d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
                                                                     </svg>
-                                                                    <p>BOLETO </p>
+                                                                    <p classe="mt-3">BOLETO </p>
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -190,7 +191,7 @@ export default {
                                                             <label
                                                                 class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
                                                                 for="kt_radio_buttons_3_option_3">
-                                                                <span class="d-block fw-bold text-start">
+                                                                <span class="d-block fw-bold text-start text-center">
 
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                         width="60" height="60" fill="currentColor"
@@ -206,7 +207,7 @@ export default {
                                                                             d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
                                                                         <path d="M12 9h2V8h-2v1Z" />
                                                                     </svg>
-                                                                    <p>PIX</p>
+                                                                    <p classe="mt-3">PIX</p>
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -406,8 +407,7 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-
+			logo: '',
 			plano_id: "1386061",
 			plano_id_zap: 0,
 
@@ -481,10 +481,42 @@ export default {
 			  
 		},
 
-		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+        async infoSubdomain() {
+			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			// let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
 		},
+
+		searchCep() {
+            let cep = this.cep
+            cep = cep.replace(/\D/gi, '')
+			if (cep.length == 8) {
+				axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+					.then(response => {
+						this.error = ""
+						this.endereco = response.data.logradouro,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf
+
+						if (response.data.erro) {
+							this.error = "Número do CEP inválido pretendes Preecher manualmente ?? "
+						}
+					}
+					)
+					.catch(error =>
+						error
+					)
+			}
+		},
+
+        mask_cep() {
+            let mascara = this.cep
+            mascara = mascara.replace(/\D/gi, '')
+            mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
+            mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
+            this.cep = mascara
+        },
 
 	},
 
@@ -496,14 +528,17 @@ export default {
 		this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
         this.instituicao_id = localStorage.getItem('instituicao_id')
+
+        let logo = (await this.infoSubdomain()).dados_instituicao
+        this.logo = logo.logo
         
-        let dados = (await this.infoSubdomain()).dados_instituicao
-		this.cep = dados.endereco.cep
-		this.endereco = dados.endereco.logadouro
-		this.numero = dados.endereco.numero 
-		this.bairro = dados.endereco.bairro
-        this.cidade = dados.endereco.cidade
-		this.estado = dados.endereco.estado  
+        // let dados = (await this.infoSubdomain()).dados_instituicao
+		// this.cep = dados.endereco.cep
+		// this.endereco = dados.endereco.logadouro
+		// this.numero = dados.endereco.numero 
+		// this.bairro = dados.endereco.bairro
+        // this.cidade = dados.endereco.cidade
+		// this.estado = dados.endereco.estado  
 	},
 
 }
