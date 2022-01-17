@@ -1,4 +1,6 @@
-export default [
+<?php
+
+return [
     "safado",
     "safados",
     "pilantra",
@@ -44,6 +46,10 @@ export default [
     "inveja",
     "semvergonha",
     "semvergonhas",
+    "rola",
+    "rolas",
+    "rolao",
+    "rolla",
     "semnoçao",
     "caralho",
     "caralhos",
@@ -62,4 +68,4 @@ export default [
     "bucetao",
     "tranco",
     "tranko",
-]
+];

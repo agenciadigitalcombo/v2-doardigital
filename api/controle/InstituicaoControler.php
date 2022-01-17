@@ -234,7 +234,8 @@ class InstituicaoControler
         $endereco = new Endereco();
 
         $subdomaim = $_REQUEST['subdomaim'];
-        $logo = __DIR__ . '/api/upload/logo.jpeg';
+        $logo = 'https://doardigital.tk/uploads/0/logo.svg';
+        $icon = 'https://doardigital.tk/uploads/0/icon.png';
 
         campo_obrigatorios([
             'subdomaim' => 'Indoforme o Sub-domaim',
@@ -268,7 +269,8 @@ class InstituicaoControler
 
         $payload_instituicao = [
             'logo' => $logo,
-            'cor' => '#c00',
+            'icon' => $icon,
+            'cor' => '#009ef7',
             'id' => $get_instituicao['id'],
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
