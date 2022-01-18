@@ -394,6 +394,7 @@ export default {
             cart_cvv,
             cart_validade,
             cart_nome,
+            debug: 1,
         })
     },
 
