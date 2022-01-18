@@ -6,15 +6,14 @@ export default {
 	<div class="d-flex flex-column flex-root"> 
 			<div class="mb-0" id="home"> 
 				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
-					style="background-image: url(assets/media/svg/illustrations/landing.svg)">
+			  :style="{ backgroundColor: inst.backgroundColor }">
  
-					<div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-50px px-9">
+					<div class="d-flex flex-column flex-center w-100 min-h-40px min-h-lg-40px px-9">
 					 
 						<div class="text-center mb-5 mb-lg-0 py-10 py-lg-10">
 						 
 							<div class="text-center">
-								<img style="width: 20%;" src="../../doacao/assets/image/1633726236.png" class="rounded"
-									alt="...">
+							<img class="rounded" style="width: 150px;" v-bind:src="inst.logo">
 							</div> 
 						</div> 
 					</div> 
@@ -24,9 +23,8 @@ export default {
 				style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
 			 
 				<div class="my-2 me-5">
-					<div class="text-center "> 
-						<img style="width: 5%;" src="../../doacao/assets/icons/verificado.png" class="rounded"
-							alt="...">
+					<div class="text-center"> 
+							<img class="rounded" style="width: 50px;" v-bind:src="inst.icon">
 						<h3 class="fs-2hx text-white">Obrigado por sua generosidade!</h3>
 					 
 					</div>
@@ -112,15 +110,14 @@ export default {
 					</div> 
 				</div> 
 			</div> 
-			<div class="mt-sm-n20"> 
-				<div class="landing-curve landing-dark-color">
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
+			<div class="mt-sm-n20" > 
+					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg" >
+						<path  
 							d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
-							fill="currentColor"></path>
+							:fill="inst.backgroundColor" ></path>
 					</svg>
 				</div> 
-				<div class="py-2 landing-dark-bg"> 
+				<div class="py-2 landing-dark-bg" :style="{ backgroundColor: inst.backgroundColor }" > 
 					<div class="container"> 
 						<div class="d-flex flex-column container"> 
 							<div class="mb-13 text-center">
@@ -131,11 +128,13 @@ export default {
 
 
 								<div class="text-center mb-5 mb-lg-10 py-10 py-lg-2">
-									<a href="#" class="btn btn-light w-15 mx-6 text-white text-hover-dark"
+									<a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=https://'+inst.urlsite+'%2F&amp;src=sdkpreparse'"
+									class="btn btn-light w-15 mx-6 text-white text-hover-dark"
 										style="background-color: #085a97;">
 										<img alt="Logo" src="../../doacao/assets/image/facebook.svg"
 											class="h-20px me-3"> Facebook </a>
-									<a href="#" class="btn btn-light w-15 text-white text-hover-dark"
+
+									<a target="_blank" :href="'https://web.whatsapp.com/send?text=https://'+inst.urlsite" class="btn btn-light w-15 text-white text-hover-dark"
 										style="background-color: #429813;">
 										<img alt="Logo" src="../../doacao/assets/image/whatsap.svg"
 											class="h-20px me-3">Whatsapp</a>
@@ -153,7 +152,7 @@ export default {
 					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
-							fill="currentColor"></path>
+							:fill="inst.backgroundColor"></path>
 					</svg>
 				</div> 
 			</div> 
@@ -183,24 +182,26 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
+			inst: {
+				bairro: null,
+				cep: null,
+				cidade: null,
+				cnpj: null,
+				complemento: null,
+				email: null,
+				estado: null,
+				nome_fantasia: null,
+				razao_social: null,
+				endereco: null,
+				telefone: null,
+				logo: '',
+				icon: '',
+				backgroundColor: '',
+				urlsite: 'natal.doacoesbethania.com.br.doardigital.com.br/',
+			},
 
-				inst: {
-					bairro: null,
-					cep: null,
-					cidade: null,
-					cnpj: null,
-					complemento: null,
-					email: null,
-					estado: null,
-					nome_fantasia: null,
-					razao_social: null,
-					endereco: null,
-					telefone: null,
-				},
-
-				type: '',
-				jms: false,
+			type: '',
+			jms: false,
 		}
 	},
 	methods: {
@@ -208,18 +209,22 @@ export default {
 			let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
 		},
- 
+
 	},
 
-	async mounted() {  
-        let dados = (await this.infoSubdomain()).dados_instituicao
+	async mounted() {
+		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep
 		this.inst.endereco = dados.endereco.logadouro
-		this.inst.numero = dados.endereco.numero 
+		this.inst.numero = dados.endereco.numero
 		this.inst.bairro = dados.endereco.bairro
-        this.inst.cidade = dados.endereco.cidade
-		this.inst.estado = dados.endereco.estado 
-		this.inst.complemento = dados.endereco.complemento 
+		this.inst.cidade = dados.endereco.cidade
+		this.inst.estado = dados.endereco.estado
+		this.inst.complemento = dados.endereco.complemento
+		this.inst.logo = dados.logo
+		this.inst.icon = dados.icon
+		this.inst.backgroundColor = dados.cor
+
 
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')

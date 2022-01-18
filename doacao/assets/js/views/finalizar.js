@@ -3,8 +3,8 @@ import adm from "../../../../static/js/api/adm.js"
 export default {
     template:`
 
-        <div>
-            <div class="d-flex flex-column flex-root">
+        <div :style="{ backgroundColor: backgroundColor }">
+            <div class="d-flex flex-column flex-root"  >
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="post d-flex flex-column-fluid" id="kt_post">
                         <div id="kt_content_container" class="container-xxl">
@@ -437,6 +437,7 @@ export default {
             tipo: null,
             valor: null,
 
+            backgroundColor: '',
             msg: "",
             error: null,
             subdomaim: null,
@@ -529,9 +530,10 @@ export default {
         this.token = localStorage.getItem('token')
         this.instituicao_id = localStorage.getItem('instituicao_id')
 
-        let logo = (await this.infoSubdomain()).dados_instituicao
-        this.logo = logo.logo
-        
+        let config = (await this.infoSubdomain()).dados_instituicao
+        this.logo = config.logo
+        this.backgroundColor = config.cor
+
         // let dados = (await this.infoSubdomain()).dados_instituicao
 		// this.cep = dados.endereco.cep
 		// this.endereco = dados.endereco.logadouro

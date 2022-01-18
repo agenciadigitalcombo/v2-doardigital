@@ -1,5 +1,5 @@
 import adm from "../../../../../static/js/api/adm.js"
-const { required, minLength, between } = window.validators
+const { required, minLength, between, email } = window.validators
 
 export default {
 	template: `
@@ -109,7 +109,9 @@ export default {
 												<input v-model.trin="$v.valor_digitado.$model" type="text" @input="money" required @input="money"
 												:class=" {'is-invalid':$v.valor_digitado.$error, 'is-valid':!$v.valor_digitado.$invalid }"
 												 class="form-control form-control-solid p-5" placeholder="00.00"/>
-												
+												 <p class="erro_texte">
+												 {{minimoalerta}}
+												 </p>
 											</div>
 											<div class="card-title mb-5">
 												<h3>Informacao</h3>
@@ -119,27 +121,40 @@ export default {
 												<input v-model.trin="$v.email.$model" type="email" class="form-control form-control-solid p-5"
 												:class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"
 												placeholder="Email" />
+
+													
+												<div class="erros" v-if="$v.email.$error">
+												<div class="erro_texte" v-if="!$v.email.required">
+												email é necessária</div>
+												<div class="erro_texte" v-else-if="!$v.email.isUnique ">
+											  este email não é válido ..
+													</div>
+											</div>
+
+											<div class="sucesso_texte" v-else> 
+													
+												</div>
+
 											</div>
 											<div>
-										
-									 <div>
-									 <p class="typo__p" v-if="submitStatus === 'OK'"> 
-									 </p>
-									 <p class="erro_texte" v-if="submitStatus === 'ERROR'">
-									 Por favor, preencha o valor e o E-email.</p>
-									 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
-									 </p>
-
-									 <p class="erro_texte">
-									{{minimoalerta}}
-									</p>
-								 </div>
+								
 								 
 
 										 <div class="d-flex"> 
 										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
 											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
-									 </div>
+									 </div>		
+									 <div>
+									 <p class="typo__p" v-if="submitStatus === 'OK'"> 
+									 </p>
+									 <p class="erro_texte" v-if="submitStatus === 'ERROR'">
+									 certifique que o valor e o E-email está preenchido corretamente 
+									 </p>
+									 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
+									 </p>
+
+								
+								 </div>
 										</div>
 									</div>
 								</div>
@@ -183,14 +198,17 @@ export default {
 	
 	validations: { 
 		valor_digitado: {
-			required,
+			required, 
+
 		},
 		valor: {
 			required,
 		},
 		email: {
 			required,
-		}
+			email,
+		},
+		
 	},
 
 
@@ -253,8 +271,7 @@ export default {
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} 
-			else if(cunston_valor <= "2499"){
-               
+			else if(cunston_valor != 0 && cunston_valor <= 2499){
 				this.minimoalerta= "Valor minimo deve ser 25,00"
 			}
 			else {
