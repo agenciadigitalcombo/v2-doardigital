@@ -67,4 +67,11 @@ class Doador implements IDoador
         return $guard;
     }
     
+
+    public function set_token(int $id, string $token): void
+    {
+        $banco = new Banco();
+        $sql = "UPDATE doador SET token='$token' WHERE id=$id";
+        $banco->exec($sql);
+    }
 }

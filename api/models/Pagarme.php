@@ -29,6 +29,8 @@ class PagarMe
                 )
             ));
 
+            
+
             $result = file_get_contents($full_path, FALSE, $context);
             return json_decode($result, true);
         } catch (\Throwable $th) {
