@@ -4,10 +4,10 @@ $lista = glob(__DIR__ . "/../interfaces/*.php*");
 foreach ($lista as $path) {
     require $path;
 }
-var_dump($lista);
-die;
 
 $lista = glob(__DIR__ . "/../models/*.php*");
+var_dump($lista);
+die;
 foreach ($lista as $path) {
     require $path;
 }
