@@ -6,8 +6,8 @@ foreach ($lista as $path) {
 }
 
 $lista = glob(__DIR__ . "/../models/*.php*");
-var_dump($lista);
-die;
+// var_dump($lista);
+// die;
 foreach ($lista as $path) {
     require $path;
 }
