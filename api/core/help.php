@@ -283,22 +283,6 @@ function cpf($cpf_campo): string
     
     $cpf = withdraw_caracter($cpf_campo);
 
-    $campos_obrigatorios = [
-        'cpf'
-    ];
-    $lb = [
-        'cpf' => 'digite o cpf'
-    ];
-    foreach ($campos_obrigatorios as $campo) {
-        if (empty($_REQUEST[$campo])) {
-            echo json_encode([
-                'next' => false,
-                'message' => $lb[$campo]
-            ]);
-            die;
-        }
-    }
-
     if (strlen($cpf) != 11) {
         echo json_encode([
             "next" => false,
