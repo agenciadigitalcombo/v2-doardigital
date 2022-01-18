@@ -427,7 +427,7 @@ export default {
 			endereco: null,
 			bairro: null,
 			cidade: null,
-			type_pagamento: "cartao",
+			type_pagamento: "pix",
 			cart_numero: null,
 			cart_cvv: null,
 			cart_validade: null,

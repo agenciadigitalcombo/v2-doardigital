@@ -41,6 +41,7 @@ class TransacaoControler{
 
 
         
+        
         $is_doador = $doador->exist($cpf);
         if(!$is_doador){
             $doador->create($nome, $email, $telefone, $cpf, "1234567890");
