@@ -42,5 +42,10 @@ class Doacao implements IDoacao{
         $banco->exec($sql);
     }
 
+    public function valid_type_pagamento(string $valor): bool{
+        $lb = ['credit_card', 'boleto', 'pix'];
+
+        return in_array($valor, $lb);
+    }
     
 }

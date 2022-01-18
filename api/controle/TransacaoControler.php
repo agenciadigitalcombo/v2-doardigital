@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class TransacaoControler{
     
     static function primeira_parte_create_transacao()
@@ -38,17 +40,22 @@ class TransacaoControler{
         $cart_cvv = $_REQUEST['cart_cvv'] ?? null;
         $cart_validade = $_REQUEST['cart_validade'] ?? null;
         $cart_nome = $_REQUEST['cart_nome'] ?? null;
-
-
         
+         
+        if(!$doacao->valid_type_pagamento($type_pagamento)){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Tipo pagamento invalido'
+            ]);
+            return null;
+        }
         
         $is_doador = $doador->exist($cpf);
         if(!$is_doador){
             $doador->create($nome, $email, $telefone, $cpf, "1234567890");
         }
 
-        $type_valid = ['credit_card', 'boleto', 'pix']; 
-        
+
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
 
