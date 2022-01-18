@@ -14,7 +14,7 @@ class TransacaoControler{
         $pagarme_Costumer = new PagarMeCostumer();
         
  
-        $token_parce = token();
+       
 
         $instituicao_id = $_REQUEST['instituicao_id'];
         $mensal = $_REQUEST['mensal'] ?? null;
