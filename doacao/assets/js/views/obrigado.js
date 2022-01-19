@@ -34,7 +34,7 @@ export default {
 				<div class="container"> 
 					<div class="text-center mb-12">
 						
-						<div id="block2" v-if="type=='cartao'"> 
+						<div id="block2" v-if="type=='credit_card'"> 
 						<h3 class="fs-2hx text-dark mb-15">Sua doação foi recebida com sucesso, Deus te abençoe!.</h3>
 					 
 					</div>
@@ -77,22 +77,14 @@ export default {
 							<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
 							</div>
 						
-							<div ref="print_qr"></div> 
+							
+						
+							
 						<div id="block2" v-if="type=='pix'">
 						
 						<h3 class="fs-2hx text-dark mb-15">
 							Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
 					 
-						<div class="text-center m-5">
-							
-							<img style="width: 20%;" src="../../doacao/assets/image/qr.png" class="rounded"
-								alt="...">
-								
-						</div>
- 						QRCODE
-						 
-						
-					
 							<div class="mw-lg-600px mx-auto"> 
 								<div class="mb-13 text-center"> 
 									<div class="text-muted fw-bold fs-5 ">
@@ -100,17 +92,29 @@ export default {
 										Seu codigo pix..
 										</h2>
 									</div> 
-								</div> 
-								<div class="mb-10">
-									<div class="d-flex">
-										<input id="kt_share_earn_link_input" type="text" v-model="qrCode"  ref="codigo" 
-											class="form-control form-control-solid me-3 flex-grow-1" name="search" >
-										<button id="kt_share_earn_link_copy_button" @click="copiar('codigo')"
-											class="btn btn-light fw-bolder flex-shrink-0" >Copiar</button>
-									</div> 
-								</div>
+								</div>  
 							</div>
 						</div>
+ 
+						<center>
+						<div ref="print_qr"></div>
+					</center>
+					 
+		
+							
+					<div id="block12" v-if="type=='pix'">
+					
+						<div class="mw-lg-600px mx-auto  mt-10"> 
+						  
+							<div class="mb-10">
+								<div class="d-flex">
+									<input type="text" v-model="qrCode"  ref="codigo" 
+										class="form-control  me-3 flex-grow-1" name="search" >
+									<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+								</div> 
+							</div>
+						</div>
+					</div> 
 
 					</div> 
 				</div> 
@@ -217,8 +221,8 @@ export default {
 		},
 
 		copiar(ref) {
-            this.$refs[ref].select(); document.execCommand('copy');
-        }
+			this.$refs[ref].select(); document.execCommand('copy');
+		}
 
 	},
 
@@ -239,15 +243,19 @@ export default {
 		this.type = localStorage.getItem('type_pagamento')
 		this.qrCode = localStorage.getItem("qrCode")
 
-		let code_pix =  `${this.qrCode}`		
-		var qrcode = new QRCode(this.$refs.print_qr, {
-			text: code_pix,
-			width: 230,
-			height: 230,
-			colorDark: "#000000",
-			colorLight: "#ffffff",
-			correctLevel: QRCode.CorrectLevel.L
-		});
+
+		if (this.type == 'pix') {
+			let code_pix = `${this.qrCode}`
+			var qrcode = new QRCode(this.$refs.print_qr, {
+				text: code_pix,
+				width: 230,
+				height: 230,
+				height: 230,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.L
+			});
+		}
 	},
 
 }
