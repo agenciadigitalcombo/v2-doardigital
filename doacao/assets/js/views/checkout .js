@@ -69,7 +69,7 @@ export default {
 																			</div>
 
 																	<div class="flex-grow-1">
-																		<div class="fw-bold opacity-100">R$  {{ listar.amount }}</div>
+																		<div class="fw-bold opacity-100">{{ listar.amount | is_price }} </div>
 																	</div>
 																</div>
 															</label>
@@ -106,7 +106,7 @@ export default {
 													<h3>Informe um valor, mínimo R$ 25,00. (Pix máximo R$ 1000,00 dia)</h3>
 												</div>
 												
-												<input v-model.trin="$v.valor_digitado.$model" type="text" @input="money" required @input="money"
+												<input v-model.trin="$v.valor_digitado.$model" type="text" @input="money" required 
 												:class=" {'is-invalid':$v.valor_digitado.$error, 'is-valid':!$v.valor_digitado.$invalid }"
 												 class="form-control form-control-solid p-5" placeholder="00.00"/>
 												 <p class="erro_texte">
@@ -210,7 +210,13 @@ export default {
 		},
 		
 	},
-
+		
+	filters: {
+        is_price(price) {
+            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${amount}`
+        }
+    },
 
 	methods: {
 		async infoSubdomain() {
