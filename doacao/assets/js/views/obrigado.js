@@ -76,18 +76,22 @@ export default {
 							</div>
 							<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
 							</div>
-
-						<div id="block2" v-if="type=='pix'"> 
+						
+							<div ref="print_qr"></div> 
+						<div id="block2" v-if="type=='pix'">
+						
 						<h3 class="fs-2hx text-dark mb-15">
 							Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
 					 
 						<div class="text-center m-5">
+							
 							<img style="width: 20%;" src="../../doacao/assets/image/qr.png" class="rounded"
 								alt="...">
+								
 						</div>
  						QRCODE
 						 
-						<div ref="print_qr"></div>
+						
 					
 							<div class="mw-lg-600px mx-auto"> 
 								<div class="mb-13 text-center"> 
@@ -235,7 +239,7 @@ export default {
 		this.type = localStorage.getItem('type_pagamento')
 		this.qrCode = localStorage.getItem("qrCode")
 
-		let code_pix =  `${this.qrCode}`
+		let code_pix =  `${this.qrCode}`		
 		var qrcode = new QRCode(this.$refs.print_qr, {
 			text: code_pix,
 			width: 230,
