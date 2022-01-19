@@ -42,13 +42,13 @@ class TransacaoControler{
 
         
         $cep = withdraw_caracter($cep_campo);
-        $numero = $_REQUEST['numero'] ?? null;
-        $estado = $_REQUEST['estado'] ?? null;
-        $endereco = $_REQUEST['endereco'] ?? null;
-        $bairro = $_REQUEST['bairro'] ?? null;
-        $cidade = $_REQUEST['cidade'] ?? null;
+        $numero = $_REQUEST['numero'];
+        $estado = $_REQUEST['estado'];
+        $endereco = $_REQUEST['endereco'];
+        $bairro = $_REQUEST['bairro'];
+        $cidade = $_REQUEST['cidade'];
 
-        $type_pagamento = $_REQUEST['type_pagamento'] ?? null;
+        $type_pagamento = $_REQUEST['type_pagamento'];
 
         $cart_numero = $_REQUEST['cart_numero'] ?? null;
         $cart_cvv = $_REQUEST['cart_cvv'] ?? null;
@@ -111,6 +111,11 @@ class TransacaoControler{
         $get_token = $doador_dados['token'];
         
         if($type_pagamento == "pix"){
+
+            campo_obrigatorios([
+                'planos_valor' => 'Campo planos_valor opbrigatorio',
+            ]);
+
             $pagarme_pix = new PagarMePix();
             
             $res_pagarme = $pagarme_pix->pay($planos_valor);
