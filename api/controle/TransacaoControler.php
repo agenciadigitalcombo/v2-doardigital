@@ -40,7 +40,6 @@ class TransacaoControler{
         $data_nascimento = data_format($data_nascimento_campo);
         $cep_campo = $_REQUEST['cep'];
 
-        $type_document = $_REQUEST['type_documento'];
         
         $cep = withdraw_caracter($cep_campo);
         $numero = $_REQUEST['numero'] ?? null;
