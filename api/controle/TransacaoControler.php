@@ -92,37 +92,41 @@ class TransacaoControler{
         $codigo = null;
         $url = null;
         
+        
+        
+        $doador_dados = $doador->get_by_cpf($cpf);
+        $get_token = $doador_dados['token'];
+        
         if($type_pagamento == "pix"){
             $pagarme_pix = new PagarMePix();
             
             $res_pagarme = $pagarme_pix->pay($planos_valor);
             
+            $get_token = $res_pagarme['id'];
+            $get_status = $res_pagarme['status'];
             $codigo = $res_pagarme['pix_qr_code'];
             $url = $res_pagarme['pix_qr_code'];
             
+            
         }
-        
-        
+
         
         if($type_pagamento == "boleto"){
             $pagarme_boleto = new PagarMeBoleto();
-            
-            $doador_dados = $doador->get_by_cpf($cpf);
-            $get_token = $doador_dados['token'];
-            
+             
             $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $type_document, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
-            
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = $res_pagarme['boleto_barcode'];
             $url = $res_pagarme['boleto_url'];
             
             
+            
         }
         
         
-        
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $get_status, $planos_id, $planos_valor, $codigo, $url);
+        
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',
