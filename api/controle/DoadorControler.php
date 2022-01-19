@@ -17,7 +17,9 @@ class DoadorControler{
         
         token();
 
-        $cpf = cpf();
+        $cpf_campo = $_REQUEST[''];
+
+        $cpf = cpf($cpf_campo);
 
         $list_doador = $doador->get_by_cpf($cpf);
 

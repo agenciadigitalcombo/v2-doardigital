@@ -21,6 +21,12 @@ class PagarMe
 
                 $payload['postback_url'] = $this->postback_url;
             }
+            
+            if(!empty($_REQUEST['debug_pagarme'])){
+                echo json_encode($payload);
+                
+            }            
+
             $context = stream_context_create(array(
                 'http' => array(
                     'method' => 'POST',
@@ -29,7 +35,6 @@ class PagarMe
                 )
             ));
 
-            
 
             $result = file_get_contents($full_path, FALSE, $context);
             return json_decode($result, true);

@@ -17,13 +17,15 @@ class Doacao implements IDoacao{
         return $guard[0] ?? [];
     }
 
-    public function create(int $instituicao_id, int $doador_id, string $token, string $tipo = null, string $status_pagamento, int $plano_id, int $valor, string $codigo = null, string $url = null, string $data = null, string $hora = null): void
+    public function create(int $instituicao_id, int $doador_id, string $token, string $tipo, string $status_pagamento, int $plano_id, int $valor, string $codigo, string $url): void
     {
         $banco = new Banco();
+        $data_regis = date("Y-m-d H:i:s");
+        $hora_regis = date("H:i:s");
         $sql = "INSERT INTO doacoes";
         $sql .= "(instituicao_id, doador_id, token, tipo, status_pagamento, plano_id, valor, codigo, url, data, hora)";
         $sql .= "VALUES";
-        $sql .= "('$instituicao_id', '$doador_id', '$token', '$tipo', '$status_pagamento', '$plano_id', '$valor', '$codigo', '$url', '$data', '$hora')";
+        $sql .= "('$instituicao_id', '$doador_id', '$token', '$tipo', '$status_pagamento', '$plano_id', '$valor', '$codigo', '$url', '$data_regis', '$hora_regis')";
         $banco->exec($sql);
     }
 

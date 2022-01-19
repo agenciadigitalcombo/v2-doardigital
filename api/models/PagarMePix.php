@@ -1,11 +1,12 @@
 <?php
+
 class PagarMePix extends PagarMe
 {
     function __construct()
     {
         parent::__construct();
     }
-    function pay(int $amount, array $split): array
+    function pay(int $amount): array
     {
         $payload = [
             'payment_method' => 'pix',
