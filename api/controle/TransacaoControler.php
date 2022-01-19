@@ -56,6 +56,20 @@ class TransacaoControler{
         $cart_nome = $_REQUEST['cart_nome'] ?? null;
         
         
+        campo_obrigatorios([
+            'planos_valor' => 'Campo planos_valor opbrigatorio',
+            'type_pagamento' => 'Campo type_pagamento opbrigatorio',
+            'nome' => 'Campo nome opbrigatorio',
+            'email' => 'Campo email opbrigatorio',
+            'cpf' => 'Campo cpf opbrigatorio',
+            'telefone' => 'Campo telefone opbrigatorio',
+            'estado' => 'Campo estado opbrigatorio',
+            'cidade' => 'Campo cidade opbrigatorio',
+            'bairro' => 'Campo bairro opbrigatorio',
+            'endereco' => 'Campo endereco opbrigatorio',
+            'numero' => 'Campo numero opbrigatorio',
+            'cep' => 'Campo cep opbrigatorio',
+        ]);
 
 
         if(!$doacao->valid_type_pagamento($type_pagamento)){
@@ -111,6 +125,13 @@ class TransacaoControler{
 
 
         if($type_pagamento == "boleto"){
+
+            campo_obrigatorios([
+                'planos_valor' => 'Campo planos_valor opbrigatorio',
+                'data_nascimento' => 'Campo data_nascimento opbrigatorio',
+                'planos_nome' => 'Campo planos_nome opbrigatorio'
+            ]);
+
             $pagarme_boleto = new PagarMeBoleto();
              
             $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
