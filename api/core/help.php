@@ -330,6 +330,50 @@ function cpf($cpf_campo): string
 }
 
 
+function valid_cpf_cnpj($valor): string
+{
+    
+    $cpf_cnpj = withdraw_caracter($valor);
+
+
+
+    if (
+        $cpf_cnpj == '00000000000000' ||
+        $cpf_cnpj == '11111111111111' ||
+        $cpf_cnpj == '22222222222222' ||
+        $cpf_cnpj == '33333333333333' ||
+        $cpf_cnpj == '44444444444444' ||
+        $cpf_cnpj == '55555555555555' ||
+        $cpf_cnpj == '66666666666666' ||
+        $cpf_cnpj == '77777777777777' ||
+        $cpf_cnpj == '88888888888888' ||
+        $cpf_cnpj == '99999999999999'
+    ) {
+
+        echo json_encode([
+            "next" => false,
+            "message" => "Cpf ou Cnpj Ínvalido"
+        ]);
+        die;
+    }
+    return $cpf_cnpj;
+
+    $tamanho_cpf_cnpj = strlen($cpf_cnpj);
+
+
+
+    if ($tamanho_cpf_cnpj <= 14 and $tamanho_cpf_cnpj >= 11) {
+        echo json_encode([
+            "next" => false,
+            "message" => "Cpf ou Cnpj Ínvalido"
+        ]);
+        die;
+    }
+    return $cpf_cnpj;
+}
+
+
+
 function valid_telefone($valor): string
 {
     
@@ -346,7 +390,6 @@ function valid_telefone($valor): string
     }
     return $valor;
 }
-
 
 
 function min_amount($valor): int

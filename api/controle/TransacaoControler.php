@@ -36,7 +36,7 @@ class TransacaoControler{
 
         $email = valid_email($email_campo);
         $telefone = withdraw_caracter($telefone_campo);
-        $cpf = cpf($cpf_campo);
+        $cpf = valid_cpf_cnpj($cpf_campo);
         $data_nascimento = data_format($data_nascimento_campo);
         $cep_campo = $_REQUEST['cep'];
 
@@ -110,11 +110,11 @@ class TransacaoControler{
             
         }
 
-        
+
         if($type_pagamento == "boleto"){
             $pagarme_boleto = new PagarMeBoleto();
              
-            $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $type_document, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+            $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $type_document, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = $res_pagarme['boleto_barcode'];
