@@ -59,6 +59,7 @@ export default {
                             Ao se cadastar você ira para uma lista de aprovação
                             isso pode demorar 48hs, todos os termos você encontrar
                             <a href="#/termos" target="_blank"> clicando aqui </a>.
+
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!"> 
 

@@ -34,7 +34,7 @@ export default {
 				<div class="container"> 
 					<div class="text-center mb-12">
 						
-						<div id="block2" v-if="type=='cartao'"> 
+						<div id="block2" v-if="type=='credit_card'"> 
 						<h3 class="fs-2hx text-dark mb-15">Sua doação foi recebida com sucesso, Deus te abençoe!.</h3>
 					 
 					</div>
@@ -75,16 +75,16 @@ export default {
 
 							</div>
 							<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
-	</div>
-
-						<div id="block2" v-if="type=='pix'"> 
+							</div>
+						
+							
+						
+							
+						<div id="block2" v-if="type=='pix'">
+						
 						<h3 class="fs-2hx text-dark mb-15">
 							Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
 					 
-						<div class="text-center m-5">
-							<img style="width: 20%;" src="../../doacao/assets/image/qr.png" class="rounded"
-								alt="...">
-						</div>
 							<div class="mw-lg-600px mx-auto"> 
 								<div class="mb-13 text-center"> 
 									<div class="text-muted fw-bold fs-5 ">
@@ -92,20 +92,29 @@ export default {
 										Seu codigo pix..
 										</h2>
 									</div> 
-								</div> 
-								<div class="mb-10">
-									<div class="d-flex">
-										<input id="kt_share_earn_link_input" type="text"
-											class="form-control form-control-solid me-3 flex-grow-1" name="search"
-											value="https://keenthemes.com/?ref=skitechnology">
-										<button id="kt_share_earn_link_copy_button"
-											class="btn btn-light fw-bolder flex-shrink-0"
-											data-clipboard-target="#kt_share_earn_link_input">Copiar</button>
-									</div> 
-								</div>
-
+								</div>  
 							</div>
 						</div>
+ 
+						<center>
+						<div ref="print_qr"></div>
+					</center>
+					 
+		
+							
+					<div id="block12" v-if="type=='pix'">
+					
+						<div class="mw-lg-600px mx-auto  mt-10"> 
+						  
+							<div class="mb-10">
+								<div class="d-flex">
+									<input type="text" v-model="qrCode"  ref="codigo" 
+										class="form-control  me-3 flex-grow-1" name="search" >
+									<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+								</div> 
+							</div>
+						</div>
+					</div> 
 
 					</div> 
 				</div> 
@@ -120,7 +129,7 @@ export default {
 				<div class="py-2 landing-dark-bg" :style="{ backgroundColor: inst.backgroundColor }" > 
 					<div class="container"> 
 						<div class="d-flex flex-column container"> 
-							<div class="mb-13 text-center">
+							<div class="mb-13 mt-10 text-center">
 								<h1 class="fs-2hx fw-bolder text-white mb-5">Obrigado</h1>
 								<div class="text-gray-600 fw-bold fs-5 mb-5">Ajude-nos na missão de
 									<br />Restaurar Vidas! Compartilhe esta causa!
@@ -156,12 +165,11 @@ export default {
 					</svg>
 				</div> 
 			</div> 
-			<div class="mt-20 mb-n20 position-relative z-index-2">
-			 
+			<div class="mt-20 position-relative z-index-2 mb-20">
 				<div class="container"> 
 					<div class="text-center mb-17"> 
 						<div class="fs-5 text-muted fw-bold  flex-center ">
-							<p>
+							<p class="m-10">
 								{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
 								Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
 								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
@@ -198,6 +206,7 @@ export default {
 				icon: '',
 				backgroundColor: '',
 				urlsite: 'natal.doacoesbethania.com.br.doardigital.com.br/',
+				qrCode: '',
 			},
 
 			type: '',
@@ -206,9 +215,14 @@ export default {
 	},
 	methods: {
 		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			// let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
 		},
+
+		copiar(ref) {
+			this.$refs[ref].select(); document.execCommand('copy');
+		}
 
 	},
 
@@ -225,11 +239,24 @@ export default {
 		this.inst.icon = dados.icon
 		this.inst.backgroundColor = dados.cor
 
-
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
-	},
+		this.qrCode = localStorage.getItem("qrCode")
 
+
+		if (this.type == 'pix') {
+			let code_pix = `${this.qrCode}`
+			var qrcode = new QRCode(this.$refs.print_qr, {
+				text: code_pix,
+				width: 230,
+				height: 230,
+				height: 230,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.L
+			});
+		}
+	},
 
 }
 
