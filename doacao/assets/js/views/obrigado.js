@@ -19,12 +19,13 @@ export default {
 					</div> 
 				</div>  
 			</div> 
-			<div class="flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13"
+			<div class="flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 "
 				style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
 			 
 				<div class="my-2 me-5">
 					<div class="text-center"> 
-							<img class="rounded" style="width: 50px;" v-bind:src="inst.icon">
+					<img style="width: 50px;" src="../../doacao/assets/icons/verificado.png" class="rounded">
+				 	<!-- <img class="rounded" style="width: 50px;" v-bind:src="inst.icon"> -->
 						<h3 class="fs-2hx text-white">Obrigado por sua generosidade!</h3>
 					 
 					</div>
@@ -63,15 +64,12 @@ export default {
 									</div> 
 								</div> 
 								<div class="mb-10">
-									<div class="d-flex">
-										<input id="kt_share_earn_link_input" type="text"
-											class="form-control form-control-solid me-3 flex-grow-1" name="search"
-											value="https://keenthemes.com/?ref=skitechnology">
-										<button id="kt_share_earn_link_copy_button"
-											class="btn btn-light fw-bolder flex-shrink-0"
-											data-clipboard-target="#kt_share_earn_link_input">Copiar</button>
-									</div> 
-								</div>
+								<div class="d-flex">
+									<input type="text" v-model="codigo_geral"  ref="codigo" 
+										class="form-control  me-3 flex-grow-1" name="search" >
+									<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+								</div> 
+							</div>
 
 							</div>
 							<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
@@ -108,7 +106,7 @@ export default {
 						  
 							<div class="mb-10">
 								<div class="d-flex">
-									<input type="text" v-model="qrCode"  ref="codigo" 
+									<input type="text" v-model="codigo_geral"  ref="codigo" 
 										class="form-control  me-3 flex-grow-1" name="search" >
 									<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
 								</div> 
@@ -206,7 +204,7 @@ export default {
 				icon: '',
 				backgroundColor: '',
 				urlsite: 'natal.doacoesbethania.com.br.doardigital.com.br/',
-				qrCode: '',
+				codigo_geral: '',
 			},
 
 			type: '',
@@ -241,11 +239,11 @@ export default {
 
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
-		this.qrCode = localStorage.getItem("qrCode")
+		this.codigo_geral = localStorage.getItem("codigo")
 
 
 		if (this.type == 'pix') {
-			let code_pix = `${this.qrCode}`
+			let code_pix = `${this.codigo_geral}`
 			var qrcode = new QRCode(this.$refs.print_qr, {
 				text: code_pix,
 				width: 230,

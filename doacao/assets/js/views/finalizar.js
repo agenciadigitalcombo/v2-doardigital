@@ -1,4 +1,5 @@
 import adm from "../../../../static/js/api/adm.js"
+const { required, minLength, between } = window.validators
 
 export default {
     template: `
@@ -42,6 +43,16 @@ export default {
                                                     <option v-model="genero">Feminino</option>
                                                 </select>
                                             </div>
+ 
+
+                                            <div class="mb-7">
+                                            <label for="exampleFormControlInput1"
+                                                class="required form-label">Data de nascimento </label>
+                                            <input v-model="data_nascimento" type="text" v-mask="'##/##/####'"
+                                                placeholder="17/10/2000" 
+                                                class="form-control form-control-solid" required />
+                                        </div>
+
                                             <div class="mb-7">
                                                 <label for="exampleFormControlInput1"
                                                     class="required form-label">CPF</label>
@@ -73,10 +84,20 @@ export default {
                                                     <div class="mb-1">
                                                         <label for="exampleFormControlInput1"
                                                             class="required form-label">CEP</label>
-                                                        <input v-model="cep" type="text" @blur="searchCep"
+                                                        <input  v-model.trin="$v.cep.$model" type="text" @blur="searchCep"
                                                             @input="mask_cep" class="form-control form-control-solid" required
                                                             v-mask="'########'" placeholder="00000-000" />
                                                     </div>
+                                                    <div class="erros" v-if="$v.cep.$error">
+													<div class="erro_texte" v-if="!$v.cep.required">O CEP
+														é necessária</div>
+													<div class="erro_texte" v-if="!$v.cep.minLength">
+														O CEP São 8 numeros.</div>
+												</div>
+
+												<div class="sucesso_texte" v-else>
+
+												</div>
 
                                                 </div>
                                                 <div class="col-6">
@@ -138,7 +159,7 @@ export default {
                                         </div>
                                         <P>
                                             Todas as transações são segura e criptografadas. As informações do
-                                            cartão de credito nuca são armazenado em nossos servidores.
+                                            cartão de credito nunca são armazenado em nossos servidores.
                                         </P>
                                         <div class="card card-dashed h-xl-0  flex-stack flex-wrap ">
 
@@ -354,13 +375,13 @@ export default {
                                             </div>
 
                                             <c-mensagem :msg="msg" v-show="msg"></c-mensagem>
-
+                                            <c-mensagem :error="error" ></c-mensagem>
+                                            
                                             <div style="width: 100%;">
                                                 <div class="p-9">
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                                                         <button style="width: 100%;" type="submit"
-                                                            class="btn btn-success p-5"
-                                                            id="kt_account_profile_details_submit">
+                                                            class="btn btn-success p-5" >
                                                             DOAR AGORA!
                                                         </button>
                                                     </div>
@@ -434,6 +455,7 @@ export default {
             email: null,
             nome: null,
             genero: null,
+            data_nascimento: null,
             cpf: null,
             telefone: null,
             cep: null,
@@ -456,10 +478,14 @@ export default {
             msg: "",
             error: null,
             subdomaim: null,
-            qrCode: null,
+            codigo_geral: null,
             dados: []
         }
     },
+
+
+
+
 
     filters: {
         money: val => {
@@ -498,19 +524,31 @@ export default {
         }
     },
 
+    
+	validations: {
+		cep: {
+			required,
+			minLength: minLength(9)
+		},
+	},
+
     methods: {
         async addTransacao() {
             this.error = null
-
-            let res = await adm.transacaoPlano(
-                this.token,
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
+            let res = await adm.transacaoPlano( 
                 this.instituicao_id,
                 this.mensal,
                 this.planos_id,
                 this.planos_valor,
+                this.planos_nome,
                 this.email,
                 this.nome,
                 this.genero,
+                this.data_nascimento, 
                 this.cpf,
                 this.telefone,
                 this.cep,
@@ -524,6 +562,7 @@ export default {
                 this.cart_cvv,
                 this.cart_validade,
                 this.cart_nome,
+
                 window.localStorage.setItem("type_pagamento", this.type_pagamento)
 
             )
@@ -531,13 +570,10 @@ export default {
                 this.error = res.message
                 return null
             }
-            this.msg = res.message
-            if (this.type_pagamento == "pix") {
-
-            this.qrCode = window.localStorage.setItem("qrCode", res.codigo)
-            }
+            this.msg = res.message  
+             window.localStorage.setItem("codigo", res.codigo) 
             window.location.href = "#/obrigado"
-
+        }
         },
 
         async infoSubdomain() {
@@ -583,24 +619,18 @@ export default {
         this.mensal = window.localStorage.getItem("tipo")
         this.planos_valor = window.localStorage.getItem("amount")
         // this.planos_valor = (window.localStorage.getItem("amount")/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-
         this.valor_digitado = window.localStorage.getItem("amount_digitado")
         this.planos_id = window.localStorage.getItem("planos_id")
+        this.planos_nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
         this.instituicao_id = localStorage.getItem('instituicao_id')
 
+        
         let config = (await this.infoSubdomain()).dados_instituicao
         this.logo = config.logo
         this.backgroundColor = config.cor
 
-        // let dados = (await this.infoSubdomain()).dados_instituicao
-        // this.cep = dados.endereco.cep
-        // this.endereco = dados.endereco.logadouro
-        // this.numero = dados.endereco.numero
-        // this.bairro = dados.endereco.bairro
-        // this.cidade = dados.endereco.cidade
-        // this.estado = dados.endereco.estado
     },
 
 }

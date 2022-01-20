@@ -349,15 +349,16 @@ export default {
         })
     },
 
-    async transacaoPlano(
-        token,
+    async transacaoPlano( 
         instituicao_id,
         mensal,
         planos_id,
         planos_valor,
+        planos_nome,
         email,
         nome,
         genero,
+       data_nascimento,
         cpf,
         telefone,
         cep,
@@ -370,17 +371,18 @@ export default {
         cart_numero,
         cart_cvv,
         cart_validade,
-        cart_nome,
+        cart_nome, 
     ) {
-        return await http.post('/transacao', {
-            token,
+        return await http.post('/transacao', { 
             instituicao_id,
             mensal,
             planos_id,
             planos_valor,
+            planos_nome,
             email,
             nome,
             genero,
+       data_nascimento,
             cpf,
             telefone,
             cep,
@@ -393,8 +395,7 @@ export default {
             cart_numero,
             cart_cvv,
             cart_validade,
-            cart_nome,
-            debug: 1,
+            cart_nome, 
         })
     },
 

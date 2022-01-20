@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="manifest" href="./manifest.json">
 
-    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon" id="favicon">
 
     <link href="./assets/css/vendor/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="./assets/css/vendor/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/css/vendor/plugins.bundle.css" rel="stylesheet" type="text/css" />
 
     <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="./assets/css/vendor/validacao.css" rel="stylesheet" type="text/css" />
-     
+
     <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -31,17 +31,40 @@
 
 <body>
 
-<body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
-    <div id="app">
-        <router-view></router-view>
-    </div>
-</div>
+    <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
+        <div id="app">
+            <router-view></router-view>
+        </div>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="./assets/js/vendor/scripts.bundle.js" ></script>
-<script src="./assets/js/vendor/vuelidate.js" ></script>
-<script src="./assets/js/vendor/validators.js" ></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./assets/js/vendor/scripts.bundle.js"></script>
+        <script src="./assets/js/vendor/vuelidate.js"></script>
+        <script src="./assets/js/vendor/validators.js"></script>
+
+        <script>
+
+
+            const favicon = document.getElementById('favicon');
+            const subdomaim = ''
+ 
+            favicon.setAttribute("href", "/")
+
+            function carregarIcons() {
+                const response = await adm.todoSubdomain( subdomaim = "34edqwe21")
+                // let dados = await response.json().dados_instituicao
+
+            }
+
+            window.onload = () => {
+                let dados = (await this.infoSubdomain()).dados_instituicao
+                favicon = dados.icon
+                // carregarIcons()
+            }
+
+        </script>
+
+    </body>
 
 </html>
