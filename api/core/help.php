@@ -509,3 +509,83 @@ function space_sanitize($campo): string
 {
     return preg_replace('/\s+/', '', $campo);
 }
+
+function valid_subdomain($campo): void
+{
+    $lista = ["safado",
+    "safados",
+    "pilantra",
+    "pilantras",
+    "filhaputa",
+    "filhosdaputa",
+    "filhosdap",
+    "filhodap",
+    "paunoc",
+    "paunocu",
+    "cambalacheiro",
+    "canbalacho",
+    "cambalachos",
+    "armadilha",
+    "armadilhas",
+    "falcatrua",
+    "falcatruas",
+    "bandido",
+    "bandidos",
+    "roubo",
+    "roubos",
+    "roubam",
+    "roubam",
+    "enganação",
+    "enganaçam",
+    "enganacao",
+    "enganam",
+    "enrolação",
+    "enrolaçam",
+    "enrolacao",
+    "caralho",
+    "caralhos",
+    "penis",
+    "penes",
+    "vagina",
+    "vaginas",
+    "cu",
+    "cus",
+    "pau",
+    "pau",
+    "pauavagina",
+    "invejoso",
+    "inveja",
+    "semvergonha",
+    "semvergonhas",
+    "rola",
+    "rolas",
+    "rolao",
+    "rolla",
+    "semnoçao",
+    "caralho",
+    "caralhos",
+    "falso",
+    "falsos",
+    "buceta",
+    "bucetas",
+    "xana",
+    "xanas",
+    "xoxota",
+    "xoxotas",
+    "sexo",
+    "sexos",
+    "transa",
+    "transas",
+    "bucetao",
+    "tranco",
+    "tranko"
+];
+
+    if(in_array($campo, $lista)){
+        echo json_encode([
+            'next' => false,
+            'message' => 'Nome informado nao Adequado'
+        ]);
+        die;
+    }
+}

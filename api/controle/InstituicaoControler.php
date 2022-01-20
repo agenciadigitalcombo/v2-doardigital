@@ -27,8 +27,6 @@ class InstituicaoControler
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
-
-
         
         campo_obrigatorios([
         'nome_fantasia' => 'Informe um Nome Fantasia',
@@ -39,7 +37,8 @@ class InstituicaoControler
         'cnpj' => 'Informe o Cnpj']);
 
     
-
+        valid_subdomain($sub_domain);
+        
 
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
@@ -234,6 +233,7 @@ class InstituicaoControler
         $endereco = new Endereco();
 
         $subdomaim = $_REQUEST['subdomaim'];
+
         $logo = 'https://doardigital.tk/uploads/0/logo.svg';
         $icon = 'https://doardigital.tk/uploads/0/icon.png';
 
@@ -325,6 +325,7 @@ class InstituicaoControler
         $instituicao = new Instituicao();
         
         $sub_domain = $_REQUEST['subdomaim'];
+
 
         campo_obrigatorios([
             "subdomaim" => "informe um subdomínio"
