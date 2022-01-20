@@ -84,7 +84,7 @@ export default {
 
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-model="valor" class="form-check-input"
+																		<input v-model="valor" class="form-check-input"  
 																			type="radio" name="plan" value="0" />
 																	</div>
 
@@ -137,8 +137,8 @@ export default {
 
 											</div>
 											<div>
-								
-					
+								 
+				
 										 <div class="d-flex"> 
 										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
 											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
@@ -178,7 +178,7 @@ export default {
 
 
 	data: function () {
-		return { 
+		return {
 			logo: '',
 			tipo: "mes",
 			amount: null,
@@ -192,16 +192,16 @@ export default {
 			submitStatus: null,
 			minimoalerta: null,
 
-			
-            backgroundColor: '',
+
+			backgroundColor: '',
 			dados: [],
-			
+
 		}
 	},
 
-	validations: { 
+	validations: {
 		valor_digitado: {
-			required, 
+			required,
 
 		},
 		valor: {
@@ -211,15 +211,15 @@ export default {
 			required,
 			email,
 		},
-		
+
 	},
-		
+
 	filters: {
-        is_price(price) {
-            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            return `R$ ${amount}`
-        }
-    },
+		is_price(price) {
+			let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			return `R$ ${amount}`
+		}
+	},
 
 	methods: {
 		async infoSubdomain() {
@@ -232,9 +232,16 @@ export default {
 			this.valor = jms.amount
 			this.planos_id = jms.id
 			this.planos_nome = jms.nome
-			 
-			this.valor_digitado="0"
+
+			this.valor_digitado = "0"
 		},
+
+		// outro() {
+		// 	localStorage.removeItem("planos_id");
+		// 	this.planos_nome = "Plano "+this.valor_digitado
+		// 	this.valor="0"
+		// },
+
 
 		money() {
 			let val = this.valor_digitado
@@ -269,38 +276,50 @@ export default {
 					break;
 			}
 			this.valor_digitado = val
-		},  
+		},
 
 		descartavel() {
 
-            let cunston_valor = parseInt( `${this.valor_digitado}`.replace(/\D/gi, '') )
+			let cunston_valor = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
+
+			alert(this.valor_digitado)
 
 			this.error = null
-			
-			this.$v.$touch() 
+			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
-			} 
-			else if(cunston_valor != 0 && cunston_valor <= 2499){
-				this.minimoalerta= "Valor minimo deve ser 25,00"
+			}
+			else if (cunston_valor != 0 && cunston_valor <= 2499) {
+				this.minimoalerta = "Valor minimo deve ser 25,00"
 			}
 			else {
-			window.localStorage.setItem("tipo", this.tipo)
-			window.localStorage.setItem("amount", this.valor)
-			window.localStorage.setItem("planos_id", this.planos_id)
-			window.localStorage.setItem("planos_nome", this.planos_nome)
-			
-			window.localStorage.setItem("amount_digitado", this.valor_digitado)
-			window.localStorage.setItem("email", this.email)
-			window.location.href = "#/finalizar"
+
+				this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
+				alert(this.valor_digitado)
+				if (this.valor == 0) {
+					window.localStorage.setItem("planos_id", "999")
+					window.localStorage.setItem("planos_nome", this.valor_digitado)
+					window.localStorage.setItem("amount", this.valor_digitado)
+				} else {
+					window.localStorage.setItem("planos_id", this.planos_id)
+					window.localStorage.setItem("planos_nome", this.planos_nome)
+					window.localStorage.setItem("amount", this.valor)
+				}
+
+				window.localStorage.setItem("tipo", this.tipo)
+				// window.localStorage.setItem("amount_digitado", this.valor_digitado)
+				window.localStorage.setItem("email", this.email)
+				window.location.href = "#/finalizar"
+
+
+			}
 		}
-	}
 	},
 
 	async mounted() {
 		let config = (await this.infoSubdomain()).dados_instituicao
-		 this.logo = config.logo
-		 this.backgroundColor = config.cor
+		this.logo = config.logo
+		this.backgroundColor = config.cor
 
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
 		// this.amount = dados.amount 

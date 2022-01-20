@@ -47,8 +47,8 @@ export default {
 							<h3 class="fs-1 text-dark mb-5">
 								<span>Clique abaixo para acessar o seu boleto.</span>
 							</h3>
-
-							<a href="#" class="btn btn-primary er fs-6 px-8 my-14" data-bs-toggle="modal"
+							
+							<a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-14" data-bs-toggle="modal"
 								data-bs-target="#kt_modal_share_earn">
 								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
 									class="bi bi-upc" viewBox="0 0 16 16">
@@ -163,6 +163,8 @@ export default {
 					</svg>
 				</div> 
 			</div> 
+
+
 			<div class="mt-20 position-relative z-index-2 mb-20">
 				<div class="container"> 
 					<div class="text-center mb-17"> 
@@ -205,6 +207,7 @@ export default {
 				backgroundColor: '',
 				urlsite: 'natal.doacoesbethania.com.br.doardigital.com.br/',
 				codigo_geral: '',
+				url_geral: '',
 			},
 
 			type: '',
@@ -240,7 +243,7 @@ export default {
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
 		this.codigo_geral = localStorage.getItem("codigo")
-
+        this.url_geral = localStorage.getItem("url")
 
 		if (this.type == 'pix') {
 			let code_pix = `${this.codigo_geral}`
