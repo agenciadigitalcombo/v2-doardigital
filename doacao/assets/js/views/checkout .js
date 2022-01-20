@@ -3,7 +3,7 @@ const { required, minLength, between, email } = window.validators
 
 export default {
 	template: `
-		<div>
+		<div :style="{ backgroundColor: backgroundColor }">
 
 			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 				<div class="post d-flex flex-column-fluid" id="kt_post">
@@ -138,12 +138,12 @@ export default {
 											</div>
 											<div>
 								
-								 
-
+					
 										 <div class="d-flex"> 
 										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
 											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
-									 </div>		
+									 </div>	
+
 									 <div>
 									 <p class="typo__p" v-if="submitStatus === 'OK'"> 
 									 </p>
@@ -183,6 +183,7 @@ export default {
 			tipo: "mes",
 			amount: null,
 			valor: null,
+			planos_nome: null,
 			valor_digitado: null,
 			planos_id: null,
 			email: null,
@@ -190,12 +191,14 @@ export default {
 			subdomaim: null,
 			submitStatus: null,
 			minimoalerta: null,
+
+			
+            backgroundColor: '',
 			dados: [],
 			
 		}
 	},
 
-	
 	validations: { 
 		valor_digitado: {
 			required, 
@@ -228,7 +231,8 @@ export default {
 		setarPlano(jms) {
 			this.valor = jms.amount
 			this.planos_id = jms.id
-
+			this.planos_nome = jms.nome
+			 
 			this.valor_digitado="0"
 		},
 
@@ -284,6 +288,8 @@ export default {
 			window.localStorage.setItem("tipo", this.tipo)
 			window.localStorage.setItem("amount", this.valor)
 			window.localStorage.setItem("planos_id", this.planos_id)
+			window.localStorage.setItem("planos_nome", this.planos_nome)
+			
 			window.localStorage.setItem("amount_digitado", this.valor_digitado)
 			window.localStorage.setItem("email", this.email)
 			window.location.href = "#/finalizar"
@@ -292,8 +298,9 @@ export default {
 	},
 
 	async mounted() {
-		let logo = (await this.infoSubdomain()).dados_instituicao
-		 this.logo = logo.logo
+		let config = (await this.infoSubdomain()).dados_instituicao
+		 this.logo = config.logo
+		 this.backgroundColor = config.cor
 
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
 		// this.amount = dados.amount 
