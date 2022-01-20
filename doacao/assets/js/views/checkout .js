@@ -281,9 +281,7 @@ export default {
 		descartavel() {
 
 			let cunston_valor = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
-
-			alert(this.valor_digitado)
-
+ 
 			this.error = null
 			this.$v.$touch()
 			if (this.$v.$invalid) {
@@ -295,7 +293,7 @@ export default {
 			else {
 
 				this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
-				alert(this.valor_digitado)
+			 
 				if (this.valor == 0) {
 					window.localStorage.setItem("planos_id", "999")
 					window.localStorage.setItem("planos_nome", this.valor_digitado)
