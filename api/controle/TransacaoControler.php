@@ -50,10 +50,11 @@ class TransacaoControler{
 
         $type_pagamento = $_REQUEST['type_pagamento'];
 
-        $cart_numero = $_REQUEST['cart_numero'] ?? null;
-        $cart_cvv = $_REQUEST['cart_cvv'] ?? null;
-        $cart_validade = $_REQUEST['cart_validade'] ?? null;
-        $cart_nome = $_REQUEST['cart_nome'] ?? null;
+        $cart_numero = $_REQUEST['cart_numero'];
+        $cart_cvv = $_REQUEST['cart_cvv'];
+        $cart_validade_campo = $_REQUEST['cart_validade'];
+        $cart_validade = withdraw_caracter($cart_validade_campo);
+        
         
         
         campo_obrigatorios([
@@ -110,6 +111,29 @@ class TransacaoControler{
         $doador_dados = $doador->get_by_cpf($cpf);
         $get_token = $doador_dados['token'];
         
+
+        if($type_pagamento == "credit_card"){
+
+            campo_obrigatorios([
+                'cart_numero' => 'Campo cart_numero Obrigatorio',
+                'cart_cvv' => 'Campo cart_cvv Obrigatorio',
+                'cart_validade' => 'Campo cart_validade Obrigatorio',
+                'planos_valor' => 'Campo planos_valor Obrigatorio',
+            ]);
+
+            $pagarme_cartao = new PagarMeCartao();
+            
+            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+            
+            $get_token = $res_pagarme['id'];
+            $get_status = $res_pagarme['status'];
+            $codigo = "";
+            $url = "";
+            
+            
+        }
+
+
         if($type_pagamento == "pix"){
 
             campo_obrigatorios([
