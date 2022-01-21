@@ -21,7 +21,7 @@ class TransacaoControler{
         $planos_nome = $_REQUEST['planos_nome'];
         $planos_valor = $_REQUEST['planos_valor'];
 
-        $mensal = $_REQUEST['mensal'];
+        $mensal = $_REQUEST['mensal'] ?? null;
         
         $nome = $_REQUEST['nome'];
         // $genero = $_REQUEST['genero'];
