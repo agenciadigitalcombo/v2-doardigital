@@ -380,16 +380,32 @@ function valid_telefone($valor): string
     $telefone = withdraw_caracter($valor);
 
     $tamanho_telefone = strlen($telefone);
-
-    if ($tamanho_telefone < 11 and $tamanho_telefone > 8 ) {
+    if ($tamanho_telefone > 11 or $tamanho_telefone < 8) {
         echo json_encode([
             "next" => false,
             "message" => "Telefone Ínvalido"
         ]);
         die;
     }
-    return $valor;
+
+    if ($tamanho_telefone > 8 and $tamanho_telefone != 11) {
+        echo json_encode([
+            "next" => false,
+            "message" => "Este Telefone informado falta o DDD"
+        ]);
+        die;
+    }
+    
+    return $telefone;
 }
+
+function telefone_get_ddd($telefone_campo): string
+{
+    $telefone = withdraw_caracter($telefone_campo);
+    $get_ddd = substr($telefone, 0, 2);
+    return $get_ddd;
+}
+
 
 
 function min_amount($valor): int
@@ -512,7 +528,9 @@ function space_sanitize($campo): string
 
 function valid_subdomain($campo): void
 {
-    $lista = ["safado",
+    $lista = 
+    [
+    "safado",
     "safados",
     "pilantra",
     "pilantras",

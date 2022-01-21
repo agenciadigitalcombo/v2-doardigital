@@ -3,7 +3,7 @@
 class PagarMeBoleto extends PagarMe
 {
 
-    function create(int $amount, string $type_pagamento, string $costumer_id, string $nome_costumer, string $email_costumer, string $document_costumer, array $phone_numbers, string $data_nascimento,
+    public function create(int $amount, string $type_pagamento, string $costumer_id, string $nome_costumer, string $email_costumer, string $document_costumer, array $phone_numbers, string $data_nascimento,
     string $estado, string $city, string $bairro, string $logradouro, string $street_number, string $cep,
         string $plano_id, string $title_plano, int $quantidade = 1, string $country = "br", string $type_document = "cpf"): array
     {
