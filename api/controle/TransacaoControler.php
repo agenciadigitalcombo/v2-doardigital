@@ -8,10 +8,7 @@ class TransacaoControler{
     {
         header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
-        $adm = new Adm(); 
         $doador = new Doador();
-        $instituicao = new Instituicao;
-        $plano = new Plano();
         $Endereco = new Endereco;
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
@@ -27,7 +24,7 @@ class TransacaoControler{
         $mensal = $_REQUEST['mensal'];
         
         $nome = $_REQUEST['nome'];
-        $genero = $_REQUEST['genero'];
+        // $genero = $_REQUEST['genero'];
         
         $cpf_campo = $_REQUEST['cpf'];
         $telefone_campo = $_REQUEST['telefone'];
