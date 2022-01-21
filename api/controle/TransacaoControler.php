@@ -121,7 +121,7 @@ class TransacaoControler{
             $url = "";
         }
 
-        if($mensal == 1 and $type_pagamento == "boleto"){
+        if($mensal == 0 and $type_pagamento == "boleto"){
             
             $pagarme_cartao = new PagarMeBoleto();
             $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
