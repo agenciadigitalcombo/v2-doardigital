@@ -51,4 +51,32 @@ class PagarMeBoleto extends PagarMe
 
         return $this->post('/transactions', $payload, false);
     }
+
+    public function create_recorrencia_boleto(string $plano_id, string $bairro, string $logradouro, string $street_number, string $cep, string $document_costumer, string $email_costumer, string $nome_costumer, 
+    string $phone_numbers, string $phone_ddd, string $type_pagamento): array
+    {
+        $payload = [
+            "customer" => [
+                "address" => [
+                    "neighborhood" => $bairro,
+                    "street" => $logradouro,
+                    "street_number" => $street_number,
+                    "zipcode" => $cep
+                    ], 
+                    "document_number" => $document_costumer, 
+                    "email" => $email_costumer, 
+                    "name" => $nome_costumer, 
+                    "phone" => [
+                        "ddd" => $phone_ddd, 
+                        "number" => $phone_numbers
+                    ]
+            ], 
+            "payment_method" => $type_pagamento, 
+            "plan_id" =>  $plano_id
+        ];
+       
+
+        return $this->post('/subscriptions', $payload, false);
+    }
+
 }

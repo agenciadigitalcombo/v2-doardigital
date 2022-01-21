@@ -59,7 +59,6 @@ class TransacaoControler{
         
         
         campo_obrigatorios([
-            'mensal' => 'Campo mensal opbrigatorio',
             'planos_valor' => 'Campo planos_valor opbrigatorio',
             'type_pagamento' => 'Campo type_pagamento opbrigatorio',
             'nome' => 'Campo nome opbrigatorio',
@@ -123,6 +122,15 @@ class TransacaoControler{
             $get_status = $res_pagarme_recorrencia['status'];
             $codigo = "";
             $url = "";
+        }
+
+        if($mensal == 1 and $type_pagamento == "boleto"){
+            
+            $pagarme_cartao = new PagarMeBoleto();
+            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
+            $get_status = $res_pagarme_recorrencia['current_transaction'] ['status'];
+            $codigo = $res_pagarme_recorrencia['current_transaction'] ['boleto_barcode'];
+            $url = $res_pagarme_recorrencia['current_transaction'] ['boleto_url'];
         }
 
 
