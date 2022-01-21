@@ -347,7 +347,7 @@ export default {
                                                                         <input v-model="cart_validade" type="text"
                                                                             name="validar"
                                                                             class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                                            v-mask="'##/####'" placeholder="MM/YYYY"
+                                                                            v-mask="'##/##'" placeholder="MM/YY"
                                                                             required />
                                                                     </div>
                                                                     <div class="col-lg-6 fv-row">
@@ -376,7 +376,7 @@ export default {
 
                                             <c-mensagem :msg="msg" v-show="msg"></c-mensagem>
                                             <c-mensagem :error="error" ></c-mensagem>
-                                            
+
                                             <div style="width: 100%;">
                                                 <div class="p-9">
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -572,6 +572,7 @@ export default {
             }
             this.msg = res.message  
              window.localStorage.setItem("codigo", res.codigo) 
+             window.localStorage.setItem("url", res.url) 
             window.location.href = "#/obrigado"
         }
         },
@@ -617,10 +618,16 @@ export default {
 
     async mounted() {
         this.mensal = window.localStorage.getItem("tipo")
-        this.planos_valor = window.localStorage.getItem("amount")
-        // this.planos_valor = (window.localStorage.getItem("amount")/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-        this.valor_digitado = window.localStorage.getItem("amount_digitado")
         this.planos_id = window.localStorage.getItem("planos_id")
+
+        if (this.planos_id) { 
+        this.planos_valor = window.localStorage.getItem("amount")  
+        } else { 
+       this.planos_valor = window.localStorage.getItem("amount_digitado")
+        }   
+        // this.planos_valor = (window.localStorage.getItem("amount")/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+
+      
         this.planos_nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
