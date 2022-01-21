@@ -131,7 +131,7 @@ class TransacaoControler{
         }
 
 
-        if($type_pagamento == "credit_card" and $mensal == 0){
+        if($type_pagamento == "credit_card"){
 
             campo_obrigatorios([
                 'cart_numero' => 'Campo cart_numero Obrigatorio',
@@ -144,7 +144,7 @@ class TransacaoControler{
             
             $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
             $get_token = $res_pagarme['id'];
-
+            $get_status = $res_pagarme['status'];
             $codigo = "";
             $url = "";
             
