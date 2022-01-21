@@ -43,16 +43,7 @@ export default {
                                                     <option v-model="genero">Feminino</option>
                                                 </select>
                                             </div>
- 
-
-                                            <div class="mb-7">
-                                            <label for="exampleFormControlInput1"
-                                                class="required form-label">Data de nascimento </label>
-                                            <input v-model="data_nascimento" type="text" v-mask="'##/##/####'"
-                                                placeholder="17/10/2000" 
-                                                class="form-control form-control-solid" required />
-                                        </div>
-
+  
                                             <div class="mb-7">
                                                 <label for="exampleFormControlInput1"
                                                     class="required form-label">CPF</label>
@@ -70,8 +61,8 @@ export default {
                                             <div class="mb-10">
                                                 <label for="exampleFormControlInput1"
                                                     class="required form-label">Telefone</label>
-                                                <input v-model="telefone" type="text" v-mask="'(##) ####-####'"
-                                                    class="form-control form-control-solid" required placeholder="(00) 0000-0000 " />
+                                                <input v-model="telefone" type="text" v-mask="'(##) # ####-####'"
+                                                    class="form-control form-control-solid" required placeholder="(00) 0 0000-0000 " />
                                             </div>
                                         </div>
                                         <div class="card-title mb-10">
@@ -155,7 +146,7 @@ export default {
                                     <div class="col-xl-6">
                                         <div class="card-title mb-10">
                                             <h1> Total a Pagar: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
-                                                |money }} {{ tipo == 'mes' ? 'Por mês' : ''}} </h1>
+                                                |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                         </div>
                                         <P>
                                             Todas as transações são segura e criptografadas. As informações do
@@ -205,7 +196,7 @@ export default {
                                                         </label>
                                                     </div>
 
-                                                    <div class="col-xl-4" v-if="mensal ==='unica'">
+                                                    <div class="col-xl-4" v-if="mensal ==='0'">
                                                         <input type="radio" class="btn-check"
                                                             @click="type_pagamento = 'pix'" name="radio_buttons_2"
                                                             value="3" id="kt_radio_buttons_3_option_3" />
@@ -454,8 +445,7 @@ export default {
             planos_valor: null,
             email: null,
             nome: null,
-            genero: null,
-            data_nascimento: null,
+            genero: null, 
             cpf: null,
             telefone: null,
             cep: null,
@@ -470,8 +460,7 @@ export default {
             cart_validade: null,
             cart_nome: null,
 
-            valor_digitado: null,
-            tipo: null,
+            valor_digitado: null, 
             valor: null,
 
             backgroundColor: '',
@@ -547,8 +536,7 @@ export default {
                 this.planos_nome,
                 this.email,
                 this.nome,
-                this.genero,
-                this.data_nascimento, 
+                this.genero, 
                 this.cpf,
                 this.telefone,
                 this.cep,
@@ -562,7 +550,7 @@ export default {
                 this.cart_cvv,
                 this.cart_validade,
                 this.cart_nome,
-
+ 
                 window.localStorage.setItem("type_pagamento", this.type_pagamento)
 
             )
@@ -617,7 +605,7 @@ export default {
     },
 
     async mounted() {
-        this.mensal = window.localStorage.getItem("tipo")
+        this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
         if (this.planos_id) { 
