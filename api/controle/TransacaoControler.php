@@ -4,7 +4,7 @@ use function PHPSTORM_META\type;
 
 class TransacaoControler{
     
-    static function primeira_parte_create_transacao()
+    static function create_transacao()
     {
         header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
