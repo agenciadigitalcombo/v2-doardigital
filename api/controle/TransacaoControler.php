@@ -29,15 +29,15 @@ class TransacaoControler{
         $cpf_campo = $_REQUEST['cpf'];
         $telefone_campo = $_REQUEST['telefone'];
         $email_campo = $_REQUEST['email'];
-        $data_nascimento_campo = $_REQUEST['data_nascimento'];
+        $data_nascimento_campo = "21/01/2022";
         $cep_campo = $_REQUEST['cep'];
-
         $email = valid_email($email_campo);
         $telefone = valid_telefone($telefone_campo);
         $phone_ddd = telefone_get_ddd($telefone);
         $cpf = valid_cpf_cnpj($cpf_campo);
         $data_nascimento = data_format($data_nascimento_campo);
-
+        
+        
         
         $cep = withdraw_caracter($cep_campo);
         $numero = $_REQUEST['numero'];
@@ -174,7 +174,6 @@ class TransacaoControler{
 
             campo_obrigatorios([
                 'planos_valor' => 'Campo planos_valor opbrigatorio',
-                'data_nascimento' => 'Campo data_nascimento opbrigatorio',
                 'planos_nome' => 'Campo planos_nome opbrigatorio'
             ]);
 
