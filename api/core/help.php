@@ -391,7 +391,7 @@ function valid_telefone($valor): string
     if ($tamanho_telefone > 8 and $tamanho_telefone != 11) {
         echo json_encode([
             "next" => false,
-            "message" => "Este Telefone informado falta o DDD"
+            "message" => "Telefone Ínvalido"
         ]);
         die;
     }
