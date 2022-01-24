@@ -1,5 +1,5 @@
 import adm from "../../../../static/js/api/adm.js"
-const { required, minLength, between } = window.validators
+const { required, minLength, maxLength  } = window.validators
 
 export default {
     template: `
@@ -61,9 +61,17 @@ export default {
                                             <div class="mb-10">
                                                 <label for="exampleFormControlInput1"
                                                     class="required form-label">Telefone</label>
-                                                <input v-model="telefone" type="text" v-mask="'(##) # ####-####'"
-                                                    class="form-control form-control-solid" required placeholder="(00) 0 0000-0000 " />
-                                            </div>
+                                                <input v-model.trin="$v.telefone.$model" type="text" v-mask="'(##) # ####-####'" placeholder="(00) 0 0000-0000"
+                                                    class="form-control form-control-solid" required />
+                                                <div class="erros" v-if="$v.telefone.$error">
+                                                                                                <div class="erro_texte" v-if="!$v.telefone.required">O Telefone
+                                                                                                    é necessária</div>
+                                                                                                <div class="erro_texte" v-if="!$v.telefone.minLength">
+                                                                                                Telefone tem de ter no minimo 10 número.</div>
+                                                                                            
+                                                                                            </div>
+                                                </div>
+                                               
                                         </div>
                                         <div class="card-title mb-10">
                                             <h2>INFORME SEU INDEREÇO</h2>
@@ -75,7 +83,7 @@ export default {
                                                     <div class="mb-1">
                                                         <label for="exampleFormControlInput1"
                                                             class="required form-label">CEP</label>
-                                                        <input  v-model.trin="$v.cep.$model" type="text" @blur="searchCep"
+                                                        <input v-model.trin="$v.cep.$model" type="text" @blur="searchCep"
                                                             @input="mask_cep" class="form-control form-control-solid" required
                                                             v-mask="'########'" placeholder="00000-000" />
                                                     </div>
@@ -533,6 +541,12 @@ export default {
 			required,
 			minLength: minLength(9)
 		},
+        telefone: {
+			required,
+			minLength: minLength(15)
+		},
+
+        
 	},
 
     methods: {
