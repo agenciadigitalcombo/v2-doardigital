@@ -25,6 +25,10 @@ Vue.component('c-footer', footer )
 import mensagem from './componentes/c-mensagem.js'
 Vue.component('c-mensagem', mensagem )
 
+import loading from './componentes/c-loading.js'
+Vue.component('c-loading', loading )
+ 
+
 import validacao from './componentes/c-validacao.js'
 Vue.component('c-validacao', validacao )
 

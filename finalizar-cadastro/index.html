@@ -7,15 +7,14 @@
     <title></title>
     <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
     <link rel="manifest" href="./manifest.json">
-
-    
-		<!--begin::Fonts-->
+ 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<!--end::Fonts-->
-		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+ 
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Global Stylesheets Bundle-->
+	
+        <link href="./assets/css/vendor/validacao.css" rel="stylesheet" type="text/css" />
+        
 
     <script defer>
         if ('serviceWorker' in navigator) {
@@ -35,19 +34,15 @@
         <router-view></router-view>
     </div>
 
-    <script>var hostUrl = "assets/";</script>
-		<!--begin::Javascript-->
-		<!--begin::Global Javascript Bundle(used by all pages)-->
+    <script>var hostUrl = "assets/";</script> 
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
-		<!--end::Global Javascript Bundle-->
-		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="assets/js/custom/modals/create-account.js"></script>
-	
-        
- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../../painel/assets/js/vendor/vuelidate.js" ></script>
-        <script src="../../painel/assets/js/vendor/validators.js" ></script>
+		<script src="assets/js/scripts.bundle.js"></script> 
+		<script src="assets/js/custom/modals/create-account.js"></script> 
+
+        <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+        <script src="./assets/js/vendor/vuelidate.js"></script>
+        <script src="./assets/js/vendor/validators.js"></script>
 
         
 </body>

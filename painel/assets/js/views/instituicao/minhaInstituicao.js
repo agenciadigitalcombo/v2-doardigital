@@ -139,7 +139,7 @@ export default {
 	},
 
 	computed: {
-
+ 
 		filtraCredencial() {
 			return this.dados.filter((credencial) => {
 				return credencial.nome_fantasia.match(this.search) || credencial.id.match(this.search);

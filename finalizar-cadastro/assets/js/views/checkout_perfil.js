@@ -85,12 +85,12 @@ export default {
 									<span class="required">Data de Nascimento</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Selecione o tipo de conta conforme documento utilizado"></i></h2>
 								</label>
-								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" v-model="data_nascimento" placeholder="29/10/1685"/>
+								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" v-model="data_nascimento" v-mask="'##/##/####'" placeholder="29/10/1685"/>
 						 </div>	
 						 
 						 <div class="mb-10 fv-row">
 								 <label class="form-label mb-3">CNPJ</label>
-							 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" v-model="cpf_cnpj" placeholder="28.893.699/0001-85" />
+							 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" v-model="cpf_cnpj" v-mask="'##.###.###/####-##'" placeholder="28.893.699/0001-85" />
 						 </div>
 						 <div class="mb-0 fv-row">
 								 <label class="d-flex align-items-center form-label mb-5">Selecione em qual 

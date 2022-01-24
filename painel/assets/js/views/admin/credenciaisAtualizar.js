@@ -43,6 +43,7 @@ export default {
 
 														<div class="row g-5">
 
+														{{jms}}
 
 															<div class="col-lg-4" v-for="listar in permisao">
 																<div class="card card-stretch mb-5">
@@ -144,7 +145,6 @@ export default {
 			setTimeout(() => this.msg = "", 3000);
 
 			this.nome_identificacao= ""
-			console.log("atualizado")
 		},
 
 		checkAll() {

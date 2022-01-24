@@ -22,6 +22,9 @@ Vue.component('c-obrigado', obrigado )
 import mensagem from './componentes/c-mensagem.js'
 Vue.component('c-mensagem', mensagem )
 
+import loading from './componentes/c-loading.js'
+Vue.component('c-loading', loading )
+
 const app = new Vue({
     store,
     router,

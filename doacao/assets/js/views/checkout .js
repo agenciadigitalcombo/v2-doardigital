@@ -50,6 +50,7 @@ export default {
 												</div>
 												<div>
 													<div class="card-title mt-10">
+
 														<h3>Escolha Valor para Doação</h3>
 													</div>
 
@@ -57,7 +58,7 @@ export default {
 
 														<div class="row mt-5">
 
-															<div class="col-lg-4 mb-10 mb-lg-0" v-for="listar in dados" :key="listar.id">
+															<div class="col-lg-4 mb-10 mb-lg-0" v-for="listar in filtraPlano" :key="listar.id">
 
 															<label 
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-5 mb-5">
@@ -192,7 +193,7 @@ export default {
 			submitStatus: null,
 			minimoalerta: null,
 
-
+			status: '',
 			backgroundColor: '',
 			dados: [],
 
@@ -312,13 +313,25 @@ export default {
 		}
 	},
 
+	computed: {
+
+		filtraPlano() {
+			return this.dados.filter((plano) => {
+				return  plano.status.match(this.status = 1);
+			})
+			
+		}
+ 
+	},
+
 	async mounted() {
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = config.logo
 		this.backgroundColor = config.cor
 
-		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
+		this.dados = (await this.infoSubdomain()).dados_instituicao.plano 
 		// this.amount = dados.amount 
+		
 	},
 
 

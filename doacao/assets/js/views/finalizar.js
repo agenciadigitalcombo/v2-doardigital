@@ -22,7 +22,7 @@ export default {
 
                                 <div class="row g-5 g-xl-8">
                                     <div class="col-xl-6">
-
+                                    
                                         <div class="card-title mb-10">
                                             <h2>DIGITE SUAS INFORMAÇÕES</h2>
                                         </div>
@@ -368,13 +368,26 @@ export default {
                                             <c-mensagem :msg="msg" v-show="msg"></c-mensagem>
                                             <c-mensagem :error="error" ></c-mensagem>
 
+                                            
+
+                              <!--      <c-loading></c-loading> -->
+
                                             <div style="width: 100%;">
                                                 <div class="p-9">
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                                                         <button style="width: 100%;" type="submit"
-                                                            class="btn btn-success p-5" >
+                                                            class="btn btn-success p-5" :disabled="submitStatus === 'PENDING'" >
                                                             DOAR AGORA!
                                                         </button>
+                                                    </div>
+                                                    <div class=" d-flex justify-content-end py-2 px-9">
+                                                    <p class="typo__p" v-if="submitStatus === 'OK'"> 
+                                                    </p>
+                                                    <p class="typo__p" v-if="submitStatus === 'ERROR'">
+                                                    Por favor, preencha o formulário corretamente.</p>
+                                                    <p class="typo__p" v-if="submitStatus === 'PENDING'">
+                                                    <c-loading></c-loading> 
+                                                    </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -468,6 +481,7 @@ export default {
             error: null,
             subdomaim: null,
             codigo_geral: null,
+            submitStatus: null,
             dados: []
         }
     },
@@ -549,8 +563,7 @@ export default {
                 this.cart_numero,
                 this.cart_cvv,
                 this.cart_validade,
-                this.cart_nome,
- 
+                this.cart_nome, 
                 window.localStorage.setItem("type_pagamento", this.type_pagamento)
 
             )
@@ -558,10 +571,16 @@ export default {
                 this.error = res.message
                 return null
             }
-            this.msg = res.message  
-             window.localStorage.setItem("codigo", res.codigo) 
-             window.localStorage.setItem("url", res.url) 
-            window.location.href = "#/obrigado"
+            
+				this.submitStatus = 'PENDING'
+				setTimeout(() => {
+					this.submitStatus = 'OK'  
+                this.msg = res.message  
+                window.localStorage.setItem("codigo", res.codigo) 
+                window.localStorage.setItem("url", res.url) 
+               window.location.href = "#/obrigado"
+				}, 1800)
+
         }
         },
 

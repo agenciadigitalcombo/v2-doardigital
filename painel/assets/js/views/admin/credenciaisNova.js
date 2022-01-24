@@ -9,21 +9,13 @@ export default {
 				<c-aside></c-aside>
 
 				<!--begin::Root-->
-				<div class="d-flex flex-column flex-root">
-					<!--begin::Page-->
+				<div class="d-flex flex-column flex-root"> 
 					<div class="page d-flex flex-row flex-column-fluid">
+ <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+							 <div class="content d-flex flex-column flex-column-fluid"> 
+								<div class="post d-flex flex-column-fluid"> 
 
-						<!--begin::Wrapper-->
-						<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-							<!--begin::Root-->
-							<div class="content d-flex flex-column flex-column-fluid">
-								<!--begin::Post-->
-								<div class="post d-flex flex-column-fluid">
-									<!--begin::Container-->			
-
-
-									<div class="container-xxl">
-										<!--begin::Card-->
+									<div class="container-xxl"> 
 										<div class="card">
 											<div class="card-body pb-0">
 												<div class="card-px pt-10 pb-5">
@@ -34,10 +26,7 @@ export default {
 														<input v-model="nome_identificacao" type="text"
 															class="form-control form-control-solid"
 															placeholder="informe um nome" required />
-
-													
-
-
+ 
 														<p class="text-gray-400 fs-4 fw-bold py-7">Poderá acessar em:
 														</p>
 
@@ -64,7 +53,7 @@ export default {
 
 														<div class="mb-10">
 														<input class="form-check-input" type="checkbox"
-																@click="checkAll()" v-model="isCheckAll" /> selecionar
+																@click="checkAll()" v-model="isCheckAll"/> selecionar
 															tudo
 															</div>
 
@@ -79,16 +68,10 @@ export default {
 									</div>
 
 								</div>
-							</div>
-
-							<!--end::Root-->
-
-						</div>
-						<!--end::Wrapper-->
-					</div>
-					<!--end::Page-->
-				</div>
-
+							</div> 
+						</div> 
+					</div> 
+				</div> 
 
 				<c-footer />
 			</div>

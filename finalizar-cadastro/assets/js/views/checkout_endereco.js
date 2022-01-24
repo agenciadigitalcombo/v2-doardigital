@@ -85,9 +85,12 @@ export default {
 								<label class="form-label required">CEP</label>
 								 
 								<input v-model="nome_identificacao" type="hidden"/>
-						 <input v-model="cep" @keyup="searchCep()" name="business_name" class="form-control form-control-lg form-control-solid" value="sem registro"/>
+						 <input v-model="cep" @keyup="searchCep()" @input="mask_cep" v-mask="'########'" placeholder="00000-000" required
+						  class="form-control form-control-lg form-control-solid"  />
 								
-					 
+						  <div class="erro_texte"> 
+					 {{cepErro}}
+					 </div> 
 							</div> 
 							<div class="fv-row mb-0"> 
 								<label class="fs-6 fw-bold form-label required">Logradouro</label>
@@ -98,7 +101,7 @@ export default {
 						<br>
 							 <div class="fv-row mb-0">
 								
-								<label class="fs-6 fw-bold form-label required">Número</label>
+								<label class="fs-6 fw-bold form-label ">Número</label>
 								
 								<input id="numero" v-model="numero" type="text" 
 								 name="business_name" class="form-control form-control-lg form-control-solid" placeholder="Localização"  />
@@ -107,7 +110,7 @@ export default {
 							<br>
 							<div class="fv-row mb-0">
 								
-							<label class="fs-6 fw-bold form-label required">Complemento</label>
+							<label class="fs-6 fw-bold form-label ">Complemento</label>
 							
 							<input v-model="complemento" name="Complemento" class="form-control form-control-lg form-control-solid" value="Boa Vista" />
 							
@@ -190,6 +193,7 @@ export default {
 			estado: null,
 			secret: null,
 			token: null,
+			cepErro: null,
 
         }
     },
@@ -228,23 +232,37 @@ export default {
 			window.location.href = `#/checkout_plano`
 		},
 
-       
 		searchCep() {
-			if (this.cep.length == 8) {
-				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
-					.then(response => {
-						this.cep = this.cep.replace(/[^\d]+/g, '')
-						this.logadouro = response.data.logradouro,
-							this.bairro = response.data.bairro,
-							this.cidade = response.data.localidade,
-							this.estado = response.data.uf
-					}
-					)
-					.catch(error =>
-						console.log(error)
-					)
-			}
-		}
+            let cep = this.cep
+            cep = cep.replace(/\D/gi, '')
+            if (cep.length == 8) {
+                axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => {
+                        this.error = ""
+                        this.logadouro = response.data.logradouro,
+                            this.bairro = response.data.bairro,
+                            this.cidade = response.data.localidade,
+                            this.estado = response.data.uf
+
+                        if (response.data.erro) {
+                            this.cepErro = "Número do CEP inválido...!"
+                        }
+                    }
+                    )
+                    .catch(error =>
+                        error
+                    )
+            }
+        },
+
+		mask_cep() {
+            let mascara = this.cep
+            mascara = mascara.replace(/\D/gi, '')
+            mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
+            mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
+            this.cep = mascara
+        },
+ 
 
     },
 	

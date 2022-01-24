@@ -279,16 +279,16 @@ export default {
         nome,
         telefone,
         credencial_id,
-        secret,
         email,
+        secret,
         token,
     ) {
         return await http.post('/atualizar-subadm', {
             nome,
             telefone,
             credencial_id,
-            secret,
             email,
+            secret,
             token,
         })
     },

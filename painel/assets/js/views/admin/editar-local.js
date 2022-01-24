@@ -117,7 +117,7 @@ export default {
 										</div>
 										<div class="row mb-6">
 											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Complemento</span>
+												<span class="">Complemento</span>
 
 											</label>
 											<div class="col-lg-8 fv-row">
