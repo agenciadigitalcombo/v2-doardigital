@@ -23,8 +23,8 @@ export default {
 														<div class="btn-group w-100" data-kt-buttons="true"
 															data-kt-buttons-target="[data-kt-button]">
 
-															<input v-model="tipo" type="radio" class="btn-check"
-																name="radio_buttons_2" value="mes" checked="checked"
+															<input v-model="mensal" type="radio" class="btn-check"
+																name="radio_buttons_2" value="1" checked="checked"
 																id="kt_radio_buttons_2_option_1" />
 															<label
 																class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
@@ -34,8 +34,8 @@ export default {
 																</span>
 															</label>
 
-															<input v-model="tipo" type="radio" class="btn-check"
-																name="radio_buttons_2" value="unica"
+															<input v-model="mensal" type="radio" class="btn-check"
+																name="radio_buttons_2" value="0"
 																id="kt_radio_buttons_2_option_2" />
 															<label
 																class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
@@ -75,7 +75,7 @@ export default {
 															</label>
 														</div>
 
-														<div class="col-lg-4 mb-10 mb-lg-0" v-if="tipo !== 'mes'">
+														<div class="col-lg-4 mb-10 mb-lg-0" v-if="mensal !== '1'">
 
 															<label
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
@@ -101,7 +101,7 @@ export default {
 										</div>
 
 										<div class="col-xl-6">
-											<div class="mb-10" v-if="valor === '0' && tipo !== 'mes'">
+											<div class="mb-10" v-if="valor === '0' && mensal !== '1'">
 												<div class="card-title mb-5">
 													<h3>Informe um valor, mínimo R$ 25,00. (Pix máximo R$ 1000,00 dia)</h3>
 												</div>
@@ -180,7 +180,7 @@ export default {
 	data: function () {
 		return {
 			logo: '',
-			tipo: "mes",
+			mensal: "1",
 			amount: null,
 			valor: null,
 			planos_nome: null,
@@ -291,9 +291,7 @@ export default {
 				this.minimoalerta = "Valor minimo deve ser 25,00"
 			}
 			else {
-
 				this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
-			 
 				if (this.valor == 0) {
 					window.localStorage.setItem("planos_id", "999")
 					window.localStorage.setItem("planos_nome", this.valor_digitado)
@@ -304,7 +302,7 @@ export default {
 					window.localStorage.setItem("amount", this.valor)
 				}
 
-				window.localStorage.setItem("tipo", this.tipo)
+				window.localStorage.setItem("mensal", this.mensal)
 				// window.localStorage.setItem("amount_digitado", this.valor_digitado)
 				window.localStorage.setItem("email", this.email)
 				window.location.href = "#/finalizar"
