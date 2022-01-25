@@ -39,7 +39,7 @@ input {
   /* max-width: 50%; */
   margin: 0px auto 15px auto;
   padding: 5px 5px 0px 5px;
-  z-index: 19999999999;
+  z-index: 99;
   text-align: center;
   font-size: 15px;
 }
@@ -53,7 +53,7 @@ input {
   /* max-width: 50%; */
   margin: 0px auto 15px auto;
   padding: 5px 5px 0px 5px;
-  z-index: 19999999999;
+  z-index: 99;
   text-align: center;
   font-size: 15px;
 }

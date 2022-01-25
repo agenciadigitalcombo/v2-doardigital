@@ -4,6 +4,11 @@ export default {
     template: `
     
     <div>
+           
+    <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
+           <c-loading></c-loading> 
+        </p>
+
         <div class="inner-box">
         <div class="container">
             <div class="row">
@@ -68,11 +73,12 @@ export default {
 
                         <span class="svg-icon svg-icon-2hx svg-icon-danger me-3"><i
                                 class="bi bi-droplet-half text-danger"></i></span>
-        
+         
 
-                        <div class="d-flex flex-column" >
+                        <div class="d-flex flex-column">
         
                             <h4 class="mb-1 text-dark">{{error}}</h4>
+                            
                     
                         </div>
             
@@ -92,15 +98,14 @@ export default {
             email: null,
             senha: null,
             telefone: null,
-            error: null
+            error: null,
+            submitStatus: null,
         }
     },
-    methods: {
- 
-        
+    methods: { 
         async cadastrar() {
             this.error = null
-
+            this.submitStatus = 'CARREGAR'
             let res = await adm.cadastrar(
                 this.nome,
                 this.email,
@@ -109,21 +114,18 @@ export default {
                 this.error
             )
             if (!res.next) {
-                console.log(res)
+                this.submitStatus = 'FALHA'
                 this.error = res.message
                 return null
             }
             localStorage.setItem('token', res.token)
-
             window.location.href = "/finalizar-cadastro/index.html#/";
         },
+        
         updateForm(event) {
             this[event.name] = event.value
         }
     },
-    mounted() {
-        this.nome = localStorage.getItem('nome')
-
-    }
+ 
 
 }

@@ -22,6 +22,9 @@ Vue.component('c-obrigado', obrigado )
 import mensagem from './componentes/c-mensagem.js'
 Vue.component('c-mensagem', mensagem )
 
+import erro_500 from './componentes/c-erro_500.js'
+Vue.component('c-erro_500', erro_500 )
+
 import loading from './componentes/c-loading.js'
 Vue.component('c-loading', loading )
 
