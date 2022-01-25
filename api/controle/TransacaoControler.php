@@ -72,6 +72,7 @@ class TransacaoControler{
         ]);
 
 
+
         if(!$doacao->valid_type_pagamento($type_pagamento)){
             echo json_encode([
                 'next' => false,
@@ -111,84 +112,87 @@ class TransacaoControler{
         $get_token = $doador_dados['token'];
         
         
-        if($mensal == 1 and $type_pagamento == "credit_card"){
-            
-            $pagarme_cartao = new PagarMeCartao();
-            $res_pagarme_cartao = $pagarme_cartao->create_cartao($cart_numero, $cart_cvv, $cart_validade, $nome);
-            $get_id_cartao = $res_pagarme_cartao['id'];
-            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
-            $get_status = $res_pagarme_recorrencia['status'];
-            $codigo = "";
-            $url = "";
-        }
 
-        if($mensal == 1 and $type_pagamento == "boleto"){
-            
-            $pagarme_cartao = new PagarMeBoleto();
-            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
-            $get_status = $res_pagarme_recorrencia['current_transaction'] ['status'];
-            $codigo = $res_pagarme_recorrencia['current_transaction'] ['boleto_barcode'];
-            $url = $res_pagarme_recorrencia['current_transaction'] ['boleto_url'];
-        }
-
-
-        if($type_pagamento == "credit_card"){
-
-            campo_obrigatorios([
-                'cart_numero' => 'Campo cart_numero Obrigatorio',
-                'cart_cvv' => 'Campo cart_cvv Obrigatorio',
-                'cart_validade' => 'Campo cart_validade Obrigatorio',
-                'planos_valor' => 'Campo planos_valor Obrigatorio',
-            ]);
-
-            $pagarme_cartao = new PagarMeCartao();
-            
-            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
-            $get_token = $res_pagarme['id'];
-            $get_status = $res_pagarme['status'];
-            $codigo = "";
-            $url = "";
-            
-        }
+            if($mensal == 1 and $type_pagamento == "credit_card"){
+                
+                $pagarme_cartao = new PagarMeCartao();
+                $res_pagarme_cartao = $pagarme_cartao->create_cartao($cart_numero, $cart_cvv, $cart_validade, $nome);
+                
+                $get_id_cartao = $res_pagarme_cartao['id'];
+                $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
+                $get_status = $res_pagarme_recorrencia['status'];
+                $codigo = "";
+                $url = "";
+            }
     
+            if($mensal == 1 and $type_pagamento == "boleto"){
+                
+                $pagarme_cartao = new PagarMeBoleto();
+                $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
+                $get_status = $res_pagarme_recorrencia['current_transaction'] ['status'];
+                $codigo = $res_pagarme_recorrencia['current_transaction'] ['boleto_barcode'];
+                $url = $res_pagarme_recorrencia['current_transaction'] ['boleto_url'];
+            }
+    
+    
+            if($type_pagamento == "credit_card"){
+    
+                campo_obrigatorios([
+                    'cart_numero' => 'Campo cart_numero Obrigatorio',
+                    'cart_cvv' => 'Campo cart_cvv Obrigatorio',
+                    'cart_validade' => 'Campo cart_validade Obrigatorio',
+                    'planos_valor' => 'Campo planos_valor Obrigatorio',
+                ]);
+    
+                $pagarme_cartao = new PagarMeCartao();
+                
+                $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+                $get_token = $res_pagarme['id'];
+                $get_status = $res_pagarme['status'];
+                $codigo = "";
+                $url = "";
+                
+            }
         
-        if($type_pagamento == "pix"){
-
-            campo_obrigatorios([
-                'planos_valor' => 'Campo planos_valor opbrigatorio',
-            ]);
-
-            $pagarme_pix = new PagarMePix();
             
-            $res_pagarme = $pagarme_pix->pay($planos_valor);
-            
-            $get_token = $res_pagarme['id'];
-            $get_status = $res_pagarme['status'];
-            $codigo = $res_pagarme['pix_qr_code'];
-            $url = $res_pagarme['pix_qr_code'];
-            
-            
-        }
-
-
-        if($type_pagamento == "boleto"){
-
-            campo_obrigatorios([
-                'planos_valor' => 'Campo planos_valor opbrigatorio',
-                'planos_nome' => 'Campo planos_nome opbrigatorio'
-            ]);
-
-            $pagarme_boleto = new PagarMeBoleto();
-             
-            $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
-            $get_token = $res_pagarme['id'];
-            $get_status = $res_pagarme['status'];
-            $codigo = $res_pagarme['boleto_barcode'];
-            $url = $res_pagarme['boleto_url'];
-            
-            
-            
-        }
+            if($type_pagamento == "pix"){
+    
+                campo_obrigatorios([
+                    'planos_valor' => 'Campo planos_valor opbrigatorio',
+                ]);
+    
+                $pagarme_pix = new PagarMePix();
+                
+                $res_pagarme = $pagarme_pix->pay($planos_valor);
+                
+                $get_token = $res_pagarme['id'];
+                $get_status = $res_pagarme['status'];
+                $codigo = $res_pagarme['pix_qr_code'];
+                $url = $res_pagarme['pix_qr_code'];
+                
+                
+            }
+    
+    
+            if($type_pagamento == "boleto"){
+    
+                campo_obrigatorios([
+                    'planos_valor' => 'Campo planos_valor opbrigatorio',
+                    'planos_nome' => 'Campo planos_nome opbrigatorio'
+                ]);
+    
+                $pagarme_boleto = new PagarMeBoleto();
+                 
+                $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+                $get_token = $res_pagarme['id'];
+                $get_status = $res_pagarme['status'];
+                $codigo = $res_pagarme['boleto_barcode'];
+                $url = $res_pagarme['boleto_url'];
+                
+                
+                
+            }
+        
         
         
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $get_status, $planos_id, $planos_valor, $codigo, $url);

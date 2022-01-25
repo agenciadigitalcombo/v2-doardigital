@@ -607,3 +607,4 @@ function valid_subdomain($campo): void
         die;
     }
 }
+

@@ -36,12 +36,16 @@ class PagarMe
             ));
 
 
-            $result = file_get_contents($full_path, FALSE, $context);
+            @$result = file_get_contents($full_path, FALSE, $context);
             return json_decode($result, true);
         } catch (\Throwable $th) {
-            return [
-                "error" => "Não foi possivel acessar pagar me"
-            ];
+            
+            echo json_encode([
+                'next' => false,
+                'message' => 'Algum parâmetro obrigatório não foi passado, ou os parâmetros não são corretos.'
+            ]);
+            die;
+            
         }
     }
 
