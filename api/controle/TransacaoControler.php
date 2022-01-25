@@ -197,8 +197,8 @@ class TransacaoControler{
         
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $get_status, $planos_id, $planos_valor, $codigo, $url);
         
-        @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:s"), json_encode($_REQUEST));
-        @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:I"), json_encode($_REQUEST));
+        @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
+        @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
 
         @mail($email, "Doação", "...");
         echo json_encode([
