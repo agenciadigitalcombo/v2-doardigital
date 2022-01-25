@@ -19,7 +19,6 @@ export default {
 
     data: function () {
 		return {
-            gravatar: '../painel/assets/image/gravatar.png'
 
         }
     },

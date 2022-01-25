@@ -36,7 +36,7 @@ input {
   border: 2px solid #B8DAFF;
   border-radius: 5px; */
 
-  max-width: 50%;
+  /* max-width: 50%; */
   margin: 0px auto 15px auto;
   padding: 5px 5px 0px 5px;
   z-index: 19999999999;
@@ -50,8 +50,7 @@ input {
   /* background-color: #CCE5FF;
   border: 2px solid #B8DAFF;
   border-radius: 5px; */
-
-  max-width: 50%;
+  /* max-width: 50%; */
   margin: 0px auto 15px auto;
   padding: 5px 5px 0px 5px;
   z-index: 19999999999;

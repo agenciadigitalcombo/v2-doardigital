@@ -2,7 +2,7 @@ import adm from "../../../../static/js/api/adm.js"
 const { required, minLength, maxLength  } = window.validators
 
 export default {
-    template: `
+    template: `  Total a Pagar:
 
 <div :style="{ backgroundColor: backgroundColor }">
     <div class="d-flex flex-column flex-root">
@@ -152,10 +152,22 @@ export default {
 
                                     </div>
                                     <div class="col-xl-6">
-                                        <div class="card-title mb-10">
+                                        <div class="card-title mb-10"  v-if="type_pagamento !=='pix'">
                                             <h1> Total a Pagar: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
                                                 |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                         </div>
+
+                                        <div class="card-title mb-10"  v-if="type_pagamento =='pix'">
+                                      
+                                        <div v-if="planos_valor > '100000'">
+                                        <h1> Total a Pagar: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
+                                            |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
+                                         </div>
+                                         <div v-else>
+                                          <h1> O pagamento maximo vai ser R$ 1.000.00 </h1>
+                                        </div>
+                                    </div>
+
                                         <P>
                                             Todas as transações são segura e criptografadas. As informações do
                                             cartão de credito nunca são armazenado em nossos servidores.
@@ -167,7 +179,7 @@ export default {
 
                                                     <div class="col-xl-4">
                                                         <input type="radio" class="btn-check"
-                                                            @click="type_pagamento = 'credit_card'" name="radio_buttons_2"
+                                                            @click="type_pagamento = 'credit_card'; consultar();" name="radio_buttons_2"
                                                             value="1" checked="checked"
                                                             id="kt_radio_buttons_2_option_1" />
                                                         <label
@@ -187,7 +199,7 @@ export default {
                                                     </div>
                                                     <div class="col-xl-4">
                                                         <input type="radio" class="btn-check"
-                                                            @click="type_pagamento = 'boleto'" name="radio_buttons_2"
+                                                            @click="type_pagamento = 'boleto'; consultar();" name="radio_buttons_2"
                                                             value="2" id="kt_radio_buttons_2_option_2" />
                                                         <label
                                                             class="btn btn-outline btn-outline-dashed btn-outline-default d-flex align-items-center mb-5"
@@ -206,7 +218,7 @@ export default {
 
                                                     <div class="col-xl-4" v-if="mensal ==='0'">
                                                         <input type="radio" class="btn-check"
-                                                            @click="type_pagamento = 'pix'" name="radio_buttons_2"
+                                                            @click="type_pagamento = 'pix'; consultar();" name="radio_buttons_2"
                                                             value="3" id="kt_radio_buttons_3_option_3" />
                                                         <label
                                                             class="btn btn-outline btn-outline-dashed btn-outline-default d-flex align-items-center mb-5"
@@ -376,10 +388,6 @@ export default {
                                             <c-mensagem :msg="msg" v-show="msg"></c-mensagem>
                                             <c-mensagem :error="error" ></c-mensagem>
 
-                                            
-
-                              <!--      <c-loading></c-loading> -->
-
                                             <div style="width: 100%;">
                                                 <div class="p-9">
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -394,6 +402,9 @@ export default {
                                                     <p class="typo__p" v-if="submitStatus === 'ERROR'">
                                                     Por favor, preencha o formulário corretamente.</p>
                                                     <p class="typo__p" v-if="submitStatus === 'PENDING'">
+                                                  
+                                                    </p>
+                                                    <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
                                                     <c-loading></c-loading> 
                                                     </p>
                                                     </div>
@@ -550,16 +561,39 @@ export default {
 	},
 
     methods: {
+
+
+        consultar() {
+            if (this.type_pagamento == "pix") {
+                if (this.planos_valor >= 100000) { 
+                    this.planos_valor = "100000"
+                  } else { 
+                    this.planos_valor = window.localStorage.getItem("amount") 
+                  }
+              } else {
+                this.planos_valor = window.localStorage.getItem("amount") 
+              }
+
+
+            
+        },
+
+
         async addTransacao() {
             this.error = null
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
+
+                this.submitStatus = 'CARREGAR'
+
+
             let res = await adm.transacaoPlano( 
                 this.instituicao_id,
                 this.mensal,
                 this.planos_id,
+                
                 this.planos_valor,
                 this.planos_nome,
                 this.email,
@@ -583,17 +617,16 @@ export default {
             )
             if (!res.next) {
                 this.error = res.message
+                this.submitStatus = 'FALHA'  
                 return null
             }
-            
-				this.submitStatus = 'PENDING'
-				setTimeout(() => {
-					this.submitStatus = 'OK'  
+             
+			 	this.submitStatus = 'OK'  
                 this.msg = res.message  
                 window.localStorage.setItem("codigo", res.codigo) 
                 window.localStorage.setItem("url", res.url) 
                window.location.href = "#/obrigado"
-				}, 1800)
+			 
 
         }
         },
