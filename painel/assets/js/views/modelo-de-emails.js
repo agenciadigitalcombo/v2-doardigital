@@ -1,243 +1,181 @@
-import tags from '../domain/tag-email.js'
+import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template:`
-		<div>
+template:`
+<div>
 
-			<c-header></c-header>
-			<c-aside></c-aside>
+    <c-header></c-header>
+    <c-aside></c-aside>
 
-			<div class="d-flex flex-column flex-root">
-			<div class="page d-flex flex-row flex-column-fluid">
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<div id="kt_content_container" class="container-xxl">
+    <!--begin::Root-->
+    <div class="d-flex flex-column flex-root">
 
-							<div class="d-flex flex-column flex-lg-row">
-							<!--begin::Content-->
-							<div class="flex-lg-row-fluid ">
-								<!--begin::Card-->
-								<div class="card">
-									<div class="card-header align-items-center">
-										<div class="card-title">
-											<h2>Modelo de E-mails</h2>
-										</div>
-									</div>
-									<div class="card-body p-0">
-										<!--begin::Form-->
-										<form id="kt_inbox_compose_form">
-											<!--begin::Body-->
-											<div class="d-block">
-												<!--begin::To-->
-												<div class="d-flex align-items-center border-bottom px-8 min-h-50px">
-													<!--begin::Label-->
-													<div class="text-dark fw-bolder w-75px">Para:</div>
-													<!--end::Label-->
-													<!--begin::Input-->
-												
-													<input type="text" class="form-control border-0"
-														name="compose_to" value="" >
-													<!--end::Input-->
-													<!--begin::CC & BCC buttons-->
-													<div class="ms-auto w-75px text-end">
-														<span
-															class="text-muted fs-bold cursor-pointer text-hover-primary me-2"
-															data-kt-inbox-form="cc_button">Cc</span>
-														<span
-															class="text-muted fs-bold cursor-pointer text-hover-primary"
-															data-kt-inbox-form="bcc_button">Bcc</span>
-													</div>
-													<!--end::CC & BCC buttons-->
-												</div>
-												<!--end::To-->
-												<!--begin::CC-->
-												<div class="d-none align-items-center border-bottom ps-8 pe-5 min-h-50px"
-													data-kt-inbox-form="cc">
-													
-													<!--begin::Input-->
-													<tags
-														class="tagify form-control border-0 tagify--noTags tagify--empty"
-														tabindex="-1">
-														<span contenteditable="" tabindex="0" data-placeholder="​"
-															aria-placeholder="" class="tagify__input" role="textbox"
-															aria-autocomplete="both" aria-multiline="false"></span>
-														​
-													</tags><input type="text" class="form-control border-0"
-														name="compose_cc" value="" data-kt-inbox-form="tagify">
-													<!--end::Input-->
-													<!--begin::Close-->
-													<span class="btn btn-clean btn-xs btn-icon"
-														data-kt-inbox-form="cc_close">
-														<i class="la la-close"></i>
-													</span>
-													<!--end::Close-->
-												</div>
-												<!--end::CC-->
-												<!--begin::BCC-->
-												<div class="d-none align-items-center border-bottom inbox-to-bcc ps-8 pe-5 min-h-50px"
-													data-kt-inbox-form="bcc">
-													<!--begin::Label-->
-													<div class="text-dark fw-bolder w-75px">Bcc:</div>
-													<!--end::Label-->
-													<!--begin::Input-->
-													<tags
-														class="tagify form-control border-0 tagify--noTags tagify--empty"
-														tabindex="-1">
-														<span contenteditable="" tabindex="0" data-placeholder="​"
-															aria-placeholder="" class="tagify__input" role="textbox"
-															aria-autocomplete="both" aria-multiline="false"></span>
-														​
-													</tags><input type="text" class="form-control border-0"
-														name="compose_bcc" value="" data-kt-inbox-form="tagify">
-													<!--end::Input-->
-													<!--begin::Close-->
-													<span class="btn btn-clean btn-xs btn-icon"
-														data-kt-inbox-form="bcc_close">
-														<i class="la la-close"></i>
-													</span>
-													<!--end::Close-->
-												</div>
-												<!--end::BCC-->
-												<!--begin::Subject-->
-												<div class="border-bottom">
-													<div class="form-floating">
-													<textarea class="form-control border-0 px-8 min-h-45px" style="height: 100px"
-														name="compose_subject" placeholder="Escreva sua mensagem aqui"></textarea>
-														<label class="px-8" for="floatingTextarea2">Escreva sua mensagem aqui</label>
+        <div class="page d-flex flex-row flex-column-fluid">
 
-													</div>
-													</div>
-												<!--end::Subject-->
-												<!--begin::Message-->
-											
-												<div class="border-0 h-200px p-8  ql-container ql-snow">
-					
-													<p>Você pode usar as seguintes Tags:</p>
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-													
-													<span>
-													<span class="tag" v-for="tag in tags">{{tag}}</span>
-												</span>
+                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
-												</div>
-												<!--end::Message viewBox="0 0 18 18"-->
+                    <div class="post d-flex flex-column-fluid" id="kt_post">
 
-											</div>
-											<!--end::Body-->
-											<!--begin::Footer-->
-											<div class="d-flex flex-stack flex-wrap gap-2 py-5 ps-8 pe-5 border-top">
-												<!--begin::Actions-->
-												<div class="d-flex align-items-center me-3">
-													<!--begin::Send-->
-													<div class="btn-group me-4">
-														<!--begin::Submit-->
-														<a class="btn btn-primary">Salvar</a>
-													</div>
-													<!--end::Send-->
-													<!--begin::Upload attachement-->
-													<span
-														class="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2 dz-clickable"
-														id="kt_inbox_reply_attachments_select"
-														data-kt-inbox-form="dropzone_upload">
-														<!--begin::Svg Icon | path: icons/duotune/communication/com008.svg-->
-														<span class="svg-icon svg-icon-2 m-0">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24"
-																height="24" viewBox="0 0 24 24" fill="none">
-																<path opacity="0.3"
-																	d="M4.425 20.525C2.525 18.625 2.525 15.525 4.425 13.525L14.825 3.125C16.325 1.625 18.825 1.625 20.425 3.125C20.825 3.525 20.825 4.12502 20.425 4.52502C20.025 4.92502 19.425 4.92502 19.025 4.52502C18.225 3.72502 17.025 3.72502 16.225 4.52502L5.82499 14.925C4.62499 16.125 4.62499 17.925 5.82499 19.125C7.02499 20.325 8.82501 20.325 10.025 19.125L18.425 10.725C18.825 10.325 19.425 10.325 19.825 10.725C20.225 11.125 20.225 11.725 19.825 12.125L11.425 20.525C9.525 22.425 6.425 22.425 4.425 20.525Z"
-																	fill="black"></path>
-																<path
-																	d="M9.32499 15.625C8.12499 14.425 8.12499 12.625 9.32499 11.425L14.225 6.52498C14.625 6.12498 15.225 6.12498 15.625 6.52498C16.025 6.92498 16.025 7.525 15.625 7.925L10.725 12.8249C10.325 13.2249 10.325 13.8249 10.725 14.2249C11.125 14.6249 11.725 14.6249 12.125 14.2249L19.125 7.22493C19.525 6.82493 19.725 6.425 19.725 5.925C19.725 5.325 19.525 4.825 19.125 4.425C18.725 4.025 18.725 3.42498 19.125 3.02498C19.525 2.62498 20.125 2.62498 20.525 3.02498C21.325 3.82498 21.725 4.825 21.725 5.925C21.725 6.925 21.325 7.82498 20.525 8.52498L13.525 15.525C12.325 16.725 10.525 16.725 9.32499 15.625Z"
-																	fill="black"></path>
-															</svg>
-														</span>
-														<!--end::Svg Icon-->
-													</span>
-													<!--end::Upload attachement-->
-													<!--begin::Pin-->
-													<span
-														class="btn btn-icon btn-sm btn-clean btn-active-light-primary">
-														<!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
-														<span class="svg-icon svg-icon-2 m-0">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24"
-																height="24" viewBox="0 0 24 24" fill="none">
-																<path opacity="0.3"
-																	d="M18.0624 15.3453L13.1624 20.7453C12.5624 21.4453 11.5624 21.4453 10.9624 20.7453L6.06242 15.3453C4.56242 13.6453 3.76242 11.4453 4.06242 8.94534C4.56242 5.34534 7.46242 2.44534 11.0624 2.04534C15.8624 1.54534 19.9624 5.24534 19.9624 9.94534C20.0624 12.0453 19.2624 13.9453 18.0624 15.3453Z"
-																	fill="black"></path>
-																<path
-																	d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z"
-																	fill="black"></path>
-															</svg>
-														</span>
-														<!--end::Svg Icon-->
-													</span>
-													<!--end::Pin-->
-												</div>
-												<!--end::Actions-->
-												<!--begin::Toolbar-->
-												<div class="d-flex align-items-center">
-													<!--begin::More actions-->
-													<span
-														class="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2"
-														data-toggle="tooltip" title="More actions">
-														<!--begin::Svg Icon | path: icons/duotune/coding/cod001.svg-->
-														<span class="svg-icon svg-icon-2">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24"
-																height="24" viewBox="0 0 24 24" fill="none">
-																<path opacity="0.3"
-																	d="M22.1 11.5V12.6C22.1 13.2 21.7 13.6 21.2 13.7L19.9 13.9C19.7 14.7 19.4 15.5 18.9 16.2L19.7 17.2999C20 17.6999 20 18.3999 19.6 18.7999L18.8 19.6C18.4 20 17.8 20 17.3 19.7L16.2 18.9C15.5 19.3 14.7 19.7 13.9 19.9L13.7 21.2C13.6 21.7 13.1 22.1 12.6 22.1H11.5C10.9 22.1 10.5 21.7 10.4 21.2L10.2 19.9C9.4 19.7 8.6 19.4 7.9 18.9L6.8 19.7C6.4 20 5.7 20 5.3 19.6L4.5 18.7999C4.1 18.3999 4.1 17.7999 4.4 17.2999L5.2 16.2C4.8 15.5 4.4 14.7 4.2 13.9L2.9 13.7C2.4 13.6 2 13.1 2 12.6V11.5C2 10.9 2.4 10.5 2.9 10.4L4.2 10.2C4.4 9.39995 4.7 8.60002 5.2 7.90002L4.4 6.79993C4.1 6.39993 4.1 5.69993 4.5 5.29993L5.3 4.5C5.7 4.1 6.3 4.10002 6.8 4.40002L7.9 5.19995C8.6 4.79995 9.4 4.39995 10.2 4.19995L10.4 2.90002C10.5 2.40002 11 2 11.5 2H12.6C13.2 2 13.6 2.40002 13.7 2.90002L13.9 4.19995C14.7 4.39995 15.5 4.69995 16.2 5.19995L17.3 4.40002C17.7 4.10002 18.4 4.1 18.8 4.5L19.6 5.29993C20 5.69993 20 6.29993 19.7 6.79993L18.9 7.90002C19.3 8.60002 19.7 9.39995 19.9 10.2L21.2 10.4C21.7 10.5 22.1 11 22.1 11.5ZM12.1 8.59998C10.2 8.59998 8.6 10.2 8.6 12.1C8.6 14 10.2 15.6 12.1 15.6C14 15.6 15.6 14 15.6 12.1C15.6 10.2 14 8.59998 12.1 8.59998Z"
-																	fill="black"></path>
-																<path
-																	d="M17.1 12.1C17.1 14.9 14.9 17.1 12.1 17.1C9.30001 17.1 7.10001 14.9 7.10001 12.1C7.10001 9.29998 9.30001 7.09998 12.1 7.09998C14.9 7.09998 17.1 9.29998 17.1 12.1ZM12.1 10.1C11 10.1 10.1 11 10.1 12.1C10.1 13.2 11 14.1 12.1 14.1C13.2 14.1 14.1 13.2 14.1 12.1C14.1 11 13.2 10.1 12.1 10.1Z"
-																	fill="black"></path>
-															</svg>
-														</span>
-														<!--end::Svg Icon Drop files here to upload-->
-													</span>
-													<!--end::More actions-->
-												
-												</div>
-												<!--end::Toolbar-->
-											</div>
-											<!--end::Footer-->
-										</form>
-										<!--end::Form-->
-									</div>
-								</div>
-								<!--end::Card-->
-							</div>
-							<!--end::Content-->
-						</div>
-							
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        <div id="kt_content_container" class="container-xxl">
+
+                            <div class="card">
+                                <div class="card-header border-0 pt-6">
+
+                                    <div class="card-title">
+                                        <div class="d-flex align-items-center position-relative my-1">
+                                            <h1>Emails</h1>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-end align-items-center d-none mr-9"
+                                        data-kt-subscription-table-toolbar="selected">
+                                        <div class="fw-bolder ">
+                                            <span class="" data-kt-subscription-table-select="selected_count"></span>
+                                            Activo
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed table-striped fs-6 gy-5"
+                                            id="kt_subscriptions_table">
+                                            <thead>
+                                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                                    <th class="w-10px pe-2">
+
+                                                    </th>
+                                                    <th class="min-w-200px">TIpo</th>
+                                                    <th class="min-w-50px"></th>
+                                                    <th class="min-w-200px"></th>
+                                                    <th class="min-w-150px">Status </th>
+                                                    <th class="min-w-50px"></th>
+                                                    <th class="text-end min-w-170px">Ação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-gray-600 fw-bold">
+                                                <tr v-for="item in dados" :key="item.id"> 
+                                                    <td>
+                                                    </td> 
+                                                    <td> 
+                                                        <!--begin::User details-->
+                                                        <div class="d-flex flex-column">
+                                                            <a class="text-gray-800 text-center mb-1">
+                                                               
+                                                            <div class="badge badge-light fw-bolder"> 1 min </div>
+                                                           Doação Concluída
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge badge-light"></div>
+                                                    </td>
+                                                    <td>
+
+                                                    </td>
+                                                    <td> 
+                                                        <div
+                                                            class="form-check form-switch form-check-custom form-check-solid me-10">
+
+                                                            <input class="form-check-input h-30px w-50px"
+                                                                v-model="item.status" true-value="1" false-value="0"
+                                                                @click="statusx(item.id)" type="checkbox"
+                                                                id="flexSwitch30x50" />
+                                                        </div> 
+                                                    </td>
+                                                    <td>
+                                                    </td> 
+                                                    <td class="text-end">
+
+                                                        <a @click="editar(item.id)"
+                                                            class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
+                                                            style="margin: 2px;">
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                                            <span class="svg-icon svg-icon-3">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                    height="20" fill="currentColor"
+                                                                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                                                </svg>
+                                                            </span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Root-->
+
+    <c-footer />
+</div>
+`,
 
 
+data: function () {
+return {
+id: null,
+instituicao_id: null,
+nome: null,
+amount: null,
+status: null,
+token: null,
+dados: []
+}
+},
 
 
+filters: {
+is_price(price) {
+let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+return `R$ ${amount}`
+}
+},
+
+methods: {
+async listar() {
+let res = await adm.listarPlanos(localStorage.getItem('instituicao_id'))
+return res
+},
+
+async editar(id) {
+//  globalThis._planos = this.dados.find(user => user.id == id) 
+window.location.href = "#/modelo-de-emails/editar"
+},
 
 
-		<!--end:: Root-->
-
-			<c-footer />
-		</div>
-    `,
-
-
-     data: function () {
-		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-			tags: []
-        }
-    },
-	methods: {
-
-    },
-	
+async statusx(status) {
+this.error = null
+this.plano_id= status
+let res = await adm.onoffPlano(
+this.plano_id,
+this.token,
+)
+if (!res.next) {
+console.log(res)
+this.error = res.message
+return null
 }
 
+},
+
+},
+
+async mounted() {
+this.dados = (await this.listar()).dados
+this.instituicao_id = localStorage.getItem("instituicao_id");
+},
+
+}

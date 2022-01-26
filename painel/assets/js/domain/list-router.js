@@ -66,5 +66,7 @@ export default [
 
     { path: '/modelo-de-emails', component: { template: '<c-modelo-de-emails>' } },
     
+    { path: '/modelo-de-emails/editar', component: { template: '<c-modelo-de-emails-editar>' } },
+ 
     
 ]
