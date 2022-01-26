@@ -276,6 +276,9 @@ class InstituicaoControler
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'status' => $get_instituicao['status'],
+            'telefone' => $get_instituicao['telefone'],
+            'email' => $get_instituicao['email'],
+            'cnpj' => $get_instituicao['cnpj'],
             'plano' => $payload_plano,
             'endereco' => $payload_endereco
         ];
