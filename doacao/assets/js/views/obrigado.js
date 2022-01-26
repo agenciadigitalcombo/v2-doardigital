@@ -6,7 +6,7 @@ export default {
 	<div class="d-flex flex-column flex-root"> 
 			<div class="mb-0" id="home"> 
 				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
-			  :style="{ backgroundColor: inst.backgroundColor }">
+			  style="background-color: white">
  
 					<div class="d-flex flex-column flex-center w-100 min-h-40px min-h-lg-40px px-9">
 					 
@@ -121,10 +121,10 @@ export default {
 					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg" >
 						<path  
 							d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
-							:fill="inst.backgroundColor" ></path>
+							fill="rgba(19,38,60,255)" ></path>
 					</svg>
 				</div> 
-				<div class="py-2 landing-dark-bg" :style="{ backgroundColor: inst.backgroundColor }" > 
+				<div class="py-2 landing-dark-bg" > 
 					<div class="container"> 
 						<div class="d-flex flex-column container"> 
 							<div class="mb-13 mt-10 text-center">
@@ -159,7 +159,7 @@ export default {
 					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
-							:fill="inst.backgroundColor"></path>
+							fill="rgba(19,38,60,255)"></path>
 					</svg>
 				</div> 
 			</div> 
