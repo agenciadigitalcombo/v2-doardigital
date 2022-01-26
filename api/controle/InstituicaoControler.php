@@ -421,8 +421,10 @@ class InstituicaoControler
 
         echo json_encode([
             'next' => true,
-            'message' => 'Instituicao Pelo Id',
+            'message' => 'Lista de doadores',
             'dados' => array_values($payload)
         ]);
     }
+
+   
 }

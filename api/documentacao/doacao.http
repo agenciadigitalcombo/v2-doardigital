@@ -21,3 +21,8 @@ instituicao_id=5,
 &cart_numero=4389356828475573,
 &cart_cvv=254,
 &cart_validade=12/23
+
+###
+
+GET http://localhost/v2-doardigital/api/list-doacoes?instituicao_id=5
+Content-Type: application/x-www-form-urlencoded

@@ -1,4 +1,6 @@
 // Listar por instituicao ID
+GET http://localhost/v2-doardigital/api/list-doadores?instituicao_id=5
+Content-Type: application/x-www-form-urlencoded
 
 // detalhe por CPF
 
