@@ -9,3 +9,4 @@ router('/delete-instituicao', 'InstituicaoControler@detete_instituicao');
 router('/on-off-instituicao', 'InstituicaoControler@on_off_instituicao');
 router('/info-subdomaim', 'InstituicaoControler@list_instituicao_by_subdomaim');
 router('/subdominio-disponivel', 'InstituicaoControler@subdominio_disponivel');
+router('/list-doacoes', 'InstituicaoControler@list_doacoes');

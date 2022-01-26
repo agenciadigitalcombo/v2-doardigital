@@ -14,8 +14,12 @@ GET http://localhost/v2-doardigital/api/instituicao-id?instituicao_id=5
 
 GET http://localhost/v2-doardigital/api/info-subdomaim?subdomaim=34edqwe21
 
-###
 
+###
+GET http://localhost/v2-doardigital/api/list-doacoes?instituicao_id=5
+Content-Type: application/x-www-form-urlencoded
+
+###
 
 POST http://localhost/v2-doardigital/api/update-instituicao
 Content-Type: application/x-www-form-urlencoded
@@ -96,3 +100,5 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 &site_url= "digital.tk",
 &email_recebedor= "some@email.com",
 &telefone_recebedor= "11987654321"
+
+

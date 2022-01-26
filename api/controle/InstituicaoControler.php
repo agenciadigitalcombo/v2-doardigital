@@ -347,4 +347,35 @@ class InstituicaoControler
             "message" => "Subdomínio disponível para uso"
         ]);
     }
+
+    static function list_doacoes()
+    {
+        $doacoes = new Doacao();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Indoforme o ID da Instituicao',
+        ]);
+
+        $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
+
+        $payload = array_map(function ($list) {
+            return[
+                'doador_id' => $list['doador_id'],
+                'valor' => $list['valor'],
+                'status_pagamento' => $list['status_pagamento'],
+                'data' => $list['data'],
+                'tipo' => $list['tipo']
+            ];
+        },$get_doacoes);
+        
+        
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Instituicao Pelo Id',
+            'dados' => $payload
+        ]);
+    }
 }
