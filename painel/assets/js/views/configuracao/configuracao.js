@@ -1,7 +1,7 @@
 
 
 export default {
-	template:`
+	template:`  Cor de Fundo
 		<div>
 
 			<c-header></c-header>
@@ -47,11 +47,15 @@ export default {
 												</div> 
 												<div class="col-lg-12">
 													<div class="fv-row mb-10">
-														<label class="required fw-bold fs-6 mb-2">Cor de Fundo</label>
+														<label class="required fw-bold fs-6 mb-2">Escolha uma Cor de Fundo</label>
 														<br>
+														<div>
+													A cor deve ter um bom contraste com o branco
+														</div>
 															<input style="width: 130px; height: 50px;" class="" type="color"
 																maxlength="75">
 															</div>
+											 
 													</div>
 
 													<div class="col-lg-12">
@@ -59,7 +63,7 @@ export default {
 															<div class="mb-7">
 															 
 																<label class="fs-6 fw-bold mb-2">
-																	<span>Atualizar Avatar</span>
+																	<span>Atualizar Logo</span>
 																	<i class="fas fa-exclamation-circle ms-1 fs-7"
 																		data-bs-toggle="tooltip"
 																		title="Tipos de arquivo permitidos: png, jpg, jpeg."></i>
@@ -97,6 +101,8 @@ export default {
 																	</div> 
 																</div> 
 																<span> 1MB o tamanho máximo da imgem.</span>
+																<br>
+																<span> De Preferência uma imagem com fundo trasparente.</span>
 															</div>
 														</div>
 													</div> 
