@@ -1,8 +1,8 @@
 import adm from "../../../../static/js/api/adm.js"
-const { required, minLength, maxLength  } = window.validators
+const { required, minLength, maxLength } = window.validators
 
 export default {
-    template: `  Total a Pagar:
+    template: `  loa
 
 <div :style="{ backgroundColor: backgroundColor }">
     <div class="d-flex flex-column flex-root">
@@ -153,14 +153,14 @@ export default {
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="card-title mb-10"  v-if="type_pagamento !=='pix'">
-                                            <h1> Total a Pagar: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
+                                            <h1> TOTAL A DOAR: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
                                                 |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                         </div>
 
                                         <div class="card-title mb-10"  v-if="type_pagamento =='pix'">
                                       
                                         <div v-if="planos_valor > '100000'">
-                                        <h1> Total a Pagar: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
+                                        <h1> TOTAL A DOAR: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
                                             |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                          </div>
                                          <div v-else>
@@ -257,6 +257,13 @@ export default {
 
                                                 </div>
                                             </div>
+
+                                                 
+                                        <div class="erro-container">
+                                        {{txto_pix}}
+                                        <br>
+                                        {{txto_pix2}}
+                                        </div>
 
                                             <div v-if="type_pagamento =='credit_card'" style="width: 100%;">
                                                 <div class="p-1">
@@ -402,17 +409,19 @@ export default {
                                                     <p class="typo__p" v-if="submitStatus === 'ERROR'">
                                                     Por favor, preencha o formulário corretamente.</p>
                                                     <p class="typo__p" v-if="submitStatus === 'PENDING'">
-                                                  
                                                     </p>
+                                                   
                                                     <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
                                                     <c-loading></c-loading> 
                                                     </p>
+                                                  
+                                                 <p class="typo__p" v-if="submitStatus === 'FALHA500'">
+                                                    <c-erro_500></c-erro_500> 
+                                                    </p>  
+
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +432,6 @@ export default {
             </div>
         </div>
     </div>
-
 
     <div class="post d-flex flex-column-fluid">
         <div class="container-xxl">
@@ -477,7 +485,7 @@ export default {
             planos_valor: null,
             email: null,
             nome: null,
-            genero: null, 
+            genero: null,
             cpf: null,
             telefone: null,
             cep: null,
@@ -492,7 +500,7 @@ export default {
             cart_validade: null,
             cart_nome: null,
 
-            valor_digitado: null, 
+            valor_digitado: null,
             valor: null,
 
             backgroundColor: '',
@@ -501,7 +509,9 @@ export default {
             subdomaim: null,
             codigo_geral: null,
             submitStatus: null,
-            dados: []
+            dados: [],
+            txto_pix: "",
+            txto_pix2: ""
         }
     },
 
@@ -546,89 +556,97 @@ export default {
         }
     },
 
-    
-	validations: {
-		cep: {
-			required,
-			minLength: minLength(9)
-		},
-        telefone: {
-			required,
-			minLength: minLength(15)
-		},
 
-        
-	},
+    validations: {
+        cep: {
+            required,
+            minLength: minLength(9)
+        },
+        telefone: {
+            required,
+            minLength: minLength(15)
+        },
+
+
+    },
 
     methods: {
 
 
         consultar() {
             if (this.type_pagamento == "pix") {
-                if (this.planos_valor >= 100000) { 
-                    this.planos_valor = "100000"
-                  } else { 
-                    this.planos_valor = window.localStorage.getItem("amount") 
-                  }
-              } else {
-                this.planos_valor = window.localStorage.getItem("amount") 
-              }
+                this.txto_pix = "Obs : O valor do PIX entre as 20:00h e 6:00h (noturno)"
+                this.txto_pix2 = "será máximo de R$ 1.000,00 reais."
+
+                if (this.planos_valor >= 100000) {
+                    // this.planos_valor = "100000"
+                } else {
+                    this.planos_valor = window.localStorage.getItem("amount")
+                }
+            } else {
+                this.planos_valor = window.localStorage.getItem("amount")
+                this.txto_pix = ""
+                this.txto_pix2 = ""
+            }
 
 
-            
+
         },
 
 
         async addTransacao() {
-            this.error = null
-			this.$v.$touch()
-			if (this.$v.$invalid) {
-				this.submitStatus = 'ERROR'
-			} else {
+            try {
+                this.error = null
+                this.$v.$touch()
+                if (this.$v.$invalid) {
+                    this.submitStatus = 'ERROR'
+                } else {
+                    this.submitStatus = 'CARREGAR'
+                    let res = await adm.transacaoPlano(
+                        this.instituicao_id,
+                        this.mensal,
+                        this.planos_id,
+                        this.planos_valor,
+                        this.planos_nome,
+                        this.email,
+                        this.nome,
+                        this.genero,
+                        this.cpf,
+                        this.telefone,
+                        this.cep,
+                        this.numero,
+                        this.estado,
+                        this.endereco,
+                        this.bairro,
+                        this.cidade,
+                        this.type_pagamento,
+                        this.cart_numero,
+                        this.cart_cvv,
+                        this.cart_validade,
+                        this.cart_nome,
+                        window.localStorage.setItem("type_pagamento", this.type_pagamento)
 
-                this.submitStatus = 'CARREGAR'
+                    )
+                    if (!res.next) {
+                        this.error = res.message
+                        this.submitStatus = 'FALHA'
+                        return null
+                    }
 
-
-            let res = await adm.transacaoPlano( 
-                this.instituicao_id,
-                this.mensal,
-                this.planos_id,
-                
-                this.planos_valor,
-                this.planos_nome,
-                this.email,
-                this.nome,
-                this.genero, 
-                this.cpf,
-                this.telefone,
-                this.cep,
-                this.numero,
-                this.estado,
-                this.endereco,
-                this.bairro,
-                this.cidade,
-                this.type_pagamento,
-                this.cart_numero,
-                this.cart_cvv,
-                this.cart_validade,
-                this.cart_nome, 
-                window.localStorage.setItem("type_pagamento", this.type_pagamento)
-
-            )
-            if (!res.next) {
-                this.error = res.message
-                this.submitStatus = 'FALHA'  
-                return null
+                    this.submitStatus = 'OK'
+                    this.msg = res.message
+                    window.localStorage.setItem("codigo", res.codigo)
+                    window.localStorage.setItem("url", res.url)
+                    window.location.href = "#/obrigado"
+                }
             }
-             
-			 	this.submitStatus = 'OK'  
-                this.msg = res.message  
-                window.localStorage.setItem("codigo", res.codigo) 
-                window.localStorage.setItem("url", res.url) 
-               window.location.href = "#/obrigado"
-			 
+            catch (e) {
+                setTimeout(() => {
+                    this.submitStatus = 'FALHA500'
+                }, 1500)
 
-        }
+            }
+
         },
 
         async infoSubdomain() {
@@ -674,20 +692,20 @@ export default {
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
-        if (this.planos_id) { 
-        this.planos_valor = window.localStorage.getItem("amount")  
-        } else { 
-       this.planos_valor = window.localStorage.getItem("amount_digitado")
-        }   
+        if (this.planos_id) {
+            this.planos_valor = window.localStorage.getItem("amount")
+        } else {
+            this.planos_valor = window.localStorage.getItem("amount_digitado")
+        }
         // this.planos_valor = (window.localStorage.getItem("amount")/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
 
-      
+
         this.planos_nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
         this.instituicao_id = localStorage.getItem('instituicao_id')
 
-        
+
         let config = (await this.infoSubdomain()).dados_instituicao
         this.logo = config.logo
         this.backgroundColor = config.cor

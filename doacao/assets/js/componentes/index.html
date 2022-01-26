@@ -1,9 +1,0 @@
-<div class="card-title mb-10"  v-if="type_pagamento =='PIX'">
-    <div v-if="amount >=='100000'">
-    <h1> Total a Pagar: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
-        |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
-     </div>
-     <div v-else>
-      <h1>  </h1>
-    </div>
-</div>

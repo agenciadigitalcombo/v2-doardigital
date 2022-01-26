@@ -7,21 +7,11 @@ Vue.use(Router)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
 
-
-import header from './componentes/c-header.js'
-Vue.component('c-header', header )
-
-import  aside from './componentes/c-aside.js'
-Vue.component('c-aside', aside )
-
-import footer from './componentes/c-footer.js'
-Vue.component('c-footer', footer )
-
+import loading from './componentes/c-loading.js'
+Vue.component('c-loading', loading )
 
 import cadastrar from './views/cadastro.js'
 Vue.component('c-cadastro', cadastrar )
-
-
 
 import termos from './views/termos.js'
 Vue.component('c-termos', termos )
