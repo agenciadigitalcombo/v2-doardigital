@@ -426,5 +426,34 @@ class InstituicaoControler
         ]);
     }
 
+    static function list_email_by_instituicao()
+    {
+        $email = new Email();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Indoforme o ID da Instituicao',
+        ]);
+
+        $get_email = $email->list_by_instituicao($instituicao_id);
+
+        $payload = array_map(function ($list) {
+            return[
+                'assunto' => $list['assunto'],
+                'corpo' => $list['corpo'],
+                'acao' => $list['acao'],
+                'cron' => $list['cron']
+            ];
+        },$get_email);
+        
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Lista de doadores',
+            'dados' => array_values($payload)
+        ]);
+    }
+
    
 }

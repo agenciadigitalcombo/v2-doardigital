@@ -1,0 +1,12 @@
+
+POST http://localhost/v2-doardigital/api/atualiza-email
+Content-Type: application/x-www-form-urlencoded
+
+instituicao_id=5,
+&assunto=DOACAO,
+&corpo=Doação realiada com sucesso, Deus abençoe,
+&status= processing, authorized, paid, refunded, waiting_payment, pending_refund, refused, chargeback
+
+###
+GET http://localhost/v2-doardigital/api/list-email?instituicao_id=5
+Content-Type: application/x-www-form-urlencoded
