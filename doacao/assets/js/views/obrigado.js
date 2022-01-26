@@ -209,7 +209,7 @@ export default {
 				codigo_geral: '',
 				url_geral: '',
 			},
-
+		
 			type: '',
 			jms: false,
 		}
@@ -239,6 +239,11 @@ export default {
 		this.inst.logo = dados.logo
 		this.inst.icon = dados.icon
 		this.inst.backgroundColor = dados.cor
+		this.inst.email = dados.email
+		this.inst.telefone  = dados.telefone
+		this.inst.cnpj = dados.cnpj
+		this.inst.urlsite = dados.subdomaim+'.com.br.doardigital.com.br/'
+		
 
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
