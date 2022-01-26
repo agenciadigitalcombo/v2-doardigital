@@ -381,4 +381,43 @@ class InstituicaoControler
             'dados' => $payload
         ]);
     }
+
+    static function list_doadores()
+    {
+        $doacoes = new Doacao();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Indoforme o ID da Instituicao',
+        ]);
+
+        $get_doadores = $doacoes->list_all_by_doador($instituicao_id);
+
+        $doadores_id = array_map(function ($list) {
+            return[
+                'doador_id' => $list['doador_id']
+            ];
+        },$get_doadores);
+        
+        $payload = array_unique($doadores_id, SORT_REGULAR);        
+
+        $doador = new Doador();
+
+        $payload = array_map(function ($list) use($doador){
+            $dados = $doador->get_by_id($list['doador_id']);
+            return array_map(function ($get_colunm) {
+                return[
+                    'nome' => $get_colunm['nome'],
+                    'data_registro' => $get_colunm['data_registro']
+                ];
+            }, $dados);
+        }, $payload);
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Instituicao Pelo Id',
+            'dados' => $payload
+        ]);
+    }
 }
