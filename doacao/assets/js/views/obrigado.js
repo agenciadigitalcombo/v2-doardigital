@@ -87,7 +87,7 @@ export default {
 								<div class="mb-13 text-center"> 
 									<div class="text-muted fw-bold fs-5 ">
 										<h2 class="text-gray-600">
-										Seu codigo pix..
+										Seu codigo PIX..
 										</h2>
 									</div> 
 								</div>  
