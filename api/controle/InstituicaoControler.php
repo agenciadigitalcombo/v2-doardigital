@@ -405,19 +405,24 @@ class InstituicaoControler
         $doador = new Doador();
 
         $payload = array_map(function ($list) use($doador){
-            $dados = $doador->get_by_id($list['doador_id']);
-            return array_map(function ($get_colunm) {
-                return[
-                    'nome' => $get_colunm['nome'],
-                    'data_registro' => $get_colunm['data_registro']
-                ];
-            }, $dados);
+            
+            $dados = $doador->get_by_id($list['doador_id'])[0];
+            return[
+                'id' => $dados['id'],
+                'nome' => $dados['nome'],
+                'email' => $dados['email'],
+                'tipo' => 'unico',
+                'gravatar' => gravatar($dados['email']),
+                'data_registro' => $dados['data_registro']
+            ];
+
         }, $payload);
+
 
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao Pelo Id',
-            'dados' => $payload
+            'dados' => array_values($payload)
         ]);
     }
 }
