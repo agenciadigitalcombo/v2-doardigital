@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-template:`
+    template: `
 <div>
 
     <c-header></c-header>
@@ -48,25 +48,25 @@ template:`
                                                     <th class="w-10px pe-2">
 
                                                     </th>
-                                                    <th class="min-w-200px">TIpo</th>
+                                                    <th class="min-w-300px">TIpo</th>
                                                     <th class="min-w-50px"></th>
-                                                    <th class="min-w-200px"></th>
-                                                    <th class="min-w-150px">Status </th>
                                                     <th class="min-w-50px"></th>
+                                                    <th class="min-w-200px">Status </th>
+                                                    <th class="min-w-100px"></th>
                                                     <th class="text-end min-w-170px">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 fw-bold">
-                                                <tr v-for="item in dados" :key="item.id"> 
+                                                <tr v-for="item in emails" :key="item.id"> 
                                                     <td>
                                                     </td> 
                                                     <td> 
                                                         <!--begin::User details-->
                                                         <div class="d-flex flex-column">
-                                                            <a class="text-gray-800 text-center mb-1">
+                                                            <a class="text-gray-800  mb-1">
                                                                
                                                             <div class="badge badge-light fw-bolder"> 1 min </div>
-                                                           Doação Concluída
+                                                          {{item.acao}}
                                                             </a>
                                                         </div>
                                                     </td>
@@ -82,7 +82,7 @@ template:`
 
                                                             <input class="form-check-input h-30px w-50px"
                                                                 v-model="item.status" true-value="1" false-value="0"
-                                                                @click="statusx(item.id)" type="checkbox"
+                                                                @click="statusx(item.acao)" type="checkbox"
                                                                 id="flexSwitch30x50" />
                                                         </div> 
                                                     </td>
@@ -90,7 +90,7 @@ template:`
                                                     </td> 
                                                     <td class="text-end">
 
-                                                        <a @click="editar(item.id)"
+                                                        <a @click="editar(item.acao)"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -124,58 +124,48 @@ template:`
 `,
 
 
-data: function () {
-return {
-id: null,
-instituicao_id: null,
-nome: null,
-amount: null,
-status: null,
-token: null,
-dados: []
-}
-},
+    data: function () {
+        return {
+            instituicao_id: null,
+            acao: null,
+            emails: []
+        }
+    },
+
+    methods: {
+        async listarEmails() {
+            let res = await adm.listarEmail(localStorage.getItem('instituicao_id'))
+            return res
+        },
+
+        async editar(acao) {
+             globalThis._emaiis = this.emails.find(doador => doador.acao == acao) 
+            window.location.href = "#/modelo-de-emails/editar"
+        },
 
 
-filters: {
-is_price(price) {
-let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-return `R$ ${amount}`
-}
-},
+        async statusx(status) {
+            this.error = null
+            this.plano_id = status
+            let res = await adm.onoffPlano(
+                this.plano_id,
+                this.token,
+            )
+            if (!res.next) {
+                console.log(res)
+                this.error = res.message
+                return null
+            }
 
-methods: {
-async listar() {
-let res = await adm.listarPlanos(localStorage.getItem('instituicao_id'))
-return res
-},
+        },
 
-async editar(id) {
-//  globalThis._planos = this.dados.find(user => user.id == id) 
-window.location.href = "#/modelo-de-emails/editar"
-},
+    },
 
+    async mounted() {
+        this.emails = (await this.listarEmails()).dados
+        // alert(this.emails)
 
-async statusx(status) {
-this.error = null
-this.plano_id= status
-let res = await adm.onoffPlano(
-this.plano_id,
-this.token,
-)
-if (!res.next) {
-console.log(res)
-this.error = res.message
-return null
-}
-
-},
-
-},
-
-async mounted() {
-this.dados = (await this.listar()).dados
-this.instituicao_id = localStorage.getItem("instituicao_id");
-},
+        this.instituicao_id = localStorage.getItem("instituicao_id");
+    },
 
 }
