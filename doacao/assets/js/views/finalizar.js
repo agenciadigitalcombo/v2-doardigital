@@ -494,14 +494,14 @@ export default {
             email: null,
             nome: null,
             genero: null,
-            cpf: null,
-            telefone: null,
-            cep: null,
-            numero: null,
-            estado: null,
-            endereco: null,
-            bairro: null,
-            cidade: null,
+            cpf: "00569652065",
+            telefone: "38998019210",
+            cep: "02835090",
+            numero: "75",
+            estado: "sp",
+            endereco: "rua plinio",
+            bairro: "Serralheiro",
+            cidade: "Sao Paulo",
             type_pagamento: "credit_card",
             cart_numero: null,
             cart_cvv: null,
@@ -711,13 +711,13 @@ export default {
         this.planos_nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
-        this.instituicao_id = localStorage.getItem('instituicao_id')
+        // this.instituicao_id = localStorage.getItem('instituicao_id')
 
 
         let config = (await this.infoSubdomain()).dados_instituicao
         this.logo = config.logo
         this.backgroundColor = config.cor
-
+        this.instituicao_id = config.id
     },
 
 }
