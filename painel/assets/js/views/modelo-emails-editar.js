@@ -27,8 +27,8 @@ export default {
 											<div class="d-block"> 
 												<div class="d-flex align-items-center border-bottom px-8 min-h-50px">
 												 
-													<div class="text-dark fw-bolder w-75px">Para:</div>
-													 <input type="text" class="form-control border-0"
+													<div class="text-dark fw-bolder w-75px">Assunto:</div>
+													 <input v-model="assunto" type="text" class="form-control border-0"
 														name="compose_to" value="" > 
 													<div class="ms-auto w-75px text-end">
 														<span
@@ -74,7 +74,7 @@ export default {
 												 </div>
 											 	<div class="border-bottom">
 													<div class="form-floating">
-													<textarea class="form-control border-0 px-8 min-h-45px" style="height: 100px"
+													<textarea v-model="corpo" class="form-control border-0 px-8 min-h-45px" style="height: 100px"
 														name="compose_subject" placeholder="Escreva sua mensagem aqui"></textarea>
 														<label class="px-8" for="floatingTextarea2">Escreva sua mensagem aqui</label>
 
@@ -180,12 +180,27 @@ export default {
 			"{{link_recuperacao_senha}}",
 			"{{botao_recuperacao_senha}}",
 			"{{telefone_doador}}",
-			"{{telefone_instituicao}}",]
+			"{{telefone_instituicao}}"
+		],
+
+			assunto: null,
+			corpo: null,
+			acao: null,
+			cron: null
         }
     },
 	methods: {
 
     },
+
+	async mounted() {
+		this.assunto = globalThis._emaiis.assunto
+		this.corpo = globalThis._emaiis.corpo 
+		this.acao = globalThis._emaiis.acao
+  
+ 
+	},
+
 	
 }
 

@@ -1,4 +1,4 @@
-
+import adm from "../../../../../static/js/api/adm.js"
 
 export default {
 	template:`
@@ -153,7 +153,7 @@ export default {
 													<tbody class="text-gray-600 fw-bold">
 
 
-														<tr>
+													<tr v-for="item in doadores" :key="item.id"> 
 															<td>
 																<div class="form-check form-check-sm form-check-custom form-check-solid">
 																	<input class="form-check-input" type="checkbox" value="1" />
@@ -162,32 +162,32 @@ export default {
 															<td class="d-flex align-items-center">
 																<!--begin:: Avatar -->
 																<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-																	<a href="../../demo8/dist/apps/user-management/users/view.html">
+																	<a href="">
 																		<div class="symbol-label">
-																			<img src="../painel/assets/image/gravatar.png" alt="Emma Smith" class="w-100" />
+																			<img :src="item.gravatar" alt="Emma Smith" class="w-100" />
 																		</div>
 																	</a>
 																</div>
 																<div class="d-flex flex-column">
-																	<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-																	<span>e.smith@kpmg.com.au</span>
+																	<a href="" class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
+																	<span>{{item.email}}</span>
 																</div>
 															</td>
 															<td>
 																<div class="badge badge-light"></div>
 															</td>
 
-															<td> <div> 07/12/2021 </div></td>
+															<td> <div> {{item.data_registro}} </div></td>
 
 															<td></td>
 															<td>
-																<div class="badge badge-light-success">Recorrente</div>
+																<div class="badge badge-light-success"> {{item.tipo}} </div>
 															</td>
 															<td class="text-end">
 
 																<a @click="editar(item.id)"
 																class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
-											style="margin: 2px;">
+															style="margin: 2px;">
 																<span class="svg-icon svg-icon-3">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="20"
 																		height="20" fill="currentColor"
@@ -201,7 +201,7 @@ export default {
 															<button @click="eliminar(item)"
 															title="Para Apagar de duplo click"
 															class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-											style="margin: 2px;">
+														style="margin: 2px;">
 															<!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
 															<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 																fill="currentColor" class="bi bi-trash2-fill"
@@ -303,21 +303,33 @@ export default {
 
 	data: function () {
 		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-	
-        }
-    },
+
+			instituicao_id: "",
+			doadores: []
+
+		}
+	},
 	methods: {
-	
 
-    },
-	
+		async listarDoadores() {
+			let res = await adm.listarDoadores(
+				this.instituicao_id
+			)
+			return res
+		},
 
-mounted() {  
-	
-	
-},
+	},
 
-	
+	async mounted() {
+
+		this.doadores = (await this.listarDoadores()).dados || {}
+ 
+	},
+
+	created() {
+		this.instituicao_id = window.localStorage.getItem("instituicao_id")
+
+	},
+
+
 }
-

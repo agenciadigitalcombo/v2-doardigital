@@ -2,7 +2,7 @@ import adm from "../../../../static/js/api/adm.js"
 const { required, minLength, maxLength } = window.validators
 
 export default {
-    template: `  loa
+    template: ` Os seus dados pessoais serão u
 
 <div :style="{ backgroundColor: backgroundColor }">
     <div class="d-flex flex-column flex-root">
@@ -403,6 +403,12 @@ export default {
                                                             DOAR AGORA!
                                                         </button>
                                                     </div>
+                                                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                               <img style="width: 100%;" src="../doacao/assets/logo/logo-dc-doar.png" class="bandeiras">
+
+                                                    
+                                                </div>
+
                                                     <div class=" d-flex justify-content-end py-2 px-9">
                                                     <p class="typo__p" v-if="submitStatus === 'OK'"> 
                                                     </p>
@@ -420,7 +426,9 @@ export default {
                                                     </p>  
 
                                                     </div>
+                                                    
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -449,7 +457,7 @@ export default {
                         </h5>
 
                         <img style="width: 80%;" src="../doacao/assets/image/bandeiras.png" class="bandeiras">
-
+                 
                     </div>
                 </div>
             </div>
