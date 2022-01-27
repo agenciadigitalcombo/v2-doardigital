@@ -583,6 +583,25 @@ export default {
         })
     },
 
+  
+    async listarDoacoes(instituicao_id) {
+        return await http.get('/list-doacoes', {
+            instituicao_id
+        })
+    },
+    
+    async listarDoadores(instituicao_id) {
+        return await http.get('/list-doadores', {
+            instituicao_id
+        })
+    },
+
+    async listarEmail(instituicao_id) {
+        return await http.get('/list-email', {
+            instituicao_id
+        })
+    },
+
 }
 
 // editarSubadm

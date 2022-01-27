@@ -381,4 +381,80 @@ class InstituicaoControler
             'dados' => $payload
         ]);
     }
+
+    static function list_doadores()
+    {
+        $doacoes = new Doacao();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Indoforme o ID da Instituicao',
+        ]);
+
+        $get_doadores = $doacoes->list_all_by_doador($instituicao_id);
+
+        $doadores_id = array_map(function ($list) {
+            return[
+                'doador_id' => $list['doador_id']
+            ];
+        },$get_doadores);
+        
+        $payload = array_unique($doadores_id, SORT_REGULAR);        
+
+        $doador = new Doador();
+
+        $payload = array_map(function ($list) use($doador){
+            
+            $dados = $doador->get_by_id($list['doador_id'])[0];
+            return[
+                'id' => $dados['id'],
+                'nome' => $dados['nome'],
+                'email' => $dados['email'],
+                'tipo' => 'unico',
+                'gravatar' => gravatar($dados['email']),
+                'data_registro' => $dados['data_registro']
+            ];
+
+        }, $payload);
+
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Lista de doadores',
+            'dados' => array_values($payload)
+        ]);
+    }
+
+    static function list_email_by_instituicao()
+    {
+        $email = new Email();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Indoforme o ID da Instituicao',
+        ]);
+
+        $get_email = $email->list_by_instituicao($instituicao_id);
+
+        $payload = array_map(function ($list) {
+            return[
+                'id' => $list['id'],
+                'assunto' => $list['assunto'],
+                'corpo' => $list['corpo'],
+                'acao' => $list['acao'],
+                'cron' => $list['cron']
+            ];
+        },$get_email);
+        
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Lista de doadores',
+            'dados' => array_values($payload)
+        ]);
+    }
+
+   
 }
