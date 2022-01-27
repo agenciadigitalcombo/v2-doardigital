@@ -214,6 +214,7 @@ export default {
 		},
 
 	},
+	//
 
 	filters: {
 		is_price(price) {
