@@ -711,13 +711,13 @@ export default {
         this.planos_nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
-        this.instituicao_id = localStorage.getItem('instituicao_id')
+        // this.instituicao_id = localStorage.getItem('instituicao_id')
 
 
         let config = (await this.infoSubdomain()).dados_instituicao
         this.logo = config.logo
         this.backgroundColor = config.cor
-
+        this.instituicao_id = config.id
     },
 
 }
