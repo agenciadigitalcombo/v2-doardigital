@@ -440,6 +440,7 @@ class InstituicaoControler
 
         $payload = array_map(function ($list) {
             return[
+                'id' => $list['id'],
                 'assunto' => $list['assunto'],
                 'corpo' => $list['corpo'],
                 'acao' => $list['acao'],
