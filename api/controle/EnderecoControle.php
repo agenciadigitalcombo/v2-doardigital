@@ -20,7 +20,7 @@ class EnderecoControle
 
         $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
         $logradouro = $_REQUEST['logradouro'] ?? '';
-        $complemento = $_REQUEST['complemento'] ?? '';
+        $complemento = $_REQUEST['complemento'] ?? null;
         $bairro = $_REQUEST['bairro'] ?? '';
         $cidade = $_REQUEST['cidade'] ?? '';
         $estado = $_REQUEST['estado'] ?? '';
@@ -147,7 +147,7 @@ class EnderecoControle
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
         $numero = $_REQUEST['numero'];
-        $complemento = $_REQUEST['complemento'];
+        $complemento = $_REQUEST['complemento'] ?? null;
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];

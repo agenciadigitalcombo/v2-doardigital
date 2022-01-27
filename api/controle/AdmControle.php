@@ -68,7 +68,7 @@ class AdmControle
         $token_parce = token();
         
         $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
-        $cpf_cnpj = withdraw_caracter($cpf_cnpj_campo);
+        $cpf_cnpj = valid_cpf_cnpj($cpf_cnpj_campo);
 
         $data_nascimento_campo = $_REQUEST['data_nascimento'];
         $data_nascimento = data_format($data_nascimento_campo);

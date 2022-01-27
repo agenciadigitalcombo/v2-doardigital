@@ -12,6 +12,8 @@ class InstituicaoControler
 
         $token_parce = token();
 
+        var_dump($token_parce);
+        die;
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['subdomaim'] ?? '';
@@ -111,6 +113,46 @@ class InstituicaoControler
         ]);
     }
 
+    static function config_instituicao()
+    {
+        $instituicao = new Instituicao();
+
+
+        token();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+
+        
+        $nome_fantasia = $_REQUEST['nome_fantasia'];
+        $razao_social = $_REQUEST['razao_social'];
+
+        $email = $_REQUEST['email'];
+
+        $cnpj = $_REQUEST['cnpj'];
+        $telefone = $_REQUEST['telefone'];
+
+        $transform_cnpj = withdraw_caracter($cnpj);
+        $transform_tel = withdraw_caracter($telefone);
+
+
+        campo_obrigatorios([
+            'instituicao_id' => 'Informe o ID',
+            'nome_fantasia' => 'Informe um Nome Fantasia',
+            'razao_social' => 'Qual a RazaoSocial',
+            'email' => 'Qual o Email',
+            'telefone' => 'Digite o numero de Telefone',
+            'cnpj' => 'Informe o Cnpj'
+        ]);
+
+        $instituicao->update($instituicao_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, "#FFF", "");
+        echo json_encode([
+            'next' => true,
+            'message' => 'Instituicao atualizada'
+        ]);
+    }
+
+
 
     static function update_domain_person()
     {
@@ -172,13 +214,15 @@ class InstituicaoControler
         $token_parce = token();
 
         $get_secret_adm = $token_parce['secret'];
-        $secret = $adm->list_profile($get_secret_adm);
+        
+        $sanitize_secret = trim($get_secret_adm);
+
+        $secret = $adm->list_profile($sanitize_secret);
         $id = $secret['id'];
-
-
-
+        
+        
+        
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
-
 
 
         $payload = [
