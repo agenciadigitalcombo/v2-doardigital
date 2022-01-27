@@ -650,7 +650,7 @@ export default {
         },
 
         async infoSubdomain() {
-            let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+            let res = await adm.todoSubdomain(this.subdomaim = "comunidadebethania.doardigital.com.br")
             // let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
             return res
         },
