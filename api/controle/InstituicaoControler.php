@@ -405,27 +405,22 @@ class InstituicaoControler
     static function list_doacoes()
     {
         $doacoes = new Doacao();
-
+        
         $instituicao_id = $_REQUEST['instituicao_id'];
-
+        
         campo_obrigatorios([
             'instituicao_id' => 'Indoforme o ID da Instituicao',
         ]);
-
+        
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
-
-
-
-        $payload_id = array_map(function ($list) {
-            return[
-                'doador_id' => $list['doador_id'],
-                
-            ];
-        },$get_doacoes);
-
+        
+        
+        
+        
         $payload = array_map(function ($list) {
+            $doador = new Doador();
             return[
-                'doador_id' => $list['doador_id'],
+                'doador' => $doador->get_by_id($list['doador_id']),
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],
                 'data' => $list['data'],
