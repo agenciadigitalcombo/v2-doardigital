@@ -37,10 +37,10 @@ class Doacao implements IDoacao{
         return $guard;
     }
 
-    public function list_all_by_doador(int $instituicao_id): array
+    public function list_all_by_doador(int $doador_id): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM doacoes WHERE instituicao_id='$instituicao_id'";
+        $sql = "SELECT * FROM doacoes WHERE doador_id='$doador_id'";
         $guard = $banco->query($sql);
         return $guard;
     }
