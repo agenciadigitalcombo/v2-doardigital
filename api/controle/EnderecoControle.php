@@ -143,15 +143,18 @@ class EnderecoControle
 
         $token_parse = token();
 
+        var_dump($token_parse);
+        die;
+        
         $nome_identificacao = $_REQUEST['nome_identificacao'];
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
         $numero = $_REQUEST['numero'];
-        $complemento = $_REQUEST['complemento'] ?? null;
+        $complemento = $_REQUEST['complemento'] ?? '';
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
-
+        
         $transform_cep = withdraw_caracter($cep);
         $transform_numero = withdraw_caracter($numero);
         

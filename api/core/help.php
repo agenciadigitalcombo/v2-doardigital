@@ -140,7 +140,8 @@ function withdraw_caracter_teste($valor): string
 function token(): array
 {
     $jwt = new Jwt();
-    $token = $_REQUEST['token'] ?? '';
+    $token = $_REQUEST['token'];
+    
     $campos_obrigatorios = [
         'token'
     ];
