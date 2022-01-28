@@ -111,16 +111,8 @@ export default {
 																<path d="M18.75 8.25H17.75C17.1977 8.25 16.75 8.69772 16.75 9.25C16.75 9.80228 17.1977 10.25 17.75 10.25C18.3023 10.25 18.75 10.6977 18.75 11.25V18.25C18.75 18.8023 18.3023 19.25 17.75 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V11.25C4.75 10.6977 5.19771 10.25 5.75 10.25C6.30229 10.25 6.75 9.80228 6.75 9.25C6.75 8.69772 6.30229 8.25 5.75 8.25H4.75C3.64543 8.25 2.75 9.14543 2.75 10.25V19.25C2.75 20.3546 3.64543 21.25 4.75 21.25H18.75C19.8546 21.25 20.75 20.3546 20.75 19.25V10.25C20.75 9.14543 19.8546 8.25 18.75 8.25Z" fill="#C4C4C4" />
 															</svg>
 														</span>
-														Export</button>
-													<a href="../../demo8/dist/apps/subscriptions/add.html" class="btn btn-primary">
-
-														<span class="svg-icon svg-icon-2">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-																<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
-															</svg>
-														</span>
-														Novo</a>
+														Exportar</button>
+												
 
 												</div>
 												<div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
@@ -197,92 +189,20 @@ export default {
 																	</svg>
 																</span>
 															</a>
-
-															<button @click="eliminar(item)"
-															title="Para Apagar de duplo click"
-															class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-														style="margin: 2px;">
-															<!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-															<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-																fill="currentColor" class="bi bi-trash2-fill"
-																viewBox="0 0 16 16">
-																<path
-																	d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
-															</svg>
-
-														</button>
+															<a href="#/doadorHitorico"
+                                                            title="Para Visualizar da um click"
+                                                            class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
+                                                            style="margin: 2px;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                          </svg>
+                                                        </a>
 
 													</td>
 
 												</tr>
 
-												<tr>
-
-													<td>
-														<div class="form-check form-check-sm form-check-custom form-check-solid">
-															<input class="form-check-input" type="checkbox" value="1" />
-														</div>
-													</td>
-													<td class="d-flex align-items-center">
-
-														<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-															<a href="../../demo8/dist/apps/user-management/users/view.html">
-																<div class="symbol-label">
-																	<img src="../painel/assets/image/gravatar.png" alt="Emma Smith" class="w-100" />
-																</div>
-															</a>
-														</div>
-														<div class="d-flex flex-column">
-															<a href="../../demo8/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-															<span>e.smith@kpmg.com.au</span>
-														</div>
-
-													</td>
-
-													<td>
-														<div class="badge badge-light"></div>
-													</td>
-
-													<td> <div>29/12/2021</div></td>
-
-													<td></td>
-													<td>
-														<div class="badge badge-light-danger">Unica</div>
-													</td>
-													<td class="text-end">
-
-														<a @click="editar(item.id)"
-														class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
-											style="margin: 2px;">
-														<span class="svg-icon svg-icon-3">
-															<svg xmlns="http://www.w3.org/2000/svg" width="20"
-																height="20" fill="currentColor"
-																class="bi bi-pencil-fill" viewBox="0 0 16 16">
-																<path
-																	d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-															</svg>
-														</span>
-
-													</a>
-
-													<button @click="eliminar(item)"
-													title="Para Apagar de duplo click"
-													class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-											style="margin: 2px;">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-														fill="currentColor" class="bi bi-trash2-fill"
-														viewBox="0 0 16 16">
-														<path
-															d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
-													</svg>
-
-												</button>
-
-											</td>
-
-										</td>
-
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -295,7 +215,7 @@ export default {
 	</div >
 </div >
 <!--end:: Root-- >
-
+buscar Doadores
 	<c-footer />
 		
 	</div >
@@ -305,7 +225,8 @@ export default {
 		return {
 
 			instituicao_id: "",
-			doadores: []
+			doadores: [],
+			paginaAtual: 1
 
 		}
 	},
@@ -318,6 +239,16 @@ export default {
 			return res
 		},
 
+		estaActivo(semPagina) {
+			//   return semPagina  == this.paginaAtual ? "active": ""
+						   //        ou
+			   if (semPagina == this.paginaAtual) {
+				   return "active"
+			   } else {
+				   return ""
+			   }
+		   }
+
 	},
 
 	async mounted() {
@@ -329,7 +260,7 @@ export default {
 	created() {
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
 
-	},
+	}, 
 
 
 }

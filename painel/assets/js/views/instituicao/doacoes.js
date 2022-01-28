@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template: ` 
+    template: ` 
 <div>
     <c-header></c-header>
     <c-aside></c-aside> 
@@ -14,22 +14,7 @@ export default {
                             <div class="card"> 
                                 <div class="card-header border-0 pt-6"> 
                                     <div class="card-title"> 
-                                        <div class="d-flex align-items-center position-relative my-1">
-                                              <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                        height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
-                                                        fill="black" />
-                                                    <path
-                                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                        fill="black" />
-                                                </svg>
-                                            </span> 
-                                            <input type="text" data-kt-subscription-table-filter="search"
-                                                class="form-control form-control-solid w-250px ps-14"
-                                                placeholder="Buscar Doações ..." />
-                                        </div> 
+                                        
                                     </div> 
                                     <div class="card-toolbar"> 
                                         <div class="d-flex justify-content-end"
@@ -151,21 +136,9 @@ export default {
                                                             fill="#C4C4C4" />
                                                     </svg>
                                                 </span>
-                                                    Export
+                                                Exportar
                                             </button> 
-                                            <a href="../../demo8/dist/apps/subscriptions/add.html"
-                                                class="btn btn-primary"> 
-                                                <span class="svg-icon svg-icon-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2"
-                                                            rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-                                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
-                                                            fill="black" />
-                                                    </svg>
-                                                </span> 
-                                                Novo
-                                            </a> 
+                                           
                                         </div> 
                                         <div class="d-flex justify-content-end align-items-center d-none"
                                             data-kt-subscription-table-toolbar="selected">
@@ -206,7 +179,7 @@ export default {
                                                 </tr> 
                                             </thead> 
                                             <tbody class="text-gray-600 fw-bold">
-                                                <tr v-for="item in doacoes" :key="item.id"> 
+                                                <tr v-for="item in dadosPagina" :key="item.id"> 
                                                     <td>
                                                         <div
                                                             class="form-check form-check-sm form-check-custom form-check-solid">
@@ -226,45 +199,32 @@ export default {
                                                         </div> 
                                                         <div class="d-flex flex-column">
                                                             <a href="../../demo8/dist/apps/user-management/users/view.html"
-                                                                class="text-gray-800 text-hover-primary mb-1">Emma
+                                                                class="text-gray-800 text-hover-primary mb-1"> {{item.doador_id}}      Emma
                                                                 Smith</a>
                                                             <span>e.smith@kpmg.com.au</span>
                                                         </div> 
                                                     </td> 
-                                                    <td> {{item.valor}} </td> 
+                                                    <td> {{ item.valor | is_price }} </td> 
                                                     <td>
-                                                        <div class="badge badge-light-success"> {{item.status_pagamento}} </div>
+                                                        <div class="badge badge-light-success"> {{item.status_pagamento  | is_status}} </div>
                                                     </td> 
-                                                    <td>{{item.data}}</td> 
+                                                    <td>{{item.data | is_data }}</td> 
                                                     <td>
                                                         <div class="badge badge-light"> {{item.tipo}}</div>
                                                     </td> 
                                                     <td class="text-end">
 
-                                                        <a @click="editar(item.id)"
+                                                        <a @click="editar(item.id)" href="#/doacoesDetalhe"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
                                                              <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                    height="20" fill="currentColor"
-                                                                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                                                </svg>
+                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                           </svg>
                                                             </span> 
                                                         </a>
 
-                                                        <button @click="eliminar(item)"
-                                                            title="Para Apagar de duplo click"
-                                                            class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-                                                            style="margin: 2px;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                height="20" fill="currentColor"
-                                                                class="bi bi-trash2-fill" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
-                                                            </svg> 
-                                                        </button>
                                                     </td> 
                                                 </tr>
                                                 <tr> 
@@ -305,31 +265,26 @@ export default {
                                                         <a @click="editar(item.id)"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
-                                                            <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                    height="20" fill="currentColor"
-                                                                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                                                </svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                          </svg>
                                                             </span> 
                                                         </a>
 
-                                                        <button @click="eliminar(item)"
-                                                            title="Para Apagar de duplo click"
-                                                            class="btn btn-icon btn-active-light-danger w-35px h-35px btn-danger"
-                                                            style="margin: 2px;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                height="20" fill="currentColor"
-                                                                class="bi bi-trash2-fill" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
-                                                            </svg> 
-                                                        </button>
                                                     </td> 
                                                 </tr>
                                             </tbody> 
                                         </table>
+ 
+
+                                    <ul class="pagination"> 
+                                        <li @click="getAnterior()" class="page-item previous disabled"><a class="page-link"><i class="previous"></i></a></li>
+                                        <li  @click="getPagina(pagina)" v-for="pagina in totalPagina()" :key="pagina.id" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link">{{pagina}}</a></li>
+                                        <li class="page-item active"><a class="page-link">2</a></li>
+                                        <li @click="getProximo()" class="page-item next"><a class="page-link"><i class="next"></i></a></li>
+                                    </ul>
+
                                     </div> 
                                 </div> 
                             </div> 
@@ -340,40 +295,99 @@ export default {
         </div> 
     </div> 
 
-    <c-footer />
+    <c-footer /> novo
 </div>
 `,
 
 
-	data: function () {
-		return {
+    data: function () {
+        return {
 
-			instituicao_id: "",
-			doacoes: []
+            instituicao_id: "",
+            data: "",
+            doacoes: [],
+            elementoPaginacao: 10,
+            dadosPagina: [],
+            paginaAtual: 1
 
-		}
-	},
-	methods: {
+        }
+    },
 
-		async listarDoacoes() {
-			let res = await adm.listarDoacoes(
-				this.instituicao_id
-			)
-			return res
-		},
+    filters: {
+        is_price(price) {
+            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${valor}`
+        },
 
-	},
+        is_data(datas) {
+            let data = datas.split('-').reverse().join('/');
+            return `${data}`
+        },
 
-	async mounted() {
+        is_status(status) {
+            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento ');
+            return `${status_pagamento}`
+        },
+        
+    },
+    
 
-		this.doacoes = (await this.listarDoacoes()).dados || {}
- 
-	},
+    methods: {
 
-	created() {
-		this.instituicao_id = window.localStorage.getItem("instituicao_id")
+        async listarDoacoes() {
+            let res = await adm.listarDoacoes(
+                this.instituicao_id
+            )
+            return res
+        },
 
-	},
+        totalPagina() {
+            return Math.ceil(this.doacoes.length / this.elementoPaginacao)
+        },
+
+        getPagina(semPagina) {
+            this.paginaAtual = semPagina;
+            this.dadosPagina = [];
+            let inicio = (semPagina * this.elementoPaginacao) - this.elementoPaginacao;
+            let fim = (semPagina * this.elementoPaginacao);
+            this.dadosPagina = this.doacoes.slice(inicio, fim);
+
+        },
+
+        getProximo() {
+            if (this.paginaAtual < this.totalPagina()) {
+                this.paginaAtual++
+            }
+            this.getPagina(this.paginaAtual)
+        },
+
+        getAnterior() {
+            if (this.paginaAtual > 1) {
+                this.paginaAtual--
+            }
+            this.getPagina(this.paginaAtual)
+        },
+        estaActivo(semPagina) {
+         //   return semPagina  == this.paginaAtual ? "active": ""
+                        //        ou
+            if (semPagina == this.paginaAtual) {
+                return "active"
+            } else {
+                return ""
+            }
+        }
+    },
+
+    async mounted() {
+
+        this.doacoes = (await this.listarDoacoes()).dados || {}
+        this.getPagina(1)
+
+    },
+
+    created() {
+        this.instituicao_id = window.localStorage.getItem("instituicao_id")
+    },
 
 
 }

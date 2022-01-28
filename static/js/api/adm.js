@@ -602,6 +602,20 @@ export default {
         })
     },
 
+    async alterarEmail( 
+        instituicao_id,
+        assunto,
+        corpo,
+        status,
+    ) {
+        return await http.post('/atualiza-email', { 
+            instituicao_id,
+            assunto,
+            corpo,
+            status,
+        })
+    },
+
 }
 
 // editarSubadm

@@ -1,4 +1,5 @@
 import tags from '../domain/tag-email.js'
+import adm from "../../../../../static/js/api/adm.js"
 
 export default {
 	template:`
@@ -23,7 +24,8 @@ export default {
 										</div>
 									</div>
 									<div class="card-body p-0"> 
-										<form id="kt_inbox_compose_form"> 
+										
+													<form class="form" @submit.prevent="atualizarEmail" novalidate="novalidate">
 											<div class="d-block"> 
 												<div class="d-flex align-items-center border-bottom px-8 min-h-50px">
 												 
@@ -39,6 +41,17 @@ export default {
 															data-kt-inbox-form="bcc_button">Bcc</span>
 													</div> 
 												</div> 
+
+		
+												<div class=" align-items-center border-bottom px-8 min-h-50px">
+												<div class="text-dark fw-bolder">status de pagamento:</div>
+									<select v-model="status" class="form-select border-0" data-control="select2" data-placeholder="Seleciona a opcao"> 
+									<option v-for="dado in pagamento" :key="dado" :value="dado.id" >{{ dado.id  }}</option>
+								</select>
+																			 
+									 
+								</div>
+
 												<div class="d-none align-items-center border-bottom ps-8 pe-5 min-h-50px"
 													data-kt-inbox-form="cc"> 
 													<tags
@@ -80,7 +93,10 @@ export default {
 
 													</div>
 													</div>
-													<div class="border-0 h-200px p-8  ql-container ql-snow">
+
+
+
+													<div class="border-0 p-8  ql-container ql-snow">
 					
 													<p>Você pode usar as seguintes Tags:</p>
 
@@ -91,13 +107,18 @@ export default {
 
 												</div> 
 											</div> 
+											<c-mensagem :msg="msg" ></c-mensagem>
+
+											 {{error}}
 											<div class="d-flex flex-stack flex-wrap gap-2 py-5 ps-8 pe-5 border-top">
-											 
+
+
 												<div class="d-flex align-items-center me-3">
 												 
 													<div class="btn-group me-4"> 
-														<a class="btn btn-primary">Salvar</a>
+													<button class="btn btn-primary" type="submit">SALVAR!</button>
 													</div> 
+
 													<span
 														class="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2 dz-clickable"
 														id="kt_inbox_reply_attachments_select"
@@ -160,7 +181,7 @@ export default {
 		</div> 
 		<!--end:: Root-->
 
-			<c-footer />
+			<c-footer />   
 		</div>
     `,
 
@@ -182,22 +203,53 @@ export default {
 			"{{telefone_doador}}",
 			"{{telefone_instituicao}}"
 		],
-
+		error: null,
+		msg: null,
 			assunto: null,
 			corpo: null,
-			acao: null,
-			cron: null
+			status: null,
+			cron: null,
+			pagamento: [
+				{ id: '' },
+				{ id: 'processing' },
+				{ id: 'authorized' },
+				{ id: 'refunded' },
+				{ id: 'waiting_payment' },
+				{ id: 'pending_refund' },
+				{ id: 'chargeback' }
+			  ]
+ 
         }
     },
 	methods: {
 
+		async atualizarEmail() {
+			this.error = null
+			 
+				let res = await adm.alterarEmail( 
+					this.instituicao_id, 
+					this.assunto,
+					this.corpo,
+					this.status,
+				)
+				if (!res.next) { 
+						setTimeout(() => this.msg = "", 5000); 
+					this.error = res.message
+					return null
+				}
+				this.msg = res.message
+		 
+
+		},
+
+
     },
 
 	async mounted() {
-		this.assunto = globalThis._emaiis.assunto
-		this.corpo = globalThis._emaiis.corpo 
-		this.acao = globalThis._emaiis.acao
-  
+		this.assunto = globalThis._emails.assunto
+		this.corpo = globalThis._emails.corpo 
+		this.status = globalThis._emails.acao
+		this.instituicao_id = window.localStorage.getItem("instituicao_id")
  
 	},
 
