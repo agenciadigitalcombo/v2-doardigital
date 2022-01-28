@@ -87,7 +87,7 @@ export default {
 							<div class="fv-row"> 
 								<div class="row"> 
 									<div class="col-lg-6"> 
-										<input type="radio" class="btn-check" name="account_type" value="personal"  id="kt_create_account_form_account_type_personal" />
+										<input   @click="jms = false"  type="radio" class="btn-check" name="account_type" value="personal"  id="kt_create_account_form_account_type_personal" />
 										<label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
 										 <span class="svg-icon svg-icon-3x me-5">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -101,7 +101,7 @@ export default {
 										 </label>
 								 </div>
 									 <div class="col-lg-6">
-										 <input type="radio" class="btn-check" name="account_type" value="corporate" checked="checked" id="kt_create_account_form_account_type_corporate" />
+										 <input  @click="jms = true" type="radio" class="btn-check" name="account_type" value="corporate" checked="checked" id="kt_create_account_form_account_type_corporate" />
 										<label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
 											 <span class="svg-icon svg-icon-3x me-5">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -125,7 +125,7 @@ export default {
 						</div>
 						<div>
 							 
-							<a type="button" class="btn btn-lg btn-primary" href="#/checkout_perfil">Continuar
+							<a @click="addcnpj()" type="button" class="btn btn-lg btn-primary">Continuar
 						 <span class="svg-icon svg-icon-4 ms-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 									<rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
@@ -153,15 +153,22 @@ export default {
 
      data: function () {
 		return {
-			
+			cnpj: null,
 			tipo: null,
 				valor: null,
 				email: null,
+				jms: true
 
         }
     },
 	methods: {
 	
+
+		addcnpj() {
+			window.localStorage.setItem("cnpj", this.jms )
+			window.location.href = "#/checkout_perfil"
+				   },
+
 		descartavel() {
 			this.tipo = window.localStorage.setItem("tipo", this.tipo)
 			this.valor = window.localStorage.setItem("valor", this.valor)

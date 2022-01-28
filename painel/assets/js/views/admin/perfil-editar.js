@@ -131,6 +131,7 @@ export default {
 
 		}
 	},
+	
 	methods: {
 
 		async alterarAdm() {

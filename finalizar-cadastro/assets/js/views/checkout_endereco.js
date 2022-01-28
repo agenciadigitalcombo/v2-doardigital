@@ -72,7 +72,7 @@ export default {
 	<div class="d-flex flex-column flex-lg-row-fluid py-10"> 
 		<div class="d-flex flex-center flex-column flex-column-fluid"> 
 			<div class="w-lg-700px p-10 p-lg-15 mx-auto"> 
-				<form @submit.prevent="editarEndereco" autocomplete="off" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+				<form @submit.prevent="editarEndereco" autocomplete="off" class="my-auto pb-5">
 					<div class="current" data-kt-stepper-element="content"> 
 						<div class="w-100"> 
 							<div class="pb-10 pb-lg-12"> 
@@ -85,8 +85,8 @@ export default {
 								<label class="form-label required">CEP</label>
 								 
 								<input v-model="nome_identificacao" type="hidden"/>
-						 <input v-model="cep" @keyup="searchCep()" @input="mask_cep" v-mask="'########'" placeholder="00000-000" required
-						  class="form-control form-control-lg form-control-solid"  />
+						 <input v-model="cep" @keyup="searchCep()" @input="mask_cep" v-mask="'########'" placeholder="00000-000" 
+						  class="form-control form-control-lg form-control-solid" required  />
 								
 						  <div class="erro_texte"> 
 					 {{cepErro}}
@@ -95,7 +95,7 @@ export default {
 							<div class="fv-row mb-0"> 
 								<label class="fs-6 fw-bold form-label required">Logradouro</label>
 								 
-								<input id="logradouro" v-model="logadouro" name="business_name" class="form-control form-control-lg form-control-solid" disabled />
+								<input id="logradouro" v-model="logadouro" name="business_name" class="form-control form-control-lg form-control-solid" required />
 								 
 							</div>
 						<br>
@@ -104,7 +104,7 @@ export default {
 								<label class="fs-6 fw-bold form-label ">Número</label>
 								
 								<input id="numero" v-model="numero" type="text" 
-								 name="business_name" class="form-control form-control-lg form-control-solid" placeholder="Localização"  />
+								 name="business_name" class="form-control form-control-lg form-control-solid" required placeholder="Localização"  />
 								
 							</div>
 							<br>
@@ -112,7 +112,7 @@ export default {
 								
 							<label class="fs-6 fw-bold form-label ">Complemento</label>
 							
-							<input v-model="complemento" name="Complemento" class="form-control form-control-lg form-control-solid" value="Boa Vista" />
+							<input v-model="complemento" name="Complemento" class="form-control form-control-lg form-control-solid"  value="Boa Vista" />
 							
 						</div>
 						<br>
@@ -120,14 +120,14 @@ export default {
 								
 								<label class="fs-6 fw-bold form-label required">Bairro</label>
 								
-								<input v-model="bairro" name="bairro" class="form-control form-control-lg form-control-solid" disabled />
+								<input v-model="bairro" name="bairro" class="form-control form-control-lg form-control-solid" required />
 								
 							</div>
 						
 						<br> 
 							<div class="fv-row mb-0"> 
 								<label class="fs-6 fw-bold form-label required">Cidade</label> 
-								<input v-model="cidade" type="text" disabled class="form-control form-control-lg form-control-solid" />
+								<input v-model="cidade" type="text" class="form-control form-control-lg form-control-solid" required />
 								
 							</div>
 						<br> 
@@ -135,7 +135,7 @@ export default {
 								
 								<label class="fs-6 fw-bold form-label required">Estado</label>
 								
-								<input id="uf" v-model="estado" type="text" disabled name="business_name" class="form-control form-control-lg form-control-solid"  />
+								<input id="uf" v-model="estado" type="text" name="business_name" class="form-control form-control-lg form-control-solid" required  />
 								
 							</div> 
 						</div> 

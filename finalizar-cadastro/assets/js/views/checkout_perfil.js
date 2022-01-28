@@ -73,7 +73,7 @@ export default {
 		<div class="d-flex flex-center flex-column flex-column-fluid"> 
 			<div class="w-lg-700px p-10 p-lg-15 mx-auto"> 
 
-			<form @submit.prevent="finalizarAdm" autocomplete="off" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+			<form @submit.prevent="finalizarAdm" autocomplete="off" class="my-auto pb-5">
 			 	 <div class="current" data-kt-stepper-element="content">
 						 <div class="w-100">
 							 <div class="pb-10 pb-lg-15">
@@ -85,13 +85,19 @@ export default {
 									<span class="required">Data de Nascimento</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Selecione o tipo de conta conforme documento utilizado"></i></h2>
 								</label>
-								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" v-model="data_nascimento" v-mask="'##/##/####'" placeholder="29/10/1685"/>
+								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" v-model="data_nascimento" v-mask="'##/##/####'" placeholder="29/10/1685" required/>
 						 </div>	
 						 
-						 <div class="mb-10 fv-row">
-								 <label class="form-label mb-3">CNPJ</label>
-							 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" v-model="cpf_cnpj" v-mask="'##.###.###/####-##'" placeholder="28.893.699/0001-85" />
-						 </div>
+						 <div class="mb-10 fv-row" v-if="jms == 'true'">
+						 <label class="form-label mb-3">CNPJ</label>
+					 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" v-model="cpf_cnpj" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00" required/>
+					 </div>
+					 
+					 <div class="mb-10 fv-row" v-else>
+						 <label class="form-label mb-3">CPF</label> 
+					 <input type="text" class="form-control form-control-lg form-control-solid" name="account_name" v-model="cpf_cnpj" v-mask="'###.###.###-##'" placeholder="000.000.000-00" required/>
+					 </div>
+
 						 <div class="mb-0 fv-row">
 								 <label class="d-flex align-items-center form-label mb-5">Selecione em qual 
 								<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Monthly billing will be based on your account plan"></i></label>
@@ -160,9 +166,12 @@ export default {
 								</div> 
 							</div> 
 						</div> 
-					</div> 
+					</div>  
+					<div class="d-flex flex-stack pt-15 erro_texte">  
+					{{error}}
+				  </div> 
 
-					<div class="d-flex flex-stack pt-15">
+					<div class="d-flex flex-stack pt-5">
 						<div class="mr-2">
 							<a type="button" class="btn btn-lg btn-light-primary me-3" href="#/" >
 							 <span class="svg-icon svg-icon-4 me-1">
@@ -184,8 +193,10 @@ export default {
 							</span>
 						 </button>
 						</div>
-					</div> 
-				</form> 
+					</div>
+					 
+				</form>  
+
 			</div> 
 		</div> 
 		<div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
@@ -207,6 +218,8 @@ export default {
 			cpf_cnpj: null,
 			data_nascimento: null,
 			token: null,
+			jms: "",
+			error: null,
 
         }
     },
@@ -233,7 +246,7 @@ export default {
 	
 
 	async mounted() {
-		this.token = localStorage.getItem('token') 
+		this.jms = localStorage.getItem('cnpj') 
 	
 	},
 

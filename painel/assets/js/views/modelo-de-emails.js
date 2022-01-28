@@ -90,7 +90,7 @@ export default {
                                                     </td> 
                                                     <td class="text-end">
 
-                                                        <a @click="editar(item.acao)"
+                                                        <a @click="editar(item.id)"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -127,6 +127,7 @@ export default {
     data: function () {
         return {
             instituicao_id: null,
+            id: null,
             acao: null,
             emails: []
         }
@@ -138,8 +139,8 @@ export default {
             return res
         },
 
-        async editar(acao) {
-             globalThis._emaiis = this.emails.find(doador => doador.acao == acao) 
+        async editar(id) {
+             globalThis._emails = this.emails.find(doador => doador.id == id) 
             window.location.href = "#/modelo-de-emails/editar"
         },
 

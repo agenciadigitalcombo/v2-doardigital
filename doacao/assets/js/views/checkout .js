@@ -65,7 +65,7 @@ export default {
 																<div class="d-flex align-items-center me-2">
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)"
+																		<input v-on:click="setarPlano(listar)" checked="checked"
 																			class="form-check-input" type="radio" name="plan" />
 																			</div>
 
@@ -138,8 +138,9 @@ export default {
 
 											</div>
 											<div>
-								 
-				
+								  
+
+
 										 <div class="d-flex"> 
 										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
 											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
@@ -311,7 +312,12 @@ export default {
 
 
 			}
-		}
+		},
+
+		estaActivo(semPagina) {
+			  return semPagina  == this.paginaAtual ? "active": ""
+				
+		   }
 	},
 
 	computed: {

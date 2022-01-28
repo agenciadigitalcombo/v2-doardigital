@@ -172,7 +172,7 @@ export default {
 							<p class="m-10">
 								{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
 								Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
-								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
+								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep  | is_data}} |
 								Para dúvidas e cancelamentos entre em contato com nossa <br>
 								central de relacionamento no telefone {{inst.telefone}}
 								ou pelo e-mail: {{inst.email}} |
@@ -214,6 +214,18 @@ export default {
 			jms: false,
 		}
 	},
+
+	
+    filters: {
+     
+     is_data(datas) { 
+         let cep  = datas.split('').join('/'); 
+		  
+         return `${cep}`
+     },
+    },
+
+
 	methods: {
 		async infoSubdomain() {
 			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
