@@ -15,7 +15,8 @@ class DoadorControler{
     {
         $doacoes = new Doacao();
         $doador = new Doador();
-        
+        $endereco = new Endereco;
+
         token();
 
         $cpf_campo = $_REQUEST['cpf'];
@@ -27,6 +28,21 @@ class DoadorControler{
         $get_doador_id = $list_doador['id'];
 
         $get_doacoes = $doacoes->list_all_by_doador($get_doador_id);
+
+
+        $get_endereco = $endereco->list_all_by_fk($get_doador_id);
+
+        $dados_endereco = 
+        [
+            'cep' => $get_endereco['cep'],
+            'logadouro' => $get_endereco['logadouro'],
+            'numero' => $get_endereco['numero'],
+            'complemento' => $get_endereco['complemento'],
+            'bairro' => $get_endereco['bairro'],
+            'cidade' => $get_endereco['cidade'],
+            'estado' => $get_endereco['estado']
+        ];
+
 
         $all_doacoes = array_map(function($lis_dados){
             return [
@@ -50,6 +66,7 @@ class DoadorControler{
             'foto' => $list_doador['foto'],
             'data_nascimento' => $list_doador['data_nascimento'],
             'data_registro' => $list_doador['data_registro'],
+            'endereco' => $dados_endereco,
             'doacoes' => $all_doacoes
 
         ];
