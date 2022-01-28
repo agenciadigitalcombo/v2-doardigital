@@ -421,12 +421,14 @@ class InstituicaoControler
             $doador = new Doador();
             $dados_doador = $doador->get_by_id($list['doador_id']);
             return[
+                'id' => $dados_doador['id'],
                 'nome' => $dados_doador['nome'],
                 'email' => $dados_doador['email'],
                 'cpf' => $dados_doador['cpf'],
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],
                 'data' => $list['data'],
+                'hora' => $list['hora'],
                 'tipo' => $list['tipo']
             ];
         },$get_doacoes);
