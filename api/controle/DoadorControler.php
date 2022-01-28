@@ -52,9 +52,86 @@ class DoadorControler{
                 'status_pagamento' => $lis_dados['status_pagamento'],
                 'plano_id' => $lis_dados['plano_id'],
                 'valor' => $lis_dados['valor'],
-                'data' => $lis_dados['data']
+                'data' => $lis_dados['data'],
+                'hora' => $lis_dados['hora']
             ];
         },$get_doacoes);
+
+
+
+        $payload = [
+            'id' => $list_doador['id'],
+            'nome' => $list_doador['nome'],
+            'email' => $list_doador['email'],
+            'cpf' => $list_doador['cpf'],
+            'telefone' => $list_doador['telefone'],
+            'foto' => $list_doador['foto'],
+            'data_nascimento' => $list_doador['data_nascimento'],
+            'data_registro' => $list_doador['data_registro'],
+            'endereco' => $dados_endereco,
+            'doacoes' => $all_doacoes
+
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Doador',
+            'dados' => $payload
+        ]);
+
+    }
+
+    static function list_get_doador()
+    {
+        $doacoes = new Doacao();
+        $doador = new Doador();
+        $endereco = new Endereco;
+
+        token();
+
+        $cpf_campo = $_REQUEST['cpf'];
+
+        $doacao_id = $_REQUEST['doacao_id'];
+
+        campo_obrigatorios([
+            'cpf' => 'Campo CPF obrigatorio',
+            'doacao_id' => 'Campo doacao_id obrigatorio'
+        ]);
+
+        $cpf = cpf($cpf_campo);
+
+        $list_doador = $doador->get_by_cpf($cpf);
+
+        $get_doador_id = $list_doador['id'];
+
+        $get_doacoes = $doacoes->get_by_id($doacao_id);
+
+        
+        $get_endereco = $endereco->list_all_by_fk($get_doador_id);
+
+        $dados_endereco = 
+        [
+            'cep' => $get_endereco['cep'],
+            'logadouro' => $get_endereco['logadouro'],
+            'numero' => $get_endereco['numero'],
+            'complemento' => $get_endereco['complemento'],
+            'bairro' => $get_endereco['bairro'],
+            'cidade' => $get_endereco['cidade'],
+            'estado' => $get_endereco['estado']
+        ];
+
+
+        $all_doacoes = 
+        [
+            'instituicao_id' => $get_doacoes['instituicao_id'],
+            'tipo' => $get_doacoes['tipo'],
+            'recorrente' => $get_doacoes['recorrente'],
+            'status_pagamento' => $get_doacoes['status_pagamento'],
+            'plano_id' => $get_doacoes['plano_id'],
+            'valor' => $get_doacoes['valor'],
+            'data' => $get_doacoes['data'],
+            'hora' => $get_doacoes['hora']
+        ];
 
 
 
