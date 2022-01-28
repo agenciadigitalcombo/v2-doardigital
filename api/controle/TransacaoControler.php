@@ -1,6 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
 
 class TransacaoControler{
     
@@ -21,7 +20,7 @@ class TransacaoControler{
         $planos_nome = $_REQUEST['planos_nome'];
         $planos_valor = $_REQUEST['planos_valor'];
 
-        $mensal = $_REQUEST['mensal'] ?? null;
+        $mensal = $_REQUEST['mensal'] ?? 0;
         
         
         $nome = $_REQUEST['nome'];
@@ -98,6 +97,9 @@ class TransacaoControler{
             $doador_dados['token'] = $token_doador;
         }
         
+        $get_token_doador = $doador_dados['token'];
+
+       
         
         $res_plano = $pagarme_plano->create($nome, $planos_valor);
         $plano_token = $res_plano['id'];
@@ -109,9 +111,6 @@ class TransacaoControler{
         
         
         
-        $doador_dados = $doador->get_by_cpf($cpf);
-        $get_token = $doador_dados['token'];
-        
         
 
             if($mensal == 1 and $type_pagamento == "credit_card"){
@@ -121,6 +120,7 @@ class TransacaoControler{
                 
                 $get_id_cartao = $res_pagarme_cartao['id'];
                 $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
+                $get_token = $res_pagarme_recorrencia['id'];
                 $get_status = $res_pagarme_recorrencia['status'];
                 $codigo = "";
                 $url = "";
@@ -131,12 +131,14 @@ class TransacaoControler{
                 $pagarme_cartao = new PagarMeBoleto();
                 $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
                 $get_status = $res_pagarme_recorrencia['current_transaction'] ['status'];
+                $get_token = $res_pagarme_recorrencia['id'];
                 $codigo = $res_pagarme_recorrencia['current_transaction'] ['boleto_barcode'];
                 $url = $res_pagarme_recorrencia['current_transaction'] ['boleto_url'];
             }
-    
-    
-            if($type_pagamento == "credit_card"){
+
+            
+            
+            if($type_pagamento == "credit_card" and $mensal != 1){
     
                 campo_obrigatorios([
                     'cart_numero' => 'Campo cart_numero Obrigatorio',
@@ -147,21 +149,21 @@ class TransacaoControler{
     
                 $pagarme_cartao = new PagarMeCartao();
                 
-                $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+                $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
                 $get_token = $res_pagarme['id'];
                 $get_status = $res_pagarme['status'];
                 $codigo = "";
                 $url = "";
                 
             }
-        
+            
             
             if($type_pagamento == "pix"){
     
                 campo_obrigatorios([
                     'planos_valor' => 'Campo planos_valor opbrigatorio',
                 ]);
-    
+                
                 $pagarme_pix = new PagarMePix();
                 
                 $res_pagarme = $pagarme_pix->pay($planos_valor);
@@ -173,18 +175,18 @@ class TransacaoControler{
                 
                 
             }
-    
-    
-            if($type_pagamento == "boleto"){
-    
+            
+            
+            if($type_pagamento == "boleto" and $mensal != 1){
+                
                 campo_obrigatorios([
                     'planos_valor' => 'Campo planos_valor opbrigatorio',
                     'planos_nome' => 'Campo planos_nome opbrigatorio'
                 ]);
-    
+                
                 $pagarme_boleto = new PagarMeBoleto();
-                 
-                $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+                
+                $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
                 $get_token = $res_pagarme['id'];
                 $get_status = $res_pagarme['status'];
                 $codigo = $res_pagarme['boleto_barcode'];
@@ -193,10 +195,11 @@ class TransacaoControler{
                 
                 
             }
-        
-        
-        
-        $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $get_status, $planos_id, $planos_valor, $codigo, $url);
+            
+            
+            
+            
+            $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url);
         
         @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
         @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));

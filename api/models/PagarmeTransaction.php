@@ -12,5 +12,4 @@ class PagarMeTransaction extends PagarMe
         return $this->post('/transactions/transaction_id', $payload, false);
     }
 
-
 }

@@ -7,6 +7,7 @@ interface IDoacao
         int $doador_id,
         string $token,
         string $tipo,
+        string $recorrente,
         string $status_pagamento,
         int $plano_id,
         int $valor,

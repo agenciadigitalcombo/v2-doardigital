@@ -48,6 +48,7 @@ class DoadorControler{
             return [
                 'instituicao_id' => $lis_dados['instituicao_id'],
                 'tipo' => $lis_dados['tipo'],
+                'recorrente' => $lis_dados['recorrente'],
                 'status_pagamento' => $lis_dados['status_pagamento'],
                 'plano_id' => $lis_dados['plano_id'],
                 'valor' => $lis_dados['valor'],
