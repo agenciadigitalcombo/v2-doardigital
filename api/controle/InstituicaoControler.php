@@ -285,9 +285,14 @@ class InstituicaoControler
             'subdomaim' => 'Indoforme o Sub-domaim',
         ]);
 
+
         $get_instituicao = $instituicao->get_by_subdomaim($subdomaim);
 
+        
+
         $get_instituicao_id = $get_instituicao['id'];
+
+
         $get_plano = $plano->list_all_by_instituicao($get_instituicao_id);
 
         $get_endereco = $endereco->list_all_by_fk($get_instituicao_id);
@@ -312,9 +317,9 @@ class InstituicaoControler
         },$get_plano );
 
         $payload_instituicao = [
-            'logo' => $logo,
+            'logo' => $get_instituicao['logo'],
             'icon' => $icon,
-            'cor' => '#009ef7',
+            'cor' => $get_instituicao['cor'],
             'id' => $get_instituicao['id'],
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
