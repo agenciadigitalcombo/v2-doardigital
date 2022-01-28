@@ -143,10 +143,8 @@ class EnderecoControle
 
         $token_parse = token();
 
-        var_dump($token_parse);
-        die;
         
-        $nome_identificacao = $_REQUEST['nome_identificacao'];
+        // $nome_identificacao = $_REQUEST['nome_identificacao'];
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
         $numero = $_REQUEST['numero'];
@@ -154,6 +152,7 @@ class EnderecoControle
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
+        
         
         $transform_cep = withdraw_caracter($cep);
         $transform_numero = withdraw_caracter($numero);
@@ -171,7 +170,7 @@ class EnderecoControle
         $id_adm = $adm->list_profile($secret);
         $id = $id_adm['id'];
 
-        $endereco->create($id, $nome_identificacao, $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+        $endereco->create($id, "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
         echo json_encode([
             'next' => true,
             'message' => 'Endereco Atualizado'
