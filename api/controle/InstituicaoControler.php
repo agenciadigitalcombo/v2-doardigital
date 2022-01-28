@@ -419,8 +419,11 @@ class InstituicaoControler
         
         $payload = array_map(function ($list) {
             $doador = new Doador();
+            $dados_doador = $doador->get_by_id($list['doador_id']);
             return[
-                'doador' => $doador->get_by_id($list['doador_id']),
+                'nome' => $dados_doador['nome'],
+                'email' => $dados_doador['email'],
+                'cpf' => $dados_doador['cpf'],
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],
                 'data' => $list['data'],
