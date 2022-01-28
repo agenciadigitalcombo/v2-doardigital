@@ -414,6 +414,15 @@ class InstituicaoControler
 
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
 
+
+
+        $payload_id = array_map(function ($list) {
+            return[
+                'doador_id' => $list['doador_id'],
+                
+            ];
+        },$get_doacoes);
+
         $payload = array_map(function ($list) {
             return[
                 'doador_id' => $list['doador_id'],
@@ -461,6 +470,7 @@ class InstituicaoControler
             return[
                 'id' => $dados['id'],
                 'nome' => $dados['nome'],
+                'cpf' => $dados['cpf'],
                 'email' => $dados['email'],
                 'tipo' => 'unico',
                 'gravatar' => gravatar($dados['email']),

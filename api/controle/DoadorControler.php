@@ -89,25 +89,22 @@ class DoadorControler{
 
         token();
 
-        $cpf_campo = $_REQUEST['cpf'];
 
         $doacao_id = $_REQUEST['doacao_id'];
 
         campo_obrigatorios([
-            'cpf' => 'Campo CPF obrigatorio',
             'doacao_id' => 'Campo doacao_id obrigatorio'
         ]);
 
-        $cpf = cpf($cpf_campo);
 
-        $list_doador = $doador->get_by_cpf($cpf);
-
-        $get_doador_id = $list_doador['id'];
-
-        $get_doacoes = $doacoes->get_by_id($doacao_id);
+        $list_doador = $doador->get_by_id($doacao_id);
 
         
-        $get_endereco = $endereco->list_all_by_fk($get_doador_id);
+        $get_endereco = $endereco->list_all_by_fk($doacao_id);
+
+        $get_doacoes = $doacoes->get_doador($doacao_id);
+
+        
 
         $dados_endereco = 
         [
@@ -145,7 +142,7 @@ class DoadorControler{
             'data_nascimento' => $list_doador['data_nascimento'],
             'data_registro' => $list_doador['data_registro'],
             'endereco' => $dados_endereco,
-            'doacoes' => $all_doacoes
+            'doacao' => $all_doacoes
 
         ];
 

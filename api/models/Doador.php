@@ -16,6 +16,7 @@ class Doador implements IDoador
         $banco = new Banco();
         $sql = "SELECT * FROM doador WHERE id='$id'";
         $guard = $banco->query($sql);
+        return $guard[0] ?? [];
     }
 
     public function add_costumer_id(int $id, int $costumer_id_pagar_me): void
@@ -30,7 +31,7 @@ class Doador implements IDoador
         $banco = new Banco();
         $sql = "SELECT * FROM doador WHERE id='$id'";
         $guard = $banco->query($sql);
-        return $guard;
+        return $guard [0] ?? [];
     }
 
     public function get_by_email(string $email): array
