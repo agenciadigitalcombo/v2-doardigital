@@ -183,7 +183,7 @@ export default {
 			logo: '',
 			mensal: "1",
 			amount: null,
-			valor: null,
+			valor: 2500,
 			planos_nome: null,
 			valor_digitado: null,
 			planos_id: null,
