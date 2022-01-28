@@ -12,8 +12,7 @@ class InstituicaoControler
 
         $token_parce = token();
 
-        var_dump($token_parce);
-        die;
+        
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['subdomaim'] ?? '';
@@ -224,14 +223,17 @@ class InstituicaoControler
         
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
 
+        
 
-        $payload = [
-            'id' => $get_instituicao['id'],
-            'adm_id' => $get_instituicao['adm_id'],
-            'nome_fantasia' => $get_instituicao['nome_fantasia'],
-            'subdomaim' => $get_instituicao['subdomaim'],
-            'status' => $get_instituicao['status']
-        ];
+        $payload  = array_map(function($lis_dados){
+            return [
+                'id' => $lis_dados['id'],
+                'adm_id' => $lis_dados['adm_id'],
+                'nome_fantasia' => $lis_dados['nome_fantasia'],
+                'subdomaim' => $lis_dados['subdomaim'],
+                'status' => $lis_dados['status']
+            ];
+        },$get_instituicao); 
 
         echo json_encode([
             'next' => true,
