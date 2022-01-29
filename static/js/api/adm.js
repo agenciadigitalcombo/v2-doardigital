@@ -251,7 +251,7 @@ export default {
     },
 
     async todoSubdomain(subdomaim) {
-        return await http.get('/info-subdomaim', {
+        return await http.post('/info-subdomaim', {
             subdomaim
         })
     },
