@@ -83,6 +83,38 @@ export default {
 								<a href="#" class="text-primary fw-bolder">Help Page</a>.</div>
 							 
 							</div>
+
+												 
+							<div class="row fv-row mb-7 "> 
+							<div class="col-6">
+							<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+									<span class="required">Instituições</span>
+									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+								</label>
+								<select name="card_expiry_month" class="form-select form-select-solid" data-control="select2" data-hide-search="true" placeholder="Month">
+									<option disabled selected hidden>Qual a Plano da Instituicao</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								
+								</select>
+							</div> 
+							<div class="col-6">
+							<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+									<span class="required">Disparos Whatsapp</span>
+									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+								</label>
+								<select name="card_expiry_year" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year">
+									<option disabled selected hidden>Selecione o disparo</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+							</div> 
+						</div> 
+
 							 <div class="d-flex flex-column mb-7 fv-row">
 								
 								<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -111,8 +143,8 @@ export default {
 									 
 									<div class="row fv-row"> 
 										<div class="col-6">
-											<select name="card_expiry_month" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Month">
-												<option></option>
+											<select name="card_expiry_month" class="form-select form-select-solid" data-control="select2" data-hide-search="true" placeholder="Month">
+												<option disabled selected hidden>Mês</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
@@ -129,7 +161,7 @@ export default {
 										</div> 
 										<div class="col-6">
 											<select name="card_expiry_year" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year">
-												<option></option>
+												<option disabled selected hidden>Ano</option>
 												<option value="2021">2021</option>
 												<option value="2022">2022</option>
 												<option value="2023">2023</option>

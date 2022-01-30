@@ -325,7 +325,10 @@ export default {
         },
 
         is_status(status) {
-            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento ');
+            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
+            //status.split('paid').join(' Pago ')
+          //  status_pagamento = status.split('paid').join('Pago')
+        
             return `${status_pagamento}`
         },
         
@@ -383,10 +386,15 @@ export default {
         this.doacoes = (await this.listarDoacoes()).dados || {}
         this.getPagina(1)
 
+        this.is_status()
+
     },
 
     created() {
         this.instituicao_id = window.localStorage.getItem("instituicao_id")
+
+  
+        
     },
 
 
