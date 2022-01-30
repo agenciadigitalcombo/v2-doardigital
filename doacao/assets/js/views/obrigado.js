@@ -254,7 +254,7 @@ export default {
 		this.inst.email = dados.email
 		this.inst.telefone  = dados.telefone
 		this.inst.cnpj = dados.cnpj
-		this.inst.urlsite = dados.subdomaim+'.com.br.doardigital.com.br/'
+		this.inst.urlsite = dados.subdomaim+'.doardigital.com.br/'
 		
 
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')

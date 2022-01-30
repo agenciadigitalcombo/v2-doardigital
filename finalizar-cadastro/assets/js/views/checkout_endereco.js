@@ -246,7 +246,9 @@ export default {
 
                         if (response.data.erro) {
                             this.cepErro = "Número do CEP inválido...!"
-                        }
+                        } else {
+							this.cepErro = ""
+						}
                     }
                     )
                     .catch(error =>

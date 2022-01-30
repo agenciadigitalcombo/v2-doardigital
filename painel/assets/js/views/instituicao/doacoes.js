@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-    template: ` 
+    template: `
 <div>
     <c-header></c-header>
     <c-aside></c-aside> 
@@ -179,7 +179,7 @@ export default {
                                                 </tr> 
                                             </thead> 
                                             <tbody class="text-gray-600 fw-bold">
-                                                <tr v-for="item in dadosPagina" :key="item.id"> 
+                                                <tr v-for="item in dadosPagina"> 
                                                     <td>
                                                         <div
                                                             class="form-check form-check-sm form-check-custom form-check-solid">
@@ -198,8 +198,7 @@ export default {
                                                             </a>
                                                         </div> 
                                                         <div class="d-flex flex-column">
-                                                            <a href="../../demo8/dist/apps/user-management/users/view.html"
-                                                                class="text-gray-800 text-hover-primary mb-1"> {{item.doador_id}}      Emma
+                                                            <a class="text-gray-800 text-hover-primary mb-1">     Emma
                                                                 Smith</a>
                                                             <span>e.smith@kpmg.com.au</span>
                                                         </div> 
@@ -227,61 +226,14 @@ export default {
 
                                                     </td> 
                                                 </tr>
-                                                <tr> 
-                                                    <td>
-                                                        <div
-                                                            class="form-check form-check-sm form-check-custom form-check-solid">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                    </td> 
-                                                    <td class="d-flex align-items-center"> 
-                                                        <div
-                                                            class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                            <a
-                                                                href="../../demo8/dist/apps/user-management/users/view.html">
-                                                                <div class="symbol-label">
-                                                                    <img src="../painel/assets/image/gravatar.png"
-                                                                        alt="Emma Smith" class="w-100" />
-                                                                </div>
-                                                            </a>
-                                                        </div> 
-                                                        <div class="d-flex flex-column">
-                                                            <a href="../../demo8/dist/apps/user-management/users/view.html"
-                                                                class="text-gray-800 text-hover-primary mb-1">Emma
-                                                                Smith</a>
-                                                            <span>e.smith@kpmg.com.au</span>
-                                                        </div> 
-                                                    </td> 
-                                                    <td>29,90 </td> 
-                                                    <td>
-                                                        <div class="badge badge-light-danger">Nao Pago</div>
-                                                    </td> 
-                                                    <td>Nov 10, 2021</td> 
-                                                    <td>
-                                                        <div class="badge badge-light">credit_card</div>
-                                                    </td> 
-                                                    <td class="text-end">
-
-                                                        <a @click="editar(item.id)"
-                                                            class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
-                                                            style="margin: 2px;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                                                          </svg>
-                                                            </span> 
-                                                        </a>
-
-                                                    </td> 
-                                                </tr>
+                                              
                                             </tbody> 
                                         </table>
  
 
                                     <ul class="pagination"> 
                                         <li @click="getAnterior()" class="page-item previous disabled"><a class="page-link"><i class="previous"></i></a></li>
-                                        <li  @click="getPagina(pagina)" v-for="pagina in totalPagina()" :key="pagina.id" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link">{{pagina}}</a></li>
-                                        <li class="page-item active"><a class="page-link">2</a></li>
+                                        <li  @click="getPagina(pagina)" v-for="pagina in totalPagina()" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link btn">{{pagina}}</a></li>
                                         <li @click="getProximo()" class="page-item next"><a class="page-link"><i class="next"></i></a></li>
                                     </ul>
 
@@ -325,6 +277,10 @@ export default {
         },
 
         is_status(status) {
+          //  if (condition) {
+                
+        //    }
+
             let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
             //status.split('paid').join(' Pago ')
           //  status_pagamento = status.split('paid').join('Pago')
@@ -371,22 +327,22 @@ export default {
             this.getPagina(this.paginaAtual)
         },
         estaActivo(semPagina) {
-         //   return semPagina  == this.paginaAtual ? "active": ""
+            return semPagina  == this.paginaAtual ? "active": ""
                         //        ou
-            if (semPagina == this.paginaAtual) {
-                return "active"
-            } else {
-                return ""
-            }
+          //  if (semPagina == this.paginaAtual) {
+           //     return "active"
+         //   } else {
+            //    return ""
+          //  }
         }
     },
-
+ 
     async mounted() {
 
         this.doacoes = (await this.listarDoacoes()).dados || {}
         this.getPagina(1)
 
-        this.is_status()
+      
 
     },
 

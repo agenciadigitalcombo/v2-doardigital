@@ -65,7 +65,7 @@ export default {
 																<div class="d-flex align-items-center me-2">
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)" checked="checked"
+																		<input v-on:click="setarPlano(listar)" checked="checked" v-modal="amount" value="valor"
 																			class="form-check-input" type="radio" name="plan" />
 																			</div>
 
@@ -74,7 +74,8 @@ export default {
 																	</div>
 																</div>
 															</label>
-														</div>
+														</div> 
+																				 
 
 														<div class="col-lg-4 mb-10 mb-lg-0" v-if="mensal !== '1'">
 
@@ -184,7 +185,7 @@ export default {
 			logo: '',
 			mensal: "1",
 			amount: null,
-			valor: 2500,
+			valor: '2500',
 			planos_nome: null,
 			valor_digitado: null,
 			planos_id: null,
