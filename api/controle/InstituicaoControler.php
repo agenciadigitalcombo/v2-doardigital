@@ -215,11 +215,14 @@ class InstituicaoControler
 
         $get_secret_adm = $token_parce['secret'];
 
+
         $sanitize_secret = trim($get_secret_adm);
-
-        $secret = $adm->list_profile($sanitize_secret);
+        
+        
+        $secret = $adm->list_profile("61dcbc7262b7e");
         $id = $secret['id'];
-
+        
+        
 
 
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
