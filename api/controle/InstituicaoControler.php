@@ -409,6 +409,7 @@ class InstituicaoControler
     static function list_doacoes()
     {
         $doacoes = new Doacao();
+        $doador = new Doador();
 
         $instituicao_id = $_REQUEST['instituicao_id'];
 
@@ -418,16 +419,16 @@ class InstituicaoControler
 
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
 
-
-
-
-        $payload = array_map(function ($list) {
-            $doador = new Doador();
+        
+        
+        $payload = array_map(function ($list) use($doador){
             $dados_doador = $doador->get_by_id($list['doador_id']);
+            
             return [
                 'doador_id' => $dados_doador['id'],
                 'nome' => $dados_doador['nome'],
                 'email' => $dados_doador['email'],
+                'gravatar' => gravatar($dados_doador['email']),
                 'cpf' => $dados_doador['cpf'],
                 'doacao_id' => $list['id'],
                 'valor' => $list['valor'],
@@ -436,7 +437,7 @@ class InstituicaoControler
                 'hora' => $list['hora'],
                 'tipo' => $list['tipo']
             ];
-        }, $get_doacoes);
+        },$get_doacoes);
 
 
 
@@ -475,6 +476,7 @@ class InstituicaoControler
                 'id' => $dados['id'],
                 'nome' => $dados['nome'],
                 'email' => $dados['email'],
+                'cpf' => $dados['cpf'],
                 'tipo' => 'unico',
                 'gravatar' => gravatar((string)$dados['email']),
                 'data_registro' => $dados['data_registro']
