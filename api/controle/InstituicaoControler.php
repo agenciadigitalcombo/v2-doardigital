@@ -12,7 +12,7 @@ class InstituicaoControler
 
         $token_parce = token();
 
-        
+
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['subdomaim'] ?? '';
@@ -28,18 +28,19 @@ class InstituicaoControler
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
 
-        
-        campo_obrigatorios([
-        'nome_fantasia' => 'Informe um Nome Fantasia',
-        'razao_social' => 'Qual a RazaoSocial',
-        'subdomaim' => 'Informe o Sub Domain',
-        'email' => 'Qual o Email',
-        'telefone' => 'Digite o numero de Telefone',
-        'cnpj' => 'Informe o Cnpj']);
 
-    
+        campo_obrigatorios([
+            'nome_fantasia' => 'Informe um Nome Fantasia',
+            'razao_social' => 'Qual a RazaoSocial',
+            'subdomaim' => 'Informe o Sub Domain',
+            'email' => 'Qual o Email',
+            'telefone' => 'Digite o numero de Telefone',
+            'cnpj' => 'Informe o Cnpj'
+        ]);
+
+
         valid_subdomain($sub_domain);
-        
+
 
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
@@ -83,7 +84,7 @@ class InstituicaoControler
         $instituicao_id = $_REQUEST['instituicao_id'];
 
 
-        
+
         $nome_fantasia = $_REQUEST['nome_fantasia'];
         $razao_social = $_REQUEST['razao_social'];
 
@@ -122,7 +123,7 @@ class InstituicaoControler
         $instituicao_id = $_REQUEST['instituicao_id'];
 
 
-        
+
         $nome_fantasia = $_REQUEST['nome_fantasia'];
         $razao_social = $_REQUEST['razao_social'];
 
@@ -213,19 +214,19 @@ class InstituicaoControler
         $token_parce = token();
 
         $get_secret_adm = $token_parce['secret'];
-        
+
         $sanitize_secret = trim($get_secret_adm);
 
         $secret = $adm->list_profile($sanitize_secret);
         $id = $secret['id'];
-        
-        
-        
+
+
+
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
 
-        
 
-        $payload  = array_map(function($lis_dados){
+
+        $payload  = array_map(function ($lis_dados) {
             return [
                 'id' => $lis_dados['id'],
                 'adm_id' => $lis_dados['adm_id'],
@@ -233,7 +234,7 @@ class InstituicaoControler
                 'subdomaim' => $lis_dados['subdomaim'],
                 'status' => $lis_dados['status']
             ];
-        },$get_instituicao); 
+        }, $get_instituicao);
 
         echo json_encode([
             'next' => true,
@@ -290,7 +291,7 @@ class InstituicaoControler
 
         $get_instituicao = $instituicao->get_by_subdomaim($subdomaim);
 
-        
+
 
         $get_instituicao_id = $get_instituicao['id'];
 
@@ -309,14 +310,14 @@ class InstituicaoControler
             'estado' => $get_endereco['estado']
         ];
 
-        $payload_plano = array_map(function($plano) {
+        $payload_plano = array_map(function ($plano) {
             return [
                 'id' => $plano['id'],
                 'nome' => $plano['nome'],
                 'amount' => $plano['amount'],
                 'status' => $plano['status']
             ];
-        },$get_plano );
+        }, $get_plano);
 
         $payload_instituicao = [
             'logo' => $get_instituicao['logo'],
@@ -377,7 +378,7 @@ class InstituicaoControler
     {
 
         $instituicao = new Instituicao();
-        
+
         $sub_domain = $_REQUEST['subdomaim'];
 
 
@@ -386,7 +387,7 @@ class InstituicaoControler
         ]);
 
 
-        
+
 
         if ($instituicao->exist_subdomain($sub_domain)) {
             echo json_encode([
@@ -405,35 +406,36 @@ class InstituicaoControler
     static function list_doacoes()
     {
         $doacoes = new Doacao();
-        
+
         $instituicao_id = $_REQUEST['instituicao_id'];
-        
+
         campo_obrigatorios([
             'instituicao_id' => 'Indoforme o ID da Instituicao',
         ]);
-        
+
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
-        
-        
-        
-        
+
+
+
+
         $payload = array_map(function ($list) {
             $doador = new Doador();
             $dados_doador = $doador->get_by_id($list['doador_id']);
-            return[
-                'id' => $dados_doador['id'],
+            return [
+                'doador_id' => $dados_doador['id'],
                 'nome' => $dados_doador['nome'],
                 'email' => $dados_doador['email'],
                 'cpf' => $dados_doador['cpf'],
+                'doacao_id' => $list['id'],
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],
                 'data' => $list['data'],
                 'hora' => $list['hora'],
                 'tipo' => $list['tipo']
             ];
-        },$get_doacoes);
-        
-        
+        }, $get_doacoes);
+
+
 
         echo json_encode([
             'next' => true,
@@ -445,6 +447,7 @@ class InstituicaoControler
     static function list_doadores()
     {
         $doacoes = new Doacao();
+        $doador = new Doador();
 
         $instituicao_id = $_REQUEST['instituicao_id'];
 
@@ -452,37 +455,32 @@ class InstituicaoControler
             'instituicao_id' => 'Indoforme o ID da Instituicao',
         ]);
 
-        $get_doadores = $doacoes->list_all_by_doador($instituicao_id);
+        $all_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
+        $all_id_doadores = array_map(function ($list) {
+            return $list['doador_id'];
+        }, $all_doacoes);
+        $all_id_doadores = array_unique($all_id_doadores, SORT_REGULAR);
 
-        $doadores_id = array_map(function ($list) {
-            return[
-                'doador_id' => $list['doador_id']
-            ];
-        },$get_doadores);
-        
-        $payload = array_unique($doadores_id, SORT_REGULAR);        
+        $all_doadores = $doador->list_all();
 
-        $doador = new Doador();
+        $all_doadores = array_filter($all_doadores, function ($d) use ($all_id_doadores) {
+            return in_array($d['id'], $all_id_doadores);
+        });
 
-        $payload = array_map(function ($list) use($doador){
-            
-            $dados = $doador->get_by_id($list['doador_id'])[0];
-            return[
+        $payload = array_map(function ($dados) {            
+            return [
                 'id' => $dados['id'],
                 'nome' => $dados['nome'],
-                'cpf' => $dados['cpf'],
                 'email' => $dados['email'],
                 'tipo' => 'unico',
-                'gravatar' => gravatar($dados['email']),
+                'gravatar' => gravatar((string)$dados['email']),
                 'data_registro' => $dados['data_registro']
             ];
-
-        }, $payload);
-
+        }, $all_doadores);
 
         echo json_encode([
             'next' => true,
-            'message' => 'Lista de doadores',
+            'message' => 'Instituicao Pelo Id',
             'dados' => array_values($payload)
         ]);
     }
@@ -500,15 +498,15 @@ class InstituicaoControler
         $get_email = $email->list_by_instituicao($instituicao_id);
 
         $payload = array_map(function ($list) {
-            return[
+            return [
                 'id' => $list['id'],
                 'assunto' => $list['assunto'],
                 'corpo' => $list['corpo'],
                 'acao' => $list['acao'],
                 'cron' => $list['cron']
             ];
-        },$get_email);
-        
+        }, $get_email);
+
 
         echo json_encode([
             'next' => true,
@@ -516,6 +514,4 @@ class InstituicaoControler
             'dados' => array_values($payload)
         ]);
     }
-
-   
 }

@@ -34,6 +34,14 @@ class Doador implements IDoador
         return $guard [0] ?? [];
     }
 
+    public function get_all_by_id(int $id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doador WHERE id='$id'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
     public function get_by_email(string $email): array
     {
         $banco = new Banco();
