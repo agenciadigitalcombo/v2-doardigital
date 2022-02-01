@@ -205,11 +205,11 @@ export default {
                                                     </td> 
                                                     <td> {{ item.valor | is_price }} </td> 
                                                     <td>
-                                                        <div class="badge badge-light-success"> {{item.status_pagamento  | is_status}} </div>
+                                                        <div class="badge badge-light-success"> {{item.status_pagamento  | is_status | is_status2}} </div>
                                                     </td> 
                                                     <td>{{item.data | is_data }}</td> 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.tipo}}</div>
+                                                        <div class="badge badge-light"> {{item.tipo | is_tipo | is_tipo2 | is_tipo3}}</div>
                                                     </td> 
                                                     <td class="text-end">
 
@@ -277,17 +277,29 @@ export default {
         },
 
         is_status(status) {
-          //  if (condition) {
-                
-        //    }
-
             let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
-            //status.split('paid').join(' Pago ')
-          //  status_pagamento = status.split('paid').join('Pago')
-        
-            return `${status_pagamento}`
+           return `${status_pagamento}`
+        },
+
+        is_status2(status) {
+            let status_pagamento = status.split('paid').join('Pago')
+           return `${status_pagamento}`
         },
         
+        is_tipo(tipo) {
+            let tipo_pagamento = tipo.split('boleto').join('Boleto ')
+           return `${tipo_pagamento}`
+        },
+        	
+        is_tipo2(tipo) {
+            let tipo_pagamento = tipo.split('credit_card').join('Crédito')
+           return `${tipo_pagamento}`
+        },
+
+        is_tipo3(tipo) {
+            let tipo_pagamento = tipo.split('pix').join('PIX ')
+           return `${tipo_pagamento}`
+        },
     },
     
 

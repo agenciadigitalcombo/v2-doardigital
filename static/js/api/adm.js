@@ -595,6 +595,15 @@ export default {
             instituicao_id
         })
     }, 
+
+    async visualizarDoador(
+        token, cpf) {
+        return await http.post('/list-doador', {
+            token,
+            cpf,
+
+        })
+    },
     
     async listarEmail(instituicao_id) {
         return await http.get('/list-email', {
@@ -615,6 +624,8 @@ export default {
             status,
         })
     },
+
+    
 
 }
 

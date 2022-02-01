@@ -148,7 +148,7 @@ export default {
 
 								</div>
 
-								<a href=""
+								<a href="#/"
 									class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 ">Fazer nova
 									Doação</a>
 							</div> 
@@ -205,7 +205,7 @@ export default {
 				logo: '',
 				icon: '',
 				backgroundColor: '',
-				urlsite: 'natal.doacoesbethania.com.br.doardigital.com.br/',
+				urlsite: '',
 				codigo_geral: '',
 				url_geral: '',
 			},
@@ -223,7 +223,10 @@ export default {
 		  
          return `${cep}`
      },
+
     },
+
+
 
 
 	methods: {

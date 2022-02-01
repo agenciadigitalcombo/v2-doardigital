@@ -1,31 +1,17 @@
+import get_template from './get_template.js'
+import adm from "../../../../static/js/api/adm.js"
 
 export default {
-    template: `
-	<div>
-    <div class="message"> 
-    <div class="message-container"> 
-    <p> {{msg}} </p>
-    </div>
-	</div>
-
-    <div class="erro"> 
-    <div class="erro-container"> 
-    <p> {{error}} </p>
-    </div>
-	</div>
-    </div>
-    `,
-
-
     data: function () {
-		return {
-            gravatar: '../painel/assets/image/gravatar.png'
-
+        return {
+      
         }
     },
-   props:{
-       msg: String,
-       error: String
-   }
-}  
+	
+	props:{
+		msg: String,
+		error: String
+	},
 
+    template: await get_template('./assets/js/components/c-mensagem')
+}

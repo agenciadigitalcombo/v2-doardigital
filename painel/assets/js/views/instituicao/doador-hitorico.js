@@ -1,8 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-    template: `
-	
+	template: `	
     <div>
     <div>
  
@@ -40,14 +39,13 @@ export default {
 													<!--end::Avatar-->
 													<!--begin::Name-->
 													<a href="#"
-														class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">Emma
-														Smith</a>
+														class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">{{nome}}</a>
 													<!--end::Name-->
 													<!--begin::Position-->
 													<div class="mb-9">
 														<!--begin::Badge-->
 														<div class="badge badge-lg badge-light-primary d-inline">
-															Administrator</div>
+															Usuario</div>
 														<!--begin::Badge-->
 													</div>
 													<!--end::Position-->
@@ -69,7 +67,7 @@ export default {
 												<div class="d-flex flex-stack fs-4 py-3">
 													<div class="fw-bolder rotate collapsible" data-bs-toggle="collapse"
 														href="#kt_user_view_details" role="button" aria-expanded="false"
-														aria-controls="kt_user_view_details">Details
+														aria-controls="kt_user_view_details">Detalhes
 														<span class="ms-2 rotate-180">
 															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
 															<span class="svg-icon svg-icon-3">
@@ -97,36 +95,43 @@ export default {
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
 														<div class="fw-bolder mt-5">Account ID</div>
-														<div class="text-gray-600">ID-45453423</div>
+														<div class="text-gray-600">{{id}}</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bolder mt-5">Email</div>
 														<div class="text-gray-600">
 															<a href="#"
-																class="text-gray-600 text-hover-primary">info@keenthemes.com</a>
+																class="text-gray-600 text-hover-primary">{{email}}</a>
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bolder mt-5">Telefone</div>
-														<div class="text-gray-600">+5541996283086</div>
+														<div class="text-gray-600">{{telefone}}</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bolder mt-5">CPF</div>
-														<div class="text-gray-600">08988901959</div>
+														<div class="text-gray-600">{{cpf}}</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bolder mt-5">Endereço</div>
 														<div class="text-gray-600">
-															<span style="color: black;">CEP: </span>82540-091,
+															<span style="color: black;">CEP: </span>
+															{{end.cep}},
 															<br />
-															<span style="color: black;">Rua: </span> Rua Desembargador
-															Aurélio Feijó
+															<span style="color: black;">Rua: </span>
+															{{end.logadouro}}
 															<br />
-															<span style="color: black;">Número: </span> 11
+															<span style="color: black;">Número: </span> 
+															{{end.numero}}
 															<br />
-															<span style="color: black;">Bairro: </span> Boa Vista
+															<span style="color: black;">Bairro: </span>
+															{{end.bairro}}
 															<br />
-															<span style="color: black;">Cidade: </span> Curitiba
+															<span style="color: black;">Cidade: </span>
+															{{end.cidade}}
+															<br />
+															<span style="color: black;">Estado: </span> 
+															{{end.estado}}
 														</div>
 
 														<!--begin::Details item-->
@@ -172,24 +177,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 										<!--begin:::Tab content-->
 										<div class="tab-content" id="myTabContent">
 											<!--begin:::Tab pane-->
@@ -230,389 +217,23 @@ export default {
 															<tbody class="fs-6 fw-bold text-gray-600">
 
 																<!--begin::Table row-->
-																<tr>
+																<tr  v-for="item in doacoes"> 
 																	<!--begin::Invoice=-->
 																	<td>
-																		21/12/2021
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-		<div
-		-->
-																	<td>R$1,200.00</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>Pix</td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
-																	<td><span
-																			class="badge badge-light-success">Pago</span>
-																	</td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row-->
-
-
-																<!--begin::Table row-->
-																<tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		21/12/2021
+																		{{item.data}}
 																	</td>
 																	<!--end::Invoice=-->
 																	<!--begin::Status=
 	<div
 	-->
-																	<td>R$1,200.00</td>
+																	<td>{{item.valor}}</td> </td>
 																	<!--end::Status=-->
 																	<!--begin::Amount=-->
-																	<td>Cartão </td>
+																	<td> {{item.tipo}} </td>
 																	<!--end::Amount=-->
 																	<!--begin::Date=-->
-																	<td><span class="badge badge-light-danger"> Vencidos
-																		</span></td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row pago-->
-
-
-
-
-																<!--begin::Table row-->
-																<tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		21/12/2021
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-	<div
-	-->
-																	<td>R$1,200.00</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>Boleto</td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
-																	<td><span
-																			class="badge badge-light-warning">Aberto</span>
-																	</td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row-->
-
-
-
-																<!--begin::Table row-->
-																<tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		21/12/2021
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-	<div
-	-->
-																	<td>R$1,200.00</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>Pix </td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
-																	<td><span class="badge badge-light-danger"> Falhado
-																		</span></td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row pago-->
-
-
-																<!--begin::Table row-->
-																<tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		21/12/2021
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-	<div
-	-->
-																	<td>R$1,200.00</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>Boleto</td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
-																	<td><span
-																			class="badge badge-light-warning">Aberto</span>
-																	</td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row-->
-
-																<!--begin::Table row-->
-																<tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		21/12/2021
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-	<div
-	-->
-																	<td>R$1,200.00</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>Pix</td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
-																	<td><span
-																			class="badge badge-light-success">Pago</span>
-																	</td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row-->
-
-
-
-																<!--begin::Table row-->
-																<tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		21/12/2021
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-	<div
-	-->
-																	<td>R$1,200.00</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>Cartão </td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
-																	<td><span class="badge badge-light-danger"> Vencidos
+																	<td><span class="badge badge-light-danger"> 
+																	{{item.status_pagamento}}
 																		</span></td>
 																	<!--end::Date=-->
 																	<!--begin::Action=-->
@@ -1445,47 +1066,66 @@ export default {
     `,
 
 
-    
-    data: function () {
-        
-        return {
-			gravatar: '../painel/assets/image/gravatar.png',
+
+	data: function () {
+		
+		return {
+			foto: '../painel/assets/image/gravatar.png',
+			id: null,
 			token: null,
 			nome: null,
-			cpf: null,
+			cpf: "56124276038",
 			telefone: null,
-			email: null
-        }
-    
-    },
-	
-    async mounted() {
-        // this.user = localStorage.getItem('user')
-		
-        // let plugin = document.createElement('script')
-        // plugin.setAttribute('src', './front-js/scripts.bundle.js')
-        // plugin.async = true;
-        // document.head.appendChild(plugin)
+			email: null, 
+			doacoes:[],
+			end: {
+				cep: null,
+				logadouro: null,
+				numero: null,
+				complemento: null,
+				bairro: null,
+				cidade: null,
+				estado: null,
+			},
 
+
+		}
+
+	},
+//Historico de transação R$1,200.00
+	async mounted() {
 		let dados = (await this.listar()).dados
-
-		console.log(dados)
+		this.doacoes = (await this.listar()).dados.doacoes
 		this.nome = dados.nome
-		this.email = dados.email
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone
-    
-		
-    }, 
+		this.email = dados.email
+
+		 
+		this.end.cep = dados.endereco.cep
+		this.end.logadouro = dados.endereco.logadouro
+		this.end.numero = dados.endereco.numero
+		this.end.complemento = dados.endereco.complemento
+		this.end.bairro = dados.endereco.bairro
+		this.end.cidade = dados.endereco.cidade
+		this.end.estado = dados.endereco.estado
+
+		console.log(dados.endereco.cep)
+
+
+	},
 
 	methods: {
 		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
+			let res = await adm.visualizarDoador(
+				this.token,
+				this.cpf
+			)
 			return res
-        },
+		},
 	},
 }
 
-// Taxa de Doações
+// Taxa de Doações Emma Smith
 
-// Preenchimento de Perfil
+// Preenchimento de Perfil   {{nome}} ID-45453423

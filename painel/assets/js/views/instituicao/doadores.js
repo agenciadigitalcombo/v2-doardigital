@@ -177,7 +177,7 @@ export default {
 															</td>
 															<td class="text-end">
  
-															<a href="#/doadorHitorico" @click="editar(item.id)"
+															<a @click="editar(item.id)"
                                                             title="Para Visualizar da um click"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
                                                             style="margin: 2px;">
@@ -203,7 +203,7 @@ export default {
 	</div >
 </div >
 <!--end:: Root-- >
-buscar Doadores
+
 	<c-footer />
 		
 	</div >
@@ -235,19 +235,21 @@ buscar Doadores
 			   } else {
 				   return ""
 			   }
+		   },
+
+		   async editar(id){
+			   globalThis._doador = this.doadores.find(doad => doad.id == id)
+			   window.location.href = "#/doadorHitorico"
 		   }
 
 	},
 
 	async mounted() {
-
 		this.doadores = (await this.listarDoadores()).dados || {}
- 
 	},
 
 	created() {
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
-
 	}, 
 
 
