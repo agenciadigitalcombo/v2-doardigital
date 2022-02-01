@@ -418,11 +418,12 @@ class InstituicaoControler
         ]);
 
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
-
         
+        var_dump($get_doacoes);
+        die;
         
         $payload = array_map(function ($list) use($doador){
-            $dados_doador = $doador->get_by_id($list['doador_id']);
+            
             
             return [
                 'doador_id' => $dados_doador['id'],
