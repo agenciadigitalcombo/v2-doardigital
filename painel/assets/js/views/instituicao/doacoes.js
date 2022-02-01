@@ -192,15 +192,15 @@ export default {
                                                             <a
                                                                 href="../../demo8/dist/apps/user-management/users/view.html">
                                                                 <div class="symbol-label">
-                                                                    <img src="../painel/assets/image/gravatar.png"
-                                                                        alt="Emma Smith" class="w-100" />
+                                                                <img :src="item.gravatar" alt="Emma Smith" class="w-100" />
                                                                 </div>
                                                             </a>
                                                         </div> 
                                                         <div class="d-flex flex-column">
-                                                            <a class="text-gray-800 text-hover-primary mb-1">     Emma
-                                                                Smith</a>
-                                                            <span>e.smith@kpmg.com.au</span>
+                                                            <a class="text-gray-800 text-hover-primary mb-1">  
+                                                              {{ item.nome }}
+                                                            </a>
+                                                            <span> {{ item.email }}</span>
                                                         </div> 
                                                     </td> 
                                                     <td> {{ item.valor | is_price }} </td> 
@@ -213,7 +213,7 @@ export default {
                                                     </td> 
                                                     <td class="text-end">
 
-                                                        <a @click="editar(item.id)" href="#/doacoesDetalhe"
+                                                        <a @click="editar(item.doacao_id)" 
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px me-3 btn-primary"
                                                             style="margin: 2px;">
                                                              <span class="svg-icon svg-icon-3">
@@ -254,7 +254,7 @@ export default {
 
     data: function () {
         return {
-
+            doacao_id: "",
             instituicao_id: "",
             data: "",
             doacoes: [],
@@ -344,10 +344,16 @@ export default {
           //  if (semPagina == this.paginaAtual) {
            //     return "active"
          //   } else {
-            //    return ""
-          //  }
-        }
-    },
+            //    return "" 
+          //  }  Emma Smith
+        },
+
+        
+		async editar(doacao_id){
+			globalThis._doacao = this.doacoes.find(doad => doad.doacao_id == doacao_id)
+			window.location.href = "#/doacoes/detalhe"
+		}
+    }, 
  
     async mounted() {
 
@@ -363,7 +369,7 @@ export default {
 
   
         
-    },
+    }
 
 
 }

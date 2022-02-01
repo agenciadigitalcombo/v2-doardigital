@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<title>Step by step</title>
+
+</head>
+
+
+<body>
+	<div class="container" id="app">
+
+		<div>
+			<input type="text" onKeyPress="MascaraMoeda(this);">
+		</div>
+
+		<div>
+			<input type="text" v-model="id" @keyup="MascaraMoeda(this);">
+		</div>
+
+
+		<div>{{ cep | is_data }}</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				id: "111111111111",
+				nome_identificacao: "54420241",
+				cep: "54420241",
+			},
+
+
+
+			methods: {
+
+
+				MascaraMoeda(i) {
+					//var v = i.value.replace(/\D/g, '');
+					var v = (v / 100).toFixed(5);
+					v = v.replace(".", ",");
+					v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+					v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+					i.value = v;
+				},
+
+				//is_price(price) {
+				//  let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+				// return `R$ ${valor}`
+				//  },  54420-241
+
+
+
+				cpf(v) {
+					let valor = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+					valor = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+					valor = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+					//de novo (para o segundo bloco de números)
+					valor = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+					return valor
+				},
+
+
+
+				install(options) {
+
+					documentId = typeof documentId != 'string' ? documentId.toString() : documentId;
+					if (documentType == 'J') {
+						documentId = documentId.padStart(14, '0');
+						documentId = documentId.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+					} else {
+						documentId = documentId.padStart(11, '0');
+						documentId = documentId.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+					}
+					return documentId;
+
+				}
+			},
+
+			filters: {
+
+				is_data(v) {
+				let cep = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+					cep = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+					cep = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+					//de novo (para o segundo bloco de números)
+					cep = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+					return cep
+				}, 
+ 
+			},
+
+
+		})
+	</script>
+
+
+
+
+
+
+
+</body>
+
+</html>

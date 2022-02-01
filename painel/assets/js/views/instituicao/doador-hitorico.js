@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template: `	
+	template: `
     <div>
     <div>
  
@@ -9,68 +9,34 @@ export default {
     <c-aside></c-aside>
 
 	<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
+		<div class="d-flex flex-column flex-root"> 
 			<div class="page d-flex flex-row flex-column-fluid">
-
-				<!--begin::Wrapper-->
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-								<!--begin::Layout-->
-								<div class="d-flex flex-column flex-xl-row">
-									<!--begin::Sidebar-->
-									<div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
-										<!--begin::Card-->
-										<div class="card mb-5 mb-xl-8">
-											<!--begin::Card body-->
-											<div class="card-body">
-												<!--begin::Summary-->
-												<!--begin::User Info-->
-												<div class="d-flex flex-center flex-column py-5">
-													<!--begin::Avatar-->
+ 
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper"> 
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content"> 
+						<div class="post d-flex flex-column-fluid" id="kt_post"> 
+							<div id="kt_content_container" class="container-xxl"> 
+								<div class="d-flex flex-column flex-xl-row"> 
+									<div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10"> 
+										<div class="card mb-5 mb-xl-8"> 
+											<div class="card-body"> 
+												<div class="d-flex flex-center flex-column py-5"> 
 													<div class="symbol symbol-100px symbol-circle mb-7">
 														<img src="../painel/assets/image/gravatar.png" alt="image" />
-													</div>
-													<!--end::Avatar-->
-													<!--begin::Name-->
+													</div> 
 													<a href="#"
 														class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">{{nome}}</a>
-													<!--end::Name-->
-													<!--begin::Position-->
-													<div class="mb-9">
-														<!--begin::Badge-->
+												 <div class="mb-9"> 
 														<div class="badge badge-lg badge-light-primary d-inline">
-															Usuario</div>
-														<!--begin::Badge-->
-													</div>
-													<!--end::Position-->
-													<!--begin::Info-->
-													<!--begin::Info heading-->
-													<div class="fw-bolder mb-3">Assinatura
-														<i class="fas fa-exclamation-circle ms-2 fs-7"
-															data-bs-toggle="popover" data-bs-trigger="hover"
-															data-bs-html="true"
-															data-bs-content="Number of support tickets assigned, closed and pending this week."></i>
-													</div>
-													<!--end::Info heading-->
-
-													<!--end::Info-->
-												</div>
-												<!--end::User Info-->
-												<!--end::Summary-->
-												<!--begin::Details toggle-->
+															Usuario</div> 
+													</div>  
+												</div> 
 												<div class="d-flex flex-stack fs-4 py-3">
 													<div class="fw-bolder rotate collapsible" data-bs-toggle="collapse"
 														href="#kt_user_view_details" role="button" aria-expanded="false"
 														aria-controls="kt_user_view_details">Detalhes
 														<span class="ms-2 rotate-180">
-															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-															<span class="svg-icon svg-icon-3">
+														 	<span class="svg-icon svg-icon-3">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path
@@ -78,38 +44,23 @@ export default {
 																		fill="black" />
 																</svg>
 															</span>
-															<!--end::Svg Icon-->
-														</span>
+													 	</span>
 													</div>
-													<span data-bs-toggle="tooltip" data-bs-trigger="hover"
-														title="Edit customer details">
-														<a href="#" class="btn btn-sm btn-light-primary"
-															data-bs-toggle="modal"
-															data-bs-target="#kt_modal_update_details">Editar</a>
-													</span>
 												</div>
-												<!--end::Details toggle-->
-												<div class="separator"></div>
-												<!--begin::Details content-->
-												<div id="kt_user_view_details" class="collapse show">
+											 	<div class="separator"></div>
+											 	<div id="kt_user_view_details" class="collapse show">
 													<div class="pb-5 fs-6">
-														<!--begin::Details item-->
-														<div class="fw-bolder mt-5">Account ID</div>
-														<div class="text-gray-600">{{id}}</div>
-														<!--begin::Details item-->
-														<!--begin::Details item-->
-														<div class="fw-bolder mt-5">Email</div>
+													 	<div class="fw-bolder mt-5">Account ID </div>
+														<div class="text-gray-600">
+														{{cpf}}</div>
+													 	<div class="fw-bolder mt-5">Email</div>
 														<div class="text-gray-600">
 															<a href="#"
 																class="text-gray-600 text-hover-primary">{{email}}</a>
 														</div>
-														<!--begin::Details item-->
-														<!--begin::Details item-->
-														<div class="fw-bolder mt-5">Telefone</div>
+													 	<div class="fw-bolder mt-5">Telefone</div>
 														<div class="text-gray-600">{{telefone}}</div>
-														<!--begin::Details item-->
-														<!--begin::Details item-->
-														<div class="fw-bolder mt-5">CPF</div>
+													 	<div class="fw-bolder mt-5">CPF</div>
 														<div class="text-gray-600">{{cpf}}</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
@@ -190,12 +141,9 @@ export default {
 														<!--begin::Card title-->
 														<div class="card-title">
 															<h2>Historico de transação</h2>
-														</div>
-														<!--end::Card title-->
+														</div> 
 
-													</div>
-													<!--end::Card header-->
-													<!--begin::Card body-->
+													</div> 
 													<div class="card-body pt-0 pb-5">
 														<!--begin::Table-->
 														<table class="table align-middle table-row-dashed gy-5"
@@ -209,8 +157,7 @@ export default {
 																	<th>Método </th>
 																	<th class="min-w-100px">Status</th>
 																	<th class="text-end min-w-100px pe-4">ação</th>
-																</tr>
-																<!--end::Table row-->
+																</tr> 
 															</thead>
 															<!--end::Table head-->
 															<!--begin::Table body-->
@@ -218,87 +165,44 @@ export default {
 
 																<!--begin::Table row-->
 																<tr  v-for="item in doacoes"> 
-																	<!--begin::Invoice=-->
+																 
 																	<td>
 																		{{item.data}}
 																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=
-	<div
-	-->
-																	<td>{{item.valor}}</td> </td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td> {{item.tipo}} </td>
-																	<!--end::Amount=-->
-																	<!--begin::Date=-->
+															 
+																	<td>{{item.valor  | is_price }}</td> </td>
+																 
+																	<td> {{item.tipo  | is_tipo | is_tipo2 | is_tipo3 }} </td>
+																
 																	<td><span class="badge badge-light-danger"> 
-																	{{item.status_pagamento}}
+																	{{item.status_pagamento | is_status | is_status2 }}
 																		</span></td>
-																	<!--end::Date=-->
-																	<!--begin::Action=-->
+																
 																	<td class="pe-0 text-end">
-																		<a href="#"
-																			class="btn btn-sm btn-light btn-active-light-primary"
-																			data-kt-menu-trigger="click"
-																			data-kt-menu-placement="bottom-end">ação
-																			<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-																			<span class="svg-icon svg-icon-5 m-0">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-																					width="24" height="24"
-																					viewBox="0 0 24 24" fill="none">
-																					<path
-																						d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-																						fill="black" />
-																				</svg>
-																			</span>
-																			<!--end::Svg Icon-->
-																		</a>
-																		<!--begin::Menu-->
-																		<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-																			data-kt-menu="true">
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="../../demo8/dist/apps/customers/view.html"
-																					class="menu-link px-3">Ver</a>
-																			</div>
-																			<!--end::Menu item-->
-																			<!--begin::Menu item-->
-																			<div class="menu-item px-3">
-																				<a href="#" class="menu-link px-3"
-																					data-kt-customer-table-filter="delete_row">Deletar</a>
-																			</div>
-																			<!--end::Menu item-->
-																		</div>
-																		<!--end::Menu-->
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-																<!--end::Table row pago-->
-
-															</tbody>
-															<!--end::Table body-->
-														</table>
-														<!--end::Table-->
-													</div>
-													<!--end::Card body-->
-												</div>
-												<!--end::Card-->
-											</div>
-											<!--end:::Tab pane-->
-
-											<!--begin:::Tab pane-->
+																	
+															<a @click="editar(item.instituicao_id)"
+                                                            title="Para Visualizar da um click"
+                                                            class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
+                                                            style="margin: 2px;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                          </svg>
+                                                        </a>
+																	</td> 
+																</tr> 
+															</tbody> 
+														</table> 
+													</div> 
+												</div> 
+											</div> 
 											<div class="tab-pane fade" id="kt_user_view_overview_events_and_logs_tab"
-												role="tabpanel">
-												<!--begin::Card-->
-												<div class="card pt-4 mb-6 mb-xl-9">
-													<!--begin::Card header-->
-													<div class="card-header border-0">
-														<!--begin::Card title-->
+												role="tabpanel"> 
+												<div class="card pt-4 mb-6 mb-xl-9"> 
+													<div class="card-header border-0"> 
 														<div class="card-title">
 															<h2>Minhas Assinatura</h2>
-														</div>
-														<!--end::Card title-->
+														</div> 
 
 													</div>
 													<!--end::Card header-->
@@ -1057,7 +961,6 @@ export default {
 		</div>
 		<!--end::Root-->
  
-
     <c-footer/>
 	</div>
  
@@ -1071,10 +974,11 @@ export default {
 		
 		return {
 			foto: '../painel/assets/image/gravatar.png',
+			instituicao_id : null,
 			id: null,
 			token: null,
 			nome: null,
-			cpf: "56124276038",
+			cpf: "",
 			telefone: null,
 			email: null, 
 			doacoes:[],
@@ -1092,8 +996,50 @@ export default {
 		}
 
 	},
-//Historico de transação R$1,200.00
+	
+	filters: {
+        is_price(price) {
+            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${valor}`
+        },
+
+        is_data(datas) {
+            let data = datas.split('-').reverse().join('/');
+            return `${data}`
+        },
+
+        is_status(status) {
+            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
+           return `${status_pagamento}`
+        },
+
+        is_status2(status) {
+            let status_pagamento = status.split('paid').join('Pago')
+           return `${status_pagamento}`
+        },
+        
+        is_tipo(tipo) {
+            let tipo_pagamento = tipo.split('boleto').join('Boleto ')
+           return `${tipo_pagamento}`
+        },
+        	
+        is_tipo2(tipo) {
+            let tipo_pagamento = tipo.split('credit_card').join('Crédito')
+           return `${tipo_pagamento}`
+        },
+
+        is_tipo3(tipo) {
+            let tipo_pagamento = tipo.split('pix').join('PIX ')
+           return `${tipo_pagamento}`
+        },
+    },
+
+
+
 	async mounted() {
+		this.cpf = globalThis._doador.cpf
+
+
 		let dados = (await this.listar()).dados
 		this.doacoes = (await this.listar()).dados.doacoes
 		this.nome = dados.nome
@@ -1101,7 +1047,6 @@ export default {
 		this.telefone = dados.telefone
 		this.email = dados.email
 
-		 
 		this.end.cep = dados.endereco.cep
 		this.end.logadouro = dados.endereco.logadouro
 		this.end.numero = dados.endereco.numero
@@ -1109,9 +1054,6 @@ export default {
 		this.end.bairro = dados.endereco.bairro
 		this.end.cidade = dados.endereco.cidade
 		this.end.estado = dados.endereco.estado
-
-		console.log(dados.endereco.cep)
-
 
 	},
 
@@ -1123,9 +1065,12 @@ export default {
 			)
 			return res
 		},
+
+		async editar(instituicao_id){
+			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
+			window.location.href = "#/doador/detalhe"
+		}
 	},
 }
 
-// Taxa de Doações Emma Smith
 
-// Preenchimento de Perfil   {{nome}} ID-45453423

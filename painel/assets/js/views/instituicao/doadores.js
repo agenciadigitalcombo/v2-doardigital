@@ -154,14 +154,14 @@ export default {
 															<td class="d-flex align-items-center">
 																<!--begin:: Avatar -->
 																<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-																	<a href="">
+																	<a>
 																		<div class="symbol-label">
 																			<img :src="item.gravatar" alt="Emma Smith" class="w-100" />
 																		</div>
 																	</a>
 																</div>
 																<div class="d-flex flex-column">
-																	<a href="" class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
+																	<a class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
 																	<span>{{item.email}}</span>
 																</div>
 															</td>

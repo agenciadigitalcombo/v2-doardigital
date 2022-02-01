@@ -42,18 +42,18 @@ export default {
 												<div class="col-lg-6">
 												<span class=" fw-bold text-muted">
 												Nome</span>
-													<p class="fw-bolder fs-6 text-gray-800">john</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ nome }}</p>
 												
 													<span class=" fw-bold text-muted">
 													Tipo</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">Crédito</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ tipo | is_tipo | is_tipo2 | is_tipo3 }}</p>
 												
 
 													<span class=" fw-bold text-muted">
 													Data</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">30/10/2021 - 15:04</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ data | is_data }} - {{ hora }}</p>
 												
 
 												
@@ -64,17 +64,17 @@ export default {
 												<span class=" fw-bold text-muted">
 												Valor</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">R$29,90</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price}}</p>
 												
 
 													<span class=" fw-bold text-muted">
 													Recorrente</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">SIM</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ recorente | is_recorente | is_recorente2}}</p>
 
 													<span class=" fw-bold text-muted">
 													Status</span>
-													<p class="fw-bolder fs-6 text-gray-800">pago</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ status | is_status | is_status2 }}</p>
 												
 												</div>
 												<!--end::Col-->
@@ -114,44 +114,83 @@ export default {
     
     data: function () {
         
-        return {
-			gravatar: '../painel/assets/image/gravatar.png',
-			token: null,
+        return { 
 			nome: null,
-			cpf: null,
-			telefone: null,
-			email: null
+			tipo: null,
+			valor: null,
+			recorente: null,
+			data: null,
+			hora: null,
+			status: null
         }
     
     },
 	
-    async mounted() {
-        // this.user = localStorage.getItem('user')
-		
-        // let plugin = document.createElement('script')
-        // plugin.setAttribute('src', './front-js/scripts.bundle.js')
-        // plugin.async = true;
-        // document.head.appendChild(plugin)
+	
+    filters: {
+        is_price(price) {
+            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${valor}`
+        },
 
-		let dados = (await this.listar()).dados
+        is_data(datas) {
+            let data = datas.split('-').reverse().join('/');
+            return `${data}`
+        },
 
-		console.log(dados)
-		this.nome = dados.nome
-		this.email = dados.email
-		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-    
+        is_status(status) {
+            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
+           return `${status_pagamento}`
+        },
+
+        is_status2(status) {
+            let status_pagamento = status.split('paid').join('Pago')
+           return `${status_pagamento}`
+        },
+        
+        is_tipo(tipo) {
+            let tipo_pagamento = tipo.split('boleto').join('Boleto ')
+           return `${tipo_pagamento}`
+        },
+        	
+        is_tipo2(tipo) {
+            let tipo_pagamento = tipo.split('credit_card').join('Crédito')
+           return `${tipo_pagamento}`
+        },
+
+        is_tipo3(tipo) {
+            let tipo_pagamento = tipo.split('pix').join('PIX ')
+           return `${tipo_pagamento}`
+        },
+
 		
+
+		is_recorente(recorente) {
+            let recorente_pagamento = recorente.split('mes').join('SIM')
+           return `${recorente_pagamento}`
+        },
+
+        is_recorente2(recorente) {
+            let recorente_pagamento = recorente.split('unico').join('NÃO ')
+           return `${recorente_pagamento}`
+        },
+    },
+
+    async mounted() { 
+		this.nome = globalThis._doador.nome
+		this.recorente = globalThis._doador.tipo 
+		this.tipo = globalThis._doacoes.tipo
+		this.valor = globalThis._doacoes.valor,
+		this.data = globalThis._doacoes.data,
+		this.hora = globalThis._doacoes.hora
+		this.status = globalThis._doacoes.status_pagamento
+
+    	 
     }, 
 
 	methods: {
-		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
-			return res
-        },
+	
 	},
 }
 
-// Taxa de Doações
-
-// Preenchimento de Perfil
+  

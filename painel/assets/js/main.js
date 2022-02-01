@@ -119,8 +119,12 @@ Vue.component('c-doadores', doadores )
 import doacoes from './views/instituicao/doacoes.js'
 Vue.component('c-doacoes', doacoes )
 
-import doacoesDetalhe from './views/instituicao/doacoes-detalhe.js'
+import doadorDetalhe from './views/instituicao/doadorDetalhe.js'
+Vue.component('c-doadorDetalhe', doadorDetalhe )
+
+import doacoesDetalhe from './views/instituicao/doacoesDetalhe.js'
 Vue.component('c-doacoesDetalhe', doacoesDetalhe )
+ 
 
 import doadorHitorico from './views/instituicao/doador-hitorico.js'
 Vue.component('c-doadorHitorico', doadorHitorico )

@@ -38,7 +38,9 @@ export default [
     { path: '/doadores', component: { template: '<c-doadores>' } },
     { path: '/doacoes', component: { template: '<c-doacoes>' } },
     
-    { path: '/doacoesDetalhe', component: { template: '<c-doacoesDetalhe>' } },
+    { path: '/doador/detalhe', component: { template: '<c-doadorDetalhe>' } },
+    { path: '/doacoes/detalhe', component: { template: '<c-doacoesDetalhe>' } },
+
     { path: '/doadorHitorico', component: { template: '<c-doadorHitorico>' } },
     { path: '/configuracao', component: { template: '<c-configuracao>' } },
     { path: '/carteira', component: { template: '<c-carteira>' } },
