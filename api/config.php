@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "host" => "sql451.main-hosting.eu",
+    "host" => "sql718.main-hosting.eu",
     "banco" => "u236932588_doardigital",
     "user" => "u236932588_doardigital",
     "senha" => "^2hqx&rS",
