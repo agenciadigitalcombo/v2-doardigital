@@ -38,7 +38,7 @@ export default {
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->
-                                            <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">Doações</div>
+                                            <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">Ambiente 2!</div>
                                             <div class="fw-bold text-gray-400">Lands, XS, Ranchos, Farms</div>
                                         </div>
                                         <!--end::Body-->
