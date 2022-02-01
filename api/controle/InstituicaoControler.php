@@ -410,27 +410,35 @@ class InstituicaoControler
     {
         $doacoes = new Doacao();
         $doador = new Doador();
-
+        
         $instituicao_id = $_REQUEST['instituicao_id'];
-
+        
         campo_obrigatorios([
             'instituicao_id' => 'Indoforme o ID da Instituicao',
         ]);
-
+        
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
+        $all_doadores = $doador->list_all();
+        $lb = [];
+        foreach($all_doadores as $v) {
+            $lb[$v['id']] = $v;
+        }
+
         
-        var_dump($get_doacoes);
-        die;
+       
         
-        $payload = array_map(function ($list) use($doador){
+        $payload = array_map(function ($list) use($doador, $lb){
+            $doador_id = (int) @$list['doador_id'] ?? 1;
+            $dados_doador = @$lb[$doador_id]?? [];
             
+           
             
             return [
-                'doador_id' => $dados_doador['id'],
-                'nome' => $dados_doador['nome'],
-                'email' => $dados_doador['email'],
-                'gravatar' => gravatar($dados_doador['email']),
-                'cpf' => $dados_doador['cpf'],
+                'doador_id' => $doador_id,
+                'nome' => $dados_doador['nome'] ?? null,
+                'email' => $dados_doador['email'] ?? null,
+                'gravatar' => gravatar($dados_doador['email']??'user@outlook.com'),
+                'cpf' => $dados_doador['cpf']??null,
                 'doacao_id' => $list['id'],
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],
