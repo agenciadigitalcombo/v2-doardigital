@@ -8,12 +8,13 @@ class PlanoDigitalControler {
         $plano = new PlanoDigital();    
         
         token();
-        $nome = $_REQUEST['nome'] ?? '';
-        $whatsapp = $_REQUEST['whatsapp'] ?? '';
-        $instituicao_max = $_REQUEST['instituicao_max'] ?? '';
+        $nome = $_REQUEST['nome'];
+        $whatsapp = $_REQUEST['whatsapp'] ?? 0;
+        $instituicao_max = $_REQUEST['instituicao_max'];
+        $codigo_cupom = $_REQUEST['codigo_cupom'];
+        $trial = $_REQUEST['trial'] ?? 0;
         $amount_campo = $_REQUEST['amount'];
         $amount = min_amount($amount_campo);
-        
         
         
         campo_obrigatorios([
@@ -29,12 +30,13 @@ class PlanoDigitalControler {
             ]);
             return null;
         }
-     
+        
         
         $res_pagarme = $pagarme->create($nome, $amount);
         $token_pagarme = $res_pagarme['id'];
-
-        $plano->create($nome, $whatsapp, $instituicao_max, $amount, $token_pagarme);
+        
+        $plano->create($nome, $whatsapp, $instituicao_max, $codigo_cupom, $amount, $trial, $token_pagarme);
+        
         echo json_encode([
             'next' => true,
             'message' => 'Plano Digital criado'

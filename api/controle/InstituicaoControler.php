@@ -429,16 +429,15 @@ class InstituicaoControler
         
         $payload = array_map(function ($list) use($doador, $lb){
             $doador_id = (int) @$list['doador_id'] ?? 1;
-            $dados_doador = @$lb[$doador_id]?? [];
-            
-           
+            $dados_doador = @$lb[$doador_id] ?? [];
+                 
             
             return [
                 'doador_id' => $doador_id,
                 'nome' => $dados_doador['nome'] ?? null,
                 'email' => $dados_doador['email'] ?? null,
                 'gravatar' => gravatar($dados_doador['email']??'user@outlook.com'),
-                'cpf' => $dados_doador['cpf']??null,
+                'cpf' => $dados_doador['cpf'] ?? null,
                 'doacao_id' => $list['id'],
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],

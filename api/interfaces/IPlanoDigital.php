@@ -9,7 +9,9 @@ interface IPlanoDigital
         string $nome,
         int $whatsapp,
         int $instituicao_max,
+        string $codigo_cupom,
         int $amount,
+        int $trial,
         string $token
     ): void;
 

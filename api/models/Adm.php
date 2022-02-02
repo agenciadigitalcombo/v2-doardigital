@@ -54,12 +54,13 @@ class Adm implements IAdm
     public function create(string $nome, string $email, string $senha, string $telefone): void
     {
         $secret = uniqid();
+
         $data_regis = date("Y-m-d H:i:s");
         $banco = new Banco();
         $sql = "INSERT INTO adm";
         $sql .= "(nome, email, pass, telefone, secret, step, status, super_adm, data_registro)";
         $sql .= "VALUES";
-        $sql .= "('$nome', '$email', '$senha', '$telefone', ' $secret', 1, 1, 0, '$data_regis')";
+        $sql .= "('$nome', '$email', '$senha', '$telefone', '$secret', 1, 1, 0, '$data_regis')";
         $banco->exec($sql);
     }
 
