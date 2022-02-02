@@ -626,6 +626,25 @@ export default {
     },
 
     
+    async recorrenciaDigital( 
+        token ,
+      plano_token ,
+      amount ,
+      cart_nome ,
+      cart_numero ,
+      cart_cvv ,
+      cart_validade ,
+    ) {
+        return await http.post('/recorrencia-digital', { 
+            token ,
+            plano_token ,
+            amount ,
+            cart_nome ,
+            cart_numero ,
+            cart_cvv ,
+            cart_validade ,
+        })
+    },
 
 }
 

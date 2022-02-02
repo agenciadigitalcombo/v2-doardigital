@@ -93,7 +93,10 @@ export default {
 	},
 
 	async mounted() {
+
 		this.instituicao_id = localStorage.getItem("instituicao_id"); 
+
+
 	 },
 
     template: await get_template('./assets/js/view/instituicoes/banco_editar_instituicoes')

@@ -63,5 +63,7 @@ export default {
 		},
 	},
 
+	
+
     template: await get_template('./assets/js/view/instituicoes/home')
 }

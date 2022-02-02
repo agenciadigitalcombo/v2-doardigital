@@ -1,7 +1,8 @@
 import adm from "../../../../../static/js/api/adm.js"
+const { required, minLength, maxLength } = window.validators
 
 export default {
-    template:`
+	template: `
  
 	<div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column" id="kt_create_account_stepper">
 		 
@@ -85,7 +86,18 @@ export default {
 									<span class="required">Data de Nascimento</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Selecione o tipo de conta conforme documento utilizado"></i></h2>
 								</label>
-								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" v-model="data_nascimento" v-mask="'##/##/####'" placeholder="29/10/1685" required/>
+								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" 
+								 v-model.trin="$v.data_nascimento.$model" :class=" {'is-invalid':$v.data_nascimento.$error, 'is-valid':!$v.data_nascimento.$invalid }"
+								 v-mask="'##/##/####'" placeholder="29/10/1685" required/>
+
+								 <div class="erros" v-if="$v.data_nascimento.$error">
+												<div class="erro_texte" v-if="!$v.data_nascimento.required">Valor
+													é necessária</div>
+												<div class="erro_texte" v-if="!$v.data_nascimento.minLength">
+													adicione 8 digito para a data de nascimento.</div>
+											</div>
+											<div class="sucesso_texte" v-else>  
+												</div>
 						 </div>	
 						 
 						 <div class="mb-10 fv-row" v-if="jms == 'true'">
@@ -212,45 +224,56 @@ export default {
 	`,
 
 
-     data: function () {
+	data: function () {
 		return {
-			
+
 			cpf_cnpj: null,
 			data_nascimento: null,
 			token: null,
 			jms: "",
 			error: null,
 
-        }
-    },
+		}
+	},
+
+	validations: {
+		data_nascimento: {
+			required,
+			minLength: minLength(10)
+		},
+
+	},
 	methods: {
 		async finalizarAdm() {
 			this.error = null
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
 
-			let res = await adm.atualizarFinaliza(
-				this.cpf_cnpj,
-				this.data_nascimento,
-				this.token
-				
-			)
-			if (!res.next) {
-				console.log(res)
-				this.error = res.message
-				return null
+				let res = await adm.atualizarFinaliza(
+					this.cpf_cnpj,
+					this.data_nascimento,
+					this.token
+
+				)
+				if (!res.next) {
+					console.log(res)
+					this.error = res.message
+					return null
+				}
+				window.location.href = `#/checkout_endereco`
 			}
-			window.location.href = `#/checkout_endereco`
+
 		},
-	 
-
-    },
-	
-
-	async mounted() {
-		this.jms = localStorage.getItem('cnpj') 
-	
 	},
 
 
-	
+	async mounted() {
+		this.jms = localStorage.getItem('cnpj')
+	},
+
+
+
 }
 

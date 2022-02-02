@@ -1,4 +1,5 @@
-
+import adm from "../../../../../static/js/api/adm.js"
+const { required, minLength, maxLength } = window.validators
 
 export default {
     template:`
@@ -71,7 +72,7 @@ export default {
 	<div class="d-flex flex-column flex-lg-row-fluid py-10"> 
 		<div class="d-flex flex-center flex-column flex-column-fluid"> 
 			<div class="w-lg-700px p-10 p-lg-15 mx-auto"> 
-				<form @submit.prevent="descartavel" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+				<form @submit.prevent="transacaoRecorrencia" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
 				
 					<div class="current" data-kt-stepper-element="content"> 
 						<div class="w-100">
@@ -107,10 +108,11 @@ export default {
 								</label>
 								<select name="card_expiry_year" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year">
 									<option disabled selected hidden>Selecione o disparo</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
+								    <option value="2022">Nenhum Disparo</option>
+                                        <option value="2023">1 Mil Disparos</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2025">2025</option>
 								</select>
 							</div> 
 						</div> 
@@ -122,13 +124,13 @@ export default {
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 								</label>
 								
-								<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+								<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" v-model="cart_nome"/>
 							</div> 
 							<div class="d-flex flex-column mb-7 fv-row">
 								
 								<label class="required fs-6 fw-bold form-label mb-2">Card Number</label>
 							 <div class="position-relative">
-								 <input type="text" class="form-control form-control-solid" placeholder="Enter card number" name="card_number" value="4111 1111 1111 1111" />
+								 <input type="text" class="form-control form-control-solid" placeholder="Enter card number" name="card_number" v-model="cart_numero" />
 									 <div class="position-absolute translate-middle-y top-50 end-0 me-5">
 										<img src="assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
 										<img src="assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
@@ -185,7 +187,7 @@ export default {
 									</label>
 									 
 									<div class="position-relative"> 
-										<input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" name="card_cvv" />
+										<input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" name="card_cvv" v-model="cart_cvv" />
 										 
 										<div class="position-absolute translate-middle-y top-50 end-0 me-3">
 											 <span class="svg-icon svg-icon-2hx">
@@ -258,16 +260,41 @@ export default {
 
 
      data: function () {
-		return {
-			
-			tipo: null,
-				valor: null,
-				email: null,
-
+		return { 
+				token: null,
+				plano_token: "709362", 
+				amount: "122222",
+				cart_nome: null,
+				cart_numero: null,
+				cart_cvv: null,
+				cart_validade: "12/23",
         }
     },
+
 	methods: {
 		
+		async transacaoRecorrencia() {
+			
+			this.error = null
+			let res = await adm.recorrenciaDigital(
+				this.token,
+				this.plano_token,
+				this.amount,
+				this.cart_nome,
+				this.cart_numero,
+				this.cart_cvv,
+				this.cart_validade, 
+
+			)
+			if (!res.next) {
+				// this.error = res.message
+				this.msg = res.message
+				return null
+			}
+
+			 
+		},
+
 		descartavel() {
 			window.location.href = "/painel/index.html#/perfil-editar";
 		}

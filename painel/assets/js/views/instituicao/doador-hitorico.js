@@ -50,9 +50,6 @@ export default {
 											 	<div class="separator"></div>
 											 	<div id="kt_user_view_details" class="collapse show">
 													<div class="pb-5 fs-6">
-													 	<div class="fw-bolder mt-5">Account ID </div>
-														<div class="text-gray-600">
-														{{cpf}}</div>
 													 	<div class="fw-bolder mt-5">Email</div>
 														<div class="text-gray-600">
 															<a href="#"
@@ -167,7 +164,7 @@ export default {
 																<tr  v-for="item in doacoes"> 
 																 
 																	<td>
-																		{{item.data}}
+																		{{item.data | is_data}}
 																	</td>
 															 
 																	<td>{{item.valor  | is_price }}</td> </td>
@@ -1002,7 +999,8 @@ export default {
             let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${valor}`
         },
-
+	
+		
         is_data(datas) {
             let data = datas.split('-').reverse().join('/');
             return `${data}`
@@ -1072,5 +1070,4 @@ export default {
 		}
 	},
 }
-
 
