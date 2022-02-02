@@ -16,6 +16,9 @@ Vue.component('c-aside', aside)
 import detalhe from './components/c-detalhe.js'
 Vue.component('c-detalhe', detalhe)
 
+import mensagem from './components/c-mensagem.js'
+Vue.component('c-mensagem', mensagem)
+
 // IMPORTANDO PÁGINAS
 import page_home from './view/home/home.js'
 Vue.component('p-home', page_home)
@@ -31,6 +34,18 @@ Vue.component('p-nova_instituicoes', page_instituicoes_novo)
 
 import page_instituicoes_editar from './view/instituicoes/editar_instituicoes.js'
 Vue.component('p-editar_instituicoes', page_instituicoes_editar)
+
+import page_local_instituicoes from './view/instituicoes/local_instituicoes.js'
+Vue.component('p-local_instituicoes', page_local_instituicoes)
+
+import page_local_editar_instituicoes from './view/instituicoes/local_editar_instituicoes.js'
+Vue.component('p-local_editar_instituicoes', page_local_editar_instituicoes)
+
+import page_banco_editar_instituicoes from './view/instituicoes/banco_editar_instituicoes.js'
+Vue.component('p-banco_editar_instituicoes', page_banco_editar_instituicoes)
+
+import page_banco_instituicoes from './view/instituicoes/banco_instituicoes.js'
+Vue.component('p-banco_instituicoes', page_banco_instituicoes)
 
 import page_usuarios from './view/usuarios/home.js'
 Vue.component('p-usuarios', page_usuarios)
@@ -68,9 +83,13 @@ const routes = [
     { path: '/contato', component: { template: '<p-contato></p-contato>' } },
     { path: '/instituicoes', component: { template: '<p-instituicoes></p-instituicoes>' } },
     { path: '/instituicoes/nova', component: { template: '<p-nova_instituicoes></p-nova_instituicoes>' } },
-    { path: '/instituicoes/editar', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } },
+    { path: '/editar-instituicoes', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } },
+   { path: '/endereco-instituicoes', component: { template: '<p-local_instituicoes></p-local_instituicoes>' } },
+     { path: '/endereco-editar', component: { template: '<p-local_editar_instituicoes></p-local_editar_instituicoes>' } },
+    { path: '/bancario-editar', component: { template: '<p-banco_editar_instituicoes></p-banco_editar_instituicoes>' } },
+    { path: '/banco-instituicoes', component: { template: '<p-banco_instituicoes></p-banco_instituicoes>' } },
 
-
+    
     { path: '/usuarios', component: { template: '<p-usuarios></p-usuarios>' } },
     { path: '/usuario-editar', component: { template: '<p-usuarios_editar></p-usuarios_editar>' } },
     { path: '/usuario-novo', component: { template: '<p-usuarios_novo></p-usuarios_novo>' } },

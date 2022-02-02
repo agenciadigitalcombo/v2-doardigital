@@ -59,7 +59,7 @@ export default {
 
 		async editar(id) { 
 			globalThis._instituicao = this.dados.find(user => user.id == id);
-			window.location.href = "#/instituicoes/editar"
+			window.location.href = "#/editar-instituicoes"
 		},
 	},
 
