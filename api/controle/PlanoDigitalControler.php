@@ -64,7 +64,8 @@ class PlanoDigitalControler {
                 'codigo_cupom' => $g['codigo_cupom'],
                 'trial' => $g['trial'],
                 'quant_disparos' => $g['quant_disparos'],
-                'status' => $g['status']
+                'status' => $g['status'],
+                'token' => $g['token']
             ];
         }
         echo json_encode([
