@@ -3,7 +3,7 @@
 interface IDoacaoDigital
 {
     public function create(
-        int $doador_id,
+        int $admin_id,
         string $token,
         string $tipo,
         string $status_pagamento,

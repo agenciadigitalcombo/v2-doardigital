@@ -183,14 +183,11 @@ CREATE TABLE doacoes (
 
 CREATE TABLE doacoes_digital (
     id int not null auto_increment primary key,
-    doador_id int,
-    token varchar(255),
-    tipo varchar(25),
+    admin_id int,
+    token_transacao varchar(255),
     status_pagamento varchar(75),
-    plano_id int,
+    plano_token int,
     valor int,
-    codigo varchar(255),
-    url varchar(255),
     data varchar(9),
     hora varchar(8)
 );

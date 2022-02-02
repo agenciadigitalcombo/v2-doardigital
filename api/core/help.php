@@ -407,7 +407,12 @@ function telefone_get_ddd($telefone_campo): string
     return $get_ddd;
 }
 
-
+function telefone_get_number($telefone_campo): string
+{
+    $telefone = withdraw_caracter($telefone_campo);
+    $get_ddd = substr($telefone, 2, 10);
+    return $get_ddd;
+}
 
 function min_amount($valor): int
 {
