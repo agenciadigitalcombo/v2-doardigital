@@ -12,7 +12,8 @@ class PlanoDigitalControler {
         $whatsapp = $_REQUEST['whatsapp'] ?? 0;
         $instituicao_max = $_REQUEST['instituicao_max'];
         $codigo_cupom = $_REQUEST['codigo_cupom'];
-        $trial = $_REQUEST['trial'] ?? 0;
+        $trial = (int)$_REQUEST['trial'] ?? 0;
+        $quant_disparos = $_REQUEST['quant_disparos'] ?? 0;
         $amount_campo = $_REQUEST['amount'];
         $amount = min_amount($amount_campo);
         
@@ -32,10 +33,11 @@ class PlanoDigitalControler {
         }
         
         
-        $res_pagarme = $pagarme->create($nome, $amount);
+        $res_pagarme = $pagarme->create($nome, $amount, $trial);
         $token_pagarme = $res_pagarme['id'];
         
-        $plano->create($nome, $whatsapp, $instituicao_max, $codigo_cupom, $amount, $trial, $token_pagarme);
+
+        $plano->create($nome, $whatsapp, $instituicao_max, $codigo_cupom, $quant_disparos, $amount, $trial, $token_pagarme);
         
         echo json_encode([
             'next' => true,
@@ -59,6 +61,9 @@ class PlanoDigitalControler {
                 'whatsapp' => $g['whatsapp'],
                 'instituicao_max' => $g['instituicao_max'],
                 'amount' => $g['amount'],
+                'codigo_cupom' => $g['codigo_cupom'],
+                'trial' => $g['trial'],
+                'quant_disparos' => $g['quant_disparos'],
                 'status' => $g['status']
             ];
         }
@@ -67,9 +72,6 @@ class PlanoDigitalControler {
             'message' => 'Lista de Planos Digitais',
             'dados' => $payload
         ]);
-
-
-
     }
 
     static function planodigital()
@@ -105,8 +107,8 @@ class PlanoDigitalControler {
         token();
         
         
-        $plano_id = $_REQUEST['plano_id'] ?? '';
-        $nome = $_REQUEST['nome'] ?? '';
+        $plano_id = $_REQUEST['plano_id'];
+        $nome = $_REQUEST['nome'];
         
         $campos_obrigatorios = [
             'plano_id',

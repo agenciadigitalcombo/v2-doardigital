@@ -61,7 +61,10 @@ CREATE TABLE plano_digital (
     nome varchar(75),
     whatsapp int,
     instituicao_max int, 
+    codigo_cupom varchar(155),
     amount int,
+    trial int,
+    quant_disparos varchar(75),
     status int
 );
 

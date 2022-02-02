@@ -10,6 +10,7 @@ interface IPlanoDigital
         int $whatsapp,
         int $instituicao_max,
         string $codigo_cupom,
+        string $quant_disparos,
         int $amount,
         int $trial,
         string $token

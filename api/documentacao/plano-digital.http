@@ -7,6 +7,9 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 &whatsapp=1
 &instituicao_max=2
 &amount=1000
+&codigo_cupom= Banco
+&trial= 15
+&quant_disparos= 1000
 
 ###
 GET http://localhost/v2-doardigital/api/plano-digital-list
