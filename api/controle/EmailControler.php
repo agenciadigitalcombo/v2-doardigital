@@ -57,7 +57,9 @@ class EmailContoler{
             'next' => true,
             'message' => 'Email salvo',
             'dados' => $payload,
-            'status_pagamento' => Email::status_payment()
+            'status_pagamento' => Email::status_payment(),
+            'cron' => Email::cron(),
+            'default' => Email::default(),
         ]);
 
     }
