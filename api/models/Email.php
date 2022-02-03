@@ -1,20 +1,20 @@
 <?php 
-    class Email implements IEmail{
+    class Email{
 
-        public static function send(int $instituicao_id, string $status, string $subject, string $content): void
+        public static function send(int $instituicao_id, string $status, string $subject, string $content, string $cron): void
         {
             $banco = new Banco();
-            $exist = "SELECT * FROM email_notificao WHERE acao='$status'";
+            $exist = "SELECT * FROM email_notificao WHERE instituicao_id='$instituicao_id' AND acao='$status'";
             $get_email = $banco->query($exist);
 
             $insert = "INSERT INTO email_notificao";
-            $insert .= " (instituicao_id, assunto, corpo, acao)";
+            $insert .= " (instituicao_id, assunto, corpo, acao, cron)";
             $insert .= "VALUES";
-            $insert .= "('$instituicao_id', '$subject', '$content', '$status')";
+            $insert .= "('$instituicao_id', '$subject', '$content', '$status', '$cron')";
            
-            $update = "UPDATE email_notificao SET assunto='$subject', corpo='$content', acao='$status' WHERE instituicao_id=$instituicao_id AND acao='$status'";
-            
-            
+            $update = "UPDATE email_notificao SET assunto='$subject', corpo='$content', acao='$status', cron='$cron' WHERE instituicao_id=$instituicao_id AND acao='$status'";
+        
+
             if(empty($get_email[0])){
                 $banco->exec($insert);    
             }else{
@@ -29,7 +29,7 @@
             $get_email = $banco->query($sql);
             return $get_email;
         }
-        static function type_payment() : array {
+        static function status_payment() : array {
             return [
                 "processing", 
                 "authorized", 
