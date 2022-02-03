@@ -12,10 +12,10 @@ class EvendasNotificacao implements IEvendas{
         $set_smtp .= "VALUES";
         $set_smtp .= "($instituicao_id, '$canal')";
         
-        $save_smtp = "UPDATE evendas SET canal=$canal WHERE instituicao_id=$instituicao_id";
+        $save_smtp = "UPDATE evendas SET canal='$canal' WHERE instituicao_id=$instituicao_id";
         
         
-        if(empty($res_exist)) {
+        if(empty($res_exist[0])) {
             $banco->exec($set_smtp);
         }else {
             $banco->exec($save_smtp);
