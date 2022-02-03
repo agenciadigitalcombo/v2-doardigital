@@ -48,9 +48,13 @@
                 "+1 days",
                 "+2 days",
                 "+3 days",
-                "+31 days",
-                "+32 days",
-                "+33 days",
+                "+4 days",
+                "+5 days",
+                "+6 days",
+                "+7 days",
+                "+8 days",
+                "+9 days",
+                "+10 days",
             ];
         }
         static function tags() : array {
