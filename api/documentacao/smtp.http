@@ -9,4 +9,7 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 &email=victorballa@gmail.com
 &senha=1234567
 
+###
 
+GET http://localhost/v2-doardigital/api/list-smtp
+Content-Type: application/x-www-form-urlencoded
