@@ -1,5 +1,5 @@
 <?php
-class Email
+class SendGrid
 {
 
     static function header(
