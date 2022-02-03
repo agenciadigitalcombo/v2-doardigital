@@ -30,7 +30,7 @@ class ConfigSmtpControler{
 
         echo json_encode([
             'next' => true,
-            'message' => 'Smtp salvo',
+            'message' => 'Smtp',
             'dados' => $payload
         ]);
         
@@ -61,7 +61,7 @@ class ConfigSmtpControler{
         $host = $_REQUEST['host'];
         $protocolo = $_REQUEST['protocolo'];
         $porta = $_REQUEST['porta'];
-        $email = $_REQUEST['email'];
+        $email = valid_email($_REQUEST['email']);
         $senha = $_REQUEST['senha'];
         
         self::set_smtp($instituicao_id, $host, $protocolo, $porta, $email, $senha);

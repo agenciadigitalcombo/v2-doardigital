@@ -10,11 +10,11 @@ class EvendasControler{
 
         echo json_encode([
             'next' => true,
-            'message' => 'Smtp salvo'
+            'message' => 'Evendas salvo'
         ]);
     }
     
-    static function get_by_instituicao_smtp($instituicao_id): void{
+    static function get_by_instituicao_evendas($instituicao_id): void{
         $evendas = new EvendasNotificacao();
     
         $get_dados = $evendas->get_by_instituicao_id($instituicao_id);
@@ -26,7 +26,7 @@ class EvendasControler{
 
         echo json_encode([
             'next' => true,
-            'message' => 'Smtp salvo',
+            'message' => 'Evendas',
             'dados' => $payload
         ]);
         
@@ -62,6 +62,6 @@ class EvendasControler{
 
         $instituicao_id = $_REQUEST['instituicao_id'];
 
-        self::get_by_instituicao_smtp($instituicao_id);
+        self::get_by_instituicao_evendas($instituicao_id);
     }
 }

@@ -14,9 +14,9 @@ class ContaSmtp implements ISmtp{
         $set_smtp .= "VALUES";
         $set_smtp .= "($instituicao_id, '$host', '$protocolo', $porta, '$email', '$senha')";
         
-        $save_smtp = "UPDATE conta_email_smtp SET host=$host, protocolo=$protocolo, porta=$porta, email=$email, senha=$senha";
-        $save_smtp .= " WHERE instituicao_id=$instituicao_id";
+        $save_smtp = "UPDATE conta_email_smtp SET host='$host', protocolo='$protocolo', porta=$porta, email='$email', senha=$senha WHERE instituicao_id=$instituicao_id";
         
+       
         
         if(empty($res_exist)) {
             $banco->exec($set_smtp);
