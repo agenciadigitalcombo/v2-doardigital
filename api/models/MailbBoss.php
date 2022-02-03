@@ -1,8 +1,7 @@
-<?php 
+<?php
 
-class ContaSmtp implements ISmtp{
-
-    public function create_update( int $instituicao_id, string $host, string $protocolo, int $porta, string $email, string $senha) : void
+class MailBoss{
+    public function create_update( int $instituicao_id, string $token, string $token_uid) : void
     {
         $banco = new Banco();
         
@@ -10,13 +9,11 @@ class ContaSmtp implements ISmtp{
         $res_exist = $banco->query($exist_id);
         
         $set_smtp = "INSERT INTO conta_email_smtp";
-        $set_smtp .= "(instituicao_id, host, protocolo, porta, email, senha)";
+        $set_smtp .= "(instituicao_id, token, token_uid)";
         $set_smtp .= "VALUES";
-        $set_smtp .= "($instituicao_id, '$host', '$protocolo', $porta, '$email', '$senha')";
+        $set_smtp .= "($instituicao_id, '$token', '$token_uid')";
         
-        $save_smtp = "UPDATE conta_email_smtp SET host='$host', protocolo='$protocolo', porta=$porta, email='$email', senha=$senha WHERE instituicao_id=$instituicao_id";
-        
-       
+        $save_smtp = "UPDATE conta_email_smtp SET token='$token', token_uid='$token_uid'";
         
         if(empty($res_exist)) {
             $banco->exec($set_smtp);
@@ -33,5 +30,4 @@ class ContaSmtp implements ISmtp{
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
     }
-    
 }
