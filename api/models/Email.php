@@ -28,6 +28,46 @@
             $sql = "SELECT * FROM email_notificao WHERE instituicao_id='$instituicao_id'";
             $get_email = $banco->query($sql);
             return $get_email;
-        }   
+        }
+        static function type_payment() : array {
+            return [
+                "processing", 
+                "authorized", 
+                "paid", 
+                "refunded", 
+                "waiting_payment", 
+                "pending_refund", 
+                "refused", 
+                "chargedback"
+            ];
+        }
+        static function cron() : array {
+            return [
+                "+1 minute",
+                "+15 minute",
+                "+1 days",
+                "+2 days",
+                "+3 days",
+                "+31 days",
+                "+32 days",
+                "+33 days",
+            ];
+        }
+        static function tags() : array {
+            return [
+                "@@nome_doador@@",
+                "@@nome_doador_completo@@",
+                "@@nome_instituicao@@",
+                "@@link_boleto@@",
+                "@@botao_com_boleto@@",
+                "@@link_recuperar_doacao@@",
+                "@@botao_recuperar_doacao@@",
+                "@@codigo_barras_boleto@@",
+                "@@link_recuperacao_senha@@",
+                "@@botao_recuperacao_senha@@",
+                "@@telefone_doador@@",
+                "@@telefone_instituicao@@",
+            ];
+        }
     }
 ?>
