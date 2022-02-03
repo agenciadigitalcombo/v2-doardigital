@@ -646,6 +646,38 @@ export default {
         })
     },
 
+    
+
+    async savarEmail(
+        token,
+        instituicao_id,
+        host,
+        protocolo,
+        porta,
+        email,
+        senha,
+    ) {
+        return await http.post('/smtp-save', {
+            token,
+            instituicao_id,
+            host,
+            protocolo,
+            porta,
+            email,
+            senha,
+        })
+    },
+
+    async savarEvenda(
+        instituicao_id,
+        canal,
+    ) {
+        return await http.post('/save-evendas', {
+            instituicao_id,
+            canal,
+        })
+    },
+
 }
 
 // editarSubadm
