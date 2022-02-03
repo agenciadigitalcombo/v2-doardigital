@@ -30,7 +30,7 @@ class ConfigSmtpControler{
 
         echo json_encode([
             'next' => true,
-            'message' => 'Smtp salvo',
+            'message' => 'Smtp',
             'dados' => $payload
         ]);
         
