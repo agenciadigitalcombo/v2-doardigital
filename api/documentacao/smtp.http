@@ -11,5 +11,5 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 
 ###
 
-GET http://localhost/v2-doardigital/api/list-smtp
+GET http://localhost/v2-doardigital/api/list-smtp?instituicao_id=5
 Content-Type: application/x-www-form-urlencoded

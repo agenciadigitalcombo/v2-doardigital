@@ -1,5 +1,5 @@
 <?php
-class Email
+class SendGrid
 {
 
     static function header(
@@ -57,7 +57,7 @@ class Email
     static function template(array $payload, string $modelo_html)
     {
         $html = file_get_contents(__DIR__ . "/../template_email/{$modelo_html}.html");
-        $html = str_repeat('@@text@@', $payload['text'], $html);
+        $html = str_replace('@@text@@', $payload['text'], $html);
         foreach ($payload as $k) {
             $html = str_replace("@@" . $k . "@@", $payload[$k], $html);
         }

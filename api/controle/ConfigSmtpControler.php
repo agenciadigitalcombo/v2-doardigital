@@ -67,7 +67,7 @@ class ConfigSmtpControler{
         self::set_smtp($instituicao_id, $host, $protocolo, $porta, $email, $senha);
     }
 
-    static function list_smt_by_instituicao(){
+    static function list_smtp_by_instituicao(){
 
         self::campos_requiridos_list();
 
