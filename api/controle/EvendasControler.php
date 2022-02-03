@@ -45,7 +45,7 @@ class EvendasControler{
         ]);
     }
 
-    static function save_smpt(){
+    static function save_evendas(){
         
         self::campos_requiridos_save();
 
