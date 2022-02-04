@@ -220,9 +220,6 @@ class TransacaoControler{
         $get_token_evendas = $dados_evendas['canal'];
 
         $response = Evendas::send($nome, $email, $telefone, $phone_ddd, $planos_valor, $get_status, $type_pagamento, $url, $url, $codigo, $endereco, $get_token_evendas);
-
-        var_dump($response);
-        die;
         
         $template_email = $email_notificacao->exest_acao($instituicao_id, $get_status);
 
