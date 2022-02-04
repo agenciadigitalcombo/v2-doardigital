@@ -29,6 +29,49 @@
             $get_email = $banco->query($sql);
             return $get_email;
         }
+
+
+        static function exist_acao_default($acao): array
+        {
+           
+            foreach(self::default() as $el){
+                if($el['acao'] == $acao){
+                    return ['assunto' => $el['assunto'],
+                    'text' => $el['text']  
+                    ];        
+                }
+            }
+            return ['assunto' => 'Nao encontrado',
+                    'text' => 'Nao encontrado'    
+        ];
+        }
+
+
+        public function exest_acao(int $instituicao, string $acao): array
+        {
+            $banco = new Banco();
+            $exist = "SELECT * FROM email_notificao WHERE acao='$acao' AND instituicao_id=$instituicao";
+            $guard = $banco->query($exist);
+            
+            
+            if(empty($guard)){
+
+                $dados = self::exist_acao_default($acao);
+                $assunto = $dados['assunto'];
+                $text = $dados['text'];    
+            }
+
+            if(!empty($guard)){
+                $assunto = $guard[0] ['assunto'];
+                $text = $guard[0] ['corpo']; 
+            }
+            
+            return ['assunto' => $assunto,
+                    'text' => $text    
+        ];
+
+        }
+
         static function status_payment() : array {
             return [
                 "processing", 

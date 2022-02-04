@@ -8,10 +8,12 @@ class TransacaoControler{
         header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
         $doador = new Doador();
-        $Endereco = new Endereco;
+        $Endereco = new Endereco();
+        $evendas = new EvendasNotificacao();
+        $instituicao = new Instituicao();
+        $email_notificacao = new Email();
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
-        $instituicao = new Instituicao();
        
 
         $instituicao_id = $_REQUEST['instituicao_id'];
@@ -199,6 +201,7 @@ class TransacaoControler{
         
         
         
+        
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url);
     
         @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
@@ -211,14 +214,24 @@ class TransacaoControler{
         $color_instituicao = $instituicao_dados['cor'];
         $logo_instituicao = $instituicao_dados['logo'];
 
+        
+        $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
+
+        $get_token_evendas = $dados_evendas['canal'];
+
+        $response = Evendas::send($nome, $email, $telefone, $phone_ddd, $planos_valor, $get_status, $type_pagamento, $url, $url, $codigo, $endereco, $get_token_evendas);
+
+        
+        $template_email = $email_notificacao->exest_acao($instituicao_id, $get_status);
+
         SendGrid::send(
         $nome, 
         $email, 
         $nome_instituicao, 
         $email_instituicao, 
-        "Docaoa Efetuada", 
-        "Doacao Concluida", 
-        "Em breve ...", 
+        $template_email['assunto'], 
+        $template_email['assunto'], 
+        $template_email['text'], 
         $color_instituicao, 
         $nome_instituicao, 
         $logo_instituicao,
