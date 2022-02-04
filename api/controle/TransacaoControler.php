@@ -211,8 +211,6 @@ class TransacaoControler{
         $color_instituicao = $instituicao_dados['cor'];
         $logo_instituicao = $instituicao_dados['logo'];
 
-        
-
         SendGrid::send(
         $nome, 
         $email, 
