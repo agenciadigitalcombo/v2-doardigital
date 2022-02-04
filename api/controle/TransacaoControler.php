@@ -11,7 +11,7 @@ class TransacaoControler{
         $Endereco = new Endereco;
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
-        
+        $instituicao = new Instituicao();
        
 
         $instituicao_id = $_REQUEST['instituicao_id'];
@@ -204,7 +204,29 @@ class TransacaoControler{
         @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
         @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
 
-        @mail($email, "Doação", "...");
+
+        $instituicao_dados = $instituicao->get_by_id($instituicao_id);
+        $nome_instituicao = $instituicao_dados['nome_fantasia'];
+        $email_instituicao = $instituicao_dados['email'];
+        $color_instituicao = $instituicao_dados['cor'];
+        $logo_instituicao = $instituicao_dados['logo'];
+
+        
+
+        SendGrid::send(
+        $nome, 
+        $email, 
+        $nome_instituicao, 
+        $email_instituicao, 
+        "Docaoa Efetuada", 
+        "Doacao Concluida", 
+        "Em breve ...", 
+        $color_instituicao, 
+        $nome_instituicao, 
+        $logo_instituicao,
+        'instituicao');
+
+
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',
