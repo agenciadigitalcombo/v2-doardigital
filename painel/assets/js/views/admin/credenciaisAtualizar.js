@@ -43,16 +43,16 @@ export default {
 
 														<div class="row g-5">
 
-														{{jms}}
+														{{recursos}}
 
 															<div class="col-lg-4" v-for="listar in permisao">
 																<div class="card card-stretch mb-5">
 																	<label
 																		class="form-check form-switch form-check-custom form-check-solid">
 
-																		<input v-bind:value="listar" v-model="jms"
+																		<input v-bind:value="listar.jms" v-model="recursos"
 																			@change='updateCheckall()'
-																			class="form-check-input" type="checkbox" />
+																			class="form-check-input" type="checkbox"/>
 																		<span class="form-check-label">
 																			{{ listar }}
 																		</span>
@@ -118,6 +118,11 @@ export default {
 	async mounted() {
 		this.nome_identificacao = globalThis._usuario.nome_identificacao,
 		this.recursos = globalThis._usuario.recursos
+
+        this.recursos.split(',').forEach( id => {
+            this.jms[id] = true
+        });
+		
 	},
 
 	methods: {

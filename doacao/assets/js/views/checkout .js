@@ -65,7 +65,7 @@ export default {
 																<div class="d-flex align-items-center me-2">
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)" checked="checked" v-modal="amount" value="valor"
+																		<input v-on:click="setarPlano(listar)" checked="checked" v-modal="amount" :value="valor"
 																			class="form-check-input" type="radio" name="plan" />
 																			</div>
 
@@ -185,7 +185,7 @@ export default {
 			logo: '',
 			mensal: "1",
 			amount: null,
-			valor: '2500',
+			valor: '1.111,11',
 			planos_nome: null,
 			valor_digitado: null,
 			planos_id: null,
@@ -248,6 +248,9 @@ export default {
 
 
 		money() {
+
+
+
 			let val = this.valor_digitado
 			val = val.replace('.', '')
 			val = val.replace(/\D/gi, '')
@@ -327,12 +330,14 @@ export default {
 			return this.dados.filter((plano) => {
 				return  plano.status.match(this.status = 1);
 			})
-			
 		}
  
 	},
 
 	async mounted() {
+
+	 
+
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = config.logo
 		this.backgroundColor = config.cor

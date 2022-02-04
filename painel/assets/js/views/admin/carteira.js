@@ -54,7 +54,7 @@ export default {
 
 											</div> 
 											<div class="card-body pt-5"> 
-												<form class="form" action="#"> 
+												<form class="form" action="#" @submit.prevent="solicitarSaque"> 
 													<div class="py-10 px-lg-17"> 
 														<div class="mb-5"> 
 															<div class="fv-row"> 
@@ -79,9 +79,8 @@ export default {
 																	</label> 
 																</div> 
 																<div class="mb-2 mt-10" v-if="jms">
-																	<input type="email"
-																		class="form-control form-control-solid"
-																		value="0" />
+																	<input type="text" v-model="amount"
+																		class="form-control form-control-solid" />
 																</div>
 
 															</div> 
@@ -89,12 +88,8 @@ export default {
 													</div> 
 													<div class="modal-footer flex-center">
  
-														<button type="submit" id="kt_modal_create_api_key_submit"
-															class="btn btn-primary">
+														<button type="submit" class="btn btn-primary">
 															<span class="indicator-label">Solicitar Saque</span>
-															<span class="indicator-progress">Please wait...
-																<span
-																	class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 														</button> 
 														<div class=""> 
 															<div class="timeline-content fw-bolder text-gray-800 ps-3">
@@ -160,11 +155,13 @@ export default {
 			liberado: null,
 			liberar: null,
 			retirado: null,
-
+			amount: null,
 			data: null,
 			valor: null,
 			status: null,
-			historico: []
+			historico: [],
+			error: null,
+			msg: null
 		}
 	},
 
@@ -176,6 +173,23 @@ export default {
 			)
             return res
         },
+		
+		async solicitarSaque() {
+			this.error = null
+		
+				let res = await adm.antecipacao(
+					this.token,
+					this.instituicao_id,
+					this.amount,
+			
+				)
+				if (!res.next) {
+						setTimeout(() => this.msg = "", 5000);
+					this.error = res.message
+					return null
+				}
+				this.msg = res.message
+		},
 	},
 
 
