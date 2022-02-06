@@ -53,6 +53,7 @@ class TransacaoControler{
 
         $cart_numero = $_REQUEST['cart_numero'];
         $cart_cvv = $_REQUEST['cart_cvv'];
+        $cart_nome = $_REQUEST['cart_nome'];
         $cart_validade_campo = $_REQUEST['cart_validade'];
         $cart_validade = withdraw_caracter($cart_validade_campo);
         
@@ -118,7 +119,7 @@ class TransacaoControler{
         if($mensal == 1 and $type_pagamento == "credit_card"){
             
             $pagarme_cartao = new PagarMeCartao();
-            $res_pagarme_cartao = $pagarme_cartao->create_cartao($cart_numero, $cart_cvv, $cart_validade, $nome);
+            $res_pagarme_cartao = $pagarme_cartao->create_cartao($cart_numero, $cart_cvv, $cart_validade, $cart_nome);
             
             $get_id_cartao = $res_pagarme_cartao['id'];
             $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
@@ -151,7 +152,7 @@ class TransacaoControler{
 
             $pagarme_cartao = new PagarMeCartao();
             
-            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $nome, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = "";

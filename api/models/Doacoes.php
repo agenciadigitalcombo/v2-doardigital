@@ -37,6 +37,38 @@ class Doacao implements IDoacao{
         return $guard;
     }
 
+    public function list_all_by_instituicao_tipo(int $instituicao_id, string $tipo): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doacoes WHERE instituicao_id=$instituicao_id AND tipo='$tipo'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+    public function list_all_by_instituicao_status_pagamento(int $instituicao_id, string $status_pagamento): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doacoes WHERE instituicao_id=$instituicao_id AND status_pagamento='$status_pagamento'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+    public function list_all_by_instituicao_status_tipo_pagamento(int $instituicao_id, string $tipo, string $status_pagamento): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doacoes WHERE instituicao_id=$instituicao_id AND status_pagamento='$status_pagamento' AND tipo='$tipo'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+    public function list_all_by_instituicao_recorrencia(int $instituicao_id, int $recorrente): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doacoes WHERE instituicao_id=$instituicao_id AND recorrente='$recorrente'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
     public function list_all_by_doador(int $doador_id): array
     {
         $banco = new Banco();
