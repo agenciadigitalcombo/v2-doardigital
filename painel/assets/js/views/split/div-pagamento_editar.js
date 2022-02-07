@@ -51,7 +51,7 @@ export default {
 																			<div class="erro_texte" v-if="!$v.recebedor_id.required">O Id do recebedor
 																				é necessária</div>
 																			<div class="erro_texte" v-if="!$v.recebedor_id.minLength">
-																				quantidade deve ter pelo menos 4 caracter.</div>
+																				quantidade deve ter pelo menos 8 caracter.</div>
 																		</div>
 				
 																		<div class="sucesso_texte" v-else> 
@@ -144,7 +144,7 @@ export default {
 	validations: {
 		recebedor_id: {
 			required,
-			minLength: minLength(2)
+			minLength: minLength(8)
 		},
 		porcentagem: {
 			required,

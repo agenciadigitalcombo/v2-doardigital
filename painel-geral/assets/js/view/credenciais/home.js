@@ -16,6 +16,9 @@ export default {
     },
 
     async mounted() {
+
+         globalThis._jms = "ola jms"
+
         this.dados = (await this.listar()).dados
         this.id = dados.id
         this.nome_identificacao = dados.nome_identificacao

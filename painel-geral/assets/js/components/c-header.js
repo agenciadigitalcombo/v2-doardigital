@@ -9,7 +9,7 @@ export default {
     },
  
 created() {
-
+ 
   
 },
     template: await get_template('./assets/js/components/c-header')

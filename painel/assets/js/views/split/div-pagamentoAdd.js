@@ -43,7 +43,7 @@ export default {
 																	<div class="fv-row mb-5">
 																		<label for="Recebedor"
 																			class="form-label fs-6 fw-bolder mb-3 required">Recebedor</label>
-																		<input type="number"  v-model.trin="$v.recebedor_id.$model"
+																		<input type="text"  v-model.trin="$v.recebedor_id.$model"
 																		:class=" {'is-invalid':$v.recebedor_id.$error, 'is-valid':!$v.recebedor_id.$invalid }"
 																			class="form-control form-control-lg form-control-solid" />
 
@@ -51,7 +51,7 @@ export default {
 																			<div class="erro_texte" v-if="!$v.recebedor_id.required">O Id do recebedor
 																				é necessária</div>
 																			<div class="erro_texte" v-if="!$v.recebedor_id.minLength">
-																				quantidade deve ter pelo menos 4 caracter.</div>
+																				quantidade deve ter pelo menos 8 caracter.</div>
 																		</div>
 				
 																		<div class="sucesso_texte" v-else> 
@@ -144,7 +144,7 @@ export default {
 	validations: {
 		recebedor_id: {
 			required,
-			minLength: minLength(2)
+			minLength: minLength(8)
 		},
 		porcentagem: {
 			required,
@@ -153,7 +153,7 @@ export default {
 	},
 
 	methods: {
-
+		 
 		async addSplit() {
 			this.error = null
 

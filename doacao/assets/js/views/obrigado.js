@@ -170,9 +170,9 @@ export default {
 					<div class="text-center mb-17"> 
 						<div class="fs-5 text-muted fw-bold  flex-center ">
 							<p class="m-10">
-								{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
+								{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}}  |
 								Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
-								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep  | is_data}} |
+								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
 								Para dúvidas e cancelamentos entre em contato com nossa <br>
 								central de relacionamento no telefone {{inst.telefone}}
 								ou pelo e-mail: {{inst.email}} |
@@ -180,9 +180,15 @@ export default {
 								realizaremos o ressarcimento integral dos valores doados.
 							</p>
 						</div> 
+ 
 					</div>  
 				</div> 
 			</div>  
+						<div class="rotaObscura"> 
+						<input v-mask="'###.###.###-##'" v-model="inst.cnpj" class="invisivel"/>
+						<input v-mask="'#####-###'" v-model="inst.cep" class="invisivel"/>
+						<input v-mask="'(##) # ####-####'" v-model="inst.telefone" class="invisivel"/>
+						</div>
 		</div> 
 	</div>
 	`,
@@ -259,7 +265,6 @@ export default {
 		this.inst.cnpj = dados.cnpj
 		this.inst.urlsite = dados.subdomaim+'.doardigital.com.br/'
 		
-
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
 		this.codigo_geral = localStorage.getItem("codigo")

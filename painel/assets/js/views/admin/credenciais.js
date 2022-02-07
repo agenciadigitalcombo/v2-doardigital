@@ -198,11 +198,8 @@ export default {
     },
 
     async mounted() {
-        this.dados = (await this.listar()).dados
-        this.id = dados.id
-        this.nome_identificacao = dados.nome_identificacao
-        this.recursos = dados.recursos
-        console.log(dados)
+        this.dados = (await this.listar()).dados 
+         
     },
 
     methods: {

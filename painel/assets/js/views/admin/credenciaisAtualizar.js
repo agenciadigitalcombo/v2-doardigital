@@ -43,14 +43,12 @@ export default {
 
 														<div class="row g-5">
 
-														{{recursos}}
-
 															<div class="col-lg-4" v-for="listar in permisao">
 																<div class="card card-stretch mb-5">
 																	<label
 																		class="form-check form-switch form-check-custom form-check-solid">
 
-																		<input v-bind:value="listar.jms" v-model="recursos"
+																		<input v-bind:value="listar" v-model="jms"
 																			@change='updateCheckall()'
 																			class="form-check-input" type="checkbox"/>
 																		<span class="form-check-label">
@@ -105,28 +103,23 @@ export default {
 		return {
 			token: null,
 			nome_identificacao: null,
-			// recursos: null,
+			id: null,
 			msg: null,
 			isCheckAll: false,
 			permisao: ['Inicio', 'Doadores', 'Doações', 'Credenciais', 'Usuários', 'Minhas Instituições', 'Divisão Pagamento',
 				'Metas', 'Modelo de E-mails', 'Configuração', 'Perfil', 'Modulos', 'Meu Plano', 'Carteira', 'QR CODE'],
-			jms: [],
+			jms:[],
 			recursos: ""
 		}
 	},
 
 	async mounted() {
-		this.nome_identificacao = globalThis._usuario.nome_identificacao,
-		this.recursos = globalThis._usuario.recursos
-
-        this.recursos.split(',').forEach( id => {
-            this.jms[id] = true
-        });
-		
+		this.jms = globalThis._usuario.recursos.split(', ')
+		this.nome_identificacao = globalThis._usuario.nome_identificacao
+		this.id = globalThis._usuario.id
 	},
 
 	methods: {
-		
 		
 		async alterarCredencia() {
 			this.error = null
@@ -135,26 +128,24 @@ export default {
 			for (var key in this.jms) {
 				this.recursos += this.jms[key] + ", ";
 			}
+			
 			let res = await adm.atualizarCredencia(
 				this.id,
 				this.nome_identificacao,
 				this.recursos,
 			)
-			if (!res.next) {
-				console.log(res)
+			if (!res.next) { 
 				this.error = res.message
 				return null
-			}
-				console.log(this.nome_identificacao)
+			} 
 			this.msg = res.message,
 			setTimeout(() => this.msg = "", 3000);
 
-			this.nome_identificacao= ""
+			 
 		},
 
 		checkAll() {
 			this.isCheckAll = !this.isCheckAll;
-			this.jms = [];
 
 			if (this.isCheckAll) {
 				for (var key in this.permisao) {
@@ -170,14 +161,7 @@ export default {
 			}
 		},
 
-		printValues() {
-			this.recursos = "";
-
-			for (var key in this.jms) {
-				this.recursos += this.jms[key] + ", ";
-
-			}
-		}
+	 
 
 	},
 

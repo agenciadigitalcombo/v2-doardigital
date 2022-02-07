@@ -31,7 +31,6 @@ export default {
 														</p>
 
 														<div class="row g-5">
-																		{{jms}}
 
 															<div class="col-lg-4" v-for="listar in permisao">
 																<div class="card card-stretch mb-5">

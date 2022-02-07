@@ -53,6 +53,7 @@ export default {
 
 														<h3>Escolha Valor para Doação</h3>
 													</div>
+			
 
 													<div class="d-flex flex-column">
 
@@ -65,7 +66,7 @@ export default {
 																<div class="d-flex align-items-center me-2">
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)" checked="checked" v-modal="amount" :value="valor"
+																		<input v-on:click="setarPlano(listar)"  v-modal="amount" :value="valor"    
 																			class="form-check-input" type="radio" name="plan" />
 																			</div>
 
@@ -184,8 +185,8 @@ export default {
 		return {
 			logo: '',
 			mensal: "1",
-			amount: null,
-			valor: '1.111,11',
+			amount: "",
+			valor: 111111,
 			planos_nome: null,
 			valor_digitado: null,
 			planos_id: null,
@@ -198,6 +199,7 @@ export default {
 			status: '',
 			backgroundColor: '',
 			dados: [],
+		 
 
 		}
 	},
@@ -240,6 +242,7 @@ export default {
 			this.valor_digitado = "0"
 		},
 
+ 
 		// outro() {
 		// 	localStorage.removeItem("planos_id");
 		// 	this.planos_nome = "Plano "+this.valor_digitado
@@ -247,10 +250,7 @@ export default {
 		// },
 
 
-		money() {
-
-
-
+		money() { 
 			let val = this.valor_digitado
 			val = val.replace('.', '')
 			val = val.replace(/\D/gi, '')
@@ -318,32 +318,29 @@ export default {
 			}
 		},
 
-		estaActivo(semPagina) {
-			  return semPagina  == this.paginaAtual ? "active": ""
-				
-		   }
+		 
 	},
 
 	computed: {
 
 		filtraPlano() {
-			return this.dados.filter((plano) => {
+			return this.dados.filter((plano) => { 
 				return  plano.status.match(this.status = 1);
+				
 			})
 		}
- 
 	},
 
 	async mounted() {
-
-	 
-
+ 
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = config.logo
 		this.backgroundColor = config.cor
 
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano 
 		// this.amount = dados.amount 
+
+	
 		
 	},
 

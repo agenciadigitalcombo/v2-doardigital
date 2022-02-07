@@ -19,8 +19,9 @@ export default {
 	},
 
 	async mounted() {
-		this.nome_identificacao = globalThis._usuario.nome_identificacao,
-		this.recursos = globalThis._usuario.recursos
+		this.jms = globalThis._usuario.recursos.split(', ')
+		this.nome_identificacao = globalThis._usuario.nome_identificacao
+		this.id = globalThis._usuario.id
 	},
 
 	methods: {
