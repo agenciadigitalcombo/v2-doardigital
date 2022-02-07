@@ -60,11 +60,23 @@ function upload($name)
 function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
 {
     $banco = new Banco();
-    $sql = "INSERT INTO taxonomia";
-    $sql .= "(from_id, to_id, tipo_relacao)";
-    $sql .= "VALUES";
-    $sql .= "('$from_id', '$to_id', '$tipo_relacao')";
-    $banco->query($sql);
+
+    $exist = "SELECT * FROM taxonomia WHERE from_id=$from_id AND to_id=$to_id AND tipo_relacao='$tipo_relacao'";
+    $get_exist = $banco->query($exist);
+    
+    $ID = empty($get_exist[0]['id']) ? null : $get_exist[0]['id'];
+    
+    if(!$ID) {
+        $insert = "INSERT INTO taxonomia";
+        $insert .= "(from_id, to_id, tipo_relacao)";
+        $insert .= "VALUES";
+        $insert .= "('$from_id', '$to_id', '$tipo_relacao')";
+        
+        $banco->query($insert);
+    }
+
+    
+
 }
 
 function get_taxonomy_by_from(int $from_id): array

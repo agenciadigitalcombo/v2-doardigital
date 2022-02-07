@@ -114,7 +114,9 @@ class TransacaoControler{
         
         
         
-        
+        if($mensal == 1) {
+            set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
+        }
 
         if($mensal == 1 and $type_pagamento == "credit_card"){
             

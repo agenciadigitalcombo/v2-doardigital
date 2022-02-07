@@ -24,7 +24,6 @@ class DashboardControler{
 
     }
 
-
     static function media_doacao($instituicao_id): string
     {
         
