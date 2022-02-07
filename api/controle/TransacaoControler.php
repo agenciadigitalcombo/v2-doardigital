@@ -122,8 +122,8 @@ class TransacaoControler{
         if($total_porcent == 100){
             $split = array_map(function($list){
                 return ['recipient_id' => $list['recebedor_id'],
-                        'percentage' => $list['porcetagem'],
-                        'liable' => $list['responsavel_estorno'] == 1 ? true : false 
+                        'percentage' => $list['porcentagem'],
+                        'liable' => !!$list['responsavel_estorno'] 
             ];
             }, $all_split);
         }
