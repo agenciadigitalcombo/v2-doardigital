@@ -481,13 +481,13 @@ class InstituicaoControler
             return in_array($d['id'], $all_id_doadores);
         });
 
-        $payload = array_map(function ($dados) {            
+        $payload = array_map(function ($dados) use($instituicao_id){            
             return [
                 'id' => $dados['id'],
                 'nome' => $dados['nome'],
                 'email' => $dados['email'],
                 'cpf' => $dados['cpf'],
-                'tipo' => 'unico',
+                'tipo' =>  empty(get_taxonomy($instituicao_id, $dados['id'], "ASSINANTE")) ? 'UNICO' : 'RECORRENTE',
                 'gravatar' => gravatar((string)$dados['email']),
                 'data_registro' => $dados['data_registro']
             ];

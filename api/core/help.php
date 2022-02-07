@@ -70,7 +70,18 @@ function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
         $insert .= "VALUES";
         $insert .= "('$from_id', '$to_id', '$tipo_relacao')";        
         $banco->exec($insert);
-    }   
+    }
+
+}
+
+function get_taxonomy(int $from_id, int $to_id, string $tipo_relacao): array
+{
+    $banco = new Banco();
+
+    $exist = "SELECT * FROM taxonomia WHERE from_id=$from_id AND to_id=$to_id AND tipo_relacao='$tipo_relacao'";
+    $get_exist = $banco->query($exist);
+    
+    return $get_exist;
 
 }
 
