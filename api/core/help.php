@@ -64,18 +64,13 @@ function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
     $exist = "SELECT * FROM taxonomia WHERE from_id=$from_id AND to_id=$to_id AND tipo_relacao='$tipo_relacao'";
     $get_exist = $banco->query($exist);
     
-    $ID = empty($get_exist[0]['id']) ? null : $get_exist[0]['id'];
-    
-    if(!$ID) {
+    if(empty($get_exist)) {
         $insert = "INSERT INTO taxonomia";
         $insert .= "(from_id, to_id, tipo_relacao)";
         $insert .= "VALUES";
-        $insert .= "('$from_id', '$to_id', '$tipo_relacao')";
-        
-        $banco->query($insert);
-    }
-
-    
+        $insert .= "('$from_id', '$to_id', '$tipo_relacao')";        
+        $banco->exec($insert);
+    }   
 
 }
 
