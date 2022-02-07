@@ -29,6 +29,18 @@ class Doacao implements IDoacao{
         $banco->exec($sql);
     }
 
+    public function agendamento($instituicao_id, $doador_id, $get_token, $type_pagamento, $planos_id, $planos_valor, $proximo_pagamento): void
+    {
+        $banco = new Banco();
+        $data_regis = $proximo_pagamento.' '.date("H:i:s");
+        $hora_regis = date("H:i:s");
+        $sql = "INSERT INTO doacoes";
+        $sql .= "(instituicao_id, doador_id, data, hora, status_pagamento, plano_id, valor, tipo, token)";
+        $sql .= "VALUES";
+        $sql .= "('$instituicao_id', '$doador_id', '$data_regis', '$hora_regis', 'pending', '$planos_id', '$planos_valor', '$type_pagamento', '$get_token')";
+        $banco->exec($sql);
+    }
+
     public function list_all_by_instituicao(int $instituicao_id): array
     {
         $banco = new Banco();

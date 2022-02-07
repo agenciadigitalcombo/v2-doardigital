@@ -202,7 +202,12 @@ class TransacaoControler{
         }
         
         
-        
+        if($mensal == 1) {
+            $datas_agendadas = maker_datas( date('Y-m-d') );
+            foreach( $datas_agendadas as $proximo_pagamento ) {
+                $doacao->agendamento($instituicao_id, $doador_id, $get_token, $type_pagamento, $planos_id, $planos_valor, $proximo_pagamento);
+            }
+        }
         
         
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url);

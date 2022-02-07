@@ -632,3 +632,13 @@ function valid_subdomain($campo): void
     }
 }
 
+function maker_datas(string $data): array
+{
+    $res_array =  array_fill(0, 24, $data);
+    $i = 0;
+    return array_map(function($data) use (&$i) {
+        $i++;        
+        return date('d/m/Y', strtotime('+'.$i.' month', strtotime($data)));
+    }, $res_array );
+    
+}
