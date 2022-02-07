@@ -468,9 +468,11 @@ class InstituicaoControler
         ]);
 
         $all_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
+        
         $all_id_doadores = array_map(function ($list) {
             return $list['doador_id'];
         }, $all_doacoes);
+
         $all_id_doadores = array_unique($all_id_doadores, SORT_REGULAR);
 
         $all_doadores = $doador->list_all();

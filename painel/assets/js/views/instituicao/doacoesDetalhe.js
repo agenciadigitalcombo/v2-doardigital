@@ -42,7 +42,9 @@ export default {
 												<div class="col-lg-6">
 												<span class=" fw-bold text-muted">
 												Nome</span>
+												<a href="#/doadorHitorico" >
 													<p class="fw-bolder fs-6 text-gray-800">{{ nome }}</p>
+													</a>
 												
 													<span class=" fw-bold text-muted">
 													Tipo</span>
@@ -64,7 +66,7 @@ export default {
 												<span class=" fw-bold text-muted">
 												Valor</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price}}</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price}} {{cpf}} vlor</p>
 												
 
 													<span class=" fw-bold text-muted">
@@ -121,7 +123,8 @@ export default {
 			recorente: null,
 			data: null,
 			hora: null,
-			status: null
+			status: null,
+			cpf: null
         }
     
     },
@@ -175,16 +178,18 @@ export default {
            return `${recorente_pagamento}`
         },
     },
-
+ 
     async mounted() { 
-	this.nome = globalThis._doacao.nome
-		this.recorente = globalThis._doacao.tipo
+	this.nome = globalThis._doador.nome
+		this.recorente = globalThis._doador.tipo
 		 
-		this.tipo = globalThis._doacao.tipo
-		this.valor = globalThis._doacao.valor,
-		this.data = globalThis._doacao.data,
-		this.hora = globalThis._doacao.hora
-		this.status = globalThis._doacao.status_pagamento
+		this.tipo = globalThis._doador.tipo
+		this.valor = globalThis._doador.valor,
+		this.data = globalThis._doador.data,
+		this.hora = globalThis._doador.hora
+		this.status = globalThis._doador.status_pagamento
+
+		this.cpf = globalThis._doador.cpf
 
     	 
     }, 

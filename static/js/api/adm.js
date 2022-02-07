@@ -349,7 +349,7 @@ export default {
         })
     },
 
-    async transacaoPlano( 
+    async transacaoPlano(
         instituicao_id,
         mensal,
         planos_id,
@@ -370,9 +370,9 @@ export default {
         cart_numero,
         cart_cvv,
         cart_validade,
-        cart_nome, 
+        cart_nome,
     ) {
-        return await http.post('/transacao', { 
+        return await http.post('/transacao', {
             instituicao_id,
             mensal,
             planos_id,
@@ -393,7 +393,7 @@ export default {
             cart_numero,
             cart_cvv,
             cart_validade,
-            cart_nome, 
+            cart_nome,
         })
     },
 
@@ -583,18 +583,18 @@ export default {
         })
     },
 
-  
+
     async listarDoacoes(instituicao_id) {
         return await http.get('/list-doacoes', {
             instituicao_id
         })
     },
-    
+
     async listarDoadores(instituicao_id) {
         return await http.get('/list-doadores', {
             instituicao_id
         })
-    }, 
+    },
 
     async visualizarDoador(
         token, cpf) {
@@ -604,20 +604,20 @@ export default {
 
         })
     },
-    
+
     async listarEmail(instituicao_id) {
         return await http.get('/list-email', {
             instituicao_id
         })
     },
 
-    async alterarEmail( 
+    async alterarEmail(
         instituicao_id,
         assunto,
         corpo,
         status,
     ) {
-        return await http.post('/atualiza-email', { 
+        return await http.post('/atualiza-email', {
             instituicao_id,
             assunto,
             corpo,
@@ -625,24 +625,77 @@ export default {
         })
     },
 
-    
-    async recorrenciaDigital( 
-        token ,
-      plano_token ,
-      amount ,
-      cart_nome ,
-      cart_numero ,
-      cart_cvv ,
-      cart_validade ,
+
+    async recorrenciaDigital(
+        token,
+        plano_token,
+        amount,
+        cart_nome,
+        cart_numero,
+        cart_cvv,
+        cart_validade,
     ) {
-        return await http.post('/recorrencia-digital', { 
-            token ,
-            plano_token ,
-            amount ,
-            cart_nome ,
-            cart_numero ,
-            cart_cvv ,
-            cart_validade ,
+        return await http.post('/recorrencia-digital', {
+            token,
+            plano_token,
+            amount,
+            cart_nome,
+            cart_numero,
+            cart_cvv,
+            cart_validade,
+        })
+    },
+
+
+
+    async savarEmail(
+        token,
+        instituicao_id,
+        host,
+        protocolo,
+        porta,
+        email,
+        senha,
+    ) {
+        return await http.post('/smtp-save', {
+            token,
+            instituicao_id,
+            host,
+            protocolo,
+            porta,
+            email,
+            senha,
+        })
+    },
+
+    async savarEvenda(
+        instituicao_id,
+        canal,
+    ) {
+        return await http.post('/save-evendas', {
+            instituicao_id,
+            canal,
+        })
+    },
+
+    async antecipacao(
+        token,
+        instituicao_id,
+        amount,
+    ) {
+        return await http.post('/antecipacao', {
+            token,
+            instituicao_id,
+            amount,
+        })
+    },
+
+    async listarCarteira(
+        token,
+        instituicao_id,) {
+        return await http.get('/carteira', {
+            token,
+            instituicao_id,
         })
     },
 

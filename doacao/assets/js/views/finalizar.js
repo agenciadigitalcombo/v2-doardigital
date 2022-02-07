@@ -2,7 +2,7 @@ import adm from "../../../../static/js/api/adm.js"
 const { required, minLength, maxLength } = window.validators
 
 export default {
-    template: ` Os seus dados pessoais serão u
+    template: ` 
 
 <div :style="{ backgroundColor: backgroundColor }">
     <div class="d-flex flex-column flex-root">

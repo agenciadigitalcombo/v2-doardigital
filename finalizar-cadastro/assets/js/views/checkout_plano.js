@@ -273,8 +273,7 @@ export default {
 
 	methods: {
 		
-		async transacaoRecorrencia() {
-			
+		async transacaoRecorrencia() { 
 			this.error = null
 			let res = await adm.recorrenciaDigital(
 				this.token,

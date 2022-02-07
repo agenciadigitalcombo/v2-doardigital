@@ -1,0 +1,25 @@
+
+.status_paid {
+    color: #50cd89;
+    background-color: #e8fff3
+}
+.status_refused {
+    border: 2px solid #DC143C;
+    color: #DC143C; 
+}
+.status_unpaid {
+    color: #f1416c;
+    background-color: #fff5f8
+
+}
+.status_waiting_payment {
+    color: #7e8299;
+    background-color: #f5f8fa
+}
+
+
+.tipo_unico {
+    color: #f1416c;
+    background-color: #fff5f8
+
+}

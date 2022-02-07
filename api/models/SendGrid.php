@@ -15,7 +15,7 @@ class SendGrid
         return $headers;
     }
 
-    function send(
+    static function send(
         $to_name,
         $to_email,
         $from_name,
@@ -58,8 +58,8 @@ class SendGrid
     {
         $html = file_get_contents(__DIR__ . "/../template_email/{$modelo_html}.html");
         $html = str_replace('@@text@@', $payload['text'], $html);
-        foreach ($payload as $k) {
-            $html = str_replace("@@" . $k . "@@", $payload[$k], $html);
+        foreach ($payload as $k => $v) {
+            $html = str_replace("@@" . $k . "@@", $v, $html);
         }
         $html = trim( str_replace("%20", ' ', $html) );
         return $html;

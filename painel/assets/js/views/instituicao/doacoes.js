@@ -205,11 +205,11 @@ export default {
                                                     </td> 
                                                     <td> {{ item.valor | is_price }} </td> 
                                                     <td>
-                                                        <div class="badge badge-light-success"> {{item.status_pagamento  | is_status | is_status2}} </div>
+                                                        <div class="badge" :class="'status_'+item.status_pagamento"> {{item.status_pagamento | este_status }} </div>
                                                     </td> 
                                                     <td>{{item.data | is_data }}</td> 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.tipo | is_tipo | is_tipo2 | is_tipo3}}</div>
+                                                        <div class="badge badge-light" > {{item.tipo | este_tipo}}</div>
                                                     </td> 
                                                     <td class="text-end">
 
@@ -276,29 +276,25 @@ export default {
             return `${data}`
         },
 
-        is_status(status) {
-            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
-           return `${status_pagamento}`
+
+        este_status(status) {
+            let apresentar = {
+                waiting_payment: 'Aguardando Pagamento ',
+                refused: 'Cancelado',
+                paid: 'Pago',
+                unpaid: 'Não Pago'
+            }
+            return apresentar[status] 
         },
 
-        is_status2(status) {
-            let status_pagamento = status.split('paid').join('Pago')
-           return `${status_pagamento}`
-        },
-        
-        is_tipo(tipo) {
-            let tipo_pagamento = tipo.split('boleto').join('Boleto ')
-           return `${tipo_pagamento}`
-        },
-        	
-        is_tipo2(tipo) {
-            let tipo_pagamento = tipo.split('credit_card').join('Crédito')
-           return `${tipo_pagamento}`
-        },
 
-        is_tipo3(tipo) {
-            let tipo_pagamento = tipo.split('pix').join('PIX ')
-           return `${tipo_pagamento}`
+        este_tipo(status) {
+            let apresentar = {
+                boleto: 'Boleto',
+                credit_card: 'Crédito',
+                pix: 'PIX', 
+            }
+            return apresentar[status] 
         },
     },
     
@@ -350,17 +346,14 @@ export default {
 
         
 		async editar(doacao_id){
-			globalThis._doacao = this.doacoes.find(doad => doad.doacao_id == doacao_id)
+			globalThis._doador = this.doacoes.find(doad => doad.doacao_id == doacao_id)
 			window.location.href = "#/doacoes/detalhe"
 		}
     }, 
  
     async mounted() {
-
         this.doacoes = (await this.listarDoacoes()).dados || {}
-        this.getPagina(1)
-
-      
+        this.getPagina(1) 
 
     },
 

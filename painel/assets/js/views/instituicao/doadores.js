@@ -173,7 +173,7 @@ export default {
 
 															<td></td>
 															<td>
-																<div class="badge badge-light-success"> {{item.tipo}} </div>
+																<div class="badge" :class="'tipo_'+item.tipo"> {{item.tipo}} </div>
 															</td>
 															<td class="text-end">
  

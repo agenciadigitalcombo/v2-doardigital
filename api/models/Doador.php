@@ -42,6 +42,15 @@ class Doador implements IDoador
         return $guard;
     }
 
+    public function list_all_data_registro(string $data_registro): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM doador WHERE data_registro='$data_registro'";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+
     public function get_by_email(string $email): array
     {
         $banco = new Banco();

@@ -45,7 +45,7 @@ export default {
 										<div class="d-flex flex-wrap align-items-center mb-10">
 											<div id="kt_signin_password_edit" class="flex-row-fluid ">
 
-												<form @submit.prevent="adicionaMetas" class="form" novalidate="novalidate">
+												<form @submit.prevent="adicionaMetas" class="form">
 													<div class="row mb-1">
 													<div class="col-lg-3">
 															<div class="fv-row mb-5">
@@ -414,6 +414,7 @@ export default {
 			this.dezembro = dados.dezembro
 			this.masc()
 		},
+
 		async masc() {
 			this.masc_money1()
 			this.masc_money2()

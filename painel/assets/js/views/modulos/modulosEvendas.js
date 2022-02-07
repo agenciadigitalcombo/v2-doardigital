@@ -1,4 +1,4 @@
-
+import adm from "../../../../../static/js/api/adm.js"
 
 export default {
     template:`
@@ -39,17 +39,17 @@ export default {
 								<!--begin::Content-->
 								<div id="kt_account_profile_details">
 									<!--begin::Form-->
-									<form id="kt_account_profile_details_form" class="form">
+									<form class="form" @submit.prevent="adicionaEvenda">
 		
 										<!--begin::Wrapper-->
 											<div class=" m-2 p-6">
 												<div class="mb-3">
 													<label for="Chave" class="form-label">Chave</label>
-													<input type="text" class="form-control form-control-lg form-control-solid" id="Chave" disabled >
+													<input type="text" class="form-control form-control-lg form-control-solid" id="Chave"  required v-model="canal"  >
 												  </div>
 										</div>
-										<!--end::Notice-->
-										<!--begin::Actions-->
+								
+										<c-mensagem :msg="msg" ></c-mensagem>
 										<div class="card-footer d-flex justify-content-end py-6 px-9">
 											<button type="submit" class="btn btn-primary"
 												id="kt_account_profile_details_submit">SALVAR</button>
@@ -78,19 +78,38 @@ export default {
 	</div>
     `,
 
-
-     data: function () {
-		return {
-			gravatar: '../painel/assets/image/gravatar.png',
-	
+	data: function () {
+		return { 
+			instituicao_id: null,
+			canal: null,
+			error: null,
+			msg: null,
         }
     },
+
 	methods: {
 	
-     
-       
+		async adicionaEvenda() {
+			this.error = null
+		
+				let res = await adm.savarEvenda(
+					this.instituicao_id,
+					this.canal,
+			
+				)
+				if (!res.next) {
+						setTimeout(() => this.msg = "", 5000);
+					this.error = res.message
+					return null
+				}
+				this.msg = res.message
+		}, 
 
     },
+
+	async mounted() {
+		this.instituicao_id = window.localStorage.getItem('instituicao_id');
+	}
 	
 
 	
