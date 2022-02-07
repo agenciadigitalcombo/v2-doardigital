@@ -123,7 +123,7 @@ class TransacaoControler{
             $split = array_map(function($list){
                 return ['recipient_id' => $list['recebedor_id'],
                         'percentage' => $list['porcetagem'],
-                        'liable' => $list['responsavel_estorno']
+                        'liable' => $list['responsavel_estorno'] == 1 ? true : false 
             ];
             }, $all_split);
         }
