@@ -9,7 +9,7 @@ class Split implements ISplit{
         return $guard;
     }
 
-    public function create(int $instituicao_id, int $recebedor_id, int $responsavel_estorno, int $porcentagem): void
+    public function create(int $instituicao_id, string $recebedor_id, int $responsavel_estorno, int $porcentagem): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO split";
@@ -19,10 +19,10 @@ class Split implements ISplit{
         $banco->exec($sql);
     }
 
-    public function update(int $id, int $instituicao_id, int $recebedor_id, int $responsavel_estorno, int $porcentagem): void
+    public function update(int $id, int $instituicao_id, string $recebedor_id, int $responsavel_estorno, int $porcentagem): void
     {
         $banco = new Banco();
-        $sql = "UPDATE split SET instituicao_id=$instituicao_id, recebedor_id=$recebedor_id, responsavel_estorno=$responsavel_estorno, porcentagem=$porcentagem WHERE id=$id";
+        $sql = "UPDATE split SET instituicao_id=$instituicao_id, recebedor_id='$recebedor_id', responsavel_estorno=$responsavel_estorno, porcentagem=$porcentagem WHERE id=$id";
         $banco->exec($sql);
     }
 

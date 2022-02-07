@@ -9,7 +9,7 @@ interface ISplit
 
     public function create(
         int $instituicao_id,
-        int $recebedor_id,
+        string $recebedor_id,
         int $responsavel_estorno,
         int $porcentagem
     ): void;
@@ -17,7 +17,7 @@ interface ISplit
     public function update(
         int $id,
         int $instituicao_id,
-        int $recebedor_id,
+        string $recebedor_id,
         int $responsavel_estorno,
         int $porcentagem
     ): void;
