@@ -111,9 +111,23 @@ class TransacaoControler{
         
         $codigo = null;
         $url = null;
+        $split = [];
         
         
-        
+        $split_rules = new Split();
+        $all_split = $split_rules->list_all_by_instituicao($instituicao_id);
+        $total_porcent = array_reduce($all_split, function( $total, $pessoa ) {            
+            return intval( $pessoa['porcentagem'] ) + $total;
+        }, 0 );
+        if($total_porcent == 100){
+            $split = array_map(function($list){
+                return ['recipient_id' => $list['recebedor_id'],
+                        'percentage' => $list['porcetagem'],
+                        'liable' => $list['responsavel_estorno']
+            ];
+            }, $all_split);
+        }
+
         if($mensal == 1) {
             set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
         }
@@ -124,7 +138,7 @@ class TransacaoControler{
             $res_pagarme_cartao = $pagarme_cartao->create_cartao($cart_numero, $cart_cvv, $cart_validade, $cart_nome);
             
             $get_id_cartao = $res_pagarme_cartao['id'];
-            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
+            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento, $split);
             $get_token = $res_pagarme_recorrencia['id'];
             $get_status = $res_pagarme_recorrencia['status'];
             $codigo = "";
@@ -134,7 +148,7 @@ class TransacaoControler{
         if($mensal == 1 and $type_pagamento == "boleto"){
             
             $pagarme_cartao = new PagarMeBoleto();
-            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento);
+            $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento, $split);
             $get_status = $res_pagarme_recorrencia['current_transaction'] ['status'];
             $get_token = $res_pagarme_recorrencia['id'];
             $codigo = $res_pagarme_recorrencia['current_transaction'] ['boleto_barcode'];
@@ -154,7 +168,7 @@ class TransacaoControler{
 
             $pagarme_cartao = new PagarMeCartao();
             
-            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome, $split);
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = "";
@@ -171,7 +185,7 @@ class TransacaoControler{
             
             $pagarme_pix = new PagarMePix();
             
-            $res_pagarme = $pagarme_pix->pay($planos_valor);
+            $res_pagarme = $pagarme_pix->pay($planos_valor, $split);
             
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
@@ -191,7 +205,7 @@ class TransacaoControler{
             
             $pagarme_boleto = new PagarMeBoleto();
             
-            $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome);
+            $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome, $split);
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = $res_pagarme['boleto_barcode'];

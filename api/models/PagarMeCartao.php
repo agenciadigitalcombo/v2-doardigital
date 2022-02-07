@@ -5,7 +5,7 @@ class PagarMeCartao extends PagarMe
 
     public function create(int $amount, string $type_pagamento, string $card_number, string $card_cvv, string $card_expiration_date, string $card_holder_name, string $costumer_id, string $nome_costumer, string $email_costumer, string $document_costumer, array $phone_numbers, string $data_nascimento,
     string $estado, string $city, string $bairro, string $logradouro, string $street_number, string $cep,
-        string $plano_id, string $title_plano, int $quantidade = 1, string $country = "br", string $type_document = "cpf"): array
+        string $plano_id, string $title_plano, array $split = [], int $quantidade = 1, string $country = "br", string $type_document = "cpf"): array
     {
         $payload = [
 
@@ -53,6 +53,10 @@ class PagarMeCartao extends PagarMe
             ]
         ];
 
+
+        if(!empty($split)){
+            $payload['split_rules'] = $split;
+        }
         return $this->post('/transactions', $payload, false);
     }
 
@@ -73,7 +77,7 @@ class PagarMeCartao extends PagarMe
 
 
     public function create_recorrencia(string $plano_id, string $card_id, string $bairro, string $logradouro, string $street_number, string $cep, string $document_costumer, string $email_costumer, string $nome_costumer, 
-    string $phone_numbers, string $phone_ddd, string $type_pagamento): array
+    string $phone_numbers, string $phone_ddd, string $type_pagamento, array $split = []): array
     {
         $payload = [
             "card_id" => $card_id, 
@@ -96,6 +100,9 @@ class PagarMeCartao extends PagarMe
             "plan_id" =>  $plano_id
         ];
        
+        if(!empty($split)){
+            $payload['split_rules'] = $split;
+        }
 
         return $this->post('/subscriptions', $payload, false);
     }

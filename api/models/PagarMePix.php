@@ -6,7 +6,7 @@ class PagarMePix extends PagarMe
     {
         parent::__construct();
     }
-    function pay(int $amount): array
+    function pay(int $amount, array $split = []): array
     {
         $payload = [
             'payment_method' => 'pix',
@@ -21,6 +21,10 @@ class PagarMePix extends PagarMe
             // 'split_rules' => $split
         ];
         
+
+        if(!empty($split)){
+            $payload['split_rules'] = $split;
+        }
 
         return $this->post('/transactions', $payload, false);
     }
