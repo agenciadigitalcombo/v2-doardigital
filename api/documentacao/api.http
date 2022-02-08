@@ -1,6 +1,6 @@
 POST http://localhost/v2-doardigital/api/criar-adm
 Content-Type: multipart/form-data;
-
+ 
 {
     "nome": "Bruno Vieira",
     "email": "br.rafael@outlook.com",

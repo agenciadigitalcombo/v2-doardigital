@@ -196,10 +196,18 @@ export default {
 
 
     async listarInstutuicao(token) {
+        return await http.get('/instituicao', {
+            token
+        })
+    },
+
+    async listarInstutuicaoTodas(token) {
         return await http.get('/list-instituicao', {
             token
         })
     },
+
+    
 
     async listarEnderecoInst(
         token,
@@ -249,6 +257,36 @@ export default {
 
         })
     },
+
+    async configuracaoInstituicao(
+        token,
+		instituicao_id,
+		tags,
+		descricao_site,
+		cor,
+		logo
+    ) {
+        return await http.post('/configuracao-instituicao', {
+            token,
+            instituicao_id,
+            tags,
+            descricao_site,
+            cor,
+            logo
+        })
+    },
+
+    async uploadImg(
+        file
+    ) {
+        return await http.post('/upload-img', {
+        file
+        })
+    },
+
+
+
+
 
     async todoSubdomain(subdomaim) {
         return await http.get('/info-subdomaim', {

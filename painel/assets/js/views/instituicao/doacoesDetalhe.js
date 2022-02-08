@@ -66,7 +66,7 @@ export default {
 												<span class=" fw-bold text-muted">
 												Valor</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price}} {{cpf}} vlor</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price}}</p>
 												
 
 													<span class=" fw-bold text-muted">

@@ -41,7 +41,7 @@ export default {
 									</div> 
 								</div> 
 							
-								<form class="form" @submit.prevent="addInstituicao" novalidate="novalidate">
+								<form class="form" @submit.prevent="addInstituicao">
 										<div class="card-body border-top p-9"> 
 											<div class="row mb-6"> 
 												<label class="col-lg-4 col-form-label required fw-bold fs-6">Nome

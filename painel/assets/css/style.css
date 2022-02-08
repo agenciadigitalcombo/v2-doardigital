@@ -31,9 +31,6 @@ span .menu  {
     height:32px;
 }
 
-
-
-
 .all-step {
     display: flex;
     justify-content: space-between;
@@ -87,3 +84,6 @@ span .menu  {
     padding: 0 !important
 }
 
+.xxbtn { 
+    width: 200px !important;
+}

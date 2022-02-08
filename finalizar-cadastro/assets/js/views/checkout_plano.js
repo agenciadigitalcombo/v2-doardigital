@@ -297,8 +297,7 @@ export default {
 		descartavel() {
 			window.location.href = "/painel/index.html#/perfil-editar";
 		}
-       
-
+        
     },
 	
 
