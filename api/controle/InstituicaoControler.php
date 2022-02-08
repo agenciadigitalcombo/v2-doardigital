@@ -123,32 +123,21 @@ class InstituicaoControler
         $instituicao_id = $_REQUEST['instituicao_id'];
 
 
-
-        $nome_fantasia = $_REQUEST['nome_fantasia'];
-        $razao_social = $_REQUEST['razao_social'];
-
-        $email = $_REQUEST['email'];
-
-        $cnpj = $_REQUEST['cnpj'];
-        $telefone = $_REQUEST['telefone'];
-
-        $transform_cnpj = withdraw_caracter($cnpj);
-        $transform_tel = withdraw_caracter($telefone);
+        $titulo_site = $_REQUEST['titulo_site'] ?? "";
+        $tags = $_REQUEST['tags'] ?? "";
+        $descricao_site = $_REQUEST['descricao_site'] ?? "";
+        $cor = $_REQUEST['cor'] ?? "";
+        $logo = $_REQUEST['logo'] ?? "";
 
 
         campo_obrigatorios([
-            'instituicao_id' => 'Informe o ID',
-            'nome_fantasia' => 'Informe um Nome Fantasia',
-            'razao_social' => 'Qual a RazaoSocial',
-            'email' => 'Qual o Email',
-            'telefone' => 'Digite o numero de Telefone',
-            'cnpj' => 'Informe o Cnpj'
+            'instituicao_id' => 'Informe o ID'
         ]);
 
-        $instituicao->update($instituicao_id, $nome_fantasia, $razao_social, $email, $transform_cnpj, $transform_tel, "#FFF", "");
+        $instituicao->config_instituicao($instituicao_id, $cor, $logo, $titulo_site, $tags, $descricao_site);
         echo json_encode([
             'next' => true,
-            'message' => 'Instituicao atualizada'
+            'message' => 'Instituicao Configurada'
         ]);
     }
 

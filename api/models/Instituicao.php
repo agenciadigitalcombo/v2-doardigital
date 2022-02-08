@@ -65,11 +65,11 @@ class Instituicao implements IInstituicao
 
     }
 
-    public function config_instituicao(int $instituicao_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
+    public function config_instituicao(int $instituicao_id, string $cor, string $logo, string $titulo_site, string $tags, string $descricao_site): void
     {
         $banco = new Banco();
         $sql = "UPDATE instituicao SET";
-        $sql .= " nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
+        $sql .= " cor='$cor', logo='$logo', titulo_site='$titulo_site', tags='$tags', descricao_site='$descricao_site'";
         $sql .= " WHERE id=$instituicao_id";
         
         $banco->exec($sql);

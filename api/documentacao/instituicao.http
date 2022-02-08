@@ -34,6 +34,18 @@ token=eyJzZWNyZXQiOiIgNjFkYjU1M2I4ODNjMiIsIm5vbWUiOiJqb2FxdWltIE1pZ3VlbCIsImVtYW
 
 ###
 
+POST http://localhost/v2-doardigital/api/configuracao-instituicao
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiIgNjFkYjU1M2I4ODNjMiIsIm5vbWUiOiJqb2FxdWltIE1pZ3VlbCIsImVtYWlsIjoiam9hcXVpbUBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.edb1a7efadc35fa936991c29e23cb34ea8d9ed8e,
+&instituicao_id=5,
+&tags=google
+&descricao_site=fazendo o bem sem olhar aquem
+&cor=#FFFF
+&logo=gravatar
+
+###
+
 POST http://localhost/v2-doardigital/api/on_off
 Content-Type: application/x-www-form-urlencoded
 
@@ -82,7 +94,7 @@ Content-Type: application/x-www-form-urlencoded
 
 ###
 
-POST http://localhost/v2-doardigital/api//create-conta-instituicao
+POST http://localhost/v2-doardigital/api/create-conta-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67,
