@@ -1,5 +1,11 @@
 <?php
 
+define('WHITE_LIST', [
+    "jpg",
+    "jpeg",
+    "png"
+]);
+
 function router($path, $action_hook)
 {
     $black_list = [
@@ -37,18 +43,13 @@ function get_curl($url)
     return $output;
 }
 
-function upload($name)
+function upload()
 {
-    $white_list = [
-        "jpg",
-        "jpeg",
-        "png"
-    ];
-    $extensao = pathinfo($_FILES[$name]["name"], PATHINFO_EXTENSION);
-    if (in_array($extensao, $white_list)) {
+    $type_file = pathinfo($_FILES['file']["name"], PATHINFO_EXTENSION);
+    if (in_array($type_file, WHITE_LIST)) {
         $name = uniqid() . time() . ".png";
-        $file = __DIR__ . "/../uploads/{$name}";
-        $tmp = $_FILES[$name]['tmp_name'];
+        $file = __DIR__ . "/../upload/{$name}";
+        $tmp = $_FILES['file']['tmp_name'];
         if (move_uploaded_file($tmp, $file)) {
             return $name;
         }
@@ -453,8 +454,6 @@ function min_amount($valor): int
     return $amount;
 }
 
-
-
 function campo_obrigatorios(array $payload): void
 {
     $campos_obrigatorios = array_keys($payload);
@@ -469,7 +468,6 @@ function campo_obrigatorios(array $payload): void
         }
     }
 }
-
 
 function campos_numericos(array $valores): void
 {
