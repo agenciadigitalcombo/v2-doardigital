@@ -128,13 +128,13 @@ class InstituicaoControler
         $descricao_site = $_REQUEST['descricao_site'] ?? "";
         $cor = $_REQUEST['cor'] ?? "";
         $logo = $_REQUEST['logo'] ?? "";
-
+        $icon = $_REQUEST['icon'] ?? "";
 
         campo_obrigatorios([
             'instituicao_id' => 'Informe o ID'
         ]);
 
-        $instituicao->config_instituicao($instituicao_id, $cor, $logo, $titulo_site, $tags, $descricao_site);
+        $instituicao->config_instituicao($instituicao_id, $cor, $logo, $titulo_site, $tags, $descricao_site, $icon);
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao Configurada'
