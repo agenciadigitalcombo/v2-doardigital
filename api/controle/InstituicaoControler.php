@@ -219,7 +219,7 @@ class InstituicaoControler
         $sanitize_secret = trim($get_secret_adm);
         
         
-        $secret = $adm->list_profile("61dcbc7262b7e");
+        $secret = $adm->list_profile($sanitize_secret);
         $id = $secret['id'];
         
         
