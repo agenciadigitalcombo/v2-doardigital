@@ -207,7 +207,7 @@ export default {
         })
     },
 
-    
+
 
     async listarEnderecoInst(
         token,
@@ -260,11 +260,11 @@ export default {
 
     async configuracaoInstituicao(
         token,
-		instituicao_id,
-		tags,
-		descricao_site,
-		cor,
-		logo
+        instituicao_id,
+        tags,
+        descricao_site,
+        cor,
+        logo
     ) {
         return await http.post('/configuracao-instituicao', {
             token,
@@ -277,15 +277,20 @@ export default {
     },
 
     async uploadImg(
-        file
+        form
     ) {
-        return await http.post('/upload-img', {
-        file
+        console.log(form)
+        let res = await fetch(`https://doardigital.tk/api/upload-img`, {
+
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: form,
+           
         })
+        return await res.json()
+
     },
-
-
-
 
 
     async todoSubdomain(subdomaim) {

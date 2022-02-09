@@ -18,8 +18,14 @@
 }
 
 
-.tipo_unico {
+.tipo_UNICO {
     color: #f1416c;
-    background-color: #fff5f8
+    background-color: #fff5f8 
 
 }
+.tipo_RECORRENTE {
+    color: #50cd89;
+    background-color: #e8fff3
+
+}
+

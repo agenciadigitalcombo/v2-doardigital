@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template: ` 
+	template:` 
 	<div>
 
 	<c-header></c-header>
@@ -20,7 +20,7 @@ export default {
 										<h3 class="fw-bolder m-0">Configuração</h3>
 									</div>
 								</div> 
-								<form class="form" @submit.prevent="AddConfiguracao" enctype="multipart/form-data">
+								<form class="form" @submit.prevent="AddConfiguracao">
 								<div class="card-body p-9"> 
 									<div class="row"> 
 										<div class="col-lg-12">
@@ -74,7 +74,7 @@ export default {
 														<div class="mt-1"> 
  
 															<div class="image-input image-input-empty" data-kt-image-input="true">
-															<img :src="imagemVer" @click="openUpload" alt="Girl in a jacket" width="200" height="200">
+															<img :src="file" @click="openUpload" alt="Girl in a jacket" width="200" height="200">
 															  
 																<label class="btn btn-icon btn-circle btn-active-color-primary w-30px h-30px bg-white shadow"
 																	data-kt-image-input-action="change"
@@ -87,8 +87,8 @@ export default {
 																</svg>
 																	</i>
 
-																	<input ref="file" v-on:change="updatePreview" required type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-																	
+																	<input  id="file-field" @change="updatePreview($event)" required type="file" name="avatar" accept="image/*" v-model="file"/>
+													
 																	<input type="hidden" name="avatar_remove" />
 																 
 																</label> 
@@ -129,8 +129,8 @@ export default {
 														{{msg}}
 														<br>
 														{{file.name}}
-														{{imagemVer.name}}
-														
+														<br>
+														<button  @click="file = ''" type="button" class="btn btn-danger m-2">elimina</button>
 											<div class="card-footer  px-9">
 												<button type="submit" class="btn btn-primary m-2">SALVAR</button>
 											</div> 
@@ -154,81 +154,91 @@ export default {
     `,
 
 
-	data: function () {
+     data: function () {
 		return {
-			token: null,
-			instituicao_id: null,
-			tags: null,
-			descricao_site: null,
-			cor: null,
-			logo: null,
-			msg: null,
-			error: null,
-			file: "",
-			imagemVer: "../painel/assets/icons/blank.png"
+		token: null,
+		instituicao_id: null,
+		tags: null,
+		descricao_site: null,
+		cor:  null,
+		logo:  null,
+		msg: null,
+		error: null,
+	 
+		file:"../painel/assets/icons/blank.png"
 
+        }
+    },
+	computed: {
+		fileName () {
+		  const { file } = this.file
+	
+		  if (file) {
+			const split = file.name.split('.')
+			return `${split[0]}-${new Date().getTime()}.${split[1]}`
+		  } else {
+			return ''
+		  }
 		}
-	},
+	  },
 
 	methods: {
 		async sendFile() {
-			let file = new FormData();
-			for (let files of this.$refs.file) {
-				file.append(`file`, files);
-			}
+		
 			this.error = null
 
 			let res = await adm.uploadImg(
-				this.file
-			)
+				this.file 
+					)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
-		},
+		  },
 
 
-		openUpload() {
-
-
-		},
-
-		updatePreview(e) {
+		openUpload () {
+			document.getElementById('file-field').click()
+		
+		  },
+		  
+		  updatePreview (e) {
+			this.file = e.target.files[0]
 			console.log(e)
+		  },
+	 
 
-			var file, files = e.target.files
+		  updatePreviewxxx (e) {
+			console.log('e', e)
+			var reader, files = e.target.files
 			if (files.length === 0) {
-				console.log('vazio')
+			  console.log('Empty')
 			}
-			file = new FileReader();
-			file.onload = (e) => {
-				this.imagemVer = e.target.result
+			reader = new FileReader();
+			reader.onload = (e) => {
+			  this.file = e.target.result
 			}
-			file.readAsDataURL(files[0])
-		},
+			reader.readAsDataURL(files[0])
+		  },
 
 
-
-		async carregarImg() {
-			let file = new FormData();
-
-			file.append('file', this.$refs.file.files[0]);
-
+		  async carregarImg() {
+		 
 			this.error = null
 
 			let res = await adm.uploadImg(
-				file
-			)
+				this.file 
+					)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
-		},
-
+		  },
+		  
 
 
 		async AddConfiguracao() {
@@ -241,8 +251,8 @@ export default {
 				this.descricao_site,
 				this.cor,
 				this.logo,
-
-
+				
+				
 			)
 			if (!res.next) {
 				this.error = res.message
@@ -251,16 +261,16 @@ export default {
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
 		},
+     
+       
 
-
-
-	},
-
+    },
+	
 
 	async mounted() {
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
 	},
 
-
+	
 }
 
