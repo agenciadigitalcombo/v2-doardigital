@@ -452,12 +452,6 @@ class DashboardControler{
 
     }
 
-    static function total_instituicao_of_adm(): array
-    {
-
-        return[];
-    }
-
     static function doadores($instituicao_id, $data_resgistro):array
     {   
 
@@ -504,11 +498,17 @@ class DashboardControler{
     static function dashboard_admin()
     {
         $adm = new Adm();
+        $instituicao = new Instituicao();
 
         $token_parce = token();
 
         $scret = $token_parce['secret'];
         $adm_id = $adm->list_profile($scret);
+
+        $list_all_instituicao = $instituicao->list_all_by_adm_id($adm_id);
+
+        var_dump($list_all_instituicao);
+
         
 
 
