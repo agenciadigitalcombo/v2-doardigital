@@ -46,6 +46,7 @@ function get_curl($url)
 function upload()
 {
     $type_file = pathinfo($_FILES['file']["name"], PATHINFO_EXTENSION);
+    var_dump($_FILES);
     if (in_array($type_file, WHITE_LIST)) {
         $name = uniqid() . time() . ".png";
         $file = __DIR__ . "/../upload/{$name}";

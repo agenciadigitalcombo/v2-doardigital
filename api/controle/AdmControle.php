@@ -32,7 +32,8 @@ class AdmControle
         $transform_tel = valid_telefone($telefone);
         
         
-
+        
+        
         if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
                 "next" => false,
@@ -52,6 +53,20 @@ class AdmControle
             'super_adm' => $usuario_logado['super_adm'],
             'step' => $usuario_logado['step']
         ];
+
+        SendGrid::send(
+            $nome, 
+            $email, 
+            "null", 
+            "null", 
+            "null", 
+            "null", 
+            "null", 
+            "null", 
+            "null", 
+            "null",
+            'cadastro');
+
         echo json_encode([
             "next" => true,
             "message" => "Usuário criado com sucesso",
@@ -193,7 +208,7 @@ class AdmControle
             'assunto' => 'Informe um assunto'
         ]);
 
-        $email->send($id_instituicao, $endereco, $assunto, $content);
+        // $email->send($id_instituicao, $endereco, $assunto, $content);
         echo json_encode([
             "next" => true,
             "message" => "Nova senha enviada por email"
