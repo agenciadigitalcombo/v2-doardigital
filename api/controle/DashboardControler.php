@@ -504,11 +504,18 @@ class DashboardControler{
 
         $scret = $token_parce['secret'];
         $adm_id = $adm->list_profile($scret);
+        $get_adm_nome = $token_parce['nome'];
 
-        $list_all_instituicao = $instituicao->list_all_by_adm_id($adm_id);
+        $list_all_instituicao = $instituicao->list_all_by_adm_id($adm_id['id']);
+        $number_instituicoes = count(array_keys($list_all_instituicao));
 
-        var_dump($list_all_instituicao);
-
+        echo json_encode([
+            'next' => true,
+            'message' => 'Dashboard do Adm ' . $get_adm_nome,
+            'dados' => [
+                'instituicoes' => $number_instituicoes
+            ]
+        ]);
         
 
 

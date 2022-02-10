@@ -115,8 +115,9 @@ class Instituicao implements IInstituicao
     {
 
         $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE adm_id='$adm_id'";
+        $sql = "SELECT * FROM instituicao WHERE adm_id=$adm_id";
         $guard = $banco->query($sql);
         return $guard;
     }
+
 }

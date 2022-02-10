@@ -1,4 +1,4 @@
 <?php
 
 router('/dashboard', 'DashboardControler@dashboard_instituicao');
-router('/dashboard-adm', 'DashboardControler@dashboard_admin');
+router('/dashboard-adm', 'DashboardAdmControler@dashboard_admin');

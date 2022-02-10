@@ -47,6 +47,64 @@ class Doacao implements IDoacao{
         $sql = "SELECT * FROM doacoes WHERE instituicao_id='$instituicao_id'";
         $guard = $banco->query($sql);
         return $guard;
+    }    
+    
+    public function list_ids(array $ids): array
+    {
+        $banco = new Banco();
+        $plus = [];
+        foreach( $ids as $ID ) {
+            $plus[] = "instituicao_id={$ID}";
+        }
+        $plus = implode(' OR ', $plus);
+        $where = count($ids) > 0 ? 'WHERE' : '';
+        $sql = "SELECT * FROM doacoes {$where} {$plus}";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+    public function list_ids_tipo(array $ids, string $tipo): array
+    {
+        $banco = new Banco();
+        $plus = [];
+        foreach( $ids as $ID ) {
+            $plus[] = "instituicao_id={$ID}";
+        }
+        $plus = implode(' OR ', $plus);
+        $_AND = count($ids) > 0 ? 'AND' : '';
+        $sql = "SELECT * FROM doacoes WHERE tipo='{$tipo}' {$_AND} {$plus}";
+        die($sql);
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+    public function list_ids_status_pagamento(array $ids, string $status): array
+    {
+        $banco = new Banco();
+        $plus = [];
+        foreach( $ids as $ID ) {
+            $plus[] = "instituicao_id={$ID}";
+        }
+        $plus = implode(' OR ', $plus);
+        $_AND = count($ids) > 0 ? 'AND' : '';
+        $sql = "SELECT * FROM doacoes WHERE status_pagamento='{$status}' {$_AND} {$plus}";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
+
+    public function list_ids_tipo_status(array $ids, string $status, string $tipo): array
+    {
+        $banco = new Banco();
+        $plus = [];
+        foreach( $ids as $ID ) {
+            $plus[] = "instituicao_id={$ID}";
+        }
+        $plus = implode(' OR ', $plus);
+        $_AND = count($ids) > 0 ? 'AND' : '';
+        $sql = "SELECT * FROM doacoes WHERE status_pagamento='{$status}' {$_AND} {$plus} AND  tipo='{$tipo}'";
+        $guard = $banco->query($sql);
+        return $guard;
     }
 
     public function list_all_by_instituicao_tipo(int $instituicao_id, string $tipo): array

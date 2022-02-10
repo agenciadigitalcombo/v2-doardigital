@@ -158,7 +158,8 @@ class AdmControle
             'telefone' => $guard['telefone'],
             'step' => $guard['step'],
             'gravatar' => gravatar($guard['email']),
-            'data_nascimento' => $guard['data_nascimento']
+            'data_nascimento' => $guard['data_nascimento'],
+            'super_adm' => $guard['super_adm']
         ];
         echo json_encode([
             'next' => true,
