@@ -28,7 +28,9 @@ export default {
            <div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="5px">
                <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
                <div class="menu-item" v-for="m in menus">
-                    <a class="menu-link"  :href="m.link" >
+
+
+                    <a class="menu-link" :href="m.link" V-if="ADM.SUPER == 1 && menus.permisao == 1">
                         <span class="menu-icon">
                            <span class="svg-icon svg-icon-2">
                             <img class="filter-green" class="menu" :src="'../painel/assets/icon/'+m.icon">

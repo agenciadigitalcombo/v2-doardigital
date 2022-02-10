@@ -16,10 +16,42 @@ export default {
                                     <div class="card-title"> 
                                         
                                     </div> 
+
+
+
+
+
+
+
+                                   
+                                    
+
+
+                                    
+
+                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    
                                     <div class="card-toolbar"> 
                                         <div class="d-flex justify-content-end"
                                             data-kt-subscription-table-toolbar="base"> 
-                                            <button type="button" class="btn btn-light-primary me-3" v-once
+                                         
+                                            <button type="button" class="btn btn-light-primary me-3" v-once @click="modal()"
                                                 data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                                  <span class="svg-icon svg-icon-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -31,8 +63,24 @@ export default {
                                                 </span>
                                                Filtros
                                             </button>
-                                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px"
-                                                data-kt-menu="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            
+
+                                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px " :class="mostraresconder"
+                                                data-kt-menu="true"  style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate(-117px, 125px);">
                                                 <div class="px-7 py-5">
                                                     <div class="fs-5 text-dark fw-bolder">Opção de Filtros</div>
                                                 </div>
@@ -260,8 +308,12 @@ export default {
             doacoes: [],
             elementoPaginacao: 10,
             dadosPagina: [],
-            paginaAtual: 1
-
+            paginaAtual: 1,
+            mostraresconder:
+            {
+                'show': false
+            
+            }
         }
     },
 
@@ -284,7 +336,7 @@ export default {
                 paid: 'Pago',
                 unpaid: 'Não Pago'
             }
-            return apresentar[status] 
+            return apresentar[status]
         },
 
 
@@ -292,15 +344,22 @@ export default {
             let apresentar = {
                 boleto: 'Boleto',
                 credit_card: 'Crédito',
-                pix: 'PIX', 
+                pix: 'PIX',
             }
-            return apresentar[status] 
+            return apresentar[status]
         },
     },
-    
+
 
     methods: {
 
+        modal() {
+            console.log('jms')
+            this.mostraresconder =
+            {
+                'show': true 
+            }
+        },
         async listarDoacoes() {
             let res = await adm.listarDoacoes(
                 this.instituicao_id
@@ -335,33 +394,33 @@ export default {
             this.getPagina(this.paginaAtual)
         },
         estaActivo(semPagina) {
-            return semPagina  == this.paginaAtual ? "active": ""
-                        //        ou
-          //  if (semPagina == this.paginaAtual) {
-           //     return "active"
-         //   } else {
+            return semPagina == this.paginaAtual ? "active" : ""
+            //        ou
+            //  if (semPagina == this.paginaAtual) {
+            //     return "active"
+            //   } else {
             //    return "" 
-          //  }  Emma Smith
+            //  }  Emma Smith
         },
 
-        
-		async editar(doacao_id){
-			globalThis._doador = this.doacoes.find(doad => doad.doacao_id == doacao_id)
-			window.location.href = "#/doacoes/detalhe"
-		}
-    }, 
- 
+
+        async editar(doacao_id) {
+            globalThis._doador = this.doacoes.find(doad => doad.doacao_id == doacao_id)
+            window.location.href = "#/doacoes/detalhe"
+        }
+    },
+
     async mounted() {
         this.doacoes = (await this.listarDoacoes()).dados || {}
-        this.getPagina(1) 
+        this.getPagina(1)
 
     },
 
     created() {
         this.instituicao_id = window.localStorage.getItem("instituicao_id")
 
-  
-        
+
+
     }
 
 

@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-	template: ` 
+	template:` 
 	<div>
 
 	<c-header></c-header>
@@ -23,43 +23,8 @@ export default {
 								<form class="form" @submit.prevent="AddConfiguracao" enctype="multipart/form-data">
 								<div class="card-body p-9"> 
 									<div class="row"> 
-										<div class="col-lg-12">
-											<div class="fv-row mb-10">
-												<label class="required fw-bold fs-6 mb-2">Titulo do Site</label>
-												<input required type="text" name="text_input"
-													class="form-control form-control-solid mb-3 mb-lg-0"
-													placeholder=""/>
-											</div>
-										</div> 
-									 
-										<div class="col-lg-12">
-											<div class="fv-row mb-10">
-												<label class="required fw-bold fs-6 mb-2">Tags Google</label>
-												<textarea name="textarea_input"  v-model="tags" placeholder="As suas tags"
-													class="form-control form-control-solid"></textarea>
-											</div>
-										</div> 
-
-										<div class="col-lg-12">
-										<div class="fv-row mb-10">
-											<label class="required fw-bold fs-6 mb-2">Descrição Google</label>
-											<textarea name="textarea_input" v-model="descricao_site"  
-												class="form-control form-control-solid"></textarea>
-										</div>
-									</div> 
- 
-										<div class="col-lg-12">
-											<div class="fv-row mb-10">
-												<label class="required fw-bold fs-6 mb-2">Escolha uma Cor de Fundo</label>
-												<br>
-												<div>
-											A cor deve ter um bom contraste com o branco
-												</div>
-													<input required style="width: 130px; height: 50px;" class="" type="color" v-model="cor"  
-														maxlength="75">
-													</div>
-									 
-											</div>
+									  
+									   
 
 											<div class="col-lg-12">
 												<div class="fv-row mb-10">
@@ -87,7 +52,7 @@ export default {
 																</svg>
 																	</i>
 
-																	<input ref="file" v-on:change="updatePreview" required type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+																	<input  id="file-field" v-on:change="updatePreview" required type="file" name="avatar" accept=".png, .jpg, .jpeg" v-model="file"/>
 																	
 																	<input type="hidden" name="avatar_remove" />
 																 
@@ -126,6 +91,32 @@ export default {
 												</div>
 											</div> 
 											<br>
+____________________________________________________________________________________________________________________
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">VUe Example Component</div>
+
+<div class="panel-body">
+		<legend>Upload form</legend>
+
+		<div class="form-group">
+			<label>Upload Files</label>
+			<input id="upload-file" type="file" multiple class="form-control" @change="fieldChange">
+		</div>
+
+
+
+
+		<button class="btn btn-primary" @click="uploadFile">Submit</button>
+
+</div>
+</div>
+
+____________________________________________________________________________________________________________
+
+
 														{{msg}}
 														<br>
 														{{file.name}}
@@ -154,81 +145,134 @@ export default {
     `,
 
 
-	data: function () {
+     data: function () {
 		return {
-			token: null,
-			instituicao_id: null,
-			tags: null,
-			descricao_site: null,
-			cor: null,
-			logo: null,
-			msg: null,
-			error: null,
-			file: "",
-			imagemVer: "../painel/assets/icons/blank.png"
+		token: null,
+		instituicao_id: null,
+		tags: null,
+		descricao_site: null,
+		cor:  null,
+		logo:  null,
+		msg: null,
+		error: null,
+		file: "",
+		imagemVer:"../painel/assets/icons/blank.png",
 
-		}
-	},
+		attachments:[],
+		form: new FormData
+
+        }
+    },
 
 	methods: {
+
+
+		fieldChange(e){
+			let selectedFiles=e.target.files;
+
+			if(!selectedFiles.length){
+				return false;
+			}
+
+			for(let i=0;i<selectedFiles.length;i++){
+
+				this.attachments.push(selectedFiles[i]);
+			}
+
+
+
+			console.log(this.attachments);
+
+
+		},
+		async uploadFile(){
+			for(let i=0; i<this.attachments.length;i++){
+
+				this.form.append('pics[]',this.attachments[i]);
+			}
+
+			const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+			document.getElementById('upload-file').value=[];
+
+		 
+			
+			let res = await adm.uploadImg( 
+				this.file,
+				
+				
+					)
+				.catch(response=>{
+					//error
+				});
+				console.log(res);
+		},
+
+
+
+
+
+
+
+
 		async sendFile() {
 			let file = new FormData();
-			for (let files of this.$refs.file) {
-				file.append(`file`, files);
+			for (let files of this.$refs.files.files) {
+			  file.append(`file`, files);
 			}
 			this.error = null
 
 			let res = await adm.uploadImg(
-				this.file
-			)
+				this.file 
+					)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
-		},
+		  },
 
 
-		openUpload() {
-
-
-		},
-
-		updatePreview(e) {
-			console.log(e)
-
+		openUpload () {
+			document.getElementById('file-field').click()
+		
+		  },
+		  
+		  updatePreview (e) {
+			console.log( e)
+			 
 			var file, files = e.target.files
 			if (files.length === 0) {
-				console.log('vazio')
+			  console.log('vazio')
 			}
 			file = new FileReader();
 			file.onload = (e) => {
-				this.imagemVer = e.target.result
+			  this.imagemVer = e.target.result
 			}
 			file.readAsDataURL(files[0])
-		},
+		  },
 
-
-
-		async carregarImg() {
+		  
+	 
+		  async carregarImg() {
 			let file = new FormData();
 
-			file.append('file', this.$refs.file.files[0]);
+            file.append('file-field', this.imagemVer);
 
 			this.error = null
 
-			let res = await adm.uploadImg(
-				file
-			)
+			let res = await adm.uploadImg( 
+				this.file = new FormData()
+				
+					)
 			if (!res.next) {
 				this.error = res.message
 				return null
 			}
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
-		},
-
+		  },
+		  
 
 
 		async AddConfiguracao() {
@@ -241,8 +285,8 @@ export default {
 				this.descricao_site,
 				this.cor,
 				this.logo,
-
-
+				
+				
 			)
 			if (!res.next) {
 				this.error = res.message
@@ -251,16 +295,16 @@ export default {
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
 		},
+     
+       
 
-
-
-	},
-
+    },
+	
 
 	async mounted() {
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
 	},
 
-
+	
 }
 

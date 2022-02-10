@@ -66,7 +66,7 @@ export default {
 																<div class="d-flex align-items-center me-2">
 																	<div
 																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)"  v-modal="amount" :value="valor"    
+																		<input v-on:click="setarPlano(listar)"  v-model="amount" :value="listar.amount"    
 																			class="form-check-input" type="radio" name="plan" />
 																			</div>
 
@@ -338,9 +338,9 @@ export default {
 		this.backgroundColor = config.cor
 
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano 
-		// this.amount = dados.amount 
+        this.amount = this.dados.filter(x => x.status == 1)[0].amount
 
-	
+		console.log(this.amount)
 		
 	},
 
