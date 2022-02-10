@@ -57,7 +57,7 @@ class TransacaoControler{
         $cart_validade_campo = $_REQUEST['cart_validade'];
         $cart_validade = withdraw_caracter($cart_validade_campo);
         
-        $reference_key = "re_" . uniqid();
+        $reference_key = "ref_" . uniqid();
         
         
         campo_obrigatorios([

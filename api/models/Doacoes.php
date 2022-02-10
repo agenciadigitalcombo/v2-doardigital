@@ -147,6 +147,15 @@ class Doacao implements IDoacao{
         return $guard;
     }
 
+    public function get_doacao_by_reference_key(string $reference_key): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT instituicao_id, doador_id FROM doacoes WHERE reference_key='$reference_key'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
+
     public function get_doador(int $doador_id): array
     {
         $banco = new Banco();
@@ -155,17 +164,18 @@ class Doacao implements IDoacao{
         return $guard[0] ?? [];
     }
 
+
     public function set_status(int $instituicao_id, string $status): void
     {
         $banco = new Banco();
-        $sql = "UPDATE doacoes SET status='$status' WHERE instituicao_id='$instituicao_id'";
+        $sql = "UPDATE doacoes SET status_pagamento='$status' WHERE instituicao_id='$instituicao_id'";
         $banco->exec($sql);
     }
 
     public function set_status_hook(string $reference_key, string $status): void
     {
         $banco = new Banco();
-        $sql = "UPDATE doacoes SET status='$status' WHERE reference_key='$reference_key'";
+        $sql = "UPDATE doacoes SET status_pagamento='$status' WHERE reference_key='$reference_key'";
         $banco->exec($sql);
     }
 
