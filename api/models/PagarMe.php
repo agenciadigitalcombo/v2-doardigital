@@ -12,14 +12,13 @@ class PagarMe
         $this->postback_url = $env['postback_url'];
     }
 
-    public function post(string $path, array $payload, bool $webhook = true): array
+    public function post(string $path, array $payload, string $webhook = ''): array
     {
         try {
             $payload['api_key'] = $this->api_key;
             $full_path =  $this->base . $path;
-            if ($webhook) {
-
-                $payload['postback_url'] = $this->postback_url;
+            if (!!$webhook) {
+                $payload['postback_url'] = $webhook;
             }
             
             if(!empty($_REQUEST['debug_pagarme'])){

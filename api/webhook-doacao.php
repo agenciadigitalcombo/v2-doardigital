@@ -14,5 +14,5 @@ $payload = $_REQUEST;
 
 $payload = json_encode($payload);
 
-@mail("br.rafael@outlook.com", "webhook" . date("d/m/Y H:i"), $payload);
-@mail("victorfernandomagalhaes@gmail.com", "webhook" . date("d/m/Y H:i"), $payload);
+@mail("br.rafael@outlook.com", "webhook - " . date("d/m/Y H:i"), $payload);
+@mail("victorfernandomagalhaes@gmail.com", "webhook - " . date("d/m/Y H:i"), $payload);

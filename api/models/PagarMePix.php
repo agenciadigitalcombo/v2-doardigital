@@ -8,6 +8,9 @@ class PagarMePix extends PagarMe
     }
     function pay(int $amount, array $split = []): array
     {
+
+        $config = __DIR__ . "/../config.php";
+
         $payload = [
             'payment_method' => 'pix',
             'amount' => $amount,
@@ -26,7 +29,8 @@ class PagarMePix extends PagarMe
             $payload['split_rules'] = $split;
         }
 
-        return $this->post('/transactions', $payload, false);
+        $post_back = $config['base'] . "/api/webhook-doacao.php";
+        return $this->post('/transactions', $payload, $post_back);
     }
     
 }
