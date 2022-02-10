@@ -6,15 +6,16 @@ class PagarMePix extends PagarMe
     {
         parent::__construct();
     }
-    function pay(int $amount, array $split = []): array
+    function pay(int $amount, array $split = [], string $reference_key): array
     {
 
-        $config = __DIR__ . "/../config.php";
+        $config = include __DIR__ . "/../config.php";
 
         $payload = [
             'payment_method' => 'pix',
             'amount' => $amount,
             'pix_expiration_date' => date('Y-m-d', strtotime('+7 days')),
+            'reference_key' => $reference_key,
             'pix_additional_fields' => [
                 [
                     'name' => 'Doação',
@@ -28,8 +29,8 @@ class PagarMePix extends PagarMe
         if(!empty($split)){
             $payload['split_rules'] = $split;
         }
-
         $post_back = $config['base'] . "/api/webhook-doacao.php";
+       
         return $this->post('/transactions', $payload, $post_back);
     }
     

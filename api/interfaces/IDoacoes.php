@@ -12,7 +12,8 @@ interface IDoacao
         int $plano_id,
         int $valor,
         string $codigo,
-        string $url
+        string $url,
+        string $reference_key
     ): void;
 
     public function set_status(

@@ -17,15 +17,15 @@ class Doacao implements IDoacao{
         return $guard[0] ?? [];
     }
 
-    public function create(int $instituicao_id, int $doador_id, string $token, string $tipo, string $recorrente, string $status_pagamento, int $plano_id, int $valor, string $codigo, string $url): void
+    public function create(int $instituicao_id, int $doador_id, string $token, string $tipo, string $recorrente, string $status_pagamento, int $plano_id, int $valor, string $codigo, string $url, string $reference_key): void
     {
         $banco = new Banco();
         $data_regis = date("Y-m-d H:i:s");
         $hora_regis = date("H:i:s");
         $sql = "INSERT INTO doacoes";
-        $sql .= "(instituicao_id, doador_id, token, tipo, recorrente, status_pagamento, plano_id, valor, codigo, url, data, hora)";
+        $sql .= "(instituicao_id, doador_id, token, tipo, recorrente, status_pagamento, plano_id, valor, codigo, url, data, hora, reference_key)";
         $sql .= "VALUES";
-        $sql .= "('$instituicao_id', '$doador_id', '$token', '$tipo', '$recorrente', '$status_pagamento', '$plano_id', '$valor', '$codigo', '$url', '$data_regis', '$hora_regis')";
+        $sql .= "('$instituicao_id', '$doador_id', '$token', '$tipo', '$recorrente', '$status_pagamento', '$plano_id', '$valor', '$codigo', '$url', '$data_regis', '$hora_regis', '$reference_key')";
         $banco->exec($sql);
     }
 
@@ -161,6 +161,14 @@ class Doacao implements IDoacao{
         $sql = "UPDATE doacoes SET status='$status' WHERE instituicao_id='$instituicao_id'";
         $banco->exec($sql);
     }
+
+    public function set_status_hook(string $reference_key, string $status): void
+    {
+        $banco = new Banco();
+        $sql = "UPDATE doacoes SET status='$status' WHERE reference_key='$reference_key'";
+        $banco->exec($sql);
+    }
+
 
     public function valid_type_pagamento(string $valor): bool{
         $lb = ['credit_card', 'boleto', 'pix'];

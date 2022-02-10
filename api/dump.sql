@@ -172,6 +172,7 @@ CREATE TABLE doacoes (
     doador_id int,
     token varchar(255),
     tipo varchar(25),
+    refrence_key varchar(75),
     status_pagamento varchar(75),
     plano_id int,
     valor int,

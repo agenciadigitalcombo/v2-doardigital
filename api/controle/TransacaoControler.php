@@ -14,7 +14,7 @@ class TransacaoControler{
         $email_notificacao = new Email();
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
-       
+        
 
         $instituicao_id = $_REQUEST['instituicao_id'];
 
@@ -57,6 +57,7 @@ class TransacaoControler{
         $cart_validade_campo = $_REQUEST['cart_validade'];
         $cart_validade = withdraw_caracter($cart_validade_campo);
         
+        $reference_key = "re_" . uniqid();
         
         
         campo_obrigatorios([
@@ -185,7 +186,7 @@ class TransacaoControler{
             
             $pagarme_pix = new PagarMePix();
             
-            $res_pagarme = $pagarme_pix->pay($planos_valor, $split);
+            $res_pagarme = $pagarme_pix->pay($planos_valor, $split, $reference_key);
             
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
@@ -224,7 +225,7 @@ class TransacaoControler{
         }
         
         
-        $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url);
+        $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url, $reference_key);
     
         @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
         @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
