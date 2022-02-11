@@ -21,6 +21,9 @@ export default {
 			id: null,
 			nome_identificacao: null,
 			recursos: null,
+			msg: null,
+			error: null,
+			jms: true,
 
 		}
 	},
@@ -44,6 +47,11 @@ export default {
 				return null
 			}
 
+			this.jms= res.next,
+			this.msg = res.message
+			setTimeout(() => {
+					window.location.href = "#/usuarios"
+			}, 1200)
 		},
 
 		async listar() {

@@ -35,45 +35,41 @@ export default {
 													<!-- <div id="kt_signin_password_edit" class="flex-row-fluid d-none"> -->
 														<div id="kt_signin_password_edit" class="flex-row-fluid ">
 
-															<form id="kt_docs_formvalidation_text" class="form"
-																novalidate="novalidate">
+															<form @submit.prevent="addUsuario" class="form" >
 																<div class="row mb-1">
 
 																	<div class="col-lg-6">
 																		<div class="fv-row mb-5">
-																			<label for="nome"
+																			<label for="nome" required
 																				class="form-label fs-6 fw-bolder mb-3">Nome</label>
 																			<input type="text" v-model="nome"
-																				class="form-control form-control-lg form-control-solid"
-																				name="text_input" id="nome" />
+																				class="form-control form-control-lg form-control-solid" required/>
 																		</div>
 																	</div>
 																	<div class="col-lg-6">
 																		<div class="fv-row mb-5">
-																			<label for="Email"
+																			<label for="Email" required
 																				class="form-label fs-6 fw-bolder mb-3">Email</label>
 																			<input type="email" v-model="email"
-																				class="form-control form-control-lg form-control-solid"
-																				name="email_input" id="Email" />
+																				class="form-control form-control-lg form-control-solid" required/>
 																		</div>
 																	</div>
 
 																	<div class="col-lg-6">
 																		<div class="fv-row mb-5">
-																			<label for="Telefone"
+																			<label for="Telefone" required
 																				class="form-label fs-6 fw-bolder mb-3">Telefone</label>
 																		</label>
 																	</label>
 																	<input type="text" v-model="telefone" v-mask="'(###) #####-####'" placeholder="(41) 99999-9999"
-																		class="form-control form-control-lg form-control-solid"
-																		name="text_input" id="Telefone" />
+																		class="form-control form-control-lg form-control-solid" required/>
 																</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="fv-row mb-5">
 																<label for="Credencial"
 																	class="form-label fs-6 fw-bolder mb-3 ">Credencial</label>
-																<select v-model="credencial_id" class="form-select form-control form-control-lg form-control-solid">
+																<select v-model="credencial_id" class="form-select form-control form-control-lg form-control-solid" required>
 																	<option selected>Qual a sua Credencial</option>
 																	<option v-for="dado in lista_credencial" :key="dado.id" :value="dado.id" >{{ dado.nome_identificacao }}</option>
 
@@ -255,9 +251,15 @@ export default {
 														</div>
 													</div>
 
+													<div v-if="jms===true"> 
+													<c-mensagem :msg="msg" ></c-mensagem>
+												  </div>
+												  <div v-else> 
+													<c-mensagem :error="error" ></c-mensagem>
+												  </div>
+													
 													<div class="d-flex">
-
-														<button @click="addUsuario()" id="kt_docs_formvalidation_text_submit" type="submit" class="btn btn-primary">
+														<button type="submit" class="btn btn-primary">
 														<span class="indicator-label">SALVAR</span>
 														<span class="indicator-progress">Por favor, aguarde...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -303,6 +305,9 @@ export default {
 			id: null,
 			nome_identificacao: null,
 			recursos: null,
+				msg: null,
+			error: null,
+			jms: true,
 
 		}
 	},
@@ -331,11 +336,18 @@ export default {
 				this.token,
 			)
 			if (!res.next) {
+				this.jms= res.next,
 				this.error = res.message
 				return null
 			}
 
-			console.log(this.telefone,)
+			this.jms= res.next,
+			this.msg = res.message
+			setTimeout(() => {
+					window.location.href = "#/usuarios"
+			}, 1200)
+			return res
+			
 		},
 
 
@@ -359,11 +371,7 @@ export default {
 
 
 	async mounted() {
-       this.lista_credencial = (await this.listar()).dados
-		this.id = lista_credencial.id
-		this.nome_identificacao = lista_credencial.nome_identificacao
-		this.recursos = lista_credencial.recursos
-		console.log(lista_credencial)
+       this.lista_credencial = (await this.listar()).dados 
 	},
 
 

@@ -31,7 +31,7 @@ export default {
                <div class="menu-item" v-for="m in lista">
 
 
-                    <a class="menu-link" :href="m.link" v-if="superAdm " >
+                    <a class="menu-link" :href="m.link" v-if="m.permisao1 === '1' || m.permisao2 === superAdm" >
                         <span class="menu-icon">
                            <span class="svg-icon svg-icon-2">
                             <img class="filter-green" class="menu" :src="'../painel/assets/icon/'+m.icon">
@@ -67,7 +67,8 @@ export default {
             superAdm: '',
             menus,
             lista: [],
-            nome: null
+            nome: null,
+            permisao: ['inicio', 'sass', 'planos', 'divisao', 'modulos', 'configuracao', 'doacoes', 'doadores'],
         }
     },
 
@@ -88,15 +89,31 @@ export default {
 	},
  
     async mounted() {
-        this.lista = menus
-
-        this.lista = this.menus
+     
+     //   this.lista = this.menus.filter(itens => recursos.includes(itens.id)) || this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
+        
 
         let dados = (await this.listar()).dados
-             	this.nome = dados.nome.split(' ')[0]
+               this.nome = dados.nome.split(' ')[0]
                this.gravatar = dados.gravatar
                this.superAdm = dados.super_adm
 
+              
+               
+        this.lista = menus
+
+        let recursos = this.permisao
+      //let adm = this.superAdm
+        let adm = '1'
+        
+        if (adm == '1') {
+            this.lista = this.menus.filter() 
+        }else if (adm == '0') {
+            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
+        }else{
+            this.lista = this.menus.filter(itens => recursos.includes(itens.id)) 
+        }
+       
         let jms = document.createElement('script'); 
         jms.setAttribute('src', "../../painel/assets/js/vendor/scripts.bundle.js");
         document.head.appendChild(jms);

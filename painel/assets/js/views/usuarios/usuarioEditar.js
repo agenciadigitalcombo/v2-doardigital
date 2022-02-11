@@ -99,6 +99,12 @@ export default {
 														</div>
 
 
+														<div v-if="jms===true"> 
+														<c-mensagem :msg="msg" ></c-mensagem>
+													  </div>
+													  <div v-else> 
+														<c-mensagem :error="error" ></c-mensagem>
+													  </div>
 
 														<div class="d-flex">
 																<button @click="editarUsuario()" id="kt_password_submit" type="button"
@@ -157,7 +163,9 @@ export default {
 			id: null,
 			nome_identificacao: null,
 			recursos: null,
-
+			msg: null,
+			error: null,
+			jms: true,
 		}
 	},
 
@@ -179,6 +187,12 @@ export default {
 				this.error = res.message
 				return null
 			}
+
+			this.jms= res.next,
+			this.msg = res.message
+			setTimeout(() => {
+					window.location.href = "#/usuarios"
+			}, 1200)
 
 		},
 

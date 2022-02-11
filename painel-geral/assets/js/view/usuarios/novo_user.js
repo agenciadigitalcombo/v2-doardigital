@@ -23,6 +23,9 @@ export default {
 			id: null,
 			nome_identificacao: null,
 			recursos: null,
+			msg: null,
+			error: null,
+			jms: true,
 
 		}
 	},
@@ -87,11 +90,7 @@ export default {
 
 
 	async mounted() {
-       this.lista_credencial = (await this.listar()).dados
-		this.id = lista_credencial.id
-		this.nome_identificacao = lista_credencial.nome_identificacao
-		this.recursos = lista_credencial.recursos
-		console.log(lista_credencial)
+       this.lista_credencial = (await this.listar()).dados 
 	},
 
 

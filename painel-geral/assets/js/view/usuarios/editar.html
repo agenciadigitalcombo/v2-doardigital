@@ -24,11 +24,9 @@
                             <div class="card-header border-0 cursor-pointer" role="button"
                                 data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
                                 <div class="card-title m-0">
-                                    <h3 class="fw-bolder m-0">Novo Usuário</h3>
+                                    <h3 class="fw-bolder m-0">Editar Usuário</h3>
                                 </div>
-                            </div>
-                            <!--end::Card header-->
-                            <!--begin::Content-->
+                            </div> 
                             <div id="kt_account_signin_method">
                                 <!--begin::Card body-->
                                 <div class="card-body border-top p-9">
@@ -92,7 +90,12 @@
         
                                                 </div>
 
-
+                                                <div v-if="jms===true"> 
+                                                    <c-mensagem :msg="msg" ></c-mensagem>
+                                                  </div>
+                                                  <div v-else> 
+                                                    <c-mensagem :error="error" ></c-mensagem>
+                                                  </div>
 
                                                 <div class="d-flex">
                                                         <button @click="editarUsuario()" id="kt_password_submit" type="button"

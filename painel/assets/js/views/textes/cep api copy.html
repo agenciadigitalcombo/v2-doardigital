@@ -15,74 +15,51 @@
 
 
 	<div id="app">
-		<div class="callout">
-			<button @click.stop="show" class="button secondary">Click me</button>
-
-			<div class="callout" v-if="showInside" v-click-outside="closeEvent">
-
-				<p>This is the Inside. You can click inside of here and nothing happens. You close with the button
-					below, or by clicking outside the box.</p>
-
-				<p>If you click outside of this box, the event defined via the <i>v-click-outside</i> directive will be
-					emitted.</p>
-
-				<p>Caveat: The Event that makes this box show ("Click me") has to use the .stop modifier, otherwise the
-					event set up by <i>v-click-outside</i> will catch it, and $emit the custom event prematurely </p>
-
-				<button class="button" @click="hide">Close</button>
-
+		<div class="modal-wrapper" @click="toggle">
+			<div class="cont-icom-seting">
+			  <i @click.stop="toggle" class="fas fa-cog"></i>
+		
+			  <div v-show="isOpen">
+				<!--       Adcionado stop aqui ⬇️ -->
+				<div class="menuSusoenco" @click.stop>
+				  <div class="contItensMenuSuspenco">
+					<div class="menuSusoenco-item">conteudo</div>
+					<div class="menuSusoenco-item">conteudo</div>
+					<div class="menuSusoenco-item">conteudo</div>
+					<hr />
+					<div class="menuSusoenco-item">Logout</div>
+				  </div>
+				</div>
+			  </div>
 			</div>
-
-		</div>
+		  </div>
 	</div>
 
 	<!-- <script src="../../../static/js/api/cep.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
-
-		Vue.directive('click-outside', {
-			priority: 700,
-			bind() {
-				let self = this
-				this.event = function (event) {
-					console.log('emitting event')
-					self.vm.$emit(self.expression, event)
-				}
-				this.el.addEventListener('click', this.stopProp)
-				document.body.addEventListener('click', this.event)
-			},
-
-			unbind() {
-				console.log('unbind')
-				this.el.removeEventListener('click', this.stopProp)
-				document.body.removeEventListener('click', this.event)
-			},
-			stopProp(event) { event.stopPropagation() }
-		})
-
-		var App = new Vue({
+ 
+ var App = new Vue({
   el: '#app',
   data() {
     return {
-			showInside: false
-    }
-  },
+		showInside: false
+           }
+  		},
+
   methods:{
-    show: function () {
-    	this.showInside = true 
-    },
-    hide: function () { 
-    	console.log('hide')
-    	this.showInside = false
-    }
+
+
+  		},
+
+  created(){
+    window.body.addEventListener("click", this.toggle)
   },
-  events: {
-    closeEvent: function () {
-      console.log('close event called')
-      this.hide()
-    }
+  destroy(){
+    window.body.removeEventListener("click", this.toggle)
   }
+ 
 })
 	</script>
 </body>
