@@ -133,8 +133,9 @@ class AdmControle
             'secret' => $usuario_logado['secret'],
             'nome' => $usuario_logado['nome'],
             'email' => $usuario_logado['email'],
-            'super_adm' => $usuario_logado['super_adm'],
-            'step' => $usuario_logado['step'],
+            'super_adm' => $usuario_logado['super_adm'] ?? 0,
+            'step' => $usuario_logado['step'] ?? 0,
+            'credencial' => $usuario_logado['credencial_id'] ?? 0
             
         ];
         echo json_encode([

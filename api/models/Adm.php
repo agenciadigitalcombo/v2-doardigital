@@ -36,12 +36,33 @@ class Adm implements IAdm
         return $guard;
     }
 
-    public function get_by_email(string $email): array
+    public function get_by_email_adm(string $email): array
     {
         $banco = new Banco();
         $sql = "SELECT * FROM adm WHERE email='$email'";
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
+    }
+
+    public function get_by_email_user(string $email): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM sub_adm WHERE email='$email'";
+        $guard = $banco->query($sql);
+        return $guard[0] ?? [];
+    }
+
+    public function get_by_email(string $email): array
+    {
+        
+        if( !empty( $this->get_by_email_adm($email) ) ) return $this->get_by_email_adm($email);
+        
+        // die('sos');
+        return $this->get_by_email_user($email);
+        // $banco = new Banco();
+        // $sql = "SELECT * FROM adm WHERE email='$email'";
+        // $guard = $banco->query($sql);
+        // return $guard[0] ?? [];
     }
 
     public function set_step(int $id, int $step): void
@@ -94,12 +115,34 @@ class Adm implements IAdm
         return $guard;
     }
 
-    public function login(string $email, string $senha): bool
+    public function login_adm(string $email, string $senha): bool
     {
         $banco = new Banco();
         $sql = "SELECT * FROM adm WHERE email='$email' and pass='$senha'";
         $guard = $banco->query($sql);
         return empty($guard);
+    }
+
+    public function login_user(string $email, string $senha): bool
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM sub_adm WHERE email='$email' and senha='$senha'";
+        $guard = $banco->query($sql);
+        return empty($guard);
+    }    
+
+    public function login(string $email, string $senha): bool
+    {
+        
+        if( !empty($this->login_adm($email, $senha)) ) {
+            return $this->login_user($email, $senha );
+        }
+        // die('sos');
+        return false;
+        // $banco = new Banco();
+        // $sql = "SELECT * FROM adm WHERE email='$email' and pass='$senha'";
+        // $guard = $banco->query($sql);
+        // return empty($guard);
     }
 
     public function update_step(string $token, int $step): void
