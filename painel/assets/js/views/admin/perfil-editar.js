@@ -175,7 +175,6 @@ export default {
 		this.token = dados.token
 		 this.data_nascimento =  dados.data_nascimento.split('-').reverse().join('/');
 		
-		
 	},
 
 

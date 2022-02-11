@@ -5,7 +5,7 @@ export default {
 <div>
     <c-header></c-header>
     <c-aside></c-aside> 
-    <div class="d-flex flex-column flex-root"> 
+    <div class="d-flex flex-column flex-root" @blur="unfocused()"> 
         <div class="page d-flex flex-row flex-column-fluid"> 
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper"> 
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content"> 
@@ -79,11 +79,22 @@ export default {
 
                                             
 
-                                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px " :class="mostraresconder"
-                                                data-kt-menu="true"  style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate(-117px, 125px);">
+                                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px " :class="mostraresconder" 
+                                                data-kt-menu="true" style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate(-117px, 125px);">
                                                 <div class="px-7 py-5">
                                                     <div class="fs-5 text-dark fw-bolder">Opção de Filtros</div>
-                                                </div>
+                                              <div >
+                                                <a @click="fechaModel()" class="btn btn-icon btn-danger">
+                                                <i class="fs-4 me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon" viewBox="0 0 16 16">
+                                                <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                              </svg></i>
+                                                </a>
+                                                </div> 
+                                                 </div>
+
+                                                
+
                                                  <div class="separator border-gray-200"></div>
                                                  <div class="px-7 py-5" data-kt-subscription-table-filter="form">
                                                      <div class="mb-10">
@@ -312,7 +323,7 @@ export default {
             mostraresconder:
             {
                 'show': false
-            
+
             }
         }
     },
@@ -355,11 +366,28 @@ export default {
 
         modal() {
             console.log('jms')
+            
             this.mostraresconder =
             {
-                'show': true 
+                'show': true
             }
         },
+
+        unfocused() {
+            alert('good bye')
+          },
+
+        fechaModel() {
+
+        
+                this.mostraresconder =
+                {
+                    'show': !true
+                }
+           
+
+        },
+
         async listarDoacoes() {
             let res = await adm.listarDoacoes(
                 this.instituicao_id
