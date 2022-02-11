@@ -518,4 +518,18 @@ class InstituicaoControler
             'dados' => array_values($payload)
         ]);
     }
+
+    static function teste_create(){
+
+        $instituicao = new Instituicao();
+        $doacoes = new Doacao();
+        $metas = new Metas();
+
+        $all_instituicao_adm = $instituicao->list_all_by_adm_id('88');
+        $intitutions_ids = array_map(function($inst) { return (int) $inst['id']; }, $all_instituicao_adm);           
+        $list_doacoes = $doacoes->list_ids($intitutions_ids);
+        $all_metas = $metas->list_ids_metas($intitutions_ids);
+
+        Relatorio::teste($list_doacoes, $all_metas);
+    }
 }

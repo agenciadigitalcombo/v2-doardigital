@@ -102,7 +102,7 @@ class Doacao implements IDoacao{
         }
         $plus = implode(' OR ', $plus);
         $_AND = count($ids) > 0 ? 'AND' : '';
-        $sql = "SELECT * FROM doacoes WHERE status_pagamento='{$status}' {$_AND} {$plus} AND  tipo='{$tipo}'";
+        $sql = "SELECT * FROM doacoes WHERE status_pagamento='{$status}' {$_AND} {$plus} AND tipo='{$tipo}'";
         $guard = $banco->query($sql);
         return $guard;
     }

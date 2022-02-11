@@ -116,6 +116,9 @@ class AdmControle
         $campo_senha = $_REQUEST['senha'];
         $senha = valid_senha($campo_senha);
         
+
+
+
         if ($adm->login($email, $senha)) {
             echo json_encode([
                 "next" => false,
@@ -131,7 +134,8 @@ class AdmControle
             'nome' => $usuario_logado['nome'],
             'email' => $usuario_logado['email'],
             'super_adm' => $usuario_logado['super_adm'],
-            'step' => $usuario_logado['step']
+            'step' => $usuario_logado['step'],
+            
         ];
         echo json_encode([
             "next" => true,

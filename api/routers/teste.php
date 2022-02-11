@@ -1,3 +1,3 @@
 <?php
 
-router('/teste-create', 'TesteControler@testecreate');
+router('/teste', 'TesteControler@testecreate');

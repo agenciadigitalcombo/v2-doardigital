@@ -34,5 +34,37 @@ class Metas implements IMetas{
         return $guard;
     }
 
-    
+    public function list_ids_metas(array $ids): array
+    {
+
+       
+        $banco = new Banco();
+        $plus = [];
+        foreach( $ids as $ID ) {
+            $plus[] = "instituicao_id={$ID}";
+        }
+        $plus = implode(' OR ', $plus);
+        $where = count($ids) > 0 ? 'WHERE' : '';
+        $sql = "SELECT * FROM meta_mes {$where} {$plus}";
+        $guard = $banco->query($sql);
+        return array_map(function($m) {
+            return  [
+                "ano" => intval($m['ano']),
+                "janeiro" => intval($m['janeiro']),
+                "fevereiro" => intval($m['fevereiro']),
+                "marco" => intval($m['marco']),
+                "abril" => intval($m['abril']),
+                "maio" => intval($m['maio']),
+                "junho" => intval($m['junho']),
+                "julho" => intval($m['julho']),
+                "agosto" => intval($m['agosto']),
+                "setembro" => intval($m['setembro']),
+                "outubro" => intval($m['outubro']),
+                "novembro" => intval($m['novembro']),
+                "dezembro" => intval($m['dezembro'])
+            ];
+        }, $guard );
+    }
+
+
 }
