@@ -93,7 +93,6 @@ Content-Type: application/x-www-form-urlencoded
 
 
 ###
-
 POST http://localhost/v2-doardigital/api/create-conta-instituicao
 Content-Type: application/x-www-form-urlencoded
 

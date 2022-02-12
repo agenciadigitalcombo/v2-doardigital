@@ -15,24 +15,608 @@
 
 
 	<div id="app">
-		<div class="modal-wrapper" @click="toggle">
-			<div class="cont-icom-seting">
-			  <i @click.stop="toggle" class="fas fa-cog"></i>
+		 
+			<div>
+			<div>
 		
-			  <div v-show="isOpen">
-				<!--       Adcionado stop aqui ⬇️ -->
-				<div class="menuSusoenco" @click.stop>
-				  <div class="contItensMenuSuspenco">
-					<div class="menuSusoenco-item">conteudo</div>
-					<div class="menuSusoenco-item">conteudo</div>
-					<div class="menuSusoenco-item">conteudo</div>
-					<hr />
-					<div class="menuSusoenco-item">Logout</div>
-				  </div>
+			<c-header></c-header>
+			<c-aside></c-aside>
+		
+			<div class="d-flex flex-column flex-root">
+					<!--begin::Sales Statistics-->
+					<div class="page d-flex flex-row flex-column-fluid">
+				
+						<!--begin::Wrapper-->
+						<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+					 
+					 0000xxxxx  === {{ dash_inst }}
+					xx {{cartao_total}}
+							<!--end::Header-->
+							<!--begin::Content-->
+							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+								<!--begin::Post-->
+								<div class="post d-flex flex-column-fluid" id="kt_post">
+									<!--begin::Container-->
+									<div id="kt_content_container" class="container-xxl">
+										<!--begin::Row-->
+										<div class="row g-5 g-xl-8">
+											<!--begin::Col-->
+											<div class="col-xl-3">
+												<!--begin::Mixed Widget 1-->
+												<div class="card card-xl-stretch mb-xl-8">
+													<!--begin::Body-->
+													<div class="card-body p-0">
+														<!--begin::Header-->
+														<div class="px-9 pt-7 card-rounded h-275px w-100 bg-primary">
+														 
+															<!--begin::Balance-->
+															<div class="d-flex text-center flex-column text-white pt-8">
+																<h3 class="m-0 text-white fw-bolder fs-3">Total de Doações</h3>
+																<span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+															</div>
+															<!--end::Balance-->
+														</div>
+														<!--end::Header-->
+														<!--begin::Items-->
+														<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																			<path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																			<path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																			<path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																			<path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																			<path d="M12 9h2V8h-2v1Z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Pix</div>
+																	</div>
+																	
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$2,5b</div>
+																		 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+														
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-upc-scan" viewBox="0 0 16 16">
+																			<path
+																				d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+																	</div>
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$8,8m</div>
+											 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+
+																<!--begin::Item-->
+																<div class="d-flex align-items-center mb-6">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-45px w-40px me-5">
+																		<span class="symbol-label bg-lighten">
+																			<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+																			<span class="svg-icon svg-icon-1">
+																				<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																				height="60" fill="currentColor"
+																				class="bi bi-credit-card-2-front-fill"
+																				viewBox="0 0 16 16">
+																				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																			</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Description-->
+																	<div class="d-flex align-items-center flex-wrap w-100">
+																		<!--begin::Title-->
+																		<div class="mb-1 pe-3 flex-grow-1">
+																			 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+																		</div>
+																		<!--end::Title-->
+																		<!--begin::Label-->
+																		<div class="d-flex align-items-center">
+																			<div class="fw-bolder fs-5 text-gray-800 pe-1">$1,7b</div>
+																			 
+																		</div>
+																		<!--end::Label-->
+																	</div>
+																	<!--end::Description-->
+																</div>
+																<!--end::Item-->
+														</div>
+														<!--end::Items-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Mixed Widget 1-->
+											</div>
+											<!--end::Col-->
+										
+											<!--begin::Col-->
+											<div class="col-xl-3">
+												<!--begin::Mixed Widget 1-->
+												<div class="card card-xl-stretch mb-5 mb-xl-8">
+													<!--begin::Body-->
+													<div class="card-body p-0">
+														<!--begin::Header-->
+														<div class="px-9 pt-7 card-rounded h-275px w-100 bg-success">
+														 
+															<!--begin::Balance-->
+															<div class="d-flex text-center flex-column text-white pt-8"> 
+																<h3 class="m-0 text-white fw-bolder fs-3">Doações Concluidas</h3>
+																<span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+															</div>
+															<!--end::Balance-->
+														</div>
+														<!--end::Header-->
+														<!--begin::Items-->
+														<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																			<path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																			<path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																			<path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																			<path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																			<path d="M12 9h2V8h-2v1Z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Pix</div>
+																	</div>
+																	
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$2,5b</div>
+																		 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+														
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-upc-scan" viewBox="0 0 16 16">
+																			<path
+																				d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+																	</div>
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$8,8m</div>
+											 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+																<!--begin::Item-->
+																<div class="d-flex align-items-center mb-6">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-45px w-40px me-5">
+																		<span class="symbol-label bg-lighten">
+																			<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+																			<span class="svg-icon svg-icon-1">
+																				<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																				height="60" fill="currentColor"
+																				class="bi bi-credit-card-2-front-fill"
+																				viewBox="0 0 16 16">
+																				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																			</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Description-->
+																	<div class="d-flex align-items-center flex-wrap w-100">
+																		<!--begin::Title-->
+																		<div class="mb-1 pe-3 flex-grow-1">
+																			 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+																		</div>
+																		<!--end::Title-->
+																		<!--begin::Label-->
+																		<div class="d-flex align-items-center">
+																			<div class="fw-bolder fs-5 text-gray-800 pe-1">$1,7b</div>
+																			 
+																		</div>
+																		<!--end::Label-->
+																	</div>
+																	<!--end::Description-->
+																</div>
+																<!--end::Item-->
+														</div>
+														<!--end::Items-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Mixed Widget 1-->
+											</div>
+											<!--end::Col-->
+		
+												<!--begin::Col-->
+												<div class="col-xl-3">
+													<!--begin::Mixed Widget 1-->
+													<div class="card card-xl-stretch mb-5 mb-xl-8">
+														<!--begin::Body-->
+														<div class="card-body p-0">
+															<!--begin::Header-->
+															<div class="px-9 pt-7 card-rounded h-275px w-100 bg-warning">
+															 
+																<!--begin::Balance-->
+																<div class="d-flex text-center flex-column text-white pt-8"> 
+																	<h3 class="m-0 text-white fw-bolder fs-3">Doações Concluidas</h3>
+																	<span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+																</div>
+																<!--end::Balance-->
+															</div>
+															<!--end::Header-->
+														<!--begin::Items-->
+														<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																			<path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																			<path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																			<path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																			<path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																			<path d="M12 9h2V8h-2v1Z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Pix</div>
+																	</div>
+																	
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$2,5b</div>
+																		 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+														
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-upc-scan" viewBox="0 0 16 16">
+																			<path
+																				d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+																	</div>
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$8,8m</div>
+											 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+
+																<!--begin::Item-->
+																<div class="d-flex align-items-center mb-6">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-45px w-40px me-5">
+																		<span class="symbol-label bg-lighten">
+																			<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+																			<span class="svg-icon svg-icon-1">
+																				<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																				height="60" fill="currentColor"
+																				class="bi bi-credit-card-2-front-fill"
+																				viewBox="0 0 16 16">
+																				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																			</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Description-->
+																	<div class="d-flex align-items-center flex-wrap w-100">
+																		<!--begin::Title-->
+																		<div class="mb-1 pe-3 flex-grow-1">
+																			 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+																		</div>
+																		<!--end::Title-->
+																		<!--begin::Label-->
+																		<div class="d-flex align-items-center">
+																			<div class="fw-bolder fs-5 text-gray-800 pe-1">$1,7b</div>
+																			 
+																		</div>
+																		<!--end::Label-->
+																	</div>
+																	<!--end::Description-->
+																</div>
+																<!--end::Item-->
+														</div>
+														<!--end::Items-->
+														</div>
+														<!--end::Body-->
+													</div>
+													<!--end::Mixed Widget 1-->
+												</div>
+												<!--end::Col-->
+
+													<!--begin::Col-->
+											<div class="col-xl-3">
+												<!--begin::Mixed Widget 1-->
+												<div class="card card-xl-stretch mb-xl-8">
+													<!--begin::Body-->
+													<div class="card-body p-0">
+														<!--begin::Header-->
+														<div class="px-9 pt-7 card-rounded h-275px w-100 bg-danger">
+														 
+															<!--begin::Balance-->
+															<div class="d-flex text-center flex-column text-white pt-8"> 
+																<h3 class="m-0 text-white fw-bolder fs-3">Total Vencido/Falhados</h3>
+																<span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+															</div>
+															<!--end::Balance-->
+														</div>
+														<!--end::Header-->
+														<!--begin::Items-->
+														<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																			<path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																			<path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																			<path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																			<path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																			<path d="M12 9h2V8h-2v1Z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Pix</div>
+																	</div>
+																	
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$2,5b</div>
+																		 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+														
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-6">
+																<!--begin::Symbol-->
+																<div class="symbol symbol-45px w-40px me-5">
+																	<span class="symbol-label bg-lighten">
+																		<!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
+																		<span class="svg-icon svg-icon-1">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																			height="60" fill="currentColor"
+																			class="bi bi-upc-scan" viewBox="0 0 16 16">
+																			<path
+																				d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																		</svg>
+																		</span>
+																		<!--end::Svg Icon-->
+																	</span>
+																</div>
+																<!--end::Symbol-->
+																<!--begin::Description-->
+																<div class="d-flex align-items-center flex-wrap w-100">
+																	<!--begin::Title-->
+																	<div class="mb-1 pe-3 flex-grow-1"> 
+																		<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+																	</div>
+																	<!--end::Title-->
+																	<!--begin::Label-->
+																	<div class="d-flex align-items-center">
+																		<div class="fw-bolder fs-5 text-gray-800 pe-1">$8,8m</div>
+											 
+																	</div>
+																	<!--end::Label-->
+																</div>
+																<!--end::Description-->
+															</div>
+															<!--end::Item-->
+
+																<!--begin::Item-->
+																<div class="d-flex align-items-center mb-6">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-45px w-40px me-5">
+																		<span class="symbol-label bg-lighten">
+																			<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+																			<span class="svg-icon svg-icon-1">
+																				<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																				height="60" fill="currentColor"
+																				class="bi bi-credit-card-2-front-fill"
+																				viewBox="0 0 16 16">
+																				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																			</svg>
+																			</span>
+																			<!--end::Svg Icon-->
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Description-->
+																	<div class="d-flex align-items-center flex-wrap w-100">
+																		<!--begin::Title-->
+																		<div class="mb-1 pe-3 flex-grow-1">
+																			 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+																		</div>
+																		<!--end::Title-->
+																		<!--begin::Label-->
+																		<div class="d-flex align-items-center">
+																			<div class="fw-bolder fs-5 text-gray-800 pe-1">$1,7b</div>
+																			 
+																		</div>
+																		<!--end::Label-->
+																	</div>
+																	<!--end::Description-->
+																</div>
+																<!--end::Item-->
+														</div>
+														<!--end::Items-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Mixed Widget 1-->
+											</div>
+											<!--end::Col-->
+										</div>
+										
+								 
+									</div>
+									<!--end::Container-->
+								</div>
+								<!--end::Post-->
+							</div>
+							<!--end::Content-->
+						 
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Page-->
 				</div>
-			  </div>
+													 
+											  
+			<c-footer/>
 			</div>
-		  </div>
+		 
+			</div>
+			
+		 
 	</div>
 
 	<!-- <script src="../../../static/js/api/cep.js"></script> -->

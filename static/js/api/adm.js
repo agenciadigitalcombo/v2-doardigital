@@ -742,6 +742,34 @@ export default {
         })
     },
 
+    // DASHBOARD
+
+    async dashboardInstituicao(
+        token,
+        instituicao_id,
+        ) {
+        return await http.get('/dashboard-instituicao', {
+            token,
+            instituicao_id,
+        })
+    }, 
+
+    async dashboardAdm(
+        token, 
+        ) {
+        return await http.post('/dashboard-adm', {
+            token, 
+        })
+    }, 
+
+    async dashboard(
+        token, 
+        ) {
+        return await http.post('/dashboard', {
+            token, 
+        })
+    },
+
 }
 
 // editarSubadm

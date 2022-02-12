@@ -107,7 +107,7 @@ export default {
         let adm = '1'
         
         if (adm == '1') {
-            this.lista = this.menus.filter() 
+            this.lista = this.menus
         }else if (adm == '0') {
             this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
         }else{
