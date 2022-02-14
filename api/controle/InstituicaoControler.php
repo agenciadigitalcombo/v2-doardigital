@@ -224,6 +224,7 @@ class InstituicaoControler
                 'adm_id' => $lis_dados['adm_id'],
                 'nome_fantasia' => $lis_dados['nome_fantasia'],
                 'subdomaim' => $lis_dados['subdomaim'],
+                'dominio' => $lis_dados['dominio'],
                 'status' => $lis_dados['status']
             ];
         }, $get_instituicao);
@@ -255,6 +256,7 @@ class InstituicaoControler
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
+            'dominio' => $get_instituicao['dominio'],
             'status' => $get_instituicao['status']
         ];
 
@@ -319,6 +321,7 @@ class InstituicaoControler
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
+            'dominio' => $get_instituicao['dominio'],
             'status' => $get_instituicao['status'],
             'telefone' => $get_instituicao['telefone'],
             'email' => $get_instituicao['email'],
