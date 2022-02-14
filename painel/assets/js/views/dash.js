@@ -283,7 +283,6 @@ export default {
 																<!--begin::Label-->
 																<div class="d-flex align-items-center">
 																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_concluido | is_price }}</div>		 
-   
 																</div>
 																<!--end::Label-->
 															</div>
@@ -311,9 +310,8 @@ export default {
 														<!--begin::Balance-->
 														<div class="d-flex text-center flex-column text-white pt-8"> 
 															<h3 class="m-0 text-white fw-bolder fs-3">Doações em Aberto</h3>
-															<span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+															<span class="fw-bolder fs-2x pt-1">{{ aberto_total | is_price }}</span>
 														</div>
-														<!--end::Balance-->
 													</div>
 													<!--end::Header-->
 												<!--begin::Items-->
@@ -349,21 +347,17 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">$2,5b</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_aberto | is_price }}</div>
 																 
 															</div>
-															<!--end::Label-->
-														</div>
-														<!--end::Description-->
-													</div>
-													<!--end::Item-->
-												
-													<!--begin::Item-->
+													
+														</div> 
+													</div> 
+
 													<div class="d-flex align-items-center mb-6">
-														<!--begin::Symbol-->
+														 
 														<div class="symbol symbol-45px w-40px me-5">
-															<span class="symbol-label bg-lighten">
-																<!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
+															<span class="symbol-label bg-lighten"> 
 																<span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
 																	height="60" fill="currentColor"
@@ -371,35 +365,24 @@ export default {
 																	<path
 																		d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
 																</svg>
-																</span>
-																<!--end::Svg Icon-->
+																</span> 
 															</span>
-														</div>
-														<!--end::Symbol-->
-														<!--begin::Description-->
+														</div> 
 														<div class="d-flex align-items-center flex-wrap w-100">
 															<!--begin::Title-->
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
 															</div>
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">$8,8m</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_aberto | is_price }}</div>
 									 
-															</div>
-															<!--end::Label-->
-														</div>
-														<!--end::Description-->
-													</div>
-													<!--end::Item-->
-
-														<!--begin::Item-->
-														<div class="d-flex align-items-center mb-6">
-															<!--begin::Symbol-->
+															</div> 
+														</div> 
+													</div> 
+														<div class="d-flex align-items-center mb-6"> 
 															<div class="symbol symbol-45px w-40px me-5">
-																<span class="symbol-label bg-lighten">
-																	<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+																<span class="symbol-label bg-lighten"> 
 																	<span class="svg-icon svg-icon-1">
 																		<svg xmlns="http://www.w3.org/2000/svg" width="60"
 																		height="60" fill="currentColor"
@@ -407,24 +390,18 @@ export default {
 																		viewBox="0 0 16 16">
 																		<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
 																	</svg>
-																	</span>
-																	<!--end::Svg Icon-->
+																	</span> 
 																</span>
-															</div>
-															<!--end::Symbol-->
-															<!--begin::Description-->
+															</div> 
 															<div class="d-flex align-items-center flex-wrap w-100">
-																<!--begin::Title-->
+															 
 																<div class="mb-1 pe-3 flex-grow-1">
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
 																</div>
-																<!--end::Title-->
-																<!--begin::Label-->
 																<div class="d-flex align-items-center">
-																	<div class="fw-bolder fs-5 text-gray-800 pe-1">$1,7b</div>
-																	 
-																</div>
-																<!--end::Label-->
+																	<div class="fw-bolder fs-5 text-gray-800 pe-1"> {{ cartao_aberto | is_price }}</div>
+															 	</div>
+																 
 															</div>
 															<!--end::Description-->
 														</div>
@@ -450,19 +427,16 @@ export default {
 													<!--begin::Balance-->
 													<div class="d-flex text-center flex-column text-white pt-8"> 
 														<h3 class="m-0 text-white fw-bolder fs-3">Total Vencido/Falhados</h3>
-														<span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+														<span class="fw-bolder fs-2x pt-1">{{ falhado_total | is_price }}</span>
 													</div>
-													<!--end::Balance-->
-												</div>
-												<!--end::Header-->
-												<!--begin::Items-->
+												 
+												</div> 
 												<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
 													<!--begin::Item-->
 													<div class="d-flex align-items-center mb-6">
 														<!--begin::Symbol-->
 														<div class="symbol symbol-45px w-40px me-5">
-															<span class="symbol-label bg-lighten">
-																<!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
+															<span class="symbol-label bg-lighten"> 
 																<span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
 																	height="60" fill="currentColor"
@@ -473,8 +447,7 @@ export default {
 																	<path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
 																	<path d="M12 9h2V8h-2v1Z" />
 																</svg>
-																</span>
-																<!--end::Svg Icon-->
+																</span> 
 															</span>
 														</div>
 														<!--end::Symbol-->
@@ -488,18 +461,12 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">$2,5b</div>
-																 
-															</div>
-															<!--end::Label-->
-														</div>
-														<!--end::Description-->
-													</div>
-													<!--end::Item-->
-												
-													<!--begin::Item-->
-													<div class="d-flex align-items-center mb-6">
-														<!--begin::Symbol-->
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_falhado | is_price }}</div>
+
+															</div> 
+														</div> 
+													</div> 
+													<div class="d-flex align-items-center mb-6"> 
 														<div class="symbol symbol-45px w-40px me-5">
 															<span class="symbol-label bg-lighten">
 																<!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
@@ -510,12 +477,9 @@ export default {
 																	<path
 																		d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
 																</svg>
-																</span>
-																<!--end::Svg Icon-->
+																</span> 
 															</span>
-														</div>
-														<!--end::Symbol-->
-														<!--begin::Description-->
+														</div> 
 														<div class="d-flex align-items-center flex-wrap w-100">
 															<!--begin::Title-->
 															<div class="mb-1 pe-3 flex-grow-1"> 
@@ -524,21 +488,15 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">$8,8m</div>
-									 
-															</div>
-															<!--end::Label-->
-														</div>
-														<!--end::Description-->
-													</div>
-													<!--end::Item-->
-
-														<!--begin::Item-->
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_falhado | is_price }}</div>
+					
+															</div> 
+														</div> 
+													</div> 
 														<div class="d-flex align-items-center mb-6">
 															<!--begin::Symbol-->
 															<div class="symbol symbol-45px w-40px me-5">
-																<span class="symbol-label bg-lighten">
-																	<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+																<span class="symbol-label bg-lighten"> 
 																	<span class="svg-icon svg-icon-1">
 																		<svg xmlns="http://www.w3.org/2000/svg" width="60"
 																		height="60" fill="currentColor"
@@ -546,26 +504,19 @@ export default {
 																		viewBox="0 0 16 16">
 																		<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
 																	</svg>
-																	</span>
-																	<!--end::Svg Icon-->
+																	</span> 
 																</span>
-															</div>
-															<!--end::Symbol-->
-															<!--begin::Description-->
+															</div> 
 															<div class="d-flex align-items-center flex-wrap w-100">
 																<!--begin::Title-->
 																<div class="mb-1 pe-3 flex-grow-1">
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
-																</div>
-																<!--end::Title-->
-																<!--begin::Label-->
+																</div>  
 																<div class="d-flex align-items-center">
-																	<div class="fw-bolder fs-5 text-gray-800 pe-1">$1,7b</div>
+																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_falhado | is_price }}</div>
 																	 
-																</div>
-																<!--end::Label-->
-															</div>
-															<!--end::Description-->
+																</div> 
+															</div> 
 														</div>
 														<!--end::Item-->
 												</div>
@@ -618,6 +569,16 @@ export default {
 			 boleto_concluido: "",
 			 pix_concluido: "",
 
+			 aberto_total: "",
+			 cartao_aberto: "",
+			 boleto_aberto: "",
+			 pix_aberto: "",
+
+			 falhado_total: "",
+			 cartao_falhado: "",
+			 boleto_falhado: "",
+			 pix_falhado: "",
+
 			msg: null,
 			error: null,
 			jms: true,
@@ -669,26 +630,31 @@ export default {
 
 
 
-				var unicoAC = parseInt(res.dados.credit_card.unico.paid.total)
-				var recorentAC = parseInt(res.dados.credit_card.recorrente.paid.total)
-				var unicoAP = parseInt(res.dados.pix.unico.paid.total)
-				var recorentAP = parseInt(res.dados.pix.recorrente.paid.total)
-				var unicoAB = parseInt(res.dados.boleto.unico.paid.total)
-				var recorentAB = parseInt(res.dados.boleto.recorrente.paid.total)
+				var unicoAC = parseInt(res.dados.credit_card.unico.waiting_payment.total)
+				var recorentAC = parseInt(res.dados.credit_card.recorrente.waiting_payment.total)
+				var unicoAP = parseInt(res.dados.pix.unico.waiting_payment.total)
+				var recorentAP = parseInt(res.dados.pix.recorrente.waiting_payment.total)
+				var unicoAB = parseInt(res.dados.boleto.unico.waiting_payment.total)
+				var recorentAB = parseInt(res.dados.boleto.recorrente.waiting_payment.total)
 
-				var unicoFC = parseInt(res.dados.credit_card.unico.paid.total)
-				var recorentFC = parseInt(res.dados.credit_card.recorrente.paid.total)
-				var unicoFP = parseInt(res.dados.pix.unico.paid.total)
-				var recorentFP = parseInt(res.dados.pix.recorrente.paid.total)
-				var unicoFB = parseInt(res.dados.boleto.unico.paid.total)
-				var recorentFB = parseInt(res.dados.boleto.recorrente.paid.total)
+				this.cartao_aberto = unicoAC + recorentAC
+				this.boleto_aberto = unicoAB + recorentAB
+				this.pix_aberto = unicoAP + recorentAP 
+				this.aberto_total = this.cartao_aberto + this.boleto_aberto + this.pix_aberto
 
-				var unicoJMSC = parseInt(res.dados.credit_card.unico.paid.total)
-				var recorentJMSC = parseInt(res.dados.credit_card.recorrente.paid.total)
-				var unicoJMSP = parseInt(res.dados.pix.unico.paid.total)
-				var recorentJMSP = parseInt(res.dados.pix.recorrente.paid.total)
-				var unicoJMSB = parseInt(res.dados.boleto.unico.paid.total)
-				var recorentJMSB = parseInt(res.dados.boleto.recorrente.paid.total)
+
+
+				var unicoFC = parseInt(res.dados.credit_card.unico.refused.total)
+				var recorentFC = parseInt(res.dados.credit_card.recorrente.refused.total)
+				var unicoFP = parseInt(res.dados.pix.unico.refused.total)
+				var recorentFP = parseInt(res.dados.pix.recorrente.refused.total)
+				var unicoFB = parseInt(res.dados.boleto.unico.refused.total)
+				var recorentFB = parseInt(res.dados.boleto.recorrente.refused.total)
+
+				this.cartao_falhado = unicoFC + recorentFC
+				this.boleto_falhado = unicoFB + recorentFB
+				this.pix_falhado = unicoFP + recorentFP 
+				this.falhado_total = this.cartao_falhado + this.boleto_falhado + this.pix_falhado
 
 			return res
 

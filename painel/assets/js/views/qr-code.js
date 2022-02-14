@@ -39,19 +39,21 @@ export default {
 	
 	
 	
-												<div class="m-0">
+												<div class="m-0 text-center">
 													<h3 class="mb-12">QR CODE para ajudar na divulgação !!!</h3>
 												</div>
 	
 												<div class="col-lg-12">
 													<div class="fv-row mb-2">
 	
-														<img src="../../painel/assets/image/qr.png" style="width: 300px;"
-															alt="" srcset="">
+													<center>
+													<div ref="print_qr"></div>
+												</center>
+													
 													</div>
 												</div>
 												<!--begin::Actions-->
-												<div class="">
+												<div class="text-center p-8">
 													<button type="submit" class="btn btn-primary m-2">
 														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 															fill="currentColor" class="bi bi-download p-2"
@@ -98,17 +100,62 @@ export default {
      data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
-	
+			subdomaim: null,
+			dominio: null,
+			codigo_geral
         }
     },
 	methods: {
-	
-     
-       
+
+		async infoSubdomain() {
+			 let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			//let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			return res
+		}, 
+
+
 
     },
 	
 
+		async mounted() {
+
+			let dados = (await this.infoSubdomain()).dados_instituicao
+		
+			this.subdomaim = dados.subdomaim+'.doardigital.com.br/'
+			this.dominio = dados.dominio
+			this.codigo_geral = localStorage.getItem("codigo")
+
+		
+
+			if (this.dominio) { 
+					let code_pix = `${this.dominio}`
+					var qrcode = new QRCode(this.$refs.print_qr, {
+						text: code_pix,
+						width: 230,
+						height: 230,
+						height: 230,
+						colorDark: "#000000",
+						colorLight: "#ffffff",
+						correctLevel: QRCode.CorrectLevel.L
+					});
+			 
+			} else {   
+					let code_pix = `${this.subdomaim}`
+					var qrcode = new QRCode(this.$refs.print_qr, {
+						text: code_pix,
+						width: 230,
+						height: 230,
+						height: 230,
+						colorDark: "#000000",
+						colorLight: "#ffffff",
+						correctLevel: QRCode.CorrectLevel.L
+					});
+			  
+			}
+	
+		},
 	
 }
 
+ 

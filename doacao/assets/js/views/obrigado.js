@@ -216,6 +216,7 @@ export default {
 				url_geral: '',
 			},
 		
+			subdomaim: '',
 			type: '',
 			jms: false,
 		}
@@ -237,8 +238,8 @@ export default {
 
 	methods: {
 		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-			// let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			//let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
 		},
 
@@ -285,4 +286,3 @@ export default {
 	},
 
 }
-
