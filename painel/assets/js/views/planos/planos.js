@@ -95,7 +95,7 @@ export default {
 														<div class="badge badge-light"></div>
 													</td>
 													<td>
-														<div class=""> {{ item.amount | is_price }}</div>
+														<div class=""> {{ item.amount | form_valor }}</div>
 													</td>
 													<td></td>
 												
@@ -159,7 +159,7 @@ export default {
 
 	
 	filters: {
-        is_price(price) {
+        form_valor(price) {
             let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${amount}`
         }

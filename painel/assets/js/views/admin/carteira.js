@@ -20,26 +20,23 @@ export default {
 									<div class="row"> 
 										<div class="col">
 											<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-												<span class="fs-4 fw-bold text-info pb-1 px-2">Saldo Liberado</span>
-												<span class="fs-lg-2tx fw-bolder d-flex justify-content-center">R$
-													<span data-kt-countup="true"
-														data-kt-countup-value="63,240.00"> {{liberado}}</span></span>
+												<span class="fs-4 fw-bold text-success pb-1 px-2">Saldo Liberado</span>
+												
+													<span > {{liberado | form_valor}}</span></span>
 											</div>
 										</div> 
 										<div class="col">
 											<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-												<span class="fs-4 fw-bold text-success pb-1 px-2">Saldo á liberar</span>
-												<span class="fs-lg-2tx fw-bolder d-flex justify-content-center">R$
-													<span data-kt-countup="true"
-														data-kt-countup-value="8,530.00">{{liberar}}</span></span>
+												<span class="fs-4 fw-bold text-info pb-1 px-2">Saldo á liberar</span>
+												
+													<span >{{liberar | form_valor}}</span></span>
 											</div>
 										</div> 
 										<div class="col">
 											<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 												<span class="fs-4 fw-bold text-danger pb-1 px-2">Total Retirado</span>
-												<span class="fs-lg-2tx fw-bolder d-flex justify-content-center">R$
-													<span data-kt-countup="true"
-														data-kt-countup-value="2,600">{{retirado}}</span></span>
+												
+													<span >{{retirado | form_valor}}</span></span>
 											</div>
 										</div>  
 									</div> 
@@ -164,7 +161,13 @@ export default {
 			msg: null
 		}
 	},
-
+	
+	filters: {
+        form_valor(price) {
+            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${amount}`
+        }
+    },
 	methods: {
       async listar() {
             let res = await adm.listarCarteira( 
