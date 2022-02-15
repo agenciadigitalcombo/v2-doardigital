@@ -5,7 +5,7 @@ export default {
     
     <div>
            
-    <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
+         <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
            <c-loading></c-loading> 
         </p>
 

@@ -58,25 +58,27 @@ export default {
 																<div class="btn-group w-100" data-kt-buttons="true"
 																	data-kt-buttons-target="[data-kt-button]"> 
 																	<label
-																		class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success active"
+																		class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success" 
+																		:class="{ active: totalActive }"
 																		data-kt-button="true"> 
-																		<input @click="jms = false" class="btn-check"
+																		<input @click="total()" class="btn-check"
 																			type="radio" name="method" value="1" />
 																	 
 																		Valor Total
 																	</label> 
 																	<label
-																		class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success"
+																		class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success" 
+																		:class="{ active: parcialActive }"
 																		data-kt-button="true">
 																		<!--begin::Input-->
-																		<input @click="jms = true" class="btn-check"
+																		<input @click="parcial()" class="btn-check"
 																			type="radio" name="method" value="2" />
 																	 
-																		Valor Parcial
+																		Valor Parcial  
 																	</label> 
 																</div> 
 																<div class="mb-2 mt-10" v-if="jms">
-																	<input type="text" v-model="amount"
+																	<input type="text" v-model="amount"  @input="masc_money"
 																		class="form-control form-control-solid" />
 																</div>
 
@@ -113,16 +115,16 @@ export default {
 											<div class="card-body pt-5"> 
 												<div class="timeline-label"> 
 													<div class="timeline-item" v-for=" (item, indice ) in historico" :key="item.id"> 
-														<div class="timeline-label fw-bolder text-gray-800 fs-6">08:42
+														<div class="timeline-label fw-bolder text-gray-800 fs-6">{{item.date_created | form_hora }} 
 														</div> 
 														<div class="timeline-badge">
 															<i class="fa fa-genderless text-warning fs-1"></i>
 														</div> 
 														<div class="timeline-content fw-bolder text-gray-800 ps-3">
-															{{item.status}}
-															<a href="#" class="text-primary">R$ {{item.amount}}</a>
+															{{item.status}} 
+															<a href="#" class="text-primary">{{item.amount | form_valor}}</a>
 															<div class="timeline-content fw-bolder text-gray-800 fs-6">
-															{{item.date_created}}
+															{{item.date_created | form_data }}
 															</div>
 														</div> 
 													</div> 
@@ -148,17 +150,19 @@ export default {
 		return {  
 			token: null,
             instituicao_id: null,
-			jms: null,
+			jms: false,
 			liberado: null,
 			liberar: null,
 			retirado: null,
 			amount: null,
-			data: null,
+			date_created: null,
 			valor: null,
 			status: null,
 			historico: [],
 			error: null,
-			msg: null
+			msg: null, 
+			totalActive: true,
+			parcialActive: false
 		}
 	},
 	
@@ -166,9 +170,41 @@ export default {
         form_valor(price) {
             let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${amount}`
-        }
+        },
+
+		form_data(datas) {
+           // let date_created = datas.split('-').reverse().join('/'); 
+		   let date_created = datas.substr(0, 10);
+             return `${date_created}`
+        },
+
+		form_hora(horas) { 
+			let date_created = horas.substr(11, 5);
+			  return `${date_created}`
+		 },
     },
 	methods: {
+
+		total() {
+			this.jms = false
+			this.totalActive = true,
+			this.parcialActive = false,
+			this.amount = "50000"
+		},
+
+		parcial() {
+			this.jms = true
+			this.totalActive = false,
+			this.parcialActive = true,
+			this.amount = "00"
+		},
+
+		masc_money() {
+            let valor = this.amount.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.amount = valor
+        },
+
       async listar() {
             let res = await adm.listarCarteira( 
 				this.token,
@@ -207,13 +243,14 @@ export default {
 
 
 		this.historico = (await this.listar()).historico
+		var date_created = this.historico.date_created 
 	//	this.data = historico.date_created
 	//	this.valor = historico.amount
 	//	this.status = historico.status
 		 
 		
     
-        console.log(this.data)
+        console.log(date_created)
     },
 
 

@@ -97,14 +97,13 @@ export default {
                this.nome = dados.nome.split(' ')[0]
                this.gravatar = dados.gravatar
                this.superAdm = dados.super_adm
-
-              
+ 
                
         this.lista = menus
 
         let recursos = this.permisao
       //let adm = this.superAdm
-        let adm = '1'
+      let adm =  '1'
         
         if (adm == '1') {
             this.lista = this.menus
