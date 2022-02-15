@@ -59,12 +59,12 @@ class AdmControle
             $email, 
             "DoarDigital", 
             "contato@doardigital.com.br", 
-            "null", 
-            "null", 
-            "null", 
-            "null", 
-            "null", 
-            "null",
+            "SEJA BEM VINDO!", 
+            "", 
+            "", 
+            "", 
+            "", 
+            "",
             'cadastro');
 
         echo json_encode([
