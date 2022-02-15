@@ -110,15 +110,24 @@ class SubAdmControler
 
         $secret = $_REQUEST['secret'] ?? null;
         $listar = $subadm->list_profile($secret);
+        $lista_taxonomia = get_taxonomy_by_to($listar['id']);
+        
+        $get_dados_taxonomia = array_map(function($list){
+            return[
+                'from_id' => $list['from_id'], 
+                'to_id' => $list['to_id'],
+                'tipo_relacao' => $list['tipo_relacao']
+            ];
+        }, $lista_taxonomia);
+
 
         $payload = [
             'nome' => $listar['nome'],
             'email' => $listar['email'],
             'telefone' => $listar['telefone'],
             'credencial_id' => $listar['credencial_id'],
-            'intituicoes_ids' => []
+            'intituicoes_ids' => $get_dados_taxonomia
         ];
-        // listar todas as instituiçoes vinculadas ao sub adm
         echo json_encode([
             'next' => true,
             'message' => 'Lista do Sub Adm',
