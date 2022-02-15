@@ -155,4 +155,23 @@ class SubAdmControler
             'dados' => $payload
         ]);
     }
+
+    static function vincular_sub_adm()
+    {
+        token();
+
+        campo_obrigatorios([
+            'intituicao_id' => 'Informe o id de uma instituição',
+            'sub_adm_id' => 'Informe o id de subadm',
+        ]);
+
+        $subAdm = new SubAdm();
+        $subAdm->vincular( $_REQUEST['intituicao_id'], $_REQUEST['sub_adm_id'] );
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Atualizado com Sucesso'
+        ]);
+        
+    }
 }
