@@ -115,7 +115,6 @@ class SubAdmControler
         $get_dados_taxonomia = array_map(function($list){
             return[
                 'from_id' => $list['from_id'], 
-                'to_id' => $list['to_id'],
                 'tipo_relacao' => $list['tipo_relacao']
             ];
         }, $lista_taxonomia);
