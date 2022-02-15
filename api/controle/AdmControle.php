@@ -57,8 +57,8 @@ class AdmControle
         SendGrid::send(
             $nome, 
             $email, 
-            "null", 
-            "null", 
+            "DoarDigital", 
+            "contato@doardigital.com.br", 
             "null", 
             "null", 
             "null", 
