@@ -50,7 +50,7 @@ class AdmControle
                 "next" => false,
                 "message" => "Email já cadastrado"
             ]);
-            die;
+            return null;
         }
 
         $payload = [

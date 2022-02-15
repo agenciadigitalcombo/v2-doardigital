@@ -48,7 +48,7 @@ class SubAdmControler
                 "next" => false,
                 "message" => "Email já cadastrado"
             ]);
-            die;
+            return null;
         }
 
         // $adm_email = $token_parce['email'];
@@ -115,8 +115,10 @@ class SubAdmControler
             'nome' => $listar['nome'],
             'email' => $listar['email'],
             'telefone' => $listar['telefone'],
-            'credencial_id' => $listar['credencial_id']
+            'credencial_id' => $listar['credencial_id'],
+            'intituicoes_ids' => []
         ];
+        // listar todas as instituiçoes vinculadas ao sub adm
         echo json_encode([
             'next' => true,
             'message' => 'Lista do Sub Adm',
