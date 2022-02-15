@@ -121,12 +121,12 @@ export default {
 		 },
 
 		  baixar(){
-			 
-			  const imagemLink = document.createElement('a')
-			  const canvas = document.getElementById('meucanvas');
-			  imagemLink.href = canvas.toDataURL('image/png'); 
-			  
-			  console.log(imagemLink.href)
+			 			
+				var tela = this.$refs.print_qr.querySelector('canvas')
+				var link = document.createElement('a')
+				link.download = 'qr-code.png'
+				link.href = tela.toDataURL()
+				link.click();
 	
 			  },
 	
@@ -139,6 +139,8 @@ export default {
 	
 
 		async mounted() {
+
+			
 
 			let dados = (await this.infoSubdomain()).dados_instituicao
 		
@@ -173,6 +175,7 @@ export default {
 					});
 			
 			}
+
 	
 		},
 	
