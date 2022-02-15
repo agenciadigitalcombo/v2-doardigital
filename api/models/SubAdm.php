@@ -8,7 +8,7 @@ class SubAdm implements ISubAdm
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE email='$email'";
         $guard = $banco->query($sql);
-        return ! empty($guard);
+        return !empty($guard);
     }
 
     public function nova_senha(int $id): string

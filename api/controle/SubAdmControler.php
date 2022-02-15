@@ -41,6 +41,15 @@ class SubAdmControler
         $senha = valid_senha($campo_senha);
 
         
+        
+
+        if($subadm->exist($email)){
+            echo json_encode([
+                "next" => false,
+                "message" => "Email já cadastrado"
+            ]);
+            die;
+        }
 
         // $adm_email = $token_parce['email'];
         // $guard_adm_logado = $adm->get_by_email($adm_email);
@@ -54,6 +63,8 @@ class SubAdmControler
 
         $adm_secret = $token_parce['secret'];
         $busca_id = $adm->list_profile($adm_secret);
+        
+
         $adm_id = $busca_id['id'];
 
         $subadm->create($adm_id, $nome, $email, $senha, $telefone, $credencial_id);
