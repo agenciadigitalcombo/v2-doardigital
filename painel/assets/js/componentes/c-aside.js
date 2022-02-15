@@ -31,7 +31,7 @@ export default {
                <div class="menu-item" v-for="m in lista">
 
 
-                    <a class="menu-link" :href="m.link" v-if="m.permisao1 === '1' || m.permisao2 === superAdm" >
+                    <a class="menu-link" :href="m.link">
                         <span class="menu-icon">
                            <span class="svg-icon svg-icon-2">
                             <img class="filter-green" class="menu" :src="'../painel/assets/icon/'+m.icon">

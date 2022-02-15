@@ -1,7 +1,7 @@
 import adm from "../../../../static/js/api/adm.js"
 
 export default {
-	template:`
+	template: `
 		<div>
 
 			<c-header></c-header>
@@ -47,20 +47,15 @@ export default {
 													<div class="fv-row mb-2">
 	
 													<center>
-													<div id="meucanvas" ref="print_qr" ></div> 
+													<div id="canvas" ref="print_qr" ></div> 
 												</center>
 												
-												<canvas id="meucanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
-												Seu navegador não suporta CANVAS</canvas>
-												<hr>
-											 
-												<a id="arquivo" download="nome_do_arquivo.extensão" @click="baixar()">FAÇA O DOWNLOAD AQUI</a>
-												
+											
 													</div>
 												</div>
 												<!--begin::Actions-->
 												<div class="text-center p-8">
-													<button id="arquivo" download="nome_do_arquivo.extensão" @click="baixar()" type="submit" class="btn btn-primary m-2">
+													<button  @click="baixar()" type="submit" class="btn btn-primary m-2">
 														<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 															fill="currentColor" class="bi bi-download p-2"
 															viewBox="0 0 16 16">
@@ -72,7 +67,6 @@ export default {
 														Baixar</button>
 												</div>
 												<!--end::Actions-->
-	
 	
 											</div>
 	
@@ -103,79 +97,70 @@ export default {
     `,
 
 
-     data: function () {
+	data: function () {
 		return {
 			gravatar: '../painel/assets/image/gravatar.png',
 			subdomaim: null,
-			dominio: null, 
-        }
-    },
+			dominio: null,
+		}
+	},
 	methods: {
 
-		salvarImagem(a){
-			var meucanvas = document.getElementById('meucanvas');
-			var arquivo = document.getElementById('arquivo'); 
-			arquivo.download = a;
-			arquivo.href = meucanvas[0].toDataURL('image/png', 1); 
+		baixar() {
+			var tela = this.$refs.print_qr.querySelector('canvas')
+			var link = document.createElement('a')
+			link.download = 'qr-code.png'
 
-		 },
+			link.href = tela.toDataURL();
+			link.click();
+		},
 
-		  baixar(){
-			 
-			  const imagemLink = document.createElement('a')
-			  const canvas = document.getElementById('meucanvas');
-			  imagemLink.href = canvas.toDataURL('image/png'); 
-			  
-			  console.log(imagemLink.href)
-	
-			  },
-	
 		async infoSubdomain() {
-			 let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
 			//let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
-		},  
-    },
-	
-
-		async mounted() {
-
-			let dados = (await this.infoSubdomain()).dados_instituicao
-		
-			this.subdomaim = dados.subdomaim+'.doardigital.com.br/'
-			this.dominio = dados.dominio 
-
-		
-
-			if (this.dominio) { 
-					let code_pix = `${this.dominio}`
-					var qrcode = new QRCode(this.$refs.print_qr, {
-						text: code_pix,
-						width: 230,
-						height: 230,
-						height: 230,
-						colorDark: "#000000",
-						colorLight: "#ffffff",
-						correctLevel: QRCode.CorrectLevel.L
-					});
-					
-			 
-			} else {   
-					let code_pix = `${this.subdomaim}`
-					var qrcode = new QRCode(this.$refs.print_qr, {
-						text: code_pix,
-						width: 230,
-						height: 230,
-						height: 230,
-						colorDark: "#000000",
-						colorLight: "#ffffff",
-						correctLevel: QRCode.CorrectLevel.L
-					});
-			
-			}
-	
 		},
-	
+	},
+
+
+	async mounted() {
+
+		let dados = (await this.infoSubdomain()).dados_instituicao
+
+		this.subdomaim = dados.subdomaim + '.doardigital.com.br/'
+		this.dominio = dados.dominio
+
+
+
+		if (this.dominio) {
+			let code_pix = `${this.dominio}`
+			var qrcode = new QRCode(this.$refs.print_qr, {
+				text: code_pix,
+				width: 230,
+				height: 230,
+				height: 230,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.L
+			});
+
+
+		} else {
+			let code_pix = `${this.subdomaim}`
+			var qrcode = new QRCode(this.$refs.print_qr, {
+				text: code_pix,
+				width: 230,
+				height: 230,
+				height: 230,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.L
+			});
+
+		}
+
+	},
+
 }
 
- 
+
