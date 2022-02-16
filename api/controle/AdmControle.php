@@ -43,16 +43,16 @@ class AdmControle
         }
 
         
-        $usuario_logado = $adm->get_by_email($email);
-        if($email == $usuario_logado['email']){
+        if($adm->exist($email)){
             echo json_encode([
                 "next" => false,
                 "message" => "Email já cadastrado"
             ]);
             return null;
         }
-
+        
         $adm->create($nome, $email, $senha, $transform_tel);
+        $usuario_logado = $adm->get_by_email($email);
         
 
         $payload = [
