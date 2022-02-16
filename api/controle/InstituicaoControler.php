@@ -211,8 +211,6 @@ class InstituicaoControler
         $secret = $adm->list_profile($sanitize_secret);
         $id = $secret['id'];
         
-        
-
 
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
 
