@@ -111,20 +111,16 @@ class SubAdmControler
         $secret = $_REQUEST['secret'] ?? null;
         $listar = $subadm->list_profile($secret);
         $lista_taxonomia = get_taxonomy_by_to($listar['id']);
+        $lista_taxonomia = array_map(function($t) {
+            return intval($t['from_id']);
+         }, $lista_taxonomia);
         
-        $get_dados_taxonomia = array_map(function($list){
-            return[
-                'from_id' => $list['from_id'], 
-            ];
-        }, $lista_taxonomia);
-
-
         $payload = [
             'nome' => $listar['nome'],
             'email' => $listar['email'],
             'telefone' => $listar['telefone'],
             'credencial_id' => $listar['credencial_id'],
-            'intituicoes_ids' => $get_dados_taxonomia
+            'intituicoes_ids' => $lista_taxonomia
         ];
         echo json_encode([
             'next' => true,

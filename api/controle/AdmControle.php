@@ -42,8 +42,7 @@ class AdmControle
             return null;
         }
 
-
-        $adm->create($nome, $email, $senha, $transform_tel);
+        
         $usuario_logado = $adm->get_by_email($email);
         if($email == $usuario_logado['email']){
             echo json_encode([
@@ -52,6 +51,9 @@ class AdmControle
             ]);
             return null;
         }
+
+        $adm->create($nome, $email, $senha, $transform_tel);
+        
 
         $payload = [
 
