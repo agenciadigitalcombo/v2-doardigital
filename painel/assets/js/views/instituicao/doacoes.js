@@ -299,7 +299,7 @@ export default {
         </div> 
     </div> 
 
-    <c-footer /> novo
+    <c-footer /> 
 </div>
 `,
 
@@ -313,13 +313,15 @@ export default {
             elementoPaginacao: 10,
             dadosPagina: [],
             paginaAtual: 1,
+            search: "",
             mostraresconder:
             {
                 'show': false
-
             }
         }
     },
+
+
 
     filters: {
         is_price(price) {
@@ -369,10 +371,8 @@ export default {
         unfocused() {
             alert('good bye')
           },
-
+          
         fechaModel() {
-
-        
                 this.mostraresconder =
                 {
                     'show': !true

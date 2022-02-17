@@ -1,4 +1,4 @@
-import adm from "../../../../../static/js/api/adm.js"
+import adm from "../../../../../../static/js/api/adm.js"
 
 export default {
 	template: `

@@ -1,4 +1,4 @@
-import adm from "../../../../../static/js/api/adm.js"
+import adm from "../../../../../../static/js/api/adm.js"
 const { required, sameAs, minLength, between, email } = window.validators
 
 export default {

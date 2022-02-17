@@ -32,7 +32,8 @@ export default {
 															<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
 														</svg>
 													</span>
-													<input type="text" data-kt-subscription-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Doadores ..." />
+													<input type="text" data-kt-subscription-table-filter="search" v-model="search"
+													class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Doadores ..." />
 												</div>
 											</div>
 											<div class="card-toolbar">
@@ -135,9 +136,9 @@ export default {
 															</th>
 															<th class="min-w-300px">Usuario</th>
 															<th class="min-w-25px"></th>
-															<th class="min-w-200px">Data Cadastro </th>
-															<th class="min-w-25px"></th>
-															<th class="min-w-200px">Tipo</th>
+															<th class="min-w-175px">Data Cadastro </th>
+															<th class="min-w-150px">CPF</th>
+															<th class="min-w-100px">Tipo</th>
 															<th class="text-end min-w-100px">Ação</th>
 														</tr>
 
@@ -145,7 +146,7 @@ export default {
 													<tbody class="text-gray-600 fw-bold">
 
 
-													<tr v-for="item in doadores" :key="item.id"> 
+													<tr v-for="item in filtraDoadores" :key="item.id"> 
 															<td>
 																<div class="form-check form-check-sm form-check-custom form-check-solid">
 																	<input class="form-check-input" type="checkbox" value="1" />
@@ -171,7 +172,7 @@ export default {
 
 															<td> <div> {{item.data_registro}} </div></td>
 
-															<td></td>
+															<td> {{item.cpf}} </td>
 															<td>
 																<div class="badge" :class="'tipo_'+item.tipo"> {{item.tipo}} </div>
 															</td>
@@ -214,10 +215,28 @@ export default {
 
 			instituicao_id: "",
 			doadores: [],
+			search: "",
 			paginaAtual: 1
 
 		}
 	},
+
+
+	
+    computed: {
+ 
+		filtraDoadores() {
+			return this.doadores.filter((doador) => {
+			   return(
+				 	doador.nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+				//	doador.email.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+				 	doador.cpf.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+					//doador.email.match(this.search) 
+			   )
+			})
+		}
+	},
+
 	methods: {
 
 		async listarDoadores() {
@@ -246,6 +265,7 @@ export default {
 
 	async mounted() {
 		this.doadores = (await this.listarDoadores()).dados || {}
+	
 	},
 
 	created() {
