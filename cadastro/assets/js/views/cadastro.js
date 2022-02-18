@@ -42,7 +42,7 @@ export default {
 
                         <input v-model="nome" type="text" name="name" placeholder="Nome" required>
                         <input v-model="email" type="email" name="email" placeholder="Email" required>
-                        <input v-model="telefone" oninput="globalThis.maskTel(this)" type="text" name="phone"
+                        <input v-model="telefone"  type="text" name="phone"
                             placeholder="Telefone" required>
                         <input v-model="senha" type="password" name="password" placeholder="Senha" required>
                         <input type="password" name="password_confirm" placeholder="Confirmar senha" required>
@@ -67,6 +67,9 @@ export default {
 
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!"> 
+
+                        	<button type="button" @click="SendWhatsapp()">ver tel</button>
+												
 
 						<div  class="alert alert-danger" v-if="error!=null">
 						
@@ -104,10 +107,11 @@ export default {
     },
     methods: { 
         async cadastrar() {
+            
             this.error = null
             this.submitStatus = 'CARREGAR'
             let res = await adm.cadastrar(
-                this.nome,
+                this.nome, 
                 this.email,
                 this.senha,
                 this.telefone,
@@ -118,10 +122,40 @@ export default {
                 this.error = res.message
                 return null
             }
+        
+
             localStorage.setItem('token', res.token)
             window.location.href = "/finalizar-cadastro/index.html#/";
         },
-        
+         
+
+        async SendWhatsapp(tel) {
+            let format_tel = '244'
+            format_tel += this.telefone
+            console.log(format_tel)
+            let form = {
+                sender: 'digitalcombo',
+                number: format_tel,
+                message: 'Seja Bem vindo ao Doar Digital',
+                idc: 'cadastro.doardigital.com.br',
+            }
+            let base = 'http://149.28.111.241:8000/send-message/'
+            let options = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'default',
+                body: obj_to_url(form)
+            }
+            try {        
+                return await fetch(base, options)
+            } catch (error) {
+                return async () => '{}' 
+            }
+        },
+
         updateForm(event) {
             this[event.name] = event.value
         }

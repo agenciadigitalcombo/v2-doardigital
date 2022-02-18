@@ -43,26 +43,6 @@ Vue.component('c-login', login)
 import dash from './views/dash.js'
 Vue.component('c-dash', dash )
 
-
-import perfilEditar from './views/admin/perfil-editar.js'
-Vue.component('c-perfil-editar', perfilEditar )
-
-import EditarLocal from './views/admin/editar-local.js'
-Vue.component('c-editar-local', EditarLocal )
-
-import EditarSeguranca from './views/admin/editar-securanca.js'
-Vue.component('c-editar-securanca', EditarSeguranca )
-
-import credenciais from './views/admin/credenciais.js'
-Vue.component('c-credenciais', credenciais )
-
-import credenciaisAdd from './views/admin/credenciaisNova.js'
-Vue.component('c-nova-credenciais', credenciaisAdd )
-
-import credenciaisAtualizar from './views/admin/credenciaisAtualizar.js'
-Vue.component('c-credenciaisAtualizar', credenciaisAtualizar )
-
-
 import minhaInstituicao from './views/instituicao/minhaInstituicao.js'
 Vue.component('c-minhaInstituicao', minhaInstituicao )
 
@@ -109,10 +89,6 @@ Vue.component('c-modulosMailing', modulosMailing )
 import modulosStation from './views/modulos/modulosStation.js'
 Vue.component('c-modulosStation', modulosStation )
 
-
-import assinatura from './views/admin/assinatura.js'
-Vue.component('c-assinatura', assinatura )
-
 import doadores from './views/instituicao/doadores.js'
 Vue.component('c-doadores', doadores )
 
@@ -139,23 +115,11 @@ Vue.component('c-dominio', dominio )
 import script from './views/configuracao/script.js'
 Vue.component('c-script', script )
 
-
-
 import carteira from './views/admin/carteira.js'
 Vue.component('c-carteira', carteira )
-
-import usuarios from './views/usuarios/usuarios.js'
-Vue.component('c-usuarios', usuarios )
-
+ 
 import user from './views/textes/user.js'
 Vue.component('c-user', user )
-
-
-import usuarioNovo from './views/usuarios/usuarioNovo.js'
-Vue.component('c-usuarioNovo', usuarioNovo )
-
-import usuarioEditar from './views/usuarios/usuarioEditar.js'
-Vue.component('c-usuarioEditar', usuarioEditar )
 
 import planos from './views/planos/planos.js'
 Vue.component('c-planos', planos )
@@ -179,9 +143,6 @@ Vue.component('c-div-pagamentoAdd', divPagamentoAdd )
 
 import divPagamentoEditar from './views/split/div-pagamento_editar.js'
 Vue.component('c-div-pagamentoEditar', divPagamentoEditar )
-
-
-
 
 import planosDigital from './views/planos/planos-digital.js'
 Vue.component('c-planos-digital', planosDigital )

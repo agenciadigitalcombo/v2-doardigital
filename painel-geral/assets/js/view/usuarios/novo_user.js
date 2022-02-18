@@ -20,6 +20,8 @@ export default {
 			token: null,
 			sicret: null,
 			lista_credencial: [],
+			lista_instituicao: [],
+			instituicao_id:  [],
 			id: null,
 			nome_identificacao: null,
 			recursos: null,
@@ -75,6 +77,11 @@ export default {
 			return res
 		},
 
+		async listarInstit() {
+			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
+			return res
+		},
+
 		togleMostraSenha(){
 			var show = document.getElementById('senha')
 			if(this.mostrarsenha == false){
@@ -91,6 +98,12 @@ export default {
 
 	async mounted() {
        this.lista_credencial = (await this.listar()).dados 
+
+	   this.lista_instituicao = (await this.listarInstit()).dados || {}
+	   this.nome_fantasia = this.lista_instituicao.nome_fantasia,
+	   this.subdomaim = this.lista_instituicao.subdomaim,
+	   this.id = this.lista_instituicao.id
+
 	},
 
 
