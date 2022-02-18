@@ -92,6 +92,13 @@ class AdmControle
 
         $adm = new Adm();
 
+        
+        campo_obrigatorios([
+            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
+            'data_nascimento' => 'Informe a Data de nascimento',
+            'tipo_adm' => 'Informe o Tipo de Adm'
+        ]);
+        
         $token_parce = token();
 
         $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
@@ -99,17 +106,14 @@ class AdmControle
 
         $data_nascimento_campo = $_REQUEST['data_nascimento'];
         $data_nascimento = data_format($data_nascimento_campo);
+        $tipo_adm = $_REQUEST['tipo'];
 
 
-        campo_obrigatorios([
-            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
-            'data_nascimento' => 'Informe a Data de nascimento'
-        ]);
 
 
         $secret = $token_parce['secret'];
 
-        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj);
+        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj, $tipo_adm);
         echo json_encode([
             "next" => true,
             "message" => "Admin atualizado"

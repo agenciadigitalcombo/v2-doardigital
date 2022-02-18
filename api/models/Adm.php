@@ -23,10 +23,10 @@ class Adm implements IAdm
         $banco->exec($sql);
     }
 
-    public function complet_profile(string $secret, string $data_nascimento, string $cpf_cnpj): void
+    public function complet_profile(string $secret, string $data_nascimento, string $cpf_cnpj, string $tipo): void
     {
         $banco = new Banco();
-        $sql = "UPDATE adm SET cpf='$cpf_cnpj', data_nascimento='$data_nascimento' WHERE secret='$secret'";
+        $sql = "UPDATE adm SET cpf='$cpf_cnpj', data_nascimento='$data_nascimento', tipo='$tipo' WHERE secret='$secret'";
         $banco->exec($sql);
     }
 
