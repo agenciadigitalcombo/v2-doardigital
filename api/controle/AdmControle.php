@@ -96,9 +96,9 @@ class AdmControle
         campo_obrigatorios([
             'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
             'data_nascimento' => 'Informe a Data de nascimento',
-            'tipo_adm' => 'Informe o Tipo de Adm'
+            'tipo' => 'Informe o Tipo de Adm'
         ]);
-        
+
         $token_parce = token();
 
         $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
