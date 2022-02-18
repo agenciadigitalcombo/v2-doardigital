@@ -59,14 +59,14 @@ class SubAdm implements ISubAdm
         return $guard[0] ?? [];
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id, int $status = 1): void
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, string $data_nascimento, int $credencial_id, int $status = 1): void
     {
         $secret = uniqid();
         $banco = new Banco();
         $sql = "INSERT INTO sub_adm";
-        $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id, status)";
+        $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id, data_nascimento, status)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id','$nome','$email','$senha','$secret','$telefone','$credencial_id', '$status')";
+        $sql .= "('$adm_id','$nome','$email','$senha','$secret','$telefone','$credencial_id', '$data_nascimento', '$status')";
         $banco->exec($sql);
     }
 

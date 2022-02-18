@@ -30,7 +30,7 @@ class SubAdmControler
 
         $telefone_campo = $_REQUEST['telefone'] ?? '';
         $credencial_id_campo = $_REQUEST['credencial_id'] ?? '';
-        
+        $data_nascimento = data_format($_REQUEST['data_nascimento']) ?? '';
 
 
         $credencial_id = withdraw_caracter($credencial_id_campo);
@@ -67,7 +67,7 @@ class SubAdmControler
 
         $adm_id = $busca_id['id'];
 
-        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $credencial_id);
+        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $credencial_id, $data_nascimento);
 
         echo json_encode([
             "next" => true,
