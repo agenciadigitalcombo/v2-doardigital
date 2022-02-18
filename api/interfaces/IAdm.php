@@ -26,8 +26,9 @@ interface IAdm
     ): void;
 
     public function nova_senha(
-        int $id
-    ): string;
+        string $email,
+        string $senha
+    ): void;
 
     public function alterar_senha(
         string $secret,

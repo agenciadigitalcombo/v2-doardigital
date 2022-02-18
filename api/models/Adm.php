@@ -12,13 +12,15 @@ class Adm implements IAdm
         return !empty($guard);
     }
 
-    public function nova_senha(int $id): string
+    public function nova_senha(string $email, string $senha): void 
     {
-        $senha = '123';
-        $banco = new Banco();
-        $sql = "UPDATE adm SET pass='$senha' WHERE id='$id'";
+        $banco = new Banco();      
+
+        $sql = "UPDATE adm SET pass='$senha' WHERE email='$email'";
         $banco->exec($sql);
-        return $senha;
+        
+        $sql = "UPDATE sub_adm SET pass='$senha' WHERE email='$email'";
+        $banco->exec($sql);
     }
 
     public function complet_profile(string $secret, string $data_nascimento, string $cpf_cnpj): void
