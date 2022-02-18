@@ -205,21 +205,23 @@ class InstituicaoControler
         $get_secret_adm = $token_parce['secret'];
 
 
-        $sanitize_secret = trim($get_secret_adm);
+       
         
         
-        $secret = $adm->list_profile($sanitize_secret);
+        $secret = $adm->list_profile($get_secret_adm);
         $id = $secret['id'];
         
+        
         $lista_taxonomia = get_taxonomy_by_to_relacao($id, 'ADM');
+        
         $lista_taxonomia = array_map(function($t) {
             return intval($t['from_id']);
-         }, $lista_taxonomia);
+        }, $lista_taxonomia);
         
-         
-         
-         $get_instituicao = $instituicao->list_all_by_adm_id($id);
-         $get_instituicao_sub_adm = $instituicao->by_ids($lista_taxonomia);
+        
+        
+        $get_instituicao = $instituicao->list_all_by_adm_id($id);
+        $get_instituicao_sub_adm = $instituicao->by_ids($lista_taxonomia);
          
         // listar tadas inst [7,48,96]
         $get_instituicao = array_merge($get_instituicao, $get_instituicao_sub_adm);
