@@ -1,2 +1,2 @@
-GET http://localhost/v2-doardigital/api/credencial?instituicao_id=5
+GET http://localhost/v2-doardigital/api/credencial?id=5
 Content-Type: application/x-www-form-urlencoded
