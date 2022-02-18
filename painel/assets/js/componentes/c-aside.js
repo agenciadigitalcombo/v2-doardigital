@@ -49,7 +49,7 @@ export default {
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title"> Sair </span>
+                        <span class="menu-title"> Sair {{id}}</span>
                     </a>
                 </div>
              </div>
@@ -68,7 +68,10 @@ export default {
             menus,
             lista: [],
             nome: null,
-            permisao: ['inicio', 'sass', 'planos', 'divisao', 'modulos', 'configuracao', 'doacoes', 'doadores'],
+            
+            id: null,
+            permisao: [],
+            permisao2: ['inicio', 'sass', 'planos'],
         }
     },
 
@@ -77,7 +80,12 @@ export default {
             let res = await adm.ListarPerfil( localStorage.getItem('token') )
 			return res
         },
-	
+
+        async credenciais() {
+            let res = await adm.credencial(this.id = "0")
+			return res
+        },
+        
         async logout() {
             localStorage.removeItem('token')
             localStorage.removeItem('instituicao_nome')
@@ -97,13 +105,20 @@ export default {
                this.nome = dados.nome.split(' ')[0]
                this.gravatar = dados.gravatar
                this.superAdm = dados.super_adm
- 
-               
+               //this.id = dados.data_nascimento
+
+
         this.lista = menus
 
+              this.permisao = (await this.credenciais()).dados.recursos
+            
+               console.log(this.permisao)
+               console.log(this.permisao2)
+               console.log(this.permisao.split(","))
+
         let recursos = this.permisao
-      //let adm = this.superAdm
-      let adm =  '1'
+      let adm = this.superAdm
+      //let adm =  '1'
         
         if (adm == '1') {
             this.lista = this.menus

@@ -131,7 +131,7 @@ export default {
 											</span>
 										 </span>
 										 <span class="form-check form-check-custom form-check-solid">
-											<input class="form-check-input" type="radio" checked="checked" name="account_plan" value="1" />
+											<input class="form-check-input" type="radio" checked="checked" name="account_plan" value="Instituicao" v-model="tipo"/>
 										</span>
 									 </label>
 									 <label class="d-flex flex-stack mb-5 cursor-pointer">
@@ -151,7 +151,7 @@ export default {
 											</span>
 										 </span>
 										 <span class="form-check form-check-custom form-check-solid">
-											<input class="form-check-input" type="radio"  name="account_plan" value="2" />
+											<input class="form-check-input" type="radio"  name="account_plan" value="ONG" v-model="tipo"/>
 										</span>
 									 </label>
 								 <label class="d-flex flex-stack mb-0 cursor-pointer">
@@ -172,7 +172,7 @@ export default {
 											</span> 
 										</span> 
 										<span class="form-check form-check-custom form-check-solid">
-											<input class="form-check-input" type="radio" name="account_plan" value="3" />
+											<input class="form-check-input" type="radio" name="account_plan" value="Missionario" v-model="tipo"/>
 										</span> 
 									</label> 
 								</div> 
@@ -225,10 +225,10 @@ export default {
 
 
 	data: function () {
-		return {
-
+		return { 
 			cpf_cnpj: null,
 			data_nascimento: null,
+			tipo: null,
 			token: null,
 			jms: "",
 			error: null,
@@ -254,6 +254,7 @@ export default {
 				let res = await adm.atualizarFinaliza(
 					this.cpf_cnpj,
 					this.data_nascimento,
+					this.tipo, 
 					this.token
 
 				)
