@@ -40,6 +40,10 @@ Vue.component('c-detalhe', detalhe )
 import login from './views/admin/login.js'
 Vue.component('c-login', login)
 
+import recuperar_senha from './views/admin/recuperar_senha.js'
+Vue.component('c-recuperar_senha', recuperar_senha)
+
+
 import dash from './views/dash.js'
 Vue.component('c-dash', dash )
 

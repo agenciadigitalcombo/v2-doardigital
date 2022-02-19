@@ -68,7 +68,7 @@ export default {
             menus,
             lista: [],
             nome: null,
-            
+
             id: null,
             permisao: [],
             permisao2: ['inicio', 'sass', 'planos'],
@@ -76,60 +76,65 @@ export default {
     },
 
     methods: {
-		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
-			return res
+        async listar() {
+            let res = await adm.ListarPerfil(localStorage.getItem('token'))
+            return res
         },
 
         async credenciais() {
-            let res = await adm.credencial(this.id = "0")
-			return res
+            let res = await adm.credencial(this.id)
+            return res
         },
-        
+
         async logout() {
             localStorage.removeItem('token')
             localStorage.removeItem('instituicao_nome')
             localStorage.removeItem('instituicao_id')
-            
+
             window.location.href = "#/";
         },
-        
-	},
- 
+
+    },
+
     async mounted() {
-     
-     //   this.lista = this.menus.filter(itens => recursos.includes(itens.id)) || this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
-        
+
+        //   this.lista = this.menus.filter(itens => recursos.includes(itens.id)) || this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
+
 
         let dados = (await this.listar()).dados
-               this.nome = dados.nome.split(' ')[0]
-               this.gravatar = dados.gravatar
-               this.superAdm = dados.super_adm
-               //this.id = dados.data_nascimento
+        this.nome = dados.nome.split(' ')[0]
+        this.gravatar = dados.gravatar
+        this.superAdm = dados.super_adm
+         //   so mudar pelo credencial_id
+         this.id = dados.data_nascimento
 
 
-        this.lista = menus
+    },
 
-              this.permisao = (await this.credenciais()).dados.recursos
-            
-               console.log(this.permisao)
-               console.log(this.permisao2)
-               console.log(this.permisao.split(","))
+    async created() {
+
+        this.permisao = (await this.credenciais()).dados.recursos
+
+        console.log(this.permisao)
+        console.log(this.permisao2)
+        console.log(this.permisao.split(","))
 
         let recursos = this.permisao
-      let adm = this.superAdm
-      //let adm =  '1'
-        
+        let adm = this.superAdm
+        //let adm =  '1'
+
         if (adm == '1') {
             this.lista = this.menus
-        }else if (adm == '0') {
-            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
-        }else{
-            this.lista = this.menus.filter(itens => recursos.includes(itens.id)) 
+        } else if (adm == '0') {
+            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2))
+        } else {
+            this.lista = this.menus.filter(itens => recursos.includes(itens.id))
         }
-       
-        let jms = document.createElement('script'); 
+
+        let jms = document.createElement('script');
         jms.setAttribute('src', "../../painel/assets/js/vendor/scripts.bundle.js");
         document.head.appendChild(jms);
     }
+
+
 }

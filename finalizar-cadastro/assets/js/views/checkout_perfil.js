@@ -88,7 +88,7 @@ export default {
 								</label>
 								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" 
 								 v-model.trin="$v.data_nascimento.$model" :class=" {'is-invalid':$v.data_nascimento.$error, 'is-valid':!$v.data_nascimento.$invalid }"
-								 v-mask="'##/##/####'" placeholder="29/10/1685" required/>
+								 v-mask="'##/##/####'" placeholder="29/10/1980" required/>
 
 								 <div class="erros" v-if="$v.data_nascimento.$error">
 												<div class="erro_texte" v-if="!$v.data_nascimento.required">Valor
@@ -178,10 +178,24 @@ export default {
 								</div> 
 							</div> 
 						</div> 
-					</div>  
-					<div class="d-flex flex-stack pt-15 erro_texte">  
-					{{error}}
-				  </div> 
+					</div> 
+					
+					
+				 
+				  <div class="alert alert-danger d-flex align-items-center p-5 m-5" v-if="error!=null">
+				  <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+				  <span class="svg-icon svg-icon-2hx svg-icon-danger me-4">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+															  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+														  </svg>
+				  </span>
+				  <!--end::Svg Icon-->
+				  <div class="d-flex flex-column">
+					  <h4 class="mb-1 text-danger">{{error}}</h4>
+					   </div>
+			  </div>
+
 
 					<div class="d-flex flex-stack pt-5">
 						<div class="mr-2">

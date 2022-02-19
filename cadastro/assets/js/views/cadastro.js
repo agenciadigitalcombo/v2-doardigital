@@ -130,14 +130,14 @@ export default {
          
 
         async SendWhatsapp(tel) {
-            let format_tel = '244'
+            let format_tel = '55'
             format_tel += this.telefone
             console.log(format_tel)
             let form = {
                 sender: 'digitalcombo',
                 number: format_tel,
                 message: 'Seja Bem vindo ao Doar Digital',
-                idc: 'cadastro.doardigital.com.br',
+               // idc: 'cadastro.doardigital.com.br',
             }
             let base = 'http://149.28.111.241:8000/send-message/'
             let options = {

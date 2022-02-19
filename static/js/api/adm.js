@@ -12,7 +12,7 @@ export default {
         })
     },
 
-    async recuperar_email(email) {
+    async recuperar_senha(email) {
         return await http.post('/recuperar-senha', {
             email
         })

@@ -302,11 +302,11 @@ export default {
 				return null
 			}
 
-			 
+			window.location.href = "/painel-geral/index.html#/";
 		},
 
 		descartavel() {
-			window.location.href = "/painel/index.html#/perfil-editar";
+			window.location.href = "/painel-geral/index.html#/perfil-editar";
 		}
         
     },

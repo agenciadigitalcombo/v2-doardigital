@@ -1,5 +1,7 @@
 export default [
-    { path: '/', component: { template: '<c-login/>' } },  
+    { path: '/', component: { template: '<c-login/>' } },
+    { path: '/recuperar_senha', component: { template: '<c-recuperar_senha/>' } },
+      
     { path: '/dash', component: { template: '<c-dash/>' } },   
     { path: '/texte', component: { template: '<c-texte/>' } }, 
     { path: '/header', component: { template: '<c-header/>' } }, 
