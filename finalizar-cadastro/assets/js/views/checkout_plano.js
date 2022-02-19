@@ -72,7 +72,7 @@ export default {
 	<div class="d-flex flex-column flex-lg-row-fluid py-10"> 
 		<div class="d-flex flex-center flex-column flex-column-fluid"> 
 			<div class="w-lg-700px p-10 p-lg-15 mx-auto"> 
-				<form @submit.prevent="transacaoRecorrencia" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+				<form @submit.prevent="transacaoRecorrencia" class="my-auto pb-5">
 				
 					<div class="current" data-kt-stepper-element="content"> 
 						<div class="w-100">
@@ -92,13 +92,23 @@ export default {
 									<span class="required">Instituições</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 								</label>
-								<select name="card_expiry_month" class="form-select form-select-solid" data-control="select2" data-hide-search="true" placeholder="Month">
+								<select name="card_expiry_month" class="form-select form-select-solid" v-model="inst" required>
 									<option disabled selected hidden>Qual a Plano da Instituicao</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-								
+									<option value="2990">1 Instituição</option>
+									<option value="5980">2 Instituições</option>
+									<option value="8970">3 Instituições</option>
+									<option value="11960">4 Instituições</option>
+									<option value="14950">5 Instituições</option>
+									<option value="17940">6 Instituições</option>
+									<option value="20930">7 Instituições</option>
+									<option value="23920">8 Instituições</option>
+									<option value="26910">9 Instituições</option>
+									<option value="29900">10 Instituições</option>
+									<option value="32890">11 Instituições</option>
+									<option value="35880">12 Instituições</option>
+									<option value="38870">13 Instituições</option>
+									<option value="41860">14 Instituições</option>
+									<option value="44850">15 Instituições</option>
 								</select>
 							</div> 
 							<div class="col-6">
@@ -106,13 +116,12 @@ export default {
 									<span class="required">Disparos Whatsapp</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 								</label>
-								<select name="card_expiry_year" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year">
+								<select name="card_expiry_year" class="form-select form-select-solid" v-model="zap" required>
 									<option disabled selected hidden>Selecione o disparo</option>
-								    <option value="2022">Nenhum Disparo</option>
-                                        <option value="2023">1 Mil Disparos</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
-                                        <option value="2025">2025</option>
+								    <option value="000">Nenhum Disparo</option>
+                                        <option value="6990">1 Mil Disparos</option>
+                                        <option value="11000">2 Mil Disparos</option>
+                                        <option value="190900">5 Mil Disparos</option> 
 								</select>
 							</div> 
 						</div> 
@@ -120,7 +129,7 @@ export default {
 							 <div class="d-flex flex-column mb-7 fv-row">
 								
 								<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-									<span class="required">Name On Card</span>
+									<span class="required">Nome no cartão</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 								</label>
 								
@@ -128,7 +137,7 @@ export default {
 							</div> 
 							<div class="d-flex flex-column mb-7 fv-row">
 								
-								<label class="required fs-6 fw-bold form-label mb-2">Card Number</label>
+								<label class="required fs-6 fw-bold form-label mb-2">Número do cartão</label>
 							 <div class="position-relative">
 								 <input type="text" class="form-control form-control-solid" placeholder="Enter card number" name="card_number" v-model="cart_numero" />
 									 <div class="position-absolute translate-middle-y top-50 end-0 me-5">
@@ -141,7 +150,7 @@ export default {
 							<div class="row mb-10"> 
 								<div class="col-md-8 fv-row">
 									
-									<label class="required fs-6 fw-bold form-label mb-2">Expiration Date</label>
+									<label class="required fs-6 fw-bold form-label mb-2">Data de validade </label>
 									 
 									<div class="row fv-row"> 
 										<div class="col-6">
@@ -187,7 +196,7 @@ export default {
 									</label>
 									 
 									<div class="position-relative"> 
-										<input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" name="card_cvv" v-model="cart_cvv" />
+										<input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" name="card_cvv" v-model="cart_cvv" required/>
 										 
 										<div class="position-absolute translate-middle-y top-50 end-0 me-3">
 											 <span class="svg-icon svg-icon-2hx">
@@ -203,11 +212,11 @@ export default {
 							<div class="d-flex flex-stack">
 								
 								<div class="me-5">
-									<label class="fs-6 fw-bold form-label">Save Card for further billing?</label>
+									<label class="fs-6 fw-bold form-label">Salvar cartão para cobrança adicional? </label>
 									<div class="fs-7 fw-bold text-muted">If you need more info, please check budget planning</div>
 								</div> 
 								<label class="form-check form-switch form-check-custom form-check-solid">
-									<input class="form-check-input" type="checkbox" value="1" checked="checked" />
+									<input class="form-check-input" type="checkbox" value="1" checked="checked" required/>
 									<span class="form-check-label fw-bold text-muted">Save Card</span>
 								</label> 
 							</div>
@@ -263,11 +272,13 @@ export default {
 		return { 
 				token: null,
 				plano_token: "709362", 
-				amount: "122222",
+				amount: "",
 				cart_nome: null,
 				cart_numero: null,
 				cart_cvv: null,
 				cart_validade: "12/23",
+				zap: null,
+				inst: null,
         }
     },
 
@@ -278,7 +289,7 @@ export default {
 			let res = await adm.recorrenciaDigital(
 				this.token,
 				this.plano_token,
-				this.amount,
+				this.amount = parseInt(this.zap) + parseInt(this.inst),
 				this.cart_nome,
 				this.cart_numero,
 				this.cart_cvv,
@@ -299,8 +310,7 @@ export default {
 		}
         
     },
-	
-
-	
+  
+	 
 }
 
