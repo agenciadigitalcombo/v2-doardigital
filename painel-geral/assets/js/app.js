@@ -20,6 +20,12 @@ import mensagem from './components/c-mensagem.js'
 Vue.component('c-mensagem', mensagem)
 
 // IMPORTANDO PÁGINAS
+import page_login from './view/admin/home.js'
+Vue.component('p-login', page_login)
+
+import page_recuperar_senha from './view/admin/recuperar_senha.js'
+Vue.component('p-recuperar_senha', page_recuperar_senha)
+
 import page_home from './view/home/home.js'
 Vue.component('p-home', page_home)
 
@@ -79,6 +85,9 @@ Vue.component('p-seguranca', seguranca)
 Vue.use(Router)
 
 const routes = [
+    { path: '/login', component: { template: '<p-login></p-login>' } },
+    { path: '/recuperar_senha', component: { template: '<p-recuperar_senha></p-recuperar_senha>' } },
+    
     { path: '/', component: { template: '<p-home></p-home>' } },
     { path: '/contato', component: { template: '<p-contato></p-contato>' } },
     { path: '/instituicoes', component: { template: '<p-instituicoes></p-instituicoes>' } },
@@ -108,7 +117,20 @@ const router = new Router({ routes })
 // CONFIGURAÇÃO DO APP
 new Vue({
     router,
-    data: {}
-}).$mount('#app')
+    data: {},
+    computed: { },
+    methods: { },
+    mounted() {
+        let is_token = localStorage.getItem('token')
+		if(is_token) {
+        if(window.location.hash == `#/login` ){
+            window.location.href = `#/`
+            }
+		}else {
+            window.location.href = `#/login`
+        }
+        
 
-    ; (async () => { })()
+    },
+}).$mount('#app')
+; (async () => { })()
