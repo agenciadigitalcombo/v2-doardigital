@@ -67,7 +67,7 @@ class SubAdmControler
 
         $adm_id = $busca_id['id'];
 
-        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $credencial_id, $data_nascimento);
+        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $data_nascimento, $credencial_id);
 
         echo json_encode([
             "next" => true,
@@ -110,6 +110,7 @@ class SubAdmControler
 
         $secret = $_REQUEST['secret'] ?? null;
         $listar = $subadm->list_profile($secret);
+        
         $lista_taxonomia = get_taxonomy_by_to($listar['id']);
         $lista_taxonomia = array_map(function($t) {
             return intval($t['from_id']);
