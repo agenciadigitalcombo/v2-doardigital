@@ -94,21 +94,21 @@ export default {
 								</label>
 								<select name="card_expiry_month" class="form-select form-select-solid" v-model="inst" required>
 									<option disabled selected hidden>Qual a Plano da Instituicao</option>
-									<option value="1">1 Instituição</option>
-									<option value="2">2 Instituições</option>
-									<option value="3">3 Instituições</option>
-									<option value="4">4 Instituições</option>
-									<option value="5">5 Instituições</option>
-									<option value="6">6 Instituições</option>
-									<option value="7">7 Instituições</option>
-									<option value="8">8 Instituições</option>
-									<option value="9">9 Instituições</option>
-									<option value="10">10 Instituições</option>
-									<option value="11">11 Instituições</option>
-									<option value="12">12 Instituições</option>
-									<option value="13">13 Instituições</option>
-									<option value="14">14 Instituições</option>
-									<option value="15">15 Instituições</option>
+									<option value="2990">1 Instituição</option>
+									<option value="5980">2 Instituições</option>
+									<option value="8970">3 Instituições</option>
+									<option value="11960">4 Instituições</option>
+									<option value="14950">5 Instituições</option>
+									<option value="17940">6 Instituições</option>
+									<option value="20930">7 Instituições</option>
+									<option value="23920">8 Instituições</option>
+									<option value="26910">9 Instituições</option>
+									<option value="29900">10 Instituições</option>
+									<option value="32890">11 Instituições</option>
+									<option value="35880">12 Instituições</option>
+									<option value="38870">13 Instituições</option>
+									<option value="41860">14 Instituições</option>
+									<option value="44850">15 Instituições</option>
 								</select>
 							</div> 
 							<div class="col-6">
@@ -119,21 +119,12 @@ export default {
 								<select name="card_expiry_year" class="form-select form-select-solid" v-model="zap" required>
 									<option disabled selected hidden>Selecione o disparo</option>
 								    <option value="000">Nenhum Disparo</option>
-                                        <option value="1">1 Mil Disparos</option>
-                                        <option value="2">2 Mil Disparos</option>
-                                        <option value="5">5 Mil Disparos</option> 
+                                        <option value="6990">1 Mil Disparos</option>
+                                        <option value="11000">2 Mil Disparos</option>
+                                        <option value="190900">5 Mil Disparos</option> 
 								</select>
 							</div> 
 						</div> 
-
-					
-					
-					<input type="text"  v-model="search"/>
-						<ul v-for="item in filtraDoadores" :key="item.id">
-  <li> valor {{ item.amount }}</li>
-  <li>{{item.instituicao_max}} - Intituicao </li>
-  <li>{{item.quant_disparos}} - Zap disparos </li>
-</ul>
 
 							 <div class="d-flex flex-column mb-7 fv-row">
 								
@@ -288,34 +279,10 @@ export default {
 				cart_validade: "12/23",
 				zap: null,
 				inst: null,
-				dados: [],
-				search: null,
         }
     },
+	async mounted() {
 
-	computed: {
- 
-		filtraDoadores() {
-           let valores
-
-
-			valores = this.dados.filter((filtrar) => {
-			 if (this.inst === null) {
-				 return filtrar;
-			 }
-			 return filtrar.instituicao_max === this.inst;
-			 })
-	    
-			 valores = valores.filter((filtrar) => {
-				if (this.zap === null) {
-					return filtrar;
-				}
-				return filtrar.quant_disparos === this.zap;
-				})
-			 
-			return valores
-			
-		}
 	},
 
 	methods: {
@@ -341,22 +308,12 @@ export default {
 			window.location.href = "/painel-geral/index.html#/";
 		},
 
-		async listar() {
-            let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
-            return res
-        },
-
 		descartavel() {
 			window.location.href = "/painel-geral/index.html#/perfil-editar";
 		}
         
     },
   
-	async mounted() {
-		this.dados = (await this.listar()).dados
-       
-	   
-	},
 	 
 }
 
