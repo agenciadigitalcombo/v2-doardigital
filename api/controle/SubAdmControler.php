@@ -105,22 +105,25 @@ class SubAdmControler
     static function subadm()
     {
         $subadm = new SubAdm();
+        $adm = new Adm();
 
-        token();
+        $token_parce = token();
 
-        $secret = $_REQUEST['secret'] ?? null;
-        $listar = $subadm->list_profile($secret);
-        
-        $lista_taxonomia = get_taxonomy_by_to($listar['id']);
+        $secret = $token_parce['secret'];
+        $get_adm_id = $adm->list_profile($secret);
+        $adm_id = $get_adm_id['id'];
+        $lista_taxonomia = get_taxonomy_by_to($adm_id);
         $lista_taxonomia = array_map(function($t) {
             return intval($t['from_id']);
-         }, $lista_taxonomia);
+        }, $lista_taxonomia);
+        var_dump($get_adm_id);
+        die;
         
         $payload = [
-            'nome' => $listar['nome'],
-            'email' => $listar['email'],
-            'telefone' => $listar['telefone'],
-            'credencial_id' => $listar['credencial_id'],
+            'nome' => $get_adm_id['nome'],
+            'email' => $get_adm_id['email'],
+            'telefone' => $get_adm_id['telefone'],
+            'credencial_id' => $get_adm_id['credencial_id'],
             'intituicoes_ids' => $lista_taxonomia
         ];
         echo json_encode([
