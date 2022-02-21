@@ -134,12 +134,12 @@ export default {
             format_tel += this.telefone
             console.log(format_tel)
             let form = {
-                sender: 'digitalcombo',
+                sender: 'primary',
                 number: format_tel,
-                message: 'Seja Bem vindo ao Doar Digital',
+                message: 'Seja Bem vindo ao Doar Digital =D',
                // idc: 'cadastro.doardigital.com.br',
             }
-            let base = 'http://149.28.111.241:8000/send-message/'
+            let base = 'https://whatsapi-doar.herokuapp.com/send-message/'
             let options = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
