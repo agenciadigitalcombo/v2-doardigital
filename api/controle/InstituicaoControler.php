@@ -213,6 +213,8 @@ class InstituicaoControler
         
         
         $lista_taxonomia = get_taxonomy_by_to_relacao($id, 'ADM');
+        var_dump($lista_taxonomia);
+        die;
         
         $lista_taxonomia = array_map(function($t) {
             return intval($t['from_id']);

@@ -181,7 +181,7 @@ class AdmControle
             'step' => $guard['step'],
             'gravatar' => gravatar($guard['email']),
             'data_nascimento' => $guard['data_nascimento'],
-            'super_adm' => $guard['super_adm']
+            'super_adm' => $guard['super_adm'],
         ];
         echo json_encode([
             'next' => true,
