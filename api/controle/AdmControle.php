@@ -172,16 +172,19 @@ class AdmControle
         $guard = $adm->list_profile($secret);
         
 
+        
+
         $payload = [
             'secret' => $guard['secret'],
             'nome' => $guard['nome'],
-            'cpf' => $guard['cpf'],
+            'cpf' => $guard['cpf'] ?? 0,
             'email' => $guard['email'],
             'telefone' => $guard['telefone'],
-            'step' => $guard['step'],
+            'step' => $guard['step'] ?? 0,
             'gravatar' => gravatar($guard['email']),
             'data_nascimento' => $guard['data_nascimento'],
-            'super_adm' => $guard['super_adm'],
+            'super_adm' => $guard['super_adm'] ?? 0,
+            'credencial_id' => $guard['credencial_id'] ?? 0
         ];
         echo json_encode([
             'next' => true,

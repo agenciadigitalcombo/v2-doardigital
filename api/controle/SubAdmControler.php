@@ -116,7 +116,8 @@ class SubAdmControler
         $lista_taxonomia = array_map(function($t) {
             return intval($t['from_id']);
         }, $lista_taxonomia);
-        
+        var_dump($get_adm_id);
+        die;
         
         $payload = [
             'nome' => $get_adm_id['nome'],
