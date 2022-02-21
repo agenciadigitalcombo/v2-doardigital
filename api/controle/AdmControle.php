@@ -241,7 +241,7 @@ class AdmControle
         if (!$adm->get_by_email($email)) {
             echo json_encode([
                 "next" => false,
-                "message" => "Este endereço de Email nao existe"
+                "message" => "Este endereço de Email não existe"
             ]);
             return null;
         }
@@ -308,6 +308,7 @@ class AdmControle
         $data_nascimento_campo = $_REQUEST['data_nascimento'];
         $data_nascimento = data_format($data_nascimento_campo);
 
+        
 
         campo_obrigatorios([
             'nome' => 'Informe um nome',

@@ -90,8 +90,20 @@ class Adm implements IAdm
     public function update(string $nome, string $telefone, string $cpf, string $secret, string $data_nascimento): void
     {
         $banco = new Banco();
-        $sql = "UPDATE adm SET nome='$nome', telefone='$telefone', cpf='$cpf', data_nascimento='$data_nascimento' WHERE secret='$secret'";
-        $banco->exec($sql);
+        $sql_adm = "SELECT * FROM adm WHERE secret='$secret'";
+        $guard = $banco->query($sql_adm);
+        if(!empty($guard)){
+            $sql = "UPDATE adm SET nome='$nome', telefone='$telefone', cpf='$cpf', data_nascimento='$data_nascimento' WHERE secret='$secret'";
+            $banco->exec($sql);
+        }
+
+        $sql_sub_adm = "SELECT * FROM sub_adm WHERE secret='$secret'";
+        $guard = $banco->query($sql_sub_adm);
+        if(!empty($guard)){
+            $sql = "UPDATE sub_adm SET nome='$nome', telefone='$telefone' WHERE secret='$secret'";
+            $banco->exec($sql);
+        }
+        
     }
 
     public function alterar_senha(string $secret, string $senha): void

@@ -1,0 +1,57 @@
+POST http://localhost/v2-doardigital/api/create-instituicao
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+&nome_fantasia=GilMinas
+&razao_social=minas
+&subdomaim=gilminas.gm
+&email=gilminas@gmail.com
+&cnpj=123.456.789-31
+&telefone=(38) 998019-210
+
+###
+
+GET http://localhost/v2-doardigital/api/subdominio-disponivel?subdomaim=gilminas.gm&token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280&
+Content-Type: application/x-www-form-urlencoded
+
+###
+
+
+GET http://localhost/v2-doardigital/api/info-subdomaim?subdomaim=gilminas.gm&token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280&
+Content-Type: application/x-www-form-urlencoded
+
+###
+
+POST http://localhost/v2-doardigital/api/endereco-instituicao
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+&id=132
+&nome_identificacao=instituicao
+&logradouro=Rua Plínio Rocha Pinto
+&complemento=casa
+&bairro=Vila Serralheiro
+&cidade=São Paulo
+&estado=SP
+&numero=76
+&cep=02835090
+
+###
+
+POST http://localhost/v2-doardigital/api/create-conta-instituicao
+Content-Type: application/x-www-form-urlencoded
+
+token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+&instituicao_id=132
+&codigo_banco=1
+&agencia=0465
+&conta=46915989
+&conta_digito=0
+&tipo_conta=conta_corrente
+&nome_completo=VICTOR FERNANDO MAGALHAES
+&documento_numero=27.579.304-7
+&recebedor_nome=victor fernando
+&email_recebedor=victorfernandomagalhaes@gmail.com
+&cnpj=34.592.825/0001-64
+&site_url=gilminas.gm
+&telefone_recebedor=38998019210
