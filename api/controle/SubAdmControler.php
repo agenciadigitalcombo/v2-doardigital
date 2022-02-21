@@ -30,7 +30,7 @@ class SubAdmControler
 
         $telefone_campo = $_REQUEST['telefone'] ?? '';
         $credencial_id_campo = $_REQUEST['credencial_id'] ?? '';
-        
+        $data_nascimento = data_format($_REQUEST['data_nascimento']) ?? '';
 
 
         $credencial_id = withdraw_caracter($credencial_id_campo);
@@ -41,6 +41,15 @@ class SubAdmControler
         $senha = valid_senha($campo_senha);
 
         
+        
+
+        if($subadm->exist($email)){
+            echo json_encode([
+                "next" => false,
+                "message" => "Email já cadastrado"
+            ]);
+            return null;
+        }
 
         // $adm_email = $token_parce['email'];
         // $guard_adm_logado = $adm->get_by_email($adm_email);
@@ -54,9 +63,11 @@ class SubAdmControler
 
         $adm_secret = $token_parce['secret'];
         $busca_id = $adm->list_profile($adm_secret);
+        
+
         $adm_id = $busca_id['id'];
 
-        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $credencial_id);
+        $subadm->create($adm_id, $nome, $email, $senha, $telefone, $data_nascimento, $credencial_id);
 
         echo json_encode([
             "next" => true,
@@ -99,12 +110,18 @@ class SubAdmControler
 
         $secret = $_REQUEST['secret'] ?? null;
         $listar = $subadm->list_profile($secret);
-
+        
+        $lista_taxonomia = get_taxonomy_by_to($listar['id']);
+        $lista_taxonomia = array_map(function($t) {
+            return intval($t['from_id']);
+         }, $lista_taxonomia);
+        
         $payload = [
             'nome' => $listar['nome'],
             'email' => $listar['email'],
             'telefone' => $listar['telefone'],
-            'credencial_id' => $listar['credencial_id']
+            'credencial_id' => $listar['credencial_id'],
+            'intituicoes_ids' => $lista_taxonomia
         ];
         echo json_encode([
             'next' => true,
@@ -143,5 +160,24 @@ class SubAdmControler
             'message' => 'Todos os SubAdm',
             'dados' => $payload
         ]);
+    }
+
+    static function vincular_sub_adm()
+    {
+        token();
+
+        campo_obrigatorios([
+            'intituicao_id' => 'Informe o id de uma instituição',
+            'sub_adm_id' => 'Informe o id de subadm',
+        ]);
+
+        $subAdm = new SubAdm();
+        $subAdm->vincular( $_REQUEST['intituicao_id'], $_REQUEST['sub_adm_id'] );
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Atualizado com Sucesso'
+        ]);
+        
     }
 }

@@ -16,8 +16,7 @@
                         <div id="kt_content_container" class="container-xxl">
 
                             <div class="card mb-5 mb-xl-10">
-                                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
-                                    data-bs-target="#kt_account_signin_method">
+                                <div class="card-header border-0 cursor-pointer" role="button" >
                                     <div class="card-title m-0">
                                         <h3 class="fw-bolder m-0">Novo Usuário</h3>
                                     </div>
@@ -151,112 +150,22 @@
 
                                                                 <div class="text-center">
 
-                                                                    <div class="row g-5">
-                                                                        <div class="col-lg-4">
+                                                                	<div class="row g-5">
+                                                                        <div class="col-lg-4" v-for="dado in lista_instituicao" :key="dado.id" >
                                                                             <div class="card card-stretch mb-2">
                                                                                 <label
                                                                                     class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
+    
+                                                                                    <input class="form-check-input" v-model="instituicao_id" :value="dado.id"
                                                                                         type="checkbox" />
                                                                                     <span class="form-check-label">
-                                                                                        nome completo da instituicao
+                                                                                    {{dado.nome_fantasia}} id {{dado.id}}
                                                                                     </span>
                                                                                 </label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        nome completo da instituicao
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
+                                                                        id {{instituicao_id}}
+                                                                      
                                                                     </div>
 
                                                                 </div>

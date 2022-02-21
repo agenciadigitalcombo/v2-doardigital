@@ -5,7 +5,7 @@ class Plano implements IPlano{
     public function list_all(): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM plano ORDER BY amount";
+        $sql = "SELECT * FROM plano ORDER BY amount ASC";
         $guard = $banco->query($sql);
         return $guard;
         
@@ -31,7 +31,7 @@ class Plano implements IPlano{
     public function list_all_by_instituicao(int $id): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM plano WHERE instituicao_id='$id'";
+        $sql = "SELECT * FROM plano WHERE instituicao_id='$id' ORDER BY amount ASC";
         $guard = $banco->query($sql);
         return $guard ?? [];
     }

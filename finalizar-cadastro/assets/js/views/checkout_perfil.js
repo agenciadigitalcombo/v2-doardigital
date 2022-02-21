@@ -88,7 +88,7 @@ export default {
 								</label>
 								 <input name="business_descriptor" class="form-control form-control-lg form-control-solid" 
 								 v-model.trin="$v.data_nascimento.$model" :class=" {'is-invalid':$v.data_nascimento.$error, 'is-valid':!$v.data_nascimento.$invalid }"
-								 v-mask="'##/##/####'" placeholder="29/10/1685" required/>
+								 v-mask="'##/##/####'" placeholder="29/10/1980" required/>
 
 								 <div class="erros" v-if="$v.data_nascimento.$error">
 												<div class="erro_texte" v-if="!$v.data_nascimento.required">Valor
@@ -131,7 +131,7 @@ export default {
 											</span>
 										 </span>
 										 <span class="form-check form-check-custom form-check-solid">
-											<input class="form-check-input" type="radio" checked="checked" name="account_plan" value="1" />
+											<input class="form-check-input" type="radio" checked="checked" name="account_plan" value="Instituicao" v-model="tipo"/>
 										</span>
 									 </label>
 									 <label class="d-flex flex-stack mb-5 cursor-pointer">
@@ -151,7 +151,7 @@ export default {
 											</span>
 										 </span>
 										 <span class="form-check form-check-custom form-check-solid">
-											<input class="form-check-input" type="radio"  name="account_plan" value="2" />
+											<input class="form-check-input" type="radio"  name="account_plan" value="ONG" v-model="tipo"/>
 										</span>
 									 </label>
 								 <label class="d-flex flex-stack mb-0 cursor-pointer">
@@ -172,16 +172,30 @@ export default {
 											</span> 
 										</span> 
 										<span class="form-check form-check-custom form-check-solid">
-											<input class="form-check-input" type="radio" name="account_plan" value="3" />
+											<input class="form-check-input" type="radio" name="account_plan" value="Missionario" v-model="tipo"/>
 										</span> 
 									</label> 
 								</div> 
 							</div> 
 						</div> 
-					</div>  
-					<div class="d-flex flex-stack pt-15 erro_texte">  
-					{{error}}
-				  </div> 
+					</div> 
+					
+					
+				 
+				  <div class="alert alert-danger d-flex align-items-center p-5 m-5" v-if="error!=null">
+				  <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+				  <span class="svg-icon svg-icon-2hx svg-icon-danger me-4">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+															  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+														  </svg>
+				  </span>
+				  <!--end::Svg Icon-->
+				  <div class="d-flex flex-column">
+					  <h4 class="mb-1 text-danger">{{error}}</h4>
+					   </div>
+			  </div>
+
 
 					<div class="d-flex flex-stack pt-5">
 						<div class="mr-2">
@@ -225,10 +239,10 @@ export default {
 
 
 	data: function () {
-		return {
-
+		return { 
 			cpf_cnpj: null,
 			data_nascimento: null,
+			tipo: null,
 			token: null,
 			jms: "",
 			error: null,
@@ -254,6 +268,7 @@ export default {
 				let res = await adm.atualizarFinaliza(
 					this.cpf_cnpj,
 					this.data_nascimento,
+					this.tipo, 
 					this.token
 
 				)

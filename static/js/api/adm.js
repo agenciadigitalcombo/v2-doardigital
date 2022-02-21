@@ -12,7 +12,7 @@ export default {
         })
     },
 
-    async recuperar_email(email) {
+    async recuperar_senha(email) {
         return await http.post('/recuperar-senha', {
             email
         })
@@ -31,9 +31,9 @@ export default {
         })
     },
 
-    async atualizarFinaliza(cpf_cnpj, data_nascimento, token) {
+    async atualizarFinaliza(cpf_cnpj, data_nascimento, tipo, token) {
         return await http.post('/completar-profile', {
-            cpf_cnpj, data_nascimento, token
+            cpf_cnpj, data_nascimento, tipo, token
         })
     },
 
@@ -108,6 +108,13 @@ export default {
 
         })
     },
+
+    async credencial(id) {
+        return await http.get('/credencial', {
+            id
+        })
+    },
+
     async cadastrarCredencia(
         nome_identificacao, recursos) {
         return await http.post('/create-credencial', {

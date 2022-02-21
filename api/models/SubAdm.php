@@ -8,7 +8,7 @@ class SubAdm implements ISubAdm
         $banco = new Banco();
         $sql = "SELECT * FROM sub_adm WHERE email='$email'";
         $guard = $banco->query($sql);
-        return ! empty($guard);
+        return !empty($guard);
     }
 
     public function nova_senha(int $id): string
@@ -59,14 +59,14 @@ class SubAdm implements ISubAdm
         return $guard[0] ?? [];
     }
 
-    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, int $credencial_id, int $status = 1): void
+    public function create(int $adm_id, string $nome, string $email, string $senha, string $telefone, string $data_nascimento, int $credencial_id, int $status = 1): void
     {
         $secret = uniqid();
         $banco = new Banco();
         $sql = "INSERT INTO sub_adm";
-        $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id, status)";
+        $sql .= "(adm_id, nome, email, senha, secret, telefone, credencial_id, data_nascimento, status)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id','$nome','$email','$senha','$secret','$telefone','$credencial_id', '$status')";
+        $sql .= "('$adm_id','$nome','$email','$senha','$secret','$telefone','$credencial_id', '$data_nascimento', '$status')";
         $banco->exec($sql);
     }
 
@@ -115,5 +115,26 @@ class SubAdm implements ISubAdm
         $guard = $banco->query($sql);
         return $guard;
     }
+
+    public function vincular($instituicao_id, $sub_adm_id):int
+    {
+        $banco = new Banco();
+
+        $sql_exist = "SELECT * FROM taxonomia WHERE from_id={$instituicao_id} AND to_id={$sub_adm_id} AND tipo_relacao='ADM'";
+        
+        $guard = $banco->query($sql_exist);
+
+        if( empty($guard) ) {
+            $sql_insert = "INSERT INTO taxonomia (from_id, to_id, tipo_relacao) VALUES ({$instituicao_id}, {$sub_adm_id}, 'ADM')";
+            $banco->exec($sql_insert);
+            return 1;
+        }
+
+        if( !empty($guard) ) {
+            $sql_drop = "DELETE FROM  taxonomia WHERE from_id={$instituicao_id} AND to_id={$sub_adm_id} AND tipo_relacao='ADM'";
+            $banco->exec($sql_drop);
+            return 0;
+        }
+                
+    }
 }
-?>

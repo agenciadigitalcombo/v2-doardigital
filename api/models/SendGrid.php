@@ -56,7 +56,7 @@ class SendGrid
 
     static function template(array $payload, string $modelo_html)
     {
-        $html = file_get_contents(__DIR__ . "/../template_email/{$modelo_html}.html");
+        $html = @file_get_contents(__DIR__ . "/../template_email/{$modelo_html}.html") ?? '';
         $html = str_replace('@@text@@', $payload['text'], $html);
         foreach ($payload as $k => $v) {
             $html = str_replace("@@" . $k . "@@", $v, $html);

@@ -15,8 +15,8 @@ class AdmControle
     {
         $adm = new Adm();
         $jwt = new Jwt();
-        
-        
+
+
         $nome = $_REQUEST['nome'] ?? '';
 
         $campo_email = $_REQUEST['email'];
@@ -26,14 +26,14 @@ class AdmControle
         $senha = valid_senha($campo_senha);
 
         $telefone = $_REQUEST['telefone'] ?? '';
-        
-        
+
+
 
         $transform_tel = valid_telefone($telefone);
-        
-        
-        
-        
+
+
+
+
         if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
                 "next" => false,
@@ -43,8 +43,18 @@ class AdmControle
         }
 
 
+        if ($adm->exist($email)) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Email já cadastrado"
+            ]);
+            return null;
+        }
+
         $adm->create($nome, $email, $senha, $transform_tel);
         $usuario_logado = $adm->get_by_email($email);
+
+
         $payload = [
 
             'secret' => $usuario_logado['secret'],
@@ -55,17 +65,18 @@ class AdmControle
         ];
 
         SendGrid::send(
-            $nome, 
-            $email, 
-            "null", 
-            "null", 
-            "null", 
-            "null", 
-            "null", 
-            "null", 
-            "null", 
-            "null",
-            'cadastro');
+            $nome,
+            $email,
+            "Doar Digital",
+            "contato@doardigital.com.br",
+            "SEJA BEM VINDO!",
+            "",
+            "",
+            "",
+            "",
+            "",
+            'cadastro'
+        );
 
         echo json_encode([
             "next" => true,
@@ -76,34 +87,39 @@ class AdmControle
 
 
 
-    static function completar_profile(){
+    static function completar_profile()
+    {
 
         $adm = new Adm();
 
-        $token_parce = token();
         
+        campo_obrigatorios([
+            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
+            'data_nascimento' => 'Informe a Data de nascimento',
+            'tipo' => 'Informe o Tipo de Adm'
+        ]);
+
+        $token_parce = token();
+
         $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
         $cpf_cnpj = valid_cpf_cnpj($cpf_cnpj_campo);
 
         $data_nascimento_campo = $_REQUEST['data_nascimento'];
         $data_nascimento = data_format($data_nascimento_campo);
+        $tipo_adm = $_REQUEST['tipo'];
 
-        
-        campo_obrigatorios([
-            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
-            'data_nascimento' => 'Informe a Data de nascimento'
-        ]);
-        
-        
+
+
+
         $secret = $token_parce['secret'];
-        
-        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj);
+
+        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj, $tipo_adm);
         echo json_encode([
             "next" => true,
             "message" => "Admin atualizado"
         ]);
     }
-    
+
 
     static function login()
     {
@@ -115,7 +131,7 @@ class AdmControle
 
         $campo_senha = $_REQUEST['senha'];
         $senha = valid_senha($campo_senha);
-        
+
 
 
 
@@ -136,7 +152,7 @@ class AdmControle
             'super_adm' => $usuario_logado['super_adm'] ?? 0,
             'step' => $usuario_logado['step'] ?? 0,
             'credencial' => $usuario_logado['credencial_id'] ?? 0
-            
+
         ];
         echo json_encode([
             "next" => true,
@@ -150,11 +166,12 @@ class AdmControle
         $adm = new Adm();
 
         $token_parce = token();
-        
-       
+
+
         $secret = $token_parce['secret'];
         $guard = $adm->list_profile($secret);
-       
+        
+
         $payload = [
             'secret' => $guard['secret'],
             'nome' => $guard['nome'],
@@ -178,43 +195,76 @@ class AdmControle
         $adm = new Adm();
         $dados = $adm->list_all();
 
-        foreach($dados as $g){
-            $payload [] = [
+        foreach ($dados as $g) {
+            $payload[] = [
                 'secret' => $g['secret'],
                 'nome' => $g['nome'],
                 'cpf' => $g['cpf'],
                 'email' => $g['email'],
                 'telefone' => $g['telefone'],
                 'step' => $g['step'],
-                
+
             ];
-            
-        }   
+        }
         echo json_encode([
             'next' => true,
             'message' => 'Dados do Usuario',
             'dados' => $payload
         ]);
-
-       
     }
-    
+
     static function recuperar_senha()
     {
-        $email = new Email();
-        $id_instituicao = $_REQUEST['id'] ?? '';
 
-        $endereco = $_REQUEST['endereco'] ?? '';
-        $assunto = $_REQUEST['assunto'] ?? '';
-        $content = "";
+        /***
+         * perdeu a senha 
+         * so tem o email
+         * 
+         * recebe o email verifica se existe tanto adm sub_adm
+         * gerar uma uma senha sanvar no banco
+         * enviar um email com a senha recem gerada
+         */
+
+        $adm = new Adm();
 
         campo_obrigatorios([
-            'id' => 'id',
-            'endereco' => 'Informe o endereco',
-            'assunto' => 'Informe um assunto'
+            'email' => 'Informe o email'
         ]);
 
-        // $email->send($id_instituicao, $endereco, $assunto, $content);
+        $email = valid_email($_REQUEST['email']);
+
+        
+        
+        if (!$adm->get_by_email($email)) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Este endereço de Email nao existe"
+            ]);
+            return null;
+        }
+
+        $nova_senha = uniqid();
+        $nova_senha_crip = valid_senha($nova_senha);
+
+        $adm->nova_senha($email, $nova_senha_crip);
+        
+
+        SendGrid::send(
+            "Usuário",
+            $email,
+            "Doar Digital",
+            "contato@doardigital.com.br",
+            "NOVA SENHA GERADA COM SUCESSO!",
+            "",
+            "Sua senha temporaria é: {$nova_senha}",
+            "",
+            "",
+            "",
+            ''
+        );
+
+
+
         echo json_encode([
             "next" => true,
             "message" => "Nova senha enviada por email"
@@ -224,12 +274,12 @@ class AdmControle
     static function alterar_senha()
     {
         $adm = new Adm();
-        
+
         $token_parce = token();
-        
+
         $campo_senha = $_REQUEST['senha'];
         $senha = valid_senha($campo_senha);
-        
+
         $secret = $token_parce['secret'];
 
         $adm->alterar_senha($secret, $senha);
@@ -244,40 +294,39 @@ class AdmControle
         $adm = new Adm();
 
         $token_parce = token();
-        
+
         $nome = $_REQUEST['nome'] ?? null;
         $telefone = $_REQUEST['telefone'] ?? null;
         $cpf = $_REQUEST['cpf'] ?? null;
 
         $transform_tel = withdraw_caracter($telefone);
         $transform_cpf = withdraw_caracter($cpf);
-        
+
         $data_nascimento_campo = $_REQUEST['data_nascimento'];
         $data_nascimento = data_format($data_nascimento_campo);
 
-        
+
         campo_obrigatorios([
             'nome' => 'Informe um nome',
             'telefone' => 'Digite o telefone',
-            'cpf' => 'Digite o cpf' ,
-            'data_nascimento' => 'Informe a Data de Nascimento' 
+            'cpf' => 'Digite o cpf',
+            'data_nascimento' => 'Informe a Data de Nascimento'
         ]);
-        
-        
+
+
         $secret = $token_parce['secret'];
 
         $adm->update($nome, $transform_tel, $transform_cpf, $secret, $data_nascimento);
         echo json_encode([
             "next" => true,
             "message" => "Dados atualizados"
-        ]); 
-        
+        ]);
     }
 
     static function update_step()
     {
         $adm = new Adm();
-        
+
         $token_parce = token();
 
         $step = $_REQUEST['step'];
@@ -311,7 +360,7 @@ class AdmControle
         $jwt = new Jwt();
 
         $token = $_REQUEST['token'] ?? '';
-        
+
         $status = $jwt->valid($token);
         $token_parse = $jwt->ler($token);
         echo json_encode([

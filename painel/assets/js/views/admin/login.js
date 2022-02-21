@@ -40,7 +40,7 @@ export default {
 			
 							<label class="form-label fw-bolder text-dark fs-6 mb-0">Senha</label>
 					
-							<a href="/dist/authentication/flows/basic/password-reset.html"
+							<a href="#/recuperar_senha"
 								class="link-primary fs-6 fw-bolder">Esqueceu a Senha?</a>
 		
 						</div>
@@ -72,7 +72,7 @@ export default {
 							</div>
 				
 						</div>
-				
+						
 
 
 					</div>

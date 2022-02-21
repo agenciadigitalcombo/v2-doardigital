@@ -57,6 +57,43 @@ export default {
 
 													<div class="d-flex flex-column">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 														<div class="row mt-5">
 
 															<div class="col-lg-4 mb-10 mb-lg-0" v-for="listar in filtraPlano" :key="listar.id">
@@ -223,6 +260,11 @@ export default {
 	filters: {
 		is_price(price) {
 			let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			return `${amount}`
+		},
+
+		is_price2(price) {
+			let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
 			return `R$ ${amount}`
 		}
 	},
@@ -337,10 +379,13 @@ export default {
 		this.logo = config.logo
 		this.backgroundColor = config.cor
 
-		this.dados = (await this.infoSubdomain()).dados_instituicao.plano 
+
+
+		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
+		 
         this.amount = this.dados.filter(x => x.status == 1)[0].amount
 
-		console.log(this.amount)
+	
 		
 	},
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="64.000000pt"
+   height="64.000000pt"
+   viewBox="0 0 64.000000 64.000000"
+   preserveAspectRatio="xMidYMid meet"
+   id="svg8"
+   sodipodi:docname="icone-aguardando.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="pt"
+     showgrid="false"
+     inkscape:zoom="6.65625"
+     inkscape:cx="42.591549"
+     inkscape:cy="42.591549"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
+     fill="#000000"
+     stroke="none"
+     id="g6"
+     style="fill:#f2f2f2">
+    <path
+       d="M254 626 c-8 -21 3 -36 27 -36 13 0 19 -7 19 -23 0 -18 -8 -25 -43 -34 -108 -29 -193 -127 -204 -235 -15 -146 94 -280 239 -295 195 -20 348 173 283 358 -9 24 -23 51 -32 61 -15 17 -15 19 0 36 10 10 17 24 17 31 0 20 -30 24 -50 6 -18 -16 -20 -16 -44 2 -14 11 -46 26 -71 33 -36 10 -45 17 -45 35 0 15 7 25 21 28 13 4 20 12 17 24 -3 15 -15 19 -66 21 -48 2 -64 0 -68 -12z m182 -172 c61 -37 104 -113 104 -184 0 -70 -43 -147 -103 -184 -198 -122 -423 103 -301 301 63 102 196 132 300 67z"
+       id="path2"
+       style="fill:#f2f2f2" />
+    <path
+       d="M352 337 c-53 -54 -66 -87 -34 -87 23 0 122 100 122 123 0 32 -35 17 -88 -36z"
+       id="path4"
+       style="fill:#f2f2f2" />
+  </g>
+</svg>

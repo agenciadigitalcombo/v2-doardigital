@@ -31,7 +31,7 @@ export default {
                <div class="menu-item" v-for="m in lista">
 
 
-                    <a class="menu-link" :href="m.link" v-if="m.permisao1 === '1' || m.permisao2 === superAdm" >
+                    <a class="menu-link" :href="m.link">
                         <span class="menu-icon">
                            <span class="svg-icon svg-icon-2">
                             <img class="filter-green" class="menu" :src="'../painel/assets/icon/'+m.icon">
@@ -49,7 +49,7 @@ export default {
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title"> Sair </span>
+                        <span class="menu-title"> Sair {{id}}</span>
                     </a>
                 </div>
              </div>
@@ -68,54 +68,76 @@ export default {
             menus,
             lista: [],
             nome: null,
-            permisao: ['inicio', 'sass', 'planos', 'divisao', 'modulos', 'configuracao', 'doacoes', 'doadores'],
+
+            id: null,
+            permisao: [],
+            permisao2: ['inicio', 'sass', 'planos'],
         }
     },
 
     methods: {
-		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
-			return res
+        async listar() {
+            let res = await adm.ListarPerfil(localStorage.getItem('token'))
+            return res
         },
-	
+
+        async credenciais() {
+            let res = await adm.credencial(this.id)
+            return res
+        },
+
         async logout() {
             localStorage.removeItem('token')
             localStorage.removeItem('instituicao_nome')
             localStorage.removeItem('instituicao_id')
-            
+
             window.location.href = "#/";
         },
-        
-	},
- 
+
+    },
+
     async mounted() {
-     
-     //   this.lista = this.menus.filter(itens => recursos.includes(itens.id)) || this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
-        
+
+        //   this.lista = this.menus.filter(itens => recursos.includes(itens.id)) || this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
+
 
         let dados = (await this.listar()).dados
-               this.nome = dados.nome.split(' ')[0]
-               this.gravatar = dados.gravatar
-               this.superAdm = dados.super_adm
+        this.nome = dados.nome.split(' ')[0]
+        this.gravatar = dados.gravatar
+        this.superAdm = dados.super_adm
+          //  so mudar pelo credencial_id
+        //   this.id = dados.data_nascimento
+           this.id =  dados.data_nascimento || "777"
 
-              
-               
-        this.lista = menus
+         
+         this.permisao = (await this.credenciais()).dados.recursos
+
+         //console.log(this.permisao)
+       //  console.log(this.permisao2)
+         // console.log(this.permisao.split(","))
 
         let recursos = this.permisao
-      //let adm = this.superAdm
-        let adm = '1'
-        
+         let adm = this.superAdm
+      // let adm =  '1'
+
         if (adm == '1') {
             this.lista = this.menus
-        }else if (adm == '0') {
-            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
-        }else{
-            this.lista = this.menus.filter(itens => recursos.includes(itens.id)) 
+        } else if (adm == '0') {
+            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2))
+        } else {
+             //   so mudar pelo credencial_id
+          this.id = dados.data_nascimento
+            this.lista = this.menus.filter(itens => recursos.includes(itens.id))
         }
-       
-        let jms = document.createElement('script'); 
+
+
+    },
+
+    async created() {
+        let jms = document.createElement('script');
         jms.setAttribute('src', "../../painel/assets/js/vendor/scripts.bundle.js");
         document.head.appendChild(jms);
     }
+
+
 }

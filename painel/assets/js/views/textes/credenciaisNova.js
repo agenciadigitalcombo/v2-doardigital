@@ -47,7 +47,7 @@ export default {
 																</div>
 															</div>
 															<br>
-														
+														 
 														</div>
 
 														<div class="mb-10">

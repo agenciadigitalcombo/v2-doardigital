@@ -1,5 +1,7 @@
 POST https://doardigital.tk/api/login
-Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
+Content-Type: application/x-www-form-urlencoded;
 
-email=br.rafael@outlook.com
-&senha=12345678
+email=string
+&senha=string
+
+###

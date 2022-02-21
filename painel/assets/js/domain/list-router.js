@@ -1,18 +1,13 @@
 export default [
-    { path: '/', component: { template: '<c-login/>' } },  
+    { path: '/', component: { template: '<c-login/>' } },
+    { path: '/recuperar_senha', component: { template: '<c-recuperar_senha/>' } },
+      
     { path: '/dash', component: { template: '<c-dash/>' } },   
     { path: '/texte', component: { template: '<c-texte/>' } }, 
     { path: '/header', component: { template: '<c-header/>' } }, 
     { path: '/aside', component: { template: '<c-aside/>' } }, 
     { path: '/mensagem', component: { template: '<c-mensagem/>' } }, 
    
-    { path: '/perfil-editar', component: { template: '<c-perfil-editar/>' } }, 
-    { path: '/editar-local', component: { template: '<c-editar-local/>' } }, 
-    { path: '/editar-securanca', component: { template: '<c-editar-securanca/>' } }, 
-    { path: '/credencias', component: { template: '<c-credenciais/>' } }, 
-    { path: '/credencias/nova', component: { template: '<c-nova-credenciais>' } }, 
-    { path: '/credencias/editar', component: { template: '<c-credenciaisAtualizar>' } }, 
-    
     { path: '/minha-instituicoes', component: { template: '<c-minhaInstituicao>' } }, 
     { path: '/add-instituicoes', component: { template: '<c-addInstituicao>' } }, 
     { path: '/endereco-instituicoes', component: { template: '<c-localInstituicao>' } },
@@ -33,8 +28,6 @@ export default [
     { path: '/modulos/mailing', component: { template: '<c-modulosMailing>' } },
     { path: '/modulos/rd-station', component: { template: '<c-modulosStation>' } },
 
-    { path: '/meu-plano', component: { template: '<c-assinatura>' } },
-
     { path: '/doadores', component: { template: '<c-doadores>' } },
     { path: '/doacoes', component: { template: '<c-doacoes>' } },
     
@@ -44,11 +37,9 @@ export default [
     { path: '/doadorHitorico', component: { template: '<c-doadorHitorico>' } },
     { path: '/configuracao', component: { template: '<c-configuracao>' } },
     { path: '/carteira', component: { template: '<c-carteira>' } },
-    
-    { path: '/usuarios', component: { template: '<c-usuarios>' } },
+     
     { path: '/user', component: { template: '<c-user>' } },
-    { path: '/usuario-novo', component: { template: '<c-usuarioNovo>' } },
-    { path: '/usuario-editar', component: { template: '<c-usuarioEditar>' } },
+  
    
     { path: '/planos', component: { template: '<c-planos>' } },
     { path: '/planos/novo', component: { template: '<c-planoNovo>' } },
@@ -70,5 +61,4 @@ export default [
     
     { path: '/modelo-de-emails/editar', component: { template: '<c-modelo-de-emails-editar>' } },
  
-    
 ]

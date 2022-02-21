@@ -1,4 +1,4 @@
-import adm from "../../../../../static/js/api/adm.js"
+import adm from "../../../../../../static/js/api/adm.js"
 const { required, sameAs, minLength, between, email } = window.validators
 
 export default {
@@ -137,114 +137,24 @@ export default {
 																class="form-label fs-6 fw-bolder mb-10">Selecione a
 																instituições de acesso</label>
 
-															<div class="text-center">
+															<div class="text-center" >
 
 																<div class="row g-5">
-																	<div class="col-lg-4">
+																	<div class="col-lg-4" v-for="dado in lista_instituicao" :key="dado.id" >
 																		<div class="card card-stretch mb-2">
 																			<label
 																				class="form-check form-switch form-check-custom form-check-solid">
 
-																				<input class="form-check-input"
+																				<input class="form-check-input" v-model="instituicao_id" :value="dado.id"
 																					type="checkbox" />
 																				<span class="form-check-label">
-																					nome completo da instituicao
+																				{{dado.nome_fantasia}} id {{dado.id}}
 																				</span>
 																			</label>
 																		</div>
 																	</div>
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
-
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
-																	<div class="col-lg-4">
-																		<div class="card card-stretch mb-2">
-																			<label
-																				class="form-check form-switch form-check-custom form-check-solid">
-
-																				<input class="form-check-input"
-																					type="checkbox" />
-																				<span class="form-check-label">
-																					nome completo da instituicao
-																				</span>
-																			</label>
-																		</div>
-																	</div>
+																	id {{instituicao_id}}
+																  
 																</div>
 
 															</div>
@@ -302,7 +212,8 @@ export default {
 			token: null,
 			sicret: null,
 			lista_credencial: [],
-			id: null,
+			lista_instituicao: [],
+			instituicao_id:  [],
 			nome_identificacao: null,
 			recursos: null,
 				msg: null,
@@ -350,9 +261,16 @@ export default {
 			
 		},
 
-
-		async listar() {
+		async vinclular() {
+			alert("ola vincular")
+		},
+		async listarCred() {
 			let res = await adm.listarCredencial(localStorage.getItem('token'))
+			return res
+		},
+
+			async listarInstit() {
+			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
 			return res
 		},
 
@@ -371,7 +289,12 @@ export default {
 
 
 	async mounted() {
-       this.lista_credencial = (await this.listar()).dados 
+       this.lista_credencial = (await this.listarCred()).dados 
+
+	   this.lista_instituicao = (await this.listarInstit()).dados
+	   this.nome_fantasia = this.lista_instituicao.nome_fantasia,
+	   this.subdomaim = this.lista_instituicao.subdomaim,
+	   this.id = this.lista_instituicao.id
 	},
 
 

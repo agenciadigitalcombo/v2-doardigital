@@ -108,6 +108,16 @@ class Instituicao implements IInstituicao
         $banco->exec($sql);
     }
 
+
+    public function by_ids(array $ids): array
+    {
+        $banco = new Banco();
+        $ids = implode(', ', $ids);
+        $sql = "SELECT * FROM instituicao WHERE id IN ($ids)";
+        $guard = $banco->query($sql);
+        return $guard;
+    }
+
     public function search_by_name_or_id(string $termo): array
     {return [];}
 
