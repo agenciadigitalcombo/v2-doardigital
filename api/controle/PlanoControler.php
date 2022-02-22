@@ -113,7 +113,7 @@ class PlanoControler {
 
         $plano = new Plano();
 
-        $instituicao_id = $_REQUEST['instituicao_id'];
+        $plano_id = $_REQUEST['plano_id'];
         $nome = $_REQUEST['nome'] ?? '';
 
         $campos_obrigatorios = [
@@ -132,7 +132,7 @@ class PlanoControler {
             }
         }
 
-        $plano->update($instituicao_id, $nome);
+        $plano->update($plano_id, $nome);
         echo json_encode([
             'next' => true,
             'message' => 'Plano Atualizado'

@@ -77,12 +77,12 @@ class AdmControle
             'cadastro'
         );
         
-        
         $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
         $get_ddd_tel = telefone_get_ddd($telefone);
         $numero_ddd = [$get_ddd_tel, $get_numero_tel];
         
         SendZap::send('prmary', '55' . implode('', $numero_ddd), 'Bem vindo ao Doar Digital');
+        
 
 
         echo json_encode([
