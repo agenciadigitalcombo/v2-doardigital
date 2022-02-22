@@ -21,8 +21,7 @@ class SendZap
         ));
 
 
-        @$result = file_get_contents('https://whatsapi-doar.herokuapp.com/send-message/', FALSE, $context);
-        return json_decode($result, true);
+        file_get_contents('https://whatsapi-doar.herokuapp.com/send-message/', FALSE, $context);
         
     }
 }
