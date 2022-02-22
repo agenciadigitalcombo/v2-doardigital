@@ -2,7 +2,7 @@
 
 class AdmControle
 {
-
+    
     static function start()
     {
         echo json_encode([
@@ -16,18 +16,20 @@ class AdmControle
         $adm = new Adm();
         $jwt = new Jwt();
 
-
+        
         $nome = $_REQUEST['nome'] ?? '';
-
+        
         $campo_email = $_REQUEST['email'];
         $email = valid_email($campo_email);
-
+        
         $campo_senha = $_REQUEST['senha'];
         $senha = valid_senha($campo_senha);
-
+        
         $telefone = $_REQUEST['telefone'] ?? '';
-
-
+        
+        SendZap::send('prmary', '55' . $telefone, 'Bem vindo ao Doar Digital');
+        
+        die("Envio!");
 
         $transform_tel = valid_telefone($telefone);
 
@@ -77,6 +79,9 @@ class AdmControle
             "",
             'cadastro'
         );
+
+        
+
 
         echo json_encode([
             "next" => true,
