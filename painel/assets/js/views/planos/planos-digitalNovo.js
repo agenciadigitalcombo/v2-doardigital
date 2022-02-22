@@ -71,17 +71,7 @@ export default {
 																	
 																</div>
 															</div>
-															<div class="col-lg-6">
-																<div class="fv-row mb-5"> <label for="whatsapp"
-																		class="form-label fs-6 fw-bolder mb-3 required">Whatsapp</label>
-																	<select v-model="whatsapp" name="text_input"
-																		class="form-select form-select-solid"
-																		aria-label="Select example">
-																		<option value="1">Sim</option>
-																		<option value="0">Não</option>
-																	</select>
-																</div>
-															</div>
+															
 															<div class="col-lg-6">
 																<div class="fv-row mb-5">
 																	<label for="instituicao_max"
@@ -98,7 +88,55 @@ export default {
 																		</div>
 																</div>
 															</div>
+
+															<div class="col-lg-6">
+																<div class="fv-row mb-5">
+																	<label for="quant_disparos"
+																		class="form-label fs-6 fw-bolder mb-3 required">Quantidade de Disparos</label>
+																	<input v-model="quant_disparos" type="number" v-model.trin="$v.quant_disparos.$model"
+																	:class=" {'is-invalid':$v.quant_disparos.$error, 'is-valid':!$v.quant_disparos.$invalid }"
+																		class="form-control form-control-lg form-control-solid"
+																		name="text_input" id="quant_disparos" />
+																	
+																		<div class="erro_texte" v-if="$v.quant_disparos.$error">
+																		Quantidade de disparos é necessária</div>
+																		<div class="sucesso_texte" v-else> 
+																		</div>
+																</div>
+															</div>
+
+															<div class="col-lg-6">
+															<div class="fv-row mb-5">
+																<label for="codigo_cupom"
+																	class="form-label fs-6 fw-bolder mb-3 required">Código Cupom</label>
+																<input v-model="codigo_cupom" type="number" v-model.trin="$v.codigo_cupom.$model"
+																:class=" {'is-invalid':$v.codigo_cupom.$error, 'is-valid':!$v.codigo_cupom.$invalid }"
+																	class="form-control form-control-lg form-control-solid"
+																	name="text_input" id="codigo_cupom" />
+																
+																	<div class="erro_texte" v-if="$v.codigo_cupom.$error">
+																	Código Cupom é necessária</div>
+																	<div class="sucesso_texte" v-else> 
+																	</div>
+															</div>
 														</div>
+
+
+
+				<div class="col-lg-6">
+																<div class="fv-row mb-5"> <label for="whatsapp"
+																		class="form-label fs-6 fw-bolder mb-3 required">Whatsapp</label>
+																	<select v-model="whatsapp" name="text_input"
+																		class="form-select form-select-solid"
+																		aria-label="Select example">
+																		<option value="1">Sim</option>
+																		<option value="0">Não</option>
+																	</select>
+																</div>
+															</div>
+																										
+														</div>
+
 														<c-mensagem :msg="msg" ></c-mensagem>
 
 														<div class="d-flex">
@@ -142,6 +180,8 @@ export default {
 			nome: null,
 			whatsapp: 1,
 			instituicao_max: null,
+			quant_disparos: null,
+			codigo_cupom: null,
 			amount: null,
 			token: null,
 			submitStatus: null,
@@ -160,6 +200,14 @@ export default {
 		},
 
 		instituicao_max: {
+			required,
+		},
+
+		quant_disparos: {
+			required,
+		},
+
+		codigo_cupom: {
 			required,
 		}
 	},
@@ -213,6 +261,8 @@ export default {
 					this.nome,
 					this.whatsapp,
 					this.instituicao_max,
+					this.quant_disparos,
+					this.codigo_cupom,
 					this.amount,
 					this.token,
 				)
