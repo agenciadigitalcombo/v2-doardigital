@@ -7,7 +7,7 @@ class SendZap
         string $sender,
         string $number,
         string $message
-    ): array {
+    ): void {
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'POST',
