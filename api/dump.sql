@@ -12,7 +12,8 @@ CREATE TABLE adm (
     plano_id varchar(255),
     step int,
     status int,
-    super_adm int
+    super_adm int,
+    tipo varchar(75)
 );
 
 CREATE TABLE sub_adm (
@@ -25,7 +26,9 @@ CREATE TABLE sub_adm (
     foto varchar(255),
     telefone varchar(11),
     credencial_id int,
-    status int
+    status int,
+    data_nascimento varchar(10),
+    cpf varchar(25)
 );
 
 CREATE TABLE taxonomia (
@@ -76,13 +79,6 @@ CREATE TABLE split (
     porcentagem int
 );
 
-CREATE TABLE split_digital (
-    id int not null auto_increment primary key,
-    recebedor_id int,
-    responsavel_estorno int,
-    porcentagem int
-);
-
 CREATE TABLE inscrito (
     id int not null auto_increment primary key,
     instituicao_id int,
@@ -119,17 +115,6 @@ CREATE TABLE conta_bancaria (
     documento_numero varchar(14)
 );
 
-CREATE TABLE  (
-    id int not null auto_increment primary key,
-    adm_id int,
-    token varchar(255), 
-    nome_identificacao varchar(75),
-    conta_bancaria_token varchar(255),
-    email varchar(75),
-    ddd varchar(25),
-    telefone varchar(9)
-);
-
 CREATE TABLE instituicao (
     id int not null auto_increment primary key,
     adm_id int,
@@ -145,7 +130,11 @@ CREATE TABLE instituicao (
     cor varchar(9),
     logo varchar(255),
     data_registro varchar(19),
-    status int
+    status int,
+    titulo_site varchar(55),
+    tags varchar(75),
+    descricao_site varchar(255),
+    icon varchar(75)
 );
 
 CREATE TABLE meta_mes (
@@ -172,6 +161,7 @@ CREATE TABLE doacoes (
     doador_id int,
     token varchar(255),
     tipo varchar(25),
+    recorrente int,
     refrence_key varchar(75),
     status_pagamento varchar(75),
     plano_id int,
