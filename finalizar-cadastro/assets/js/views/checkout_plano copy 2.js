@@ -2,7 +2,7 @@ import adm from "../../../../../static/js/api/adm.js"
 const { required, minLength, maxLength } = window.validators
 
 export default {
-	template: `
+    template:`
 	
 	<div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column" id="kt_create_account_stepper">
 		 
@@ -92,25 +92,48 @@ export default {
 									<span class="required">Instituições</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 								</label>
-								<select name="card_expiry_month" class="form-select form-select-solid" v-model="inst" @change="setarPlano($event)" required>
+								<select name="card_expiry_month" class="form-select form-select-solid" v-model="inst" required>
 									<option disabled selected hidden>Qual a Plano da Instituicao</option>
-									<option v-for="item in planoInst" :key="item.id" :value="item">{{item}} Instituição</option>
+									<option value="1">1 Instituição</option>
+									<option value="2">2 Instituições</option>
+									<option value="3">3 Instituições</option>
+									<option value="4">4 Instituições</option>
+									<option value="5">5 Instituições</option>
+									<option value="6">6 Instituições</option>
+									<option value="7">7 Instituições</option>
+									<option value="8">8 Instituições</option>
+									<option value="9">9 Instituições</option>
+									<option value="10">10 Instituições</option>
+									<option value="11">11 Instituições</option>
+									<option value="12">12 Instituições</option>
+									<option value="13">13 Instituições</option>
+									<option value="14">14 Instituições</option>
+									<option value="15">15 Instituições</option>
 								</select>
 							</div> 
-
 							<div class="col-6">
 							<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
 									<span class="required">Disparos Whatsapp</span>
 									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 								</label>
-								<select name="card_expiry_year" class="form-select form-select-solid" v-model="zap" @change="setarPlano($event)" required>
+								<select name="card_expiry_year" class="form-select form-select-solid" v-model="zap" required>
 									<option disabled selected hidden>Selecione o disparo</option>
 								    <option value="000">Nenhum Disparo</option>
-                                        <option v-for="item in planoZap" :key="item.id" :value="item">{{item}} Mil Disparos</option>
+                                        <option value="1">1 Mil Disparos</option>
+                                        <option value="2">2 Mil Disparos</option>
+                                        <option value="5">5 Mil Disparos</option> 
 								</select>
 							</div> 
 						</div> 
 
+					
+					
+					<input type="text"  v-model="search"/>
+						<ul v-for="item in filtraDoadores" :key="item.id">
+  <li> valor {{ item.amount }}</li>
+  <li>{{item.instituicao_max}} - Intituicao </li>
+  <li>{{item.quant_disparos}} - Zap disparos </li>
+</ul>
 
 							 <div class="d-flex flex-column mb-7 fv-row">
 								
@@ -209,8 +232,6 @@ export default {
 						
 						</div> 
 					</div> 
-<br>
-<br>
 
 
 					<div class="d-flex flex-stack pt-15">
@@ -256,69 +277,50 @@ export default {
 	`,
 
 
-	data: function () {
-		return {
-			token: null,
-			plano_token: "",
-			amount: "",
-			cart_nome: null,
-			cart_numero: null,
-			cart_cvv: null,
-			cart_validade: "08/2022",
-			zap: null,
-			inst: null,
-			dados: [],
-			planoInst: [],
-			planoZap: [],
-			search: null,
-
-		}
-	},
+     data: function () {
+		return { 
+				token: null,
+				plano_token: "709362", 
+				amount: "22211",
+				cart_nome: null,
+				cart_numero: null,
+				cart_cvv: null,
+				cart_validade: "12/23",
+				zap: null,
+				inst: null,
+				dados: [],
+				search: null,
+        }
+    },
 
 	computed: {
+ 
+		filtraDoadores() {
+           let valores
 
-		filtraPlanos() {
-			let valores
 
 			valores = this.dados.filter((filtrar) => {
-				if (this.inst === null) {
-					return filtrar;
-				}
-				return filtrar.instituicao_max === this.inst;
-			})
-
-			valores = valores.filter((filtrar) => {
+			 if (this.inst === null) {
+				 return filtrar;
+			 }
+			 return filtrar.instituicao_max === this.inst;
+			 })
+	    
+			 valores = valores.filter((filtrar) => {
 				if (this.zap === null) {
 					return filtrar;
 				}
-
 				return filtrar.quant_disparos === this.zap;
-			})
-
+				})
+			 
 			return valores
-
+			
 		}
 	},
 
 	methods: {
 		
-		setarPlano(event) {
-			console.log(event.target.value)
-
-			const novoaray = this.dados.filter((valorAtual) => {
-		return valorAtual.instituicao_max.includes(this.inst) && valorAtual.quant_disparos.includes(this.zap) 
-				})
-
-				console.log(novoaray[0].amount)
-				console.log(novoaray[0].token)
-				console.log(novoaray[0].instituicao_max)
-				console.log(novoaray[0].quant_disparos)
-
-			this.amount = novoaray[0].amount
-		   this.plano_token =novoaray[0].token
-		},
-
-		async transacaoRecorrencia() {
+		async transacaoRecorrencia() { 
 			this.error = null
 			let res = await adm.recorrenciaDigital(
 				this.token,
@@ -327,7 +329,7 @@ export default {
 				this.cart_nome,
 				this.cart_numero,
 				this.cart_cvv,
-				this.cart_validade,
+				this.cart_validade, 
 
 			)
 			if (!res.next) {
@@ -340,42 +342,21 @@ export default {
 		},
 
 		async listar() {
-			let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
-			return res
-		},
+            let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
+            return res
+        },
 
 		descartavel() {
 			window.location.href = "/painel-geral/index.html#/perfil-editar";
 		}
-
-	},
-
+        
+    },
+  
 	async mounted() {
 		this.dados = (await this.listar()).dados
-		console.log(this.dados)
-
-		const unicoInt = new Map();
-		this.dados.forEach((element) => {
-			if (!unicoInt.has(element.instituicao_max)) {
-				unicoInt.set(element.instituicao_max, element)
-			}
-
-		});
-
-		const unicoZap = new Map();
-		this.dados.forEach((element) => {
-			if (!unicoZap.has(element.quant_disparos)) {
-				unicoZap.set(element.quant_disparos, element)
-			}
-
-		});
-
-		this.planoInst = [...unicoInt.keys()]
-		this.planoZap = [...unicoZap.keys()]
-		
-	
-
+       
+	   
 	},
-
+	 
 }
 

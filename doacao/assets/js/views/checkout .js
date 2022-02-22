@@ -236,7 +236,6 @@ export default {
 			status: '',
 			backgroundColor: '',
 			dados: [],
-		 
 
 		}
 	},
@@ -284,7 +283,7 @@ export default {
 			this.valor_digitado = "0"
 		},
 
- 
+
 		// outro() {
 		// 	localStorage.removeItem("planos_id");
 		// 	this.planos_nome = "Plano "+this.valor_digitado
@@ -292,7 +291,7 @@ export default {
 		// },
 
 
-		money() { 
+		money() {
 			let val = this.valor_digitado
 			val = val.replace('.', '')
 			val = val.replace(/\D/gi, '')
@@ -330,7 +329,7 @@ export default {
 		descartavel() {
 
 			let cunston_valor = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
- 
+
 			this.error = null
 			this.$v.$touch()
 			if (this.$v.$invalid) {
@@ -360,21 +359,21 @@ export default {
 			}
 		},
 
-		 
+
 	},
 
 	computed: {
 
 		filtraPlano() {
-			return this.dados.filter((plano) => { 
-				return  plano.status.match(this.status = 1);
-				
+			return this.dados.filter((plano) => {
+				return plano.status.match(this.status = 1);
+
 			})
 		}
 	},
 
 	async mounted() {
- 
+
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = config.logo
 		this.backgroundColor = config.cor
@@ -382,11 +381,11 @@ export default {
 
 
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
-		 
-        this.amount = this.dados.filter(x => x.status == 1)[0].amount
 
-	
-		
+		this.amount = this.dados.filter(x => x.status == 1)[0].amount
+
+
+
 	},
 
 

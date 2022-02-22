@@ -53,63 +53,91 @@ Filter Options
 <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
 	<div id="app">
 
-		<button @click="falso()"> true </button>
+		<select name="LeaveType" class="form-control" v-model="key">
+			<option value="1">Annual Leave/ Off-Day</option>
+			<option value="2">On Demand Leave</option>
+		</select>
 
-		<button @click="verdade()"> verdade </button>
 
-<ul></ul>
+		<select v-model="selected" @change="setarPlano($event)">
+			<option v-for="option in produtos" v-bind:value="option.id">
+				{{ option.descricao }}
+			<option> clicar</option>
+			</option>
+		</select>
+		<br>
+		
+		<span>Selecionado: {{ selected }}</span>
 
 
-		<div class="ativados" v-bind:class="jms">
-			<h1> olaaaaa </h1>
-		</div>
-
+		<ul v-for="option in filtrar">
+			<li> id {{option.id}}</li>
+			<li> id {{option.id}}</li>
+		</ul>
 	</div>
 
-
-	<style>
-		.static {
-			background-color: brown;
-
-		}
-
-		.altura {
-			height: 20rem;
-		}
-
-
-		.ativados {
-			width: 50%;
-		}
-	</style>
 
 	<script>
 
 		new Vue({
 			el: '#app',
 			data: {
-				jms: {
-					"static": true,
-					"altura": true,
-				},
-				hasError: false
+				selected: '',
+				planos_id: '',
+				planos_nome: '',
+				planos_desc: '',
+				key: "",
+				lista: [],
+				produtos: [
+					{ id: '1', jms: '1', descricao: "Smartphone", categoria: "Eletrônico" },
+					{ id: '2', jms: '2', descricao: "Notebook", categoria: "Eletrônico" },
+					{ id: '3', jms: '1', descricao: "Geladeira", categoria: "Eletrodoméstico" },
+					{ id: '4', jms: '2', descricao: "Liquidificador", categoria: "Eletrodoméstico" },
+					{ id: '5', jms: '1', descricao: "Fogão", categoria: "Eletrodoméstico" }
+				]
 			},
-			methods: {
-				falso() {
-					this.jms = {
-						"static": true,
-						"altura": true,
-					}
-				},
-				verdade() {
-					this.jms =  {
-					"static": true,
+
+			computed: {
+				filtrar() {
+					let valores = []
+					valores = this.produtos.filter((item) => {
+						if (this.selected == null) {
+							return item
+						}
+						return item.id === this.selected;
+					})
+					return valores
 				}
+			,	 
+			},
+
+			methods: {
+
+				setarPlano(event) {
+					console.log(event.target.value)
+
+					const novoaray = this.produtos.filter((valorAtual) => {
+				return valorAtual.id.includes(this.selected) && valorAtual.jms.includes(this.key) 
+						})
+
+						console.log(novoaray[0].id)
+						console.log(novoaray[0].descricao)
+						console.log(novoaray[0].categoria)
+
+						this.planos_id = novoaray[0].id,
+					this.planos_nome =novoaray[0].descricao,
+					this.planos_desc =novoaray[0].categoria 
 				},
+
+				onChange(event) {
+					 this.key 
+					 console.log(this.key)
+				}
+
 			},
 
 			mounted() {
-				// this.jms = this.step
+				
 			},
 
 		})
