@@ -153,6 +153,7 @@ export default {
 			nome: null,
 			whatsapp: null,
 			instituicao_max: null,
+			quant_disparos: null,
 			amount: null,
 			status: null,
 	        token: null,

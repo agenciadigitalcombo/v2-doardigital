@@ -457,6 +457,8 @@ export default {
         nome,
         whatsapp,
         instituicao_max,
+        quant_disparos,
+        codigo_cupom,
         amount,
         token,
     ) {
@@ -464,6 +466,8 @@ export default {
             nome,
             whatsapp,
             instituicao_max,
+            quant_disparos,
+            codigo_cupom,
             amount,
             token,
         })

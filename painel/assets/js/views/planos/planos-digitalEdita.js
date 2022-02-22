@@ -140,6 +140,7 @@ export default {
 			instituicao_max: null,
 			amount: null,
 			token: null,
+			token_id: null,
 			submitStatus: null
 
 		}
