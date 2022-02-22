@@ -7,7 +7,7 @@ class SendZap
         string $sender,
         string $number,
         string $message
-    ): void {
+    ): array {
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'POST',
@@ -21,7 +21,8 @@ class SendZap
         ));
 
 
-        file_get_contents('https://whatsapi-doar.herokuapp.com/send-message/', FALSE, $context);
+        @$result = file_get_contents('https://whatsapi-doar.herokuapp.com/send-message/', FALSE, $context);
+        return json_decode($result, true);
         
     }
 }
