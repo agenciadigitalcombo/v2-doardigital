@@ -27,15 +27,12 @@ class AdmControle
         
         $telefone = $_REQUEST['telefone'] ?? '';
         
-        SendZap::send('prmary', '55' . $telefone, 'Bem vindo ao Doar Digital');
         
-        die("Envio!");
-
         $transform_tel = valid_telefone($telefone);
-
-
-
-
+        
+        
+        
+        
         if (empty($nome) or empty($email) or empty($telefone)) {
             echo json_encode([
                 "next" => false,
@@ -55,8 +52,8 @@ class AdmControle
 
         $adm->create($nome, $email, $senha, $transform_tel);
         $usuario_logado = $adm->get_by_email($email);
-
-
+        
+        
         $payload = [
 
             'secret' => $usuario_logado['secret'],
@@ -79,8 +76,13 @@ class AdmControle
             "",
             'cadastro'
         );
-
         
+        
+        $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
+        $get_ddd_tel = telefone_get_ddd($telefone);
+        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
+        
+        SendZap::send('prmary', '55' . implode('', $numero_ddd), 'Bem vindo ao Doar Digital');
 
 
         echo json_encode([
