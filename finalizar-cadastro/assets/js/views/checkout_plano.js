@@ -2,7 +2,7 @@ import adm from "../../../../../static/js/api/adm.js"
 const { required, minLength, maxLength } = window.validators
 
 export default {
-	template: `
+    template: `
 
 <div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column"
     id="kt_create_account_stepper">
@@ -83,9 +83,7 @@ export default {
                             <div class="pb-10 pb-lg-15">
 
                                 <h2 class="fw-bolder text-dark">Selecionar Plano</h2>
-                                <div class="text-muted fw-bold fs-6">If you need more info, please check out
-                                    <a href="#" class="text-primary fw-bolder">Help Page</a>.
-                                </div>
+                             
 
                             </div>
 
@@ -234,7 +232,7 @@ export default {
                                         <div class="row mb-6" v-if="jms">
                                             <div class="col-lg-12 fv-row">
                                                 <label class="col-lg-10 col-form-label fw-bold fs-6">Cupom</label>
-                                                <input type="text" name="cupom" v-model="cupon"  @blur="setarPlano($event)"
+                                                <input type="text" name="cupom" v-model="cupon"  @blur="verCupom($event)"
                                                     class="form-control form-control-lg form-control-solid"
                                                     placeholder="?" />
                                             </div>
@@ -243,6 +241,55 @@ export default {
                                     </div>
                                 </div>
  
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row w-100 p-5 mb-10"  v-if="showCupon === '0'">
+												
+													<span class="svg-icon svg-icon-2hx svg-icon-light me-4 mb-5 mb-sm-0">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<path opacity="0.3" d="M2 4V16C2 16.6 2.4 17 3 17H13L16.6 20.6C17.1 21.1 18 20.8 18 20V17H21C21.6 17 22 16.6 22 16V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4Z" fill="black"></path>
+															<path d="M18 9H6C5.4 9 5 8.6 5 8C5 7.4 5.4 7 6 7H18C18.6 7 19 7.4 19 8C19 8.6 18.6 9 18 9ZM16 12C16 11.4 15.6 11 15 11H6C5.4 11 5 11.4 5 12C5 12.6 5.4 13 6 13H15C15.6 13 16 12.6 16 12Z" fill="black"></path>
+														</svg>
+													</span>
+													<div class="d-flex flex-column text-light pe-0 pe-sm-10">
+														<h4 class="mb-2 text-light">{{smsCupon}}</h4>
+													</div>
+												
+												</div>
+
+
+                                                <div class="alert alert-dismissible bg-success d-flex flex-column flex-sm-row w-100 p-5 mb-10"  v-if="showCupon === '1'">
+												 
+													<span class="svg-icon svg-icon-2hx svg-icon-light me-4 mb-5 mb-sm-0">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
+															<path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black"></path>
+														</svg>
+													</span> 
+													<div class="d-flex flex-column text-light pe-0 pe-sm-10">
+														<h4 class="mb-2 text-light">{{smsCupon}}</h4>
+                                            	</div> 
+												
+												</div>
+
+
+                                                
+
+
+
+
+
+
+
                             </div>
 
 
@@ -263,9 +310,9 @@ export default {
                                 </span>
                                 Anterior</a>
                         </div>
-                        <div>
+                        <div v-show="invision ==='visivel'">
                             <button type="submit" class="btn btn-lg btn-primary">
-                                <span class="indicator-label">Fazer Assinatura
+                                <span class="indicator-label">Fazer Assinatura {{amount}}
                                     <span class="svg-icon svg-icon-4 ms-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">
@@ -302,135 +349,181 @@ export default {
 `,
 
 
-	data: function () {
-		return {
-			token: null,
-			plano_token: "",
-			amount: "",
-			cart_nome: null,
-			cart_numero: null,
-			cart_cvv: null,
-			cart_validade: "08/22",
-			zap: null,
-			inst: null,
-			cupon: null,
-			dados: [],
-			planoInst: [],
-			planoZap: [],
-			search: null,
-			jms: false,
+    data: function () {
+        return {
+            token: null,
+            plano_token: "",
+            amount: "",
+            cart_nome: null,
+            cart_numero: null,
+            cart_cvv: null,
+            cart_validade: "08/22",
+            zap: null,
+            inst: null,
+            cupon: null,
+            validarCupon: null,
+            dados: [],
+            planoInst: [],
+            planoZap: [],
+            search: null,
+            jms: false,
+            smsCupon: null,
+            showCupon: null,
+            invision: "visivel"
+        }
+    },
 
-		}
-	},
+    computed: {
 
-	computed: {
+        filtraPlanos() {
+            let valores
 
-		filtraPlanos() {
-			let valores
+            valores = this.dados.filter((filtrar) => {
+                if (this.inst === null) {
+                    return filtrar;
+                }
+                return filtrar.instituicao_max === this.inst;
+            })
 
-			valores = this.dados.filter((filtrar) => {
-				if (this.inst === null) {
-					return filtrar;
-				}
-				return filtrar.instituicao_max === this.inst;
-			})
+            valores = valores.filter((filtrar) => {
+                if (this.zap === null) {
+                    return filtrar;
+                }
 
-			valores = valores.filter((filtrar) => {
-				if (this.zap === null) {
-					return filtrar;
-				}
+                return filtrar.quant_disparos === this.zap;
+            })
 
-				return filtrar.quant_disparos === this.zap;
-			})
+            return valores
 
-			return valores
+        }
+    },
 
-		}
-	},
+    methods: {
 
-	methods: {
+        setarPlano(event) {
+            const novoaray = this.dados.filter((valorAtual) => {
 
-		setarPlano(event) {
-			const novoaray = this.dados.filter((valorAtual) => {
-				if (this.jms) {
-					console.log("sim")
-					return valorAtual.instituicao_max.includes(this.inst) && valorAtual.quant_disparos.includes(this.zap) && valorAtual.quant_disparos.includes(this.zap)
-		
-				} else {
-					console.log("nao")
-						return valorAtual.instituicao_max.includes(this.inst) && valorAtual.quant_disparos.includes(this.zap)
-			
-				}
-			})
+                return valorAtual.instituicao_max.includes(this.inst) && valorAtual.quant_disparos.includes(this.zap)
 
-			console.log(novoaray[0].amount)
-			console.log(novoaray[0].token)
-			console.log(novoaray[0].instituicao_max)
-			console.log(novoaray[0].quant_disparos)
-			console.log("cupon"+novoaray[0].codigo_cupom)
-			console.log(this.jms)
+            })
 
-			this.amount = novoaray[0].amount
-			this.plano_token = novoaray[0].token
-		},
+            console.log(novoaray[0].amount)
+            console.log(novoaray[0].token)
+            console.log(novoaray[0].instituicao_max)
+            console.log(novoaray[0].quant_disparos)
+            console.log("cupon" + novoaray[0].codigo_cupom)
+            console.log(this.jms)
 
-		async transacaoRecorrencia() {
-			this.error = null
-			let res = await adm.recorrenciaDigital(
-				this.token,
-				this.plano_token,
-				this.amount,
-				this.cart_nome,
-				this.cart_numero,
-				this.cart_cvv,
-				this.cart_validade,
+            this.invision = "visivel"
+            this.amount = novoaray[0].amount
+            this.plano_token = novoaray[0].token
+            this.validarCupon = novoaray[0].codigo_cupom
+        },
 
-			)
-			if (!res.next) {
-				// this.error = res.message = parseInt(this.zap) + parseInt(this.inst)
-				this.msg = res.message
-				return null
-			}
+        verCupom() {
 
-			window.location.href = "/painel-geral/index.html#/";
-		},
+            const vercupom = this.dados.filter((cuponAtual) => {
+                return cuponAtual.instituicao_max.includes(this.inst) && cuponAtual.quant_disparos.includes(this.zap) && cuponAtual.codigo_cupom.includes(this.cupon)
+            })
+           
 
-		async listar() {
-			let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
-			return res
-		},
+            try {
+                 this.validarCupon = vercupom[0].codigo_cupom
+            console.log('chegou ')
+                if (this.cupon === this.validarCupon) {
+                    this.amount = vercupom[0].amount
+                    this.plano_token = vercupom[0].token
+                    this.validarCupon = vercupom[0].codigo_cupom
+                    console.log("cupon valido")
+    
+                    console.log(this.validarCupon)
+                    console.log(vercupom[0].amount)
+                    console.log(vercupom[0].token)
+                    console.log(vercupom[0].instituicao_max)
+                    console.log(vercupom[0].quant_disparos)
+                    console.log("cupon" + vercupom[0].codigo_cupom)
+                    console.log(this.jms)
+    
+                    this.invision = "visivel"
+                    this.showCupon = "1"
+                    this.smsCupon = "Cupom confirmado"
+                } else {
+    
+                    this.showCupon = "0"
+                    this.smsCupon = "Este Cupon não é valido"
+                    console.log("cupon invalido")
+                }
+            } catch (e) {
+                if (e instanceof TypeError) {
 
-		descartavel() {
-			window.location.href = "/painel-geral/index.html#/perfil-editar";
-		}
-
-	},
-
-	async mounted() {
-		this.dados = (await this.listar()).dados
-		console.log(this.dados)
-
-		const unicoInt = new Map();
-		this.dados.forEach((element) => {
-			if (!unicoInt.has(element.instituicao_max)) {
-				unicoInt.set(element.instituicao_max, element)
-			}
-
-		});
-
-		const unicoZap = new Map();
-		this.dados.forEach((element) => {
-			if (!unicoZap.has(element.quant_disparos)) {
-				unicoZap.set(element.quant_disparos, element)
-			}
-
-		});
-
-		this.planoInst = [...unicoInt.keys()]
-		this.planoZap = [...unicoZap.keys()]
+                    this.invision = "invisivel"
+                    this.showCupon = "0"
+                    this.smsCupon = "Este Cupon não é valido"
+                    console.log("cupon invalido")
+                     
+                } 
+            } 
 
 
+        },
 
-	},
+        async transacaoRecorrencia() {
+            this.error = null
+            let res = await adm.recorrenciaDigital(
+                this.token,
+                this.plano_token,
+                this.amount,
+                this.cart_nome,
+                this.cart_numero,
+                this.cart_cvv,
+                this.cart_validade,
+
+            )
+            if (!res.next) {
+                // this.error = res.message = parseInt(this.zap) + parseInt(this.inst)
+                this.msg = res.message
+                return null
+            }
+
+            window.location.href = "/painel-geral/index.html#/";
+        },
+
+        async listar() {
+            let res = await adm.listarPlanoDigital(localStorage.getItem('token'))
+            return res
+        },
+
+        descartavel() {
+            window.location.href = "/painel-geral/index.html#/perfil-editar";
+        }
+
+    },
+
+    async mounted() {
+        this.dados = (await this.listar()).dados
+        console.log(this.dados)
+
+        const unicoInt = new Map();
+        this.dados.forEach((element) => {
+            if (!unicoInt.has(element.instituicao_max)) {
+                unicoInt.set(element.instituicao_max, element)
+            }
+
+        });
+
+        const unicoZap = new Map();
+        this.dados.forEach((element) => {
+            if (!unicoZap.has(element.quant_disparos)) {
+                unicoZap.set(element.quant_disparos, element)
+            }
+
+        });
+
+        this.planoInst = [...unicoInt.keys()]
+        this.planoZap = [...unicoZap.keys()]
+
+
+
+    },
 
 }
