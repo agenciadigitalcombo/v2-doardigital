@@ -14,7 +14,8 @@ class TransacaoControler{
         $email_notificacao = new Email();
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
-        
+        $adm = new Adm();
+
 
         $instituicao_id = $_REQUEST['instituicao_id'];
 
@@ -226,7 +227,9 @@ class TransacaoControler{
         
         
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url, $reference_key);
-    
+        
+        
+
         @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
         @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
 
@@ -258,7 +261,14 @@ class TransacaoControler{
         $nome_instituicao, 
         $logo_instituicao,
         'instituicao');
+        
+        $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
+        $get_ddd_tel = telefone_get_ddd($telefone);
+        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
+        
+        
 
+        SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
 
         echo json_encode([
             'next' => true,

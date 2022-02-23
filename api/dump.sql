@@ -134,7 +134,8 @@ CREATE TABLE instituicao (
     titulo_site varchar(55),
     tags varchar(75),
     descricao_site varchar(255),
-    icon varchar(75)
+    icon varchar(75),
+    plano_id int
 );
 
 CREATE TABLE meta_mes (

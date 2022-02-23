@@ -113,6 +113,15 @@ class Adm implements IAdm
         $banco->exec($sql);
     }
 
+
+    public function set_plano(string $secret, int $plano_id): void
+    {
+        $banco = new Banco();
+        $sql = "UPDATE adm SET plano_id=$plano_id WHERE secret='$secret'";
+        $banco->exec($sql);
+    }
+
+
     public function list_profile($secret)
     {
         $banco = new Banco();

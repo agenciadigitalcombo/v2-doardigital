@@ -6,8 +6,8 @@ class PlanoDigitalControler {
     {
         $pagarme = new PagarmePlano();
         $plano = new PlanoDigital();    
-        
-        token();
+        $adm = new Adm();
+        $token_parse = token();
         $nome = $_REQUEST['nome'];
         $whatsapp = $_REQUEST['whatsapp'] ?? 0;
         $instituicao_max = $_REQUEST['instituicao_max'];
@@ -37,8 +37,12 @@ class PlanoDigitalControler {
         $token_pagarme = $res_pagarme['id'];
         
 
+
         $plano->create($nome, $whatsapp, $instituicao_max, $codigo_cupom, $quant_disparos, $amount, $trial, $token_pagarme);
         
+
+        $adm->set_plano($token_parse['secret'], $token_pagarme);
+
         echo json_encode([
             'next' => true,
             'message' => 'Plano Digital criado'

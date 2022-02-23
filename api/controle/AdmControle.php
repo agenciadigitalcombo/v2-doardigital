@@ -81,7 +81,7 @@ class AdmControle
         $get_ddd_tel = telefone_get_ddd($telefone);
         $numero_ddd = [$get_ddd_tel, $get_numero_tel];
         
-        SendZap::send('prmary', '55' . implode('', $numero_ddd), 'Bem vindo ao Doar Digital');
+        SendZap::send('primary', '55' . implode('', $numero_ddd), 'Bem vindo ao Doar Digital');
         
 
 
