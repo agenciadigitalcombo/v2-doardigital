@@ -205,6 +205,17 @@ class RecorrenciaDigital
 
         self::send_email($email);
 
+        $email_notificacao = new Email();
+
+        $get_numero_tel = substr(telefone_get_number($full_telefone), -8, 8);
+        $get_ddd_tel = telefone_get_ddd($full_telefone);
+        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
+        
+        $template_email = $email_notificacao->exest_acao(0, $res_asign_plan['status']);
+        
+
+        SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
+
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',

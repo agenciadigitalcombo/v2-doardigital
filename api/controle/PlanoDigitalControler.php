@@ -7,6 +7,9 @@ class PlanoDigitalControler {
         $pagarme = new PagarmePlano();
         $plano = new PlanoDigital();    
         $adm = new Adm();
+        $email_notificacao = new Email();
+        
+        
         $token_parse = token();
         $nome = $_REQUEST['nome'];
         $whatsapp = $_REQUEST['whatsapp'] ?? 0;
@@ -16,7 +19,6 @@ class PlanoDigitalControler {
         $quant_disparos = $_REQUEST['quant_disparos'] ?? 0;
         $amount_campo = $_REQUEST['amount'];
         $amount = min_amount($amount_campo);
-        
         
         campo_obrigatorios([
             'nome' => 'Informe o nome',
@@ -42,6 +44,8 @@ class PlanoDigitalControler {
         
 
         $adm->set_plano($token_parse['secret'], $token_pagarme);
+
+
 
         echo json_encode([
             'next' => true,
