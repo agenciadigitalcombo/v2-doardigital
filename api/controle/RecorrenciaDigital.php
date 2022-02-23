@@ -3,6 +3,17 @@
 class RecorrenciaDigital
 {
 
+    static function tamanho_cpf($cpf): string
+    {   
+        if(strlen($cpf) > 11){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Este campo de CPF só aceita CPF',
+            ]);
+            die;
+        }
+        return $cpf;
+    }
 
     static function obrigatorio()
     {
@@ -38,6 +49,7 @@ class RecorrenciaDigital
         if (!$doador->exist($cpf)) {
             $doador->create($nome, $email, $telefone, $cpf, "GFCGDVJKLIKHB@~");
         }
+
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
 
@@ -161,8 +173,7 @@ class RecorrenciaDigital
         $phone_number = telefone_get_number($full_telefone);
         $ddd = telefone_get_ddd($full_telefone);
         $email = valid_email($email_campo);
-        $cpf = valid_cpf_cnpj($cpf_campo);
-        
+        $cpf = self::tamanho_cpf(valid_cpf_cnpj($cpf_campo));
         $full_endereco = self::get_endereco_by_id($adm_id);
 
         $bairro = $full_endereco['bairro'];
