@@ -239,7 +239,10 @@ export default {
 											</div> 
 										</div>
 									</div>
-									
+
+									<c-mensagem :msg="msg" v-show="msg"></c-mensagem>
+									<c-mensagem :error="error" ></c-mensagem>
+
 									<div class="card-footer d-flex justify-content-end py-6 px-9">
 										<button  type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">SALVAR</button>
 									</div> 
@@ -276,7 +279,8 @@ export default {
 			cnpj: null,
 			site_url: null,
 			telefone_recebedor: null,
-			  
+			    
+			error: "",
 			msg: "",
 			items: [],
 			data: null,
@@ -332,8 +336,7 @@ export default {
 					this.telefone_recebedor,
 				)
 				if (!res.next) {
-					// this.error = res.message
-					this.msg = res.message
+					 this.error = res.message 
 					return null
 				} 
 				this.submitStatus = 'PENDING'
@@ -343,8 +346,6 @@ export default {
 				}, 500)
 			}
 		},
- 
-
 	},
 
 	async mounted() {
