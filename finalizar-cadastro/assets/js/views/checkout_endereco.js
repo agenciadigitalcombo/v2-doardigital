@@ -143,7 +143,7 @@ export default {
 
 					<div class="d-flex flex-stack pt-15">
 						<div class="mr-2">
-							<a type="button" class="btn btn-lg btn-light-primary me-3"  >
+							<a href="#/checkout_perfil" type="button" class="btn btn-lg btn-light-primary me-3"  >
 							 <span class="svg-icon svg-icon-4 me-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 									<rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="black" />

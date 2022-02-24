@@ -244,12 +244,12 @@ export default {
                                         <div class="row mb-6" v-if="jms">
                                             <div class="col-lg-12 fv-row pb-3">
                                                 <label class="col-lg-10 col-form-label fw-bold fs-6">Cupom</label>
-                                                <input type="text" name="cupom" v-model="cupon"  
+                                                <input type="text" name="cupom" v-model="cupon"  @blur="setaCupon($event)"
                                                     class="form-control form-control-lg form-control-solid"
                                                     placeholder="?" />
                                             </div>
 
-                                            <a @click="verCupom($event)" class="btn btn-success btn-hover-rotate-end">Validar Cupom</a>
+                                            <a @click="verCupoms($event)" class="btn btn-success btn-hover-rotate-end">Validar Cupom</a>
                                           
                                             <div class="pt-3">
                                             <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row w-100 p-5 mb-10"  v-if="showCupon === '0'">												
@@ -406,7 +406,7 @@ export default {
 
         },
 
-      
+
 
 
     },
@@ -421,49 +421,81 @@ export default {
             })
 
             try {
-
                 console.log(novoaray[0].amount)
                 console.log(novoaray[0].token)
                 console.log(novoaray[0].instituicao_max)
                 console.log(novoaray[0].quant_disparos)
                 console.log("cupon" + novoaray[0].codigo_cupom)
                 console.log(this.jms)
-    
+
                 this.invision = "visivel"
                 this.amount = novoaray[0].amount
                 this.plano_token = novoaray[0].token
-                this.validarCupon = novoaray[0].codigo_cupom
-    
+                this.validarCupon = novoaray[1].codigo_cupom
+
 
             } catch (e) {
                 if (e instanceof TypeError) {
 
-                    alert("erro")
                     console.log("cupon invalido")
-                     
-                } 
-            } 
 
-          
+                }
+            }
 
-        
+
+
+
         },
 
-        verCupom() {
+      
+        setaCupon(event) {
+            const novoaray = this.dados.filter((valorAtual) => {
 
-            const vercupom = this.dados.filter((cuponAtual) => {
-                return cuponAtual.instituicao_max.includes(this.inst) && cuponAtual.quant_disparos.includes(this.zap) && cuponAtual.codigo_cupom.includes(this.cupon)
+                return valorAtual.codigo_cupom.includes(this.cupon)
+
             })
-           
+
+            try { 
+                console.log("cupon" + novoaray[1].codigo_cupom)
+                console.log(this.jms)
+
+                this.invision = "visivel"
+                this.amount = novoaray[1].amount
+                this.plano_token = novoaray[1].token 
+
+
+            } catch (e) {
+                if (e instanceof TypeError) {
+
+                    console.log("cupon invalido")
+
+                }
+            }
+
+
+
+
+        },
+ 
+
+        verCupoms(event) {
 
             try {
-                 this.validarCupon = vercupom[0].codigo_cupom 
+
+                const vercupom = this.dados.filter((cuponAtual) => {
+                    return cuponAtual.instituicao_max.includes(this.inst) && cuponAtual.quant_disparos.includes(this.zap) && cuponAtual.codigo_cupom.includes(this.cupon)
+                })
+
+
+             
+ 
                 if (this.cupon === this.validarCupon) {
+
                     this.amount = vercupom[0].amount
                     this.plano_token = vercupom[0].token
                     this.validarCupon = vercupom[0].codigo_cupom
                     console.log("cupon valido")
-    
+
                     console.log(this.validarCupon)
                     console.log(vercupom[0].amount)
                     console.log(vercupom[0].token)
@@ -471,12 +503,13 @@ export default {
                     console.log(vercupom[0].quant_disparos)
                     console.log("cupon" + vercupom[0].codigo_cupom)
                     console.log(this.jms)
-    
+
                     this.invision = "visivel"
                     this.showCupon = "1"
                     this.smsCupon = "Cupom confirmado"
+
                 } else {
-    
+                    this.invision = "invisivel"
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido"
                     console.log("cupon invalido")
@@ -488,9 +521,14 @@ export default {
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido"
                     console.log("cupon invalido")
-                     
-                } 
-            } 
+
+                } else {
+                    this.invision = "invisivel"
+                    this.showCupon = "0"
+                    this.smsCupon = "Este Cupon não é valido"
+                    console.log("cupon invalido")
+                }
+            }
 
 
         },
@@ -536,7 +574,7 @@ export default {
             if (!unicoInt.has(element.instituicao_max)) {
                 unicoInt.set(element.instituicao_max, element)
 
-              
+
             }
         });
 
@@ -544,13 +582,13 @@ export default {
         this.dados.forEach((element) => {
             if (!unicoZap.has(element.quant_disparos)) {
                 unicoZap.set(element.quant_disparos, element)
-              
-            } 
+
+            }
         });
 
         this.planoInst = [...unicoInt.keys()]
         this.planoZap = [...unicoZap.keys()]
- 
+
 
     },
 

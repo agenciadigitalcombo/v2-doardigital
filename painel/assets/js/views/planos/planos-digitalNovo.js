@@ -109,7 +109,7 @@ export default {
 															<div class="fv-row mb-5">
 																<label for="codigo_cupom"
 																	class="form-label fs-6 fw-bolder mb-3 required">Código Cupom</label>
-																<input v-model="codigo_cupom" type="number" v-model.trin="$v.codigo_cupom.$model"
+																<input v-model="codigo_cupom" type="text" v-model.trin="$v.codigo_cupom.$model"
 																:class=" {'is-invalid':$v.codigo_cupom.$error, 'is-valid':!$v.codigo_cupom.$invalid }"
 																	class="form-control form-control-lg form-control-solid"
 																	name="text_input" id="codigo_cupom" />

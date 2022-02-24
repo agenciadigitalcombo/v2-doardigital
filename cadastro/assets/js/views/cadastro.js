@@ -67,8 +67,7 @@ export default {
 
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!"> 
-
-                        	<button type="button" @click="SendWhatsapp()">ver tel</button>
+ 
 												
 
 						<div  class="alert alert-danger" v-if="error!=null">
