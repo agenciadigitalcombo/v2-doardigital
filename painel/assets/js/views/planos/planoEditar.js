@@ -124,7 +124,7 @@ export default {
 
 		return {
 			id: null,
-			instituicao_id: null,
+			plano_id: null,
 			nome: null,
 			amount: null,
 			token: null,
@@ -160,7 +160,7 @@ export default {
 				this.submitStatus = 'ERROR'
 			} else {
 				let res = await adm.editarPlanos(
-					this.instituicao_id,
+					this.plano_id,
 					this.nome,
 					this.amount,
 					this.token,
@@ -181,7 +181,7 @@ export default {
 
 
 	async mounted() {
-		this.instituicao_id = globalThis._planos.id
+		this.plano_id = globalThis._planos.id
 		this.nome = globalThis._planos.nome
 		this.amount = (globalThis._planos.amount/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }) 
 	},

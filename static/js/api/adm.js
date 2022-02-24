@@ -369,13 +369,13 @@ export default {
     },
 
     async editarPlanos(
-        instituicao_id,
+        plano_id,
         nome,
         amount,
         token,
     ) {
         return await http.post('/update-plano', {
-            instituicao_id,
+            plano_id,
             nome,
             amount,
             token,
