@@ -191,7 +191,8 @@ class AdmControle
             'gravatar' => gravatar($guard['email']),
             'data_nascimento' => $guard['data_nascimento'],
             'super_adm' => $guard['super_adm'] ?? 0,
-            'credencial_id' => $guard['credencial_id'] ?? 0
+            'credencial_id' => $guard['credencial_id'] ?? 0,
+            'plano_id' => $guard['plano_id'] ?? 0
         ];
         echo json_encode([
             'next' => true,
