@@ -209,10 +209,12 @@ class InstituicaoControler
         
         $secret = $adm->list_profile($get_secret_adm);
         $id = $secret['id'];
+
+       
         
         
         $lista_taxonomia = get_taxonomy_by_to_relacao($id, 'ADM');
-       
+        
         
         $lista_taxonomia = array_map(function($t) {
             return intval($t['from_id']);
@@ -221,8 +223,8 @@ class InstituicaoControler
         
         
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
+        
         $get_instituicao_sub_adm = $instituicao->by_ids($lista_taxonomia);
-         
         // listar tadas inst [7,48,96]
         $get_instituicao = array_merge($get_instituicao, $get_instituicao_sub_adm);
 
