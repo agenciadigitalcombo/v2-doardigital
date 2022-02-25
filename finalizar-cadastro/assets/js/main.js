@@ -10,6 +10,9 @@ Vue.use(Router)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
 
+import loading from './componentes/c-loading.js'
+Vue.component('c-loading', loading )
+
 import checkout  from './views/checkout .js'
 Vue.component('c-checkout', checkout  )
 

@@ -7,6 +7,10 @@ export default {
 <div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column"
     id="kt_create_account_stepper">
 
+    <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
+    <c-loading></c-loading> 
+ </p>
+
     <div class="d-flex flex-column flex-lg-row-auto w-xl-500px bg-lighten shadow-sm">
 
         <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-500px scroll-y">
@@ -165,8 +169,8 @@ export default {
                                     <div class="row fv-row">
                                         <div class="col-6">
                                             <select name="card_expiry_month" class="form-select form-select-solid" v-model="mes"
-                                                data-control="select2" data-hide-search="true">
-                                                <option value="00" disabled selected hidden>Mês</option>
+                                                data-hide-search="true" required>
+                                                <option value="" disabled selected hidden>Mês</option>
                                                 <option value="01">1</option>
                                                 <option value="02">2</option>
                                                 <option value="03">3</option>
@@ -183,8 +187,8 @@ export default {
                                         </div>
                                         <div class="col-6">
                                             <select name="card_expiry_year" class="form-select form-select-solid" v-model="ano"
-                                                data-control="select2" data-hide-search="true" >
-                                                <option value="00" disabled selected hidden>Ano</option>
+                                                data-hide-search="true" required>
+                                                <option value="" disabled hidden>Ano</option>
                                                 <option value="21">2021</option>
                                                 <option value="22">2022</option>
                                                 <option value="23">2023</option>
@@ -201,7 +205,6 @@ export default {
                                     </div>
                                 </div>
 
-                                
                                 <div class="col-md-4 fv-row">
 
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -237,12 +240,13 @@ export default {
                                                 for="flexSwitchDefault">
                                                 Tem um código promocional
                                             </label>
-                                         <input @click="jms = !jms" class="form-check-input" type="checkbox" value=""
+                                             <input @click="jms = !jms , invision = true , showCupon = '2', cupon = ''" class="form-check-input" type="checkbox" 
                                                 id="flexSwitchDefault" />
-                                         <input @click="jms = !jms" class="form-check-input" type="checkbox" value=""
-                                                id="flexSwitchDefault" />
-                                        </div>
+
+
+                                                     </div> 
                                     </div>
+  
 
                                     <div class="col-6">
                                         <div class="row mb-6" v-if="jms">
@@ -323,9 +327,9 @@ export default {
                                 </span>
                                 Anterior</a>
                         </div>
-                        <div v-show="invision ==='visivel'">
+                        <div v-show="invision">
                             <button type="submit" class="btn btn-lg btn-primary">
-                                <span class="indicator-label">Fazer Assinatura {{amount}}
+                                <span class="indicator-label">Fazer Assinatura  {{amount | form_valor}}
                                     <span class="svg-icon svg-icon-4 ms-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">
@@ -342,6 +346,20 @@ export default {
                             </button>
                         </div>
                     </div>
+
+                    <div class="pt-3" >
+                    <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row w-100 p-5 mb-10"  v-if="error">												
+                    <span class="svg-icon svg-icon-2hx svg-icon-light me-4 mb-5 mb-sm-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+                </svg>
+                    </span>
+                    <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+                        <h4 class="mb-2 text-light">{{error}}</h4>
+                    </div>    
+                </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -370,8 +388,8 @@ export default {
             cart_nome: null,
             cart_numero: null,
             cart_cvv: null,
-            mes: "00",
-            ano: "00",
+            mes: "",
+            ano: "",
             cart_validade: null,
             zap: null,
             inst: null,
@@ -384,12 +402,15 @@ export default {
             jms: false,
             smsCupon: null,
             showCupon: null,
-            invision: "visivel"
+            invision: true,
+            submitStatus: null,
+            error: null,
+            msg: null,
 
         }
     },
 
-	filters: {
+    filters: {
         form_valor(price) {
             let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${amount}`
@@ -397,6 +418,7 @@ export default {
     },
 
     computed: {
+      
 
         filtraPlanos() {
             let valores
@@ -426,42 +448,26 @@ export default {
     },
 
     methods: {
-
+        
         setarPlano(event) {
             const novoaray = this.dados.filter((valorAtual) => {
-
                 return valorAtual.instituicao_max.includes(this.inst) && valorAtual.quant_disparos.includes(this.zap)
-
             })
 
             try {
-                console.log(novoaray[0].amount)
-                console.log(novoaray[0].token)
-                console.log(novoaray[0].instituicao_max)
-                console.log(novoaray[0].quant_disparos)
-                console.log("cupon" + novoaray[0].codigo_cupom)
-                console.log(this.jms)
-
-                this.invision = "visivel"
+                this.invision = true
                 this.amount = novoaray[0].amount
                 this.plano_token = novoaray[0].token
                 this.validarCupon = novoaray[1].codigo_cupom
 
-
             } catch (e) {
                 if (e instanceof TypeError) {
 
-                    console.log("cupon invalido")
-
                 }
             }
-
-
-
-
         },
 
-      
+
         setaCupon(event) {
             const novoaray = this.dados.filter((valorAtual) => {
 
@@ -469,78 +475,53 @@ export default {
 
             })
 
-            try { 
-                console.log("cupon" + novoaray[1].codigo_cupom)
-                console.log(this.jms)
-
-                this.invision = "visivel"
+            try {
+                this.invision = true
                 this.amount = novoaray[1].amount
-                this.plano_token = novoaray[1].token 
+                this.plano_token = novoaray[1].token
 
 
             } catch (e) {
                 if (e instanceof TypeError) {
 
-                    console.log("cupon invalido")
-
                 }
             }
-
-
-
-
         },
- 
+
 
         verCupoms(event) {
-
             try {
-
                 const vercupom = this.dados.filter((cuponAtual) => {
                     return cuponAtual.instituicao_max.includes(this.inst) && cuponAtual.quant_disparos.includes(this.zap) && cuponAtual.codigo_cupom.includes(this.cupon)
                 })
-
-
-             
  
                 if (this.cupon === this.validarCupon) {
 
                     this.amount = vercupom[0].amount
                     this.plano_token = vercupom[0].token
                     this.validarCupon = vercupom[0].codigo_cupom
-                    console.log("cupon valido")
-
-                    console.log(this.validarCupon)
-                    console.log(vercupom[0].amount)
-                    console.log(vercupom[0].token)
-                    console.log(vercupom[0].instituicao_max)
-                    console.log(vercupom[0].quant_disparos)
-                    console.log("cupon" + vercupom[0].codigo_cupom)
-                    console.log(this.jms)
-
-                    this.invision = "visivel"
+                 
+                    this.invision = true
                     this.showCupon = "1"
                     this.smsCupon = "Cupom confirmado"
 
                 } else {
-                    this.invision = "invisivel"
+                    this.invision = false
                     this.showCupon = "0"
-                    this.smsCupon = "Este Cupon não é valido"
-                    console.log("cupon invalido")
+                    this.smsCupon = "Este Cupon não é valido" 
                 }
             } catch (e) {
                 if (e instanceof TypeError) {
 
-                    this.invision = "invisivel"
+                    this.invision = false
                     this.showCupon = "0"
-                    this.smsCupon = "Este Cupon não é valido"
-                    console.log("cupon invalido")
+                    this.smsCupon = "Este Cupon não é valido" 
 
                 } else {
-                    this.invision = "invisivel"
+                    this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido"
-                    console.log("cupon invalido")
+                
                 }
             }
 
@@ -549,6 +530,7 @@ export default {
 
         async transacaoRecorrencia() {
             this.error = null
+            this.submitStatus = 'CARREGAR'
             let res = await adm.recorrenciaDigital(
                 this.token,
                 this.plano_token,
@@ -556,11 +538,12 @@ export default {
                 this.cart_nome,
                 this.cart_numero,
                 this.cart_cvv,
-                this.cart_validade =  "08/23"
+                this.cart_validade =  this.mes+'/'+this.ano,
 
             )
             if (!res.next) {
-                // this.error = res.message = parseInt(this.mes) + parseInt(this.ano)
+                this.submitStatus = 'FALHA'
+                 this.error = res.message 
                 this.msg = res.message
                 return null
             }
@@ -581,11 +564,10 @@ export default {
 
     async mounted() {
 
-       // this.cart_validade = this.mes+'/'+this.ano,
-        
-        this.dados = (await this.listar()).dados
-        console.log(this.dados)
+        // this.cart_validade = this.mes+'/'+this.ano,
 
+        this.dados = (await this.listar()).dados
+   
         const unicoInt = new Map();
         this.dados.forEach((element) => {
             if (!unicoInt.has(element.instituicao_max)) {
