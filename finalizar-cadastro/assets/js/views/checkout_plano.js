@@ -127,7 +127,7 @@ export default {
                                     title="Specify a card holder's name"></i>
                             </label>
 
-                            <input type="text" class="form-control form-control-solid" placeholder=""
+                            <input type="text" class="form-control form-control-solid" placeholder="" disabled
                                 name="amount" v-model="amount" />
                         </div>
 
@@ -146,8 +146,8 @@ export default {
 
                                 <label class="required fs-6 fw-bold form-label mb-2">Número do cartão</label>
                                 <div class="position-relative">
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="Enter card number" name="card_number" v-model="cart_numero" />
+                                    <input type="number" class="form-control form-control-solid" required v-mask="'################'"
+                                        placeholder="Numero do Cartao" name="card_number" v-model="cart_numero" />
                                     <div class="position-absolute translate-middle-y top-50 end-0 me-5">
                                         <img src="assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
                                         <img src="assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
@@ -163,42 +163,44 @@ export default {
 
                                     <div class="row fv-row">
                                         <div class="col-6">
-                                            <select name="card_expiry_month" class="form-select form-select-solid"
-                                                data-control="select2" data-hide-search="true" placeholder="Month">
-                                                <option disabled selected hidden>Mês</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
+                                            <select name="card_expiry_month" class="form-select form-select-solid" v-model="mes"
+                                                data-control="select2" data-hide-search="true">
+                                                <option value="00" disabled selected hidden>Mês</option>
+                                                <option value="01">1</option>
+                                                <option value="02">2</option>
+                                                <option value="03">3</option>
+                                                <option value="04">4</option>
+                                                <option value="05">5</option>
+                                                <option value="06">6</option>
+                                                <option value="07">7</option>
+                                                <option value="08">8</option>
+                                                <option value="09">9</option>
                                                 <option value="10">10</option>
                                                 <option value="11">11</option>
                                                 <option value="12">12</option>
                                             </select>
                                         </div>
                                         <div class="col-6">
-                                            <select name="card_expiry_year" class="form-select form-select-solid"
-                                                data-control="select2" data-hide-search="true" data-placeholder="Year">
-                                                <option disabled selected hidden>Ano</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2025">2025</option>
-                                                <option value="2026">2026</option>
-                                                <option value="2027">2027</option>
-                                                <option value="2028">2028</option>
-                                                <option value="2029">2029</option>
-                                                <option value="2030">2030</option>
-                                                <option value="2031">2031</option>
+                                            <select name="card_expiry_year" class="form-select form-select-solid" v-model="ano"
+                                                data-control="select2" data-hide-search="true" >
+                                                <option value="00" disabled selected hidden>Ano</option>
+                                                <option value="21">2021</option>
+                                                <option value="22">2022</option>
+                                                <option value="23">2023</option>
+                                                <option value="24">2024</option>
+                                                <option value="25">2025</option>
+                                                <option value="26">2026</option>
+                                                <option value="27">2027</option>
+                                                <option value="28">2028</option>
+                                                <option value="29">2029</option>
+                                                <option value="30">2030</option>
+                                                <option value="31">2031</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+
+                                
                                 <div class="col-md-4 fv-row">
 
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -208,9 +210,8 @@ export default {
                                     </label>
 
                                     <div class="position-relative">
-                                        <input type="text" class="form-control form-control-solid" minlength="3"
-                                            maxlength="4" placeholder="CVV" name="card_cvv" v-model="cart_cvv"
-                                            required />
+                                        <input type="number" class="form-control form-control-solid" required minlength="3" maxlength="4" v-mask="'####'"
+                                            placeholder="CVV" name="card_cvv" v-model="cart_cvv"  />
 
                                         <div class="position-absolute translate-middle-y top-50 end-0 me-3">
                                             <span class="svg-icon svg-icon-2hx">
@@ -366,7 +367,9 @@ export default {
             cart_nome: null,
             cart_numero: null,
             cart_cvv: null,
-            cart_validade: "08/22",
+            mes: "00",
+            ano: "00",
+            cart_validade: null,
             zap: null,
             inst: null,
             cupon: null,
@@ -379,6 +382,9 @@ export default {
             smsCupon: null,
             showCupon: null,
             invision: "visivel"
+
+
+
         }
     },
 
@@ -542,11 +548,11 @@ export default {
                 this.cart_nome,
                 this.cart_numero,
                 this.cart_cvv,
-                this.cart_validade,
+                this.cart_validade =  "08/23"
 
             )
             if (!res.next) {
-                // this.error = res.message = parseInt(this.zap) + parseInt(this.inst)
+                // this.error = res.message = parseInt(this.mes) + parseInt(this.ano)
                 this.msg = res.message
                 return null
             }
@@ -566,6 +572,9 @@ export default {
     },
 
     async mounted() {
+
+       // this.cart_validade = this.mes+'/'+this.ano,
+        
         this.dados = (await this.listar()).dados
         console.log(this.dados)
 

@@ -277,6 +277,9 @@ export default {
 					this.error = res.message
 					return null
 				}
+				globalThis._cpf = this.cpf_cnpj
+				globalThis._nascimento = this.data_nascimento
+				globalThis._tipo = this.tipo
 				window.location.href = `#/checkout_endereco`
 			}
 
@@ -286,6 +289,10 @@ export default {
 
 	async mounted() {
 		this.jms = localStorage.getItem('cnpj')
+
+	     this.cpf_cnpj = globalThis._cpf 
+		 this.data_nascimento = globalThis._nascimento 
+		 this.tipo = globalThis._tipo 
 	},
 
 

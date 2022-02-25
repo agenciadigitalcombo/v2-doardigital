@@ -153,7 +153,7 @@ export default {
 						 Anterior</a>
 						</div>
 						<div> 
-							<button type="submit" class="btn btn-lg btn-primary" >Continuar
+							<button type="submit" class="btn btn-lg btn-primary" :disabled="disabled" >Continuar
 						 <span class="svg-icon svg-icon-4 ms-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 									<rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
@@ -194,6 +194,7 @@ export default {
 			secret: null,
 			token: null,
 			cepErro: null,
+			disabled: false
 
         }
     },
@@ -229,6 +230,15 @@ export default {
 				return null
 			}
 
+			globalThis._identificacao = this.nome_identificacao
+			globalThis._cep = this.cep
+			globalThis._logadouro = this.logadouro
+			globalThis._numero = this.numero
+			globalThis._complemento = this.complemento
+			globalThis._bairro = this.bairro 
+			globalThis._cidade= this.cidade
+			globalThis._estado = this.estado 
+
 			window.location.href = `#/checkout_plano`
 		},
 
@@ -246,8 +256,10 @@ export default {
 
                         if (response.data.erro) {
                             this.cepErro = "Número do CEP inválido...!"
+							this.disabled = true
                         } else {
 							this.cepErro = ""
+							this.disabled = false
 						}
                     }
                     )
@@ -269,7 +281,17 @@ export default {
     },
 	
 	created() {
-		this.token = localStorage.getItem('token')
+
+		      this.token = localStorage.getItem('token')
+
+ 				this.nome_identificacao = globalThis._identificacao 
+ 				this.cep = globalThis._cep
+ 				this.logadouro= globalThis._logadouro 
+ 				this.numero= globalThis._numero
+ 				this.complemento= globalThis._complemento
+ 				this.bairro = globalThis._bairro 
+ 				this.cidade= globalThis._cidade
+ 				this.estado = globalThis._estado 
 	},
 	
 }
