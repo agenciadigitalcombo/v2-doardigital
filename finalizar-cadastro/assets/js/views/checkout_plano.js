@@ -126,9 +126,10 @@ export default {
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
                                     title="Specify a card holder's name"></i>
                             </label>
-
-                            <input type="text" class="form-control form-control-solid" placeholder="" disabled
-                                name="amount" v-model="amount" />
+                            <div class="bg-light rounded p-5  mt-1" id="kt_toggle_example_target">
+                           {{amount | form_valor}}
+                        </div>
+                           
                         </div>
 
                             <div class="d-flex flex-column mb-7 fv-row">
@@ -236,7 +237,9 @@ export default {
                                                 for="flexSwitchDefault">
                                                 Tem um código promocional
                                             </label>
-                                            <input @click="jms = !jms" class="form-check-input" type="checkbox" value=""
+                                         <input @click="jms = !jms" class="form-check-input" type="checkbox" value=""
+                                                id="flexSwitchDefault" />
+                                         <input @click="jms = !jms" class="form-check-input" type="checkbox" value=""
                                                 id="flexSwitchDefault" />
                                         </div>
                                     </div>
@@ -383,8 +386,13 @@ export default {
             showCupon: null,
             invision: "visivel"
 
+        }
+    },
 
-
+	filters: {
+        form_valor(price) {
+            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${amount}`
         }
     },
 

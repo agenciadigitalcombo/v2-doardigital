@@ -141,7 +141,7 @@ export default {
 						</div> 
 					</div> 
 
-					<div class="d-flex flex-stack pt-15">
+					<div class="d-flex flex-stack pt-15 pb-5">
 						<div class="mr-2">
 							<a href="#/checkout_perfil" type="button" class="btn btn-lg btn-light-primary me-3"  >
 							 <span class="svg-icon svg-icon-4 me-1">
@@ -163,6 +163,25 @@ export default {
 						 </button>
 						</div>
 					</div> 
+
+					 <div v-if="cepErro" class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row w-100 p-5 mb-10">
+				  <span class="svg-icon svg-icon-2hx svg-icon-light me-4 mb-5 mb-sm-0">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+				  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+				  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+			  </svg>
+					 </span> 
+					 <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+						 <h4 class="mb-2 text-light"> {{cepErro}}</h4>
+					 </div>
+				 </div>
+
+
+
+
+
+
+
 				</form> 
 			</div> 
 		</div> 

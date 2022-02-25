@@ -1,4 +1,5 @@
 import adm from '../../../../static/js/api/adm.js'
+const { required, sameAs, minLength, between, email } = window.validators
 
 export default {
     template: `
@@ -42,10 +43,26 @@ export default {
 
                         <input v-model="nome" type="text" name="name" placeholder="Nome" required>
                         <input v-model="email" type="email" name="email" placeholder="Email" required>
-                        <input v-model="telefone"  type="text" name="phone"
-                            placeholder="Telefone" required>
-                        <input v-model="senha" type="password" name="password" placeholder="Senha" required>
-                        <input type="password" name="password_confirm" placeholder="Confirmar senha" required>
+                        <input v-model="telefone"  type="text" name="phone" v-mask="'(##) # #####-####'"   
+                            placeholder="Telefone" required>  
+                        
+                        <input type="password" v-model.trin="$v.repetirsenha.$model"
+                        :class=" {'is-invalid':$v.repetirsenha.$error, 'is-valid': (senha != '') ? !$v.repetirsenha.$invalid : ''}"
+                        placeholder="Senha" required>
+
+                        <input id="senha" v-model.trin="$v.senha.$model" required
+                        :class=" {'is-invalid':$v.senha.$error, 'is-valid':!$v.senha.$invalid }"
+                         type="password" name="password" placeholder="Confirmar senha" required>
+                       
+                  
+
+                       <div class="erro_texte" v-if="!$v.repetirsenha.sameAsPassword">
+                        As senhas devem ser idênticas
+                    </div>
+
+                    <div class="sucesso_texte" v-else>
+                    </div>
+
                         <label class="cinza-text">
                             <input type="checkbox" required>
                             Eu aceito todos os termos
@@ -68,8 +85,6 @@ export default {
                         </p>
                         <input type="submit" value="ME CADASTRAR AGORA!"> 
  
-												
-
 						<div  class="alert alert-danger" v-if="error!=null">
 						
 
@@ -104,8 +119,25 @@ export default {
             submitStatus: null,
         }
     },
+
+    validations: {
+		senha: {
+			required,
+			minLength: minLength(8)
+		},
+		repetirsenha: {
+			sameAsPassword: sameAs('senha')
+		},
+	
+	},
+
     methods: { 
         async cadastrar() {
+            this.error = null
+			this.$v.$touch() 
+			if (this.$v.$invalid) {
+				this.submitStatus = 'ERROR'
+			} else {
             
             this.error = null
             this.submitStatus = 'CARREGAR'
@@ -125,6 +157,7 @@ export default {
 
             localStorage.setItem('token', res.token)
             window.location.href = "/finalizar-cadastro/index.html#/";
+        }
         },
          
 

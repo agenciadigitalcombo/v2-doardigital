@@ -1,0 +1,62 @@
+input {
+  border: 1px solid silver;
+  border-radius: 4px;
+  background: white;
+  padding: 5px 10px;
+}
+
+.dirty {
+  border-color: rgb(52, 32, 138);
+  background: rgb(186, 191, 255);
+}
+
+.dirty:focus {
+  outline-color: #8E8;
+}
+
+.error {
+  border-color: red;
+  background: #FDD;
+}
+.erro_texte{
+    color: rgb(233, 5, 5);
+}
+.sucesso_texte{
+    color: #8E8;
+}
+
+.error:focus {
+  outline-color: #F99;
+}
+
+.message-container {
+  color: #004085;
+
+  /* background-color: #CCE5FF;
+  border: 2px solid #B8DAFF;
+  border-radius: 5px; */
+
+  max-width: 50%;
+  margin: 0px auto 15px auto;
+  padding: 5px 5px 0px 5px;
+  z-index: 19999999999;
+  text-align: center;
+  font-size: 15px;
+}
+
+.erro-container {
+  color: rgb(233, 5, 5);
+
+  /* background-color: #CCE5FF;
+  border: 2px solid #B8DAFF;
+  border-radius: 5px; */
+
+  max-width: 50%;
+  margin: 0px auto 15px auto;
+  padding: 5px 5px 0px 5px;
+  z-index: 19999999999;
+  text-align: center;
+  font-size: 15px;
+}
+
+

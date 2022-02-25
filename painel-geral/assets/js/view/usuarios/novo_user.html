@@ -118,6 +118,7 @@
                                                                 </div>
                                                             </div>
 
+                                                            
                                                             <div class="col-lg-6">
                                                                 <div class="fv-row mb-10">
                                                                     <label
@@ -128,7 +129,7 @@
                                                                         v-model.trin="$v.repetirsenha.$model"
                                                                         :class=" {'is-invalid':$v.repetirsenha.$error, 'is-valid': (senha != '') ? !$v.repetirsenha.$invalid : ''}"
                                                                         class="form-control form-control-lg form-control-solid" />
-
+ 
 
                                                                     <div class="erro_texte"
                                                                         v-if="!$v.repetirsenha.sameAsPassword">
