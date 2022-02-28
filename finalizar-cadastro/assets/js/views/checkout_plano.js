@@ -145,7 +145,7 @@ export default {
                                 </label>
 
                                 <input type="text" class="form-control form-control-solid" placeholder=""
-                                    name="card_name" v-model="cart_nome" />
+                                    name="card_name" required v-model="cart_nome" />
                             </div>
                             <div class="d-flex flex-column mb-7 fv-row">
 
@@ -241,7 +241,7 @@ export default {
                                                 Tem um código promocional
                                             </label>
 
-                                                <input  @click="jms = !jms , invision = true , showCupon = '2', cupon = '', amount = globalThis._amount " class="form-check-input" type="checkbox" 
+                                                <input  @click="jms = !jms , invision = true , showCupon = '2', cupon = '', amount = globalThis._amount || '00'  " class="form-check-input" type="checkbox" 
                                                 id="flexSwitchDefault" />
 
                                                      </div> 
@@ -418,7 +418,6 @@ export default {
 
     computed: {
       
-
         filtraPlanos() {
             let valores
 
@@ -440,9 +439,6 @@ export default {
             return valores
 
         },
-
-
-
 
     },
 
@@ -470,7 +466,6 @@ export default {
 
         setaCupon(event) {
             const novoaray = this.dados.filter((valorAtual) => {
-
                 return valorAtual.codigo_cupom.includes(this.cupon)
 
             })
@@ -509,7 +504,7 @@ export default {
                     this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido" 
-                    this.amount = globalThis._amount 
+                    this.amount = globalThis._amount || "00" 
                 }
             } catch (e) {
                 if (e instanceof TypeError) {
@@ -517,13 +512,13 @@ export default {
                     this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido" 
-                    this.amount = globalThis._amount 
+                    this.amount = globalThis._amount || "00"  
 
                 } else {
                     this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido"
-                    this.amount = globalThis._amount
+                    this.amount = globalThis._amount || "00" 
                 }
             }
 
