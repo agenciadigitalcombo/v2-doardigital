@@ -74,7 +74,7 @@ export default {
 														<div class="mt-1"> 
  
 															<div class="image-input image-input-empty" data-kt-image-input="true">
-															<img :src="imagemVer" @click="openUpload" alt="Girl in a jacket" width="200" height="200">
+															<img  :src="imagemVer" @click="openUpload" alt="Girl in a jacket" width="200" height="200">
 															  
 																<label class="btn btn-icon btn-circle btn-active-color-primary w-30px h-30px bg-white shadow"
 																	data-kt-image-input-action="change"
@@ -87,9 +87,9 @@ export default {
 																</svg>
 																	</i>
 
-																	<input ref="file" v-on:change="updatePreview" required type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+																	<input ref="file" v-on:change="updatePreview" required type="file" name="avatar" accept=".png, .jpg, .jpeg" />
 																	
-																	<input type="hidden" name="avatar_remove" />
+																	<input type="hidden" name="avatar_remove"  />
 																 
 																</label> 
 																<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
@@ -165,7 +165,7 @@ export default {
 			msg: null,
 			error: null,
 			file: "",
-			imagemVer: "../painel/assets/icons/blank.png"
+			imagemVer:  null,  
 
 		}
 	},
@@ -225,6 +225,8 @@ export default {
 				this.error = res.message
 				return null
 			}
+
+			globalThis._foto = res.nome_image
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000);
 		},
@@ -240,7 +242,7 @@ export default {
 				this.tags,
 				this.descricao_site,
 				this.cor,
-				this.logo,
+				this.logo = globalThis._foto,
 
 
 			)
@@ -252,15 +254,27 @@ export default {
 				setTimeout(() => this.msg = "", 3000);
 		},
 
+		async infoSubdomain() {
+			//	let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+				 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+				return res
+			},
 
 
 	},
 
 
 	async mounted() {
+		
+		let config = (await this.infoSubdomain()).dados_instituicao
+		this.logo = "https://doardigital.tk/api/upload/"+config.logo
+		this.cor = config.cor
+
+		this.imagemVer =  this.logo || "../painel/assets/icons/blank.png"
+
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
 	},
-
+ 
 
 }
 
