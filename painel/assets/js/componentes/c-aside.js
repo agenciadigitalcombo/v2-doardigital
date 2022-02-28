@@ -49,7 +49,7 @@ export default {
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title"> Sair {{id}}</span>
+                        <span class="menu-title"> Sair</span>
                     </a>
                 </div>
              </div>

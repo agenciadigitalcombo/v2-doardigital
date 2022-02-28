@@ -3,12 +3,9 @@ import adm from "../../../../../static/js/api/adm.js"
 const { required, sameAs, minLength, between, email } = window.validators
 
 export default {
- 
-
 
 	data: function () {
 		return {
-
 			id: null,
 			nome: null,
 			email: null,

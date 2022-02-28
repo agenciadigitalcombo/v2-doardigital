@@ -240,9 +240,9 @@ export default {
                                                 for="flexSwitchDefault">
                                                 Tem um código promocional
                                             </label>
-                                             <input @click="jms = !jms , invision = true , showCupon = '2', cupon = ''" class="form-check-input" type="checkbox" 
-                                                id="flexSwitchDefault" />
 
+                                                <input  @click="jms = !jms , invision = true , showCupon = '2', cupon = '', amount = globalThis._amount " class="form-check-input" type="checkbox" 
+                                                id="flexSwitchDefault" />
 
                                                      </div> 
                                     </div>
@@ -370,8 +370,7 @@ export default {
                     target="_blank">Sobre</a>
                 <a href="https://crm.digitalcombo.com.br/index.php/about/suporte"
                     class="text-muted text-hover-primary px-2" target="_blank">Suporte</a>
-                <a href="https://doardigital.com.br" class="text-muted text-hover-primary px-2" target="_blank">Termos &
-                    Condições</a>
+                    <a href="/cadastro/index.html#/termos" class="text-muted text-hover-primary px-2" target="_blank">Termos & Condições</a>
             </div>
         </div>
     </div>
@@ -448,7 +447,7 @@ export default {
     },
 
     methods: {
-        
+      
         setarPlano(event) {
             const novoaray = this.dados.filter((valorAtual) => {
                 return valorAtual.instituicao_max.includes(this.inst) && valorAtual.quant_disparos.includes(this.zap)
@@ -459,7 +458,8 @@ export default {
                 this.amount = novoaray[0].amount
                 this.plano_token = novoaray[0].token
                 this.validarCupon = novoaray[1].codigo_cupom
-
+                globalThis._amount = this.amount
+			
             } catch (e) {
                 if (e instanceof TypeError) {
 
@@ -509,6 +509,7 @@ export default {
                     this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido" 
+                    this.amount = globalThis._amount 
                 }
             } catch (e) {
                 if (e instanceof TypeError) {
@@ -516,12 +517,13 @@ export default {
                     this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido" 
+                    this.amount = globalThis._amount 
 
                 } else {
                     this.invision = false
                     this.showCupon = "0"
                     this.smsCupon = "Este Cupon não é valido"
-                
+                    this.amount = globalThis._amount
                 }
             }
 
@@ -565,6 +567,7 @@ export default {
     async mounted() {
 
         // this.cart_validade = this.mes+'/'+this.ano,
+  
 
         this.dados = (await this.listar()).dados
    

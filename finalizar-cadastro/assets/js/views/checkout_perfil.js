@@ -230,8 +230,8 @@ export default {
 			<div class="d-flex flex-center fw-bold fs-6">
 				<a href="https://doardigital.com.br" class="text-muted text-hover-primary px-2" target="_blank">Sobre</a>
 				<a href="https://crm.digitalcombo.com.br/index.php/about/suporte" class="text-muted text-hover-primary px-2" target="_blank">Suporte</a>
-				<a href="https://doardigital.com.br" class="text-muted text-hover-primary px-2" target="_blank">Termos & Condições</a>
-			</div> 
+				<a href="/cadastro/index.html#/termos" class="text-muted text-hover-primary px-2" target="_blank">Termos & Condições</a>
+					</div> 
 		</div> 
 	</div> 
 </div> 
