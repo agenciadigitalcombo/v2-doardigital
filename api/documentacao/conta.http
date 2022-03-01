@@ -1,0 +1,19 @@
+###
+POST http://doardigital.tk/api/create-conta-instituicao
+Content-Type: application/x-www-form-urlencoded
+
+token=string
+&instituicao_id=int
+&codigo_banco=int
+&agencia=int
+&conta=int
+&conta_digito=int
+&tipo_conta=string
+&nome_completo=string
+&documento_numero=string
+&recebedor_nome=string
+&document_number_recebedor=string
+&site_url=string
+&email_recebedor=string
+&telefone_recebedor=string
+

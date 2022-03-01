@@ -60,28 +60,9 @@ token=string
 
 
 ###
-GET http://doardigital.tk/api/subdominio-disponivel?subdomain=teste
+GET http://doardigital.tk/api/subdominio-disponivel?subdomain=string
 Content-Type: application/x-www-form-urlencoded
 // criar ou salvar dados bancario 
 
-
-###
-POST http://doardigital.tk/api/create-conta-instituicao
-Content-Type: application/x-www-form-urlencoded
-
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67,
-&instituicao_id= 27,
-&codigo_banco= "341",
-&agencia= "0932",
-&conta= "58054",
-&conta_digito= "2",
-&tipo_conta= "conta_poupanca",
-&nome_completo= "Victor Teste",
-&documento_numero= "26268738888",
-&recebedor_nome= "Someone",
-&document_number_recebedor= "92545278157",
-&site_url= "digital.tk",
-&email_recebedor= "some@email.com",
-&telefone_recebedor= "11987654321"
 
 
