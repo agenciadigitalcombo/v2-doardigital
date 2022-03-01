@@ -269,8 +269,27 @@ class InstituicaoControler
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'dominio' => $get_instituicao['dominio'],
-            'status' => $get_instituicao['status']
+            'status' => $get_instituicao['status'], 
+            'cor' =>  $get_instituicao['cor'],
+            'logo' =>  $get_instituicao['logo'],
+            'titulo_site' =>  $get_instituicao['titulo_site'],
+            'tags' =>  $get_instituicao['tags'],
+            'descricao_site' =>  $get_instituicao['descricao_site'],
+            'icon' =>  $get_instituicao['icon'],
+            'recebedor_token' => $get_instituicao['recebedor_token'],
+            'razao_social' => $get_instituicao['razao_social'],
+            'email' => $get_instituicao['email'],
+            'cnpj' => $get_instituicao['cnpj'],
+            'telefone' => $get_instituicao['telefone'],
+            'recebedor_id' => $get_instituicao['recebedor_id'],
+            'data_registro' => $get_instituicao['data_registro']
         ];
+
+
+        
+
+
+
 
         echo json_encode([
             'next' => true,
