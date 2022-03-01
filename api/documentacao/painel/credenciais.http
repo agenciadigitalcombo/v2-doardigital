@@ -1,4 +1,4 @@
-GET https://doardigital.tk/api/list-credencial?token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+GET https://doardigital.tk/api/list-credencial?token=string
 Content-Type: application/x-www-form-urlencoded
 
 
@@ -7,7 +7,7 @@ Content-Type: application/x-www-form-urlencoded
 POST https://doardigital.tk/api/update-credencial
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
-&id=0
-&nome_identificacao=credencial
-&recursos=Inicio, Doadores, Doações, Credenciais, Usuários, Minhas Instituições, Divisão Pagamento, Metas, Modelo de E-mails, Configuração, Perfil, Modulos, Meu Plano, Carteira, QR CODE
+token=string
+&id=int
+&nome_identificacao=string
+&recursos=string

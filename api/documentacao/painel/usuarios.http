@@ -1,22 +1,22 @@
-GET https://doardigital.tk/api/instituicao?token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+GET https://doardigital.tk/api/instituicao?token=string
 Content-Type: application/x-www-form-urlencoded
 
 ###
-GET https://doardigital.tk/api/list-credencial?token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+GET https://doardigital.tk/api/list-credencial?token=string
 Content-Type: application/x-www-form-urlencoded
 
 ###
 POST https://doardigital.tk/api/criate-subadm
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
-&nome=VICTOR FERNANDO MAGALHAES VASCONCELOS
-&email=victorfernandomagalhaes@gmail.com
-&senha=123456789
-&telefone=(038) 99801-9210
-&credencial_id=0
+token=string
+&nome=string
+&email=string
+&senha=string
+&telefone=string
+&credencial_id=int
 
 
 ###
-GET https://doardigital.tk/api/list-subadm?token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
+GET https://doardigital.tk/api/list-subadm?token=string
 Content-Type: application/x-www-form-urlencoded

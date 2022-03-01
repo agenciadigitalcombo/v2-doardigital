@@ -2,33 +2,33 @@
 POST https://doardigital.tk/api/completar-profile
 Content-Type: Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
-&cpf_cnpj=829.159.320-50
-&data_nascimento=01/04/1982
-&tipo=Instituicao
+token=string
+&cpf_cnpj=string
+&data_nascimento=string
+&tipo=string
 
 ###
 POST https://doardigital.tk/api/update-endereco
 Content-Type: Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
-&nome_identificacao=admin
-&cep=02835-090
-&logradouro=Rua Plínio Rocha Pinto
-&numero=76
-&complemento=casa
-&bairro=Vila Serralheiro
-&cidade=São Paulo
-&estado=SP
+token=string
+&nome_identificacao=string
+&cep=string
+&logradouro=string
+&numero=string
+&complemento=string
+&bairro=string
+&cidade=string
+&estado=string
 
 ###
 POST https://doardigital.tk/api/recorrencia-digital
 Content-Type: Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiI2MjEzY2FkNmFiYzgzIiwibm9tZSI6IlZJQ1RPUiBGRVJOQU5ETyBNQUdBTEhBRVMgVkFTQ09OQ0VMT1MiLCJlbWFpbCI6InZpY3RvcmZlcm5hbmRvbWFnQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.c5a908ab74f3a6ed8329ef179d4c00e0f4b3f280
-&plano_token=709362
-&amount=3
-&cart_nome=gildete magalhaes silva
-&cart_numero=5286 6392 1010 8105
-&cart_cvv=818
-&cart_validade=12/23
+token=string
+&plano_token=string
+&amount=int
+&cart_nome=string
+&cart_numero=string
+&cart_cvv=int
+&cart_validade=string
