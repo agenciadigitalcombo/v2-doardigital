@@ -406,11 +406,11 @@ class InstituicaoControler
 
         $instituicao = new Instituicao();
 
-        $sub_domain = $_REQUEST['subdomaim'];
+        $sub_domain = $_REQUEST['subdomain'];
 
 
         campo_obrigatorios([
-            "subdomaim" => "informe um subdomínio"
+            "subdomain" => "informe um subdomínio"
         ]);
 
 

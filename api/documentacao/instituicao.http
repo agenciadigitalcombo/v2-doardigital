@@ -1,5 +1,4 @@
-GET http://doardigital.tk/api/instituicao?
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
+GET http://doardigital.tk/api/instituicao?token=string
 
 ###
 configuracao
@@ -12,65 +11,53 @@ GET http://doardigital.tk/api/info-subdomaim?subdomaim=string
 POST http://doardigital.tk/api/update-instituicao
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFkYjU1M2I4ODNjMiIsIm5vbWUiOiJqb2FxdWltIE1pZ3VlbCIsImVtYWlsIjoiam9hcXVpbUBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.edb1a7efadc35fa936991c29e23cb34ea8d9ed8e,
-&instituicao_id=8,
-&nome_fantasia=empresa,
-&razao_social=exemplo,
-&email=ezemplo@gmail.com,
-&cnpj=123.456.789.31/2.12,
-&telefone=2123-3344
+token=string
+&instituicao_id=int
+&nome_fantasia=string
+&razao_social=string
+&email=string
+&cnpj=string
+&telefone=string
 
 ###
 POST http://doardigital.tk/api/configuracao-instituicao
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFkYjU1M2I4ODNjMiIsIm5vbWUiOiJqb2FxdWltIE1pZ3VlbCIsImVtYWlsIjoiam9hcXVpbUBnbWFpbC5jb20iLCJzdXBlcl9hZG0iOiIwIiwic3RlcCI6IjEifQ==.edb1a7efadc35fa936991c29e23cb34ea8d9ed8e,
-&instituicao_id=5,
-&tags=google
-&descricao_site=fazendo o bem sem olhar aquem
-&cor=#FFFF
-&logo=gravatar
+token=string
+&instituicao_id=int
+&tags=string
+&descricao_site=string
+&cor=string
+&logo=string
 
 ###
 POST http://doardigital.tk/api/on_off
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
-&instituicao_id=5
+token=string
+&instituicao_id=int
 
 ###
 POST http://doardigital.tk/api/create-instituicao
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
-&nome_fantasia=empresa,
-&sub_domain=teste,
-&razao_social=exemplo,
-&email=ezemplo@gmail.com,
-&cnpj=123.456.789.31/2.12,
-&telefone=2123-3345
+token=string
+&nome_fantasia=string
+&sub_domain=string
+&razao_social=string
+&email=string
+&cnpj=string
+&telefone=string
 
 ###
 POST http://doardigital.tk/api/update-domain-person
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67,
-&instituicao_id=5,
-&dominio=exemplo.com
+token=string
+&instituicao_id=int
+&dominio=string
 
-###
-POST http://doardigital.tk/api/endereco-instituicao
-Content-Type: application/x-www-form-urlencoded
 
-id=4,
-&nome_identificacao=vasio,
-&logradouro=rua pedro,
-&complemento=casa,
-&bairro=brasil,
-&cidade=SP,
-&estado=SP,
-&numero=33,
-&cep=12332344
 
 ###
 GET http://doardigital.tk/api/subdominio-disponivel?subdomain=teste
