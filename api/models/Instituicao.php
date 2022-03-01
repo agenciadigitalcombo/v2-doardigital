@@ -45,12 +45,12 @@ class Instituicao implements IInstituicao
     public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
     {   
         $status = 1;
-
+        $data_registro = date('Y-m-d');
         $banco = new Banco();
         $sql = "INSERT INTO instituicao";
-        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, cor, logo, status)";
+        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, cor, logo, status, data_registro)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$cor', '$logo', $status)";
+        $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$cor', '$logo', $status, '$data_registro')";
         $banco->exec($sql);
     }
 

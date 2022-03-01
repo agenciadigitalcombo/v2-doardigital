@@ -205,25 +205,25 @@ class InstituicaoControler
         $get_secret_adm = $token_parce['secret'];
 
 
-        
-        
+
+
         $secret = $adm->list_profile($get_secret_adm);
         $id = $secret['id'];
 
-       
-        
-        
+
+
+
         $lista_taxonomia = get_taxonomy_by_to_relacao($id, 'ADM');
-        
-        
-        $lista_taxonomia = array_map(function($t) {
+
+
+        $lista_taxonomia = array_map(function ($t) {
             return intval($t['from_id']);
         }, $lista_taxonomia);
-        
-        
-        
+
+
+
         $get_instituicao = $instituicao->list_all_by_adm_id($id);
-        
+
         $get_instituicao_sub_adm = $instituicao->by_ids($lista_taxonomia);
         // listar tadas inst [7,48,96]
         $get_instituicao = array_merge($get_instituicao, $get_instituicao_sub_adm);
@@ -269,10 +269,10 @@ class InstituicaoControler
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'dominio' => $get_instituicao['dominio'],
-            'status' => $get_instituicao['status'], 
+            'status' => $get_instituicao['status'],
             'cor' =>  $get_instituicao['cor'],
             'logo' =>  $get_instituicao['logo'],
-            'titulo_site' =>  $get_instituicao['titulo_site'],
+            'titulo_site' => $get_instituicao['titulo_site'],
             'tags' =>  $get_instituicao['tags'],
             'descricao_site' =>  $get_instituicao['descricao_site'],
             'icon' =>  $get_instituicao['icon'],
@@ -284,12 +284,6 @@ class InstituicaoControler
             'recebedor_id' => $get_instituicao['recebedor_id'],
             'data_registro' => $get_instituicao['data_registro']
         ];
-
-
-        
-
-
-
 
         echo json_encode([
             'next' => true,
@@ -306,8 +300,8 @@ class InstituicaoControler
 
         $subdomaim = $_REQUEST['subdomaim'];
 
-        $logo = 'https://doardigital.tk/uploads/0/logo.svg';
-        $icon = 'https://doardigital.tk/uploads/0/icon.png';
+        
+        
 
         campo_obrigatorios([
             'subdomaim' => 'Indoforme o Sub-domaim',
@@ -345,18 +339,25 @@ class InstituicaoControler
         }, $get_plano);
 
         $payload_instituicao = [
-            'logo' => $get_instituicao['logo'],
-            'icon' => $icon,
-            'cor' => $get_instituicao['cor'],
             'id' => $get_instituicao['id'],
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'dominio' => $get_instituicao['dominio'],
             'status' => $get_instituicao['status'],
-            'telefone' => $get_instituicao['telefone'],
-            'email' => $get_instituicao['email'],
             'cnpj' => $get_instituicao['cnpj'],
+            'cor' =>  $get_instituicao['cor'],
+            'logo' =>  $get_instituicao['logo'],
+            'titulo_site' => $get_instituicao['titulo_site'],
+            'tags' =>  $get_instituicao['tags'],
+            'descricao_site' =>  $get_instituicao['descricao_site'],
+            'icon' =>  $get_instituicao['icon'],
+            'recebedor_token' => $get_instituicao['recebedor_token'],
+            'razao_social' => $get_instituicao['razao_social'],
+            'email' => $get_instituicao['email'],
+            'telefone' => $get_instituicao['telefone'],
+            'recebedor_id' => $get_instituicao['recebedor_id'],
+            'data_registro' => $get_instituicao['data_registro'],
             'plano' => $payload_plano,
             'endereco' => $payload_endereco
         ];
@@ -433,33 +434,33 @@ class InstituicaoControler
     {
         $doacoes = new Doacao();
         $doador = new Doador();
-        
+
         $instituicao_id = $_REQUEST['instituicao_id'];
-        
+
         campo_obrigatorios([
             'instituicao_id' => 'Indoforme o ID da Instituicao',
         ]);
-        
+
         $get_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
         $all_doadores = $doador->list_all();
         $lb = [];
-        foreach($all_doadores as $v) {
+        foreach ($all_doadores as $v) {
             $lb[$v['id']] = $v;
         }
 
-        
-       
-        
-        $payload = array_map(function ($list) use($doador, $lb){
+
+
+
+        $payload = array_map(function ($list) use ($doador, $lb) {
             $doador_id = (int) @$list['doador_id'] ?? 1;
             $dados_doador = @$lb[$doador_id] ?? [];
-                 
-            
+
+
             return [
                 'doador_id' => $doador_id,
                 'nome' => $dados_doador['nome'] ?? null,
                 'email' => $dados_doador['email'] ?? null,
-                'gravatar' => gravatar($dados_doador['email']??'user@outlook.com'),
+                'gravatar' => gravatar($dados_doador['email'] ?? 'user@outlook.com'),
                 'cpf' => $dados_doador['cpf'] ?? null,
                 'doacao_id' => $list['id'],
                 'valor' => $list['valor'],
@@ -468,7 +469,7 @@ class InstituicaoControler
                 'hora' => $list['hora'],
                 'tipo' => $list['tipo']
             ];
-        },$get_doacoes);
+        }, $get_doacoes);
 
 
 
@@ -491,7 +492,7 @@ class InstituicaoControler
         ]);
 
         $all_doacoes = $doacoes->list_all_by_instituicao($instituicao_id);
-        
+
         $all_id_doadores = array_map(function ($list) {
             return $list['doador_id'];
         }, $all_doacoes);
@@ -504,7 +505,7 @@ class InstituicaoControler
             return in_array($d['id'], $all_id_doadores);
         });
 
-        $payload = array_map(function ($dados) use($instituicao_id){            
+        $payload = array_map(function ($dados) use ($instituicao_id) {
             return [
                 'id' => $dados['id'],
                 'nome' => $dados['nome'],
@@ -553,14 +554,17 @@ class InstituicaoControler
         ]);
     }
 
-    static function teste_create(){
+    static function teste_create()
+    {
 
         $instituicao = new Instituicao();
         $doacoes = new Doacao();
         $metas = new Metas();
 
         $all_instituicao_adm = $instituicao->list_all_by_adm_id('88');
-        $intitutions_ids = array_map(function($inst) { return (int) $inst['id']; }, $all_instituicao_adm);           
+        $intitutions_ids = array_map(function ($inst) {
+            return (int) $inst['id'];
+        }, $all_instituicao_adm);
         $list_doacoes = $doacoes->list_ids($intitutions_ids);
         $all_metas = $metas->list_ids_metas($intitutions_ids);
 
