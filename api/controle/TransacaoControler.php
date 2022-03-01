@@ -243,9 +243,11 @@ class TransacaoControler{
         
         $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
 
-        $get_token_evendas = $dados_evendas['canal'];
+        $get_token_evendas = $dados_evendas['canal'] ?? false;
 
-        $response = Evendas::send($nome, $email, $telefone, $phone_ddd, $planos_valor, $get_status, $type_pagamento, $url, $url, $codigo, $endereco, $get_token_evendas);
+        if($get_token_evendas) {
+            $response = Evendas::send($nome, $email, $telefone, $phone_ddd, $planos_valor, $get_status, $type_pagamento, $url, $url, $codigo, $endereco, $get_token_evendas);
+        }
         
         $template_email = $email_notificacao->exest_acao($instituicao_id, $get_status);
 
