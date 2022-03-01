@@ -26,7 +26,7 @@ export default {
 										<div class="col-lg-12">
 											<div class="fv-row mb-10">
 												<label class="required fw-bold fs-6 mb-2">Titulo do Site</label>
-												<input required type="text" name="text_input"
+												<input required type="text" name="text_input"  v-model="titulo_site" 
 													class="form-control form-control-solid mb-3 mb-lg-0"
 													placeholder=""/>
 											</div>
@@ -125,11 +125,7 @@ export default {
 													
 												</div>
 											</div> 
-											<br>
-														{{msg}}
-														<br>
-														{{file.name}}
-														{{imagemVer.name}}
+										
 														
 											<div class="card-footer  px-9">
 												<button type="submit" class="btn btn-primary m-2">SALVAR</button>
@@ -158,6 +154,7 @@ export default {
 		return {
 			token: null,
 			instituicao_id: null,
+			titulo_site: null,
 			tags: null,
 			descricao_site: null,
 			cor: null,
@@ -239,6 +236,7 @@ export default {
 			let res = await adm.configuracaoInstituicao(
 				this.token,
 				this.instituicao_id,
+				this.titulo_site,
 				this.tags,
 				this.descricao_site,
 				this.cor,
@@ -254,9 +252,8 @@ export default {
 				setTimeout(() => this.msg = "", 3000);
 		},
 
-		async infoSubdomain() {
-			//	let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-				 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+		async lisConfiguracao() {
+			  let res = await adm.listConf(this.instituicao_id = window.localStorage.getItem("instituicao_id"))
 				return res
 			},
 
@@ -266,15 +263,16 @@ export default {
 
 	async mounted() {
 		
-		let config = (await this.infoSubdomain()).dados_instituicao
+		let config = (await this.lisConfiguracao()).dados
 		this.logo = "https://doardigital.tk/api/upload/"+config.logo
 		this.cor = config.cor
-
+		this.tags = config.tags,
+		this.descricao_site = config.descricao_site,
+		this.titulo_site = config.titulo_site,
+ 
 		this.imagemVer =  this.logo || "../painel/assets/icons/blank.png"
 
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
 	},
- 
-
 }
 

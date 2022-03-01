@@ -19,33 +19,6 @@ export default {
 
 
 
-
-
-
-
-                                   
-                                    
-
-
-                                    
-
-                             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     
                                     <div class="card-toolbar"> 
                                         <div class="d-flex justify-content-end"

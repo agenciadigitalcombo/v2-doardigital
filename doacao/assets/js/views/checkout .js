@@ -381,10 +381,8 @@ export default {
 
 
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
-
 		this.amount = this.dados.filter(x => x.status == 1)[0].amount
 
-		//34edqwe2
 
 	},
 

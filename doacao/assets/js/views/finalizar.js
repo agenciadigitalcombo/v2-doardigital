@@ -652,14 +652,11 @@ export default {
                 setTimeout(() => {
                     this.submitStatus = 'FALHA500'
                 }, 1500)
-
             }
-
         },
 
-        async infoSubdomain() {
-            let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-            // let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+        async infoSubdomain() { 
+             let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
             return res
         },
 
@@ -715,7 +712,7 @@ export default {
 
 
         let config = (await this.infoSubdomain()).dados_instituicao
-        this.logo = config.logo
+        this.logo = "https://doardigital.tk/api/upload/"+config.logo
         this.backgroundColor = config.cor
         this.instituicao_id = config.id
     },

@@ -268,6 +268,7 @@ export default {
     async configuracaoInstituicao(
         token,
         instituicao_id,
+        titulo_site,
         tags,
         descricao_site,
         cor,
@@ -276,10 +277,17 @@ export default {
         return await http.post('/configuracao-instituicao', {
             token,
             instituicao_id,
+            titulo_site,
             tags,
             descricao_site,
             cor,
             logo
+        })
+    },
+
+    async listConf(instituicao_id) {
+        return await http.get('/instituicao-id', {
+            instituicao_id
         })
     },
 
