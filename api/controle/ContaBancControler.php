@@ -46,10 +46,10 @@ class ContaBancControler{
 
 
 
-        $secret_campo = $token_parce['secret'];
-        $secret = space_sanitize($secret_campo);
-        $get_id = $adm->list_profile($secret);
-        $adm_id = $get_id['id'];
+        // $secret_campo = $token_parce['secret'];
+        // $secret = space_sanitize($secret_campo);
+        // $get_id = $adm->list_profile($secret);
+        // $adm_id = $get_id['id'];
 
         
         
@@ -81,7 +81,7 @@ class ContaBancControler{
         $res_pagarme_conta = $banck_pagarme->create_conta($codigo_banco, $agencia, $conta_digito, $conta, $tipo_conta, $documento_numero, $nome_completo); 
         $token_conta = $res_pagarme_conta['id'];
         
-        $contaBanc->create($adm_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero, ""); 
+        $contaBanc->create($instituicao_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero, ""); 
 
         $res_pagarme_instituicao = $recebedor_pagarme->create_instituicao($token_conta);
         $id_instituicao_pagarme = $res_pagarme_instituicao['id'];
@@ -177,7 +177,7 @@ class ContaBancControler{
         $res_pagarme_conta = $banck_pagarme->create_conta($codigo_banco, $agencia, $conta_digito, $conta, $tipo_conta, $documento_numero, $nome_completo); 
         $token_conta = $res_pagarme_conta['id'];
         
-        $contaBanc->update_conta($adm_id, $instituicao_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero, ""); 
+        $contaBanc->update_conta($instituicao_id, $token_conta, $nome_identificacao, $codigo_banco, $agencia, $conta, $conta_digito, $tipo_conta, $nome_completo, $documento_numero, ""); 
 
         $res_pagarme_instituicao = $recebedor_pagarme->create_instituicao($token_conta);
         $id_instituicao_pagarme = $res_pagarme_instituicao['id'];
@@ -188,8 +188,42 @@ class ContaBancControler{
 
         echo json_encode([
             'next' => true,
-            'message' => 'Conta criada'
+            'message' => 'Conta Atualizada'
         ]);
 
     }
+
+    static function list_conta()
+    {
+        $conta = new ContaBanc();
+
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+
+        campo_obrigatorios(['instituicao_id' => 'Campo instituicao_id obrigatorio']);
+
+        $list_dados = $conta->list_by_instituicao_id($instituicao_id);
+
+        $payload=[
+            'instituicao_id' => $list_dados['instituicao_id'],
+            'token' => $list_dados['token'],
+            'nome_identificacao' => $list_dados['nome_identificacao'],
+            'codigo_banco' => $list_dados['codigo_banco'],
+            'agencia' => $list_dados['agencia'],
+            'conta' => $list_dados['conta'],
+            'conta_digito' => $list_dados['conta_digito'],
+            'tipo_conta' => $list_dados['tipo_conta'],
+            'nome_completo' => $list_dados['nome_completo'],
+            'documento_numero' => $list_dados['documento_numero']
+        ];
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Conta Atualizada',
+            'dados' => $payload
+        ]);
+
+
+    }
+
 }

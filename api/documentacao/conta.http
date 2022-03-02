@@ -36,3 +36,5 @@ token=string
 &email_recebedor=string
 &telefone_recebedor=string
 
+###
+GET http://doardigital.tk/api/list-conta-instituicao?instituicao_id=int

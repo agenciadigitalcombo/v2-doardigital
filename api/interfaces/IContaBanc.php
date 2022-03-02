@@ -17,11 +17,11 @@ interface IContaBanc
 
     ): void;
 
-    public function get_by_adm_id(
+    public function get_by_instituicao_id(
         int $id
     ): array;
 
-    public function list_by_adm_id(
+    public function list_by_instituicao_id(
         int $id
     ): array;
 
