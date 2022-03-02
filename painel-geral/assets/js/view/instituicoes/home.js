@@ -59,8 +59,22 @@ export default {
 
 		async editar(id) { 
 			globalThis._instituicao = this.dados.find(user => user.id == id);
-			window.location.href = "#/editar-instituicoes"
+			window.location.href = "#/editarInstituicoes"
 		},
+
+
+		addLocahostore(item) {
+			this.id = item.id
+			this.nome_fantasia = item.nome_fantasia
+			this.subdomaim = item.subdomaim
+
+			localStorage.setItem("instituicao_id", this.id);
+			localStorage.setItem("instituicao_nome", this.nome_fantasia);
+			localStorage.setItem("instituicao_subdomaim", this.subdomaim);
+			window.location.href = "/painel/#/dash"
+		},
+		
+	 
 	},
 
 	

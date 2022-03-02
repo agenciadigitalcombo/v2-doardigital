@@ -81,16 +81,25 @@ export default {
 				}, 500)
 			} 
 		},  
+
+		async lisConfiguracao() {
+			let res = await adm.listConf(this.instituicao_id = globalThis._instituicao.id,)
+			  return res
+		  },
 	},
 
 	async mounted() {
-	     	this.instituicao_id = globalThis._instituicao.id,
-			this.nome_fantasia = globalThis._instituicao.nome_fantasia,
-			this.email = globalThis._instituicao.email,
-			this.sub_domain = globalThis._instituicao.subdomaim,
-			this.telefone = globalThis._instituicao.telefone,
-			this.razao_social = globalThis._instituicao.razao_social,
-			this.cnpj = globalThis._instituicao.cnpj
+
+		let config = (await this.lisConfiguracao()).dados
+
+		this.instituicao_id = globalThis._instituicao.id,
+  
+			this.nome_fantasia = config.nome_fantasia ,
+			this.email = config.email,
+			this.sub_domain = config.subdomaim,
+			this.telefone = config.telefone,
+			this.razao_social = config.razao_social ,
+			this.cnpj = config.cnpj 
 
 		this.tamanho = this.cnpj.length
 		if (this.tamanho < 12) {

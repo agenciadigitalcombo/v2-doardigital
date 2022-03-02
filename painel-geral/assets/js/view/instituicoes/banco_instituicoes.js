@@ -85,6 +85,7 @@ export default {
 				  this.submitStatus = 'OK'
 				  this.msg = res.message 
 				}, 500)
+				window.location.href = "#/instituicoes"
 			}
 		},
  

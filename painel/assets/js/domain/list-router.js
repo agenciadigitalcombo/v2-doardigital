@@ -1,26 +1,11 @@
 export default [
-    { path: '/', component: { template: '<c-login/>' } },
-    { path: '/recuperar_senha', component: { template: '<c-recuperar_senha/>' } },
-      
+ 
     { path: '/dash', component: { template: '<c-dash/>' } },   
     { path: '/texte', component: { template: '<c-texte/>' } }, 
     { path: '/header', component: { template: '<c-header/>' } }, 
     { path: '/aside', component: { template: '<c-aside/>' } }, 
     { path: '/mensagem', component: { template: '<c-mensagem/>' } }, 
    
-    { path: '/minha-instituicoes', component: { template: '<c-minhaInstituicao>' } }, 
-    { path: '/add-instituicoes', component: { template: '<c-addInstituicao>' } }, 
-    { path: '/endereco-instituicoes', component: { template: '<c-localInstituicao>' } },
-    { path: '/endereco-editar', component: { template: '<c-instituLocal-editar>' } },
-    { path: '/bancario-editar', component: { template: '<c-instituicaoBancario-editar>' } },
-     { path: '/banco-instituicoes', component: { template: '<c-bancoInstituicao>' } },
-    
-   
-    { path: '/dominio-instituicoes', component: { template: '<c-dominioInstituicao>' } },
-    { path: '/editar-instituicoes', component: { template: '<c-editarInstituicao>' } },
-
-    { path: '/instituicoes', component: { template: '<c-intituicaoMenu>' } },
-    
     { path: '/modulos', component: { template: '<c-modulos>' } },
     { path: '/modulos/correio', component: { template: '<c-modulosCorreios>' } },
     { path: '/modulos/email', component: { template: '<c-modulosEmail>' } },

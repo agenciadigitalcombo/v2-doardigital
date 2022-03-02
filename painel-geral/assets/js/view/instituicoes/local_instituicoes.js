@@ -53,7 +53,7 @@ export default {
 				return null
 			} 
 			localStorage.setItem("instituicao_id", await this.infoSubdomain(globalThis._subdomaim)); 
-			window.location.href = "#/banco-instituicoes"
+			window.location.href = "#/bancoInstituicoes"
 		},
 
 		async infoSubdomain(subdomaim) {

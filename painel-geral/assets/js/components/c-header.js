@@ -7,11 +7,32 @@ export default {
             msg: "",
         }
     },
- 
-created() {
-    var lb = {instituicoes:"Minhas instituições"}
-    this.titulo = lb[window.location.href.split('#/')[1]] || window.location.href.split('#/')[1]
-  console.log(window.location.href.split('#/')[1])
-},
+
+    created() {
+        this.titulo = [window.location.href.split('#/')[1]] || window.location.href.split('#/')[1]
+        console.log(window.location.href.split('#/')[1])
+    },
+
+
+    filters: {
+
+        este_titulo(status) {
+            let apresentar = {
+                usuarios: 'Usuarios',
+                instituicoes: 'Minhas instituições',
+                editarInstituicoes: 'Editar Instituição',
+                enderecoEditar: 'Editar Endereço',
+                bancarioEditar: 'Dados Bancários',
+                credenciais: 'Minhas Credenciais',
+
+                instituicoesNova: 'Adicionar Nova Instituição',
+                bancoInstituicoes: 'Adicionar Nova Instituição'
+
+            }
+            return apresentar[status]
+        },
+
+    },
+
     template: await get_template('./assets/js/components/c-header')
 }

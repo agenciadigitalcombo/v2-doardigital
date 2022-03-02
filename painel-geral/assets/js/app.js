@@ -87,18 +87,17 @@ Vue.use(Router)
 const routes = [
     { path: '/login', component: { template: '<p-login></p-login>' } },
     { path: '/recuperar_senha', component: { template: '<p-recuperar_senha></p-recuperar_senha>' } },
-    
+
     { path: '/', component: { template: '<p-home></p-home>' } },
     { path: '/contato', component: { template: '<p-contato></p-contato>' } },
     { path: '/instituicoes', component: { template: '<p-instituicoes></p-instituicoes>' } },
-    { path: '/instituicoes/nova', component: { template: '<p-nova_instituicoes></p-nova_instituicoes>' } },
-    { path: '/editar-instituicoes', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } },
-   { path: '/endereco-instituicoes', component: { template: '<p-local_instituicoes></p-local_instituicoes>' } },
-     { path: '/endereco-editar', component: { template: '<p-local_editar_instituicoes></p-local_editar_instituicoes>' } },
-    { path: '/bancario-editar', component: { template: '<p-banco_editar_instituicoes></p-banco_editar_instituicoes>' } },
-    { path: '/banco-instituicoes', component: { template: '<p-banco_instituicoes></p-banco_instituicoes>' } },
+    { path: '/instituicoesNova', component: { template: '<p-nova_instituicoes></p-nova_instituicoes>' } },
+    { path: '/editarInstituicoes', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } },
+    { path: '/enderecoInstituicoes', component: { template: '<p-local_instituicoes></p-local_instituicoes>' } },
+    { path: '/enderecoEditar', component: { template: '<p-local_editar_instituicoes></p-local_editar_instituicoes>' } },
+    { path: '/bancarioEditar', component: { template: '<p-banco_editar_instituicoes></p-banco_editar_instituicoes>' } },
+    { path: '/bancoInstituicoes', component: { template: '<p-banco_instituicoes></p-banco_instituicoes>' } },
 
-    
     { path: '/usuarios', component: { template: '<p-usuarios></p-usuarios>' } },
     { path: '/usuario-editar', component: { template: '<p-usuarios_editar></p-usuarios_editar>' } },
     { path: '/usuario-novo', component: { template: '<p-usuarios_novo></p-usuarios_novo>' } },
@@ -118,19 +117,19 @@ const router = new Router({ routes })
 new Vue({
     router,
     data: {},
-    computed: { },
-    methods: { },
+    computed: {},
+    methods: {},
     mounted() {
         let is_token = localStorage.getItem('token')
-		if(is_token) {
-        if(window.location.hash == `#/login` ){
-            window.location.href = `#/`
+        if (is_token) {
+            if (window.location.hash == `#/login`) {
+                window.location.href = `#/`
             }
-		}else {
+        } else {
             window.location.href = `#/login`
         }
-        
+
 
     },
 }).$mount('#app')
-; (async () => { })()
+    ; (async () => { })()

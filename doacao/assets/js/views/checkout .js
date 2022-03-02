@@ -341,8 +341,8 @@ export default {
 			else {
 				this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
 				if (this.valor == 0) {
-					window.localStorage.setItem("planos_id", "999")
-					window.localStorage.setItem("planos_nome", this.valor_digitado)
+					window.localStorage.setItem("planos_id", "49")
+					window.localStorage.setItem("planos_nome", "plano-"+this.valor_digitado)
 					window.localStorage.setItem("amount", this.valor_digitado)
 				} else {
 					window.localStorage.setItem("planos_id", this.planos_id)

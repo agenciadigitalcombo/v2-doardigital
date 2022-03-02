@@ -78,6 +78,8 @@
                                                     :class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
                                             </div> 
 
+   
+
                                             <div class="col-lg-8 fv-row" v-else>
                                             <input type="tel" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
                                                 class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
