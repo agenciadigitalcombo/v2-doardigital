@@ -267,6 +267,7 @@ class InstituicaoControler
             'id' => $get_instituicao['id'],
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
+            'razao_social' => $get_instituicao['razao_social'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'dominio' => $get_instituicao['dominio'],
             'status' => $get_instituicao['status'],
