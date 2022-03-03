@@ -64,15 +64,14 @@ function set_taxonomy(int $from_id, int $to_id, string $tipo_relacao): void
 
     $exist = "SELECT * FROM taxonomia WHERE from_id=$from_id AND to_id=$to_id AND tipo_relacao='$tipo_relacao'";
     $get_exist = $banco->query($exist);
-    
-    if(empty($get_exist)) {
+
+    if (empty($get_exist)) {
         $insert = "INSERT INTO taxonomia";
         $insert .= "(from_id, to_id, tipo_relacao)";
         $insert .= "VALUES";
-        $insert .= "('$from_id', '$to_id', '$tipo_relacao')";        
+        $insert .= "('$from_id', '$to_id', '$tipo_relacao')";
         $banco->exec($insert);
     }
-
 }
 
 function get_taxonomy(int $from_id, int $to_id, string $tipo_relacao): array
@@ -81,9 +80,8 @@ function get_taxonomy(int $from_id, int $to_id, string $tipo_relacao): array
 
     $exist = "SELECT * FROM taxonomia WHERE from_id=$from_id AND to_id=$to_id AND tipo_relacao='$tipo_relacao'";
     $get_exist = $banco->query($exist);
-    
-    return $get_exist;
 
+    return $get_exist;
 }
 
 function get_taxonomy_by_from(int $from_id): array
@@ -132,9 +130,10 @@ function gravatar(string $email): string
     return "https://www.gravatar.com/avatar/{$email}";
 }
 
-function valid_int($valor): int {
+function valid_int($valor): int
+{
     $valor = (int) $valor;
-    if( $valor != NAN) {
+    if ($valor != NAN) {
         return $valor;
     }
     return 0;
@@ -143,7 +142,7 @@ function valid_int($valor): int {
 function withdraw_caracter($valor): string
 {
     $transform_valor = preg_replace('/\D/', '', $valor);
-    
+
     return $transform_valor;
 }
 
@@ -151,8 +150,8 @@ function withdraw_caracter($valor): string
 
 function withdraw_caracter_teste($valor): string
 {
-    $transform_valor = preg_replace('/\-/'/'/\_/'/'/\D/', '', $valor);
-    
+    $transform_valor = preg_replace('/\-/' / '/\_/' / '/\D/', '', $valor);
+
     return intval($transform_valor);
 }
 
@@ -160,7 +159,7 @@ function token(): array
 {
     $jwt = new Jwt();
     $token = $_REQUEST['token'];
-    
+
     $campos_obrigatorios = [
         'token'
     ];
@@ -228,7 +227,7 @@ function valid_email($email): string
 
 function valid_senha($valor): string
 {
-    
+
     $min_senha = preg_match('@[0-9]@', $valor);
     if (!$min_senha || strlen($valor) < 8) {
         echo json_encode([
@@ -243,7 +242,7 @@ function valid_senha($valor): string
     return $cripto_senha;
 }
 
-    
+
 function cnpj($cnpj_campo): string
 {
     $cnpj = withdraw_caracter($cnpj_campo);
@@ -300,7 +299,7 @@ function cpf($cpf_campo): string
 {
 
 
-    
+
     $cpf = withdraw_caracter($cpf_campo);
 
     $campos_obrigatorios = [
@@ -352,7 +351,7 @@ function cpf($cpf_campo): string
 
 function valid_cpf_cnpj($valor): string
 {
-    
+
     $cpf_cnpj = withdraw_caracter($valor);
 
 
@@ -396,7 +395,7 @@ function valid_cpf_cnpj($valor): string
 
 function valid_telefone($valor): string
 {
-    
+
     $telefone = withdraw_caracter($valor);
 
     $tamanho_telefone = strlen($telefone);
@@ -415,7 +414,7 @@ function valid_telefone($valor): string
         ]);
         die;
     }
-    
+
     return $telefone;
 }
 
@@ -438,7 +437,7 @@ function min_amount($valor): int
     $amount_campo = $valor;
     $amount = withdraw_caracter($amount_campo);
 
-    
+
     campo_obrigatorios([
         'amount' => 'digite o amount'
 
@@ -457,7 +456,7 @@ function min_amount($valor): int
 function campo_obrigatorios(array $payload): void
 {
     $campos_obrigatorios = array_keys($payload);
-    
+
     foreach ($campos_obrigatorios as $campo) {
         if (empty($_REQUEST[$campo])) {
             echo json_encode([
@@ -472,7 +471,7 @@ function campo_obrigatorios(array $payload): void
 function campos_numericos(array $valores): void
 {
     $campos_inteiros = array_keys($valores);
-    
+
     foreach ($campos_inteiros as $campo) {
         if (!is_numeric($_REQUEST[$campo])) {
             echo json_encode([
@@ -483,13 +482,12 @@ function campos_numericos(array $valores): void
             die;
         }
     }
-
 }
 
 function campos_string(array $valores): void
 {
     $campos_inteiros = array_keys($valores);
-    
+
     foreach ($campos_inteiros as $campo) {
         $valid_campo = withdraw_caracter($_REQUEST[$campo]);
         if (is_numeric($_REQUEST[$campo])) {
@@ -500,12 +498,12 @@ function campos_string(array $valores): void
             die;
         }
     }
-
 }
 
 
 
-function valid_porcentagem( int $procent ) {
+function valid_porcentagem(int $procent)
+{
     return $procent >= 1 && $procent <= 100;
 }
 
@@ -534,7 +532,7 @@ function min_max_porcentagem($porcentagem): int
 
 function data_format($data): string
 {
-    return implode("-",array_reverse(explode("/", $data)));
+    return implode("-", array_reverse(explode("/", $data)));
 }
 
 // function data_register(): string
@@ -550,78 +548,78 @@ function space_sanitize($campo): string
 
 function valid_subdomain($campo): void
 {
-    $lista = 
-    [
-    "safado",
-    "safados",
-    "pilantra",
-    "pilantras",
-    "filhaputa",
-    "filhosdaputa",
-    "filhosdap",
-    "filhodap",
-    "paunoc",
-    "paunocu",
-    "cambalacheiro",
-    "canbalacho",
-    "cambalachos",
-    "armadilha",
-    "armadilhas",
-    "falcatrua",
-    "falcatruas",
-    "bandido",
-    "bandidos",
-    "roubo",
-    "roubos",
-    "roubam",
-    "roubam",
-    "enganação",
-    "enganaçam",
-    "enganacao",
-    "enganam",
-    "enrolação",
-    "enrolaçam",
-    "enrolacao",
-    "caralho",
-    "caralhos",
-    "penis",
-    "penes",
-    "vagina",
-    "vaginas",
-    "cu",
-    "cus",
-    "pau",
-    "pau",
-    "pauavagina",
-    "invejoso",
-    "inveja",
-    "semvergonha",
-    "semvergonhas",
-    "rola",
-    "rolas",
-    "rolao",
-    "rolla",
-    "semnoçao",
-    "caralho",
-    "caralhos",
-    "falso",
-    "falsos",
-    "buceta",
-    "bucetas",
-    "xana",
-    "xanas",
-    "xoxota",
-    "xoxotas",
-    "sexo",
-    "sexos",
-    "transa",
-    "transas",
-    "bucetao",
-    "tranco",
-    "tranko"
-];
+    $lista =
+        [
+            "safado",
+            "safados",
+            "pilantra",
+            "pilantras",
+            "filhaputa",
+            "filhosdaputa",
+            "filhosdap",
+            "filhodap",
+            "paunoc",
+            "paunocu",
+            "cambalacheiro",
+            "canbalacho",
+            "cambalachos",
+            "armadilha",
+            "armadilhas",
+            "falcatrua",
+            "falcatruas",
+            "bandido",
+            "bandidos",
+            "roubo",
+            "roubos",
+            "roubam",
+            "roubam",
+            "enganação",
+            "enganaçam",
+            "enganacao",
+            "enganam",
+            "enrolação",
+            "enrolaçam",
+            "enrolacao",
+            "caralho",
+            "caralhos",
+            "penis",
+            "penes",
+            "vagina",
+            "vaginas",
+            "cu",
+            "cus",
+            "pau",
+            "pau",
+            "pauavagina",
+            "invejoso",
+            "inveja",
+            "semvergonha",
+            "semvergonhas",
+            "rola",
+            "rolas",
+            "rolao",
+            "rolla",
+            "semnoçao",
+            "caralho",
+            "caralhos",
+            "falso",
+            "falsos",
+            "buceta",
+            "bucetas",
+            "xana",
+            "xanas",
+            "xoxota",
+            "xoxotas",
+            "sexo",
+            "sexos",
+            "transa",
+            "transas",
+            "bucetao",
+            "tranco",
+            "tranko"
+        ];
 
-    if(in_array($campo, $lista)){
+    if (in_array($campo, $lista)) {
         echo json_encode([
             'next' => false,
             'message' => 'Nome informado nao Adequado'
@@ -634,9 +632,19 @@ function maker_datas(string $data): array
 {
     $res_array =  array_fill(0, 24, $data);
     $i = 0;
-    return array_map(function($data) use (&$i) {
-        $i++;        
-        return date('d/m/Y', strtotime('+'.$i.' month', strtotime($data)));
-    }, $res_array );
-    
+    return array_map(function ($data) use (&$i) {
+        $i++;
+        return date('d/m/Y', strtotime('+' . $i . ' month', strtotime($data)));
+    }, $res_array);
+}
+
+
+function get_api(string $path, array $dados): array
+{
+    $full_path  = "http://doardigital.tk/api";
+    $full_path .= $path;
+    $full_path .= '?';
+    $full_path .= http_build_query($dados);
+    $request = file_get_contents( $full_path );
+    return json_decode($request, true);
 }

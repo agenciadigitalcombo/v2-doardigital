@@ -27,7 +27,8 @@ class SendGrid
         $institution_name = 'Instituição',
         $institution_logo = 'default.png',
         $modelo_html,
-        $print = false
+        $print = false,
+        $payload = []
     ) {
 
         $headers = self::header(
@@ -37,15 +38,20 @@ class SendGrid
             $from_email
         );
 
-        $message = self::template( [
-            'institution_logo' => $institution_logo,
-            'institution_color' => $institution_color,
-            'institution_nome' => $institution_name,
+        $data = [
+            'logo' => $institution_logo,
+            'cor' => $institution_color,
+            'title' => $institution_name,
             'categoria' => $title,
             'text' => $text,
             'from_email' => $from_email,
             'from_nome' => $from_name
-        ], $modelo_html);
+        ];
+
+        $message = self::template( array_merge(
+            $data,
+            $payload
+        ) , $modelo_html);
 
         @mail($to_email, $assunto, $message, $headers);
 
