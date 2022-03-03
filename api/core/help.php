@@ -641,7 +641,7 @@ function maker_datas(string $data): array
 
 function get_api(string $path, array $dados): array
 {
-    $full_path  = "http://doardigital.tk/api";
+    $full_path  = "https://doardigital.tk/api";
     $full_path .= $path;
     $full_path .= '?';
     $full_path .= http_build_query($dados);
