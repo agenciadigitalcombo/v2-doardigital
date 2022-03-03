@@ -10,6 +10,7 @@ export default {
 			token: null,
 			nome_fantasia: null,
 			subdomaim: null,
+			dominio: null,
 			search: "",
 			dados: [],
 		}
@@ -31,7 +32,9 @@ export default {
 		this.id = this.dados.id,
 		this.nome_fantasia = this.dados.nome_fantasia,
 		this.subdomaim = this.dados.subdomaim,
-
+		this.dominio = this.dados.dominio,
+		
+console.log(this.dominio)
 		this.filtraCredencial.reverse();
 	},
 
@@ -70,7 +73,9 @@ export default {
 
 			localStorage.setItem("instituicao_id", this.id);
 			localStorage.setItem("instituicao_nome", this.nome_fantasia);
-			localStorage.setItem("instituicao_subdomaim", this.subdomaim);
+			localStorage.setItem("instituicao_subdomaim", this.dominio || this.subdomaim);
+			 
+			
 			window.location.href = "/painel/#/dash"
 		},
 		

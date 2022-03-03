@@ -91,7 +91,7 @@ export default {
             localStorage.removeItem('instituicao_nome')
             localStorage.removeItem('instituicao_id')
 
-            window.location.href = "#/";
+            window.location.href = "/painel-geral/index.html#/login";
         },
 
     },

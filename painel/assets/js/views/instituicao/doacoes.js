@@ -313,7 +313,8 @@ export default {
                 waiting_payment: 'Aguardando Pagamento ',
                 refused: 'Cancelado',
                 paid: 'Pago',
-                unpaid: 'Não Pago'
+                unpaid: 'Não Pago',
+                pending: 'Pentende'
             }
             return apresentar[status]
         },

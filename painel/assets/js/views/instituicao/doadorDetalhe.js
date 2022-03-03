@@ -47,7 +47,7 @@ export default {
 													<span class=" fw-bold text-muted">
 													Tipo</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">{{ tipo | is_tipo | is_tipo2 | is_tipo3 }}</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ tipo | este_tipo }}</p>
 												
 
 													<span class=" fw-bold text-muted">
@@ -70,11 +70,11 @@ export default {
 													<span class=" fw-bold text-muted">
 													Recorrente</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">{{ recorente | is_recorente | is_recorente2}}</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ recorente | este_recorente }}</p>
 
 													<span class=" fw-bold text-muted">
 													Status</span>
-													<p class="fw-bolder fs-6 text-gray-800">{{ status | is_status | is_status2 }}</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ status | este_status }}</p>
 												
 												</div>
 												<!--end::Col-->
@@ -128,6 +128,10 @@ export default {
 	
 	
     filters: {
+
+
+
+
         is_price(price) {
             let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${valor}`
@@ -138,42 +142,38 @@ export default {
             return `${data}`
         },
 
-        is_status(status) {
-            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
-           return `${status_pagamento}`
+
+		este_status(status) {
+            let apresentar = {
+                waiting_payment: 'Aguardando Pagamento ',
+                refused: 'Cancelado',
+                paid: 'Pago',
+                unpaid: 'Não Pago',
+				pending: 'Pentende'
+            }
+            return apresentar[status]
         },
 
-        is_status2(status) {
-            let status_pagamento = status.split('paid').join('Pago')
-           return `${status_pagamento}`
-        },
-        
-        is_tipo(tipo) {
-            let tipo_pagamento = tipo.split('boleto').join('Boleto ')
-           return `${tipo_pagamento}`
-        },
-        	
-        is_tipo2(tipo) {
-            let tipo_pagamento = tipo.split('credit_card').join('Crédito')
-           return `${tipo_pagamento}`
+   
+		este_tipo(status) {
+            let apresentar = {
+                boleto: 'Boleto',
+                credit_card: 'Crédito',
+                pix: 'PIX',
+            }
+            return apresentar[status]
         },
 
-        is_tipo3(tipo) {
-            let tipo_pagamento = tipo.split('pix').join('PIX ')
-           return `${tipo_pagamento}`
+         
+		este_recorente(status) {
+            let apresentar = {
+                mes: 'SIM',
+                unico: 'NÃO', 
+            }
+            return apresentar[status]
         },
 
-		
-
-		is_recorente(recorente) {
-            let recorente_pagamento = recorente.split('mes').join('SIM')
-           return `${recorente_pagamento}`
-        },
-
-        is_recorente2(recorente) {
-            let recorente_pagamento = recorente.split('unico').join('NÃO ')
-           return `${recorente_pagamento}`
-        },
+		 
     },
 
     async mounted() { 

@@ -116,17 +116,18 @@ export default {
 		},
 
 		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-			//let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			//let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
+			let res = await adm.todoSubdomain(this.subdomaim)
 			return res
 		},
 	},
 
 
 	async mounted() {
-
+		
+		this.subdomaim = window.localStorage.getItem("instituicao_subdomaim")
+	
 		let dados = (await this.infoSubdomain()).dados_instituicao
-
 		this.subdomaim = dados.subdomaim + '.doardigital.com.br/'
 		this.dominio = dados.dominio
 
