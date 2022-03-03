@@ -634,7 +634,7 @@ function maker_datas(string $data): array
     $i = 0;
     return array_map(function ($data) use (&$i) {
         $i++;
-        return date('d/m/Y', strtotime('+' . $i . ' month', strtotime($data)));
+        return date('Y-m-d', strtotime('+' . $i . ' month', strtotime($data)));
     }, $res_array);
 }
 
