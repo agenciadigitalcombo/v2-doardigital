@@ -96,11 +96,15 @@ export default {
 				}
 
 				globalThis._subdomaim =  this.subdomaim  
+				//globalThis._email =  this.email 
+			//globalThis._telefone =  this.telefone 
+				//globalThis._nome =  this.nome_fantasia  
+				//globalThis._cnpj =  this.cnpj 
 
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK' 
-		        	window.location.href = "#/endereco-instituicoes"
+		        	window.location.href = "#/enderecoInstituicoes"
 				}, 500)
 			}
 

@@ -426,7 +426,7 @@ export default {
 												 
 													<!--begin::Balance-->
 													<div class="d-flex text-center flex-column text-white pt-8"> 
-														<h3 class="m-0 text-white fw-bolder fs-3">Total Vencido/Falhados</h3>
+														<h3 class="m-0 text-white fw-bolder fs-3">Total Vencido/Falhado</h3>
 														<span class="fw-bolder fs-2x pt-1">{{ falhado_total | is_price }}</span>
 													</div>
 												 

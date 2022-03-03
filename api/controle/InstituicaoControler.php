@@ -234,6 +234,7 @@ class InstituicaoControler
             return [
                 'id' => $lis_dados['id'],
                 'adm_id' => $lis_dados['adm_id'],
+                'razao_social' => $lis_dados['razao_social'],
                 'nome_fantasia' => $lis_dados['nome_fantasia'],
                 'subdomaim' => $lis_dados['subdomaim'],
                 'dominio' => $lis_dados['dominio'],
@@ -267,6 +268,7 @@ class InstituicaoControler
             'id' => $get_instituicao['id'],
             'adm_id' => $get_instituicao['adm_id'],
             'nome_fantasia' => $get_instituicao['nome_fantasia'],
+            'razao_social' => $get_instituicao['razao_social'],
             'subdomaim' => $get_instituicao['subdomaim'],
             'dominio' => $get_instituicao['dominio'],
             'status' => $get_instituicao['status'],
