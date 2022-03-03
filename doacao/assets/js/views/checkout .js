@@ -237,6 +237,7 @@ export default {
 			backgroundColor: '',
 			dados: [],
 
+			titulo: "",
 		}
 	},
 
@@ -270,8 +271,8 @@ export default {
 
 	methods: {
 		async infoSubdomain() {
-		//	let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-			 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			let res = await adm.todoSubdomain(this.subdomaim )
+		//	 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
 			return res
 		},
 
@@ -372,7 +373,16 @@ export default {
 		}
 	},
 
+	created() {
+        this.titulo = window.location.href.split('//')[1]
+        console.log(window.location.hostname)
+    },
+
+	 
+
 	async mounted() {
+		//this.subdomaim = "34edqwe21"
+		this.subdomaim = window.location.hostname
 
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.tk/api/upload/"+config.logo
