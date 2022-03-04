@@ -251,27 +251,36 @@ class TransacaoControler{
         
         $template_email = $email_notificacao->exest_acao($instituicao_id, $get_status);
 
-        SendGrid::send(
-        $nome, 
-        $email, 
-        $nome_instituicao, 
-        $email_instituicao, 
-        $template_email['assunto'], 
-        $template_email['assunto'], 
-        $template_email['text'], 
-        $color_instituicao, 
-        $nome_instituicao, 
-        $logo_instituicao,
-        'instituicao');
+        // SendGrid::send(
+        // $nome, 
+        // $email, 
+        // $nome_instituicao, 
+        // $email_instituicao, 
+        // $template_email['assunto'], 
+        // $template_email['assunto'], 
+        // $template_email['text'], 
+        // $color_instituicao, 
+        // $nome_instituicao, 
+        // $logo_instituicao,
+        // 'instituicao');
+
+        
+        get_api('/email/preview', [
+            "instituicao_id" => $instituicao_id,
+            "doador_cpf" => $cpf,
+            "status" => $get_status,
+            "tipo" => $type_pagamento,
+            "codigo" => $codigo,
+            "link" => $url
+        ]);
         
         $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
         $get_ddd_tel = telefone_get_ddd($telefone);
-        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
-        
+        $numero_ddd = [$get_ddd_tel, $get_numero_tel];        
         
 
         SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
-
+            
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',
