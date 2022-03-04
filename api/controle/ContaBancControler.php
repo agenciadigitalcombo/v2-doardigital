@@ -219,7 +219,7 @@ class ContaBancControler{
 
         echo json_encode([
             'next' => true,
-            'message' => 'Conta Atualizada',
+            'message' => 'Conta da instituicao',
             'dados' => $payload
         ]);
 
