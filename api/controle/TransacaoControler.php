@@ -37,11 +37,9 @@ class TransacaoControler{
         
         $mensal = $_REQUEST['mensal'] ?? 0;
         if($mensal == 1) {
-            
             $planos_id = $_REQUEST['planos_id'];
-            $planos_nome = $_REQUEST['planos_nome'];
-        }
-        
+        }        
+        $planos_nome = $_REQUEST['planos_nome'] ?? '';
         
         $nome = $_REQUEST['nome'];
         // $genero = $_REQUEST['genero'];
