@@ -16,14 +16,31 @@ class TransacaoControler{
         $pagarme_plano = new PagarmePlano();
         $adm = new Adm();
 
+        campo_obrigatorios([
+            'planos_valor' => 'Campo planos_valor opbrigatorio',
+            'type_pagamento' => 'Campo type_pagamento opbrigatorio',
+            'nome' => 'Campo nome opbrigatorio',
+            'email' => 'Campo email opbrigatorio',
+            'cpf' => 'Campo cpf opbrigatorio',
+            'telefone' => 'Campo telefone opbrigatorio',
+            'estado' => 'Campo estado opbrigatorio',
+            'cidade' => 'Campo cidade opbrigatorio',
+            'bairro' => 'Campo bairro opbrigatorio',
+            'endereco' => 'Campo endereco opbrigatorio',
+            'numero' => 'Campo numero opbrigatorio',
+            'cep' => 'Campo cep opbrigatorio',
+        ]);
+
 
         $instituicao_id = $_REQUEST['instituicao_id'];
-
-        $planos_id = $_REQUEST['planos_id'];
-        $planos_nome = $_REQUEST['planos_nome'];
         $planos_valor = $_REQUEST['planos_valor'];
-
+        
         $mensal = $_REQUEST['mensal'] ?? 0;
+        if($mensal == 1) {
+            
+            $planos_id = $_REQUEST['planos_id'];
+            $planos_nome = $_REQUEST['planos_nome'];
+        }
         
         
         $nome = $_REQUEST['nome'];
@@ -61,20 +78,7 @@ class TransacaoControler{
         $reference_key = "ref_" . uniqid();
         
         
-        campo_obrigatorios([
-            'planos_valor' => 'Campo planos_valor opbrigatorio',
-            'type_pagamento' => 'Campo type_pagamento opbrigatorio',
-            'nome' => 'Campo nome opbrigatorio',
-            'email' => 'Campo email opbrigatorio',
-            'cpf' => 'Campo cpf opbrigatorio',
-            'telefone' => 'Campo telefone opbrigatorio',
-            'estado' => 'Campo estado opbrigatorio',
-            'cidade' => 'Campo cidade opbrigatorio',
-            'bairro' => 'Campo bairro opbrigatorio',
-            'endereco' => 'Campo endereco opbrigatorio',
-            'numero' => 'Campo numero opbrigatorio',
-            'cep' => 'Campo cep opbrigatorio',
-        ]);
+        
 
 
 
