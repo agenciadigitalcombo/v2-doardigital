@@ -134,10 +134,10 @@ class EmailContoler
         }
 
         SendGrid::send(
-            $to_name,
-            $to_email,
             $from_name,
             $from_email,
+            $to_name,
+            $to_email,
             $assunto,
             $title,
             $text,
