@@ -5,7 +5,7 @@ class ContaBanc implements IContaBanc{
     public function get_by_instituicao_id(int $id): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM conta_bancaria WHERE adm_id='$id'";
+        $sql = "SELECT * FROM conta_bancaria WHERE instituicao_id='$id'";
         $guard = $banco->query($sql);
         return $guard[0] ?? [];
     }
@@ -13,17 +13,17 @@ class ContaBanc implements IContaBanc{
     public function set_token(int $id, string $token): void
     {
         $banco = new Banco();
-        $sql = "UPDATE conta_bancaria SET token='$token' WHERE adm_id='$id'";
+        $sql = "UPDATE conta_bancaria SET token='$token' WHERE instituicao_id='$id'";
         $banco->exec($sql);
     }
 
-    public function create(int $adm_id, string $token, string $nome_identificacao, string $codigo_banco, string $agencia, string $conta, string $conta_digito, string $tipo_conta, string $nome_completo, string $documento_numero, string $agencia_digito): void
+    public function create(int $instituicao_id, string $token, string $nome_identificacao, string $codigo_banco, string $agencia, string $conta, string $conta_digito, string $tipo_conta, string $nome_completo, string $documento_numero, string $agencia_digito): void
     {
         $banco = new Banco();
         $sql = "INSERT INTO conta_bancaria";
-        $sql .= "(adm_id, token, nome_identificacao, codigo_banco, agencia, agencia_digito, conta, conta_digito, tipo_conta, nome_completo, documento_numero)";
+        $sql .= "(instituicao_id, token, nome_identificacao, codigo_banco, agencia, agencia_digito, conta, conta_digito, tipo_conta, nome_completo, documento_numero)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id', '$token', '$nome_identificacao', '$codigo_banco', '$agencia', '$agencia_digito', '$conta', '$conta_digito', '$tipo_conta', '$nome_completo', '$documento_numero')";
+        $sql .= "('$instituicao_id', '$token', '$nome_identificacao', '$codigo_banco', '$agencia', '$agencia_digito', '$conta', '$conta_digito', '$tipo_conta', '$nome_completo', '$documento_numero')";
         $banco->exec($sql);
     }
 
@@ -38,7 +38,7 @@ class ContaBanc implements IContaBanc{
     public function update(int $id, string $nome_identificacao): void
     {
         $banco = new Banco();
-        $sql = "UPDATE conta_bancaria SET nome_identificacao='$nome_identificacao' WHERE adm_id='$id'";
+        $sql = "UPDATE conta_bancaria SET nome_identificacao='$nome_identificacao' WHERE instituicao_id='$id'";
         $banco->exec($sql);
     }
 

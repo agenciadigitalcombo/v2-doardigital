@@ -3,7 +3,7 @@
 interface IContaBanc
 {
     public function create(
-        int $adm_id,
+        int $instituicao_id,
         string $token,
         string $nome_identificacao,
         string $codigo_banco,
