@@ -134,8 +134,7 @@ export default {
 																	<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_subscriptions_table .form-check-input" value="1" />
 																</div>
 															</th>
-															<th class="min-w-300px">Usuario</th>
-															<th class="min-w-25px"></th>
+															<th class="min-w-300px">Usuario</th> 
 															<th class="min-w-175px">Data Cadastro </th>
 															<th class="min-w-150px">CPF</th>
 															<th class="min-w-100px">Tipo</th>
@@ -166,9 +165,7 @@ export default {
 																	<span>{{item.email}}</span>
 																</div>
 															</td>
-															<td>
-																<div class="badge badge-light"></div>
-															</td>
+														 
 
 															<td> <div> {{item.data_registro}} </div></td>
 

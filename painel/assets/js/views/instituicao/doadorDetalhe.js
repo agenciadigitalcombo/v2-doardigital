@@ -167,8 +167,8 @@ export default {
          
 		este_recorente(status) {
             let apresentar = {
-                mes: 'SIM',
-                unico: 'NÃO', 
+                RECORRENTE: 'SIM',
+                UNICO: 'NÃO', 
             }
             return apresentar[status]
         },

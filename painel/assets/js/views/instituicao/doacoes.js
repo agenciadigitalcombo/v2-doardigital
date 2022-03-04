@@ -310,7 +310,7 @@ export default {
 
         este_status(status) {
             let apresentar = {
-                waiting_payment: 'Aguardando Pagamento ',
+                waiting_payment: 'Aguardando Pagamento',
                 refused: 'Cancelado',
                 paid: 'Pago',
                 unpaid: 'Não Pago',
@@ -335,7 +335,7 @@ export default {
 
         modal() {
             console.log('jms')
-            
+
             this.mostraresconder =
             {
                 'show': true
@@ -344,14 +344,14 @@ export default {
 
         unfocused() {
             alert('good bye')
-          },
-          
+        },
+
         fechaModel() {
-                this.mostraresconder =
-                {
-                    'show': !true
-                }
-           
+            this.mostraresconder =
+            {
+                'show': !true
+            }
+
 
         },
 
@@ -413,8 +413,6 @@ export default {
 
     created() {
         this.instituicao_id = window.localStorage.getItem("instituicao_id")
-
-
 
     }
 

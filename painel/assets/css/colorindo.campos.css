@@ -3,6 +3,8 @@
     color: #50cd89;
     background-color: #e8fff3
 }
+
+
 .status_refused {
     border: 2px solid #DC143C;
     color: #DC143C; 
@@ -17,11 +19,14 @@
     background-color: #f5f8fa
 }
 
+.status_pending {
+    color: #7e8299;
+    background-color: #f5f8fa
+}
 
 .tipo_UNICO {
     color: #f1416c;
     background-color: #fff5f8 
-
 }
 .tipo_RECORRENTE {
     color: #50cd89;
