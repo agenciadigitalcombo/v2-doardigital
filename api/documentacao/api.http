@@ -8,22 +8,6 @@ Content-Type: multipart/form-data;
     "telefone": "(82) 9 9977-6698"
 }
 
-###
-POST http://localhost/v2-doardigital/api/login
-Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
-
-{
-    "email": "br.rafael@outlook.com",
-    "senha": "12345678",
-}
-
-###
-POST http://localhost/v2-doardigital/api/recuperar-senha
-Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
-
-{
-    "email": "br.rafael@outlook.com",
-}
 
 ###
 POST http://localhost/v2-doardigital/api/alterar-senha

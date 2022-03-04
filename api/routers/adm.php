@@ -1,6 +1,6 @@
 <?php
 
-router('/', 'AdmControle@start');
+
 
 router('/criar-adm', 'AdmControle@criar_adm');
 router('/login', 'AdmControle@login');

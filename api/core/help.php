@@ -648,3 +648,7 @@ function get_api(string $path, array $dados): array
     $request = file_get_contents( $full_path );
     return json_decode($request, true);
 }
+
+function get_domain() : string {
+    return '';
+}

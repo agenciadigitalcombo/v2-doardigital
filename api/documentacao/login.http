@@ -1,0 +1,15 @@
+###
+POST http://localhost/v2-doardigital/api/login
+Content-Type: application/x-www-form-urlencoded;
+
+# email=br.rafael@outlook.com
+# &senha=12345678
+
+###
+POST http://localhost/v2-doardigital/api/recuperar-senha
+Content-Type: application/x-www-form-urlencoded;
+
+email=br.rafael@outlook.com
+
+###
+GET http://localhost/v2-doardigital/api/validar?token=eyJzZWNyZXQiOiI2MTllNGY2MGNmNGYyIiwibm9tZSI6ImJydW5hbyBvIGZlcmluaGEgZGUgYWxhZ29hcyIsImVtYWlsIjoiYnIucmFmYWVsQG91dGxvb2suY29tIiwic3VwZXJfYWRtIjoiMSIsInN0ZXAiOiIxIiwiY3JlZGVuY2lhbCI6MH0=.84d79324a2c0b7a3a915a7927b3d315feb24c273
