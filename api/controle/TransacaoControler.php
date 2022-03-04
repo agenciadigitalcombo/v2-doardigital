@@ -40,9 +40,6 @@ class TransacaoControler{
         $cpf = valid_cpf_cnpj($cpf_campo);
         $data_nascimento = data_format($data_nascimento_campo);
         
-        // var_dump($telefone);
-        // die;
-        
         $cep = withdraw_caracter($cep_campo);
         $numero = $_REQUEST['numero'];
         $estado = $_REQUEST['estado'];
