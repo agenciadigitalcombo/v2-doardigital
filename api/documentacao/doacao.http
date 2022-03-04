@@ -1,26 +1,26 @@
 POST http://localhost/v2-doardigital/api/transacao
 Content-Type: application/x-www-form-urlencoded
 
-instituicao_id=5,
-&planos_id=2,
-&planos_nome=Plano R$ 1,00,
-&planos_valor=2500,
-&mensal=1 ou 0,
-&nome=joaquin sillva,
-&cpf=005.696.520-65,
-&telefone=(38) 9 9801-9210,
-&email=victorfernando@gmail.com,
-&data_nascimento=17/10/2000,
-&cep=02835-090,
-&numero=753b,
-&estado=SP,
-&endereco=rua plinio,
-&bairro=Serralheiro,
-&cidade=Sao paulo,
-&type_pagamento=credit_card, pix ou boleto,
-&cart_numero=4389356828475573,
-&cart_cvv=254,
-&cart_validade=12/23
+instituicao_id=5
+&planos_id=int
+&planos_nome=string
+&planos_valor=int
+&mensal=[0,1]
+&nome=string
+&cpf=string
+&telefone=string
+&email=string
+&data_nascimento=string
+&cep=string
+&numero=string
+&estado=string
+&endereco=string
+&bairro=string
+&cidade=string
+&type_pagamento=[credit_card, pix, boleto]
+&cart_numero=int
+&cart_cvv=int
+&cart_validade=string
 
 ###
 
