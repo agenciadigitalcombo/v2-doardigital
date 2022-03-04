@@ -656,7 +656,7 @@ export default {
         },
 
         async infoSubdomain() { 
-             let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+             let res = await adm.todoSubdomain(this.subdomaim)
             return res
         },
 
@@ -694,6 +694,7 @@ export default {
     },
 
     async mounted() {
+        this.subdomaim = window.location.hostname
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 

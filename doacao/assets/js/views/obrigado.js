@@ -237,9 +237,8 @@ export default {
 
 
 	methods: {
-		async infoSubdomain() {
-			//let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-			 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+		async infoSubdomain() { 
+			 let res = await adm.todoSubdomain(this.subdomaim)
 			return res
 		},
 
@@ -250,6 +249,8 @@ export default {
 	},
 
 	async mounted() {
+		this.subdomaim = window.location.hostname
+		
 		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep
 		this.inst.endereco = dados.endereco.logadouro
