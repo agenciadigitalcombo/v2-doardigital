@@ -1,7 +1,7 @@
-POST http://localhost/v2-doardigital/api/transacao
+POST https://doardigital.tk/api/transacao
 Content-Type: application/x-www-form-urlencoded
 
-instituicao_id=5
+instituicao_id=int
 &planos_id=int
 &planos_nome=string
 &planos_valor=int
@@ -23,6 +23,5 @@ instituicao_id=5
 &cart_validade=string
 
 ###
-
-GET http://localhost/v2-doardigital/api/list-doacoes?instituicao_id=5
+GET https://doardigital.tk/api/list-doacoes?instituicao_id=int
 Content-Type: application/x-www-form-urlencoded
