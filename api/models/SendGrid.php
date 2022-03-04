@@ -54,7 +54,7 @@ class SendGrid
         ) , $modelo_html);
 
         $is_send = @mail($to_email, $assunto, $message, $headers);
-        var_dump( $is_send );
+        var_dump( $is_send, $to_email, $assunto, $message, $header );
 
         if ($print) {
             echo $message;
