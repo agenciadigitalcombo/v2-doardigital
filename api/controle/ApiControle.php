@@ -2,8 +2,8 @@
 
 class ApiControle
 {
-
-    static function start() {
+    static function start()
+    {
         echo json_encode([
             "next" => true,
             "message" => "Bem vindo a api Doar Digital",
