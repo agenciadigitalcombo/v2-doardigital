@@ -279,7 +279,7 @@ class TransacaoControler{
         $numero_ddd = [$get_ddd_tel, $get_numero_tel];        
         
 
-        // SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
+        SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
             
         echo json_encode([
             'next' => true,
