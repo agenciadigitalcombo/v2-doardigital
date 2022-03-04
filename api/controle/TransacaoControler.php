@@ -272,7 +272,7 @@ class TransacaoControler{
             "tipo" => $type_pagamento,
             "codigo" => $codigo,
             "link" => $url
-        ]);
+        ], false);
         
         $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
         $get_ddd_tel = telefone_get_ddd($telefone);
