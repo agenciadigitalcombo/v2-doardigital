@@ -52,11 +52,14 @@ class TransacaoControler{
 
         $type_pagamento = $_REQUEST['type_pagamento'];
 
-        $cart_numero = $_REQUEST['cart_numero'];
-        $cart_cvv = $_REQUEST['cart_cvv'];
-        $cart_nome = $_REQUEST['cart_nome'];
-        $cart_validade_campo = $_REQUEST['cart_validade'];
-        $cart_validade = withdraw_caracter($cart_validade_campo);
+        if($type_pagamento == "credit_card") {
+            
+            $cart_numero = $_REQUEST['cart_numero'];
+            $cart_cvv = $_REQUEST['cart_cvv'];
+            $cart_nome = $_REQUEST['cart_nome'];
+            $cart_validade_campo = $_REQUEST['cart_validade'];
+            $cart_validade = withdraw_caracter($cart_validade_campo);
+        }
         
         $reference_key = "ref_" . uniqid();
         
