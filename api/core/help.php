@@ -639,7 +639,7 @@ function maker_datas(string $data): array
 }
 
 
-function get_api(string $path, array $dados, bool $json = true): array|string
+function get_api(string $path, array $dados, bool $json = true)
 {
     $full_path  = "https://doardigital.tk/api";
     $full_path .= $path;
