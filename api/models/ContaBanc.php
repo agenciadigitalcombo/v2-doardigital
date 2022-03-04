@@ -52,7 +52,7 @@ class ContaBanc implements IContaBanc{
     public function list_by_instituicao_id(int $id): array
     {
         $banco = new Banco();
-        $sql = "SELECT * FROM conta_bancaria WHERE instituicao_id='$id'";
+        $sql = "SELECT * FROM conta_bancaria WHERE instituicao_id=$id";
         $guard = $banco->query($sql);
         return $guard ?? [];
     }
