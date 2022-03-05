@@ -259,7 +259,7 @@ export default {
 		this.inst.cidade = dados.endereco.cidade
 		this.inst.estado = dados.endereco.estado
 		this.inst.complemento = dados.endereco.complemento
-		this.inst.logo = dados.logo
+		this.inst.logo = "https://doardigital.tk/api/upload/"+dados.logo
 		this.inst.icon = dados.icon
 		this.inst.backgroundColor = dados.cor
 		this.inst.email = dados.email
