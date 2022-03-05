@@ -66,7 +66,33 @@ class Doador implements IDoador
         $sql .= "(nome, email, senha, telefone, cpf)";
         $sql .= "VALUES";
         $sql .= "('$name', '$email', '$senha', '$phone_numbers', '$cpf')";
+        
         $banco->exec($sql);
+    }
+
+    public function atualiza(string $name, string $email, string $phone_numbers, string $cpf, string $senha): void
+    {
+
+        $banco = new Banco();
+        
+        $pesquisa = $this->exist($cpf);
+
+        if($pesquisa){
+            $sql = "UPDATE doador SET nome='$name', email='$email', senha='$senha', telefone='$phone_numbers', senha='$senha' WHERE cpf='$cpf'";
+            $banco->exec($sql);
+
+        }
+        $sql = "INSERT INTO doador";
+        $sql .= "(nome, email, senha, telefone, cpf)";
+        $sql .= "VALUES";
+        $sql .= "('$name', '$email', '$senha', '$phone_numbers', '$cpf')";
+        
+        $banco->exec($sql);
+
+
+
+
+
     }
 
     public function get_by_cpf(string $cpf): array

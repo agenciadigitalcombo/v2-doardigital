@@ -93,6 +93,7 @@ class TransacaoControler{
         }
         
         
+        
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
         
@@ -100,11 +101,19 @@ class TransacaoControler{
             $token_doador = $pagarme_Costumer->create($nome, $email, $doador_id, ['+55' . $telefone], $cpf);
             $get_token_doador = $token_doador['id'];
             $doador->set_token($doador_id, $get_token_doador);
-            $doador_dados['token'] = $token_doador;
+            // $doador_dados['token'] = $token_doador;
         }
         
-        $get_token_doador = $doador_dados['token'];
-
+        
+        if($doador_dados['token'] == null){
+            
+            $get_token_doador = $token_doador['id'];
+        }
+        
+        if(!empty($doador_dados['token'])){
+            
+            $get_token_doador = $doador_dados['token'];
+        }
        
         
         $res_plano = $pagarme_plano->create($nome, $planos_valor);
