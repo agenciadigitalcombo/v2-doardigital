@@ -43,7 +43,6 @@ export default [
     { path: '/metas', component: { template: '<c-metas>' } },
 
     { path: '/modelo-de-emails', component: { template: '<c-modelo-de-emails>' } },
-    
     { path: '/modelo-de-emails/editar', component: { template: '<c-modelo-de-emails-editar>' } },
- 
+    { path: '/modelo-de-emails/novo', component: { template: '<c-modelo-de-emails-novo>' } },
 ]

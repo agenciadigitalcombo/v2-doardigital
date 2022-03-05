@@ -108,8 +108,6 @@ export default {
 
 													<div class="badge badge-light fw-bolder m-2" v-for="tag in tags"> 
 													{{tag}}
-
-													{{cron}} 
 													 </div> 
  
 
@@ -254,13 +252,7 @@ export default {
 		this.tempo = (await this.listarEmails()).cron
 	
 		this.instituicao_id = window.localStorage.getItem("instituicao_id")
-				 
-		this.assunto = globalThis._emails.assunto
-		this.corpo = globalThis._emails.corpo 
-		this.status = globalThis._emails.acao
-		this.cron = globalThis._emails.cron
-		//this.cron = "+15 minute"
-		 
+		
 	},
 
 	

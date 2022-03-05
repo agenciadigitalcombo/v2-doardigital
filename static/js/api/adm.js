@@ -225,6 +225,12 @@ export default {
         })
     },
 
+    async listarBancoInst(
+        instituicao_id,) {
+        return await http.get('/list-conta-instituicao', {
+            instituicao_id,
+        })
+    },
 
     async onoffIntituicao(
         instituicao_id,
@@ -301,7 +307,7 @@ export default {
             mode: 'cors',
             cache: 'default',
             body: form,
-           
+
         })
         return await res.json()
 
@@ -678,12 +684,14 @@ export default {
         assunto,
         corpo,
         status,
+        cron
     ) {
         return await http.post('/atualiza-email', {
             instituicao_id,
             assunto,
             corpo,
             status,
+            cron
         })
     },
 
@@ -766,26 +774,26 @@ export default {
     async dashboardInstituicao(
         token,
         instituicao_id,
-        ) {
+    ) {
         return await http.get('/dashboard-instituicao', {
             token,
             instituicao_id,
         })
-    }, 
+    },
 
     async dashboardAdm(
-        token, 
-        ) {
+        token,
+    ) {
         return await http.post('/dashboard-adm', {
-            token, 
+            token,
         })
-    }, 
+    },
 
     async dashboard(
-        token, 
-        ) {
+        token,
+    ) {
         return await http.post('/dashboard', {
-            token, 
+            token,
         })
     },
 

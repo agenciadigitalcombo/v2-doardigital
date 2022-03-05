@@ -57,46 +57,9 @@ export default {
 
 													<div class="d-flex flex-column">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 														<div class="row mt-5">
 
-															<div class="col-lg-4 mb-10 mb-lg-0" v-for="listar in filtraPlano" :key="listar.id">
+															<div class="col-lg-4  mb-lg-0" v-for="listar in filtraPlano" :key="listar.id">
 
 															<label 
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-5 mb-5">
@@ -240,7 +203,7 @@ export default {
 			titulo: "",
 		}
 	},
-
+ 
 	validations: {
 		valor_digitado: {
 			required,
@@ -277,6 +240,7 @@ export default {
 		},
 
 		setarPlano(jms) {
+			alert("certo")
 			this.valor = jms.amount
 			this.planos_id = jms.id
 			this.planos_nome = jms.nome
@@ -285,46 +249,11 @@ export default {
 		},
 
 
-		// outro() {
-		// 	localStorage.removeItem("planos_id");
-		// 	this.planos_nome = "Plano "+this.valor_digitado
-		// 	this.valor="0"
-		// },
-
-
 		money() {
-			let val = this.valor_digitado
-			val = val.replace('.', '')
-			val = val.replace(/\D/gi, '')
-			val = val ? val : 0
-			val = `${parseInt(val)}` ?? '0'
-			switch (val.length) {
-				case 0:
-					val = '00,00'
-					break;
-				case 1:
-					val = val.replace(/(\d{1})/gi, '00,0$1')
-					break;
-				case 2:
-					val = val.replace(/(\d{2})/gi, '00,$1')
-					break;
-				case 3:
-					val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
-					break;
-				case 4:
-					val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
-					break;
-				case 5:
-					val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
-					break;
-				case 6:
-					val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
-					break;
-				default:
-					val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
-					break;
-			}
-			this.valor_digitado = val
+			let valor
+			valor = this.valor_digitado.replace(/\D/gi, '')
+			 valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			 this.valor_digitado = valor
 		},
 
 		descartavel() {
@@ -360,7 +289,6 @@ export default {
 			}
 		},
 
-
 	},
 
 	computed: {
@@ -378,7 +306,8 @@ export default {
 	 
 
 	async mounted() {
-		//this.subdomaim = "34edqwe21"
+	
+	//	this.subdomaim = "34edqwe21"
 		this.subdomaim = window.location.hostname
 
 		let config = (await this.infoSubdomain()).dados_instituicao
@@ -390,7 +319,8 @@ export default {
 		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
 		this.amount = this.dados.filter(x => x.status == 1)[0].amount
 
-
+		this.valor_digitado = "0"
+		this.valor = this.amount
 	},
 
 

@@ -90,15 +90,32 @@ export default {
 			}
 		},
  
+		async listarBanco() {
+			let res = await adm.listarBancoInst( 
+				this.instituicao_id
+			)
+			return res
+		},
 
 	},
 
 	async mounted() {
-
-		this.instituicao_id = localStorage.getItem("instituicao_id"); 
-
-
+		let banco = (await this.listarBanco()).dados || {}   
+		this.cep = banco.cep
+		this.token = banco.token
+		this.codigo_banco = banco.codigo_banco
+		this.agencia = banco.agencia
+		this.conta_digito = banco.conta_digito
+		this.conta = banco.conta
+		this.tipo_conta = banco.tipo_conta
+		this.nome_completo = banco.nome_completo
+		this.documento_numero = banco.documento_numero
 	 },
+
+	 created() {
+		this.instituicao_id = globalThis._instituicao.id
+		this.id = globalThis._instituicao.id
+	},
 
     template: await get_template('./assets/js/view/instituicoes/banco_editar_instituicoes')
 }

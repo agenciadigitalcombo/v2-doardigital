@@ -38,6 +38,27 @@ export default {
                                         </div>
                                     </div>
 
+                                    <div class="card-toolbar">
+                                    <div class="d-flex justify-content-end"
+                                        data-kt-subscription-table-toolbar="base">
+
+                                    </div>
+                                    <a  href="#/modelo-de-emails/novo"
+                                    class="btn btn-primary">
+                                <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="11.364" y="20.364" width="16"
+                                                height="2" rx="1" transform="rotate(-90 11.364 20.364)"
+                                                fill="black" />
+                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                
+                                    Novo
+                                </a>
+                                </div>
                                 </div>
                                 <div class="card-body pt-0">
                                     <div class="table-responsive">
@@ -48,12 +69,12 @@ export default {
                                                     <th class="w-10px pe-2">
 
                                                     </th>
-                                                    <th class="min-w-300px">TIpo</th>
+                                                    <th class="min-w-200px">Assunto:</th>
+                                                    <th class="min-w-200px">status de pagamento:</th>
+                                                    <th class="min-w-150px">Disparo</th>
                                                     <th class="min-w-50px"></th>
-                                                    <th class="min-w-50px"></th>
-                                                    <th class="min-w-200px">Status </th>
-                                                    <th class="min-w-100px"></th>
-                                                    <th class="text-end min-w-170px">Ação</th>
+                                                    <th class="min-w-100px">Status </th>
+                                                    <th class="text-end min-w-70px">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 fw-bold">
@@ -63,19 +84,23 @@ export default {
                                                     <td> 
                                                         <!--begin::User details-->
                                                         <div class="d-flex flex-column">
-                                                            <a class="text-gray-800  mb-1">
-                                                               
-                                                            <div class="badge badge-light fw-bolder"> 1 min </div>
-                                                          {{item.acao}}
+                                                            <a class="text-gray-800 mb-1">
+                                                          {{item.assunto}}
                                                             </a>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="badge badge-light"></div>
+                                                        <div class="badge badge-light">
+                                                        {{item.acao}}
+                                                        </div>
                                                     </td>
                                                     <td>
-
+                                                    <div class="badge badge-light fw-bolder"> {{item.cron}} </div>
                                                     </td>
+
+                                                    <td>
+                                                    </td> 
+
                                                     <td> 
                                                         <div
                                                             class="form-check form-switch form-check-custom form-check-solid me-10">
@@ -86,8 +111,6 @@ export default {
                                                                 id="flexSwitch30x50" />
                                                         </div> 
                                                     </td>
-                                                    <td>
-                                                    </td> 
                                                     <td class="text-end">
 
                                                         <a @click="editar(item.id)"
