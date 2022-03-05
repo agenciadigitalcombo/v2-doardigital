@@ -124,6 +124,9 @@ Vue.component('c-metas', metas)
 import modeloEmails from './views/modelo-de-emails.js'
 Vue.component('c-modelo-de-emails', modeloEmails)
 
+import modeloEmailsNovo from './views/modelo-emails-novo.js'
+Vue.component('c-modelo-de-emails-novo', modeloEmailsNovo)
+
 import modeloEmailsEditar from './views/modelo-emails-editar.js'
 Vue.component('c-modelo-de-emails-editar', modeloEmailsEditar)
 
