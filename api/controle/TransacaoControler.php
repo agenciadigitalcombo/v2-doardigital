@@ -16,15 +16,29 @@ class TransacaoControler{
         $pagarme_plano = new PagarmePlano();
         $adm = new Adm();
 
+        campo_obrigatorios([
+            'planos_valor' => 'Campo planos_valor opbrigatorio',
+            'type_pagamento' => 'Campo type_pagamento opbrigatorio',
+            'nome' => 'Campo nome opbrigatorio',
+            'email' => 'Campo email opbrigatorio',
+            'cpf' => 'Campo cpf opbrigatorio',
+            'telefone' => 'Campo telefone opbrigatorio',
+            'estado' => 'Campo estado opbrigatorio',
+            'cidade' => 'Campo cidade opbrigatorio',
+            'bairro' => 'Campo bairro opbrigatorio',
+            'endereco' => 'Campo endereco opbrigatorio',
+            'numero' => 'Campo numero opbrigatorio',
+            'cep' => 'Campo cep opbrigatorio',
+        ]);
+
 
         $instituicao_id = $_REQUEST['instituicao_id'];
-
-        $planos_id = $_REQUEST['planos_id'];
-        $planos_nome = $_REQUEST['planos_nome'];
         $planos_valor = $_REQUEST['planos_valor'];
-
-        $mensal = $_REQUEST['mensal'] ?? 0;
         
+        $mensal = $_REQUEST['mensal'] ?? 0;
+               
+        $planos_id = $_REQUEST['planos_id'] ?? 0;
+        $planos_nome = $_REQUEST['planos_nome'] ?? '';
         
         $nome = $_REQUEST['nome'];
         // $genero = $_REQUEST['genero'];
@@ -40,9 +54,6 @@ class TransacaoControler{
         $cpf = valid_cpf_cnpj($cpf_campo);
         $data_nascimento = data_format($data_nascimento_campo);
         
-        // var_dump($telefone);
-        // die;
-        
         $cep = withdraw_caracter($cep_campo);
         $numero = $_REQUEST['numero'];
         $estado = $_REQUEST['estado'];
@@ -52,29 +63,19 @@ class TransacaoControler{
 
         $type_pagamento = $_REQUEST['type_pagamento'];
 
-        $cart_numero = $_REQUEST['cart_numero'];
-        $cart_cvv = $_REQUEST['cart_cvv'];
-        $cart_nome = $_REQUEST['cart_nome'];
-        $cart_validade_campo = $_REQUEST['cart_validade'];
-        $cart_validade = withdraw_caracter($cart_validade_campo);
+        if($type_pagamento == "credit_card") {
+            
+            $cart_numero = $_REQUEST['cart_numero'];
+            $cart_cvv = $_REQUEST['cart_cvv'];
+            $cart_nome = $_REQUEST['cart_nome'];
+            $cart_validade_campo = $_REQUEST['cart_validade'];
+            $cart_validade = withdraw_caracter($cart_validade_campo);
+        }
         
         $reference_key = "ref_" . uniqid();
         
         
-        campo_obrigatorios([
-            'planos_valor' => 'Campo planos_valor opbrigatorio',
-            'type_pagamento' => 'Campo type_pagamento opbrigatorio',
-            'nome' => 'Campo nome opbrigatorio',
-            'email' => 'Campo email opbrigatorio',
-            'cpf' => 'Campo cpf opbrigatorio',
-            'telefone' => 'Campo telefone opbrigatorio',
-            'estado' => 'Campo estado opbrigatorio',
-            'cidade' => 'Campo cidade opbrigatorio',
-            'bairro' => 'Campo bairro opbrigatorio',
-            'endereco' => 'Campo endereco opbrigatorio',
-            'numero' => 'Campo numero opbrigatorio',
-            'cep' => 'Campo cep opbrigatorio',
-        ]);
+        
 
 
 
@@ -251,27 +252,36 @@ class TransacaoControler{
         
         $template_email = $email_notificacao->exest_acao($instituicao_id, $get_status);
 
-        SendGrid::send(
-        $nome, 
-        $email, 
-        $nome_instituicao, 
-        $email_instituicao, 
-        $template_email['assunto'], 
-        $template_email['assunto'], 
-        $template_email['text'], 
-        $color_instituicao, 
-        $nome_instituicao, 
-        $logo_instituicao,
-        'instituicao');
+        // SendGrid::send(
+        // $nome, 
+        // $email, 
+        // $nome_instituicao, 
+        // $email_instituicao, 
+        // $template_email['assunto'], 
+        // $template_email['assunto'], 
+        // $template_email['text'], 
+        // $color_instituicao, 
+        // $nome_instituicao, 
+        // $logo_instituicao,
+        // 'instituicao');
+
+        
+        get_api('/email/preview', [
+            "instituicao_id" => $instituicao_id,
+            "doador_cpf" => $cpf,
+            "status" => $get_status,
+            "tipo" => $type_pagamento,
+            "codigo" => $codigo,
+            "link" => $url
+        ], false);
         
         $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
         $get_ddd_tel = telefone_get_ddd($telefone);
-        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
-        
+        $numero_ddd = [$get_ddd_tel, $get_numero_tel];        
         
 
-        SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
-
+        // SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
+            
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',

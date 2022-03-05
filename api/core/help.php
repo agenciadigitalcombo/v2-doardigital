@@ -639,14 +639,17 @@ function maker_datas(string $data): array
 }
 
 
-function get_api(string $path, array $dados): array
+function get_api(string $path, array $dados, bool $json = true)
 {
     $full_path  = "https://doardigital.tk/api";
     $full_path .= $path;
     $full_path .= '?';
     $full_path .= http_build_query($dados);
     $request = file_get_contents( $full_path );
-    return json_decode($request, true);
+    if($json) {
+        return json_decode($request, true);
+    }
+    return $request;
 }
 
 function get_domain() : string {

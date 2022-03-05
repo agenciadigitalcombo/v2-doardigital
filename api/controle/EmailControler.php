@@ -67,28 +67,34 @@ class EmailContoler
 
     static function preview(): void
     {
-
+        
         campo_obrigatorios([
             'instituicao_id' => 'Informe a Instituição',
             'doador_cpf' => 'Informe o CPF do doador',
-            'status' => 'Informe um status de pagamento'
+            'status' => 'Informe um status de pagamento',
+            'tipo' => 'Informe um tipo de transação',
+            'codigo' => "Informe um codigo",
+            'link' => "Informe um link",
         ]);
+
+        $doador = new Doador();
 
 
         $instituicao = get_api('/instituicao-id', [
-            "instituicao_id" => 135
+            "instituicao_id" => $_REQUEST['instituicao_id']
         ])['dados'];
 
-        $doador = new Doador();
-        $doador = $doador->get_by_cpf($_REQUEST['doador_cpf']);
+        $smtp = get_api('/list-smtp', [
+            "instituicao_id" => $_REQUEST['instituicao_id']
+        ])['dados'];
 
-        
+        $doador = $doador->get_by_cpf($_REQUEST['doador_cpf']);
 
         $to_name = $doador['nome'];
         $to_email = $doador['email'];
         $from_name = $instituicao['nome_fantasia'];
-        $from_email = $instituicao['email'];
-        
+        $from_email = !!$smtp['email'] ? $smtp['email'] : $instituicao['email'];
+
         $institution_color = $instituicao['cor'];
         $institution_name = $instituicao['nome_fantasia'];
         $institution_logo = $instituicao['logo'];
@@ -103,7 +109,30 @@ class EmailContoler
         $title = $content['assunto'];
         $text = $content['text'];
 
-       
+        if ($_REQUEST['tipo'] == 'pix') {
+            $text .= "
+            <p>
+               Copie o código PIX abaixo para efetuar o pagamento.
+            </p>
+            <p>" . $_REQUEST['codigo'] . "</p>
+            ";
+        }
+
+        if ($_REQUEST['tipo'] == 'boleto') {
+            $text .= "
+            <p>
+                Você pode copiar o código abaixo ou clique no botão para visualizar seu boleto.
+            </p>
+            <p>" . $_REQUEST['codigo'] . "</p>
+            <a 
+                href=\"" . $_REQUEST['link'] . "\" 
+                target=\"_blank\"
+                style=\"text-decoration: none; font-family:sans-serif; font-size: 18px; color: #ffffff; border-style: solid; border-color: #0681F3; border-width: 15px 30px; border-radius: 8px; background: #0681F3; font-weight: bold; font-style: normal; line-height: 22px; text-align: center;\">
+                ABRIR BOLETO
+            </a>
+            ";
+        }
+
         SendGrid::send(
             $to_name,
             $to_email,
@@ -122,6 +151,5 @@ class EmailContoler
                 $doador
             )
         );
-
     }
 }

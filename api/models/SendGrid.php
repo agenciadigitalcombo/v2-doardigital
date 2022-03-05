@@ -53,7 +53,7 @@ class SendGrid
             $payload
         ) , $modelo_html);
 
-        @mail($to_email, $assunto, $message, $headers);
+        $is_send = @mail($to_email, $assunto, $message, $headers);
 
         if ($print) {
             echo $message;

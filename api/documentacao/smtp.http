@@ -1,15 +1,14 @@
-POST http://localhost/v2-doardigital/api/smtp-save
+POST https://doardigital.tk/api/smtp-save
 Content-Type: application/x-www-form-urlencoded
 
-token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
-&instituicao_id=1,
-&host=token_pagar,
-&protocolo=tls,
-&porta=96
-&email=victorballa@gmail.com
-&senha=1234567
+token=string
+&instituicao_id=int
+&host=string
+&protocolo=string
+&porta=int
+&email=string
+&senha=strin
 
 ###
-
-GET http://localhost/v2-doardigital/api/list-smtp?instituicao_id=5
+GET https://doardigital.tk/api/list-smtp?instituicao_id=int
 Content-Type: application/x-www-form-urlencoded
