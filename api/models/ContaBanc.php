@@ -45,7 +45,7 @@ class ContaBanc implements IContaBanc{
     public function update_conta(int $instituicao_id, string $token, string $nome_identificacao, string $codigo_banco, string $agencia, string $conta, string $conta_digito, string $tipo_conta, string $nome_completo, string $documento_numero, string $agencia_digito): void
     {
         $banco = new Banco();
-        $sql = "UPDATE conta_bancaria SET (token='$token', nome_identificacao='$nome_identificacao', codigo_banco='$codigo_banco', agencia='$agencia', conta='$conta', conta_digito='$conta_digito', tipo_conta='$tipo_conta', nome_completo='$nome_completo', documento_numero='$documento_numero', agencia_digito='$agencia_digito') WHERE instituicao_id=$instituicao_id";
+        $sql = "UPDATE conta_bancaria SET token='$token', nome_identificacao='$nome_identificacao', codigo_banco='$codigo_banco', agencia='$agencia', conta='$conta', conta_digito='$conta_digito', tipo_conta='$tipo_conta', nome_completo='$nome_completo', documento_numero='$documento_numero', agencia_digito='$agencia_digito' WHERE instituicao_id=$instituicao_id";
         $banco->exec($sql);
     }
 
