@@ -9,7 +9,7 @@ export default {
 			token: null,
 			nome_fantasia: null,
 			razao_social: null,
-			subdomaim: null,
+			subdomain: null,
 			email: null,
 			cnpj: null,
 			telefone: null,
@@ -42,7 +42,7 @@ export default {
 			required,
 			minLength: minLength(2)
 		},
-		subdomaim: {
+		subdomain: {
 			required,
 			minLength: minLength(2)
 		},
@@ -52,7 +52,7 @@ export default {
 
 		async validDomain() {
 			this.error = null
-			let res = await adm.validarDomain(this.subdomaim)
+			let res = await adm.validarDomain(this.subdomain)
 			if (!res.next) {
 				// this.next = res.next
 				this.jms= res.next,
@@ -83,7 +83,7 @@ export default {
 				let res = await adm.cadastrarInstituicao(
 					this.nome_fantasia,
 					this.razao_social,
-					this.subdomaim,
+					this.subdomain,
 					this.email,
 					this.cnpj,
 					this.telefone,
@@ -95,11 +95,12 @@ export default {
 					return null
 				}
 
-				globalThis._subdomaim =  this.subdomaim  
-				//globalThis._email =  this.email 
-			//globalThis._telefone =  this.telefone 
-				//globalThis._nome =  this.nome_fantasia  
-				//globalThis._cnpj =  this.cnpj 
+				globalThis._subdomaim =  this.subdomain  
+				globalThis._email =  this.email 
+			    globalThis._telefone =  this.telefone 
+				globalThis._nome =  this.nome_fantasia  
+				globalThis._recebedor =  this.razao_social
+				globalThis._cnpj =  this.cnpj.replace(/[^\d]+/g,'')
 
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {

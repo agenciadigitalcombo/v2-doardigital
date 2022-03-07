@@ -53,13 +53,13 @@ export default {
 
 	methods: {
 
-		async contaBancario() {
+		async contaBancarioEditar() {
 			this.error = null
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
-				let res = await adm.cotaInstituicao(
+				let res = await adm.cotaEditarInstituicao(
 					this.token,
 					this.instituicao_id,
 					this.codigo_banco,
@@ -69,12 +69,7 @@ export default {
 					this.conta_digito,
 					this.tipo_conta,
 					this.nome_completo,
-					this.documento_numero,
-					this.recebedor_nome,
-					this.email_recebedor, 
-					this.cnpj,
-					this.site_url,
-					this.telefone_recebedor,
+					this.documento_numero
 				)
 				if (!res.next) {
 					// this.error = res.message

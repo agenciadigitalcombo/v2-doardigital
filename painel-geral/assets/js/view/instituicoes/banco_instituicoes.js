@@ -17,14 +17,13 @@ export default {
 			documento_numero: null,
 			recebedor_nome: null,
 			email_recebedor: null,
-			cnpj: null,
+			 
 			site_url: null,
 			telefone_recebedor: null,
 			  
 			msg: "",
 			items: [],
 			data: null,
-
 		}
 	},
 
@@ -44,11 +43,7 @@ export default {
 		conta_digito: {
 			required,
 			maxLength: maxLength(2)
-		},
-		nome_completo: {
-			required,
-			maxLength: maxLength(30)
-		}
+		}, 
 	},
 
 	methods: {
@@ -70,8 +65,7 @@ export default {
 					this.nome_completo,
 					this.documento_numero,
 					this.recebedor_nome,
-					this.email_recebedor, 
-					this.cnpj,
+					this.email_recebedor,  
 					this.site_url,
 					this.telefone_recebedor,
 				)
@@ -94,6 +88,14 @@ export default {
 
 	async mounted() {
 		this.instituicao_id = localStorage.getItem("instituicao_id"); 
+ 
+		this.email_recebedor = globalThis._email  
+		this.telefone_recebedor = globalThis._telefone  
+		this.nome_completo = globalThis._nome 
+		this.recebedor_nome = globalThis._recebedor 
+		this.documento_numero = globalThis._cnpj  
+
+
 	 },
 
     template: await get_template('./assets/js/view/instituicoes/banco_instituicoes')

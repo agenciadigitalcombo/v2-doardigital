@@ -147,86 +147,9 @@
 											
 											</div> 
 										</div>
- 
 
-										<div class="row mb-6"> 
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Nome</span>
-											
-											</label> 
-											<div class="col-lg-8 fv-row"> 
-												<input  type="text" name="nome" v-model.trin="$v.nome_completo.$model" required
-												class="form-control form-control-lg form-control-solid" placeholder="nome_completo"
-											   :class=" {'is-invalid':$v.nome_completo.$error, 'is-valid':!$v.nome_completo.$invalid }" />
-											   
-											   <div class="erros" v-if="$v.nome_completo.$error">
-											   <div class="erro_texte" v-if="!$v.nome_completo.required">Valor
-												   é necessária</div>
-											   <div class="erro_texte" v-if="!$v.nome_completo.maxLength">
-												   O nome deve ter no maximo 30 caracteres .</div>
-										   </div>
-										   <div class="sucesso_texte" v-else>  
-											   </div>
+									
 										 
-												</div> 
-										</div>
-
-										
-										<div class="row mb-6"> 
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Documento numero</span> 
-											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="documento_numero" type="text" name="documento_numero" class="form-control form-control-lg form-control-solid" required/>
-											</div> 
-										</div>
-
-
-										
-										<div class="row mb-6"> 
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Recebedor Nome</span> 
-											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="recebedor_nome" type="text" name="recebedor" class="form-control form-control-lg form-control-solid" required/>
-											</div> 
-										</div>
-
-										<div class="row mb-6"> 
-										<label class="col-lg-4 col-form-label fw-bold fs-6">
-											<span class="required">Recebedor Email</span> 
-										</label> 
-										<div class="col-lg-8 fv-row">
-											<input v-model="email_recebedor" type="text" name="recebedoremail" class="form-control form-control-lg form-control-solid" required/>
-										</div> 
-									</div>
-										
-										
-										<div class="row mb-6"> 
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">CNPJ</span> 
-											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="cnpj" type="text" name="ndocumento" class="form-control form-control-lg form-control-solid" required/>
-											</div> 
-										</div>
-										<div class="row mb-6"> 
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">Telefone</span> 
-											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="telefone_recebedor" type="text" name="telefone" class="form-control form-control-lg form-control-solid" required/>
-											</div> 
-										</div>
-										
-										<div class="row mb-6"> 
-											<label class="col-lg-4 col-form-label fw-bold fs-6">
-												<span class="required">URL Site</span> 
-											</label> 
-											<div class="col-lg-8 fv-row">
-												<input v-model="site_url" type="text" name="url" class="form-control form-control-lg form-control-solid" required/>
-											</div> 
-										</div>
 									</div>
 									
 									<div class="card-footer d-flex justify-content-end py-6 px-9">

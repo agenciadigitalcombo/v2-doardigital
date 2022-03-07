@@ -160,9 +160,9 @@ export default {
             token,
         })
     },
-    async validarDomain(subdomaim) {
+    async validarDomain(subdomain) {
         return await http.get('/subdominio-disponivel', {
-            subdomaim
+            subdomain
         })
     },
 
@@ -626,8 +626,7 @@ export default {
         nome_completo,
         documento_numero,
         recebedor_nome,
-        email_recebedor,
-        cnpj,
+        email_recebedor, 
         site_url,
         telefone_recebedor,
 
@@ -644,13 +643,39 @@ export default {
             nome_completo,
             documento_numero,
             recebedor_nome,
-            email_recebedor,
-            cnpj,
+            email_recebedor, 
             site_url,
             telefone_recebedor,
         })
     },
 
+    
+    async cotaEditarInstituicao(
+        token,
+        instituicao_id,
+        codigo_banco,
+        agencia,
+        agencia_digito,
+        conta,
+        conta_digito,
+        tipo_conta,
+        nome_completo,
+        documento_numero,
+
+    ) {
+        return await http.post('/update-conta-instituicao', {
+            token,
+            instituicao_id,
+            codigo_banco,
+            agencia,
+            agencia_digito,
+            conta,
+            conta_digito,
+            tipo_conta,
+            nome_completo,
+            documento_numero,
+        })
+    },
 
     async listarDoacoes(instituicao_id) {
         return await http.get('/list-doacoes', {
