@@ -22,7 +22,6 @@ class PagarMePix extends PagarMe
                     'value' => 'R$' . number_format($amount / 100, 2, ',', '.')
                 ]
             ],
-            // 'split_rules' => $split
         ];
         
 

@@ -22,8 +22,7 @@ class PagarMe
             }
             
             if(!empty($_REQUEST['debug_pagarme'])){
-                echo json_encode($payload);
-                
+                echo json_encode($payload);                
             }            
 
             $context = stream_context_create(array(

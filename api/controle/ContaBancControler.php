@@ -9,8 +9,21 @@ class ContaBancControler{
         $banck_pagarme = new PagarmeContaBanc();
         $contaBanc = new ContaBanc();
         
-        $token_parce = token();
         
+        campos_numericos([
+            'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
+            'codigo_banco' => 'Campo inválido, Apenas Numeros em Codigo banco',
+            'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
+            'conta' => 'Campo inválido, Apenas Numeros em Conta',
+            'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
+            'documento_numero' =>'Campo inválido, Apenas Numeros no Numero do documento'
+        ]);
+        
+        campos_string([
+            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
+        ]);        
+        
+        $token_parce = token();
         
         $nome_identificacao = "";
         $instituicao_id_campo = $_REQUEST['instituicao_id'];
@@ -53,18 +66,6 @@ class ContaBancControler{
 
         
         
-        campos_numericos([
-            'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
-            'codigo_banco' => 'Campo inválido, Apenas Numeros em Codigo banco',
-            'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
-            'conta' => 'Campo inválido, Apenas Numeros em Conta',
-            'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
-            'documento_numero' =>'Campo inválido, Apenas Numeros no Numero do documento'
-        ]);
-        
-        campos_string([
-            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
-        ]);        
         
         
 
@@ -104,6 +105,19 @@ class ContaBancControler{
         $recebedor_pagarme = new PagarmeInstituicao();
         $banck_pagarme = new PagarmeContaBanc();
         $contaBanc = new ContaBanc();
+        
+        campos_numericos([
+            'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
+            'codigo_banco' => 'Campo inválido, Apenas Numeros em Codigo banco',
+            'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
+            'conta' => 'Campo inválido, Apenas Numeros em Conta',
+            'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
+            'documento_numero' =>'Campo inválido, Apenas Numeros no Numero do documento'
+        ]);
+        
+        campos_string([
+            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
+        ]);        
         
         $token_parce = token();
         
@@ -148,19 +162,6 @@ class ContaBancControler{
         $adm_id = $get_id['id'];
 
         
-        
-        campos_numericos([
-            'instituicao_id' => 'Campo inválido, Apenas Numeros em Instituicao ID',
-            'codigo_banco' => 'Campo inválido, Apenas Numeros em Codigo banco',
-            'agencia' => 'Campo inválido, Apenas Numeros na Agencia',
-            'conta' => 'Campo inválido, Apenas Numeros em Conta',
-            'conta_digito' => 'Campo inválido, Apenas Numeros na Conta digito',
-            'documento_numero' =>'Campo inválido, Apenas Numeros no Numero do documento'
-        ]);
-        
-        campos_string([
-            'nome_completo' => 'Campo inválido, nao aceita caracters especiais',
-        ]);        
         
         
 
