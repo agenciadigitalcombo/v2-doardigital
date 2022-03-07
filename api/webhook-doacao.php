@@ -11,6 +11,7 @@ if (!empty($_REQUEST['debug'])) {
 }
 
 include __DIR__ . "/core/Banco.php";
+include __DIR__ . "/core/help.php";
 
 include __DIR__ . "/interfaces/IDoacoes.php";
 include __DIR__ . "/interfaces/IDoador.php";
@@ -39,6 +40,12 @@ $doador_id = $doc['doador_id'];
 $list_doador = $doador->get_by_id($doador_id);
 $list_instituicao = $instituicao->get_by_id($instituicao_id);
 
+$cpf = $list_doador['cpf'] ?? '';
+
+$type_pagamento = $doc['tipo'] ?? '';
+$codigo = $doc['codigo'] ?? '';
+$url = $doc['url'] ?? '';
+
 $doacao->set_status_hook(
     $reference_key,
     $status
@@ -49,16 +56,11 @@ $payload = json_encode($payload);
 @mail("br.rafael@outlook.com", "webhook - " . date("d/m/Y H:i"), $payload);
 @mail("victorfernandomagalhaes@gmail.com", "webhook - " . date("d/m/Y H:i"), $payload);
 
-SendGrid::send(
-    $list_doador['nome'],
-    $list_doador['email'],
-    $list_instituicao['nome_fantasia'],
-    $list_instituicao['email'],
-    "Atualização Doação",
-    "Atualização Doação",
-    "A sua doação de codigo {$reference_key} agora esta com o status {$status}",
-    $list_instituicao['cor'],
-    $list_instituicao['nome_fantasia'],
-    $list_instituicao['logo'],
-    'instituicao'
-);
+get_api('/email/preview', [
+    "instituicao_id" => $instituicao_id,
+    "doador_cpf" => $cpf,
+    "status" => $status,
+    "tipo" => $type_pagamento,
+    "codigo" => $codigo,
+    "link" => $url
+], false);
