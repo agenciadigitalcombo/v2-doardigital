@@ -14,5 +14,17 @@ export default {
         this.lista = this.menus
     },
 
+    methods: { 
+
+        async logout() {
+            localStorage.removeItem('token')
+            localStorage.removeItem('instituicao_nome')
+            localStorage.removeItem('instituicao_id')
+
+            window.location.href = "#/login";
+        },
+
+    },
+
     template: await get_template('./assets/js/components/c-aside')
 }

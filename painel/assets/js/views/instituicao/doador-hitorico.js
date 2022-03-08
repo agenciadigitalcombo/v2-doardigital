@@ -8,7 +8,7 @@ export default {
     <c-header></c-header>
     <c-aside></c-aside>
 
-	<!--begin::Root-->
+	<!--begin::Root Usuario-->
 		<div class="d-flex flex-column flex-root"> 
 			<div class="page d-flex flex-row flex-column-fluid">
  
@@ -27,8 +27,8 @@ export default {
 													<a href="#"
 														class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">{{nome}}</a>
 												 <div class="mb-9"> 
-														<div class="badge badge-lg badge-light-primary d-inline">
-															Usuario</div> 
+														<div class="badge"  :class="'tipo_'+tipo">
+														{{tipo}}</div> 
 													</div>  
 												</div> 
 												<div class="d-flex flex-stack fs-4 py-3">
@@ -169,11 +169,15 @@ export default {
 															 
 																	<td>{{item.valor  | is_price }}</td> </td>
 																 
-																	<td> {{item.tipo  | is_tipo | is_tipo2 | is_tipo3 }} </td>
+																	<td> 
+																	<div class="badge badge-light" > {{item.tipo | este_tipo}}</div>
+																	 </td>
 																
-																	<td><span class="badge badge-light-danger"> 
-																	{{item.status_pagamento | is_status | is_status2 }}
-																		</span></td>
+																	<td>
+																	<div class="badge" :class="'status_'+item.status_pagamento"> 
+																	{{item.status_pagamento | este_status }}
+																	 </div>
+																	</td>
 																
 																	<td class="pe-0 text-end">
 																	
@@ -975,6 +979,7 @@ export default {
 			id: null,
 			token: null,
 			nome: null,
+			tipo: null,
 			cpf: "",
 			telefone: null,
 			email: null, 
@@ -1005,38 +1010,36 @@ export default {
             let data = datas.split('-').reverse().join('/');
             return `${data}`
         },
-
-        is_status(status) {
-            let status_pagamento = status.split('waiting_payment').join('Aguardando Pagamento')
-           return `${status_pagamento}`
-        },
-
-        is_status2(status) {
-            let status_pagamento = status.split('paid').join('Pago')
-           return `${status_pagamento}`
-        },
+ 
         
-        is_tipo(tipo) {
-            let tipo_pagamento = tipo.split('boleto').join('Boleto ')
-           return `${tipo_pagamento}`
-        },
-        	
-        is_tipo2(tipo) {
-            let tipo_pagamento = tipo.split('credit_card').join('Crédito')
-           return `${tipo_pagamento}`
+		este_status(status) {
+            let apresentar = {
+                waiting_payment: 'Aguardando Pagamento',
+                refused: 'Cancelado',
+                paid: 'Pago',
+                unpaid: 'Não Pago',
+                pending: 'Pentende'
+            }
+            return apresentar[status]
         },
 
-        is_tipo3(tipo) {
-            let tipo_pagamento = tipo.split('pix').join('PIX ')
-           return `${tipo_pagamento}`
+		este_tipo(status) {
+            let apresentar = {
+                boleto: 'Boleto',
+                credit_card: 'Crédito',
+                pix: 'PIX',
+            }
+            return apresentar[status]
         },
+       
     },
 
 
 
 	async mounted() {
 		this.cpf = globalThis._doador.cpf
-
+		this.tipo = globalThis._doador.tipo
+		
 
 		let dados = (await this.listar()).dados
 		this.doacoes = (await this.listar()).dados.doacoes

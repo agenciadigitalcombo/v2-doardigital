@@ -120,7 +120,7 @@ export default {
 	  remover(){
         window.localStorage.removeItem('instituicao_id');
         window.localStorage.removeItem('instituicao_nome');
-        window.location.href = `#/dash`
+        window.location.href = `/painel-geral/index.html#/instituicoes`
       }
 	},
 }
