@@ -1,5 +1,5 @@
 import http from './http.js'
-
+ 
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/criar-adm', {

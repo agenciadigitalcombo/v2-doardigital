@@ -60,6 +60,12 @@ export default {
                                 </a>
                                 </div>
                                 </div>
+
+
+                               
+
+                              
+
                                 <div class="card-body pt-0">
                                     <div class="table-responsive">
                                         <table class="table align-middle table-row-dashed table-striped fs-6 gy-5"
@@ -91,11 +97,11 @@ export default {
                                                     </td>
                                                     <td>
                                                         <div class="badge badge-light">
-                                                        {{item.acao}}
+                                                        {{item.acao | este_status }}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                    <div class="badge badge-light fw-bolder"> {{item.cron}} </div>
+                                                    <div class="badge badge-light fw-bolder"> {{item.cron}} {{item.id}}</div>
                                                     </td>
 
                                                     <td>
@@ -132,6 +138,11 @@ export default {
                                         </table>
                                     </div>
                                 </div>
+
+                       
+                                
+
+
                             </div>
 
                         </div>
@@ -152,9 +163,31 @@ export default {
             instituicao_id: null,
             id: null,
             acao: null,
-            emails: []
+            emails: [],
+            default: []
         }
     },
+
+    filters: {
+       
+
+        este_status(status) {
+            let apresentar = {
+                refunded: 'Reembolsado',
+                processing: 'Em processamento',
+                authorized: 'Autorizado ',
+                unpaid: 'Não Pago',
+                pending: 'Pentende',
+                waiting_payment: 'Aguardando Pagamento',
+                refused: 'Cancelado',
+                paid: 'Pago', 
+                pending_refund: 'Reembolso pendente ', 
+                chargedback: 'Estorno', 
+            }
+            return apresentar[status]
+        },
+    },
+
 
     methods: {
         async listarEmails() {
@@ -163,7 +196,7 @@ export default {
         },
 
         async editar(id) {
-             globalThis._emails = this.emails.find(doador => doador.id == id) 
+            globalThis._emails = this.emails.find(doador => doador.id == id)
             window.location.href = "#/modelo-de-emails/editar"
         },
 
@@ -185,10 +218,15 @@ export default {
 
     },
 
-    async mounted() {
-        this.emails = (await this.listarEmails()).dados
-        // alert(this.emails)
+    async mounted() {   
+         var tipos = (await this.listarEmails()).dados
+        this.id = tipos.id
 
+        this.emails = (await this.listarEmails()).dados
+        this.default = (await this.listarEmails()).default
+      
+      
+    
         this.instituicao_id = localStorage.getItem("instituicao_id");
     },
 
