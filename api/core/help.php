@@ -645,6 +645,8 @@ function get_api(string $path, array $dados, bool $json = true)
     $full_path .= $path;
     $full_path .= '?';
     $full_path .= http_build_query($dados);
+    var_dump($full_path);
+    die;
     $request = file_get_contents( $full_path );
     if($json) {
         return json_decode($request, true);

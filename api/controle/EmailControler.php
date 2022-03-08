@@ -72,9 +72,9 @@ class EmailContoler
             'instituicao_id' => 'Informe a Instituição',
             'doador_cpf' => 'Informe o CPF do doador',
             'status' => 'Informe um status de pagamento',
-            'tipo' => 'Informe um tipo de transação',
-            'codigo' => "Informe um codigo",
-            'link' => "Informe um link",
+            'tipo' => 'Informe um tipo de transação'
+            // 'codigo' => "Informe um codigo",
+            // 'link' => "Informe um link",
         ]);
 
         $doador = new Doador();
