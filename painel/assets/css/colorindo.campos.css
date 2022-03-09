@@ -4,10 +4,25 @@
     background-color: #e8fff3
 }
 
+.status_refunded {
+    background-color: #700370;
+    color: #835783; 
+}
+
+.status_pending_refund {
+    background-color: #ff00ff;
+    color: #ffd0ff; 
+}
+
+.status_chargedback {
+    background-color: #b900b9;
+    color: #e7c0e7; 
+}
+
 
 .status_refused {
-    border: 2px solid #DC143C;
-    color: #DC143C; 
+    background-color: #ff8c00;
+    color: #f8cf9e; 
 }
 .status_unpaid {
     color: #f1416c;
@@ -15,14 +30,25 @@
 
 }
 .status_waiting_payment {
-    color: #7e8299;
-    background-color: #f5f8fa
+    color: #bdc917;
+    background-color: #f9fcd6
 }
 
 .status_pending {
-    color: #7e8299;
-    background-color: #f5f8fa
+    color: #797a0c;
+    background-color: #c7caa0
 }
+ 
+.status_processing {
+    color: #f2f898;
+    background-color: #f8fae3
+}
+
+.status_authorized {
+    color: #0400ff;
+    background-color: #685ef8
+}
+
 
 .tipo_UNICO {
     color: #f1416c;

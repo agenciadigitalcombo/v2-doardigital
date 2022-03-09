@@ -38,7 +38,7 @@ export default {
 										<div class="card-body p-9">
 											<!--begin::Row-->
 											<div class="row mb-7">
-												<!--begin::Label-->
+											 
 												<div class="col-lg-6">
 												<span class=" fw-bold text-muted">
 												Nome</span>
@@ -58,9 +58,8 @@ export default {
 
 												
 												</div>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-6">
+											 
+												<div class="col-lg-4">
 												<span class=" fw-bold text-muted">
 												Valor</span>
 													
@@ -77,7 +76,9 @@ export default {
 													<p class="fw-bolder fs-6 text-gray-800">{{ status | este_status }}</p>
 												
 												</div>
-												<!--end::Col-->
+												<div class="col-lg-2">
+												<a class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger">Estorno</a>
+												</div>
 											</div>
 										
 										

@@ -38,7 +38,7 @@ export default {
 										<div class="card-body p-9">
 											<!--begin::Row-->
 											<div class="row mb-7">
-												<!--begin::Label-->
+												 
 												<div class="col-lg-6">
 												<span class=" fw-bold text-muted">
 												Nome</span>
@@ -60,9 +60,8 @@ export default {
 
 												
 												</div>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-6">
+												 
+												<div class="col-lg-4">
 												<span class=" fw-bold text-muted">
 												Valor</span>
 													
@@ -79,7 +78,13 @@ export default {
 													<p class="fw-bolder fs-6 text-gray-800">{{ status | este_status }}</p>
 												
 												</div>
-												<!--end::Col-->
+												<div class="col-lg-2">
+											
+												<a class="btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary mb-2">Reenviar E-mail</a>
+												
+												<a class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success mb-2">Reenviar Whatsapp</a>
+
+												</div>
 											</div>
 										
 										
@@ -141,17 +146,22 @@ export default {
             return `${data}`
         },
 
+	 
 		este_status(status) {
-            let apresentar = {
-                waiting_payment: 'Aguardando Pagamento ',
-                refused: 'Cancelado',
-                paid: 'Pago',
-                unpaid: 'Não Pago',
-				pending: 'Pentende'
-            }
-            return apresentar[status]
-        },
-
+			let apresentar = {
+				refunded: 'Reembolsado',
+				processing: 'Em processamento',
+				authorized: 'Autorizado ',
+				unpaid: 'Não Pago',
+				pending: 'Pentende',
+				waiting_payment: 'Aguardando Pagamento',
+				refused: 'Cancelado',
+				paid: 'Pago',
+				pending_refund: 'Reembolso pendente ',
+				chargedback: 'Estorno',
+			}
+			return apresentar[status]
+		},
    
 		este_tipo(status) {
             let apresentar = {

@@ -1018,17 +1018,23 @@ export default {
             return `${data}`
         },
  
-        
+  
+
 		este_status(status) {
-            let apresentar = {
-                waiting_payment: 'Aguardando Pagamento',
-                refused: 'Cancelado',
-                paid: 'Pago',
-                unpaid: 'Não Pago',
-                pending: 'Pentende'
-            }
-            return apresentar[status]
-        },
+			let apresentar = {
+				refunded: 'Reembolsado',
+				processing: 'Em processamento',
+				authorized: 'Autorizado ',
+				unpaid: 'Não Pago',
+				pending: 'Pentende',
+				waiting_payment: 'Aguardando Pagamento',
+				refused: 'Cancelado',
+				paid: 'Pago',
+				pending_refund: 'Reembolso pendente ',
+				chargedback: 'Estorno',
+			}
+			return apresentar[status]
+		},
 
 		este_tipo(status) {
             let apresentar = {
