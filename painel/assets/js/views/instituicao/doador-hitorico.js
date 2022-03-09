@@ -82,6 +82,13 @@ export default {
 															{{end.estado}}
 														</div>
 
+
+														<div class="rotaObscura" > 
+														<input v-mask="'#####-###'" v-model="end.cep" class="invisivel"/>
+														<input v-mask="'###.###.###-##'" v-model="cpf" class="invisivel"/>
+														<input v-mask="'(##) # ####-####'" v-model="telefone" class="invisivel"/>
+														</div>
+
 														<!--begin::Details item-->
 
 													</div>
