@@ -1051,7 +1051,7 @@ export default {
 		let dados = (await this.listar()).dados
 		this.doacoes = (await this.listar()).dados.doacoes
 		this.nome = dados.nome
-		this.cpf = dados.cpf
+		//this.cpf = dados.cpf
 		this.telefone = dados.telefone
 		this.email = dados.email
 
