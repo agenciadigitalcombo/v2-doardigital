@@ -150,7 +150,7 @@ export default {
                 refused: 'Cancelado',
                 paid: 'Pago',
                 unpaid: 'Não Pago',
-				pending: 'Pentende'
+				pending: 'Pendente'
             }
             return apresentar[status]
         },

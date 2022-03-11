@@ -180,7 +180,7 @@ export default {
 				processing: 'Em processamento',
 				authorized: 'Autorizado ',
 				unpaid: 'Não Pago',
-				pending: 'Pentende',
+				pending: 'Pendente',
 				waiting_payment: 'Aguardando Pagamento',
 				refused: 'Cancelado',
 				paid: 'Pago',
