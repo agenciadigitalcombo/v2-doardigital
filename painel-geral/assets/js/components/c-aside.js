@@ -10,7 +10,7 @@ export default {
             lista: [], 
             permisao: [],
             permisao2: [],
-            selecionado: 'usuarios'
+            selecionado : ''
         }
     },
 
@@ -46,8 +46,7 @@ export default {
     },
 
     created() {
-        this.selecionado = [window.location.href.split('#/')[1]] 
-        
+        this.selecionado  = [window.location.href.split('#/')[1]] 
     },
 
     methods: {  
