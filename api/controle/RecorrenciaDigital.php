@@ -185,7 +185,7 @@ class RecorrenciaDigital
             $cpf,
             $nome,
             $email,
-            $full_telefone,
+            $full_telefone
         );
 
         $res_asign_plan = self::assinar_plano(
@@ -203,7 +203,7 @@ class RecorrenciaDigital
             $email,
             $nome,
             $phone_number,
-            $ddd,
+            $ddd
         );
 
         self::salve_db(
