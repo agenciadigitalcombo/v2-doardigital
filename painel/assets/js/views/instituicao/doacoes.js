@@ -11,15 +11,49 @@ export default {
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content"> 
                     <div class="post d-flex flex-column-fluid" id="kt_post"> 
                         <div id="kt_content_container" class="container-xxl"> 
+
+                        			 
+								<div class="row g-5 g-xl-8"> 
+                                <div class="row"> 
+                                   <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-primary pb-1 px-2">Total de Doações</span>
+                                            
+                                                <span > 1111 </span></span>
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-success pb-1 px-2">Total Pago</span>
+                                            
+                                                <span > 1111 </span></span>
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-info pb-1 px-2">Total Aberto</span>
+                                            
+                                                <span >1111</span></span>
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
+                                            
+                                                <span >11111</span></span>
+                                        </div>
+                                    </div>  
+                                </div> 
+                            </div> 
+
+
+
                             <div class="card"> 
                                 <div class="card-header border-0 pt-6"> 
                                     <div class="card-title"> 
                                         
                                     </div> 
 
-
-
-                                    
                                     <div class="card-toolbar"> 
                                         <div class="d-flex justify-content-end"
                                             data-kt-subscription-table-toolbar="base"> 

@@ -21,9 +21,12 @@
 			
 			
 				<div class="menu-item py-3" v-for="m in lista">
-					<a class="menu-link active"  :href="m.link" :title="m.nome" data-bs-toggle="tooltip"
+					<a class="menu-link"  
+					:class="{ active: m.id == selecionado }"  
+
+					 :href="m.link" :title="m.nome" data-bs-toggle="tooltip"
 						data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-						<span class="menu-icon">
+						<span class="menu-icon menux">
 							
 						 <span class="svg-icon svg-icon-2x">
 								<img class="filter-green" class="menu" :src="'../painel-geral/assets/icon/'+m.icon">
@@ -31,22 +34,17 @@
 						 
 						</span>
 					</a>
-				</div>
-			   
-
+				</div> 
 				<div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" class="menu-item py-3">
-					<a type="button" @click="logout"  class="menu-link active" title="Sair " data-bs-toggle="tooltip" data-bs-trigger="hover"
+					<a type="button" @click="logout"  class="menu-link " title="Sair "
 						data-bs-dismiss="click" data-bs-placement="right">
-						<span class="menu-icon">
+						<span class="menu-icon menux">
 							<img class="filter-green" class="menu" src="../painel/assets/icon/logout.svg">
-						 
-						</span>
+						 </span>
 					</a>
 				</div>
-			</div>
-		</div>
-	 
-	</div>
- 
+			</div> 
+		</div> 
+	</div> 
 </div>
  

@@ -168,7 +168,7 @@ export default {
 															<tbody class="fs-6 fw-bold text-gray-600">
 
 																<!--begin::Table row-->
-																<tr  v-for="item in doacoes"> 
+																<tr  v-for="item in filtraDoacao"> 
 																 
 																	<td>
 																		{{item.data | is_data}}
@@ -990,6 +990,7 @@ export default {
 			cpf: "",
 			telefone: null,
 			email: null, 
+			data: null,
 			doacoes:[],
 			end: {
 				cep: null,
@@ -1045,17 +1046,60 @@ export default {
             return apresentar[status]
         },
        
+ 
+		 
+ 
+
     },
 
 
+    computed: {
+
+		filtraDoacao2() {
+			return this.doacoes.filter((doacao) => {
+				return doacao.data.match(
+					console.log(this.data),
+					//this.data.split('-').reverse().join('') >= "20220304",
+					
+					);
+
+			})
+		},
+
+        filtraDoacao() {
+ 
+             let valores
+
+             valores = this.doacoes.filter((filtrar) => {
+                
+                 return filtrar.data.split('-').join('') <= '20220312';
+             })
+
+             return valores
+
+   },
+
+    },
 
 	async mounted() {
+
+		var dataAtual = new Date();
+		var dia = dataAtual.getDate();
+		var mes = (dataAtual.getMonth() + 1);
+		var ano = dataAtual.getFullYear(); 
+		var str_data = dia + '/' + mes + '/' + ano;
+		console.log(str_data);
+
 		this.cpf = globalThis._doador.cpf
 		this.tipo = globalThis._doador.tipo
 		
 
 		let dados = (await this.listar()).dados
 		this.doacoes = (await this.listar()).dados.doacoes
+
+		console.log(this.doacoes)
+		 // let date_created = datas.split('-').reverse().join('/'); 
+
 		this.nome = dados.nome
 		//this.cpf = dados.cpf
 		this.telefone = dados.telefone

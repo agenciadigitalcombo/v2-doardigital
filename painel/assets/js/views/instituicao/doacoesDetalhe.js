@@ -91,17 +91,115 @@ export default {
 										</div>
 										<!--end::Card body-->
 									</div>
-									<!--end::details View-->
-									<!--begin::Row-->
-								
-									<!--end::Row-->
-								
+									
 								</div>
-								<!--end::Container-->
+				 
 							</div>
 							<!--end::Post-->
 						</div>
-						<!--end::Content-->
+			
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<div> 
+						<div class="container"> 
+							<div class="text-center mb-5">
+					 
+								<div id="block2" v-if="tipo=='boleto'"> 
+								<h3 class="fs-2 text-dark mb-5">
+									Sua doação esta em aberto!.</h3> 
+									<h3 class="fs-1 text-dark mb-5">
+										<span>Clique abaixo para acessar o seu boleto.</span>
+									</h3>
+									
+									<a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-14">
+										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+											class="bi bi-upc" viewBox="0 0 16 16">
+											<path
+												d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+										</svg>
+										VER MEU BOLETO
+									</a>
+									<div class="mw-lg-600px mx-auto"> 
+										<div class="mb-13 text-center"> 
+											<div class="text-muted fw-bold fs-5">ou copie o
+												<a href="#" class="link-primary fw-bolder"> código de barras:</a>.
+											</div> 
+										</div> 
+										<div class="mb-10">
+										<div class="d-flex">
+											<input tipo="text" v-model="codigo_geral"  ref="codigo" 
+												class="form-control  me-3 flex-grow-1" name="search" >
+											<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+										</div> 
+									</div>
+		
+									</div>
+									<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
+									</div>
+								
+								<div id="block2" v-if="tipo=='pix'">
+								
+								<h3 class="fs-1 text-dark mb-15">
+									Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
+	
+							 
+									<div class="mw-lg-600px mx-auto"> 
+										<div class="mb-13 text-center"> 
+											<div class="text-muted fw-bold fs-5 ">
+												<h2 class="text-gray-600">
+												Seu codigo PIX..
+												</h2>
+											</div> 
+										</div>  
+									</div>
+								</div>
+		 
+								<center>
+								<div ref="print_qr"></div>
+							</center>
+							 
+				
+									
+							<div id="block12" v-if="tipo=='pix'">
+							
+								<div class="mw-lg-600px mx-auto  mt-10"> 
+								  
+									<div class="mb-10">
+										<div class="d-flex">
+											<input tipo="text" v-model="codigo_geral"  ref="codigo" 
+												class="form-control  me-3 flex-grow-1" name="search" >
+											<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+										</div> 
+									</div>
+								</div>
+							</div> 
+		
+							</div> 
+						</div> 
+					</div> 
+
+
+
+
+
               
             </div>
             <!--end::Wrapper-->
@@ -123,13 +221,15 @@ export default {
         
         return { 
 			nome: null,
-			tipo: null,
+			tipo: null, 
 			valor: null,
 			recorente: null,
 			data: null,
 			hora: null,
 			status: null,
-			cpf: null
+			cpf: null,
+			url_geral: null,
+			codigo_geral: null
         }
     
     },
@@ -184,7 +284,14 @@ export default {
  
         	  
     },
- 
+
+	methods: {
+	 	copiar(ref) {
+			this.$refs[ref].select(); document.execCommand('copy');
+		}
+
+	},
+
     async mounted() { 
 	this.nome = globalThis._doador.nome
 		this.recorente = globalThis._doador.tipo
@@ -197,6 +304,18 @@ export default {
 
 		this.cpf = globalThis._doador.cpf
 
+		if (this.tipo == 'pix') {
+			let code_pix = `${this.codigo_geral}`
+			var qrcode = new QRCode(this.$refs.print_qr, {
+				text: code_pix,
+				width: 230,
+				height: 230,
+				height: 230,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.L
+			});
+		}
     	 
     }, 
  

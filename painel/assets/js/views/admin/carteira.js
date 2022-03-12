@@ -249,8 +249,6 @@ export default {
 	//	this.status = historico.status
 		 
 		
-    
-        console.log(date_created)
     },
 
 

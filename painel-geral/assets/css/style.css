@@ -5,6 +5,10 @@ span .menu  {
     filter: invert(100);
 }
 
+ 
+.menux {
+    background-color: rgba(32, 32, 32, 0.1) ;
+} 
 
 .menu-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
