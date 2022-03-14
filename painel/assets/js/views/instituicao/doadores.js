@@ -20,6 +20,52 @@ export default {
 
 								<div id="kt_content_container" class="container-xxl">
 
+
+
+								
+                        			 
+								<div class="row g-5 g-xl-8"> 
+                                <div class="row"> 
+                                   <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-primary pb-1 px-2">Quant Recorrente</span>
+                                            
+                                                <span> {{ quantRec }} </span>
+
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-success pb-1 px-2">Valor Recorrente</span>
+                                            
+                                                <span> 1111 </span>
+												
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
+                                            
+                                                <span>{{ quantUnico }} </span>
+
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-danger pb-1 px-2">Valor Único</span>
+                                       
+                                                <span>11111</span>
+												
+                                        </div>
+                                    </div>  
+                                </div> 
+                            </div> 
+
+
+
+
+
+
 									<div class="card">
 										<div class="card-header border-0 pt-6">
 
@@ -210,6 +256,10 @@ export default {
 	data: function () {
 		return {
 
+			quantRec: null,
+			quantUnico: null,
+			valorUnico: null,
+
 			instituicao_id: "",
 			doadores: [],
 			search: "",
@@ -218,7 +268,12 @@ export default {
 		}
 	},
 
-
+	filters: {
+        este_valor(price) {
+            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${valor}`
+        },
+	},
 	
     computed: {
  
@@ -256,13 +311,40 @@ export default {
 		   async editar(id){
 			   globalThis._doador = this.doadores.find(doad => doad.id == id)
 			   window.location.href = "#/doadorHitorico"
-		   }
+		   },
 
+		   
+		async istituicaoDashboard() {
+			this.error = null
+			let res = await adm.dashboardInstituicao(
+				this.token,
+				this.instituicao_id,
+			)
+			if (!res.next) {
+				this.jms = res.next,
+				 this.error = res.message
+				return null
+			}
+
+			    this.jms = res.next,
+				this.msg = res.message  
+ 
+				this.quantRec = parseInt(res.dados.doadores.quantidade.recorrente)
+				this.quantUnico = parseInt(res.dados.doadores.quantidade.unicos) 
+
+				this.valorUnico = parseInt(res.dados.credit_card.unico.processing.total) 
+				alert(res.dados.credit_card.unico.paid.total)
+			//	this.doacao_total  =  this.cartao_total + this.boleto_total + this.pix_total
+				
+			return res
+
+		},
 	},
 
 	async mounted() {
+		
+		this.istituicaoDashboard() 
 		this.doadores = (await this.listarDoadores()).dados || {}
-	
 	},
 
 	created() {

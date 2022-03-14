@@ -2,290 +2,1334 @@ import adm from "../../../../../static/js/api/adm.js"
 
 export default {
 	template: `
-		<div>
-	<div class="d-flex flex-column flex-root"> 
-			<div class="mb-0" id="home"> 
-				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
-			  style="background-color: white">
- 
-					<div class="d-flex flex-column flex-center w-100 min-h-40px min-h-lg-40px px-9">
-					 
-						<div class="text-center mb-5 mb-lg-0 py-10 py-lg-10">
-						 
-							<div class="text-center">
-							<img class="rounded" style="width: 150px;" v-bind:src="inst.logo">
-							</div> 
-						</div> 
-					</div> 
-				</div>  
-			</div> 
-			<div class="flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 "
-				style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
-			 
-				<div class="my-2 me-5">
-					<div class="text-center"> 
-					<img style="width: 50px;" src="../../doacao/assets/icons/verificado.png" class="rounded">
-				 	<!-- <img class="rounded" style="width: 50px;" v-bind:src="inst.icon"> -->
-						<h3 class="fs-2hx text-white">Obrigado por sua generosidade!</h3>
-					 
-					</div>
-				</div> 
-			</div> 
-			<div class="py-10 py-lg-20"> 
-				<div class="container"> 
-					<div class="text-center mb-12">
-						
-						<div id="block2" v-if="type=='credit_card'"> 
-						<h3 class="fs-2hx text-dark mb-15">Sua doação foi recebida com sucesso, Deus te abençoe!.</h3>
-					 
-					</div>
+<div>
+	<div>
+
+		<c-header></c-header>
+		<c-aside></c-aside>
+
+		<!--begin::Root Usuario-->
+		<div class="d-flex flex-column flex-root">
+			<div class="page d-flex flex-row flex-column-fluid">
+
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<div id="kt_content_container" class="container-xxl">
+								<div class="d-flex flex-column flex-xl-row">
+									<div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
+										<div class="card mb-5 mb-xl-8">
+											<div class="card-body">
+												<div class="d-flex flex-center flex-column py-5">
+													<div class="symbol symbol-100px symbol-circle mb-7">
+														<img src="../painel/assets/image/gravatar.png" alt="image" />
+													</div>
+													<a href="#"
+														class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">{{nome}}</a>
+													<div class="mb-9">
+														<div class="badge" :class="'tipo_'+tipo">
+															{{tipo}}</div>
+													</div>
+												</div>
+												<div class="d-flex flex-stack fs-4 py-3">
+													<div class="fw-bolder rotate collapsible" data-bs-toggle="collapse"
+														href="#kt_user_view_details" role="button" aria-expanded="false"
+														aria-controls="kt_user_view_details">Detalhes
+														<span class="ms-2 rotate-180">
+															<span class="svg-icon svg-icon-3">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+																		fill="black" />
+																</svg>
+															</span>
+														</span>
+													</div>
+												</div>
+												<div class="separator"></div>
+												<div id="kt_user_view_details" class="collapse show">
+													<div class="pb-5 fs-6">
+														<div class="fw-bolder mt-5">Email</div>
+														<div class="text-gray-600">
+															<a href="#"
+																class="text-gray-600 text-hover-primary">{{email}}</a>
+														</div>
+														<div class="fw-bolder mt-5">Telefone</div>
+														<div class="text-gray-600">{{telefone}}</div>
+														<div class="fw-bolder mt-5">CPF</div>
+														<div class="text-gray-600">{{cpf}}</div>
+														<!--begin::Details item-->
+														<!--begin::Details item-->
+														<div class="fw-bolder mt-5">Endereço</div>
+														<div class="text-gray-600">
+															<span style="color: black;">CEP: </span>
+															{{end.cep}},
+															<br />
+															<span style="color: black;">Rua: </span>
+															{{end.logadouro}}
+															<br />
+															<span style="color: black;">Número: </span>
+															{{end.numero}}
+															<br />
+															<span style="color: black;">Bairro: </span>
+															{{end.bairro}}
+															<br />
+															<span style="color: black;">Cidade: </span>
+															{{end.cidade}}
+															<br />
+															<span style="color: black;">Estado: </span>
+															{{end.estado}}
+														</div>
 
 
-						<div id="block2" v-if="type=='boleto'"> 
-						<h3 class="fs-2hx text-dark mb-15">
-							Sua doação esta em aberto!.</h3> 
-							<h3 class="fs-1 text-dark mb-5">
-								<span>Clique abaixo para acessar o seu boleto.</span>
-							</h3>
-							
-							<a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-14" data-bs-toggle="modal"
-								data-bs-target="#kt_modal_share_earn">
-								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-									class="bi bi-upc" viewBox="0 0 16 16">
-									<path
-										d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
-								</svg>
-								VER MEU BOLETO
-							</a>
-							<div class="mw-lg-600px mx-auto"> 
-								<div class="mb-13 text-center"> 
-									<div class="text-muted fw-bold fs-5">ou copie o
-										<a href="#" class="link-primary fw-bolder"> código de barras:</a>.
-									</div> 
-								</div> 
-								<div class="mb-10">
-								<div class="d-flex">
-									<input type="text" v-model="codigo_geral"  ref="codigo" 
-										class="form-control  me-3 flex-grow-1" name="search" >
-									<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
-								</div> 
-							</div>
+														<div class="rotaObscura">
+															<input v-mask="'#####-###'" v-model="end.cep"
+																class="invisivel" />
+															<input v-mask="'###.###.###-##'" v-model="cpf"
+																class="invisivel" />
+															<input v-mask="'(##) # ####-####'" v-model="telefone"
+																class="invisivel" />
+														</div>
 
-							</div>
-							<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
-							</div>
-						
-							
-						
-							
-						<div id="block2" v-if="type=='pix'">
-						
-						<h3 class="fs-2hx text-dark mb-15">
-							Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
-					 
-							<div class="mw-lg-600px mx-auto"> 
-								<div class="mb-13 text-center"> 
-									<div class="text-muted fw-bold fs-5 ">
-										<h2 class="text-gray-600">
-										Seu codigo PIX..
-										</h2>
-									</div> 
-								</div>  
-							</div>
-						</div>
- 
-						<center>
-						<div ref="print_qr"></div>
-					</center>
-					 
-		
-							
-					<div id="block12" v-if="type=='pix'">
-					
-						<div class="mw-lg-600px mx-auto  mt-10"> 
-						  
-							<div class="mb-10">
-								<div class="d-flex">
-									<input type="text" v-model="codigo_geral"  ref="codigo" 
-										class="form-control  me-3 flex-grow-1" name="search" >
-									<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
-								</div> 
-							</div>
-						</div>
-					</div> 
+														<!--begin::Details item-->
 
-					</div> 
-				</div> 
-			</div> 
+													</div>
+												</div>
+												<!--end::Details content-->
+											</div>
+											<!--end::Card body-->
+										</div>
+										<!--end::Card-->
 
-            
-			<div class="mt-sm-n20" > 
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg" >
-						<path  
-							d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
-							fill="rgba(19,38,60,255)" ></path>
-					</svg>
-				</div> 
-				<div class="py-2 landing-dark-bg" > 
-					<div class="container"> 
-						<div class="d-flex flex-column container"> 
-							<div class="mb-13 mt-10 text-center">
-								<h1 class="fs-2hx fw-bolder text-white mb-5">Obrigado</h1>
-								<div class="text-gray-600 fw-bold fs-5 mb-5">Ajude-nos na missão de
-									<br />Restaurar Vidas! Compartilhe esta causa!
+									</div>
+									<!--end::Sidebar-->
+									<!--begin::Content-->
+									<div class="flex-lg-row-fluid ms-lg-15">
+										<!--begin:::Tabs-->
+										<ul
+											class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
+											<!--begin:::Tab item-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary pb-4" @click="visaoV()"
+													:class="{ active: visao }">Visão Gera</a>
+											</li>
+											<!--end:::Tab item-->
+
+											<!--begin:::Tab item Security-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary pb-4" @click="assinaturaV()"
+													data-bs-toggle="tab" :class="{ active: assinatura }">
+													Assinaturas</a>
+											</li>
+											<!--end:::Tab item-->
+											<!--begin:::Tab item-->
+											<li class="nav-item">
+												<a class="nav-link text-active-primary pb-4" @click="historicoV()"
+													data-bs-toggle="tab" :class="{ active: historico }">Histórico</a>
+											</li>
+
+										</ul>
+
+										<div class="tab-content" id="myTabContent">
+
+											<div class="tab-pane fade show active" v-if="show === '1'" role="tabpanel">
+
+												<!--begin::Card-->
+												<div class="card pt-4 mb-6 mb-xl-9">
+													<!--begin::Card header-->
+													<div class="card-header border-0">
+														<!--begin::Card title-->
+														<div class="card-title">
+															<h2>Historico de transação</h2>
+														</div>
+
+													</div>
+													<div class="card-body pt-0 pb-5">
+														<!--begin::Table-->
+														<table class="table align-middle table-row-dashed gy-5"
+															id="kt_table_customers_payment">
+															<!--begin::Table head-->
+															<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+																<!--begin::Table row-->
+																<tr class="text-start text-muted text-uppercase gs-0">
+																	<th class="min-w-100px">Data</th>
+																	<th>Valor</th>
+																	<th>Método </th>
+																	<th class="min-w-100px">Status</th>
+																	<th class="text-end min-w-100px pe-4">ação</th>
+																</tr>
+															</thead>
+															<!--end::Table head-->
+															<!--begin::Table body-->
+															<tbody class="fs-6 fw-bold text-gray-600">
+
+																<!--begin::Table row-->
+																<tr v-for="item in filtraDoacao">
+
+																	<td>
+																		{{item.data | is_data}}
+																	</td>
+
+																	<td>{{item.valor | is_price }}</td>
+																	</td>
+
+																	<td>
+																		<div class="badge badge-light"> {{item.tipo |
+																			este_tipo}}</div>
+																	</td>
+
+																	<td>
+																		<div class="badge"
+																			:class="'status_'+item.status_pagamento">
+																			{{item.status_pagamento | este_status }}
+																		</div>
+																	</td>
+
+																	<td class="pe-0 text-end">
+
+																		<a @click="editar(item.instituicao_id)"
+																			title="Para Visualizar da um click"
+																			class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
+																			style="margin: 2px;">
+																			<svg xmlns="http://www.w3.org/2000/svg"
+																				width="16" height="16"
+																				fill="currentColor"
+																				class="bi bi-eye-fill"
+																				viewBox="0 0 16 16">
+																				<path
+																					d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+																				<path
+																					d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+																			</svg>
+																		</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade show active" v-if="show === '2'" role="tabpanel">
+												<div class="card pt-4 mb-6 mb-xl-9">
+
+													<div class="card-header border-0">
+														<!--begin::Card title-->
+														<div class="card-title">
+															<h2>Minhas Assinatura</h2>
+														</div>
+
+														<!--begin::Card toolbar-->
+														<div class="card-toolbar">
+															<!--begin::Button-->
+															<label
+																class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+																<!--begin::Input-->
+																<input class="form-check-input" name="github"
+																	type="checkbox" value="1"
+																	checked="checked">
+																 
+																<span class="form-check-label fw-bold text-muted"
+																	for="assina"></span>
+														 
+															</label> 
+														</div>
+												 
+													</div>
+													<!--end::Card header-->
+													<!--begin::Card body-->
+													<div class="card-body pt-0">
+														<!--begin::Tab Content-->
+														<div id="kt_referred_users_tab_content" class="tab-content">
+															<!--begin::Tab panel-->
+															<div id="kt_customer_details_invoices_1"
+																class="py-0 tab-pane fade show active" role="tabpanel">
+																<!--begin::Table-->
+																<div id="kt_customer_details_invoices_table_1_wrapper"
+																	class="dataTables_wrapper dt-bootstrap4 no-footer">
+																	<div class="table-responsive">
+																		<table id="kt_customer_details_invoices_table_1"
+																			class="table align-middle table-row-dashed fs-6 fw-bolder gy-5 dataTable no-footer">
+																			<!--begin::Thead-->
+																			<thead
+																				class="border-bottom border-gray-200 fs-7 text-uppercase fw-bolder">
+																				<tr class="text-start text-muted gs-0">
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_1"
+																						rowspan="1" colspan="1"
+																						aria-label="Order ID: activate to sort column ascending"
+																						style="width: 100px;">ID
+																					</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_1"
+																						rowspan="1" colspan="1"
+																						aria-label="Amount: activate to sort column ascending"
+																						style="width: 100px;">Valor
+																					</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_1"
+																						rowspan="1" colspan="1"
+																						aria-label="Status: activate to sort column ascending"
+																						style="width: 100px;">Status
+																					</th>
+																					<th class="min-w-125px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_1"
+																						rowspan="1" colspan="1"
+																						aria-label="Date: activate to sort column ascending"
+																						style="width: 125px;">Data</th>
+																					<th class="min-w-100px text-end pe-7 sorting_disabled"
+																						rowspan="1" colspan="1"
+																						aria-label="Invoice"
+																						style="width: 100px;">Invoice
+																					</th>
+																				</tr>
+																			</thead>
+																			<!--end::Thead-->
+																			<!--begin::Tbody-->
+																			<tbody class="fs-6 fw-bold text-gray-600">
+
+																				<tr class="odd" >
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">10244{{item.plano_id }}</a>
+																					</td>
+																					<td class="text-success">{{item.valor | is_price }}</td>
+																					<td>
+																						<span
+																							class="badge" :class="'status_'+item.status_pagamento">{{item.status_pagamento | este_status }}</span>
+																					</td>
+																					<td>{{item.data | is_data}}</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+
+																			</tbody>
+																			<!--end::Tbody-->
+																		</table>
+																	</div>
+																	<div class="row">
+																		<div
+																			class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+																		</div>
+																		<div
+																			class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+																			<div class="dataTables_paginate paging_simple_numbers"
+																				id="kt_customer_details_invoices_table_1_paginate">
+																				<ul class="pagination">
+																					<li class="paginate_button page-item previous disabled"
+																						id="kt_customer_details_invoices_table_1_previous">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_1"
+																							data-dt-idx="0" tabindex="0"
+																							class="page-link"><i
+																								class="previous"></i></a>
+																					</li>
+																					<li
+																						class="paginate_button page-item active">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_1"
+																							data-dt-idx="1" tabindex="0"
+																							class="page-link">1</a></li>
+																					<li
+																						class="paginate_button page-item ">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_1"
+																							data-dt-idx="2" tabindex="0"
+																							class="page-link">2</a></li>
+																					<li class="paginate_button page-item next"
+																						id="kt_customer_details_invoices_table_1_next">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_1"
+																							data-dt-idx="3" tabindex="0"
+																							class="page-link"><i
+																								class="next"></i></a>
+																					</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!--end::Table-->
+															</div>
+															<!--end::Tab panel-->
+															<!--begin::Tab panel-->
+															<div id="kt_customer_details_invoices_2"
+																class="py-0 tab-pane fade" role="tabpanel">
+																<!--begin::Table-->
+																<div id="kt_customer_details_invoices_table_2_wrapper"
+																	class="dataTables_wrapper dt-bootstrap4 no-footer">
+																	<div class="table-responsive">
+																		<table id="kt_customer_details_invoices_table_2"
+																			class="table align-middle table-row-dashed fs-6 fw-bolder gy-5 dataTable no-footer">
+																			<!--begin::Thead-->
+																			<thead
+																				class="border-bottom border-gray-200 fs-7 text-uppercase fw-bolder">
+																				<tr class="text-start text-muted gs-0">
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_2"
+																						rowspan="1" colspan="1"
+																						aria-label="Order ID: activate to sort column ascending"
+																						style="width: 0px;">Order ID
+																					</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_2"
+																						rowspan="1" colspan="1"
+																						aria-label="Amount: activate to sort column ascending"
+																						style="width: 0px;">Amount</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_2"
+																						rowspan="1" colspan="1"
+																						aria-label="Status: activate to sort column ascending"
+																						style="width: 0px;">Status</th>
+																					<th class="min-w-125px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_2"
+																						rowspan="1" colspan="1"
+																						aria-label="Date: activate to sort column ascending"
+																						style="width: 0px;">Date</th>
+																					<th class="min-w-100px text-end pe-7 sorting_disabled"
+																						rowspan="1" colspan="1"
+																						aria-label="Invoice"
+																						style="width: 0px;">Invoice</th>
+																				</tr>
+																			</thead>
+																			<!--end::Thead-->
+																			<!--begin::Tbody-->
+																			<tbody class="fs-6 fw-bold text-gray-600">
+
+
+
+
+
+
+
+
+
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">523445943</a>
+																					</td>
+																					<td class="text-danger">$-1.30</td>
+																					<td>
+																						<span
+																							class="badge badge-light-warning">Pending</span>
+																					</td>
+																					<td>May 30, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="even">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">231445943</a>
+																					</td>
+																					<td class="text-success">$204.00
+																					</td>
+																					<td>
+																						<span
+																							class="badge badge-light-success">Approved</span>
+																					</td>
+																					<td>Apr 22, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">426445943</a>
+																					</td>
+																					<td class="text-success">$31.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-success">Approved</span>
+																					</td>
+																					<td>Feb 09, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="even">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">984445943</a>
+																					</td>
+																					<td class="text-success">$52.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-danger">Rejected</span>
+																					</td>
+																					<td>Nov 01, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">324442313</a>
+																					</td>
+																					<td class="text-danger">$-0.80</td>
+																					<td>
+																						<span
+																							class="badge badge-light-warning">Pending</span>
+																					</td>
+																					<td>Jan 04, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																			</tbody>
+																			<!--end::Tbody-->
+																		</table>
+																	</div>
+																	<div class="row">
+																		<div
+																			class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+																		</div>
+																		<div
+																			class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+																			<div class="dataTables_paginate paging_simple_numbers"
+																				id="kt_customer_details_invoices_table_2_paginate">
+																				<ul class="pagination">
+																					<li class="paginate_button page-item previous disabled"
+																						id="kt_customer_details_invoices_table_2_previous">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_2"
+																							data-dt-idx="0" tabindex="0"
+																							class="page-link"><i
+																								class="previous"></i></a>
+																					</li>
+																					<li
+																						class="paginate_button page-item active">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_2"
+																							data-dt-idx="1" tabindex="0"
+																							class="page-link">1</a></li>
+																					<li
+																						class="paginate_button page-item ">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_2"
+																							data-dt-idx="2" tabindex="0"
+																							class="page-link">2</a></li>
+																					<li class="paginate_button page-item next"
+																						id="kt_customer_details_invoices_table_2_next">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_2"
+																							data-dt-idx="3" tabindex="0"
+																							class="page-link"><i
+																								class="next"></i></a>
+																					</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!--end::Table-->
+															</div>
+															<!--end::Tab panel-->
+															<!--begin::Tab panel-->
+															<div id="kt_customer_details_invoices_3"
+																class="py-0 tab-pane fade" role="tabpanel">
+																<!--begin::Table-->
+																<div id="kt_customer_details_invoices_table_3_wrapper"
+																	class="dataTables_wrapper dt-bootstrap4 no-footer">
+																	<div class="table-responsive">
+																		<table id="kt_customer_details_invoices_table_3"
+																			class="table align-middle table-row-dashed fs-6 fw-bolder gy-5 dataTable no-footer">
+																			<!--begin::Thead-->
+																			<thead
+																				class="border-bottom border-gray-200 fs-7 text-uppercase fw-bolder">
+																				<tr class="text-start text-muted gs-0">
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_3"
+																						rowspan="1" colspan="1"
+																						aria-label="Order ID: activate to sort column ascending"
+																						style="width: 0px;">Order ID
+																					</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_3"
+																						rowspan="1" colspan="1"
+																						aria-label="Amount: activate to sort column ascending"
+																						style="width: 0px;">Amount</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_3"
+																						rowspan="1" colspan="1"
+																						aria-label="Status: activate to sort column ascending"
+																						style="width: 0px;">Status</th>
+																					<th class="min-w-125px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_3"
+																						rowspan="1" colspan="1"
+																						aria-label="Date: activate to sort column ascending"
+																						style="width: 0px;">Date</th>
+																					<th class="min-w-100px text-end pe-7 sorting_disabled"
+																						rowspan="1" colspan="1"
+																						aria-label="Invoice"
+																						style="width: 0px;">Invoice</th>
+																				</tr>
+																			</thead>
+																			<!--end::Thead-->
+																			<!--begin::Tbody-->
+																			<tbody class="fs-6 fw-bold text-gray-600">
+
+
+
+
+
+
+
+
+
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">426445943</a>
+																					</td>
+																					<td class="text-success">$31.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-danger">Rejected</span>
+																					</td>
+																					<td>Feb 09, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="even">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">984445943</a>
+																					</td>
+																					<td class="text-success">$52.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-success">Approved</span>
+																					</td>
+																					<td>Nov 01, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">324442313</a>
+																					</td>
+																					<td class="text-danger">$-0.80</td>
+																					<td>
+																						<span
+																							class="badge badge-light-danger">Rejected</span>
+																					</td>
+																					<td>Jan 04, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="even">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">312445984</a>
+																					</td>
+																					<td class="text-success">$5.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-success">Approved</span>
+																					</td>
+																					<td>Sep 15, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">102445788</a>
+																					</td>
+																					<td class="text-success">$38.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-info">In
+																							progress</span>
+																					</td>
+																					<td>Nov 01, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																			</tbody>
+																			<!--end::Tbody-->
+																		</table>
+																	</div>
+																	<div class="row">
+																		<div
+																			class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+																		</div>
+																		<div
+																			class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+																			<div class="dataTables_paginate paging_simple_numbers"
+																				id="kt_customer_details_invoices_table_3_paginate">
+																				<ul class="pagination">
+																					<li class="paginate_button page-item previous disabled"
+																						id="kt_customer_details_invoices_table_3_previous">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_3"
+																							data-dt-idx="0" tabindex="0"
+																							class="page-link"><i
+																								class="previous"></i></a>
+																					</li>
+																					<li
+																						class="paginate_button page-item active">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_3"
+																							data-dt-idx="1" tabindex="0"
+																							class="page-link">1</a></li>
+																					<li
+																						class="paginate_button page-item ">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_3"
+																							data-dt-idx="2" tabindex="0"
+																							class="page-link">2</a></li>
+																					<li class="paginate_button page-item next"
+																						id="kt_customer_details_invoices_table_3_next">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_3"
+																							data-dt-idx="3" tabindex="0"
+																							class="page-link"><i
+																								class="next"></i></a>
+																					</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!--end::Table-->
+															</div>
+															<!--end::Tab panel-->
+															<!--begin::Tab panel-->
+															<div id="kt_customer_details_invoices_4"
+																class="py-0 tab-pane fade" role="tabpanel">
+																<!--begin::Table-->
+																<div id="kt_customer_details_invoices_table_4_wrapper"
+																	class="dataTables_wrapper dt-bootstrap4 no-footer">
+																	<div class="table-responsive">
+																		<table id="kt_customer_details_invoices_table_4"
+																			class="table align-middle table-row-dashed fs-6 fw-bolder gy-5 dataTable no-footer">
+																			<!--begin::Thead-->
+																			<thead
+																				class="border-bottom border-gray-200 fs-7 text-uppercase fw-bolder">
+																				<tr class="text-start text-muted gs-0">
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_4"
+																						rowspan="1" colspan="1"
+																						aria-label="Order ID: activate to sort column ascending"
+																						style="width: 0px;">Order ID
+																					</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_4"
+																						rowspan="1" colspan="1"
+																						aria-label="Amount: activate to sort column ascending"
+																						style="width: 0px;">Amount</th>
+																					<th class="min-w-100px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_4"
+																						rowspan="1" colspan="1"
+																						aria-label="Status: activate to sort column ascending"
+																						style="width: 0px;">Status</th>
+																					<th class="min-w-125px sorting"
+																						tabindex="0"
+																						aria-controls="kt_customer_details_invoices_table_4"
+																						rowspan="1" colspan="1"
+																						aria-label="Date: activate to sort column ascending"
+																						style="width: 0px;">Date</th>
+																					<th class="min-w-100px text-end pe-7 sorting_disabled"
+																						rowspan="1" colspan="1"
+																						aria-label="Invoice"
+																						style="width: 0px;">Invoice</th>
+																				</tr>
+																			</thead>
+																			<!--end::Thead-->
+																			<!--begin::Tbody-->
+																			<tbody class="fs-6 fw-bold text-gray-600">
+
+
+
+
+
+
+
+
+
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">102445788</a>
+																					</td>
+																					<td class="text-success">$38.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-warning">Pending</span>
+																					</td>
+																					<td>Nov 01, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="even">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">423445721</a>
+																					</td>
+																					<td class="text-danger">$-2.60</td>
+																					<td>
+																						<span
+																							class="badge badge-light-info">In
+																							progress</span>
+																					</td>
+																					<td>Oct 24, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">102445788</a>
+																					</td>
+																					<td class="text-success">$38.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-success">Approved</span>
+																					</td>
+																					<td>Nov 01, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="even">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">423445721</a>
+																					</td>
+																					<td class="text-danger">$-2.60</td>
+																					<td>
+																						<span
+																							class="badge badge-light-success">Approved</span>
+																					</td>
+																					<td>Oct 24, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																				<tr class="odd">
+																					<td data-order="Invalid date">
+																						<a href="#"
+																							class="text-gray-600 text-hover-primary">426445943</a>
+																					</td>
+																					<td class="text-success">$31.00</td>
+																					<td>
+																						<span
+																							class="badge badge-light-danger">Rejected</span>
+																					</td>
+																					<td>Feb 09, 2020</td>
+																					<td class="text-end">
+																						<button
+																							class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+																					</td>
+																				</tr>
+																			</tbody>
+																			<!--end::Tbody-->
+																		</table>
+																	</div>
+																	<div class="row">
+																		<div
+																			class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+																		</div>
+																		<div
+																			class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+																			<div class="dataTables_paginate paging_simple_numbers"
+																				id="kt_customer_details_invoices_table_4_paginate">
+																				<ul class="pagination">
+																					<li class="paginate_button page-item previous disabled"
+																						id="kt_customer_details_invoices_table_4_previous">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_4"
+																							data-dt-idx="0" tabindex="0"
+																							class="page-link"><i
+																								class="previous"></i></a>
+																					</li>
+																					<li
+																						class="paginate_button page-item active">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_4"
+																							data-dt-idx="1" tabindex="0"
+																							class="page-link">1</a></li>
+																					<li
+																						class="paginate_button page-item ">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_4"
+																							data-dt-idx="2" tabindex="0"
+																							class="page-link">2</a></li>
+																					<li class="paginate_button page-item next"
+																						id="kt_customer_details_invoices_table_4_next">
+																						<a href="#"
+																							aria-controls="kt_customer_details_invoices_table_4"
+																							data-dt-idx="3" tabindex="0"
+																							class="page-link"><i
+																								class="next"></i></a>
+																					</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!--end::Table-->
+															</div>
+															<!--end::Tab panel-->
+														</div>
+														<!--end::Tab Content-->
+													</div>
+													<!--end::Card body-->
+												</div>
+
+											</div>
+
+											<div class="tab-pane fade show active" v-if="show === '3'" role="tabpanel">
+
+												<div class="card mb-6 mb-xl-9">
+
+
+													<div class="card-header border-0">
+														<!--begin::Card title-->
+														<div class="card-title">
+															<h2>Historico</h2>
+														</div>
+														<!--end::Card title-->
+
+													</div>
+													<!--end::Card header-->
+													<!--begin::Card body-->
+													<div class="card-body py-0">
+														<!--begin::Table wrapper-->
+														<div class="table-responsive">
+															<!--begin::Table-->
+															<table
+																class="table align-middle table-row-dashed fw-bold text-gray-600 fs-6 gy-5"
+																id="kt_table_customers_logs">
+																<!--begin::Table body-->
+																<tbody>
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-success">200
+																				OK</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoices/in_6814_4901/payment</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">20 Jun
+																			2022, 8:43 pm</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-danger">500
+																				ERR</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoice/in_7705_2575/invalid</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">05 May
+																			2022, 11:05 am</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-success">200
+																				OK</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoices/in_1296_7615/payment</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">21 Feb
+																			2022, 2:40 pm</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-warning">404
+																				WRN</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/customer/c_622f40cf5e46f/not_found
+																		</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">10 Mar
+																			2022, 6:05 pm</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-danger">500
+																				ERR</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoice/in_1515_4291/invalid</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">21 Feb
+																			2022, 6:43 am</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-danger">500
+																				ERR</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoice/in_7494_7390/invalid</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">24 Jun
+																			2022, 6:05 pm</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-success">200
+																				OK</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoices/in_4805_4302/payment</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">24 Jun
+																			2022, 10:30 am</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-warning">404
+																				WRN</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/customer/c_622f40cf5e470/not_found
+																		</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">20 Jun
+																			2022, 10:10 pm</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-success">200
+																				OK</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/invoices/in_6814_4901/payment</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">20 Jun
+																			2022, 5:20 pm</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																	<!--begin::Table row-->
+																	<tr>
+																		<!--begin::Badge=-->
+																		<td class="min-w-70px">
+																			<div class="badge badge-light-warning">404
+																				WRN</div>
+																		</td>
+																		<!--end::Badge=-->
+																		<!--begin::Status=-->
+																		<td>POST /v1/customer/c_622f40cf5e46f/not_found
+																		</td>
+																		<!--end::Status=-->
+																		<!--begin::Timestamp=-->
+																		<td class="pe-0 text-end min-w-200px">19 Aug
+																			2022, 10:30 am</td>
+																		<!--end::Timestamp=-->
+																	</tr>
+																	<!--end::Table row-->
+																</tbody>
+																<!--end::Table body-->
+															</table>
+															<!--end::Table-->
+														</div>
+														<!--end::Table wrapper-->
+													</div>
+
+
+
+												</div>
+
+
+											</div>
+
+										</div>
+
+									</div>
+
 								</div>
 
 
-								<div class="text-center mb-5 mb-lg-10 py-10 py-lg-2">
-									<a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=https://'+inst.urlsite+'%2F&amp;src=sdkpreparse'"
-									class="btn btn-light w-15 mx-6 text-white text-hover-dark"
-										style="background-color: #085a97;">
-										<img alt="Logo" src="../../doacao/assets/image/facebook.svg"
-											class="h-20px me-3"> Facebook </a>
-
-									<a target="_blank" :href="'https://web.whatsapp.com/send?text=https://'+inst.urlsite" class="btn btn-light w-15 text-white text-hover-dark"
-										style="background-color: #429813;">
-										<img alt="Logo" src="../../doacao/assets/image/whatsap.svg"
-											class="h-20px me-3">Whatsapp</a>
-
-								</div>
-
-								<a href="#/"
-									class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 ">Fazer nova
-									Doação</a>
-							</div> 
-						</div> 
-					</div> 
-				</div> 
-				<div class="landing-curve landing-dark-color">
-					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
-							fill="rgba(19,38,60,255)"></path>
-					</svg>
-				</div> 
-			</div> 
-
-
-			<div class="mt-20 position-relative z-index-2 mb-20">
-				<div class="container"> 
-					<div class="text-center mb-17"> 
-						<div class="fs-5 text-muted fw-bold  flex-center ">
-							<p class="m-10">
-								{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}}  |
-								Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
-								{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
-								Para dúvidas e cancelamentos entre em contato com nossa <br>
-								central de relacionamento no telefone {{inst.telefone}}
-								ou pelo e-mail: {{inst.email}} |
-								Em até 30 dias após o processamento da transação, <br>
-								realizaremos o ressarcimento integral dos valores doados.
-							</p>
-						</div> 
- 
-					</div>  
-				</div> 
-			</div>  
-						<div class="rotaObscura"> 
-						<input v-mask="'###.###.###-##'" v-model="inst.cnpj" class="invisivel"/>
-						<input v-mask="'#####-###'" v-model="inst.cep" class="invisivel"/>
-						<input v-mask="'(##) # ####-####'" v-model="inst.telefone" class="invisivel"/>
+							</div>
 						</div>
-		</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<c-footer />
 	</div>
-	`,
+
+</div>
+
+`,
+
+
 
 
 	data: function () {
-		return {
-			inst: {
-				bairro: null,
-				cep: null,
-				cidade: null,
-				cnpj: null,
-				complemento: null,
-				email: null,
-				estado: null,
-				nome_fantasia: null,
-				razao_social: null,
-				endereco: null,
-				telefone: null,
-				logo: '',
-				icon: '',
-				backgroundColor: '',
-				urlsite: '',
-				codigo_geral: '',
-				url_geral: '',
-			},
 		
-			subdomaim: '',
-			type: '',
-			jms: false,
+		return {
+			foto: '../painel/assets/image/gravatar.png',
+			
+			instituicao_id : null,
+			id: null,
+			token: null,
+			nome: null,
+			tipo: null,
+			cpf: "",
+			telefone: null,
+			email: null, 
+			data: null,
+			doacoes:[],
+			end: {
+				cep: null,
+				logadouro: null,
+				numero: null,
+				complemento: null,
+				bairro: null,
+				cidade: null,
+				estado: null,
+			},
+			show: '1',
+			visao: true,
+			assinatura: false,
+			historico: false,
 		}
+
 	},
-
 	
-    filters: {
-     
-     is_data(datas) { 
-         let cep  = datas.split('').join('/'); 
-		  
-         return `${cep}`
-     },
+	filters: {
+        is_price(price) {
+            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            return `R$ ${valor}`
+        },
+	
+		
+        is_data(datas) {
+            let data = datas.split('-').reverse().join('/');
+            return `${data}`
+        },
+ 
+  
 
+		este_status(status) {
+			let apresentar = {
+				refunded: 'Reembolsado',
+				processing: 'Em processamento',
+				authorized: 'Autorizado ',
+				unpaid: 'Não Pago',
+				pending: 'Pendente',
+				waiting_payment: 'Aguardando Pagamento',
+				refused: 'Cancelado',
+				paid: 'Pago',
+				pending_refund: 'Reembolso pendente ',
+				chargedback: 'Estorno',
+			}
+			return apresentar[status]
+		},
+
+		este_tipo(status) {
+            let apresentar = {
+                boleto: 'Boleto',
+                credit_card: 'Crédito',
+                pix: 'PIX',
+            }
+            return apresentar[status]
+        },
+       
     },
 
 
+    computed: {
 
+		filtraDoacao2() {
+			return this.doacoes.filter((doacao) => {
+				return doacao.data.match(
+					console.log(this.data),
+					//this.data.split('-').reverse().join('') >= "20220304",
+					
+					);
+
+			})
+		},
+
+        filtraDoacao() {
+ 
+             let valores
+
+             valores = this.doacoes.filter((filtrar) => {
+                return filtrar.data
+                 //return filtrar.data.split('-').join('') <= '20220312';
+             })
+
+             return valores
+
+   },
+
+    },
+
+	async mounted() {
+		var dataAtual = new Date();
+		var dia = dataAtual.getDate();
+		var mes = (dataAtual.getMonth() + 1);
+		var ano = dataAtual.getFullYear(); 
+		var str_data = dia + '/' + mes + '/' + ano;
+		console.log(str_data);
+
+		this.cpf = globalThis._doador.cpf
+		this.tipo = globalThis._doador.tipo
+		
+
+		let dados = (await this.listar()).dados
+		this.doacoes = (await this.listar()).dados.doacoes
+
+		console.log(this.doacoes)
+		 // let date_created = datas.split('-').reverse().join('/'); 
+
+		this.nome = dados.nome
+		//this.cpf = dados.cpf
+		this.telefone = dados.telefone
+		this.email = dados.email
+
+		this.end.cep = dados.endereco.cep
+		this.end.logadouro = dados.endereco.logadouro
+		this.end.numero = dados.endereco.numero
+		this.end.complemento = dados.endereco.complemento
+		this.end.bairro = dados.endereco.bairro
+		this.end.cidade = dados.endereco.cidade
+		this.end.estado = dados.endereco.estado
+
+	},
 
 	methods: {
-		async infoSubdomain() { 
-			 let res = await adm.todoSubdomain(this.subdomaim)
+
+		visaoV() { 
+			this.show = '1',
+			this.visao = true,
+			this.assinatura = false,
+			this.historico = false
+		},
+
+		assinaturaV() { 
+			this.show = '2',
+			this.visao = false,
+			this.assinatura = true,
+			this.historico = false
+		},
+
+		historicoV() { 
+			this.show = '3',
+			this.visao = false,
+			this.assinatura = false,
+			this.historico = true
+		},
+
+		async listar() {
+			let res = await adm.visualizarDoador(
+				this.token,
+				this.cpf
+			)
 			return res
 		},
 
-		copiar(ref) {
-			this.$refs[ref].select(); document.execCommand('copy');
-		}
+		async editar(instituicao_id){
+			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
+			window.location.href = "#/doador/detalhe"
+		},
 
 	},
-
-	async mounted() {
-		this.subdomaim = window.location.hostname
-		
-		let dados = (await this.infoSubdomain()).dados_instituicao
-		this.inst.cep = dados.endereco.cep
-		this.inst.endereco = dados.endereco.logadouro
-		this.inst.numero = dados.endereco.numero
-		this.inst.bairro = dados.endereco.bairro
-		this.inst.cidade = dados.endereco.cidade
-		this.inst.estado = dados.endereco.estado
-		this.inst.complemento = dados.endereco.complemento
-		this.inst.logo = "https://doardigital.tk/api/upload/"+dados.logo
-		this.inst.icon = dados.icon
-		this.inst.backgroundColor = dados.cor
-		this.inst.email = dados.email
-		this.inst.telefone  = dados.telefone
-		this.inst.cnpj = dados.cnpj
-		this.inst.urlsite = dados.subdomaim+'.doardigital.com.br/'
-		
-		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
-		this.type = localStorage.getItem('type_pagamento')
-		this.codigo_geral = localStorage.getItem("codigo")
-        this.url_geral = localStorage.getItem("url")
-
-		if (this.type == 'pix') {
-			let code_pix = `${this.codigo_geral}`
-			var qrcode = new QRCode(this.$refs.print_qr, {
-				text: code_pix,
-				width: 230,
-				height: 230,
-				height: 230,
-				colorDark: "#000000",
-				colorLight: "#ffffff",
-				correctLevel: QRCode.CorrectLevel.L
-			});
-		}
-	},
-
 }
+
