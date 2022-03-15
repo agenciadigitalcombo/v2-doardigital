@@ -75,6 +75,7 @@ class Asaas
                 )
             ));
             @$result = file_get_contents($full_path, FALSE, $context);
+            var_dump($full_path);
             return json_decode($result, true);
         } catch (\Throwable $th) {
             $this->is_error();

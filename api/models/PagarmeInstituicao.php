@@ -32,7 +32,7 @@ class PagarmeInstituicao extends Asaas
         ];
 
         
-        $res_pagarme = $this->post('/recipients', $payload_recebedor);
+        $res_pagarme = $this->post('/accounts', $payload_recebedor);
 
         return $res_pagarme;
 
