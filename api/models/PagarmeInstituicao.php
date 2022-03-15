@@ -1,40 +1,34 @@
 <?php
 
-class PagarmeInstituicao extends PagarMe
+class PagarmeInstituicao extends Asaas
 {
     public function create_instituicao(
-    string $conta_id): array
+    string $name,
+    string $email,
+    string $cpfCnpj,
+    string $companyType,
+    string $phone,
+    string $mobilePhone,
+    string $address,
+    string $addressNumber,
+    string $complement,
+    string $province,
+    string $postalCode): array
     {
 
         
         $payload_recebedor = [
-            "bank_account_id" => $conta_id, 
-            "transfer_day" => null, 
-            "transfer_enabled" => false, 
-            "transfer_interval" => null,
-            "postback_url" => "https://requestb.in/tl0092tl",
-            // "register_information" => [
-            //     "type" => "individual",
-            //     "document_number" => $document_number_recebedor,
-            //     "name" => $recebedor_nome,
-            //     "site_url" => $site_url,
-            //     "email" => $email_recebedor,
-            //     "phone_numbers" => [[
-            //         "number" => $telefone_recebedor,
-            //     ]]
-            // ]
-            // "register_information" => [
-            //     "type" => "individual",
-            //     "document_number" => "92545278157",
-            //     "name" => "Someone",
-            //     "site_url" =>"http://www.site.com",
-            //     "email" => "some@email.com",
-            //     "phone_numbers" => [[
-            //         "ddd" => "11",
-            //         "number" => "987654321",
-            //         "type" => "mobile"
-            //     ]]
-            // ]
+            "name" => $name,
+            "email" => $email,
+            "cpfCnpj" => $cpfCnpj,
+            "companyType" => $companyType,
+            "phone" => $phone,
+            "mobilePhone" => $mobilePhone,
+            "address" => $address,
+            "addressNumber" => $addressNumber,
+            "complement" => $complement,
+            "province" => $province,
+            "postalCode" => $postalCode
         ];
 
         

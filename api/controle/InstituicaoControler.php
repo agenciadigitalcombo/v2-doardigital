@@ -8,39 +8,61 @@ class InstituicaoControler
         $instituicao = new Instituicao();
         $instituicaopagarme = new PagarmeInstituicao();
         $banco_cont = new ContaBanc();
+        $endereco = new Endereco();
         $adm = new Adm();
+        $assas_instituicao = new PagarmeInstituicao();
 
         $token_parce = token();
-
-
-        $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
-        $razao_social = $_REQUEST['razao_social'] ?? '';
-        $sub_domain = $_REQUEST['subdomaim'] ?? '';
-
-        $email = $_REQUEST['email'];
-
-        $cor = $_REQUEST['cor'] ?? '';
-        $logo = $_REQUEST['logo'] ?? '';
-
-        $cnpj = $_REQUEST['cnpj'] ?? '';
-        $transform_cnpj = withdraw_caracter($cnpj);
-
-        $telefone = $_REQUEST['telefone'] ?? '';
-        $transform_tel = withdraw_caracter($telefone);
-
-
+        
         campo_obrigatorios([
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
             'subdomaim' => 'Informe o Sub Domain',
             'email' => 'Qual o Email',
             'telefone' => 'Digite o numero de Telefone',
-            'cnpj' => 'Informe o Cnpj'
+            'cnpj' => 'Informe o Cnpj',
+            'cep' => 'Informe um CEP',
+            'logradouro' => 'Digite um endereço',
+            'bairro' => 'digite o Bairro',
+            'cidade' => 'Informe a Cidade',
+            'estado' => 'Informe o estado',
+            'numero' => 'Digite o numero'
         ]);
+
+        $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
+        $razao_social = $_REQUEST['razao_social'] ?? '';
+        $sub_domain = $_REQUEST['subdomaim'] ?? '';
+        
+        $email = $_REQUEST['email'];
+        
+        $cor = $_REQUEST['cor'] ?? '';
+        $logo = $_REQUEST['logo'] ?? '';
+        
+        $cnpj = $_REQUEST['cnpj'] ?? '';
+        $transform_cnpj = withdraw_caracter($cnpj);
+        
+        $telefone = $_REQUEST['telefone'] ?? '';
+        $transform_tel = withdraw_caracter($telefone);
+        
+        $companyType = $_REQUEST['tipo_empresa'];
+        
+        
+        $logradouro = $_REQUEST['logradouro'] ?? '';
+        $complemento = $_REQUEST['complemento'] ?? null;
+        $bairro = $_REQUEST['bairro'] ?? '';
+        $cidade = $_REQUEST['cidade'] ?? '';
+        $estado = $_REQUEST['estado'] ?? '';
+        
+        $numero = $_REQUEST['numero'] ?? '';
+        $cep = $_REQUEST['cep'] ?? '';
+
+        $transform_numero = withdraw_caracter($numero);
+        $transform_cep = withdraw_caracter($cep);
+
 
 
         valid_subdomain($sub_domain);
-
+        
 
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
@@ -48,13 +70,13 @@ class InstituicaoControler
 
         // $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
         // $instituicao_id = $get_instituicao['id'];
-
-
-
+        
+        
+        
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
-
-
+        
+        
         if ($instituicao->exist_subdomain($sub_domain)) {
             echo json_encode([
                 "next" => false,
@@ -62,13 +84,53 @@ class InstituicaoControler
             ]);
             return null;
         }
-
+        
+        if($transform_cnpj != 14){
+            return $companyType = "";
+        }
 
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "#FFF", "");
+        
+        $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
+
+        
+
+        $endereco->create($list_instituicao['id'], "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+
+
+        $res_assas = $assas_instituicao->create_instituicao(
+            $nome_fantasia,
+            $email,
+            $transform_cnpj,
+            $companyType,
+            $transform_tel,
+            $transform_tel,
+            $logradouro,
+            $numero,
+            $complemento,
+            $bairro,
+            $transform_cep);
 
         echo json_encode([
             'next' => true,
-            'message' => 'Instituicao criada'
+            'message' => 'Instituicao criada',
+            'params' => [
+                'nome_fantasia',
+                'razao_social',
+                'subdomaim',
+                'email',
+                'telefone',
+                'cnpj',
+                'cep',
+                'logradouro',
+                'bairro',
+                'cidade',
+                'estado',
+                'numero'
+            ],
+            'links' => [['rel' => 'GET', 'href' => 'http://doardigital.tk/api/instituicao']],
+            'payload' => $res_assas
+
         ]);
     }
 

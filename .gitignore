@@ -1,6 +1,8 @@
 .project
 ref.txt
 .vscode/
+Criacao-Contas-Bancarias
+Envio-Documentos-v3
 
 /api/upload/*.jpg
 /api/upload/*.pdf
