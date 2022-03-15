@@ -62,10 +62,11 @@ class Doador implements IDoador
     public function create(string $name, string $email, string $phone_numbers, string $cpf, string $senha): void
     {
         $banco = new Banco();
+        $data_regis = date("Y-m-d");
         $sql = "INSERT INTO doador";
-        $sql .= "(nome, email, senha, telefone, cpf)";
+        $sql .= "(nome, email, senha, telefone, cpf, data_registro)";
         $sql .= "VALUES";
-        $sql .= "('$name', '$email', '$senha', '$phone_numbers', '$cpf')";
+        $sql .= "('$name', '$email', '$senha', '$phone_numbers', '$cpf', '$data_regis')";
         
         $banco->exec($sql);
     }
