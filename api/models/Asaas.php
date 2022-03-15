@@ -68,7 +68,7 @@ class Asaas
         $full_path = $this->get_path($path);
         try {
             $defaults = [
-                CURLOPT_POST           => true,
+                CURLOPT_CUSTOMREQUEST  => $method,
                 CURLOPT_HEADER         => 0,
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL            => $full_path,
@@ -78,6 +78,7 @@ class Asaas
                     "access_token: {$this->token}"
                 ]
             ];
+
             $con = curl_init();
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
