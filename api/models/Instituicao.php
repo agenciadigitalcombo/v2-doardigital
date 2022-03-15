@@ -60,7 +60,7 @@ class Instituicao
         $sql = "UPDATE instituicao SET";
         $sql .= " nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
         $sql .= " WHERE id=$instituicao_id";
-        
+        var_dump($sql);
         $banco->exec($sql);
 
     }
