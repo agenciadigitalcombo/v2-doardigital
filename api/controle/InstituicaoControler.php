@@ -110,7 +110,9 @@ class InstituicaoControler
             $complemento,
             $bairro,
             $transform_cep);
-
+         
+        var_dump($_REQUEST);
+        die;    
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao criada',
@@ -126,7 +128,8 @@ class InstituicaoControler
                 'bairro',
                 'cidade',
                 'estado',
-                'numero'
+                'numero',
+                'tipo_empresa'
             ],
             'links' => [['rel' => 'GET', 'href' => 'http://doardigital.tk/api/instituicao']],
             'payload' => $res_assas
