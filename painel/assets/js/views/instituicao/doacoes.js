@@ -213,8 +213,7 @@ export default {
                                 </div> 
                                 <div class="card-body pt-0"> 
                                     <div class="table-responsive">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5"
-                                            id="kt_subscriptions_table"> 
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5"> 
                                             <thead> 
                                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
           
@@ -227,7 +226,8 @@ export default {
                                                 </tr> 
                                             </thead> 
                                             <tbody class="text-gray-600 fw-bold">
-                                                <tr v-for="item in dadosPagina"> 
+                                                <tr v-for="item in filtraDoacao"> 
+                                                <!--<tr v-for="item in dadosPagina">-->
                                                 
                                                     <td class="d-flex align-items-center"> 
                                                         <div
@@ -305,6 +305,7 @@ export default {
             dadosPagina: [],
             paginaAtual: 1,
             search: "",
+            dataFinal: null,
             mostraresconder:
             {
                 'show': false
@@ -312,7 +313,21 @@ export default {
         }
     },
 
+	computed: {
 
+		filtraDoacao() {
+
+			let valores
+
+			valores = this.dadosPagina.filter((filtrar) => {
+				return filtrar.data.split('-').join('') <= this.dataFinal;
+			})
+
+			return valores
+
+		},
+
+	},
 
     filters: {
         is_price(price) {
@@ -413,7 +428,7 @@ export default {
             //     return "active"
             //   } else {
             //    return "" 
-            //  }  Emma Smith
+            //  }  
         },
 
 
@@ -425,6 +440,13 @@ export default {
     },
 
     async mounted() {
+        let dateObj = new Date()
+        this.dataFinal = dateObj.toLocaleString('en-GB', {
+           year: 'numeric',
+           month: '2-digit',
+           day: '2-digit',
+       }).split('/').reverse().join('');
+
         this.doacoes = (await this.listarDoacoes()).dados || {}
         this.getPagina(1)
 
@@ -432,8 +454,11 @@ export default {
 
     created() {
         this.instituicao_id = window.localStorage.getItem("instituicao_id")
-
     }
 
+
+
+   // var porceto = (500 / 100) * 2.99;
+   //   console.log(porceto)
 
 }

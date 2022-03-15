@@ -54,6 +54,10 @@ Vue.component('c-modulosMailing', modulosMailing)
 import modulosStation from './views/modulos/modulosStation.js'
 Vue.component('c-modulosStation', modulosStation)
 
+import dominio from './views/modulos/dominio.js'
+Vue.component('c-dominio', dominio)
+
+
 import doadores from './views/instituicao/doadores.js'
 Vue.component('c-doadores', doadores)
 
@@ -69,9 +73,6 @@ Vue.component('c-doadorHitorico', doadorHitorico)
 
 import configuracao from './views/configuracao/configuracao.js'
 Vue.component('c-configuracao', configuracao)
-
-import dominio from './views/configuracao/dominio.js'
-Vue.component('c-dominio', dominio)
 
 import script from './views/configuracao/script.js'
 Vue.component('c-script', script)

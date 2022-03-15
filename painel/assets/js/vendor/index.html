@@ -1,97 +1,159 @@
-<div id="kt_post" class="post d-flex flex-column-fluid">
-    <div id="kt_content_container" class="container-xxl">
-        <div id="kt_profile_details_view" class="card mb-5 mb-xl-10">
-          
+import adm from "../../../../../static/js/api/adm.js"
 
+export default {
+template:`
+<div>
 
+    <c-header></c-header>
+    <c-aside></c-aside>
 
+    <!--begin::Root-->
+    <div class="d-flex flex-column flex-root">
 
+        <div class="page d-flex flex-row flex-column-fluid">
 
+            <div class="wrapper d-flex flex-column flex-row-fluid">
 
+                <div class="content d-flex flex-column flex-column-fluid">
 
+                    <div class="post d-flex flex-column-fluid" >
 
+                        <div class="container-xxl">
 
+                            <div class="card">
+                                <div class="card-header border-0 pt-6">
 
-						<div> 
-                            <div class="container"> 
-                                <div class="text-center mb-5">
-                         
-                                    <div id="block2" v-if="tipo=='boleto'"> 
-                                    <h3 class="fs-2 text-dark mb-5">
-                                        Sua doação esta em aberto!.</h3> 
-                                        <h3 class="fs-1 text-dark mb-5">
-                                            <span>Clique abaixo para acessar o seu boleto.</span>
-                                        </h3>
-                                        
-                                        <a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-14">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                                class="bi bi-upc" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
-                                            </svg>
-                                            VER MEU BOLETO
-                                        </a>
-                                        <div class="mw-lg-600px mx-auto"> 
-                                            <div class="mb-13 text-center"> 
-                                                <div class="text-muted fw-bold fs-5">ou copie o
-                                                    <a href="#" class="link-primary fw-bolder"> código de barras:</a>.
-                                                </div> 
-                                            </div> 
-                                            <div class="mb-10">
-                                            <div class="d-flex">
-                                                <input tipo="text" v-model="codigo_geral"  ref="codigo" 
-                                                    class="form-control  me-3 flex-grow-1" name="search" >
-                                                <button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
-                                            </div> 
-                                        </div>
-            
-                                        </div>
-                                        <h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
-                                        </div>
-                                    
-                                    <div id="block2" v-if="tipo=='pix'">
-                                    
-                                    <h3 class="fs-1 text-dark mb-15">
-                                        Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
-        
-                                 
-                                        <div class="mw-lg-600px mx-auto"> 
-                                            <div class="mb-13 text-center"> 
-                                                <div class="text-muted fw-bold fs-5 ">
-                                                    <h2 class="text-gray-600">
-                                                    Seu codigo PIX..
-                                                    </h2>
-                                                </div> 
-                                            </div>  
+                                    <div class="card-title">
+                                        <div class="d-flex align-items-center position-relative my-1">
+                                            <h1>Planos</h1>
                                         </div>
                                     </div>
-             
-                                    <center>
-                                    <div ref="print_qr"></div>
-                                </center>
-                                 
-                    
-                                        
-                                <div id="block12" v-if="tipo=='pix'">
-                                
-                                    <div class="mw-lg-600px mx-auto  mt-10"> 
-                                      
-                                        <div class="mb-10">
-                                            <div class="d-flex">
-                                                <input tipo="text" v-model="codigo_geral"  ref="codigo" 
-                                                    class="form-control  me-3 flex-grow-1" name="search" >
-                                                <button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
-                                            </div> 
-                                        </div>
+                                   
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5"
+                                            id="kt_subscriptions_table">
+                                            <thead>
+                                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                                    <th class="w-10px pe-2">
+
+                                                    </th>
+                                                    <th class="min-w-100px">NOME</th>
+                                                    <th class="min-w-100px">VALOR</th>
+                                                    <th class="min-w-100px">%DOAR </th>
+                                                    <th class="min-w-100px">Pix</th>
+                                                    <th class="min-w-100px">Cartão </th>
+                                                    <th class="min-w-100px">Boleto</th>
+                                                    <th class="min-w-150px">Valor Liquido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-gray-600 fw-bold">
+                                                <tr>
+
+                                                    <td>
+                                                        1222
+                                                    </td>
+                                                    <td>
+                                                        1222
+                                                    </td>
+                                                    <td> 
+                                                        <div class="d-flex flex-column">
+                                                            <a class="text-gray-800 text-hover-primary mb-1">
+                                                                1222
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                   
+                                                    <td>
+                                                        <div class=""> 
+                                                            1222
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div
+                                                            class="form-check form-switch form-check-custom form-check-solid me-10">
+                                                            1222
+                                                        </div>
+
+                                                    </td>
+
+                                                    <td class="text-end">
+                                                        1222
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div> 
-            
-                                </div> 
-                            </div> 
-                        </div> 
-    
-    
-            
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!--end::Root-->
+
+    <c-footer />
 </div>
+`,
+
+
+data: function () {
+return {
+id: null,
+instituicao_id: null,
+nome: null,
+amount: null,
+status: null,
+token: null,
+dados: []
+}
+},
+
+
+filters: {
+form_valor(price) {
+let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+return `R$ ${amount}`
+}
+},
+
+methods: {
+async listar() {
+let res = await adm.listarPlanos(localStorage.getItem('instituicao_id'))
+return res
+},
+
+async editar(id) {
+globalThis._planos = this.dados.find(user => user.id == id)
+window.location.href = "#/planos/editar"
+},
+
+
+async statusx(status) {
+this.error = null
+this.plano_id= status
+let res = await adm.onoffPlano(
+this.plano_id,
+this.token,
+)
+if (!res.next) {
+console.log(res)
+this.error = res.message
+return null
+}
+
+},
+
+},
+
+async mounted() {
+this.dados = (await this.listar()).dados
+this.instituicao_id = localStorage.getItem("instituicao_id");
+},
+
+}
