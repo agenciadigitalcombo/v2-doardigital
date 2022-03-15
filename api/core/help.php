@@ -443,10 +443,10 @@ function min_amount($valor): int
 
     ]);
 
-    if ($amount < 2500) {
+    if ($amount < 2000) {
         echo json_encode([
             'next' => false,
-            'message' => 'Valor minimo é R$25,00'
+            'message' => 'Valor minimo é R$20,00'
         ]);
         die;
     }
