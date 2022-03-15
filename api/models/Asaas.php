@@ -95,14 +95,19 @@ class Asaas
         $param = http_build_query($payload);
         $full_path = $this->get_path("{$path}?{$param}");
         try {
-            $context = stream_context_create(array(
-                'http' => array(
-                    'method' => 'GET',
-                    'header' => $this->get_head_get(),
-                )
-            ));
-            @$result = file_get_contents($full_path, FALSE, $context);
-            return json_decode($result, true);
+            $defaults = [
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL            => $full_path,
+                CURLOPT_HTTPHEADER     => [
+                    'Content-Type:application/json',
+                    "access_token: {$this->token}"
+                ]
+            ];
+            $con = curl_init();
+            curl_setopt_array($con, $defaults);
+            $ex = curl_exec($con);
+            curl_close($con);
+            return json_decode($ex, true);
         } catch (\Throwable $th) {
             $this->is_error();
         }
