@@ -42,12 +42,21 @@ POST http://doardigital.tk/api/create-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 token=string
+&telefone=string
 &nome_fantasia=string
-&sub_domain=string
 &razao_social=string
+&subdomaim=string
 &email=string
 &cnpj=string
 &telefone=string
+&tipo_empresa=string
+&logradouro=string
+&complemento=string
+&bairro=string
+&cidade=string
+&estado=string
+&numero=string
+&cep=string
 
 ###
 POST http://doardigital.tk/api/update-domain-person
