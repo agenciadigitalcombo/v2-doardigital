@@ -1,5 +1,5 @@
 # v2-doardigital
-V2 DOAR DIGITAL
+V2 DOAR DIGITAL.
 
 Doar Digital
 
