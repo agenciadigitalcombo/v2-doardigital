@@ -131,9 +131,7 @@ class InstituicaoControler
                 'numero',
                 'tipo_empresa'
             ],
-            'links' => [['rel' => 'GET', 'href' => 'http://doardigital.tk/api/instituicao']],
-            'payload' => $res_assas
-
+            'links' => [['rel' => 'GET', 'href' => 'http://doardigital.tk/api/instituicao']]
         ]);
     }
 
