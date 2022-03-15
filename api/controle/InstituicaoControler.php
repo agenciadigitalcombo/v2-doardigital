@@ -77,28 +77,18 @@ class InstituicaoControler
         // $banc_id = $get_banc_id['id'];
         
         
-        // if ($instituicao->exist_subdomain($sub_domain)) {
-        //     echo json_encode([
-        //         "next" => false,
-        //         "message" => "Subdomínio já em uso"
-        //     ]);
-        //     return null;
-        // }
+        if ($instituicao->exist_subdomain($sub_domain)) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Subdomínio já em uso"
+            ]);
+            return null;
+        }
         
         if(strlen($transform_cnpj) != 14){
             $companyType = "";
         }
         
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "#FFF", "");
-        
-        $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
-        
-        // var_dump();
-
-        $endereco->create($list_instituicao['id'], "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
-
-
-
         $res_assas = $assas_instituicao->create_instituicao(
             $nome_fantasia,
             $email,
@@ -112,6 +102,16 @@ class InstituicaoControler
             $bairro,
             $transform_cep);
          
+        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $res_assas['walletId'], "#FFF", "");
+        
+        $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
+        
+        // var_dump();
+
+        $endereco->create($list_instituicao['id'], "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+
+
+
           
         echo json_encode([
             'next' => true,
