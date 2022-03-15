@@ -28,7 +28,7 @@ class InstituicaoControler
             'estado' => 'Informe o estado',
             'numero' => 'Digite o numero'
         ]);
-
+        
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['subdomaim'] ?? '';
@@ -55,15 +55,15 @@ class InstituicaoControler
         
         $numero = $_REQUEST['numero'] ?? '';
         $cep = $_REQUEST['cep'] ?? '';
-
+        
         $transform_numero = withdraw_caracter($numero);
         $transform_cep = withdraw_caracter($cep);
-
-
-
+        
+        
+        
         valid_subdomain($sub_domain);
         
-
+        
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
@@ -85,17 +85,18 @@ class InstituicaoControler
             return null;
         }
         
-        if($transform_cnpj != 14){
-            return $companyType = "";
+        if(strlen($transform_cnpj) != 14){
+            $companyType = "";
         }
-
+        
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, "#FFF", "");
         
         $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
-
         
+        // var_dump();
 
         $endereco->create($list_instituicao['id'], "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
+
 
 
         $res_assas = $assas_instituicao->create_instituicao(
@@ -111,8 +112,7 @@ class InstituicaoControler
             $bairro,
             $transform_cep);
          
-        var_dump($_REQUEST);
-        die;    
+          
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao criada',
