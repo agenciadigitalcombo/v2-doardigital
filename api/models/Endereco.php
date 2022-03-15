@@ -17,7 +17,7 @@ class Endereco implements IEndereco
         return $guard;
     }
 
-    public function create(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
+    public function create(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento = "", string $bairro, string $cidade, string $estado): void
     {
         $banco = new Banco();
         $pesquisa = "SELECT * FROM endereco WHERE fk_id='$fk_id'";

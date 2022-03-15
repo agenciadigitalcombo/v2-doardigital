@@ -1,0 +1,110 @@
+Para realizar o envio de documentos pela V3 é necessário primeiramente realizar um GET no seguinte endpoint https://www.asaas.com/api/v3/myAccount/documents e será retornada uma lista com os documentos necessários para o envio. Esse GET deve ser realizado utilizando a chave de API da conta que você irá enviar os documentos.
+
+Resposta Exemplo:
+
+
+{
+  "data": [
+    {
+      "id": "07bab3a9-94e7-4eee-85be-9f37b99195c0",
+      "status": "PENDING",
+      "type": "IDENTIFICATION",
+      "description": "Serão aceitos RG ou CNH.",
+      "documents": [
+        {
+          "id": "8d257732-2220-11ec-b695-b6af4a64184d",
+          "status": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "afa3ed52-0e19-480e-8456-7fce61289c90",
+      "status": "APPROVED",
+      "type": "IDENTIFICATION_SELFIE",
+      "description": "Para enviar esse documento acesse nosso aplicativo."
+    }
+  ]
+}
+Com o retorno da requisição em mãos você terá o ID de cada tipo de documento que precisa enviar
+
+Para enviar um arquivo de identificação por exemplo, basta recuperar o ID que foi retornado e informar no endpoint dessa forma:
+
+https://www.asaas.com/api/v3/myAccount/documents/{id_tipo_de_documento}
+
+Que seguindo o exemplo de retorno ficaria assim:
+
+https://www.asaas.com/api/v3/myAccount/documents/07bab3a9-94e7-4eee-85be-9f37b99195c0
+
+Realizar um POST seguindo essa estrutura abaixo de envio, substituindo o XXXX pelo type retornado ao listar os documentos:
+
+Headers: 
+
+access_token -> Chave_API
+
+Content-Type -> multipart/form-data
+
+Body:
+
+documentFile: arquivo
+
+type: XXXX(Seguindo o exemplo seria IDENTIFICATION)
+
+A resposta será apresentada dessa forma por exemplo:
+
+
+{
+    "id": "68d4e9e7-1844-468e-a4d9-781529b7813c",
+    "status": "PENDING"
+}
+Você consegue trabalhar com o envio de mais de um documento para cada tipo, então caso seja enviado dois documentos para o tipo de identificação, ao consultar o endpoint de documentos ele irá retornar uma resposta semelhante a essa:
+
+
+ {
+  "data": [
+    {
+      "id": "07bab3a9-94e7-4eee-85be-9f37b99195c0",
+      "status": "PENDING",
+      "type": "IDENTIFICATION",
+      "description": "Serão aceitos RG ou CNH.",
+      "documents": [
+        {
+          "id": "68d4e9e7-1844-468e-a4d9-781529b7813c,
+          "status": "PENDING"
+        }
+       {
+          "id": "76ef7775-40bf-11ec-a84f-023988f30c9e,
+          "status": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "afa3ed52-0e19-480e-8456-7fce61289c90",
+      "status": "APPROVED",
+      "type": "IDENTIFICATION_SELFIE",
+      "description": "Para enviar esse documento acesse nosso aplicativo."
+    }
+  ]
+}
+Para visualizar somente um documento basta dar um GET nesse endpoint:
+
+https://www.asaas.com/api/v3/myAccount/documents/files/{id_documento}
+
+É possível também atualizar um documento que já foi enviado utilizando o seguinte endpoint passando o acess_token no header e o documentFile no body, no formato de form-data/Multipart e utilizando o método POST para tal:
+
+https://www.asaas.com/api/v3/myAccount/documents/files/{id_documento}
+
+Você pode também consegue deletar um documento enviado, basta utilizar o endpoint da atualização de documentos acima citado, mas nesse caso será necessário usar o método DELETE para tal.
+
+Caso algum documento seja rejeitado, será apresentado um novo atributo chamado rejectReasons com o motivo da rejeição e ficará nesse formato por exemplo:
+
+
+{
+   "id":"68d4e9e7-1844-468e-a4d9-781529b7813c",
+   "status":"REJECTED",
+   "rejectReasons":[
+      {
+         Documento ilegível.
+      }
+   ]
+}
+A v3 de envio de documentos também está disponível em sandbox, sendo apenas necessário substituir o www.asaas para sandbox.asaas
