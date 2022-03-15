@@ -497,6 +497,7 @@ class InstituicaoControler
         ]);
     }
 
+    
     static function list_doacoes()
     {
         $doacoes = new Doacao();
@@ -637,4 +638,6 @@ class InstituicaoControler
 
         Relatorio::teste($list_doacoes, $all_metas);
     }
+
+    
 }
