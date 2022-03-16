@@ -1,7 +1,7 @@
 <?php
 
 
-class PagarMeCostumer extends PagarMe{
+class PagarMeCostumer extends Asaas{
     
     function __construct()
     {

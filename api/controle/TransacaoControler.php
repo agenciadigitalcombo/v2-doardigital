@@ -6,8 +6,6 @@ class TransacaoControler
     
     static function create_transacao()
     {
-    var_dump($_REQUEST);
-    die;
         header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
         $doador = new Doador();
@@ -18,7 +16,7 @@ class TransacaoControler
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
         $adm = new Adm();
-
+        
         campo_obrigatorios([
             'planos_valor' => 'Campo planos_valor opbrigatorio',
             'type_pagamento' => 'Campo type_pagamento opbrigatorio',
@@ -33,8 +31,8 @@ class TransacaoControler
             'numero' => 'Campo numero opbrigatorio',
             'cep' => 'Campo cep opbrigatorio',
         ]);
-
-
+        
+        
         $instituicao_id = $_REQUEST['instituicao_id'];
         $planos_valor = $_REQUEST['planos_valor'];
 
@@ -64,7 +62,7 @@ class TransacaoControler
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $complemento = $_REQUEST['complemento'] ?? '';
-
+        
         $type_pagamento = $_REQUEST['type_pagamento'];
         
         if ($type_pagamento == "credit_card") {
@@ -75,7 +73,7 @@ class TransacaoControler
             $cart_validade_campo = $_REQUEST['cart_validade'];
             $cart_validade = withdraw_caracter($cart_validade_campo);
         }
-
+        
         $reference_key = "ref_" . uniqid();
         
         
@@ -100,26 +98,28 @@ class TransacaoControler
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
         
-        // if ($doador_dados['token'] == null) {
-        //     $token_doador = $pagarme_Costumer->create($nome, 
-        //     $email, 
-        //     $doador_id, 
-        //     $telefone, 
-        //     $cpf, 
-        //     $endereco,
-        //     $numero,
-        //     $complemento,
-        //     $bairro,
-        //     $cep);
-        //     $get_token_doador = $token_doador['id'];
+        if ($doador_dados['token'] == null) {
+                $token_doador = $pagarme_Costumer->create($nome, 
+                $email, 
+                $doador_id, 
+                $telefone, 
+                $cpf, 
+                $endereco,
+                $numero,
+                $complemento,
+                $bairro,
+                $cep);
+                $get_token_doador = $token_doador['id'];
             
-        //     $doador->set_token($doador_id, $get_token_doador);
-        //     // $doador_dados['token'] = $token_doador;
-        // }
-
-        
-
-        // if ($doador_dados['token'] == null) {
+                $doador->set_token($doador_id, $get_token_doador);
+                // $doador_dados['token'] = $token_doador;
+            }
+            
+            
+            var_dump($_REQUEST);
+            die;
+            
+            // if ($doador_dados['token'] == null) {
 
         //     $get_token_doador = $token_doador['id'];
         // }
