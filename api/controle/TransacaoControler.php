@@ -116,7 +116,6 @@ class TransacaoControler
             }
             
             
-            var_dump($_REQUEST);
             die;
             
             // if ($doador_dados['token'] == null) {
