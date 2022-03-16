@@ -26,6 +26,15 @@ class Instituicao
         return $guard[0] ?? [];
     }
     
+    public function exist_email(string $email): bool
+    {
+        
+        $banco = new Banco();
+        $sql = "SELECT * FROM instituicao WHERE email='$email'";
+        $consulta = $banco->query($sql);
+        return !empty($consulta);
+    }
+
     public function exist_subdomain(string $subdomain): bool
     {
         

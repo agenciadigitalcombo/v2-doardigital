@@ -42,7 +42,6 @@ POST http://doardigital.tk/api/create-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 token=string
-&telefone=string
 &nome_fantasia=string
 &razao_social=string
 &subdomaim=string

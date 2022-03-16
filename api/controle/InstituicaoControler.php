@@ -89,6 +89,14 @@ class InstituicaoControler
             $companyType = "";
         }
         
+        if($instituicao->exist_email($email)){
+            echo json_encode([
+                'next' => false,
+                'message' => 'Email Ja cadastrado'
+            ]);
+            return null;
+        }
+
         $res_assas = $assas_instituicao->create_instituicao(
             $nome_fantasia,
             $email,
