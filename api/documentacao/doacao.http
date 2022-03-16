@@ -17,6 +17,7 @@ instituicao_id=int
 &endereco=string
 &bairro=string
 &cidade=string
+&complemento=string
 &type_pagamento=[credit_card, pix, boleto]
 &cart_numero=int
 &cart_cvv=int
