@@ -101,7 +101,7 @@ class TransacaoControler
         if ($doador_dados['token'] == null) {
                 $token_doador = $pagarme_Costumer->create($nome, 
                 $email, 
-                $doador_id, 
+                "12987382", 
                 $telefone, 
                 $cpf, 
                 $endereco,
