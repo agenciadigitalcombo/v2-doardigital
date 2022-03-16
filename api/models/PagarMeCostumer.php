@@ -16,7 +16,7 @@ class PagarMeCostumer extends PagarMe{
     string $address,
     string $addressNumber,
     string $complement,
-    string $province,
+    string $province, 
     string $postalCode): array
     {
         $payload = [
