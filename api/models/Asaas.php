@@ -58,7 +58,7 @@ class Asaas
     function is_debug($payload)
     {
         if (!empty($_REQUEST['debug_pay'])) {
-            echo json_encode($payload);
+            var_dump($payload);
         }
     }
 
