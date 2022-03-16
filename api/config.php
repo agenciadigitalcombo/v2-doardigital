@@ -1,10 +1,10 @@
 <?php
 
 return [
-    "host" => "sql718.main-hosting.eu",
-    "banco" => "u236932588_doardigital",
-    "user" => "u236932588_doardigital",
-    "senha" => "^2hqx&rS",
+    "host" => "162.240.10.148",
+    "banco" => "doardigi_doar_sandbox",
+    "user" => "doardigi_john",
+    "senha" => "Seraph@121",
     "api_key" => "ak_test_zcP5r3XuiDCVdnbcnH5wB2vMOqsPFl",
     "postback_url" => "https://teste.com",
     "base" => "https://doardigital.tk",
