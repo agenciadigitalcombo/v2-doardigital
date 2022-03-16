@@ -1,5 +1,5 @@
 import http from './http.js'
- 
+
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/criar-adm', {
@@ -141,23 +141,39 @@ export default {
 
 
     async cadastrarInstituicao(
+        token,
         nome_fantasia,
         razao_social,
         subdomaim,
+        tipo_empresa,
         email,
         cnpj,
-        telefone,
-        token,
+        telefone, 
+        logradouro,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+        numero,
+        cep,
 
     ) {
         return await http.post('/create-instituicao', {
+            token,
             nome_fantasia,
             razao_social,
             subdomaim,
+            tipo_empresa,
             email,
             cnpj,
-            telefone,
-            token,
+            telefone, 
+            logradouro,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            numero,
+            cep,
         })
     },
     async validarDomain(subdomain) {
@@ -626,7 +642,7 @@ export default {
         nome_completo,
         documento_numero,
         recebedor_nome,
-        email_recebedor, 
+        email_recebedor,
         site_url,
         telefone_recebedor,
 
@@ -643,13 +659,13 @@ export default {
             nome_completo,
             documento_numero,
             recebedor_nome,
-            email_recebedor, 
+            email_recebedor,
             site_url,
             telefone_recebedor,
         })
     },
 
-    
+
     async cotaEditarInstituicao(
         token,
         instituicao_id,

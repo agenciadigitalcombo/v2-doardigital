@@ -7,9 +7,16 @@ export default {
 
 	data: function () {
 		return {
+			nome_fantasia: null,
+			razao_social: null,
+			subdomain: null,
+			tipo_empresa: null,
+			email: null,
+			cnpj: null,
+			telefone: null,
+
 			id: null,
-			instituicao_id: null,
-			nome_identificacao: "instituicao",
+			instituicao_id: null, 
 			cep: null,
 			logradouro: null,
 			numero: null,
@@ -33,13 +40,17 @@ export default {
 
 	methods: {
 
-		async cadastrarEndereco() { 
-			this.error = null
-
-			let res = await adm.enderecoInstituicao(
+		async cadastrarEndereco() {
+			this.error = null 
+				let res = await adm.cadastrarInstituicao(
 				this.token,
-				await this.infoSubdomain(globalThis._subdomaim),
-				this.nome_identificacao,
+				this.nome_fantasia,
+				this.razao_social,
+				this.subdomaim,
+				this.tipo_empresa,
+				this.email,
+				this.cnpj,
+				this.telefone, 
 				this.logradouro,
 				this.complemento,
 				this.bairro,
@@ -51,19 +62,19 @@ export default {
 			if (!res.next) {
 				this.error = res.message
 				return null
-			} 
-			localStorage.setItem("instituicao_id", await this.infoSubdomain(globalThis._subdomaim)); 
+			}
+			localStorage.setItem("instituicao_id", await this.infoSubdomain(globalThis._subdomaim));
 			window.location.href = "#/bancoInstituicoes"
 		},
 
 		async infoSubdomain(subdomaim) {
 			let res = await adm.todoSubdomain(
-				subdomaim  
+				subdomaim
 			)
 
 			return res.dados_instituicao.id
 		},
-		 
+
 		async eliminaEndereco() {
 			let res = await adm.eliminaEndereco(
 				this.secret,
@@ -75,7 +86,7 @@ export default {
 			}
 
 		},
- 
+
 
 		searchCep() {
 			if (this.cep.length == 8) {
@@ -100,9 +111,16 @@ export default {
 
 	},
 
-  
-	created() {
-		this.instituicao_id = localStorage.getItem('instituicao_id')
+	async mounted() {
+
+		this.nome_fantasia = globalThis._nome
+		this.razao_social = globalThis._recebedor
+		this.subdomaim = globalThis._subdomaim
+		this.tipo_empresa = globalThis._empresa
+		this.email = globalThis._email
+		this.cnpj = globalThis._cnpj
+		this.telefone = globalThis._telefone
 	},
-    template: await get_template('./assets/js/view/instituicoes/local_instituicoes')
+
+	template: await get_template('./assets/js/view/instituicoes/local_instituicoes')
 }
