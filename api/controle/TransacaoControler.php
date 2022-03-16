@@ -298,11 +298,11 @@ class TransacaoControler
 
         // // SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
 
-        echo json_encode([
-            'next' => true,
-            'message' => 'Transacao Concluida',
-            'codigo' => $codigo,
-            'url' => $url
-        ]);
+        // echo json_encode([
+        //     'next' => true,
+        //     'message' => 'Transacao Concluida',
+        //     'codigo' => $codigo,
+        //     'url' => $url
+        // ]);
     }
 }
