@@ -112,6 +112,7 @@ class TransacaoControler
             var_dump($token_doador);
             die;
             $get_token_doador = $token_doador['id'];
+            
             $doador->set_token($doador_id, $get_token_doador);
             // $doador_dados['token'] = $token_doador;
         }
