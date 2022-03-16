@@ -98,22 +98,22 @@ class TransacaoControler
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
         
-        if ($doador_dados['token'] == null) {
-            $token_doador = $pagarme_Costumer->create($nome, 
-            $email, 
-            $doador_id, 
-            $telefone, 
-            $cpf, 
-            $endereco,
-            $numero,
-            $complemento,
-            $bairro,
-            $cep);
-            $get_token_doador = $token_doador['id'];
+        // if ($doador_dados['token'] == null) {
+        //     $token_doador = $pagarme_Costumer->create($nome, 
+        //     $email, 
+        //     $doador_id, 
+        //     $telefone, 
+        //     $cpf, 
+        //     $endereco,
+        //     $numero,
+        //     $complemento,
+        //     $bairro,
+        //     $cep);
+        //     $get_token_doador = $token_doador['id'];
             
-            $doador->set_token($doador_id, $get_token_doador);
-            // $doador_dados['token'] = $token_doador;
-        }
+        //     $doador->set_token($doador_id, $get_token_doador);
+        //     // $doador_dados['token'] = $token_doador;
+        // }
         var_dump($_REQUEST);
         die;
 
