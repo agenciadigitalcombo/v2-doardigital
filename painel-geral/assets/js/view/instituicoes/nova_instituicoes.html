@@ -110,6 +110,23 @@
                                             </div> 
                                         </div>
 
+                                        <div class="row mb-6"> 
+                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                <span class="required">Tipo de Empresa</span>
+
+                                            </label> 
+                                            <div class="col-lg-8 fv-row">
+                                                <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option">
+                                                    <option value="" disabled selected>Seleciona Tipo de Empresa</option>
+                                                    <option value="MEI">MEI</option>
+                                                    <option value="Limitada (ltda.)">Limitada (ltda.)</option>
+                                                    <option value="Individual">Individual</option>
+                                                    <option value="Associação">Associação</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+
+
                                     </div> 
                                     <div class="card  mb-xl-5"> 
                                         <div class="card-header border-0 cursor-pointer">
@@ -142,7 +159,7 @@
 
 
                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                        <button class="btn btn-primary"" type=" submit"
+                                        <button class="btn btn-primary" type="submit"
                                             :disabled="submitStatus === 'PENDING'">SALVAR!</button>
                                     
                                     </div>

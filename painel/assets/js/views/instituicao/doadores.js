@@ -213,7 +213,7 @@ export default {
 															</td>
 														 
 
-															<td> <div> {{item.data_registro}} </div></td>
+															<td> <div> {{item.data_registro | esta_data }} </div></td>
 
 															<td> {{item.cpf}} </td>
 															<td>
@@ -272,6 +272,10 @@ export default {
         este_valor(price) {
             let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${valor}`
+        },
+		esta_data(datas) {
+            let data = datas.split('-').reverse().join('/');
+            return `${data}`
         },
 	},
 	

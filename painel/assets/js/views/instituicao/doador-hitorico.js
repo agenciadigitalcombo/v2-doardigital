@@ -117,7 +117,7 @@ export default {
 											<!--end:::Tab item-->
 
 											<!--begin:::Tab item Security-->
-											<li class="nav-item">
+											<li class="nav-item" v-if="tipo !== 'UNICO'" >
 												<a class="nav-link text-active-primary pb-4" @click="assinaturaV()"
 													data-bs-toggle="tab" :class="{ active: assinatura }">
 													Assinaturas</a>
@@ -538,21 +538,21 @@ export default {
 
 
 	data: function () {
-		
+
 		return {
 			foto: '../painel/assets/image/gravatar.png',
-			
-			instituicao_id : null,
+
+			instituicao_id: null,
 			id: null,
 			token: null,
 			nome: null,
 			tipo: null,
 			cpf: "",
 			telefone: null,
-			email: null, 
+			email: null,
 			data: null,
-			doacoes:[],
-			assinaturas:[],
+			doacoes: [],
+			assinaturas: [],
 			end: {
 				cep: null,
 				logadouro: null,
@@ -572,23 +572,24 @@ export default {
 			visao: true,
 			assinatura: false,
 			historico: false,
+			dataFinal: null,
 		}
 
 	},
-	
+
 	filters: {
-        is_price(price) {
-            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            return `R$ ${valor}`
-        },
-	
-		
-        is_data(datas) {
-            let data = datas.split('-').reverse().join('/');
-            return `${data}`
-        },
- 
-  
+		is_price(price) {
+			let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			return `R$ ${valor}`
+		},
+
+
+		is_data(datas) {
+			let data = datas.split('-').reverse().join('/');
+			return `${data}`
+		},
+
+
 
 		este_status(status) {
 			let apresentar = {
@@ -607,67 +608,58 @@ export default {
 		},
 
 		este_tipo(status) {
-            let apresentar = {
-                boleto: 'Boleto',
-                credit_card: 'Crédito',
-                pix: 'PIX',
-            }
-            return apresentar[status]
-        },
-       
-    },
-
-
-    computed: {
-
-		filtraDoacao2() {
-			return this.doacoes.filter((doacao) => {
-				return doacao.data.match(
-					console.log(this.data),
-					//this.data.split('-').reverse().join('') >= "20220304",
-					
-					);
-
-			})
+			let apresentar = {
+				boleto: 'Boleto',
+				credit_card: 'Crédito',
+				pix: 'PIX',
+			}
+			return apresentar[status]
 		},
 
-        filtraDoacao() {
- 
-             let valores
+	},
 
-             valores = this.doacoes.filter((filtrar) => {
-                return filtrar.data
-                 //return filtrar.data.split('-').join('') <= '20220312';
-             })
 
-             return valores
+	computed: {
 
-   },
+		filtraDoacao() {
 
-    },
+			let valores
+
+			valores = this.doacoes.filter((filtrar) => {
+				return filtrar.data.split('-').join('') <= this.dataFinal;
+			})
+
+			return valores
+
+		},
+
+	},
 
 	async mounted() {
-		var dataAtual = new Date();
-		var dia = dataAtual.getDate();
-		var mes = (dataAtual.getMonth() + 1);
-		var ano = dataAtual.getFullYear(); 
-		var str_data = dia + '/' + mes + '/' + ano;
-		console.log(str_data);
+
+		let dateObj = new Date()
+		 this.dataFinal = dateObj.toLocaleString('en-GB', {
+			year: 'numeric',
+			month: '2-digit',
+			day: '2-digit',
+		}).split('/').reverse().join('');
+
+		console.log(this.dataFinal)
+
 
 		this.cpf = globalThis._doador.cpf
 		this.tipo = globalThis._doador.tipo
-		
+
 
 		let dados = (await this.listar()).dados
 		this.doacoes = (await this.listar()).dados.doacoes
 
 		var assinaturas = (await this.listar()).dados.doacoes[0]
-		this.assina.data = assinaturas.data ,
-		this.assina.valor = assinaturas.valor,
-		this.assina.identificador = assinaturas.plano_id,
-	 
-		console.log(assinaturas)
-		 // let date_created = datas.split('-').reverse().join('/'); 
+		this.assina.data = assinaturas.data,
+			this.assina.valor = assinaturas.valor,
+			this.assina.identificador = assinaturas.plano_id,
+ 
+		// let date_created = datas.split('-').reverse().join('/'); 
 
 		this.nome = dados.nome
 		//this.cpf = dados.cpf
@@ -686,25 +678,25 @@ export default {
 
 	methods: {
 
-		visaoV() { 
+		visaoV() {
 			this.show = '1',
-			this.visao = true,
-			this.assinatura = false,
-			this.historico = false
+				this.visao = true,
+				this.assinatura = false,
+				this.historico = false
 		},
 
-		assinaturaV() { 
+		assinaturaV() {
 			this.show = '2',
-			this.visao = false,
-			this.assinatura = true,
-			this.historico = false
+				this.visao = false,
+				this.assinatura = true,
+				this.historico = false
 		},
 
-		historicoV() { 
+		historicoV() {
 			this.show = '3',
-			this.visao = false,
-			this.assinatura = false,
-			this.historico = true
+				this.visao = false,
+				this.assinatura = false,
+				this.historico = true
 		},
 
 		async listar() {
@@ -715,7 +707,7 @@ export default {
 			return res
 		},
 
-		async editar(instituicao_id){
+		async editar(instituicao_id) {
 			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
 			window.location.href = "#/doador/detalhe"
 		},
