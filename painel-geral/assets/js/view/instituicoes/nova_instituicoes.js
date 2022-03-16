@@ -10,6 +10,7 @@ export default {
 			nome_fantasia: null,
 			razao_social: null,
 			subdomain: null,
+			tipo_empresa: null,
 			email: null,
 			cnpj: null,
 			telefone: null,
@@ -66,11 +67,6 @@ export default {
 		},
 
 
-
-		async listar() {
-
-		},
-
 		async addInstituicao() {
 			this.error = null
 			this.$v.$touch()
@@ -79,29 +75,16 @@ export default {
 			}else if (this.jms === false) {
 				this.error = "Porfavor adicione um subdominio valido "
 			  } else {
-
-				let res = await adm.cadastrarInstituicao(
-					this.nome_fantasia,
-					this.razao_social,
-					this.subdomain,
-					this.email,
-					this.cnpj,
-					this.telefone,
-					this.token,
-				)
-				if (!res.next) {
-					console.log(res)
-					this.error = res.message
-					return null
-				}
-
-				globalThis._subdomaim =  this.subdomain  
-				globalThis._email =  this.email 
-			    globalThis._telefone =  this.telefone 
+				
 				globalThis._nome =  this.nome_fantasia  
 				globalThis._recebedor =  this.razao_social
-				globalThis._cnpj =  this.cnpj.replace(/[^\d]+/g,'')
-
+				globalThis._subdomaim =  this.subdomain  
+				globalThis._empresa =  this.tipo_empresa 
+				globalThis._email =  this.email 
+				globalThis._cnpj =  this.cnpj
+			    globalThis._telefone =  this.telefone 
+				//globalThis._cnpj =  this.cnpj.replace(/[^\d]+/g,'')
+				
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK' 
