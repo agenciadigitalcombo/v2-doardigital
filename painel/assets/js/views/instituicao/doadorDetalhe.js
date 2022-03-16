@@ -39,7 +39,7 @@ export default {
 											<!--begin::Row-->
 											<div class="row mb-7">
 											 
-												<div class="col-lg-6">
+												<div class="col-lg-5">
 												<span class=" fw-bold text-muted">
 												Nome</span>
 													<p class="fw-bolder fs-6 text-gray-800">{{ nome }}</p>
@@ -76,13 +76,25 @@ export default {
 													<p class="fw-bolder fs-6 text-gray-800">{{ status | este_status }}</p>
 												
 												</div>
-												<div class="col-lg-2">
+												<div class="col-lg-3">
 
-												<a class="btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary mb-2">Reenviar E-mail</a>
+												<a class="btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary w-100 mb-2">Reenviar E-mail</a>
 												
-												<a class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success mb-2">Reenviar Whatsapp</a>
+												<a class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success w-100 mb-2">Reenviar Whatsapp</a>
 
-												<a class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger">Estorno</a>
+												<div v-if="status=='paid'" >
+												<a class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger w-100">fazer Estorno</a>
+												
+												<div class="alert alert-dismissible bg-light-danger border border-danger border-dashed d-flex flex-column flex-sm-row w-100 p-5">
+												 <div class="d-flex flex-column pe-0"> 
+													<span>
+													O Estorno e valido somente 30 dias após contando da data de doação paga.
+													 Passando 30 dias do pagamento não será possível fazer o estorno.
+													</span>
+												</div>
+											</div>
+											</div>
+											
 												</div>
 											</div>
 										
@@ -105,12 +117,7 @@ export default {
 								</div>
 								<!--end::Container-->
 							</div>
-							<!--end::Post-->
-
-
-						</div>
-						<!--end::Content-->
-              
+					 
 
 
 
@@ -118,107 +125,182 @@ export default {
 
 
 
-						<div id="kt_post" class="post d-flex flex-column-fluid">
-    <div id="kt_content_container" class="container-xxl">
-        <div id="kt_profile_details_view" class="card mb-5 mb-xl-10">
-          
+				 
+							<div class="post d-flex flex-column-fluid" >
+							<div class="container-xxl">
+								<div class="card">
+							 
+														<div class="text-center mt-6">
+												 
+															<div id="block2" v-if="tipo=='boleto'"> 
+															<h3 class="fs-3 text-dark">
+																Sua doação esta em aberto!.</h3> 
+																<h3 class="fs-1 text-dark ">
+																	<span>Clique abaixo para acessar o seu boleto.</span>
+																</h3>
+																
+																<a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-5">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+																		class="bi bi-upc" viewBox="0 0 16 16">
+																		<path
+																			d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																	</svg>
+																	VER MEU BOLETO
+																</a>
+																<div class="mw-lg-600px mx-auto"> 
+																	<div class="mb-5 text-center"> 
+																		<div class="text-muted fw-bold fs-5">ou copie o
+																			<a href="#" class="link-primary fw-bolder"> código de barras:</a>.
+																		</div> 
+																	</div> 
+																	<div class="mb-5">
+																	<div class="d-flex">
+																		<input tipo="text" v-model="codigo_geral"  ref="codigo" 
+																			class="form-control  me-3 flex-grow-1" name="search" >
+																		<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+																	</div> 
+																</div>
+									
+																</div>
+																<h3 class="mb-10"> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
+																</div>
+															
+															<div id="block2" v-if="tipo=='pix'">
+															
+															<h3 class="fs-1 text-dark mb-15">
+																Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
+								
+														 
+																<div class="mw-lg-600px mx-auto"> 
+																	<div class="mb-13 text-center"> 
+																		<div class="text-muted fw-bold fs-5 ">
+																			<h2 class="text-gray-600">
+																			Seu codigo PIX..
+																			</h2>
+																		</div> 
+																	</div>  
+																</div>
+															</div>
+									 
+															<center>
+															<div ref="print_qr"></div>
+														</center>
+														 
+											
+																
+														<div id="block12" v-if="tipo=='pix'">
+														
+															<div class="mw-lg-600px mx-auto  mt-10"> 
+															  
+																<div class="mb-10">
+																	<div class="d-flex">
+																		<input tipo="text" v-model="codigo_geral"  ref="codigo" 
+																			class="form-control  me-3 flex-grow-1" name="search" >
+																		<button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
+																	</div> 
+																</div>
+															</div>
+														</div> 
+									
+														</div> 
+													</div> 
+												</div> 
+												</div>
+						 
+						
+						
 
 
 
+<div class="content d-flex flex-column flex-column-fluid">
+<div class="post d-flex flex-column-fluid">
 
+                        <div class="container-xxl">
 
+                            <div class="card">
+                                <div class="card-header border-0 pt-6">
 
-
-
-
- 
-                       
-                                <div class="text-center mt-10">
-                         
-                                    <div id="block2" v-if="tipo=='boleto'"> 
-                                    <h3 class="fs-2 text-dark">
-                                        Sua doação esta em aberto!.</h3> 
-                                        <h3 class="fs-1 text-dark ">
-                                            <span>Clique abaixo para acessar o seu boleto.</span>
-                                        </h3>
-                                        
-                                        <a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-14">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                                class="bi bi-upc" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
-                                            </svg>
-                                            VER MEU BOLETO
-                                        </a>
-                                        <div class="mw-lg-600px mx-auto"> 
-                                            <div class="mb-5 text-center"> 
-                                                <div class="text-muted fw-bold fs-5">ou copie o
-                                                    <a href="#" class="link-primary fw-bolder"> código de barras:</a>.
-                                                </div> 
-                                            </div> 
-                                            <div class="mb-5">
-                                            <div class="d-flex">
-                                                <input tipo="text" v-model="codigo_geral"  ref="codigo" 
-                                                    class="form-control  me-3 flex-grow-1" name="search" >
-                                                <button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
-                                            </div> 
-                                        </div>
-            
-                                        </div>
-                                        <h3 class="mb-10"> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
-                                        </div>
-                                    
-                                    <div id="block2" v-if="tipo=='pix'">
-                                    
-                                    <h3 class="fs-1 text-dark mb-15">
-                                        Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
-        
-                                 
-                                        <div class="mw-lg-600px mx-auto"> 
-                                            <div class="mb-13 text-center"> 
-                                                <div class="text-muted fw-bold fs-5 ">
-                                                    <h2 class="text-gray-600">
-                                                    Seu codigo PIX..
-                                                    </h2>
-                                                </div> 
-                                            </div>  
+                                    <div class="card-title">
+                                        <div class="d-flex align-items-center position-relative my-1">
+										<h3 class="fw-bolder m-0">Detalhe da Transação</h3>
+										 
                                         </div>
                                     </div>
-             
-                                    <center>
-                                    <div ref="print_qr"></div>
-                                </center>
-                                 
-                    
-                                        
-                                <div id="block12" v-if="tipo=='pix'">
-                                
-                                    <div class="mw-lg-600px mx-auto  mt-10"> 
-                                      
-                                        <div class="mb-10">
-                                            <div class="d-flex">
-                                                <input tipo="text" v-model="codigo_geral"  ref="codigo" 
-                                                    class="form-control  me-3 flex-grow-1" name="search" >
-                                                <button @click="copiar('codigo')" class="btn btn-light btn-primary fw-bolder flex-shrink-0" >Copiar</button>
-                                            </div> 
-                                        </div>
+                                   
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="table-responsive">
+									<table class="table table-striped gy-7 gs-7">
+                                            <thead>
+											<tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                                   
+                                                    <th class="min-w-100px">NOME</th>
+													<th class="min-w-100px">Tipo</th>
+                                                    <th class="min-w-100px">Valor</th>
+                                                    <th class="min-w-100px">%DOAR </th>
+                                                    <th class="min-w-100px">Pix</th>
+                                                    <th class="min-w-100px">Cartão </th>
+                                                    <th class="min-w-100px">Boleto</th>
+                                                    <th class="min-w-150px">Valor Liquido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-gray-600 fw-bold">
+                                                <tr>
+
+												<td>
+												{{ nome }}
+												</td>
+
+                                                    <td>
+													{{ tipo | este_tipo }}
+                                                    </td>
+
+                                                    <td>
+													{{ valor | is_price}}
+                                                    </td>
+
+                                                    <td> 
+                                                        <div class="d-flex flex-column">
+                                                            <a class="text-gray-800 text-hover-primary mb-1">
+                                                               4%
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                   
+                                                    <td>
+                                                        <div class=""> 
+														R$ 0,79 
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div
+                                                            class="form-check form-switch form-check-custom form-check-solid me-10">
+															2,99% + R$ 0,49
+                                                        </div>
+
+                                                    </td>
+
+                                                    <td>
+														R$ 1.99 
+                                                    </td>
+
+													<td>
+												 
+												   </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div> 
-            
-                                </div> 
-                            </div> 
-                        </div> 
-      
-</div>
+                                </div>
+                            </div>
+							</div>
+                        </div>
+                    </div>
 
-
-
-
-
-
-
-
-
+					</div>
+				
 
 
             </div>

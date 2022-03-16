@@ -3,7 +3,7 @@
 
 class TransacaoControler
 {
-
+    
     static function create_transacao()
     {
         header('Content-Type: text/html; charset=utf-8');
@@ -16,7 +16,7 @@ class TransacaoControler
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
         $adm = new Adm();
-
+        
         campo_obrigatorios([
             'planos_valor' => 'Campo planos_valor opbrigatorio',
             'type_pagamento' => 'Campo type_pagamento opbrigatorio',
@@ -31,8 +31,8 @@ class TransacaoControler
             'numero' => 'Campo numero opbrigatorio',
             'cep' => 'Campo cep opbrigatorio',
         ]);
-
-
+        
+        
         $instituicao_id = $_REQUEST['instituicao_id'];
         $planos_valor = $_REQUEST['planos_valor'];
 
@@ -61,23 +61,24 @@ class TransacaoControler
         $endereco = $_REQUEST['endereco'];
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
-
+        $complemento = $_REQUEST['complemento'] ?? '';
+        
         $type_pagamento = $_REQUEST['type_pagamento'];
-
+        
         if ($type_pagamento == "credit_card") {
-
+            
             $cart_numero = $_REQUEST['cart_numero'];
             $cart_cvv = $_REQUEST['cart_cvv'];
             $cart_nome = $_REQUEST['cart_nome'];
             $cart_validade_campo = $_REQUEST['cart_validade'];
             $cart_validade = withdraw_caracter($cart_validade_campo);
         }
-
+        
         $reference_key = "ref_" . uniqid();
-
-
-
-
+        
+        
+        
+        
 
 
         if (!$doacao->valid_type_pagamento($type_pagamento)) {
@@ -87,25 +88,37 @@ class TransacaoControler
             ]);
             return null;
         }
-
+        
         $is_doador = $doador->exist($cpf);
         if (!$is_doador) {
             $telefone_sem_ddd = telefone_get_number($telefone);
             $doador->create($nome, $email, $telefone_sem_ddd, $cpf, uniqid());
         }
-
+        
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
-
+        
         if ($doador_dados['token'] == null) {
-            $token_doador = $pagarme_Costumer->create($nome, $email, $doador_id, ['+55' . $telefone], $cpf);
-            $get_token_doador = $token_doador['id'];
-            $doador->set_token($doador_id, $get_token_doador);
-            // $doador_dados['token'] = $token_doador;
-        }
-
-
-        if ($doador_dados['token'] == null) {
+                $token_doador = $pagarme_Costumer->create($nome, 
+                $email, 
+                $doador_id, 
+                $telefone, 
+                $cpf, 
+                $endereco,
+                $numero,
+                $complemento,
+                $bairro,
+                $cep);
+                $get_token_doador = $token_doador['id'];
+            
+                $doador->set_token($doador_id, $get_token_doador);
+                // $doador_dados['token'] = $token_doador;
+            }
+            
+            
+            
+            
+            if ($doador_dados['token'] == null) {
 
             $get_token_doador = $token_doador['id'];
         }
@@ -114,34 +127,34 @@ class TransacaoControler
 
             $get_token_doador = $doador_dados['token'];
         }
-
-
+        
+        
         $res_plano = $pagarme_plano->create($nome, $planos_valor);
         $plano_token = $res_plano['id'];
-
-        $Endereco->create($doador_id, "Endereco Doacao", $cep, $endereco, $numero, "casa", $bairro, $cidade, $estado);
+        
+        $Endereco->create($doador_id, "Endereco Doacao", $cep, $endereco, $numero, $complemento, $bairro, $cidade, $estado);
 
         $codigo = null;
         $url = null;
         $split = [];
-
-
+        
+        
         $split_rules = new Split();
         $all_split = $split_rules->list_all_by_instituicao($instituicao_id);
         $total_porcent = array_reduce($all_split, function ($total, $pessoa) {
-            return intval($pessoa['porcentagem']) + $total;
-        }, 0);
-        if ($total_porcent == 100) {
-            $split = array_map(function ($list) {
-                return [
-                    'recipient_id' => $list['recebedor_id'],
-                    'percentage' => $list['porcentagem'],
-                    'liable' => !!$list['responsavel_estorno']
-                ];
-            }, $all_split);
-        }
-
-        if ($mensal == 1) {
+                return intval($pessoa['porcentagem']) + $total;
+            }, 0);
+            if ($total_porcent == 100) {
+                    $split = array_map(function ($list) {
+                            return [
+                                    'recipient_id' => $list['recebedor_id'],
+                                    'percentage' => $list['porcentagem'],
+                                    'liable' => !!$list['responsavel_estorno']
+                                ];
+                            }, $all_split);
+                        }
+                        
+                        if ($mensal == 1) {
             set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
         }
 

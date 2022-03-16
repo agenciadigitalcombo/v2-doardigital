@@ -12,6 +12,7 @@ export default [
     { path: '/modulos/evenda', component: { template: '<c-modulosEvendas>' } },
     { path: '/modulos/mailing', component: { template: '<c-modulosMailing>' } },
     { path: '/modulos/rd-station', component: { template: '<c-modulosStation>' } },
+    { path: '/modulos/dominio', component: { template: '<c-dominio>' } },
 
     { path: '/doadores', component: { template: '<c-doadores>' } },
     { path: '/doacoes', component: { template: '<c-doacoes>' } },

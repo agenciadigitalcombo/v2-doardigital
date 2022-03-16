@@ -1,6 +1,6 @@
 <?php
 
-class Instituicao implements IInstituicao
+class Instituicao
 {
 
     public function set_token_recebedor(int $recebedor_id, string $recebedor_token): void
@@ -26,6 +26,15 @@ class Instituicao implements IInstituicao
         return $guard[0] ?? [];
     }
     
+    public function exist_email(string $email): bool
+    {
+        
+        $banco = new Banco();
+        $sql = "SELECT * FROM instituicao WHERE email='$email'";
+        $consulta = $banco->query($sql);
+        return !empty($consulta);
+    }
+
     public function exist_subdomain(string $subdomain): bool
     {
         
@@ -42,15 +51,15 @@ class Instituicao implements IInstituicao
         $banco->exec($sql);
     }
 
-    public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
+    public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $recebedor_token, string $cor, string $logo): void
     {   
         $status = 1;
         $data_registro = date('Y-m-d');
         $banco = new Banco();
         $sql = "INSERT INTO instituicao";
-        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, cor, logo, status, data_registro)";
+        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, recebedor_token, cor, logo, status, data_registro)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$cor', '$logo', $status, '$data_registro')";
+        $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$recebedor_token','$cor', '$logo', $status, '$data_registro')";
         $banco->exec($sql);
     }
 
@@ -60,7 +69,6 @@ class Instituicao implements IInstituicao
         $sql = "UPDATE instituicao SET";
         $sql .= " nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
         $sql .= " WHERE id=$instituicao_id";
-        
         $banco->exec($sql);
 
     }

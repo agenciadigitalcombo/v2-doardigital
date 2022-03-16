@@ -29,9 +29,9 @@ class Domain {
     }
 
     function createSubdomain($subdomain) {
-        return json_decode($this->post("https://187.45.181.130:2087/cpsess53I5927Y73ZQPQH31OW85E70JAQLX1FA/json-api/create_subdomain?api.version=1&domain={$subdomain}.doardigital.com.br&document_root=public_html%2f", [], ''));
+        return json_decode($this->post("http://162.240.10.148:2087/cpsess1RH4AASIGCPCNIPVBVMFJGKC5CYKLLUJ/json-api/create_subdomain?api.version=1&domain={$subdomain}.doardigital.tk&document_root=public_html%2f", [], ''));
     }
     function createAlias($intis) {
-        return json_decode($this->post("https://187.45.181.130:2087/cpsess53I5927Y73ZQPQH31OW85E70JAQLX1FA/json-api/cpanel?cpanel_jsonapi_user=doardi27&cpanel_jsonapi_apiversion=2&cpanel_jsonapi_module=Park&cpanel_jsonapi_func=park&domain={$intis->dominio}&topdomain={$intis->subdominio}&disallowdot=0", [], ''));
+        return json_decode($this->post("http://162.240.10.148:2087/cpsess1RH4AASIGCPCNIPVBVMFJGKC5CYKLLUJ/json-api/cpanel?cpanel_jsonapi_user=doardigital&cpanel_jsonapi_apiversion=2&cpanel_jsonapi_module=Park&cpanel_jsonapi_func=park&domain={$intis->dominio}&topdomain={$intis->subdominio}&disallowdot=0", [], ''));
     }
 }
