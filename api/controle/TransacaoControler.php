@@ -3,9 +3,11 @@
 
 class TransacaoControler
 {
-
+    
     static function create_transacao()
     {
+    var_dump($_REQUEST);
+    die;
         header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
         $doador = new Doador();
@@ -114,8 +116,6 @@ class TransacaoControler
         //     $doador->set_token($doador_id, $get_token_doador);
         //     // $doador_dados['token'] = $token_doador;
         // }
-        var_dump($_REQUEST);
-        die;
 
         
 
