@@ -115,7 +115,6 @@ class TransacaoControler
                 // $doador_dados['token'] = $token_doador;
             }
             
-            
             die;
             
             // if ($doador_dados['token'] == null) {
