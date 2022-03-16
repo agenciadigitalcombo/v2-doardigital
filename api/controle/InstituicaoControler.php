@@ -92,7 +92,7 @@ class InstituicaoControler
         if($instituicao->exist_email($email)){
             echo json_encode([
                 'next' => false,
-                'message' => 'Email Ja cadastrado'
+                'message' => 'Email Já cadastrado!'
             ]);
             return null;
         }
