@@ -76,12 +76,13 @@ class Asaas
                 CURLOPT_HTTPHEADER     => [
                     'Content-Type:application/json',
                     "access_token: {$this->token}"
-                ]
-            ];
-
-            $con = curl_init();
-            curl_setopt_array($con, $defaults);
-            $ex = curl_exec($con);
+                    ]
+                ];
+                
+                $con = curl_init();
+                curl_setopt_array($con, $defaults);
+                $ex = curl_exec($con);
+                var_dump($ex);
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
@@ -106,6 +107,8 @@ class Asaas
             $con = curl_init();
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
+            // var_dump('ttaffarel');
+            // var_dump($payload);
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
