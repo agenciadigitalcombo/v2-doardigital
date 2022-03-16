@@ -8,19 +8,34 @@ class PagarMeCostumer extends PagarMe{
         parent::__construct();
     }
 
-    public function create(string $name, string $email, string $external_id, array $phone_numbers, string $cpf): array
+    public function create(string $name, 
+    string $email,
+    string $external_id, 
+    string $phone_numbers, 
+    string $cpf, 
+    string $address,
+    string $addressNumber,
+    string $complement,
+    string $province,
+    string $postalCode): array
     {
         $payload = [
             'name' => $name,
             'email' => $email,
-            'external_id' => $external_id,
-            'type' => 'individual',
-            'country' => 'br',
-            'phone_numbers' => $phone_numbers,
-            'documents' => [[
-                'type' => 'cpf',
-                'number' => $cpf
-            ]]
+            "phone" => $phone_numbers,
+            "mobilePhone" => $phone_numbers,
+            "cpfCnpj" => $cpf,
+            "postalCode" => $postalCode,
+            "address" => $address,
+            "addressNumber" => $addressNumber,
+            "complement" => $complement,
+            "province" => $province,
+            "externalReference" => $external_id,
+            "notificationDisabled" => true,
+            "additionalEmails" => "",
+            "municipalInscription" => "",
+            "stateInscription" => "",
+            "observations" => ""
             
         ];
         
