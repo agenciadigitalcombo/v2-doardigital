@@ -202,23 +202,32 @@ class TransacaoControler
         // }
 
 
-        if ($type_pagamento == "pix") {
+        if ($type_pagamento == "PIX" or $type_pagamento == "BOLETO" and $mensal != 1) {
 
             campo_obrigatorios([
                 'planos_valor' => 'Campo planos_valor opbrigatorio',
             ]);
 
             $pagarme_pix = new PagarMeTransaction();
-
+            $pagarme_boleto = new PagarMeBoleto();
             $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
+            // var_dump($res_pagarme);
+        
             if($type_pagamento == "PIX"){
 
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
+                $codigo = $get_codigo['payload'];
+                $url = $get_codigo['encodedImage'];
+            }
+            if($type_pagamento == "BOLETO"){
+
+                $get_token = $res_pagarme['id'];
+                $get_codigo = $pagarme_boleto->codig_boleto($get_token);
+                $codigo = $get_codigo['identificationField'];
+                $url = $res_pagarme['bankSlipUrl'];
                 
             }
-            $codigo = $get_codigo['payload'];
-            $url = $get_codigo['encodedImage'];
             $get_status = $res_pagarme['status'];
         }
 

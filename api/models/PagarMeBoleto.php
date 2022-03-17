@@ -1,6 +1,6 @@
 <?php
 
-class PagarMeBoleto extends PagarMe
+class PagarMeBoleto extends Asaas
 {
 
     public function create(int $amount, string $type_pagamento, string $costumer_id, string $nome_costumer, string $email_costumer, string $document_costumer, array $phone_numbers, string $data_nascimento,
@@ -83,6 +83,17 @@ class PagarMeBoleto extends PagarMe
         }
 
         return $this->post('/subscriptions', $payload, false);
+    }
+
+
+    function codig_boleto(string $transaction_id): array
+    {
+
+        $payload = [
+            "id" => $transaction_id
+        ];
+       
+        return $this->get('/payments/' . $transaction_id . '/identificationField', $payload);
     }
 
 }

@@ -11,7 +11,7 @@ class PagarMeTransaction extends Asaas
         $payload = [
             "customer" => $costumer_id,
             "billingType" => $typePayment,
-            "dueDate" => "2017-06-10",
+            "dueDate" => date('Y-m-d'),
             "value" => $amount,
             "description" => "",
             "externalReference" => "",
@@ -50,7 +50,9 @@ class PagarMeTransaction extends Asaas
             "id" => $transaction_id
         ];
        
-        return $this->post('/payments/' . $transaction_id . '/pixQrCode', $payload);
+        return $this->get('/payments/' . $transaction_id . '/pixQrCode', $payload);
     }
+
+    
 
 }
