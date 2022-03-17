@@ -181,7 +181,7 @@ class Doacao implements IDoacao{
 
 
     public function valid_type_pagamento(string $valor): bool{
-        $lb = ['credit_card', 'boleto', 'pix'];
+        $lb = ['CREDIT_CARD', 'BOLETO', 'PIX'];
 
         return in_array($valor, $lb);
     }
