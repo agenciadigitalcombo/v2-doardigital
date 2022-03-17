@@ -1,0 +1,51 @@
+// DIGITAL COMBO
+		{
+			"object": "account",
+			"id": "349836b0-e6ce-48c5-b4e1-406391ea63d8",
+			"name": "Doar Digital",
+			"email": "contato@doardigital.com.br",
+			"loginEmail": "contato@doardigital.com.br",
+			"phone": "41996283086",
+			"mobilePhone": "41996283086",
+			"address": "Rua Desembargador Aurélio Feijó",
+			"addressNumber": "11",
+			"complement": null,
+			"province": "Bacacheri",
+			"postalCode": "82540091",
+			"cpfCnpj": "28893699000185",
+			"personType": "JURIDICA",
+			"companyType": "MEI",
+			"city": 13405,
+			"state": "PR",
+			"country": "Brasil",
+			"tradingName": null,
+			"walletId": "1acf1f41-0fce-4399-8ba1-d15918a68f1d"
+		}
+
+
+// COMUNIDADE BETHÂNIA
+
+
+
+{
+			"object": "account",
+			"id": "6b770322-b2e3-4981-9dcd-b5faf4c3956b",
+			"name": "Comunidade Betânia",
+			"email": "contato@doacoesbethania.com.br",
+			"loginEmail": "contato@doacoesbethania.com.br",
+			"phone": "48984080658",
+			"mobilePhone": "48984080658",
+			"address": "ESTRADA MUNICIPAL BETHANIA",
+			"addressNumber": "400",
+			"complement": null,
+			"province": "TIMBEZINHO",
+			"postalCode": "88240000",
+			"cpfCnpj": "00816354000109",
+			"personType": "JURIDICA",
+			"companyType": "ASSOCIATION",
+			"city": 13793,
+			"state": "SC",
+			"country": "Brasil",
+			"tradingName": null,
+			"walletId": "88f3926c-c94e-4a0a-a0b5-ad936dd3423f"
+		}

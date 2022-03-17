@@ -22,6 +22,23 @@ class PagarMePix extends PagarMe
                     'value' => 'R$' . number_format($amount / 100, 2, ',', '.')
                 ]
             ],
+            "customer" => $costumer_id,
+            "billingType" => "BOLETO",
+            "dueDate" => "2017-06-10",
+            "value" => 100,
+            "description" => "Pedido 056984",
+            "externalReference" => "056984",
+            "discount" => [
+              "value" => 10,
+              "dueDateLimitDays" => 0
+            ],
+            "fine" => [
+              "value" => 1
+            ],
+            "interest" => [
+              "value" => 2
+            ],
+            "postalService" => false
         ];
         
 

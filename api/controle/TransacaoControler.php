@@ -118,15 +118,15 @@ class TransacaoControler
             
             
             
-        //     if ($doador_dados['token'] == null) {
+        if ($doador_dados['token'] == null) {
 
-        //     $get_token_doador = $token_doador['id'];
-        // }
+            $get_token_doador = $token_doador['id'];
+        }
 
-        // if (!empty($doador_dados['token'])) {
+        if (!empty($doador_dados['token'])) {
 
-        //     $get_token_doador = $doador_dados['token'];
-        // }
+            $get_token_doador = $doador_dados['token'];
+        }
         
         
         // $res_plano = $pagarme_plano->create($nome, $planos_valor);
@@ -139,24 +139,24 @@ class TransacaoControler
         // $split = [];
         
         
-        // $split_rules = new Split();
-        // $all_split = $split_rules->list_all_by_instituicao($instituicao_id);
-        // $total_porcent = array_reduce($all_split, function ($total, $pessoa) {
-        //         return intval($pessoa['porcentagem']) + $total;
-        //     }, 0);
-        //     if ($total_porcent == 100) {
-        //             $split = array_map(function ($list) {
-        //                     return [
-        //                             'recipient_id' => $list['recebedor_id'],
-        //                             'percentage' => $list['porcentagem'],
-        //                             'liable' => !!$list['responsavel_estorno']
-        //                         ];
-        //                     }, $all_split);
-        //                 }
+        $split_rules = new Split();
+        $all_split = $split_rules->list_all_by_instituicao($instituicao_id);
+        $total_porcent = array_reduce($all_split, function ($total, $pessoa) {
+                return intval($pessoa['porcentagem']) + $total;
+            }, 0);
+            if ($total_porcent == 100) {
+                    $split = array_map(function ($list) {
+                            return [
+                                    'recipient_id' => $list['recebedor_id'],
+                                    'percentage' => $list['porcentagem'],
+                                    'liable' => !!$list['responsavel_estorno']
+                                ];
+                            }, $all_split);
+                        }
                         
-        //                 if ($mensal == 1) {
-        //     set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
-        // }
+                        if ($mensal == 1) {
+            set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
+        }
 
         // if ($mensal == 1 and $type_pagamento == "credit_card") {
 
@@ -202,21 +202,21 @@ class TransacaoControler
         // }
 
 
-        // if ($type_pagamento == "pix") {
+        if ($type_pagamento == "pix") {
 
-        //     campo_obrigatorios([
-        //         'planos_valor' => 'Campo planos_valor opbrigatorio',
-        //     ]);
+            campo_obrigatorios([
+                'planos_valor' => 'Campo planos_valor opbrigatorio',
+            ]);
 
-        //     $pagarme_pix = new PagarMePix();
+            $pagarme_pix = new PagarMeTransaction();
 
-        //     $res_pagarme = $pagarme_pix->pay($planos_valor, $split, $reference_key);
+            $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
 
-        //     $get_token = $res_pagarme['id'];
-        //     $get_status = $res_pagarme['status'];
-        //     $codigo = $res_pagarme['pix_qr_code'];
-        //     $url = $res_pagarme['pix_qr_code'];
-        // }
+            $get_token = $res_pagarme['id'];
+            $get_status = $res_pagarme['status'];
+            $codigo = $res_pagarme['pix_qr_code'];
+            $url = $res_pagarme['pix_qr_code'];
+        }
 
 
         // if ($type_pagamento == "boleto" and $mensal != 1) {
@@ -301,9 +301,9 @@ class TransacaoControler
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',
-            // 'codigo' => $codigo,
-            // 'url' => $url
-            'payload' => $token_doador
+            'codigo' => $codigo,
+            'url' => $url,
+            'payload' => $res_pagarme
         ]);
     }
 }

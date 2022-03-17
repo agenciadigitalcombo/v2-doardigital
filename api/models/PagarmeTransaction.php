@@ -1,15 +1,46 @@
 <?php
 
-class PagarMeTransaction extends PagarMe
+class PagarMeTransaction extends Asaas
 {
 
-    public function create(string $transacao_id): array
+    function pay(int $amount, string $typePayment, string $costumer_id): array
     {
-        $payload = [
-            'transaction_id' => $transacao_id
-        ];
 
-        return $this->post('/transactions/transaction_id', $payload, false);
+        $config = include __DIR__ . "/../config.php";
+
+        $payload = [
+            "customer" => $costumer_id,
+            "billingType" => $typePayment,
+            "dueDate" => "2017-06-10",
+            "value" => $amount,
+            "description" => "",
+            "externalReference" => "",
+            "discount" => [
+              "value" => 0,
+              "dueDateLimitDays" => 0
+            ],
+            "fine" => [
+              "value" => 1
+            ],
+            "interest" => [
+              "value" => 0
+            ],
+            "postalService" => false,
+            "split" => [
+                [
+                     "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",
+                     "fixedValue" => 98
+                ]
+             ]
+        ];
+        
+
+        if(!empty($split)){
+            $payload['split_rules'] = $split;
+        }
+        $post_back = $config['base'] . "/api/webhook-doacao.php";
+       
+        return $this->post('/payments', $payload, $post_back);
     }
 
 }
