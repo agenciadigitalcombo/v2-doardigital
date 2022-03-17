@@ -81,13 +81,13 @@ class TransacaoControler
         
 
 
-        if (!$doacao->valid_type_pagamento($type_pagamento)) {
-            echo json_encode([
-                'next' => false,
-                'message' => 'Tipo pagamento invalido'
-            ]);
-            return null;
-        }
+        // if (!$doacao->valid_type_pagamento($type_pagamento)) {
+        //     echo json_encode([
+        //         'next' => false,
+        //         'message' => 'Tipo pagamento invalido'
+        //     ]);
+        //     return null;
+        // }
         
         $is_doador = $doador->exist($cpf);
         if (!$is_doador) {
