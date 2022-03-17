@@ -219,6 +219,7 @@ class TransacaoControler
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
                 $codigo = $get_codigo['payload'];
                 $url = $get_codigo['encodedImage'];
+                $tempo_codigo = $get_codigo['expirationDate'];
             }
             if($type_pagamento == "BOLETO"){
 
@@ -315,8 +316,8 @@ class TransacaoControler
             'next' => true,
             'message' => 'Transacao Concluida',
             'codigo' => $codigo,
-            'url' => $url,
-            'payload' => $res_pagarme
+            'url' => $url
+            // 'payload' => $res_pagarme
         ]);
     }
 }
