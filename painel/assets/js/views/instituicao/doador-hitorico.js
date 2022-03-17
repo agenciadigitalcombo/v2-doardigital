@@ -643,10 +643,7 @@ export default {
 			month: '2-digit',
 			day: '2-digit',
 		}).split('/').reverse().join('');
-
-		console.log(this.dataFinal)
-
-
+ 
 		this.cpf = globalThis._doador.cpf
 		this.tipo = globalThis._doador.tipo
 

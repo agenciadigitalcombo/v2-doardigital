@@ -133,12 +133,7 @@ export default {
 														<div class="text-center mt-6">
 												 
 															<div id="block2" v-if="tipo=='boleto'"> 
-															<h3 class="fs-3 text-dark">
-																Sua doação esta em aberto!.</h3> 
-																<h3 class="fs-1 text-dark ">
-																	<span>Clique abaixo para acessar o seu boleto.</span>
-																</h3>
-																
+														
 																<a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-5">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
 																		class="bi bi-upc" viewBox="0 0 16 16">
@@ -162,16 +157,13 @@ export default {
 																</div>
 									
 																</div>
-																<h3 class="mb-10"> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
 																</div>
 															
 															<div id="block2" v-if="tipo=='pix'">
 															
-															<h3 class="fs-1 text-dark mb-15">
-																Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
-								
-														 
-																<div class="mw-lg-600px mx-auto"> 
+															<h3 class="fs-1 text-dark>
+															
+																<div class="mw-lg-600px mx-auto mb-15""> 
 																	<div class="mb-13 text-center"> 
 																		<div class="text-muted fw-bold fs-5 ">
 																			<h2 class="text-gray-600">
@@ -237,11 +229,12 @@ export default {
                                                     <th class="min-w-100px">NOME</th>
 													<th class="min-w-100px">Tipo</th>
                                                     <th class="min-w-100px">Valor</th>
-                                                    <th class="min-w-100px">%DOAR </th>
+                                                    <th class="min-w-100px">Doar </th>
                                                     <th class="min-w-100px" v-if="tipo ==='pix'">Pix</th>
                                                     <th class="min-w-100px" v-if="tipo ==='credit_card'">Cartão </th>
                                                     <th class="min-w-100px" v-if="tipo ==='boleto'">Boleto</th>
-                                                    <th class="min-w-150px">Valor Liquido</th>
+													<th class="min-w-150px">Transação</th>
+													<th class="min-w-150px">Valor Liquido</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 fw-bold">
@@ -284,7 +277,9 @@ export default {
                                                     <td v-if="tipo ==='boleto'">
 													R$ 1.99 
                                                     </td>
-
+													<td>
+													R$ 0.49
+												   </td>
 													<td>
 													R$ {{valorLiquido}}
 												   </td>
@@ -428,10 +423,10 @@ export default {
 			var pix = parseFloat(this.perDoar) + 0.79
 			this.valorLiquido = parseFloat(valorDoado) - pix
 		} else if (this.tipo == 'credit_card') {
-			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao)
+			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao) + 0.49
 			this.valorLiquido = parseFloat(valorDoado) - cartao
 		} else {
-			var boleto = parseFloat(this.perDoar) + 1.99
+			var boleto = parseFloat(this.perDoar) + 1.99 
 			this.valorLiquido = parseFloat(valorDoado) - boleto
 
 		}
