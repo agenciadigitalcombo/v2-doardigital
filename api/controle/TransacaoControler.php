@@ -211,11 +211,15 @@ class TransacaoControler
             $pagarme_pix = new PagarMeTransaction();
 
             $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
+            if($type_pagamento == "PIX"){
 
-            $get_token = $res_pagarme['id'];
+                $get_token = $res_pagarme['id'];
+                $get_codigo = $pagarme_pix->codig_pix($get_token);
+                
+            }
+            $codigo = $get_codigo['payload'];
+            $url = $get_codigo['encodedImage'];
             $get_status = $res_pagarme['status'];
-            $codigo = $res_pagarme['pix_qr_code'];
-            $url = $res_pagarme['pix_qr_code'];
         }
 
 

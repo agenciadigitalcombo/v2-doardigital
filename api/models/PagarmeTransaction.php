@@ -43,4 +43,14 @@ class PagarMeTransaction extends Asaas
         return $this->post('/payments', $payload, $post_back);
     }
 
+    function codig_pix(string $transaction_id): array
+    {
+
+        $payload = [
+            "id" => $transaction_id
+        ];
+       
+        return $this->post('/payments/' . $transaction_id . '/pixQrCode', $payload);
+    }
+
 }
