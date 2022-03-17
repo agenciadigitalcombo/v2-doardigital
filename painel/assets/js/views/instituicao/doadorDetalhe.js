@@ -233,14 +233,14 @@ export default {
 									<table class="table table-striped gy-7 gs-7">
                                             <thead>
 											<tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-                                                   
+											  
                                                     <th class="min-w-100px">NOME</th>
 													<th class="min-w-100px">Tipo</th>
                                                     <th class="min-w-100px">Valor</th>
                                                     <th class="min-w-100px">%DOAR </th>
-                                                    <th class="min-w-100px">Pix</th>
-                                                    <th class="min-w-100px">Cartão </th>
-                                                    <th class="min-w-100px">Boleto</th>
+                                                    <th class="min-w-100px" v-if="tipo ==='pix'">Pix</th>
+                                                    <th class="min-w-100px" v-if="tipo ==='credit_card'">Cartão </th>
+                                                    <th class="min-w-100px" v-if="tipo ==='boleto'">Boleto</th>
                                                     <th class="min-w-150px">Valor Liquido</th>
                                                 </tr>
                                             </thead>
@@ -262,31 +262,31 @@ export default {
                                                     <td> 
                                                         <div class="d-flex flex-column">
                                                             <a class="text-gray-800 text-hover-primary mb-1">
-                                                               4%
+															R$ {{perDoar}}
                                                             </a>
                                                         </div>
                                                     </td>
                                                    
-                                                    <td>
+                                                    <td v-if="tipo ==='pix'">
                                                         <div class=""> 
-														R$ 0,79 
+														R$ 0.79 
                                                         </div>
                                                     </td>
                                                     
-                                                    <td>
+                                                    <td v-if="tipo ==='credit_card'">
                                                         <div
                                                             class="form-check form-switch form-check-custom form-check-solid me-10">
-															2,99% + R$ 0,49
+															R$ {{cartao}}
                                                         </div>
 
                                                     </td>
 
-                                                    <td>
-														R$ 1.99 
+                                                    <td v-if="tipo ==='boleto'">
+													R$ 1.99 
                                                     </td>
 
 													<td>
-												 
+													R$ {{valorLiquido}}
 												   </td>
 
                                                 </tr>
@@ -330,6 +330,10 @@ export default {
 			hora: null,
 			status: null,
 			cpf: null,
+			perDoar: null,
+			cartao: null,
+			valorLiquido: null,
+			boleto: null,
 			url_geral: null,
 			codigo_geral: null
 		}
@@ -380,7 +384,6 @@ export default {
 			return apresentar[status]
 		},
 
-
 	},
 
 	async mounted() {
@@ -404,14 +407,44 @@ export default {
 				correctLevel: QRCode.CorrectLevel.L
 			});
 		}
+
+		function formatReal(int) {
+			var tmp = int + '';
+			tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+			if (tmp.length > 6)
+				tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
+
+			return tmp;
+		}
+
+
+		var doado = formatReal(this.valor)
+		var valorDoado = doado.split(',').join('.');
+		 this.perDoar = (parseFloat(valorDoado) / 100) * 4;
+
+		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
+
+		if (this.tipo == 'pix') {
+			var pix = parseFloat(this.perDoar) + 0.79
+			this.valorLiquido = parseFloat(valorDoado) - pix
+		} else if (this.tipo == 'credit_card') {
+			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao)
+			this.valorLiquido = parseFloat(valorDoado) - cartao
+		} else {
+			var boleto = parseFloat(this.perDoar) + 1.99
+			this.valorLiquido = parseFloat(valorDoado) - boleto
+
+		}
+
+
 	},
 
 	methods: {
 		copiar(ref) {
-		   this.$refs[ref].select(); document.execCommand('copy');
-	   }
+			this.$refs[ref].select(); document.execCommand('copy');
+		}
 
-   },
+	},
 }
 
 
