@@ -262,7 +262,7 @@ export default {
                                                     <td> 
                                                         <div class="d-flex flex-column">
                                                             <a class="text-gray-800 text-hover-primary mb-1">
-                                                               4%
+															R$ {{perDoar}}
                                                             </a>
                                                         </div>
                                                     </td>
@@ -330,7 +330,7 @@ export default {
 			hora: null,
 			status: null,
 			cpf: null,
-			pix: null,
+			perDoar: null,
 			cartao: null,
 			valorLiquido: null,
 			boleto: null,
@@ -420,18 +420,18 @@ export default {
 
 		var doado = formatReal(this.valor)
 		var valorDoado = doado.split(',').join('.');
-		var perDoar = (parseFloat(valorDoado) / 100) * 4;
+		 this.perDoar = (parseFloat(valorDoado) / 100) * 4;
 
 		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
 
 		if (this.tipo == 'pix') {
-			var pix = parseFloat(perDoar) + 0.79
+			var pix = parseFloat(this.perDoar) + 0.79
 			this.valorLiquido = parseFloat(valorDoado) - pix
 		} else if (this.tipo == 'credit_card') {
-			var cartao = parseFloat(perDoar) + parseFloat(this.cartao)
+			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao)
 			this.valorLiquido = parseFloat(valorDoado) - cartao
 		} else {
-			var boleto = parseFloat(perDoar) + 1.99
+			var boleto = parseFloat(this.perDoar) + 1.99
 			this.valorLiquido = parseFloat(valorDoado) - boleto
 
 		}
