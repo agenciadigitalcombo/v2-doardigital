@@ -46,7 +46,7 @@ CREATE TABLE meta (
 CREATE TABLE credencial (
     id int not null auto_increment primary key,
     nome_identificacao varchar(75),
-    recursos varchar(255),
+    recursos varchar(255)
 );
 
 CREATE TABLE plano (
@@ -260,7 +260,7 @@ CREATE TABLE no_replay (
 -- acima ja foi implementado
 
 
-CREATE TABLE DASHBOARD (
+CREATE TABLE dashboard (
     id int not null auto_increment primary key,
     instituicao_id int,
     total_doacoes int,

@@ -109,7 +109,7 @@ class EmailContoler
         $title = $content['assunto'];
         $text = $content['text'];
 
-        if ($_REQUEST['tipo'] == 'pix') {
+        if ($_REQUEST['tipo'] == 'PIX') {
             $text .= "
             <p>
                Copie o código PIX abaixo para efetuar o pagamento.

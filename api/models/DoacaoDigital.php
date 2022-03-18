@@ -61,7 +61,7 @@ class DoacaoDigital{
     }
 
     public function valid_type_pagamento(string $valor): bool{
-        $lb = ['credit_card', 'boleto', 'pix'];
+        $lb = ['credit_card', 'boleto', 'PIX'];
 
         return in_array($valor, $lb);
     }

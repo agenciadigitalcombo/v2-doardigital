@@ -12,7 +12,7 @@ class PagarMePix extends PagarMe
         $config = include __DIR__ . "/../config.php";
 
         $payload = [
-            'payment_method' => 'pix',
+            'payment_method' => 'PIX',
             'amount' => $amount,
             'pix_expiration_date' => date('Y-m-d', strtotime('+7 days')),
             'reference_key' => $reference_key,

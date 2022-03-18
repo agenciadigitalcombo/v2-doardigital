@@ -143,7 +143,7 @@ class Relatorio
         $total = $rel->total($doacoes);
         $total_doacoes_cartao = $rel->filter_tipo($doacoes, 'credit_card');
         $total_doacoes_boleto = $rel->filter_tipo($doacoes, 'boleto');
-        $total_doacoes_pix = $rel->filter_tipo($doacoes, 'pix');
+        $total_doacoes_pix = $rel->filter_tipo($doacoes, 'PIX');
 
         $total_paid = $rel->filter_status($doacoes, 'paid');
         $total_doacoes_cartao_paid = $rel->filter_status($total_doacoes_cartao, 'paid');
@@ -180,7 +180,7 @@ class Relatorio
 
         ];
 
-        $tipos = ['credit_card', 'pix', 'boleto'];
+        $tipos = ['credit_card', 'PIX', 'boleto'];
         foreach ($tipos as $key) {
             $all_by_type = $rel->filter_tipo($doacoes, $key);
             $payload['dados'][$key]["quantidade"] = count($all_by_type);
