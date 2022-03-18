@@ -153,14 +153,14 @@ export default {
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="card-title mb-10"  v-if="type_pagamento !=='PIX'">
-                                            <h1> TOTAL A DOAR: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
+                                            <h1> TOTAL A DOAR: R$ {{ ver == 0 ? valor_digitado : ver
                                                 |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                         </div>
 
                                         <div class="card-title mb-10"  v-if="type_pagamento =='PIX'">
                                       
-                                        <div v-if="planos_valor > '100000'">
-                                        <h1> TOTAL A DOAR: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
+                                        <div v-if="ver > '100000'">
+                                        <h1> TOTAL A DOAR: R$ {{ ver == 0 ? valor_digitado : ver
                                             |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                          </div>
                                          <div v-else>
@@ -507,7 +507,7 @@ export default {
             cart_cvv: "123",
             cart_validade: "0922",
             cart_nome: "Morpheus Fishburne",
-
+            ver: "",
             valor_digitado: null,
             valor: null,
 
@@ -694,19 +694,19 @@ export default {
     },
 
     async mounted() {
-         // this.subdomaim = "34edqwe21"
-     this.subdomaim = window.location.hostname
+       //  this.subdomaim = "34edqwe21"
+      this.subdomaim = window.location.hostname
 
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
         if (this.planos_id) {
             this.planos_valor = window.localStorage.getItem("amount")
+            this.ver = window.localStorage.getItem("amountjms")
         } else {
             this.planos_valor = window.localStorage.getItem("amount_digitado")
         }
-        // this.planos_valor = (window.localStorage.getItem("amount")/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-
+       
 
         this.planos_nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")

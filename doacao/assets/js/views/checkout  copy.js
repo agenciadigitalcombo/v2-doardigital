@@ -22,7 +22,7 @@ export default {
 													<div class="fv-row">
 														<div class="btn-group w-100" data-kt-buttons="true"
 															data-kt-buttons-target="[data-kt-button]">
-                                                        <div v-if="temporario =='nao'">
+
 															<input v-model="mensal" type="radio" class="btn-check"
 																name="radio_buttons_2" value="1" checked="checked"
 																id="kt_radio_buttons_2_option_1" />
@@ -33,7 +33,6 @@ export default {
 																	<span class="text-dark fw-bolder d-block fs-3">DOAÇÃO MENSAL</span>
 																</span>
 															</label>
-                                                        </div>
 
 															<input v-model="mensal" type="radio" class="btn-check"
 																name="radio_buttons_2" value="0"
@@ -185,7 +184,7 @@ export default {
 	data: function () {
 		return {
 			logo: '',
-			mensal: "0",
+			mensal: "1",
 			amount: "",
 			valor: 111111,
 			planos_nome: null,
@@ -200,9 +199,8 @@ export default {
 			status: '',
 			backgroundColor: '',
 			dados: [],
-			digitado: "",
+
 			titulo: "",
-			temporario : "nuca",
 		}
 	},
  
@@ -237,7 +235,8 @@ export default {
 	methods: {
 		async infoSubdomain() {
 			let res = await adm.todoSubdomain(this.subdomaim )
-		return res
+		//	 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
+			return res
 		},
 
 		setarPlano(jms) {
@@ -270,21 +269,15 @@ export default {
 				this.minimoalerta = "Valor minimo deve ser 25,00"
 			}
 			else {
-				//this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
+				this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
 				if (this.valor == 0) {
-
-					this.valor_digitado = this.valor_digitado.split('.').join('')
-
 					window.localStorage.setItem("planos_id", "49")
 					window.localStorage.setItem("planos_nome", "plano-"+this.valor_digitado)
-					this.digitado = this.valor_digitado
-					window.localStorage.setItem("amount", this.valor_digitado.split(',00').join(''))
-					 window.localStorage.setItem("amountjms", this.valor_digitado)
+					window.localStorage.setItem("amount", this.valor_digitado)
 				} else {
 					window.localStorage.setItem("planos_id", this.planos_id)
 					window.localStorage.setItem("planos_nome", this.planos_nome)
-					window.localStorage.setItem("amount", this.valor.split('00').join(''))
-				 	window.localStorage.setItem("amountjms", this.valor)
+					window.localStorage.setItem("amount", this.valor)
 				}
 
 				window.localStorage.setItem("mensal", this.mensal)
@@ -314,10 +307,8 @@ export default {
 
 	async mounted() {
 	
-	//	this.subdomaim = "34edqwe21"
-	this.subdomaim = window.location.hostname
-
-	//this.valor_digitado.split('.').join('')
+		this.subdomaim = "34edqwe21"
+	//this.subdomaim = window.location.hostname
 
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.tk/api/upload/"+config.logo
