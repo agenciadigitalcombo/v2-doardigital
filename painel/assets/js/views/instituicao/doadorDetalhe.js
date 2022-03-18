@@ -233,7 +233,7 @@ export default {
                                                     <th class="min-w-100px" v-if="tipo ==='pix'">Pix</th>
                                                     <th class="min-w-100px" v-if="tipo ==='credit_card'">Cartão </th>
                                                     <th class="min-w-100px" v-if="tipo ==='boleto'">Boleto</th>
-													<th class="min-w-150px">Transação</th>
+													<th class="min-w-150px" v-if="tipo ==='credit_card'">Transação</th>
 													<th class="min-w-150px">Valor Liquido</th>
                                                 </tr>
                                             </thead>
@@ -277,7 +277,7 @@ export default {
                                                     <td v-if="tipo ==='boleto'">
 													R$ 1.99 
                                                     </td>
-													<td>
+													<td v-if="tipo ==='credit_card'">
 													R$ 0.49
 												   </td>
 													<td>
@@ -296,8 +296,6 @@ export default {
 
 					</div>
 				
-
-
             </div>
             <!--end::Wrapper-->
         </div>
@@ -416,6 +414,8 @@ export default {
 		var doado = formatReal(this.valor)
 		var valorDoado = doado.split(',').join('.');
 		 this.perDoar = (parseFloat(valorDoado) / 100) * 4;
+	
+		  console.log(formatReal(this.perDoar))
 
 		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
 

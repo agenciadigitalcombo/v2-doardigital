@@ -106,7 +106,7 @@ export default {
 										<div class="col-xl-6">
 											<div class="mb-10" v-if="valor === '0' && mensal !== '1'">
 												<div class="card-title mb-5">
-													<h3>Informe um valor, mínimo R$ 25,00. </h3>
+													<h3>Informe um valor, mínimo R$ 20,00. </h3>
 												</div>
 												
 												<input v-model.trin="$v.valor_digitado.$model" type="text" @input="money" required 
@@ -240,7 +240,7 @@ export default {
 		},
 
 		setarPlano(jms) {
-			alert("certo")
+		
 			this.valor = jms.amount
 			this.planos_id = jms.id
 			this.planos_nome = jms.nome
@@ -307,8 +307,8 @@ export default {
 
 	async mounted() {
 	
-	//	this.subdomaim = "34edqwe21"
-		this.subdomaim = window.location.hostname
+		this.subdomaim = "34edqwe21"
+	//this.subdomaim = window.location.hostname
 
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.tk/api/upload/"+config.logo

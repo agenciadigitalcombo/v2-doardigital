@@ -35,13 +35,13 @@ export default {
 				<div class="container"> 
 					<div class="text-center mb-12">
 						
-						<div id="block2" v-if="type=='credit_card'"> 
+						<div id="block2" v-if="type=='CREDIT_CARD'"> 
 						<h3 class="fs-2hx text-dark mb-15">Sua doação foi recebida com sucesso, Deus te abençoe!.</h3>
 					 
 					</div>
 
 
-						<div id="block2" v-if="type=='boleto'"> 
+						<div id="block2" v-if="type=='BOLETO'"> 
 						<h3 class="fs-2hx text-dark mb-15">
 							Sua doação esta em aberto!.</h3> 
 							<h3 class="fs-1 text-dark mb-5">
@@ -78,7 +78,7 @@ export default {
 							
 						
 							
-						<div id="block2" v-if="type=='pix'">
+						<div id="block2" v-if="type=='PIX'">
 						
 						<h3 class="fs-2hx text-dark mb-15">
 							Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
@@ -100,7 +100,7 @@ export default {
 					 
 		
 							
-					<div id="block12" v-if="type=='pix'">
+					<div id="block12" v-if="type=='PIX'">
 					
 						<div class="mw-lg-600px mx-auto  mt-10"> 
 						  
@@ -249,7 +249,8 @@ export default {
 	},
 
 	async mounted() {
-		this.subdomaim = window.location.hostname
+		this.subdomaim = "34edqwe21"
+	//	this.subdomaim = window.location.hostname
 		
 		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep
@@ -272,7 +273,7 @@ export default {
 		this.codigo_geral = localStorage.getItem("codigo")
         this.url_geral = localStorage.getItem("url")
 
-		if (this.type == 'pix') {
+		if (this.type == 'PIX') {
 			let code_pix = `${this.codigo_geral}`
 			var qrcode = new QRCode(this.$refs.print_qr, {
 				text: code_pix,

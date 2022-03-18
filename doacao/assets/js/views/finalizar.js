@@ -152,12 +152,12 @@ export default {
 
                                     </div>
                                     <div class="col-xl-6">
-                                        <div class="card-title mb-10"  v-if="type_pagamento !=='pix'">
+                                        <div class="card-title mb-10"  v-if="type_pagamento !=='PIX'">
                                             <h1> TOTAL A DOAR: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
                                                 |money }} {{ mensal == '1' ? 'Por mês' : ''}} </h1>
                                         </div>
 
-                                        <div class="card-title mb-10"  v-if="type_pagamento =='pix'">
+                                        <div class="card-title mb-10"  v-if="type_pagamento =='PIX'">
                                       
                                         <div v-if="planos_valor > '100000'">
                                         <h1> TOTAL A DOAR: R$ {{ planos_valor == 0 ? valor_digitado : planos_valor
@@ -179,7 +179,7 @@ export default {
 
                                                     <div class="col-xl-4">
                                                         <input type="radio" class="btn-check"
-                                                            @click="type_pagamento = 'credit_card'; consultar();" name="radio_buttons_2"
+                                                            @click="type_pagamento = 'CREDIT_CARD'; consultar();" name="radio_buttons_2"
                                                             value="1" checked="checked"
                                                             id="kt_radio_buttons_2_option_1" />
                                                         <label
@@ -199,7 +199,7 @@ export default {
                                                     </div>
                                                     <div class="col-xl-4">
                                                         <input type="radio" class="btn-check"
-                                                            @click="type_pagamento = 'boleto'; consultar();" name="radio_buttons_2"
+                                                            @click="type_pagamento = 'BOLETO'; consultar();" name="radio_buttons_2"
                                                             value="2" id="kt_radio_buttons_2_option_2" />
                                                         <label
                                                             class="btn btn-outline btn-outline-dashed btn-outline-default d-flex align-items-center mb-5"
@@ -218,7 +218,7 @@ export default {
 
                                                     <div class="col-xl-4" v-if="mensal ==='0'">
                                                         <input type="radio" class="btn-check"
-                                                            @click="type_pagamento = 'pix'; consultar();" name="radio_buttons_2"
+                                                            @click="type_pagamento = 'PIX'; consultar();" name="radio_buttons_2"
                                                             value="3" id="kt_radio_buttons_3_option_3" />
                                                         <label
                                                             class="btn btn-outline btn-outline-dashed btn-outline-default d-flex align-items-center mb-5"
@@ -265,7 +265,7 @@ export default {
                                         {{txto_pix2}}
                                         </div>
 
-                                            <div v-if="type_pagamento =='credit_card'" style="width: 100%;">
+                                            <div v-if="type_pagamento =='CREDIT_CARD'" style="width: 100%;">
                                                 <div class="p-1">
                                                     <!-- comeco do credit_card -->
                                                     <div style="text-align:center;">
@@ -502,7 +502,7 @@ export default {
             endereco: "rua plinio",
             bairro: "Serralheiro",
             cidade: "Sao Paulo",
-            type_pagamento: "credit_card",
+            type_pagamento: "CREDIT_CARD",
             cart_numero: "4111111111111111",
             cart_cvv: "123",
             cart_validade: "0922",
@@ -582,7 +582,7 @@ export default {
 
 
         consultar() {
-            if (this.type_pagamento == "pix") {
+            if (this.type_pagamento == "PIX") {
                 this.txto_pix = "Obs : O valor do PIX entre as 20:00h e 6:00h (noturno)"
                 this.txto_pix2 = "será máximo de R$ 1.000,00 reais."
 
@@ -694,7 +694,8 @@ export default {
     },
 
     async mounted() {
-        this.subdomaim = window.location.hostname
+        this.subdomaim = "34edqwe21"
+       //this.subdomaim = window.location.hostname
 
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
@@ -719,4 +720,4 @@ export default {
         this.instituicao_id = config.id
     },
 
-}
+}  
