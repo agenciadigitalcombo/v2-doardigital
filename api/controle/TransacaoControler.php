@@ -183,7 +183,7 @@ class TransacaoControler
 
 
 
-        if ($type_pagamento == "credit_card" and $mensal != 1) {
+        if ($type_pagamento == "CREDIT_CARD" and $mensal != 1) {
 
             campo_obrigatorios([
                 'cart_numero' => 'Campo cart_numero Obrigatorio',
