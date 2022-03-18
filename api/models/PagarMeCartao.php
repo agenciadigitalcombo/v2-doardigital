@@ -1,63 +1,94 @@
 <?php
 
-class PagarMeCartao extends PagarMe
+class PagarMeCartao extends Asaas
 {
 
-    public function create(int $amount, string $type_pagamento, string $card_number, string $card_cvv, string $card_expiration_date, string $card_holder_name, string $costumer_id, string $nome_costumer, string $email_costumer, string $document_costumer, array $phone_numbers, string $data_nascimento,
-    string $estado, string $city, string $bairro, string $logradouro, string $street_number, string $cep,
-        string $plano_id, string $title_plano, array $split = [], int $quantidade = 1, string $country = "br", string $type_document = "cpf"): array
+    public function create(int $amount, string $type_pagamento, string $card_number, string $card_cvv, string $card_expiration_date, string $card_holder_name, 
+    string $costumer_id, string $nome_costumer, string $email_costumer, string $cpfCnpj, string $phone_numbers, string $complement,
+    string $street_number, string $cep): array
     {
         $payload = [
 
-            "amount" => $amount,
-            "payment_method" => $type_pagamento,
-            "card_number" => $card_number,
-            "card_cvv" => $card_cvv,
-            "card_expiration_date" =>  $card_expiration_date,
-            "card_holder_name" =>  $card_holder_name,
-            "customer" => [
-                "external_id" => $costumer_id,
-                "name" => $nome_costumer,
-                "type" => "individual",
-                "country" => $country,
-                "email" => $email_costumer,
-                "documents" => [
-                    [
-                    "type" => $type_document,
-                    "number" => $document_costumer
-                    ]
-                ],
-                "phone_numbers" => $phone_numbers,
-                "birthday" => $data_nascimento
-            ],
-            "billing" => [
-                "name" => $nome_costumer,
-                "address" => [
-                    "country" => $country,
-                    "state" => $estado,
-                    "city" => $city,
-                    "neighborhood" => $bairro,
-                    "street" => $logradouro,
-                    "street_number" => $street_number,
-                    "zipcode" => $cep
-                ]
-            ],
-            "items" => [
+            // "amount" => $amount,
+            // "payment_method" => $type_pagamento,
+            // "card_number" => $card_number,
+            // "card_cvv" => $card_cvv,
+            // "card_expiration_date" =>  $card_expiration_date,
+            // "card_holder_name" =>  $card_holder_name,
+            // "customer" => [
+            //     "external_id" => $costumer_id,
+            //     "name" => $nome_costumer,
+            //     "type" => "individual",
+            //     "country" => $country,
+            //     "email" => $email_costumer,
+            //     "documents" => [
+            //         [
+            //         "type" => $type_document,
+            //         "number" => $document_costumer
+            //         ]
+            //     ],
+            //     "phone_numbers" => $phone_numbers,
+            //     "birthday" => $data_nascimento
+            // ],
+            // "billing" => [
+            //     "name" => $nome_costumer,
+            //     "address" => [
+            //         "country" => $country,
+            //         "state" => $estado,
+            //         "city" => $city,
+            //         "neighborhood" => $bairro,
+            //         "street" => $logradouro,
+            //         "street_number" => $street_number,
+            //         "zipcode" => $cep
+            //     ]
+            // ],
+            // "items" => [
+            //     [
+            //         "id" => $plano_id,
+            //         "title" => $title_plano,
+            //         "unit_price" => $amount,
+            //         "quantity" => $quantidade,
+            //         "tangible" => true
+            //     ]
+            // ],
+            "customer" => $costumer_id,
+            "billingType" => $type_pagamento,
+            "dueDate" => date('Y-m-d'),
+            "value" => $amount,
+            "description" => "",
+            "externalReference" => "",
+            "split" => [
                 [
-                    "id" => $plano_id,
-                    "title" => $title_plano,
-                    "unit_price" => $amount,
-                    "quantity" => $quantidade,
-                    "tangible" => true
+                     "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",
+                     "percentualValue" => 98
                 ]
-            ]
+            ],
+            "creditCard" => [
+                "holderName" => $card_holder_name,
+                "number" => $card_number,
+                "expiryMonth" => substr($card_expiration_date, 0, 2),
+                "expiryYear" => substr($card_expiration_date, 2, 4),
+                "ccv" => $card_cvv
+            ],
+            "creditCardHolderInfo" => [
+                "name" => $nome_costumer,
+                "email" => $email_costumer,
+                "cpfCnpj" => $cpfCnpj,
+                "postalCode" => $cep,
+                "addressNumber" => $street_number,
+                "addressComplement" => $complement,
+                "phone" => $phone_numbers,
+                "mobilePhone" => $phone_numbers
+            ],
+            "remoteIp" => $_SERVER['REMOTE_ADDR']
         ];
 
 
-        if(!empty($split)){
-            $payload['split_rules'] = $split;
-        }
-        return $this->post('/transactions', $payload, false);
+        // if(!empty($split)){
+        //     $payload['split_rules'] = $split;
+        // }
+
+        return $this->post('/payments', $payload, false);
     }
 
 

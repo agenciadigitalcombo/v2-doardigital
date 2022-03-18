@@ -65,14 +65,14 @@ class TransacaoControler
         
         $type_pagamento = $_REQUEST['type_pagamento'];
         
-        // if ($type_pagamento == "credit_card") {
+        if ($type_pagamento == "CREDIT_CARD") {
             
-        //     $cart_numero = $_REQUEST['cart_numero'];
-        //     $cart_cvv = $_REQUEST['cart_cvv'];
-        //     $cart_nome = $_REQUEST['cart_nome'];
-        //     $cart_validade_campo = $_REQUEST['cart_validade'];
-        //     $cart_validade = withdraw_caracter($cart_validade_campo);
-        // }
+            $cart_numero = $_REQUEST['cart_numero'];
+            $cart_cvv = $_REQUEST['cart_cvv'];
+            $cart_nome = $_REQUEST['cart_nome'];
+            $cart_validade_campo = $_REQUEST['cart_validade'];
+            $cart_validade = withdraw_caracter($cart_validade_campo);
+        }
         
         // $reference_key = "ref_" . uniqid();
         
@@ -183,23 +183,24 @@ class TransacaoControler
 
 
 
-        // if ($type_pagamento == "credit_card" and $mensal != 1) {
+        if ($type_pagamento == "credit_card" and $mensal != 1) {
 
-        //     campo_obrigatorios([
-        //         'cart_numero' => 'Campo cart_numero Obrigatorio',
-        //         'cart_cvv' => 'Campo cart_cvv Obrigatorio',
-        //         'cart_validade' => 'Campo cart_validade Obrigatorio',
-        //         'planos_valor' => 'Campo planos_valor Obrigatorio',
-        //     ]);
+            campo_obrigatorios([
+                'cart_numero' => 'Campo cart_numero Obrigatorio',
+                'cart_cvv' => 'Campo cart_cvv Obrigatorio',
+                'cart_validade' => 'Campo cart_validade Obrigatorio',
+                'planos_valor' => 'Campo planos_valor Obrigatorio',
+            ]);
 
-        //     $pagarme_cartao = new PagarMeCartao();
+            $pagarme_cartao = new PagarMeCartao();
 
-        //     $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome, $split);
-        //     $get_token = $res_pagarme['id'];
-        //     $get_status = $res_pagarme['status'];
-        //     $codigo = "";
-        //     $url = "";
-        // }
+             $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep);
+            $get_token = $res_pagarme['id'];
+            $get_status = $res_pagarme['status'];
+            var_dump($res_pagarme);
+            $codigo = "";
+            $url = "";
+        }
 
 
         if ($type_pagamento == "PIX" or $type_pagamento == "BOLETO" and $mensal != 1) {
@@ -231,6 +232,8 @@ class TransacaoControler
             }
             $get_status = $res_pagarme['status'];
         }
+
+
 
 
         // if ($type_pagamento == "boleto" and $mensal != 1) {
@@ -317,8 +320,8 @@ class TransacaoControler
             'message' => 'Transacao Concluida',
             'codigo' => $codigo,
             'url' => $url,
-            'expirationCode' => $expirationCode
-            // 'payload' => $res_pagarme
+            'expirationCode' => $expirationCode,
+            'payload' => $res_pagarme
         ]);
     }
 }

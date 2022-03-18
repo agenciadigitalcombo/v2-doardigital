@@ -29,7 +29,7 @@ class PagarMeTransaction extends Asaas
             "split" => [
                 [
                      "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",
-                     "fixedValue" => 98
+                     "percentualValue" => 98
                 ]
              ]
         ];
