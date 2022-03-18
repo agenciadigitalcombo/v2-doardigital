@@ -198,7 +198,7 @@ class TransacaoControler
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = "";
-            $url = $get_token['transactionReceiptUrl'];
+            $url = $res_pagarme['transactionReceiptUrl'];
         }
 
 
