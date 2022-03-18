@@ -307,8 +307,8 @@ export default {
 
 	async mounted() {
 	
-		this.subdomaim = "34edqwe21"
-	//this.subdomaim = window.location.hostname
+	//	this.subdomaim = "34edqwe21"
+	this.subdomaim = window.location.hostname
 
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.tk/api/upload/"+config.logo
