@@ -74,7 +74,7 @@ class TransacaoControler
             $cart_validade = withdraw_caracter($cart_validade_campo);
         }
         
-        // $reference_key = "ref_" . uniqid();
+        $reference_key = "ref_" . uniqid();
         
         
         
@@ -194,12 +194,11 @@ class TransacaoControler
 
             $pagarme_cartao = new PagarMeCartao();
 
-             $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep);
+            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep);
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
-            var_dump($res_pagarme);
             $codigo = "";
-            $url = "";
+            $url = $get_token['transactionReceiptUrl'];
         }
 
 
@@ -211,11 +210,10 @@ class TransacaoControler
 
             $pagarme_pix = new PagarMeTransaction();
             $pagarme_boleto = new PagarMeBoleto();
-            $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
-            // var_dump($res_pagarme);
-        
+            
             if($type_pagamento == "PIX"){
-
+                
+                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
                 $codigo = $get_codigo['payload'];
@@ -224,6 +222,7 @@ class TransacaoControler
             }
             if($type_pagamento == "BOLETO"){
 
+                $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_boleto->codig_boleto($get_token);
                 $codigo = $get_codigo['identificationField'];
@@ -261,30 +260,30 @@ class TransacaoControler
         // }
 
 
-        // $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url, $reference_key);
+        $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url, $reference_key);
 
 
 
-        // @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
-        // @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
+        @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
+        @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
 
 
-        // $instituicao_dados = $instituicao->get_by_id($instituicao_id);
-        // $nome_instituicao = $instituicao_dados['nome_fantasia'];
-        // $email_instituicao = $instituicao_dados['email'];
-        // $color_instituicao = $instituicao_dados['cor'];
-        // $logo_instituicao = $instituicao_dados['logo'];
+        $instituicao_dados = $instituicao->get_by_id($instituicao_id);
+        $nome_instituicao = $instituicao_dados['nome_fantasia'];
+        $email_instituicao = $instituicao_dados['email'];
+        $color_instituicao = $instituicao_dados['cor'];
+        $logo_instituicao = $instituicao_dados['logo'];
 
 
-        // $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
+        $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
 
-        // $get_token_evendas = $dados_evendas['canal'] ?? false;
+        $get_token_evendas = $dados_evendas['canal'] ?? false;
 
-        // if ($get_token_evendas) {
-        //     Evendas::send($nome, $email, telefone_get_number($telefone), $phone_ddd, $planos_valor, $get_status, $type_pagamento, $url, $url, $codigo, $endereco, $get_token_evendas);
-        // }
+        if ($get_token_evendas) {
+            Evendas::send($nome, $email, telefone_get_number($telefone), $phone_ddd, $planos_valor, $get_status, $type_pagamento, $url, $url, $codigo, $endereco, $get_token_evendas);
+        }
 
-        // $email_notificacao->exest_acao($instituicao_id, $get_status);
+        $email_notificacao->exest_acao($instituicao_id, $get_status);
 
         // // SendGrid::send(
         // // $nome, 
@@ -299,18 +298,18 @@ class TransacaoControler
         // // $logo_instituicao,
         // // 'instituicao');
 
-        // get_api('/email/preview', [
-        //     "instituicao_id" => $instituicao_id,
-        //     "doador_cpf" => $cpf,
-        //     "status" => $get_status,
-        //     "tipo" => $type_pagamento,
-        //     "codigo" => $codigo,
-        //     "link" => $url
-        // ], false);
+        get_api('/email/preview', [
+            "instituicao_id" => $instituicao_id,
+            "doador_cpf" => $cpf,
+            "status" => $get_status,
+            "tipo" => $type_pagamento,
+            "codigo" => $codigo,
+            "link" => $url
+        ], false);
 
-        // $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
-        // $get_ddd_tel = telefone_get_ddd($telefone);
-        // $numero_ddd = [$get_ddd_tel, $get_numero_tel];
+        $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
+        $get_ddd_tel = telefone_get_ddd($telefone);
+        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
 
 
         // // SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
@@ -320,8 +319,7 @@ class TransacaoControler
             'message' => 'Transacao Concluida',
             'codigo' => $codigo,
             'url' => $url,
-            'expirationCode' => $expirationCode,
-            'payload' => $res_pagarme
+            'expirationCode' => $expirationCode
         ]);
     }
 }
