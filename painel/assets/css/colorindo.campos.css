@@ -1,10 +1,10 @@
 
-.status_paid {
+.status_CONFIRMED {
     color: #50cd89;
     background-color: #e8fff3
 }
 
-.status_refunded {
+.status_REFUNDED {
     background-color: #700370;
     color: #835783; 
 }
@@ -24,7 +24,7 @@
     background-color: #ff8c00;
     color: #f8cf9e; 
 }
-.status_unpaid {
+.status_OVERDUE {
     color: #f1416c;
     background-color: #fff5f8
 
@@ -34,13 +34,13 @@
     background-color: #f9fcd6
 }
 
-.status_pending {
-    color: #797a0c;
-    background-color: #c7caa0
+.status_PENDING {
+    color: #9c9e19;
+    background-color: #ebeec7
 }
  
 .status_processing {
-    color: #f2f898;
+    color: #bdc917;
     background-color: #f8fae3
 }
 

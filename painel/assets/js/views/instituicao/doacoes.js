@@ -246,7 +246,7 @@ export default {
                                                             <span> {{ item.email }}</span>
                                                         </div> 
                                                     </td> 
-                                                    <td> {{ item.valor | is_price }} </td> 
+                                                    <td> {{ item.valor+'00' | is_price }} </td> 
                                                     <td>
                                                         <div class="badge" :class="'status_'+item.status_pagamento"> {{item.status_pagamento | este_status }} </div>
                                                     </td> 
@@ -301,39 +301,51 @@ export default {
             instituicao_id: "",
             data: "",
             doacoes: [],
-            elementoPaginacao: 10,
+            elementoPaginacao: 30,
             dadosPagina: [],
             paginaAtual: 1,
             search: "",
             dataFinal: null,
+            total: [],
             mostraresconder:
             {
                 'show': false
             }
+            
         }
     },
 
 	computed: {
 
 		filtraDoacao() {
-
 			let valores
-
 			valores = this.dadosPagina.filter((filtrar) => {
 				return filtrar.data.split('-').join('') <= this.dataFinal;
 			})
-
 			return valores
+		},
 
+        filtraTotal() {
+			 
+			this.total = this.dadosPagina.filter((filtrar) => {
+				return filtrar.data.split('-').join('') <= this.dataFinal;
+			})
+			return this.total
 		},
 
 	},
 
     filters: {
         is_price(price) {
-            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            return `R$ ${valor}`
+            var tmp = price + '';
+			tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+			if (tmp.length > 6)
+				tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
+
+			return tmp;
         },
+
+      
 
         is_data(datas) {
             let data = datas.split('-').reverse().join('/');
@@ -343,11 +355,15 @@ export default {
 
         este_status(status) {
             let apresentar = {
-                waiting_payment: 'Aguardando Pagamento',
+                PENDING: 'Aguardando Pagamento',
                 refused: 'Cancelado',
-                paid: 'Pago',
-                unpaid: 'Não Pago',
-                pending: 'Pendente'
+                CONFIRMED: 'Pago',
+                OVERDUE: 'Vencida', 
+                REFUNDED: 'Reembolsado',
+				processing: 'Em processamento',
+				authorized: 'Autorizado ', 
+				pending_refund: 'Reembolso pendente ',
+				chargedback: 'Estorno',
             }
             return apresentar[status]
         },
@@ -355,9 +371,9 @@ export default {
 
         este_tipo(status) {
             let apresentar = {
-                boleto: 'Boleto',
-                credit_card: 'Crédito',
-                pix: 'PIX',
+                BOLETO: 'Boleto',
+                CREDIT_CARD: 'Crédito',
+                PIX: 'PIX',
             }
             return apresentar[status]
         },
@@ -447,9 +463,10 @@ export default {
            day: '2-digit',
        }).split('/').reverse().join('');
 
-        this.doacoes = (await this.listarDoacoes()).dados || {}
+        this.doacoes = (await this.listarDoacoes()).dados.reverse() || {}
         this.getPagina(1)
 
+        console.log(this.total)
     },
 
     created() {
