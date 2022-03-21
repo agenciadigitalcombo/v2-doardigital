@@ -65,6 +65,7 @@ class Asaas
     {
         $this->is_debug($payload);
         $full_path = $this->get_path($path);
+
         try {
             $defaults = [
                 // CURLOPT_CUSTOMREQUEST  => $method,
@@ -75,7 +76,7 @@ class Asaas
                 CURLOPT_POSTFIELDS     => json_encode($payload),
                 CURLOPT_HTTPHEADER     => [
                     'Content-Type:application/json',
-                    "access_token: {$this->token}"
+                    "access_token: {$this->api_key}"
                 ]
                 ];
                 
@@ -83,6 +84,7 @@ class Asaas
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
             curl_close($con);
+
             return json_decode($ex, true);
         } catch (\Throwable $th) {
             $this->is_error();
@@ -100,7 +102,7 @@ class Asaas
                 CURLOPT_URL            => $full_path,
                 CURLOPT_HTTPHEADER     => [
                     'Content-Type:application/json',
-                    "access_token: {$this->token}"
+                    "access_token: {$this->api_key}"
                 ]
             ];
             $con = curl_init();
