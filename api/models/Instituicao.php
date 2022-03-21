@@ -3,10 +3,10 @@
 class Instituicao
 {
 
-    public function set_token_recebedor(int $recebedor_id, string $walletId): void
+    public function set_token_recebedor(int $recebedor_id, string $wallet_id): void
     {
         $banco = new Banco();
-        $sql = "UPDATE instituicao SET walletId='$walletId' WHERE id=$recebedor_id";
+        $sql = "UPDATE instituicao SET wallet_id='$wallet_id' WHERE id=$recebedor_id";
         $banco->exec($sql);
     }
 
@@ -51,15 +51,15 @@ class Instituicao
         $banco->exec($sql);
     }
 
-    public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $walletId, string $api_key, string $cor, string $logo): void
+    public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $wallet_id, string $api_key, string $cor, string $logo): void
     {   
         $status = 1;
         $data_registro = date('Y-m-d');
         $banco = new Banco();
         $sql = "INSERT INTO instituicao";
-        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, walletId, api_key, cor, logo, status, data_registro)";
+        $sql .= "(adm_id, nome_fantasia, razao_social, subdomaim, email, cnpj, telefone, wallet_id, api_key, cor, logo, status, data_registro)";
         $sql .= "VALUES";
-        $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$walletId', '$api_key,', '$cor', '$logo', $status, '$data_registro')";
+        $sql .= "('$adm_id', '$nome_fantasia', '$razao_social', '$sub_domain', '$email', '$cnpj', '$telefone', '$wallet_id', '$api_key,', '$cor', '$logo', $status, '$data_registro')";
         $banco->exec($sql);
     }
 

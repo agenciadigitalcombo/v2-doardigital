@@ -6,11 +6,11 @@ class InstituicaoControler
     static function create_instituicao()
     {
         $instituicao = new Instituicao();
-        $instituicaopagarme = new PagarmeInstituicao();
         $banco_cont = new ContaBanc();
         $endereco = new Endereco();
         $adm = new Adm();
         $assas_instituicao = new PagarmeInstituicao();
+        $assas_instituicao->set_api_key("18e834381bb3da3f16589539a13076a8ef475d159b2b5131d692d1ca2992efbb");
 
         $token_parce = token();
         
@@ -109,8 +109,9 @@ class InstituicaoControler
             $complemento,
             $bairro,
             $transform_cep);
-         
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $res_assas['walletId'], $res_assas['walletId'], "#FFF", "");
+        
+        
+        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $res_assas['walletId'], $res_assas['apiKey'], "#FFF", "");
         
         $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
         
