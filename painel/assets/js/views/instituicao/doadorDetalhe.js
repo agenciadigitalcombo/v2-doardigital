@@ -63,7 +63,7 @@ export default {
 												<span class=" fw-bold text-muted">
 												Valor</span>
 													
-													<p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price}}</p>
+													<p class="fw-bolder fs-6 text-gray-800">{{ valor+'00' | is_price}}</p>
 												
 
 													<span class=" fw-bold text-muted">
@@ -132,7 +132,7 @@ export default {
 							 
 														<div class="text-center mt-6">
 												 
-															<div id="block2" v-if="tipo=='boleto'"> 
+															<div id="block2" v-if="tipo=='BOLETO'"> 
 														
 																<a target="_blank" :href="url_geral" class="btn btn-primary er fs-6 px-8 my-5">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -231,9 +231,9 @@ export default {
                                                     <th class="min-w-100px">Valor</th>
                                                     <th class="min-w-100px">Doar </th>
                                                     <th class="min-w-100px" v-if="tipo ==='pix'">Pix</th>
-                                                    <th class="min-w-100px" v-if="tipo ==='credit_card'">Cartão </th>
-                                                    <th class="min-w-100px" v-if="tipo ==='boleto'">Boleto</th>
-													<th class="min-w-150px" v-if="tipo ==='credit_card'">Transação</th>
+                                                    <th class="min-w-100px" v-if="tipo ==='CREDIT_CARD'">Cartão </th>
+                                                    <th class="min-w-100px" v-if="tipo ==='BOLETO'">Boleto</th>
+													<th class="min-w-150px" v-if="tipo ==='CREDIT_CARD'">Transação</th>
 													<th class="min-w-150px">Valor Liquido</th>
                                                 </tr>
                                             </thead>
@@ -249,7 +249,7 @@ export default {
                                                     </td>
 
                                                     <td>
-													{{ valor | is_price}}
+													{{ valor+'00' | is_price}}
                                                     </td>
 
                                                     <td> 
@@ -266,7 +266,7 @@ export default {
                                                         </div>
                                                     </td>
                                                     
-                                                    <td v-if="tipo ==='credit_card'">
+                                                    <td v-if="tipo ==='CREDIT_CARD'">
                                                         <div
                                                             class="form-check form-switch form-check-custom form-check-solid me-10">
 															R$ {{cartao}}
@@ -274,10 +274,10 @@ export default {
 
                                                     </td>
 
-                                                    <td v-if="tipo ==='boleto'">
+                                                    <td v-if="tipo ==='BOLETO'">
 													R$ 1.99 
                                                     </td>
-													<td v-if="tipo ==='credit_card'">
+													<td v-if="tipo ==='CREDIT_CARD'">
 													R$ 0.49
 												   </td>
 													<td>
@@ -361,9 +361,9 @@ export default {
 
 		este_tipo(status) {
 			let apresentar = {
-				boleto: 'Boleto',
-				credit_card: 'Crédito',
-				pix: 'PIX',
+				BOLETO: 'Boleto',
+				CREDIT_CARD: 'Crédito',
+				PIX: 'PIX',
 			}
 			return apresentar[status]
 		},
@@ -411,22 +411,22 @@ export default {
 		}
 
 
-		var doado = formatReal(this.valor)
+		var doado = formatReal(this.valor + '00')
 		var valorDoado = doado.split(',').join('.');
-		 this.perDoar = (parseFloat(valorDoado) / 100) * 4;
-	
-		  console.log(formatReal(this.perDoar))
+		this.perDoar = (parseFloat(valorDoado) / 100) * 4;
+
+		console.log(formatReal(this.perDoar))
 
 		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
 
-		if (this.tipo == 'pix') {
+		if (this.tipo == 'PIX') {
 			var pix = parseFloat(this.perDoar) + 0.79
 			this.valorLiquido = parseFloat(valorDoado) - pix
-		} else if (this.tipo == 'credit_card') {
+		} else if (this.tipo == 'CREDIT_CARD') {
 			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao) + 0.49
 			this.valorLiquido = parseFloat(valorDoado) - cartao
 		} else {
-			var boleto = parseFloat(this.perDoar) + 1.99 
+			var boleto = parseFloat(this.perDoar) + 1.99
 			this.valorLiquido = parseFloat(valorDoado) - boleto
 
 		}

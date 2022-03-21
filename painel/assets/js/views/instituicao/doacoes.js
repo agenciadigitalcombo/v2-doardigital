@@ -325,13 +325,13 @@ export default {
 			return valores
 		},
 
-        filtraTotal() {
-			 
-			this.total = this.dadosPagina.filter((filtrar) => {
-				return filtrar.data.split('-').join('') <= this.dataFinal;
-			})
-			return this.total
-		},
+      
+
+        totals() {
+            return this.items.reduce((a, b) => {
+                return a + b.width;
+            }, 0);
+        }
 
 	},
 
@@ -379,12 +379,9 @@ export default {
         },
     },
 
-
     methods: {
 
         modal() {
-            console.log('jms')
-
             this.mostraresconder =
             {
                 'show': true
@@ -400,8 +397,6 @@ export default {
             {
                 'show': !true
             }
-
-
         },
 
         async listarDoacoes() {
@@ -421,7 +416,6 @@ export default {
             let inicio = (semPagina * this.elementoPaginacao) - this.elementoPaginacao;
             let fim = (semPagina * this.elementoPaginacao);
             this.dadosPagina = this.doacoes.slice(inicio, fim);
-
         },
 
         getProximo() {
@@ -466,16 +460,19 @@ export default {
         this.doacoes = (await this.listarDoacoes()).dados.reverse() || {}
         this.getPagina(1)
 
+        for(var i = 0; i < i.length; i++) {
+            this.total = (await this.listarDoacoes()).dados[i].valor
+        } 
         console.log(this.total)
+        // console.log(total)
+ 
+
     },
 
     created() {
         this.instituicao_id = window.localStorage.getItem("instituicao_id")
+
+        
     }
-
-
-
-   // var porceto = (500 / 100) * 2.99;
-   //   console.log(porceto)
 
 }
