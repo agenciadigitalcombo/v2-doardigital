@@ -12,19 +12,14 @@
 
 <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
 	<div class="container" id="app">
-		<div class="column is-12">
-			<h3 class="title is-1">CEP</h3>
-			<hr>
-			<div class="notification is-warning" v-if="cep">
-				<pre>{{ data }}</pre>
+		<div id="editor"> 
+			<ul>
+			 
+			</ul>
+			<hr />
+			<div>
+			  <i>Somatória:</i> <b>{{total}}</b>
 			</div>
-			<input type="text" v-model="cep" @keyup="searchCep()" placeholder="digite o cep aqui">
-
-		 <input type="text" v-model="logradouro" placeholder="rua"> 
-		 <input type="text" v-model="complemento" placeholder="complemento">
-			<!--
-			<input type="text" v-model="bairro" placeholder="digite o cep aqui">
-			<input type="text" v-model="localidade" placeholder="digite o cep aqui"> -->
 		</div>
 	</div>
 
@@ -35,36 +30,24 @@
 	<script>
 		new Vue({
 			el: '#app',
-			data: {
-				cep: null,
-				dados: [],
-				messageCep: null,
-
-				logradouro: null,
-				complemento: null,
-				localidade: null,
-				bairro: null
+			data: { 
+				items: [
+					{ width: '100' },
+					{ width: '200' },
+					{ width: '150' },
+					{ width: '111' },
+				]
 			},
 			methods: {
-				async searchCep() {
-					if (this.cep.length == 8) {
-						axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
-							.then(response => {
-								
-							this.logradouro = response.data.logradouro,
-							this.complemento = response.data.complemento,
-							console.log(response.data)
-							}
-							)
-							.catch(error => console.log(error))
-						
-					}
+			 
+			},
+			computed: {
+				total() {
+					return this.items.reduce((a, b) => {
+						return a + b.width;
+					}, 0);
 				}
-			},
-
-			mounted() {
-
-			},
+			}
 		})
 	</script>
 </body>
