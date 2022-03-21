@@ -8,7 +8,7 @@ class Asaas
         "BOLETO", "CREDIT_CARD", "DEBIT_CARD",
         "UNDEFINED", "TRANSFER", "DEPOSIT", "PIX"
     ];
-    public $token = NULL;
+    public $api_key = NULL;
     const STATUS_PAYMENT = [
         "PAYMENT_CREATED", "PAYMENT_UPDATED", "PAYMENT_CONFIRMED",
         "PAYMENT_RECEIVED", "PAYMENT_OVERDUE", "PAYMENT_DELETED",
@@ -21,7 +21,6 @@ class Asaas
     function __construct()
     {
         $env = include __DIR__ . "/../config.php";
-        $this->token = $env['access_token'];
         $this->sandbox = $env['sandbox'];
     }
 
@@ -36,13 +35,13 @@ class Asaas
     function get_head()
     {
         $head = "Content-Type: application/json; charset=UTF-8\r\n";
-        $head .= "access_token: {$this->token}\r\n";
+        $head .= "access_token: {$this->api_key}\r\n";
         return $head;
     }
 
     function get_head_get()
     {
-        $head = "access_token: {$this->token}\r\n";
+        $head = "access_token: {$this->api_key}\r\n";
         return $head;
     }
 
@@ -112,6 +111,11 @@ class Asaas
         } catch (\Throwable $th) {
             $this->is_error();
         }
+    }
+
+    public function set_api_key(string $api_key): void
+    {
+        $this->api_key = $api_key;
     }
 
     public function put(string $path, array $payload): array
