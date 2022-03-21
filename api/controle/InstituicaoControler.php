@@ -110,7 +110,7 @@ class InstituicaoControler
             $bairro,
             $transform_cep);
          
-        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $res_assas['walletId'], "#FFF", "");
+        $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $res_assas['walletId'], $res_assas['walletId'], "#FFF", "");
         
         $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
         
