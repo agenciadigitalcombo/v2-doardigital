@@ -57,12 +57,12 @@ class PagarMeCartao extends Asaas
             "value" => $amount,
             "description" => "",
             "externalReference" => "",
-            "split" => [
-                [
-                     "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",
-                     "percentualValue" => 98
-                ]
-            ],
+            // "split" => [
+            //     [
+            //          "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",
+            //          "percentualValue" => 98
+            //     ]
+            // ],
             "creditCard" => [
                 "holderName" => $card_holder_name,
                 "number" => $card_number,

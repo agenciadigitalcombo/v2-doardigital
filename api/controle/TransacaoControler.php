@@ -16,6 +16,11 @@ class TransacaoControler
         $pagarme_Costumer = new PagarMeCostumer();
         $pagarme_plano = new PagarmePlano();
         $adm = new Adm();
+        $pagarme_pix = new PagarMeTransaction();
+        $pagarme_boleto = new PagarMeBoleto();
+        $pagarme_cartao = new PagarMeCartao();
+
+        
         
         campo_obrigatorios([
             'planos_valor' => 'Campo planos_valor opbrigatorio',
@@ -32,18 +37,33 @@ class TransacaoControler
             'cep' => 'Campo cep opbrigatorio',
         ]);
         
+
         
         $instituicao_id = $_REQUEST['instituicao_id'];
+
+        $instituicao_dados = $instituicao->get_by_id($instituicao_id);
+        $get_api_Key = $instituicao_dados['api_key'];
+
+        $pagarme_Costumer->set_api_key("18e834381bb3da3f16589539a13076a8ef475d159b2b5131d692d1ca2992efbb");
+        $pagarme_pix->set_api_key($get_api_Key);
+        $pagarme_boleto->set_api_key($get_api_Key);
+        $pagarme_cartao->set_api_key($get_api_Key);
+        
+
+
+
+
+
         $planos_valor = $_REQUEST['planos_valor'];
 
         $mensal = $_REQUEST['mensal'] ?? 0;
-
+        
         $planos_id = $_REQUEST['planos_id'] ?? 0;
         $planos_nome = $_REQUEST['planos_nome'] ?? '';
-
+        
         $nome = $_REQUEST['nome'];
-        // $genero = $_REQUEST['genero'];
-
+        
+        
         $cpf_campo = $_REQUEST['cpf'];
         $telefone_campo = $_REQUEST['telefone'];
         $email_campo = $_REQUEST['email'];
@@ -54,7 +74,7 @@ class TransacaoControler
         $phone_ddd = telefone_get_ddd($telefone);
         $cpf = valid_cpf_cnpj($cpf_campo);
         $data_nascimento = data_format($data_nascimento_campo);
-
+        
         $cep = withdraw_caracter($cep_campo);
         $numero = $_REQUEST['numero'];
         $estado = $_REQUEST['estado'];
@@ -80,7 +100,7 @@ class TransacaoControler
         
         
 
-
+        
         if (!$doacao->valid_type_pagamento($type_pagamento)) {
             echo json_encode([
                 'next' => false,
@@ -110,7 +130,7 @@ class TransacaoControler
                 $bairro,
                 $cep);
                 $get_token_doador = $token_doador['id'];
-            
+                
                 $doador->set_token($doador_id, $get_token_doador);
                 // $doador_dados['token'] = $token_doador;
             }
@@ -118,9 +138,9 @@ class TransacaoControler
             
             
             
-        if ($doador_dados['token'] == null) {
-
-            $get_token_doador = $token_doador['id'];
+            if ($doador_dados['token'] == null) {
+                
+                $get_token_doador = $token_doador['id'];
         }
 
         if (!empty($doador_dados['token'])) {
@@ -129,14 +149,6 @@ class TransacaoControler
         }
         
         
-        // $res_plano = $pagarme_plano->create($nome, $planos_valor);
-        // $plano_token = $res_plano['id'];
-        
-        // $Endereco->create($doador_id, "Endereco Doacao", $cep, $endereco, $numero, $complemento, $bairro, $cidade, $estado);
-
-        // $codigo = null;
-        // $url = null;
-        // $split = [];
         
         
         $split_rules = new Split();
@@ -146,8 +158,8 @@ class TransacaoControler
             }, 0);
             if ($total_porcent == 100) {
                     $split = array_map(function ($list) {
-                            return [
-                                    'recipient_id' => $list['recebedor_id'],
+                        return [
+                            'recipient_id' => $list['recebedor_id'],
                                     'percentage' => $list['porcentagem'],
                                     'liable' => !!$list['responsavel_estorno']
                                 ];
@@ -155,36 +167,17 @@ class TransacaoControler
                         }
                         
                         if ($mensal == 1) {
-            set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
+                            set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
         }
 
-        // if ($mensal == 1 and $type_pagamento == "credit_card") {
-
-        //     $pagarme_cartao = new PagarMeCartao();
-        //     $res_pagarme_cartao = $pagarme_cartao->create_cartao($cart_numero, $cart_cvv, $cart_validade, $cart_nome);
-
-        //     $get_id_cartao = $res_pagarme_cartao['id'];
-        //     $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia($plano_token, $get_id_cartao, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento, $split);
-        //     $get_token = $res_pagarme_recorrencia['id'];
-        //     $get_status = $res_pagarme_recorrencia['status'];
-        //     $codigo = "";
-        //     $url = "";
-        // }
-
-        // if ($mensal == 1 and $type_pagamento == "boleto") {
-
-        //     $pagarme_cartao = new PagarMeBoleto();
-        //     $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_boleto($plano_token, $bairro, $endereco, $numero, $cep, $cpf, $email, $nome, substr($telefone, 2, 10), $phone_ddd, $type_pagamento, $split);
-        //     $get_status = $res_pagarme_recorrencia['current_transaction']['status'];
-        //     $get_token = $res_pagarme_recorrencia['id'];
-        //     $codigo = $res_pagarme_recorrencia['current_transaction']['boleto_barcode'];
-        //     $url = $res_pagarme_recorrencia['current_transaction']['boleto_url'];
-        // }
-
-
-
+       
+        
+        
+        
+   
+        
         if ($type_pagamento == "CREDIT_CARD" and $mensal != 1) {
-
+            
             campo_obrigatorios([
                 'cart_numero' => 'Campo cart_numero Obrigatorio',
                 'cart_cvv' => 'Campo cart_cvv Obrigatorio',
@@ -192,9 +185,18 @@ class TransacaoControler
                 'planos_valor' => 'Campo planos_valor Obrigatorio',
             ]);
 
-            $pagarme_cartao = new PagarMeCartao();
+            
 
             $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep);
+
+            if(empty($res_pagarme['id'])){
+                echo json_encode([
+                    'next' => false,
+                    'message' => 'Cartão invalido!'
+                ]);
+                die;
+            }
+
             $get_token = $res_pagarme['id'];
             $get_status = $res_pagarme['status'];
             $codigo = "";
@@ -208,12 +210,10 @@ class TransacaoControler
                 'planos_valor' => 'Campo planos_valor opbrigatorio',
             ]);
 
-            $pagarme_pix = new PagarMeTransaction();
-            $pagarme_boleto = new PagarMeBoleto();
             
             if($type_pagamento == "PIX"){
                 
-                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
+                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);        
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
                 $codigo = $get_codigo['payload'];
@@ -235,30 +235,7 @@ class TransacaoControler
 
 
 
-        // if ($type_pagamento == "boleto" and $mensal != 1) {
-
-        //     campo_obrigatorios([
-        //         'planos_valor' => 'Campo planos_valor opbrigatorio',
-        //         'planos_nome' => 'Campo planos_nome opbrigatorio'
-        //     ]);
-
-        //     $pagarme_boleto = new PagarMeBoleto();
-
-        //     $res_pagarme = $pagarme_boleto->create($planos_valor, $type_pagamento, $get_token_doador, $nome, $email, $cpf, ['+55' . $telefone], $data_nascimento, $estado, $cidade, $bairro, $endereco, $numero, $cep, $plano_token, $planos_nome, $split);
-        //     $get_token = $res_pagarme['id'];
-        //     $get_status = $res_pagarme['status'];
-        //     $codigo = $res_pagarme['boleto_barcode'];
-        //     $url = $res_pagarme['boleto_url'];
-        // }
-
-
-        // if ($mensal == 1) {
-        //     $datas_agendadas = maker_datas(date('Y-m-d'));
-        //     foreach ($datas_agendadas as $proximo_pagamento) {
-        //         $doacao->agendamento($instituicao_id, $doador_id, $get_token, $type_pagamento, $planos_id, $planos_valor, $proximo_pagamento);
-        //     }
-        // }
-
+       
 
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url, $reference_key);
 
@@ -268,7 +245,6 @@ class TransacaoControler
         @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
 
 
-        $instituicao_dados = $instituicao->get_by_id($instituicao_id);
         $nome_instituicao = $instituicao_dados['nome_fantasia'];
         $email_instituicao = $instituicao_dados['email'];
         $color_instituicao = $instituicao_dados['cor'];
@@ -285,19 +261,7 @@ class TransacaoControler
 
         $email_notificacao->exest_acao($instituicao_id, $get_status);
 
-        // // SendGrid::send(
-        // // $nome, 
-        // // $email, 
-        // // $nome_instituicao, 
-        // // $email_instituicao, 
-        // // $template_email['assunto'], 
-        // // $template_email['assunto'], 
-        // // $template_email['text'], 
-        // // $color_instituicao, 
-        // // $nome_instituicao, 
-        // // $logo_instituicao,
-        // // 'instituicao');
-
+       
         get_api('/email/preview', [
             "instituicao_id" => $instituicao_id,
             "doador_cpf" => $cpf,
@@ -312,7 +276,7 @@ class TransacaoControler
         $numero_ddd = [$get_ddd_tel, $get_numero_tel];
 
 
-        // // SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
+        
 
         echo json_encode([
             'next' => true,

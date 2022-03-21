@@ -84,7 +84,7 @@ class Asaas
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
             curl_close($con);
-
+            // var_dump($this->api_key);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
             $this->is_error();
@@ -118,6 +118,7 @@ class Asaas
     public function set_api_key(string $api_key): void
     {
         $this->api_key = $api_key;
+        
     }
 
     public function put(string $path, array $payload): array
