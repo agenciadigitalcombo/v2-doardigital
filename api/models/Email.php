@@ -76,9 +76,9 @@
             return [
                 "processing", 
                 "authorized", 
-                "paid", 
+                "CONFIRMED", 
                 "refunded", 
-                "waiting_payment", 
+                "PENDING", 
                 "pending_refund", 
                 "refused", 
                 "chargedback"

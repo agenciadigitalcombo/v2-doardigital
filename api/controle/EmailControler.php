@@ -14,7 +14,7 @@ class EmailContoler
         $cron = $_REQUEST['cron'];
 
 
-        $status_payment = ['processing', 'authorized', 'paid', 'refunded', 'waiting_payment', 'pending_refund', 'refused', 'chargeback'];
+        $status_payment = ['processing', 'authorized', 'CONFIRMED', 'refunded', 'PENDING', 'pending_refund', 'refused', 'chargeback'];
 
 
         if (!in_array($status, $status_payment)) {
