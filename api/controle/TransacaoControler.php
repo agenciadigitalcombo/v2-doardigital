@@ -44,7 +44,7 @@ class TransacaoControler
         $instituicao_dados = $instituicao->get_by_id($instituicao_id);
         $get_api_Key = $instituicao_dados['api_key'];
 
-        $pagarme_Costumer->set_api_key("18e834381bb3da3f16589539a13076a8ef475d159b2b5131d692d1ca2992efbb");
+        $pagarme_Costumer->set_api_key($get_api_Key);
         $pagarme_pix->set_api_key($get_api_Key);
         $pagarme_boleto->set_api_key($get_api_Key);
         $pagarme_cartao->set_api_key($get_api_Key);
