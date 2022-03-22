@@ -109,12 +109,16 @@ class TransacaoControler
             return null;
         }
         
-        $is_doador = $doador->exist($cpf);
+        $is_doador = $doador->exist_by_cpf_instituicao($cpf, $instituicao_id);
         if (!$is_doador) {
             $telefone_sem_ddd = telefone_get_number($telefone);
-            $doador->create($nome, $email, $telefone_sem_ddd, $cpf, uniqid());
+            $doador->create($nome, $instituicao_id, $email, $telefone_sem_ddd, $cpf, uniqid());
         }
         
+        echo json_encode([
+            'next' => true,
+            'message' => 'Deu certo'
+        ]);
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
         
@@ -132,7 +136,7 @@ class TransacaoControler
                 $get_token_doador = $token_doador['id'];
                 
                 $doador->set_token($doador_id, $get_token_doador);
-                // $doador_dados['token'] = $token_doador;
+                $doador_dados['token'] = $token_doador;
             }
             
             
