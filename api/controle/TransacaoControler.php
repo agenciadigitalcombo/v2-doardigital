@@ -115,10 +115,6 @@ class TransacaoControler
             $doador->create($nome, $instituicao_id, $email, $telefone_sem_ddd, $cpf, uniqid());
         }
         
-        echo json_encode([
-            'next' => true,
-            'message' => 'Deu certo'
-        ]);
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
         
