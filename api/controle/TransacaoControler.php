@@ -214,7 +214,6 @@ class TransacaoControler
             if($type_pagamento == "PIX"){
                 
                 $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);        
-                var_dump($res_pagarme);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
                 $codigo = $get_codigo['payload'];
