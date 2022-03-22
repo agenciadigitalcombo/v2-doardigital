@@ -117,8 +117,7 @@ class Asaas
 
     public function set_api_key(string $api_key): void
     {
-        $this->api_key = $api_key;
-        
+        $this->api_key = $api_key;        
     }
 
     public function put(string $path, array $payload): array
