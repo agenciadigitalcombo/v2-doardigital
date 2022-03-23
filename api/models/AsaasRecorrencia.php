@@ -70,7 +70,7 @@ class AsaasRecorrencia extends Asaas
             "billingType" => $type_payment,
             "nextDueDate" => date('Y-m-d', strtotime('+30 days', strtotime(date('Y-m-d')))),
             "value" => $amaount,
-            "cycle" => "CREDIT_CARD",
+            "cycle" => "MONTHLY",
             "description" => "Doação",
             "creditCard" => [
                 "holderName" => $card_holder_name,
@@ -90,8 +90,7 @@ class AsaasRecorrencia extends Asaas
                 "mobilePhone" => $phone_numbers
             ],
             "maxPayments" => "24",
-            "remoteIp" => $_SERVER['REMOTE_ADDR'],
-            "creditCardToken" => "a75a1d98-c52d-4a6b-a413-71e00b193c99"
+            "remoteIp" => $_SERVER['REMOTE_ADDR']
         ];
 
         return $this->post('/subscriptions', $payload);

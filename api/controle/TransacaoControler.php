@@ -48,6 +48,7 @@ class TransacaoControler
         $get_api_Key = $instituicao_dados['api_key'];
 
         $pagarme_Costumer->set_api_key($get_api_Key);
+        $assasRecorrencia->set_api_key($get_api_Key);
         $pagarme_pix->set_api_key($get_api_Key);
         $pagarme_boleto->set_api_key($get_api_Key);
         $pagarme_cartao->set_api_key($get_api_Key);
@@ -95,6 +96,12 @@ class TransacaoControler
             $cart_nome = $_REQUEST['cart_nome'];
             $cart_validade_campo = $_REQUEST['cart_validade'];
             $cart_validade = withdraw_caracter($cart_validade_campo);
+        }else{
+
+            $cart_numero = "";
+            $cart_cvv = "";
+            $cart_nome = "";
+            $cart_validade = "";
         }
         
         $reference_key = "ref_" . uniqid();
@@ -202,13 +209,13 @@ class TransacaoControler
         }
 
 
-        if ($type_pagamento == "CREDIT_CARD" and $mensal == 1) {
+        if ($mensal == 1) {
             $res_recorrencia = $assasRecorrencia->create_recorrencia_cartao(
                 $get_token_doador, 
-                'CREDIT_CARD', 
+                $type_pagamento, 
                 $planos_valor,
                 $cart_nome,
-                $cart_cvv,
+                $cart_numero,
                 $cart_validade,
                 $cart_cvv,
                 $nome,
@@ -219,6 +226,16 @@ class TransacaoControler
                 $complemento,
                 $telefone
             );
+
+
+            if(empty($res_recorrencia['id'])){
+                echo json_encode([
+                    'next' => false,
+                    'message' => 'Erro ao transacionar!'
+                ]);
+                die;
+            }
+
             $get_token = $res_recorrencia['id'];
             $get_status = $res_recorrencia['status'];
             $codigo = "";
@@ -234,16 +251,16 @@ class TransacaoControler
             ]);
 
             
-            if($type_pagamento == "PIX"){
-                
+            if($type_pagamento == "PIX" and $mensal != 1){
                 $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);        
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
                 $codigo = $get_codigo['payload'];
                 $url = $get_codigo['encodedImage'];
                 $expirationCode = $get_codigo['expirationDate'];
+                $get_status = $res_pagarme['status'];
             }
-            if($type_pagamento == "BOLETO"){
+            if($type_pagamento == "BOLETO" and $mensal != 1){
 
                 $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador);
                 $get_token = $res_pagarme['id'];
@@ -251,8 +268,8 @@ class TransacaoControler
                 $codigo = $get_codigo['identificationField'];
                 $url = $res_pagarme['bankSlipUrl'];
                 
+                $get_status = $res_pagarme['status'];
             }
-            $get_status = $res_pagarme['status'];
         }
 
 
