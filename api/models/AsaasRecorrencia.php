@@ -89,6 +89,7 @@ class AsaasRecorrencia extends Asaas
                 "phone" => $phone_numbers,
                 "mobilePhone" => $phone_numbers
             ],
+            "maxPayments" => "24",
             "remoteIp" => $_SERVER['REMOTE_ADDR'],
             "creditCardToken" => "a75a1d98-c52d-4a6b-a413-71e00b193c99"
         ];
