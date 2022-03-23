@@ -19,7 +19,7 @@ class TransacaoControler
         $pagarme_pix = new PagarMeTransaction();
         $pagarme_boleto = new PagarMeBoleto();
         $pagarme_cartao = new PagarMeCartao();
-
+        $assasRecorrencia = new AsaasRecorrencia();
         
         
         campo_obrigatorios([
@@ -35,9 +35,12 @@ class TransacaoControler
             'endereco' => 'Campo endereco opbrigatorio',
             'numero' => 'Campo numero opbrigatorio',
             'cep' => 'Campo cep opbrigatorio',
+            'cart_numero' => 'Campo cart_numero Obrigatorio',
+            'cart_cvv' => 'Campo cart_cvv Obrigatorio',
+            'cart_validade' => 'Campo cart_validade Obrigatorio',
+            'planos_valor' => 'Campo planos_valor Obrigatorio',
         ]);
         
-
         
         $instituicao_id = $_REQUEST['instituicao_id'];
 
@@ -179,12 +182,6 @@ class TransacaoControler
         
         if ($type_pagamento == "CREDIT_CARD" and $mensal != 1) {
             
-            campo_obrigatorios([
-                'cart_numero' => 'Campo cart_numero Obrigatorio',
-                'cart_cvv' => 'Campo cart_cvv Obrigatorio',
-                'cart_validade' => 'Campo cart_validade Obrigatorio',
-                'planos_valor' => 'Campo planos_valor Obrigatorio',
-            ]);
 
             
 
@@ -202,6 +199,31 @@ class TransacaoControler
             $get_status = $res_pagarme['status'];
             $codigo = "";
             $url = $res_pagarme['transactionReceiptUrl'];
+        }
+
+
+        if ($type_pagamento == "CREDIT_CARD" and $mensal == 1) {
+            $res_recorrencia = $assasRecorrencia->create_recorrencia_cartao(
+                $get_token_doador, 
+                'CREDIT_CARD', 
+                $planos_valor,
+                $cart_nome,
+                $cart_cvv,
+                $cart_validade,
+                $cart_cvv,
+                $nome,
+                $email,
+                $cpf,
+                $cep, 
+                $numero, 
+                $complemento,
+                $telefone
+            );
+            $get_token = $res_recorrencia['id'];
+            $get_status = $res_recorrencia['status'];
+            $codigo = "";
+            $url = "";
+
         }
 
 
