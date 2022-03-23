@@ -50,20 +50,20 @@ class AsaasRecorrencia extends Asaas
     // }
 
     public function create_recorrencia_cartao(
-        $costumer_id,
-        $type_payment,
-        $amaount,
-        $card_holder_name,
-        $card_number,
-        $card_expiration_date,
-        $card_cvv,
-        $nome_costumer,
-        $email_costumer,
-        $cpfCnpj,
-        $cep,
-        $street_number,
-        $complement,
-        $phone_numbers): array
+        string $costumer_id,
+        string $type_payment,
+        string $amaount,
+        string $card_holder_name,
+        string $card_number,
+        string $card_expiration_date,
+        string $card_cvv,
+        string $nome_costumer,
+        string $email_costumer,
+        string $cpfCnpj,
+        string $cep,
+        string $street_number,
+        string $complement,
+        string $phone_numbers): array
     {
         $payload = [
             "customer" => $costumer_id,

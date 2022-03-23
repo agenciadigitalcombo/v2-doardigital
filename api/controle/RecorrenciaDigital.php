@@ -1,5 +1,3 @@
-<?php
-
 class RecorrenciaDigital
 {
 
@@ -18,12 +16,12 @@ class RecorrenciaDigital
     static function obrigatorio()
     {
         campo_obrigatorios([
+            'plano_token' => 'Informe um token de plano',
             'amount' => 'Informe o valor',
             'cart_nome' => 'Informe um nome',
             'cart_numero' => 'Informe numero de cartão',
             'cart_cvv' => 'Informe um cvv',
-            'cart_validade' => 'informe validade',
-            'instituicao_id' => 'Informe Instituicao'
+            'cart_validade' => 'inform validade',
         ]);
     }
 
@@ -40,35 +38,21 @@ class RecorrenciaDigital
             "email" => $get_dados['email']
         ];
     }
-    
-    static function get_token_doador(
-        $cpf, 
-        $nome, 
-        $email, 
-        $telefone, 
-        $instituicao_id,
-        $complemento,
-        $bairro,
-        $endereco,
-        $numero,
-        $cep)
-        {
-            $doador = new Doador();
+
+    static function get_token_doador($cpf, $nome, $email, $telefone)
+    {
+        $doador = new Doador();
         $pagarme_Costumer = new PagarMeCostumer();
-        
-        $get_api_Key = self::get_api_key($instituicao_id);
 
-        $pagarme_Costumer->set_api_key($get_api_Key);
-
-        if (!$doador->exist_by_cpf_instituicao($cpf, $instituicao_id)) {
-            $doador->create($nome, $instituicao_id, $email, $telefone, $cpf, "GFCGDVJKLIKHB@~");
+        if (!$doador->exist($cpf)) {
+            $doador->create($nome, $email, $telefone, $cpf, "GFCGDVJKLIKHB@~");
         }
 
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
 
         if ($doador_dados['token'] == null) {
-            $token_doador = $pagarme_Costumer->create($nome, $email, $doador_id, $telefone, $cpf, $endereco, $numero, $complemento, $bairro, $cep);
+            $token_doador = $pagarme_Costumer->create($nome, $email, $doador_id, ['+55' . $telefone], $cpf);
             $get_token_doador = $token_doador['id'];
             $doador->set_token($doador_id, $get_token_doador);
             $doador_dados['token'] = $token_doador;
@@ -77,50 +61,51 @@ class RecorrenciaDigital
     }
 
     static function assinar_plano(
-        $costumer_id,
-        $instituicao_id,
+        $plano_token,
         $amount,
         $cart_nome,
         $cart_numero,
         $cart_cvv,
         $cart_validade,
+        $bairro,
+        $endereco,
         $numero,
-        $complemento,
         $cep,
         $cpf,
         $email,
         $nome,
-        $phone_number
-        ) {
-            
-            $pagarme_cartao = new AsaasRecorrencia();
-            
-            $get_api_Key = self::get_api_key($instituicao_id);
-            $pagarme_cartao->set_api_key($get_api_Key);
-            
-            
-        $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia_cartao(
-            $costumer_id,
-            'CREDIT_CARD',
-            $amount,
-            $cart_nome,
+        $phone_number,
+        $ddd
+    ) {
+
+        $pagarme_cartao = new PagarMeCartao();
+        $res_pagarme_cartao = $pagarme_cartao->create_cartao(
             $cart_numero,
-            $cart_validade,
             $cart_cvv,
-            $nome,
-            $email,
-            $cpf,
-            $cep,
-            $numero,
-            $complemento,
-            $phone_number,
+            $cart_validade,
+            $cart_nome
         );
 
-        
+        $get_id_cartao = $res_pagarme_cartao['id'];
+
+        $res_pagarme_recorrencia = $pagarme_cartao->create_recorrencia(
+            $plano_token,
+            $get_id_cartao,
+            $bairro,
+            $endereco,
+            $numero,
+            $cep,
+            $cpf,
+            $email,
+            $nome,
+            $phone_number,
+            $ddd,
+            'credit_card'
+        );
+
         return [
-            "status" => $res_pagarme_recorrencia['status'],
-            "token" => $res_pagarme_recorrencia['id'],
-            "payload" => $res_pagarme_recorrencia
+            "status" => $res_pagarme_recorrencia['id'],
+            "token" => $res_pagarme_recorrencia['status']
         ];
     }
 
@@ -128,7 +113,7 @@ class RecorrenciaDigital
         $admin_id, 
         $token, 
         $status_pagamento, 
-        $costumer_id, 
+        $plano_id, 
         $valor           
 
     ) {
@@ -137,7 +122,7 @@ class RecorrenciaDigital
             $admin_id, 
             $token, 
             $status_pagamento, 
-            $costumer_id, 
+            $plano_id, 
             $valor  
         );
     }
@@ -161,19 +146,6 @@ class RecorrenciaDigital
         ];
     }
 
-
-    static function get_api_key($instituicao_id): string
-
-    {
-
-        $instituicao = new Instituicao();
-
-        $instituicao_dados = $instituicao->get_by_id($instituicao_id);
-        $get_api_Key = $instituicao_dados['api_key'];
-
-        return $get_api_Key;
-    }
-
     static function create_transacao()
     {
         header('Content-Type: text/html; charset=utf-8');
@@ -183,16 +155,13 @@ class RecorrenciaDigital
         self::obrigatorio();
         $dados_adm = self::get_dados_adm($jwt);
 
-        $costumer_id = $_REQUEST['costumer_id'];
-        $instituicao_id = $_REQUEST['instituicao_id'];
+        $plano_token = $_REQUEST['plano_token'];
         $amount = $_REQUEST['amount'];
-        $complemento = $_REQUEST['complemento'] ?? '';
         $cart_nome = $_REQUEST['cart_nome'];
         $cart_numero = withdraw_caracter($_REQUEST['cart_numero']);
         
         $cart_cvv = $_REQUEST['cart_cvv'];
-        $cart_validade = withdraw_caracter($_REQUEST['cart_validade']);
-               
+        $cart_validade = withdraw_caracter($_REQUEST['cart_validade']);       
         
         $cpf_campo = $dados_adm['cpf'];
         $email_campo = $dados_adm['email'];
@@ -210,53 +179,40 @@ class RecorrenciaDigital
         $numero = $full_endereco['numero'];
         $cep = $full_endereco['cep'];
 
-        $instituicao_id = $_REQUEST['instituicao_id'];
-
-        
-
-
         $token_doador = self::get_token_doador(
-            $cpf, 
-            $nome, 
-            $email, 
-            $full_telefone, 
-            $instituicao_id,
-            $complemento,
-            $bairro,
-            $endereco,
-            $numero,
-            $cep
+            $cpf,
+            $nome,
+            $email,
+            $full_telefone
         );
 
         $res_asign_plan = self::assinar_plano(
-            $costumer_id,
-            $instituicao_id,
+            $plano_token,
             $amount,
             $cart_nome,
             $cart_numero,
             $cart_cvv,
             $cart_validade,
+            $bairro,
+            $endereco,
             $numero,
-            $complemento,
             $cep,
             $cpf,
             $email,
             $nome,
             $phone_number,
+            $ddd
         );
 
         self::salve_db(
             $adm_id, 
             $res_asign_plan['token'], 
             $res_asign_plan['status'], 
-            $costumer_id, 
+            $plano_token, 
             $amount
         );
 
         self::send_email($email);
-
-
-        self::get_api_key($instituicao_id);
 
         $email_notificacao = new Email();
 
@@ -264,7 +220,7 @@ class RecorrenciaDigital
         $get_ddd_tel = telefone_get_ddd($full_telefone);
         $numero_ddd = [$get_ddd_tel, $get_numero_tel];
         
-        $template_email = $email_notificacao->exest_acao($instituicao_id, $res_asign_plan['status']);
+        $template_email = $email_notificacao->exest_acao(0, $res_asign_plan['status']);
         
 
         SendZap::send('primary', '55' . implode('', $numero_ddd), $template_email['text']);
@@ -272,7 +228,6 @@ class RecorrenciaDigital
         echo json_encode([
             'next' => true,
             'message' => 'Transacao Concluida',
-            'payload' => $res_asign_plan['payload']
         ]);
     }
 }
