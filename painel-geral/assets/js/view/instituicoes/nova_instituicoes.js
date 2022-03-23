@@ -9,15 +9,27 @@ export default {
 			token: null,
 			nome_fantasia: null,
 			razao_social: null,
-			subdomain: null,
+			subdomaim: null,
 			tipo_empresa: null,
 			email: null,
 			cnpj: null,
 			telefone: null,
-			msg: null,
-			error: null,
 			submitStatus: null,
 			jms: true,
+
+
+			id: null,
+			instituicao_id: null, 
+			cep: null,
+			logradouro: null,
+			numero: null,
+			complemento: null,
+			bairro: null,
+			cidade: null,
+			estado: null,
+			secret: null,
+			msg: "",
+			error: null,
 		}
 	},
 
@@ -47,6 +59,10 @@ export default {
 			required,
 			minLength: minLength(2)
 		},
+		cep: {
+			required,
+			minLength: minLength(8)
+		},
 	},
 
 	methods: {
@@ -66,31 +82,61 @@ export default {
 			return res
 		},
 
+	searchCep() {
+			if (this.cep.length == 8) {
+				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
+					.then(response => {
+						this.error = ""
+						this.logradouro = response.data.logradouro,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf
+
+						if (response.data.erro) {
+							this.error = "Número do CEP inválido pretendes Preecher manualmente ?? "
+						}
+					}
+					)
+					.catch(error =>
+						error
+					)
+			}
+		},
 
 		async addInstituicao() {
 			this.error = null
-			this.$v.$touch()
-			if (this.$v.$invalid) {
-				this.submitStatus = 'ERROR'
-			}else if (this.jms === false) {
-				this.error = "Porfavor adicione um subdominio valido "
-			  } else {
+		 
 				
-				globalThis._nome =  this.nome_fantasia  
-				globalThis._recebedor =  this.razao_social
-				globalThis._subdomaim =  this.subdomain  
-				globalThis._empresa =  this.tipo_empresa 
-				globalThis._email =  this.email 
-				globalThis._cnpj =  this.cnpj
-			    globalThis._telefone =  this.telefone 
-				//globalThis._cnpj =  this.cnpj.replace(/[^\d]+/g,'')
+				let res = await adm.cadastrarInstituicao(
+					this.token,
+					this.nome_fantasia,
+					this.razao_social,
+					this.subdomaim,
+					this.email,
+					this.telefone,
+					this.cnpj,
+					this.cep,
+					this.logradouro,
+					this.bairro,
+					this.cidade,
+					this.estado,
+					this.numero,
+					this.tipo_empresa, 
+					this.complemento,
+	
+	
+				)
+				if (!res.next) {
+					this.error = res.message
+					return null
+				}
 				
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK' 
-		        	window.location.href = "#/enderecoInstituicoes"
+		        //	window.location.href = "#/enderecoInstituicoes"
 				}, 500)
-			}
+	 
 
 		},
 	}, 

@@ -9,12 +9,12 @@ export default {
 		return {
 			nome_fantasia: null,
 			razao_social: null,
-			subdomain: null,
+			subdomaim: null,
 			tipo_empresa: null,
 			email: null,
 			cnpj: null,
 			telefone: null,
-
+			jms: true,
 			id: null,
 			instituicao_id: null, 
 			cep: null,
@@ -28,10 +28,35 @@ export default {
 			token: null,
 			msg: "",
 			error: null,
+ 
 		}
 	},
 
 	validations: {
+		nome_fantasia: {
+			required,
+			minLength: minLength(2)
+		},
+		razao_social: {
+			required,
+			minLength: minLength(2)
+		},
+		cnpj: {
+			required,
+			minLength: minLength(2)
+		},
+		telefone: {
+			required,
+			minLength: minLength(2)
+		},
+		email: {
+			required,
+			minLength: minLength(2)
+		},
+		subdomain: {
+			required,
+			minLength: minLength(2)
+		},
 		cep: {
 			required,
 			minLength: minLength(8)
@@ -58,6 +83,8 @@ export default {
 				this.estado,
 				this.numero,
 				this.cep,
+
+
 			)
 			if (!res.next) {
 				this.error = res.message

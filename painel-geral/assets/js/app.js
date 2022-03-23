@@ -107,7 +107,7 @@ const routes = [
 
     { path: '/minha_assinatura', component: { template: '<p-minha_assinatura></p-minha_assinatura>' } },
     { path: '/perfil', component: { template: '<p-perfil></p-perfil>' } },
-    { path: '/editar-local', component: { template: '<p-endereco></p-endereco>' } },
+    { path: '/local', component: { template: '<p-endereco></p-endereco>' } },
     { path: '/seguranca', component: { template: '<p-seguranca></p-seguranca>' } },
 ]
 

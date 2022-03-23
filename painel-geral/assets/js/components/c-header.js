@@ -26,8 +26,10 @@ export default {
                 credenciais: 'Minhas Credenciais',
 
                 instituicoesNova: 'Adicionar Nova Instituição',
-                bancoInstituicoes: 'Adicionar Nova Instituição'
-
+                bancoInstituicoes: 'Adicionar Nova Instituição',
+                perfil: 'Perfil',
+                local: 'Perfil',
+                seguranca: 'Perfil',
             }
             return apresentar[status]
         },
