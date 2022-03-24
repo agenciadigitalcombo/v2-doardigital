@@ -163,9 +163,9 @@ export default {
 															
 															<h3 class="fs-1 text-dark">
 															
-																<div class="mw-lg-600px mx-auto mb-15"> 
+																<div class="mw-lg-600px mx-auto mb-15""> 
 																	<div class="mb-13 text-center"> 
-																		<div class="text-muted fw-bold fs-5">
+																		<div class="text-muted fw-bold fs-5 ">
 																			<h2 class="text-gray-600">
 																			Seu codigo PIX..
 																			</h2>
@@ -255,7 +255,7 @@ export default {
                                                     <td> 
                                                         <div class="d-flex flex-column">
                                                             <a class="text-gray-800 text-hover-primary mb-1">
-															R$ {{perDoar}}
+															R$ {{doarDigital }}
                                                             </a>
                                                         </div>
                                                     </td>
@@ -324,6 +324,7 @@ export default {
 			status: null,
 			cpf: null,
 			perDoar: null,
+			doarDigital: null,
 			cartao: null,
 			valorLiquido: null,
 			boleto: null,
@@ -347,7 +348,7 @@ export default {
 		},
 
 
-		este_status(status) {
+			este_status(status) {
             let apresentar = {
                 PENDING: 'Aguardando Pagamento',
                 refused: 'Cancelado',
@@ -393,7 +394,7 @@ export default {
 			this.hora = globalThis._doacoes.hora
 		this.status = globalThis._doacoes.status_pagamento
 
-		if (this.tipo == 'PIX') {
+		if (this.tipo == 'pix') {
 			let code_pix = `${this.codigo_geral}`
 			var qrcode = new QRCode(this.$refs.print_qr, {
 				text: code_pix,
@@ -411,16 +412,16 @@ export default {
 			tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
 			if (tmp.length > 6)
 				tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
-
 			return tmp;
 		}
 
 
-		var doado = formatReal(this.valor + '00')
+		var doado = formatReal(this.valor+'00')
 		var valorDoado = doado.split(',').join('.');
 		this.perDoar = (parseFloat(valorDoado) / 100) * 4;
 
-		console.log(formatReal(this.perDoar))
+		alert(doado)
+			alert(this.valor)
 
 		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
 
@@ -433,9 +434,14 @@ export default {
 		} else {
 			var boleto = parseFloat(this.perDoar) + 1.99
 			this.valorLiquido = parseFloat(valorDoado) - boleto
+           
+		} 
 
-		}
-
+		var a = 1.75 + 2.68 + 5.56;//9.989999999999998
+		a.toPrecision(9);//"9.99"
+		 
+		this.doarDigital  = this.perDoar.toFixed(2);
+	 
 
 	},
 
