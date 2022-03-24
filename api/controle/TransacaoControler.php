@@ -35,9 +35,6 @@ class TransacaoControler
             'endereco' => 'Campo endereco opbrigatorio',
             'numero' => 'Campo numero opbrigatorio',
             'cep' => 'Campo cep opbrigatorio',
-            'cart_numero' => 'Campo cart_numero Obrigatorio',
-            'cart_cvv' => 'Campo cart_cvv Obrigatorio',
-            'cart_validade' => 'Campo cart_validade Obrigatorio',
             'planos_valor' => 'Campo planos_valor Obrigatorio',
         ]);
         
@@ -53,13 +50,13 @@ class TransacaoControler
         $pagarme_boleto->set_api_key($get_api_Key);
         $pagarme_cartao->set_api_key($get_api_Key);
         
+        
 
-
-
-
-
+        
+        
+        
         $planos_valor = $_REQUEST['planos_valor'];
-
+        
         $mensal = $_REQUEST['mensal'] ?? 0;
         
         $planos_id = $_REQUEST['planos_id'] ?? 0;
@@ -91,13 +88,19 @@ class TransacaoControler
         
         if ($type_pagamento == "CREDIT_CARD") {
             
+            campo_obrigatorios([
+                'cart_numero' => 'Campo cart_numero Obrigatorio',
+                'cart_cvv' => 'Campo cart_cvv Obrigatorio',
+                'cart_validade' => 'Campo cart_validade Obrigatorio'
+            ]);
+            
             $cart_numero = $_REQUEST['cart_numero'];
             $cart_cvv = $_REQUEST['cart_cvv'];
             $cart_nome = $_REQUEST['cart_nome'];
             $cart_validade_campo = $_REQUEST['cart_validade'];
             $cart_validade = withdraw_caracter($cart_validade_campo);
         }else{
-
+            
             $cart_numero = "";
             $cart_cvv = "";
             $cart_nome = "";
@@ -109,7 +112,6 @@ class TransacaoControler
         
         
         
-
         
         if (!$doacao->valid_type_pagamento($type_pagamento)) {
             echo json_encode([
@@ -270,7 +272,7 @@ class TransacaoControler
                 
                 $get_status = $res_pagarme['status'];
             }
-            
+
             if($type_pagamento == "BOLETO" and $mensal != 1){
 
                 $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador);
