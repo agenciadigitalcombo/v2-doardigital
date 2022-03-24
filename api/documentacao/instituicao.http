@@ -73,6 +73,9 @@ Content-Type: application/x-www-form-urlencoded
 &instituicao_id=int
 
 ###
+GET http://doardigital.tk/api/listar-chave-pix?instituicao_id=string
+Content-Type: application/x-www-form-urlencoded
+###
 GET http://doardigital.tk/api/subdominio-disponivel?subdomain=string
 Content-Type: application/x-www-form-urlencoded
 // criar ou salvar dados bancario 

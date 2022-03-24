@@ -654,6 +654,26 @@ class InstituicaoControler
         ]);
     }
 
+    
+    static function list_pix_key_by_instituicao()
+    {
+
+        $instituicao = new Instituicao();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+        
+        
+        $get_chave_pix = $instituicao->list_pix($instituicao_id);
+
+        
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Chave PIX da instituicao',
+            'pix_key' => $get_chave_pix['pix_key']
+        ]);
+    }
+
 
     static function teste_create()
     {
@@ -671,6 +691,7 @@ class InstituicaoControler
 
         Relatorio::teste($list_doacoes, $all_metas);
     }
+
 
     
 }

@@ -81,6 +81,15 @@ class Instituicao
         return !empty($guard);
     }
 
+    public function list_pix(int $instituicao_id): array
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM instituicao WHERE id=$instituicao_id";
+        $guard = $banco->query($sql);
+
+        return $guard[0];
+    }
+
     public function update(int $instituicao_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
     {
         $banco = new Banco();
