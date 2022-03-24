@@ -250,16 +250,27 @@ class TransacaoControler
                 'planos_valor' => 'Campo planos_valor opbrigatorio',
             ]);
 
-            
             if($type_pagamento == "PIX" and $mensal != 1){
+                
                 $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);        
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
-                $codigo = $get_codigo['payload'];
+                
+                $exist_chave_pix = $instituicao->list_pix($instituicao_id);
+                if($exist_chave_pix['pix_key'] != null){
+                    $codigo = $exist_chave_pix['pix_key'];
+                }
+
+                if($exist_chave_pix['pix_key'] == null){
+                    $codigo = $get_codigo['payload'];
+                }
+                
                 $url = $get_codigo['encodedImage'];
                 $expirationCode = $get_codigo['expirationDate'];
+                
                 $get_status = $res_pagarme['status'];
             }
+            
             if($type_pagamento == "BOLETO" and $mensal != 1){
 
                 $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador);
