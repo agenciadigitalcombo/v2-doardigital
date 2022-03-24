@@ -65,7 +65,12 @@ token=string
 &instituicao_id=int
 &dominio=string
 
+###
+POST http://doardigital.tk/api/create-chave-pix
+Content-Type: application/x-www-form-urlencoded
 
+&chave_pix=string
+&instituicao_id=int
 
 ###
 GET http://doardigital.tk/api/subdominio-disponivel?subdomain=string

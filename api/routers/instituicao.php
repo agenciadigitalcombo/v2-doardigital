@@ -13,4 +13,6 @@ router('/list-doacoes', 'InstituicaoControler@list_doacoes');
 router('/list-doadores', 'InstituicaoControler@list_doadores');
 router('/list-email', 'InstituicaoControler@list_email_by_instituicao');
 router('/configuracao-instituicao', 'InstituicaoControler@config_instituicao');
+router('/create-chave-pix', 'InstituicaoControler@generate_pix_key');
 router('/teste-create', 'InstituicaoControler@teste_create');
+

@@ -629,6 +629,32 @@ class InstituicaoControler
         ]);
     }
 
+
+    static function generate_pix_key()
+    {
+
+        $instituicao = new Instituicao();
+
+        $instituicao_id = $_REQUEST['instituicao_id'];
+        $pix_key = $_REQUEST['chave_pix'] ?? '';
+
+        if($instituicao->exist_pix($pix_key)){
+            echo json_encode([
+                'next' => true,
+                'message' => 'Chave PIX ja Cadastrada!'
+            ]);
+            die;
+        } 
+        
+        $instituicao->set_pix_key($pix_key, $instituicao_id);
+
+        echo json_encode([
+            'next' => true,
+            'message' => 'Chave PIX cadastrada com Sucesso!'
+        ]);
+    }
+
+
     static function teste_create()
     {
 

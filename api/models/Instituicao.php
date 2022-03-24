@@ -63,6 +63,24 @@ class Instituicao
         $banco->exec($sql);
     }
 
+    public function set_pix_key(string $pix_key, int $instituicao_id): void
+    {   
+        $banco = new Banco();
+        $sql = "UPDATE instituicao SET ";
+        $sql .= "pix_key='$pix_key' WHERE id=$instituicao_id";
+        $banco->exec($sql);
+    }
+
+
+    public function exist_pix(string $pix_key): bool
+    {
+        $banco = new Banco();
+        $sql = "SELECT * FROM instituicao WHERE pix_key='$pix_key'";
+        $guard = $banco->query($sql);
+
+        return !empty($guard);
+    }
+
     public function update(int $instituicao_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
     {
         $banco = new Banco();
