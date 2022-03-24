@@ -347,9 +347,9 @@ export default {
             if (tmp.length > 6)
                 tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
 
-            return tmp;
+            return `R$ ${tmp}`;
         },
-
+        
 
 
         is_data(datas) {
