@@ -82,7 +82,6 @@ export default {
 															{{end.estado}}
 														</div>
 
-
 														<div class="rotaObscura">
 															<input v-mask="'#####-###'" v-model="end.cep"
 																class="invisivel" />
@@ -171,7 +170,7 @@ export default {
 																		{{item.data | is_data}}
 																	</td>
 
-																	<td>{{item.valor | is_price }}</td>
+																	<td>{{item.valor+'00' | is_price }}</td>
 																	</td>
 
 																	<td>
@@ -592,29 +591,29 @@ export default {
 
 
 		este_status(status) {
-			let apresentar = {
-				refunded: 'Reembolsado',
-				processing: 'Em processamento',
-				authorized: 'Autorizado ',
-				unpaid: 'Não Pago',
-				pending: 'Pendente',
-				waiting_payment: 'Aguardando Pagamento',
-				refused: 'Cancelado',
-				paid: 'Pago',
-				pending_refund: 'Reembolso pendente ',
-				chargedback: 'Estorno',
-			}
-			return apresentar[status]
-		},
+            let apresentar = {
+                PENDING: 'Aguardando Pagamento',
+                refused: 'Cancelado',
+                CONFIRMED: 'Pago',
+                OVERDUE: 'Vencida',
+                REFUNDED: 'Reembolsado',
+                processing: 'Em processamento',
+                authorized: 'Autorizado ',
+                pending_refund: 'Reembolso pendente ',
+                chargedback: 'Estorno',
+            }
+            return apresentar[status]
+        },
 
-		este_tipo(status) {
-			let apresentar = {
-				boleto: 'Boleto',
-				credit_card: 'Crédito',
-				pix: 'PIX',
-			}
-			return apresentar[status]
-		},
+
+        este_tipo(status) {
+            let apresentar = {
+                BOLETO: 'Boleto',
+                CREDIT_CARD: 'Crédito',
+                PIX: 'PIX',
+            }
+            return apresentar[status]
+        },
 
 	},
 

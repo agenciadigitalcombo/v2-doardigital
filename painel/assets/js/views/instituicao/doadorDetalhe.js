@@ -159,13 +159,13 @@ export default {
 																</div>
 																</div>
 															
-															<div id="block2" v-if="tipo=='pix'">
+															<div id="block2" v-if="tipo=='PIX'">
 															
-															<h3 class="fs-1 text-dark>
+															<h3 class="fs-1 text-dark">
 															
-																<div class="mw-lg-600px mx-auto mb-15""> 
+																<div class="mw-lg-600px mx-auto mb-15"> 
 																	<div class="mb-13 text-center"> 
-																		<div class="text-muted fw-bold fs-5 ">
+																		<div class="text-muted fw-bold fs-5">
 																			<h2 class="text-gray-600">
 																			Seu codigo PIX..
 																			</h2>
@@ -180,7 +180,7 @@ export default {
 														 
 											
 																
-														<div id="block12" v-if="tipo=='pix'">
+														<div id="block12" v-if="tipo=='PIX'">
 														
 															<div class="mw-lg-600px mx-auto  mt-10"> 
 															  
@@ -230,7 +230,7 @@ export default {
 													<th class="min-w-100px">Tipo</th>
                                                     <th class="min-w-100px">Valor</th>
                                                     <th class="min-w-100px">Doar </th>
-                                                    <th class="min-w-100px" v-if="tipo ==='pix'">Pix</th>
+                                                    <th class="min-w-100px" v-if="tipo ==='PIX'">Pix</th>
                                                     <th class="min-w-100px" v-if="tipo ==='CREDIT_CARD'">Cartão </th>
                                                     <th class="min-w-100px" v-if="tipo ==='BOLETO'">Boleto</th>
 													<th class="min-w-150px" v-if="tipo ==='CREDIT_CARD'">Transação</th>
@@ -260,7 +260,7 @@ export default {
                                                         </div>
                                                     </td>
                                                    
-                                                    <td v-if="tipo ==='pix'">
+                                                    <td v-if="tipo ==='PIX'">
                                                         <div class=""> 
 														R$ 0.79 
                                                         </div>
@@ -348,15 +348,20 @@ export default {
 
 
 		este_status(status) {
-			let apresentar = {
-				waiting_payment: 'Aguardando Pagamento ',
-				refused: 'Cancelado',
-				paid: 'Pago',
-				unpaid: 'Não Pago',
-				pending: 'Pendente'
-			}
-			return apresentar[status]
-		},
+            let apresentar = {
+                PENDING: 'Aguardando Pagamento',
+                refused: 'Cancelado',
+                CONFIRMED: 'Pago',
+                OVERDUE: 'Vencida',
+                REFUNDED: 'Reembolsado',
+                processing: 'Em processamento',
+                authorized: 'Autorizado ',
+                pending_refund: 'Reembolso pendente ',
+                chargedback: 'Estorno',
+            }
+            return apresentar[status]
+        },
+
 
 
 		este_tipo(status) {
@@ -388,7 +393,7 @@ export default {
 			this.hora = globalThis._doacoes.hora
 		this.status = globalThis._doacoes.status_pagamento
 
-		if (this.tipo == 'pix') {
+		if (this.tipo == 'PIX') {
 			let code_pix = `${this.codigo_geral}`
 			var qrcode = new QRCode(this.$refs.print_qr, {
 				text: code_pix,
