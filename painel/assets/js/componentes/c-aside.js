@@ -117,8 +117,8 @@ export default {
          // console.log(this.permisao.split(","))
 
         let recursos = this.permisao
-         let adm = this.superAdm
-      // let adm =  '1'
+    let adm = this.superAdm
+         //   let adm =  '0'
 
         if (adm == '1') {
             this.lista = this.menus
