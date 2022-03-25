@@ -3,7 +3,7 @@
 
 class TransacaoControler
 {
-    
+
     static function create_transacao()
     {
         header('Content-Type: text/html; charset=utf-8');
@@ -20,8 +20,8 @@ class TransacaoControler
         $pagarme_boleto = new PagarMeBoleto();
         $pagarme_cartao = new PagarMeCartao();
         $assasRecorrencia = new AsaasRecorrencia();
-        
-        
+
+
         campo_obrigatorios([
             'planos_valor' => 'Campo planos_valor opbrigatorio',
             'type_pagamento' => 'Campo type_pagamento opbrigatorio',
@@ -37,8 +37,8 @@ class TransacaoControler
             'cep' => 'Campo cep opbrigatorio',
             'planos_valor' => 'Campo planos_valor Obrigatorio',
         ]);
-        
-        
+
+
         $instituicao_id = $_REQUEST['instituicao_id'];
 
         $instituicao_dados = $instituicao->get_by_id($instituicao_id);
@@ -49,22 +49,22 @@ class TransacaoControler
         $pagarme_pix->set_api_key($get_api_Key);
         $pagarme_boleto->set_api_key($get_api_Key);
         $pagarme_cartao->set_api_key($get_api_Key);
-        
-        
 
-        
-        
-        
+
+
+
+
+
         $planos_valor = $_REQUEST['planos_valor'];
-        
+
         $mensal = $_REQUEST['mensal'] ?? 0;
-        
+
         $planos_id = $_REQUEST['planos_id'] ?? 0;
         $planos_nome = $_REQUEST['planos_nome'] ?? '';
-        
+
         $nome = $_REQUEST['nome'];
-        
-        
+
+
         $cpf_campo = $_REQUEST['cpf'];
         $telefone_campo = $_REQUEST['telefone'];
         $email_campo = $_REQUEST['email'];
@@ -75,7 +75,7 @@ class TransacaoControler
         $phone_ddd = telefone_get_ddd($telefone);
         $cpf = valid_cpf_cnpj($cpf_campo);
         $data_nascimento = data_format($data_nascimento_campo);
-        
+
         $cep = withdraw_caracter($cep_campo);
         $numero = $_REQUEST['numero'];
         $estado = $_REQUEST['estado'];
@@ -83,36 +83,36 @@ class TransacaoControler
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $complemento = $_REQUEST['complemento'] ?? '';
-        
+
         $type_pagamento = $_REQUEST['type_pagamento'];
-        
+
         if ($type_pagamento == "CREDIT_CARD") {
-            
+
             campo_obrigatorios([
                 'cart_numero' => 'Campo cart_numero Obrigatorio',
                 'cart_cvv' => 'Campo cart_cvv Obrigatorio',
                 'cart_validade' => 'Campo cart_validade Obrigatorio'
             ]);
-            
+
             $cart_numero = $_REQUEST['cart_numero'];
             $cart_cvv = $_REQUEST['cart_cvv'];
             $cart_nome = $_REQUEST['cart_nome'];
             $cart_validade_campo = $_REQUEST['cart_validade'];
             $cart_validade = withdraw_caracter($cart_validade_campo);
-        }else{
-            
+        } else {
+
             $cart_numero = "";
             $cart_cvv = "";
             $cart_nome = "";
             $cart_validade = "";
         }
-        
+
         $reference_key = "ref_" . uniqid();
-        
-        
-        
-        
-        
+
+
+
+
+
         if (!$doacao->valid_type_pagamento($type_pagamento)) {
             echo json_encode([
                 'next' => false,
@@ -120,83 +120,89 @@ class TransacaoControler
             ]);
             return null;
         }
-        
+
         $is_doador = $doador->exist_by_cpf_instituicao($cpf, $instituicao_id);
+
         if (!$is_doador) {
             $telefone_sem_ddd = telefone_get_number($telefone);
             $doador->create($nome, $instituicao_id, $email, $telefone_sem_ddd, $cpf, uniqid());
         }
-        
+
         $doador_dados = $doador->get_by_cpf($cpf);
         $doador_id = $doador_dados['id'];
-        
+
+
+
         if ($doador_dados['token'] == null) {
-                $token_doador = $pagarme_Costumer->create(
-                $nome, 
-                $email, 
-                $doador_id, 
-                $telefone, 
-                $cpf, 
+
+            $token_doador = $pagarme_Costumer->create(
+                $nome,
+                $email,
+                $doador_id,
+                $telefone,
+                $cpf,
                 $endereco,
                 $numero,
                 $complemento,
                 $bairro,
-                $cep);
-                $get_token_doador = $token_doador['id'];
-                
-                $doador->set_token($doador_id, $get_token_doador);
-                $doador_dados['token'] = $token_doador;
-            }
+                $cep
+            );
+            $get_token_doador = $token_doador['id'];
             
-            
-            
-            
-            if ($doador_dados['token'] == null) {
-                
-                $get_token_doador = $token_doador['id'];
+
+            $doador->set_token($doador_id, $get_token_doador);
+            $doador_dados['token'] = $token_doador['id'];
         }
+
+
+
+
+
+        if ($doador_dados['token'] == null) {
+            $get_token_doador = $token_doador['id'];
+        }
+
+
 
         if (!empty($doador_dados['token'])) {
 
             $get_token_doador = $doador_dados['token'];
         }
-        
-        
-        
-        
+
+
         $split_rules = new Split();
         $all_split = $split_rules->list_all_by_instituicao($instituicao_id);
         $total_porcent = array_reduce($all_split, function ($total, $pessoa) {
-                return intval($pessoa['porcentagem']) + $total;
-            }, 0);
-            if ($total_porcent == 100) {
-                    $split = array_map(function ($list) {
-                        return [
-                            'recipient_id' => $list['recebedor_id'],
-                                    'percentage' => $list['porcentagem'],
-                                    'liable' => !!$list['responsavel_estorno']
-                                ];
-                            }, $all_split);
-                        }
-                        
-                        if ($mensal == 1) {
-                            set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
+            return intval($pessoa['porcentagem']) + $total;
+        }, 0);
+        if ($total_porcent == 100) {
+            $split = array_map(function ($list) {
+                return [
+                    'recipient_id' => $list['recebedor_id'],
+                    'percentage' => $list['porcentagem'],
+                    'liable' => !!$list['responsavel_estorno']
+                ];
+            }, $all_split);
         }
 
-       
-        
-        
-        
-   
-        
-        if ($type_pagamento == "CREDIT_CARD" and $mensal != 1) {
-            
+        if ($mensal == 1) {
+            set_taxonomy($instituicao_id, $doador_id, 'ASSINANTE');
+        }
 
-            
+
+
+
+
+
+
+        if ($type_pagamento == "CREDIT_CARD" and $mensal != 1) {
+
+
+
 
             $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep);
 
-            if(empty($res_pagarme['id'])){
+            if (empty($res_pagarme['id'])) {
                 echo json_encode([
                     'next' => false,
                     'message' => 'Cartão invalido!'
@@ -213,8 +219,8 @@ class TransacaoControler
 
         if ($mensal == 1) {
             $res_recorrencia = $assasRecorrencia->create_recorrencia_cartao(
-                $get_token_doador, 
-                $type_pagamento, 
+                $get_token_doador,
+                $type_pagamento,
                 $planos_valor,
                 $cart_nome,
                 $cart_numero,
@@ -223,14 +229,14 @@ class TransacaoControler
                 $nome,
                 $email,
                 $cpf,
-                $cep, 
-                $numero, 
+                $cep,
+                $numero,
                 $complemento,
                 $telefone
             );
 
 
-            if(empty($res_recorrencia['id'])){
+            if (empty($res_recorrencia['id'])) {
                 echo json_encode([
                     'next' => false,
                     'message' => 'Erro ao transacionar!'
@@ -242,7 +248,6 @@ class TransacaoControler
             $get_status = $res_recorrencia['status'];
             $codigo = "";
             $url = "";
-
         }
 
 
@@ -252,35 +257,35 @@ class TransacaoControler
                 'planos_valor' => 'Campo planos_valor opbrigatorio',
             ]);
 
-            if($type_pagamento == "PIX" and $mensal != 1){
-                
-                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);        
+            if ($type_pagamento == "PIX" and $mensal != 1) {
+
+                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
-                
+
                 $exist_chave_pix = $instituicao->list_pix($instituicao_id);
-                if($exist_chave_pix['pix_key'] != null){
+                if ($exist_chave_pix['pix_key'] != null) {
                     $codigo = $exist_chave_pix['pix_key'];
                 }
 
-                if($exist_chave_pix['pix_key'] == null){
+                if ($exist_chave_pix['pix_key'] == null) {
                     $codigo = $get_codigo['payload'];
                 }
-                
+
                 $url = $get_codigo['encodedImage'];
                 $expirationCode = $get_codigo['expirationDate'];
-                
+
                 $get_status = $res_pagarme['status'];
             }
 
-            if($type_pagamento == "BOLETO" and $mensal != 1){
+            if ($type_pagamento == "BOLETO" and $mensal != 1) {
 
                 $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_boleto->codig_boleto($get_token);
                 $codigo = $get_codigo['identificationField'];
                 $url = $res_pagarme['bankSlipUrl'];
-                
+
                 $get_status = $res_pagarme['status'];
             }
         }
@@ -288,7 +293,7 @@ class TransacaoControler
 
 
 
-       
+
 
         $doacao->create($instituicao_id, $doador_id, $get_token, $type_pagamento, $mensal, $get_status, $planos_id, $planos_valor, $codigo, $url, $reference_key);
 
@@ -311,24 +316,24 @@ class TransacaoControler
 
         if ($get_token_evendas) {
             Evendas::send(
-                $nome, 
-                $email, 
-                telefone_get_number($telefone), 
-                $phone_ddd, 
-                $planos_valor, 
-                $get_status, 
-                $type_pagamento, 
-                $url, 
-                $codigo, 
-                $codigo, 
-                $endereco, 
+                $nome,
+                $email,
+                telefone_get_number($telefone),
+                $phone_ddd,
+                $planos_valor,
+                $get_status,
+                $type_pagamento,
+                $url,
+                $codigo,
+                $codigo,
+                $endereco,
                 $get_token_evendas
             );
         }
 
         $email_notificacao->exest_acao($instituicao_id, $get_status);
 
-       
+
         get_api('/email/preview', [
             "instituicao_id" => $instituicao_id,
             "doador_cpf" => $cpf,
@@ -343,7 +348,7 @@ class TransacaoControler
         $numero_ddd = [$get_ddd_tel, $get_numero_tel];
 
 
-        
+
 
         echo json_encode([
             'next' => true,
