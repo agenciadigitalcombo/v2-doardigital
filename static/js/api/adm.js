@@ -431,8 +431,7 @@ export default {
 
     async transacaoPlano(
         instituicao_id,
-        mensal,
-        planos_id,
+        mensal, 
         planos_valor,
         planos_nome,
         email,
@@ -455,7 +454,6 @@ export default {
         return await http.post('/transacao', {
             instituicao_id,
             mensal,
-            planos_id,
             planos_valor,
             planos_nome,
             email,
@@ -480,8 +478,7 @@ export default {
     
     async transacao(
         instituicao_id,
-        mensal,
-        planos_id,
+        mensal, 
         planos_valor,
         planos_nome,
         email,
@@ -501,7 +498,6 @@ export default {
         return await http.post('/transacao', {
             instituicao_id,
             mensal,
-            planos_id,
             planos_valor,
             planos_nome,
             email,

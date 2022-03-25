@@ -627,7 +627,6 @@ export default {
                     let res = await adm.transacaoPlano(
                         this.instituicao_id,
                         this.mensal,
-                        this.planos_id,
                         this.planos_valor,
                         this.planos_nome,
                         this.email,
@@ -681,7 +680,6 @@ export default {
                     let res = await adm.transacao(
                         this.instituicao_id,
                         this.mensal,
-                        this.planos_id,
                         this.planos_valor,
                         this.planos_nome,
                         this.email,

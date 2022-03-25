@@ -314,7 +314,7 @@ export default {
 
 	async mounted() {
 	
-		//this.subdomaim = "34edqwe21"
+	//	this.subdomaim = "34edqwe21"
 	this.subdomaim = window.location.hostname
 
 	//this.valor_digitado.split('.').join('')
