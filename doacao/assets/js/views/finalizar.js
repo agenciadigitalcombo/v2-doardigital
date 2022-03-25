@@ -18,7 +18,7 @@ export default {
                     <div class="card mb-5 mb-xl-10">
 
                         <div class="card-body">
-                            <form @submit.prevent="addTransacao" autocomplete="off" name="formulario" class="form">
+                            <form autocomplete="off" name="formulario" class="form">
 
                                 <div class="row g-5 g-xl-8">
                                     <div class="col-xl-6">
@@ -244,8 +244,8 @@ export default {
                                                     </div>
 
                                                     <div class="col-xl-4" v-else>
-                                                        <label class="btn btn-outline-default ">
-                                                            <span class="d-block fw-bold text-start ">
+                                                        <label class="btn btn-outline-default">
+                                                            <span class="d-block fw-bold text-start">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="60"
                                                                     height="60" fill="currentColor"
                                                                     viewBox="0 0 16 16 ">
@@ -317,8 +317,9 @@ export default {
                                                                 stroke-width="1.099">
                                                                 <tspan style="-inkscape-font-specification:monospace"
                                                                     x="14.101" y="67.018" font-family="monospace">
-                                                                    {{ cart_validade|| '02/2027'}}</tspan>
+                                                                    {{ cart_validade || '02/2027'}}</tspan>
                                                             </text>
+
                                                             <text
                                                                 style="line-height:1.25;-inkscape-font-specification:'Segoe UI'"
                                                                 x="124.871" y="61.097" font-weight="400"
@@ -397,12 +398,25 @@ export default {
 
                                             <div style="width: 100%;">
                                                 <div class="p-9">
-                                                    <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                                        <button style="width: 100%;" type="submit"
+                                                  
+                                                
+                                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                                       
+                                                <button style="width: 100%;" type="button" @click="addTransacao"
+                                                         v-if="type_pagamento == 'CREDIT_CARD'" 
                                                             class="btn btn-success p-5" :disabled="submitStatus === 'PENDING'" >
                                                             DOAR AGORA!
                                                         </button>
+
+                                                        <button style="width: 100%;" type="button" @click="transacao"
+                                                        v-if="type_pagamento !== 'CREDIT_CARD'"
+                                                        class="btn btn-success p-5" :disabled="submitStatus === 'PENDING'" >
+                                                        DOAR AGORA!
+                                                    </button>
+
                                                     </div>
+
+
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                                                <img style="width: 100%;" src="../doacao/assets/logo/logo-dc-doar.png" class="bandeiras">
 
@@ -655,6 +669,56 @@ export default {
             }
         },
 
+        
+        async transacao() {
+            try {
+                this.error = null
+                this.$v.$touch()
+                if (this.$v.$invalid) {
+                    this.submitStatus = 'ERROR'
+                } else {
+                    this.submitStatus = 'CARREGAR'
+                    let res = await adm.transacao(
+                        this.instituicao_id,
+                        this.mensal,
+                        this.planos_id,
+                        this.planos_valor,
+                        this.planos_nome,
+                        this.email,
+                        this.nome,
+                        this.genero,
+                        this.cpf,
+                        this.telefone,
+                        this.cep,
+                        this.numero,
+                        this.estado,
+                        this.endereco,
+                        this.bairro,
+                        this.cidade,
+                        this.type_pagamento,  
+                        window.localStorage.setItem("type_pagamento", this.type_pagamento)
+
+                    )
+                    if (!res.next) {
+                        this.error = res.message
+                        this.submitStatus = 'FALHA'
+                        return null
+                    }
+
+                    this.submitStatus = 'OK'
+                    this.msg = res.message
+                    window.localStorage.setItem("codigo", res.codigo)
+                    window.localStorage.setItem("url", res.url)
+                    window.location.href = "#/obrigado"
+                }
+            }
+            catch (e) {
+                setTimeout(() => {
+                    this.submitStatus = 'FALHA500'
+                }, 1500)
+            }
+        },
+
         async infoSubdomain() { 
              let res = await adm.todoSubdomain(this.subdomaim)
             return res
@@ -694,7 +758,7 @@ export default {
     },
 
     async mounted() {
-       //  this.subdomaim = "34edqwe21"
+      //   this.subdomaim = "34edqwe21"
       this.subdomaim = window.location.hostname
 
         this.mensal = window.localStorage.getItem("mensal")

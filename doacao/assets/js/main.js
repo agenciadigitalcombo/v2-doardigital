@@ -10,7 +10,7 @@ Vue.use(Router)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
 
-import checkout  from './views/checkout .js'
+import checkout  from './views/checkout.js'
 Vue.component('c-checkout', checkout  )
 
 import finalizar from './views/finalizar.js'

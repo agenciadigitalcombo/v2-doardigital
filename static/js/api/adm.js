@@ -477,6 +477,49 @@ export default {
         })
     },
 
+    
+    async transacao(
+        instituicao_id,
+        mensal,
+        planos_id,
+        planos_valor,
+        planos_nome,
+        email,
+        nome,
+        genero,
+        cpf,
+        telefone,
+        cep,
+        numero,
+        estado,
+        endereco,
+        bairro,
+        cidade,
+        type_pagamento,
+       
+    ) {
+        return await http.post('/transacao', {
+            instituicao_id,
+            mensal,
+            planos_id,
+            planos_valor,
+            planos_nome,
+            email,
+            nome,
+            genero,
+            cpf,
+            telefone,
+            cep,
+            numero,
+            estado,
+            endereco,
+            bairro,
+            cidade,
+            type_pagamento,
+            
+        })
+    },
+
     async listarPlanoDigital(token) {
         return await http.get('/plano-digital-list', {
             token

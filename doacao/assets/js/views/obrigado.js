@@ -249,8 +249,8 @@ export default {
 	},
 
 	async mounted() {
-	//	this.subdomaim = "34edqwe21"
-		this.subdomaim = window.location.hostname
+		//	this.subdomaim = "34edqwe21"
+	this.subdomaim = window.location.hostname
 		
 		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep
