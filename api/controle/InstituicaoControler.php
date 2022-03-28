@@ -540,6 +540,8 @@ class InstituicaoControler
                 'doacao_id' => $list['id'],
                 'valor' => $list['valor'],
                 'status_pagamento' => $list['status_pagamento'],
+                'codigo' => $list['codigo'],
+                'url' => $list['url'],
                 'data' => $list['data'],
                 'hora' => $list['hora'],
                 'tipo' => $list['tipo']
