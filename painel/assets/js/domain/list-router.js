@@ -1,6 +1,6 @@
 export default [
  
-    { path: '/dash', component: { template: '<c-dash/>' } },   
+    { path: '/', component: { template: '<c-dash/>' } },   
     { path: '/texte', component: { template: '<c-texte/>' } }, 
     { path: '/header', component: { template: '<c-header/>' } }, 
     { path: '/aside', component: { template: '<c-aside/>' } }, 

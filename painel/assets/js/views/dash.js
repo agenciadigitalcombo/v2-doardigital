@@ -37,7 +37,7 @@ export default {
 													<!--begin::Balance-->
 													<div class="d-flex text-center flex-column text-white pt-8">
 														<h3 class="m-0 text-white fw-bolder fs-3">Total de Doações</h3>
-														<span class="fw-bolder fs-2x pt-1">{{doacao_total  | is_price }}</span>
+														<span class="fw-bolder fs-2x pt-1">{{doacao_total+'00'  | is_price }}</span>
 														
 													</div> 
 												</div>
@@ -75,7 +75,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_total | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_total+'00' | is_price }}</div>
 																 
 															</div> 
 														</div>
@@ -110,7 +110,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_total | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_total+'00' | is_price }}</div>
 									 
 															</div>   
 														</div>
@@ -145,7 +145,7 @@ export default {
 																<!--end::Title-->
 																<!--begin::Label-->
 																<div class="d-flex align-items-center">   
-																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_total | is_price }}</div>
+																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_total+'00' | is_price }}</div>
 																	 
 																</div>
 																<!--end::Label-->
@@ -174,7 +174,7 @@ export default {
 													<!--begin::Balance-->
 													<div class="d-flex text-center flex-column text-white pt-8"> 
 														<h3 class="m-0 text-white fw-bolder fs-3">Doações Concluidas</h3>
-														<span class="fw-bolder fs-2x pt-1">{{ concluido_total | is_price }}</span>
+														<span class="fw-bolder fs-2x pt-1">{{ concluido_total+'00' | is_price }}</span>
 													</div>
 												</div>
 												<!--end::Header-->
@@ -211,7 +211,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_concluido | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_concluido+'00' | is_price }}</div>
 														
 															</div>
 															<!--end::Label-->
@@ -247,7 +247,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_concluido | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_concluido+'00' | is_price }}</div>
 									 
 															</div>
 															<!--end::Label-->
@@ -282,7 +282,7 @@ export default {
 																<!--end::Title-->
 																<!--begin::Label-->
 																<div class="d-flex align-items-center">
-																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_concluido | is_price }}</div>		 
+																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_concluido+'00' | is_price }}</div>		 
 																</div>
 																<!--end::Label-->
 															</div>
@@ -310,7 +310,7 @@ export default {
 														<!--begin::Balance-->
 														<div class="d-flex text-center flex-column text-white pt-8"> 
 															<h3 class="m-0 text-white fw-bolder fs-3">Doações em Aberto</h3>
-															<span class="fw-bolder fs-2x pt-1">{{ aberto_total | is_price }}</span>
+															<span class="fw-bolder fs-2x pt-1">{{ aberto_total+'00' | is_price }}</span>
 														</div>
 													</div>
 													<!--end::Header-->
@@ -347,7 +347,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_aberto | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_aberto+'00' | is_price }}</div>
 																 
 															</div>
 													
@@ -375,7 +375,7 @@ export default {
 															</div>
 															
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_aberto | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_aberto+'00' | is_price }}</div>
 									 
 															</div> 
 														</div> 
@@ -399,7 +399,7 @@ export default {
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
 																</div>
 																<div class="d-flex align-items-center">
-																	<div class="fw-bolder fs-5 text-gray-800 pe-1"> {{ cartao_aberto | is_price }}</div>
+																	<div class="fw-bolder fs-5 text-gray-800 pe-1"> {{ cartao_aberto+'00' | is_price }}</div>
 															 	</div>
 																 
 															</div>
@@ -427,7 +427,7 @@ export default {
 													<!--begin::Balance-->
 													<div class="d-flex text-center flex-column text-white pt-8"> 
 														<h3 class="m-0 text-white fw-bolder fs-3">Total Vencido/Falhado</h3>
-														<span class="fw-bolder fs-2x pt-1">{{ falhado_total | is_price }}</span>
+														<span class="fw-bolder fs-2x pt-1">{{ falhado_total+'00' | is_price }}</span>
 													</div>
 												 
 												</div> 
@@ -461,7 +461,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_falhado | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_falhado+'00' | is_price }}</div>
 
 															</div> 
 														</div> 
@@ -488,7 +488,7 @@ export default {
 															<!--end::Title-->
 															<!--begin::Label-->
 															<div class="d-flex align-items-center">
-																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_falhado | is_price }}</div>
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_falhado+'00' | is_price }}</div>
 					
 															</div> 
 														</div> 
@@ -513,7 +513,7 @@ export default {
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
 																</div>  
 																<div class="d-flex align-items-center">
-																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_falhado | is_price }}</div>
+																	<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ cartao_falhado+'00' | is_price }}</div>
 																	 
 																</div> 
 															</div> 
@@ -613,13 +613,13 @@ export default {
 
 				this.cartao_total = parseInt(res.dados.credit_card.total)
 				this.boleto_total = parseInt(res.dados.boleto.total)
-				this.pix_total = parseInt(res.dados.pix.total)
+				this.pix_total = parseInt(res.dados.PIX.total)
 				this.doacao_total  =  this.cartao_total + this.boleto_total + this.pix_total
 				
 				var unicoC = parseInt(res.dados.credit_card.unico.paid.total)
 				var recorentC = parseInt(res.dados.credit_card.recorrente.paid.total)
-				var unicoP = parseInt(res.dados.pix.unico.paid.total)
-				var recorentP = parseInt(res.dados.pix.recorrente.paid.total)
+				var unicoP = parseInt(res.dados.PIX.unico.paid.total)
+				var recorentP = parseInt(res.dados.PIX.recorrente.paid.total)
 				var unicoB = parseInt(res.dados.boleto.unico.paid.total)
 				var recorentB = parseInt(res.dados.boleto.recorrente.paid.total)
 				
@@ -632,8 +632,8 @@ export default {
 
 				var unicoAC = parseInt(res.dados.credit_card.unico.waiting_payment.total)
 				var recorentAC = parseInt(res.dados.credit_card.recorrente.waiting_payment.total)
-				var unicoAP = parseInt(res.dados.pix.unico.waiting_payment.total)
-				var recorentAP = parseInt(res.dados.pix.recorrente.waiting_payment.total)
+				var unicoAP = parseInt(res.dados.PIX.unico.waiting_payment.total)
+				var recorentAP = parseInt(res.dados.PIX.recorrente.waiting_payment.total)
 				var unicoAB = parseInt(res.dados.boleto.unico.waiting_payment.total)
 				var recorentAB = parseInt(res.dados.boleto.recorrente.waiting_payment.total)
 
@@ -642,12 +642,10 @@ export default {
 				this.pix_aberto = unicoAP + recorentAP 
 				this.aberto_total = this.cartao_aberto + this.boleto_aberto + this.pix_aberto
 
-
-
 				var unicoFC = parseInt(res.dados.credit_card.unico.refused.total)
 				var recorentFC = parseInt(res.dados.credit_card.recorrente.refused.total)
-				var unicoFP = parseInt(res.dados.pix.unico.refused.total)
-				var recorentFP = parseInt(res.dados.pix.recorrente.refused.total)
+				var unicoFP = parseInt(res.dados.PIX.unico.refused.total)
+				var recorentFP = parseInt(res.dados.PIX.recorrente.refused.total)
 				var unicoFB = parseInt(res.dados.boleto.unico.refused.total)
 				var recorentFB = parseInt(res.dados.boleto.recorrente.refused.total)
 

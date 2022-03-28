@@ -76,7 +76,7 @@ export default {
 					<div class="current" data-kt-stepper-element="content"> 
 						<div class="w-100"> 
 							<div class="pb-10 pb-lg-12"> 
-								<h2 class="fw-bolder text-dark">Endereço de Cobrança</h2> 
+								<h2 class="fw-bolder text-dark">Endereço de Perfil do Administrador</h2> 
 								<div class="text-muted fw-bold fs-6">Complete os dados de endereço 
 								.</div> 
 							</div> 
