@@ -52,6 +52,8 @@ class DoadorControler{
                 'status_pagamento' => $lis_dados['status_pagamento'],
                 'plano_id' => $lis_dados['plano_id'],
                 'valor' => $lis_dados['valor'],
+                'codigo' => $lis_dados['codigo'],
+                'url' => $lis_dados['url'],
                 'data' => $lis_dados['data'],
                 'hora' => $lis_dados['hora']
             ];

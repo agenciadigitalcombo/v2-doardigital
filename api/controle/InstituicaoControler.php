@@ -590,7 +590,9 @@ class InstituicaoControler
                 'cpf' => $dados['cpf'],
                 'tipo' =>  empty(get_taxonomy($instituicao_id, $dados['id'], "ASSINANTE")) ? 'UNICO' : 'RECORRENTE',
                 'gravatar' => gravatar((string)$dados['email']),
-                'data_registro' => $dados['data_registro']
+                'data_registro' => $dados['data_registro'],
+                'codigo' => $dados['codigo'],
+                'url' => $dados['url']
             ];
         }, $all_doadores);
 
