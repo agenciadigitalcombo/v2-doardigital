@@ -314,7 +314,8 @@ export default {
 
 	async mounted() {
 	
-	//	this.subdomaim = "34edqwe21"
+		//	this.subdomaim = "34edqwe21"
+	//	this.subdomaim = "doardigital"
 	this.subdomaim = window.location.hostname
  
 		let config = (await this.infoSubdomain()).dados_instituicao

@@ -98,37 +98,30 @@ export default {
 
     async mounted() {
 
-        //   this.lista = this.menus.filter(itens => recursos.includes(itens.id)) || this.menus.filter(itens => this.superAdm.includes(itens.permisao2)) 
-
-
         let dados = (await this.listar()).dados
         this.nome = dados.nome.split(' ')[0]
         this.gravatar = dados.gravatar
         this.superAdm = dados.super_adm || "777"
-          //  so mudar pelo credencial_id
+        //  so mudar pelo credencial_id
         //   this.id = dados.data_nascimento
-           this.id =  dados.credencial_id || "777"
+        this.id = dados.credencial_id || "777"
 
-         
-         this.permisao = (await this.credenciais()).dados.recursos
 
-         //console.log(this.permisao)
-       //  console.log(this.permisao2)
-         // console.log(this.permisao.split(","))
+        this.permisao = (await this.credenciais()).dados.recursos
+
 
         let recursos = this.permisao
-    let adm = this.superAdm
-         //   let adm =  '0'
+
+        let adm = this.superAdm
+        //    let adm = '0'
 
         if (adm == '1') {
             this.lista = this.menus
         } else if (adm == '0') {
-            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2))
+            this.lista = this.menus.filter(itens => adm.includes(itens.permisao2))
         } else {
             this.lista = this.menus.filter(itens => recursos.includes(itens.id))
         }
-
-
     },
 
     async created() {
