@@ -215,43 +215,39 @@ export default {
 				codigo_geral: '',
 				url_geral: '',
 			},
-		
+
 			subdomaim: '',
 			type: '',
 			jms: false,
 		}
 	},
 
-	
-    filters: {
-     
-     is_data(datas) { 
-         let cep  = datas.split('').join('/'); 
-		  
-         return `${cep}`
-     },
 
-    },
+	filters: {
 
+		is_data(datas) {
+			let cep = datas.split('').join('/');
 
+			return `${cep}`
+		},
 
+	},
 
 	methods: {
-		async infoSubdomain() { 
-			 let res = await adm.todoSubdomain(this.subdomaim)
+		async infoSubdomain() {
+			let res = await adm.todoSubdomain(this.subdomaim)
 			return res
 		},
 
 		copiar(ref) {
 			this.$refs[ref].select(); document.execCommand('copy');
 		}
-
 	},
 
 	async mounted() {
 		//	this.subdomaim = "34edqwe21"
-	this.subdomaim = window.location.hostname
-		
+		this.subdomaim = window.location.hostname
+
 		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep
 		this.inst.endereco = dados.endereco.logadouro
@@ -260,18 +256,18 @@ export default {
 		this.inst.cidade = dados.endereco.cidade
 		this.inst.estado = dados.endereco.estado
 		this.inst.complemento = dados.endereco.complemento
-		this.inst.logo = "https://doardigital.tk/api/upload/"+dados.logo
+		this.inst.logo = "https://doardigital.tk/api/upload/" + dados.logo
 		this.inst.icon = dados.icon
 		this.inst.backgroundColor = dados.cor
 		this.inst.email = dados.email
-		this.inst.telefone  = dados.telefone
+		this.inst.telefone = dados.telefone
 		this.inst.cnpj = dados.cnpj
-		this.inst.urlsite = dados.subdomaim+'.doardigital.com.br/'
-		
+		this.inst.urlsite = dados.subdomaim + '.doardigital.com.br/'
+
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
 		this.codigo_geral = localStorage.getItem("codigo")
-        this.url_geral = localStorage.getItem("url")
+		this.url_geral = localStorage.getItem("url")
 
 		if (this.type == 'PIX') {
 			let code_pix = `${this.codigo_geral}`

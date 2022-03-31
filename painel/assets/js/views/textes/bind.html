@@ -1,16 +1,4 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
-Purchase: https://1.envato.market/EA4JP
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com   Dec 20, 2021
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes actions
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
-Filter Options
--->
 
 
 <html lang="en">
@@ -18,65 +6,119 @@ Filter Options
 
 <head>
 	<base href="../../../">
-	<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel
-		by Keenthemes</title>
-	<meta charset="utf-8" />
-	<meta name="description"
-		content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
-	<meta name="keywords"
-		content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title"
-		content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-	<meta property="og:url" content="https://keenthemes.com/metronic" />
-	<meta property="og:site_name" content="Keenthemes | Metronic" />
-	<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-	<!--begin::Fonts-->
-	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> -->
-	<!--end::Fonts Dec 20, 2021-->
-	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<!-- <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-
-
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<link href="../../painel/assets/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="../../painel/assets/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="../../assets/css/front-css/datatables.bundle.css" rel="stylesheet" type="text/css" /> -->
-	<!--end::Global Stylesheets Bundle-->
+	<link href="../../painel/assets/css/vendor/style.bundle.css" rel="stylesheet" type="text/css" /> 
+	<link href="../../painel/assets/css/vendor/plugins.bundle.css" rel="stylesheet" type="text/css" /> 
 </head>
 <!--end::Head-->
 <!--begin::Body-->
 
 <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
 	<div id="app">
+   <!--begin::Page-->
+   <div class="page d-flex flex-row flex-column-fluid">
 
-		<select name="LeaveType" class="form-control" v-model="key">
-			<option value="1">Annual Leave/ Off-Day</option>
-			<option value="2">On Demand Leave</option>
-		</select>
+	<!--begin::Wrapper-->
+	<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
+		<!--begin::Content-->
+		<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+			<!--begin::Post-->
+			<div class="post d-flex flex-column-fluid" id="kt_post">
+				<!--begin::Container-->
+				<div id="kt_content_container" class="container-xxl">
+					<!--begin::Row-->
+					<div class="row g-5 g-xl-8">
+						<div class="col-xl-6">
+							<!--begin::Charts Widget 1-->
+							<div class="card card-xl-stretch mb-xl-8">
+								<!--begin::Header-->
+								<div class="card-header border-0 pt-5">
+									<!--begin::Title-->
+									<h3 class="card-title align-items-start flex-column">
+										<span class="card-label fw-bolder fs-3 mb-1">Recent Statistics</span>
+										<span class="text-muted fw-bold fs-7">More than 400 new members</span>
+									</h3>
+									<!--end::Title-->
+									<!--begin::Toolbar-->
+									<div class="card-toolbar">
+										<!--begin::Menu-->
+										<button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+												<!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+															<rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+															<rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+															<rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+														</g>
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</button>
 
-		<select v-model="selected" @change="setarPlano($event)">
-			<option v-for="option in produtos" v-bind:value="option.id">
-				{{ option.descricao }}
-			<option> clicar</option>
-			</option>
-		</select>
-		<br>
-		
-		<span>Selecionado: {{ selected }}</span>
+									</div>
+									<!--end::Toolbar-->
+								</div>
+								<!--end::Header-->
+								<!--begin::Body-->
+								<div class="card-body">
+									<!--begin::Chart-->
+									<div id="kt_charts_widget_1_chart" style="height: 350px"></div>
+									<!--end::Chart-->
+								</div>
+								<!--end::Body-->
+							</div>
+							<!--end::Charts Widget 1-->
+						</div>
+						<div class="col-xl-6">
+							<!--begin::Charts Widget 2-->
+							<div class="card card-xl-stretch mb-5 mb-xl-8">
+								<!--begin::Header-->
+								<div class="card-header border-0 pt-5">
+									<h3 class="card-title align-items-start flex-column">
+										<span class="card-label fw-bolder fs-3 mb-1">Recent Orders</span>
+										<span class="text-muted fw-bold fs-7">More than 500 new orders</span>
+									</h3>
+									<!--begin::Toolbar-->
+									<div class="card-toolbar" data-kt-buttons="true">
+										<a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1" id="kt_charts_widget_2_year_btn">Year</a>
+										<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_2_month_btn">Month</a>
+										<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4" id="kt_charts_widget_2_week_btn">Week</a>
+									</div>
+									<!--end::Toolbar-->
+								</div>
+								<!--end::Header-->
+								<!--begin::Body-->
+								<div class="card-body">
+									<!--begin::Chart-->
+									<div id="kt_charts_widget_2_chart" style="height: 350px"></div>
+									<!--end::Chart-->
+								</div>
+								<!--end::Body-->
+							</div>
+							<!--end::Charts Widget 2-->
+						</div>
+					</div>
 
+				</div>
+				<!--end::Container-->
+			</div>
+			<!--end::Post-->
+		</div>
 
-		<ul v-for="option in filtrar">
-			<li> id {{option.id}}</li>
-			<li> id {{option.id}}</li>
-		</ul>
+	</div>
+	<!--end::Wrapper-->
+</div>
+<!--end::Page-->
 	</div>
 
+	<script src="../../painel/assets/css/vendor/widgets.js"></script>
+	<script src="../../painel/assets/css/vendor/plugins.bundle.js"></script>
+	<script src="../../painel/assets/css/vendor/scripts.bundle.js"></script>
 
+ 
 	<script>
 
 		new Vue({
@@ -113,26 +155,7 @@ Filter Options
 
 			methods: {
 
-				setarPlano(event) {
-					console.log(event.target.value)
-
-					const novoaray = this.produtos.filter((valorAtual) => {
-				return valorAtual.id.includes(this.selected) && valorAtual.jms.includes(this.key) 
-						})
-
-						console.log(novoaray[0].id)
-						console.log(novoaray[0].descricao)
-						console.log(novoaray[0].categoria)
-
-						this.planos_id = novoaray[0].id,
-					this.planos_nome =novoaray[0].descricao,
-					this.planos_desc =novoaray[0].categoria 
-				},
-
-				onChange(event) {
-					 this.key 
-					 console.log(this.key)
-				}
+			 
 
 			},
 

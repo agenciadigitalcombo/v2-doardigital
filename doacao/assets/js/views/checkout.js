@@ -316,9 +316,7 @@ export default {
 	
 	//	this.subdomaim = "34edqwe21"
 	this.subdomaim = window.location.hostname
-
-	//this.valor_digitado.split('.').join('')
-
+ 
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.tk/api/upload/"+config.logo
 		this.backgroundColor = config.cor

@@ -170,14 +170,14 @@ export default {
 																			Seu codigo PIX..
 																			</h2>
 																		</div> 
+															<center>
+															<div ref="print_qr"></div> 
+														</center>
+														 
 																	</div>  
 																</div>
 															</div>
 									 
-															<center>
-															<div ref="print_qr"></div>
-														</center>
-														 
 											
 																
 														<div id="block12" v-if="tipo=='PIX'">
@@ -348,20 +348,20 @@ export default {
 		},
 
 
-			este_status(status) {
-            let apresentar = {
-                PENDING: 'Aguardando Pagamento',
-                refused: 'Cancelado',
-                CONFIRMED: 'Pago',
-                OVERDUE: 'Vencida',
-                REFUNDED: 'Reembolsado',
-                processing: 'Em processamento',
-                authorized: 'Autorizado ',
-                pending_refund: 'Reembolso pendente ',
-                chargedback: 'Estorno',
-            }
-            return apresentar[status]
-        },
+		este_status(status) {
+			let apresentar = {
+				PENDING: 'Aguardando Pagamento',
+				refused: 'Cancelado',
+				CONFIRMED: 'Pago',
+				OVERDUE: 'Vencida',
+				REFUNDED: 'Reembolsado',
+				processing: 'Em processamento',
+				authorized: 'Autorizado ',
+				pending_refund: 'Reembolso pendente ',
+				chargedback: 'Estorno',
+			}
+			return apresentar[status]
+		},
 
 
 
@@ -386,26 +386,17 @@ export default {
 	},
 
 	async mounted() {
-		this.nome = globalThis._doador.nome
-		this.recorente = globalThis._doador.tipo
+
 		this.tipo = globalThis._doacoes.tipo
 		this.valor = globalThis._doacoes.valor,
-			this.data = globalThis._doacoes.data,
-			this.hora = globalThis._doacoes.hora
+		this.data = globalThis._doacoes.data,
+		this.hora = globalThis._doacoes.hora
 		this.status = globalThis._doacoes.status_pagamento
+		this.codigo_geral = globalThis._doacoes.codigo
+		this.url_geral = globalThis._doacoes.url
+		this.nome = globalThis._doador.nome
+		this.recorente = globalThis._doador.tipo
 
-		if (this.tipo == 'pix') {
-			let code_pix = `${this.codigo_geral}`
-			var qrcode = new QRCode(this.$refs.print_qr, {
-				text: code_pix,
-				width: 230,
-				height: 230,
-				height: 230,
-				colorDark: "#000000",
-				colorLight: "#ffffff",
-				correctLevel: QRCode.CorrectLevel.L
-			});
-		}
 
 		function formatReal(int) {
 			var tmp = int + '';
@@ -416,12 +407,10 @@ export default {
 		}
 
 
-		var doado = formatReal(this.valor+'00')
+		var doado = formatReal(this.valor + '00')
 		var valorDoado = doado.split(',').join('.');
 		this.perDoar = (parseFloat(valorDoado) / 100) * 4;
 
-		alert(doado)
-			alert(this.valor)
 
 		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
 
@@ -434,14 +423,24 @@ export default {
 		} else {
 			var boleto = parseFloat(this.perDoar) + 1.99
 			this.valorLiquido = parseFloat(valorDoado) - boleto
-           
-		} 
+		}
 
-		var a = 1.75 + 2.68 + 5.56;//9.989999999999998
-		a.toPrecision(9);//"9.99"
-		 
-		this.doarDigital  = this.perDoar.toFixed(2);
-	 
+		this.doarDigital = this.perDoar.toFixed(2);
+
+
+		if (this.tipo == 'PIX') {
+			alert("olaaa")
+			let code_pix = `${this.codigo_geral}`
+			var qrcode = new QRCode(this.$refs.print_qr, {
+				text: code_pix,
+				width: 230,
+				height: 230,
+				height: 230,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.L
+			});
+		}
 
 	},
 
