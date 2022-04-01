@@ -16,12 +16,14 @@ include __DIR__ . "/core/help.php";
 include __DIR__ . "/interfaces/IDoacoes.php";
 include __DIR__ . "/interfaces/IDoador.php";
 include __DIR__ . "/interfaces/IInstituicao.php";
+include __DIR__ . "/interfaces/IEvendas.php";
 
 include __DIR__ . "/models/Doacoes.php";
 include __DIR__ . "/models/Doador.php";
 include __DIR__ . "/models/Instituicao.php";
 include __DIR__ . "/models/SendGrid.php";
 include __DIR__ . "/models/EvendasNotificacao.php";
+include __DIR__ . "/models/Evendas.php";
 
 $doacao = new Doacao();
 $doador = new Doador();
@@ -35,17 +37,34 @@ $request = $_REQUEST;
 
 $payload = array_merge($getJson, $request);
 
-$reference_key = $payload['payment']['externalReference'];
-$status = $payload['payment']['status'];
+$reference_key = $payload['payment']['externalReference'] ?? 'error';
+$status = $payload['payment']['status'] ?? 'error';
 
 
 $doc = $doacao->get_doacao_by_reference_key($reference_key);
 
+if(empty($doc)){
+    die;
+}
+
 $instituicao_id = $doc['instituicao_id'];
 $doador_id = $doc['doador_id'];
 
+
+
 $list_doador = $doador->get_by_id($doador_id);
+
+if(empty($list_doador)){
+    die;
+}
+
+
 $list_instituicao = $instituicao->get_by_id($instituicao_id);
+
+
+if(empty($list_instituicao)){
+    die;
+}
 
 $cpf = $list_doador['cpf'] ?? '';
 
@@ -97,7 +116,7 @@ $endereco = "";
 
 
 if ($get_token_evendas) {
-    Evendas::send(
+    $res_evendas = Evendas::send(
         $nome,
         $email,
         $telefone,
