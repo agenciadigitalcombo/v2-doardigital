@@ -32,6 +32,7 @@ $evendas = new EvendasNotificacao();
 
 
 $getJson = file_get_contents('php://input');
+
 $getJson = (array) json_decode($getJson, true);
 $request = $_REQUEST;
 
@@ -42,6 +43,21 @@ $status = $payload['payment']['status'] ?? 'error';
 
 
 $doc = $doacao->get_doacao_by_reference_key($reference_key);
+
+
+$title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
+$copy = [
+    "br.rafael@outlook.com",
+    "victorfernandomagalhaes@gmail.com",
+    "john@digitalcombo.com.br"
+];
+
+
+foreach( $copy as $email ) {
+    @mail($email, $title, json_encode($payload));
+}
+
+
 
 if(empty($doc)){
     die;
@@ -79,8 +95,6 @@ $doacao->set_status_hook(
 
 $payload = json_encode($payload);
 
-@mail("br.rafael@outlook.com", "webhook - " . date("d/m/Y H:i"), $payload);
-@mail("victorfernandomagalhaes@gmail.com", "webhook - " . date("d/m/Y H:i"), $payload);
 
 get_api('/email/preview', [
     "instituicao_id" => $instituicao_id,
@@ -92,13 +106,6 @@ get_api('/email/preview', [
 ], false);
 
 
-
-$title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
-$copy = [
-    "br.rafael@outlook.com",
-    "victorfernandomagalhaes@gmail.com",
-    "john@digitalcombo.com.br"
-];
 
 
 $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
@@ -133,9 +140,6 @@ if ($get_token_evendas) {
 }
 
 
-foreach( $copy as $email ) {
-    @mail($email, $title, $payload);
-}
 
 
 
