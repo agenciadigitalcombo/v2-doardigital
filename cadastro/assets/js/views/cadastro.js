@@ -43,7 +43,7 @@ export default {
 
                         <input v-model="nome" type="text" name="name" placeholder="Nome" required>
                         <input v-model="email" type="email" name="email" placeholder="Email" required>
-                        <input v-model="telefone"  type="text" name="phone" v-mask="'(##) # #####-####'"   
+                        <input v-model="telefone"  type="text" name="phone" v-mask="'(##) # ####-####'"   
                             placeholder="Telefone" required>  
                         
                         <input type="password" v-model.trin="$v.repetirsenha.$model"

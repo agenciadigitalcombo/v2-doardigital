@@ -21,9 +21,8 @@
 			
 			
 				<div class="menu-item py-3" v-for="m in lista">
-					<a class="menu-link"  
+					<a class="menu-link"  @click="setar()"
 					:class="{ active: m.id == selecionado }"  
-
 					 :href="m.link" :title="m.nome" data-bs-toggle="tooltip"
 						data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
 						<span class="menu-icon menux">

@@ -7,32 +7,29 @@ export default {
         return {
             title: "aside",
             menus,
-            lista: [], 
+            lista: [],
             permisao: [],
             permisao2: [],
-            selecionado : ''
+            selecionado: ''
         }
     },
 
     async mounted() {
-       
-          
+
         let dados = (await this.listar()).dados
         this.nome = dados.nome.split(' ')[0]
         this.gravatar = dados.gravatar
         this.superAdm = dados.super_adm || "777"
-       
-           this.id =  dados.credencial_id || "777"
 
-         
-         this.permisao = (await this.credenciais()).dados.recursos
+        this.id = dados.credencial_id || "777"
 
-      
+
+        this.permisao = (await this.credenciais()).dados.recursos
 
         let recursos = this.permisao
-         let adm = this.superAdm
-       
-        
+        let adm = this.superAdm
+
+
         if (adm == '1') {
             this.lista = this.menus
         } else if (adm == '0') {
@@ -41,15 +38,29 @@ export default {
             this.lista = this.menus.filter(itens => recursos.includes(itens.id))
         }
 
-
-   
     },
 
     created() {
-        this.selecionado  = [window.location.href.split('#/')[1]] 
+        this.setar()
     },
 
-    methods: {  
+    methods: {
+
+        setar() {
+            var jms = [window.location.href.split('#/')[1]]
+            for (var i = 0; i < this.menus.length; i++) {
+
+                if (this.menus[i].id == jms) {
+                    globalThis._menu = [window.location.href.split('#/')[1]] 
+                    this.selecionado = globalThis._menu
+                } else {
+                    this.selecionado = globalThis._menu
+                }
+
+            }
+
+        },
+
         async listar() {
             let res = await adm.ListarPerfil(localStorage.getItem('token'))
             return res

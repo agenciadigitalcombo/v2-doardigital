@@ -7,6 +7,7 @@ export default [
     { id: 'credenciais', nome: 'Credenciais', icon: 'planos.svg', link: '#/credenciais', feature_flag: true , permisao1: "1"},
     { id: 'divisao', nome: 'Divisão Pagamento', icon: 'coins.svg', link: '#/divisao-pagamento', feature_flag: true , permisao1: "1"},
    
+   
 ]
 
 
