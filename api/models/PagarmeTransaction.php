@@ -3,7 +3,7 @@
 class PagarMeTransaction extends Asaas
 {
 
-    function pay(int $amount, string $typePayment, string $costumer_id): array
+    function pay(int $amount, string $typePayment, string $costumer_id, string $reference_key): array
     {
 
         $config = include __DIR__ . "/../config.php";
@@ -14,7 +14,7 @@ class PagarMeTransaction extends Asaas
             "dueDate" => date('Y-m-d'),
             "value" => $amount,
             "description" => "",
-            "externalReference" => "",
+            "externalReference" => $reference_key,
             "discount" => [
               "value" => 0,
               "dueDateLimitDays" => 0

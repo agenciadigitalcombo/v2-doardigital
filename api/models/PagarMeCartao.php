@@ -5,7 +5,7 @@ class PagarMeCartao extends Asaas
 
     public function create(int $amount, string $type_pagamento, string $card_number, string $card_cvv, string $card_expiration_date, string $card_holder_name, 
     string $costumer_id, string $nome_costumer, string $email_costumer, string $cpfCnpj, string $phone_numbers, string $complement,
-    string $street_number, string $cep): array
+    string $street_number, string $cep, string $reference_key): array
     {
         $payload = [
 
@@ -15,7 +15,7 @@ class PagarMeCartao extends Asaas
             "dueDate" => date('Y-m-d'),
             "value" => $amount,
             "description" => "",
-            "externalReference" => "",
+            "externalReference" => $reference_key,
             // "split" => [
             //     [
             //          "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",

@@ -200,7 +200,7 @@ class TransacaoControler
 
 
 
-            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep);
+            $res_pagarme = $pagarme_cartao->create($planos_valor, $type_pagamento, $cart_numero, $cart_cvv, $cart_validade, $cart_nome, $get_token_doador, $nome, $email, $cpf, $telefone, $complemento, $numero, $cep, $reference_key);
 
             if (empty($res_pagarme['id'])) {
                 echo json_encode([
@@ -221,7 +221,7 @@ class TransacaoControler
             $res_recorrencia = $assasRecorrencia->create_recorrencia_cartao(
                 $get_token_doador,
                 $type_pagamento,
-                $planos_valor,
+                $planos_valor,  
                 $cart_nome,
                 $cart_numero,
                 $cart_validade,
@@ -259,7 +259,7 @@ class TransacaoControler
 
             if ($type_pagamento == "PIX" and $mensal != 1) {
 
-                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador);
+                $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador, $reference_key);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
 
@@ -280,7 +280,7 @@ class TransacaoControler
 
             if ($type_pagamento == "BOLETO" and $mensal != 1) {
 
-                $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador);
+                $res_pagarme = $pagarme_boleto->pay($planos_valor, $type_pagamento, $get_token_doador, $reference_key);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_boleto->codig_boleto($get_token);
                 $codigo = $get_codigo['identificationField'];
