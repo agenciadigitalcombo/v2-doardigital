@@ -97,13 +97,13 @@ $doacao->set_status_hook(
 
 if(!empty($subscription)){
     
-    $codigo = $payload['payment']['invoiceNumber'] ?? "error"; 
-    $url = $payload['payment']['invoiceUrl'] ?? "error";
+    $codigo = $payload['payment']['identificationField'] ?? "error"; 
+    $url = $payload['payment']['bankSlipUrl'] ?? "error";
 
     $doacao->set_status_hook_recorrente(
         $reference_key, 
-        $codigo, 
-        $url
+        $url,
+        $codigo 
     );
 
 }
