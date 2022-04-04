@@ -33,8 +33,7 @@ export default {
 		this.nome_fantasia = this.dados.nome_fantasia,
 		this.subdomaim = this.dados.subdomaim,
 		this.dominio = this.dados.dominio,
-		
-console.log(this.dominio)
+ 
 		this.filtraCredencial.reverse();
 	},
 
@@ -53,7 +52,7 @@ console.log(this.dominio)
 				this.token,
 			)
 			if (!res.next) {
-				console.log(res)
+		 
 				this.error = res.message
 				return null
 			}
@@ -78,11 +77,8 @@ console.log(this.dominio)
 			
 			window.location.href = "/painel/#/dash"
 		},
-		
-	 
-	},
-
 	
+	},
 
     template: await get_template('./assets/js/view/instituicoes/home')
 }
