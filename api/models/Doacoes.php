@@ -179,6 +179,13 @@ class Doacao implements IDoacao{
         $banco->exec($sql);
     }
 
+    public function set_status_hook_recorrente(string $reference_key, string $url, string $codigo): void
+    {
+        $banco = new Banco();
+        $sql = "UPDATE doacoes SET url='$url', codigo='$codigo' WHERE reference_key='$reference_key'";
+        $banco->exec($sql);
+    }
+
 
     public function valid_type_pagamento(string $valor): bool{
         $lb = ['CREDIT_CARD', 'BOLETO', 'PIX'];

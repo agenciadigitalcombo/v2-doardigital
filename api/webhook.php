@@ -38,6 +38,7 @@ $request = $_REQUEST;
 
 $payload = array_merge($getJson, $request);
 
+$subscription =  $payload['payment']['subscription'] ?? null;
 $reference_key = $payload['payment']['externalReference'] ?? 'error';
 $status = $payload['payment']['status'] ?? 'error';
 
@@ -92,6 +93,19 @@ $doacao->set_status_hook(
     $reference_key,
     $status
 );
+
+if(!empty($subscription)){
+    
+    $codigo = $payload['payment']['invoiceUrl'] ?? "error"; 
+    $url = $payload['payment']['invoiceNumber'] ?? "error";
+
+    $doacao->set_status_hook_recorrente(
+        $reference_key, 
+        $codigo, 
+        $url
+    );
+
+}
 
 $payload = json_encode($payload);
 
