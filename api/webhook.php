@@ -161,5 +161,9 @@ if ($get_token_evendas) {
 
 echo json_encode([
     "next" => true,
-    "message" => "Seja bem vindo a Doar Digital"
+    "message" => "Seja bem vindo a Doar Digital",
+    "evendas" => $res_evendas ?? [],
+    "instituicao" => $list_instituicao ?? [],
+    "doador" => $list_doador ?? [],
+    "doacao" => $doc ?? []
 ]);

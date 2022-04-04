@@ -177,9 +177,7 @@ class AdmControle
 
         $secret = $token_parce['secret'];
         $guard = $adm->list_profile($secret);
-        
-
-        
+         
 
         $payload = [
             'secret' => $guard['secret'],
