@@ -97,8 +97,8 @@ $doacao->set_status_hook(
 
 if(!empty($subscription)){
     
-    $codigo = $payload['payment']['invoiceUrl'] ?? "error"; 
-    $url = $payload['payment']['invoiceNumber'] ?? "error";
+    $codigo = $payload['payment']['invoiceNumber'] ?? "error"; 
+    $url = $payload['payment']['invoiceUrl'] ?? "error";
 
     $doacao->set_status_hook_recorrente(
         $reference_key, 
@@ -163,6 +163,9 @@ echo json_encode([
     "next" => true,
     "message" => "Seja bem vindo a Doar Digital",
     "evendas" => $res_evendas ?? [],
+    "url" => $url,
+    "codigo" => $codigo,
+    "status" => $status,
     "instituicao" => $list_instituicao ?? [],
     "doador" => $list_doador ?? [],
     "doacao" => $doc ?? []
