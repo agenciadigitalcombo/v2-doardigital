@@ -1,5 +1,5 @@
 ###
-POST http://doardigital.tk/api/endereco-instituicao
+POST http://doardigital.com.br/api/endereco-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 id=int

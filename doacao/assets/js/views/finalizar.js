@@ -778,7 +778,7 @@ export default {
 
 
         let config = (await this.infoSubdomain()).dados_instituicao
-        this.logo = "https://doardigital.tk/api/upload/"+config.logo
+        this.logo = "https://doardigital.com.br/api/upload/"+config.logo
         this.backgroundColor = config.cor
         this.instituicao_id = config.id
     },

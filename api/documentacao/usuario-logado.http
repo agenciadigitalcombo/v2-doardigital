@@ -1,6 +1,6 @@
 
 ###
-POST http://doardigital.tk/api/atualizar-adm
+POST http://doardigital.com.br/api/atualizar-adm
 Content-Type: application/x-www-form-urlencoded
 
 token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67
@@ -10,7 +10,7 @@ token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaW
 &data_nascimento=17/10/1987
 
 ###
-POST http://doardigital.tk/api/create-endereco
+POST http://doardigital.com.br/api/create-endereco
 Content-Type: application/x-www-form-urlencoded
 
 token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67

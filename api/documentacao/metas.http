@@ -1,12 +1,12 @@
 
 // pegar pelo ID instituicao e Ano 
-GET http://doardigital.tk/api/list-metas?
+GET http://doardigital.com.br/api/list-metas?
 token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67?
 istituicao_id=5?ano=22"
 
 // salvar e acriar por instituicao ID
 
-POST http://doardigital.tk/api/save-metas
+POST http://doardigital.com.br/api/save-metas
 Content-Type: application/x-www-form-urlencoded
 
 token=eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67

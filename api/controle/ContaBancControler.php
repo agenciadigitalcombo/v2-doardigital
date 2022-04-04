@@ -47,7 +47,7 @@ class ContaBancControler{
         // die;
         // $recebedor_nome = $_REQUEST['recebedor_nome'];
         // $document_number_recebedor_campo = $_REQUEST['document_number_recebedor'];
-        // $site_url = "doardigital.tk";
+        // $site_url = "doardigital.com.br";
         // $email_recebedor_campo = $_REQUEST['email_recebedor'];
         // $email_recebedor = valid_email($email_recebedor_campo);
         
@@ -144,7 +144,7 @@ class ContaBancControler{
         // die;
         // $recebedor_nome = $_REQUEST['recebedor_nome'];
         // $document_number_recebedor_campo = $_REQUEST['document_number_recebedor'];
-        // $site_url = "doardigital.tk";
+        // $site_url = "doardigital.com.br";
         // $email_recebedor_campo = $_REQUEST['email_recebedor'];
         // $email_recebedor = valid_email($email_recebedor_campo);
         

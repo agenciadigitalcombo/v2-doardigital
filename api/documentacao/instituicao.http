@@ -1,14 +1,14 @@
-GET http://doardigital.tk/api/instituicao?token=string
+GET http://doardigital.com.br/api/instituicao?token=string
 
 ###
 configuracao
-GET http://doardigital.tk/api/instituicao-id?instituicao_id=int
+GET http://doardigital.com.br/api/instituicao-id?instituicao_id=int
 
 ###
-GET http://doardigital.tk/api/info-subdomaim?subdomaim=string
+GET http://doardigital.com.br/api/info-subdomaim?subdomaim=string
 
 ###
-POST http://doardigital.tk/api/update-instituicao
+POST http://doardigital.com.br/api/update-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 token=string
@@ -20,7 +20,7 @@ token=string
 &telefone=string
 
 ###
-POST http://doardigital.tk/api/configuracao-instituicao
+POST http://doardigital.com.br/api/configuracao-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 token=string
@@ -31,14 +31,14 @@ token=string
 &logo=string
 
 ###
-POST http://doardigital.tk/api/on_off
+POST http://doardigital.com.br/api/on_off
 Content-Type: application/x-www-form-urlencoded
 
 token=string
 &instituicao_id=int
 
 ###
-POST http://doardigital.tk/api/create-instituicao
+POST http://doardigital.com.br/api/create-instituicao
 Content-Type: application/x-www-form-urlencoded
 
 token=string
@@ -58,7 +58,7 @@ token=string
 &cep=string
 
 ###
-POST http://doardigital.tk/api/update-domain-person
+POST http://doardigital.com.br/api/update-domain-person
 Content-Type: application/x-www-form-urlencoded
 
 token=string
@@ -66,17 +66,17 @@ token=string
 &dominio=string
 
 ###
-POST http://doardigital.tk/api/create-chave-pix
+POST http://doardigital.com.br/api/create-chave-pix
 Content-Type: application/x-www-form-urlencoded
 
 &chave_pix=string
 &instituicao_id=int
 
 ###
-GET http://doardigital.tk/api/listar-chave-pix?instituicao_id=string
+GET http://doardigital.com.br/api/listar-chave-pix?instituicao_id=string
 Content-Type: application/x-www-form-urlencoded
 ###
-GET http://doardigital.tk/api/subdominio-disponivel?subdomain=string
+GET http://doardigital.com.br/api/subdominio-disponivel?subdomain=string
 Content-Type: application/x-www-form-urlencoded
 // criar ou salvar dados bancario 
 

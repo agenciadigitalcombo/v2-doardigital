@@ -7,7 +7,7 @@ return [
     "senha" => "Seraph@121",
     "api_key" => "ak_test_zcP5r3XuiDCVdnbcnH5wB2vMOqsPFl",
     "postback_url" => "https://teste.com",
-    "base" => "https://doardigital.tk",
+    "base" => "https://doardigital.com.br",
     "email_host" => "mail.doardigital.com.br",
     "email_port" => 465,
     "email_user" => "contato@doardigital.com.br",

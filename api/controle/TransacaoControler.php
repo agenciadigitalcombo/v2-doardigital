@@ -205,7 +205,9 @@ class TransacaoControler
             if (empty($res_pagarme['id'])) {
                 echo json_encode([
                     'next' => false,
-                    'message' => 'Cartão invalido!'
+                    'message' => 'Cartão invalido!',
+                    'resposta' => $res_pagarme
+
                 ]);
                 die;
             }
@@ -232,7 +234,8 @@ class TransacaoControler
                 $cep,
                 $numero,
                 $complemento,
-                $telefone
+                $telefone,
+                $reference_key
             );
 
 

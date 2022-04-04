@@ -1,12 +1,12 @@
-GET https://doardigital.tk/api/instituicao?token=string
+GET https://doardigital.com.br/api/instituicao?token=string
 Content-Type: application/x-www-form-urlencoded
 
 ###
-GET https://doardigital.tk/api/list-credencial?token=string
+GET https://doardigital.com.br/api/list-credencial?token=string
 Content-Type: application/x-www-form-urlencoded
 
 ###
-POST https://doardigital.tk/api/criate-subadm
+POST https://doardigital.com.br/api/criate-subadm
 Content-Type: application/x-www-form-urlencoded
 
 token=string
@@ -18,5 +18,5 @@ token=string
 
 
 ###
-GET https://doardigital.tk/api/list-subadm?token=string
+GET https://doardigital.com.br/api/list-subadm?token=string
 Content-Type: application/x-www-form-urlencoded

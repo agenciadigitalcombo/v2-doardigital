@@ -63,7 +63,8 @@ class AsaasRecorrencia extends Asaas
         string $cep,
         string $street_number,
         string $complement,
-        string $phone_numbers): array
+        string $phone_numbers,
+        string $reference_key): array
     {
         $payload = [
             "customer" => $costumer_id,
@@ -90,7 +91,8 @@ class AsaasRecorrencia extends Asaas
                 "mobilePhone" => $phone_numbers
             ],
             "maxPayments" => "24",
-            "remoteIp" => $_SERVER['REMOTE_ADDR']
+            "remoteIp" => $_SERVER['REMOTE_ADDR'],
+            "externalReference" => $reference_key
         ];
 
         return $this->post('/subscriptions', $payload);

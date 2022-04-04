@@ -50,20 +50,20 @@ POST http://localhost/v2-doardigital/api/step-update
 }
 
 ###
-GET http://doardigital.tk/api/list-endereco
+GET http://doardigital.com.br/api/list-endereco
 {
     "token": ""
 }
 
 ### 
-GET http://doardigital.tk/api/list-subadm
+GET http://doardigital.com.br/api/list-subadm
 
 {
     "token": "eyJzZWNyZXQiOiIgNjFiNzQ3N2RkOWVmNCIsIm5vbWUiOiJnaWxkZXRlIiwiZW1haWwiOiJnaWxkZXRlQGdtYWlsLmNvbSIsInN1cGVyX2FkbSI6IjAiLCJzdGVwIjoiMSJ9.d6024749fac75479d40db1611f9555c66c48ab67"
 }
 
 ###
-POST http://doardigital.tk/api/criate-subadm
+POST http://doardigital.com.br/api/criate-subadm
 Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {
@@ -75,7 +75,7 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 }
 
 ###
-POST http://doardigital.tk/api/atualizar-subadm
+POST http://doardigital.com.br/api/atualizar-subadm
 Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
 {

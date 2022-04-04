@@ -175,7 +175,7 @@ export default {
 	data: function () {
         
 		return {
-			gravatar: 'https://doardigital.tk/api/gravatar?email=brunnocriacoes@gmail.com',
+			gravatar: 'https://doardigital.com.br/api/gravatar?email=brunnocriacoes@gmail.com',
 			nome: null,
 			email: null,
 			senha: null,
