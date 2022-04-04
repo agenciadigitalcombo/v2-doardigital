@@ -175,7 +175,7 @@ class Doacao implements IDoacao{
     public function set_status_hook(string $reference_key, string $status): void
     {
         $banco = new Banco();
-        $sql = "UPDATE doacoes SET status_pagamento='$status' WHERE reference_key='$reference_key'";
+        $sql = "UPDATE doacoes SET status_assinatura='$status' WHERE reference_key='$reference_key'";
         $banco->exec($sql);
     }
 

@@ -248,7 +248,7 @@ class TransacaoControler
             }
 
             $get_token = $res_recorrencia['id'];
-            $get_status = $res_recorrencia['status'];
+            $get_status = "PENDING";
             $codigo = "";
             $url = "";
         }
@@ -313,25 +313,30 @@ class TransacaoControler
         $logo_instituicao = $instituicao_dados['logo'];
 
 
-        $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
+        
 
-        $get_token_evendas = $dados_evendas['canal'] ?? false;
 
-        if ($get_token_evendas) {
-            Evendas::send(
-                $nome,
-                $email,
-                telefone_get_number($telefone),
-                $phone_ddd,
-                $planos_valor,
-                $get_status,
-                $type_pagamento,
-                $url,
-                $codigo,
-                $codigo,
-                $endereco,
-                $get_token_evendas
-            );
+        if ($mensal == 1) {
+            $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
+
+            $get_token_evendas = $dados_evendas['canal'] ?? false;
+
+            if ($get_token_evendas) {
+                Evendas::send(
+                    $nome,
+                    $email,
+                    telefone_get_number($telefone),
+                    $phone_ddd,
+                    $planos_valor,
+                    $get_status,
+                    $type_pagamento,
+                    $url,
+                    $codigo,
+                    $codigo,
+                    $endereco,
+                    $get_token_evendas
+                );
+            }
         }
 
         $email_notificacao->exest_acao($instituicao_id, $get_status);
