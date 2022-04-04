@@ -40,11 +40,11 @@ export default {
 				this.recursos,
 			)
 			if (!res.next) {
-				console.log(res)
+			 
 				this.error = res.message
 				return null
 			}
-				console.log(this.nome_identificacao)
+				 
 			this.msg = res.message,
 			setTimeout(() => this.msg = "", 3000);
 

@@ -70,7 +70,7 @@ export default {
 					this.telefone,
 				)
 				if (!res.next) {
-					console.log(res)
+				 
 					this.error = res.message
 					return null
 				}

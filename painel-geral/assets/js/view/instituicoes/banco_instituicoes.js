@@ -95,7 +95,6 @@ export default {
 		this.recebedor_nome = globalThis._recebedor 
 		this.documento_numero = globalThis._cnpj  
 
-
 	 },
 
     template: await get_template('./assets/js/view/instituicoes/banco_instituicoes')
