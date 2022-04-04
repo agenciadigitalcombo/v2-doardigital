@@ -316,7 +316,7 @@ class TransacaoControler
         
 
 
-        if ($mensal == 1) {
+        if ($mensal != 1) {
             $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
 
             $get_token_evendas = $dados_evendas['canal'] ?? false;
