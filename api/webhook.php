@@ -119,8 +119,6 @@ get_api('/email/preview', [
 ], false);
 
 
-
-
 $dados_evendas = $evendas->get_by_instituicao_id($instituicao_id);
 
 $get_token_evendas = $dados_evendas['canal'] ?? false;
@@ -151,12 +149,6 @@ if ($get_token_evendas) {
         $get_token_evendas
     );
 }
-
-
-var_dump($payload);
-
-
-
 
 echo json_encode([
     "next" => true,
