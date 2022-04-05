@@ -363,7 +363,8 @@ class TransacaoControler
             'message' => 'Transacao Concluida',
             'codigo' => $codigo,
             'url' => $url,
-            'expirationCode' => $expirationCode
+            'expirationCode' => $expirationCode,
+            'reference_key' => $reference_key
         ]);
     }
 }
