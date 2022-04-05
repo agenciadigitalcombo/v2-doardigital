@@ -25,6 +25,9 @@ include __DIR__ . "/models/SendGrid.php";
 include __DIR__ . "/models/EvendasNotificacao.php";
 include __DIR__ . "/models/Evendas.php";
 
+include __DIR__ . "/models/Asaas.php";
+include __DIR__ . "/models/AsaasPix.php";
+
 $doacao = new Doacao();
 $doador = new Doador();
 $instituicao = new Instituicao();
@@ -99,6 +102,15 @@ if(!empty($subscription)){
     
     $codigo = $payload['payment']['identificationField'] ?? "error"; 
     $url = $payload['payment']['bankSlipUrl'] ?? "error";
+
+    if($type_pagamento == 'PIX') {
+
+        $AsPix = new AsaasPix();
+        $idTransaction = $payload['payment']['id'];
+        $AsPix->getCodePix($idTransaction);
+        $url = $AsPix['payload'];
+
+    }
 
     $doacao->set_status_hook_recorrente(
         $reference_key, 
