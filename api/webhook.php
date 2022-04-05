@@ -171,5 +171,6 @@ echo json_encode([
     "instituicao" => $list_instituicao ?? [],
     "doador" => $list_doador ?? [],
     "doacao" => $doc ?? [],
-    "resAsPix" => $resAsPix ?? []
+    "resAsPix" => $resAsPix ?? [],
+    "path" => "/payments/".$payload['payment']['id']."/pixQrCode"
 ]);
