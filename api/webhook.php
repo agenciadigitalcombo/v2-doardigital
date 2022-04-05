@@ -107,9 +107,8 @@ if(!empty($subscription)){
 
         $AsPix = new AsaasPix();
         $idTransaction = $payload['payment']['id'];
-        $AsPix->getCodePix($idTransaction);
-        $url = $AsPix['payload'];
-
+        $resAsPix = $AsPix->getCodePix($idTransaction);
+        $url = $resAsPix['payload'];
     }
 
     $doacao->set_status_hook_recorrente(
@@ -171,5 +170,6 @@ echo json_encode([
     "status" => $status,
     "instituicao" => $list_instituicao ?? [],
     "doador" => $list_doador ?? [],
-    "doacao" => $doc ?? []
+    "doacao" => $doc ?? [],
+    "resAsPix" => $resAsPix ?? []
 ]);
