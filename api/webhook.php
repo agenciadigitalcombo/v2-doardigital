@@ -73,6 +73,7 @@ $doador_id = $doc['doador_id'];
 
 
 
+
 $list_doador = $doador->get_by_id($doador_id);
 
 if(empty($list_doador)){
@@ -105,10 +106,17 @@ if(!empty($subscription)){
 
     if($payload['payment']['billingType'] == 'PIX') {
 
-        // $AsPix = new AsaasPix();
-        // $idTransaction = $payload['payment']['id'];
-        // $resAsPix = $AsPix->getCodePix($idTransaction);
-        $url = $resAsPix['payload'] ?? 'error';
+
+        $AsPix = new AsaasPix();
+        
+        $AsPix->set_api_key($list_instituicao['api_key']);
+        
+
+
+        $idTransaction = $payload['payment']['id'];
+        $resAsPix = $AsPix->getCodePix($idTransaction);
+        $codigo = $resAsPix['payload'] ?? 'error';
+        $url = $payload['payment']['invoiceUrl'] ?? 'error';
     }
 
     $doacao->set_status_hook_recorrente(
