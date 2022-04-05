@@ -103,12 +103,12 @@ if(!empty($subscription)){
     $codigo = $payload['payment']['identificationField'] ?? "error"; 
     $url = $payload['payment']['bankSlipUrl'] ?? "error";
 
-    if($type_pagamento == 'PIX') {
+    if($payload['payment']['billingType'] == 'PIX') {
 
         $AsPix = new AsaasPix();
         $idTransaction = $payload['payment']['id'];
         $resAsPix = $AsPix->getCodePix($idTransaction);
-        $url = $resAsPix['payload'];
+        $url = $resAsPix['payload'] ?? 'error';
     }
 
     $doacao->set_status_hook_recorrente(
