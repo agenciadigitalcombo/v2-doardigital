@@ -105,9 +105,9 @@ if(!empty($subscription)){
 
     if($payload['payment']['billingType'] == 'PIX') {
 
-        $AsPix = new AsaasPix();
-        $idTransaction = $payload['payment']['id'];
-        $resAsPix = $AsPix->getCodePix($idTransaction);
+        // $AsPix = new AsaasPix();
+        // $idTransaction = $payload['payment']['id'];
+        // $resAsPix = $AsPix->getCodePix($idTransaction);
         $url = $resAsPix['payload'] ?? 'error';
     }
 
