@@ -75,7 +75,7 @@ export default {
 			localStorage.setItem("instituicao_subdomaim", this.dominio || this.subdomaim);
 			 
 			
-			window.location.href = "/painel/#/dash"
+			window.location.href = "/painel/#/"
 		},
 	
 	},
