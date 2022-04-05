@@ -31,6 +31,6 @@ interface IDoacao
     ): array;
 
     public function get_by_id(
-        int $id
+        string $id
     ): array;
 }
