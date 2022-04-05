@@ -108,8 +108,6 @@ if(!empty($subscription)){
 
 }
 
-$payload = json_encode($payload);
-
 
 get_api('/email/preview', [
     "instituicao_id" => $instituicao_id,
