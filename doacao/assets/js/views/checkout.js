@@ -77,7 +77,7 @@ export default {
 														</div> 
 																				 
 
-														<div class="col-lg-4 mb-10 mb-lg-0" v-if="mensal !== '1'">
+														<div class="col-lg-4 mb-10 mb-lg-0">
 
 															<label
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
