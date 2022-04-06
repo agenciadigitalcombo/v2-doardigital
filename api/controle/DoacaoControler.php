@@ -9,7 +9,7 @@ class DoacaoControler{
         $doacao_id = $_REQUEST['doacao_id'];
 
         campo_obrigatorios([
-            'doacao_id' => 'Indoforme o ID da Doacao',
+            'doacao_id' => 'Indoforme o campo doacao_id',
         ]);
 
         $list = $doacoes->get_by_id($doacao_id);
