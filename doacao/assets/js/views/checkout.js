@@ -77,7 +77,7 @@ export default {
 														</div> 
 																				 
 
-														<div class="col-lg-4 mb-10 mb-lg-0">
+														<div class="col-lg-4 mb-10 mb-lg-0" v-if="mensal !== '1'">
 
 															<label
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
@@ -103,7 +103,7 @@ export default {
 										</div>
 
 										<div class="col-xl-6">
-											<div class="mb-10">
+											<div class="mb-10" v-if="valor === '0' && mensal !== '1'">
 												<div class="card-title mb-5">
 													<h3>Informe um valor, mínimo R$ 20,00. </h3>
 												</div>
