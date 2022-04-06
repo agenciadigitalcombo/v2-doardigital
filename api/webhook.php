@@ -25,6 +25,9 @@ include __DIR__ . "/models/SendGrid.php";
 include __DIR__ . "/models/EvendasNotificacao.php";
 include __DIR__ . "/models/Evendas.php";
 
+include __DIR__ . "/models/Asaas.php";
+include __DIR__ . "/models/AsaasPix.php";
+
 $doacao = new Doacao();
 $doador = new Doador();
 $instituicao = new Instituicao();
@@ -70,6 +73,7 @@ $doador_id = $doc['doador_id'];
 
 
 
+
 $list_doador = $doador->get_by_id($doador_id);
 
 if(empty($list_doador)){
@@ -99,6 +103,21 @@ if(!empty($subscription)){
     
     $codigo = $payload['payment']['identificationField'] ?? "error"; 
     $url = $payload['payment']['bankSlipUrl'] ?? "error";
+
+    if($payload['payment']['billingType'] == 'PIX') {
+
+
+        $AsPix = new AsaasPix();
+        
+        $AsPix->set_api_key($list_instituicao['api_key']);
+        
+
+
+        $idTransaction = $payload['payment']['id'];
+        $resAsPix = $AsPix->getCodePix($idTransaction);
+        $codigo = $resAsPix['payload'] ?? 'error';
+        $url = $payload['payment']['invoiceUrl'] ?? 'error';
+    }
 
     $doacao->set_status_hook_recorrente(
         $reference_key, 
@@ -159,5 +178,7 @@ echo json_encode([
     "status" => $status,
     "instituicao" => $list_instituicao ?? [],
     "doador" => $list_doador ?? [],
-    "doacao" => $doc ?? []
+    "doacao" => $doc ?? [],
+    "resAsPix" => $resAsPix ?? [],
+    "path" => "/payments/".$payload['payment']['id']."/pixQrCode"
 ]);
