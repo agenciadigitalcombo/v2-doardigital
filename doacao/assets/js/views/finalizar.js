@@ -11,7 +11,7 @@ export default {
                 <div id="kt_content_container" class="container-xxl">
 
                     <div class="text-center mb-20 mb-xl-5">
-                        <img class="rounded" style="width: 150px;" v-bind:src="logo">
+                        <img class="rounded" style="width: 250px;" v-bind:src="logo">
 
                     </div>
 
@@ -506,21 +506,21 @@ export default {
             planos_id: null,
             planos_valor: null,
             email: null,
-            nome: "Victor",
+            nome: "",
             genero: null,
-            cpf: "00569652065",
-            telefone: "38998019210",
-            cep: "02835090",
-            numero: "75",
-            estado: "sp",
-            endereco: "rua plinio",
-            bairro: "Serralheiro",
-            cidade: "Sao Paulo",
+            cpf: "",
+            telefone: "",
+            cep: "",
+            numero: "",
+            estado: "",
+            endereco: "o",
+            bairro: "",
+            cidade: "",
             type_pagamento: "CREDIT_CARD",
-            cart_numero: "4111111111111111",
-            cart_cvv: "123",
-            cart_validade: "0922",
-            cart_nome: "Morpheus Fishburne",
+            cart_numero: "",
+            cart_cvv: "",
+            cart_validade: "",
+            cart_nome: "",
             ver: "",
             valor_digitado: null,
             valor: null,
