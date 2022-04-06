@@ -26,6 +26,8 @@ Vue.component('c-mensagem', mensagem)
 import loading from './componentes/c-loading.js'
 Vue.component('c-loading', loading)
 
+import grafico from './componentes/c-grafico.js'
+Vue.component('c-grafico', grafico)
 
 import validacao from './componentes/c-validacao.js'
 Vue.component('c-validacao', validacao)
