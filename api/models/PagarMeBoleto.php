@@ -26,12 +26,12 @@ class PagarMeBoleto extends Asaas
               "value" => 0
             ],
             "postalService" => false,
-            // "split" => [
-            //     [
-            //          "walletId" => "88f3926c-c94e-4a0a-a0b5-ad936dd3423f",
-            //          "percentualValue" => 98
-            //     ]
-            //  ]
+            "split" => [
+                [
+                     "walletId" => "628c021e-0220-403a-8e67-34716ee5ecf6",
+                     "percentualValue" => 2
+                ]
+            ]
         ];
        
         return $this->post('/payments', $payload);

@@ -11,7 +11,7 @@ export default {
                 <div id="kt_content_container" class="container-xxl">
 
                     <div class="text-center mb-20 mb-xl-5">
-                        <img class="rounded" style="width: 150px;" v-bind:src="logo">
+                        <img class="rounded" style="width: 250px;" v-bind:src="logo">
 
                     </div>
 
@@ -216,7 +216,7 @@ export default {
                                                         </label>
                                                     </div>
 
-                                                    <div class="col-xl-4" v-if="mensal ==='0'">
+                                                    <div class="col-xl-4" >
                                                         <input type="radio" class="btn-check"
                                                             @click="type_pagamento = 'PIX'; consultar();" name="radio_buttons_2"
                                                             value="3" id="kt_radio_buttons_3_option_3" />
@@ -506,21 +506,21 @@ export default {
             planos_id: null,
             planos_valor: null,
             email: null,
-            nome: "Victor",
+            nome: "",
             genero: null,
-            cpf: "00569652065",
-            telefone: "38998019210",
-            cep: "02835090",
-            numero: "75",
-            estado: "sp",
-            endereco: "rua plinio",
-            bairro: "Serralheiro",
-            cidade: "Sao Paulo",
+            cpf: "",
+            telefone: "",
+            cep: "",
+            numero: "",
+            estado: "",
+            endereco: "o",
+            bairro: "",
+            cidade: "",
             type_pagamento: "CREDIT_CARD",
-            cart_numero: "4111111111111111",
-            cart_cvv: "123",
-            cart_validade: "0922",
-            cart_nome: "Morpheus Fishburne",
+            cart_numero: "",
+            cart_cvv: "",
+            cart_validade: "",
+            cart_nome: "",
             ver: "",
             valor_digitado: null,
             valor: null,
@@ -658,6 +658,7 @@ export default {
                     this.msg = res.message
                     window.localStorage.setItem("codigo", res.codigo)
                     window.localStorage.setItem("url", res.url)
+                     window.localStorage.setItem("ref", res.reference_key)
                     window.location.href = "#/obrigado"
                 }
             }
@@ -707,6 +708,7 @@ export default {
                     this.msg = res.message
                     window.localStorage.setItem("codigo", res.codigo)
                     window.localStorage.setItem("url", res.url)
+                     window.localStorage.setItem("ref", res.reference_key)
                     window.location.href = "#/obrigado"
                 }
             }
@@ -757,8 +759,8 @@ export default {
 
     async mounted() {
         //	this.subdomaim = "34edqwe21"
-        //  this.subdomaim = "doardigital"
-     this.subdomaim = window.location.hostname
+      //   this.subdomaim = "combopay.com.br"
+       this.subdomaim = window.location.hostname
 
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
