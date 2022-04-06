@@ -36,7 +36,7 @@ export default {
                                             </div>
                                             <div class="mb-7">
                                                 <label for="exampleFormControlInput1"
-                                                    class="required form-label">Género</label>
+                                                    class="required form-label">Gênero</label>
                                                 <select class="form-select form-select-solid" required
                                                     aria-label="Select example">
                                                     <option v-model="genero">Masculino</option>
@@ -60,7 +60,7 @@ export default {
                                             </div>
                                             <div class="mb-10">
                                                 <label for="exampleFormControlInput1"
-                                                    class="required form-label">Telefone</label>
+                                                    class="required form-label">Whatsapp com DDD</label>
                                                 <input v-model.trin="$v.telefone.$model" type="text" v-mask="'(##) # ####-####'" placeholder="(00) 0 0000-0000"
                                                     class="form-control form-control-solid" required />
                                                 <div class="erros" v-if="$v.telefone.$error">
@@ -294,7 +294,7 @@ export default {
                                                                 stroke-width="1.099">
                                                                 <tspan style="-inkscape-font-specification:monospace"
                                                                     x="13.547" y="79.959" font-family="monospace">
-                                                                    {{ cart_nome|| 'NOME COMPLETO'}}</tspan>
+                                                                    {{ cart_nome|| 'NOME IGUAL DO CARTÃO'}}</tspan>
                                                             </text>
                                                             <path
                                                                 d="M17.606 21.77c-.813 0-1.552.305-2.108.81h5.23l-.81-.81zm3.12 0l3.307 3.306 3.306-3.307zm7.422 0l-.824.824h5.227a3.127 3.127 0 00-2.124-.825zM15.002 23.15a3.13 3.13 0 00-.534 1.756v1.078h6.323v.122h.116v6.539h-.125v.144h-6.314v1.2c0 .566.15 1.096.41 1.554h6.307l2.562-2.561v-7.386L21.3 23.151zm11.75.014L24.319 25.6v7.383l2.449 2.448h6.448c.223-.431.349-.92.349-1.441v-1.17H27.33V25.82h6.235v-.914a3.13 3.13 0 00-.525-1.742zm1.15 3.228v2.612h5.663v-2.612zm-13.434.163v2.449h5.867v-2.449zm0 3.021v2.641h5.867v-2.64zm13.434 0v2.67h5.663v-2.67zm-3.869 3.929l-3.622 3.622h7.245zm3.306 2.497l1.125 1.124h1.963c.97 0 1.836-.436 2.41-1.124zm-12.044.113a3.128 3.128 0 002.311 1.011h1.995l1.012-1.011z"
@@ -386,7 +386,7 @@ export default {
                                                                     Completo</label>
                                                                 <input v-model="cart_nome" type="text" name="nascimento"
                                                                     class="form-control form-control-lg form-control-solid"
-                                                                    placeholder="Nome Completo" required />
+                                                                    placeholder="Nome Igual do Cartão" required />
                                                             </div>
                                                         </div>
                                                     </div>
