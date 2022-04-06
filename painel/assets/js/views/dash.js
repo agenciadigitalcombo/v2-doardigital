@@ -9,15 +9,17 @@ export default {
 	<c-aside></c-aside>
 
 	<div class="d-flex flex-column flex-root">
-		 
+			<!--begin::Sales Statistics-->
 			<div class="page d-flex flex-row flex-column-fluid">
 		
-			 
+				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 			 
-		  
+		 
+					<!--end::Header-->
+					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-					 
+						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
@@ -529,16 +531,16 @@ export default {
 								
 						 
 							</div>
-						
-							 
+							<!--end::Container-->
 						</div>
-						  
-						<c-grafico></c-grafico>
- 
+						<!--end::Post-->
+					</div>
+					<!--end::Content-->
+				 
 				</div>
-			
+				<!--end::Wrapper-->
 			</div>
-		
+			<!--end::Page-->
 		</div>
 											 
 									  
@@ -669,49 +671,6 @@ export default {
 	mounted() {
 	   this.istituicaoDashboard() 
 	 
-	   var options = {
-		chart: {
-			type: 'bar'
-		},
-		series: [{
-			name: 'sales',
-			data: [30, 40, 45, 50, 49, 60, 70, 91, 125]
-		}],
-		xaxis: {
-			categories: [111, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-		}
-	}
-
-	var chart = new ApexCharts(document.querySelector("#barra"), options);
-
-	chart.render();
-
-
-
-	var options = {
-		series: [44, 55, 13, 43, 22],
-		chart: {
-		width: 380,
-		type: 'pie',
-	  },
-	  labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-	  responsive: [{
-		breakpoint: 480,
-		options: {
-		  chart: {
-			width: 200
-		  },
-		  legend: {
-			position: 'bottom'
-		  }
-		}
-	  }]
-	  };
-
-	  var chart = new ApexCharts(document.querySelector("#pie"), options);
-	  chart.render();
-	
-
 
 	//	let token_payload = token.split('.')[0]
 	//	let token_parse = JSON.parse(atob(token_payload))
