@@ -253,7 +253,7 @@ export default {
 																	<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
 																		<!--begin::Table row-->
 																		<tr class="text-start text-muted text-uppercase gs-0">
-																			<th class="min-w-100px">Data</th>
+																			<th class="min-w-100px">Data da Assinatura</th>
 																			<th>Valor</th> 
 																			<th class="min-w-100px">Status</th>
 																			<th class="text-end min-w-100px pe-4"></th>
