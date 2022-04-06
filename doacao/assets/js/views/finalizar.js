@@ -216,7 +216,7 @@ export default {
                                                         </label>
                                                     </div>
 
-                                                    <div class="col-xl-4" v-if="mensal ==='0'">
+                                                    <div class="col-xl-4" >
                                                         <input type="radio" class="btn-check"
                                                             @click="type_pagamento = 'PIX'; consultar();" name="radio_buttons_2"
                                                             value="3" id="kt_radio_buttons_3_option_3" />
@@ -658,6 +658,7 @@ export default {
                     this.msg = res.message
                     window.localStorage.setItem("codigo", res.codigo)
                     window.localStorage.setItem("url", res.url)
+                     window.localStorage.setItem("ref", res.reference_key)
                     window.location.href = "#/obrigado"
                 }
             }
@@ -707,6 +708,7 @@ export default {
                     this.msg = res.message
                     window.localStorage.setItem("codigo", res.codigo)
                     window.localStorage.setItem("url", res.url)
+                     window.localStorage.setItem("ref", res.reference_key)
                     window.location.href = "#/obrigado"
                 }
             }
@@ -757,8 +759,8 @@ export default {
 
     async mounted() {
         //	this.subdomaim = "34edqwe21"
-        //  this.subdomaim = "doardigital"
-     this.subdomaim = window.location.hostname
+      //   this.subdomaim = "combopay.com.br"
+       this.subdomaim = window.location.hostname
 
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")

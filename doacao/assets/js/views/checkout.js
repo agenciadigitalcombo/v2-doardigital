@@ -310,10 +310,9 @@ export default {
 	 
 
 	async mounted() {
-	
-		//	this.subdomaim = "34edqwe21"
-	//	this.subdomaim = "doardigital"
-	this.subdomaim = window.location.hostname
+	 
+	//		this.subdomaim = "combopay.com.br"
+		this.subdomaim = window.location.hostname
  
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.com.br/api/upload/"+config.logo
