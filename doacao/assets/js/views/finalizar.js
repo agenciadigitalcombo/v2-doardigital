@@ -74,7 +74,7 @@ export default {
                                                
                                         </div>
                                         <div class="card-title mb-10">
-                                            <h2>INFORME SEU INDEREÇO</h2>
+                                            <h2>INFORME SEU ENDEREÇO</h2>
                                         </div>
                                         <div>
                                             <div class="row g-5">
@@ -418,7 +418,7 @@ export default {
 
 
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                               <img style="width: 100%;" src="../doacao/assets/logo/logo-dc-doar.png" class="bandeiras">
+                                               <img style="width: 100%;" src="../doacao/assets/logo/logo-doardigital.jpeg" class="bandeiras">
 
                                                     
                                                 </div>
