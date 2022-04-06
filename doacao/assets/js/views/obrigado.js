@@ -215,10 +215,11 @@ export default {
 				codigo_geral: '',
 				url_geral: '',
 			},
-
+			doacao_id: '',
 			subdomaim: '',
 			type: '',
 			jms: false,
+
 		}
 	},
 
@@ -241,13 +242,35 @@ export default {
 
 		copiar(ref) {
 			this.$refs[ref].select(); document.execCommand('copy');
-		}
+		},
+
+		async obrigados() {
+			this.error = null
+
+			let res = await adm.obrigado(
+				this.doacao_id
+			)
+			if (!res.next) {
+				this.msg = res.message,
+					setTimeout(() => this.msg = "", 5000);
+
+				this.error = res.message
+				return null
+			}
+			 
+			setTimeout(() => {
+				this.submitStatus = 'OK'
+			
+			}, 500)
+
+
+		},
 	},
 
 	async mounted() {
-	
-			//this.subdomaim = "doardigital"
-	this.subdomaim = window.location.hostname
+
+		//this.subdomaim = "combopay.com.br"
+		this.subdomaim = window.location.hostname
 
 		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep

@@ -1,5 +1,5 @@
 import http from './http.js'
- 
+
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/criar-adm', {
@@ -154,7 +154,7 @@ export default {
         cidade,
         estado,
         numero,
-        tipo_empresa, 
+        tipo_empresa,
         complemento,
 
     ) {
@@ -172,7 +172,7 @@ export default {
             cidade,
             estado,
             numero,
-            tipo_empresa, 
+            tipo_empresa,
             complemento,
         })
     },
@@ -431,7 +431,7 @@ export default {
 
     async transacaoPlano(
         instituicao_id,
-        mensal, 
+        mensal,
         planos_valor,
         planos_nome,
         email,
@@ -475,10 +475,10 @@ export default {
         })
     },
 
-    
+
     async transacao(
         instituicao_id,
-        mensal, 
+        mensal,
         planos_valor,
         planos_nome,
         email,
@@ -493,7 +493,7 @@ export default {
         bairro,
         cidade,
         type_pagamento,
-       
+
     ) {
         return await http.post('/transacao', {
             instituicao_id,
@@ -512,9 +512,21 @@ export default {
             bairro,
             cidade,
             type_pagamento,
-            
+
         })
     },
+
+
+
+    async obrigado(
+        doacao_id
+    ) {
+        return await http.post('/list-doacao', {
+            doacao_id
+        })
+    },
+
+
 
     async listarPlanoDigital(token) {
         return await http.get('/plano-digital-list', {

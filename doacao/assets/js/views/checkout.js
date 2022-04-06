@@ -22,7 +22,7 @@ export default {
 													<div class="fv-row">
 														<div class="btn-group w-100" data-kt-buttons="true"
 															data-kt-buttons-target="[data-kt-button]">
-                                                        <div v-if="temporario =='nao'">
+                                                       
 															<input v-model="mensal" type="radio" class="btn-check"
 																name="radio_buttons_2" value="1" checked="checked"
 																id="kt_radio_buttons_2_option_1" />
@@ -33,7 +33,7 @@ export default {
 																	<span class="text-dark fw-bolder d-block fs-3">DOAÇÃO MENSAL</span>
 																</span>
 															</label>
-                                                        </div>
+                                                       
 
 															<input v-model="mensal" type="radio" class="btn-check"
 																name="radio_buttons_2" value="0"
@@ -314,9 +314,9 @@ export default {
 
 	async mounted() {
 	
-		//	this.subdomaim = "34edqwe21"
-	//	this.subdomaim = "doardigital"
-	this.subdomaim = window.location.hostname
+		//this.subdomaim = "combopay.com.br"
+		//this.subdomaim = "doardigital"
+		this.subdomaim = window.location.hostname
  
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.com.br/api/upload/"+config.logo
