@@ -34,7 +34,7 @@ export default {
                                     </div> 
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-info pb-1 px-2">Total Aberto</span>
+                                            <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
                                             
                                                 <span >{{ aberto+'00' | is_price }}</span></span>
                                         </div>
