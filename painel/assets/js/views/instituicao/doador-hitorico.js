@@ -111,7 +111,7 @@ export default {
 											<!--begin:::Tab item-->
 											<li class="nav-item">
 												<a class="nav-link text-active-primary pb-4" @click="visaoV()"
-													:class="{ active: visao }">Visão Gera</a>
+													:class="{ active: visao }">Visão Geral</a>
 											</li>
 											<!--end:::Tab item-->
 
@@ -140,7 +140,7 @@ export default {
 													<div class="card-header border-0">
 														<!--begin::Card title-->
 														<div class="card-title">
-															<h2>Historico de transação</h2>
+															<h2>Historico de Transação</h2>
 														</div>
 
 													</div>
