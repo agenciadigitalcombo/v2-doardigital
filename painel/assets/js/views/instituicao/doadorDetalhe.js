@@ -429,7 +429,6 @@ export default {
 
 
 		if (this.tipo == 'PIX') {
-			alert("olaaa")
 			let code_pix = `${this.codigo_geral}`
 			var qrcode = new QRCode(this.$refs.print_qr, {
 				text: code_pix,

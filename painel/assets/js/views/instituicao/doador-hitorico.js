@@ -111,7 +111,7 @@ export default {
 											<!--begin:::Tab item-->
 											<li class="nav-item">
 												<a class="nav-link text-active-primary pb-4" @click="visaoV()"
-													:class="{ active: visao }">Visão Gera</a>
+													:class="{ active: visao }">Visão Geral</a>
 											</li>
 											<!--end:::Tab item-->
 
@@ -140,7 +140,7 @@ export default {
 													<div class="card-header border-0">
 														<!--begin::Card title-->
 														<div class="card-title">
-															<h2>Historico de transação</h2>
+															<h2>Historico de Transação</h2>
 														</div>
 
 													</div>
@@ -218,21 +218,7 @@ export default {
 															<h2>Minhas Assinatura</h2>
 														</div>
 
-														<!--begin::Card toolbar-->
-														<div class="card-toolbar">
-															<!--begin::Button-->
-															<label
-																class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-																<!--begin::Input-->
-																<input class="form-check-input" name="github"
-																	type="checkbox" value="1"
-																	checked="checked">
-																 
-																<span class="form-check-label fw-bold text-muted"
-																	for="assina"></span>
-														 
-															</label> 
-														</div>
+														
 												 
 													</div>
 													<!--end::Card header-->
@@ -253,7 +239,7 @@ export default {
 																	<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
 																		<!--begin::Table row-->
 																		<tr class="text-start text-muted text-uppercase gs-0">
-																			<th class="min-w-100px">Data</th>
+																			<th class="min-w-100px">Data da Assinatura</th>
 																			<th>Valor</th> 
 																			<th class="min-w-100px">Status</th>
 																			<th class="text-end min-w-100px pe-4"></th>
@@ -281,7 +267,7 @@ export default {
 		
 																			<td class="pe-0 text-end">
 																				<a class="btn btn-primary" >
-																				 Cancelar assinatura
+																				 Cancelar Assinatura
 																				</a>
 																			</td>
 																		</tr>

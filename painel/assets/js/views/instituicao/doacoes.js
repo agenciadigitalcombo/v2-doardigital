@@ -34,7 +34,7 @@ export default {
                                     </div> 
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-info pb-1 px-2">Total Aberto</span>
+                                            <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
                                             
                                                 <span >{{ aberto+'00' | is_price }}</span></span>
                                         </div>
@@ -43,7 +43,7 @@ export default {
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
                                             
-                                                <span >11111</span></span>
+                                                <span >R$ 0,00</span></span>
                                         </div>
                                     </div>  
                                 </div> 
@@ -345,7 +345,7 @@ export default {
             var tmp = price + '';
             tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
             if (tmp.length > 6)
-                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
 
             return `R$ ${tmp}`;
         },
