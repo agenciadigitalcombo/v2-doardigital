@@ -9,7 +9,7 @@ export default {
 				<div class="post d-flex flex-column-fluid" id="kt_post">
 					<div id="kt_content_container" class="container-xxl">
 						<div class="text-center mb-8 mb-xl-5">
-								<img class="rounded" style="width: 150px;" v-bind:src="logo">
+								<img class="rounded" style="width: 250px;" v-bind:src="logo">
 								</div>
 								<div class="card mb-5 mb-xl-10">
 									<div class="card-body">
