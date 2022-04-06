@@ -116,13 +116,12 @@ export default {
 												 </p>
 											</div>
 											<div class="card-title mb-5">
-												<h3>Informacao</h3>
+												<h3>Preencher E-mail</h3>
 											</div>
 											<div class="mb-10">
-												<label for="exampleFormControlInput1" class="required form-label">E-mail</label>
 												<input v-model.trin="$v.email.$model" type="email" class="form-control form-control-solid p-5"
 												:class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"
-												placeholder="Email" />
+												placeholder="E-mail" />
 
 													
 												<div class="erros" v-if="$v.email.$error">
@@ -144,7 +143,7 @@ export default {
 
 										 <div class="d-flex"> 
 										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
-											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
+											 :disabled="submitStatus === 'PENDING'">PROSEGUIR..</button>									 
 									 </div>	
 
 									 <div>
@@ -171,7 +170,7 @@ export default {
 			<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 				<div class="text-dark order-2 order-md-1"><span class="text-muted fw-bold me-1">2022©</span> <a
 						href="https://doardigital.com.br" target="_blank" class="text-gray-800 text-hover-primary">- 
-						 Doar digital
+						 Doar Digital
 						 </a></div>
 			</div>
 		</div>
