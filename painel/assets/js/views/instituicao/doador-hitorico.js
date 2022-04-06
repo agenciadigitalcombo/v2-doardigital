@@ -281,7 +281,7 @@ export default {
 		
 																			<td class="pe-0 text-end">
 																				<a class="btn btn-primary" >
-																				 Cancelar assinatura
+																				 Cancelar Assinatura
 																				</a>
 																			</td>
 																		</tr>
