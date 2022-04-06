@@ -189,7 +189,7 @@ export default {
 			planos_nome: null,
 			valor_digitado: null,
 			planos_id: null,
-			email: "victorfernando@gmail.com",
+			email: "",
 			outro: null,
 			subdomaim: null,
 			submitStatus: null,
