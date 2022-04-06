@@ -9,7 +9,7 @@ class Doacao implements IDoacao{
         $banco->exec($sql);
     }
 
-    public function get_by_id(int  $id): array
+    public function get_by_id(string  $id): array
     {
         $banco = new Banco();
         $sql = "SELECT * FROM doacoes WHERE id='$id' OR reference_key='$id'";
