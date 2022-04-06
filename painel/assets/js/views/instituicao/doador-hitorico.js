@@ -218,21 +218,7 @@ export default {
 															<h2>Minhas Assinatura</h2>
 														</div>
 
-														<!--begin::Card toolbar-->
-														<div class="card-toolbar">
-															<!--begin::Button-->
-															<label
-																class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-																<!--begin::Input-->
-																<input class="form-check-input" name="github"
-																	type="checkbox" value="1"
-																	checked="checked">
-																 
-																<span class="form-check-label fw-bold text-muted"
-																	for="assina"></span>
-														 
-															</label> 
-														</div>
+														
 												 
 													</div>
 													<!--end::Card header-->
