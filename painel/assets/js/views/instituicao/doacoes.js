@@ -43,7 +43,7 @@ export default {
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
                                             
-                                                <span >11111</span></span>
+                                                <span >R$ 0,00</span></span>
                                         </div>
                                     </div>  
                                 </div> 
