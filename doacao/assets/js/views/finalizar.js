@@ -418,7 +418,7 @@ export default {
 
 
                                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                               <img style="width: 100%;" src="../doacao/assets/logo/logo-doardigital.jpeg" class="bandeiras">
+                                               <img style="width: 220px;" src="../doacao/assets/logo/logo-doardigital.jpeg" class="bandeiras">
 
                                                     
                                                 </div>
