@@ -382,8 +382,7 @@ export default {
                                                         <div class="row mb-5">
                                                             <div class="col-lg-12 fv-row">
                                                                 <label
-                                                                    class="col-lg-10 col-form-label required fw-bold fs-6">Nome
-                                                                    Completo</label>
+                                                                    class="col-lg-10 col-form-label required fw-bold fs-6">Nome Igual do Cartão</label>
                                                                 <input v-model="cart_nome" type="text" name="nascimento"
                                                                     class="form-control form-control-lg form-control-solid"
                                                                     placeholder="Nome Igual do Cartão" required />
