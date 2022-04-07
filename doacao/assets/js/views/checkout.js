@@ -263,7 +263,7 @@ export default {
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			}
-			else if (cunston_valor != 0 && cunston_valor <= 499) {
+			else if (cunston_valor != 0 && cunston_valor <= 1999) {
 				this.minimoalerta = "Valor minimo deve ser 20,00"
 			}
 			else {

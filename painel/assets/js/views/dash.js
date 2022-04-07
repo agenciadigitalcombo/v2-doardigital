@@ -9,47 +9,41 @@ export default {
 	<c-aside></c-aside>
 
 	<div class="d-flex flex-column flex-root">
-			<!--begin::Sales Statistics-->
-			<div class="page d-flex flex-row flex-column-fluid">
-		
-				<!--begin::Wrapper-->
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 			 
+			<div class="page d-flex flex-row flex-column-fluid">
 		 
-					<!--end::Header-->
-					<!--begin::Content-->
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+			  
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
+						 
 						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
+						 
 							<div id="kt_content_container" class="container-xxl">
-								<!--begin::Row-->
+							 
 								<div class="row g-5 g-xl-8">
-									<!--begin::Col-->
+								 
 									<div class="col-xl-3">
-										<!--begin::Mixed Widget 1-->
+									 
 										<div class="card card-xl-stretch mb-xl-8">
-											<!--begin::Body-->
+										 
 											<div class="card-body p-0">
-												<!--begin::Header-->
+											 
 												<div class="px-9 pt-7 card-rounded h-275px w-100 bg-primary">
-												 
-													<!--begin::Balance-->
+												  
 													<div class="d-flex text-center flex-column text-white pt-8">
 														<h3 class="m-0 text-white fw-bolder fs-3">Total de Doações</h3>
 														<span class="fw-bolder fs-2x pt-1">{{doacao_total+'00'  | is_price }}</span>
 														
 													</div> 
 												</div>
-												<!--end::Header-->
-												<!--begin::Items-->
+											 
 												<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
-													<!--begin::Item-->
+												 
 													<div class="d-flex align-items-center mb-6">
-														<!--begin::Symbol-->
+													 
 														<div class="symbol symbol-45px w-40px me-5">
 															<span class="symbol-label bg-lighten">
-																<!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
+															 
 																<span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
 																	height="60" fill="currentColor"
@@ -61,19 +55,17 @@ export default {
 																	<path d="M12 9h2V8h-2v1Z" />
 																</svg>
 																</span>
-																<!--end::Svg Icon-->
+															 
 															</span>
 														</div>
-														<!--end::Symbol-->
-														<!--begin::Description-->
+														 
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Pix</div>
 															</div>
 															
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_total+'00' | is_price }}</div>
 																 
@@ -103,12 +95,11 @@ export default {
 														<!--end::Symbol-->
 														<!--begin::Description-->
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
 															</div>
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_total+'00' | is_price }}</div>
 									 
@@ -138,7 +129,7 @@ export default {
 															<!--end::Symbol-->
 															<!--begin::Description-->
 															<div class="d-flex align-items-center flex-wrap w-100">
-																<!--begin::Title-->
+																
 																<div class="mb-1 pe-3 flex-grow-1">
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
 																</div>
@@ -203,13 +194,12 @@ export default {
 														<!--end::Symbol-->
 														<!--begin::Description-->
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Pix</div>
 															</div>
 															
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_concluido+'00' | is_price }}</div>
 														
@@ -240,12 +230,11 @@ export default {
 														<!--end::Symbol-->
 														<!--begin::Description-->
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
 															</div>
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_concluido+'00' | is_price }}</div>
 									 
@@ -275,7 +264,7 @@ export default {
 															<!--end::Symbol-->
 															<!--begin::Description-->
 															<div class="d-flex align-items-center flex-wrap w-100">
-																<!--begin::Title-->
+																
 																<div class="mb-1 pe-3 flex-grow-1">
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
 																</div>
@@ -339,13 +328,11 @@ export default {
 														<!--end::Symbol-->
 														<!--begin::Description-->
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Pix</div>
 															</div>
 															
-															<!--end::Title-->
-															<!--begin::Label-->
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_aberto+'00' | is_price }}</div>
 																 
@@ -369,7 +356,7 @@ export default {
 															</span>
 														</div> 
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
 															</div>
@@ -453,13 +440,12 @@ export default {
 														<!--end::Symbol-->
 														<!--begin::Description-->
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Pix</div>
 															</div>
 															
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ pix_falhado+'00' | is_price }}</div>
 
@@ -481,12 +467,11 @@ export default {
 															</span>
 														</div> 
 														<div class="d-flex align-items-center flex-wrap w-100">
-															<!--begin::Title-->
+															
 															<div class="mb-1 pe-3 flex-grow-1"> 
 																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
 															</div>
-															<!--end::Title-->
-															<!--begin::Label-->
+															
 															<div class="d-flex align-items-center">
 																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{ boleto_falhado+'00' | is_price }}</div>
 					
@@ -508,7 +493,7 @@ export default {
 																</span>
 															</div> 
 															<div class="d-flex align-items-center flex-wrap w-100">
-																<!--begin::Title-->
+																
 																<div class="mb-1 pe-3 flex-grow-1">
 																	 <div class="text-gray-400 fw-bold fs-7"> Cartão </div>
 																</div>  
@@ -608,7 +593,7 @@ export default {
 
 			    this.jms = res.next,
 				this.msg = res.message
-			//	this.dash_inst = res.dados.boleto || {} 
+			//	this.dash_inst = res.dados.boleto || {}  
 				console.log(this.dash_inst)
 
 				this.cartao_total = parseInt(res.dados.credit_card.total)

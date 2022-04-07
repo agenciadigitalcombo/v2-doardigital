@@ -14,10 +14,8 @@ export default {
         <!--begin::Page-->
         <div class="page d-flex flex-row flex-column-fluid">
          
-            <!--begin::Wrapper-->
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
               
-            <!--begin::Content-->
 						<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 							<!--begin::Post-->
 							<div class="post d-flex flex-column-fluid" id="kt_post">
@@ -42,7 +40,9 @@ export default {
 												<div class="col-lg-5">
 												<span class=" fw-bold text-muted">
 												Nome</span>
-													<p class="fw-bolder fs-6 text-gray-800">{{ nome }}</p>
+													<p class="fw-bolder fs-6 text-gray-800">
+													<a href="#/doadorHitorico" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">{{ nome }}</a>
+													</p>
 												
 													<span class=" fw-bold text-muted">
 													Tipo</span>
@@ -54,9 +54,7 @@ export default {
 													Data</span>
 													
 													<p class="fw-bolder fs-6 text-gray-800">{{ data | is_data }} - {{ hora }}</p>
-												
-
-												
+												 
 												</div>
 											 
 												<div class="col-lg-4">
@@ -100,33 +98,18 @@ export default {
 										
 										
 										</div>
-										<!--end::Card body-->
-
-
-
-
-
-					
+										 
 
 									</div>
-									<!--end::details View-->
-									<!--begin::Row-->
-								
-									<!--end::Row-->
+									 
 								
 								</div>
-								<!--end::Container-->
+							 
 							</div>
 					 
+							
 
-
-
-
-
-
-
-				 
-							<div class="post d-flex flex-column-fluid" >
+							<div class="post d-flex flex-column-fluid" v-if="tipo !=='CREDIT_CARD'">
 							<div class="container-xxl">
 								<div class="card">
 							 
@@ -145,7 +128,7 @@ export default {
 																<div class="mw-lg-600px mx-auto"> 
 																	<div class="mb-5 text-center"> 
 																		<div class="text-muted fw-bold fs-5">ou copie o
-																			<a href="#" class="link-primary fw-bolder"> código de barras:</a>.
+																			<a href="/doadorHitorico" class="link-primary fw-bolder"> código de barras:</a>.
 																		</div> 
 																	</div> 
 																	<div class="mb-5">
@@ -199,11 +182,7 @@ export default {
 												</div> 
 												</div>
 						 
-						
-						
-
-
-
+ 
 <div class="content d-flex flex-column flex-column-fluid">
 <div class="post d-flex flex-column-fluid">
 
@@ -435,8 +414,8 @@ export default {
 				width: 230,
 				height: 230,
 				height: 230,
-				colorDark: "#000000",
-				colorLight: "#ffffff",
+				colorDark: "/doadorHitorico000000",
+				colorLight: "/doadorHitoricoffffff",
 				correctLevel: QRCode.CorrectLevel.L
 			});
 		}

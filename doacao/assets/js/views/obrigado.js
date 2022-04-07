@@ -231,7 +231,7 @@ template: `
 			type: '',
 			jms: false,
 			doacao_id: '',
-			 loader: 'sim',
+			 loader: '',
 		}
 	},
 
@@ -257,12 +257,9 @@ template: `
 		},
 
 		 
-					
-			
-			 
 		  isQr() {	
 			this.error = null
-			 
+			this.loader = 'sim',
 				setTimeout( async () => {
 
 					let res = await adm.obrigado(
@@ -287,7 +284,7 @@ template: `
 	async mounted() {
 		
 		
-	//		this.subdomaim = "combopay.com.br"
+//			this.subdomaim = "combopay.com.br"
 	this.subdomaim = window.location.hostname
 	
 		let dados = (await this.infoSubdomain()).dados_instituicao
@@ -304,15 +301,18 @@ template: `
 		this.inst.email = dados.email
 		this.inst.telefone = dados.telefone
 		this.inst.cnpj = dados.cnpj
-		this.inst.urlsite = dados.subdomaim + '.doardigital.com.br/'
+		this.inst.urlsite = dados.subdomaim + '.doardigital.com.br/' 
 
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
 		//this.codigo_geral = localStorage.getItem("codigo")
 		//this.inst.url_geral = localStorage.getItem("url")
 		this.doacao_id = localStorage.getItem("ref")
+
+		if (this.type !== 'CREDIT_CARD') {
+
 		this.isQr() 
-	 
+	}
 
 		if (this.type == 'PIX') {
 			let code_pix = `${this.inst.codigo_geral}`
