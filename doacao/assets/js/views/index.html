@@ -1,329 +1,341 @@
 import adm from "../../../../../static/js/api/adm.js"
-const { required, minLength, between, email } = window.validators
 
 export default {
-	template: `
-		<div :style="{ backgroundColor: backgroundColor }">
+template: `
+<div>
+	<div class="d-flex flex-column flex-root">
+		<div class="mb-0" id="home">
+			<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
+				style="background-color: white">
 
-			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-				<div class="post d-flex flex-column-fluid" id="kt_post">
-					<div id="kt_content_container" class="container-xxl">
-						<div class="text-center mb-8 mb-xl-5">
-								<img class="rounded" style="width: 150px;" v-bind:src="logo">
-								</div>
-								<div class="card mb-5 mb-xl-10">
-									<div class="card-body">
-										<div class="row gx-9 gy-6">
-											<div class="col-xl-6">
-												<div>
-													<div class="card-title mb-5">
-														<h3>Escolha tipo</h3>
-													</div>
-													<div class="fv-row">
-														<div class="btn-group w-100" data-kt-buttons="true"
-															data-kt-buttons-target="[data-kt-button]">
-                                                        <div v-if="temporario">
-															<input v-model="mensal" type="radio" class="btn-check"
-																name="radio_buttons_2" value="1" checked="checked"
-																id="kt_radio_buttons_2_option_1" />
-															<label
-																class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
-																for="kt_radio_buttons_2_option_1">
-																<span class="d-block fw-bold text-start">
-																	<span class="text-dark fw-bolder d-block fs-3">DOAÇÃO MENSAL</span>
-																</span>
-															</label>
-                                                        </div>
+				<div class="d-flex flex-column flex-center w-100 min-h-40px min-h-lg-40px px-9">
 
-															<input v-model="mensal" type="radio" class="btn-check"
-																name="radio_buttons_2" value="0"
-																id="kt_radio_buttons_2_option_2" />
-															<label
-																class="btn btn-outline btn-outline-dashed btn-outline-default p-5 d-flex align-items-center mb-5"
-																for="kt_radio_buttons_2_option_2">
-																<span class="d-block fw-bold text-start">
-																	<span class="text-dark fw-bolder d-block fs-3">DOAÇÃO UNICA</span>
-																</span>
-															</label>
-														</div>
-													</div>
+					<div class="text-center mb-5 mb-lg-0 py-10 py-lg-10">
 
-												</div>
-												<div>
-													<div class="card-title mt-10">
-
-														<h3>Escolha Valor para Doação</h3>
-													</div>
-			
-
-													<div class="d-flex flex-column">
-
-														<div class="row mt-5">
-
-															<div class="col-lg-4  mb-lg-0" v-for="listar in filtraPlano" :key="listar.id">
-
-															<label 
-																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-5 mb-5">
-																<div class="d-flex align-items-center me-2">
-																	<div
-																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-on:click="setarPlano(listar)"  v-model="amount" :value="listar.amount"    
-																			class="form-check-input" type="radio" name="plan" />
-																			</div>
-
-																	<div class="flex-grow-1">
-																		<div class="fw-bold opacity-100">{{ listar.amount | is_price }} </div>
-																	</div>
-																</div>
-															</label>
-														</div> 
-																				 
-
-														<div class="col-lg-4 mb-10 mb-lg-0" v-if="mensal !== '1'">
-
-															<label
-																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
-
-																<div class="d-flex align-items-center me-2">
-
-																	<div
-																		class="form-check form-check-custom form-check-solid form-check-primary me-6">
-																		<input v-model="valor" class="form-check-input"  
-																			type="radio" name="plan" value="0" />
-																	</div>
-
-																	<div class="flex-grow-1">
-																		<div class="fw-bold opacity-100">OUTRO</div>
-																	</div>
-																</div>
-															</label>
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-
-										<div class="col-xl-6">
-											<div class="mb-10" v-if="valor === '0' && mensal !== '1'">
-												<div class="card-title mb-5">
-													<h3>Informe um valor, mínimo R$ 20,00. </h3>
-												</div>
-												
-												<input v-model.trin="$v.valor_digitado.$model" type="text" @input="money" required 
-												:class=" {'is-invalid':$v.valor_digitado.$error, 'is-valid':!$v.valor_digitado.$invalid }"
-												 class="form-control form-control-solid p-5" placeholder="00.00"/>
-												 <p class="erro_texte">
-												 {{minimoalerta}}
-												 </p>
-											</div>
-											<div class="card-title mb-5">
-												<h3>Informacao</h3>
-											</div>
-											<div class="mb-10">
-												<label for="exampleFormControlInput1" class="required form-label">E-mail</label>
-												<input v-model.trin="$v.email.$model" type="email" class="form-control form-control-solid p-5"
-												:class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"
-												placeholder="Email" />
-
-													
-												<div class="erros" v-if="$v.email.$error">
-												<div class="erro_texte" v-if="!$v.email.required">
-												email é necessária</div>
-												<div class="erro_texte" v-else-if="!$v.email.isUnique ">
-											  este email não é válido ..
-													</div>
-											</div>
-
-											<div class="sucesso_texte" v-else> 
-													
-												</div>
-
-											</div>
-											<div>
-								  
-
-
-										 <div class="d-flex"> 
-										 <button style="width: 100%;" class="btn btn-success p-5" type=" submit" @click="descartavel()"
-											 :disabled="submitStatus === 'PENDING'">PROSEGUIR...!</button>									 
-									 </div>	
-
-									 <div>
-									 <p class="typo__p" v-if="submitStatus === 'OK'"> 
-									 </p>
-									 <p class="erro_texte" v-if="submitStatus === 'ERROR'">
-									 certifique que o valor e o E-email está preenchido corretamente 
-									 </p>
-									 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...
-									 </p>
-
-								
-								 </div>
-										</div>
-									</div>
-								</div>
+						<div class="text-center">
+							<img class="rounded" style="width: 150px;" v-bind:src="inst.logo">
 						</div>
 					</div>
 				</div>
 			</div>
-		</div> 
+		</div>
+		<div class="flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 "
+			style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
 
-		<div class="footer py-4 d-flex flex-lg-column a-footer">
-			<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-				<div class="text-dark order-2 order-md-1"><span class="text-muted fw-bold me-1">2022©</span> <a
-						href="https://doardigital.com.br" target="_blank" class="text-gray-800 text-hover-primary">- 
-						 Doar digital
-						 </a></div>
+			<div class="my-2 me-5">
+				<div class="text-center">
+					<img style="width: 50px;" src="../../doacao/assets/icons/verificado.png" class="rounded">
+					<!-- <img class="rounded" style="width: 50px;" v-bind:src="inst.icon"> -->
+					<h3 class="fs-2hx text-white">Obrigado por sua generosidade!</h3>
+
+				</div>
 			</div>
 		</div>
- 
+		<div class="py-10 py-lg-20">
+			<div class="container">
+				<div class="text-center mb-12">
+
+					<div id="block2" v-if="type=='CREDIT_CARD'">
+						<h3 class="fs-2hx text-dark mb-15">Sua doação foi recebida com sucesso, Deus te abençoe!.</h3>
+
+					</div>
+
+					<div id="block2" v-if="inst.codigo_geral">
+						<div class="lds-hourglass"></div>
+						<div class="lds-text">
+							Seu código está sendo gerado, por favor aguarde ...
+						</div>
+					</div>
+
+					<div id="block2" else>
+						<div id="block2" v-if="type=='BOLETO'">
+
+							<h3 class="fs-2hx text-dark mb-15">
+								Sua doação esta em aberto!.</h3>
+							<h3 class="fs-1 text-dark mb-5">
+								<span>Clique abaixo para acessar o seu boleto.</span>
+							</h3>
+
+							<a target="_blank" :href="inst.url_geral" class="btn btn-primary er fs-6 px-8 my-14"
+								data-bs-toggle="modal" data-bs-target="#kt_modal_share_earn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+									class="bi bi-upc" viewBox="0 0 16 16">
+									<path
+										d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+								</svg>
+								VER MEU BOLETO
+							</a>
+							<div class="mw-lg-600px mx-auto">
+								<div class="mb-13 text-center">
+									<div class="text-muted fw-bold fs-5">ou copie o
+										<a href="#" class="link-primary fw-bolder"> código de barras:</a>.
+									</div>
+								</div>
+								<div class="mb-10">
+									<div class="d-flex">
+										<input type="text" v-model="inst.codigo_geral" ref="codigo"
+											class="form-control  me-3 flex-grow-1" name="search">
+										<button @click="copiar('codigo')"
+											class="btn btn-light btn-primary fw-bolder flex-shrink-0">Copiar</button>
+									</div>
+								</div>
+
+							</div>
+							<h3> Importante: Este boleto é uma contribuição espontânea e não gera protesto. </h3>
+						</div>
+
+
+						<div id="block2" v-if="type=='PIX'">
+
+							<h3 class="fs-2hx text-dark mb-15">
+								Sua doação está sendo processada, após o pagamento você receberá uma confirmação.</h3>
+
+							<div class="mw-lg-600px mx-auto">
+								<div class="mb-13 text-center">
+									<div class="text-muted fw-bold fs-5 ">
+										<h2 class="text-gray-600">
+											Seu codigo PIX..
+										</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<center>
+							<div ref="print_qr"></div>
+						</center>
+					
+
+
+						<div id="block12" v-if="type=='PIX'">
+
+							<div class="mw-lg-600px mx-auto  mt-10">
+
+								<div class="mb-10">
+									<div class="d-flex">
+										<input type="text" v-model="inst.codigo_geral" ref="codigo"
+											class="form-control  me-3 flex-grow-1" name="search">
+										<button @click="copiar('codigo')"
+											class="btn btn-light btn-primary fw-bolder flex-shrink-0">Copiar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="mt-sm-n20">
+				<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
+						fill="rgba(19,38,60,255)"></path>
+				</svg>
+			</div>
+			<div class="py-2 landing-dark-bg">
+				<div class="container">
+					<div class="d-flex flex-column container">
+						<div class="mb-13 mt-10 text-center">
+							<h1 class="fs-2hx fw-bolder text-white mb-5">Obrigado</h1>
+							<div class="text-gray-600 fw-bold fs-5 mb-5">Ajude-nos na missão de
+								<br />Restaurar Vidas! Compartilhe esta causa!
+							</div>
+
+
+							<div class="text-center mb-5 mb-lg-10 py-10 py-lg-2">
+								<a target="_blank"
+									:href="'https://www.facebook.com/sharer/sharer.php?u=https://'+inst.urlsite+'%2F&amp;src=sdkpreparse'"
+									class="btn btn-light w-15 mx-6 text-white text-hover-dark"
+									style="background-color: #085a97;">
+									<img alt="Logo" src="../../doacao/assets/image/facebook.svg" class="h-20px me-3">
+									Facebook </a>
+
+								<a target="_blank" :href="'https://web.whatsapp.com/send?text=https://'+inst.urlsite"
+									class="btn btn-light w-15 text-white text-hover-dark"
+									style="background-color: #429813;">
+									<img alt="Logo" src="../../doacao/assets/image/whatsap.svg"
+										class="h-20px me-3">Whatsapp</a>
+
+							</div>
+
+							<a href="#/" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 ">Fazer
+								nova
+								Doação</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="landing-curve landing-dark-color">
+				<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
+						fill="rgba(19,38,60,255)"></path>
+				</svg>
+			</div>
+		</div>
+
+
+		<div class="mt-20 position-relative z-index-2 mb-20">
+			<div class="container">
+				<div class="text-center mb-17">
+					<div class="fs-5 text-muted fw-bold  flex-center ">
+						<p class="m-10">
+							{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
+							Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
+							{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
+							Para dúvidas e cancelamentos entre em contato com nossa <br>
+							central de relacionamento no telefone {{inst.telefone}}
+							ou pelo e-mail: {{inst.email}} |
+							Em até 30 dias após o processamento da transação, <br>
+							realizaremos o ressarcimento integral dos valores doados.
+						</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="rotaObscura">
+			<input v-mask="'###.###.###-##'" v-model="inst.cnpj" class="invisivel" />
+			<input v-mask="'#####-###'" v-model="inst.cep" class="invisivel" />
+			<input v-mask="'(##) # ####-####'" v-model="inst.telefone" class="invisivel" />
+		</div>
 	</div>
-	`,
+</div>
+`,
 
 
-	data: function () {
-		return {
-			logo: '',
-			mensal: "0",
-			amount: "",
-			valor: 111111,
-			planos_nome: null,
-			valor_digitado: null,
-			planos_id: null,
-			email: "victorfernando@gmail.com",
-			outro: null,
-			subdomaim: null,
-			submitStatus: null,
-			minimoalerta: null,
+data: function () {
+return {
+inst: {
+bairro: null,
+cep: null,
+cidade: null,
+cnpj: null,
+complemento: null,
+email: null,
+estado: null,
+nome_fantasia: null,
+razao_social: null,
+endereco: null,
+telefone: null,
+logo: '',
+icon: '',
+backgroundColor: '',
+urlsite: '',
+codigo_geral: '',
+url_geral: '',
+},
 
-			status: '',
-			backgroundColor: '',
-			dados: [],
-
-			titulo: "",
-		}
-	},
- 
-	validations: {
-		valor_digitado: {
-			required,
-
-		},
-		valor: {
-			required,
-		},
-		email: {
-			required,
-			email,
-		},
-
-	},
-	//
-
-	filters: {
-		is_price(price) {
-			let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-			return `${amount}`
-		},
-
-		is_price2(price) {
-			let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-			return `R$ ${amount}`
-		}
-	},
-
-	methods: {
-		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim )
-		//	 let res = await adm.todoSubdomain(this.subdomaim = window.localStorage.getItem("instituicao_subdomaim"))
-			return res
-		},
-
-		setarPlano(jms) {
-		
-			this.valor = jms.amount
-			this.planos_id = jms.id
-			this.planos_nome = jms.nome
-
-			this.valor_digitado = "0"
-		},
+subdomaim: '',
+type: '',
+jms: false,
+doacao_id: '',
+}
+},
 
 
-		money() {
-			let valor
-			valor = this.valor_digitado.replace(/\D/gi, '')
-			 valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-			 this.valor_digitado = valor
-		},
+filters: {
 
-		descartavel() {
+is_data(datas) {
+let cep = datas.split('').join('/');
 
-			let cunston_valor = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
+return `${cep}`
+},
 
-			this.error = null
-			this.$v.$touch()
-			if (this.$v.$invalid) {
-				this.submitStatus = 'ERROR'
-			}
-			else if (cunston_valor != 0 && cunston_valor <= 2499) {
-				this.minimoalerta = "Valor minimo deve ser 25,00"
-			}
-			else {
-				this.valor_digitado = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
-				if (this.valor == 0) {
-					window.localStorage.setItem("planos_id", "49")
-					window.localStorage.setItem("planos_nome", "plano-"+this.valor_digitado)
-					window.localStorage.setItem("amount", this.valor_digitado)
-				} else {
-					window.localStorage.setItem("planos_id", this.planos_id)
-					window.localStorage.setItem("planos_nome", this.planos_nome)
-					window.localStorage.setItem("amount", this.valor)
-				}
+},
 
-				window.localStorage.setItem("mensal", this.mensal)
-				// window.localStorage.setItem("amount_digitado", this.valor_digitado)
-				window.localStorage.setItem("email", this.email)
-				window.location.href = "#/finalizar"
+methods: {
+async infoSubdomain() {
+let res = await adm.todoSubdomain(this.subdomaim)
+return res
+},
 
-
-			}
-		},
-
-	},
-
-	computed: {
-
-		filtraPlano() {
-			return this.dados.filter((plano) => {
-				return plano.status.match(this.status = 1);
-
-			})
-		}
-	},
-
-	 
-
-	 
-
-	async mounted() {
-	
-		this.subdomaim = "34edqwe21"
-	//this.subdomaim = window.location.hostname
-
-		let config = (await this.infoSubdomain()).dados_instituicao
-		this.logo = "https://doardigital.com.br/api/upload/"+config.logo
-		this.backgroundColor = config.cor
+copiar(ref) {
+this.$refs[ref].select(); document.execCommand('copy');
+},
 
 
 
-		this.dados = (await this.infoSubdomain()).dados_instituicao.plano
-		this.amount = this.dados.filter(x => x.status == 1)[0].amount
-
-		this.valor_digitado = "0"
-		this.valor = this.amount
-	},
 
 
+isQr() {
+this.error = null
+var COUNT = 0;
+COUNT++
+setTimeout( async () => {
+
+let res = await adm.obrigado(
+this.doacao_id
+)
+this.inst.codigo_geral = res.dados.codigo
+this.inst.url_geral = res.dados.url
+alert(res.dados.url)
+
+console.log(`teste COUNT ${COUNT}`)
+let verificaQrExist = res.dados.url
+if( !verificaQrExist ) {
+this.isQr()
+alert("if")
 }
 
+alert("else")
+}, 1500 )
+}
+
+
+
+
+
+},
+
+async mounted() {
+
+
+this.subdomaim = "combopay.com.br"
+//this.subdomaim = window.location.hostname
+
+let dados = (await this.infoSubdomain()).dados_instituicao
+this.inst.cep = dados.endereco.cep
+this.inst.endereco = dados.endereco.logadouro
+this.inst.numero = dados.endereco.numero
+this.inst.bairro = dados.endereco.bairro
+this.inst.cidade = dados.endereco.cidade
+this.inst.estado = dados.endereco.estado
+this.inst.complemento = dados.endereco.complemento
+this.inst.logo = "https://doardigital.com.br/api/upload/" + dados.logo
+this.inst.icon = dados.icon
+this.inst.backgroundColor = dados.cor
+this.inst.email = dados.email
+this.inst.telefone = dados.telefone
+this.inst.cnpj = dados.cnpj
+this.inst.urlsite = dados.subdomaim + '.doardigital.com.br/'
+
+this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
+this.type = localStorage.getItem('type_pagamento')
+//this.codigo_geral = localStorage.getItem("codigo")
+//this.inst.url_geral = localStorage.getItem("url")
+this.doacao_id = localStorage.getItem("ref")
+
+if (this.type == 'PIX') {
+let code_pix = `${this.inst.codigo_geral}`
+var qrcode = new QRCode(this.$refs.print_qr, {
+text: code_pix,
+width: 230,
+height: 230,
+height: 230,
+colorDark: "#000000",
+colorLight: "#ffffff",
+correctLevel: QRCode.CorrectLevel.L
+});
+}
+
+// setTimeout(() => {
+
+// }, 90000)
+this.isQr()
+
+
+
+},
+
+}

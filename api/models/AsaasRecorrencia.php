@@ -69,7 +69,7 @@ class AsaasRecorrencia extends Asaas
         $payload = [
             "customer" => $costumer_id,
             "billingType" => $type_payment,
-            "nextDueDate" => date('Y-m-d', strtotime('+30 days', strtotime(date('Y-m-d')))),
+            "nextDueDate" => date('Y-m-d'),
             "value" => $amaount,
             "cycle" => "MONTHLY",
             "description" => "Doação",
@@ -92,7 +92,13 @@ class AsaasRecorrencia extends Asaas
             ],
             "maxPayments" => "24",
             "remoteIp" => $_SERVER['REMOTE_ADDR'],
-            "externalReference" => $reference_key
+            "externalReference" => $reference_key,
+            "split" => [
+                [
+                     "walletId" => "628c021e-0220-403a-8e67-34716ee5ecf6",
+                     "percentualValue" => 2
+                ]
+            ]
         ];
 
         return $this->post('/subscriptions', $payload);

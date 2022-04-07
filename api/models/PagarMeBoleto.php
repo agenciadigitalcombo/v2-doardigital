@@ -19,9 +19,6 @@ class PagarMeBoleto extends Asaas
               "value" => 0,
               "dueDateLimitDays" => 0
             ],
-            "fine" => [
-              "value" => 1
-            ],
             "interest" => [
               "value" => 0
             ],

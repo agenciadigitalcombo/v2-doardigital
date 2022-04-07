@@ -16,4 +16,5 @@ router('/configuracao-instituicao', 'InstituicaoControler@config_instituicao');
 router('/create-chave-pix', 'InstituicaoControler@generate_pix_key');
 router('/listar-chave-pix', 'InstituicaoControler@list_pix_key_by_instituicao');
 router('/teste-create', 'InstituicaoControler@teste_create');
+router('/instituicao/balance', 'InstituicaoControler@balance');
 
