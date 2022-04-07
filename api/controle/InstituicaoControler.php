@@ -715,12 +715,14 @@ class InstituicaoControler
             ]);
         }
         $Asaas->set_api_key($IsInstitution['api_key']);
+        $statistic = $Asaas->statistic();
         echo json_encode([
             "next" => true,
             "message" => "Saldo da conta",
             "dados" => [
                 "balance" => $Asaas->balance()
-            ]
+            ],
+            "statistic" => $statistic
         ]);
     }
 }
