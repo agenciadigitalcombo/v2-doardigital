@@ -13,7 +13,7 @@ class InstituicaoControler
         $assas_instituicao->set_api_key("18e834381bb3da3f16589539a13076a8ef475d159b2b5131d692d1ca2992efbb");
 
         $token_parce = token();
-        
+
         campo_obrigatorios([
             'nome_fantasia' => 'Informe um Nome Fantasia',
             'razao_social' => 'Qual a RazaoSocial',
@@ -28,55 +28,55 @@ class InstituicaoControler
             'estado' => 'Informe o estado',
             'numero' => 'Digite o numero'
         ]);
-        
+
         $nome_fantasia = $_REQUEST['nome_fantasia'] ?? '';
         $razao_social = $_REQUEST['razao_social'] ?? '';
         $sub_domain = $_REQUEST['subdomaim'] ?? '';
-        
+
         $email = $_REQUEST['email'];
-        
+
         $cor = $_REQUEST['cor'] ?? '';
         $logo = $_REQUEST['logo'] ?? '';
-        
+
         $cnpj = $_REQUEST['cnpj'] ?? '';
         $transform_cnpj = withdraw_caracter($cnpj);
-        
+
         $telefone = $_REQUEST['telefone'] ?? '';
         $transform_tel = withdraw_caracter($telefone);
-        
+
         $companyType = $_REQUEST['tipo_empresa'];
-        
-        
+
+
         $logradouro = $_REQUEST['logradouro'] ?? '';
         $complemento = $_REQUEST['complemento'] ?? null;
         $bairro = $_REQUEST['bairro'] ?? '';
         $cidade = $_REQUEST['cidade'] ?? '';
         $estado = $_REQUEST['estado'] ?? '';
-        
+
         $numero = $_REQUEST['numero'] ?? '';
         $cep = $_REQUEST['cep'] ?? '';
-        
+
         $transform_numero = withdraw_caracter($numero);
         $transform_cep = withdraw_caracter($cep);
-        
-        
-        
+
+
+
         valid_subdomain($sub_domain);
-        
-        
+
+
         $secret = $token_parce['secret'];
         $guard_adm = $adm->list_profile($secret);
         $adm_id = $guard_adm['id'];
 
         // $get_instituicao = $instituicao->list_all_by_adm_id($adm_id);
         // $instituicao_id = $get_instituicao['id'];
-        
-        
-        
+
+
+
         // $get_banc_id = $banco_cont->get_by_adm_id($adm_id);
         // $banc_id = $get_banc_id['id'];
-        
-        
+
+
         if ($instituicao->exist_subdomain($sub_domain)) {
             echo json_encode([
                 "next" => false,
@@ -84,12 +84,12 @@ class InstituicaoControler
             ]);
             return null;
         }
-        
-        if(strlen($transform_cnpj) != 14){
+
+        if (strlen($transform_cnpj) != 14) {
             $companyType = "";
         }
-        
-        if($instituicao->exist_email($email)){
+
+        if ($instituicao->exist_email($email)) {
             echo json_encode([
                 'next' => false,
                 'message' => 'Email Já cadastrado!'
@@ -108,20 +108,21 @@ class InstituicaoControler
             $numero,
             $complemento,
             $bairro,
-            $transform_cep);
-        
-        
+            $transform_cep
+        );
+
+
         $instituicao->create($adm_id, $nome_fantasia, $razao_social, $sub_domain, $email, $transform_cnpj, $transform_tel, $res_assas['walletId'], $res_assas['apiKey'], "#FFF", "");
-        
+
         $list_instituicao = $instituicao->get_by_subdomaim($sub_domain);
-        
-        
+
+
 
         $endereco->create($list_instituicao['id'], "", $transform_cep, $logradouro, $transform_numero, $complemento, $bairro, $cidade, $estado);
 
 
 
-          
+
         echo json_encode([
             'next' => true,
             'message' => 'Instituicao criada',
@@ -374,8 +375,8 @@ class InstituicaoControler
 
         $subdomaim = $_REQUEST['subdomaim'];
 
-        
-        
+
+
 
         campo_obrigatorios([
             'subdomaim' => 'Indoforme o Sub-domaim',
@@ -642,14 +643,14 @@ class InstituicaoControler
         $instituicao_id = $_REQUEST['instituicao_id'];
         $pix_key = $_REQUEST['chave_pix'] ?? '';
 
-        if($instituicao->exist_pix($pix_key)){
+        if ($instituicao->exist_pix($pix_key)) {
             echo json_encode([
                 'next' => true,
                 'message' => 'Chave PIX ja Cadastrada!'
             ]);
             die;
-        } 
-        
+        }
+
         $instituicao->set_pix_key($pix_key, $instituicao_id);
 
         echo json_encode([
@@ -658,18 +659,18 @@ class InstituicaoControler
         ]);
     }
 
-    
+
     static function list_pix_key_by_instituicao()
     {
 
         $instituicao = new Instituicao();
 
         $instituicao_id = $_REQUEST['instituicao_id'];
-        
-        
+
+
         $get_chave_pix = $instituicao->list_pix($instituicao_id);
 
-        
+
 
         echo json_encode([
             'next' => true,
@@ -696,6 +697,30 @@ class InstituicaoControler
         Relatorio::teste($list_doacoes, $all_metas);
     }
 
-
-    
+    static function balance()
+    {
+        campo_obrigatorios([
+            'id' => 'è necessário informa o atributo [id] com id de uma instituição ',
+        ]);
+        $instituicao = new Instituicao();
+        $Asaas = new AsaasConta();
+        $IsInstitution = $instituicao->get_by_id($_REQUEST['id']);
+        if (empty($IsInstitution['api_key'])) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Instituição não possui api_key",
+                "dados" => [
+                    "balance" => 0
+                ]
+            ]);
+        }
+        $Asaas->set_api_key($IsInstitution['api_key']);
+        echo json_encode([
+            "next" => true,
+            "message" => "Saldo da conta",
+            "dados" => [
+                "balance" => $Asaas->balance()
+            ]
+        ]);
+    }
 }
