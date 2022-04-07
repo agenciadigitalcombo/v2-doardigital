@@ -99,13 +99,13 @@ $doacao->set_status(
     $status
 );
 
-$get_mensal = $doacao->get_by_id($reference_key);
-if($get_mensal['recorrente'] == 1){
-    $doacao->set_status_hook(
-        $reference_key,
-        $status
-    );
-}
+// $get_mensal = $doacao->get_by_id($reference_key);
+// if($get_mensal['recorrente'] == 1){
+//     $doacao->set_status_hook(
+//         $reference_key,
+//         $status
+//     );
+// }
 
 if(!empty($subscription)){
     
