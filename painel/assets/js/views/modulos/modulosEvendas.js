@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-    template:`
+	template: `
 	<div>
 
     <c-header></c-header>
@@ -79,39 +79,50 @@ export default {
     `,
 
 	data: function () {
-		return { 
+		return {
 			instituicao_id: null,
 			canal: null,
 			error: null,
 			msg: null,
-        }
-    },
+		}
+	},
 
 	methods: {
-	
+
 		async adicionaEvenda() {
 			this.error = null
-		
-				let res = await adm.savarEvenda(
-					this.instituicao_id,
-					this.canal,
-			
-				)
-				if (!res.next) {
-						setTimeout(() => this.msg = "", 5000);
-					this.error = res.message
-					return null
-				}
-				this.msg = res.message
-		}, 
 
-    },
+			let res = await adm.savarEvenda(
+				this.instituicao_id,
+				this.canal,
+
+			)
+			if (!res.next) {
+				setTimeout(() => this.msg = "", 5000);
+				this.error = res.message
+				return null
+			}
+			this.msg = res.message
+		},
+
+		async listar() {
+			let res = await adm.listarEvenda(
+				this.instituicao_id
+			)
+			return res
+		},
+
+	},
 
 	async mounted() {
 		this.instituicao_id = window.localStorage.getItem('instituicao_id');
-	}
-	
 
-	
+		var evenda = (await this.listar()).dados
+		this.instituicao_id = evenda.instituicao_id,
+			this.canal = evenda.canal
+	}
+
+
+
 }
 

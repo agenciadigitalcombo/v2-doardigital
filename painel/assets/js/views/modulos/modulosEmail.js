@@ -115,7 +115,7 @@ export default {
 		async adicionaEmail() {
 			this.error = null
 		
-				let res = await adm.savarEmail(
+				let res = await adm.savarSmtp(
 					this.token,
 					this.instituicao_id,
 					this.host,
@@ -132,11 +132,27 @@ export default {
 				this.msg = res.message
 		}, 
 
+		async listar() {
+            let res = await adm.listarSmtp(
+				this.instituicao_id
+			)			
+            return res
+        },
+
     },
 
 	async mounted() {
 		this.instituicao_id = window.localStorage.getItem('instituicao_id');
 		this.token = window.localStorage.getItem('token');
+
+		var smtp = (await this.listar()).dados
+		this.instituicao_id = smtp.instituicao_id,
+		this.host = smtp.host,
+		this.protocolo = smtp.protocolo,
+		this.porta = smtp.porta,
+		this.email = smtp.email,
+		this.senha = smtp.senha
+
 	}
 	
 

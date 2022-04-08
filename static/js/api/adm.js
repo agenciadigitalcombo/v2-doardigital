@@ -807,7 +807,7 @@ export default {
 
 
 
-    async savarEmail(
+    async savarSmtp(
         token,
         instituicao_id,
         host,
@@ -827,6 +827,14 @@ export default {
         })
     },
 
+    async listarSmtp( 
+        instituicao_id
+        ) {
+        return await http.get('/list-smtp', {
+             instituicao_id
+        })
+    },
+
     async savarEvenda(
         instituicao_id,
         canal,
@@ -834,6 +842,34 @@ export default {
         return await http.post('/save-evendas', {
             instituicao_id,
             canal,
+        })
+    },
+
+    async listarEvenda( 
+        instituicao_id
+        ) {
+        return await http.get('/list-evendas', {
+             instituicao_id
+        })
+    },
+
+    async savarMailBoss(
+        instituicao_id,
+        token,
+        token_uid
+    ) {
+        return await http.post('/save-mailBoss', {
+            instituicao_id,
+            token,
+            token_uid
+        })
+    },
+
+    async listarMailBoss( 
+        instituicao_id
+        ) {
+        return await http.get('/list-mailBoss', {
+             instituicao_id
         })
     },
 

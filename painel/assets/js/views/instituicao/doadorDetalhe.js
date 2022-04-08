@@ -80,7 +80,7 @@ export default {
 												
 												<a class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success w-100 mb-2">Reenviar Whatsapp</a>
 
-												<div v-if="status=='paid'" >
+												<div v-if="status=='CONFIRMED' && tipo=='CREDIT_CARD'" >
 												<a class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger w-100">fazer Estorno</a>
 												
 												<div class="alert alert-dismissible bg-light-danger border border-danger border-dashed d-flex flex-column flex-sm-row w-100 p-5">
@@ -289,7 +289,7 @@ export default {
     
     `,
 
-
+ 
 
 	data: function () {
 
