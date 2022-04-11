@@ -82,5 +82,3 @@ Content-Type: application/x-www-form-urlencoded
 ###
 GET https://doardigital.tk/api/instituicao/balance?id=249
 
-
-

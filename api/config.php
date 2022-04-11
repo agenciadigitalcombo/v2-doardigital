@@ -12,5 +12,5 @@ return [
     "email_port" => 465,
     "email_user" => "contato@doardigital.com.br",
     "email_pass" => "Prosperidade@121",
-    "sandbox" => false
+    "sandbox" => true
 ];
