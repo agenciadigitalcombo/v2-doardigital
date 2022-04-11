@@ -76,12 +76,13 @@
                                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-1">
                                     <span class="required">Valor a Pagar</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                        title="Specify a card holder's name"></i>
+                                        title="Este é o valor que vai ser pago ao finalizar o Caastro"></i>
                                 </label>
                                 <div class="bg-light rounded p-5 mt-1" >
-                                    R$ 59,90 
+                                 <h4 class="text-danger" >
+                                    {{amount | form_valor}}
+                                 </h4> 
                                 </div>
-
                             </div>
 
 
@@ -111,18 +112,22 @@
                                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                     <span class="required">Nome do cartão</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                        title="Specify a card holder's name"></i>
+                                        title="Adicione o nome do seu cartão de credito"></i>
                                 </label>
 
-                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                <input type="text" class="form-control form-control-solid" placeholder="Nome"
                                     name="card_name" required v-model="cart_nome" />
                             </div>
                             <div class="d-flex flex-column mb-7 fv-row">
 
-                                <label class="required fs-6 fw-bold form-label mb-2">Número do cartão</label>
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Número do cartão</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                        title="Adicione o Número do seu cartão de credito"></i>
+                                </label>
                                 <div class="position-relative">
                                     <input type="number" class="form-control form-control-solid" required
-                                        v-mask="'################'" placeholder="Numero do Cartao" name="card_number"
+                                        v-mask="'################'" placeholder="Numero do Cartão" name="card_number"
                                         v-model="cart_numero" />
                                     <div class="position-absolute translate-middle-y top-50 end-0 me-5">
                                         <img src="assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
@@ -132,6 +137,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row mb-10">
                                 <div class="col-md-8 fv-row">
 
