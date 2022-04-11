@@ -248,7 +248,7 @@ export default {
                                                     <td v-if="tipo ==='CREDIT_CARD'">
                                                         <div
                                                             class="form-check form-switch form-check-custom form-check-solid me-10">
-															R$ {{cartao}}
+															R$ {{cartaoView}}
                                                         </div>
 
                                                     </td>
@@ -305,6 +305,7 @@ export default {
 			perDoar: null,
 			doarDigital: null,
 			cartao: null,
+			cartaoView: null,
 			valorLiquido: null,
 			boleto: null,
 			url_geral: null,
@@ -392,16 +393,22 @@ export default {
 
 
 		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
+		this.cartaoView = this.cartao.toFixed(2);
+
 
 		if (this.tipo == 'PIX') {
 			var pix = parseFloat(this.perDoar) + 0.79
-			this.valorLiquido = parseFloat(valorDoado) - pix
+			var jmsP = parseFloat(valorDoado) - pix
+			this.valorLiquido = jmsP.toFixed(2);
 		} else if (this.tipo == 'CREDIT_CARD') {
 			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao) + 0.49
-			this.valorLiquido = parseFloat(valorDoado) - cartao
+			var jmsC = parseFloat(valorDoado) - cartao
+			this.valorLiquido = jmsC.toFixed(2);
+			alert(this.valorLiquido)
 		} else {
 			var boleto = parseFloat(this.perDoar) + 1.99
-			this.valorLiquido = parseFloat(valorDoado) - boleto
+			var jmsB = parseFloat(valorDoado) - boleto
+			this.valorLiquido = jmsB.toFixed(2);
 		}
 
 		this.doarDigital = this.perDoar.toFixed(2);
