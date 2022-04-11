@@ -93,7 +93,7 @@ export default {
 														<div class=""> 
 															<div class="timeline-content fw-bolder text-gray-800 ps-3">
 																*Será cobrado o valor de
-																<a class="text-primary"> R$3,90 </a>
+																<a class="text-primary"> R$5,00 </a>
 																por saque
 															</div> 
 														</div> 

@@ -94,10 +94,18 @@ $type_pagamento = $doc['tipo'] ?? '';
 $codigo = $doc['codigo'] ?? '';
 $url = $doc['url'] ?? '';
 
-$doacao->set_status_hook(
+$doacao->set_status(
     $reference_key,
     $status
 );
+
+// $get_mensal = $doacao->get_by_id($reference_key);
+// if($get_mensal['recorrente'] == 1){
+//     $doacao->set_status_hook(
+//         $reference_key,
+//         $status
+//     );
+// }
 
 if(!empty($subscription)){
     

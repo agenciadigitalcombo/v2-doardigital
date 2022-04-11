@@ -414,7 +414,7 @@ export default {
 	async mounted() {
 		
 		this.istituicaoDashboard() 
-		this.doadores = (await this.listarDoadores()).dados || {}
+		this.doadores = (await this.listarDoadores()).dados.reverse() || {}
 	},
 
 	created() {

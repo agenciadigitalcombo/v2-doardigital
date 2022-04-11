@@ -124,8 +124,7 @@ class TransacaoControler
         $is_doador = $doador->exist_by_cpf_instituicao($cpf, $instituicao_id);
 
         if (!$is_doador) {
-            $telefone_sem_ddd = telefone_get_number($telefone);
-            $doador->create($nome, $instituicao_id, $email, $telefone_sem_ddd, $cpf, uniqid());
+            $doador->create($nome, $instituicao_id, $email, $telefone, $cpf, uniqid());
         }
 
         $doador_dados = $doador->get_by_cpf($cpf);
@@ -265,7 +264,7 @@ class TransacaoControler
                 $res_pagarme = $pagarme_pix->pay($planos_valor, $type_pagamento, $get_token_doador, $reference_key);
                 $get_token = $res_pagarme['id'];
                 $get_codigo = $pagarme_pix->codig_pix($get_token);
-
+                
                 $exist_chave_pix = $instituicao->list_pix($instituicao_id);
                 if ($exist_chave_pix['pix_key'] != null) {
                     $codigo = $exist_chave_pix['pix_key'];
@@ -275,7 +274,7 @@ class TransacaoControler
                     $codigo = $get_codigo['payload'];
                 }
 
-                $url = $get_codigo['encodedImage'];
+                $url = $res_pagarme['invoiceUrl'];
                 $expirationCode = $get_codigo['expirationDate'];
 
                 $get_status = $res_pagarme['status'];
