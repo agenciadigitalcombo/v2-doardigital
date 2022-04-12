@@ -4,6 +4,7 @@ const { required, minLength, maxLength } = window.validators
 
 export default {
    
+   
     data: function () {
         return {
             token: null,
@@ -15,7 +16,10 @@ export default {
             mes: "",
             ano: "",
             cart_validade: null,
-             
+            zap: null,
+            inst: null,
+            cupon: null,
+            validarCupon: null, 
             search: null,
             jms: false,
             smsCupon: null,
@@ -34,9 +38,72 @@ export default {
             return `R$ ${amount}`
         }
     },
-    
+
+   
     methods: {
-    
+      
+      
+        setaCupon(event) {
+            const novoaray = this.dados.filter((valorAtual) => {
+                return valorAtual.codigo_cupom.includes(this.cupon)
+
+            })
+
+            try {
+                this.invision = true
+                this.amount = novoaray[1].amount
+                this.plano_token = novoaray[1].token
+
+
+            } catch (e) {
+                if (e instanceof TypeError) {
+
+                }
+            }
+        },
+
+
+        verCupoms(event) {
+            try {
+                const vercupom = this.dados.filter((cuponAtual) => {
+                    return cuponAtual.instituicao_max.includes(this.inst) && cuponAtual.quant_disparos.includes(this.zap) && cuponAtual.codigo_cupom.includes(this.cupon)
+                })
+ 
+                if (this.cupon === this.validarCupon) {
+
+                    this.amount = vercupom[0].amount
+                    this.plano_token = vercupom[0].token
+                    this.validarCupon = vercupom[0].codigo_cupom
+                 
+                    this.invision = true
+                    this.showCupon = "1"
+                    this.smsCupon = "Cupom confirmado"
+
+                } else {
+                    this.invision = false
+                    this.showCupon = "0"
+                    this.smsCupon = "Este Cupon não é valido" 
+                    this.amount = globalThis._amount || "00" 
+                }
+            } catch (e) {
+                if (e instanceof TypeError) {
+
+                    this.invision = false
+                    this.showCupon = "0"
+                    this.smsCupon = "Este Cupon não é valido" 
+                    this.amount = globalThis._amount || "00"  
+
+                } else {
+                    this.invision = false
+                    this.showCupon = "0"
+                    this.smsCupon = "Este Cupon não é valido"
+                    this.amount = globalThis._amount || "00" 
+                }
+            }
+
+
+        },
+
         async transacaoRecorrencia() {
             this.error = null
             this.submitStatus = 'CARREGAR'
@@ -59,16 +126,13 @@ export default {
 
             window.location.href = "/painel-geral/index.html#/";
         },
-
+ 
         descartavel() {
             window.location.href = "/painel-geral/index.html#/perfil-editar";
         }
 
-    },
-
-    async mounted() {
-
-    },
+    }, 
+    
 
     template: await get_template('./assets/js/view/checkout_plano')
 }

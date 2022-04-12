@@ -72,13 +72,11 @@ export default {
 			if (phone.length < 11) {
 				
 				this.tell = '(##) ####-####'
-			} else{ 
+			} else{
+			
 				this.tell = '(##) #####-####'
-			} 
-        },
-
-		 tiraHifen(event) {
-			this.tell = '(##) #####-####'
+			}
+       
         },
 
 		async validDomain() {

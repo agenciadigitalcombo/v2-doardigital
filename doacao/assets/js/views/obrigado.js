@@ -195,9 +195,9 @@ template: `
 			</div>
 		</div>
 		<div class="rotaObscura">
-			<input v-mask="'###.###.###-##'" v-model="inst.cnpj" class="invisivel" />
+			<input v-mask="'##.###.###/####-##'" v-model="inst.cnpj" class="invisivel" />
 			<input v-mask="'#####-###'" v-model="inst.cep" class="invisivel" />
-			<input v-mask="'(##) # ####-####'" v-model="inst.telefone" class="invisivel" />
+			<input  v-mask="tell" v-model="inst.telefone" class="invisivel" />
 		</div>
 	</div>
 </div>
@@ -232,6 +232,7 @@ template: `
 			jms: false,
 			doacao_id: '',
 			 loader: '',
+			 tell: '',
 		}
 	},
 
@@ -256,6 +257,18 @@ template: `
 			this.$refs[ref].select(); document.execCommand('copy');
 		},
 
+		validaTell(event) {
+			var phone = this.inst.telefone.replace(/\D/g,"");
+		 
+			if (phone.length < 11) {
+				
+				this.tell = '(##) ####-####'
+			} else{
+			
+				this.tell = '(##) #####-####'
+			}
+       
+        },
 		 
 		  isQr() {	
 			this.error = null
@@ -312,6 +325,7 @@ template: `
 		if (this.type !== 'CREDIT_CARD') {
 
 		this.isQr() 
+		this.validaTell(event)
 	}
 
 		if (this.type == 'PIX') {
