@@ -33,6 +33,9 @@ Vue.component('c-validacao', validacao)
 import detalhe from './componentes/c-detalhe.js'
 Vue.component('c-detalhe', detalhe)
 
+import grafico from './views/grafico.js'
+Vue.component('c-grafico', grafico)
+
 import dash from './views/dash.js'
 Vue.component('c-dash', dash)
 
@@ -79,9 +82,6 @@ Vue.component('c-script', script)
 
 import carteira from './views/admin/carteira.js'
 Vue.component('c-carteira', carteira)
-
-import user from './views/textes/user.js'
-Vue.component('c-user', user)
 
 import planos from './views/planos/planos.js'
 Vue.component('c-planos', planos)
