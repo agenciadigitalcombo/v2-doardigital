@@ -36,14 +36,14 @@ export default {
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
                                             
-                                                <span >{{ aberto+'00' | is_price }}</span></span>
+                                                <span>{{ aberto+'00' | is_price }}</span></span>
                                         </div>
                                     </div> 
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
                                             
-                                                <span >R$ 0,00</span></span>
+                                                <span> {{ vencido+'00' | is_price }} </span></span>  
                                         </div>
                                     </div>  
                                 </div> 
@@ -312,6 +312,7 @@ export default {
             total: "",
             pago: "",
             aberto: "",
+            vencido: "",
             mostraresconder:
             {
                 'show': false
@@ -363,9 +364,9 @@ export default {
                 PENDING: 'Aguardando Pagamento',
                 refused: 'Cancelado',
                 CONFIRMED: 'Pago',
+                RECEIVED: 'Pago',
                 OVERDUE: 'Vencida',
                 REFUNDED: 'Reembolsado',
-                processing: 'Em processamento',
                 authorized: 'Autorizado ',
                 pending_refund: 'Reembolso pendente ',
                 chargedback: 'Estorno',
@@ -497,8 +498,9 @@ export default {
             return pago.data.split('-').join('') <= final;
           });
           filtroPago = filtroPago.filter(function(pago) {
-            return pago.status_pagamento === "CONFIRMED";
+            return pago.status_pagamento === "CONFIRMED" || pago.status_pagamento === "RECEIVED";
           });
+          
            
         var pagoArray = [];
         length = filtroPago.length;
@@ -531,6 +533,23 @@ export default {
             return total + numero;
         }, 0);
 
+        let filtroVencido
+        filtroVencido = detalheDoar.filter(function(vencido) {
+            return vencido.data.split('-').join('') <= final;
+          });
+          filtroVencido = filtroVencido.filter(function(vencido) {
+            return vencido.status_pagamento === "OVERDUE";
+          });
+           
+        var vencidoArray = [];
+        length = filtroVencido.length;
+
+        for (var i = 0; i < length; i++) 
+        vencidoArray.push(parseInt(filtroVencido[i].valor));
+
+        this.vencido = vencidoArray.reduce(function (total, numero) {
+            return total + numero;
+        }, 0);
 
     },
 

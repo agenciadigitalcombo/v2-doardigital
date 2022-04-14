@@ -333,6 +333,7 @@ export default {
 				PENDING: 'Aguardando Pagamento',
 				refused: 'Cancelado',
 				CONFIRMED: 'Pago',
+				RECEIVED: 'Pago',
 				OVERDUE: 'Vencida',
 				REFUNDED: 'Reembolsado',
 				processing: 'Em processamento',
