@@ -182,7 +182,7 @@ export default {
 	data: function () {
 		return {
 			logo: '',
-			mensal: "0",
+			mensal: "1",
 			amount: "",
 			valor: 111111,
 			planos_nome: null,
@@ -311,8 +311,8 @@ export default {
 
 	async mounted() {
 	 
-	this.subdomaim = "combopay.com.br"
-		//		this.subdomaim = window.location.hostname
+		//		this.subdomaim = "combopay.com.br"
+	this.subdomaim = window.location.hostname
  
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.com.br/api/upload/"+config.logo
