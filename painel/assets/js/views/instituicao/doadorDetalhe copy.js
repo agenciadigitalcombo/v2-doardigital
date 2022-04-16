@@ -234,7 +234,7 @@ export default {
                                                     <td> 
                                                         <div class="d-flex flex-column">
                                                             <a class="text-gray-800 text-hover-primary mb-1">
-															R$ {{perDoar }}
+															R$ {{doarDigital }}
                                                             </a>
                                                         </div>
                                                     </td>
@@ -248,7 +248,7 @@ export default {
                                                     <td v-if="tipo ==='CREDIT_CARD'">
                                                         <div
                                                             class="form-check form-switch form-check-custom form-check-solid me-10">
-															R$ {{cartao}}
+															R$ {{cartaoView}}
                                                         </div>
 
                                                     </td>
@@ -302,8 +302,10 @@ export default {
 			hora: null,
 			status: null,
 			cpf: null,
-			perDoar: null, 
-			cartao: null, 
+			perDoar: null,
+			doarDigital: null,
+			cartao: null,
+			cartaoView: null,
 			valorLiquido: null,
 			boleto: null,
 			url_geral: null,
@@ -377,19 +379,24 @@ export default {
 		this.recorente = globalThis._doador.tipo
 
 
-	 
+		function formatReal(int) {
+			var tmp = int + '';
+			tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+			if (tmp.length > 6)
+				tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
+			return tmp;
+		}
 
-		var doado = (this.valor + '.00')
-	
+
+		var doado = formatReal(this.valor + '00')
 		var valorDoado = doado.split(',').join('.');
-		var doar = (valorDoado / 100) * 4;
-		this.perDoar = doar.toFixed(2);
+		this.perDoar = (parseFloat(valorDoado) / 100) * 4;
 
-		var cart = (valorDoado / 100) * 2.99; 
 
-		this.cartao = cart.toFixed(2)
-		
-		
+		this.cartao = (parseFloat(valorDoado) / 100) * 2.99;
+		this.cartaoView = this.cartao.toFixed(2);
+
+
 		if (this.tipo == 'PIX') {
 			var pix = parseFloat(this.perDoar) + 0.79
 			var jmsP = parseFloat(valorDoado) - pix
@@ -397,7 +404,8 @@ export default {
 		} else if (this.tipo == 'CREDIT_CARD') {
 			var cartao = parseFloat(this.perDoar) + parseFloat(this.cartao) + 0.49
 			var jmsC = parseFloat(valorDoado) - cartao
-			this.valorLiquido = jmsC
+			alert(jmsC)
+			this.valorLiquido = jmsC.toFixed(2);
 		
 		} else {
 			var boleto = parseFloat(this.perDoar) + 1.99
@@ -405,7 +413,7 @@ export default {
 			this.valorLiquido = jmsB.toFixed(2);
 		}
 
-	 
+		this.doarDigital = this.perDoar.toFixed(2);
 
 
 		if (this.tipo == 'PIX') {
