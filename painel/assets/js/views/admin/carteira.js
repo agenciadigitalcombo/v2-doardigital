@@ -237,7 +237,7 @@ export default {
 
         var carteira = (await this.listar()).dados.balance
 		var balance = String(carteira.toFixed(2)).split('.').join('')
-		alert(balance)
+		
 		this.liberado =  balance
 		//this.liberar = carteira.waiting_funds.amount
 		//this.retirado = carteira.transferred.amount
