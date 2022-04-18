@@ -1,5 +1,5 @@
 import http from './http.js'
-
+ 
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/criar-adm', {
@@ -886,11 +886,10 @@ export default {
     },
 
     async listarCarteira(
-        token,
-        instituicao_id,) {
-        return await http.get('/carteira', {
-            token,
-            instituicao_id,
+        id,
+        ) {
+        return await http.get('/instituicao/balance', {
+            id, 
         })
     },
 

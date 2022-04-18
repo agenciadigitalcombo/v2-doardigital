@@ -149,7 +149,7 @@ export default {
 	data: function () {
 		return {  
 			token: null,
-            instituicao_id: null,
+            id: null,
 			jms: false,
 			liberado: null,
 			liberar: null,
@@ -207,8 +207,7 @@ export default {
 
       async listar() {
             let res = await adm.listarCarteira( 
-				this.token,
-				this.instituicao_id,
+				this.id,
 			)
             return res
         },
@@ -233,13 +232,15 @@ export default {
 
 
     async mounted() {
-		this.instituicao_id = window.localStorage.getItem('instituicao_id');
+		this.id = window.localStorage.getItem('instituicao_id');
 		this.token = window.localStorage.getItem('token');
 
-        var carteira = (await this.listar()).payload
-		this.liberado = carteira.available.amount
-		this.liberar = carteira.waiting_funds.amount
-		this.retirado = carteira.transferred.amount
+        var carteira = (await this.listar()).dados.balance
+		var balance = String(carteira.toFixed(2)).split('.').join('')
+		alert(balance)
+		this.liberado =  balance
+		//this.liberar = carteira.waiting_funds.amount
+		//this.retirado = carteira.transferred.amount
 
 
 		this.historico = (await this.listar()).historico
