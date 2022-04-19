@@ -77,7 +77,7 @@ export default {
 														</div> 
 																				 
 
-														<div class="col-lg-4 mb-10 mb-lg-0" v-if="mensal !== '1'">
+														<div class="col-lg-4 mb-10 mb-lg-0">
 
 															<label
 																class="btn btn-outline btn-outline-dashed d-flex flex-stack text-start p-6">
@@ -103,7 +103,7 @@ export default {
 										</div>
 
 										<div class="col-xl-6">
-											<div class="mb-10" v-if="valor === '0' && mensal !== '1'">
+											<div class="mb-10" v-if="valor === '0'">
 												<div class="card-title mb-5">
 													<h3>Informe um valor, mínimo R$ 20,00. </h3>
 												</div>
@@ -182,7 +182,7 @@ export default {
 	data: function () {
 		return {
 			logo: '',
-			mensal: "0",
+			mensal: "1",
 			amount: "",
 			valor: 111111,
 			planos_nome: null,
@@ -311,8 +311,8 @@ export default {
 
 	async mounted() {
 	 
-	//		this.subdomaim = "combopay.com.br"
-		this.subdomaim = window.location.hostname
+		//		this.subdomaim = "combopay.com.br"
+	this.subdomaim = window.location.hostname
  
 		let config = (await this.infoSubdomain()).dados_instituicao
 		this.logo = "https://doardigital.com.br/api/upload/"+config.logo

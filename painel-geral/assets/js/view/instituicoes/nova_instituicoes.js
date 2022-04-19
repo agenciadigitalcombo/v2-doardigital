@@ -17,9 +17,8 @@ export default {
 			submitStatus: null,
 			jms: true,
 
-
 			id: null,
-			instituicao_id: null, 
+			instituicao_id: null,
 			cep: null,
 			logradouro: null,
 			numero: null,
@@ -30,6 +29,7 @@ export default {
 			secret: null,
 			msg: "",
 			error: null,
+			tell: '', 
 		}
 	},
 
@@ -66,23 +66,37 @@ export default {
 	},
 
 	methods: {
+		validaTell(event) {
+			var phone = this.telefone.replace(/\D/g,"");
+		 
+			if (phone.length < 11) {
+				
+				this.tell = '(##) ####-####'
+			} else{ 
+				this.tell = '(##) #####-####'
+			} 
+        },
+
+		 tiraHifen(event) {
+			this.tell = '(##) #####-####'
+        },
 
 		async validDomain() {
 			this.error = null
 			let res = await adm.validarDomain(this.subdomain)
 			if (!res.next) {
 				// this.next = res.next
-				this.jms= res.next,
-				this.error = res.message
+				this.jms = res.next,
+					this.error = res.message
 				return null
 			}
 			// this.next = res.next
-			this.jms= res.next,
-			this.msg = res.message
+			this.jms = res.next,
+				this.msg = res.message
 			return res
 		},
 
-	searchCep() {
+		searchCep() {
 			if (this.cep.length == 8) {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 					.then(response => {
@@ -105,41 +119,48 @@ export default {
 
 		async addInstituicao() {
 			this.error = null
-		 
-				
-				let res = await adm.cadastrarInstituicao(
-					this.token,
-					this.nome_fantasia,
-					this.razao_social,
-					this.subdomaim,
-					this.email,
-					this.telefone,
-					this.cnpj,
-					this.cep,
-					this.logradouro,
-					this.bairro,
-					this.cidade,
-					this.estado,
-					this.numero,
-					this.tipo_empresa, 
-					this.complemento,
-	
-	
-				)
-				if (!res.next) {
-					this.error = res.message
-					return null
-				}
-				
-				this.submitStatus = 'PENDING'
-				setTimeout(() => {
-					this.submitStatus = 'OK' 
-		        //	window.location.href = "#/enderecoInstituicoes"
-				}, 500)
-	 
+
+
+			let res = await adm.cadastrarInstituicao(
+				this.token,
+				this.nome_fantasia,
+				this.razao_social,
+				this.subdomaim,
+				this.email,
+				this.telefone,
+				this.cnpj,
+				this.cep,
+				this.logradouro,
+				this.bairro,
+				this.cidade,
+				this.estado,
+				this.numero,
+				this.tipo_empresa,
+				this.complemento,
+
+
+			)
+			if (!res.next) {
+				this.error = res.message
+				return null
+			}
+
+			this.submitStatus = 'PENDING'
+			setTimeout(() => {
+				this.submitStatus = 'OK'
+				//	window.location.href = "#/enderecoInstituicoes"
+			}, 500)
+
 
 		},
-	}, 
 
-    template: await get_template('./assets/js/view/instituicoes/nova_instituicoes')
+	},
+
+		 mounted() {
+		
+			
+		},
+
+
+	template: await get_template('./assets/js/view/instituicoes/nova_instituicoes')
 }

@@ -195,9 +195,9 @@ template: `
 			</div>
 		</div>
 		<div class="rotaObscura">
-			<input v-mask="'###.###.###-##'" v-model="inst.cnpj" class="invisivel" />
+			<input v-mask="'##.###.###/####-##'" v-model="inst.cnpj" class="invisivel" />
 			<input v-mask="'#####-###'" v-model="inst.cep" class="invisivel" />
-			<input v-mask="'(##) # ####-####'" v-model="inst.telefone" class="invisivel" />
+			<input  v-mask="tell" v-model="inst.telefone" class="invisivel" />
 		</div>
 	</div>
 </div>
@@ -232,6 +232,7 @@ template: `
 			jms: false,
 			doacao_id: '',
 			 loader: '',
+			 tell: '',
 		}
 	},
 
@@ -256,6 +257,18 @@ template: `
 			this.$refs[ref].select(); document.execCommand('copy');
 		},
 
+		validaTell(event) {
+			var phone = this.inst.telefone.replace(/\D/g,"");
+		 
+			if (phone.length < 11) {
+				
+				this.tell = '(##) ####-####'
+			} else{
+			
+				this.tell = '(##) #####-####'
+			}
+       
+        },
 		 
 		  isQr() {	
 			this.error = null
@@ -283,9 +296,9 @@ template: `
 
 	async mounted() {
 		
-		
-//			this.subdomaim = "combopay.com.br"
-	this.subdomaim = window.location.hostname
+	//		this.subdomaim = "34edqwe21"
+			 //	 this.subdomaim = "combopay.com.br"
+this.subdomaim = window.location.hostname
 	
 		let dados = (await this.infoSubdomain()).dados_instituicao
 		this.inst.cep = dados.endereco.cep
@@ -301,17 +314,18 @@ template: `
 		this.inst.email = dados.email
 		this.inst.telefone = dados.telefone
 		this.inst.cnpj = dados.cnpj
-		this.inst.urlsite = dados.subdomaim + '.doardigital.com.br/' 
 
+		this.inst.urlsite =  dados.dominio || dados.subdomaim + '.doardigital.com.br/' 
+		 
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
-		this.type = localStorage.getItem('type_pagamento')
-		//this.codigo_geral = localStorage.getItem("codigo")
+		this.type = localStorage.getItem('type_pagamento') 
 		//this.inst.url_geral = localStorage.getItem("url")
 		this.doacao_id = localStorage.getItem("ref")
 
 		if (this.type !== 'CREDIT_CARD') {
 
 		this.isQr() 
+		this.validaTell(event)
 	}
 
 		if (this.type == 'PIX') {

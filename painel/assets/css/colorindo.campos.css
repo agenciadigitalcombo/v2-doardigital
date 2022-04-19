@@ -4,6 +4,11 @@
     background-color: #e8fff3
 }
 
+.status_RECEIVED {
+    color: #50cd89;
+    background-color: #dcf8ea
+}
+
 .status_REFUNDED {
     background-color: #700370;
     color: #835783; 

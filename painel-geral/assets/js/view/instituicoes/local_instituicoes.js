@@ -4,7 +4,6 @@ const { required, minLength, between } = window.validators
 
 export default {
 
-
 	data: function () {
 		return {
 			nome_fantasia: null,
