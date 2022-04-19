@@ -1,5 +1,5 @@
 <?php 
-class PlanoDigital implements IPlanoDigital{
+class PlanoDigital {
 
     public function list_all(): array
     {

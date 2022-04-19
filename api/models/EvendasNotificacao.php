@@ -1,6 +1,6 @@
 <?php
 
-class EvendasNotificacao implements IEvendas{
+class EvendasNotificacao{
     public function create_update( int $instituicao_id, string $canal ): void{
         $banco = new Banco();
         

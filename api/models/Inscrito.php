@@ -1,6 +1,6 @@
 <?php
 
-class Inscrito implements IInscrito
+class Inscrito
 {
 
     public function list_all(): array

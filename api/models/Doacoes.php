@@ -1,6 +1,6 @@
 <?php
 
-class Doacao implements IDoacao{
+class Doacao{
     
     public function set_token(int $instituicao_id, string $token): void
     {

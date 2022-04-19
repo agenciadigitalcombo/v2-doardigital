@@ -80,5 +80,5 @@ GET http://doardigital.com.br/api/subdominio-disponivel?subdomain=string
 Content-Type: application/x-www-form-urlencoded
 
 ###
-GET https://doardigital.tk/api/instituicao/balance?id=249
+GET https://doardigital.com.br/api/instituicao/balance?id=249
 

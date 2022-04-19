@@ -1,5 +1,5 @@
 <?php
-class Endereco implements IEndereco
+class Endereco
 {
     public function get_by_id(int $id): array
     {

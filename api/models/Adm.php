@@ -1,195 +1,228 @@
 <?php
 
-class Adm implements IAdm
+class Adm
 {
+
+    private $id;
+    private $code;
+    private $nome;
+    private $cpf;
+    private $nascimento;
+    private $telefone;
+    private $email;
+    private $senha;
+    private $registro;
+    private $etapa;
+    private $ativo;
+    private $sass;
+    private $credencial;
+    private $adm;
+
+    private $con;
+
+    function __construct()
+    {
+        $this->con = new Banco();
+    }
+
+    static function porter($payload)
+    {
+        return [
+            "code" => $payload['code'] ?? null,
+            "nome" => $payload['nome'] ?? null,
+            "cpf" => $payload['cpf'] ?? null,
+            "nascimento" => $payload['nascimento'] ?? null,
+            "telefone" => $payload['telefone'] ?? null,
+            "email" => $payload['email'] ?? null,
+            "etapa" => $payload['etapa'] ?? null,
+            "ativo" => $payload['ativo'] ?? null,
+            "credencial" => $payload['credencial'] ?? null,
+            "adm" => $payload['adm'] ?? null,
+            "gravatar" => self::gravatar($payload['email'] ?? '123@123.com.br'),
+        ];
+    }
 
     public function exist(string $email): bool
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM adm WHERE email='$email'";
-        $guard = $banco->query($sql);
-
-        return !empty($guard);
+        return !empty($this->getByEmail($email));
     }
 
-    public function nova_senha(string $email, string $senha): void 
+    public function recoverPass(string $email): string
     {
-        $banco = new Banco();      
-
-        $sql = "UPDATE adm SET pass='$senha' WHERE email='$email'";
-        $banco->exec($sql);
-        
-        $sql = "UPDATE sub_adm SET pass='$senha' WHERE email='$email'";
-        $banco->exec($sql);
+        $tempPass = sha1(uniqid());
+        $this->con->table('administrador');
+        $this->con->where([
+            "email" => $email
+        ]);
+        $this->con->update([
+            "senha" => $this->pass($tempPass)
+        ]);
+        return $tempPass;
     }
 
-    public function complet_profile(string $secret, string $data_nascimento, string $cpf_cnpj, string $tipo): void
+    public function getByEmail(string $email): array
     {
-        $banco = new Banco();
-        $sql = "UPDATE adm SET cpf='$cpf_cnpj', data_nascimento='$data_nascimento', tipo='$tipo' WHERE secret='$secret'";
-        $banco->exec($sql);
+        $this->con->table('administrador');
+        $this->con->where([
+            "email" => $email
+        ]);
+        return $this->con->select();
     }
 
-    public function get_by_id(int $id): array
+    function pass(string $secret): string
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM adm WHERE id='$id'";
-        $guard = $banco->query($sql);
-        return $guard;
+        return md5($secret);
     }
 
-    public function get_by_email_adm(string $email): array
+    function code(string $prefix): string
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM adm WHERE email='$email'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return $prefix . uniqid();
     }
 
-    public function get_by_email_user(string $email): array
+    function dateNow(): string
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM sub_adm WHERE email='$email'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        return date("Y-m-d H:i:s");
     }
 
-    public function get_by_email(string $email): array
+    function clearPhone(string $phone): string
     {
-        
-        if( !empty( $this->get_by_email_adm($email) ) ) return $this->get_by_email_adm($email);
-        
-        // die('sos');
-        return $this->get_by_email_user($email);
-        // $banco = new Banco();
-        // $sql = "SELECT * FROM adm WHERE email='$email'";
-        // $guard = $banco->query($sql);
-        // return $guard[0] ?? [];
+        return preg_replace('/\D/', '', $phone);
     }
 
-    public function set_step(int $id, int $step): void
+    public function register(string $nome, string $email, string $senha, string $telefone): void
     {
-        $banco = new Banco();
-        $sql = "UPDATE adm SET step='$step' WHERE id='$id'";
-        $banco->exec($sql);
+        $this->con->table('administrador');
+        $this->con->insert([
+            "code" => $this->code('adm_'),
+            "nome" => $nome,
+            "telefone" => $this->clearPhone($telefone),
+            "email" => $email,
+            "senha" => $this->pass($senha),
+            "registro" => $this->dateNow(),
+            "etapa" => 1,
+            "ativo" => 1,
+            "sass" => 0,
+            "adm" => null
+        ]);
     }
 
-    public function create(string $nome, string $email, string $senha, string $telefone): void
+    public function createSubAdm(string $code, string $nome, string $email, string $senha, string $telefone): void
     {
-        $secret = uniqid();
-
-        $data_regis = date("Y-m-d H:i:s");
-        $banco = new Banco();
-        $sql = "INSERT INTO adm";
-        $sql .= "(nome, email, pass, telefone, secret, step, status, super_adm, data_registro)";
-        $sql .= "VALUES";
-        $sql .= "('$nome', '$email', '$senha', '$telefone', '$secret', 1, 1, 0, '$data_regis')";
-        $banco->exec($sql);
+        $this->con->table('administrador');
+        $this->con->insert([
+            "code" => $this->code('sub_'),
+            "nome" => $nome,
+            "telefone" => $this->clearPhone($telefone),
+            "email" => $email,
+            "senha" => $this->pass($senha),
+            "registro" => $this->dateNow(),
+            "etapa" => 0,
+            "ativo" => 1,
+            "sass" => 0,
+            "adm" => $code
+        ]);
     }
 
-    public function update(string $nome, string $telefone, string $cpf, string $secret, string $data_nascimento): void
+    public function createAdm(string $nome, string $email, string $senha, string $telefone): void
     {
-        $banco = new Banco();
-        $sql_adm = "SELECT * FROM adm WHERE secret='$secret'";
-        $guard = $banco->query($sql_adm);
-        if(!empty($guard)){
-            $sql = "UPDATE adm SET nome='$nome', telefone='$telefone', cpf='$cpf', data_nascimento='$data_nascimento' WHERE secret='$secret'";
-            $banco->exec($sql);
-        }
-
-        $sql_sub_adm = "SELECT * FROM sub_adm WHERE secret='$secret'";
-        $guard = $banco->query($sql_sub_adm);
-        if(!empty($guard)){
-            $sql = "UPDATE sub_adm SET nome='$nome', telefone='$telefone' WHERE secret='$secret'";
-            $banco->exec($sql);
-        }
-        
+        $this->con->table('administrador');
+        $this->con->insert([
+            "code" => $this->code('adm_'),
+            "nome" => $nome,
+            "telefone" => $this->clearPhone($telefone),
+            "email" => $email,
+            "senha" => $this->pass($senha),
+            "registro" => $this->dateNow(),
+            "etapa" => 0,
+            "ativo" => 1,
+            "sass" => 0,
+            "adm" => null
+        ]);
     }
 
-    public function alterar_senha(string $secret, string $senha): void
-    {
-        $banco = new Banco();
-        $sql = "UPDATE adm SET pass='$senha' WHERE secret='$secret'";
-        $banco->exec($sql);
+    public function update(
+        string $code,
+        string $nome,
+        string $telefone,
+        string $cpf,
+        string $nascimento,
+        int $credencial
+    ): void {
+        $this->con->table('administrador');
+        $this->con->where([
+            "code" => $code
+        ]);
+        $this->con->update([
+            "nome" => $nome,
+            "cpf" => $cpf,
+            "nascimento" => $nascimento,
+            "telefone" => $this->clearPhone($$telefone),
+            "credencial" => $credencial,
+        ]);
     }
 
-
-    public function set_plano(string $secret, int $plano_id): void
+    public function alterPass(string $code, string $senha): void
     {
-        $banco = new Banco();
-        $sql = "UPDATE adm SET plano_id=$plano_id WHERE secret='$secret'";
-        $banco->exec($sql);
+        $this->con->table('administrador');
+        $this->con->where([
+            "code" => $code
+        ]);
+        $this->con->update([
+            "senha" => $this->pass($senha)
+        ]);
     }
 
-
-    public function list_profile($secret)
+    public function getByCode(string $code): array
     {
-        $banco = new Banco();
-        $sql_adm = "SELECT * FROM adm WHERE secret='$secret'";
-        $guard = $banco->query($sql_adm);
-        if(!empty($guard)){
-            return $guard[0] ?? [];
-        }
-        $sql_sub_adm = "SELECT * FROM sub_adm WHERE secret='$secret'";
-        $guard = $banco->query($sql_sub_adm);
-        if(!empty($guard)){
-            return $guard[0] ?? [];
-        }
-        return [];
-        
+        $this->con->table('administrador');
+        $this->con->where([
+            "code" => $code
+        ]);
+        return self::porter($this->con->select()[0] ?? []);
     }
 
-    
-    public function list_all(): array
+    public function listAll(): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM adm";
-        $guard = $banco->query($sql);
-        return $guard;
+        $this->con->table('administrador');
+        $this->con->where([
+            "adm" => ""
+        ]);
+        return array_map(['Adm','porter'], $this->con->select());
     }
 
-    public function login_adm(string $email, string $senha): bool
+    public function listAllSubAdm(string $code): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM adm WHERE email='$email' and pass='$senha'";
-        $guard = $banco->query($sql);
-        return empty($guard);
+        $this->con->table('administrador');
+        $this->con->where([
+            "adm" => $code
+        ]);
+        return array_map(['Adm','porter'], $this->con->select());
     }
 
-    public function login_user(string $email, string $senha): bool
+    public function login(string $email, string $senha): string
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM sub_adm WHERE email='$email' and senha='$senha'";
-        $guard = $banco->query($sql);
-        return empty($guard);
-    }    
-
-    public function login(string $email, string $senha): bool
-    {
-        
-        if( !empty($this->login_adm($email, $senha)) ) {
-            return $this->login_user($email, $senha );
-        }
-        // die('sos');
-        return false;
-        // $banco = new Banco();
-        // $sql = "SELECT * FROM adm WHERE email='$email' and pass='$senha'";
-        // $guard = $banco->query($sql);
-        // return empty($guard);
+        $this->con->table('administrador');
+        $this->con->where([
+            "email" => $email,
+            "senha" => $this->pass($senha)
+        ]);
+        return $this->con->select()[0]['code'] ?? '';
     }
 
-    public function update_step(string $token, int $step): void
+    static function gravatar(string $email): string
     {
-        $banco = new Banco();
-        $sql = "UPDATE adm SET step='$step' WHERE secret='$token'";
-        $banco->exec($sql);
+        $email = md5(strtolower(trim($email)));
+        return "https://www.gravatar.com/avatar/{$email}";
     }
 
-    static function teste()
+    public function setStep(string $code, int $step): void
     {
-        $instacia = new Adm();
-        $instacia->list_all();
+        $this->con->table('administrador');
+        $this->con->where([
+            "code" => $code
+        ]);
+        $this->con->update([
+            "etapa" => $step
+        ]);
     }
 }
-
-?>

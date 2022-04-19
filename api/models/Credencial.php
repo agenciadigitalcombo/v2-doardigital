@@ -1,6 +1,6 @@
 <?php
 
-class Credencial implements ICredencial
+class Credencial
 {
 
     public function create(string $nome_identificacao, string $recursos): void

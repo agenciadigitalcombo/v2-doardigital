@@ -1,6 +1,6 @@
 <?php
 
-class SubAdm implements ISubAdm
+class SubAdm 
 {
 
     public function exist(string $email): bool

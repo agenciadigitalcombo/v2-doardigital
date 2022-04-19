@@ -1,6 +1,6 @@
 <?php 
 
-class PagarmePlano extends PagarMe implements IPagarMePlano
+class PagarmePlano extends PagarMe
 {
     
     public function create(string $name, int $amount, int $trial_days = 0, int $days = 30, array $payment_methods = ["boleto", "credit_card"]):array

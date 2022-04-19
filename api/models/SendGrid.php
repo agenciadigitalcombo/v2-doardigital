@@ -16,46 +16,20 @@ class SendGrid
     }
 
     static function send(
-        $to_name,
-        $to_email,
-        $from_name,
-        $from_email,
-        $assunto,
-        $title,
-        $text,
-        $institution_color = '#C00',
-        $institution_name = 'Instituição',
-        $institution_logo = 'default.png',
-        $modelo_html,
-        $print = false,
-        $payload = []
+        string $template,
+        array $payload
     ) {
-
         $headers = self::header(
-            $to_name,
-            $to_email,
-            $from_name,
-            $from_email
+            $payload['nome'] ?? 'Usuário',
+            $payload['to'],
+            $payload['fromName'] ?? "Doar Digital",
+            $payload['fromEmail'] ?? "contato@doardigital.com.br"
         );
-
-        $data = [
-            'logo' => $institution_logo,
-            'cor' => $institution_color,
-            'title' => $institution_name,
-            'categoria' => $title,
-            'text' => $text,
-            'from_email' => $from_email,
-            'from_nome' => $from_name
-        ];
-
-        $message = self::template( array_merge(
-            $data,
-            $payload
-        ) , $modelo_html);
-
-        $is_send = @mail($to_email, $assunto, $message, $headers);
-
-        if ($print) {
+        $payload['text'] = $payload['text'] ?? '';
+        $message = self::template( $payload, $template);
+        $subject = $payload['subject'] ?? "Doar Digital";
+        $isSend = @mail($payload['to'], $subject, $message, $headers);
+        if ( !empty($payload['print'])) {
             echo $message;
         }
     }

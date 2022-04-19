@@ -12,10 +12,10 @@ class Jwt
     static function valid(string $jwt): bool
     {
         $bom = explode('.', $jwt);
-        $playload = json_decode(base64_decode($bom[0]), true);
+        $playload = json_decode(base64_decode($bom[0]??'eyJ0cm9sbCI6dHJ1ZX0='), true);
         $playload["segredo"] = 'QWCYS@JHM1rRaiEF4l9e!zi5uCJNy%ERYBcv9kcNR&5nPM$ShN';
         $playload = sha1(base64_encode(json_encode($playload)));
-        $salt = $bom[1];
+        $salt = $bom[1]??'00001';
         return $playload === $salt;
     }
     static function ler(string $jwt): array

@@ -1,24 +1,5 @@
-POST http://localhost/v2-doardigital/api/criar-adm
-Content-Type: multipart/form-data;
- 
-{
-    "nome": "Bruno Vieira",
-    "email": "br.rafael@outlook.com",
-    "senha": "12312345",
-    "telefone": "(82) 9 9977-6698"
-}
 
 
-###
-POST http://localhost/v2-doardigital/api/alterar-senha
-Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
-
-{
-    "senha": "123123",
-    "token": ""
-}
-
-###
 POST http://localhost/v2-doardigital/api/atualizar-adm
 Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 
@@ -30,10 +11,7 @@ Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY
 }
 
 ###
-GET http://localhost/v2-doardigital/api/gravatar?email=br.rafael@outlook.com
 
-
-###
 GET http://localhost/v2-doardigital/api/credencial
 
 {

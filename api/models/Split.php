@@ -1,6 +1,6 @@
 <?php 
 
-class Split implements ISplit{
+class Split{
     public function list_all(): array
     {
         $banco = new Banco();
