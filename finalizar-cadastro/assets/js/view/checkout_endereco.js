@@ -7,8 +7,7 @@ export default {
 	data: function () {
 		return {
 			
-			id: null,
-			nome_identificacao: 'admin',
+			id: null, 
 			cep: null,
 			logadouro: null,
 			numero: null,
@@ -38,8 +37,7 @@ export default {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				this.token,
-				this.nome_identificacao,
+				this.token, 
 				this.cep,
 				this.logadouro,
 				this.numero,
@@ -54,8 +52,7 @@ export default {
 				this.msg = res.message
 				return null
 			}
-
-			globalThis._identificacao = this.nome_identificacao
+ 
 			globalThis._cep = this.cep
 			globalThis._logadouro = this.logadouro
 			globalThis._numero = this.numero
@@ -108,8 +105,7 @@ export default {
 	created() {
 
 		      this.token = localStorage.getItem('token')
-
- 				this.nome_identificacao = globalThis._identificacao 
+ 
  				this.cep = globalThis._cep
  				this.logadouro= globalThis._logadouro 
  				this.numero= globalThis._numero

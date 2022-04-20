@@ -2,12 +2,12 @@ import http from './http.js'
  
 export default {
     async cadastrar(nome, email, senha, telefone) {
-        return await http.post('/criar-adm', {
+        return await http.post('/adm/register', {
             nome, email, senha, telefone
         })
     },
     async login(email, senha) {
-        return await http.post('/login', {
+        return await http.post('/adm/login', {
             email, senha
         })
     },
@@ -18,10 +18,11 @@ export default {
         })
     },
 
-    async alterar_senha(senha, token) {
-        return await http.post('/alterar-senha', {
-            senha,
-            token
+    async alterar_senha(token, code, senha) {
+        return await http.post('/adm/alter-pass', {
+            token,
+            code,
+            senha
         })
     },
 
@@ -37,9 +38,9 @@ export default {
         })
     },
 
-    async ListarPerfil(token) {
-        return await http.get('/profile', {
-            token
+    async ListarPerfil(token, code) {
+        return await http.get('/adm/info', {
+            token, code
         })
     },
 
@@ -58,10 +59,9 @@ export default {
 
         })
     },
-
+    
     async atualizarEndereco(
-        token,
-        nome_identificacao,
+        token, 
         cep,
         logradouro,
         numero,
@@ -71,8 +71,7 @@ export default {
         estado,
     ) {
         return await http.post('/update-endereco', {
-            token,
-            nome_identificacao,
+            token, 
             cep,
             logradouro,
             numero,

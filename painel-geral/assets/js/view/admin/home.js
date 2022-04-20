@@ -23,7 +23,7 @@ export default {
                 this.error = res.message
                 return null
             }
-            localStorage.setItem('token', res.token)
+            localStorage.setItem('token', res.payload.token)
             window.location.href = `#/`
         },
         updateForm(event) {
@@ -32,6 +32,7 @@ export default {
     },
 	mounted() {
         this.user = localStorage.getItem('user')
+
 		
     },
 

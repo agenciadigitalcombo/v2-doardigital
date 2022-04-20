@@ -5,8 +5,10 @@ export default {
     data: function () {
         return {
             title: "Meu Perfil",
+			foto: null,
             nome: null,
 			token: null,
+			code: null,
 			email: null,
 			cpf: null,
 			telefone: null,
@@ -47,22 +49,28 @@ export default {
 		},
 
 		async listar() {
-			let res = await adm.ListarPerfil(localStorage.getItem('token'))
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
 			return res
 		},
 	},
 	async mounted() {
 		this.token = localStorage.getItem('token')
-		let dados = (await this.listar()).dados
- 
+		 let str = this.token.split('.')[0]
+		 let encodedStr = atob(str); 
+		 var res =  JSON.parse(encodedStr);
+		 this.code = res.code
+
+		let dados = (await this.listar()).payload
 		this.nome = dados.nome
 		this.email = dados.email
 		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-		this.token = dados.token
-		 this.data_nascimento =  dados.data_nascimento.split('-').reverse().join('/');
-		
-		
+		this.telefone = dados.telefone 
+		this.data_nascimento =  dados.nascimento.split('-').reverse().join('/');
+		 
 	},
+
     template: await get_template('./assets/js/view/perfil/home')
 }
