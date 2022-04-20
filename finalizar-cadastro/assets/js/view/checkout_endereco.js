@@ -9,7 +9,7 @@ export default {
 			
 			id: null, 
 			cep: null,
-			logadouro: null,
+			logradouro: null,
 			numero: null,
 			complemento: null,
 			bairro: null,
@@ -38,14 +38,15 @@ export default {
 
 			let res = await adm.atualizarEndereco(
 				this.token, 
+				this.code, 
 				this.cep,
-				this.logadouro,
+				this.logradouro,
 				this.numero,
 				this.complemento,
 				this.bairro,
 				this.cidade,
 				this.estado,
-
+				 
 			)
 			if (!res.next) {
 				// this.error = res.message
@@ -54,7 +55,7 @@ export default {
 			}
  
 			globalThis._cep = this.cep
-			globalThis._logadouro = this.logadouro
+			globalThis._logradouro = this.logradouro
 			globalThis._numero = this.numero
 			globalThis._complemento = this.complemento
 			globalThis._bairro = this.bairro 
@@ -71,7 +72,7 @@ export default {
                 axios.get(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(response => {
                         this.error = ""
-                        this.logadouro = response.data.logradouro,
+                        this.logradouro = response.data.logradouro,
                             this.bairro = response.data.bairro,
                             this.cidade = response.data.localidade,
                             this.estado = response.data.uf
@@ -99,15 +100,31 @@ export default {
             this.cep = mascara
         },
  
+		async listar() {
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
+			return res
+		},
 
     },
-	
-	created() {
 
+	async mounted() {
+		 this.token = localStorage.getItem('token')
+		 let str = this.token.split('.')[0]
+		 let encodedStr = atob(str); 
+		 var res =  JSON.parse(encodedStr);
+		 this.code = res.code
+
+	},
+
+	created() {
 		      this.token = localStorage.getItem('token')
- 
+
+
  				this.cep = globalThis._cep
- 				this.logadouro= globalThis._logadouro 
+ 				this.logradouro= globalThis._logradouro 
  				this.numero= globalThis._numero
  				this.complemento= globalThis._complemento
  				this.bairro = globalThis._bairro 

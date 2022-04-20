@@ -48,9 +48,9 @@ export default {
                 return null
             }
         
-
-            localStorage.setItem('token', res.token)
-            window.location.href = "/finalizar-cadastro/index.html#/";
+        
+            localStorage.setItem('token', res.payload.token)
+          window.location.href = "/finalizar-cadastro/index.html#/";
         }
         },
          

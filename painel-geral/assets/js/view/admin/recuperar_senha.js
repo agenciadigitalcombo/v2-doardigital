@@ -21,6 +21,7 @@ export default {
                 return null
             }
 			this.msg = res.message
+           
            //  window.location.href = `#/`
         },
         

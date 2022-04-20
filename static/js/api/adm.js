@@ -13,7 +13,7 @@ export default {
     },
 
     async recuperar_senha(email) {
-        return await http.post('/recuperar-senha', {
+        return await http.post('/adm/recover-pass', {
             email
         })
     },
@@ -32,9 +32,22 @@ export default {
         })
     },
 
-    async atualizarFinaliza(cpf_cnpj, data_nascimento, tipo, token) {
-        return await http.post('/completar-profile', {
-            cpf_cnpj, data_nascimento, tipo, token
+    async atualizarFinaliza( 
+                    token,
+					code,
+					nome, 
+					cpf,
+					nascimento,
+					telefone, 
+					credencial) {
+        return await http.post('/adm/update-info', {
+             token,
+					code,
+					nome, 
+					cpf,
+					nascimento,
+					telefone, 
+					credencial
         })
     },
 
@@ -62,6 +75,7 @@ export default {
     
     async atualizarEndereco(
         token, 
+        code, 
         cep,
         logradouro,
         numero,
@@ -70,8 +84,9 @@ export default {
         cidade,
         estado,
     ) {
-        return await http.post('/update-endereco', {
+        return await http.post('/adm/address', {
             token, 
+            code, 
             cep,
             logradouro,
             numero,
