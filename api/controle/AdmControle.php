@@ -53,39 +53,50 @@ class AdmControle extends Controle
         );
     }
 
-    static function completar_profile()
+    static function registerSub()
     {
-
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe um código",
+            "nome" => "Informe seu nome",
+            "email" => "Informe seu email",
+            "senha" => "Informe sua senha",
+            "telefone" => "Informe seu telefone",
+            "credencial" => "Informe uma credencial",
+        ]);
+        self::privateRouter();
         $adm = new Adm();
-
-
-        campo_obrigatorios([
-            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
-            'data_nascimento' => 'Informe a Data de nascimento',
-            'tipo' => 'Informe o Tipo de Adm'
-        ]);
-
-        $token_parce = token();
-
-        $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
-        $cpf_cnpj = valid_cpf_cnpj($cpf_cnpj_campo);
-
-        $data_nascimento_campo = $_REQUEST['data_nascimento'];
-        $data_nascimento = data_format($data_nascimento_campo);
-        $tipo_adm = $_REQUEST['tipo'];
-
-
-
-
-        $secret = $token_parce['secret'];
-
-        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj, $tipo_adm);
-        echo json_encode([
-            "next" => true,
-            "message" => "Admin atualizado"
-        ]);
+        $nome = $_REQUEST['nome'];
+        $email = $_REQUEST['email'];
+        $senha = $_REQUEST['senha'];
+        $telefone = $_REQUEST['telefone'];
+        $admCode = $_REQUEST['code'];
+        $credencial = (int) $_REQUEST['credencial'] ?? 0;
+        if (strlen($senha) < 8) {
+            self::printError(
+                "A senha deve ter no mínimo 8 caracteres",
+                []
+            );
+        }
+        if ($adm->exist($email)) {
+            self::printError(
+                "Email ja em uso",
+                []
+            );
+        }
+        $adm->registerSub(
+            $nome,
+            $email,
+            $senha,
+            $telefone,
+            $admCode,
+            $credencial
+        );
+        self::printSuccess(
+            "cadastrado com sucesso",
+            []
+        );
     }
-
 
     static function login()
     {
@@ -138,8 +149,8 @@ class AdmControle extends Controle
             "Lista de administradores",
             $adm->listAll()
         );
-    }    
-    
+    }
+
     static function listAllSub()
     {
         self::requireInputs([
@@ -155,62 +166,29 @@ class AdmControle extends Controle
         );
     }
 
-    static function recuperar_senha()
+    static function recoverPass()
     {
-
-        /***
-         * perdeu a senha 
-         * so tem o email
-         * 
-         * recebe o email verifica se existe tanto adm sub_adm
-         * gerar uma uma senha sanvar no banco
-         * enviar um email com a senha recem gerada
-         */
-
+        self::requireInputs([
+            "email" => "informe um email"
+        ]);
         $adm = new Adm();
-
-        campo_obrigatorios([
-            'email' => 'Informe o email'
-        ]);
-
-        $email = valid_email($_REQUEST['email']);
-
-
-
-        if (!$adm->get_by_email($email)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Este endereço de Email não existe"
-            ]);
-            return null;
+        $email = $_REQUEST['email'];
+        if (!$adm->exist($email)) {
+            self::printError(
+                "Email não encontrado",
+                []
+            );
         }
-
-        $nova_senha = uniqid();
-        $nova_senha_crip = valid_senha($nova_senha);
-
-        $adm->nova_senha($email, $nova_senha_crip);
-
-
-        SendGrid::send(
-            "Usuário",
+        $tempPass = $adm->recoverPass($email);
+        @mail(
             $email,
-            "Doar Digital",
-            "contato@doardigital.com.br",
-            "NOVA SENHA GERADA COM SUCESSO!",
-            "",
-            "Sua senha temporaria é: {$nova_senha}",
-            "",
-            "",
-            "",
-            ''
+            "Doar Digital - Senha Temporária",
+            "Sua senha temporária é: {$tempPass}"
         );
-
-
-
-        echo json_encode([
-            "next" => true,
-            "message" => "Nova senha enviada por email"
-        ]);
+        self::printSuccess(
+            "Senha temporária enviado por email",
+            ["tmp" => $tempPass]
+        );
     }
 
     static function alterPass()
@@ -237,39 +215,29 @@ class AdmControle extends Controle
         );
     }
 
-    static function atualizar_adm()
+    static function updateInfo()
     {
-        $adm = new Adm();
-
-        $token_parce = token();
-
-        $nome = $_REQUEST['nome'] ?? null;
-        $telefone = $_REQUEST['telefone'] ?? null;
-        $cpf = $_REQUEST['cpf'] ?? null;
-
-        $transform_tel = withdraw_caracter($telefone);
-        $transform_cpf = withdraw_caracter($cpf);
-
-        $data_nascimento_campo = $_REQUEST['data_nascimento'];
-        $data_nascimento = data_format($data_nascimento_campo);
-
-
-
-        campo_obrigatorios([
-            'nome' => 'Informe um nome',
-            'telefone' => 'Digite o telefone',
-            'cpf' => 'Digite o cpf',
-            'data_nascimento' => 'Informe a Data de Nascimento'
+        self::requireInputs([
+            "token" => "Informe um token",
+            "code" => "Informe o código",
+            "nome" => "Informe seu nome",
+            "cpf" => "Informe seu cpf",
+            "nascimento" => "Informe sua data de nascimento",
+            "telefone" => "Informe seu telefone",
         ]);
-
-
-        $secret = $token_parce['secret'];
-
-        $adm->update($nome, $transform_tel, $transform_cpf, $secret, $data_nascimento);
-        echo json_encode([
-            "next" => true,
-            "message" => "Dados atualizados"
-        ]);
+        self::privateRouter();
+        $Adm = new Adm();
+        $code = $_REQUEST['code'];
+        $nome = $_REQUEST['nome'];
+        $cpf = $_REQUEST['cpf'];
+        $nascimento = $_REQUEST['nascimento'];
+        $telefone = $_REQUEST['telefone'];
+        $credencial = $_REQUEST['credencial'] ?? 0;
+        $Adm->update($code, $nome, $telefone, $cpf, $nascimento, $credencial);
+        self::printSuccess(
+            "Atualizado com sucesso",
+            []
+        );
     }
 
     static function setStep()
@@ -287,6 +255,68 @@ class AdmControle extends Controle
         self::printSuccess(
             "Etapa atualizada com sucesso",
             []
+        );
+    }
+
+    static function addressSave()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe o código",
+            "cep" => "",
+            "logradouro" => "",
+            "numero" => "",
+            "complemento" => "",
+            "bairro" => "",
+            "cidade" => "",
+            "estado" => "",
+        ]);
+        self::privateRouter();
+        $local = new Endereco();
+        $code = $_REQUEST['code'];
+        $cep = $_REQUEST['cep'];
+        $logradouro = $_REQUEST['logradouro'];
+        $numero = $_REQUEST['numero'];
+        $complemento = $_REQUEST['complemento'];
+        $bairro = $_REQUEST['bairro'];
+        $cidade = $_REQUEST['cidade'];
+        $estado = $_REQUEST['estado'];
+        $local->save(
+            $code,
+            "ADM_ADDRESS",
+            $cep,
+            $logradouro,
+            $numero,
+            $complemento,
+            $bairro,
+            $cidade,
+            $estado
+        );
+        self::printSuccess(
+            "Endereço salvo com sucesso",
+            []
+        );
+    } 
+    
+    static function addressInfo()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe o código"
+        ]);
+        self::privateRouter();
+        $local = new Endereco();
+        $code = $_REQUEST['code'];
+        $address = $local->get( $code, "ADM_ADDRESS");
+        if( empty($address) ) {
+            self::printError(
+                "Endereço não encontrado",
+                []
+            );
+        }
+        self::printSuccess(
+            "Dados endereço",
+            $local->porter($address[0])
         );
     }
 

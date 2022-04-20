@@ -15,7 +15,7 @@ CREATE TABLE administrador (
     adm varchar(255)
 );
 
-CREATE TABLE enderecos (
+CREATE TABLE endereco (
     id int not null auto_increment primary key,
     fk varchar(255),
     tipo varchar(75),

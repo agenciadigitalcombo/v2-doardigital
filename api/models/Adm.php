@@ -106,6 +106,30 @@ class Adm
         ]);
     }
 
+    public function registerSub(
+        string $nome,
+        string $email,
+        string $senha,
+        string $telefone,
+        string $adm,
+        int $credencial
+    ): void {
+        $this->con->table('administrador');
+        $this->con->insert([
+            "code" => $this->code('sub_'),
+            "nome" => $nome,
+            "telefone" => $this->clearPhone($telefone),
+            "email" => $email,
+            "senha" => $this->pass($senha),
+            "registro" => $this->dateNow(),
+            "etapa" => 0,
+            "ativo" => 1,
+            "sass" => 0,
+            "adm" => $adm,
+            "credencial" => $credencial
+        ]);
+    }
+
     public function createSubAdm(string $code, string $nome, string $email, string $senha, string $telefone): void
     {
         $this->con->table('administrador');
@@ -140,13 +164,18 @@ class Adm
         ]);
     }
 
+    function formatData(string $data): string
+    {
+        return implode("-", array_reverse(explode("/", $data)));
+    }
+
     public function update(
         string $code,
         string $nome,
         string $telefone,
         string $cpf,
         string $nascimento,
-        int $credencial
+        string $credencial
     ): void {
         $this->con->table('administrador');
         $this->con->where([
@@ -154,10 +183,10 @@ class Adm
         ]);
         $this->con->update([
             "nome" => $nome,
-            "cpf" => $cpf,
-            "nascimento" => $nascimento,
-            "telefone" => $this->clearPhone($$telefone),
-            "credencial" => $credencial,
+            "cpf" => $this->clearPhone($cpf),
+            "nascimento" => $this->formatData($nascimento),
+            "telefone" => $this->clearPhone($telefone),
+            "credencial" => $credencial
         ]);
     }
 
@@ -187,7 +216,7 @@ class Adm
         $this->con->where([
             "adm" => ""
         ]);
-        return array_map(['Adm','porter'], $this->con->select());
+        return array_map(['Adm', 'porter'], $this->con->select());
     }
 
     public function listAllSubAdm(string $code): array
@@ -196,7 +225,7 @@ class Adm
         $this->con->where([
             "adm" => $code
         ]);
-        return array_map(['Adm','porter'], $this->con->select());
+        return array_map(['Adm', 'porter'], $this->con->select());
     }
 
     public function login(string $email, string $senha): string

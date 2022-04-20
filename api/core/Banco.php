@@ -16,20 +16,37 @@ class Banco
         $this->pass = $env["senha"];
     }
 
+    function error() {
+        echo json_encode([
+            "next" => false,
+            "message" => "Perda de comunicação com o banco",
+            "payload" => []
+        ]);
+        die;
+    }
+
     function query(string $sql): array
     {
-        $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
-        $query = $con->query($sql);
-        $result = $query->fetchAll();
-        $con = null;
-        return $result;
+        try {
+            $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
+            $query = $con->query($sql);
+            $result = $query->fetchAll();
+            $con = null;
+            return $result;
+        } catch (\Throwable $th) {
+           $this->error();
+        }
     }
 
     function exec(string $sql): void
     {
-        $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
-        $query = $con->query($sql);
-        $con = null;
+        try {
+            $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
+            $query = $con->query($sql);
+            $con = null;
+        } catch (\Throwable $th) {
+           $this->error();
+        }
     }
 
     function table(string $table): void
