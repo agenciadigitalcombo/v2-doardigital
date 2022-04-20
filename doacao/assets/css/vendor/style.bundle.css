@@ -6,7 +6,7 @@
     .text-gray-600 {
     color: #d7d7d7!important;
 }
-aside menu-link  form-control form-control-flush
+.form-check.form-check-solid .form-check-input:checked
 */
 
 @charset "UTF-8";
@@ -2581,7 +2581,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked {
-    background-color: #009ef7;
+    background-color: #50CD89;
     border-color: #009ef7
 }
 
