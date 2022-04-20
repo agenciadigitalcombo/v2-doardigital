@@ -29,7 +29,6 @@ export default {
         let recursos = this.permisao
         let adm = this.superAdm
 
-
         if (adm == '1') {
             this.lista = this.menus
         } else if (adm == '0') {
@@ -38,6 +37,7 @@ export default {
             this.lista = this.menus.filter(itens => recursos.includes(itens.id))
         }
 
+        this.lista = this.menus
     },
 
     created() {

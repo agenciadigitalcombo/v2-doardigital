@@ -12,7 +12,8 @@ export default {
 			email: null,
 			cpf: null,
 			telefone: null,
-			data_nascimento: null,
+			nascimento: null,
+			credencial: "",
 			error: null,
 			data: null,
 			msg: "",
@@ -26,12 +27,14 @@ export default {
 		async alterarAdm() {
 			this.error = null
 
-			let res = await adm.atualizar(
-				this.token,
-				this.nome,
+			let res = await adm.atualizarFinaliza(
+			 	this.token,
+				this.code,
+				this.nome, 
 				this.cpf,
-				this.telefone,
-				this.data_nascimento,
+				this.nascimento,
+				this.telefone, 
+				this.credencial
 				
 			)
 			if (!res.next) {
@@ -68,7 +71,7 @@ export default {
 		this.email = dados.email
 		this.cpf = dados.cpf
 		this.telefone = dados.telefone 
-		this.data_nascimento =  dados.nascimento.split('-').reverse().join('/');
+		this.nascimento =  dados.nascimento.split('-').reverse().join('/');
 		 
 	},
 

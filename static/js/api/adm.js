@@ -26,12 +26,7 @@ export default {
         })
     },
 
-    async atualizar(token, nome, cpf, telefone, data_nascimento) {
-        return await http.post('/atualizar-adm', {
-            token, nome, cpf, telefone, data_nascimento
-        })
-    },
-
+     
     async atualizarFinaliza( 
                     token,
 					code,
@@ -97,9 +92,9 @@ export default {
         })
     },
 
-    async listarEndereco(token) {
-        return await http.get('/endereco', {
-            token
+    async listarEndereco( token, code, ) {
+        return await http.get('/adm/address-info', {
+            token, code, 
         })
     },
 
@@ -356,15 +351,17 @@ export default {
         email,
         senha,
         telefone,
-        credencial_id,
+        credencial,
+        code,
         token,
     ) {
-        return await http.post('/criate-subadm', {
+        return await http.post('/adm/sub/register', {
             nome,
             email,
             senha,
             telefone,
-            credencial_id,
+            credencial,
+            code,
             token,
         })
     },
