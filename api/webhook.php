@@ -53,7 +53,6 @@ $doc = $doacao->get_doacao_by_reference_key($reference_key);
 $title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
     "br.rafael@outlook.com",
-    "victorfernandomagalhaes@gmail.com",
     "john@digitalcombo.com.br"
 ];
 
@@ -94,18 +93,10 @@ $type_pagamento = $doc['tipo'] ?? '';
 $codigo = $doc['codigo'] ?? '';
 $url = $doc['url'] ?? '';
 
-$doacao->set_status(
+$doacao->set_status_hook(
     $reference_key,
     $status
 );
-
-// $get_mensal = $doacao->get_by_id($reference_key);
-// if($get_mensal['recorrente'] == 1){
-//     $doacao->set_status_hook(
-//         $reference_key,
-//         $status
-//     );
-// }
 
 if(!empty($subscription)){
     

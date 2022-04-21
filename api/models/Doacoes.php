@@ -168,7 +168,7 @@ class Doacao implements IDoacao{
     public function set_status(int $instituicao_id, string $status): void
     {
         $banco = new Banco();
-        $sql = "UPDATE doacoes SET status_pagamento='$status' WHERE reference_key='$instituicao_id'";
+        $sql = "UPDATE doacoes SET status_pagamento='$status' WHERE instituicao_id='$instituicao_id'";
         $banco->exec($sql);
     }
 

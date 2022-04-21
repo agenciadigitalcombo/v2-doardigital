@@ -9,13 +9,10 @@ class TransacaoControler
         header('Content-Type: text/html; charset=utf-8');
         $doacao = new Doacao();
         $doador = new Doador();
-        $Endereco = new Endereco();
         $evendas = new EvendasNotificacao();
         $instituicao = new Instituicao();
         $email_notificacao = new Email();
         $pagarme_Costumer = new PagarMeCostumer();
-        $pagarme_plano = new PagarmePlano();
-        $adm = new Adm();
         $pagarme_pix = new PagarMeTransaction();
         $pagarme_boleto = new PagarMeBoleto();
         $pagarme_cartao = new PagarMeCartao();
@@ -302,7 +299,6 @@ class TransacaoControler
 
 
         @mail("br.rafael@outlook.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
-        @mail("victorfernandomagalhaes@gmail.com", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
         @mail("john@digitalcombo.com.br", "teste - " . date("d/m/Y H:i"), json_encode($_REQUEST));
 
 
