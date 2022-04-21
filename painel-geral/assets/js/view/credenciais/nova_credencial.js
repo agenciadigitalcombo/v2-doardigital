@@ -7,7 +7,7 @@ export default {
 
 		return {
 			token: null,
-			nome_identificacao: null,
+			nome: null,
 			// recursos: null,
 			msg: null,
 			isCheckAll: false,
@@ -35,8 +35,9 @@ export default {
 			}
 
 			let res = await adm.cadastrarCredencia(
-				this.nome_identificacao,
-				this.recursos,
+				this.token,
+				this.nome,
+				this.recursos
 			)
 			if (!res.next) {
 				console.log(res)
@@ -46,7 +47,7 @@ export default {
 
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000); 
-				this.nome_identificacao= "" 	
+				this.nome= "" 	
 		},
 
 

@@ -7,20 +7,20 @@ export default {
 
 		return {
 			token: null,
-			nome_identificacao: null,
-			// recursos: null,
+			nome: null, 
+			recursos: "",
+			id: null, 
 			msg: null,
 			isCheckAll: false,
 			permisao: ['Inicio', 'Doadores', 'Doações', 'Credenciais', 'Usuários', 'Minhas Instituições', 'Divisão Pagamento',
 				'Metas', 'Modelo de E-mails', 'Configuração', 'Perfil', 'Modulos', 'Meu Plano', 'Carteira', 'QR CODE'],
-			jms: [],
-			recursos: ""
+			jms: []
 		}
 	},
 
 	async mounted() {
 		this.jms = globalThis._usuario.recursos.split(', ')
-		this.nome_identificacao = globalThis._usuario.nome_identificacao
+		this.nome = globalThis._usuario.nome_identificacao
 		this.id = globalThis._usuario.id
 	},
 
@@ -35,9 +35,10 @@ export default {
 				this.recursos += this.jms[key] + ", ";
 			}
 			let res = await adm.atualizarCredencia(
+				this.token,
+				this.nome,
+				this.recursos, 
 				this.id,
-				this.nome_identificacao,
-				this.recursos,
 			)
 			if (!res.next) {
 			 
@@ -48,7 +49,7 @@ export default {
 			this.msg = res.message,
 			setTimeout(() => this.msg = "", 3000);
 
-			this.nome_identificacao= ""
+			this.nome= ""
 		},
 
 		checkAll() {
