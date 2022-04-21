@@ -387,9 +387,13 @@ export default {
 
 
 
-    async listarSubadm() {
-        return await http.get('/list-subadm', {
-
+    async listarSubadm(
+        token,
+        code,
+    ) {
+        return await http.get('/adm/list/sub', {
+            token,
+            code,
         })
     },
 

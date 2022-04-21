@@ -48,7 +48,7 @@ export default {
                     setTimeout(() => this.msg = "", 5000);
 
 
-                this.dados = (await this.listar()).dados
+                this.dados = (await this.listar()).payload
                 this.id = dados.id
                 this.nome_identificacao = dados.nome_identificacao
                 this.recursos = dados.recursos

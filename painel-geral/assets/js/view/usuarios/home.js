@@ -7,7 +7,7 @@ export default {
 	data: function () {
         
 		return {
-			gravatar: 'https://doardigital.com.br/api/gravatar?email=brunnocriacoes@gmail.com',
+			gravatar: '',
 			nome: null,
 			email: null,
 			senha: null,
@@ -16,13 +16,17 @@ export default {
 			dados: [],
 			listaCredencial: [],
 			nome_identificacao: null,
+			recursos: null,
 			secret: null,
 			jms: {},
 		}
 	},
 	methods: {
 		async listar() {
-			let res = await adm.listarSubadm(localStorage.getItem('token'))
+			let res = await adm.listarSubadm(
+				this.token,
+				this.code,
+			)
 			return res
 		},
 
@@ -39,17 +43,23 @@ export default {
 
 
 	async mounted() {
-		this.dados = (await this.listar()).dados
+		this.token = localStorage.getItem('token')
+	   let str = this.token.split('.')[0]
+	   let encodedStr = atob(str); 
+	   var res =  JSON.parse(encodedStr);
+	   this.code = res.code
 
-		this.listaCredencial = (await this.listar_credencial()).dados
-		this.nome_identificacao = this.listaCredencial.nome_identificacao
+		this.dados = (await this.listar()).payload
+ 
+		this.listaCredencial = (await this.listar_credencial()).payload 
+        this.nome_identificacao = listaCredencial.nome_identificacao
+        
 		
 	},
-     
 	filters: {
 		nomeCredencial: (valor, lista) => lista.find(
 			credencial => credencial.id == valor
-		)
+		).recursos
 	},
     template: await get_template('./assets/js/view/usuarios/home')
 }

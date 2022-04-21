@@ -47,7 +47,8 @@ export default {
 
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000); 
-				this.nome= "" 	
+				this.nome= "",
+				window.location.href = `#/credenciais`	
 		},
 
 
