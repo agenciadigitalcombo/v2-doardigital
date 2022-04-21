@@ -35,6 +35,7 @@ export default {
             if (confirm('deseja excluir a credencial ?')) {
                 this.error = null
                 let res = await adm.deleterCredencia(
+                    this.token,
                     this.id = dados.id,
 
                 )

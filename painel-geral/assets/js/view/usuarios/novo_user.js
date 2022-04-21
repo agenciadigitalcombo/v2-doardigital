@@ -96,7 +96,7 @@ export default {
 
 
 	async mounted() {
-       this.lista_credencial = (await this.listar()).dados 
+       this.lista_credencial = (await this.listar()).payload 
 
 	   this.token = localStorage.getItem('token')
 	   let str = this.token.split('.')[0]

@@ -8,6 +8,7 @@ export default {
             title: "aside",
             menus,
             jms: "",
+            token: null,
             lista: [],
             permisao: [],
             permisao2: [],
@@ -28,19 +29,19 @@ export default {
        let dados = (await this.listar()).payload
        this.nome = dados.nome
        this.email = dados.email
+       this.id = dados.credencial || "777"
 
-       // this.id = dados.credencial_id || "777"
-      //   this.permisao = (await this.credenciais()).dados.recursos
-       //  let recursos = this.permisao
+       this.permisao = (await this.credenciais()).payload.recursos
+       let recursos = this.permisao
       
 
-  if (this.jms == 'super') {
-      this.lista = this.menus
-  } else if (this.jms == 'adm') {
-      this.lista = this.menus.filter(itens => this.jms.includes(itens.permisao2))
-  } else {
-      this.lista = this.menus.filter(itens => recursos.includes(itens.id))
-  }
+        if (this.jms == 'super') {
+            this.lista = this.menus
+        } else if (this.jms == 'adm') {
+            this.lista = this.menus.filter(itens => this.jms.includes(itens.permisao2))
+        } else {
+            this.lista = this.menus.filter(itens => recursos.includes(itens.id))
+        }
 
    
     },
@@ -75,7 +76,10 @@ export default {
 		},
 
         async credenciais() {
-            let res = await adm.credencial(this.id)
+            let res = await adm.credencial(
+                this.token,
+                this.id
+                )
             return res
         },
 
