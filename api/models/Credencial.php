@@ -3,42 +3,58 @@
 class Credencial
 {
 
-    public function create(string $nome_identificacao, string $recursos): void
+    private $id;
+    private $nome_identificacao;
+    private $recursos;
+
+    private $con;
+
+    function __construct()
     {
-        $banco = new Banco();
-        $sql = "INSERT INTO credencial (nome_identificacao, recursos) VALUES ('$nome_identificacao', '$recursos')";
-        $banco->exec($sql);
+        $this->con = new Banco();
+        $this->con->table('credencial');
+    }
+
+    static function porter(array $payload): array
+    {
+        return [
+            "id" => $payload['id'] ?? null,
+            "nome_identificacao" => $payload['nome_identificacao'] ?? null,
+            "recursos" => $payload['recursos'] ?? null,
+        ];
+    }
+
+    public function register(string $nome_identificacao, string $recursos): void
+    {
+        $this->con->insert([
+            "nome_identificacao" => $nome_identificacao,
+            "recursos" => $recursos,
+        ]);
     }
 
     public function update(int $id, string $nome_identificacao, string $recursos): void
     {
-        $banco = new Banco();
-        $sql = "UPDATE credencial SET nome_identificacao='$nome_identificacao', recursos='$recursos' WHERE id='$id'";
-        $banco->exec($sql);
+        $this->con->where(["id" => $id]);
+        $this->con->update([
+            "nome_identificacao" => $nome_identificacao,
+            "recursos" => $recursos,
+        ]);
     }
 
-    public function list_by_id(int $id): array
+    public function getById(int $id): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM credencial WHERE id='$id'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        $this->con->where(["id" => $id]);
+        return self::porter($this->con->select()[0] ?? []);
     }
 
-    public function list_all(): array
+    public function listAll(): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM credencial";
-        $guard = $banco->query($sql);
-        return $guard;
+        return array_map(['Credencial', 'porter'], $this->con->select());
     }
 
     public function del(int $id): void
     {
-        $banco = new Banco();
-        $sql = "DELETE FROM credencial WHERE id='$id'";
-        $banco->exec($sql);
+        $this->con->where(["id" => $id]);
+        $this->con->delete();
     }
 }
-
-?>

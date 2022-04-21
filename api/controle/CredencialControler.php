@@ -1,109 +1,95 @@
 <?php
 
-class CredencialControler
+class CredencialControler extends Controle
 {
 
     static function start()
     {
-        echo json_encode([
-            "next" => false,
-            "message" => "Você não tem permissão"
-        ]);
+        self::printError(
+            "Você não tem permissão",
+            []
+        );
     }
 
-    static function create_credencial()
+    static function register()
     {
-        $credencial = new Credencial();
-        $nome_identificacao = $_REQUEST['nome_identificacao'] ?? '';
-        $recursos = $_REQUEST['recursos'] ?? '';
-
-        $campos_obrigatorios = [
-            'nome_identificacao',
-            'recursos'
-        ];
-        $lb = [
-            'nome_identificacao' => 'Informe um nome',
-            'recursos' => 'Informe o recurso'
-        ];
-        foreach ($campos_obrigatorios as $campo) {
-            if (empty($_REQUEST[$campo])) {
-                echo json_encode([
-                    'next' => false,
-                    'message' => $lb[$campo]
-                ]);
-                return null;
-            }
-        }
-        $credencial->create($nome_identificacao, $recursos);
-
-        echo json_encode([
-            'next' => true,
-            'message' => 'Credencial criada'
+        self::requireInputs([
+            "token" => "informe um token",
+            "nome" => "Informe seu nome",
+            "recursos" => "Informe os recursos",
         ]);
-    }
-
-    static function update_credencial()
-    {
+        self::privateRouter();
         $credencial = new Credencial();
-        $id = $_REQUEST['id'] ?? '';
-
-        $nome_identificacao = $_REQUEST['nome_identificacao'];
+        $nome = $_REQUEST['nome'];
         $recursos = $_REQUEST['recursos'];
-        
-        $credencial->update($id, $nome_identificacao, $recursos);
-        echo json_encode([
-            'next' => true,
-            'message' => 'Credencial atualizada'
-        ]);
+        $credencial->register($nome, $recursos);
+        self::printSuccess(
+            "Registrado com sucesso",
+            []
+        );
     }
 
-    static function list_credencial()
+    static function update()
     {
-        $credencial = new Credencial();
-        $lista_todos = $credencial->list_all();
-
-        foreach ($lista_todos as $g) {
-            $payload[] = [
-                'id' => $g['id'],
-                'nome_identificacao' => $g['nome_identificacao'],
-                'recursos' => $g['recursos']
-            ];
-        }
-        echo json_encode([
-            'next' => true,
-            'message' => 'Credenciais',
-            'dados' => $payload
+        self::requireInputs([
+            "token" => "informe um token",
+            "id" => "Informe um id",
+            "nome" => "Informe seu nome",
+            "recursos" => "Informe os recursos",
         ]);
+        self::privateRouter();
+        $credencial = new Credencial();
+        $nome = $_REQUEST['nome'];
+        $recursos = $_REQUEST['recursos'];
+        $id = $_REQUEST['id'];
+        $credencial->update($id, $nome, $recursos);
+        self::printSuccess(
+            "Atualizado com sucesso",
+            []
+        );
     }
 
-    static function credencial()
+    static function list()
     {
-        $credencial = new Credencial();
-        $id = $_REQUEST['id'] ?? '';
-
-        $get_credencial = $credencial->list_by_id($id);
-        $payload = [
-            'nome_identificacao' => $get_credencial['nome_identificacao'],
-            'recursos' => $get_credencial['recursos']
-        ];
-
-        echo json_encode([
-            'next' => true,
-            'message' => 'Credenciais',
-            'dados' => $payload
+        self::requireInputs([
+            "token" => "informe um token"
         ]);
+        self::privateRouter();
+        $credencial = new Credencial();
+        self::printSuccess(
+            "Lista de credenciais",
+            $credencial->listAll()
+        );
     }
 
-    static function detete_credencial()
+    static function info()
     {
+        self::requireInputs([
+            "token" => "informe um token",
+            "id" => "Informe um id"
+        ]);
+        self::privateRouter();
         $credencial = new Credencial();
-        $id = $_REQUEST['id'] ?? '';
+        $id = $_REQUEST['id'];
+        self::printSuccess(
+            "Atualizado com sucesso",
+            $credencial->getById($id)
+        );
+    }
 
+    static function del()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "id" => "Informe um id",
+        ]);
+        self::privateRouter();
+        $credencial = new Credencial();
+        $id = $_REQUEST['id'];
         $credencial->del($id);
-
-        echo json_encode([
-            'next' => true,
-            'message' => 'Credenciais Excluidas'
-        ]);
+        self::printSuccess(
+            "Apagado com sucesso",
+            []
+        );
     }
 }

@@ -1,8 +1,7 @@
 <?php
-router('/', 'CredencialControler@start');
-
-router('/create-credencial', 'CredencialControler@create_credencial');
-router('/update-credencial', 'CredencialControler@update_credencial');
-router('/list-credencial', 'CredencialControler@list_credencial');
-router('/credencial', 'CredencialControler@credencial');
-router('/delete-credencial', 'CredencialControler@detete_credencial');
+router('/credencial/', 'CredencialControler@start');
+router('/credencial/register', 'CredencialControler@register');
+router('/credencial/list', 'CredencialControler@list');
+router('/credencial/info', 'CredencialControler@info');
+router('/credencial/update-info', 'CredencialControler@update');
+router('/credencial/del', 'CredencialControler@del');

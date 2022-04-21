@@ -1,5 +1,0 @@
-POST http://localhost/v2-doardigital/api/valid-token
-Content-Type: application/x-www-form-urlencoded
-
-token=eyJzZWNyZXQiOiI2MTllNGY2MGNmNGYyIiwibm9tZSI6ImJydW5hbyBvIGZlcmluaGEgZGUgYWxhZ29hcyIsImVtYWlsIjoiYnIucmFmYWVsQG91dGxvb2suY29tIiwic3VwZXJfYWRtIjoiMCIsInN0ZXAiOiIxIn0=.c0c86ae13c943ed356c98e3aa05fbc8d708fdf58
-
