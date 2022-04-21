@@ -7,6 +7,7 @@ export default {
         return {
             title: "aside",
             menus,
+            jms: "",
             lista: [],
             permisao: [],
             permisao2: [],
@@ -16,28 +17,32 @@ export default {
 
     async mounted() {
 
-        let dados = (await this.listar()).dados
-        this.nome = dados.nome.split(' ')[0]
-        this.gravatar = dados.gravatar
-        this.superAdm = dados.super_adm || "777"
-
-        this.id = dados.credencial_id || "777"
-
-
-        this.permisao = (await this.credenciais()).dados.recursos
-
-        let recursos = this.permisao
-        let adm = this.superAdm
+        this.token = localStorage.getItem('token')
+        let str = this.token.split('.')[0]
+        let encodedStr = atob(str); 
+        var res =  JSON.parse(encodedStr);
+        this.code = res.code
+        this.jms = this.code.split('_')[0]
 
 
-        if (adm == '1') {
-            this.lista = this.menus
-        } else if (adm == '0') {
-            this.lista = this.menus.filter(itens => this.superAdm.includes(itens.permisao2))
-        } else {
-            this.lista = this.menus.filter(itens => recursos.includes(itens.id))
-        }
+       let dados = (await this.listar()).payload
+       this.nome = dados.nome
+       this.email = dados.email
 
+       // this.id = dados.credencial_id || "777"
+      //   this.permisao = (await this.credenciais()).dados.recursos
+       //  let recursos = this.permisao
+      
+
+  if (this.jms == 'super') {
+      this.lista = this.menus
+  } else if (this.jms == 'adm') {
+      this.lista = this.menus.filter(itens => this.jms.includes(itens.permisao2))
+  } else {
+      this.lista = this.menus.filter(itens => recursos.includes(itens.id))
+  }
+
+   
     },
 
     created() {
@@ -62,14 +67,19 @@ export default {
         },
 
         async listar() {
-            let res = await adm.ListarPerfil(localStorage.getItem('token'))
-            return res
-        },
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
+			return res
+		},
 
         async credenciais() {
             let res = await adm.credencial(this.id)
             return res
         },
+
+
         async logout() {
             localStorage.removeItem('token')
             localStorage.removeItem('instituicao_nome')

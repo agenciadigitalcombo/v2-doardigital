@@ -7,9 +7,9 @@ export default {
 	data: function () {
 		return {
 			id: null,
-			nome_identificacao: "admin",
+			nome: "admin",
 			cep: null,
-			logadouro: null,
+			logradouro: null,
 			numero: null,
 			complemento: null,
 			bairro: null,
@@ -17,6 +17,7 @@ export default {
 			estado: null,
 			secret: null,
 			token: null,
+			code: null,
 			msg: "",
 			items: [],
 			data: null,
@@ -38,15 +39,15 @@ export default {
 
 			let res = await adm.atualizarEndereco(
 				this.token,
-				this.nome_identificacao,
+				this.code, 
 				this.cep,
-				this.logadouro,
+				this.logradouro,
 				this.numero,
 				this.complemento,
 				this.bairro,
 				this.cidade,
 				this.estado,
-
+  
 			)
 			if (!res.next) {
 				// this.error = res.message
@@ -60,7 +61,7 @@ export default {
 
 		async listarEndereco() {
 			let res = await adm.listarEndereco(
-				(this.token)
+			 this.token, this.code
 			)
 			return res
 		},
@@ -71,7 +72,7 @@ export default {
 				axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
 					.then(response => {
 						this.cep = this.cep.replace(/[^\d]+/g, '')
-						this.logadouro = response.data.logradouro,
+						this.logradouro = response.data.logradouro,
 							this.bairro = response.data.bairro,
 							this.cidade = response.data.localidade,
 							this.estado = response.data.uf
@@ -86,23 +87,28 @@ export default {
 
 	async mounted() {
 
+		this.token = localStorage.getItem('token')
+		let str = this.token.split('.')[0]
+		let encodedStr = atob(str); 
+		var res =  JSON.parse(encodedStr);
+		this.code = res.code
+	 
 		// Rua/Avenida Nº
-		let enderecoDados = (await this.listarEndereco()).dados || {}
-		this.logadouro = enderecoDados.logadouro
+		let enderecoDados = (await this.listarEndereco()).payload || {}
+		this.logradouro = enderecoDados.logadouro
 		this.cep = enderecoDados.cep
-		this.nome_identificacao = enderecoDados.nome_identificacao
+		this.nome = enderecoDados.nome
 		this.numero = enderecoDados.numero
 		this.complemento = enderecoDados.complemento
 		this.bairro = enderecoDados.bairro
 		this.cidade = enderecoDados.cidade
 		this.estado = enderecoDados.estado
 		this.id = enderecoDados.id
-
-
+ 
 	},
 
 	created() {
-		this.token = localStorage.getItem('token')
+	
 	},
  
     template: await get_template('./assets/js/view/perfil/endereco')

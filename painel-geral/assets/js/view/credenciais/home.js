@@ -17,7 +17,7 @@ export default {
 
     async mounted() {
  
-        this.dados = (await this.listar()).dados
+        this.dados = (await this.listar()).payload
         this.id = dados.id
         this.nome_identificacao = dados.nome_identificacao
         this.recursos = dados.recursos

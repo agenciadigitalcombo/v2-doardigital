@@ -1,6 +1,6 @@
 <?php 
 
-class TagManager implements ITagManager{
+class TagManager{
 
     public function create_update(int $instituicao_id, string $token): void
     {

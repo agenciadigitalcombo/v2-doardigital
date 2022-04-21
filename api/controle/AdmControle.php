@@ -1,382 +1,342 @@
 <?php
 
-class AdmControle
+class AdmControle extends Controle
 {
-    
+
     static function start()
     {
-        echo json_encode([
-            "next" => false,
-            "message" => "Você não tem permissão"
-        ]);
+        self::printError(
+            "Você não tem permissão",
+            []
+        );
     }
 
-    static function criar_adm()
+    static function register()
     {
+        self::requireInputs([
+            "nome" => "Informe seu nome",
+            "email" => "Informe seu email",
+            "senha" => "Informe sua senha",
+            "telefone" => "Informe seu telefone"
+        ]);
         $adm = new Adm();
         $jwt = new Jwt();
-
-        
-        $nome = $_REQUEST['nome'] ?? '';
-        
-        $campo_email = $_REQUEST['email'];
-        $email = valid_email($campo_email);
-        
-        $campo_senha = $_REQUEST['senha'];
-        $senha = valid_senha($campo_senha);
-        
-        $telefone = $_REQUEST['telefone'] ?? '';
-        
-        
-        $transform_tel = valid_telefone($telefone);
-        
-        
-        
-        
-        if (empty($nome) or empty($email) or empty($telefone)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Preencha todos os campos"
-            ]);
-            return null;
+        $nome = $_REQUEST['nome'];
+        $email = $_REQUEST['email'];
+        $senha = $_REQUEST['senha'];
+        $telefone = $_REQUEST['telefone'];
+        if (strlen($senha) < 8) {
+            self::printError(
+                "A senha deve ter no mínimo 8 caracteres",
+                []
+            );
         }
-
-
         if ($adm->exist($email)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Email já cadastrado"
-            ]);
-            return null;
+            self::printError(
+                "Email ja em uso",
+                []
+            );
         }
-
-        $adm->create($nome, $email, $senha, $transform_tel);
-        $usuario_logado = $adm->get_by_email($email);
-        
-        
-        $payload = [
-
-            'secret' => $usuario_logado['secret'],
-            'nome' => $usuario_logado['nome'],
-            'email' => $usuario_logado['email'],
-            'super_adm' => $usuario_logado['super_adm'],
-            'step' => $usuario_logado['step']
-        ];
-
+        $adm->register($nome, $email, $senha, $telefone);
+        $code = $adm->login($email, $senha);
+        $jwt = $jwt->maker(["code" => $code]);
         SendGrid::send(
+            'cadastro',
+            [
+                "to" => $email,
+                "nome" => $nome
+            ]
+        );
+        self::printSuccess(
+            "cadastrado com sucesso",
+            ["token" => $jwt]
+        );
+    }
+
+    static function registerSub()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe um código",
+            "nome" => "Informe seu nome",
+            "email" => "Informe seu email",
+            "senha" => "Informe sua senha",
+            "telefone" => "Informe seu telefone",
+            "credencial" => "Informe uma credencial",
+        ]);
+        self::privateRouter();
+        $adm = new Adm();
+        $nome = $_REQUEST['nome'];
+        $email = $_REQUEST['email'];
+        $senha = $_REQUEST['senha'];
+        $telefone = $_REQUEST['telefone'];
+        $admCode = $_REQUEST['code'];
+        $credencial = (int) $_REQUEST['credencial'] ?? 0;
+        if (strlen($senha) < 8) {
+            self::printError(
+                "A senha deve ter no mínimo 8 caracteres",
+                []
+            );
+        }
+        if ($adm->exist($email)) {
+            self::printError(
+                "Email ja em uso",
+                []
+            );
+        }
+        $adm->registerSub(
             $nome,
             $email,
-            "Doar Digital",
-            "contato@doardigital.com.br",
-            "SEJA BEM VINDO!",
-            "",
-            "",
-            "",
-            "",
-            "",
-            'cadastro'
+            $senha,
+            $telefone,
+            $admCode,
+            $credencial
         );
-        
-        $get_numero_tel = substr(telefone_get_number($telefone), -8, 8);
-        $get_ddd_tel = telefone_get_ddd($telefone);
-        $numero_ddd = [$get_ddd_tel, $get_numero_tel];
-        
-        SendZap::send('primary', '55' . implode('', $numero_ddd), 'Bem vindo ao Doar Digital');
-        
-
-
-        echo json_encode([
-            "next" => true,
-            "message" => "Usuário criado com sucesso",
-            "token" => $jwt->maker($payload)
-        ]);
+        self::printSuccess(
+            "cadastrado com sucesso",
+            []
+        );
     }
-
-
-
-    static function completar_profile()
-    {
-
-        $adm = new Adm();
-
-        
-        campo_obrigatorios([
-            'cpf_cnpj' => 'Informe o Campo de Cnpj ou Cpf',
-            'data_nascimento' => 'Informe a Data de nascimento',
-            'tipo' => 'Informe o Tipo de Adm'
-        ]);
-
-        $token_parce = token();
-
-        $cpf_cnpj_campo = $_REQUEST['cpf_cnpj'];
-        $cpf_cnpj = valid_cpf_cnpj($cpf_cnpj_campo);
-
-        $data_nascimento_campo = $_REQUEST['data_nascimento'];
-        $data_nascimento = data_format($data_nascimento_campo);
-        $tipo_adm = $_REQUEST['tipo'];
-
-
-
-
-        $secret = $token_parce['secret'];
-
-        $adm->complet_profile($secret, $data_nascimento, $cpf_cnpj, $tipo_adm);
-        echo json_encode([
-            "next" => true,
-            "message" => "Admin atualizado"
-        ]);
-    }
-
 
     static function login()
     {
+        self::requireInputs([
+            "email" => "Informe um email",
+            "senha" => "Informe uma senha"
+        ]);
         $adm = new Adm();
         $jwt = new Jwt();
-
-        $campo_email = $_REQUEST['email'];
-        $email = valid_email($campo_email);
-
-        $campo_senha = $_REQUEST['senha'];
-        $senha = valid_senha($campo_senha);
-
-
-
-
-        if ($adm->login($email, $senha)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Email ou senha incorreto"
-            ]);
-            return null;
+        $email = $_REQUEST['email'];
+        $senha = $_REQUEST['senha'];
+        $code = $adm->login($email, $senha);
+        if (empty($code)) {
+            self::printError(
+                "Usuário ou senha errado",
+                []
+            );
         }
-
-        $adm->login($email, $senha);
-        $usuario_logado = $adm->get_by_email($email);
-        $payload = [
-            'secret' => $usuario_logado['secret'],
-            'nome' => $usuario_logado['nome'],
-            'email' => $usuario_logado['email'],
-            'super_adm' => $usuario_logado['super_adm'] ?? 0,
-            'step' => $usuario_logado['step'] ?? 0,
-            'credencial' => $usuario_logado['credencial_id'] ?? 0
-
-        ];
-        echo json_encode([
-            "next" => true,
-            "message" => "Usuário logado com sucesso",
-            'token' => $jwt->maker($payload)
-        ]);
-    }
-
-    static function profile()
-    {
-        $adm = new Adm();
-
-        $token_parce = token();
-
-
-        $secret = $token_parce['secret'];
-        $guard = $adm->list_profile($secret);
-         
-
-        $payload = [
-            'secret' => $guard['secret'],
-            'nome' => $guard['nome'],
-            'cpf' => $guard['cpf'] ?? 0,
-            'email' => $guard['email'],
-            'telefone' => $guard['telefone'],
-            'step' => $guard['step'] ?? 0,
-            'gravatar' => gravatar($guard['email']),
-            'data_nascimento' => $guard['data_nascimento'],
-            'super_adm' => $guard['super_adm'] ?? 0,
-            'credencial_id' => $guard['credencial_id'] ?? 0,
-            'plano_id' => $guard['plano_id'] ?? 0
-        ];
-        echo json_encode([
-            'next' => true,
-            'message' => 'Dados do Usuario',
-            'dados' => $payload
-        ]);
-    }
-
-    static function all_profile()
-    {
-        $adm = new Adm();
-        $dados = $adm->list_all();
-
-        foreach ($dados as $g) {
-            $payload[] = [
-                'secret' => $g['secret'],
-                'nome' => $g['nome'],
-                'cpf' => $g['cpf'],
-                'email' => $g['email'],
-                'telefone' => $g['telefone'],
-                'step' => $g['step'],
-
-            ];
-        }
-        echo json_encode([
-            'next' => true,
-            'message' => 'Dados do Usuario',
-            'dados' => $payload
-        ]);
-    }
-
-    static function recuperar_senha()
-    {
-
-        /***
-         * perdeu a senha 
-         * so tem o email
-         * 
-         * recebe o email verifica se existe tanto adm sub_adm
-         * gerar uma uma senha sanvar no banco
-         * enviar um email com a senha recem gerada
-         */
-
-        $adm = new Adm();
-
-        campo_obrigatorios([
-            'email' => 'Informe o email'
-        ]);
-
-        $email = valid_email($_REQUEST['email']);
-
-        
-        
-        if (!$adm->get_by_email($email)) {
-            echo json_encode([
-                "next" => false,
-                "message" => "Este endereço de Email não existe"
-            ]);
-            return null;
-        }
-
-        $nova_senha = uniqid();
-        $nova_senha_crip = valid_senha($nova_senha);
-
-        $adm->nova_senha($email, $nova_senha_crip);
-        
-
-        SendGrid::send(
-            "Usuário",
-            $email,
-            "Doar Digital",
-            "contato@doardigital.com.br",
-            "NOVA SENHA GERADA COM SUCESSO!",
-            "",
-            "Sua senha temporaria é: {$nova_senha}",
-            "",
-            "",
-            "",
-            ''
+        $jwt = $jwt->maker(["code" => $code]);
+        self::printSuccess(
+            "Logado com sucesso",
+            ["token" => $jwt]
         );
-
-
-
-        echo json_encode([
-            "next" => true,
-            "message" => "Nova senha enviada por email"
-        ]);
     }
 
-    static function alterar_senha()
+    static function info()
     {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe um código"
+        ]);
+        self::privateRouter();
+        $code = $_REQUEST['code'];
         $adm = new Adm();
-
-        $token_parce = token();
-
-        $campo_senha = $_REQUEST['senha'];
-        $senha = valid_senha($campo_senha);
-
-        $secret = $token_parce['secret'];
-
-        $adm->alterar_senha($secret, $senha);
-        echo json_encode([
-            "next" => true,
-            "message" => "Senha atualizada"
-        ]);
+        $payload = $adm->getByCode($code);
+        self::printSuccess(
+            "Dados de Usuário",
+            $payload
+        );
     }
 
-    static function atualizar_adm()
+    static function listAll()
     {
+        self::requireInputs([
+            "token" => "informe um token"
+        ]);
+        self::privateRouter();
         $adm = new Adm();
-
-        $token_parce = token();
-
-        $nome = $_REQUEST['nome'] ?? null;
-        $telefone = $_REQUEST['telefone'] ?? null;
-        $cpf = $_REQUEST['cpf'] ?? null;
-
-        $transform_tel = withdraw_caracter($telefone);
-        $transform_cpf = withdraw_caracter($cpf);
-
-        $data_nascimento_campo = $_REQUEST['data_nascimento'];
-        $data_nascimento = data_format($data_nascimento_campo);
-
-        
-
-        campo_obrigatorios([
-            'nome' => 'Informe um nome',
-            'telefone' => 'Digite o telefone',
-            'cpf' => 'Digite o cpf',
-            'data_nascimento' => 'Informe a Data de Nascimento'
-        ]);
-
-
-        $secret = $token_parce['secret'];
-
-        $adm->update($nome, $transform_tel, $transform_cpf, $secret, $data_nascimento);
-        echo json_encode([
-            "next" => true,
-            "message" => "Dados atualizados"
-        ]);
+        self::printSuccess(
+            "Lista de administradores",
+            $adm->listAll()
+        );
     }
 
-    static function update_step()
+    static function listAllSub()
     {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "Informe um código"
+        ]);
+        self::privateRouter();
         $adm = new Adm();
-
-        $token_parce = token();
-
-        $step = $_REQUEST['step'];
-
-
-        campo_obrigatorios([
-            'step' => 'Informe o step'
-        ]);
-
-        $secret = $token_parce['secret'];
-
-        $adm->update_step($secret, $step);
-
-        echo json_encode([
-            "next" => true,
-            "message" => "Dados atualizados"
-        ]);
+        $code = $_REQUEST['code'];
+        self::printSuccess(
+            "Lista de  sub administradores",
+            $adm->listAllSubAdm($code)
+        );
     }
 
-    static function gravatar()
+    static function recoverPass()
     {
-        Header('Content-Type: image/png');
-        $email = $_GET['email'] ?? 'default@default.com.br';
-        $email = md5(strtolower(trim($email)));
-        $img = "https://www.gravatar.com/avatar/{$email}";
-        echo file_get_contents($img);
+        self::requireInputs([
+            "email" => "informe um email"
+        ]);
+        $adm = new Adm();
+        $email = $_REQUEST['email'];
+        if (!$adm->exist($email)) {
+            self::printError(
+                "Email não encontrado",
+                []
+            );
+        }
+        $tempPass = $adm->recoverPass($email);
+        @mail(
+            $email,
+            "Doar Digital - Senha Temporária",
+            "Sua senha temporária é: {$tempPass}"
+        );
+        self::printSuccess(
+            "Senha temporária enviado por email",
+            ["tmp" => $tempPass]
+        );
     }
 
-    static function validar_token()
+    static function alterPass()
     {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe o código",
+            "senha" => "informe um numero"
+        ]);
+        self::privateRouter();
+        $adm = new Adm();
+        $code = $_REQUEST['code'];
+        $senha = $_REQUEST['senha'];
+        if (strlen($senha) < 8) {
+            self::printError(
+                "Senha deve ter no mínimo 8 caracteres",
+                []
+            );
+        }
+        $adm->alterPass($code, $senha);
+        self::printSuccess(
+            "Senha alterada com sucesso",
+            []
+        );
+    }
+
+    static function updateInfo()
+    {
+        self::requireInputs([
+            "token" => "Informe um token",
+            "code" => "Informe o código",
+            "nome" => "Informe seu nome",
+            "cpf" => "Informe seu cpf",
+            "nascimento" => "Informe sua data de nascimento",
+            "telefone" => "Informe seu telefone",
+        ]);
+        self::privateRouter();
+        $Adm = new Adm();
+        $code = $_REQUEST['code'];
+        $nome = $_REQUEST['nome'];
+        $cpf = $_REQUEST['cpf'];
+        $nascimento = $_REQUEST['nascimento'];
+        $telefone = $_REQUEST['telefone'];
+        $credencial = $_REQUEST['credencial'] ?? 0;
+        $Adm->update($code, $nome, $telefone, $cpf, $nascimento, $credencial);
+        self::printSuccess(
+            "Atualizado com sucesso",
+            []
+        );
+    }
+
+    static function setStep()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe o código",
+            "number" => "informe um numero"
+        ]);
+        self::privateRouter();
+        $code = $_REQUEST['code'];
+        $number = (int) $_REQUEST['number'] ?? 0;
+        $adm = new Adm();
+        $adm->setStep($code, $number);
+        self::printSuccess(
+            "Etapa atualizada com sucesso",
+            []
+        );
+    }
+
+    static function addressSave()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe o código",
+            "cep" => "",
+            "logradouro" => "",
+            "numero" => "",
+            "complemento" => "",
+            "bairro" => "",
+            "cidade" => "",
+            "estado" => "",
+        ]);
+        self::privateRouter();
+        $local = new Endereco();
+        $code = $_REQUEST['code'];
+        $cep = $_REQUEST['cep'];
+        $logradouro = $_REQUEST['logradouro'];
+        $numero = $_REQUEST['numero'];
+        $complemento = $_REQUEST['complemento'];
+        $bairro = $_REQUEST['bairro'];
+        $cidade = $_REQUEST['cidade'];
+        $estado = $_REQUEST['estado'];
+        $local->save(
+            $code,
+            "ADM_ADDRESS",
+            $cep,
+            $logradouro,
+            $numero,
+            $complemento,
+            $bairro,
+            $cidade,
+            $estado
+        );
+        self::printSuccess(
+            "Endereço salvo com sucesso",
+            []
+        );
+    } 
+    
+    static function addressInfo()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "code" => "informe o código"
+        ]);
+        self::privateRouter();
+        $local = new Endereco();
+        $code = $_REQUEST['code'];
+        $address = $local->get( $code, "ADM_ADDRESS");
+        if( empty($address) ) {
+            self::printError(
+                "Endereço não encontrado",
+                []
+            );
+        }
+        self::printSuccess(
+            "Dados endereço",
+            $local->porter($address[0])
+        );
+    }
+
+    static function logged()
+    {
+        self::requireInputs([
+            "token" => "Informe um token"
+        ]);
         $jwt = new Jwt();
-
-        $token = $_REQUEST['token'] ?? '';
-
-        $status = $jwt->valid($token);
-        $token_parse = $jwt->ler($token);
-        echo json_encode([
-            "next" => $status,
-            "message" => null,
-            "token_parse" => $token_parse
-        ]);
+        $token = $_REQUEST['token'];
+        $isValid = $jwt->valid($token);
+        if (!$isValid) {
+            self::printError(
+                "Token Invalido",
+                []
+            );
+        }
+        self::printSuccess(
+            "Token valido",
+            []
+        );
     }
 }

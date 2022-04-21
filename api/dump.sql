@@ -1,34 +1,38 @@
-CREATE TABLE adm (
+CREATE TABLE administrador (
     id int not null auto_increment primary key,
+    code varchar(255),
     nome varchar(75),
     cpf varchar(25),
-    email varchar(75),
-    pass varchar(255),
+    nascimento varchar(10),
     telefone varchar(25),
-    foto varchar(255),
-    secret varchar(255),
-    data_registro varchar(18),
-    data_nascimento varchar(10),
-    plano_id varchar(255),
-    step int,
-    status int,
-    super_adm int,
-    tipo varchar(75)
-);
-
-CREATE TABLE sub_adm (
-    id int not null auto_increment primary key,
-    adm_id int,
-    nome varchar(75),
     email varchar(75),
     senha varchar(255),
-    secret varchar(255),
-    foto varchar(255),
-    telefone varchar(11),
-    credencial_id int,
-    status int,
-    data_nascimento varchar(10),
-    cpf varchar(25)
+    registro varchar(18),
+    etapa int,
+    ativo int,
+    sass int,
+    credencial int,
+    adm varchar(255)
+);
+
+CREATE TABLE endereco (
+    id int not null auto_increment primary key,
+    fk varchar(255),
+    tipo varchar(75),
+    nome varchar(75),
+    cep varchar(8),
+    logadouro varchar(75),
+    numero varchar(10),
+    complemento varchar(75),
+    bairro varchar(75),
+    cidade varchar(75),
+    estado varchar(2)
+);
+
+CREATE TABLE credencial (
+    id int not null auto_increment primary key,
+    nome_identificacao varchar(75),
+    recursos varchar(255)
 );
 
 CREATE TABLE taxonomia (
@@ -43,11 +47,7 @@ CREATE TABLE meta (
     payload varchar(255)
 );
 
-CREATE TABLE credencial (
-    id int not null auto_increment primary key,
-    nome_identificacao varchar(75),
-    recursos varchar(255)
-);
+
 
 CREATE TABLE plano (
     id int not null auto_increment primary key,
@@ -184,18 +184,7 @@ CREATE TABLE doacoes_digital (
     hora varchar(8)
 );
 
-CREATE TABLE endereco (
-    id int not null auto_increment primary key,
-    fk_id int,
-    nome_identificacao varchar(75),
-    cep varchar(8),
-    logadouro varchar(75),
-    numero varchar(10),
-    complemento varchar(75),
-    bairro varchar(75),
-    cidade varchar(75),
-    estado varchar(2)
-);
+
 
 CREATE TABLE conta_email_smtp (
     id int not null auto_increment primary key,

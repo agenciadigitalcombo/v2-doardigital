@@ -1,6 +1,6 @@
 <?php 
 
-class ContaSmtp implements ISmtp{
+class ContaSmtp {
 
     public function create_update( int $instituicao_id, string $host, string $protocolo, int $porta, string $email, string $senha) : void
     {

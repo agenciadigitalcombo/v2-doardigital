@@ -74,14 +74,14 @@
                                 </label>
                                 <input name="business_descriptor"
                                     class="form-control form-control-lg form-control-solid"
-                                    v-model.trin="$v.data_nascimento.$model"
-                                    :class=" {'is-invalid':$v.data_nascimento.$error, 'is-valid':!$v.data_nascimento.$invalid }"
+                                    v-model.trin="$v.nascimento.$model"
+                                    :class=" {'is-invalid':$v.nascimento.$error, 'is-valid':!$v.nascimento.$invalid }"
                                     v-mask="'##/##/####'" placeholder="29/10/1980" required />
 
-                                <div class="erros" v-if="$v.data_nascimento.$error">
-                                    <div class="erro_texte" v-if="!$v.data_nascimento.required">Valor
+                                <div class="erros" v-if="$v.nascimento.$error">
+                                    <div class="erro_texte" v-if="!$v.nascimento.required">Valor
                                         é necessária</div>
-                                    <div class="erro_texte" v-if="!$v.data_nascimento.minLength">
+                                    <div class="erro_texte" v-if="!$v.nascimento.minLength">
                                         adicione 8 digito para a data de nascimento.</div>
                                 </div>
                                 <div class="sucesso_texte" v-else>
@@ -90,7 +90,7 @@
                             <div class="mb-10 fv-row">
                                 <label class="form-label mb-3">CPF</label>
                                 <input type="text" class="form-control form-control-lg form-control-solid"
-                                    name="account_name" v-model="cpf_cnpj" v-mask="'###.###.###-##'"
+                                    name="account_name" v-model="cpf" v-mask="'###.###.###-##'"
                                     placeholder="000.000.000-00" required />
                             </div>
 

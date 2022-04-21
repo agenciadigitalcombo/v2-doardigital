@@ -5,12 +5,15 @@ export default {
     data: function () {
         return {
             title: "Meu Perfil",
+			foto: null,
             nome: null,
 			token: null,
+			code: null,
 			email: null,
 			cpf: null,
 			telefone: null,
-			data_nascimento: null,
+			nascimento: null,
+			credencial: "",
 			error: null,
 			data: null,
 			msg: "",
@@ -24,12 +27,14 @@ export default {
 		async alterarAdm() {
 			this.error = null
 
-			let res = await adm.atualizar(
-				this.token,
-				this.nome,
+			let res = await adm.atualizarFinaliza(
+			 	this.token,
+				this.code,
+				this.nome, 
 				this.cpf,
-				this.telefone,
-				this.data_nascimento,
+				this.nascimento,
+				this.telefone, 
+				this.credencial
 				
 			)
 			if (!res.next) {
@@ -47,22 +52,28 @@ export default {
 		},
 
 		async listar() {
-			let res = await adm.ListarPerfil(localStorage.getItem('token'))
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
 			return res
 		},
 	},
 	async mounted() {
 		this.token = localStorage.getItem('token')
-		let dados = (await this.listar()).dados
- 
+		 let str = this.token.split('.')[0]
+		 let encodedStr = atob(str); 
+		 var res =  JSON.parse(encodedStr);
+		 this.code = res.code
+
+		let dados = (await this.listar()).payload
 		this.nome = dados.nome
 		this.email = dados.email
 		this.cpf = dados.cpf
-		this.telefone = dados.telefone
-		this.token = dados.token
-		 this.data_nascimento =  dados.data_nascimento.split('-').reverse().join('/');
-		
-		
+		this.telefone = dados.telefone 
+		this.nascimento =  dados.nascimento.split('-').reverse().join('/');
+		 
 	},
+
     template: await get_template('./assets/js/view/perfil/home')
 }

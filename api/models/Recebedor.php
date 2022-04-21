@@ -1,6 +1,6 @@
 <?php 
 
-class Recebedor implements IRecebedor
+class Recebedor 
 
 {
     public function create_update(int $adm_id, string $token, string $nome_identificacao, string $conta_bancaria_token, string $email, string $ddd, string $telefone): void

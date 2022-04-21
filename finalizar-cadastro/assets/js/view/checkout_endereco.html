@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column" id="kt_create_account_stepper">
-		 
+	 
 	<div class="d-flex flex-column flex-lg-row-auto w-xl-500px bg-lighten shadow-sm">
  
 		<div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-500px scroll-y"> 
@@ -69,7 +69,6 @@
 							<div class="fv-row mb-10"> 
 								<label class="form-label required">CEP</label>
 								 
-								<input v-model="nome_identificacao" type="hidden"/>
 						 <input v-model="cep" @keyup="searchCep()" @input="mask_cep" v-mask="'########'" placeholder="00000-000" 
 						  class="form-control form-control-lg form-control-solid" required  />
 								
@@ -80,7 +79,7 @@
 							<div class="fv-row mb-0"> 
 								<label class="fs-6 fw-bold form-label required">Logradouro</label>
 								 
-								<input id="logradouro" v-model="logadouro" name="business_name" class="form-control form-control-lg form-control-solid" required />
+								<input id="logradouro" v-model="logradouro" name="business_name" class="form-control form-control-lg form-control-solid" required />
 								 
 							</div>
 						<br>

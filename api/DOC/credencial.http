@@ -1,0 +1,38 @@
+@host=http://doardigital.con
+@token=
+@nome=
+@recursos=
+@id=
+
+##
+GET {{host}}/api/credencial/
+
+###
+POST {{host}}/api/credencial/register
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&nome={{nome}}
+&recursos={{recursos}}
+
+###
+GET {{host}}/api/credencial/list?token={{token}}
+
+###
+GET {{host}}/api/credencial/info?id={{id}}&token={{token}}
+
+###
+POST {{host}}/api/credencial/update-info
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&nome={{nome}}
+&recursos={{recursos}}
+&id={{id}}
+
+###
+POST {{host}}/api/credencial/del
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&id={{id}}

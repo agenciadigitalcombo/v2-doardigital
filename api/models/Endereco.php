@@ -1,66 +1,88 @@
 <?php
-class Endereco implements IEndereco
+class Endereco
 {
-    public function get_by_id(int $id): array
+
+    private $id;
+    private $fk;
+    private $tipo;
+    private $nome;
+    private $cep;
+    private $logadouro;
+    private $numero;
+    private $complemento;
+    private $bairro;
+    private $cidade;
+    private $estado;
+    private $con;
+
+    function __construct()
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM endereco WHERE id='$id'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        $this->con = new Banco();
     }
 
-    public function list_all(): array
-    {
-        $banco = new Banco();
-        $sql = "SELECT * FROM endereco";
-        $guard = $banco->query($sql);
-        return $guard;
+    public function get(
+        string $fk,
+        string $tipo
+    ): array {
+        $this->con->table('endereco');
+        $this->con->where([
+            "fk" => $fk,
+            "tipo" => $tipo,
+        ]);
+        return  $this->con->select();
     }
 
-    public function create(int $fk_id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento = "", string $bairro, string $cidade, string $estado): void
+    function clearZipCode(string $zipCode): string
     {
-        $banco = new Banco();
-        $pesquisa = "SELECT * FROM endereco WHERE fk_id='$fk_id'";
-        $guard_pesquisa = $banco->query($pesquisa);
-        if(!empty($guard_pesquisa[0])){
-            $registro = $guard_pesquisa[0];
-            $id = $registro['id'];
-            $sql = "UPDATE endereco SET nome_identificacao='$nome_identificacao', cep='$cep', logadouro='$logradouro', numero='$numero', complemento='$complemento', bairro='$bairro', cidade='$cidade', estado='$estado'";
-            $sql .= "WHERE id='$id'";
-            $banco->exec($sql);
-        }else{
-            $sql = "INSERT INTO endereco";
-            $sql .= "(fk_id, nome_identificacao, cep, logadouro, numero, complemento, bairro, cidade, estado)";
-            $sql .= "VALUES";
-            $sql .= "('$fk_id', '$nome_identificacao', '$cep', '$logradouro', '$numero', '$complemento', '$bairro', '$cidade', '$estado')";
-            $banco->exec($sql);
+        return preg_replace('/\D/', '', $zipCode);
+    }
 
+    static function porter(array $payload): array
+    {
+        return [
+            "tipo" => $payload['tipo'] ?? null,
+            "nome" => $payload['nome'] ?? null,
+            "cep" => $payload['cep'] ?? null,
+            "logadouro" => $payload['logadouro'] ?? null,
+            "numero" => $payload['numero'] ?? null,
+            "complemento" => $payload['complemento'] ?? null,
+            "bairro" => $payload['bairro'] ?? null,
+            "cidade" => $payload['cidade'] ?? null,
+            "estado" => $payload['estado'] ?? null
+        ];
+    }
+
+    function save(
+        string $fk,
+        string $tipo,
+        string $cep,
+        string $logadouro,
+        string $numero,
+        string $complemento,
+        string $bairro,
+        string $cidade,
+        string $estado
+    ) {
+        $this->con->table('endereco');
+        $payload = [
+            "fk" => $fk,
+            "tipo" => $tipo,
+            "cep" => $this->clearZipCode($cep),
+            "logadouro" => $logadouro,
+            "numero" => $numero,
+            "complemento" => $complemento,
+            "bairro" => $bairro,
+            "cidade" => $cidade,
+            "estado" => $estado,
+        ];
+        if (empty($this->get($fk, $tipo))) {
+            $this->con->insert($payload);
+        } else {
+            $this->con->where([
+                "fk" => $fk,
+                "tipo" => $tipo,
+            ]);
+            $this->con->update($payload);
         }
     }
-
-    public function update(int $id, string $nome_identificacao, string $cep, string $logradouro, string $numero, string $complemento, string $bairro, string $cidade, string $estado): void
-    {
-        $banco = new Banco();
-        $sql = "UPDATE endereco SET nome_identificacao='$nome_identificacao', cep='$cep', logadouro='$logradouro', numero='$numero', complemento='$complemento', bairro='$bairro', cidade='$cidade', estado='$estado'";
-        $sql .= "WHERE id='$id'";
-        $banco->exec($sql);
-    }
-
-    public function del(int $id): void
-    {
-        $banco = new Banco();
-        $sql = "DELETE FROM endereco WHERE id='$id'";
-        $banco->exec($sql);
-    }
-
-    public function list_all_by_fk(int $fk_id): array
-    {
-        $banco = new Banco();
-        $sql = "SELECT * FROM endereco WHERE fk_id='$fk_id'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
-    }
-
-
 }
-?>

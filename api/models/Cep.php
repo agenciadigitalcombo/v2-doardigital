@@ -1,5 +1,5 @@
 <?php
-class Cep implements ICep{
+class Cep {
     
     public function get_cep(string $cep): array
     {

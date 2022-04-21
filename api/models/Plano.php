@@ -1,6 +1,6 @@
 <?php 
 
-class Plano implements IPlano{
+class Plano {
     
     public function list_all(): array
     {

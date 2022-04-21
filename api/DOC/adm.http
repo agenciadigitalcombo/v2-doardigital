@@ -1,0 +1,122 @@
+@host=http://doardigital.con
+
+@code=adm_625ebcbd5adb7
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+
+@cep=06786-270
+@logradouro=Rua das capivaras
+@numero=105-AB
+@complemento=casa
+@bairro=JD Margaridas
+@cidade=Taboão da serra
+@estado=SP
+
+@nome=Bruno AP. Vieira
+@cpf=731.312.850-95
+@senha=87654321
+@nascimento=18/09/1987
+@telefone=(82) 9 9999-9999
+@email=br.rafael@outlook.com
+@credencial=1
+@adm=
+
+@number=2
+
+###
+GET {{host}}/api
+
+###
+POST {{host}}/api/adm/login
+Content-Type: application/x-www-form-urlencoded;
+
+email={{email}}
+&senha={{senha}}
+
+###
+POST {{host}}/api/adm/register
+Content-Type: application/x-www-form-urlencoded;
+
+nome={{nome}}
+&email={{email}}
+&senha={{senha}}
+&telefone={{telefone}}
+
+###
+POST {{host}}/api/adm/sub/register
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&nome={{nome}}
+&code={{code}}
+&email={{email}}
+&senha={{senha}}
+&telefone={{telefone}}
+&credencial={{{{credencial}}}}
+
+###
+POST {{host}}/api/adm/address
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&code={{code}}
+&cep={{cep}}
+&logradouro={{logradouro}}
+&numero={{numero}}
+&complemento={{complemento}}
+&bairro={{bairro}}
+&cidade={{cidade}}
+&estado={{estado}}
+
+###
+GET {{host}}/api/adm/address-info?token={{token}}&code={{code}}
+
+###
+POST {{host}}/api/adm/update-info
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&code={{code}}
+&nome={{nome}}
+&cpf={{cpf}}
+&nascimento={{nascimento}}
+&telefone={{telefone}}
+&credencial={{credencial}}
+
+
+###
+GET {{host}}/api/adm/info?code={{code}}&token={{token}}
+
+###
+POST {{host}}/api/adm/alter-pass
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&code={{code}}
+&senha={{senha}}
+
+###
+POST {{host}}/api/adm/recover-pass
+Content-Type: application/x-www-form-urlencoded;
+
+email={{email}}
+
+###
+POST {{host}}/api/adm/step
+Content-Type: application/x-www-form-urlencoded;
+
+number={{number}}
+&token={{token}}
+&code={{code}}
+
+
+###
+GET {{host}}/api/adm/list?token={{token}}
+
+###
+GET {{host}}/api/adm/list/sub?code={{code}}&token={{token}}
+
+###
+GET {{host}}/api/adm/logged?token={{token}}
+
+###
+GET {{host}}/api/adm
