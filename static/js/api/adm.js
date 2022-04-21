@@ -118,9 +118,9 @@ export default {
         })
     },
 
-    async credencial(id) {
-        return await http.get('/credencial', {
-            id
+    async credencial(token, id) {
+        return await http.get('/credencial/info', {
+               token, id
         })
     },
 

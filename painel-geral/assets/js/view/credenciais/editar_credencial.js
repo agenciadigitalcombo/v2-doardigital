@@ -22,6 +22,8 @@ export default {
 		this.jms = globalThis._usuario.recursos.split(', ')
 		this.nome = globalThis._usuario.nome_identificacao
 		this.id = globalThis._usuario.id
+		alert(this.id)
+		this.listaCredenc()
 	},
 
 	methods: {
@@ -52,6 +54,19 @@ export default {
 			this.nome= ""
 		},
 
+		async listaCredenc() {
+			this.error = null 
+			let res = await adm.credencial(
+			this.token, 
+			this.id,
+			)
+			if (!res.next) {
+				this.error = res.message
+				return null
+			}
+			 alert(res.payload.recursos)
+		},
+
 		checkAll() {
 			this.isCheckAll = !this.isCheckAll;
 			this.jms = [];
@@ -78,7 +93,6 @@ export default {
 
 			}
 		}
-
 	},
 
 
