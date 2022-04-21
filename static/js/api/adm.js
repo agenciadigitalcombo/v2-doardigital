@@ -2,44 +2,53 @@ import http from './http.js'
  
 export default {
     async cadastrar(nome, email, senha, telefone) {
-        return await http.post('/criar-adm', {
+        return await http.post('/adm/register', {
             nome, email, senha, telefone
         })
     },
     async login(email, senha) {
-        return await http.post('/login', {
+        return await http.post('/adm/login', {
             email, senha
         })
     },
 
     async recuperar_senha(email) {
-        return await http.post('/recuperar-senha', {
+        return await http.post('/adm/recover-pass', {
             email
         })
     },
 
-    async alterar_senha(senha, token) {
-        return await http.post('/alterar-senha', {
-            senha,
-            token
+    async alterar_senha(token, code, senha) {
+        return await http.post('/adm/alter-pass', {
+            token,
+            code,
+            senha
         })
     },
 
-    async atualizar(token, nome, cpf, telefone, data_nascimento) {
-        return await http.post('/atualizar-adm', {
-            token, nome, cpf, telefone, data_nascimento
+     
+    async atualizarFinaliza( 
+                    token,
+					code,
+					nome, 
+					cpf,
+					nascimento,
+					telefone, 
+					credencial) {
+        return await http.post('/adm/update-info', {
+             token,
+					code,
+					nome, 
+					cpf,
+					nascimento,
+					telefone, 
+					credencial
         })
     },
 
-    async atualizarFinaliza(cpf_cnpj, data_nascimento, tipo, token) {
-        return await http.post('/completar-profile', {
-            cpf_cnpj, data_nascimento, tipo, token
-        })
-    },
-
-    async ListarPerfil(token) {
-        return await http.get('/profile', {
-            token
+    async ListarPerfil(token, code) {
+        return await http.get('/adm/info', {
+            token, code
         })
     },
 
@@ -58,10 +67,10 @@ export default {
 
         })
     },
-
+    
     async atualizarEndereco(
-        token,
-        nome_identificacao,
+        token, 
+        code, 
         cep,
         logradouro,
         numero,
@@ -70,9 +79,9 @@ export default {
         cidade,
         estado,
     ) {
-        return await http.post('/update-endereco', {
-            token,
-            nome_identificacao,
+        return await http.post('/adm/address', {
+            token, 
+            code, 
             cep,
             logradouro,
             numero,
@@ -83,9 +92,9 @@ export default {
         })
     },
 
-    async listarEndereco(token) {
-        return await http.get('/endereco', {
-            token
+    async listarEndereco( token, code, ) {
+        return await http.get('/adm/address-info', {
+            token, code, 
         })
     },
 
@@ -342,15 +351,17 @@ export default {
         email,
         senha,
         telefone,
-        credencial_id,
+        credencial,
+        code,
         token,
     ) {
-        return await http.post('/criate-subadm', {
+        return await http.post('/adm/sub/register', {
             nome,
             email,
             senha,
             telefone,
-            credencial_id,
+            credencial,
+            code,
             token,
         })
     },

@@ -13,9 +13,9 @@ export default {
 			repetirsenha: null,
 			mostrarsenha: false,
 			telefone: null,
-			credencial_id: "",
+			credencial: "",
 			token: null,
-			sicret: null,
+			code: null,
 			lista_credencial: [],
 			lista_instituicao: [],
 			instituicao_id:  [],
@@ -53,8 +53,10 @@ export default {
 				this.email,
 				this.senha,
 				this.telefone,
-				this.credencial_id,
+				this.credencial,
+				this.code,
 				this.token,
+ 
 			)
 			if (!res.next) {
 				this.error = res.message
@@ -96,6 +98,12 @@ export default {
 	async mounted() {
        this.lista_credencial = (await this.listar()).dados 
 
+	   this.token = localStorage.getItem('token')
+	   let str = this.token.split('.')[0]
+	   let encodedStr = atob(str); 
+	   var res =  JSON.parse(encodedStr);
+	   this.code = res.code
+	   
 	   this.lista_instituicao = (await this.listarInstit()).dados || {}
 	   this.nome_fantasia = this.lista_instituicao.nome_fantasia,
 	   this.subdomaim = this.lista_instituicao.subdomaim,

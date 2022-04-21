@@ -8,6 +8,7 @@ export default {
 	data: function () {
 		return {
 			token: null,
+			code: null,
 			senha: null,
 			repetirsenha: null,
 			mostrarsenha: false,
@@ -35,8 +36,9 @@ export default {
 				this.submitStatus = 'ERROR'
 			} else {
 				let res = await adm.alterar_senha(
-					this.senha,
 					this.token,
+					this.code,
+					this.senha,
 				)
 				if (!res.next) {
 					console.log(res)
@@ -63,6 +65,17 @@ export default {
 		}
 
 	},
+
+	async mounted() {
+		this.token = localStorage.getItem('token')
+		 let str = this.token.split('.')[0]
+		 let encodedStr = atob(str); 
+		 var res =  JSON.parse(encodedStr);
+		 this.code = res.code
+
+		 
+	},
+
 
     template: await get_template('./assets/js/view/perfil/seguranca')
 }

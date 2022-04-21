@@ -19,10 +19,18 @@ export default {
     },
 	
     async mounted() {
-		let dados = (await this.listar()).dados
+		this.token = localStorage.getItem('token')
+		 let str = this.token.split('.')[0]
+		 let encodedStr = atob(str); 
+		 var res =  JSON.parse(encodedStr);
+		 this.code = res.code
+
+		let dados = (await this.listar()).payload
 		this.nome = dados.nome
 		this.email = dados.email
 		this.gravatar = dados.gravatar
+
+		
     
 		let enderecoDados = (await this.listarEndereco()).dados || {}
         this.logadouro = enderecoDados.logadouro
@@ -34,9 +42,13 @@ export default {
 
 	methods: {
 		async listar() {
-            let res = await adm.ListarPerfil( localStorage.getItem('token') )
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
 			return res
-        },
+		},
+
 		async listarEndereco() {
 			let res = await adm.listarEndereco(
 				(this.token)

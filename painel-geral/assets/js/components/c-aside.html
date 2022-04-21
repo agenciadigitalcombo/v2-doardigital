@@ -1,49 +1,45 @@
- 
 <div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside"
 	data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="auto"
 	data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
- 
+
 	<div class="aside-logo flex-column-auto pt-10 pt-lg-20">
 		<a href="/../painel-geral/">
-			<img src="../painel-geral/assets/logo/logotipo.png"
-				class="w-100px" /> 
+			<img src="../painel-geral/assets/logo/logotipo.png" class="w-100px" />
 		</a>
 
 	</div>
-	
-	<div class="aside-menu flex-column-fluid pt-0 pb-5 py-lg-5" >
-	 
+
+	<div class="aside-menu flex-column-fluid pt-0 pb-5 py-lg-5">
+
 		<div id="kt_aside_menu_wrapper" class="w-100 hover-scroll-overlay-y scroll-ps d-flex" data-kt-scroll="true"
 			data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
 			data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu" data-kt-scroll-offset="0">
 			<div class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-icon-gray-400 menu-arrow-gray-400 fw-bold fs-6"
 				data-kt-menu="true">
-			
-			
+
+
 				<div class="menu-item py-3" v-for="m in lista">
-					<a class="menu-link"  @click="setar()"
-					:class="{ active: m.id == selecionado }"  
-					 :href="m.link" :title="m.nome" data-bs-toggle="tooltip"
-						data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+					<a class="menu-link" @click="setar()" :class="{ active: m.id == selecionado }" :href="m.link"
+						:title="m.nome" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
+						data-bs-placement="right">
 						<span class="menu-icon menux">
-							
-						 <span class="svg-icon svg-icon-2x">
+
+							<span class="svg-icon svg-icon-2x">
 								<img class="filter-green" class="menu" :src="'../painel-geral/assets/icon/'+m.icon">
 							</span>
-						 
+
 						</span>
 					</a>
-				</div> 
+				</div>
 				<div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" class="menu-item py-3">
-					<a type="button" @click="logout"  class="menu-link " title="Sair "
-						data-bs-dismiss="click" data-bs-placement="right">
+					<a type="button" @click="logout" class="menu-link " title="Sair " data-bs-dismiss="click"
+						data-bs-placement="right">
 						<span class="menu-icon menux">
 							<img class="filter-green" class="menu" src="../painel/assets/icon/logout.svg">
-						 </span>
+						</span>
 					</a>
 				</div>
-			</div> 
-		</div> 
-	</div> 
+			</div>
+		</div>
+	</div>
 </div>
- 
