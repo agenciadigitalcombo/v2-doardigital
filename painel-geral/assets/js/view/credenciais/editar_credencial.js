@@ -12,8 +12,8 @@ export default {
 			id: null, 
 			msg: null,
 			isCheckAll: false,
-			permisao: ['Inicio', 'Doadores', 'Doações', 'Credenciais', 'Usuários', 'Minhas Instituições', 'Divisão Pagamento',
-				'Metas', 'Modelo de E-mails', 'Configuração', 'Perfil', 'Modulos', 'Meu Plano', 'Carteira', 'QR CODE'],
+			permisao: ['inicio', 'doadores', 'doacoes', 'credenciais', 'usuarios', 'sass', 'planos', 'planos_digital', 'divisao',
+				'metas', 'modulos', 'modelo_de_emails', 'configuracao', 'perfil', 'Modulos', 'meu_plano', 'wallet', 'qr_code'],
 			jms: []
 		}
 	},
@@ -22,7 +22,7 @@ export default {
 		this.jms = globalThis._usuario.recursos.split(', ')
 		this.nome = globalThis._usuario.nome_identificacao
 		this.id = globalThis._usuario.id
-		alert(this.id)
+
 		this.listaCredenc()
 	},
 
@@ -63,8 +63,7 @@ export default {
 			if (!res.next) {
 				this.error = res.message
 				return null
-			}
-			 alert(res.payload.recursos)
+			} 
 		},
 
 		checkAll() {
