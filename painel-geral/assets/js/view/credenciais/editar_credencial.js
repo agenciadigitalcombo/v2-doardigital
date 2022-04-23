@@ -12,7 +12,7 @@ export default {
 			id: null, 
 			msg: null,
 			isCheckAll: false,
-			permisao: ['inicio', 'doadores', 'doacoes', 'credenciais', 'usuarios', 'sass', 'planos', 'planos_digital', 'divisao',
+			permisao: ['inicio', 'doadores', 'doacoes', 'sass', 'planos', 'planos_digital', 'divisao',
 				'metas', 'modulos', 'modelo_de_emails', 'configuracao', 'perfil', 'Modulos', 'meu_plano', 'wallet', 'qr_code'],
 			jms: []
 		}
