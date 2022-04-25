@@ -398,43 +398,6 @@ export default {
     },
 
 
-    async cadastrarPlanos(
-        id,
-        instituicao_id,
-        nome,
-        amount,
-        token,
-    ) {
-        return await http.post('/create-plano', {
-            id,
-            instituicao_id,
-            nome,
-            amount,
-            token,
-        })
-    },
-
-    async editarPlanos(
-        plano_id,
-        nome,
-        amount,
-        token,
-    ) {
-        return await http.post('/update-plano', {
-            plano_id,
-            nome,
-            amount,
-            token,
-        })
-    },
-
-    async listarPlanos(instituicao_id) {
-        return await http.get('/plano', {
-            instituicao_id
-        })
-    },
-
-
     async onoffPlano(
         plano_id,
         token,
@@ -541,42 +504,54 @@ export default {
         })
     },
 
-    async listarPlanoDigital(token) {
-        return await http.get('/plano-digital-list', {
-            token
+    async listarPlanoDigital(fk) {
+        return await http.get('/plano/list', {
+            fk
         })
     },
 
     async cadastrarPlanosDigital(
-        nome,
-        whatsapp,
-        instituicao_max,
-        quant_disparos,
-        codigo_cupom,
-        amount,
         token,
+        fk,
+        price,
+        coupon,
+        send_message,
+        institution,
+        trial,
+        subadm,
     ) {
-        return await http.post('/plano-digital-new', {
-            nome,
-            whatsapp,
-            instituicao_max,
-            quant_disparos,
-            codigo_cupom,
-            amount,
+        return await http.post('/plano/register', {
             token,
+            fk,
+            price,
+            coupon,
+            send_message,
+            institution,
+            trial,
+            subadm,
         })
     },
 
 
     async editarPlanosDigital(
-        plano_id,
-        nome,
         token,
+        id,
+        price,
+        coupon,
+        send_message,
+        institution,
+        trial,
+        subadm,
     ) {
-        return await http.post('/plano-digital-update', {
-            plano_id,
-            nome,
+        return await http.post('/plano/update-info', {
             token,
+            id,
+            price,
+            coupon,
+            send_message,
+            institution,
+            trial,
+            subadm,
         })
     },
 

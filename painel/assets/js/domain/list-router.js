@@ -38,9 +38,7 @@ export default [
     { path: '/add-pagamento', component: { template: '<c-div-pagamentoAdd>' } },
     { path: '/editar-pagamento', component: { template: '<c-div-pagamentoEditar>' } },
 
-    { path: '/plano-digital', component: { template: '<c-planos-digital>' } },
-    { path: '/plano-digital/novo', component: { template: '<c-planos-digitalNovo>' } },
-    { path: '/plano-digital/editar', component: { template: '<c-planos-digitalEdita>' } },
+  
 
     { path: '/metas', component: { template: '<c-metas>' } },
 
