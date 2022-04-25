@@ -112,39 +112,40 @@ export default {
         })
     },
 
-    async listarCredencial() {
-        return await http.get('/list-credencial', {
-
+    async listarCredencial(token,) {
+        return await http.get('/credencial/list', {
+            token,
         })
     },
 
-    async credencial(id) {
-        return await http.get('/credencial', {
-            id
+    async credencial(token, id) {
+        return await http.get('/credencial/info', {
+               token, id
         })
     },
 
     async cadastrarCredencia(
-        nome_identificacao, recursos) {
-        return await http.post('/create-credencial', {
-            nome_identificacao,
-            recursos,
-
+        token, nome, recursos) {
+        return await http.post('/credencial/register', {
+            token,
+            nome,
+            recursos, 
         })
     },
 
     async atualizarCredencia(
-        id, nome_identificacao, recursos) {
-        return await http.post('/update-credencial', {
+        token, nome, recursos, id) {
+        return await http.post('/credencial/update-info', {
+            token,
+            nome,
+            recursos, 
             id,
-            nome_identificacao,
-            recursos,
         })
     },
 
-    async deleterCredencia(id) {
-        return await http.post('/delete-credencial', {
-            id,
+    async deleterCredencia(token, id) {
+        return await http.post('/credencial/del', {
+            token, id
         })
     },
 
@@ -386,9 +387,13 @@ export default {
 
 
 
-    async listarSubadm() {
-        return await http.get('/list-subadm', {
-
+    async listarSubadm(
+        token,
+        code,
+    ) {
+        return await http.get('/adm/list/sub', {
+            token,
+            code,
         })
     },
 

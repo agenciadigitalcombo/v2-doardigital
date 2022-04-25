@@ -7,11 +7,11 @@ export default {
 
 		return {
 			token: null,
-			nome_identificacao: null,
+			nome: null,
 			// recursos: null,
 			msg: null,
 			isCheckAll: false,
-			permisao: ['inicio', 'doadores', 'doacoes', 'credenciais', 'usuarios', 'sass', 'planos', 'planos_digital', 'divisao',
+			permisao: ['inicio', 'doadores', 'doacoes', 'sass', 'planos', 'planos_digital', 'divisao',
 				'metas', 'modulos', 'modelo_de_emails', 'configuracao', 'perfil', 'Modulos', 'meu_plano', 'wallet', 'qr_code'],
 				
 				permisao_nome: ['Inicio', 'Doadores', 'Doações', 'Credenciais', 'Usuários', 'Minhas Instituições', 'Divisão Pagamento',
@@ -35,8 +35,9 @@ export default {
 			}
 
 			let res = await adm.cadastrarCredencia(
-				this.nome_identificacao,
-				this.recursos,
+				this.token,
+				this.nome,
+				this.recursos
 			)
 			if (!res.next) {
 				console.log(res)
@@ -46,7 +47,8 @@ export default {
 
 			this.msg = res.message,
 				setTimeout(() => this.msg = "", 3000); 
-				this.nome_identificacao= "" 	
+				this.nome= "",
+				window.location.href = `#/credenciais`	
 		},
 
 
