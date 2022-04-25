@@ -1,74 +1,93 @@
-<?php 
+<?php
 
-class Plano {
-    
-    public function list_all(): array
+class Plano
+{
+    private $fk;
+    private $price;
+    private $coupon;
+    private $send_message;
+    private $institution;
+    private $trial;
+    private $subadm;
+
+    private $con;
+
+    function __construct()
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM plano ORDER BY amount ASC";
-        $guard = $banco->query($sql);
-        return $guard;
-        
+        $this->con = new Banco();
+        $this->con->table('plano');
     }
 
-    public function create(int $instituicao_id, string $nome, int $amount, string $token = null): void
+    public function listAll($fk): array
     {
-
-        $banco = new Banco();
-        $sql = "INSERT INTO plano (instituicao_id, token, nome, amount, status)";
-        $sql .= "VALUES";
-        $sql .= "('$instituicao_id','$token','$nome','$amount', 1)";
-        $banco->exec($sql);
+        $this->con->orderByAsc('price');
+        $this->con->where(['fk' => $fk]);
+        return array_map(['Plano','porter'], $this->con->select());
     }
 
-    public function update(int $id, string $nome): void
-    {
-        $banco = new Banco();
-        $sql = "UPDATE plano SET nome='$nome' WHERE id='$id'";
-        $banco->exec($sql);
+    public function register(
+        string $fk,
+        float $price,
+        string $coupon,
+        int $send_message,
+        int $institution,
+        int $trial,
+        int $subadm
+    ): void {
+        $this->con->insert([
+            "fk" => $fk,
+            "price" => $price,
+            "coupon" => $coupon,
+            "send_message" => $send_message,
+            "institution" => $institution,
+            "trial" => $trial,
+            "subadm" => $subadm,
+        ]);
     }
 
-    public function list_all_by_instituicao(int $id): array
-    {
-        $banco = new Banco();
-        $sql = "SELECT * FROM plano WHERE instituicao_id='$id' ORDER BY amount ASC";
-        $guard = $banco->query($sql);
-        return $guard ?? [];
+    public function update(
+        int $id,
+        float $price,
+        string $coupon,
+        int $send_message,
+        int $institution,
+        int $trial,
+        int $subadm
+    ): void {
+        $this->con->where(["id" => $id]);
+        $this->con->update([
+            "price" => $price,
+            "coupon" => $coupon,
+            "send_message" => $send_message,
+            "institution" => $institution,
+            "trial" => $trial,
+            "subadm" => $subadm,
+        ]);
     }
 
-    public function list_by_id(int $id): array
+    function info(int $id): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM plano WHERE id='$id'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        $this->con->where(["id" => $id]);
+        return self::porter( $this->con->select()[0]??[] );
     }
 
-    public function get_by_id(int $id): array
+    function del(int $id): void
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM plano WHERE id='$id'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
+        $this->con->where(["id" => $id]);
+        $this->con->delete();
     }
 
-    public function on_off(int $id): void
+    static function porter(array $payload)
     {
-        $banco = new Banco();
-
-        $guard = $this->get_by_id($id);
-        $status = $guard['status'];
-        
-        if($status == 1){
-            $status = 0;
-        }else{
-            $status = 1;
-        }
-        $sql = "UPDATE plano SET status='$status' WHERE id=$id";
-
-        $banco->exec($sql);
+        return [
+            "id" => $payload['id'] ?? 0,
+            "fk" => $payload['fk'] ?? "fk_0007",
+            "price" => $payload['price'] ?? 0,
+            "coupon" => $payload['coupon'] ?? null,
+            "send_message" => $payload['send_message'] ?? 0,
+            "institution" => $payload['institution'] ?? 0,
+            "trial" => $payload['trial'] ?? 0,
+            "subadm" => $payload['subadm'] ?? 0
+        ];
     }
-
-    
 }
-?>

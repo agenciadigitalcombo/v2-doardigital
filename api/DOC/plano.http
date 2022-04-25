@@ -1,0 +1,52 @@
+@host=http://doardigital.con
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@id=1
+@fk=42
+@price=25.50
+@coupon=#brc
+@send_message=2000
+@institution=3
+@trial=15
+@subadm=7
+
+##
+GET {{host}}/api/plano/
+
+###
+POST {{host}}/api/plano/register
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&fk={{fk}}
+&price={{price}}
+&coupon={{coupon}}
+&send_message={{send_message}}
+&institution={{institution}}
+&trial={{trial}}
+&subadm={{subadm}}
+
+###
+GET {{host}}/api/plano/list?fk=42
+
+###
+GET {{host}}/api/plano/info?id={{id}}&token={{token}}&fk=42
+
+###
+POST {{host}}/api/plano/update-info
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&id={{id}}
+&price={{price}}
+&coupon={{coupon}}
+&send_message={{send_message}}
+&institution={{institution}}
+&trial={{trial}}
+&subadm={{subadm}}
+
+###
+POST {{host}}/api/plano/del
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&id={{id}}

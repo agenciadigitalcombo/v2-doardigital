@@ -6,6 +6,7 @@ class Banco
     private $host, $db, $user, $pass;
     private $table;
     private $where;
+    private $order;
 
     function __construct()
     {
@@ -63,11 +64,21 @@ class Banco
         $this->where = implode(' AND ', $where);
     }
 
+    function orderByAsc( string $col ) {
+       $this->order =  "ORDER BY {$col} ASC";
+    }
+    
+    function orderByDesc( string $col ) {
+       $this->order =  "ORDER BY {$col} DEC";
+    }
+
     function select(): array
     {
         $where = "";
-        if (!empty($this->where)) $where = "WHERE {$this->where}";
-        $sql = "SELECT * FROM {$this->table} {$where}";
+        $order = "";
+        if (!empty($this->where)) $where = "WHERE {$this->where}";        
+        if (!empty($this->order)) $order = $this->order;
+        $sql = "SELECT * FROM {$this->table} {$where} {$order}";
         return $this->query($sql);
     }
 

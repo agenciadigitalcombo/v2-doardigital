@@ -35,6 +35,26 @@ CREATE TABLE credencial (
     recursos varchar(255)
 );
 
+CREATE TABLE plano (
+    id int not null auto_increment primary key,
+    fk varchar(255),
+    price FLOAT,
+    coupon VARCHAR(255),
+    send_message INT,
+    institution INT,
+    trial INT,
+    subadm INT
+);
+
+CREATE TABLE split (
+    id int not null auto_increment primary key,
+    fk VARCHAR(255),
+    code VARCHAR(255),
+    porcentagem int
+);
+
+
+
 CREATE TABLE taxonomia (
     from_id int,
     to_id int,
@@ -49,35 +69,9 @@ CREATE TABLE meta (
 
 
 
-CREATE TABLE plano (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    token varchar(255),
-    nome varchar(75),
-    amount int,
-    status int
-);
 
-CREATE TABLE plano_digital (
-    id int not null auto_increment primary key,
-    token varchar(255),
-    nome varchar(75),
-    whatsapp int,
-    instituicao_max int, 
-    codigo_cupom varchar(155),
-    amount int,
-    trial int,
-    quant_disparos varchar(75),
-    status int
-);
 
-CREATE TABLE split (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    recebedor_id int,
-    responsavel_estorno int,
-    porcentagem int
-);
+
 
 CREATE TABLE inscrito (
     id int not null auto_increment primary key,
