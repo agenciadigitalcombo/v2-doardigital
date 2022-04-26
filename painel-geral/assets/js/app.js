@@ -81,6 +81,15 @@ Vue.component('p-endereco', endereco)
 import seguranca from './view/perfil/seguranca.js'
 Vue.component('p-seguranca', seguranca)
 
+import planosDigital from './view/planos_digital/planos-digital.js'
+Vue.component('c-planos-digital', planosDigital)
+
+import planosDigitalNovo from './view/planos_digital/planos-digitalNovo.js'
+Vue.component('c-planos-digitalNovo', planosDigitalNovo)
+
+import planosDigitalEditar from './view/planos_digital/planos-digitalEdita.js'
+Vue.component('c-planos-digitalEdita', planosDigitalEditar)
+
 // CONFIGURAÇÃO DAS ROTAS
 Vue.use(Router)
 
@@ -109,6 +118,10 @@ const routes = [
     { path: '/perfil', component: { template: '<p-perfil></p-perfil>' } },
     { path: '/local', component: { template: '<p-endereco></p-endereco>' } },
     { path: '/seguranca', component: { template: '<p-seguranca></p-seguranca>' } },
+
+     { path: '/plano-digital', component: { template: '<c-planos-digital>' } },
+    { path: '/plano-digital/novo', component: { template: '<c-planos-digitalNovo>' } },
+    { path: '/plano-digital/editar', component: { template: '<c-planos-digitalEdita>' } },
 ]
 
 const router = new Router({ routes })

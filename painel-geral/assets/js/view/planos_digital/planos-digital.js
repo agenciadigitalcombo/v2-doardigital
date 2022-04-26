@@ -1,4 +1,4 @@
-import get_template from '../../componentes/get_template.js'
+import get_template from '../../components/get_template.js'
 import adm from "../../../../../static/js/api/adm.js" 
 
 export default {
@@ -38,7 +38,7 @@ export default {
 
 		async editar(id) {
 			globalThis._planos = this.dados.find(user => user.id == id)
-            window.location.href = "#/planos/editar"
+            window.location.href = "#/plano-digital/editar"
         },
 
 		async statusx(status) {
@@ -65,5 +65,5 @@ export default {
 	   
 	},
 
-    template: await get_template('./assets/js/views/planos/planos')
+    template: await get_template('./assets/js/view/planos_digital/planos-digital')
 }

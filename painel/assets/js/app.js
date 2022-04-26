@@ -106,14 +106,6 @@ Vue.component('c-div-pagamentoAdd', divPagamentoAdd)
 import divPagamentoEditar from './views/split/div-pagamento_editar.js'
 Vue.component('c-div-pagamentoEditar', divPagamentoEditar)
 
-import planosDigital from './views/planos/planos-digital.js'
-Vue.component('c-planos-digital', planosDigital)
-
-import planosDigitalNovo from './views/planos/planos-digitalNovo.js'
-Vue.component('c-planos-digitalNovo', planosDigitalNovo)
-
-import planosDigitalEditar from './views/planos/planos-digitalEdita.js'
-Vue.component('c-planos-digitalEdita', planosDigitalEditar)
 
 import metas from './views/metas.js'
 Vue.component('c-metas', metas)
@@ -126,15 +118,11 @@ Vue.component('c-modelo-de-emails-novo', modeloEmailsNovo)
 
 import modeloEmailsEditar from './views/modelo-emails-editar.js'
 Vue.component('c-modelo-de-emails-editar', modeloEmailsEditar)
+ 
 
-const app = new Vue({
-
-    store,
-    // scriptsbundle,
+new Vue({
     router,
     data: {},
-    computed: {},
-    methods: {},
     mounted() {
         let is_token = localStorage.getItem('token')
         if (is_token) {
@@ -147,8 +135,6 @@ const app = new Vue({
 
 
     },
-
-
 }).$mount('#app')
 
-
+;(async () => { })()

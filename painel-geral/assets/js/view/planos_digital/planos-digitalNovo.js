@@ -1,4 +1,4 @@
-import get_template from '../../componentes/get_template.js'
+import get_template from '../../components/get_template.js'
 import adm from "../../../../../static/js/api/adm.js"
 const { required, minLength, between } = window.validators
 
@@ -10,7 +10,11 @@ export default {
         token: null,
         fk: null,
         price: null,
-     
+        coupon: null,
+        send_message: null,
+        institution: null,
+        trial: null,
+        subadm: null,
 			submitStatus: null,
 			msg: null,
 
@@ -22,7 +26,18 @@ export default {
 			required,
 			minLength: minLength(2)
 		},
-		
+
+		institution: {
+			required,
+		},
+
+		trial: {
+			required,
+		},
+
+		coupon: {
+			required,
+		}
 	},
 
 	methods: {
@@ -90,7 +105,7 @@ export default {
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
-					window.location.href = `#/planos`
+					window.location.href = `#/plano-digital`
 				}, 500)
 			}
 		},
@@ -98,5 +113,5 @@ export default {
 	async mounted() { 
 		this.fk = window.localStorage.getItem('instituicao_id');
 	},
-    template: await get_template('./assets/js/views/planos/planoNovo')
+    template: await get_template('./assets/js/view/planos_digital/planos-digitalNovo')
 }
