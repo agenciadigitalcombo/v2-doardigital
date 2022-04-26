@@ -1,6 +1,7 @@
 <?php
 
-class Domain {
+class Domain
+{
 
     function post($url, $request, $json = false)
     {
@@ -28,10 +29,13 @@ class Domain {
         }
     }
 
-    function createSubdomain($subdomain) {
+    function createSubdomain($subdomain)
+    {
         return json_decode($this->post("http://162.240.10.148:2087/cpsess1RH4AASIGCPCNIPVBVMFJGKC5CYKLLUJ/json-api/create_subdomain?api.version=1&domain={$subdomain}.doardigital.com.br&document_root=public_html%2f", [], ''));
     }
-    function createAlias($intis) {
+
+    function createAlias($intis)
+    {
         return json_decode($this->post("http://162.240.10.148:2087/cpsess1RH4AASIGCPCNIPVBVMFJGKC5CYKLLUJ/json-api/cpanel?cpanel_jsonapi_user=doardigital&cpanel_jsonapi_apiversion=2&cpanel_jsonapi_module=Park&cpanel_jsonapi_func=park&domain={$intis->dominio}&topdomain={$intis->subdominio}&disallowdot=0", [], ''));
     }
 }

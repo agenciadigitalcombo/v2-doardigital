@@ -1,45 +1,64 @@
-<?php 
+<?php
 
-class Split{
-    public function list_all(): array
+class Split
+{
+    private $id;
+    private $fk;
+    private $code;
+    private $porcentagem;
+
+    private $con;
+
+    function __construct()
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM split";
-        $guard = $banco->query($sql);
-        return $guard;
+        $this->con = new Banco();
+        $this->con->table('split');
     }
 
-    public function create(int $instituicao_id, string $recebedor_id, int $responsavel_estorno, int $porcentagem): void
+    public function listAll(string $code): array
     {
-        $banco = new Banco();
-        $sql = "INSERT INTO split";
-        $sql .= "(instituicao_id, recebedor_id, responsavel_estorno, porcentagem)";
-        $sql .= "VALUES";
-        $sql .= "('$instituicao_id', '$recebedor_id', '$responsavel_estorno', '$porcentagem')";
-        $banco->exec($sql);
+        $this->con->where(["code" => $code]);
+        return array_map(["Split", "porter"], $this->con->select());
     }
 
-    public function update(int $id, int $instituicao_id, string $recebedor_id, int $responsavel_estorno, int $porcentagem): void
+    public function register(string $fk, string $code, int $porcentagem): void
     {
-        $banco = new Banco();
-        $sql = "UPDATE split SET instituicao_id=$instituicao_id, recebedor_id='$recebedor_id', responsavel_estorno=$responsavel_estorno, porcentagem=$porcentagem WHERE id=$id";
-        $banco->exec($sql);
+        $this->con->insert([
+            "fk" => $fk,
+            "code" => $code,
+            "porcentagem" => $porcentagem,
+        ]);
+    }
+
+    public function update(int $id, string $fk, string $code, int $porcentagem): void
+    {
+        $this->con->where(["id" => $id]);
+        $this->con->update([
+            "fk" => $fk,
+            "code" => $code,
+            "porcentagem" => $porcentagem,
+        ]);
     }
 
     public function del(int $id): void
     {
-        $banco = new Banco();
-        $sql = "DELETE FROM split WHERE id='$id'";
-        $banco->exec($sql);
+        $this->con->where(["id" => $id]);
+        $this->con->delete();
     }
 
-    public function list_all_by_instituicao(int $id): array
+    public function info(int $id): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM split WHERE instituicao_id='$id'";
-        $guard = $banco->query($sql);
-        return $guard ?? [];
+        $this->con->where(["id" => $id]);
+        return self::porter($this->con->select()[0] ?? []);
     }
 
-    
+    static function porter(array $payload): array
+    {
+        return [
+            "id" => $payload['id'] ?? 0,
+            "fk" => $payload['fk'] ?? null,
+            "code" => $payload['code'] ?? null,
+            "porcentagem" => $payload['porcentagem'] ?? 0,
+        ];
+    }
 }

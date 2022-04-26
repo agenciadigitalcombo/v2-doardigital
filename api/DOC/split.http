@@ -1,0 +1,38 @@
+@host=http://doardigital.con
+@token=
+@nome=
+@recursos=
+@id=
+
+##
+GET {{host}}/api/split/
+
+###
+POST {{host}}/api/split/register
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&nome={{nome}}
+&recursos={{recursos}}
+
+###
+GET {{host}}/api/split/list?token={{token}}
+
+###
+GET {{host}}/api/split/info?id={{id}}&token={{token}}
+
+###
+POST {{host}}/api/split/update-info
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&nome={{nome}}
+&recursos={{recursos}}
+&id={{id}}
+
+###
+POST {{host}}/api/split/del
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&id={{id}}

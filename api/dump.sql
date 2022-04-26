@@ -53,46 +53,68 @@ CREATE TABLE split (
     porcentagem int
 );
 
-
-
-CREATE TABLE taxonomia (
-    from_id int,
-    to_id int,
-    tipo_relacao varchar(255)
-);
-
-CREATE TABLE meta (
-    fk_id int,
-    tipo_relacao varchar(255),
-    payload varchar(255)
-);
-
-
-
-
-
-
-
-CREATE TABLE inscrito (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    nome varchar(75),
-    email varchar(75),
-    telefone varchar(11)
-);
-
 CREATE TABLE doador (
     id int not null auto_increment primary key,
-    token varchar(255),
+    instituicao_fk VARCHAR(255),
+    pagamento_fk varchar(255),
+    external_fk varchar(255),
     nome varchar(75),
+    cpf varchar(11),
+    sexo varchar(255),
+    telefone varchar(11),
     email varchar(75),
     senha varchar(255),
-    telefone varchar(11),
-    cpf varchar(11),
-    data_nascimento varchar(10),
-    foto varchar(255),
-    data_registro varchar(19)
+    nascimento varchar(10),
+    registro varchar(19)
 );
+
+CREATE TABLE fatura (
+    id int not null auto_increment primary key,
+    instituicao_fk VARCHAR(255),
+    fatura_id varchar(255),
+    tipo_pagamento varchar(255),
+    recorrente int,
+    external_fk varchar(255),
+    status_pagamento varchar(255),
+    valor FLOAT,
+    codigo varchar(255),
+    url varchar(255),
+    data varchar(9),
+    hora varchar(8),
+    doador_fk VARCHAR(255),
+    doador_nome VARCHAR(255),
+    doador_email VARCHAR(255)
+);
+
+CREATE TABLE assinatura (
+    id int not null auto_increment primary key,
+    instituicao_fk VARCHAR(255),
+    external_fk VARCHAR(255),
+    doador_fk VARCHAR(255),
+    fatura_id VARCHAR(255),
+    tipo_pagamento varchar(255),
+    status_pagamento VARCHAR(255),
+    valor FLOAT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE conta_bancaria (
     id int not null auto_increment primary key,
@@ -150,36 +172,6 @@ CREATE TABLE meta_mes (
     dezembro int
 );
 
-CREATE TABLE doacoes (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    doador_id int,
-    token varchar(255),
-    tipo varchar(25),
-    recorrente int,
-    refrence_key varchar(75),
-    status_pagamento varchar(75),
-    plano_id int,
-    valor int,
-    codigo varchar(255),
-    url varchar(255),
-    data varchar(9),
-    hora varchar(8)
-);
-
-CREATE TABLE doacoes_digital (
-    id int not null auto_increment primary key,
-    admin_id int,
-    token_transacao varchar(255),
-    status_pagamento varchar(75),
-    plano_token int,
-    valor int,
-    data varchar(9),
-    hora varchar(8)
-);
-
-
-
 CREATE TABLE conta_email_smtp (
     id int not null auto_increment primary key,
     instituicao_id int,
@@ -231,40 +223,3 @@ CREATE TABLE email_notificao (
     cron varchar(25)
 );
 
-CREATE TABLE no_replay (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    doacao_id varchar(55),
-    doacao_token varchar(255),
-    status_pagamento varchar(75),
-    data varchar(9)
-);
-
--- acima ja foi implementado
-
-
-CREATE TABLE dashboard (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    total_doacoes int,
-    doacoes_concluidas int,
-    doacoes_em_aberto int,
-    doacoes_vencidas int,
-    boletos_em_aberto int,
-    boletos_pagos int,
-    creditos_em_aberto int,
-    creditos_pagos int,
-    pix_em_aberto int,
-    pix_pago int,
-    doacoes_previstas int,
-    novos_doadores int,
-    doadores_recorrentes int,
-    doadores_unicos int,
-    doacao_media int,
-    doadores_adimplentes int,
-    doadores_inadimplentes int,
-    metas int,
-    total_cartao int,
-    total_boleto int,
-    total_pix int
-);
