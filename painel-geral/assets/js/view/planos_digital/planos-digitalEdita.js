@@ -87,7 +87,7 @@ export default {
 				let res = await adm.editarPlanosDigital( 
                     this.token,
                     this.id,
-                    this.price,
+                    this.price.replace(/[^\d]+/g,''),
                     this.coupon,
                     this.send_message,
                     this.institution,
@@ -105,7 +105,7 @@ export default {
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
-					window.location.href = `#/plano-digital`
+					window.location.href = `#/planos_digital`
 				}, 500)
 			}
 		},

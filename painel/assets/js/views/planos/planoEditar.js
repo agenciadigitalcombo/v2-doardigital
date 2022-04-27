@@ -3,14 +3,14 @@ import adm from "../../../../../static/js/api/adm.js"
 const { required, minLength, between } = window.validators
 
 export default {
-  
+
 	data: function () {
 		return {
- 
-        token: null,
-        id: null,
-        price: null,
-     
+
+			token: null,
+			id: null,
+			price: null,
+
 			submitStatus: null,
 			msg: null,
 
@@ -22,7 +22,7 @@ export default {
 			required,
 			minLength: minLength(2)
 		},
-		
+
 	},
 
 	methods: {
@@ -69,24 +69,24 @@ export default {
 				this.submitStatus = 'ERROR'
 			} else {
 
-				let res = await adm.editarPlanosDigital( 
-                    this.token,
-                    this.id,
-                    this.price,
-                    this.coupon,
-                    this.send_message,
-                    this.institution,
-                    this.trial,
-                    this.subadm,
+				let res = await adm.editarPlanosDigital(
+					this.token,
+					this.id,
+					this.price.replace(/[^\d]+/g,''),
+					this.coupon,
+					this.send_message,
+					this.institution,
+					this.trial,
+					this.subadm,
 				)
 				if (!res.next) {
-					this.msg =  res.message,
-   				 setTimeout(() => this.msg= "", 3000);
+					this.msg = res.message,
+						setTimeout(() => this.msg = "", 3000);
 
 					this.error = res.message
 					return null
 				}
-			
+
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
@@ -95,11 +95,11 @@ export default {
 			}
 		},
 	},
-	async mounted() { 
+	async mounted() {
 		this.id = globalThis._planos.id
 		this.nome = globalThis._planos.nome
-		this.price = (globalThis._planos.price/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }) 
-	
+		this.price = (globalThis._planos.price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+
 	},
-    template: await get_template('./assets/js/views/planos/planoEditar')
+	template: await get_template('./assets/js/views/planos/planoEditar')
 }

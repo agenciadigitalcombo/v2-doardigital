@@ -119,7 +119,7 @@ const routes = [
     { path: '/local', component: { template: '<p-endereco></p-endereco>' } },
     { path: '/seguranca', component: { template: '<p-seguranca></p-seguranca>' } },
 
-     { path: '/plano-digital', component: { template: '<c-planos-digital>' } },
+     { path: '/planos_digital', component: { template: '<c-planos-digital>' } },
     { path: '/plano-digital/novo', component: { template: '<c-planos-digitalNovo>' } },
     { path: '/plano-digital/editar', component: { template: '<c-planos-digitalEdita>' } },
 ]
