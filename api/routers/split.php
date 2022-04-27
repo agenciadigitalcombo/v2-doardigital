@@ -1,6 +1,8 @@
 <?php
 
-router('/split-new', 'SplitControler@create');
-router('/split-update', 'SplitControler@update');
-router('/split-delete', 'SplitControler@delete');
-router('/split-list', 'SplitControler@list_all');
+router('/split/', 'SplitControle@start');
+router('/split/register', 'SplitControle@register');
+router('/split/list', 'SplitControle@list');
+router('/split/info', 'SplitControle@info');
+router('/split/update-info', 'SplitControle@update');
+router('/split/del', 'SplitControle@del');

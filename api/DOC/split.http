@@ -1,8 +1,9 @@
 @host=http://doardigital.con
-@token=
-@nome=
-@recursos=
-@id=
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@id=2
+@fk=42
+@code=cart_000000001
+@porcentagem=3
 
 ##
 GET {{host}}/api/split/
@@ -12,11 +13,12 @@ POST {{host}}/api/split/register
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
-&nome={{nome}}
-&recursos={{recursos}}
+&fk={{fk}}
+&code={{code}}
+&porcentagem={{porcentagem}}
 
 ###
-GET {{host}}/api/split/list?token={{token}}
+GET {{host}}/api/split/list?token={{token}}&fk=42
 
 ###
 GET {{host}}/api/split/info?id={{id}}&token={{token}}
@@ -26,9 +28,10 @@ POST {{host}}/api/split/update-info
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
-&nome={{nome}}
-&recursos={{recursos}}
 &id={{id}}
+&fk={{fk}}
+&code={{code}}
+&porcentagem={{porcentagem}}
 
 ###
 POST {{host}}/api/split/del

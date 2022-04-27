@@ -213,13 +213,3 @@ CREATE TABLE atlassian_correio (
     token varchar(255),
     chave varchar(255)
 );
-
-CREATE TABLE email_notificao (
-    id int not null auto_increment primary key,
-    instituicao_id int,
-    assunto varchar(55),
-    corpo varchar(255),
-    acao varchar(75),
-    cron varchar(25)
-);
-

@@ -15,9 +15,9 @@ class Split
         $this->con->table('split');
     }
 
-    public function listAll(string $code): array
+    public function listAll(string $fk): array
     {
-        $this->con->where(["code" => $code]);
+        $this->con->where(["fk" => $fk]);
         return array_map(["Split", "porter"], $this->con->select());
     }
 
