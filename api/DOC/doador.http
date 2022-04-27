@@ -1,0 +1,13 @@
+@host=http://doardigital.con
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@instituicao_fk=42
+@cpf=0245687
+
+##
+GET {{host}}/api/doador/
+
+###
+GET {{host}}/api/doador/list?token={{token}}&instituicao_fk={{instituicao_fk}}
+
+###
+GET {{host}}/api/doador/info?instituicao_fk={{instituicao_fk}}&token={{token}}&cpf={{cpf}}
