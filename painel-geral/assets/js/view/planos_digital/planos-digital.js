@@ -41,6 +41,29 @@ export default {
             window.location.href = "#/plano-digital/editar"
         },
 
+		async eliminar(dados) {
+            if (confirm('deseja excluir este Plano Digital ?')) {
+                this.error = null
+                let res = await adm.eliminaPlanosDigital(
+                    this.token,
+                    this.id = dados.id,
+
+                )
+                if (!res.next) {
+                    
+                    this.error = res.message
+                    return null
+                }
+
+                this.msg = res.message,
+                    setTimeout(() => this.msg = "", 5000);
+
+
+                this.dados = (await this.listar()).payload 
+                 
+            }
+        },
+
 		async statusx(status) {
 			this.error = null
 			this.plano_id= status 
@@ -59,7 +82,7 @@ export default {
 	},
 
 	async mounted() {
-		this.fk = window.localStorage.getItem('instituicao_id');
+		this.fk = "999"
 		this.dados = (await this.listar()).payload
        
 	   

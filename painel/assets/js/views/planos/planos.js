@@ -21,6 +21,17 @@ export default {
         }
     },
 
+	computed: {
+
+        planos() {
+            let lista
+            lista = this.dados.filter((filtrar) => {
+                return filtrar.fk !== "10";
+            })
+            return lista
+        }, 
+    },
+
 	filters: {
         is_price(price) {
             let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
@@ -39,6 +50,29 @@ export default {
 		async editar(id) {
 			globalThis._planos = this.dados.find(user => user.id == id)
             window.location.href = "#/planos/editar"
+        },
+
+		async eliminar(dados) {
+            if (confirm('deseja excluir este Plano ?')) {
+                this.error = null
+                let res = await adm.eliminaPlanosDigital(
+                    this.token,
+                    this.id = dados.id,
+
+                )
+                if (!res.next) {
+                    
+                    this.error = res.message
+                    return null
+                }
+
+                this.msg = res.message,
+                    setTimeout(() => this.msg = "", 5000);
+
+
+                this.dados = (await this.listar()).payload 
+                 
+            }
         },
 
 		async statusx(status) {

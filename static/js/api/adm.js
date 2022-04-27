@@ -555,6 +555,19 @@ export default {
         })
     },
 
+    async eliminaPlanosDigital(
+        token,
+        id,
+        
+    ) {
+        return await http.post('/plano/del', {
+            token,
+            id,
+           
+        })
+    },
+
+
     async onOff(
         plano_id,
         token,

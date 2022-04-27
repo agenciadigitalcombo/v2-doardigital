@@ -18,6 +18,7 @@ export default {
 
         este_titulo(status) {
             let apresentar = {
+                '': 'Inicio',
                 usuarios: 'Usuarios',
                 instituicoes: 'Minhas instituições',
                 editarInstituicoes: 'Editar Instituição',
@@ -30,6 +31,12 @@ export default {
                 perfil: 'Perfil',
                 local: 'Perfil',
                 seguranca: 'Perfil',
+
+                
+                planos_digital: 'Plano Digital',
+                'plano-digital/novo': 'Plano Digital',
+                'plano-digital/editar': 'Plano Digital',
+
             }
             return apresentar[status]
         },

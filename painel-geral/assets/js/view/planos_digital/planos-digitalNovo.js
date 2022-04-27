@@ -87,7 +87,7 @@ export default {
 				let res = await adm.cadastrarPlanosDigital( 
                     this.token,
                     this.fk,
-                    this.price,
+                    this.price.replace(/[^\d]+/g,''),
                     this.coupon,
                     this.send_message,
                     this.institution,
@@ -105,13 +105,13 @@ export default {
 				this.submitStatus = 'PENDING'
 				setTimeout(() => {
 					this.submitStatus = 'OK'
-					window.location.href = `#/plano-digital`
+					window.location.href = `#/planos_digital`
 				}, 500)
 			}
 		},
 	},
 	async mounted() { 
-		this.fk = window.localStorage.getItem('instituicao_id');
+		this.fk = "999"
 	},
     template: await get_template('./assets/js/view/planos_digital/planos-digitalNovo')
 }
