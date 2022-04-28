@@ -23,18 +23,17 @@ export default {
 		}
 	},
 
-	methods: {  
+	methods: {
 
-		async UpdateSplit() {
+		async addSplit() {
 			this.error = null
 
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			} else {
-				let res = await adm.splitUpdate(
+				let res = await adm.split(
 					this.token,
-					this.id,
 					this.fk,
 					this.code,
 					this.porcentagem,
@@ -58,18 +57,16 @@ export default {
 	},
 
 	async mounted() {
-		
 		this.token = localStorage.getItem('token')
 		let str = this.token.split('.')[0]
 		let encodedStr = atob(str);
 		var res = JSON.parse(encodedStr);
 		this.code = res.code
 
-	 	this.id = globalThis._divisao.id,
-		this.porcentagem = globalThis._divisao.porcentagem	
 		this.fk = window.localStorage.getItem('instituicao_id');
 	},
 
 
-	template: await get_template('./assets/js/views/split/div-pagamento_editar')
+
+	template: await get_template('./assets/js/views/split/split_novo')
 }

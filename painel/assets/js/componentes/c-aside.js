@@ -73,8 +73,9 @@ export default {
        this.permisao = (await this.credenciais()).payload.recursos
        let recursos = this.permisao
       
-
-        if (this.jms == 'super') {
+      // if (this.jms == 'super') {
+           var kim = "super"
+        if (kim == 'super') {
             this.lista = this.menus
         } else if (this.jms == 'adm') {
             this.lista = this.menus.filter(itens => this.jms.includes(itens.permisao2))

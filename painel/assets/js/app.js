@@ -99,9 +99,8 @@ Vue.component('c-qr-code', qrCode)
 import divPagamento from './views/split/div-pagamento.js'
 Vue.component('c-div-pagamento', divPagamento)
 
-import divPagamentoAdd from './views/split/div-pagamentoAdd.js'
-Vue.component('c-div-pagamentoAdd', divPagamentoAdd)
-
+import divPagamentoAdd from './views/split/split_novos.js'
+Vue.component('c-split_novo', divPagamentoAdd)
 
 import divPagamentoEditar from './views/split/div-pagamento_editar.js'
 Vue.component('c-div-pagamentoEditar', divPagamentoEditar)
