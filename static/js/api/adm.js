@@ -581,54 +581,49 @@ export default {
 
 
     async split(
-        instituicao_id,
-        recebedor_id,
-        responsavel_estorno,
-        porcentagem,
         token,
+        fk ,
+        code,
+        porcentagem,
     ) {
-        return await http.post('/split-new', {
-            instituicao_id,
-            recebedor_id,
-            responsavel_estorno,
-            porcentagem,
-            token,
+        return await http.post('/split/register', {
+        token,
+        fk ,
+        code,
+        porcentagem,
         })
     },
 
     async splitUpdate(
-        id,
-        instituicao_id,
-        recebedor_id,
-        responsavel_estorno,
-        porcentagem,
         token,
+        id,
+        fk ,
+        code,
+        porcentagem, 
     ) {
-        return await http.post('/split-update', {
-            id,
-            instituicao_id,
-            recebedor_id,
-            responsavel_estorno,
-            porcentagem,
+        return await http.post('/split/update-info', {
             token,
+            id,
+            fk ,
+            code,
+            porcentagem, 
         })
     },
 
 
 
 
-    async listarSplit(instituicao_id) {
-        return await http.get('/split-list', {
-            instituicao_id
+    async listarSplit( token, fk) {
+        return await http.get('/split/list', {
+            token, fk 
         })
     },
 
-    async deleterSplit(id, token) {
-        return await http.post('/split-delete', {
-            id, token
+    async deleterSplit(token, id) {
+        return await http.post('/split/del', {
+            token, id
         })
     },
-
 
 
     async addMetas(

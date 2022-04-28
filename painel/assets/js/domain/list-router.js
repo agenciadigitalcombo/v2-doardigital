@@ -35,7 +35,7 @@ export default [
     { path: '/qr-code', component: { template: '<c-qr-code>' } },
     
     { path: '/divisao-pagamento', component: { template: '<c-div-pagamento>' } },
-    { path: '/add-pagamento', component: { template: '<c-div-pagamentoAdd>' } },
+    { path: '/add-pagamento', component: { template: '<c-split_novo>' } },
     { path: '/editar-pagamento', component: { template: '<c-div-pagamentoEditar>' } },
 
   
