@@ -45,11 +45,12 @@ class Asaas
         return $head;
     }
 
-    function is_error()
+    function is_error($debug = null)
     {
         echo json_encode([
             'next' => false,
-            'message' => 'Algum parâmetro obrigatório não foi passado, ou os parâmetros não são corretos.'
+            'message' => 'Algum parâmetro obrigatório não foi passado, ou os parâmetros não são corretos.',
+            'debug' => $debug
         ]);
         die;
     }
@@ -68,7 +69,6 @@ class Asaas
 
         try {
             $defaults = [
-                // CURLOPT_CUSTOMREQUEST  => $method,
                 CURLOPT_POST           => true,
                 CURLOPT_HEADER         => 0,
                 CURLOPT_RETURNTRANSFER => 1,
@@ -78,16 +78,19 @@ class Asaas
                     'Content-Type:application/json',
                     "access_token: {$this->api_key}"
                 ]
-                ];
-                
+            ];
+            if ($method != "POST") {
+                $defaults[CURLOPT_CUSTOMREQUEST] = $method;
+                unset($defaults[CURLOPT_POST]);
+            }
+
             $con = curl_init();
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
             curl_close($con);
-            // var_dump($this->api_key);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
-            $this->is_error();
+            $this->is_error(json_decode($ex, true));
         }
     }
 
@@ -111,13 +114,13 @@ class Asaas
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
-            $this->is_error();
+            $this->is_error(json_decode($ex, true));
         }
     }
 
     public function set_api_key(string $api_key): void
     {
-        $this->api_key = $api_key;        
+        $this->api_key = $api_key;
     }
 
     public function put(string $path, array $payload): array
@@ -128,5 +131,22 @@ class Asaas
     public function del(string $path, array $payload): array
     {
         return $this->post($path, $payload, 'DELETE');
+    }
+
+    function clearNumber(string $number): string
+    {
+        return preg_replace('/\D/', '', $number);
+    }
+
+    function getDDD(string $tel)
+    {
+        $tel = $this->clearNumber($tel);
+        return stripos($tel, 0, 2);
+    }
+
+    function excludeDDD(string $tel)
+    {
+        $tel = $this->clearNumber($tel);
+        return stripos($tel, 2, 9);
     }
 }
