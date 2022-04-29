@@ -269,8 +269,8 @@ export default {
 
     async mounted() {
         //	this.subdomaim = "34edqwe21"
-       //  this.subdomaim = "combopay.com.br"
-       this.subdomaim = window.location.hostname
+       //   this.subdomaim = "combopay.com.br"
+      this.subdomaim = window.location.hostname
 
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
