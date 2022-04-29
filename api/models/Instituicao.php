@@ -2,7 +2,7 @@
 
 class Instituicao
 {
-
+    
     public function set_token_recebedor(int $recebedor_id, string $wallet_id): void
     {
         $banco = new Banco();

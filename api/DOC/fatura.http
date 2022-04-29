@@ -1,24 +1,50 @@
-@token=
-@instituicao_fk=
-@nome=
-@cpf=
-@sexo=
-@telefone=
-@email=
-@cep=
-@logadouro=
+@host=http://doardigital.con
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@instituicao_fk=42
+@nome=Bruno Ap.
+@cpf=675.310.880-70
+@sexo=MASCULINO
+@telefone=(82) 9 9977-6698
+@email=br.rafael@outlook.com
+@cep=06786-270
+@logadouro=Rua das Capivaras
 @complemento=
-@numero=
-@bairro=
-@cidade=
-@estado=
-@valor=
-@recorrente=
-@tipo_pagamento=
+@numero=105 A
+@bairro=JD Margarida
+@cidade=Taboão da serra
+@estado=SP
+@valor=45.30
+@recorrente=0
+@tipo_pagamento=BOLETO
 @card_nome=
 @card_numero=
 @card_validade=
 @card_cvv=
 
+###
+GET {{host}}/api/fatura
 
 ###
+POST {{host}}/api/fatura/create
+Content-Type: application/x-www-form-urlencoded;
+
+instituicao_fk={{instituicao_fk}}
+&nome={{nome}}
+&cpf={{cpf}}
+&sexo={{sexo}}
+&telefone={{telefone}}
+&email={{email}}
+&cep={{cep}}
+&logadouro={{logadouro}}
+&complemento={{complemento}}
+&numero={{numero}}
+&bairro={{bairro}}
+&cidade={{cidade}}
+&estado={{estado}}
+&valor={{valor}}
+&recorrente={{recorrente}}
+&tipo_pagamento={{tipo_pagamento}}
+&card_nome={{card_nome}}
+&card_numero={{card_numero}}
+&card_validade={{card_validade}}
+&card_cvv={{card_cvv}}
