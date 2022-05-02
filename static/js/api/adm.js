@@ -1,5 +1,5 @@
 import http from './http.js'
- 
+
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/adm/register', {
@@ -26,23 +26,23 @@ export default {
         })
     },
 
-     
-    async atualizarFinaliza( 
-                    token,
-					code,
-					nome, 
-					cpf,
-					nascimento,
-					telefone, 
-					credencial) {
+
+    async atualizarFinaliza(
+        token,
+        code,
+        nome,
+        cpf,
+        nascimento,
+        telefone,
+        credencial) {
         return await http.post('/adm/update-info', {
-             token,
-					code,
-					nome, 
-					cpf,
-					nascimento,
-					telefone, 
-					credencial
+            token,
+            code,
+            nome,
+            cpf,
+            nascimento,
+            telefone,
+            credencial
         })
     },
 
@@ -67,10 +67,10 @@ export default {
 
         })
     },
-    
+
     async atualizarEndereco(
-        token, 
-        code, 
+        token,
+        code,
         cep,
         logradouro,
         numero,
@@ -80,8 +80,8 @@ export default {
         estado,
     ) {
         return await http.post('/adm/address', {
-            token, 
-            code, 
+            token,
+            code,
             cep,
             logradouro,
             numero,
@@ -92,9 +92,9 @@ export default {
         })
     },
 
-    async listarEndereco( token, code, ) {
+    async listarEndereco(token, code,) {
         return await http.get('/adm/address-info', {
-            token, code, 
+            token, code,
         })
     },
 
@@ -120,7 +120,7 @@ export default {
 
     async credencial(token, id) {
         return await http.get('/credencial/info', {
-               token, id
+            token, id
         })
     },
 
@@ -129,7 +129,7 @@ export default {
         return await http.post('/credencial/register', {
             token,
             nome,
-            recursos, 
+            recursos,
         })
     },
 
@@ -138,7 +138,7 @@ export default {
         return await http.post('/credencial/update-info', {
             token,
             nome,
-            recursos, 
+            recursos,
             id,
         })
     },
@@ -164,7 +164,7 @@ export default {
         cidade,
         estado,
         numero,
-        tipo_empresa, 
+        tipo_empresa,
         complemento,
 
     ) {
@@ -182,7 +182,7 @@ export default {
             cidade,
             estado,
             numero,
-            tipo_empresa, 
+            tipo_empresa,
             complemento,
         })
     },
@@ -410,7 +410,7 @@ export default {
 
     async transacaoPlano(
         instituicao_id,
-        mensal, 
+        mensal,
         planos_valor,
         planos_nome,
         email,
@@ -454,10 +454,10 @@ export default {
         })
     },
 
-    
+
     async transacao(
         instituicao_id,
-        mensal, 
+        mensal,
         planos_valor,
         planos_nome,
         email,
@@ -472,7 +472,7 @@ export default {
         bairro,
         cidade,
         type_pagamento,
-       
+
     ) {
         return await http.post('/transacao', {
             instituicao_id,
@@ -491,11 +491,11 @@ export default {
             bairro,
             cidade,
             type_pagamento,
-            
+
         })
     },
 
-    
+
     async obrigado(
         doacao_id
     ) {
@@ -558,12 +558,12 @@ export default {
     async eliminaPlanosDigital(
         token,
         id,
-        
+
     ) {
         return await http.post('/plano/del', {
             token,
             id,
-           
+
         })
     },
 
@@ -582,40 +582,40 @@ export default {
 
     async split(
         token,
-        fk ,
+        fk,
         code,
         porcentagem,
     ) {
         return await http.post('/split/register', {
-        token,
-        fk ,
-        code,
-        porcentagem,
+            token,
+            fk,
+            code,
+            porcentagem,
         })
     },
 
     async splitUpdate(
         token,
         id,
-        fk ,
+        fk,
         code,
-        porcentagem, 
+        porcentagem,
     ) {
         return await http.post('/split/update-info', {
             token,
             id,
-            fk ,
+            fk,
             code,
-            porcentagem, 
+            porcentagem,
         })
     },
 
 
 
 
-    async listarSplit( token, fk) {
+    async listarSplit(token, fk) {
         return await http.get('/split/list', {
-            token, fk 
+            token, fk
         })
     },
 
@@ -746,9 +746,12 @@ export default {
         })
     },
 
-    async listarDoadores(instituicao_id) {
-        return await http.get('/list-doadores', {
-            instituicao_id
+    async listarDoadores(
+        token,
+        instituicao_fk) {
+        return await http.get('/doador/list', {
+            token,
+            instituicao_fk
         })
     },
 
@@ -826,11 +829,11 @@ export default {
         })
     },
 
-    async listarSmtp( 
+    async listarSmtp(
         instituicao_id
-        ) {
+    ) {
         return await http.get('/list-smtp', {
-             instituicao_id
+            instituicao_id
         })
     },
 
@@ -844,11 +847,11 @@ export default {
         })
     },
 
-    async listarEvenda( 
+    async listarEvenda(
         instituicao_id
-        ) {
+    ) {
         return await http.get('/list-evendas', {
-             instituicao_id
+            instituicao_id
         })
     },
 
@@ -864,11 +867,11 @@ export default {
         })
     },
 
-    async listarMailBoss( 
+    async listarMailBoss(
         instituicao_id
-        ) {
+    ) {
         return await http.get('/list-mailBoss', {
-             instituicao_id
+            instituicao_id
         })
     },
 
@@ -886,9 +889,9 @@ export default {
 
     async listarCarteira(
         id,
-        ) {
+    ) {
         return await http.get('/instituicao/balance', {
-            id, 
+            id,
         })
     },
 
