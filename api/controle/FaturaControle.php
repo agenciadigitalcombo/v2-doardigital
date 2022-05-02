@@ -38,7 +38,7 @@ class FaturaControle extends Controle
         $email = $_REQUEST['email'] ?? null;
         $cep = $_REQUEST['cep'] ?? null;
         $logadouro = $_REQUEST['logadouro'] ?? null;
-        $complemento = $_REQUEST['complemento'] ?? null;
+        $complemento = $_REQUEST['complemento'] ?? "";
         $numero = $_REQUEST['numero'] ?? null;
         $bairro = $_REQUEST['bairro'] ?? null;
         $cidade = $_REQUEST['cidade'] ?? null;
@@ -52,16 +52,46 @@ class FaturaControle extends Controle
         $card_cvv = $_REQUEST['card_cvv'] ?? null;
 
         $client = new Doador();
+        $clientAsa = new AsaasCliente();
         $address = null;
         $fatura = null;
         $institution = null;
 
         $code = null;
         $url = null;
-
+        
         $exist = $client->exist($cpf, $instituicao_fk);
         if (!$exist) {
+            $external_fk = $client->maker_external_fk();            
+            $resClienteAsa = $clientAsa->create(
+                $external_fk,
+                $nome,
+                $email,
+                $telefone,
+                $cpf,
+                $cep,
+                $logadouro,
+                $numero,
+                $complemento,
+                $bairro
+            );
+            $pagamento_fk = $resClienteAsa['id'] ?? "cus_error";
+            $nascimento = "";
+            $client->register(
+                $instituicao_fk,
+                $pagamento_fk,
+                $external_fk,
+                $nome,
+                $cpf,
+                $telefone,
+                $email,
+                $nascimento
+            );
         }
+        $clientInfo = $client->info($cpf, $instituicao_fk);
+        $costumer = $clientInfo['pagamento_fk'];
+
+
 
         self::printSuccess(
             "Fatura registrada com sucesso",

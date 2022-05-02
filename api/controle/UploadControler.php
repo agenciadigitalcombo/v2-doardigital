@@ -1,16 +1,15 @@
 <?php
 
-class UploadControler{
+class UploadControler extends Controle{
 
     static function upload()
     {
-        
         $nome_img = upload();
-        
-        echo json_encode([
-            'next' => true,
-            'message' => 'Enviado com sucesso',
-            'nome_image' => $nome_img
-        ]);
+        self::printSuccess(
+            "Enviado com sucesso", 
+            [
+                "nome" => $nome_img
+            ]
+        );      
     }
 }

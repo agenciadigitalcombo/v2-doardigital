@@ -2,57 +2,68 @@
 
 class Instituicao
 {
-    
-    public function set_token_recebedor(int $recebedor_id, string $wallet_id): void
+    private $id;
+    private $institution_fk;
+    private $carteira_fk;
+    private $nome;
+    private $cpfCnpj;
+    private $email;
+    private $telefone;
+    private $registro;
+    private $visible;
+    private $domain;
+    private $subdomain;
+    private $logo;
+    private $icon;
+    private $cor;
+    private $titulo;
+    private $tags;
+    private $descricao;
+
+    private $con;
+
+
+    function __construct()
     {
-        $banco = new Banco();
-        $sql = "UPDATE instituicao SET wallet_id='$wallet_id' WHERE id=$recebedor_id";
-        $banco->exec($sql);
+        $this->con = new Banco();
+        $this->con->table("institution");
     }
 
-    public function get_by_id(int $id): array
+    public function info(array $institution_fk): array
     {
-        $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE id='$id'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
-    } 
-    
-    public function get_by_subdomaim(string $subdomaim): array
-    {
-        $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE subdomaim='$subdomaim' OR dominio='$subdomaim'";
-        $guard = $banco->query($sql);
-        return $guard[0] ?? [];
-    }
-    
-    public function exist_email(string $email): bool
-    {
-        
-        $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE email='$email'";
-        $consulta = $banco->query($sql);
-        return !empty($consulta);
+        $this->con->where([
+            "institution_fk" => $institution_fk
+        ]);        
+        return $this->con->select() ?? [];
     }
 
-    public function exist_subdomain(string $subdomain): bool
+    public function getByHostName(string $hostName): array
     {
-        
-        $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE subdomaim='$subdomain'";
-        $consulta = $banco->query($sql);
-        return !empty($consulta);
+        $sql = "SELECT * FROM institution WHERE subdomain='{$hostName}' OR domain='{$hostName}'";
+        $this->con->query($sql);
+        return $this->con->query($sql)[0] ?? [];
     }
 
-    public function set_domain_person(int $id, string $dominio): void
+    public function existSubdomain(string $subdomain): bool
     {
-        $banco = new Banco();
-        $sql = "UPDATE instituicao SET dominio='$dominio' WHERE id='$id'";
-        $banco->exec($sql);
+        $this->con->where([
+            "subdomain" => $subdomain
+        ]);        
+        return !empty($this->con->select());
     }
 
-    public function create(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $wallet_id, string $api_key, string $cor, string $logo): void
-    {   
+    public function setDomain(string $institution_fk, string $domain): void
+    {
+        $this->con->where([
+            "institution_fk" => $institution_fk
+        ]);
+        $this->con->update([
+            "domain" => $domain
+        ]);
+    }
+
+    public function register(int $adm_id, string $nome_fantasia, string $razao_social, string $sub_domain, string $email, string $cnpj, string $telefone, string $wallet_id, string $api_key, string $cor, string $logo): void
+    {
         $status = 1;
         $data_registro = date('Y-m-d');
         $banco = new Banco();
@@ -63,32 +74,7 @@ class Instituicao
         $banco->exec($sql);
     }
 
-    public function set_pix_key(string $pix_key, int $instituicao_id): void
-    {   
-        $banco = new Banco();
-        $sql = "UPDATE instituicao SET ";
-        $sql .= "pix_key='$pix_key' WHERE id=$instituicao_id";
-        $banco->exec($sql);
-    }
-
-
-    public function exist_pix(string $pix_key): bool
-    {
-        $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE pix_key='$pix_key'";
-        $guard = $banco->query($sql);
-
-        return !empty($guard);
-    }
-
-    public function list_pix(int $instituicao_id): array
-    {
-        $banco = new Banco();
-        $sql = "SELECT * FROM instituicao WHERE id=$instituicao_id";
-        $guard = $banco->query($sql);
-
-        return $guard[0];
-    }
+    
 
     public function update(int $instituicao_id, string $nome_fantasia, string $razao_social, string $email, string $cnpj, string $telefone, string $cor, string $logo): void
     {
@@ -97,7 +83,6 @@ class Instituicao
         $sql .= " nome_fantasia='$nome_fantasia', razao_social='$razao_social', email='$email', cnpj='$cnpj', telefone='$telefone', cor='$cor', logo='$logo'";
         $sql .= " WHERE id=$instituicao_id";
         $banco->exec($sql);
-
     }
 
     public function config_instituicao(int $instituicao_id, string $cor, string $logo, string $titulo_site, string $tags, string $descricao_site, string $icon): void
@@ -106,9 +91,8 @@ class Instituicao
         $sql = "UPDATE instituicao SET";
         $sql .= " cor='$cor', logo='$logo', titulo_site='$titulo_site', tags='$tags', descricao_site='$descricao_site', icon='$icon'";
         $sql .= " WHERE id=$instituicao_id";
-        
-        $banco->exec($sql);
 
+        $banco->exec($sql);
     }
 
     public function list_all(): array
@@ -132,10 +116,10 @@ class Instituicao
 
         $guard = $this->get_by_id($id);
         $status = $guard['status'];
-        
-        if($status == 1){
+
+        if ($status == 1) {
             $status = 0;
-        }else{
+        } else {
             $status = 1;
         }
         $sql = "UPDATE instituicao SET status='$status' WHERE id=$id";
@@ -146,7 +130,7 @@ class Instituicao
 
     public function by_ids(array $ids): array
     {
-        if( !empty($ids) ) {
+        if (!empty($ids)) {
             $banco = new Banco();
             $ids = implode(', ', $ids);
             $sql = "SELECT * FROM instituicao WHERE id IN ($ids)";
@@ -156,9 +140,6 @@ class Instituicao
         return [];
     }
 
-    public function search_by_name_or_id(string $termo): array
-    {return [];}
-
     public function list_all_by_adm_id($adm_id): array
     {
 
@@ -167,5 +148,4 @@ class Instituicao
         $guard = $banco->query($sql);
         return $guard;
     }
-
 }
