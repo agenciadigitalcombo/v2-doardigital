@@ -64,7 +64,7 @@ class FaturaControle extends Controle
         
         if( $env['sandbox'] ) {
             $clientAsa->set_api_key($env['api_key']);
-            self::printSuccess("asa",["key"=> $env['api_key']] );
+           
         }
 
 
@@ -84,6 +84,7 @@ class FaturaControle extends Controle
                 $complemento,
                 $bairro
             );
+            self::printSuccess("asa", $resClienteAsa );
             $pagamento_fk = $resClienteAsa['id'] ?? "cus_error";
             $nascimento = "";
             $client->register(
