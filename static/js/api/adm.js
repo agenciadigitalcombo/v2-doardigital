@@ -756,9 +756,10 @@ export default {
     },
 
     async visualizarDoador(
-        token, cpf) {
-        return await http.post('/list-doador', {
+        token, instituicao_fk, cpf) {
+        return await http.post('/doador/info', {
             token,
+            instituicao_fk,
             cpf,
 
         })

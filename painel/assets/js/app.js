@@ -33,7 +33,7 @@ Vue.component('c-validacao', validacao)
 import detalhe from './componentes/c-detalhe.js'
 Vue.component('c-detalhe', detalhe)
 
-import grafico from './views/grafico.js'
+import grafico from './views/graficos/grafico.js'
 Vue.component('c-grafico', grafico)
 
 import dash from './views/dash.js'
