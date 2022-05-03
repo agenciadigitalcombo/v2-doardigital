@@ -13,6 +13,7 @@ class FaturaControle extends Controle
 
     static function register()
     {
+
         self::requireInputs([
             "instituicao_fk" => "Informe a referencia da instituição",
             "nome" => "Informe seu nome",
@@ -75,18 +76,19 @@ class FaturaControle extends Controle
                 $complemento,
                 $bairro
             );
+            self::printSuccess("asa", $resClienteAsa );
             $pagamento_fk = $resClienteAsa['id'] ?? "cus_error";
             $nascimento = "";
-            $client->register(
-                $instituicao_fk,
-                $pagamento_fk,
-                $external_fk,
-                $nome,
-                $cpf,
-                $telefone,
-                $email,
-                $nascimento
-            );
+            // $client->register(
+            //     $instituicao_fk,
+            //     $pagamento_fk,
+            //     $external_fk,
+            //     $nome,
+            //     $cpf,
+            //     $telefone,
+            //     $email,
+            //     $nascimento
+            // );
         }
         $clientInfo = $client->info($cpf, $instituicao_fk);
         $costumer = $clientInfo['pagamento_fk'];
@@ -96,11 +98,11 @@ class FaturaControle extends Controle
         self::printSuccess(
             "Fatura registrada com sucesso",
             [
-                "recorrente" => $recorrente,
-                "valor" => $valor,
-                "code" => $code,
-                "url" => $url,
-                "tipo_pagamento" => $tipo_pagamento
+                "recorrente" => $recorrente ?? null,
+                "valor" => $valor ?? null,
+                "code" => $code ?? null,
+                "url" => $url ?? null,
+                "tipo_pagamento" => $tipo_pagamento ?? null
             ]
         );
     }

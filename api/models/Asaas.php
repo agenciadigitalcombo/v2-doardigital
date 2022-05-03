@@ -49,7 +49,7 @@ class Asaas
     {
         echo json_encode([
             'next' => false,
-            'message' => 'Algum parâmetro obrigatório não foi passado, ou os parâmetros não são corretos.',
+            'message' => 'Error ao chamar meio de pagamento',
             'debug' => $debug
         ]);
         die;
