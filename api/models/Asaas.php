@@ -45,26 +45,8 @@ class Asaas
         return $head;
     }
 
-    function is_error($debug = null)
-    {
-        echo json_encode([
-            'next' => false,
-            'message' => 'Error ao chamar meio de pagamento',
-            'debug' => $debug
-        ]);
-        die;
-    }
-
-    function is_debug($payload)
-    {
-        if (!empty($_REQUEST['debug_pay'])) {
-            echo json_encode($payload);
-        }
-    }
-
     public function post(string $path, array $payload, string $method = 'POST'): array
     {
-        $this->is_debug($payload);
         $full_path = $this->get_path($path);
 
         try {
@@ -90,13 +72,29 @@ class Asaas
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
-            $this->is_error(json_decode($ex, true));
+            echo json_encode([
+                "next" => false,
+                "message" => "error ao chamar meio pagamento",
+                "payload" => [
+                    "request" => [
+                        "header" => $this->get_head(),
+                        "full_path" => $full_path,
+                        "body" => $payload
+                    ],
+                    "response" => [
+                        "header" => null,
+                        "full_path" => null,
+                        "body" => json_decode($ex, true),
+                        "error" => curl_error($con)
+                    ],
+                ]
+            ]);
+            die;
         }
     }
 
     public function get(string $path, array $payload): array
     {
-        $this->is_debug($payload);
         $param = http_build_query($payload);
         $full_path = $this->get_path("{$path}?{$param}");
         try {
@@ -114,7 +112,24 @@ class Asaas
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
-            $this->is_error(json_decode($ex, true));
+            echo json_encode([
+                "next" => false,
+                "message" => "error ao chamar meio pagamento",
+                "payload" => [
+                    "request" => [
+                        "header" => $this->get_head(),
+                        "full_path" => $full_path,
+                        "body" => $payload
+                    ],
+                    "response" => [
+                        "header" => null,
+                        "full_path" => null,
+                        "body" => json_decode($ex, true),
+                        "error" => curl_error($con)
+                    ],
+                ]
+            ]);
+            die;
         }
     }
 
