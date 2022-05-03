@@ -1,4 +1,4 @@
-@host=http://doardigital.con
+@host=https://doardigital.tk
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
 @instituicao_fk=42
 @nome=Bruno Ap.
@@ -48,3 +48,4 @@ instituicao_fk={{instituicao_fk}}
 &card_numero={{card_numero}}
 &card_validade={{card_validade}}
 &card_cvv={{card_cvv}}
+&debug_pay=1
