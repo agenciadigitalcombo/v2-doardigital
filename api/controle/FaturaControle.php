@@ -57,10 +57,15 @@ class FaturaControle extends Controle
         $address = null;
         $fatura = null;
         $institution = null;
+        $env = require __DIR__ . "/../config.php";
 
         $code = null;
         $url = null;
         
+        if( $env['sandbox'] ) {
+            $clientAsa->set_api_key($env['api_key']);
+        }
+
         $exist = $client->exist($cpf, $instituicao_fk);
         if (!$exist) {
             $external_fk = $client->maker_external_fk();            
