@@ -61,14 +61,14 @@ class Asaas
                     "access_token: {$this->api_key}"
                 ]
             ];
-            if ($method != "POST") {
+            if ( !empty($method) && $method != "POST") {
                 $defaults[CURLOPT_CUSTOMREQUEST] = $method;
                 unset($defaults[CURLOPT_POST]);
             }
-
             $con = curl_init();
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
+            $info = curl_getinfo($con);
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
@@ -82,8 +82,7 @@ class Asaas
                         "body" => $payload
                     ],
                     "response" => [
-                        "header" => null,
-                        "full_path" => null,
+                        "info" => $info,
                         "body" => json_decode($ex, true),
                         "error" => curl_error($con)
                     ],
@@ -109,6 +108,7 @@ class Asaas
             $con = curl_init();
             curl_setopt_array($con, $defaults);
             $ex = curl_exec($con);
+            $info = curl_getinfo($con);
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
@@ -122,8 +122,7 @@ class Asaas
                         "body" => $payload
                     ],
                     "response" => [
-                        "header" => null,
-                        "full_path" => null,
+                        "info" => $info,
                         "body" => json_decode($ex, true),
                         "error" => curl_error($con)
                     ],

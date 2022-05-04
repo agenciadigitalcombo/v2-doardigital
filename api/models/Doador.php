@@ -26,13 +26,19 @@ class Doador
 
     public function exist(string $cpf, string $instituicao_fk): bool
     {
-        $this->con->where(["cpf" => $cpf, "instituicao_fk" => $instituicao_fk]);
+        $this->con->where([
+            "cpf" => $this->clearNumber($cpf),
+            "instituicao_fk" => $instituicao_fk
+        ]);
         return !empty($this->con->select());
     }
 
     public function info(string $cpf, string $instituicao_fk): array
     {
-        $this->con->where(["cpf" => $cpf, "instituicao_fk" => $instituicao_fk]);
+        $this->con->where([
+            "cpf" => $this->clearNumber($cpf),
+            "instituicao_fk" => $instituicao_fk
+        ]);
         return self::porter($this->con->select()[0] ?? []);
     }
 
@@ -89,7 +95,7 @@ class Doador
             "cpf" => $this->clearNumber($cpf),
             "instituicao_fk" => $instituicao_fk
         ]);
-        $this->con->insert([
+        $this->con->update([
             "nome" => $nome,
             "telefone" => $this->clearNumber($telefone),
             "email" => $email,

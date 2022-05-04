@@ -29,7 +29,7 @@ class Endereco
             "fk" => $fk,
             "tipo" => $tipo,
         ]);
-        return  $this->con->select();
+        return $this->con->select();
     }
 
     function clearZipCode(string $zipCode): string

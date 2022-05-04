@@ -44,31 +44,33 @@ class FaturaControle extends Controle
         $bairro = $_REQUEST['bairro'] ?? null;
         $cidade = $_REQUEST['cidade'] ?? null;
         $estado = $_REQUEST['estado'] ?? null;
-        $valor = (float) $_REQUEST['valor'] ?? 0;
+        $valor = (float) $_REQUEST['valor'] ? $_REQUEST['valor'] : 0;
         $recorrente = (int) $_REQUEST['recorrente'] ?? 0;
         $tipo_pagamento = $_REQUEST['tipo_pagamento'] ?? null;
         $card_nome = $_REQUEST['card_nome'] ?? null;
         $card_numero = $_REQUEST['card_numero'] ?? null;
         $card_validade = $_REQUEST['card_validade'] ?? null;
         $card_cvv = $_REQUEST['card_cvv'] ?? null;
+        $nascimento = "";
 
         $client = new Doador();
         $clientAsa = new AsaasCliente();
-        $address = null;
+        $address = new Endereco();
         $fatura = null;
         $institution = null;
         $env = require __DIR__ . "/../config.php";
 
         $code = null;
         $url = null;
-        
-        if( $env['sandbox'] ) {
-            $clientAsa->set_api_key($env['api_key']);           
+        $debug = null;
+
+        if ($env['sandbox']) {
+            $clientAsa->set_api_key($env['api_key']);
         }
 
         $exist = $client->exist($cpf, $instituicao_fk);
         if (!$exist) {
-            $external_fk = $client->maker_external_fk();            
+            $external_fk = $client->maker_external_fk();
             $resClienteAsa = $clientAsa->create(
                 $external_fk,
                 $nome,
@@ -82,7 +84,6 @@ class FaturaControle extends Controle
                 $bairro
             );
             $pagamento_fk = $resClienteAsa['id'] ?? "cus_error";
-            $nascimento = "";
             $client->register(
                 $instituicao_fk,
                 $pagamento_fk,
@@ -94,10 +95,31 @@ class FaturaControle extends Controle
                 $nascimento
             );
         }
+
         $clientInfo = $client->info($cpf, $instituicao_fk);
         $costumer = $clientInfo['pagamento_fk'];
+        $client->update(
+            $instituicao_fk,
+            $nome,
+            $cpf,
+            $telefone,
+            $email,
+            $nascimento
+        );
 
+        $address->save(
+            $clientInfo["external_fk"],
+            "ADDRESS_COSTUMER",
+            $cep,
+            $logadouro,
+            $numero,
+            $complemento,
+            $bairro,
+            $cidade,
+            $estado
+        );
 
+        $debug = $clientInfo;
 
         self::printSuccess(
             "Fatura registrada com sucesso",
@@ -106,7 +128,8 @@ class FaturaControle extends Controle
                 "valor" => $valor ?? null,
                 "code" => $code ?? null,
                 "url" => $url ?? null,
-                "tipo_pagamento" => $tipo_pagamento ?? null
+                "tipo_pagamento" => $tipo_pagamento ?? null,
+                "debug" => $debug
             ]
         );
     }
