@@ -57,8 +57,10 @@ class Asaas
                 CURLOPT_URL            => $full_path,
                 CURLOPT_POSTFIELDS     => json_encode($payload),
                 CURLOPT_HTTPHEADER     => [
-                    'Content-Type:application/json',
-                    "access_token: {$this->api_key}"
+                    'content-type: application/json',
+                    "access_token: {$this->api_key}",
+                    "accept: */*",
+                    "content-length: " . strlen(json_encode($payload)),
                 ]
             ];
             if ( !empty($method) && $method != "POST") {

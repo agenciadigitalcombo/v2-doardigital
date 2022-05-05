@@ -119,13 +119,13 @@ class FaturaControle extends Controle
         );
 
         $pay_external_fk = $fatura->maker_fk();
-        $costumer = $clientInfo['pagamento_fk'];
+        $customer = $clientInfo['pagamento_fk'];
         $split = [];
         $response = [];
 
         if ($recorrente) {
             $response = $Pay->signature(
-                $external_fk,
+                $pay_external_fk,
                 $tipo_pagamento,
                 $customer,
                 $valor,
@@ -144,7 +144,7 @@ class FaturaControle extends Controle
             );
         } else {
             $response = $Pay->single(
-                $external_fk,
+                $pay_external_fk,
                 $tipo_pagamento,
                 $customer,
                 $valor,
