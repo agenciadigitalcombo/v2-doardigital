@@ -7,12 +7,43 @@ export default {
 	data: function () {
 
 		return {
-
+			ontem: true,
+			seteDia: false,
+			trintaDia: false,
+			esteAno: false, 
 		}
 
 	},
 
 	methods: {
+		ontemX() {
+		 	this.ontem = true,
+			 this.seteDia = false,
+			 this.trintaDia = false,
+			 this.esteAno = false
+		},
+
+		seteDiaX() {
+			this.ontem = false,
+			this.seteDia = true,
+			this.trintaDia = false,
+			this.esteAno = false
+		},
+
+		trintaDiaX() {
+			this.ontem = false,
+			this.seteDia = false,
+			this.trintaDia = true,
+			this.esteAno = false
+		},
+
+		esteAnoX() {
+			this.ontem = false,
+			this.seteDia = false,
+			this.trintaDia = false,
+			this.esteAno = true
+		},
+
 	},
 
 	mounted() {
@@ -22,7 +53,7 @@ export default {
 				width: 380,
 				type: 'pie',
 			},
-			colors: ['#6aa84f', '#f1c232', '#f44336'],
+			colors: ['#37be00', '#ffd752', '#fe504f'],
 			labels: ['Pago', 'Aberto', 'Vencido'],
 			responsive: [{
 				breakpoint: 480,
@@ -50,7 +81,7 @@ export default {
 				width: 380,
 				type: 'pie',
 			},
-			colors: ['#39539E', '#1ab7ea'],
+			colors: ['#39539E', '#4fa8ff'],
 			labels: ['Recorrente', 'Unico'],
 			responsive: [{
 				breakpoint: 480,
@@ -78,7 +109,7 @@ export default {
 				width: 380,
 				type: 'pie',
 			},
-			colors: ['#6aa84f', '#f1c232'],
+			colors: ['#11b200', '#ff9901'],
 			labels: ['Pago', 'Aberto'],
 			responsive: [{
 				breakpoint: 480,
@@ -101,7 +132,7 @@ export default {
 
 
 		var options = {
-			series: [89, 11],
+			series: [19, 81],
 			chart: {
 				width: 380,
 				type: 'pie',
@@ -161,7 +192,7 @@ export default {
 
 			},
 
-			colors: ['#1ab7ea', '#6aa84f', '#f44336'],
+			colors: ['#49bfff', '#0fa39e', '#bf265f'],
 			labels: [''],
 
 		}
@@ -187,7 +218,7 @@ export default {
 					}
 				}
 			},
-			colors: ['#1ab7ea', '#6aa84f', '#f44336'],
+			colors: ['#49bfff', '#0fa39e', '#bf265f'],
 			plotOptions: {
 				bar: {
 					columnWidth: '75%',
@@ -226,7 +257,7 @@ export default {
   
         var options = {
 			series: [{
-			name: 'Servings',
+			name: 'Dia',
 			data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35, 31, 87, 65, 43, 21, 31, 87, 65, 35, 31, 87,12, 35, 31, 87,12]
 		  }],
 		 
@@ -240,6 +271,7 @@ export default {
 			  columnWidth: '50%',
 			}
 		  },  
+			colors: ['#6ab99e'],
 		  xaxis: {
 			labels: {
 			  rotate: -15
@@ -297,6 +329,7 @@ export default {
 				enabled: true,
 				enabledOnSeries: [1]
 			},
+			colors: ['#4792fc', '#13b385', '#fbd866', '#bc275f'],
 			//labels: ['jan','fev','mar','abr', 'maio', 'jun','jul','ago','set','out','nov','dez'],
 			xaxis: {
 				categories: ['jan', 'fev', 'mar', 'abr', 'maio', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
@@ -305,7 +338,7 @@ export default {
 
 		};
 
-		var chart = new ApexCharts(document.querySelector("#chart5"), options);
+		var chart = new ApexCharts(document.querySelector("#faturamentos"), options);
 		chart.render();
 
 	},

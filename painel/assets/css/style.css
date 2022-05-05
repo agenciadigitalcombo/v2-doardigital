@@ -97,3 +97,24 @@ span .menu  {
     box-shadow: none;
     border-radius: 0
 }
+
+ 
+  .hov {
+    filter: hue-rotate(90deg); 
+  }
+
+  .bg-light-Boleto {
+    background-color: #d8f8fd!important;
+}
+
+.bg-light-credito {
+    background-color: #ffbfe4!important;
+}
+ 
+.bg-light-pix {
+    background-color: #bfebe7!important;
+}
+.bg-light-adimple {
+    background-color: #e9fddd!important;
+}
+
