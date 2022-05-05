@@ -299,7 +299,7 @@ export default {
 			  columnWidth: '50%',
 			}
 		  },  
-			colors: ['#6ab99e'],
+			colors: ['#4792fc'],
 		  xaxis: {
 			labels: {
 			  rotate: -15
