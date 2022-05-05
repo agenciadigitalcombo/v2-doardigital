@@ -67,6 +67,7 @@ class FaturaControle extends Controle
 
         if ($env['sandbox']) {
             $clientAsa->set_api_key($env['api_key']);
+            $Pay->set_api_key($env['api_key']);
         }
 
         $exist = $client->exist($cpf, $instituicao_fk);
