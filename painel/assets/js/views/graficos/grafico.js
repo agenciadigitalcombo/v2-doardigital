@@ -7,6 +7,34 @@ export default {
 	data: function () {
 
 		return {
+			token: null,
+			instituicao_id: null,
+			dash_inst: "",
+			doacao_total: "",
+			cartao_total: "",
+			 boleto_total: "",
+			 pix_total: "",
+
+			 concluido_total: "",
+			 cartao_concluido: "",
+			 boleto_concluido: "",
+			 pix_concluido: "",
+
+			 aberto_total: "",
+			 cartao_aberto: "",
+			 boleto_aberto: "",
+			 pix_aberto: "",
+
+			 falhado_total: "",
+			 cartao_falhado: "",
+			 boleto_falhado: "",
+			 pix_falhado: "",
+
+			msg: null,
+			error: null,
+			jms: true,
+
+// outro
 			ontem: true,
 			seteDia: false,
 			trintaDia: false,
