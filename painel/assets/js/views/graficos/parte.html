@@ -1,248 +1,935 @@
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-danger">
-				<span class="svg-icon svg-icon-3x svg-icon-danger">
+<div>
+	<div>
 
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-						<path opacity="0.3" fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-							fill="currentColor" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-							fill="currentColor" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-							fill="currentColor" />
-					</svg>
-				</span>
-			</span>
+		<c-header></c-header>
+		<c-aside></c-aside>
+
+		<div class="d-flex flex-column flex-root">
+
+			<div class="page d-flex flex-row flex-column-fluid">
+
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+
+							<div id="kt_content_container" class="container-xxl">
+
+								<!--pesquisa-->
+								<div class="card mb-5 mb-lg-10" data-select2-id="select2-data-121-mdwq">
+
+									<div class="card-header" data-select2-id="select2-data-120-viu0">
+
+										<div class="card-title">
+											<div class=" m-5">
+												<span class="svg-icon svg-icon-2"><svg
+														xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none">
+														<path
+															d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+															fill="black"></path>
+													</svg></span>
+												Filtros
+											</div>
+
+
+											<div class="fv-row">
+												<div class="btn-group w-100" data-kt-buttons="true">
+													<label
+														class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary"
+														:class="{ active: ontem }">
+														<input @click="ontemX()" class="btn-check" type="radio"
+															name="method" value="1" />
+														Ontem
+													</label>
+													<label
+														class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary"
+														:class="{ active: seteDia }">
+														<input @click="seteDiaX()" class="btn-check" type="radio"
+															name="method" value="2" />
+														Ultimos 7 dias
+													</label>
+													<label
+														class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary"
+														:class="{ active: trintaDia }">
+														<input @click="trintaDiaX()" class="btn-check" type="radio"
+															name="method" value="3" />
+														Ultimos 30 dias
+													</label>
+													<label
+														class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-primary"
+														:class="{ active: esteAno }">
+														<input @click="esteAnoX()" class="btn-check" type="radio"
+															name="method" value="4" />
+														Este Ano
+													</label>
+												</div>
+											</div>
+										</div>
+
+
+
+										<div class="card-toolbar">
+											<div class="my-1 me-2">
+												<div class="d-flex align-items-center position-relative my-1">
+													<span class="svg-icon svg-icon-1 position-absolute ms-6">
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-calendar-date"
+															viewBox="0 0 16 16">
+															<path
+																d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z" />
+															<path
+																d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+														</svg>
+													</span>
+													<input type="text" data-kt-filemanager-table-filter="search"
+														class="form-control form-control-solid w-200px ps-15"
+														placeholder="13/12/2020">
+												</div>
+											</div>
+											<a href="#" class="btn btn-sm btn-primary my-1">Aplicar</a>
+										</div>
+									</div>
+
+								</div>
+
+								
+								<div class="row g-5 g-xl-8 mb-5 mb-xl-8">
+
+									<div class="col-xl-3">
+
+										<div class="card card-xl-stretch mb-xl-8">
+
+											<div class="card-body p-0">
+
+												<div class="px-9 pt-7 card-rounded h-275px w-100 bg-primary">
+
+													<div class="d-flex text-center flex-column text-white pt-8">
+														<h3 class="m-0 text-white fw-bolder fs-3">Total de Doações</h3>
+														<span class="fw-bolder fs-2x pt-1">{{doacao_total+'00' |
+															is_price }}</span>
+
+													</div>
+												</div>
+
+												<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1"
+													style="margin-top: -100px">
+
+													<div class="d-flex align-items-center mb-6">
+
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																		<path
+																			d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																		<path
+																			d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																		<path
+																			d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																		<path
+																			d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																		<path d="M12 9h2V8h-2v1Z" />
+																	</svg>
+																</span>
+
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Pix</div>
+															</div>
+
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	pix_total+'00' | is_price }}</div>
+
+															</div>
+														</div>
+													</div>
+
+
+
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-upc-scan" viewBox="0 0 16 16">
+																		<path
+																			d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																	</svg>
+																</span>
+
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	boleto_total+'00' | is_price }}</div>
+
+															</div>
+														</div>
+
+													</div>
+
+
+
+													<div class="d-flex align-items-center mb-6">
+
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-credit-card-2-front-fill"
+																		viewBox="0 0 16 16">
+																		<path
+																			d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																	</svg>
+																</span>
+
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	cartao_total+'00' | is_price }}</div>
+
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-3">
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-0">
+												<div class="px-9 pt-7 card-rounded h-275px w-100 bg-success">
+													<div class="d-flex text-center flex-column text-white pt-8">
+														<h3 class="m-0 text-white fw-bolder fs-3">Doações Concluidas
+														</h3>
+														<span class="fw-bolder fs-2x pt-1">{{ concluido_total+'00' |
+															is_price }}</span>
+													</div>
+												</div>
+
+												<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1"
+													style="margin-top: -100px">
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																		<path
+																			d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																		<path
+																			d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																		<path
+																			d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																		<path
+																			d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																		<path d="M12 9h2V8h-2v1Z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Pix</div>
+															</div>
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	pix_concluido+'00' | is_price }}</div>
+
+															</div>
+														</div>
+													</div>
+
+
+
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-upc-scan" viewBox="0 0 16 16">
+																		<path
+																			d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	boleto_concluido+'00' | is_price }}</div>
+															</div>
+
+														</div>
+													</div>
+
+
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-credit-card-2-front-fill"
+																		viewBox="0 0 16 16">
+																		<path
+																			d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	cartao_concluido+'00' | is_price }}</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-3">
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-0">
+												<div class="px-9 pt-7 card-rounded h-275px w-100 bg-warning">
+													<div class="d-flex text-center flex-column text-white pt-8">
+														<h3 class="m-0 text-white fw-bolder fs-3">Doações em Aberto</h3>
+														<span class="fw-bolder fs-2x pt-1">{{ aberto_total+'00' |
+															is_price }}</span>
+													</div>
+												</div>
+
+												<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1"
+													style="margin-top: -100px">
+
+													<div class="d-flex align-items-center mb-6">
+
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																		<path
+																			d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																		<path
+																			d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																		<path
+																			d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																		<path
+																			d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																		<path d="M12 9h2V8h-2v1Z" />
+																	</svg>
+																</span>
+
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Pix</div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	pix_aberto+'00' | is_price }}</div>
+															</div>
+
+														</div>
+													</div>
+
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-upc-scan" viewBox="0 0 16 16">
+																		<path
+																			d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	boleto_aberto+'00' | is_price }}</div>
+
+															</div>
+														</div>
+													</div>
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-credit-card-2-front-fill"
+																		viewBox="0 0 16 16">
+																		<path
+																			d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+															</div>
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1"> {{
+																	cartao_aberto+'00' | is_price }}</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-3">
+
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-body p-0">
+												<div class="px-9 pt-7 card-rounded h-275px w-100 bg-danger">
+													<div class="d-flex text-center flex-column text-white pt-8">
+														<h3 class="m-0 text-white fw-bolder fs-3">Total Vencido/Falhado
+														</h3>
+														<span class="fw-bolder fs-2x pt-1">{{ falhado_total+'00' |
+															is_price }}</span>
+													</div>
+												</div>
+												<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1"
+													style="margin-top: -100px">
+
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-qr-code-scan" viewBox="0 0 16 16 ">
+																		<path
+																			d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z" />
+																		<path
+																			d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z" />
+																		<path
+																			d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z" />
+																		<path
+																			d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z" />
+																		<path d="M12 9h2V8h-2v1Z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Pix</div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	pix_falhado+'00' | is_price }}</div>
+															</div>
+														</div>
+													</div>
+													<div class="d-flex align-items-center mb-6">
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-upc-scan" viewBox="0 0 16 16">
+																		<path
+																			d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7">Boleto </div>
+															</div>
+
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	boleto_falhado+'00' | is_price }}</div>
+
+															</div>
+														</div>
+													</div>
+													<div class="d-flex align-items-center mb-6">
+
+														<div class="symbol symbol-45px w-40px me-5">
+															<span class="symbol-label bg-lighten">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																		height="60" fill="currentColor"
+																		class="bi bi-credit-card-2-front-fill"
+																		viewBox="0 0 16 16">
+																		<path
+																			d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+																	</svg>
+																</span>
+															</span>
+														</div>
+														<div class="d-flex align-items-center flex-wrap w-100">
+
+															<div class="mb-1 pe-3 flex-grow-1">
+																<div class="text-gray-400 fw-bold fs-7"> Cartão </div>
+															</div>
+															<div class="d-flex align-items-center">
+																<div class="fw-bolder fs-5 text-gray-800 pe-1">{{
+																	cartao_falhado+'00' | is_price }}</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+ 
+								<div class="row g-5 g-xl-8 mb-5 mb-xl-8">
+									<!--coluna um -->
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-primary">
+													<span class="svg-icon svg-icon-3x svg-icon-primary">
+									
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+															<path opacity="0.3" fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+																fill="currentColor" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+																fill="currentColor" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+																fill="currentColor" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Total de Doadores</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-4">
+													57</a>
+											</div>
+											<span class="fw-bolder text-primary py-1">+8%</span>
+										</div>
+									</div>
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-success">
+													<span class="svg-icon svg-icon-3x svg-icon-success">
+									
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+															<path opacity="0.3" fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+																fill="currentColor" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+																fill="currentColor" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+																fill="currentColor" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Novos Doadores</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-success fs-4">
+													35</a>
+											</div>
+											<span class="fw-bolder text-success py-1">+28%</span>
+										</div>
+									</div>
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-success rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-success">
+													<span class="svg-icon svg-icon-3x svg-icon-success">
+									
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+															<path opacity="0.3" fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+																fill="currentColor" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+																fill="currentColor" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+																fill="currentColor" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Doadores Recorrentes</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-success fs-4">
+													20</a>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-danger">
+													<span class="svg-icon svg-icon-3x svg-icon-danger">
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+															<path opacity="0.3" fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+																fill="currentColor" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+																fill="currentColor" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+																fill="currentColor" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block ">Doadores Ùnico</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-danger fs-4">
+													30</a>
+											</div>
+										</div>
+									</div>
+									
+										
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-adimple">
+													<span class="svg-icon svg-icon-3x">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+															fill="#6a9e4f" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+									
+															<path fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Doadores Adimplentes</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-cyan fs-4">
+													50</a>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+									
+									
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-credito">
+													<span class="svg-icon svg-icon-3x">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+															fill="#c90076" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+									
+															<path fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Doadores Inadimplentes</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-cyan fs-4">
+													20</a>
+											</div>
+										</div>
+									</div>
+									
+									
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-warning">
+													<span class="svg-icon svg-icon-3x svg-icon-warning">
+									
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+															<path opacity="0.3" fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+																fill="currentColor" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+																fill="currentColor" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+																fill="currentColor" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Doação Média</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-warning fs-4">RS
+													87.000</a>
+											</div>
+									
+										</div>
+									</div>
+									
+									
+									<div class="col-xl-3">
+										<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
+											style="background-color: #ffffff;">
+											<div class="symbol symbol-50px me-2 p-2">
+												<span class="symbol-label bg-light-Boleto">
+													<span class="svg-icon svg-icon-3x">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+															fill="#0dcaf0" class="bi bi-clipboard-check"
+															viewBox="0 0 16 16">
+									
+															<path fill-rule="evenodd"
+																d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+															<path
+																d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+															<path
+																d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+														</svg>
+													</span>
+												</span>
+											</div>
+											<div class="flex-grow-1 me-2">
+												<span class="text-muted fw-bold d-block">Doações Previstas</span>
+												<a href="#" class="fw-bolder text-gray-800 text-hover-cyan fs-4">RS
+													1.000</a>
+											</div>
+											<span class="fw-bolder text-cyan py-1">+8%</span>
+										</div>
+									</div>
+									
+
+								</div>
+
+
+								<div class="row g-5 g-xl-8  mb-5 mb-xl-8">
+
+									<!--begin::Col-->
+									<div class="col-xl-12">
+
+
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-5">
+												<div id="faturamentos">
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+
+
+
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-5">
+												<div id="chart">
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<!--begin::Col-->
+									<div class="col-xl-6">
+
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-5">
+												<div id="formaPagamento">
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+
+									<!--begin::Col-->
+									<div class="col-xl-6">
+
+
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-5">
+												<div id="chart4">
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+
+
+									<div class="col-xl-6">
+
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-body p-5">
+												<div id="statusDoacao">
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+									<div class="col-xl-6">
+
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-body p-5">
+												<div id="tipoDoador">
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+									<div class="col-xl-6">
+
+										<div class="card card-xl-stretch mb-xl-8">
+											<div class="card-body p-5">
+												<div id="statusDoador">
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+
+									<!--begin::Col-->
+									<div class="col-xl-6">
+
+										<div class="card card-xl-stretch mb-5 mb-xl-8">
+											<div class="card-body p-5">
+												<div id="statusAssinturas">
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Total de Doadores</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-danger fs-4">
-				57</a>
-		</div>
-		<span class="fw-bolder text-danger py-1">+8%</span>
-	</div>
-</div>
 
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-success">
-				<span class="svg-icon svg-icon-3x svg-icon-success">
-
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-						<path opacity="0.3" fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-							fill="currentColor" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-							fill="currentColor" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-							fill="currentColor" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Novos Doadores</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-success fs-4">
-				35</a>
-		</div>
-		<span class="fw-bolder text-success py-1">+28%</span>
-	</div>
-</div>
-
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-warning">
-				<span class="svg-icon svg-icon-3x svg-icon-warning">
-
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-						<path opacity="0.3" fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-							fill="currentColor" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-							fill="currentColor" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-							fill="currentColor" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Doadores Recorrentes</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-warning fs-4">
-				20</a>
-		</div>
-	</div>
-</div>
-
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-primary">
-				<span class="svg-icon svg-icon-3x svg-icon-primary">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-						<path opacity="0.3" fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-							fill="currentColor" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-							fill="currentColor" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-							fill="currentColor" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block ">Doadores Ùnico</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-4">
-				30</a>
-		</div>
-	</div>
-</div>
-
-	
-
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-adimple">
-				<span class="svg-icon svg-icon-3x">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						fill="#6a9e4f" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-
-						<path fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Doadores Adimplentes</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-cyan fs-4">
-				50</a>
-		</div>
-	</div>
-</div>
-
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-
-
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-credito">
-				<span class="svg-icon svg-icon-3x">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						fill="#c90076" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-
-						<path fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Doadores Inadimplentes</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-cyan fs-4">
-				20</a>
-		</div>
-	</div>
-</div>
-
-
-
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-success">
-				<span class="svg-icon svg-icon-3x svg-icon-success">
-
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-						<path opacity="0.3" fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-							fill="currentColor" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-							fill="currentColor" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-							fill="currentColor" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Doação Média</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-success fs-4">RS
-				87.000</a>
-		</div>
-
-	</div>
-</div>
-
-
-<div class="col-xl-3">
-	<div class="d-flex align-items-center bg-white-warning rounded p-1 mb-2"
-		style="background-color: #ffffff;">
-		<div class="symbol symbol-50px me-2 p-2">
-			<span class="symbol-label bg-light-Boleto">
-				<span class="svg-icon svg-icon-3x">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						fill="#0dcaf0" class="bi bi-clipboard-check"
-						viewBox="0 0 16 16">
-
-						<path fill-rule="evenodd"
-							d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-						<path
-							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-						<path
-							d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-					</svg>
-				</span>
-			</span>
-		</div>
-		<div class="flex-grow-1 me-2">
-			<span class="text-muted fw-bold d-block">Doações Previstas</span>
-			<a href="#" class="fw-bolder text-gray-800 text-hover-cyan fs-4">RS
-				1.000</a>
-		</div>
-		<span class="fw-bolder text-cyan py-1">+8%</span>
+		<c-footer />
 	</div>
 </div>
