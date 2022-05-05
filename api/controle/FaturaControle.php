@@ -56,8 +56,9 @@ class FaturaControle extends Controle
         $client = new Doador();
         $clientAsa = new AsaasCliente();
         $address = new Endereco();
-        $fatura = null;
-        $institution = null;
+        $fatura = new Fatura();
+        $institution = new Instituicao();
+        $Pay = new AsaasPay();
         $env = require __DIR__ . "/../config.php";
 
         $code = null;
@@ -97,7 +98,6 @@ class FaturaControle extends Controle
         }
 
         $clientInfo = $client->info($cpf, $instituicao_fk);
-        $costumer = $clientInfo['pagamento_fk'];
         $client->update(
             $instituicao_fk,
             $nome,
@@ -106,7 +106,6 @@ class FaturaControle extends Controle
             $email,
             $nascimento
         );
-
         $address->save(
             $clientInfo["external_fk"],
             "ADDRESS_COSTUMER",
@@ -119,7 +118,52 @@ class FaturaControle extends Controle
             $estado
         );
 
-        $debug = $clientInfo;
+        $pay_external_fk = $fatura->maker_fk();
+        $costumer = $clientInfo['pagamento_fk'];
+        $split = [];
+        $response = [];
+
+        if ($recorrente) {
+            $response = $Pay->signature(
+                $external_fk,
+                $tipo_pagamento,
+                $customer,
+                $valor,
+                $card_nome,
+                $card_numero,
+                $card_validade,
+                $card_cvv,
+                $nome,
+                $cpf,
+                $telefone,
+                $email,
+                $cep,
+                $numero,
+                $complemento,
+                $split
+            );
+        } else {
+            $response = $Pay->single(
+                $external_fk,
+                $tipo_pagamento,
+                $customer,
+                $valor,
+                $card_nome,
+                $card_numero,
+                $card_validade,
+                $card_cvv,
+                $nome,
+                $cpf,
+                $telefone,
+                $email,
+                $cep,
+                $numero,
+                $complemento,
+                $split
+            );
+        }
+
+        $debug = $response;
 
         self::printSuccess(
             "Fatura registrada com sucesso",
