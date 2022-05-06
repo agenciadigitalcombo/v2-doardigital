@@ -65,6 +65,9 @@ class FaturaControle extends Controle
         $url = null;
         $debug = null;
 
+        $company = $institution->info($instituicao_fk);
+        $debug = $company;
+
         if ($env['sandbox']) {
             $clientAsa->set_api_key($env['api_key']);
             $Pay->set_api_key($env['api_key']);
@@ -164,7 +167,7 @@ class FaturaControle extends Controle
             );
         }
 
-        $debug = $response;
+        
 
         self::printSuccess(
             "Fatura registrada com sucesso",

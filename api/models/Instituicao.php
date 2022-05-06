@@ -37,7 +37,7 @@ class Instituicao
         return preg_replace('/\D/', '', $phone);
     }
 
-    public function info(array $institution_fk): array
+    public function info(string $institution_fk): array
     {
         $this->con->where([
             "institution_fk" => $institution_fk
