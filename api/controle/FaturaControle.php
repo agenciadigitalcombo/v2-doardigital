@@ -59,6 +59,7 @@ class FaturaControle extends Controle
         $fatura = new Fatura();
         $institution = new Instituicao();
         $Pay = new AsaasPay();
+        $split = new Split();
         $env = require __DIR__ . "/../config.php";
 
         $code = null;
@@ -71,7 +72,7 @@ class FaturaControle extends Controle
         if(empty($carteira_fk)) {
             self::printError(
                 "Instituição não possui uma código de carteira",
-                $company
+                []
             );
         }
 
@@ -131,8 +132,20 @@ class FaturaControle extends Controle
 
         $pay_external_fk = $fatura->maker_fk();
         $customer = $clientInfo['pagamento_fk'];
+
+        $allSplit = $split->listAll($instituicao_fk);
+        
         $split = [];
         $response = [];
+        if( !empty($allSplit) ) {
+            $split = array_map(function($s) {
+                return [
+                    "walletId" => $s["code"],
+                    "percentualValue" => $s["porcentagem"],
+
+                ];
+            }, $allSplit);
+        }
 
         if ($recorrente) {
             $response = $Pay->signature(
@@ -174,7 +187,7 @@ class FaturaControle extends Controle
             );
         }
 
-        $debug = $response;
+        $debug = $response;        
 
         self::printSuccess(
             "Fatura registrada com sucesso",
