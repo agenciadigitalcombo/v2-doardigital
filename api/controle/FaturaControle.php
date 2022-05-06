@@ -66,11 +66,18 @@ class FaturaControle extends Controle
         $debug = null;
 
         $company = $institution->info($instituicao_fk);
-        $debug = $company;
+        $carteira_fk = $company['carteira_fk'] ?? null;
+
+        if(empty($carteira_fk)) {
+            self::printError(
+                "Instituição não possui uma código de carteira",
+                $company
+            );
+        }
 
         if ($env['sandbox']) {
-            $clientAsa->set_api_key($env['api_key']);
-            $Pay->set_api_key($env['api_key']);
+            $clientAsa->set_api_key($carteira_fk);
+            $Pay->set_api_key($carteira_fk);
         }
 
         $exist = $client->exist($cpf, $instituicao_fk);
@@ -167,7 +174,7 @@ class FaturaControle extends Controle
             );
         }
 
-        
+        $debug = $response;
 
         self::printSuccess(
             "Fatura registrada com sucesso",

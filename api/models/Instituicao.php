@@ -42,7 +42,7 @@ class Instituicao
         $this->con->where([
             "institution_fk" => $institution_fk
         ]);
-        return $this->con->select() ?? [];
+        return $this->con->select()[0] ?? [];
     }
 
     public function getByHostName(string $hostName): array
