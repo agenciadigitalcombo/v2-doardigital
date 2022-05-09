@@ -52,42 +52,31 @@ export default {
                 { nome: '2joaquim40', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
 
 
-                { nome: '2joaquim1', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim2', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim3', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim4', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim5', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim6', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim7', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim8', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim9', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim41', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim42', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim43', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim44', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim45', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim46', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim47', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim48', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim49', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
                 { nome: '2joaquim10', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: '2joaquim48', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: 'penultimo', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
+                { nome: 'ultimo', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
 
             ],
 
 
 
-            elementoPaginacao: 5,
+            elementoPaginacao: 10,
             dadosPagina: [],
             maxVisibleButtons: 5,
             paginaAtual: 1,
             maxLeft: null,
             maxRight: null,
-
-            doacao_id: "",
-            instituicao_id: "",
-            data: "",
-            search: "",
-            dataFinal: null,
-            total: "",
-            pago: "",
-            aberto: "",
-            vencido: "",
-            mostraresconder:
-            {
-                'show': false
-            }
-
+ 
         }
     },
 
@@ -99,17 +88,21 @@ export default {
             return Math.ceil(this.lista.length / this.elementoPaginacao)
         },
 
+        atualizarPag() {
+            this.getPagina(this.paginaAtual)
+        },
+
         calculateMaxVisible() {
-            let maxLeft = (this.paginaAtual - Math.floor(this.elementoPaginacao / 2))
-            let maxRight = (this.paginaAtual + Math.floor(this.elementoPaginacao / 2))
+            let maxLeft = (this.paginaAtual - Math.floor(this.maxVisibleButtons / 2))
+            let maxRight = (this.paginaAtual + Math.floor(this.maxVisibleButtons / 2))
 
             if (maxLeft < 1) {
                 maxLeft = 1
-                maxRight = this.elementoPaginacao
+                maxRight = this.maxVisibleButtons
             }
 
             if (maxRight > this.totalPagina()) {
-                maxLeft = this.totalPagina() - (this.elementoPaginacao - 1)
+                maxLeft = this.totalPagina() - (this.maxVisibleButtons - 1)
                 maxRight = this.totalPagina()
                 if (maxLeft < 1) {
                     maxLeft = 1
@@ -125,11 +118,8 @@ export default {
             return numbers;
         },
 
-
-
         botaoJmsPaginacao() {
             return this.calculateMaxVisible()
-
         },
 
         getPagina(semPagina) {
@@ -138,13 +128,19 @@ export default {
             let inicio = (semPagina * this.elementoPaginacao) - this.elementoPaginacao;
             let fim = (semPagina * this.elementoPaginacao);
             this.dadosPagina = this.lista.slice(inicio, fim);
-
-            console.log("olaa")
+ 
         },
 
         getProximo() {
             if (this.paginaAtual < this.totalPagina()) {
                 this.paginaAtual++
+            }
+            this.getPagina(this.paginaAtual)
+        },
+
+        getUltima() {
+            if (this.paginaAtual < this.totalPagina()) {
+                this.paginaAtual = this.totalPagina()
             }
             this.getPagina(this.paginaAtual)
         },

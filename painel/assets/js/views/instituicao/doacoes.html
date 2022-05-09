@@ -57,14 +57,34 @@
                                 </table>
 
 
-                            <ul class="pagination"> 
-                                <li @click="getAnterior()" class="page-item previous disabled"><a class="page-link"><i class="previous"></i></a></li>
-                                <li  @click="getPagina(pagina)" v-for="pagina in botaoJmsPaginacao()" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link btn"> <div>  {{pagina}}</div></a></li>
-                                <li class="page-item "><a href="#" class="page-link">...</a></li>
-                                <li class="page-item "><a href="#" class="page-link">{{totalPagina()}}</a></li>
-                                <li @click="getProximo()" class="page-item next"><a class="page-link"><i class="next"></i></a></li>
-                            </ul>
+                           
 
+
+                            <div class="d-flex flex-stack flex-wrap pt-10">
+                                <div class="fs-6 fw-bold text-gray-700">Mostrando de 1 a 10 de 50 entradas
+
+                                    <select class="selectpicker" v-model="elementoPaginacao" @change="atualizarPag()">
+                                        <option value="3">3</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    linhas por página
+                               
+                                </div>
+                                
+                                <ul class="pagination">
+               
+                                    <li @click="getAnterior()" class="page-item previous disabled"><a class="page-link"><i class="previous"></i></a></li>
+                                    <li  @click="getPagina(pagina)" v-for="pagina in botaoJmsPaginacao()" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link "> <div>  {{pagina}}</div></a></li>
+                                    <li class="page-item "><a href="#" class="page-link">...</a></li>
+                                    <li @click="getUltima()" class="page-item "><a href="#" class="page-link">{{totalPagina()}}</a></li>
+                                    <li @click="getProximo()" class="page-item next"><a class="page-link"><i class="next"></i></a></li>
+                               
+                                </ul> 
+                                
+                            </div>
                             </div> 
                             
                         </div> 
