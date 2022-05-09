@@ -97,6 +97,12 @@ class FaturaControle extends Controle
                 $bairro
             );
             $pagamento_fk = $resClienteAsa['id'] ?? "cus_error";
+            if( !empty($resClienteAsa["errors"]) ) {
+                self::printError(
+                    $resClienteAsa["errors"][0]["description"], 
+                    $resClienteAsa
+                );
+            }
             $client->register(
                 $instituicao_fk,
                 $pagamento_fk,
@@ -187,7 +193,57 @@ class FaturaControle extends Controle
             );
         }
 
-        $debug = $response;        
+        $error = $response['errors'] ?? [];
+
+        if(!empty($error)) {
+            self::printError(
+                $error[0]["description"],
+                $error
+            );
+        }
+
+        $debug = $response;
+
+        $fatura_id = $response["id"];
+        $external_fk = $pay_external_fk;
+        $status_pagamento = $response["status"];
+
+        $codigo= $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "";
+        $url= $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "";
+
+        if( $recorrente ) {
+            $resCodeListSubs = $Pay->listSubs($fatura_id);
+            self::printError("",$resCodeListSubs);
+        }
+        
+        // if( $recorrente && $tipo_pagamento == "PIX" ) {
+        //     $resCode = $Pay->getCodePix($fatura_id);
+        //     self::printError("",$resCode);
+        // }
+        
+        // if( $recorrente && $tipo_pagamento == "BOLETO" ) {
+        //     $resCode = $Pay->getBarcodeBoleto($fatura_id);
+        //     self::printError("",$resCode);
+        // }
+
+        $doador_fk = $customer;
+        $doador_nome = $nome;
+        $doador_email = $email;
+
+        $fatura->create(
+            $instituicao_fk,
+            $fatura_id,
+            $tipo_pagamento,
+            $recorrente,
+            $external_fk,
+            $status_pagamento,
+            $valor,
+            $codigo,
+            $url,
+            $doador_fk,
+            $doador_nome,
+            $doador_email
+        );
 
         self::printSuccess(
             "Fatura registrada com sucesso",

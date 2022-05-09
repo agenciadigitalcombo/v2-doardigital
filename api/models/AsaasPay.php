@@ -28,6 +28,11 @@ class AsaasPay extends Asaas
     }
 
 
+    function listSubs(string $id): array
+    {
+        return $this->get("subscriptions/{$id}/payments", []);
+    }
+
 
     function single(
         string $external_fk,
