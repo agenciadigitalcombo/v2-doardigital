@@ -30,7 +30,7 @@ class AsaasPay extends Asaas
 
     function listSubs(string $id): array
     {
-        return $this->get("subscriptions/{$id}/payments", []);
+        return $this->get("/subscriptions/{$id}/payments", []);
     }
 
 
