@@ -32,6 +32,7 @@ $doacao = new Doacao();
 $doador = new Doador();
 $instituicao = new Instituicao();
 $evendas = new EvendasNotificacao();
+$env = include __DIR__ . "/config.php";
 
 
 $getJson = file_get_contents('php://input');
@@ -48,22 +49,26 @@ $status = $payload['payment']['status'] ?? 'error';
 
 
 $doc = $doacao->get_doacao_by_reference_key($reference_key);
+$sandBox = "";
 
+if ($env["sandbox"]) {
+    $sandBox = "SANDBOX - ";
+}
 
-$title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
+$title = "{$sandBox}WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
     "br.rafael@outlook.com",
     "john@digitalcombo.com.br"
 ];
 
 
-foreach( $copy as $email ) {
+foreach ($copy as $email) {
     @mail($email, $title, json_encode($payload));
 }
 
 
 
-if(empty($doc)){
+if (empty($doc)) {
     die;
 }
 
@@ -75,7 +80,7 @@ $doador_id = $doc['doador_id'];
 
 $list_doador = $doador->get_by_id($doador_id);
 
-if(empty($list_doador)){
+if (empty($list_doador)) {
     die;
 }
 
@@ -83,7 +88,7 @@ if(empty($list_doador)){
 $list_instituicao = $instituicao->get_by_id($instituicao_id);
 
 
-if(empty($list_instituicao)){
+if (empty($list_instituicao)) {
     die;
 }
 
@@ -98,18 +103,18 @@ $doacao->set_status_hook(
     $status
 );
 
-if(!empty($subscription)){
-    
-    $codigo = $payload['payment']['identificationField'] ?? "error"; 
+if (!empty($subscription)) {
+
+    $codigo = $payload['payment']['identificationField'] ?? "error";
     $url = $payload['payment']['bankSlipUrl'] ?? "error";
 
-    if($payload['payment']['billingType'] == 'PIX') {
+    if ($payload['payment']['billingType'] == 'PIX') {
 
 
         $AsPix = new AsaasPix();
-        
+
         $AsPix->set_api_key($list_instituicao['api_key']);
-        
+
 
 
         $idTransaction = $payload['payment']['id'];
@@ -119,11 +124,10 @@ if(!empty($subscription)){
     }
 
     $doacao->set_status_hook_recorrente(
-        $reference_key, 
+        $reference_key,
         $url,
-        $codigo 
+        $codigo
     );
-
 }
 
 
@@ -179,5 +183,5 @@ echo json_encode([
     "doador" => $list_doador ?? [],
     "doacao" => $doc ?? [],
     "resAsPix" => $resAsPix ?? [],
-    "path" => "/payments/".$payload['payment']['id']."/pixQrCode"
+    "path" => "/payments/" . $payload['payment']['id'] . "/pixQrCode"
 ]);
