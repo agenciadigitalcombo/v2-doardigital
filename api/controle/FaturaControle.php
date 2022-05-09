@@ -210,21 +210,24 @@ class FaturaControle extends Controle
 
         $codigo= $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "";
         $url= $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "";
-
+        
+        $ID = false;
         if( $recorrente ) {
             $resCodeListSubs = $Pay->listSubs($fatura_id);
-            self::printError("",$resCodeListSubs);
+            $ID = $resCodeListSubs["data"][0]["id"];
         }
         
-        // if( $recorrente && $tipo_pagamento == "PIX" ) {
-        //     $resCode = $Pay->getCodePix($fatura_id);
-        //     self::printError("",$resCode);
-        // }
+        if( $recorrente && $tipo_pagamento == "PIX" && $ID ) {
+            $resCode = $Pay->getCodePix($ID);
+            $code = $resCode["payload"] ?? "";
+            $url= $resCodeListSubs["data"][0]["invoiceUrl"] ?? "";
+        }
         
-        // if( $recorrente && $tipo_pagamento == "BOLETO" ) {
-        //     $resCode = $Pay->getBarcodeBoleto($fatura_id);
-        //     self::printError("",$resCode);
-        // }
+        if( $recorrente && $tipo_pagamento == "BOLETO" && $ID ) {
+            $resCode = $Pay->getBarcodeBoleto($ID);
+            $code = $resCode["identificationField"] ?? "";
+            $url= $resCodeListSubs["data"][0]["bankSlipUrl"] ?? "";
+        }
 
         $doador_fk = $customer;
         $doador_nome = $nome;
