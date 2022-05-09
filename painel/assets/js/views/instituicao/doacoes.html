@@ -13,7 +13,7 @@
                                     <thead> 
                                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
   
-                                            <th class="min-w-125px">Doador {{totalPagina()}}</th>
+                                            <th class="min-w-125px">Doador</th>
                                             <th class="min-w-100px">Valor</th>
                                             <th class="min-w-125px">Status</th> 
                                             <th class="min-w-100px">Tipo</th>
@@ -59,7 +59,9 @@
 
                             <ul class="pagination"> 
                                 <li @click="getAnterior()" class="page-item previous disabled"><a class="page-link"><i class="previous"></i></a></li>
-                                <li  @click="getPagina(pagina)" v-for="pagina in calculateMaxVisible()" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link btn"> <div>  {{pagina}}</div></a></li>
+                                <li  @click="getPagina(pagina)" v-for="pagina in botaoJmsPaginacao()" v-bind:class="estaActivo(pagina)" class="page-item "><a class="page-link btn"> <div>  {{pagina}}</div></a></li>
+                                <li class="page-item "><a href="#" class="page-link">...</a></li>
+                                <li class="page-item "><a href="#" class="page-link">{{totalPagina()}}</a></li>
                                 <li @click="getProximo()" class="page-item next"><a class="page-link"><i class="next"></i></a></li>
                             </ul>
 
