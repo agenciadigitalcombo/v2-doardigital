@@ -79,7 +79,7 @@ CREATE TABLE fatura (
     valor FLOAT,
     codigo VARCHAR(255),
     url VARCHAR(255),
-    data VARCHAR(9),
+    data VARCHAR(10),
     hora VARCHAR(8),
     doador_fk VARCHAR(255),
     doador_nome VARCHAR(255),
