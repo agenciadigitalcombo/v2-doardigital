@@ -8,6 +8,82 @@
                     <div class="post d-flex flex-column-fluid" id="kt_post"> 
                         <div id="kt_content_container" class="container-xxl"> 
                               
+     
+                            <div class="row g-5 g-xl-8"> 
+                                <div class="row"> 
+                                   <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-primary pb-1 px-2">Total de Doações</span>
+                                            
+                                                <span>  
+                                                  {{ total+'00' | is_price }}
+                                                </span>
+                                                </span>
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-success pb-1 px-2">Total Pago</span>
+                                            
+                                                <span> {{ pago+'00' | is_price }} </span></span>
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
+                                            
+                                                <span>{{ aberto+'00' | is_price }}</span></span>
+                                        </div>
+                                    </div> 
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
+                                            
+                                                <span> {{ vencido+'00' | is_price }} </span></span>  
+                                        </div>
+                                    </div>  
+                                </div> 
+                            </div> 
+
+
+
+                            <div class="card"> 
+                                <div class="card-header border-0 pt-6"> 
+                                    <div class="card-title"> 
+                                        
+                                    </div> 
+
+                                    <div class="card-toolbar"> 
+                                        <div class="d-flex justify-content-end"> 
+                                         
+                                            <button type="button" class="btn btn-light-primary me-3" v-once @click="modal()"
+                                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                                 <span class="svg-icon svg-icon-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none">
+                                                        <path
+                                                            d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+                                                            fill="black" />
+                                                    </svg>
+                                                </span>
+                                               Filtros
+                                            </button>
+
+                                            
+                                             
+                                            <button type="button" class="btn btn-light-primary me-3"
+                                                data-bs-toggle="modal" data-bs-target="#kt_subscriptions_export_modal">
+                                                 <span class="svg-icon svg-icon-2">
+                                                     
+                                                </span>
+                                                Exportar
+                                            </button> 
+                                           
+                                        </div> 
+                                         
+                                    </div> 
+                                </div> 
+                            <div class="card-body pt-0"> 
                             <div class="table-responsive">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5"> 
                                     <thead> 
@@ -61,14 +137,13 @@
 
 
                             <div class="d-flex flex-stack flex-wrap pt-10">
-                                <div class="fs-6 fw-bold text-gray-700">Mostrando de 1 a 10 de 50 entradas
+                                <div class="fs-6 fw-bold text-gray-700">Mostrando de 1 a {{elementoPaginacao}} de 200 entradas
 
-                                    <select class="selectpicker" v-model="elementoPaginacao" @change="atualizarPag()">
-                                        <option value="3">3</option>
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
+                                    <select class="selectpagina" v-model="elementoPaginacao" @change="atualizarPag()">
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="200">200</option> 
                                     </select>
                                     linhas por página
                                
@@ -86,7 +161,9 @@
                                 
                             </div>
                             </div> 
-                            
+                                              
+                        </div>       
+                        </div> 
                         </div> 
                     </div> 
                 </div> 

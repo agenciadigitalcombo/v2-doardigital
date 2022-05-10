@@ -7,6 +7,22 @@ export default {
 
     data: function () {
         return {
+            doacao_id: "",
+            instituicao_id: "",
+            data: "",
+            doacoes: [], 
+            dadosPagina: [],
+            paginaAtual: 1,
+            search: "",
+            dataFinal: null,
+            total: "",
+            pago: "",
+            aberto: "",
+            vencido: "",
+            mostraresconder:
+            {
+                'show': false
+            },
 
             lista: [
                 { nome: '2joaquim1', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
@@ -70,7 +86,7 @@ export default {
 
 
 
-            elementoPaginacao: 10,
+            elementoPaginacao: 25,
             dadosPagina: [],
             maxVisibleButtons: 5,
             paginaAtual: 1,
