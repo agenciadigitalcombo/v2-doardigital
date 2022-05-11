@@ -106,8 +106,12 @@ import divPagamentoEditar from './views/split/div-pagamento_editar.js'
 Vue.component('c-div-pagamentoEditar', divPagamentoEditar)
 
 
-import metas from './views/metas.js'
+import metas from './views/graficos/metas.js'
 Vue.component('c-metas', metas)
+
+import Analytics from './views/graficos/Analytics.js'
+Vue.component('c-Analytics', Analytics)
+
 
 import modeloEmails from './views/modelo-de-emails.js'
 Vue.component('c-modelo-de-emails', modeloEmails)

@@ -2,6 +2,8 @@ export default [
  
     { id: 'inicio', nome: 'Inicio', icon: 'home.svg', link: '#/', feature_flag: true , permisao1: "1", permisao2: "0"},
     { id: 'grafico', nome: 'Grafico', icon: 'home.svg', link: '#/grafico', feature_flag: true , permisao1: "1", permisao2: "0"},
+    { id: 'analytics', nome: 'analytics', icon: 'planos.svg', link: '#/analytics', feature_flag: true , permisao1: "1",  permisao2: "0"},
+   
     
     { id: 'doadores', nome: 'Doadores', icon: 'doadores.svg', link: '#/doadores', feature_flag: true , permisao1: "1",  permisao2: "0"},
     { id: 'doacoes', nome: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true , permisao1: "1",  permisao2: "0"},

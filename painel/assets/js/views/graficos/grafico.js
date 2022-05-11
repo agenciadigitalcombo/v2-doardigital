@@ -220,65 +220,69 @@ export default {
 
 			},
 
-			colors: ['#49bfff', '#0fa39e', '#bf265f'],
+			colors: ['#49bfff', '#0fa39e', '#39539E'],
 			labels: [''],
 
 		}
 
 		var pagamento = new ApexCharts(document.querySelector("#formaPagamento"), options);
 		pagamento.render();
-
-
  
 
-
-
-		var options = {
+	    var options = {
 			series: [{
-				data: [21, 22, 10]
-			}],
+			name: 'Valor',
+			data:  ["25", "50", "75", "100", "150", "200", "250", "300"],
+		  }],
 			chart: {
-				height: 350,
-				type: 'bar',
-				events: {
-					click: function (chart, w, e) {
-						// console.log(chart, w, e)
-					}
-				}
-			},
-			colors: ['#49bfff', '#0fa39e', '#bf265f'],
-			plotOptions: {
-				bar: {
-					columnWidth: '75%',
-					distributed: true,
-				}
-			},
-			dataLabels: {
-				enabled: false
-			},
-			legend: {
-				show: false
-			},
-			title: {
-				text: 'Formas de Pagamentos',
-
-			},
-			xaxis: {
-				categories: [
-					['Boleto'],
-					['Pix'],
-					'Cartao',
-				],
-				labels: {
-					style: {
-						colors: ['#1ab7ea', '#6aa84f', '#f44336'],
-						fontSize: '12px'
-					}
-				}
+			height: 350,
+			type: 'bar',
+		  },
+		  plotOptions: {
+			bar: {
+			  borderRadius: 10,
+			  dataLabels: {
+				position: 'top',  
+			  },
 			}
-		};
+		  },
+		  dataLabels: {
+			enabled: true,
+			formatter: function (val) {
+			  return "Rs " + val ;
+			},
+			offsetY: -20,
+			style: {
+			  fontSize: '12px',
+			  colors: ["#304758"]
+			}
+		  },
+		  
+		  xaxis: {
+			categories: ["25", "50", "75", "100", "150", "200", "250", "300"],
+		  
+		  },
+		  yaxis: {
+			axisBorder: {
+			  show: false
+			},
+			axisTicks: {
+			  show: false,
+			},
+			labels: {
+			  show: false,
+			  formatter: function (val) {
+				return val + "RS";
+			  }
+			}
+		  
+		  },
+		  title: {
+			text: 'Quantidade por planos', 
+		  }
+		  };
 
-		var chart = new ApexCharts(document.querySelector("#chart4"), options);
+		var chart = new ApexCharts(document.querySelector("#quantidade"), options);
 		chart.render();
 
 
@@ -359,10 +363,7 @@ export default {
 			},
 
 		};
-
-
-  
-		  
+ 
 		var chart = new ApexCharts(document.querySelector("#faturamentos"), options);
 		chart.render();
 
