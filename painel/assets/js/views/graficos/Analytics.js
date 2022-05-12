@@ -290,6 +290,98 @@ export default {
 			});
 
 		});
+
+		var options = {
+			series: [56, 20, 7, 6, 3, 5, 3, 2, 2,  2],
+			chart: {
+				width: 480,
+				type: 'pie',
+			},
+			colors: ['#fe504f', '#37be00', '#ffd752', '#fe504f'],
+			labels: ['(not set) ', 'Curitiba', 'Sao Paulo','Rio de Janeiro', 'Belo Horizonte ', 'Campinas','Porto Alegre', 'Brasilia', 'Fortaleza', 'Outros'],
+			responsive: [{
+				breakpoint: 480,
+				options: {
+					chart: {
+						width: 50
+					},
+					legend: {
+						position: 'bottom'
+					}
+				}
+			}],
+			title: {
+				text: 'Status das Doações',
+
+			},
+		};
+
+
+		am5.ready(function() {
+
+			// Create root element
+			// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+			var root = am5.Root.new("cidade");
+			
+			
+			// Set themes
+			// https://www.amcharts.com/docs/v5/concepts/themes/
+			root.setThemes([
+			  am5themes_Animated.new(root)
+			]);
+			
+			
+			// Create chart
+			// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+			  layout: root.verticalLayout
+			}));
+			
+			
+			// Create series
+			// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+			  valueField: "value",
+			  categoryField: "category"
+			}));
+			
+			
+			// Set data
+			// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+			series.data.setAll([
+			  { value: 10, category: "(not set)" },
+			  { value: 9, category: "Curitiba" },
+			  { value: 6, category: "Sao Paulo" },
+			  { value: 5, category: "Rio de Janeiro" },
+			  { value: 4, category: "Belo Horizonte " },
+			  { value: 3, category: "Campinas" },
+			  { value: 1, category: "Porto Alegre" },
+			  { value: 3, category: "Brasilia" },
+			  { value: 1, category: "Fortaleza" },
+			  { value: 3, category: "Outros" }, 
+			]);
+
+			
+			
+			// Create legend
+			// https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+			var legend = chart.children.push(am5.Legend.new(root, {
+			  centerX: am5.percent(50),
+			  x: am5.percent(50),
+			  marginTop: 15,
+			  marginBottom: 15
+			}));
+			
+			legend.data.setAll(series.dataItems);
+			
+			
+			// Play initial series animation
+			// https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+			series.appear(1000, 100);
+			
+			}); // end am5.ready()
+	 
+
 	},
 
 	created() {

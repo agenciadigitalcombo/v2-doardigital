@@ -141,14 +141,12 @@ span .menu  {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-#chartdiv {
+#chartdiv, #mapas{
     width: 100%;
     height: 500px;
   }
 
-  #mapas {
-    width: 100%;
+   
+ #cidade{
     height: 500px;
   }
-
-  
