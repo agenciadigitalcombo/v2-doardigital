@@ -2,7 +2,6 @@
 
 class UploadControle extends Controle
 {
-
     static function saveImage(): string
     {
         $WHITE_LIST = [
@@ -24,7 +23,12 @@ class UploadControle extends Controle
     }
     static function upload()
     {
-        echo "ok";
+        $_REQUEST['file'] = $_FILES['file'] ?? null;
+        self::requireInputs([
+            "token" => "informe um token",
+            "file" => "envie um arquivo"
+        ]);
+        self::privateRouter();
         $nome = self::saveImage();
         self::printSuccess(
             "Enviado com sucesso",

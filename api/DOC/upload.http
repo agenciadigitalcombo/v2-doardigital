@@ -1,6 +1,19 @@
-@host=http://doar.con
+@host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@file=
 
 ###
-POST {{host}}/api/upload
-Content-Type: application/x-www-form-urlencoded;
+POST {{host}}/api/upload-img
+Content-Type: multipart/form-data; boundary=--MyBoundary
+
+
+----MyBoundary
+Content-Disposition: form-data; name="file"; filename="1.png"
+Content-Type: application/octet-stream
+
+< .\logo.png
+----MyBoundary
+Content-Disposition: form-data; name="token"
+
+{{token}}
+----MyBoundary--
