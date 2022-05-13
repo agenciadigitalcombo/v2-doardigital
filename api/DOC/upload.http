@@ -1,0 +1,6 @@
+@host=http://doar.con
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+
+###
+POST {{host}}/api/upload
+Content-Type: application/x-www-form-urlencoded;

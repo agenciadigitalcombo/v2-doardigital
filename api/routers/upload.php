@@ -1,3 +1,2 @@
 <?php
-
-router('/upload-img', 'UploadControler@upload');
+router('/upload', 'UploadControle@upload');
