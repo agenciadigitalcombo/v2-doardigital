@@ -118,3 +118,35 @@ span .menu  {
     background-color: #e9fddd!important;
 }
 
+.bg-visual {
+    background-color: #ffbfe4!important;
+    padding: 1.5rem 1rem 1.5rem 1.20rem;
+    
+}
+
+
+.selectpagina { 
+    padding: 0.5rem 1rem 0.5rem 0.20rem;
+    -moz-padding-start: calc(1rem - 3px);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #f0f1f5;
+    background-color: #414141;
+    background-repeat: no-repeat; 
+    background-size: 16px 12px;
+    border: 1px solid #E4E6EF;
+    border-radius: 0.475rem;
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#chartdiv, #mapas{
+    width: 100%;
+    height: 500px;
+  }
+
+   
+ #cidade{
+    height: 500px;
+  }
