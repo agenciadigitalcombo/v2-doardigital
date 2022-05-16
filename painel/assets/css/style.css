@@ -119,8 +119,9 @@ span .menu  {
 }
 
 .bg-visual {
-    background-color: #ffbfe4!important;
+    background-color: #7cb0ff96!important;
     padding: 1.5rem 1rem 1.5rem 1.20rem;
+    opacity: 1,3;
     
 }
 
@@ -141,12 +142,17 @@ span .menu  {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-#chartdiv, #mapas{
+  #mapas {
     width: 100%;
     height: 500px;
   }
 
-   
- #cidade{
-    height: 500px;
+  #chartdiv{
+    width: 100%;
+    height: 400px;
+  }
+
+ #cidade, #midia , #despositivoY, #despositivoX,  #navegador, #dispositivo , #idadeX , #idadeY, #sexoX , #sexoY { 
+   width: 100%;
+    height: 350px;
   }

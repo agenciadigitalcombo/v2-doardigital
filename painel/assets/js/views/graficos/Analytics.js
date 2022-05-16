@@ -78,53 +78,29 @@ export default {
 
 		am5.ready(function () {
 
-			// Create root element
-			// https://www.amcharts.com/docs/v5/getting-started/#Root_element
 			var root = am5.Root.new("chartdiv");
 
-
-			// Set themes
-			// https://www.amcharts.com/docs/v5/concepts/themes/
 			root.setThemes([
 				am5themes_Animated.new(root)
 			]);
 
-
-			// Create chart
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/sliced-chart/
 			var chart = root.container.children.push(am5percent.SlicedChart.new(root, {
 				layout: root.verticalLayout
 			}));
 
-
-			// Create series
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/sliced-chart/#Series
 			var series = chart.series.push(am5percent.FunnelSeries.new(root, {
 				alignLabels: false,
 				orientation: "vertical",
 				valueField: "value",
 				categoryField: "category"
 			}));
-
-
-			// Set data
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/sliced-chart/#Setting_data
 			series.data.setAll([
-				{ value: 10, category: "Tráfego" },
 				{ value: 9, category: "Visitantes" },
-				{ value: 6, category: "Leads" },
-				{ value: 5, category: "Oportunidades" },
-				{ value: 4, category: "Clientes" },
+				{ value: 5, category: "Checkoup" },
+				{ value: 4, category: "Doadores" },
 			]);
-
-
-			// Play initial series animation
-			// https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
 			series.appear();
 
-
-			// Create legend
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
 			var legend = chart.children.push(am5.Legend.new(root, {
 				centerX: am5.p50,
 				x: am5.p50,
@@ -134,12 +110,9 @@ export default {
 
 			legend.data.setAll(series.dataItems);
 
-
-			// Make stuff animate on load
-			// https://www.amcharts.com/docs/v5/concepts/animations/
 			chart.appear(1000, 100);
 
-		}); // end am5.ready()
+		});
 
 
 		am5.ready(function () {
@@ -291,96 +264,465 @@ export default {
 
 		});
 
-		var options = {
-			series: [56, 20, 7, 6, 3, 5, 3, 2, 2,  2],
-			chart: {
-				width: 480,
-				type: 'pie',
-			},
-			colors: ['#fe504f', '#37be00', '#ffd752', '#fe504f'],
-			labels: ['(not set) ', 'Curitiba', 'Sao Paulo','Rio de Janeiro', 'Belo Horizonte ', 'Campinas','Porto Alegre', 'Brasilia', 'Fortaleza', 'Outros'],
-			responsive: [{
-				breakpoint: 480,
-				options: {
-					chart: {
-						width: 50
-					},
-					legend: {
-						position: 'bottom'
-					}
-				}
-			}],
-			title: {
-				text: 'Status das Doações',
+		am5.ready(function () {
 
-			},
-		};
-
-
-		am5.ready(function() {
-
-			// Create root element
-			// https://www.amcharts.com/docs/v5/getting-started/#Root_element
 			var root = am5.Root.new("cidade");
-			
-			
-			// Set themes
-			// https://www.amcharts.com/docs/v5/concepts/themes/
+
+
 			root.setThemes([
-			  am5themes_Animated.new(root)
-			]);
-			
-			
-			// Create chart
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-			var chart = root.container.children.push(am5percent.PieChart.new(root, {
-			  layout: root.verticalLayout
-			}));
-			
-			
-			// Create series
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-			var series = chart.series.push(am5percent.PieSeries.new(root, {
-			  valueField: "value",
-			  categoryField: "category"
-			}));
-			
-			
-			// Set data
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-			series.data.setAll([
-			  { value: 10, category: "(not set)" },
-			  { value: 9, category: "Curitiba" },
-			  { value: 6, category: "Sao Paulo" },
-			  { value: 5, category: "Rio de Janeiro" },
-			  { value: 4, category: "Belo Horizonte " },
-			  { value: 3, category: "Campinas" },
-			  { value: 1, category: "Porto Alegre" },
-			  { value: 3, category: "Brasilia" },
-			  { value: 1, category: "Fortaleza" },
-			  { value: 3, category: "Outros" }, 
+				am5themes_Animated.new(root)
 			]);
 
-			
-			
-			// Create legend
-			// https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-			var legend = chart.children.push(am5.Legend.new(root, {
-			  centerX: am5.percent(50),
-			  x: am5.percent(50),
-			  marginTop: 15,
-			  marginBottom: 15
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
 			}));
-			
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 30, category: "(not set)" },
+				{ value: 9, category: "Curitiba" },
+				{ value: 6, category: "Sao Paulo" },
+				{ value: 5, category: "Rio de Janeiro" },
+				{ value: 4, category: "Belo Horizonte " },
+				{ value: 3, category: "Campinas" },
+				{ value: 1, category: "Porto Alegre" },
+				{ value: 3, category: "Brasilia" },
+				{ value: 1, category: "Fortaleza" },
+				{ value: 10, category: "Outros" },
+			]);
+
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
 			legend.data.setAll(series.dataItems);
-			
-			
-			// Play initial series animation
-			// https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+
 			series.appear(1000, 100);
-			
-			}); // end am5.ready()
-	 
+
+		});
+
+		am5.ready(function () {
+
+			var root = am5.Root.new("midia");
+
+
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
+			}));
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 20, category: "trafego/facebook" },
+				{ value: 9, category: "(direct)/(none) " },
+				{ value: 6, category: "l.facebook.com/referral" },
+				{ value: 5, category: "m.facebook.com/referral" },
+				{ value: 4, category: "bethania.com.br/referral" },
+				{ value: 3, category: "RD Station/email" },
+				{ value: 1, category: "lm.facebook.com/referral" },
+				{ value: 3, category: "google/organic" },
+				{ value: 1, category: "Fortafacebook/anuncio" },
+				{ value: 2, category: "Outros" },
+			]);
+
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
+			legend.data.setAll(series.dataItems);
+
+			series.appear(1000, 100);
+
+		});
+
+		am5.ready(function () {
+ 
+			var root = am5.Root.new("despositivoX");
+ 
+			root.setThemes([am5themes_Animated.new(root)]);
+ 
+			var chart = root.container.children.push(
+				am5xy.XYChart.new(root, {
+					panX: false,
+					panY: false,
+					wheelX: "none",
+					wheelY: "none"
+				})
+			);
+
+ 
+			var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 });
+
+			var yAxis = chart.yAxes.push(
+				am5xy.CategoryAxis.new(root, {
+					maxDeviation: 0,
+					categoryField: "country",
+					renderer: yRenderer
+				})
+			);
+
+			var xAxis = chart.xAxes.push(
+				am5xy.ValueAxis.new(root, {
+					maxDeviation: 0,
+					min: 0,
+					renderer: am5xy.AxisRendererX.new(root, {})
+				})
+			);
+
+ 
+			var series = chart.series.push(
+				am5xy.ColumnSeries.new(root, {
+					name: "Series 1",
+					xAxis: xAxis,
+					yAxis: yAxis,
+					valueXField: "value",
+					sequencedInterpolation: true,
+					categoryYField: "country"
+				})
+			);
+
+
+			// Set data
+			var data = [{
+				country: "tablet",
+				value: 122
+			}, {
+				country: "desktop",
+				value: 1182
+			}, {
+				country: "mobile",
+				value: 2025
+			}];
+
+			yAxis.data.setAll(data);
+			series.data.setAll(data);
+ 
+			series.appear(1000);
+			chart.appear(1000, 100);
+
+		});  
+
+
+		am5.ready(function () {
+
+			var root = am5.Root.new("despositivoY");
+
+
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
+			}));
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 20, category: "mobile" },
+				{ value: 7, category: "desktop" },
+				{ value: 1, category: "tablet" },
+			]);
+
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
+			legend.data.setAll(series.dataItems);
+
+			series.appear(1000, 100);
+
+		});
+
+		am5.ready(function () {
+
+			var root = am5.Root.new("dispositivo");
+
+
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
+			}));
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 20, category: "Samsung" },
+				{ value: 9, category: "Motorola" },
+				{ value: 6, category: "Apple" },
+				{ value: 5, category: "LG" },
+				{ value: 4, category: "Xiaomi" },
+				{ value: 3, category: "Asus" },
+				{ value: 1, category: "Lenovo" },
+				{ value: 3, category: "Nokia)"},
+				{ value: 1, category: "(not set)" },
+				{ value: 2, category: "outros" },
+			]);
+
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
+			legend.data.setAll(series.dataItems);
+
+			series.appear(1000, 100);
+
+		});
+
+
+
+		am5.ready(function () {
+ 
+			var root = am5.Root.new("idadeX");
+ 
+			root.setThemes([am5themes_Animated.new(root)]);
+ 
+			var chart = root.container.children.push(
+				am5xy.XYChart.new(root, {
+					panX: false,
+					panY: false,
+					wheelX: "none",
+					wheelY: "none"
+				})
+			);
+
+ 
+			var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 });
+
+			var yAxis = chart.yAxes.push(
+				am5xy.CategoryAxis.new(root, {
+					maxDeviation: 0,
+					categoryField: "country",
+					renderer: yRenderer
+				})
+			);
+
+			var xAxis = chart.xAxes.push(
+				am5xy.ValueAxis.new(root, {
+					maxDeviation: 0,
+					min: 0,
+					renderer: am5xy.AxisRendererX.new(root, {})
+				})
+			);
+
+ 
+			var series = chart.series.push(
+				am5xy.ColumnSeries.new(root, {
+					name: "Series 1",
+					xAxis: xAxis,
+					yAxis: yAxis,
+					valueXField: "value",
+					sequencedInterpolation: true,
+					categoryYField: "country"
+				})
+			);
+
+
+			// Set data
+			var data = [{
+				country: "65+",
+				value: 1082
+			}, {
+				country: "55-64",
+				value: 1282
+			},{
+				country: "45-54",
+				value: 1482
+			}, {
+				country: "35-44",
+				value: 1782
+			},{
+				country: "25-34",
+				value: 2182
+			},{
+				country: "18-24",
+				value: 2625
+			}];
+ 
+			yAxis.data.setAll(data);
+			series.data.setAll(data);
+ 
+			series.appear(1000);
+			chart.appear(1000, 100);
+
+		});  
+
+
+		am5.ready(function () {
+
+			var root = am5.Root.new("idadeY");
+
+
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
+			}));
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 9, category: "18-24" },
+				{ value: 7, category: "25-34" },
+				{ value: 8, category: "35-44" },
+				{ value: 8, category: "45-54" },
+				{ value: 5, category: "55-64" },
+				{ value: 2, category: "65+" }, 
+			]);
+
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
+			legend.data.setAll(series.dataItems);
+
+			series.appear(1000, 100);
+
+		});
+
+
+
+		am5.ready(function () {
+ 
+			var root = am5.Root.new("sexoX");
+ 
+			root.setThemes([am5themes_Animated.new(root)]);
+ 
+			var chart = root.container.children.push(
+				am5xy.XYChart.new(root, {
+					panX: false,
+					panY: false,
+					wheelX: "none",
+					wheelY: "none"
+				})
+			);
+
+ 
+			var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 });
+
+			var yAxis = chart.yAxes.push(
+				am5xy.CategoryAxis.new(root, {
+					maxDeviation: 0,
+					categoryField: "country",
+					renderer: yRenderer
+				})
+			);
+
+			var xAxis = chart.xAxes.push(
+				am5xy.ValueAxis.new(root, {
+					maxDeviation: 0,
+					min: 0,
+					renderer: am5xy.AxisRendererX.new(root, {})
+				})
+			);
+
+ 
+			var series = chart.series.push(
+				am5xy.ColumnSeries.new(root, {
+					name: "Series 1",
+					xAxis: xAxis,
+					yAxis: yAxis,
+					valueXField: "value",
+					sequencedInterpolation: true,
+					categoryYField: "country"
+				})
+			);
+
+
+			// Set data
+			var data = [{
+				country: "Homem",
+				value: 2082
+			}, {
+				country: "Mulher",
+				value: 2625
+			}];
+ 
+			yAxis.data.setAll(data);
+			series.data.setAll(data);
+ 
+			series.appear(1000);
+			chart.appear(1000, 100);
+
+		});  
+
+
+		am5.ready(function () {
+
+			var root = am5.Root.new("sexoY");
+
+
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
+			}));
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 9, category: "Homem" },
+				{ value: 7, category: "Mulher" }, 
+			]);
+
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
+			legend.data.setAll(series.dataItems);
+
+			series.appear(1000, 100);
+
+		});
+
 
 	},
 
