@@ -561,6 +561,49 @@ export default {
 
 		});
 
+
+		am5.ready(function () {
+
+			var root = am5.Root.new("navegador");
+
+
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				layout: root.verticalLayout
+			}));
+
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				valueField: "value",
+				categoryField: "category"
+			}));
+
+			series.data.setAll([
+				{ value: 30, category: "Android Webview" },
+				{ value: 9, category: "Safari (in-app)" },
+				{ value: 6, category: "Chrome" },
+				{ value: 5, category: "Opera" },
+				{ value: 4, category: "Safari" },
+				{ value: 3, category: "Samsung Internet" },
+				{ value: 1, category: "Firefox" },
+				{ value: 3, category: "Edge" },
+				 { value: 2, category: "[FBAN" },
+			]); 
+			var legend = chart.children.push(am5.Legend.new(root, {
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				marginTop: 15,
+				marginBottom: 15
+			}));
+
+			legend.data.setAll(series.dataItems);
+
+			series.appear(1000, 100);
+
+		});
+
 		am5.ready(function () {
 
 			var root = am5.Root.new("dispositivo");
