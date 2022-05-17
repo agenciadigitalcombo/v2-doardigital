@@ -86,7 +86,7 @@ class Asaas
                     "response" => [
                         "info" => $info,
                         "body" => json_decode($ex, true),
-                        "error" => curl_error($con)
+                        "error" => @curl_error($con)
                     ],
                 ]
             ]);

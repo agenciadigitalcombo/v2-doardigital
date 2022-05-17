@@ -31,19 +31,11 @@ POST {{host}}/api/instituicao/register
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
-institution_fk
 &nome={{nome}}
 &cpfCnpj={{cpfCnpj}}
 &email={{email}}
 &telefone={{telefone}}
-&domain={{domain}}
 &subdomain={{subdomain}}
-&logo={{logo}}
-&icon={{icon}}
-&cor={{cor}}
-&titulo={{titulo}}
-&tags={{tags}}
-&descricao={{descricao}}
 &tipoEmpresa={{tipoEmpresa}}
 &cep={{cep}}
 &logradouro={{logradouro}}
@@ -65,6 +57,26 @@ POST {{host}}/api/instituicao/update-info
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
+&institution_fk={{institution_fk}}
+&nome={{nome}}
+&cpfCnpj={{cpfCnpj}}
+&email={{email}}
+&telefone={{telefone}}
+&domain={{domain}}
+&logo={{logo}}
+&icon={{icon}}
+&cor={{cor}}
+&titulo={{titulo}}
+&tags={{tags}}
+&descricao={{descricao}}
+&tipoEmpresa={{tipoEmpresa}}
+&cep={{cep}}
+&logradouro={{logradouro}}
+&numero={{numero}}
+&complemento={{complemento}}
+&bairro={{bairro}}
+&cidade={{cidade}}
+&estado={{estado}}
 
 
 ###

@@ -1,36 +1,41 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . "/../vendor/PHPMailer/src/Exception.php";
+require __DIR__ . "/../vendor/PHPMailer/src/PHPMailer.php";
+require __DIR__ . "/../vendor/PHPMailer/src/SMTP.php";
+
 class SendGrid
 {
 
-    static function header(
-        $to_name,
-        $to_email,
-        $from_name,
-        $from_email
-    ): string {
-        $headers = "MIME-Version: 1.0 \r\n";
-        $headers .= "Content-type: text/html; charset=utf-8 \r\n";
-        $headers .= "To: {$to_name} <{$to_email}> \r\n";
-        $headers .= "From: {$from_name} <{$from_email}> \r\n";
-        return $headers;
-    }
+    static function send(array $payload): bool
+    {
+        $mail = new PHPMailer(true);
+        try {
 
-    static function send(
-        string $template,
-        array $payload
-    ) {
-        $headers = self::header(
-            $payload['nome'] ?? 'Usuário',
-            $payload['to'],
-            $payload['fromName'] ?? "Doar Digital",
-            $payload['fromEmail'] ?? "contato@doardigital.com.br"
-        );
-        $payload['text'] = $payload['text'] ?? '';
-        $message = self::template( $payload, $template);
-        $subject = $payload['subject'] ?? "Doar Digital";
-        $isSend = @mail($payload['to'], $subject, $message, $headers);
-        if ( !empty($payload['print'])) {
-            echo $message;
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.example.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'user@example.com';
+            $mail->Password   = 'secret';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port       = 465;
+
+            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->addAddress('joe@example.net', 'Joe User');
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Here is the subject';
+            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
         }
     }
 
@@ -39,9 +44,9 @@ class SendGrid
         $html = @file_get_contents(__DIR__ . "/../template_email/{$modelo_html}.html") ?? '';
         $html = str_replace('@@text@@', $payload['text'], $html);
         foreach ($payload as $k => $v) {
-            $html = str_replace("@@" . $k . "@@", $v, $html);
+            $html = str_replace("{" . $k . "}", $v, $html);
         }
-        $html = trim( str_replace("%20", ' ', $html) );
+        $html = trim(str_replace("%20", ' ', $html));
         return $html;
     }
 }
