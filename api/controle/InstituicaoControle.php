@@ -115,10 +115,20 @@ class InstituicaoControle extends Controle
             $cep
         );
 
+        if(!empty($resConta['errors'])) {
+            self::printError(
+                $resConta['errors'][0]["description"],
+                $resConta['errors']
+            );
+        }
+
+        $ID = $resConta['id'];
+        $walletId = $resConta['walletId'];
+        $apiKey = $resConta['apiKey'];
 
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
-            []
+            $resConta
         );
 
     }
