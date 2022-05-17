@@ -14,6 +14,6 @@ return [
     "email_user" => "contato@doardigital.com.br",
     "email_pass" => "Prosperidade@121",
     
-    "api_key" => "9d175701dd7c6aa2602c43329379496d158ab746baa2974e655eb2840a137352",
+    "api_key" => "82d275dc283ece7657d407ad7fc9ac403fece1d94361e94d86de0fb114fdfc4f",
     "sandbox" => true
 ];
