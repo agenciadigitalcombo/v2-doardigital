@@ -174,4 +174,24 @@ class Instituicao
             "visible" => $visible
         ]);
     }
+
+    static function porter( array $payload ) : array {
+        return [
+            "institution_fk" => $payload["institution_fk"] ?? null,
+            "nome" => $payload["nome"] ?? null,
+            "cpfCnpj" => $payload["cpfCnpj"] ?? null,
+            "email" => $payload["email"] ?? null,
+            "telefone" => $payload["telefone"] ?? null,
+            "registro" => $payload["registro"] ?? null,
+            "visible" => $payload["visible"] ?? null,
+            "domain" => $payload["domain"] ?? null,
+            "subdomain" => $payload["subdomain"] ?? null,
+            "logo" => $payload["logo"] ?? null,
+            "icon" => $payload["icon"] ?? null,
+            "cor" => $payload["cor"] ?? null,
+            "titulo" => $payload["titulo"] ?? null,
+            "tags" => $payload["tags"] ?? null,
+            "descricao" => $payload["descricao"] ?? null,
+        ];
+    }
 }

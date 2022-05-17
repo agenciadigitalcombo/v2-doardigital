@@ -5,7 +5,7 @@
 @cpfCnpj=384.493.120-19
 @email=br.rafael@outlook.com
 @telefone=(11) 94949-9944
-@domain=
+@domain=teste
 @subdomain=teste
 @logo=
 @icon=
@@ -24,7 +24,7 @@
 @adm_fk=adm_007
 
 ##
-GET {{host}}/api/instituicao/
+GET {{host}}/api/instituicao
 
 ###
 POST {{host}}/api/instituicao/register
@@ -58,7 +58,7 @@ institution_fk
 GET {{host}}/api/instituicao/list?token={{token}}&adm_fk=
 
 ###
-GET {{host}}/api/instituicao/info?institution_fk={{institution_fk}}&token={{token}}
+GET {{host}}/api/instituicao/info?domain={{domain}}&token={{token}}
 
 ###
 POST {{host}}/api/instituicao/update-info
@@ -66,9 +66,6 @@ Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
 
-###
-POST {{host}}/api/instituicao/del
-Content-Type: application/x-www-form-urlencoded;
 
-token={{token}}
-&institution_fk={{institution_fk}}
+###
+GET {{host}}/api/instituicao/balance?token={{token}}&institution_fk={{institution_fk}}

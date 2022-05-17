@@ -1,0 +1,7 @@
+Doação falhada não concluída!
+
+Olá {NOME}, sua Doação não foi concluída.
+
+Houve alguma falha no processamento de sua doação. Pedimos a gentileza de verificar se houve algum dado digitado trocado ou faltando algum número.
+
+Ou se preferir pode nos chamar no suporte para que nossa equipe possa te auxiliar em sua doação.
