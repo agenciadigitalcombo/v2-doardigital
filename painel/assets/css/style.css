@@ -119,8 +119,12 @@ span .menu  {
 }
 
 .bg-visual {
-    background-color: #ffbfe4!important;
+    border-width: medium;
+  border-style: groove;
+  border-color: rgb(145, 180, 255);
+  background-color: #ffffff!important;
     padding: 1.5rem 1rem 1.5rem 1.20rem;
+    
     
 }
 
@@ -141,12 +145,17 @@ span .menu  {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-#chartdiv, #mapas{
+  #mapas {
     width: 100%;
     height: 500px;
   }
 
-   
- #cidade{
-    height: 500px;
+  #chartdiv,#usuario {
+    width: 100%;
+    height: 400px;
+  }
+
+ #cidade, #midia , #despositivoY, #despositivoX,  #navegador, #dispositivo , #idadeX , #idadeY, #sexoX , #sexoY { 
+   width: 100%;
+    height: 350px;
   }
