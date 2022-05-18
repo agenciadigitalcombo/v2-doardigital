@@ -61,63 +61,63 @@ export default {
 
 			var data = [
 			  {
-				country: "12 abr.",
+				country: "12 de abr.",
 				visits: 3025,
 				error: 100
 			  },{
-				country: "13 abr.",
+				country: "13 de abr.",
 				visits: 3025,
 				error: 100
 			  },
 			  {
-				country: "14 abr",
+				country: "14 de abr",
 				visits: 1882,
 				error: 180
 			  },{
-				country: "15 abr.",
+				country: "15 de abr.",
 				visits: 3025,
 				error: 100
 			  },
 			  {
-				country: "16 abr",
+				country: "16 de abr",
 				visits: 1809,
 				error: 130
 			  },{
-				country: "17 abr.",
+				country: "17 de abr.",
 				visits: 3025,
 				error: 100
 			  },
 			  {
-				country: "18 abr.",
+				country: "18 de abr.",
 				visits: 1322,
 				error: 200
 			  },{
-				country: "19 abr.",
+				country: "19 de abr.",
 				visits: 3025,
 				error: 100
 			  },
 			  {
-				country: "20 abr.",
+				country: "20 de abr.",
 				visits: 1122,
 				error: 150
 			  },
 			  {
-				country: "21 abr.",
+				country: "21 de abr.",
 				visits: 1122,
 				error: 150
 			  },
 			  {
-				country: "22 abr.",
+				country: "22 de abr.",
 				visits: 1114,
 				error: 110
 			  },
 			  {
-				country: "22 abr.",
+				country: "22 de abr.",
 				visits: 1122,
 				error: 150
 			  },
 			  {
-				country: "24 abr",
+				country: "24 de abr",
 				visits: 984,
 				error: 120
 			  }
