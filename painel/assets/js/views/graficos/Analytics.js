@@ -59,70 +59,6 @@ export default {
 
 		am5.ready(function() {
 
-			var data = [
-			  {
-				country: "12 abr.",
-				visits: 3025,
-				error: 100
-			  },{
-				country: "13 abr.",
-				visits: 3025,
-				error: 100
-			  },
-			  {
-				country: "14 abr",
-				visits: 1882,
-				error: 180
-			  },{
-				country: "15 abr.",
-				visits: 3025,
-				error: 100
-			  },
-			  {
-				country: "16 abr",
-				visits: 1809,
-				error: 130
-			  },{
-				country: "17 abr.",
-				visits: 3025,
-				error: 100
-			  },
-			  {
-				country: "18 abr.",
-				visits: 1322,
-				error: 200
-			  },{
-				country: "19 abr.",
-				visits: 3025,
-				error: 100
-			  },
-			  {
-				country: "20 abr.",
-				visits: 1122,
-				error: 150
-			  },
-			  {
-				country: "21 abr.",
-				visits: 1122,
-				error: 150
-			  },
-			  {
-				country: "22 abr.",
-				visits: 1114,
-				error: 110
-			  },
-			  {
-				country: "22 abr.",
-				visits: 1122,
-				error: 150
-			  },
-			  {
-				country: "24 abr",
-				visits: 984,
-				error: 120
-			  }
-			];
-			
 			// Create root element
 			// https://www.amcharts.com/docs/v5/getting-started/#Root_element
 			var root = am5.Root.new("usuario");
@@ -135,108 +71,195 @@ export default {
 			
 			// Create chart
 			// https://www.amcharts.com/docs/v5/charts/xy-chart/
-			var chart = root.container.children.push(
-			  am5xy.XYChart.new(root, {
-				panX: true,
-				panY: true,
-				wheelY: "zoomXY",
-			  pinchZoomX:true
-			  })
-			);
-			
-			chart.get("colors").set("step", 2);
-			
-			// Create axes
-			// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-			var xAxis = chart.xAxes.push(
-			  am5xy.CategoryAxis.new(root, {
-				categoryField: "country",
-				renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 50 }),
-				tooltip: am5.Tooltip.new(root, {})
-			  })
-			);
-			
-			var yAxis = chart.yAxes.push(
-			  am5xy.ValueAxis.new(root, {
-				extraMax: 0.1,
-				extraMin: 0.1,
-				renderer: am5xy.AxisRendererY.new(root, {}),
-				tooltip: am5.Tooltip.new(root, {})
-			  })
-			);
-			
-			// Create series
-			// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-			var series = chart.series.push(
-			  am5xy.LineSeries.new(root, {
-				calculateAggregates: true,
-				xAxis: xAxis,
-				yAxis: yAxis,
-				valueYField: "visits",
-				categoryXField: "country",
-				tooltip: am5.Tooltip.new(root, {
-				  labelText: "Usuario: {valueY}\nerro do Usuario: {error}"
-				})
-			  })
-			);
-			
-			// add error bullet
-			series.bullets.push(function() {
-			  var graphics = am5.Graphics.new(root, {
-				strokeWidth: 2,
-				stroke: series.get("stroke"),
-				draw: function(display, target) {
-				  var dataItem = target.dataItem;
-			
-				  var error = dataItem.dataContext.error;
-			
-				  var yPosition0 = yAxis.valueToPosition(0);
-				  var yPosition1 = yAxis.valueToPosition(error);
-			
-				  var height =
-					(yAxis.get("renderer").positionToCoordinate(yPosition1) - yAxis.get("renderer").positionToCoordinate(yPosition0)) / 2;
-			
-				  display.moveTo(0, -height);
-				  display.lineTo(0, height);
-			
-				  display.moveTo(-10, -height);
-				  display.lineTo(10, -height);
-			
-				  display.moveTo(-10, height);
-				  display.lineTo(10, height);
-				}
-			  });
-			
-			  return am5.Bullet.new(root, {
-				dynamic: true,
-				sprite: graphics
-			  });
-			});
-			
-			// Add circle bullet
-			// https://www.amcharts.com/docs/v5/charts/xy-chart/series/#Bullets
-			series.bullets.push(function() {
-			  var graphics = am5.Circle.new(root, {
-				strokeWidth: 2,
-				radius: 5,
-				stroke: series.get("stroke"),
-				fill: root.interfaceColors.get("background")
-			  });
-			  return am5.Bullet.new(root, {
-				sprite: graphics
-			  });
-			});
+			var chart = root.container.children.push(am5xy.XYChart.new(root, {
+			  panX: false,
+			  panY: false,
+			  wheelX: "none",
+			  wheelY: "none"
+			}));
 			
 			// Add cursor
 			// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-			chart.set("cursor", am5xy.XYCursor.new(root, {
-			  xAxis: xAxis,
-			  yAxis: yAxis,
-			  snapToSeries: [series]
+			var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+			cursor.lineY.set("visible", false);
+			
+			// Create axes
+			// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+			var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+			
+			var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+			  maxDeviation: 0,
+			  categoryField: "name",
+			  renderer: xRenderer,
+			  tooltip: am5.Tooltip.new(root, {})
 			}));
 			
-			series.data.setAll(data);
+			xRenderer.grid.template.set("visible", false);
+			
+			var yRenderer = am5xy.AxisRendererY.new(root, {});
+			var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+			  maxDeviation: 0,
+			  min: 0,
+			  extraMax: 0.1,
+			  renderer: yRenderer
+			}));
+			
+			yRenderer.grid.template.setAll({
+			  strokeDasharray: [2, 2]
+			});
+			
+			// Create series
+			// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+			var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+			  name: "Series 1",
+			  xAxis: xAxis,
+			  yAxis: yAxis,
+			  valueYField: "value",
+			  sequencedInterpolation: true,
+			  categoryXField: "name",
+			  tooltip: am5.Tooltip.new(root, { dy: -25, labelText: "{valueY}" })
+			}));
+			
+			
+			series.columns.template.setAll({
+			  cornerRadiusTL: 5,
+			  cornerRadiusTR: 5
+			});
+			
+			series.columns.template.adapters.add("fill", (fill, target) => {
+			  return chart.get("colors").getIndex(series.columns.indexOf(target));
+			});
+			
+			series.columns.template.adapters.add("stroke", (stroke, target) => {
+			  return chart.get("colors").getIndex(series.columns.indexOf(target));
+			});
+			
+			// Set data
+			var data = [
+			  {
+				name: "1",
+				value: 35654,
+				bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
+			  },
+			  {
+				name: "2",
+				value: 65456,
+			  },
+			  {
+				name: "3",
+				value: 45724,
+			  },
+			  {
+				name: "4",
+				value: 13654, 
+			  },
+			  {
+				name: "5",
+				value: 65456,
+			  },
+			  {
+				name: "6",
+				value: 45724,
+			  },
+			  {
+				name: "7",
+				value: 13654, 
+			  },
+			  {
+				name: "8",
+				value: 65456,
+			  },
+			  {
+				name: "9",
+				value: 45724,
+			  },
+			  {
+				name: "10",
+				value: 13654, 
+			  }, {
+				name: "11",
+				value: 35654,
+				bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
+			  },
+			  {
+				name: "12",
+				value: 65456,
+			  },
+			  {
+				name: "13",
+				value: 45724,
+			  },
+			  {
+				name: "14",
+				value: 13654, 
+			  },
+			  {
+				name: "15",
+				value: 65456,
+			  },
+			  {
+				name: "16",
+				value: 45724,
+			  },
+			  {
+				name: "17",
+				value: 13654, 
+			  },
+			  {
+				name: "18",
+				value: 65456,
+			  },
+			  {
+				name: "19",
+				value: 45724,
+			  },  {
+				name: "20",
+				value: 45724,
+			  },  {
+				name: "21",
+				value: 35654,
+				bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
+			  },
+			  {
+				name: "22",
+				value: 65456,
+			  },
+			  {
+				name: "23",
+				value: 45724,
+			  },
+			  {
+				name: "24",
+				value: 13654, 
+			  },
+			  {
+				name: "25",
+				value: 65456,
+			  },
+			  {
+				name: "26",
+				value: 45724,
+			  },
+			  {
+				name: "27",
+				value: 13654, 
+			  },
+			  {
+				name: "28",
+				value: 65456,
+			  },
+			  {
+				name: "29",
+				value: 45724,
+			  },
+			  {
+				name: "30",
+				value: 13654, 
+			  },
+			];
+		 
 			xAxis.data.setAll(data);
+			series.data.setAll(data);
 			
 			// Make stuff animate on load
 			// https://www.amcharts.com/docs/v5/concepts/animations/

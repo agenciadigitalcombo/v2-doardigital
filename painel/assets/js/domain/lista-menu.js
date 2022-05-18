@@ -2,6 +2,7 @@ export default [
  
     { id: 'inicio', nome: 'Inicio', icon: 'home.svg', link: '#/', feature_flag: true , permisao1: "1", permisao2: "0"},
     { id: 'grafico', nome: 'Grafico', icon: 'home.svg', link: '#/grafico', feature_flag: true , permisao1: "1", permisao2: "0"},
+    { id: 'grafico2', nome: 'Grafico2', icon: 'home.svg', link: '#/grafico2', feature_flag: true , permisao1: "1", permisao2: "0"},
     { id: 'analytics', nome: 'analytics', icon: 'planos.svg', link: '#/analytics', feature_flag: true , permisao1: "1",  permisao2: "0"},
    
     

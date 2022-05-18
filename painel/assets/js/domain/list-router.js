@@ -2,6 +2,7 @@ export default [
  
     { path: '/', component: { template: '<c-dash/>' } }, 
     { path: '/grafico', component: { template: '<c-grafico/>' } }, 
+    { path: '/grafico2', component: { template: '<c-grafico2/>' } }, 
     { path: '/analytics', component: { template: '<c-Analytics/>' } }, 
     
     { path: '/texte', component: { template: '<c-texte/>' } }, 
