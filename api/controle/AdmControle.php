@@ -40,13 +40,6 @@ class AdmControle extends Controle
         $adm->register($nome, $email, $senha, $telefone);
         $code = $adm->login($email, $senha);
         $jwt = $jwt->maker(["code" => $code]);
-        SendGrid::send(
-            'cadastro',
-            [
-                "to" => $email,
-                "nome" => $nome
-            ]
-        );
         self::printSuccess(
             "cadastrado com sucesso",
             ["token" => $jwt]

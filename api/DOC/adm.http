@@ -1,4 +1,4 @@
-@host=http://doardigital.con
+@host=https://doardigital.con
 
 @code=adm_625ebcbd5adb7
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
@@ -16,7 +16,7 @@
 @senha=87654321
 @nascimento=18/09/1987
 @telefone=(82) 9 9999-9999
-@email=br.rafael@outlook.com
+@email=br.rafael2@outlook.com
 @credencial=1
 @adm=
 
@@ -40,6 +40,7 @@ nome={{nome}}
 &email={{email}}
 &senha={{senha}}
 &telefone={{telefone}}
+&debug=1
 
 ###
 POST {{host}}/api/adm/sub/register
