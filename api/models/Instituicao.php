@@ -77,6 +77,7 @@ class Instituicao
 
     public function register(
         string $adm_fk,
+        string $id_fk,
         string $institution_fk,
         string $carteira_fk,
         string $nome,
@@ -85,12 +86,19 @@ class Instituicao
         string $telefone,
         string $subdomain,
         string $logo,
-        string $cor
+        string $cor,
+        string $account,
+        string $accountDigit,
+        string $accountName,
+        string $agency,
+        string $bank,
+        string $bankAccountType
     ): void {
         $this->setAdm($institution_fk, $adm_fk);
         $this->con->insert([
             "institution_fk" => $institution_fk,
             "carteira_fk" => $carteira_fk,
+            "id_fk" => $id_fk,
             "nome" => $nome,
             "cpfCnpj" => $this->clearNumber($cpfCnpj),
             "email" => $email,
@@ -100,6 +108,12 @@ class Instituicao
             "subdomain" => $subdomain,
             "logo" => $logo,
             "cor" => $cor,
+            "account" => $account,
+            "accountDigit" => $accountDigit,
+            "accountName" => $accountName,
+            "agency" => $agency,
+            "bank" => $bank,
+            "bankAccountType" => $bankAccountType,
         ]);
     }
 

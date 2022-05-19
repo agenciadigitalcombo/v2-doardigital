@@ -51,7 +51,7 @@ class InstituicaoControle extends Controle
             "cpfCnpj" => "Informe um CPF ou CNPJ",
             "email" => "Informe um email",
             "telefone" => "Informe um telefone",
-            "subdomain" => "Informe um subdomain",            
+            "subdomain" => "Informe um subdomain",
             "tipoEmpresa" => "Informe tipo de empresa",
             "cep" => "Informe o CEP",
             "logradouro" => "Informe o endereço",
@@ -66,7 +66,7 @@ class InstituicaoControle extends Controle
             "agency" => "Informe o numero da agencia",
             "bank" => "Informe numero do banco",
             "bankAccountType" => "Informe o tipo da conta",
-            
+
         ]);
 
         self::privateRouter();
@@ -106,14 +106,14 @@ class InstituicaoControle extends Controle
 
         $conta->set_api_key($env["api_key"]);
         $existSubdomain = $company->existSubdomain($subdomain);
-        
-        if( $existSubdomain ) {
+
+        if ($existSubdomain) {
             self::printError(
                 "Subdomain esta indisponível",
                 []
             );
         }
-        
+
         $resConta = $conta->registerCarteira(
             $nome,
             $email,
@@ -134,7 +134,7 @@ class InstituicaoControle extends Controle
             $bankAccountType
         );
 
-        if(!empty($resConta['errors'])) {
+        if (!empty($resConta['errors'])) {
             self::printError(
                 $resConta['errors'][0]["description"],
                 $resConta['errors']
@@ -144,12 +144,32 @@ class InstituicaoControle extends Controle
         $ID = $resConta['id'];
         $walletId = $resConta['walletId'];
         $apiKey = $resConta['apiKey'];
+        $institution_fk = $company->maker_fk();
+
+        $company->register(
+            $adm_fk,
+            $ID,
+            $apiKey,
+            $walletId,
+            $nome,
+            $cpfCnpj,
+            $email,
+            $telefone,
+            $subdomain,
+            $logo,
+            $cor,
+            $account,
+            $accountDigit,
+            $accountName,
+            $agency,
+            $bank,
+            $bankAccountType
+        );
 
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta
         );
-
     }
 
     static function info()

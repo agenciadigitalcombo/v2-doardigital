@@ -123,6 +123,7 @@ CREATE TABLE institution (
     id int not null auto_increment primary key,
     institution_fk VARCHAR(255),
     carteira_fk VARCHAR(255),
+    id_fk VARCHAR(255),
     nome VARCHAR(255),
     cpfCnpj VARCHAR(14),
     email VARCHAR(75),
@@ -136,7 +137,13 @@ CREATE TABLE institution (
     cor VARCHAR(9),
     titulo VARCHAR(75),
     tags VARCHAR(75),
-    descricao VARCHAR(145)
+    descricao VARCHAR(145),
+    account VARCHAR(75),
+    accountDigit VARCHAR(75),
+    accountName VARCHAR(75),
+    agency VARCHAR(75),
+    bank VARCHAR(75),
+    bankAccountType VARCHAR(75)
 );
 
 CREATE TABLE meta (
