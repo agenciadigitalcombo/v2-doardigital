@@ -1,8 +1,8 @@
 @host=https://doardigital.tk
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
 @institution_fk=
-@nome=Bruno Vieira
-@cpfCnpj=384.493.120-19
+@nome=Bruno Ap. Vieira
+@cpfCnpj=673.904.610-71
 @email=br.rafael@outlook3.com
 @telefone=(11) 94949-9944
 @domain=teste
@@ -22,11 +22,11 @@
 @cidade=Taboão da serra
 @estado=SP
 @adm_fk=adm_007
-@account=790514
-@accountDigit=1
-@accountName=Santander
-@agency=Santander
-@bank=3200
+@account=54799
+@accountDigit=5
+@accountName=Itaú
+@agency=9313
+@bank=341
 @bankAccountType=CONTA_CORRENTE
 
 ##

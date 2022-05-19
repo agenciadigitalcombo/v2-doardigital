@@ -86,7 +86,7 @@ class AsaasConta extends Asaas
                 "account" => $this->clearNumber($account),
                 "accountDigit" => $this->clearNumber($accountDigit),
                 "accountName" => $accountName,
-                "agency" => $agency,
+                "agency" => $this->clearNumber($agency),
                 "bank"=> $this->clearNumber($bank),
                 "bankAccountType" => $bankAccountType,
                 "cpfCnpj" => $this->clearNumber($cpfCnpj),
