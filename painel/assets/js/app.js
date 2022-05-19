@@ -36,6 +36,9 @@ Vue.component('c-detalhe', detalhe)
 import grafico from './views/graficos/grafico.js'
 Vue.component('c-grafico', grafico)
 
+import grafico2 from './views/graficos/grafico2.js'
+Vue.component('c-grafico2', grafico2)
+
 import dash from './views/dash.js'
 Vue.component('c-dash', dash)
 
