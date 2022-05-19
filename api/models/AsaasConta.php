@@ -93,7 +93,6 @@ class AsaasConta extends Asaas
                 "name" => $name,
             ]
         ];
-        print_r($payload);
         return $this->post('/accounts', $payload);
     }
 
