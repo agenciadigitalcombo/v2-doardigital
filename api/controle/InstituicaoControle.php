@@ -60,6 +60,12 @@ class InstituicaoControle extends Controle
             "cidade" => "Informe a cidade",
             "estado" => "Informe o estado",
             "adm_fk" => "Informe quem é o adm",
+            "account" => "Informe o numero conta",
+            "accountDigit" => "Informe o digito da conta",
+            "accountName" => "Informe o nome do banco",
+            "agency" => "Informe o numero da agencia",
+            "bank" => "Informe numero do banco",
+            "bankAccountType" => "Informe o tipo da conta",
             
         ]);
 
@@ -85,6 +91,13 @@ class InstituicaoControle extends Controle
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
         $adm_fk = $_REQUEST['adm_fk'];
+
+        $account = $_REQUEST["account"];
+        $accountDigit = $_REQUEST["accountDigit"];
+        $accountName = $_REQUEST["accountName"];
+        $agency = $_REQUEST["agency"];
+        $bank = $_REQUEST["bank"];
+        $bankAccountType = $_REQUEST["bankAccountType"];
 
         $company = new Instituicao();
         $conta = new AsaasConta();
@@ -112,7 +125,13 @@ class InstituicaoControle extends Controle
             $numero,
             $complemento,
             $bairro,
-            $cep
+            $cep,
+            $account,
+            $accountDigit,
+            $accountName,
+            $agency,
+            $bank,
+            $bankAccountType
         );
 
         if(!empty($resConta['errors'])) {

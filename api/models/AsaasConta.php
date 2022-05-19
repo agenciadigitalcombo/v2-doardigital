@@ -61,7 +61,14 @@ class AsaasConta extends Asaas
         string $addressNumber,
         string $complement,
         string $province,
-        string $postalCode
+        string $postalCode,
+
+        string $account,
+        string $accountDigit,
+        string $accountName,
+        string $agency,
+        string $bank,
+        string $bankAccountType
     ): array {
         $payload = [
             "name" => $name,
@@ -74,7 +81,17 @@ class AsaasConta extends Asaas
             "addressNumber" => $addressNumber,
             "complement" => $complement,
             "province" => $province,
-            "postalCode" => $postalCode
+            "postalCode" => $postalCode,
+            "bankAccount" => [
+                "account" => $this->clearNumber($account),
+                "accountDigit" => $this->clearNumber($accountDigit),
+                "accountName" => $accountName,
+                "agency" => $agency,
+                "bank"=> $this->clearNumber($bank),
+                "bankAccountType" => $bankAccountType,
+                "cpfCnpj" => $this->clearNumber($cpfCnpj),
+                "name" => $name,
+            ]
         ];
         return $this->post('/accounts', $payload);
     }
