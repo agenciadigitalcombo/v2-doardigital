@@ -277,47 +277,111 @@ export default {
 			
 			}); // end am5.ready()
 
-		var options = {
-			chart: {
-				type: 'bar'
-			},
-			series: [
-				{
-					name: 'Boleto',
-					data: [30]
-				},
-				{
-					name: 'Pix',
-					data: [40]
-				},
-				{
-					name: 'Cartao',
-					data: [45]
-				}
-			],
+	
+			am5.ready(function() {
 
-			plotOptions: {
-				bar: {
-					dataLabels: {
-						position: 'top'
-
-					}
-				}
-			},
-
-			title: {
-				text: 'Formas de Pagamentos',
-
-			},
-
-			colors: ['#49bfff', '#0fa39e', '#39539E'],
-			labels: [''],
-
-		}
-
-		var pagamento = new ApexCharts(document.querySelector("#formaPagamento"), options);
-		pagamento.render();
- 
+				// Create root element
+				// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+				var root = am5.Root.new("formaPagamento");
+				
+				// Set themes
+				// https://www.amcharts.com/docs/v5/concepts/themes/
+				root.setThemes([
+				  am5themes_Animated.new(root)
+				]);
+				
+				// Create chart
+				// https://www.amcharts.com/docs/v5/charts/xy-chart/
+				var chart = root.container.children.push(am5xy.XYChart.new(root, {
+				  panX: false,
+				  panY: false,
+				  wheelX: "none",
+				  wheelY: "none"
+				}));
+				
+				// Add cursor
+				// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+				var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+				cursor.lineY.set("visible", false);
+				
+				// Create axes
+				// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+				var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+				
+				var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+				  maxDeviation: 0,
+				  categoryField: "name",
+				  renderer: xRenderer,
+				  tooltip: am5.Tooltip.new(root, {})
+				}));
+				
+				xRenderer.grid.template.set("visible", false);
+				
+				var yRenderer = am5xy.AxisRendererY.new(root, {});
+				var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+				  maxDeviation: 0,
+				  min: 0,
+				  extraMax: 0.1,
+				  renderer: yRenderer
+				}));
+				
+				yRenderer.grid.template.setAll({
+				  strokeDasharray: [2, 2]
+				});
+				
+				// Create series
+				// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+				var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+				  name: "Series 1",
+				  xAxis: xAxis,
+				  yAxis: yAxis,
+				  valueYField: "value",
+				  sequencedInterpolation: true,
+				  categoryXField: "name",
+				  tooltip: am5.Tooltip.new(root, { dy: -25, labelText: "{valueY}" })
+				}));
+				
+				
+				series.columns.template.setAll({
+				  cornerRadiusTL: 5,
+				  cornerRadiusTR: 5
+				});
+				
+				series.columns.template.adapters.add("fill", (fill, target) => {
+				  return chart.get("colors").getIndex(series.columns.indexOf(target));
+				});
+				
+				series.columns.template.adapters.add("stroke", (stroke, target) => {
+				  return chart.get("colors").getIndex(series.columns.indexOf(target));
+				});
+				
+				// Set data
+				var data = [
+				  
+				  {
+					name: "Boleto",
+					value: 15724,
+				  },
+				  {
+					name: "Pix",
+					value: 23654, 
+				  },
+				  {
+					name: "Cartao",
+					value: 3654, 
+				  },
+				];
+			 
+				xAxis.data.setAll(data);
+				series.data.setAll(data);
+				
+				// Make stuff animate on load
+				// https://www.amcharts.com/docs/v5/concepts/animations/
+				series.appear(1000);
+				chart.appear(1000, 100);
+				
+				}); // end am5.ready()
+  
   
 		am5.ready(function() {
 
@@ -516,20 +580,12 @@ export default {
 			  cornerRadiusTR: 5
 			});
 			
-			series.columns.template.adapters.add("fill", (fill, target) => {
-			  return chart.get("colors").getIndex(series.columns.indexOf(target));
-			});
-			
-			series.columns.template.adapters.add("stroke", (stroke, target) => {
-			  return chart.get("colors").getIndex(series.columns.indexOf(target));
-			});
-			
+			 
 			// Set data
 			var data = [
 			  {
 				name: "1",
-				value: 35654,
-				bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
+				value: 35654, 
 			  },
 			  {
 				name: "2",
@@ -568,8 +624,7 @@ export default {
 				value: 13654, 
 			  }, {
 				name: "11",
-				value: 35654,
-				bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
+				value: 35654, 
 			  },
 			  {
 				name: "12",
@@ -607,8 +662,7 @@ export default {
 				value: 45724,
 			  },  {
 				name: "21",
-				value: 35654,
-				bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
+				value: 35654, 
 			  },
 			  {
 				name: "22",

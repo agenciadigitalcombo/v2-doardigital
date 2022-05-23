@@ -154,7 +154,7 @@ span .menu  {
     width: 100%;
     height: 400px;
   }
-  #quantidade, #faturamentos, #statusDoacao , #tipoDoador , #statusDoador, #statusAssinturas   {
+  #quantidade, #faturamentos, #statusDoacao , #tipoDoador , #statusDoador, #statusAssinturas, #formaPagamento  {
   width: 100%;
   height: 250px;
 }
