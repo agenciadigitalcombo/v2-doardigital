@@ -1,0 +1,43 @@
+
+@host=http://doardigital.con
+@token=eyJjb2RlIjoiYWRtXzYyODY5ZWNiNWM4YzEifQ==.01fa5998f3e38a55d9add4251a595bd8be793bac
+@instituicao_fk=inst_0007
+@ano=2022
+@janeiro=10000
+@fevereiro=7000
+@marco=5000
+@abril=5000
+@maio=12000
+@junho=3000
+@julho=5000
+@agosto=6000
+@setembro=4000
+@outubro=5000
+@novembro=6000
+@dezembro=10000
+
+###
+GET {{host}}/api/metas
+
+###
+GET {{host}}/api/metas/info?token={{token}}&instituicao_fk={{instituicao_fk}}&ano={{ano}}
+
+###
+POST {{host}}/api/metas/save
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}} 
+&instituicao_fk={{instituicao_fk}}
+&ano={{ano}}
+&janeiro={{janeiro}}
+&fevereiro={{fevereiro}}
+&marco={{marco}}
+&abril={{abril}}
+&maio={{maio}}
+&junho={{junho}}
+&julho={{julho}}
+&agosto={{agosto}}
+&setembro={{setembro}}
+&outubro={{outubro}}
+&novembro={{novembro}}
+&dezembro={{dezembro}}

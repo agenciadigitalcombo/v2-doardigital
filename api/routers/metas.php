@@ -1,5 +1,6 @@
 <?php
 
-router('/save-metas', 'MetasControler@save_meta');
-router('/list-metas', 'MetasControler@list_metas');
+router('/metas', 'MetasControle@start');
+router('/metas/info', 'MetasControle@info');
+router('/metas/save', 'MetasControle@save');
 

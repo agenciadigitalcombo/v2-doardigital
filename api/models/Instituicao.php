@@ -206,6 +206,12 @@ class Instituicao
             "titulo" => $payload["titulo"] ?? null,
             "tags" => $payload["tags"] ?? null,
             "descricao" => $payload["descricao"] ?? null,
+            "account" => $payload["account"] ?? null,
+            "accountDigit" => $payload["accountDigit"] ?? null,
+            "accountName" => $payload["accountName"] ?? null,
+            "agency" => $payload["agency"] ?? null,
+            "bank" => $payload["bank"] ?? null,
+            "bankAccountType" => $payload["bankAccountType"] ?? null,
         ];
     }
 }

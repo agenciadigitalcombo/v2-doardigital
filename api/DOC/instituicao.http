@@ -1,12 +1,12 @@
-@host=https://doardigital.tk
+@host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
 @institution_fk=
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
 @email=br.rafael2@outlook.com
 @telefone=(11) 94949-9944
-@domain=teste
-@subdomain=teste
+@domain=teste.doardigital.con
+@subdomain=teste.doardigital.con
 @logo=
 @icon=
 @cor=#C00

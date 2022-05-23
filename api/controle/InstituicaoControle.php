@@ -101,8 +101,8 @@ class InstituicaoControle extends Controle
 
         $company = new Instituicao();
         $conta = new AsaasConta();
+        $address = new Endereco();
         $env = require __DIR__ . "/../config.php";
-
 
         $conta->set_api_key($env["api_key"]);
         $existSubdomain = $company->existSubdomain($subdomain);
@@ -166,6 +166,31 @@ class InstituicaoControle extends Controle
             $bankAccountType
         );
 
+        $address->save(
+            $institution_fk,
+            'INSTITUTION',
+            $cep,
+            $logradouro,
+            $numero,
+            $complemento,
+            $bairro,
+            $cidade,
+            $estado
+        );
+
+        $plan = new Plano();
+
+        foreach( self::plansDefault() as $valor ) {
+            $plan->register(
+                $institution_fk,
+                $valor,
+                "",
+                0,
+                0,
+                0,
+                0
+            );
+        }
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta
@@ -183,6 +208,17 @@ class InstituicaoControle extends Controle
             "SELECT * FROM institution WHERE domain='{$domain}' OR subdomain='{$domain}'"
         )[0] ?? [];
         $company = Instituicao::porter($company);
+        $banco->table("plano");
+        $banco->where([
+            "institution_fk" => $company["institution_fk"],
+            "tipo" => "INSTITUTION",
+        ]);
+        $company['endereco'] = Endereco::porter( $banco->select() );
+        $banco->table("plano");
+        $banco->where([
+            "fk" => $company["institution_fk"]
+        ]);
+        $company['planos'] = Plano::porter($banco->select());
         self::printSuccess(
             "Informações da Instituição",
             $company

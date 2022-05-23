@@ -97,22 +97,6 @@ CREATE TABLE assinatura (
     valor FLOAT
 );
 
-CREATE TABLE bank (
-    id int not null auto_increment primary key,
-    institution_fk VARCHAR(255),
-    carteira_fk VARCHAR(255),
-    bank_fk VARCHAR(255),
-    nome_identificacao VARCHAR(75),
-    codigo_banco VARCHAR(3),
-    agencia VARCHAR(4),
-    agencia_digito VARCHAR(1),
-    conta VARCHAR(13),
-    conta_digito VARCHAR(2),
-    tipo_conta VARCHAR(75),
-    nome_completo VARCHAR(100),
-    documento_numero VARCHAR(14)
-);
-
 CREATE TABLE institution_adm (
     id int not null auto_increment primary key,
     adm_fk VARCHAR(255),
