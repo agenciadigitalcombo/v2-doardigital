@@ -149,8 +149,8 @@ class InstituicaoControle extends Controle
         $company->register(
             $adm_fk,
             $ID,
+            $institution_fk,
             $apiKey,
-            $walletId,
             $nome,
             $cpfCnpj,
             $email,
@@ -167,7 +167,7 @@ class InstituicaoControle extends Controle
         );
 
         $address->save(
-            $apiKey,
+            $institution_fk,
             'INSTITUTION',
             $cep,
             $logradouro,
@@ -182,7 +182,7 @@ class InstituicaoControle extends Controle
 
         foreach( self::plansDefault() as $valor ) {
             $plan->register(
-                $apiKey,
+                $institution_fk,
                 $valor,
                 "",
                 0,

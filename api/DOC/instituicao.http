@@ -3,10 +3,10 @@
 @institution_fk=
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
-@email=br.rafael3@outlook.com
+@email=br.rafael4@outlook.com
 @telefone=(11) 94949-9944
-@domain=teste2.doardigital.con
-@subdomain=teste2.doardigital.con
+@domain=teste3.doardigital.con
+@subdomain=teste3.doardigital.con
 @logo=
 @icon=
 @cor=#C00
@@ -33,7 +33,7 @@
 GET {{host}}/api/instituicao
 
 ###
-POST {{host}}/api/ 
+POST {{host}}/api/instituicao/register
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
