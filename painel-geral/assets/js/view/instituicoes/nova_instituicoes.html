@@ -38,251 +38,293 @@
                                 </div>
 
                                 <form class="form" @submit.prevent="addInstituicao" novalidate="novalidate">
-                                    <div class="card-body border-top p-9">
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
-                                                Fantasia</label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="text" placeholder="Nome Fantasia"
-                                                    class="form-control form-control-lg form-control-solid" required
-                                                    v-model.trin="$v.nome_fantasia.$model"
-                                                    :class=" {'is-invalid':$v.nome_fantasia.$error, 'is-valid':!$v.nome_fantasia.$invalid }" />
+                                    <div v-if="type === 'A'">
+                                        <div class="card-body border-top p-9">
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
+                                                    Fantasia</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input type="text" placeholder="Nome Fantasia"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model.trin="$v.nome.$model"
+                                                        :class=" {'is-invalid':$v.nome.$error, 'is-valid':!$v.nome.$invalid }" />
+                                                </div>
+    
                                             </div>
-
-                                        </div>
-
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Razão
-                                                Social</label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="text" placeholder="adicione a Razão Social"
-                                                    class="form-control form-control-lg form-control-solid" required
-                                                    v-model.trin="$v.razao_social.$model"
-                                                    :class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }" />
+    
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Razão
+                                                    Social</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input type="text" placeholder="adicione a Razão Social"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model.trin="$v.razao_social.$model"
+                                                        :class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }" />
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row mb-6">
-                                            <div class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <label class="form-check-label"
-                                                    for="kt_docs_formvalidation_radio_option_1">
-                                                    <div class="fw-bold text-gray-800">CPF</div>
+    
+                                            <div class="row mb-6">
+                                                <div class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <label class="form-check-label"
+                                                        for="kt_docs_formvalidation_radio_option_1">
+                                                        <div class="fw-bold text-gray-800">CPF</div>
+                                                    </label>
+                                                    <input checked @click="jms = true" class="form-check-input me-3"
+                                                        name="radio_input" type="radio" value="1" />
+    
+                                                    <label class="form-check-label"
+                                                        for="kt_docs_formvalidation_radio_option_1">
+                                                        <div class="fw-bold text-gray-800">CNPJ</div>
+                                                    </label>
+                                                    <input @click="jms = false" class="form-check-input me-3"
+                                                        name="radio_input" type="radio" value="1" />
+                                                </div>
+    
+                                                <div class="col-lg-8 fv-row" v-if="jms">
+                                                    <input type="tel" v-mask="'###.###.###-##'" placeholder="000.000.000-00"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model.trin="$v.cpfCnpj.$model"
+                                                        :class=" {'is-invalid':$v.cpfCnpj.$error, 'is-valid':!$v.cpfCnpj.$invalid }" />
+                                                </div>
+    
+    
+    
+                                                <div class="col-lg-8 fv-row" v-else>
+                                                    <input type="tel" v-mask="'##.###.###/####-##'"
+                                                        placeholder="00.000.000/0000-00"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model.trin="$v.cpfCnpj.$model"
+                                                        :class=" {'is-invalid':$v.cpfCnpj.$error, 'is-valid':!$v.cpfCnpj.$invalid }" />
+                                                </div>
+    
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Telefone</span>
+    
                                                 </label>
-                                                <input checked @click="jms = true" class="form-check-input me-3"
-                                                    name="radio_input" type="radio" value="1" />
-
-                                                <label class="form-check-label"
-                                                    for="kt_docs_formvalidation_radio_option_1">
-                                                    <div class="fw-bold text-gray-800">CNPJ</div>
+                                                <div class="col-lg-8 fv-row">
+           
+                                                    <input type="text"  v-mask="tell" name="Telefone" @blur="validaTell($event)" @focus="tiraHifen(event)"
+                                                        placeholder="(41) 99999-9999"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model.trin="$v.telefone.$model"
+                                                        :class=" {'is-invalid':$v.telefone.$error, 'is-valid':!$v.telefone.$invalid }" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">E-mail</span>
+    
                                                 </label>
-                                                <input @click="jms = false" class="form-check-input me-3"
-                                                    name="radio_input" type="radio" value="1" />
+                                                <div class="col-lg-8 fv-row">
+                                                    <input type="email" placeholder="doardigital@gmail.com"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model.trin="$v.email.$model"
+                                                        :class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }" />
+                                                </div>
                                             </div>
-
-                                            <div class="col-lg-8 fv-row" v-if="jms">
-                                                <input type="tel" v-mask="'###.###.###-##'" placeholder="000.000.000-00"
-                                                    class="form-control form-control-lg form-control-solid" required
-                                                    v-model.trin="$v.cnpj.$model"
-                                                    :class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }" />
+    
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Tipo de Empresa</span>
+    
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <select class="form-select form-select-solid" v-model="tipoEmpresa">
+                                                        <option value="" disabled selected>Seleciona Tipo de Empresa
+                                                        </option>
+                                                        <option value="MEI">MEI</option>
+                                                        <option value="LIMITED">Limitada (ltda.)</option>
+                                                        <option value="INDIVIDUAL">Individual</option>
+                                                        <option value="ASSOCIATION">Associação</option>
+                                                    </select>
+                                                </div>
                                             </div>
-
-
-
-                                            <div class="col-lg-8 fv-row" v-else>
-                                                <input type="tel" v-mask="'##.###.###/####-##'"
-                                                    placeholder="00.000.000/0000-00"
-                                                    class="form-control form-control-lg form-control-solid" required
-                                                    v-model.trin="$v.cnpj.$model"
-                                                    :class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }" />
-                                            </div>
-
+    
                                         </div>
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Telefone</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-       
-                                                <input type="text"  v-mask="tell" name="Telefone" @blur="validaTell($event)" @focus="tiraHifen(event)"
-                                                    placeholder="(41) 99999-9999"
-                                                    class="form-control form-control-lg form-control-solid" required
-                                                    v-model.trin="$v.telefone.$model"
-                                                    :class=" {'is-invalid':$v.telefone.$error, 'is-valid':!$v.telefone.$invalid }" />
+                                        <div class="card  mb-xl-5">
+                                            <div class="card-header border-0 cursor-pointer">
+    
+                                                <div class="card-title m-0">
+                                                    <h3 class="fw-bolder m-0">Subdomínio</h3>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">E-mail</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="email" placeholder="doardigital@gmail.com"
-                                                    class="form-control form-control-lg form-control-solid" required
-                                                    v-model.trin="$v.email.$model"
-                                                    :class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }" />
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Tipo de Empresa</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <select class="form-select form-select-solid" v-model="tipo_empresa">
-                                                    <option value="" disabled selected>Seleciona Tipo de Empresa
-                                                    </option>
-                                                    <option value="MEI">MEI</option>
-                                                    <option value="LIMITED">Limitada (ltda.)</option>
-                                                    <option value="INDIVIDUAL">Individual</option>
-                                                    <option value="ASSOCIATION">Associação</option>
-                                                </select>
+    
+                                            <div
+                                                class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
+    
+                                                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+    
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control form-control-lg " required
+                                                            v-on:blur="validDomain" v-model="subdomain" />
+                                                        <span class="input-group-text text-danger" >.doardigital.com.br</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
-                                            <div class="col-lg-8 fv-row">
-                                                <div class="input-group mb-3">
-                                                    <input v-model.trin="$v.cep.$model" @keyup="searchCep()"
-                                                        v-mask="'########'" type="text"
+        
+                                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                            <button @click="endereco()" class="btn btn-primary">Continuar!</button>
+    
+                                        </div> 
+                               
+                                      </div>
+                                      <div v-else-if="type === 'B'">
+                                        <div class="card-body border-top p-9">
+                                          
+    
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <div class="input-group mb-3">
+                                                        <input v-model.trin="$v.cep.$model" @keyup="searchCep()"
+                                                            v-mask="'########'" type="text"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="00000-000" />
+                                                        <span class="input-group-text" id="basic-addon2">
+                                                            <a @click="searchCep()">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="30"
+                                                                    height="30" fill="currentColor" class="bi bi-search"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                                </svg>
+                                                            </a>
+    
+                                                        </span>
+    
+                                                    </div>
+    
+                                                    <div class="erros" v-if="$v.cep.$error">
+                                                        <div class="erro_texte" v-if="!$v.cep.required">O CEP
+                                                            é necessária</div>
+                                                        <div class="erro_texte" v-if="!$v.cep.minLength">
+                                                            O CEP São 8 numeros.</div>
+                                                    </div>
+    
+                                                    <div class="sucesso_texte" v-else>
+    
+                                                    </div>
+                                                    <div style="color: rgb(233, 5, 5);">
+                                                        <p> {{error}} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida
+                                                    Nº</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input id="logradouro" v-model="logradouro" type="text" disabled
                                                         class="form-control form-control-lg form-control-solid"
-                                                        placeholder="00000-000" />
-                                                    <span class="input-group-text" id="basic-addon2">
-                                                        <a @click="searchCep()">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                                                height="30" fill="currentColor" class="bi bi-search"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                                            </svg>
-                                                        </a>
-
+                                                        placeholder="Localização" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
+    
+                                                <div class="col-lg-8 fv-row">
+                                                    <input v-model="numero" type="text"
+                                                        class="form-control form-control-lg form-control-solid"
+                                                        placeholder="Numero" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="">Complemento</span>
+    
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input v-model="complemento" type="text" name="Complemento"
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+    
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Bairro</span>
+    
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input id="bairro" v-model="bairro" type="text" name="Bairro" disabled
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Cidade</span>
+    
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input v-model="cidade" type="text" disabled
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+    
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Estado</span>
+    
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input id="uf" v-model="estado" type="text" disabled
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-stack pt-15 pb-5">
+                                                <div class="mr-2">
+                                                    <button  @click="instituicao()" type="button" class="btn btn-lg btn-light-primary me-3"  >
+                                                     <span class="svg-icon svg-icon-4 me-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="black" />
+                                                            <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="black" />
+                                                        </svg>
                                                     </span>
-
+                                                 Anterior</button>
                                                 </div>
-
-                                                <div class="erros" v-if="$v.cep.$error">
-                                                    <div class="erro_texte" v-if="!$v.cep.required">O CEP
-                                                        é necessária</div>
-                                                    <div class="erro_texte" v-if="!$v.cep.minLength">
-                                                        O CEP São 8 numeros.</div>
+                                                <div> 
+                                                    <button @click="banco()" type="button" class="btn btn-lg btn-primary" >Continuar
+                                                 <span class="svg-icon svg-icon-4 ms-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                                            <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                 </button>
                                                 </div>
-
-                                                <div class="sucesso_texte" v-else>
-
-                                                </div>
-                                                <div style="color: rgb(233, 5, 5);">
-                                                    <p> {{error}} </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida
-                                                Nº</label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input id="logradouro" v-model="logradouro" type="text" disabled
-                                                    class="form-control form-control-lg form-control-solid"
-                                                    placeholder="Localização" />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
-
-                                            <div class="col-lg-8 fv-row">
-                                                <input v-model="numero" type="text"
-                                                    class="form-control form-control-lg form-control-solid"
-                                                    placeholder="Numero" />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="">Complemento</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input v-model="complemento" type="text" name="Complemento"
-                                                    class="form-control form-control-lg form-control-solid" />
-                                            </div>
+                                            </div> 
                                         </div>
 
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Bairro</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input id="bairro" v-model="bairro" type="text" name="Bairro" disabled
-                                                    class="form-control form-control-lg form-control-solid" />
-                                            </div>
+                                      
+                                      </div>
+                               
+                                      <div v-else-if="type === 'c'">
+                                       
+                                        
+                                        
+    
+                                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                            <button class="btn btn-primary" type="submit"
+                                                :disabled="submitStatus === 'PENDING'">SALVAR!</button>
+    
                                         </div>
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Cidade</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input v-model="cidade" type="text" disabled
-                                                    class="form-control form-control-lg form-control-solid" />
-                                            </div>
+                                        <div class=" d-flex justify-content-end py-2 px-9">
+                                            <p class="typo__p" v-if="submitStatus === 'OK'">
+                                            </p>
+                                            <p class="typo__p" v-if="submitStatus === 'ERROR'">
+                                                Por favor, preencha o formulário corretamente.</p>
+                                            <p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
+                                            </p>
+                                        </div> 
+                                        <div v-if="jms===true">
+                                            <c-mensagem :msg="msg"></c-mensagem>
                                         </div>
-
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Estado</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <input id="uf" v-model="estado" type="text" disabled
-                                                    class="form-control form-control-lg form-control-solid" />
-                                            </div>
+                                        <div v-else>
+                                            <c-mensagem :error="error"></c-mensagem>
                                         </div>
-                                    </div>
-                                    <div class="card  mb-xl-5">
-                                        <div class="card-header border-0 cursor-pointer">
-
-                                            <div class="card-title m-0">
-                                                <h3 class="fw-bolder m-0">Subdomínio</h3>
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
-
-                                            <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-
-                                                <div class="input-group mb-3">
-                                                    <input type="text" class="form-control form-control-lg " required
-                                                        v-on:blur="validDomain" v-model="subdomaim" />
-                                                    <span class="input-group-text text-danger" >.doardigital.com.br</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-   
-
-                                    <div v-if="jms===true">
-                                        <c-mensagem :msg="msg"></c-mensagem>
-                                    </div>
-                                    <div v-else>
-                                        <c-mensagem :error="error"></c-mensagem>
-                                    </div>
-
-
-                                    <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                        <button class="btn btn-primary" type="submit"
-                                            :disabled="submitStatus === 'PENDING'">SALVAR!</button>
-
-                                    </div>
-                                    <div class=" d-flex justify-content-end py-2 px-9">
-                                        <p class="typo__p" v-if="submitStatus === 'OK'">
-                                        </p>
-                                        <p class="typo__p" v-if="submitStatus === 'ERROR'">
-                                            Por favor, preencha o formulário corretamente.</p>
-                                        <p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
-                                        </p>
-                                    </div>
+                                      </div>
+                                    
                                 </form>
 
                             </div>

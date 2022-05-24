@@ -7,18 +7,23 @@ export default {
 	data: function () {
 		return {
 			token: null,
-			nome_fantasia: null,
-			razao_social: null,
-			subdomaim: null,
-			tipo_empresa: null,
+			nome: null,
+			cpfCnpj: null,
 			email: null,
-			cnpj: null,
 			telefone: null,
+			subdomain: null,
+			tipoEmpresa: null,
+			razao_social: null,
 			submitStatus: null,
-			jms: true,
 
-			id: null,
-			instituicao_id: null,
+			adm_fk: null,
+			account: null,
+			accountDigit: null,
+			accountName: null,
+			agency: null,
+			bank: null,
+			bankAccountType: null,
+
 			cep: null,
 			logradouro: null,
 			numero: null,
@@ -26,16 +31,18 @@ export default {
 			bairro: null,
 			cidade: null,
 			estado: null,
-			secret: null,
+
 			msg: "",
 			error: null,
-			tell: '', 
+			tell: '',
+			jms: true,
+			type: 'A',
 		}
 	},
 
 
 	validations: {
-		nome_fantasia: {
+		nome: {
 			required,
 			minLength: minLength(2)
 		},
@@ -43,7 +50,7 @@ export default {
 			required,
 			minLength: minLength(2)
 		},
-		cnpj: {
+		cpfCnpj: {
 			required,
 			minLength: minLength(2)
 		},
@@ -66,20 +73,35 @@ export default {
 	},
 
 	methods: {
-		validaTell(event) {
-			var phone = this.telefone.replace(/\D/g,"");
-		 
-			if (phone.length < 11) {
-				
-				this.tell = '(##) ####-####'
-			} else{ 
-				this.tell = '(##) #####-####'
-			} 
-        },
+		instituicao() {
+			this.type = 'A'
+			
+		},
 
-		 tiraHifen(event) {
+		endereco() {
+			this.type = 'B'
+			
+		},
+
+		instituicao() {
+			this.type = 'C'
+			
+		},
+
+		validaTell(event) {
+			var phone = this.telefone.replace(/\D/g, "");
+
+			if (phone.length < 11) {
+
+				this.tell = '(##) ####-####'
+			} else {
+				this.tell = '(##) #####-####'
+			}
+		},
+
+		tiraHifen(event) {
 			this.tell = '(##) #####-####'
-        },
+		},
 
 		async validDomain() {
 			this.error = null
@@ -123,22 +145,27 @@ export default {
 
 			let res = await adm.cadastrarInstituicao(
 				this.token,
-				this.nome_fantasia,
-				this.razao_social,
-				this.subdomaim,
+				this.nome,
+				this.cpfCnpj,
 				this.email,
 				this.telefone,
-				this.cnpj,
+				this.subdomain,
+				this.tipoEmpresa,
 				this.cep,
 				this.logradouro,
+				this.numero,
+				this.complemento,
 				this.bairro,
 				this.cidade,
 				this.estado,
-				this.numero,
-				this.tipo_empresa,
-				this.complemento,
 
-
+				this.adm_fk,
+				this.account,
+				this.accountDigit,
+				this.accountName,
+				this.agency,
+				this.bank,
+				this.bankAccountType,
 			)
 			if (!res.next) {
 				this.error = res.message
@@ -156,10 +183,10 @@ export default {
 
 	},
 
-		 mounted() {
-		
-			
-		},
+	mounted() {
+
+
+	},
 
 
 	template: await get_template('./assets/js/view/instituicoes/nova_instituicoes')
