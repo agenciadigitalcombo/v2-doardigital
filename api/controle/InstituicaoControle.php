@@ -149,8 +149,8 @@ class InstituicaoControle extends Controle
         $company->register(
             $adm_fk,
             $ID,
+            $institution_fk,
             $apiKey,
-            $walletId,
             $nome,
             $cpfCnpj,
             $email,
@@ -208,9 +208,10 @@ class InstituicaoControle extends Controle
             "SELECT * FROM institution WHERE domain='{$domain}' OR subdomain='{$domain}'"
         )[0] ?? [];
         $company = Instituicao::porter($company);
-        $banco->table("plano");
+
+        $banco->table("endereco");
         $banco->where([
-            "institution_fk" => $company["institution_fk"],
+            "fk" => $company["institution_fk"],
             "tipo" => "INSTITUTION",
         ]);
         $company['endereco'] = Endereco::porter( $banco->select() );
