@@ -33,7 +33,7 @@
 GET {{host}}/api/instituicao
 
 ###
-POST {{host}}/api/ 
+POST {{host}}/api/instituicao/register
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}

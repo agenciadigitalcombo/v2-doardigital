@@ -1,6 +1,6 @@
 import get_template from '../../components/get_template.js'
 import adm from "../../../../../static/js/api/adm.js"
-const { required, minLength } = window.validators
+const { required, maxLength, minLength, between } = window.validators
 
 export default {
 
@@ -70,22 +70,44 @@ export default {
 			required,
 			minLength: minLength(8)
 		},
+
+		 
+		agency: {
+			required,
+			maxLength: maxLength(4)
+		},
+
+		accountName: {
+			required,
+			maxLength: maxLength(50)
+		},
+		account: {
+			required,
+			maxLength: maxLength(13)
+		},
+		accountDigit: {
+			required,
+			maxLength: maxLength(2)
+		},
+		bank: {
+			required,
+			maxLength: maxLength(4)
+		},
+	 
+
 	},
 
 	methods: {
 		instituicao() {
-			this.type = 'A'
-			
+			this.type = 'A' 
 		},
 
 		endereco() {
-			this.type = 'B'
-			
+			this.type = 'B' 
 		},
 
-		instituicao() {
-			this.type = 'C'
-			
+		banco() {
+			this.type = 'C' 
 		},
 
 		validaTell(event) {
@@ -180,12 +202,27 @@ export default {
 
 
 		},
-
+		async listar() {
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
+			return res
+		},
 	},
 
-	mounted() {
+	async mounted() {
+		this.token = localStorage.getItem('token')
+		let str = this.token.split('.')[0]
+		let encodedStr = atob(str); 
+		var res =  JSON.parse(encodedStr);
+		this.code = res.code
+ 
 
-
+	   let dados = (await this.listar()).payload
+	   this.adm_fk = dados.code 
+		
+	   
 	},
 
 
