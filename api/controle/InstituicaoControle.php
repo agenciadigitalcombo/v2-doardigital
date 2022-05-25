@@ -191,6 +191,14 @@ class InstituicaoControle extends Controle
                 0
             );
         }
+
+        $split = new Split();
+        $split->register(
+            $institution_fk,
+            $env['split'],
+            $env['split_porcentagem']
+        );
+
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta
@@ -213,16 +221,42 @@ class InstituicaoControle extends Controle
         $banco->where([
             "fk" => $company["institution_fk"]
         ]);
-        $company['endereco'] = Endereco::porter( $banco->select() );
-        // print_r($company["institution_fk"]);
+        $company['endereco'] = Endereco::porter( $banco->select()[0] );
         $banco->table("plano");
         $banco->where([
             "fk" => $company["institution_fk"]
         ]);
-        $company['planos'] = Plano::porter($banco->select());
+        $company['planos'] = array_map(['Plano','porter'], $banco->select()) ;
         self::printSuccess(
             "Informações da Instituição",
             $company
+        );
+    }
+
+    static function list() {
+        self::requireInputs([
+            "token" => "informe um token",
+            "adm_fk" => "informe um identificador de adm"
+        ]);
+        self::privateRouter();
+        $con = new Banco();
+        $adm_fk = $_REQUEST['adm_fk'];
+        $con->table("institution_adm");
+        $con->where([
+            "adm_fk" => $adm_fk
+        ]);
+        $list = [];
+        foreach($con->select() as $inst) {
+            $instituition_fk = $inst['instituition_fk'];
+            $con->table("institution");
+            $con->where([
+                "institution_fk" => $instituition_fk,
+            ]);
+            $list[] = Instituicao::porter($con->select()[0]);
+        }
+        self::printSuccess(
+            "lista de instituição",
+            $list
         );
     }
 
