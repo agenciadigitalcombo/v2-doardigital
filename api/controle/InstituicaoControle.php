@@ -211,10 +211,10 @@ class InstituicaoControle extends Controle
 
         $banco->table("endereco");
         $banco->where([
-            "fk" => $company["institution_fk"],
-            "tipo" => "INSTITUTION",
+            "fk" => $company["institution_fk"]
         ]);
         $company['endereco'] = Endereco::porter( $banco->select() );
+        // print_r($company["institution_fk"]);
         $banco->table("plano");
         $banco->where([
             "fk" => $company["institution_fk"]

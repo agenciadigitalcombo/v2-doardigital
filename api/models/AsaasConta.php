@@ -93,6 +93,9 @@ class AsaasConta extends Asaas
                 "name" => $name,
             ]
         ];
+        if($bankAccountType == "MEI") {
+            $payload["bankAccount"]["thirdPartyAccount"] = true;
+        }
         return $this->post('/accounts', $payload);
     }
 
