@@ -191,6 +191,7 @@ export default {
 			)
 			if (!res.next) {
 				this.error = res.message
+				console.log(res)
 				return null
 			}
 
@@ -222,7 +223,7 @@ export default {
 	   let dados = (await this.listar()).payload
 	   this.adm_fk = dados.code 
 		
-	   
+	    
 	},
 
 
