@@ -6,7 +6,7 @@ export default {
 	data: function () {
 
 		return {
-			id: "",
+			adm_fk: null,
 			token: null,
 			nome_fantasia: null,
 			subdomaim: null,
@@ -21,26 +21,32 @@ export default {
  
 		filtraCredencial() {
 			return this.dados.filter((credencial) => {
-				return credencial.nome_fantasia.match(this.search) || credencial.id.match(this.search);
+				return credencial.nome.match(this.search) || credencial.subdomain.match(this.search);
 			})
 		}
 	},
 
 	async mounted() {
+		this.token = localStorage.getItem('token')
+		let str = this.token.split('.')[0]
+		let encodedStr = atob(str); 
+		var res =  JSON.parse(encodedStr);
+		this.adm_fk = res.code
 
-		this.dados = (await this.listar()).dados
-		this.id = this.dados.id,
-		this.nome_fantasia = this.dados.nome_fantasia,
-		this.subdomaim = this.dados.subdomaim,
-		this.dominio = this.dados.dominio,
+
+		this.dados = (await this.listar()).payload
+		 
  
 		this.filtraCredencial.reverse();
 	},
-
+	 
 	methods: {
 
 		async listar() {
-			let res = await adm.listarInstutuicao(localStorage.getItem('token'))
+			let res = await adm.listarInstutuicao(
+			    this.token,
+				this.adm_fk,
+			)
 			return res
 		},
 
@@ -59,7 +65,7 @@ export default {
 
 		},
 
-		async editar(id) { 
+		async editar(id) {  
 			globalThis._instituicao = this.dados.find(user => user.id == id);
 			window.location.href = "#/editarInstituicoes"
 		},
@@ -71,10 +77,9 @@ export default {
 			this.subdomaim = item.subdomaim
 
 			localStorage.setItem("instituicao_id", this.id);
-			localStorage.setItem("instituicao_nome", this.nome_fantasia);
-			localStorage.setItem("instituicao_subdomaim", this.dominio || this.subdomaim);
-			 
-			
+			localStorage.setItem("instituicao_nome", this.nome);
+			localStorage.setItem("instituicao_subdomaim", this.domain || this.subdomain);
+			  
 			window.location.href = "/painel/#/"
 		},
 	

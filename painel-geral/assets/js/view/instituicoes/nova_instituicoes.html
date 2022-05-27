@@ -33,7 +33,7 @@
                             <div class="card mb-5 mb-xl-10">
 
 
-                                <form class="form" @submit.prevent="addInstituicao" novalidate="novalidate">
+                                <form class="form" @submit.prevent="addInstituicao">
 
                                     <div v-if="type === 'A'">
 
@@ -43,7 +43,7 @@
                                                     Fantasia</label>
                                                 <div class="col-lg-8 fv-row">
                                                     <input type="text" placeholder="Nome Fantasia"
-                                                        class="form-control form-control-lg form-control-solid" required
+                                                        class="form-control form-control-lg form-control-solid required" required
                                                         v-model.trin="$v.nome.$model"
                                                         :class=" {'is-invalid':$v.nome.$error, 'is-valid':!$v.nome.$invalid }" />
                                                 </div>
@@ -184,7 +184,7 @@
                                                         <input v-model.trin="$v.cep.$model" @keyup="searchCep()"
                                                             v-mask="'########'" type="text"
                                                             class="form-control form-control-lg form-control-solid"
-                                                            placeholder="00000-000" />
+                                                            placeholder="00000-000" required />
                                                         <span class="input-group-text" id="basic-addon2">
                                                             <a @click="searchCep()">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30"

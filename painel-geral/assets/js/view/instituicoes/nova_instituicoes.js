@@ -178,7 +178,7 @@ export default {
 				this.numero,
 				this.complemento,
 				this.bairro,
-				this.cidade,
+				this.cidade,+
 				this.estado,
 
 				this.adm_fk,

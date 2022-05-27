@@ -41,8 +41,6 @@ Vue.component('p-nova_instituicoes', page_instituicoes_novo)
 import page_instituicoes_editar from './view/instituicoes/editar_instituicoes.js'
 Vue.component('p-editar_instituicoes', page_instituicoes_editar)
 
-import page_local_instituicoes from './view/instituicoes/local_instituicoes.js'
-Vue.component('p-local_instituicoes', page_local_instituicoes)
 
 import page_local_editar_instituicoes from './view/instituicoes/local_editar_instituicoes.js'
 Vue.component('p-local_editar_instituicoes', page_local_editar_instituicoes)
@@ -50,8 +48,7 @@ Vue.component('p-local_editar_instituicoes', page_local_editar_instituicoes)
 import page_banco_editar_instituicoes from './view/instituicoes/banco_editar_instituicoes.js'
 Vue.component('p-banco_editar_instituicoes', page_banco_editar_instituicoes)
 
-import page_banco_instituicoes from './view/instituicoes/banco_instituicoes.js'
-Vue.component('p-banco_instituicoes', page_banco_instituicoes)
+
 
 import page_usuarios from './view/usuarios/home.js'
 Vue.component('p-usuarios', page_usuarios)
@@ -101,12 +98,10 @@ const routes = [
     { path: '/contato', component: { template: '<p-contato></p-contato>' } },
     { path: '/instituicoes', component: { template: '<p-instituicoes></p-instituicoes>' } },
     { path: '/instituicoesNova', component: { template: '<p-nova_instituicoes></p-nova_instituicoes>' } },
-    { path: '/editarInstituicoes', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } },
-    { path: '/enderecoInstituicoes', component: { template: '<p-local_instituicoes></p-local_instituicoes>' } },
+    { path: '/editarInstituicoes', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } }, 
     { path: '/enderecoEditar', component: { template: '<p-local_editar_instituicoes></p-local_editar_instituicoes>' } },
     { path: '/bancarioEditar', component: { template: '<p-banco_editar_instituicoes></p-banco_editar_instituicoes>' } },
-    { path: '/bancoInstituicoes', component: { template: '<p-banco_instituicoes></p-banco_instituicoes>' } },
-
+   
     { path: '/usuarios', component: { template: '<p-usuarios></p-usuarios>' } },
     { path: '/usuario-editar', component: { template: '<p-usuarios_editar></p-usuarios_editar>' } },
     { path: '/usuario-novo', component: { template: '<p-usuarios_novo></p-usuarios_novo>' } },
