@@ -205,6 +205,91 @@ class InstituicaoControle extends Controle
         );
     }
 
+    static function update()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe o identificador da instituição",
+            "nome" => "Informe nome",
+            "email" => "Informe um email",
+            "telefone" => "Informe um telefone",
+            "cep" => "Informe o CEP",
+            "logradouro" => "Informe o endereço",
+            "numero" => "Informe o numero",
+            "bairro" => "Informe o bairro",
+            "cidade" => "Informe a cidade",
+            "estado" => "Informe o estado",
+            "logo" => "Informe logo",
+            "icon" => "Informe ícone",
+            "cor" => "Informe a cor",
+            "titulo" => "Informe o titulo",
+            "tags" => "Informe a tag",
+            "descricao" => "Informe uma descrição",
+        ]);
+
+        self::privateRouter();
+        $institution_fk = $_REQUEST['institution_fk'];
+        $nome = $_REQUEST['nome'];
+        $email = $_REQUEST['email'];
+        $telefone = $_REQUEST['telefone'];
+        $domain = $_REQUEST['domain'] ?? '';
+        $logo = $_REQUEST['logo'];
+        $icon = $_REQUEST['icon'];
+        $cor = $_REQUEST['cor'];
+        $titulo = $_REQUEST['titulo'];
+        $tags = $_REQUEST['tags'];
+        $descricao = $_REQUEST['descricao'];
+        $cep = $_REQUEST['cep'];
+        $logradouro = $_REQUEST['logradouro'];
+        $numero = $_REQUEST['numero'];
+        $complemento = $_REQUEST['complemento'] ?? '';
+        $bairro = $_REQUEST['bairro'];
+        $cidade = $_REQUEST['cidade'];
+        $estado = $_REQUEST['estado'];        
+
+        $company = new Instituicao();
+        $address = new Endereco();
+
+        $inst = $company->info($institution_fk);
+        if(!$inst['institution_fk']) {
+            self::printError(
+                "Instituição não existe",
+                []
+            );
+        }
+
+        $company->update(
+            $institution_fk,
+            $nome,
+            $email,
+            $telefone,
+            $domain,
+            $logo,
+            $icon,
+            $cor,
+            $titulo,
+            $tags,
+            $descricao
+        );
+
+        $address->save(
+            $institution_fk,
+            'INSTITUTION',
+            $cep,
+            $logradouro,
+            $numero,
+            $complemento,
+            $bairro,
+            $cidade,
+            $estado
+        );
+
+        self::printSuccess(
+            "Instituição atualizada com sucesso",
+            []
+        );
+    }
+
     static function info()
     {
         self::requireInputs([

@@ -7,6 +7,7 @@ class Banco
     private $table;
     private $where;
     private $order;
+    private $pdo;
 
     function __construct()
     {
@@ -15,6 +16,12 @@ class Banco
         $this->db = $env["banco"];
         $this->user = $env["user"];
         $this->pass = $env["senha"];
+        try {
+            $this->pdo = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
+        } catch (\Throwable $th) {
+            $this->error();
+        }
+
     }
 
     function error() {
@@ -29,10 +36,8 @@ class Banco
     function query(string $sql): array
     {
         try {
-            $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
-            $query = $con->query($sql);
-            $result = $query->fetchAll();
-            $con = null;
+            $query = $this->pdo->query($sql);
+            $result = $query->fetchAll();            
             return $result;
         } catch (\Throwable $th) {
            $this->error();
@@ -42,9 +47,7 @@ class Banco
     function exec(string $sql): void
     {
         try {
-            $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
-            $query = $con->query($sql);
-            $con = null;
+            $this->pdo->query($sql);            
         } catch (\Throwable $th) {
            $this->error();
         }

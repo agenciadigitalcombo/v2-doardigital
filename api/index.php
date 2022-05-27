@@ -4,6 +4,8 @@ header("Access-Control-Allow-Headers: Authorization, Content-Type");
 header("Access-Control-Allow-Origin: *");
 header('content-type: application/json; charset=utf-8');
 
+set_time_limit(20);
+
 date_default_timezone_set('America/Sao_Paulo');
 
 if(!empty($_REQUEST['debug'])){    

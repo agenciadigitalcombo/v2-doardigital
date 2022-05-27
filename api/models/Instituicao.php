@@ -42,7 +42,7 @@ class Instituicao
         $this->con->where([
             "institution_fk" => $institution_fk
         ]);
-        return $this->con->select()[0] ?? [];
+        return self::porter( $this->con->select()[0] ?? [] );
     }
 
     public function getByHostName(string $hostName): array
@@ -120,11 +120,9 @@ class Instituicao
     public function update(
         string $institution_fk,
         string $nome,
-        string $cpfCnpj,
         string $email,
         string $telefone,
         string $domain,
-        string $subdomain,
         string $logo,
         string $icon,
         string $cor,
@@ -137,11 +135,9 @@ class Instituicao
         ]);
         $this->con->update([
             "nome" => $nome,
-            "cpfCnpj" => $this->clearNumber($cpfCnpj),
             "email" => $email,
             "telefone" => $this->clearNumber($telefone),
             "domain" => $domain,
-            "subdomain" => $subdomain,
             "logo" => $logo,
             "icon" => $icon,
             "cor" => $cor,

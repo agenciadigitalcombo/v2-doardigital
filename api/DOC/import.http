@@ -1,0 +1,23 @@
+@host=http://doardigital.con
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@institution_fk=inst_628cd9db47cdc
+
+###
+POST {{host}}/api/import/doadores
+Content-Type: multipart/form-data; boundary=--MyBoundary
+
+
+----MyBoundary
+Content-Disposition: form-data; name="file"; filename="doador.csv"
+Content-Type: application/octet-stream
+
+< .\doador.csv
+----MyBoundary
+Content-Disposition: form-data; name="token"
+
+{{token}}
+----MyBoundary
+Content-Disposition: form-data; name="institution_fk"
+
+{{institution_fk}}
+----MyBoundary--
