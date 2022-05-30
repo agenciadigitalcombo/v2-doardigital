@@ -16,15 +16,15 @@
                                         class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 
                                         <li class="nav-item mt-2">
-                                            <a class="nav-link text-active-primary ms-0 me-10 py-5 active">Informação da
+                                            <a class="nav-link text-active-primary ms-0 me-10 py-5" :class="{ active: isInforma }">Informação da
                                                 Instituição</a>
                                         </li>
                                         <li class="nav-item mt-2">
-                                            <a class="nav-link text-active-primary ms-0 me-10 py-5 "
+                                            <a class="nav-link text-active-primary ms-0 me-10 py-5" :class="{ active: isEndereco }"
                                                 title="Cadastra primeiro a Instituição para prosseguir ">Endereço </a>
                                         </li>
                                         <li class="nav-item mt-2">
-                                            <a class="nav-link text-active-primary ms-0 me-10 py-5">Dados Bancario</a>
+                                            <a class="nav-link text-active-primary ms-0 me-10 py-5" :class="{ active: isBanco }">Dados Bancario</a>
                                         </li>
 
                                     </ul>

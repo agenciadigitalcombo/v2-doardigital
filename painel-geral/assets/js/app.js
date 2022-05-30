@@ -19,6 +19,9 @@ Vue.component('c-detalhe', detalhe)
 import mensagem from './components/c-mensagem.js'
 Vue.component('c-mensagem', mensagem)
 
+import mensagemErro from './components/c-mensagemErro.js'
+Vue.component('c-mensagemErro', mensagemErro)
+
 // IMPORTANDO PÁGINAS
 import page_login from './view/admin/home.js'
 Vue.component('p-login', page_login)
