@@ -21,3 +21,43 @@ Content-Disposition: form-data; name="institution_fk"
 
 {{institution_fk}}
 ----MyBoundary--
+
+###
+POST {{host}}/api/import/doacoes
+Content-Type: multipart/form-data; boundary=--MyBoundary
+
+
+----MyBoundary
+Content-Disposition: form-data; name="file"; filename="doacoes.csv"
+Content-Type: application/octet-stream
+
+< .\doacoes.csv
+----MyBoundary
+Content-Disposition: form-data; name="token"
+
+{{token}}
+----MyBoundary
+Content-Disposition: form-data; name="institution_fk"
+
+{{institution_fk}}
+----MyBoundary--
+
+###
+POST {{host}}/api/import/enderecos
+Content-Type: multipart/form-data; boundary=--MyBoundary
+
+
+----MyBoundary
+Content-Disposition: form-data; name="file"; filename="enderecos.csv"
+Content-Type: application/octet-stream
+
+< .\enderecos.csv
+----MyBoundary
+Content-Disposition: form-data; name="token"
+
+{{token}}
+----MyBoundary
+Content-Disposition: form-data; name="institution_fk"
+
+{{institution_fk}}
+----MyBoundary--

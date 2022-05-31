@@ -7,4 +7,4 @@ cpf,
 telefone,
 email
 FROM doador
-WHERE instituicao_id = 255
+WHERE instituicao_id = 255 AND token != ""
