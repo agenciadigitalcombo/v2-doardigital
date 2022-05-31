@@ -37,6 +37,11 @@ export default {
 			tell: '',
 			jms: true,
 			type: 'A',
+
+			isInforma: true,
+			isEndereco: false,
+			isBanco: false,
+
 		}
 	},
 
@@ -71,7 +76,7 @@ export default {
 			minLength: minLength(8)
 		},
 
-		 
+
 		agency: {
 			required,
 			maxLength: maxLength(4)
@@ -93,21 +98,30 @@ export default {
 			required,
 			maxLength: maxLength(4)
 		},
-	 
+
 
 	},
 
 	methods: {
 		instituicao() {
-			this.type = 'A' 
+			this.type = 'A'
+			this.isInforma = true,
+				this.isEndereco = false,
+				this.isBanco = false
 		},
 
 		endereco() {
-			this.type = 'B' 
+			this.type = 'B'
+			this.isInforma = false,
+				this.isEndereco = true,
+				this.isBanco = false
 		},
 
 		banco() {
-			this.type = 'C' 
+			this.type = 'C'
+			this.isInforma = false,
+				this.isEndereco = false,
+				this.isBanco = true
 		},
 
 		validaTell(event) {
@@ -178,8 +192,8 @@ export default {
 				this.numero,
 				this.complemento,
 				this.bairro,
-				this.cidade,
-				this.estado,
+				this.cidade, +
+			this.estado,
 
 				this.adm_fk,
 				this.account,
@@ -215,15 +229,15 @@ export default {
 	async mounted() {
 		this.token = localStorage.getItem('token')
 		let str = this.token.split('.')[0]
-		let encodedStr = atob(str); 
-		var res =  JSON.parse(encodedStr);
+		let encodedStr = atob(str);
+		var res = JSON.parse(encodedStr);
 		this.code = res.code
- 
 
-	   let dados = (await this.listar()).payload
-	   this.adm_fk = dados.code 
-		
-	    
+
+		let dados = (await this.listar()).payload
+		this.adm_fk = dados.code
+
+
 	},
 
 

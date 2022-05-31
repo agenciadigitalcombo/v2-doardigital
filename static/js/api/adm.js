@@ -220,29 +220,53 @@ export default {
 
     async alterarInstituicao(
         token,
-        instituicao_id,
-        nome_fantasia,
-        razao_social,
+        institution_fk,
+        nome, 
         email,
-        cnpj,
         telefone,
-
+        domain,
+        logo,
+        icon,
+        cor,
+        titulo,
+        tags,
+        descricao, 
+        cep,
+        logradouro,
+        numero,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+ 
     ) {
-        return await http.post('/update-instituicao', {
+        return await http.post('/instituicao/update-info', {
             token,
-            instituicao_id,
-            nome_fantasia,
-            razao_social,
+            institution_fk,
+            nome, 
             email,
-            cnpj,
             telefone,
+            domain,
+            logo,
+            icon,
+            cor,
+            titulo,
+            tags,
+            descricao, 
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
         })
     },
 
 
-    async listarInstutuicao(token) {
-        return await http.get('/instituicao', {
-            token
+    async listarInstutuicao(token, adm_fk) {
+        return await http.get('/instituicao/list', {
+            token, adm_fk
         })
     },
 
@@ -329,9 +353,13 @@ export default {
         })
     },
 
-    async listConf(instituicao_id) {
-        return await http.get('/instituicao-id', {
-            instituicao_id
+    async listConf(	
+        token,
+        domain
+        ) {
+        return await http.post('/instituicao/info', {
+            token,
+            domain
         })
     },
 

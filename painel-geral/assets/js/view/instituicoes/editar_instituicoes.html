@@ -1,162 +1,340 @@
 <div>
-	    
-	<c-header></c-header>
-	<c-aside></c-aside>
 
-<div class="d-flex flex-column flex-root"> 
-    <div class="page d-flex flex-row flex-column-fluid">
+    <c-header></c-header>
+    <c-aside></c-aside>
+    <div class="d-flex flex-column flex-root">
+        <div class="page d-flex flex-row flex-column-fluid">
 
-        <div class="wrapper d-flex flex-column flex-row-fluid" > 
-            <div class="content d-flex flex-column flex-column-fluid" >
-             
-                <div class="post d-flex flex-column-fluid" > 
-                    <div class="container-xxl"> 
-                        <div class="card mb-5 mb-xl-10">
-                            <div class="card-body pt-5 pb-0"> 
-                                <ul
-                                class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+            <div class="wrapper d-flex flex-column flex-row-fluid">
+                <div class="content d-flex flex-column flex-column-fluid">
 
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active"
-                                        href="#/editarInstituicoes">Informação da Instituição</a>
-                                </li>
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 "
-                                        href="#/enderecoEditar">Endereço </a>
-                                </li>
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 "
-                                        href="#/bancarioEditar">Dados Bancario</a>
-                                </li>
+                    <div class="post d-flex flex-column-fluid">
+                        <div class="container-xxl">  
+                            <div class="card mb-5 mb-xl-10">
+                                <div class="card-body pt-5 pb-0">
+                                    <ul
+                                        class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 
-                            </ul>
+                                        <li class="nav-item mt-2">
+                                            <a class="nav-link text-active-primary ms-0 me-10 py-5" :class="{ active: isInforma }" @click="instituicao()">Informação da
+                                                Instituição</a>
+                                        </li>
+                                        <li class="nav-item mt-2">
+                                            <a class="nav-link text-active-primary ms-0 me-10 py-5 "
+                                                title="Cadastra primeiro a Instituição para prosseguir" :class="{ active: isEndereco }" @click="endereco()">Endereço </a>
+                                        </li>
+                                        <li class="nav-item mt-2">
+                                            <a class="nav-link text-active-primary ms-0 me-10 py-5" :class="{ active: isBanco }" @click="banco()">Dados Bancario</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </div>
-                        </div> 
-                        <div class="card mb-5 mb-xl-10"> 
-                            <div class="card-header border-0 cursor-pointer" > 
-                                <div class="card-title m-0">
-                                    <h3 class="fw-bolder m-0">Editar Informação da Instituição</h3>
-                                </div> 
-                            </div> 
-                        
-                            <form class="form" @submit.prevent="editaInstituicao" novalidate="novalidate">
-                                    <div class="card-body border-top p-9"> 
-                                        <div class="row mb-6"> 
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
-                                                Fantasia</label> 
-                                                
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="text" placeholder="Nome Fantasia"
-                                                    class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.nome_fantasia.$model"
-                                                            :class=" {'is-invalid':$v.nome_fantasia.$error, 'is-valid':!$v.nome_fantasia.$invalid }"/>
-                                            </div> 
-    
-                                            </div>
+                            <div class="card mb-5 mb-xl-10">
 
-                                        <div class="row mb-6"> 
-                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Razão
-                                                Social</label> 
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="text" placeholder="adicione a Razão Social"
-                                                    class="form-control form-control-lg form-control-solid" required  v-model.trin="$v.razao_social.$model"
-                                                    :class=" {'is-invalid':$v.razao_social.$error, 'is-valid':!$v.razao_social.$invalid }"/>
-                                            </div> 
-                                        </div> 
-                                        
-                                        <div class="row mb-6"> 
-                                            <div class="col-lg-4 col-form-label fw-bold fs-6">
-                                            <label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
-                                                <div class="fw-bold text-gray-800">CPF</div>
-                                            </label>
-                                            <input v-bind:checked="radioFalse" @click="jms = true" class="form-check-input me-3" name="radio_input" type="radio" value="1" />
-                                                
-                                                <label class="form-check-label" for="kt_docs_formvalidation_radio_option_1">
-                                                    <div class="fw-bold text-gray-800">CNPJ</div>
+
+                                <form class="form" @submit.prevent="editaInstituicao">
+
+                                    <div v-if="type === 'A'">
+
+                                        <div class="card-body border-top p-9">
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
+                                                    Fantasia</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input type="text" placeholder="Nome Fantasia"
+                                                        class="form-control form-control-lg form-control-solid required" required
+                                                        v-model="nome" />
+                                                </div>
+
+                                            </div>
+                                           
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Telefone</span>
+
                                                 </label>
-                                                    <input v-bind:checked="radioTrue" @click="jms = false" class="form-check-input me-3" name="radio_input" type="radio" value="1" />
+                                                <div class="col-lg-8 fv-row">
+
+                                                    <input type="text" v-mask="tell" name="Telefone"
+                                                       placeholder="(41) 99999-9999"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model="telefone"/>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">E-mail</span>
+
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input type="email" placeholder="doardigital@gmail.com"
+                                                        class="form-control form-control-lg form-control-solid" required
+                                                        v-model="email"/>
+                                                </div>
+                                            </div>
+  
+                                        </div>
+                                        <div class="card  mb-xl-5">
+                                            <div class="card-header border-0 cursor-pointer">
+
+                                                <div class="card-title m-0">
+                                                    <h3 class="fw-bolder m-0">Domínio Personalizado</h3>
+                                                </div>
                                             </div>
 
-                                            <div class="col-lg-8 fv-row" v-if="jms">
-                                                <input type="tel"  v-mask="'###.###.###-##'" placeholder="000.000.000-00"
-                                                    class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
-                                                    :class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
-                                            </div> 
+                                            <div
+                                                class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
 
-                                            <div class="col-lg-8 fv-row" v-else>
-                                            <input type="tel" v-mask="'##.###.###/####-##'" placeholder="00.000.000/0000-00"
-                                                class="form-control form-control-lg form-control-solid" required v-model.trin="$v.cnpj.$model"
-                                                :class=" {'is-invalid':$v.cnpj.$error, 'is-valid':!$v.cnpj.$invalid }"/>
-                                        </div> 
+                                                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
 
-                                        </div> 
-                                        <div class="row mb-6"> 
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Telefone</span>
-
-                                            </label> 
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="tel" name="Telefone" v-mask="'(###) #####-####'" placeholder="(41) 99999-9999"
-                                                    class="form-control form-control-lg form-control-solid" required v-model.trin="$v.telefone.$model"
-                                                    :class=" {'is-invalid':$v.telefone.$error, 'is-valid':!$v.telefone.$invalid }"/>
-                                            </div> 
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control form-control-lg "
+                                                            required v-model="domain" />
+                                                        <span
+                                                            class="input-group-text text-danger">nomedoSite.doardigital.com.br</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row mb-6"> 
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">E-mail</span>
-
-                                            </label> 
-                                            <div class="col-lg-8 fv-row">
-                                                <input type="email" placeholder="doardigital@gmail.com"
-                                                    class="form-control form-control-lg form-control-solid" required v-model.trin="$v.email.$model"
-                                                    :class=" {'is-invalid':$v.email.$error, 'is-valid':!$v.email.$invalid }"/>
-                                            </div> 
-                                        </div>
-
-                                    </div> 
-                                    <div class="card  mb-xl-5"> 
-                                        <div class="card-header border-0 cursor-pointer">
                                          
-                                            <div class="card-title m-0">
-                                                <h3 class="fw-bolder m-0">Subdomínio</h3>
-                                            </div> 
-                                        </div> 
-
-                                        <div
-                                            class="notice d-flex bg-light-primary rounded border-primary border border-dashed flex-stack h-xl-100 m-8 -10 p-6">
+                                         
+                                        <div class=" d-flex justify-content-end py-2 px-9">
+                                            <p class="typo__p" v-if="submitStatus === 'OK'">
+                                            </p>
+                                            <p class="typo__p" v-if="submitStatus === 'ERROR'">
+                                                Por favor, preencha o formulário corretamente.</p>
+                                            <p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
+                                            </p>
+                                        </div>
                                      
-                                            <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                                             
-                                                <div class="input-group mb-3">
-                                                    <input type="text" class="form-control form-control-lg " required disabled
-                                                     v-model.trin="$v.sub_domain.$model" :class=" {'is-invalid':$v.sub_domain.$error, 'is-valid':!$v.sub_domain.$invalid }"/>
-                                                    <span class="input-group-text" id="basic-addon2">.doardigital.com.br</span>
-                                                </div> 
+                                        <div v-if="jms==='sucesso'"> 
+                                            <div class="alert alert-success d-flex align-items-center p-5 mb-10">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                                                <span class="svg-icon svg-icon-2hx svg-icon-success me-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                                                        <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <div class="d-flex flex-column">
+                                                    <h4 class="mb-1 text-success">{{msg}}</h4>
+                                                </div>
                                             </div>
-                                        </div> 
-                                    </div> 
+                                        </div>
+                                        <div v-else-if="jms==='erro'"> 
+                                            <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                                                <span class="svg-icon svg-icon-2hx svg-icon-danger me-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                                                        <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <div class="d-flex flex-column">
+                                                    <h4 class="mb-1 text-danger"> {{error}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <c-mensagem :msg="msg" ></c-mensagem>
-                                    <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                        <button class="btn btn-primary"" type=" submit"
-                                            :disabled="submitStatus === 'PENDING'">SALVAR!</button>
+                                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                             
+                                            <div>
+                                                <button type="submit" class="btn btn-lg btn-primary"
+                                                    :disabled="submitStatus === 'PENDING'">Salvar!
+                                                </button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div v-else-if="type === 'B'">
+                                        <div class="card-body border-top p-9">
+
+
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">CEP</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <div class="input-group mb-3">
+                                                        <input v-model="cep" @keyup="searchCep()"
+                                                            v-mask="'########'" type="text"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="00000-000" required />
+                                                        <span class="input-group-text" id="basic-addon2">
+                                                            <a @click="searchCep()">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="30"
+                                                                    height="30" fill="currentColor" class="bi bi-search"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                                </svg>
+                                                            </a>
+
+                                                        </span>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Rua/Avenida
+                                                    Nº</label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input id="logradouro" v-model="logradouro" type="text" disabled
+                                                        class="form-control form-control-lg form-control-solid"
+                                                        placeholder="Localização" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label
+                                                    class="col-lg-4 col-form-label required fw-bold fs-6">Numero</label>
+
+                                                <div class="col-lg-8 fv-row">
+                                                    <input v-model="numero" type="text"
+                                                        class="form-control form-control-lg form-control-solid"
+                                                        placeholder="Numero" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="">Complemento</span>
+
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input v-model="complemento" type="text" name="Complemento"
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Bairro</span>
+
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input id="bairro" v-model="bairro" type="text" name="Bairro"
+                                                        disabled  class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Cidade</span>
+
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input v-model="cidade" type="text" disabled
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-6">
+                                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                    <span class="required">Estado</span>
+
+                                                </label>
+                                                <div class="col-lg-8 fv-row">
+                                                    <input id="uf" v-model="estado" type="text" disabled
+                                                        class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+                                             
+                                        </div>
+
+
+                                        <div class=" d-flex justify-content-end py-2 px-9">
+                                            <p class="typo__p" v-if="submitStatus === 'OK'">
+                                            </p>
+                                            <p class="typo__p" v-if="submitStatus === 'ERROR'">
+                                                Por favor, preencha o formulário corretamente.</p>
+                                            <p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
+                                            </p>
+                                        </div>
+                                       
+
+                                        
+
+                                        <div v-if="jms==='sucesso'"> 
+                                            <div class="alert alert-success d-flex align-items-center p-5 mb-10">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                                                <span class="svg-icon svg-icon-2hx svg-icon-success me-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                                                        <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <div class="d-flex flex-column">
+                                                    <h4 class="mb-1 text-success">{{msg}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div v-else-if="jms==='erro'"> 
+                                            <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                                                <span class="svg-icon svg-icon-2hx svg-icon-danger me-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                                                        <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <div class="d-flex flex-column">
+                                                    <h4 class="mb-1 text-danger"> {{error}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         
+
+                                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                             
+                                            <div>
+                                                <button type="submit" class="btn btn-lg btn-primary"
+                                                    :disabled="submitStatus === 'PENDING'">Salvar!
+                                                </button>
+                                            </div>
+                                             
+                                        </div>
+
+                                    </div>
+
+                                    <div v-else-if="type === 'C'">
+
+
+                                        <div class="card-body border-top p-9">
+
+                                            <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                                                <span class="svg-icon svg-icon-2hx svg-icon-danger me-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                                                        <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <div class="d-flex flex-column text-center">
+                                                    <h3 class="mb-1 text-danger">Importante</h3>
+                                                    <h5>
+                                                      Para alteração de Dados Bancario entre em Contacto com o Suporte da plataforma. 
+                                                        .</h5>
+                                                </div>
+                                            </div>
+  
+     
+                                        </div>
+   
+                                    </div>
                                     
-                                    </div>
-                                    <div class=" d-flex justify-content-end py-2 px-9">
-                                    <p class="typo__p" v-if="submitStatus === 'OK'"> 
-                                    </p>
-                                    <p class="typo__p" v-if="submitStatus === 'ERROR'">
-                                    Por favor, preencha o formulário corretamente.</p>
-                                    <p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
-                                    </p>
-                                    </div>
-                                </form> 
-                        
-                        </div> 
+                                </form>
+                              
+                            </div>
 
-                    </div> 
-                </div> 
-            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </div>
