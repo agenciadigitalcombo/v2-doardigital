@@ -199,6 +199,24 @@ class InstituicaoControle extends Controle
             $env['split_porcentagem']
         );
 
+        $meta = new Metas();
+        $meta->save(
+            $institution_fk,
+            date('Y'),
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+        );
+
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta

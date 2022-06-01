@@ -1,7 +1,7 @@
 
 @host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyODY5ZWNiNWM4YzEifQ==.01fa5998f3e38a55d9add4251a595bd8be793bac
-@instituicao_fk=inst_0007
+@instituicao_fk=inst_0008
 @ano=2022
 @janeiro=10000
 @fevereiro=7000
@@ -26,7 +26,7 @@ GET {{host}}/api/metas/info?token={{token}}&instituicao_fk={{instituicao_fk}}&an
 POST {{host}}/api/metas/save
 Content-Type: application/x-www-form-urlencoded;
 
-token={{token}} 
+token={{token}}
 &instituicao_fk={{instituicao_fk}}
 &ano={{ano}}
 &janeiro={{janeiro}}

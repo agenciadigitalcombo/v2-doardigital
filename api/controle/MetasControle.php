@@ -14,6 +14,7 @@ class MetasControle extends Controle
     static function save()
     {
         self::requireInputs([
+            "token" => "informe um token",
             'instituicao_fk' => 'Informe a instituição',
             'ano' => 'Informe o ano',
             'janeiro' => 'Informe o mês de janeiro',
@@ -30,7 +31,7 @@ class MetasControle extends Controle
             'dezembro' => 'Informe o mês de dezembro',
         ]);
 
-        // self::privateRouter();
+        self::privateRouter();
 
         $meta = new Metas();
         $instituicao_fk = $_REQUEST['instituicao_fk'];
