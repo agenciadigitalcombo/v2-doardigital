@@ -6,31 +6,37 @@ export default {
    
     data: function () {
         return {
+            token: null,
+            instituicao_fk: null,
+            mensal: null,
+            valor: null,
+            recorrente: null,
+            nome: null,
+            email: null,
+            nome: null,
+            sexo: null,
+            cpf: null,
+            telefone: null,
+            cep: null,
+            numero: null,
+            estado: null,
+            logadouro: null, 
+            complemento: null,
+            bairro: null,
+            cidade: null,
+    
+            tipo_pagamento: 'CREDIT_CARD',
+            card_nome: null,
+            card_numero: null,
+            card_cvv: null,
+            card_validade: null,
+            
             logo: '',
             plano_id: "1386061",
             plano_id_zap: 0,
-
-            token: null,
-            instituicao_id: null,
-            mensal: null,
+  
             planos_id: null,
-            planos_valor: null,
-            email: null,
-            nome: "",
-            genero: null,
-            cpf: "",
-            telefone: "",
-            cep: "",
-            numero: "",
-            estado: "",
-            endereco: "o",
-            bairro: "",
-            cidade: "",
-            type_pagamento: "CREDIT_CARD",
-            cart_numero: "",
-            cart_cvv: "",
-            cart_validade: "",
-            cart_nome: "",
+        
             ver: "",
             valor_digitado: null,
             valor: null,
@@ -43,7 +49,8 @@ export default {
             submitStatus: null,
             dados: [],
             txto_pix: "",
-            txto_pix2: ""
+            txto_pix2: "",
+            jms: ""
         }
     },
 
@@ -110,13 +117,13 @@ export default {
                 this.txto_pix = "Obs : O valor do PIX entre as 20:00h e 6:00h (noturno)"
                 this.txto_pix2 = "será máximo de R$ 1.000,00 reais."
 
-                if (this.planos_valor >= 100000) {
-                    // this.planos_valor = "100000"
+                if (this.valor >= 100000) {
+                    // this.valor = "100000"
                 } else {
-                    this.planos_valor = window.localStorage.getItem("amount")
+                    this.valor = window.localStorage.getItem("price")
                 }
             } else {
-                this.planos_valor = window.localStorage.getItem("amount")
+                this.valor = window.localStorage.getItem("price")
                 this.txto_pix = ""
                 this.txto_pix2 = ""
             }
@@ -135,32 +142,37 @@ export default {
                 } else {
                     this.submitStatus = 'CARREGAR'
                     let res = await adm.transacaoPlano(
-                        this.instituicao_id,
-                        this.mensal,
-                        this.planos_valor,
-                        this.planos_nome,
-                        this.email,
-                        this.nome,
-                        this.genero,
-                        this.cpf,
-                        this.telefone,
-                        this.cep,
-                        this.numero,
-                        this.estado,
-                        this.endereco,
-                        this.bairro,
-                        this.cidade,
-                        this.type_pagamento,
-                        this.cart_numero,
-                        this.cart_cvv,
-                        this.cart_validade,
-                        this.cart_nome,
-                        window.localStorage.setItem("type_pagamento", this.type_pagamento)
+                    this.instituicao_fk,
+                    this.mensal,
+                    this.valor,
+                    this.recorrente = 'sim', 
+                    this.email,
+                    this.nome,
+                    this.sexo,
+                    this.cpf,
+                    this.telefone,
+                    this.cep,
+                    this.numero,
+                    this.estado,
+                    this.logadouro,
+                    this.complemento,
+                    this.bairro,
+                    this.cidade,
+                
+                    this.tipo_pagamento,
+                    this.card_nome,
+                    this.card_numero,
+                    this.card_cvv,
+                    this.card_validade,
+                        window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
 
                     )
                     if (!res.next) {
-                        this.error = res.message
+                        alert("eroo comeco")
                         this.submitStatus = 'FALHA'
+                        this.jms = "erro"
+                        this.error = res.message
+                        alert("eroo")
                         return null
                     }
 
@@ -187,30 +199,40 @@ export default {
                 if (this.$v.$invalid) {
                     this.submitStatus = 'ERROR'
                 } else {
-                    this.submitStatus = 'CARREGAR'
+                    this.submitStatus = 'CARREGAR' 
+
                     let res = await adm.transacao(
-                        this.instituicao_id,
+                        this.instituicao_fk,
                         this.mensal,
-                        this.planos_valor,
-                        this.planos_nome,
+                        this.valor,
+                        this.recorrente = 'sim', 
                         this.email,
                         this.nome,
-                        this.genero,
+                        this.sexo,
                         this.cpf,
                         this.telefone,
                         this.cep,
                         this.numero,
                         this.estado,
-                        this.endereco,
+                        this.logadouro,
+                        this.complemento,
                         this.bairro,
                         this.cidade,
-                        this.type_pagamento,  
-                        window.localStorage.setItem("type_pagamento", this.type_pagamento)
+                    
+                        this.tipo_pagamento,
+                        this.card_nome,
+                        this.card_numero,
+                        this.card_cvv,
+                        this.card_validade,
+                            window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
 
                     )
                     if (!res.next) {
-                        this.error = res.message
+                        alert("eroo comeco")
                         this.submitStatus = 'FALHA'
+                        this.jms = "erro"
+                        this.error = res.message
+                        alert("eroo")
                         return null
                     }
 
@@ -229,10 +251,14 @@ export default {
             }
         },
 
-        async infoSubdomain() { 
-             let res = await adm.todoSubdomain(this.subdomaim)
-            return res
-        },
+		async lisConfiguracao() {
+			let res = await adm.listConf(
+				this.token,
+				this.domain,
+			)
+			return res
+		},
+
 
         searchCep() {
             let cep = this.cep
@@ -241,7 +267,7 @@ export default {
                 axios.get(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(response => {
                         this.error = ""
-                        this.endereco = response.data.logradouro,
+                        this.logadouro = response.data.logradouro,
                             this.bairro = response.data.bairro,
                             this.cidade = response.data.localidade,
                             this.estado = response.data.uf
@@ -268,31 +294,36 @@ export default {
     },
 
     async mounted() {
-        //	this.subdomaim = "34edqwe21"
-       //   this.subdomaim = "combopay.com.br"
-      this.subdomaim = window.location.hostname
-
+       
         this.mensal = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
         if (this.planos_id) {
-            this.planos_valor = window.localStorage.getItem("amount")
-            this.ver = window.localStorage.getItem("amountjms")
+            this.valor = window.localStorage.getItem("price")
+            this.ver = window.localStorage.getItem("pricejms")
         } else {
-            this.planos_valor = window.localStorage.getItem("amount_digitado")
+            this.valor = window.localStorage.getItem("price_digitado")
         }
        
 
-        this.planos_nome = window.localStorage.getItem("planos_nome")
+        this.nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
-        // this.instituicao_id = localStorage.getItem('instituicao_id')
+        // this.instituicao_fk = localStorage.getItem('instituicao_fk')
+ 
+     
 
+        this.token = localStorage.getItem('token')
+		//this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
+		this.domain = "jms21122xxcr"
+		// this.this.domain  = window.location.hostname
 
-        let config = (await this.infoSubdomain()).dados_instituicao
-        this.logo = "https://doardigital.com.br/api/upload/"+config.logo
-        this.backgroundColor = config.cor
-        this.instituicao_id = config.id
+		let config = (await this.lisConfiguracao()).payload
+		this.logo = "https://doardigital.com.br/api/upload/"+config.logo
+		this.backgroundColor = config.cor
+        this.instituicao_fk = config.institution_fk
+         
+ 
     },
 
  

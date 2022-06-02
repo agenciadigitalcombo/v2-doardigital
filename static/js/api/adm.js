@@ -380,13 +380,6 @@ export default {
     },
 
 
-    async todoSubdomain(subdomaim) {
-        return await http.get('/info-subdomaim', {
-            subdomaim
-        })
-    },
-
-
     async cadastrarSubadm(
         nome,
         email,
@@ -447,90 +440,108 @@ export default {
             token,
         })
     },
+    
 
     async transacaoPlano(
-        instituicao_id,
+        instituicao_fk,
         mensal,
-        planos_valor,
-        planos_nome,
+        valor,
+        recorrente,
         email,
         nome,
-        genero,
+        sexo,
         cpf,
         telefone,
         cep,
         numero,
         estado,
-        endereco,
+        logadouro,
+        complemento,
         bairro,
         cidade,
-        type_pagamento,
-        cart_numero,
-        cart_cvv,
-        cart_validade,
-        cart_nome,
+
+        tipo_pagamento,
+        card_nome,
+        card_numero,
+        card_cvv,
+        card_validade,
     ) {
-        return await http.post('/transacao', {
-            instituicao_id,
+        return await http.post('/fatura/create', {
+            instituicao_fk,
             mensal,
-            planos_valor,
-            planos_nome,
+            valor,
+            recorrente,
             email,
             nome,
-            genero,
+            sexo,
             cpf,
             telefone,
             cep,
             numero,
             estado,
-            endereco,
+            logadouro,
+            complemento,
             bairro,
             cidade,
-            type_pagamento,
-            cart_numero,
-            cart_cvv,
-            cart_validade,
-            cart_nome,
+    
+            tipo_pagamento,
+            card_nome,
+            card_numero,
+            card_cvv,
+            card_validade,
         })
     },
 
 
     async transacao(
-        instituicao_id,
+        instituicao_fk,
         mensal,
-        planos_valor,
-        planos_nome,
+        valor,
+        recorrente,
         email,
         nome,
-        genero,
+        sexo,
         cpf,
         telefone,
         cep,
         numero,
         estado,
-        endereco,
+        logadouro,
+        complemento,
         bairro,
         cidade,
-        type_pagamento,
+
+        tipo_pagamento,
+        card_nome,
+        card_numero,
+        card_cvv,
+        card_validade,
+       
 
     ) {
-        return await http.post('/transacao', {
-            instituicao_id,
+        return await http.post('/fatura/create', {
+            instituicao_fk,
             mensal,
-            planos_valor,
-            planos_nome,
+            valor, 
+            recorrente,
             email,
             nome,
-            genero,
+            sexo,
             cpf,
             telefone,
             cep,
             numero,
             estado,
-            endereco,
+            logadouro,
+            complemento,
             bairro,
             cidade,
-            type_pagamento,
+    
+            tipo_pagamento,
+            card_nome,
+            card_numero,
+            card_cvv,
+            card_validade,
 
         })
     },
