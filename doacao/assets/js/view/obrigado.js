@@ -1,7 +1,7 @@
 import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-template: `
+	template: `
 <div>
 	<div class="d-flex flex-column flex-root">
 		<div class="mb-0" id="home">
@@ -231,8 +231,8 @@ template: `
 			type: '',
 			jms: false,
 			doacao_id: '',
-			 loader: '',
-			 tell: '',
+			loader: '',
+			tell: '',
 		}
 	},
 
@@ -248,85 +248,107 @@ template: `
 	},
 
 	methods: {
-		async infoSubdomain() {
-			let res = await adm.todoSubdomain(this.subdomaim)
+
+		async lisConfiguracao() {
+			let res = await adm.listConf(
+				this.token,
+				this.domain,
+			)
 			return res
 		},
+
 
 		copiar(ref) {
 			this.$refs[ref].select(); document.execCommand('copy');
 		},
 
 		validaTell(event) {
-			var phone = this.inst.telefone.replace(/\D/g,"");
-		 
+			var phone = this.inst.telefone.replace(/\D/g, "");
+
 			if (phone.length < 11) {
-				
+
 				this.tell = '(##) ####-####'
-			} else{
-			
+			} else {
+
 				this.tell = '(##) #####-####'
 			}
-       
-        },
-		 
-		  isQr() {	
+
+		},
+
+		isQr() {
 			this.error = null
 			this.loader = 'sim',
-				setTimeout( async () => {
+				setTimeout(async () => {
 
 					let res = await adm.obrigado(
 						this.doacao_id
 					)
 					this.inst.codigo_geral = res.dados.codigo
 					this.inst.url_geral = res.dados.url
-			    	 
-					let verificaQrExist = res.dados.codigo
-					if( !verificaQrExist ) {
-						this.isQr() 
-					}else{
-						this.loader= 'nao'
-					}
-			 
-				}, 1500 )
 
-			}
-	 
+					let verificaQrExist = res.dados.codigo
+					if (!verificaQrExist) {
+						this.isQr()
+					} else {
+						this.loader = 'nao'
+					}
+
+				}, 1500)
+
+		}
+
 	},
 
 	async mounted() {
-		
-	//		this.subdomaim = "34edqwe21"
-			 //	 this.subdomaim = "combopay.com.br"
-this.subdomaim = window.location.hostname
-	
-		let dados = (await this.infoSubdomain()).dados_instituicao
-		this.inst.cep = dados.endereco.cep
-		this.inst.endereco = dados.endereco.logadouro
-		this.inst.numero = dados.endereco.numero
-		this.inst.bairro = dados.endereco.bairro
-		this.inst.cidade = dados.endereco.cidade
-		this.inst.estado = dados.endereco.estado
-		this.inst.complemento = dados.endereco.complemento
-		this.inst.logo = "https://doardigital.com.br/api/upload/" + dados.logo
-		this.inst.icon = dados.icon
-		this.inst.backgroundColor = dados.cor
-		this.inst.email = dados.email
-		this.inst.telefone = dados.telefone
-		this.inst.cnpj = dados.cnpj
 
-		this.inst.urlsite =  dados.dominio || dados.subdomaim + '.doardigital.com.br/' 
-		 
+
+		this.token = localStorage.getItem('token')
+		//this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
+		this.domain = "jms21122xxcr"
+		// this.this.domain  = window.location.hostname
+
+		let config = (await this.lisConfiguracao()).payload
+
+
+		this.inst.institution_fk = config.institution_fk,
+			this.inst.nome = config.nome,
+			this.inst.email = config.email,
+			this.inst.telefone = config.telefone,
+
+
+			this.inst.logo = "https://doardigital.com.br/api/upload/" + config.logo,
+			//this.inst.icon = config.icon,
+			this.inst.icon = "icon.png"
+		//this.inst.titulo = config.titulo,
+		this.inst.titulo = "titulo 0"
+		//this.inst.tags = config.tags,
+		this.inst.tags = "tags"
+		//this.inst.descricao = config.descricao,
+		this.inst.descricao = "tags mista cs"
+		this.inst.backgroundColor = config.cor
+
+		this.inst.domain = config.domain,
+			this.inst.inst.urlsite = config.domain || config.subdomain + '.doardigital.com.br/'
+
+		this.inst.cep = config.endereco.cep,
+			this.inst.endereco = config.endereco.logadouro,
+			this.inst.numero = config.endereco.numero,
+			this.inst.complemento = config.endereco.complemento,
+			this.inst.bairro = config.endereco.bairro,
+			this.inst.cidade = config.endereco.cidade,
+			this.inst.estado = config.endereco.estado
+
+
 		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
-		this.type = localStorage.getItem('type_pagamento') 
+		this.type = localStorage.getItem('type_pagamento')
 		//this.inst.url_geral = localStorage.getItem("url")
 		this.doacao_id = localStorage.getItem("ref")
 
 		if (this.type !== 'CREDIT_CARD') {
 
-		this.isQr() 
-		this.validaTell(event)
-	}
+			this.isQr()
+			this.validaTell(event)
+		}
 
 		if (this.type == 'PIX') {
 			let code_pix = `${this.inst.codigo_geral}`
@@ -340,11 +362,11 @@ this.subdomaim = window.location.hostname
 				correctLevel: QRCode.CorrectLevel.L
 			});
 		}
-		
+
 		// setTimeout(() => {
-		 	
+
 		// }, 90000)
-	
+
 
 
 	},
