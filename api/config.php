@@ -10,6 +10,7 @@ return [
     "base" => "https://doardigital.com.br",
     
     "email_host" => "mail.doardigital.com.br",
+    "email_protocolo" => "TLS",
     "email_port" => 465,
     "email_user" => "contato@doardigital.com.br",
     "email_pass" => "Prosperidade@121",

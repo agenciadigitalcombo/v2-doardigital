@@ -217,6 +217,16 @@ class InstituicaoControle extends Controle
             100
         );
 
+        $smtp =  new Smtp();
+        $smtp->save(
+            $instituicao_fk,
+            $env["email_host"],
+            $env["email_protocolo"],
+            $env["email_porta"],
+            $env["email_email"],
+            $env["email_senha"]
+        );
+
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta
