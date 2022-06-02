@@ -180,7 +180,7 @@ class InstituicaoControle extends Controle
 
         $plan = new Plano();
 
-        foreach( self::plansDefault() as $valor ) {
+        foreach (self::plansDefault() as $valor) {
             $plan->register(
                 $institution_fk,
                 $valor,
@@ -219,12 +219,19 @@ class InstituicaoControle extends Controle
 
         $smtp =  new Smtp();
         $smtp->save(
-            $instituicao_fk,
+            $institution_fk,
             $env["email_host"],
             $env["email_protocolo"],
             $env["email_porta"],
             $env["email_email"],
             $env["email_senha"]
+        );
+
+        $inter =  new Integration();
+        $inter->save(
+            $institution_fk,
+            "EVENDAS",
+            $env["evendas"]
         );
 
         self::printSuccess(
@@ -273,13 +280,13 @@ class InstituicaoControle extends Controle
         $complemento = $_REQUEST['complemento'] ?? '';
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
-        $estado = $_REQUEST['estado'];        
+        $estado = $_REQUEST['estado'];
 
         $company = new Instituicao();
         $address = new Endereco();
 
         $inst = $company->info($institution_fk);
-        if(!$inst['institution_fk']) {
+        if (!$inst['institution_fk']) {
             self::printError(
                 "Instituição não existe",
                 []
@@ -334,19 +341,20 @@ class InstituicaoControle extends Controle
         $banco->where([
             "fk" => $company["institution_fk"]
         ]);
-        $company['endereco'] = Endereco::porter( $banco->select()[0] );
+        $company['endereco'] = Endereco::porter($banco->select()[0]);
         $banco->table("plano");
         $banco->where([
             "fk" => $company["institution_fk"]
         ]);
-        $company['planos'] = array_map(['Plano','porter'], $banco->select()) ;
+        $company['planos'] = array_map(['Plano', 'porter'], $banco->select());
         self::printSuccess(
             "Informações da Instituição",
             $company
         );
     }
 
-    static function list() {
+    static function list()
+    {
         self::requireInputs([
             "token" => "informe um token",
             "adm_fk" => "informe um identificador de adm"
@@ -359,7 +367,7 @@ class InstituicaoControle extends Controle
             "adm_fk" => $adm_fk
         ]);
         $list = [];
-        foreach($con->select() as $inst) {
+        foreach ($con->select() as $inst) {
             $instituition_fk = $inst['instituition_fk'];
             $con->table("institution");
             $con->where([

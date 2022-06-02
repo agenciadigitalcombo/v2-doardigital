@@ -158,7 +158,7 @@ CREATE TABLE email (
     senha VARCHAR(255)
 );
 
-CREATE TABLE intregration (
+CREATE TABLE integration (
     id int not null auto_increment primary key,
     instituicao_fk VARCHAR(255),
     tipo VARCHAR(255),

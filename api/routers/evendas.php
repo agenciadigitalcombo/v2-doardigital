@@ -1,4 +1,5 @@
 <?php
 
-router('/save-evendas', 'EvendasControler@save_evendas');
-router('/list-evendas', 'EvendasControler@list_evendas_by_instituicao');
+router('/evendas', 'EvendasControle@start');
+router('/evendas/save', 'EvendasControle@save');
+router('/evendas/info', 'EvendasControle@info');
