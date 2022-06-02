@@ -66,9 +66,8 @@ class FaturaControle extends Controle
         $url = null;
         $debug = null;
 
-        $company = $institution->info($instituicao_fk);
-        $carteira_fk = $company['carteira_fk'] ?? null;
-
+        $carteira_fk = $institution->get_key($instituicao_fk);
+        
         if(empty($carteira_fk)) {
             self::printError(
                 "Instituição não possui uma código de carteira",

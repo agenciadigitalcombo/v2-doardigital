@@ -45,6 +45,14 @@ class Instituicao
         return self::porter( $this->con->select()[0] ?? [] );
     }
 
+    public function get_key(string $institution_fk): string
+    {
+        $this->con->where([
+            "institution_fk" => $institution_fk
+        ]);
+        return  $this->con->select()[0]["carteira_fk"] ?? "" ;
+    }
+
     public function getByHostName(string $hostName): array
     {
         $sql = "SELECT * FROM institution WHERE subdomain='{$hostName}' OR domain='{$hostName}'";
