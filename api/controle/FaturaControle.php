@@ -222,6 +222,12 @@ class FaturaControle extends Controle
             $url = $resCodeListSubs["data"][0]["invoiceUrl"] ?? "";
         }
 
+        if (!$recorrente && $tipo_pagamento == "PIX") {
+            $resCode = $Pay->getCodePix($response["id"]);
+            $code = $resCode["payload"] ?? "";
+            $url = $resCodeListSubs["data"][0]["invoiceUrl"] ?? "";
+        }
+
         if ($recorrente && $tipo_pagamento == "BOLETO" && $ID) {
             $resCode = $Pay->getBarcodeBoleto($ID);
             $code = $resCode["identificationField"] ?? "";
@@ -289,7 +295,7 @@ class FaturaControle extends Controle
             [
                 "recorrente" => $recorrente ?? null,
                 "valor" => $valor ?? null,
-                "code" => $code ?? null,
+                "code" => $code ?? $codigo ?? null,
                 "url" => $url ?? null,
                 "tipo_pagamento" => $tipo_pagamento ?? null,
                 "debug" => $debug
