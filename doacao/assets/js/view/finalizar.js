@@ -3,12 +3,11 @@ import adm from '../../../../static/js/api/adm.js'
 const { required, minLength, between } = window.validators
 
 export default {
-   
+
     data: function () {
         return {
             token: null,
             instituicao_fk: null,
-            mensal: null,
             valor: null,
             recorrente: null,
             nome: null,
@@ -20,23 +19,23 @@ export default {
             cep: null,
             numero: null,
             estado: null,
-            logadouro: null, 
+            logadouro: null,
             complemento: null,
             bairro: null,
             cidade: null,
-    
+
             tipo_pagamento: 'CREDIT_CARD',
             card_nome: null,
             card_numero: null,
             card_cvv: null,
             card_validade: null,
-            
+
             logo: '',
             plano_id: "1386061",
             plano_id_zap: 0,
-  
+
             planos_id: null,
-        
+
             ver: "",
             valor_digitado: null,
             valor: null,
@@ -140,72 +139,12 @@ export default {
                 if (this.$v.$invalid) {
                     this.submitStatus = 'ERROR'
                 } else {
+                    this.error = null
                     this.submitStatus = 'CARREGAR'
                     let res = await adm.transacaoPlano(
-                    this.instituicao_fk,
-                    this.mensal,
-                    this.valor,
-                    this.recorrente = 'sim', 
-                    this.email,
-                    this.nome,
-                    this.sexo,
-                    this.cpf,
-                    this.telefone,
-                    this.cep,
-                    this.numero,
-                    this.estado,
-                    this.logadouro,
-                    this.complemento,
-                    this.bairro,
-                    this.cidade,
-                
-                    this.tipo_pagamento,
-                    this.card_nome,
-                    this.card_numero,
-                    this.card_cvv,
-                    this.card_validade,
-                        window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
-
-                    )
-                    if (!res.next) {
-                        alert("eroo comeco")
-                        this.submitStatus = 'FALHA'
-                        this.jms = "erro"
-                        this.error = res.message
-                        alert("eroo")
-                        return null
-                    }
-
-                    this.submitStatus = 'OK'
-                    this.msg = res.message
-                    window.localStorage.setItem("codigo", res.codigo)
-                    window.localStorage.setItem("url", res.url)
-                     window.localStorage.setItem("ref", res.reference_key)
-                    window.location.href = "#/obrigado"
-                }
-            }
-            catch (e) {
-                setTimeout(() => {
-                    this.submitStatus = 'FALHA500'
-                }, 1500)
-            }
-        },
-
-        
-        async transacao() {
-            try {
-                this.error = null
-                this.$v.$touch()
-                if (this.$v.$invalid) {
-                    this.submitStatus = 'ERROR'
-                } else {
-                    this.submitStatus = 'CARREGAR' 
-
-                    let res = await adm.transacao(
                         this.instituicao_fk,
-                        this.mensal,
                         this.valor,
-                        this.recorrente = 'sim', 
+                        this.recorrente,
                         this.email,
                         this.nome,
                         this.sexo,
@@ -218,21 +157,19 @@ export default {
                         this.complemento,
                         this.bairro,
                         this.cidade,
-                    
+
                         this.tipo_pagamento,
                         this.card_nome,
                         this.card_numero,
                         this.card_cvv,
                         this.card_validade,
-                            window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
+                        window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
 
                     )
-                    if (!res.next) {
-                        alert("eroo comeco")
+                    if (!res.next) { 
                         this.submitStatus = 'FALHA'
                         this.jms = "erro"
-                        this.error = res.message
-                        alert("eroo")
+                        this.error = res.message 
                         return null
                     }
 
@@ -240,7 +177,7 @@ export default {
                     this.msg = res.message
                     window.localStorage.setItem("codigo", res.codigo)
                     window.localStorage.setItem("url", res.url)
-                     window.localStorage.setItem("ref", res.reference_key)
+                    window.localStorage.setItem("ref", res.reference_key)
                     window.location.href = "#/obrigado"
                 }
             }
@@ -251,13 +188,70 @@ export default {
             }
         },
 
-		async lisConfiguracao() {
-			let res = await adm.listConf(
-				this.token,
-				this.domain,
-			)
-			return res
-		},
+
+        async transacao() {
+            try {
+                this.error = null
+                this.$v.$touch()
+                if (this.$v.$invalid) {
+                    this.submitStatus = 'ERROR'
+                } else {
+
+                    this.submitStatus = 'CARREGAR'
+
+                    let res = await adm.transacao(
+                        this.instituicao_fk,
+                        this.valor,
+                        this.recorrente,
+                        this.email,
+                        this.nome,
+                        this.sexo,
+                        this.cpf,
+                        this.telefone,
+                        this.cep,
+                        this.numero,
+                        this.estado,
+                        this.logadouro,
+                        this.complemento,
+                        this.bairro,
+                        this.cidade,
+
+                        this.tipo_pagamento,
+                        this.card_nome,
+                        this.card_numero,
+                        this.card_cvv,
+                        this.card_validade,
+                        window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
+
+                    )
+                    if (!res.next) { 
+                        this.submitStatus = 'FALHA' 
+                        this.error = res.message 
+                        return null
+                    }
+
+                    this.submitStatus = 'OK'
+                    this.msg = res.message
+                    window.localStorage.setItem("codigo", res.codigo)
+                    window.localStorage.setItem("url", res.url)
+                    window.localStorage.setItem("ref", res.reference_key)
+                    window.location.href = "#/obrigado"
+                }
+            }
+            catch (e) {
+                setTimeout(() => {
+                    this.submitStatus = 'FALHA500'
+                }, 1500)
+            }
+        },
+
+        async lisConfiguracao() {
+            let res = await adm.listConf(
+                this.token,
+                this.domain,
+            )
+            return res
+        },
 
 
         searchCep() {
@@ -294,8 +288,8 @@ export default {
     },
 
     async mounted() {
-       
-        this.mensal = window.localStorage.getItem("mensal")
+
+        this.recorrente = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
         if (this.planos_id) {
@@ -304,28 +298,28 @@ export default {
         } else {
             this.valor = window.localStorage.getItem("price_digitado")
         }
-       
+
 
         this.nome = window.localStorage.getItem("planos_nome")
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
         // this.instituicao_fk = localStorage.getItem('instituicao_fk')
- 
-     
+
+
 
         this.token = localStorage.getItem('token')
-		//this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
-		this.domain = "jms21122xxcr"
-		// this.this.domain  = window.location.hostname
+        //this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
+        this.domain = "jms21122xxcr"
+        // this.this.domain  = window.location.hostname
 
-		let config = (await this.lisConfiguracao()).payload
-		this.logo = "https://doardigital.com.br/api/upload/"+config.logo
-		this.backgroundColor = config.cor
+        let config = (await this.lisConfiguracao()).payload
+        this.logo = "https://doardigital.com.br/api/upload/" + config.logo
+        this.backgroundColor = config.cor
         this.instituicao_fk = config.institution_fk
-         
- 
+
+
     },
 
- 
+
     template: await get_template('./assets/js/view/finalizar')
 }
