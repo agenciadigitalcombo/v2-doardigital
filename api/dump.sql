@@ -176,3 +176,10 @@ CREATE TABLE template_email (
     assunto VARCHAR(255),
     content LONGTEXT
 );
+
+CREATE TABLE message (
+    id int not null auto_increment primary key,
+    tipo VARCHAR(255),
+    data VARCHAR(255),
+    payload JSON
+);

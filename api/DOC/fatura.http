@@ -15,7 +15,7 @@
 @estado=SP
 @valor=45.30
 @recorrente=1
-@tipo_pagamento=CREDIT_CARD
+@tipo_pagamento=BOLETO
 @card_nome=Bruno Ap Vieira
 @card_numero=5119 4054 5033 2489
 @card_validade=05/2023

@@ -31,26 +31,26 @@ class FaturaControle extends Controle
             "tipo_pagamento" => "Informe um tipo de pagamento",
         ]);
 
-        $instituicao_fk = $_REQUEST['instituicao_fk'] ?? null;
-        $nome = $_REQUEST['nome'] ?? null;
-        $cpf = $_REQUEST['cpf'] ?? null;
-        $sexo = $_REQUEST['sexo'] ?? null;
-        $telefone = $_REQUEST['telefone'] ?? null;
-        $email = $_REQUEST['email'] ?? null;
-        $cep = $_REQUEST['cep'] ?? null;
-        $logadouro = $_REQUEST['logadouro'] ?? null;
+        $instituicao_fk = $_REQUEST['instituicao_fk'] ?? "";
+        $nome = $_REQUEST['nome'] ?? "";
+        $cpf = $_REQUEST['cpf'] ?? "";
+        $sexo = $_REQUEST['sexo'] ?? "";
+        $telefone = $_REQUEST['telefone'] ?? "";
+        $email = $_REQUEST['email'] ?? "";
+        $cep = $_REQUEST['cep'] ?? "";
+        $logadouro = $_REQUEST['logadouro'] ?? "";
         $complemento = $_REQUEST['complemento'] ?? "";
-        $numero = $_REQUEST['numero'] ?? null;
-        $bairro = $_REQUEST['bairro'] ?? null;
-        $cidade = $_REQUEST['cidade'] ?? null;
-        $estado = $_REQUEST['estado'] ?? null;
+        $numero = $_REQUEST['numero'] ?? "";
+        $bairro = $_REQUEST['bairro'] ?? "";
+        $cidade = $_REQUEST['cidade'] ?? "";
+        $estado = $_REQUEST['estado'] ?? "";
         $valor = (float) $_REQUEST['valor'] ? $_REQUEST['valor'] : 0;
         $recorrente = (int) $_REQUEST['recorrente'] ?? 0;
-        $tipo_pagamento = $_REQUEST['tipo_pagamento'] ?? null;
-        $card_nome = $_REQUEST['card_nome'] ?? null;
-        $card_numero = $_REQUEST['card_numero'] ?? null;
-        $card_validade = $_REQUEST['card_validade'] ?? null;
-        $card_cvv = $_REQUEST['card_cvv'] ?? null;
+        $tipo_pagamento = $_REQUEST['tipo_pagamento'] ?? "";
+        $card_nome = $_REQUEST['card_nome'] ?? "";
+        $card_numero = $_REQUEST['card_numero'] ?? "";
+        $card_validade = $_REQUEST['card_validade'] ?? "";
+        $card_cvv = $_REQUEST['card_cvv'] ?? "";
         $nascimento = "";
 
         $client = new Doador();
@@ -191,6 +191,18 @@ class FaturaControle extends Controle
                 $split
             );
         }
+
+        $notification = new Message();
+        $notification->save(
+            "EMAIL",
+            time(),
+            []
+        );
+        $notification->save(
+            "WHATS",
+            time(),
+            []
+        );
 
         $error = $response['errors'] ?? [];
 
