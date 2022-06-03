@@ -28,6 +28,7 @@ export default {
 
         }
     },
+    
     props: {
         text: {
             required: false,

@@ -180,7 +180,7 @@ export default {
 				<div class="text-center mb-17">
 					<div class="fs-5 text-muted fw-bold  flex-center ">
 						<p class="m-10">
-							{{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
+							{{inst.nome}} - CPF/CNPJ: {{inst.cpfCnpj}} |
 							Endereço: {{inst.endereco}} , {{inst.complemento}} - {{inst.bairro}}, <br>
 							{{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
 							Para dúvidas e cancelamentos entre em contato com nossa <br>
@@ -195,7 +195,7 @@ export default {
 			</div>
 		</div>
 		<div class="rotaObscura">
-			<input v-mask="'##.###.###/####-##'" v-model="inst.cnpj" class="invisivel" />
+			<input v-mask="'##.###.###/####-##'" v-model="inst.cpfCnpj" class="invisivel" />
 			<input v-mask="'#####-###'" v-model="inst.cep" class="invisivel" />
 			<input  v-mask="tell" v-model="inst.telefone" class="invisivel" />
 		</div>
@@ -211,11 +211,11 @@ export default {
 				bairro: null,
 				cep: null,
 				cidade: null,
-				cnpj: null,
+				cpfCnpj: null,
 				complemento: null,
 				email: null,
 				estado: null,
-				nome_fantasia: null,
+				nome: null,
 				razao_social: null,
 				endereco: null,
 				telefone: null,
@@ -310,7 +310,7 @@ export default {
 		let config = (await this.lisConfiguracao()).payload
 
 
-		this.inst.institution_fk = config.institution_fk,
+			this.inst.cpfCnpj = config.cpfCnpj,
 			this.inst.nome = config.nome,
 			this.inst.email = config.email,
 			this.inst.telefone = config.telefone,
@@ -326,20 +326,19 @@ export default {
 		//this.inst.descricao = config.descricao,
 		this.inst.descricao = "tags mista cs"
 		this.inst.backgroundColor = config.cor
-
+		
 		this.inst.domain = config.domain,
-			this.inst.inst.urlsite = config.domain || config.subdomain + '.doardigital.com.br/'
-
-		this.inst.cep = config.endereco.cep,
+			this.inst.urlsite = config.domain || config.subdomain + '.doardigital.com.br/'
+		 
+		   this.inst.cep = config.endereco.cep,
 			this.inst.endereco = config.endereco.logadouro,
 			this.inst.numero = config.endereco.numero,
 			this.inst.complemento = config.endereco.complemento,
 			this.inst.bairro = config.endereco.bairro,
 			this.inst.cidade = config.endereco.cidade,
 			this.inst.estado = config.endereco.estado
+ 
 
-
-		this.inst.nome_fantasia = localStorage.getItem('instituicao_nome')
 		this.type = localStorage.getItem('type_pagamento')
 		//this.inst.url_geral = localStorage.getItem("url")
 		this.doacao_id = localStorage.getItem("ref")

@@ -441,61 +441,9 @@ export default {
         })
     },
     
-
-    async transacaoPlano(
-        instituicao_fk,
-        mensal,
-        valor,
-        recorrente,
-        email,
-        nome,
-        sexo,
-        cpf,
-        telefone,
-        cep,
-        numero,
-        estado,
-        logadouro,
-        complemento,
-        bairro,
-        cidade,
-
-        tipo_pagamento,
-        card_nome,
-        card_numero,
-        card_cvv,
-        card_validade,
-    ) {
-        return await http.post('/fatura/create', {
-            instituicao_fk,
-            mensal,
-            valor,
-            recorrente,
-            email,
-            nome,
-            sexo,
-            cpf,
-            telefone,
-            cep,
-            numero,
-            estado,
-            logadouro,
-            complemento,
-            bairro,
-            cidade,
     
-            tipo_pagamento,
-            card_nome,
-            card_numero,
-            card_cvv,
-            card_validade,
-        })
-    },
-
-
     async transacao(
-        instituicao_fk,
-        mensal,
+        instituicao_fk, 
         valor,
         recorrente,
         email,
@@ -521,7 +469,6 @@ export default {
     ) {
         return await http.post('/fatura/create', {
             instituicao_fk,
-            mensal,
             valor, 
             recorrente,
             email,
