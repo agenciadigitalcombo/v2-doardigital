@@ -67,8 +67,8 @@ class FaturaControle extends Controle
         $debug = null;
 
         $carteira_fk = $institution->get_key($instituicao_fk);
-        
-        if(empty($carteira_fk)) {
+
+        if (empty($carteira_fk)) {
             self::printError(
                 "Instituição não possui uma código de carteira",
                 []
@@ -96,9 +96,9 @@ class FaturaControle extends Controle
                 $bairro
             );
             $pagamento_fk = $resClienteAsa['id'] ?? "cus_error";
-            if( !empty($resClienteAsa["errors"]) ) {
+            if (!empty($resClienteAsa["errors"])) {
                 self::printError(
-                    $resClienteAsa["errors"][0]["description"], 
+                    $resClienteAsa["errors"][0]["description"],
                     $resClienteAsa
                 );
             }
@@ -139,11 +139,11 @@ class FaturaControle extends Controle
         $customer = $clientInfo['pagamento_fk'];
 
         $allSplit = $split->listAll($instituicao_fk);
-        
+
         $split = [];
         $response = [];
-        if( !empty($allSplit) ) {
-            $split = array_map(function($s) {
+        if (!empty($allSplit)) {
+            $split = array_map(function ($s) {
                 return [
                     "walletId" => $s["code"],
                     "percentualValue" => $s["porcentagem"],
@@ -196,17 +196,42 @@ class FaturaControle extends Controle
         $notification->save(
             "EMAIL",
             time(),
-            []
+            [
+                "instituicao" => $institution->info($instituicao_fk),
+                "nome" => $nome,
+                "email" => $email,
+                "telefone" => $telefone,
+                "valor" => $valor,
+                "status_payment" => $response["status"] ?? "FAILED",
+                "type_payment" => $tipo_pagamento,
+                "url" => $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "",
+                "code" => $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "",
+            ]
         );
         $notification->save(
             "WHATS",
             time(),
-            []
+            [
+                "instituicao" => $institution->info($instituicao_fk),
+                "nome" => $nome,
+                "email" => $email,
+                "telefone" => $telefone,
+                "ddd" => $telefone,
+                "valor" => $valor,
+                "status_payment" => $response["status"] ?? "FAILED",
+                "type_payment" => $tipo_pagamento,
+                "boleto_url" => $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "",
+                "url_pix" => $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "",
+                "code_boleto" => $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "",
+                "logradouro" => $logadouro,
+                "token" => null,
+                "external_id" => $pay_external_fk,
+            ]
         );
 
         $error = $response['errors'] ?? [];
 
-        if(!empty($error)) {
+        if (!empty($error)) {
             self::printError(
                 $error[0]["description"],
                 $error
@@ -219,25 +244,25 @@ class FaturaControle extends Controle
         $external_fk = $pay_external_fk;
         $status_pagamento = $response["status"];
 
-        $codigo= $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "";
-        $url= $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "";
-        
+        $codigo = $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "";
+        $url = $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "";
+
         $ID = false;
-        if( $recorrente ) {
+        if ($recorrente) {
             $resCodeListSubs = $Pay->listSubs($fatura_id);
             $ID = $resCodeListSubs["data"][0]["id"];
         }
-        
-        if( $recorrente && $tipo_pagamento == "PIX" && $ID ) {
+
+        if ($recorrente && $tipo_pagamento == "PIX" && $ID) {
             $resCode = $Pay->getCodePix($ID);
             $code = $resCode["payload"] ?? "";
-            $url= $resCodeListSubs["data"][0]["invoiceUrl"] ?? "";
+            $url = $resCodeListSubs["data"][0]["invoiceUrl"] ?? "";
         }
-        
-        if( $recorrente && $tipo_pagamento == "BOLETO" && $ID ) {
+
+        if ($recorrente && $tipo_pagamento == "BOLETO" && $ID) {
             $resCode = $Pay->getBarcodeBoleto($ID);
             $code = $resCode["identificationField"] ?? "";
-            $url= $resCodeListSubs["data"][0]["bankSlipUrl"] ?? "";
+            $url = $resCodeListSubs["data"][0]["bankSlipUrl"] ?? "";
         }
 
         $doador_fk = $customer;
