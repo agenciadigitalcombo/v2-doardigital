@@ -225,12 +225,11 @@ export default {
 				urlsite: '',
 				codigo_geral: '',
 				url_geral: '',
+				recorrente: '',
 			},
-
-			subdomaim: '',
+ 
 			type: '',
-			jms: false,
-			doacao_id: '',
+			jms: false, 
 			loader: '',
 			tell: '',
 		}
@@ -238,7 +237,6 @@ export default {
 
 
 	filters: {
-
 		is_data(datas) {
 			let cep = datas.split('').join('/');
 
@@ -279,14 +277,7 @@ export default {
 			this.error = null
 			this.loader = 'sim',
 				setTimeout(async () => {
-
-					let res = await adm.obrigado(
-						this.doacao_id
-					)
-					this.inst.codigo_geral = res.dados.codigo
-					this.inst.url_geral = res.dados.url
-
-					let verificaQrExist = res.dados.codigo
+					let verificaQrExist = this.inst.codigo_geral
 					if (!verificaQrExist) {
 						this.isQr()
 					} else {
@@ -310,7 +301,7 @@ export default {
 		let config = (await this.lisConfiguracao()).payload
 
 
-			this.inst.cpfCnpj = config.cpfCnpj,
+		this.inst.cpfCnpj = config.cpfCnpj,
 			this.inst.nome = config.nome,
 			this.inst.email = config.email,
 			this.inst.telefone = config.telefone,
@@ -318,30 +309,31 @@ export default {
 
 			this.inst.logo = "https://doardigital.com.br/api/upload/" + config.logo,
 			//this.inst.icon = config.icon,
-			this.inst.icon = "icon.png"
-		//this.inst.titulo = config.titulo,
-		this.inst.titulo = "titulo 0"
-		//this.inst.tags = config.tags,
-		this.inst.tags = "tags"
-		//this.inst.descricao = config.descricao,
-		this.inst.descricao = "tags mista cs"
-		this.inst.backgroundColor = config.cor
-		
-		this.inst.domain = config.domain,
-			this.inst.urlsite = config.domain || config.subdomain + '.doardigital.com.br/'
-		 
-		   this.inst.cep = config.endereco.cep,
+			this.inst.icon = "icon.png",
+			//this.inst.titulo = config.titulo,
+			this.inst.titulo = "titulo 0",
+			//this.inst.tags = config.tags,
+			this.inst.tags = "tags",
+			//this.inst.descricao = config.descricao,
+			this.inst.descricao = "tags mista cs",
+			this.inst.backgroundColor = config.cor,
+
+			this.inst.domain = config.domain,
+			this.inst.urlsite = config.domain || config.subdomain + '.doardigital.com.br/',
+			this.inst.cep = config.endereco.cep,
 			this.inst.endereco = config.endereco.logadouro,
 			this.inst.numero = config.endereco.numero,
 			this.inst.complemento = config.endereco.complemento,
 			this.inst.bairro = config.endereco.bairro,
 			this.inst.cidade = config.endereco.cidade,
 			this.inst.estado = config.endereco.estado
- 
+
 
 		this.type = localStorage.getItem('type_pagamento')
-		//this.inst.url_geral = localStorage.getItem("url")
-		this.doacao_id = localStorage.getItem("ref")
+		this.inst.codigo_geral = localStorage.getItem("codigo")
+		this.inst.url_geral = localStorage.getItem("url")
+		this.inst.recorrente = localStorage.getItem("recorrente")
+
 
 		if (this.type !== 'CREDIT_CARD') {
 

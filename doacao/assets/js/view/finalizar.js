@@ -163,22 +163,23 @@ export default {
                         this.card_numero,
                         this.card_cvv,
                         this.card_validade,
-                        window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
+
 
                     )
-                    if (!res.next) { 
+                    if (!res.next) {
                         this.submitStatus = 'FALHA'
                         this.jms = "erro"
-                        this.error = res.message 
+                        this.error = res.message
                         return null
                     }
 
                     this.submitStatus = 'OK'
                     this.msg = res.message
-                    window.localStorage.setItem("codigo", res.codigo)
-                    window.localStorage.setItem("url", res.url)
-                    window.localStorage.setItem("ref", res.reference_key)
-                    window.location.href = "#/obrigado"
+                    window.localStorage.setItem("codigo", res.payload.code)
+                    window.localStorage.setItem("url", res.payload.url)
+                    window.localStorage.setItem("type_pagamento", res.payload.tipo_pagamento)
+                    window.localStorage.setItem("recorrente", res.payload.recorrente)
+                    // window.location.href = "#/obrigado"
                 }
             }
             catch (e) {
@@ -224,18 +225,19 @@ export default {
                         window.localStorage.setItem("type_pagamento", this.tipo_pagamento)
 
                     )
-                    if (!res.next) { 
-                        this.submitStatus = 'FALHA' 
-                        this.error = res.message 
+                    if (!res.next) {
+                        this.submitStatus = 'FALHA'
+                        this.error = res.message
                         return null
                     }
 
                     this.submitStatus = 'OK'
                     this.msg = res.message
-                    window.localStorage.setItem("codigo", res.codigo)
-                    window.localStorage.setItem("url", res.url)
-                    window.localStorage.setItem("ref", res.reference_key)
-                    window.location.href = "#/obrigado"
+                    window.localStorage.setItem("codigo", res.payload.code)
+                    window.localStorage.setItem("url", res.payload.url)
+                    window.localStorage.setItem("type_pagamento", res.payload.tipo_pagamento)
+                    window.localStorage.setItem("recorrente", res.payload.recorrente)
+                     window.location.href = "#/obrigado"
                 }
             }
             catch (e) {
