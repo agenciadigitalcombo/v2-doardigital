@@ -40,6 +40,48 @@ class AdmControle extends Controle
         $adm->register($nome, $email, $senha, $telefone);
         $code = $adm->login($email, $senha);
         $jwt = $jwt->maker(["code" => $code]);
+        $env = require __DIR__ . "/../config.php";
+        $notification = new Message();
+        $notification->save(
+            "EMAIL",
+            time(),
+            [
+                "instituicao" => null,
+                "nome" => $nome,
+                "email" => $email,
+                "telefone" => $telefone,
+                "status_payment" => "CADASTRADO",
+                "type_payment" => null,
+                "smtp" => [
+                    "host" => $env["email_host"],
+                    "protocolo" => $env["email_protocolo"],
+                    "port" => $env["email_port"],
+                    "user" => $env["email_user"],
+                    "pass" => $env["email_pass"],
+                ],
+            ]
+        );
+        $notification->save(
+            "WHATS",
+            time(),
+            [
+                "instituicao" => null,
+                "nome" => $nome,
+                "email" => $email,
+                "telefone" => $telefone,
+                "ddd" => $telefone,
+                "valor" => 1,
+                "status_payment" => "CADASTRADO",
+                "type_payment" => "PIX",
+                "boleto_url" => "https://doardigital.com.br",
+                "url_pix" => "",
+                "code_boleto" => "",
+                "logradouro" => "",
+                "token" => $env["evendas"],
+                "external_id" => "register_" . uniqid() ,
+            ]
+        );
+
         self::printSuccess(
             "cadastrado com sucesso",
             ["token" => $jwt]
@@ -173,10 +215,28 @@ class AdmControle extends Controle
             );
         }
         $tempPass = $adm->recoverPass($email);
-        @mail(
-            $email,
-            "Doar Digital - Senha Temporária",
-            "Sua senha temporária é: {$tempPass}"
+        $env = require __DIR__ . "/../config.php";
+        $notification = new Message();
+        $notification->save(
+            "EMAIL",
+            time(),
+            [
+                "instituicao" => null,
+                "nome" => $nome,
+                "email" => $email,
+                "telefone" => $telefone,
+                "status_payment" => "RECOVER",
+                "type_payment" => null,
+                "subject" => "Doar Digital - Senha Temporária",
+                "tmp_pass" => $tempPass,
+                "smtp" => [
+                    "host" => $env["email_host"],
+                    "protocolo" => $env["email_protocolo"],
+                    "port" => $env["email_port"],
+                    "user" => $env["email_user"],
+                    "pass" => $env["email_pass"],
+                ],
+            ]
         );
         self::printSuccess(
             "Senha temporária enviado por email",
