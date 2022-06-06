@@ -64,28 +64,20 @@ $action = [
 
 if ($action["tipo"] == "EMAIL") {
 
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-
-    // $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
-    $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
-
-    
-    
     $status_payment = $action["payload"]["status_payment"];
     $template = get_template($status_payment);
-    $email = $action["payload"]["email"] ?? "br.rafael@outlook.com";
-    $blade = blade( (array)$action["payload"], $template );
-    mail($email, "TESTE CRON",  $blade, implode("\r\n", $headers));
+    $email = $action["payload"]["email"] ?? null;
+    $nome = $action["payload"]["nome"] ?? null;
+    $subject = $action["payload"]["subject"] ?? null;
 
-    $templateAdm = "
-    @@body@@
-    Email: {email}
-    nome: {nome}
-    telefone: {telefone} ";
-    $copy = blade( (array)$action["payload"], $templateAdm );
-    mail("br.rafael@outlook.com", "Um novo cadastro foi realizado", $copy, implode("\r\n", $headers));
+    $blade = blade((array)$action["payload"], $template);
 
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    $headers[] = "To: {$nome} <{$email}>";
+    $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
+
+    mail($email, $subject, $blade, implode("\r\n", $headers));
 }
 
 if ($action["tipo"] == "EVENDAS") {
@@ -110,21 +102,6 @@ if ($action["tipo"] == "EVENDAS") {
         $email,
         $telefone,
         $ddd,
-        $valor,
-        $status_payment,
-        $type_payment,
-        $boleto_url,
-        $url_pix,
-        $code_boleto,
-        $logradouro,
-        $token,
-        $external_id
-    );
-    $zap->send(
-        $nome,
-        $email,
-        "999776698",
-        "82",
         $valor,
         $status_payment,
         $type_payment,

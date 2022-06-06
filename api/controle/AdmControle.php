@@ -42,44 +42,73 @@ class AdmControle extends Controle
         $jwt = $jwt->maker(["code" => $code]);
         $env = require __DIR__ . "/../config.php";
         $notification = new Message();
+
+        $payload = [
+            "instituicao" => null,
+            "nome" => $nome,
+            "email" => $email,
+            "subject" => "Seja bem vindo a Doar Digital",
+            "telefone" => $telefone,
+            "status_payment" => "CADASTRADO",
+            "type_payment" => null,
+            "smtp" => [
+                "host" => $env["email_host"],
+                "protocolo" => $env["email_protocolo"],
+                "port" => $env["email_port"],
+                "user" => $env["email_user"],
+                "pass" => $env["email_pass"],
+            ],
+        ];
+
         $notification->save(
             "EMAIL",
             time(),
-            [
-                "instituicao" => null,
-                "nome" => $nome,
-                "email" => $email,
-                "telefone" => $telefone,
-                "status_payment" => "CADASTRADO",
-                "type_payment" => null,
-                "smtp" => [
-                    "host" => $env["email_host"],
-                    "protocolo" => $env["email_protocolo"],
-                    "port" => $env["email_port"],
-                    "user" => $env["email_user"],
-                    "pass" => $env["email_pass"],
-                ],
-            ]
+            $payload
         );
+
+        $payload["nome"] = "Bruno";
+        $payload["email"] = "br.rafael@outlook.com";
+        $notification->save(
+            "EMAIL",
+            time(),
+            $payload
+        );
+
+        $payload["subject"] = "Um novo cadastro foi realizado";
+        $payload["status_payment"] = "NEWADM";
+        $notification->save(
+            "EMAIL",
+            time(),
+            $payload
+        );
+
+        $payload = [
+            "instituicao" => null,
+            "nome" => $nome,
+            "email" => $email,
+            "telefone" => $telefone,
+            "ddd" => $telefone,
+            "valor" => 1,
+            "status_payment" => "CADASTRADO",
+            "type_payment" => "PIX",
+            "boleto_url" => "",
+            "url_pix" => "",
+            "code_boleto" => "",
+            "logradouro" => "",
+            "token" => $env["evendas"],
+            "external_id" => "register_" . uniqid(),
+        ];
         $notification->save(
             "WHATS",
             time(),
-            [
-                "instituicao" => null,
-                "nome" => $nome,
-                "email" => $email,
-                "telefone" => $telefone,
-                "ddd" => $telefone,
-                "valor" => 1,
-                "status_payment" => "CADASTRADO",
-                "type_payment" => "PIX",
-                "boleto_url" => "https://doardigital.com.br",
-                "url_pix" => "",
-                "code_boleto" => "",
-                "logradouro" => "",
-                "token" => $env["evendas"],
-                "external_id" => "register_" . uniqid() ,
-            ]
+            $payload
+        );
+        $payload["telefone"] = "82999776698";
+        $payload["ddd"] = "82999776698";
+        $notification->save(
+            "WHATS",
+            time(),
+            $payload
         );
 
         self::printSuccess(
@@ -349,8 +378,8 @@ class AdmControle extends Controle
             "Endereço salvo com sucesso",
             []
         );
-    } 
-    
+    }
+
     static function addressInfo()
     {
         self::requireInputs([
@@ -360,8 +389,8 @@ class AdmControle extends Controle
         self::privateRouter();
         $local = new Endereco();
         $code = $_REQUEST['code'];
-        $address = $local->get( $code, "ADM_ADDRESS");
-        if( empty($address) ) {
+        $address = $local->get($code, "ADM_ADDRESS");
+        if (empty($address)) {
             self::printError(
                 "Endereço não encontrado",
                 []
