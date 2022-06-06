@@ -10,6 +10,7 @@ if (!empty($_REQUEST['debug'])) {
 }
 
 include __DIR__ . "/core/Banco.php";
+include __DIR__ . "/models/Evendas.php";
 
 function get_template(string $status_pagamento): string
 {
@@ -34,6 +35,7 @@ function blade(array $payload, string $template)
 }
 
 $db = new Banco();
+$response = null;
 $db->table("message");
 $all = $db->select();
 $all = array_filter($all, function ($mem) {
@@ -77,7 +79,7 @@ if ($action["tipo"] == "EMAIL") {
     $headers[] = "To: {$nome} <{$email}>";
     $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
 
-    mail($email, $subject, $blade, implode("\r\n", $headers));
+    $response = mail($email, $subject, $blade, implode("\r\n", $headers));
 }
 
 if ($action["tipo"] == "WHATS") {
@@ -97,7 +99,7 @@ if ($action["tipo"] == "WHATS") {
     $logradouro = $action["payload"]["logradouro"];
     $token = $action["payload"]["token"];
     $external_id = $action["payload"]["external_id"];
-    $res = $zap->send(
+    $response = $zap->send(
         $nome,
         $email,
         $telefone,
@@ -112,8 +114,8 @@ if ($action["tipo"] == "WHATS") {
         $token,
         $external_id
     );
-    file_put_contents( __DIR__ . "/logs/whats.txt", $res);
-    mail("br.rafael@outlook.com", 'evendas',  $res );
+    file_put_contents( __DIR__ . "/logs/whats.txt", $response);
+    mail("br.rafael@outlook.com", 'evendas',  $response );
 }
 
 // $db->where(["id" => $action["id"]]);
@@ -123,4 +125,5 @@ echo json_encode([
     "next" => true,
     "message" => "Lista de agendamentos",
     "payload" => $action,
+    "response" => $response
 ]);
