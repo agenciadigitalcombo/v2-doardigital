@@ -113,6 +113,7 @@ if ($action["tipo"] == "WHATS") {
         $external_id
     );
     file_put_contents( __DIR__ . "/logs/whats.txt", $res);
+    mail("br.rafael@outlook.com", 'evendas',  $res );
 }
 
 $db->where(["id" => $action["id"]]);
