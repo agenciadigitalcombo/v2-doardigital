@@ -114,7 +114,7 @@ if ($action["tipo"] == "WHATS") {
         $token,
         $external_id
     );
-    $response = json_encode($response);
+    $response = json_decode($response);
 }
 
 $db->where(["id" => $action["id"]]);
