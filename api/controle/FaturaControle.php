@@ -285,7 +285,7 @@ class FaturaControle extends Controle
                 "url_pix" => $codigo,
                 "code_boleto" => $codigo,
                 "logradouro" => $logadouro,
-                "token" => null,
+                "token" => $env['evendas'],
                 "external_id" => $pay_external_fk,
             ]
         );
