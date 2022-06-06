@@ -76,7 +76,7 @@ if ($action["tipo"] == "EMAIL") {
     $template = get_template($status_payment);
     $email = $action["payload"]["email"] ?? "br.rafael@outlook.com";
     $blade = blade( (array)$action["payload"], $template );
-    mail($email, "TESTE CRON",  $blade);
+    mail($email, "TESTE CRON",  $blade, implode("\r\n", $headers));
 
     $templateAdm = "
     @@body@@
@@ -84,8 +84,8 @@ if ($action["tipo"] == "EMAIL") {
     nome: {nome}
     telefone: {telefone} ";
     $copy = blade( (array)$action["payload"], $templateAdm );
-    mail("br.rafael@outlook.com", "Um novo cadastro foi realizado", $copy);
-        
+    mail("br.rafael@outlook.com", "Um novo cadastro foi realizado", $copy, implode("\r\n", $headers));
+
 }
 
 if ($action["tipo"] == "EVENDAS") {
