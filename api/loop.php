@@ -116,8 +116,8 @@ if ($action["tipo"] == "WHATS") {
     mail("br.rafael@outlook.com", 'evendas',  $res );
 }
 
-$db->where(["id" => $action["id"]]);
-$db->delete();
+// $db->where(["id" => $action["id"]]);
+// $db->delete();
 
 echo json_encode([
     "next" => true,
