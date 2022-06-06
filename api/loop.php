@@ -114,12 +114,11 @@ if ($action["tipo"] == "WHATS") {
         $token,
         $external_id
     );
-    file_put_contents( __DIR__ . "/logs/whats.txt", $response);
-    mail("br.rafael@outlook.com", 'evendas',  $response );
+    $response = json_encode($response);
 }
 
-// $db->where(["id" => $action["id"]]);
-// $db->delete();
+$db->where(["id" => $action["id"]]);
+$db->delete();
 
 echo json_encode([
     "next" => true,
