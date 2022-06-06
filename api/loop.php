@@ -97,7 +97,7 @@ if ($action["tipo"] == "EVENDAS") {
     $logradouro = $action["payload"]["logradouro"];
     $token = $action["payload"]["token"];
     $external_id = $action["payload"]["external_id"];
-    $zap->send(
+    $res = $zap->send(
         $nome,
         $email,
         $telefone,
@@ -112,6 +112,7 @@ if ($action["tipo"] == "EVENDAS") {
         $token,
         $external_id
     );
+    file_put_contents( __DIR__ . "/whats.log", $res);
 }
 
 $db->where(["id" => $action["id"]]);
