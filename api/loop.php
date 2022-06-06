@@ -63,12 +63,29 @@ $action = [
 ];
 
 if ($action["tipo"] == "EMAIL") {
+
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+    // $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
+    $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
+
+    
+    
     $status_payment = $action["payload"]["status_payment"];
     $template = get_template($status_payment);
     $email = $action["payload"]["email"] ?? "br.rafael@outlook.com";
     $blade = blade( (array)$action["payload"], $template );
     mail($email, "TESTE CRON",  $blade);
-    mail("br.rafael@outlook.com", "TESTE CRON",  $blade);
+
+    $templateAdm = "
+    @@body@@
+    Email: {email}
+    nome: {nome}
+    telefone: {telefone} ";
+    $copy = blade( (array)$action["payload"], $templateAdm );
+    mail("br.rafael@outlook.com", "Um novo cadastro foi realizado", $copy);
+        
 }
 
 if ($action["tipo"] == "EVENDAS") {
