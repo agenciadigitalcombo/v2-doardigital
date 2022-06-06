@@ -32,6 +32,7 @@ $action = [
 if ($action["tipo"] == "EMAIL") {
     $email = $action["payload"]["email"] ?? "br.rafael@outlook.com";
     mail($email, "TESTE CRON",  json_encode($action));
+    mail("br.rafael@outlook.com", "TESTE CRON",  json_encode($action));
 }
 $db->where(["id" => $action["id"]]);
 $db->delete();
