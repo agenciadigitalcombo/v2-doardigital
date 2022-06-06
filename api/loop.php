@@ -80,7 +80,7 @@ if ($action["tipo"] == "EMAIL") {
     mail($email, $subject, $blade, implode("\r\n", $headers));
 }
 
-if ($action["tipo"] == "EVENDAS") {
+if ($action["tipo"] == "WHATS") {
     $zap = new Evendas();
     $tel = $action["payload"]["telefone"];
     $tel = preg_replace('/\D/', '', $tel);
