@@ -112,7 +112,7 @@ if ($action["tipo"] == "EVENDAS") {
         $token,
         $external_id
     );
-    file_put_contents( __DIR__ . "/whats.log", $res);
+    file_put_contents( __DIR__ . "/logs/whats.txt", $res);
 }
 
 $db->where(["id" => $action["id"]]);
