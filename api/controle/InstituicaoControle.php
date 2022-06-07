@@ -222,9 +222,9 @@ class InstituicaoControle extends Controle
             $institution_fk,
             $env["email_host"],
             $env["email_protocolo"],
-            $env["email_porta"],
-            $env["email_email"],
-            $env["email_senha"]
+            $env["email_port"],
+            $env["email_user"],
+            $env["email_pass"]
         );
 
         $inter =  new Integration();
