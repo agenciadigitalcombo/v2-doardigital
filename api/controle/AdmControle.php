@@ -49,7 +49,7 @@ class AdmControle extends Controle
             "email" => $email,
             "subject" => "Seja bem vindo a Doar Digital",
             "telefone" => $telefone,
-            "status_payment" => "CADASTRADO",
+            "status_payment" => "CADASTRO",
             "type_payment" => null,
             "smtp" => [
                 "host" => $env["email_host"],
