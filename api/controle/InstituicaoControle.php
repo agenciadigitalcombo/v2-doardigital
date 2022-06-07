@@ -217,10 +217,6 @@ class InstituicaoControle extends Controle
             100
         );
 
-
-        print_r($env);
-        die;
-
         $smtp =  new Smtp();
         $smtp->save(
             $institution_fk,
