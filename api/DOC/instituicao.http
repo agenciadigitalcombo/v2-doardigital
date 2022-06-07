@@ -1,4 +1,4 @@
-@host=https://doardigital.tk
+@host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
 @institution_fk=inst_628cd9db47cdc
 @nome=Bruno Ap. Vieira
@@ -92,3 +92,6 @@ token={{token}}
 
 ###
 GET {{host}}/api/instituicao/balance?token={{token}}&institution_fk={{institution_fk}}
+
+###
+GET {{host}}/api/instituicao/donation?token={{token}}&institution_fk={{institution_fk}}

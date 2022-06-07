@@ -403,4 +403,18 @@ class InstituicaoControle extends Controle
             ]
         );
     }
+
+    static function donation() {
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe o identificador da instituição",
+        ]);
+        self::privateRouter();
+        $institution_fk =  $_REQUEST["institution_fk"];
+        $fatura = new Fatura();
+        self::printSuccess(
+            "Lista de doações",
+            $fatura->listAll($institution_fk)
+        );
+    }
 }

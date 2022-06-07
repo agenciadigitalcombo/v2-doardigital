@@ -121,7 +121,8 @@ class Doador
             "nascimento" => $payload["nascimento"] ?? null,
             "registro" => $payload["registro"] ?? null,
             "sexo" => $payload["sexo"] ?? null,
-            "gravatar" => self::gravatar($payload["email"] ?? '123@123.com')
+            "gravatar" => self::gravatar($payload["email"] ?? '123@123.com'),
+            "recorrente" => false,
         ];
     }
 }
