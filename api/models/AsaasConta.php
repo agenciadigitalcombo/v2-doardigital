@@ -29,7 +29,7 @@ class AsaasConta extends Asaas
 
     function registerWebHook()
     {
-        $env = require __DIR__ . "../config.php";
+        $env = require __DIR__ . "/../config.php";
         $prefix = ".com.br";
         if ($env['sandbox']) {
             $prefix = ".tk";

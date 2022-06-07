@@ -3,10 +3,10 @@
 @institution_fk=inst_628cd9db47cdc
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
-@email=br.rafael9@outlook.com
+@email=br.rafael11@outlook.com
 @telefone=(11) 94949-9944
-@domain=teste9.doardigital.con
-@subdomain=teste9.doardigital.con
+@domain=rafael11.doardigital.con
+@subdomain=rafael11.doardigital.con
 @logo=logo.png
 @icon=logo.png
 @cor=#C00
@@ -57,7 +57,7 @@ token={{token}}
 &agency={{agency}}
 &bank={{bank}}
 &bankAccountType={{bankAccountType}}
-&debug=1
+# &debug=1
 
 
 ###

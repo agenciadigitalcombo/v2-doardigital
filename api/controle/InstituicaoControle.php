@@ -234,10 +234,9 @@ class InstituicaoControle extends Controle
             $env["evendas"]
         );
 
-        $debug = $conta->chavePix();
-        print_r( $debug );
-        die;
-        // $conta->registerWebHook();
+        $conta->set_api_key($apiKey);
+        $conta->chavePix();
+        $conta->registerWebHook();
 
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
