@@ -85,7 +85,6 @@ export default {
             ],
 
 
-
             elementoPaginacao: 25,
             dadosPagina: [],
             maxVisibleButtons: 5,

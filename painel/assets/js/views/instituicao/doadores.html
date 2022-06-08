@@ -16,52 +16,60 @@
 
 						<div id="kt_content_container" class="container-xxl">
 
+							<div class="row g-5 g-xl-8">
+								
+								
+								<div class="modal-overlay" id="overlay">
+									<div class="modal" id="modal">
+										<div class="modal-header">
+											Modal title
+										</div>
+										<div class="modal-content">
+											content
+										</div>
+										<div class="modal-footer">
+											footer
+										</div>
+									</div>
+								</div> 
+							
 
 
-						
-							 
-						<div class="row g-5 g-xl-8"> 
-						<div class="row"> 
-						   <div class="col">
-								<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-									<span class="fs-4 fw-bold text-primary pb-1 px-2">Quant Recorrente</span>
-									
-										<span> {{ quantRec }} </span>
+								<div class="row">
+									<div class="col">
+										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
+											<span class="fs-4 fw-bold text-primary pb-1 px-2">Quant Recorrente</span>
 
+											<span> {{ quantRec }} </span>
+
+										</div>
+									</div>
+									<div class="col">
+										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
+											<span class="fs-4 fw-bold text-success pb-1 px-2">Valor Recorrente</span>
+
+											<span> {{ valorRecorrente | este_valor }} </span>
+
+										</div>
+									</div>
+									<div class="col">
+										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
+											<span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
+
+											<span>{{ quantUnico }} </span>
+
+										</div>
+									</div>
+									<div class="col">
+										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
+											<span class="fs-4 fw-bold text-danger pb-1 px-2">Valor Único</span>
+
+											<span> {{ valorUnico | este_valor }}</span>
+
+										</div>
+									</div>
 								</div>
-							</div> 
-							<div class="col">
-								<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-									<span class="fs-4 fw-bold text-success pb-1 px-2">Valor Recorrente</span>
-									
-										<span> {{ valorRecorrente | este_valor }} </span>
-										
-								</div>
-							</div> 
-							<div class="col">
-								<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-									<span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
-									
-										<span>{{ quantUnico }} </span>
-
-								</div>
-							</div> 
-							<div class="col">
-								<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-									<span class="fs-4 fw-bold text-danger pb-1 px-2">Valor Único</span>
-							   
-										<span> {{ valorUnico | este_valor }}</span>
-										
-								</div>
-							</div>  
-						</div> 
-					</div> 
-
-
-
-
-
-
+							</div>
 							<div class="card">
 								<div class="card-header border-0 pt-6">
 
@@ -69,88 +77,129 @@
 
 										<div class="d-flex align-items-center position-relative my-1">
 											<span class="svg-icon svg-icon-1 position-absolute ms-6">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"/>
-													<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+													viewBox="0 0 24 24" fill="none">
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+														height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
+														fill="black" />
+													<path
+														d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+														fill="black" />
 												</svg>
 											</span>
-											<input type="text" data-kt-subscription-table-filter="search" v-model="search"
-											class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Doadores ..."/>
+											<input type="text" data-kt-subscription-table-filter="search"
+												v-model="search" class="form-control form-control-solid w-250px ps-14"
+												placeholder="Buscar Doadores ..." />
 										</div>
 									</div>
-									 
+
+									<div class="card-toolbar">
+ 
+
+										<div class="d-flex justify-content-end">
+											<button type="button" class="btn btn-light-primary me-3" v-once
+												@click="openModal()" data-kt-menu-trigger="click"
+												data-kt-menu-placement="bottom-end">
+												Filtros
+											</button>
+
+											<button type="button" class="btn btn-light-primary me-3" v-once
+												@click="modal()" data-kt-menu-trigger="click"
+												data-kt-menu-placement="bottom-end">
+												Importar
+											</button>
+
+											<a type="button" class="btn btn-light-primary me-3 js-baixar"
+												@click="exportar()" download="relatorio.csv" data-bs-toggle="modal"
+												data-bs-target="#kt_subscriptions_export_modal">
+												<span class="svg-icon svg-icon-2">
+
+												</span>
+												Exportar
+											</a>
+										</div>
+
+									</div>
 								</div>
 								<div class="card-body pt-0">
 									<div class="table-responsive">
-										<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
+										<table class="table align-middle table-row-dashed fs-6 gy-5"
+											id="kt_subscriptions_table">
 
 											<thead>
 												<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-													
-													<th class="min-w-300px">Usuario</th> 
-													<th class="min-w-100px">Genero</th>
+
+													<th class="min-w-300px">Usuario</th>
+													<th class="min-w-100px">Tipo Doador</th>
 													<th class="min-w-175px">Data Cadastro </th>
 													<th class="min-w-150px">CPF</th>
 													<th class="text-end min-w-100px">Ação</th>
 												</tr>
-
 											</thead>
-											<tbody class="text-gray-600 fw-bold"> 
-											<tr v-for="item in filtraDoadores" :key="item.id"> 
-													
+											<tbody class="text-gray-600 fw-bold">
+												<tr v-for="item in filtraDoadores" :key="item.id">
+
 													<td class="d-flex align-items-center">
-														 
-														<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+
+														<div
+															class="symbol symbol-circle symbol-50px overflow-hidden me-3">
 															<a>
 																<div class="symbol-label">
-																	<img :src="item.gravatar" alt="Emma Smith" class="w-100"/>
+																	<img :src="item.gravatar" alt="Emma Smith"
+																		class="w-100" />
 																</div>
 															</a>
 														</div>
 
 
 														<div class="d-flex flex-column">
-															<a class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
+															<a
+																class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
 															<span>{{item.email}}</span>
 														</div>
 													</td>
-												<td>
-														  {{item.sexo}}  
-													</td> 
+													<td>
+														{{item.recorrente | recorrente}}
+													</td>
 
-													<td> <div> {{item.registro }} </div></td>
+													<td>
+														<div> {{item.registro }} </div>
+													</td>
 
 													<td> {{item.cpf}} </td>
-													
+
 													<td class="text-end">
 
-													<a @click="editar(item.id)"
-													title="Para Visualizar da um click"
-													class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
-													style="margin: 2px;">
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-													<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-													<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-												  </svg>
-												</a>
+														<a @click="editar(item.id)" title="Para Visualizar da um click"
+															class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
+															style="margin: 2px;">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16"
+																height="16" fill="currentColor" class="bi bi-eye-fill"
+																viewBox="0 0 16 16">
+																<path
+																	d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+																<path
+																	d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+															</svg>
+														</a>
 
-											</td>
+													</td>
 
-										</tr>
+												</tr>
 
-						</tbody>
-					</table>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--end:: Root-->
+
+	<c-footer />
+
 </div>
-	</div>
-</div >
-</div >
-</div >
-<!--end:: Root-->
-
-<c-footer/>
-
-</div >
