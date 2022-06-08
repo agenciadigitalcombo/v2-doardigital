@@ -61,6 +61,33 @@ $faturas->where([
 
 $fatura = $faturas->select()[0];
 
+if( empty($fatura) ) {
+    $faturas->where([
+        "external_fk" => $reference_key
+    ]);
+    $copy = $faturas->select()[0] ?? [];
+    $faturas->insert([
+        "instituicao_fk" => $copy["instituicao_fk"] ?? "",
+        "fatura_id" => $ID,
+        "tipo_pagamento" => $copy["tipo_pagamento"] ?? "",
+        "recorrente" => $copy["recorrente"] ?? "",
+        "external_fk" => $copy["external_fk"] ?? "",
+        "status_pagamento" => $copy["status_pagamento"] ?? "",
+        "valor" => $copy["valor"] ?? "",
+        "codigo" => $copy["codigo"] ?? "",
+        "url" => $copy["url"] ?? "",
+        "data" => $dueDate,
+        "hora" => $copy["hora"] ?? "",
+        "doador_fk" => $copy["doador_fk"] ?? "",
+        "doador_nome" => $copy["doador_nome"] ?? "",
+        "doador_email" => $copy["doador_email"] ?? "",
+    ]);
+
+    $faturas->where([
+        "fatura_id" => $ID
+    ]);
+}
+
 $faturas->update([
     "status_pagamento" => $status,
 ]);
