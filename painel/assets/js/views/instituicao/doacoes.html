@@ -1,12 +1,12 @@
 <div>
     <c-header></c-header>
     <c-aside></c-aside>
-    <div class="d-flex flex-column flex-root" @blur="unfocused()">
+    <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
-            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <div class="post d-flex flex-column-fluid" id="kt_post">
-                        <div id="kt_content_container" class="container-xxl">
+            <div class="wrapper d-flex flex-column flex-row-fluid">
+                <div class="content d-flex flex-column flex-column-fluid" >
+                    <div class="post d-flex flex-column-fluid">
+                        <div class="container-xxl">
 
 
                             <div class="row g-5 g-xl-8">
@@ -17,8 +17,7 @@
 
                                             <span>
                                                 {{ total+'00' | is_price }}
-                                            </span>
-                                            </span>
+                                            </span> 
                                         </div>
                                     </div>
                                     <div class="col">
@@ -51,6 +50,22 @@
                                 <div class="card-header border-0 pt-6">
                                     <div class="card-title">
 
+										<div class="d-flex align-items-center position-relative my-1">
+											<span class="svg-icon svg-icon-1 position-absolute ms-6">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+													viewBox="0 0 24 24" fill="none">
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+														height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
+														fill="black" />
+													<path
+														d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+														fill="black" />
+												</svg>
+											</span>
+											<input type="text" data-kt-subscription-table-filter="search"
+												v-model="search" class="form-control form-control-solid w-250px ps-14"
+												placeholder="Buscar Doadores ..." />
+										</div>
                                     </div>
 
                                     <div class="card-toolbar">
@@ -98,7 +113,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 fw-bold">
-                                                <tr v-for="item in dadosPagina">
+                                                <tr v-for="item in filtraDoacoes">
                                                     <!--<tr v-for="item in dadosPagina">-->
 
                                                     <td class="d-flex align-items-center">
@@ -107,16 +122,16 @@
                                                             <a
                                                                 href="../../demo8/dist/apps/user-management/users/view.html">
                                                                 <div class="symbol-label">
-                                                                    <img :src="item.gravatar" alt="Emma Smith"
+                                                                    <img :src="item.doador_gravatar" alt="Emma Smith"
                                                                         class="w-100" />
                                                                 </div>
                                                             </a>
                                                         </div>
                                                         <div class="d-flex flex-column">
                                                             <a class="text-gray-800 text-hover-primary mb-1">
-                                                                {{ item.nome }}
+                                                                {{ item.doador_nome }}
                                                             </a>
-                                                            <span> {{ item.email }}</span>
+                                                            <span> {{ item.doador_email }}</span>
                                                         </div>
                                                     </td>
                                                     <td> {{ item.is_price }} </td>
@@ -125,7 +140,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.tipo }}</div>
+                                                        <div class="badge badge-light"> {{item.tipo_pagamento }}</div>
                                                     </td>
                                                     <td class="text-end">
                                                     </td>

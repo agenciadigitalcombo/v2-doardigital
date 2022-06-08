@@ -738,9 +738,12 @@ export default {
         })
     },
 
-    async listarDoacoes(instituicao_id) {
-        return await http.get('/list-doacoes', {
-            instituicao_id
+    async listarDoacoes(
+        token,
+        institution_fk) {
+        return await http.get('/instituicao/donation', {
+            token,
+            institution_fk
         })
     },
 

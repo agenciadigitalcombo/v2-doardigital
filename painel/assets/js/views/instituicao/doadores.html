@@ -3,45 +3,25 @@
 	<c-header></c-header>
 	<c-aside></c-aside>
 
-	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root">
-		<!--begin::Page-->
 		<div class="page d-flex flex-row flex-column-fluid">
 
-			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+			<div class="wrapper d-flex flex-column flex-row-fluid">
 
-				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+				<div class="content d-flex flex-column flex-column-fluid" >
 
-					<div class="post d-flex flex-column-fluid" id="kt_post">
+					<div class="post d-flex flex-column-fluid">
 
-						<div id="kt_content_container" class="container-xxl">
+						<div class="container-xxl">
 
-							<div class="row g-5 g-xl-8">
-								
-								
-								<div class="modal-overlay" id="overlay">
-									<div class="modal" id="modal">
-										<div class="modal-header">
-											Modal title
-										</div>
-										<div class="modal-content">
-											content
-										</div>
-										<div class="modal-footer">
-											footer
-										</div>
-									</div>
-								</div> 
-							
-
-
+							<div class="row g-5 g-xl-8"> 
 								<div class="row">
 									<div class="col">
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-primary pb-1 px-2">Quant Recorrente</span>
 
-											<span> {{ quantRec }} </span>
-
+											<span> 200 </span>
+											<!--<span> {{ quantRec }} </span>-->
 										</div>
 									</div>
 									<div class="col">
@@ -56,7 +36,8 @@
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
 
-											<span>{{ quantUnico }} </span>
+											<!--<span> {{ quantUnico }} </span>-->
+											<span> 5 </span>
 
 										</div>
 									</div>
@@ -94,14 +75,103 @@
 									</div>
 
 									<div class="card-toolbar">
- 
+
 
 										<div class="d-flex justify-content-end">
-											<button type="button" class="btn btn-light-primary me-3" v-once
-												@click="openModal()" data-kt-menu-trigger="click"
-												data-kt-menu-placement="bottom-end">
-												Filtros
-											</button>
+
+											<div class="modals">
+
+												<button type="button" class="btn btn-light-primary me-3" v-once
+													@click="openModal()" data-kt-menu-trigger="click"
+													data-kt-menu-placement="bottom-end">
+													Filtros
+												</button>
+
+
+												<div class="modal-overlay" id="overlay">
+													<div class="meu_modal w-300px w-md-325px" id="meu_modal">
+
+														<div class="px-7 py-5">
+															<div class="fs-5 text-dark fw-bolder">Opção de Filtros</div>
+														</div>
+														<div class="separator border-gray-200"></div>
+
+														<div class="px-7 py-5" data-kt-subscription-table-filter="form">
+
+															<div class="mb-10">
+																<label class="form-label fs-6 fw-bold">Periodo:</label>
+																<select class="form-select form-select-solid fw-bolder"
+																	data-kt-select2="true"
+																	data-placeholder="selecione a Opção"
+																	data-allow-clear="true"
+																	data-kt-subscription-table-filter="month"
+																	data-hide-search="true">
+																	<option></option>
+																	<option value="0">Hoje</option>
+																	<option value="1">Ontem</option>
+																	<option value="7">Últimos 7 dias</option>
+																	<option value="30">Últimos 30 dias</option>
+																	<option value="365">Este Ano</option>
+																	<option value="366">Escolher Periodo</option>
+																</select>
+															</div>
+															<div class="mb-10">
+																<label
+																	class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+																	<span class="required">Data Ínicio</span>
+																	<i class="fas fa-exclamation-circle ms-2 fs-7"
+																		data-bs-toggle="tooltip"
+																		title="Enter a card CVV code"></i>
+																</label>
+																<div class="position-relative">
+																	<input type="date"
+																		class="form-control form-control-solid" />
+																</div>
+															</div>
+															<div class="mb-10">
+																<label
+																	class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+																	<span class="required">Data Final</span>
+																	<i class="fas fa-exclamation-circle ms-2 fs-7"
+																		data-bs-toggle="tooltip"
+																		title="Enter a card CVV code"></i>
+																</label>
+																<div class="position-relative">
+																	<input type="date"
+																		class="form-control form-control-solid" />
+																</div>
+															</div>
+															<div class="mb-10">
+																<label
+																	class="form-label fs-6 fw-bold">Recorrente:</label>
+																<select class="form-select form-select-solid fw-bolder"
+																	data-kt-select2="true"
+																	data-placeholder="selecione a Opção"
+																	data-allow-clear="true"
+																	data-kt-subscription-table-filter="product"
+																	data-hide-search="true">
+																	<option></option>
+																	<option value="1">SIM</option>
+																	<option value="0">NÃO</option>
+																</select>
+															</div>
+															<div class="d-flex justify-content-end">
+																<button type="reset"
+																	class="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
+																	data-kt-menu-dismiss="true"
+																	data-kt-subscription-table-filter="reset">Reset</button>
+																<button type="submit"
+																	class="btn btn-primary fw-bold px-6"
+																	data-kt-menu-dismiss="true"
+																	data-kt-subscription-table-filter="filter">Aplicar</button>
+															</div>
+
+														</div>
+
+													</div>
+												</div>
+
+											</div>
 
 											<button type="button" class="btn btn-light-primary me-3" v-once
 												@click="modal()" data-kt-menu-trigger="click"

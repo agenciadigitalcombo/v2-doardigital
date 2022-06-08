@@ -6,7 +6,7 @@
     .text-gray-600 {
     color: #d7d7d7!important;
 }
-aside menu-link badge-light-success
+modal
 */
 
 @charset "UTF-8"; 
@@ -6222,8 +6222,7 @@ fieldset:disabled .btn {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1055;
-    display: none;
+    z-index: 1055; 
     width: 100%;
     height: 100%;
     overflow-x: hidden;

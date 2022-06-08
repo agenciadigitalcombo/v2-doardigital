@@ -59,7 +59,7 @@ export default {
 	methods: {
 		 handleClickOutside (event){
 			let overlay = document.getElementById("overlay");
-			let modal = document.getElementById("modal");
+			let modal = document.getElementById("meu_modal");
 			if (!modal.contains(event.target)) {
 				modal.style.display = 'none';
 				overlay.style.display = 'none';
@@ -69,7 +69,7 @@ export default {
 		
 		 openModal () {
 			let overlay = document.getElementById("overlay");
-			let modal = document.getElementById("modal");
+			let modal = document.getElementById("meu_modal");
 			overlay.style.display = 'flex'
 			modal.style.display = 'flex'
 			setTimeout(() => { document.addEventListener('click', this.handleClickOutside, false) }, 200);

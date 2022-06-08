@@ -8,7 +8,7 @@ export default {
     data: function () {
         return {
             doacao_id: "",
-            instituicao_id: "",
+            institution_fk: "",
             data: "",
             doacoes: [], 
             dadosPagina: [],
@@ -23,70 +23,9 @@ export default {
             {
                 'show': false
             },
+            search: "",
 
-            lista: [
-                { nome: '2joaquim1', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim2', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim3', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim4', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim5', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim6', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim7', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim8', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim9', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim10', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim11', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim12', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim13', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim14', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim15', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim16', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim17', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim18', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim19', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim20', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim21', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim22', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim23', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim24', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim25', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim26', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim27', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim28', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim29', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim30', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-
-                { nome: '2joaquim31', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim32', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim33', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim34', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim35', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim36', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim37', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim38', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim39', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim40', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-
-
-                { nome: '2joaquim41', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim42', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim43', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim44', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim45', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim46', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim47', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim48', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim49', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim10', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: '2joaquim48', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: 'penultimo', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-                { nome: 'ultimo', email: 'jjms@gm', is_price: '223232', status_pagamento: 'pago', tipo: 'recorrencia', },
-
-            ],
-
-
-            elementoPaginacao: 25,
-            dadosPagina: [],
+            elementoPaginacao: 25, 
             maxVisibleButtons: 5,
             paginaAtual: 1,
             maxLeft: null,
@@ -96,11 +35,33 @@ export default {
     },
 
 
+    computed: {
+
+		filtraDoacoes() {
+			return this.dadosPagina.filter((doacao) => {
+				return (
+					//doacao.nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+					//	doacao.email.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+					doacao.doador_nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+
+				)
+			})
+		}
+	},
+
 
     methods: {
 
+        async listarDoacoes() {
+			let res = await adm.listarDoacoes(
+				this.token,
+				this.institution_fk
+			)
+			return res
+		},
+
         totalPagina() {
-            return Math.ceil(this.lista.length / this.elementoPaginacao)
+            return Math.ceil(this.doacoes.length / this.elementoPaginacao)
         },
 
         atualizarPag() {
@@ -142,7 +103,7 @@ export default {
             this.dadosPagina = [];
             let inicio = (semPagina * this.elementoPaginacao) - this.elementoPaginacao;
             let fim = (semPagina * this.elementoPaginacao);
-            this.dadosPagina = this.lista.slice(inicio, fim);
+            this.dadosPagina = this.doacoes.slice(inicio, fim);
  
         },
 
@@ -179,10 +140,15 @@ export default {
     },
 
     async mounted() {
-        this.getPagina(1)
-
+        this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
+        this.getPagina(1) 
+            console.log(this.dadosPagina)
     },
 
+
+	created() {
+		this.institution_fk = window.localStorage.getItem("instituicao_id")
+	},
 
     template: await get_template('./assets/js/views/instituicao/doacoes')
 }

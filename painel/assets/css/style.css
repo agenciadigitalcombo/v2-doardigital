@@ -164,13 +164,7 @@ span .menu  {
     height: 350px;
   }
 
-
-
-
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
+ 
   .modal-overlay {
     background-color: rgba(0, 0, 0, 0.342);
     width: 100vw;
@@ -185,7 +179,12 @@ span .menu  {
     overflow-y: auto;
   }
   
-  .modal {
+  .meu_modal {
+    position: relative;
+    top: 10%;
+    left: 30%;
+
+    right: 20%;
     margin: 1rem;
     width: 100%;
     max-width: 600px;
@@ -201,24 +200,11 @@ span .menu  {
   }
   
   @media only screen and (max-width: 600px) {
-    .modal {
+    .meu_modal {
       height: 50%;
       width: 100vw;
   
     }
-  }
-  
-  .modal-header {
-    background-color: rgba(0, 0, 0, 0.041);
-    padding: 1rem;
-  }
-  .modal-content {
-    padding: 0.5rem 1rem;
-    flex: 1;
-  }
-  .modal-footer {
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.041);
   }
   
   @-webkit-keyframes scale-in-center {
