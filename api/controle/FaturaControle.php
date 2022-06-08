@@ -234,7 +234,7 @@ class FaturaControle extends Controle
             $url = $resCodeListSubs["data"][0]["bankSlipUrl"] ?? "";
         }
 
-        if($recorrente) {
+        if ($recorrente) {
             $sub = new Assinatura();
             $sub->register(
                 $instituicao_fk,
@@ -253,7 +253,7 @@ class FaturaControle extends Controle
 
         $fatura->create(
             $instituicao_fk,
-            $fatura_id,
+            $ID ? $ID : $fatura_id,
             $tipo_pagamento,
             $recorrente,
             $external_fk,
