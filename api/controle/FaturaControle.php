@@ -234,6 +234,19 @@ class FaturaControle extends Controle
             $url = $resCodeListSubs["data"][0]["bankSlipUrl"] ?? "";
         }
 
+        if($recorrente) {
+            $sub = new Assinatura();
+            $sub->register(
+                $instituicao_fk,
+                $external_fk,
+                $doador_fk,
+                $fatura_id,
+                $tipo_pagamento,
+                $status_pagamento,
+                $valor
+            );
+        }
+
         $doador_fk = $customer;
         $doador_nome = $nome;
         $doador_email = $email;

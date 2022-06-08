@@ -91,7 +91,7 @@ CREATE TABLE assinatura (
     instituicao_fk VARCHAR(255),
     external_fk VARCHAR(255),
     doador_fk VARCHAR(255),
-    fatura_id VARCHAR(255),
+    subscription_fk VARCHAR(255),
     tipo_pagamento VARCHAR(255),
     status_pagamento VARCHAR(255),
     valor FLOAT
