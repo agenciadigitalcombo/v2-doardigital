@@ -7,6 +7,9 @@ import { mapState } from './vendor/vuex.js'
 Vue.use(window.vuelidate.default)
 Vue.use(VueMask.VueMaskPlugin);
 
+
+Vue.use(window["vue-js-modal"].default);
+
 Vue.use(Router)
 import routes from './domain/list-router.js'
 const router = new Router({ routes })
