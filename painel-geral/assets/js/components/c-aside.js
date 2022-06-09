@@ -20,20 +20,20 @@ export default {
 
         this.token = localStorage.getItem('token')
         let str = this.token.split('.')[0]
-        let encodedStr = atob(str); 
-        var res =  JSON.parse(encodedStr);
+        let encodedStr = atob(str);
+        var res = JSON.parse(encodedStr);
         this.code = res.code
         this.jms = this.code.split('_')[0]
 
 
-       let dados = (await this.listar()).payload
-       this.nome = dados.nome
-       this.email = dados.email
-       this.id = dados.credencial || "777"
+        let dados = (await this.listar()).payload
+        this.nome = dados.nome
+        this.email = dados.email
+        this.id = dados.credencial || "777"
 
-       this.permisao = (await this.credenciais()).payload.recursos
-       let recursos = this.permisao
-      
+        this.permisao = (await this.credenciais()).payload.recursos
+        let recursos = this.permisao
+
 
         if (this.jms == 'super') {
             this.lista = this.menus
@@ -42,8 +42,6 @@ export default {
         } else {
             this.lista = this.menus.filter(itens => recursos.includes(itens.id))
         }
-
-   
     },
 
     created() {
@@ -57,7 +55,7 @@ export default {
             for (var i = 0; i < this.menus.length; i++) {
 
                 if (this.menus[i].id == jms) {
-                    globalThis._menu = [window.location.href.split('#/')[1]] 
+                    globalThis._menu = [window.location.href.split('#/')[1]]
                     this.selecionado = globalThis._menu
                 } else {
                     this.selecionado = globalThis._menu
@@ -68,18 +66,18 @@ export default {
         },
 
         async listar() {
-			let res = await adm.ListarPerfil(
-				this.token,
-				this.code,
-			)
-			return res
-		},
+            let res = await adm.ListarPerfil(
+                this.token,
+                this.code,
+            )
+            return res
+        },
 
         async credenciais() {
             let res = await adm.credencial(
                 this.token,
                 this.id
-                )
+            )
             return res
         },
 
