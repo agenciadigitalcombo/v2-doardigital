@@ -3,7 +3,7 @@
     <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
         <c-loading></c-loading>
     </p>
-
+     
     <div class="d-flex flex-column flex-lg-row-auto w-xl-500px bg-lighten shadow-sm">
 
         <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-500px scroll-y">
@@ -102,7 +102,7 @@
                                 </label>
                                 <div class="bg-light rounded p-5 mt-1">
                                     <h4 class="text-success">
-                                        {{amount | form_valor}}
+                                        {{valor | form_valor}}
                                     </h4>
                                 </div>
                             </div>
@@ -310,7 +310,7 @@
                         </div>
                         <div v-show="invision">
                             <button type="submit" class="btn btn-lg btn-primary">
-                                <span class="indicator-label">Fazer Assinatura {{amount | form_valor}}
+                                <span class="indicator-label">Fazer Assinatura {{valor | form_valor}}
                                     <span class="svg-icon svg-icon-4 ms-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">
