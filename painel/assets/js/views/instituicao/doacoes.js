@@ -18,11 +18,7 @@ export default {
             total: "",
             pago: "",
             aberto: "",
-            vencido: "",
-            mostraresconder:
-            {
-                'show': false
-            },
+            vencido: "", 
             search: "",
 
             elementoPaginacao: 25, 
@@ -52,6 +48,24 @@ export default {
 
     methods: {
 
+        handleClickOutside (event){
+			let overlay = document.getElementById("overlay");
+			let modal = document.getElementById("meu_modal");
+			if (!modal.contains(event.target)) {
+				modal.style.display = 'none';
+				overlay.style.display = 'none';
+				document.removeEventListener('click', this.handleClickOutside, false);
+			}
+		},
+		
+		 openModal () {
+			let overlay = document.getElementById("overlay");
+			let modal = document.getElementById("meu_modal");
+			overlay.style.display = 'flex'
+			modal.style.display = 'flex'
+			setTimeout(() => { document.addEventListener('click', this.handleClickOutside, false) }, 200);
+		},
+
         async listarDoacoes() {
 			let res = await adm.listarDoacoes(
 				this.token,
@@ -59,6 +73,20 @@ export default {
 			)
 			return res
 		},
+
+        async exportar() {
+
+			const FIX = 'data:text/csv;charset=utf-8,'
+			const ENTER = '%0A'
+				; (() => {
+					const $link = document.querySelector('.js-baixar')
+					let linhas = this.filtraDoacoes.map(u => `${u.registro};${u.nome};${u.cpf};${u.sexo};${u.nascimento};${u.email};${u.telefone}${ENTER}`)
+					//	let linhas = `${'olaa'}${ENTER}`
+					$link.href = FIX + linhas
+				})()
+
+		},
+
 
         totalPagina() {
             return Math.ceil(this.doacoes.length / this.elementoPaginacao)
@@ -84,8 +112,7 @@ export default {
                     maxLeft = 1
                 }
             }
-
-            console.log(maxLeft, maxRight)
+ 
 
             let numbers = new Array();
             for (var i = maxLeft; i <= maxRight; i++) {
@@ -141,8 +168,7 @@ export default {
 
     async mounted() {
         this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
-        this.getPagina(1) 
-            console.log(this.dadosPagina)
+        this.getPagina(1)  
     },
 
 

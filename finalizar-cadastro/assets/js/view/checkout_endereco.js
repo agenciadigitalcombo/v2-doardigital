@@ -122,7 +122,6 @@ export default {
 	created() {
 		      this.token = localStorage.getItem('token')
 
-
  				this.cep = globalThis._cep
  				this.logradouro= globalThis._logradouro 
  				this.numero= globalThis._numero

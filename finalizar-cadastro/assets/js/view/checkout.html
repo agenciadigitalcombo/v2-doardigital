@@ -87,6 +87,16 @@
                                 <div class="sucesso_texte" v-else>
                                 </div>
                             </div>
+
+                            <div class="mb-10 fv-row">
+                                <label for="exampleFormControlInput1"
+                                    class="required form-label">Gênero</label>
+                                <select class="form-select form-select-solid" v-model="sexo" required
+                                    aria-label="Select example">
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                </select>
+                            </div>
                             <div class="mb-10 fv-row">
                                 <label class="form-label mb-3">CPF</label>
                                 <input type="text" class="form-control form-control-lg form-control-solid"

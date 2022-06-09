@@ -49,6 +49,10 @@ export default {
             }
         
             localStorage.setItem('token', res.payload.token)
+            localStorage.setItem('nome', this.nome)
+            localStorage.setItem('email', this.email)
+            localStorage.setItem('telefone', this.telefone) 
+ 
           window.location.href = "/finalizar-cadastro/index.html#/";
 
         }

@@ -200,9 +200,10 @@ span .menu  {
   }
   
   @media only screen and (max-width: 600px) {
-    .meu_modal {
-      height: 50%;
-      width: 100vw;
+    .meu_modal { 
+      width: 50vw;
+      top: 5%;
+      left: 10%;
   
     }
   }
