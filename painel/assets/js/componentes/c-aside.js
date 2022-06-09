@@ -74,7 +74,7 @@ export default {
        let recursos = this.permisao
       
       // if (this.jms == 'super') {
-           var kim = "super"
+         //  var kim = "super"
         if (kim == 'super') {
             this.lista = this.menus
         } else if (this.jms == 'adm') {

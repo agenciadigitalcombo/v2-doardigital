@@ -176,7 +176,7 @@ export default {
         this.token = localStorage.getItem('token'),
         
             this.instituicao_fk = 'inst_628ea77b60f3c',
-            this.recorrente,
+            this.recorrente = '1',
             this.email = localStorage.getItem('email'),
             this.nome = localStorage.getItem('nome'),
             this.telefone = localStorage.getItem('telefone'),
