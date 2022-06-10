@@ -10,7 +10,7 @@ export default {
 
             token: null,
             instituicao_fk: null,
-            valor: "9890",
+            valor: "98.90",
             recorrente: null,
             nome: null,
             email: null,

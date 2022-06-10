@@ -8,8 +8,8 @@ export default {
 		return {
 			adm_fk: null,
 			token: null,
-			nome_fantasia: null,
-			subdomaim: null,
+			nome: null,
+			subdomain: null,
 			dominio: null,
 			search: "",
 			dados: [],
@@ -72,11 +72,14 @@ export default {
 
 
 		addLocahostore(item) {
-			this.id = item.id
-			this.nome_fantasia = item.nome_fantasia
-			this.subdomaim = item.subdomaim
+			this.institution_fk = item.institution_fk
+			this.nome = item.nome
+			this.subdomain = item.subdomain
 
-			localStorage.setItem("instituicao_id", this.id);
+			this.institution_fk = window.localStorage.getItem("instituicao_id")
+
+
+			localStorage.setItem("instituicao_id", this.institution_fk);
 			localStorage.setItem("instituicao_nome", this.nome);
 			localStorage.setItem("instituicao_subdomaim", this.domain || this.subdomain);
 			  
