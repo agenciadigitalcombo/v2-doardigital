@@ -86,19 +86,19 @@ if ($action["tipo"] == "WHATS") {
     $zap = new Evendas();
     $tel = $action["payload"]["telefone"];
     $tel = preg_replace('/\D/', '', $tel);
-    $nome = $action["payload"]["nome"];
-    $email = $action["payload"]["email"];
+    $nome = $action["payload"]["nome"] ?? "";
+    $email = $action["payload"]["email"] ?? "";
     $telefone = substr($tel, 2, 9);
     $ddd = substr($tel, 0, 2);
-    $valor = $action["payload"]["valor"];
-    $status_payment = $action["payload"]["status_payment"];
-    $type_payment = $action["payload"]["type_payment"];
-    $boleto_url = $action["payload"]["boleto_url"];
-    $url_pix = $action["payload"]["url_pix"];
-    $code_boleto = $action["payload"]["code_boleto"];
-    $logradouro = $action["payload"]["logradouro"];
-    $token = $action["payload"]["token"];
-    $external_id = $action["payload"]["external_id"];
+    $valor = $action["payload"]["valor"] ?? "";
+    $status_payment = $action["payload"]["status_payment"] ?? "";
+    $type_payment = $action["payload"]["type_payment"] ?? "";
+    $boleto_url = $action["payload"]["boleto_url"] ?? "";
+    $url_pix = $action["payload"]["url_pix"] ?? "";
+    $code_boleto = $action["payload"]["code_boleto"] ?? "";
+    $logradouro = $action["payload"]["logradouro"] ?? "";
+    $token = $action["payload"]["token"] ?? "";
+    $external_id = $action["payload"]["external_id"] ?? "";
     $response = $zap->send(
         $nome,
         $email,
