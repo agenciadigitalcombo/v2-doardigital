@@ -1,5 +1,5 @@
 import http from './http.js'
-
+ 
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/adm/register', {
@@ -737,10 +737,13 @@ export default {
             documento_numero,
         })
     },
-
-    async listarDoacoes(instituicao_id) {
-        return await http.get('/list-doacoes', {
-            instituicao_id
+     
+    async listarDoacoes(
+        token,
+        institution_fk) {
+        return await http.get('/instituicao/donation', {
+            token,
+            institution_fk
         })
     },
 
@@ -784,28 +787,6 @@ export default {
             cron
         })
     },
-
-
-    async recorrenciaDigital(
-        token,
-        plano_token,
-        amount,
-        cart_nome,
-        cart_numero,
-        cart_cvv,
-        cart_validade,
-    ) {
-        return await http.post('/recorrencia-digital', {
-            token,
-            plano_token,
-            amount,
-            cart_nome,
-            cart_numero,
-            cart_cvv,
-            cart_validade,
-        })
-    },
-
 
 
     async savarSmtp(

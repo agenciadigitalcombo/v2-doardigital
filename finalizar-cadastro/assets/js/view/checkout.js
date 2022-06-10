@@ -11,6 +11,7 @@ export default {
 			nome: null,
 			telefone: null,
 			credencial: "",
+			sexo: "",
 			code: null,
 			token: null,
 			jms: "",
@@ -51,6 +52,8 @@ export default {
 				}
 				globalThis._cpf = this.cpf
 				globalThis._nascimento = this.nascimento 
+				globalThis._sexo = this.sexo 
+ 
 				window.location.href = `#/checkout_endereco`
 			}
 

@@ -130,65 +130,7 @@ export default {
 
 
         },
-
-
-        async addTransacao() {
-            try {
-                this.error = null
-                this.$v.$touch()
-                if (this.$v.$invalid) {
-                    this.submitStatus = 'ERROR'
-                } else {
-                    this.error = null
-                    this.submitStatus = 'CARREGAR'
-                    let res = await adm.transacaoPlano(
-                        this.instituicao_fk,
-                        this.valor,
-                        this.recorrente,
-                        this.email,
-                        this.nome,
-                        this.sexo,
-                        this.cpf,
-                        this.telefone,
-                        this.cep,
-                        this.numero,
-                        this.estado,
-                        this.logadouro,
-                        this.complemento,
-                        this.bairro,
-                        this.cidade,
-
-                        this.tipo_pagamento,
-                        this.card_nome,
-                        this.card_numero,
-                        this.card_cvv,
-                        this.card_validade,
-
-
-                    )
-                    if (!res.next) {
-                        this.submitStatus = 'FALHA'
-                        this.jms = "erro"
-                        this.error = res.message
-                        return null
-                    }
-
-                    this.submitStatus = 'OK'
-                    this.msg = res.message
-                    window.localStorage.setItem("codigo", res.payload.code)
-                    window.localStorage.setItem("url", res.payload.url)
-                    window.localStorage.setItem("type_pagamento", res.payload.tipo_pagamento)
-                    window.localStorage.setItem("recorrente", res.payload.recorrente)
-                    // window.location.href = "#/obrigado"
-                }
-            }
-            catch (e) {
-                setTimeout(() => {
-                    this.submitStatus = 'FALHA500'
-                }, 1500)
-            }
-        },
-
+ 
 
         async transacao() {
             try {

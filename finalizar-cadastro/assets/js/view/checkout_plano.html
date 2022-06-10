@@ -3,7 +3,7 @@
     <p class="typo__p" v-if="submitStatus === 'CARREGAR'">
         <c-loading></c-loading>
     </p>
-
+     
     <div class="d-flex flex-column flex-lg-row-auto w-xl-500px bg-lighten shadow-sm">
 
         <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-500px scroll-y">
@@ -62,7 +62,7 @@
     <div class="d-flex flex-column flex-lg-row-fluid py-10">
         <div class="d-flex flex-center flex-column flex-column-fluid">
             <div class="w-lg-700px p-10 p-lg-15 mx-auto">
-                <form @submit.prevent="transacaoRecorrencia" class="my-auto pb-5">
+                <form @submit.prevent="transacao" class="my-auto pb-5">
 
                     <div class="current" data-kt-stepper-element="content">
                         <div class="w-100">
@@ -102,7 +102,7 @@
                                 </label>
                                 <div class="bg-light rounded p-5 mt-1">
                                     <h4 class="text-success">
-                                        {{amount | form_valor}}
+                                        {{valor | form_valor}}
                                     </h4>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                         </label>
 
                                         <input type="text" class="form-control form-control-solid" placeholder="Nome"
-                                            name="card_name" required v-model="cart_nome" />
+                                            name="card_name" required v-model="card_nome" />
                                     </div>
                                 </div>
 
@@ -137,7 +137,7 @@
                                         <div class="position-relative">
                                             <input type="number" class="form-control form-control-solid" required
                                                 v-mask="'################'" placeholder="Numero do Cartão"
-                                                name="card_number" v-model="cart_numero" />
+                                                name="card_number" v-model="card_numero" />
 
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@
                                     <div class="position-relative">
                                         <input type="number" class="form-control form-control-solid" required
                                             minlength="3" maxlength="4" v-mask="'####'" placeholder="CVV"
-                                            name="card_cvv" v-model="cart_cvv" />
+                                            name="card_cvv" v-model="card_cvv" />
 
                                         <div class="position-absolute translate-middle-y top-50 end-0 me-3">
                                             <span class="svg-icon svg-icon-2hx">
@@ -310,7 +310,7 @@
                         </div>
                         <div v-show="invision">
                             <button type="submit" class="btn btn-lg btn-primary">
-                                <span class="indicator-label">Fazer Assinatura {{amount | form_valor}}
+                                <span class="indicator-label">Fazer Assinatura {{valor | form_valor}}
                                     <span class="svg-icon svg-icon-4 ms-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">

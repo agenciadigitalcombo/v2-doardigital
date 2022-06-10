@@ -52,6 +52,7 @@ export default {
 			setTimeout(() => this.msg = "", 3000);
 
 			this.nome= ""
+			window.location.href = `#/credenciais`
 		},
 
 		async listaCredenc() {

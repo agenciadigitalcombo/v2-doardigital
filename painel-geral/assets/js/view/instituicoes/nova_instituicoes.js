@@ -212,7 +212,7 @@ export default {
 			this.submitStatus = 'PENDING'
 			setTimeout(() => {
 				this.submitStatus = 'OK'
-				//	window.location.href = "#/enderecoInstituicoes"
+					window.location.href = "#/instituicoes"
 			}, 500)
 
 
