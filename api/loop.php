@@ -68,9 +68,9 @@ if ($action["tipo"] == "EMAIL") {
 
     $status_payment = $action["payload"]["status_payment"];
     $template = get_template($status_payment);
-    $email = $action["payload"]["email"] ?? null;
-    $nome = $action["payload"]["nome"] ?? null;
-    $subject = $action["payload"]["subject"] ?? null;
+    $email = $action["payload"]["email"] ?? "";
+    $nome = $action["payload"]["nome"] ?? "";
+    $subject = $action["payload"]["subject"] ?? "";
 
     $blade = blade((array)$action["payload"], $template);
 
