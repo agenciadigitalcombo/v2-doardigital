@@ -96,7 +96,8 @@ export default {
 		},
 	},
 	async mounted() {
-		this.fk = window.localStorage.getItem('instituicao_id');
+		var planos = window.localStorage.getItem('instituicao_id').replace(/[^\d]+/g,'') ; 
+		this.fk = planos
 	},
 	template: await get_template('./assets/js/views/planos/planoNovo')
 }

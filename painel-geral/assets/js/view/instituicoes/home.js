@@ -74,9 +74,7 @@ export default {
 		addLocahostore(item) {
 			this.institution_fk = item.institution_fk
 			this.nome = item.nome
-			this.subdomain = item.subdomain
-
-			this.institution_fk = window.localStorage.getItem("instituicao_id")
+			this.subdomain = item.subdomain 
 
 
 			localStorage.setItem("instituicao_id", this.institution_fk);

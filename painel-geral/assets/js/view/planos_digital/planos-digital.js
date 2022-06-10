@@ -82,7 +82,8 @@ export default {
 	},
 
 	async mounted() {
-		this.fk = "999"
+		var planos = 'inst_628ea77b60f3c'.replace(/[^\d]+/g,'') ;  
+		this.fk = planos
 		this.dados = (await this.listar()).payload
        
 	   
