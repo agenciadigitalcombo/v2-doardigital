@@ -30,9 +30,7 @@ export default {
          
             return `${valor}`
 		},
-
-
-		
+ 
 		esta_data(datas) {
 			let data = datas.split('-').reverse().join('/');
 			return `${data}`
@@ -138,11 +136,10 @@ export default {
 			}
 		},
 
-		async editar(id) {
-			globalThis._doador = this.doadores.find(doad => doad.id == id)
+		async editar(cpf) {
+			globalThis._doador = this.doadores.find(doad => doad.cpf == cpf)
 			window.location.href = "#/doadorHitorico"
 		},
-
 
 		async istituicaoDashboard() {
 			this.error = null
