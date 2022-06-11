@@ -173,20 +173,18 @@ export default {
 
     async mounted() {
         this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
-        this.getPagina(1)  
-        alert('this.total')
+        this.getPagina(1)   
+        
         var tatalArray = [];
-        length = this.filtraDoacoes.length;
+        length = this.doacoes.length;
 
         for (var i = 0; i < length; i++) 
-        tatalArray.push(parseInt(this.filtraDoacoes[i].valor));
+        tatalArray.push(parseInt(this.doacoes[i].valor));
  
         this.total = tatalArray.reduce(function (total, numero) {
             return total + numero;
         }, 0);
-
-alert(this.total)
-alert('this.total')
+ 
 
     },
 
