@@ -31,9 +31,11 @@ export default {
 
     filters: {
 
-        is_price(price) {
-            let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            return `R$ ${valor}`
+        is_price(price) { 
+            var price  = parseFloat(price); 
+            var valor = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+         
+            return `${valor}`
         },
 
         is_data(datas) {
@@ -84,7 +86,10 @@ export default {
     async mounted() {
 
         this.tipo = globalThis._doacoes.tipo_pagamento
-        this.valor = globalThis._doacoes.valor
+        var kim  = parseFloat(globalThis._doacoes.valor); 
+
+        this.valor = parseFloat(globalThis._doacoes.valor); 
+
         this.data = globalThis._doacoes.data
         this.hora = globalThis._doacoes.hora
         this.status = globalThis._doacoes.status_pagamento
@@ -96,8 +101,8 @@ export default {
 
  
 
-        var doado = (this.valor + '.00')
-        var valorDoado = doado.split(',').join('.');
+        var doado = (this.valor)
+        var valorDoado = doado;
         var doar = (valorDoado / 100) * 4;
         this.perDoar = doar.toFixed(2);
 

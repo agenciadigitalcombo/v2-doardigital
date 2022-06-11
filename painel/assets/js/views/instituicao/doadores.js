@@ -25,9 +25,14 @@ export default {
 
 	filters: {
 		este_valor(price) {
-			let valor = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-			return `R$ ${valor}`
+			var price  = parseFloat(price); 
+            var valor = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+         
+            return `${valor}`
 		},
+
+
+		
 		esta_data(datas) {
 			let data = datas.split('-').reverse().join('/');
 			return `${data}`

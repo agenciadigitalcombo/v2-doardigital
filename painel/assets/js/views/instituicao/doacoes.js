@@ -45,6 +45,31 @@ export default {
 		}
 	},
 
+    
+	filters: {
+		este_valor(price) {
+			var price  = parseFloat(price); 
+            var valor = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+         
+            return `${valor}`
+		},
+
+
+		
+		esta_data(datas) {
+			let data = datas.split('-').reverse().join('/');
+			return `${data}`
+		},
+
+		recorrente(status) {
+			let apresentar = {
+				false: 'UNICO',
+				true: 'RECORRENTE',
+			}
+			return apresentar[status]
+		}
+	},
+
 
     methods: {
 
@@ -174,7 +199,7 @@ export default {
     async mounted() {
         this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
         this.getPagina(1)   
-        
+
         var tatalArray = [];
         length = this.doacoes.length;
 

@@ -59,7 +59,7 @@
                                                 <span class=" fw-bold text-muted">
                                                     Valor</span>
 
-                                                <p class="fw-bolder fs-6 text-gray-800">{{ valor+'00' | is_price}}</p>
+                                                <p class="fw-bolder fs-6 text-gray-800">{{ valor | is_price }}</p>
 
 
                                                 <span class=" fw-bold text-muted">
@@ -243,7 +243,7 @@
                                                         </td>
 
                                                         <td>
-                                                            {{ valor+'00' | is_price}}
+                                                            {{ valor | is_price }}
                                                         </td>
 
                                                         <td>
@@ -275,7 +275,7 @@
                                                             R$ 0.49
                                                         </td>
                                                         <td>
-                                                            R$ {{valorLiquido}}
+                                                             {{valorLiquido | is_price}}
                                                         </td>
 
                                                     </tr>
