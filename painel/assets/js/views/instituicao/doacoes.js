@@ -74,6 +74,11 @@ export default {
 			return res
 		},
 
+        async editar(instituicao_id) {
+			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
+			window.location.href = "#/doador/detalhe"
+		},
+
         async exportar() {
 
 			const FIX = 'data:text/csv;charset=utf-8,'
@@ -169,6 +174,20 @@ export default {
     async mounted() {
         this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
         this.getPagina(1)  
+        alert('this.total')
+        var tatalArray = [];
+        length = this.filtraDoacoes.length;
+
+        for (var i = 0; i < length; i++) 
+        tatalArray.push(parseInt(this.filtraDoacoes[i].valor));
+ 
+        this.total = tatalArray.reduce(function (total, numero) {
+            return total + numero;
+        }, 0);
+
+alert(this.total)
+alert('this.total')
+
     },
 
 
