@@ -54,8 +54,6 @@ export default {
             return `${valor}`
 		},
 
-
-		
 		esta_data(datas) {
 			let data = datas.split('-').reverse().join('/');
 			return `${data}`
@@ -67,7 +65,33 @@ export default {
 				true: 'RECORRENTE',
 			}
 			return apresentar[status]
-		}
+		},
+
+        este_status(status) {
+            let apresentar = {
+                ACTIVE: 'Ativo',
+                PENDING: 'Aguardando Pagamento',
+                refused: 'Cancelado',
+                CONFIRMED: 'Pago',
+                OVERDUE: 'Vencida',
+                REFUNDED: 'Reembolsado',
+                processing: 'Em processamento',
+                authorized: 'Autorizado ',
+                pending_refund: 'Reembolso pendente ',
+                chargedback: 'Estorno',
+            }
+            return apresentar[status]
+        },
+
+
+        este_tipo(status) {
+            let apresentar = {
+                BOLETO: 'Boleto',
+                CREDIT_CARD: 'Crédito',
+                PIX: 'PIX',
+            }
+            return apresentar[status]
+        },
 	},
 
 

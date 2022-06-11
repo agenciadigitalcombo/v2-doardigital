@@ -19,9 +19,8 @@
 									<div class="col">
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-primary pb-1 px-2">Quant Recorrente</span>
-
-											<span> 200 </span>
-											<!--<span> {{ quantRec }} </span>-->
+  
+											<span> {{ quantRec }} </span>
 										</div>
 									</div>
 									<div class="col">
@@ -36,8 +35,7 @@
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
 
-											<!--<span> {{ quantUnico }} </span>-->
-											<span> 5 </span>
+										<span> {{ quantUnico }} </span>
 
 										</div>
 									</div>
@@ -199,11 +197,11 @@
 														</div>
 													</td>
 													<td>
-														{{item.recorrente | recorrente}}
+														<div  class="badge" :class="'tipo_'+item.recorrente">{{item.recorrente | recorrente}}</div>
 													</td>
 
 													<td>
-														<div> {{item.registro }} </div>
+														<div> {{item.registro | esta_data }} </div>
 													</td>
 
 													<td> {{item.cpf}} </td>

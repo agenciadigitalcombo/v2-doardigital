@@ -210,11 +210,11 @@
                                                     <td> {{ item.valor | este_valor  }} </td>
 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.status_pagamento }}</div>
+                                                        <div class="badge" :class="'status_'+item.status_pagamento"> {{item.status_pagamento  | este_status}}</div>
                                                     </td>
 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.tipo_pagamento }}</div>
+                                                        <div class="badge badge-light"> {{item.tipo_pagamento | este_tipo}}</div>
                                                     </td>
 
 
