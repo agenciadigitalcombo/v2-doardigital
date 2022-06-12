@@ -149,11 +149,10 @@ export default {
 			month: '2-digit',
 			day: '2-digit',
 		}).split('/').reverse().join('');
-		alert('alert 1')
+	
 		this.instituicao_fk = window.localStorage.getItem("instituicao_id")
 		this.cpf = globalThis._doador.cpf
-		alert('alert 2')
-		alert(this.cpf)
+	 
 		//this.tipo = globalThis._doador.tipo
 
 		let dados = (await this.listar()).payload

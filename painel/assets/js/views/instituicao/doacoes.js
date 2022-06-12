@@ -123,8 +123,8 @@ export default {
 			return res
 		},
 
-        async editar(instituicao_id) {
-			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
+        async editar(fatura_id) {
+			globalThis._doacoes = this.doacoes.find(doad => doad.fatura_id == fatura_id)
 			window.location.href = "#/doador/detalhe"
 		},
 

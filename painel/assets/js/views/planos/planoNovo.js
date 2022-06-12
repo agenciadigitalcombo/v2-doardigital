@@ -96,8 +96,10 @@ export default {
 		},
 	},
 	async mounted() {
-		var planos = window.localStorage.getItem('instituicao_id').replace(/[^\d]+/g,'') ; 
-		this.fk = planos
+		//var planos = window.localStorage.getItem('instituicao_id').replace(/[^\d]+/g,'') ; 
+		//this.fk = planos
+
+		this.fk = 'inst_628ea6c513cc3'; 
 	},
 	template: await get_template('./assets/js/views/planos/planoNovo')
 }

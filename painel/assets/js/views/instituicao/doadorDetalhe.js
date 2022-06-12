@@ -3,10 +3,7 @@ import adm from "../../../../../static/js/api/adm.js"
 
 export default {
 
-
-
-
-
+ 
     data: function () {
 
         return {
@@ -83,6 +80,12 @@ export default {
 
     },
 
+    methods: {
+        copiar(ref) {
+            this.$refs[ref].select(); document.execCommand('copy');
+        }
+
+    },
     async mounted() {
 
         this.tipo = globalThis._doacoes.tipo_pagamento
@@ -97,8 +100,6 @@ export default {
         this.url_geral = globalThis._doacoes.url
         this.nome = globalThis._doacoes.doador_nome
         this.recorente = globalThis._doacoes.recorrente
-
-
  
 
         var doado = (this.valor)
@@ -144,11 +145,5 @@ export default {
 
     },
 
-    methods: {
-        copiar(ref) {
-            this.$refs[ref].select(); document.execCommand('copy');
-        }
-
-    },
     template: await get_template('./assets/js/views/instituicao/doadorDetalhe')
 }
