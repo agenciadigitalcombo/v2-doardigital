@@ -20,6 +20,7 @@ export default [
 
     { path: '/doadores', component: { template: '<c-doadores>' } },
     { path: '/doacoes', component: { template: '<c-doacoes>' } },
+    { path: '/lancamento', component: { template: '<c-lancamento>' } },
     
     { path: '/doador/detalhe', component: { template: '<c-doadorDetalhe>' } },
     { path: '/doacoes/detalhe', component: { template: '<c-doacoesDetalhe>' } },
