@@ -1,4 +1,4 @@
-@host=http://doardigital.con
+@host=https://doardigital.tk
 ###
 
 POST {{host}}/api/webhook.php

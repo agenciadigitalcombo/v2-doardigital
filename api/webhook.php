@@ -86,6 +86,7 @@ if( empty($fatura) ) {
     $faturas->where([
         "fatura_id" => $ID
     ]);
+    $fatura = $faturas->select()[0];
 }
 
 $faturas->update([
