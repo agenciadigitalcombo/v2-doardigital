@@ -232,6 +232,10 @@ class FaturaControle extends Controle
             $code = $resCode["identificationField"] ?? "";
             $url = $resCodeListSubs["data"][0]["bankSlipUrl"] ?? "";
         }
+        
+        $doador_fk = $clientInfo["external_fk"];
+        $doador_nome = $nome;
+        $doador_email = $email;
 
         if ($recorrente) {
             $sub = new Assinatura();
@@ -246,9 +250,6 @@ class FaturaControle extends Controle
             );
         }
 
-        $doador_fk = $customer;
-        $doador_nome = $nome;
-        $doador_email = $email;
 
         $fatura->create(
             $instituicao_fk,
