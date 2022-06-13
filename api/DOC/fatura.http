@@ -48,4 +48,3 @@ instituicao_fk={{instituicao_fk}}
 &card_numero={{card_numero}}
 &card_validade={{card_validade}}
 &card_cvv={{card_cvv}}
-# &debug=1

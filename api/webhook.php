@@ -116,7 +116,7 @@ $pay->set_api_key($carteira_fk);
 $code = null;
 
 if ($tipo == "PIX") {
-    $resCode = $Pay->getCodePix($ID);
+    $resCode = $pay->getCodePix($ID);
     $code = $resCode["payload"] ?? "";
 }
 
