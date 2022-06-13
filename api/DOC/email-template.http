@@ -1,0 +1,36 @@
+@host=http://doardigital.con
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@instituicao_fk=TEST_0007
+@tipo=PIX
+@status_pagamento=CONFIRMED
+@assunto=Doação concluída com sucesso!
+@content=KKKKK
+
+###
+GET {{host}}/api/email-template
+
+###
+GET {{host}}/api/email-template/info?token={{token}}&tipo={{tipo}}&status_pagamento={{status_pagamento}}&instituicao_fk={{instituicao_fk}}
+
+###
+GET {{host}}/api/email-template/list?token={{token}}&instituicao_fk={{instituicao_fk}}
+
+###
+POST {{host}}/api/email-template/save
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&tipo={{tipo}}
+&instituicao_fk={{instituicao_fk}}
+&status_pagamento={{status_pagamento}}
+&assunto={{assunto}}
+&content={{content}}
+
+###
+POST {{host}}/api/email-template/recover
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&tipo={{tipo}}
+&status_pagamento={{status_pagamento}}
+&instituicao_fk={{instituicao_fk}}

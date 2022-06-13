@@ -340,7 +340,8 @@ class InstituicaoControle extends Controle
             "SELECT * FROM institution WHERE domain='{$domain}' OR subdomain='{$domain}'"
         )[0] ?? [];
         $company = Instituicao::porter($company);
-
+        
+        
         $banco->table("endereco");
         $banco->where([
             "fk" => $company["institution_fk"]

@@ -1,0 +1,56 @@
+@host=http://doardigital.con
+###
+
+POST {{host}}/api/webhook.php
+
+{
+    "event": "PAYMENT_CREATED",
+    "payment": {
+        "object": "payment",
+        "id": "pay_0654650368776757",
+        "dateCreated": "2022-05-09",
+        "customer": "cus_000004862417",
+        "paymentLink": null,
+        "value": 45.30,
+        "netValue": 44.31,
+        "originalValue": null,
+        "interestValue": null,
+        "description": "Doa\u00e7\u00e3o Unica",
+        "billingType": "PIX",
+        "pixTransaction": null,
+        "status": "OVERDUE",
+        "dueDate": "2022-05-09",
+        "originalDueDate": "2022-05-09",
+        "paymentDate": null,
+        "clientPaymentDate": null,
+        "installmentNumber": null,
+        "invoiceUrl": "https://sandbox.asaas.com/i/0654650368776757",
+        "invoiceNumber": "01079879",
+        "externalReference": "ref_6279155a1c7ea",
+        "deleted": false,
+        "anticipated": false,
+        "creditDate": null,
+        "estimatedCreditDate": null,
+        "transactionReceiptUrl": null,
+        "nossoNumero": null,
+        "bankSlipUrl": null,
+        "lastInvoiceViewedDate": null,
+        "lastBankSlipViewedDate": null,
+        "discount": {
+            "value": 0.00,
+            "limitDate": null,
+            "dueDateLimitDays": 0,
+            "type": "FIXED"
+        },
+        "fine": {
+            "value": 0.00,
+            "type": "FIXED"
+        },
+        "interest": {
+            "value": 0.00,
+            "type": "PERCENTAGE"
+        },
+        "postalService": false,
+        "refunds": null
+    }
+}

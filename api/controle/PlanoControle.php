@@ -48,7 +48,7 @@ class PlanoControle extends Controle
             "fk" => "Informe um identificador da instituição",
         ]);
         $plan = new Plano();
-        $fk = (int) $_REQUEST['fk'] ?? 0;
+        $fk = $_REQUEST['fk'] ?? 0;
         self::printSuccess(
             "lista de planos",
             $plan->listAll($fk)

@@ -18,7 +18,6 @@ class FaturaControle extends Controle
             "instituicao_fk" => "Informe a referencia da instituição",
             "nome" => "Informe seu nome",
             "cpf" => "informe CPF",
-            "sexo" => "Informe sexo",
             "telefone" => "Informe seu telefone",
             "email" => "Informe seu email",
             "cep" => "Informe seu CEP",

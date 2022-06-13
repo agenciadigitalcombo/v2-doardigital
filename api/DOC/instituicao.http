@@ -1,11 +1,11 @@
-@host=https://doardigital.tk
+@host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
-@institution_fk=inst_628ea6c513cc3
+@institution_fk=inst_628ea77b60f3c
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
 @email=br.rafael17@outlook.com
 @telefone=(11) 94949-9944
-@domain=rafael17.doardigital.con
+@domain=jms21122xxcr.doardigital.tk
 @subdomain=rafael17.doardigital.con
 @logo=logo.png
 @icon=logo.png
@@ -64,7 +64,7 @@ token={{token}}
 GET {{host}}/api/instituicao/list?token={{token}}&adm_fk={{adm_fk}}
 
 ###
-GET {{host}}/api/instituicao/info?domain={{domain}}&token={{token}}
+GET {{host}}/api/instituicao/info?domain={{domain}}
 
 ###
 POST {{host}}/api/instituicao/update-info

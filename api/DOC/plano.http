@@ -1,7 +1,7 @@
 @host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
 @id=1
-@fk=42
+@fk=inst_628ea77b60f3c
 @price=25.50
 @coupon=#brc
 @send_message=2000
@@ -26,10 +26,10 @@ token={{token}}
 &subadm={{subadm}}
 
 ###
-GET {{host}}/api/plano/list?fk=42
+GET {{host}}/api/plano/list?fk={{fk}}
 
 ###
-GET {{host}}/api/plano/info?id={{id}}&token={{token}}&fk=42
+GET {{host}}/api/plano/info?id={{id}}&token={{token}}
 
 ###
 POST {{host}}/api/plano/update-info
