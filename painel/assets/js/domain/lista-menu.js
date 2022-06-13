@@ -9,7 +9,7 @@ export default [
     { id: 'doadores', nome: 'Doadores', icon: 'doadores.svg', link: '#/doadores', feature_flag: true, permisao1: "1", permisao2: "adm" },
     { id: 'doacoes', nome: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true, permisao1: "1", permisao2: "adm" },
     { id: 'planos', nome: 'Planos', icon: 'planos.svg', link: '#/planos', feature_flag: true, permisao1: "1", permisao2: "adm" },
-    { id: 'divisao', nome: 'Divisão Pagamento', icon: 'coins.svg', link: '#/divisao-pagamento', feature_flag: true, permisao1: "1", permisao2: "adm" },
+    { id: 'divisao', nome: 'Divisão Pagamento', icon: 'coins.svg', link: '#/divisao-pagamento', feature_flag: true },
     { id: 'metas', nome: 'Metas', icon: 'metas.svg', link: '#/metas', feature_flag: true, permisao1: "1", permisao2: "adm" },
     { id: 'modulos', nome: 'Modulos', icon: 'componente.svg', link: '#/modulos', feature_flag: true, permisao1: "1", permisao2: "adm" },
     { id: 'modelo_de_emails', nome: 'Modelo de E-mails', icon: 'email.svg', link: '#/modelo-de-emails', feature_flag: true, permisao1: "1", permisao2: "adm" },

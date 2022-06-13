@@ -19,9 +19,8 @@
 									<div class="col">
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-primary pb-1 px-2">Quant Recorrente</span>
-
-											<span> 200 </span>
-											<!--<span> {{ quantRec }} </span>-->
+  
+											<span> {{ quantRec }} </span>
 										</div>
 									</div>
 									<div class="col">
@@ -36,8 +35,7 @@
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
 
-											<!--<span> {{ quantUnico }} </span>-->
-											<span> 5 </span>
+										<span> {{ quantUnico }} </span>
 
 										</div>
 									</div>
@@ -199,31 +197,31 @@
 														</div>
 													</td>
 													<td>
-														{{item.recorrente | recorrente}}
+														<div  class="badge" :class="'tipo_'+item.recorrente">{{item.recorrente | recorrente}}</div>
 													</td>
 
 													<td>
-														<div> {{item.registro }} </div>
+														<div> {{item.registro | esta_data }} </div>
 													</td>
 
-													<td> {{item.cpf}} </td>
+													<td> {{item.cpf | cpf}} </td>
 
 													<td class="text-end">
 
-														<a @click="editar(item.id)" title="Para Visualizar da um click"
-															class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
-															style="margin: 2px;">
-															<svg xmlns="http://www.w3.org/2000/svg" width="16"
-																height="16" fill="currentColor" class="bi bi-eye-fill"
-																viewBox="0 0 16 16">
-																<path
-																	d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-																<path
-																	d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-															</svg>
-														</a>
+                                                        <a @click="editar(item.cpf)" title="Para Visualizar da um click"
+                                                            class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
+                                                            style="margin: 2px;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" class="bi bi-eye-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                                <path
+                                                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                                            </svg>
+                                                        </a>
 
-													</td>
+                                                    </td>
 
 												</tr>
 

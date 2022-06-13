@@ -333,26 +333,6 @@ export default {
         })
     },
 
-    async configuracaoInstituicao(
-        token,
-        instituicao_id,
-        titulo_site,
-        tags,
-        descricao_site,
-        cor,
-        logo
-    ) {
-        return await http.post('/configuracao-instituicao', {
-            token,
-            instituicao_id,
-            titulo_site,
-            tags,
-            descricao_site,
-            cor,
-            logo
-        })
-    },
-
     async listConf(	
         token,
         domain

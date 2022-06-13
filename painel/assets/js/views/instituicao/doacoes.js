@@ -45,6 +45,55 @@ export default {
 		}
 	},
 
+    
+	filters: {
+		este_valor(price) {
+			var price  = parseFloat(price); 
+            var valor = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+         
+            return `${valor}`
+		},
+
+		esta_data(datas) {
+			let data = datas.split('-').reverse().join('/');
+			return `${data}`
+		},
+
+		recorrente(status) {
+			let apresentar = {
+				false: 'UNICO',
+				true: 'RECORRENTE',
+			}
+			return apresentar[status]
+		},
+
+        este_status(status) {
+            let apresentar = {
+                ACTIVE: 'Ativo',
+                PENDING: 'Aguardando Pagamento',
+                refused: 'Cancelado',
+                CONFIRMED: 'Pago',
+                OVERDUE: 'Vencida',
+                REFUNDED: 'Reembolsado',
+                processing: 'Em processamento',
+                authorized: 'Autorizado ',
+                pending_refund: 'Reembolso pendente ',
+                chargedback: 'Estorno',
+            }
+            return apresentar[status]
+        },
+
+
+        este_tipo(status) {
+            let apresentar = {
+                BOLETO: 'Boleto',
+                CREDIT_CARD: 'Crédito',
+                PIX: 'PIX',
+            }
+            return apresentar[status]
+        },
+	},
+
 
     methods: {
 
@@ -72,6 +121,11 @@ export default {
 				this.institution_fk
 			)
 			return res
+		},
+
+        async editar(fatura_id) {
+			globalThis._doacoes = this.doacoes.find(doad => doad.fatura_id == fatura_id)
+			window.location.href = "#/doador/detalhe"
 		},
 
         async exportar() {
@@ -168,7 +222,19 @@ export default {
 
     async mounted() {
         this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
-        this.getPagina(1)  
+        this.getPagina(1)   
+
+        var tatalArray = [];
+        length = this.doacoes.length;
+
+        for (var i = 0; i < length; i++) 
+        tatalArray.push(parseInt(this.doacoes[i].valor));
+ 
+        this.total = tatalArray.reduce(function (total, numero) {
+            return total + numero;
+        }, 0);
+ 
+
     },
 
 

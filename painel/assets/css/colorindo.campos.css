@@ -9,6 +9,12 @@
     background-color: #dcf8ea
 }
 
+.status_ACTIVE {
+    color: #009ef7; 
+    background-color: #f1faff;
+}
+
+
 .status_REFUNDED {
     background-color: #700370;
     color: #835783; 
@@ -59,9 +65,20 @@
     color: #f1416c;
     background-color: #fff5f8 
 }
+
+.tipo_false {
+    color: #f1416c;
+    background-color: #fff5f8 
+}
+
+.tipo_true {
+    color: #50cd89;
+    background-color: #e8fff3
+}
+
+
 .tipo_RECORRENTE {
     color: #50cd89;
     background-color: #e8fff3
-
 }
 

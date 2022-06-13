@@ -111,7 +111,9 @@ export default {
 		},
 	},
 	async mounted() { 
-		this.fk = "999"
+ var planos = 'inst_628ea77b60f3c'.replace(/[^\d]+/g,'') ; 
+ this.fk = planos
+ 
 	},
     template: await get_template('./assets/js/view/planos_digital/planos-digitalNovo')
 }

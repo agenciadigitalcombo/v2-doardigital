@@ -16,7 +16,7 @@
                                             <span class="fs-4 fw-bold text-primary pb-1 px-2">Total de Doações</span>
 
                                             <span>
-                                                {{ total+'00' | is_price }}
+                                                {{ total | este_valor }}
                                             </span>
                                         </div>
                                     </div>
@@ -24,21 +24,21 @@
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-success pb-1 px-2">Total Pago</span>
 
-                                            <span> {{ pago+'00' | is_price }} </span></span>
+                                            <span> {{ pago+'00' | este_valor }} </span></span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
 
-                                            <span>{{ aberto+'00' | is_price }}</span></span>
+                                            <span>{{ aberto+'00' | este_valor }}</span></span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
 
-                                            <span> {{ vencido+'00' | is_price }} </span></span>
+                                            <span> {{ vencido+'00' | este_valor }} </span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -207,20 +207,19 @@
                                                             <span> {{ item.doador_email }}</span>
                                                         </div>
                                                     </td>
-                                                    <td> {{ item.valor }} </td>
+                                                    <td> {{ item.valor | este_valor  }} </td>
 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.status_pagamento }}</div>
+                                                        <div class="badge" :class="'status_'+item.status_pagamento"> {{item.status_pagamento  | este_status}}</div>
                                                     </td>
 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.tipo_pagamento }}</div>
+                                                        <div class="badge badge-light"> {{item.tipo_pagamento | este_tipo}}</div>
                                                     </td>
-
 
                                                     <td class="text-end">
 
-                                                        <a @click="editar(item.id)" title="Para Visualizar da um click"
+                                                        <a @click="editar(item.fatura_id)" title="Para Visualizar da um click"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
                                                             style="margin: 2px;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
