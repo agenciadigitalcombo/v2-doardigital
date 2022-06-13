@@ -19,6 +19,7 @@ export default {
             pago: "",
             aberto: "",
             vencido: "", 
+            estorno: "", 
             search: "",
 
             elementoPaginacao: 25, 
@@ -37,12 +38,58 @@ export default {
 			return this.dadosPagina.filter((doacao) => {
 				return (
 					//doacao.nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
-					//	doacao.email.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+					doacao.doador_email.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
 					doacao.doador_nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1
 
 				)
 			})
-		}
+		},
+
+        filtraTotal() {
+			return this.filltroDoa.filter((doacao) => {
+				return ( 
+					doacao.status_pagamento
+
+				)
+			})
+		},
+
+        filtraAberto() {
+			return this.filltroDoa.filter((doacao) => {
+				return ( 
+					doacao.status_pagamento === 'PENDING'
+
+				)
+			})
+		},
+        
+        filtraPago() {
+			return this.filltroDoa.filter((doacao) => {
+				return ( 
+					doacao.status_pagamento === 'RECEIVED'
+
+				)
+			})
+		},
+
+        filtraVencido() {
+			return this.filltroDoa.filter((doacao) => {
+				return ( 
+					doacao.status_pagamento === 'OVERDUE'
+
+				)
+			})
+		},
+
+        filtraEstorno() {
+			return this.filltroDoa.filter((doacao) => {
+				return ( 
+					doacao.status_pagamento === 'OVERDUE'
+
+				)
+			})
+		},
+        
 	},
 
     
@@ -68,18 +115,18 @@ export default {
 		},
 
         este_status(status) {
-            let apresentar = {
-                ACTIVE: 'Ativo',
+            let apresentar = { 
                 PENDING: 'Aguardando Pagamento',
-                refused: 'Cancelado',
-                CONFIRMED: 'Pago',
-                OVERDUE: 'Vencida',
-                REFUNDED: 'Reembolsado',
-                processing: 'Em processamento',
-                authorized: 'Autorizado ',
-                pending_refund: 'Reembolso pendente ',
-                chargedback: 'Estorno',
+                RECEIVED: 'Pago',
+                CONFIRMED: 'Pago', 
+                OVERDUE: 'Vencida', 
+  
+                REFUND_REQUESTED: 'Estorno',
+                CHARGEBACK_REQUESTED: 'Estorno',
+                CHARGEBACK_DISPUTE: 'Estorno',
+                AWAITING_CHARGEBACK_REVERSAL: 'Estorno',
             }
+
             return apresentar[status]
         },
 
@@ -224,17 +271,52 @@ export default {
         this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
         this.getPagina(1)   
 
-        var tatalArray = [];
-        length = this.doacoes.length;
+        this.filltroDoa = (await this.listarDoacoes()).payload || {}
 
+        var tatalArray = [];
+        length = this.filtraTotal.length;
         for (var i = 0; i < length; i++) 
-        tatalArray.push(parseInt(this.doacoes[i].valor));
- 
+        tatalArray.push(parseInt(this.filtraTotal[i].valor));
         this.total = tatalArray.reduce(function (total, numero) {
             return total + numero;
         }, 0);
- 
+  
 
+          var abertoArray = [];
+          length = this.filtraAberto.length;
+        for (var i = 0; i < length; i++) 
+        abertoArray.push(parseInt(this.filtraAberto[i].valor));
+        this.aberto = abertoArray.reduce(function (total, numero) {
+            return total + numero;
+        }, 0); 
+
+
+        var abertoArray = [];
+        length = this.filtraPago.length;
+      for (var i = 0; i < length; i++) 
+      abertoArray.push(parseInt(this.filtraPago[i].valor));
+      this.pago = abertoArray.reduce(function (total, numero) {
+          return total + numero;
+      }, 0); 
+       
+      var abertoVencido = [];
+      length = this.filtraVencido.length;
+    for (var i = 0; i < length; i++) 
+    abertoVencido.push(parseInt(this.filtraVencido[i].valor));
+    this.vencido = abertoVencido.reduce(function (total, numero) {
+        return total + numero;
+    }, 0);
+      
+    var abertoEstorno = [];
+      length = this.filtraEstorno.length;
+    for (var i = 0; i < length; i++) 
+    abertoEstorno.push(parseInt(this.filtraEstorno[i].valor));
+    this.estorno = abertoEstorno.reduce(function (total, numero) {
+        return total + numero;
+    }, 0);
+      
+
+    
     },
 
 

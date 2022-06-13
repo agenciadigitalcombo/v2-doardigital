@@ -24,21 +24,29 @@
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-success pb-1 px-2">Total Pago</span>
 
-                                            <span> {{ pago+'00' | este_valor }} </span></span>
+                                            <span> {{ pago | este_valor }} </span></span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
 
-                                            <span>{{ aberto+'00' | este_valor }}</span></span>
+                                            <span>{{ aberto | este_valor }}</span></span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="card card-dashed flex-center min-w-175px my-3 p-6">
                                             <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
 
-                                            <span> {{ vencido+'00' | este_valor }} </span></span>
+                                            <span> {{ vencido | este_valor }} </span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                            <span class="fs-4 fw-bold text-danger pb-1 px-2">Estornado </span>
+
+                                            <span> {{ estorno | este_valor }} </span></span>
                                         </div>
                                     </div>
                                 </div>
