@@ -415,11 +415,20 @@ class InstituicaoControle extends Controle
             "institution_fk" => "informe o identificador da instituição",
         ]);
         self::privateRouter();
+        $assinatura = new Banco();
+        $assinatura->table("assinatura");
+        $assinantes = $assinatura->select();
+        $assinantes = array_map( fn($doador) => $doador["doador_fk"], $assinantes );
         $institution_fk =  $_REQUEST["institution_fk"];
         $fatura = new Fatura();
+        $faturas = $fatura->listAll($institution_fk);
+        $faturas = array_map(function($charge) use ($assinantes) {
+            $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
+            return $charge;
+        }, $faturas);
         self::printSuccess(
             "Lista de doações",
-            $fatura->listAll($institution_fk)
+            $faturas
         );
     }
 }
