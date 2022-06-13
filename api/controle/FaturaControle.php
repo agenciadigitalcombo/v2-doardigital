@@ -213,6 +213,7 @@ class FaturaControle extends Controle
         if ($recorrente) {
             $resCodeListSubs = $Pay->listSubs($fatura_id);
             $ID = $resCodeListSubs["data"][0]["id"];
+            $status_pagamento = $resCodeListSubs["data"][0]["status"];
         }
 
         if ($recorrente && $tipo_pagamento == "PIX" && $ID) {
