@@ -4,8 +4,6 @@ class EmailTemplateControle  extends Controle
 {
     static function start()
     {
-
-        EmailTemplate::tipos();
         self::printError(
             "Você não tem acesso",
             []

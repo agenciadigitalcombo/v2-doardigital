@@ -23,7 +23,49 @@ class EmailTemplate
         return $names;
     }
 
-    static function status() {}
+    static function default() {
+        $emails = [];
+        $tipos = self::tipos();
+        foreach( $tipos as $tipo ) {
+            $templates = glob(__DIR__."/../email/{$tipo}/*.txt*");
+            $templates = array_map( function($email) {
+                $body = file($email);
+                $subject = $body[0] ?? null;
+                unset( $body[0] );
+                return [
+                    "status" => str_replace(".txt", "", basename($email) ),
+                    "subject" => $subject,
+                    "body" => implode("", $body),
+                ];
+            }, $templates );
+            $templates = array_filter( $templates, fn($email) => $email["subject"]);
+            $templates = array_values($templates);
+            $emails[] = [
+                "tipo" => $tipo,
+                "email" => $templates
+            ];
+        }
+        return $emails;
+    }
+
+    static function maker(
+        $instituicao_fK
+    ) {
+        $bc = new Banco();
+        $bc->table("template_email");
+        $insertEmails = [];
+        $templates = EmailTemplate::default();
+        foreach( $templates as $template) {
+            $tipo = $template["tipo"];
+            foreach( $template["email"] as $email ) {
+                $status = $email["status"] ?? null;
+                $subject = $email["subject"] ?? null;
+                $body = $email["body"]??null;
+                $insertEmails[] = "INSERT INTO template_email (instituicao_fk,tipo,status_pagamento,assunto,content) VALUES ('$instituicao_fK','$tipo','$status','$subject','$body')";
+            }
+        }
+        $bc->exec(implode(";",$insertEmails));
+    }
 
     public function save(
         string $instituicao_fk,

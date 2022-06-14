@@ -237,6 +237,7 @@ class InstituicaoControle extends Controle
         $conta->set_api_key($apiKey);
         $conta->chavePix();
         $conta->registerWebHook();
+        EmailTemplate::maker($institution_fk);
 
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
