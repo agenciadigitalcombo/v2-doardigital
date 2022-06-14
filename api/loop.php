@@ -117,8 +117,8 @@ if ($action["tipo"] == "WHATS") {
     $response = json_decode($response);
 }
 
-$db->where(["id" => $action["id"]]);
-$db->delete();
+// $db->where(["id" => $action["id"]]);
+// $db->delete();
 
 echo json_encode([
     "next" => true,
