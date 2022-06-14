@@ -76,6 +76,7 @@ export default {
             let items = [];
             items = this.dadosPagina.filter((item) => {
                 return (
+                    item.status_pagamento === 'CONFIRMED' ||
                     item.status_pagamento === 'RECEIVED'
                 );
             });

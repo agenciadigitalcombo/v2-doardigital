@@ -35,7 +35,6 @@ export default {
     computed: {
 
 
-
         filtraDoacoes() {
             let items = [];
             items = this.dadosPagina.filter((item) => {
@@ -76,7 +75,8 @@ export default {
             let items = [];
             items = this.dadosPagina.filter((item) => {
                 return (
-                    item.status_pagamento === 'RECEIVED'
+                    item.status_pagamento === 'CONFIRMED' ||
+                     item.status_pagamento === 'RECEIVED'
                 );
             });
             items = items.filter((item) => {
