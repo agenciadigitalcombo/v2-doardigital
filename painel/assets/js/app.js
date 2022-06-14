@@ -73,6 +73,9 @@ Vue.component('c-doadores', doadores)
 import doacoes from './views/instituicao/doacoes.js'
 Vue.component('c-doacoes', doacoes)
 
+import lancamento from './views/instituicao/lancamento.js'
+Vue.component('c-lancamento', lancamento)
+
 import doadorDetalhe from './views/instituicao/doadorDetalhe.js'
 Vue.component('c-doadorDetalhe', doadorDetalhe)
 

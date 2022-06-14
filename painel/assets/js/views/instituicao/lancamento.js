@@ -45,7 +45,7 @@ export default {
                 );
             });
             items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
+                return item.data.split('-').join('') > this.dataFinal
             });
             return items;
         },
@@ -53,7 +53,7 @@ export default {
         filtraTotal() {
             return this.filltroDoa.filter((doacao) => {
                 return (
-                    doacao.data.split('-').join('') <= this.dataFinal
+                    doacao.data.split('-').join('') > this.dataFinal
                 )
             })
         },
@@ -66,7 +66,7 @@ export default {
                 );
             });
             items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
+                return item.data.split('-').join('') > this.dataFinal
             });
             return items;
 
@@ -80,7 +80,7 @@ export default {
                 );
             });
             items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
+                return item.data.split('-').join('') > this.dataFinal
             });
             return items;
         },
@@ -93,7 +93,7 @@ export default {
                 );
             });
             items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
+                return item.data.split('-').join('') > this.dataFinal
             });
             return items;
 
@@ -107,7 +107,7 @@ export default {
                 );
             });
             items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
+                return item.data.split('-').join('') > this.dataFinal
             });
             return items;
         },
@@ -352,5 +352,5 @@ export default {
         this.institution_fk = window.localStorage.getItem("instituicao_id")
     },
 
-    template: await get_template('./assets/js/views/instituicao/doacoes')
+    template: await get_template('./assets/js/views/instituicao/lancamento')
 }
