@@ -4,6 +4,8 @@ class EmailTemplateControle  extends Controle
 {
     static function start()
     {
+
+        var_dump(EmailTemplate::default()[0]);
         self::printError(
             "Você não tem acesso",
             []
@@ -21,6 +23,19 @@ class EmailTemplateControle  extends Controle
             "content" => "Informe um conteúdo",
         ]);
         self::privateRouter();
+        $instituicao_fk = $_REQUEST["instituicao_fk"];
+        $tipo = $_REQUEST["tipo"];
+        $status_pagamento = $_REQUEST["status_pagamento"];
+        $assunto = $_REQUEST["assunto"];
+        $content = $_REQUEST["content"];
+        $template = new EmailTemplate();
+        $template->save(
+            $instituicao_fk,
+            $tipo,
+            $status_pagamento,
+            $assunto,
+            $content
+        );
         self::printSuccess(
             "Salvo com sucesso",
             []
@@ -36,9 +51,13 @@ class EmailTemplateControle  extends Controle
             "status_pagamento" => "Informe um status de pagamento",
         ]);
         self::privateRouter();
+        $instituicao_fk = $_REQUEST["instituicao_fk"];
+        $tipo = $_REQUEST["tipo"];
+        $status_pagamento = $_REQUEST["status_pagamento"];
+        $template = new EmailTemplate();
         self::printSuccess(
             "Dados",
-            []
+            $template->info( $instituicao_fk, $tipo, $status_pagamento)
         );
     }
 
@@ -51,6 +70,11 @@ class EmailTemplateControle  extends Controle
             "status_pagamento" => "Informe um status de pagamento",
         ]);
         self::privateRouter();
+        $instituicao_fk = $_REQUEST["instituicao_fk"];
+        $tipo = $_REQUEST["tipo"];
+        $status_pagamento = $_REQUEST["status_pagamento"];
+        $template = new EmailTemplate();
+        $template->recover($instituicao_fk,$tipo, $status_pagamento); 
         self::printSuccess(
             "Atualizado com sucesso",
             []
@@ -64,9 +88,11 @@ class EmailTemplateControle  extends Controle
             "instituicao_fk" => "Informe uma identificação de instituição",
         ]);
         self::privateRouter();
+        $instituicao_fk = $_REQUEST['instituicao_fk'];
+        $template = new EmailTemplate();
         self::printSuccess(
             "Lista de Email",
-            []
+            $template->list($instituicao_fk)
         );
     }
 }

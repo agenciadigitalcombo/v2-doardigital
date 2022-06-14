@@ -18,27 +18,28 @@ class EmailTemplate
 
     static function tipos(): array
     {
-        $dirs = glob(__DIR__."/../email/*");
-        $names = array_map(fn( $dir ) => array_reverse(explode("/",str_replace("\\", "/", $dir)))[0], $dirs);
+        $dirs = glob(__DIR__ . "/../email/*");
+        $names = array_map(fn ($dir) => array_reverse(explode("/", str_replace("\\", "/", $dir)))[0], $dirs);
         return $names;
     }
 
-    static function default() {
+    static function default()
+    {
         $emails = [];
         $tipos = self::tipos();
-        foreach( $tipos as $tipo ) {
-            $templates = glob(__DIR__."/../email/{$tipo}/*.txt*");
-            $templates = array_map( function($email) {
+        foreach ($tipos as $tipo) {
+            $templates = glob(__DIR__ . "/../email/{$tipo}/*.txt*");
+            $templates = array_map(function ($email) {
                 $body = file($email);
                 $subject = $body[0] ?? null;
-                unset( $body[0] );
+                unset($body[0]);
                 return [
-                    "status" => str_replace(".txt", "", basename($email) ),
+                    "status" => str_replace(".txt", "", basename($email)),
                     "subject" => $subject,
                     "body" => implode("", $body),
                 ];
-            }, $templates );
-            $templates = array_filter( $templates, fn($email) => $email["subject"]);
+            }, $templates);
+            $templates = array_filter($templates, fn ($email) => $email["subject"]);
             $templates = array_values($templates);
             $emails[] = [
                 "tipo" => $tipo,
@@ -55,16 +56,32 @@ class EmailTemplate
         $bc->table("template_email");
         $insertEmails = [];
         $templates = EmailTemplate::default();
-        foreach( $templates as $template) {
+        foreach ($templates as $template) {
             $tipo = $template["tipo"];
-            foreach( $template["email"] as $email ) {
+            foreach ($template["email"] as $email) {
                 $status = $email["status"] ?? null;
                 $subject = $email["subject"] ?? null;
-                $body = $email["body"]??null;
+                $body = $email["body"] ?? null;
                 $insertEmails[] = "INSERT INTO template_email (instituicao_fk,tipo,status_pagamento,assunto,content) VALUES ('$instituicao_fK','$tipo','$status','$subject','$body')";
             }
         }
-        $bc->exec(implode(";",$insertEmails));
+        $bc->exec(implode(";", $insertEmails));
+    }
+
+    static function getDefault(
+        $tipo,
+        $status
+    ) {
+        foreach( self::default() as $template ) {
+            if( $template["tipo"] == $tipo) {
+                foreach( $template["email"] as $email ) {
+                    if( $email["status"] == $status) {
+                        return $email;
+                    }
+                }
+            }
+        }
+        
     }
 
     public function save(

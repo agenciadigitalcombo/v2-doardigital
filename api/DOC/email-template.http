@@ -1,6 +1,6 @@
 @host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
-@instituicao_fk=TEST_0007
+@instituicao_fk=inst_62a891e95ac6b
 @tipo=PIX
 @status_pagamento=CONFIRMED
 @assunto=Doação concluída com sucesso!

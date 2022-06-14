@@ -238,7 +238,6 @@ class InstituicaoControle extends Controle
         $conta->chavePix();
         $conta->registerWebHook();
         EmailTemplate::maker($institution_fk);
-
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta
