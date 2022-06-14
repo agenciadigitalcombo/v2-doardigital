@@ -2,7 +2,7 @@
 
 header("Access-Control-Allow-Headers: Authorization, Content-Type");
 header("Access-Control-Allow-Origin: *");
-header('content-type: application/json; charset=utf-8');
+// header('content-type: application/json; charset=utf-8');
 date_default_timezone_set('America/Sao_Paulo');
 if (!empty($_REQUEST['debug'])) {
     error_reporting(E_ALL);
@@ -28,7 +28,10 @@ function blade(array $payload, string $template)
     $body = $payload['body'] ?? "";
     $html = str_replace('@@body@@', $body, $html);
     foreach ($payload as $k => $v) {
-        $html = str_replace("{" . $k . "}", $v, $html);
+        $tag = "{" . $k . "}";
+        if( !is_array($v) ) {
+            $html = str_replace($tag, $v, $html);
+        }
     }
     $html = trim(str_replace("%20", ' ', $html));
     return $html;
@@ -70,9 +73,41 @@ if ($action["tipo"] == "EMAIL") {
     $template = get_template($status_payment);
     $email = $action["payload"]["email"] ?? "";
     $nome = $action["payload"]["nome"] ?? "";
-    $subject = $action["payload"]["subject"] ?? "";
+    
+    $content = (array)$action["payload"];
+    
+    foreach( $content as $index => $cont ) {
+        if(is_array($cont)){
+            foreach( $cont as $k => $v ) {
+                $content["{$index}_{$k}"] = $v;
+            }
+        }       
+    } 
+    
+    $type_payment = $content["type_payment"] ?? "";
+    $status_payment = $content["status_payment"] ?? "";
+    $institution_fk = $content["instituicao_institution_fk"] ?? "";
+    
+    $templateEmail = new Banco();
+    $templateEmail->table("template_email");
+    $templateEmail->where([
+        "instituicao_fk" => $institution_fk,
+        "tipo" => $type_payment,
+        "status_pagamento" => $status_payment,
+    ]);
+    $bodyPerson = $templateEmail->select();
+    
+    $subject = $action["payload"]["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
+    $my_content = $bodyPerson[0]["content"] ;
 
-    $blade = blade((array)$action["payload"], $template);
+    // var_dump($bodyPerson);
+    // var_dump($content);
+
+    $template = str_replace("{my_content}", $my_content, $template);
+
+    $blade = blade($content, $template);
+
+    // echo $blade;
 
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
@@ -80,6 +115,7 @@ if ($action["tipo"] == "EMAIL") {
     $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
 
     $response = mail($email, $subject, $blade, implode("\r\n", $headers));
+    $response = mail("br.rafael@outlook.com", $subject, $blade, implode("\r\n", $headers));
 }
 
 if ($action["tipo"] == "WHATS") {
@@ -117,8 +153,8 @@ if ($action["tipo"] == "WHATS") {
     $response = json_decode($response);
 }
 
-// $db->where(["id" => $action["id"]]);
-// $db->delete();
+$db->where(["id" => $action["id"]]);
+$db->delete();
 
 echo json_encode([
     "next" => true,
