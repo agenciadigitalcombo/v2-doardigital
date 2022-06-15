@@ -17,7 +17,7 @@
                 <img src="./assets/logo/logo.svg" alt="Doar Digital" height="40" />
             </div>
             <div class="d-block w-50 bg-white rounded shadow-sm p-5 mx-auto">
-                <form action="javascript:void(0)" class="form w-100" autocomplete="off">
+                <form action="javascript:void(0)" class="form w-100" @submit="login" autocomplete="off">
                     <div class="text-center mb-10">
                         <h1 class="text-dark mb-3">
                             Acesso
@@ -70,7 +70,9 @@
     </template>
 
     <script src="https://unpkg.com/vue@3"></script>
-    <script>
+    <script type="module">
+
+        import http from "./static/js/api/http.js"
 
         const Lb = {
             template: "#comp-label",
@@ -96,6 +98,23 @@
                         { text: "Contato", href: "https://digitalcombo.com.br/contato" },
                     ]
                 }
+            },
+            methods: {
+                async login() {
+                    this.isLoad = true
+                    let response = await http.post( "/adm/login", {
+                        email: this.email, 
+                        senha: this.senha
+                    } )
+                    this.isLoad = false
+                    this.error = response.next ? null : response.message                    
+                    if(!response.next) return null
+                    localStorage.setItem('token', response.payload.token)
+                    window.location.href = "painel/#/"
+                }
+            },
+            mounted() {
+                
             },
             components: {
                 Lb,
