@@ -345,19 +345,18 @@ class AdmControle extends Controle
         self::requireInputs([
             "token" => "informe um token",
             "code" => "informe o código",
-            "cep" => "",
-            "logradouro" => "",
-            "numero" => "",
-            "complemento" => "",
-            "bairro" => "",
-            "cidade" => "",
-            "estado" => "",
+            "cep" => "Informe um CEP",
+            "numero" => "Informe um Número",
+            "complemento" => "Informe um complemento",
+            "bairro" => "Informe um bairro",
+            "cidade" => "Informe uma cidade",
+            "estado" => "Informe o estado",
         ]);
         self::privateRouter();
         $local = new Endereco();
         $code = $_REQUEST['code'];
         $cep = $_REQUEST['cep'];
-        $logradouro = $_REQUEST['logradouro'];
+        $logradouro = $_REQUEST['logradouro'] ?? "";
         $numero = $_REQUEST['numero'];
         $complemento = $_REQUEST['complemento'];
         $bairro = $_REQUEST['bairro'];
