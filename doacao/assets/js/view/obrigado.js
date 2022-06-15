@@ -307,7 +307,8 @@ export default {
 			this.inst.telefone = config.telefone,
 
 
-			this.inst.logo = "https://doardigital.com.br/api/upload/" + config.logo,
+			this.inst.logo = "https://doardigital.tk/api/upload/" + config.logo,
+			
 			//this.inst.icon = config.icon,
 			this.inst.icon = "icon.png",
 			//this.inst.titulo = config.titulo,

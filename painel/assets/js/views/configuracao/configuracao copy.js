@@ -45,7 +45,7 @@ export default {
             }
             this.error = null
 
-            let res = await adm.uploadImg(
+            let res = await adm.uploadImgs(
                 this.token,
                 this.file
             )
@@ -59,7 +59,8 @@ export default {
  
 
         updatePreview(e) {
-          
+            alert(e)
+
             var file, files = e.target.files
             if (files.length === 0) {
                 alert('vazio')
@@ -68,32 +69,30 @@ export default {
             file.onload = (e) => {
               
                 this.imagemVer = e.target.result
-                this.carregarImg()
+                alert(this.imagemVer)
             }
             file.readAsDataURL(files[0])
-            
         },
 
 
 
-        async carregarImg() { 
+        async carregarImg() {
             let file = new FormData();
 
-            file.append('token', this.token,);
             file.append('file', this.$refs.file.files[0]);
 
             this.error = null
 
-            let res = await adm.uploadImg(  
-                file 
+            let res = await adm.uploadImgs(
+                this.token,
+                 this.file = this.imagemVer
             )
             if (!res.next) {
                 this.error = res.message
                 return null
             }
-            this.logo = res.payload.nome,
-            globalThis._foto = res.payload.nome
-          
+
+            globalThis._foto = res.nome_image
             this.msg = res.message,
                 setTimeout(() => this.msg = "", 3000);
         },
