@@ -1,12 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doar Digital</title>
+    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Em Construção...</h1>
+
+<body class="bg-light">
+    <div id="app">
+        <div>
+            <div class="d-block mb-12 text-center py-5">
+                <img src="./assets/logo/logo.svg" alt="Doar Digital" height="40" />
+            </div>
+            <div class="d-block w-50 bg-white rounded shadow-sm p-5 mx-auto">
+                <form action="javascript:void(0)" class="form w-100" autocomplete="off">
+                    <div class="text-center mb-10">
+                        <h1 class="text-dark mb-3">
+                            Acesso
+                        </h1>
+                    </div>
+                    <div class="fv-row mb-10">
+                        <Lb text="Email"></Lb>
+                        <input v-model="email" class="form-control form-control-lg form-control-solid" type="text"
+                            name="email" required />
+                    </div>
+                    <div class="fv-row mb-10">
+                        <div class="d-flex justify-content-between m-2">
+                            <Lb text="Senha"></Lb>
+                            <Lk href="/painel/#/recuperar_senha" text="Esqueceu a Senha?"></Lk>
+                        </div>
+                        <input v-model="senha" class="form-control form-control-lg form-control-solid" type="password"
+                            required />
+                    </div>
+                    <div class="mt-4"></div>
+                    <button type="submit" class="btn btn-lg btn-primary w-100">
+                        <span v-show="!isLoad">
+                            Continue
+                        </span>
+                        <span v-show="isLoad">
+                            Por favor aguarde...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <div class="alert alert-danger {{ error }} mt-4 text-center" v-if="error!=null">
+                        {{ error }}
+                    </div>
+
+                </form>
+            </div>
+            <div class="d-block text-center p-10 fw-bold fs-6 mt-5 mb-5">
+                <Lk v-for="c in contato" :href="c.href" :text="c.text"></Lk>
+            </div>
+        </div>
+    </div>
+
+    <template id="comp-label">
+        <label class="form-label fs-6 fw-bolder text-dark">
+            {{text}}
+        </label>
+    </template>
+
+    <template id="comp-link">
+        <a :href="href" target="_blank" class="text-muted text-hover-primary px-2 text-decoration-none">
+            {{text}}
+        </a>
+    </template>
+
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+
+        const Lb = {
+            template: "#comp-label",
+            props: ["text"]
+        }
+
+        const Lk = {
+            template: "#comp-link",
+            props: ["text", "href"]
+        }
+
+
+        const { createApp } = Vue
+        const App = createApp({
+            data() {
+                return {
+                    error: "usuario ou senha errado",
+                    email: null,
+                    senha: null,
+                    isLoad: false,
+                    contato: [
+                        { text: "Sobre Nós", href: "https://digitalcombo.com.br" },
+                        { text: "Materiais", href: "mailto:contato@digitalcombo.com.br" },
+                        { text: "Contato", href: "https://digitalcombo.com.br/contato" },
+                    ]
+                }
+            },
+            components: {
+                Lb,
+                Lk,
+            }
+        }).mount('#app')
+
+    </script>
 </body>
+
 </html>
