@@ -102,19 +102,27 @@
             methods: {
                 async login() {
                     this.isLoad = true
-                    let response = await http.post( "/adm/login", {
-                        email: this.email, 
+                    let response = await http.post("/adm/login", {
+                        email: this.email,
                         senha: this.senha
-                    } )
+                    })
                     this.isLoad = false
-                    this.error = response.next ? null : response.message                    
-                    if(!response.next) return null
+                    this.error = response.next ? null : response.message
+                    if (!response.next) return null
                     localStorage.setItem('token', response.payload.token)
-                    window.location.href = "painel/#/"
+                    window.location.href = "/painel/#/"
                 }
             },
-            mounted() {
-                
+            async mounted() {
+                const token = localStorage.getItem('token')
+                if (!token) return null
+                let response = await http.post("/adm/logged", {
+                   token
+                })
+                if( !response.next ) {
+                    localStorage.removeItem('token')
+                }
+                window.location.href = "/painel/#/"
             },
             components: {
                 Lb,
