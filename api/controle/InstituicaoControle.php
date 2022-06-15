@@ -336,17 +336,16 @@ class InstituicaoControle extends Controle
         ]);
         $banco = new Banco();
         $domain = $_REQUEST["domain"];
+        
         $company = $banco->query(
             "SELECT * FROM institution WHERE domain='{$domain}' OR subdomain='{$domain}'"
         )[0] ?? [];
         $company = Instituicao::porter($company);
-        
-        
         $banco->table("endereco");
         $banco->where([
             "fk" => $company["institution_fk"]
         ]);
-        $company['endereco'] = Endereco::porter($banco->select()[0]);
+        $company['endereco'] = Endereco::porter($banco->select()[0] ?? []);
         $banco->table("plano");
         $banco->where([
             "fk" => $company["institution_fk"]
