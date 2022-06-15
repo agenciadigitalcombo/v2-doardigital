@@ -110,7 +110,7 @@
                     this.error = response.next ? null : response.message
                     if (!response.next) return null
                     localStorage.setItem('token', response.payload.token)
-                    window.location.href = "/painel/#/"
+                    window.location.href = "/painel-geral/#/"
                 }
             },
             async mounted() {
@@ -122,7 +122,7 @@
                 if( !response.next ) {
                     localStorage.removeItem('token')
                 }
-                window.location.href = "/painel/#/"
+                window.location.href = "/painel-geral/#/"
             },
             components: {
                 Lb,
