@@ -48,7 +48,7 @@
 														<select v-model="tipo" class="form-select border-0"
 															data-control="select2" data-placeholder="Seleciona a opcao">
 															<option v-for="dado in tipos" :key="dado"
-																:value="dado">{{ dado}}</option>
+																:value="dado">{{ dado | este_tipo }}</option>
 														</select>
 													</div>
 

@@ -39,11 +39,10 @@
 
                                                     </th>
                                                     <th class="min-w-200px">Assunto:</th>
+                                                    <th class="min-w-150px">Tipo de pagamento:</th> 
+                                                     <th class="min-w-50px"></th>
                                                     <th class="min-w-200px">status de pagamento:</th>
-                                                    <th class="min-w-50px"></th>
-                                                    <th class="min-w-150px">Tipo de pagamento:</th>
-                                                    <th class="min-w-100px"> status</th>
-                                                    <th class="text-end min-w-70px">Ação</th>
+                                                   <th class="text-end min-w-70px">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 fw-bold">
@@ -59,7 +58,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="badge badge-light fw-bolder"> {{item.tipo}}</div>
+                                                        <div class="badge badge-light fw-bolder"> {{item.tipo | este_tipo}}</div>
                                                     </td>
 
                                                     <td>
@@ -70,16 +69,6 @@
                                                         </div>
                                                     </td>
 
-                                                    <td>
-                                                        <div
-                                                            class="form-check form-switch form-check-custom form-check-solid me-10">
-
-                                                            <input class="form-check-input h-30px w-50px"
-                                                                v-model="item.status" true-value="1" false-value="0"
-                                                                @click="statusx(item.acao)" type="checkbox"
-                                                                id="flexSwitch30x50" />
-                                                        </div>
-                                                    </td>
                                                     <td class="text-end">
 
                                                         <a @click="editar(item.assunto)"

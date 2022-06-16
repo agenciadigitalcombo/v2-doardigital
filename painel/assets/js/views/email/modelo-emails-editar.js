@@ -28,25 +28,46 @@ export default {
 
 	filters: {
 
-		este_status(status) {
-			let apresentar = {
-				PENDING: 'Aguardando Pagamento',
-				RECEIVED: 'Pago',
-				CONFIRMED: 'Pago',
-				OVERDUE: 'Vencida',
-				RECOVER_2_DAY: 'Recuperação 2 dias',
-				RECOVER_3_DAY: 'Recuperação 3 dias',
-				RECOVER_4_DAY: 'Recuperação 4 dias',
-				RECOVER_5_DAY: 'Recuperação 5 dias',
-				RECOVER_6_DAY: 'Recuperação 6 dias',
+	
+        este_status(status) {
+            let apresentar = {
+                PENDING: 'Aguardando Pagamento',
+                RECEIVED: 'Pago',
+                CONFIRMED: 'Pago',
+                OVERDUE: 'Vencida',
+                RECOVER_2_DAY: 'Recuperação 2 dias', 
+                RECOVER_3_DAY: 'Recuperação 3 dias', 
+                RECOVER_4_DAY: 'Recuperação 4 dias', 
+                RECOVER_5_DAY: 'Recuperação 5 dias', 
+                RECOVER_6_DAY: 'Recuperação 6 dias',
+                RECOVER_15: 'Recuperação 15',
+                RECOVER_25: 'Recuperação 25',
+                RECOVER_40: 'Recuperação 40',
+                RECOVER_45: 'Recuperação 45', 
 
-				REFUND_REQUESTED: 'Estorno',
-				CHARGEBACK_REQUESTED: 'Estorno',
-				CHARGEBACK_DISPUTE: 'Estorno',
-				AWAITING_CHARGEBACK_REVERSAL: 'Estorno',
-			}
-			return apresentar[status]
-		},
+                REFUND_REQUESTED: 'Estorno',
+                CHARGEBACK_REQUESTED: 'Estorno',
+                CHARGEBACK_DISPUTE: 'Estorno',
+                AWAITING_CHARGEBACK_REVERSAL: 'Estorno', 
+
+            }
+            return apresentar[status]
+        },
+
+		  este_tipo(status) {
+            let apresentar = {
+                BOLETO: 'BOLETO',
+                PIX: 'PIX',  
+                CREDIT_CARD: 'CRÉDITO', 
+
+                CREDIT_CARD_SIGNATURE: 'ASSINATURA CRÉDITO', 
+                BOLETO_SIGNATURE: 'ASSINATURA BOLETO', 
+                PIX_SIGNATURE: 'ASSINATURA PIX', 
+                RECOVER_CART: 'RECUPERAÇÃO DOAÇÃO', 
+                     
+            }
+            return apresentar[status]
+        },
 	},
 
 
