@@ -791,16 +791,16 @@ export default {
 
     async savarSmtp(
         token,
-        instituicao_id,
+        instituicao_fk,
         host,
         protocolo,
         porta,
         email,
         senha,
     ) {
-        return await http.post('/smtp-save', {
+        return await http.post('/smtp/save', {
             token,
-            instituicao_id,
+            instituicao_fk,
             host,
             protocolo,
             porta,
@@ -810,28 +810,34 @@ export default {
     },
 
     async listarSmtp(
-        instituicao_id
+        token,
+        instituicao_fk
     ) {
-        return await http.get('/list-smtp', {
-            instituicao_id
+        return await http.get('/smtp/info', {
+            token,
+            instituicao_fk
         })
     },
 
     async savarEvenda(
-        instituicao_id,
-        canal,
+         token,
+         instituicao_fk,
+         canal,
     ) {
-        return await http.post('/save-evendas', {
-            instituicao_id,
-            canal,
+        return await http.post('/evendas/save', {
+             token,
+             instituicao_fk,
+             canal,
         })
     },
 
     async listarEvenda(
-        instituicao_id
+        token,
+        instituicao_fk,
     ) {
-        return await http.get('/list-evendas', {
-            instituicao_id
+        return await http.get('/evendas/info', {
+            token,
+            instituicao_fk,
         })
     },
 
