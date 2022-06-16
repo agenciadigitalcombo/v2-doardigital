@@ -746,28 +746,48 @@ export default {
         })
     },
 
-    async listarEmail(instituicao_id) {
-        return await http.get('/list-email', {
-            instituicao_id
-        })
-    },
-
-    async alterarEmail(
-        instituicao_id,
-        assunto,
-        corpo,
-        status,
-        cron
+    async listarEmail(
+        token,
+        instituicao_fk
     ) {
-        return await http.post('/atualiza-email', {
-            instituicao_id,
+        return await http.get('/email-template/list', {
+            
+            token,
+            instituicao_fk
+        })
+    },
+ 
+    async salvarEmail(
+        token,
+        tipo,
+        instituicao_fk,
+        status_pagamento,
+        assunto,
+        content, 
+    ) {
+        return await http.post('/email-template/save', {
+            token,
+            tipo,
+            instituicao_fk,
+            status_pagamento,
             assunto,
-            corpo,
-            status,
-            cron
+            content, 
         })
     },
 
+    async recuperaEmail(
+        token,
+        tipo,
+        instituicao_fk,
+        status_pagamento
+    ) {
+        return await http.post('/email-template/recover', {
+            token,
+            tipo,
+            instituicao_fk,
+            status_pagamento
+        })
+    },
 
     async savarSmtp(
         token,
