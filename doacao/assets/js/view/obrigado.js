@@ -275,13 +275,13 @@ export default {
 
 		isQr() {
 			this.error = null
-			this.loader = 'sim',
+			 
 				setTimeout(async () => {
 					let verificaQrExist = this.inst.codigo_geral
 					if (!verificaQrExist) {
 						this.isQr()
 					} else {
-						this.loader = 'nao'
+						this.loader = 'nao' 
 					}
 
 				}, 1500)
@@ -335,7 +335,7 @@ export default {
 		this.inst.url_geral = localStorage.getItem("url")
 		this.inst.recorrente = localStorage.getItem("recorrente")
 
-
+  
 		if (this.type !== 'CREDIT_CARD') {
 
 			this.isQr()

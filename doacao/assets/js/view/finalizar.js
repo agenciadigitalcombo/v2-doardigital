@@ -244,7 +244,7 @@ export default {
         }
 
 
-        this.nome = window.localStorage.getItem("planos_nome")
+        
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
         // this.instituicao_fk = localStorage.getItem('instituicao_fk')
