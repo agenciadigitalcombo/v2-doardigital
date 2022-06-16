@@ -42,17 +42,16 @@ export default {
 		},
 
 	},
-	//
 
 	filters: {
 		is_price(valor) {
-			let price = (valor / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
 			return `${price}`
 		},
-
+		
 		is_price2(valor) {
-			let price = (valor / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-			return `R$ ${price}`
+			let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+			return `${price}`
 		}
 	},
 
@@ -94,14 +93,22 @@ export default {
 
 		descartavel() {
 
-			let cunston_valor = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
+			let value_min =  25
+			let custom_value = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
+
+			this.minimoalerta = null
+			if( this.jmsColorHouver == null && custom_value < value_min) {
+				this.minimoalerta = "Valor mínimo deve ser R$ 25,00"
+				this.$refs.custom_value.focus()				
+				return null
+			}
 
 			this.error = null
 			this.$v.$touch()
 			if (this.$v.$invalid) {
 				this.submitStatus = 'ERROR'
 			}
-			else if (cunston_valor != 0 && cunston_valor <= 1999) {
+			else if (custom_value != 0 && custom_value <= value_min) {
 				this.minimoalerta = "Valor minimo deve ser 20,00"
 			}
 			else {
