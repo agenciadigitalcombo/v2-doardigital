@@ -17,6 +17,7 @@ export default [
     { path: '/modulos/mailing', component: { template: '<c-modulosMailing>' } },
     { path: '/modulos/rd-station', component: { template: '<c-modulosStation>' } },
     { path: '/modulos/dominio', component: { template: '<c-dominio>' } },
+    { path: '/modulos/tags', component: { template: '<c-tags>' } },
 
     { path: '/doadores', component: { template: '<c-doadores>' } },
     { path: '/doacoes', component: { template: '<c-doacoes>' } },

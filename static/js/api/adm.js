@@ -841,6 +841,29 @@ export default {
         })
     },
 
+
+    
+    async savarTags(
+        token,
+        instituicao_fk,
+        key,
+   ) {
+       return await http.post('/tag-manager/save', {
+            token,
+            instituicao_fk,
+            key,
+       })
+   },
+
+   async listarTags(
+       token,
+       instituicao_fk,
+   ) {
+       return await http.get('/tag-manager/info', {
+           token,
+           instituicao_fk,
+       })
+   },
     async savarMailBoss(
         instituicao_id,
         token,

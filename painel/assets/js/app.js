@@ -66,6 +66,9 @@ Vue.component('c-modulosStation', modulosStation)
 import dominio from './views/modulos/dominio.js'
 Vue.component('c-dominio', dominio)
 
+import tags from './views/modulos/tags.js'
+Vue.component('c-tags', tags)
+
 
 import doadores from './views/instituicao/doadores.js'
 Vue.component('c-doadores', doadores)
