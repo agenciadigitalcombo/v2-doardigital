@@ -93,12 +93,12 @@ export default {
 
 		descartavel() {
 
-			let value_min =  25
+			let value_min =  20
 			let custom_value = parseInt(`${this.valor_digitado}`.replace(/\D/gi, ''))
 
 			this.minimoalerta = null
 			if( this.jmsColorHouver == null && custom_value < value_min) {
-				this.minimoalerta = "Valor mínimo deve ser R$ 25,00"
+				this.minimoalerta = "Valor mínimo deve ser R$ 20,00"
 				this.$refs.custom_value.focus()				
 				return null
 			}
