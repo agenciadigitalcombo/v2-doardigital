@@ -242,7 +242,7 @@ export default {
         this.planos_id = window.localStorage.getItem("planos_id")
 
         if (this.planos_id) {
-            this.valor = window.localStorage.getItem("price")
+            this.valor = window.localStorage.getItem("pricejms")
             this.ver = window.localStorage.getItem("pricejms")
         } else {
             this.valor = window.localStorage.getItem("price_digitado")
