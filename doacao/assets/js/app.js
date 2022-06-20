@@ -29,6 +29,9 @@ Vue.component('c-erro_500', erro_500 )
 import loading from './componentes/c-loading.js'
 Vue.component('c-loading', loading )
 
+import card from './componentes/c-card.js'
+Vue.component('c-card', card )
+
 new Vue({
     store,
     router,

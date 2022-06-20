@@ -3,10 +3,10 @@
 [x] arrumar os valores que vem do banco
 [] pegar o domínio dinamicamente
 [] ao setar plano valor vem errado
-[] remover opção gênero
-[] adicionar icon de meio de pagamento
-[] mostrar mensagem de error
-[] focus em campo obrigatório
-[] adicionar evento submit formulário
-[] adicionar cartão
-[] adicionar os termos https://doacoesbethania.com.br/doacao/#/finalizar
+[x] remover opção gênero
+[x] adicionar icon de meio de pagamento
+[x] mostrar mensagem de error
+[x] focus em campo obrigatório
+[x] adicionar evento submit formulário
+[x] adicionar cartão
+[x] adicionar os termos https://doacoesbethania.com.br/doacao/#/finalizar

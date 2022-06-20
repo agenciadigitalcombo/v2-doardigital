@@ -114,7 +114,7 @@ export default {
         consultar() {
             if (this.type_pagamento == "PIX") {
                 this.txto_pix = "Obs : O valor do PIX entre as 20:00h e 6:00h (noturno)"
-                this.txto_pix2 = "será máximo de R$ 1.000,00 reais."
+                this.txto_pix2 = ""
 
                 if (this.valor >= 100000) {
                     // this.valor = "100000"
