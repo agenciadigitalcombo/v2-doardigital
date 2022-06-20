@@ -7,7 +7,7 @@ export default {
 
     data: function () {
         return {
-            doacao_id: "",
+            token: "",
             institution_fk: "",
             data: "",
             doacoes: [],
@@ -166,23 +166,46 @@ export default {
 
     methods: {
 
-        handleClickOutside(event) {
-            let overlay = document.getElementById("overlay");
-            let modal = document.getElementById("meu_modal");
+        fechaModalExporta(event) {
+            let overlay = document.getElementById("exporta");
+            let modal = document.getElementById("exporta_modal"); 
             if (!modal.contains(event.target)) {
                 modal.style.display = 'none';
-                overlay.style.display = 'none';
-                document.removeEventListener('click', this.handleClickOutside, false);
+                overlay.style.display = 'none'; 
+                document.removeEventListener('click', this.fechaModalExporta, false);
+            } 
+        },
+
+
+        fechaModalImporta(event) { 
+            let importarModal = document.getElementById("importar_modal");
+            let importar = document.getElementById("importar"); 
+           
+            if (!importarModal.contains(event.target)) { 
+                importar.style.display = 'none';
+                importarModal.style.display = 'none';
+                document.removeEventListener('click', this.fechaModalImporta, false);
             }
         },
 
-        openModal() {
-            let overlay = document.getElementById("overlay");
-            let modal = document.getElementById("meu_modal");
+
+      
+        modalExporta() {
+            let overlay = document.getElementById("exporta");
+            let modal = document.getElementById("exporta_modal");
             overlay.style.display = 'flex'
             modal.style.display = 'flex'
-            setTimeout(() => { document.addEventListener('click', this.handleClickOutside, false) }, 200);
+            setTimeout(() => { document.addEventListener('click', this.fechaModalExporta, false) }, 200);
         },
+
+        modalImportar() {
+            let importar = document.getElementById("importar");
+            let importarModal = document.getElementById("importar_modal");
+            importar.style.display = 'flex'
+            importarModal.style.display = 'flex'
+            setTimeout(() => { document.addEventListener('click', this.fechaModalImporta, false) }, 200);
+        },
+
 
         async listarDoacoes() {
             let res = await adm.listarDoacoes(
@@ -208,6 +231,29 @@ export default {
                     $link.href = FIX + linhas
                 })()
 
+        },
+
+        async Importa() { 
+            let file = new FormData();
+
+            file.append('token', this.token,);
+            file.append('institution_fk', this.institution_fk,);
+            file.append('file', this.$refs.file.files[0]);
+
+            this.error = null
+
+            let res = await adm.doacaoUploadCsv(  
+                file 
+            )
+            if (!res.next) {
+                this.error = res.message
+                return null
+            }
+            this.logo = res.payload.nome,
+            globalThis._foto = res.payload.nome
+          
+            this.msg = res.message,
+                setTimeout(() => this.msg = "", 3000);
         },
 
 
@@ -348,8 +394,8 @@ export default {
 
     },
 
-
     created() {
+        this.token = window.localStorage.getItem("token")
         this.institution_fk = window.localStorage.getItem("instituicao_id")
     },
 

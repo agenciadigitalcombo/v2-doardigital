@@ -359,6 +359,21 @@ export default {
         return await res.json()
     },
 
+    async doacaoUploadCsv( 
+        form
+    ) {
+        console.log(form)
+        let res = await fetch(`https://doardigital.tk/import/doacoes`, {
+            
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: form,
+
+        })
+        return await res.json()
+    },
+
 
     async cadastrarSubadm(
         nome,

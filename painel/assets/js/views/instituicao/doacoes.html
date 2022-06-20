@@ -85,14 +85,14 @@
                                             <div class="modals">
 
                                                 <button type="button" class="btn btn-light-primary me-3" v-once
-                                                    @click="openModal()" data-kt-menu-trigger="click"
+                                                    @click="modalExporta()" data-kt-menu-trigger="click"
                                                     data-kt-menu-placement="bottom-end">
                                                     Filtros
                                                 </button>
 
 
-                                                <div class="modal-overlay" id="overlay">
-                                                    <div class="meu_modal w-300px w-md-325px" id="meu_modal">
+                                                <div class="modal-overlay" id="exporta">
+                                                    <div class="meu_modal w-300px w-md-325px" id="exporta_modal">
 
                                                         <div class="px-7 py-5">
                                                             <div class="fs-5 text-dark fw-bolder">Opção de Filtros</div>
@@ -163,10 +163,55 @@
                                             </div>
 
                                             <button type="button" class="btn btn-light-primary me-3" v-once
-                                                @click="modal()" data-kt-menu-trigger="click"
+                                                @click="modalImportar()" data-kt-menu-trigger="click"
                                                 data-kt-menu-placement="bottom-end">
                                                 Importar
                                             </button>
+
+                                            <div class="modal-overlay" id="importar">
+                                                <div class="meu_modal " id="importar_modal">
+                                                    <form class="form">
+
+                                                        <div class="modal-header">
+                                                            <h2 class="fw-bolder">Importar arquivo</h2>
+
+                                                            <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                                                                data-bs-dismiss="modal">
+                                                                <span class="svg-icon svg-icon-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                                        <rect opacity="0.5" x="6" y="17.3137" width="16"
+                                                                            height="2" rx="1"
+                                                                            transform="rotate(-45 6 17.3137)"
+                                                                            fill="currentColor"></rect>
+                                                                        <rect x="7.41422" y="6" width="16" height="2"
+                                                                            rx="1" transform="rotate(45 7.41422 6)"
+                                                                            fill="currentColor"></rect>
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-body pt-10">
+                                                            <div class="form-group">
+                                                             
+                                                                    <input class="form-control" type="file"
+                                                                    ref="file" required accept=".csv" id="formFile">
+                                                                        
+                                                                    <span class="form-text fs-6 text-muted mb-4">Tamanho
+                                                                        maximo 1MB por arquivo.</span>
+
+                                                                    <div class="mt-4">
+                                                                        <a @click="Importa()"
+                                                                            class="btn btn-sm btn-light-primary me-2">Importar</a>
+                                                                        <a
+                                                                            class="btn btn-sm btn-light-primary">Remover</a>
+                                                                    </div> 
+                                                            </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+
 
                                             <a type="button" class="btn btn-light-primary me-3 js-baixar"
                                                 @click="exportar()" download="relatorio.csv" data-bs-toggle="modal"
@@ -177,6 +222,8 @@
                                                 Exportar
                                             </a>
                                         </div>
+
+
 
                                     </div>
                                 </div>
@@ -215,19 +262,22 @@
                                                             <span> {{ item.doador_email }}</span>
                                                         </div>
                                                     </td>
-                                                    <td> {{ item.valor | este_valor  }} </td>
+                                                    <td> {{ item.valor | este_valor }} </td>
 
                                                     <td>
-                                                        <div class="badge" :class="'status_'+item.status_pagamento"> {{item.status_pagamento  | este_status}}</div>
+                                                        <div class="badge" :class="'status_'+item.status_pagamento">
+                                                            {{item.status_pagamento | este_status}}</div>
                                                     </td>
 
                                                     <td>
-                                                        <div class="badge badge-light"> {{item.tipo_pagamento | este_tipo}}</div>
+                                                        <div class="badge badge-light"> {{item.tipo_pagamento |
+                                                            este_tipo}}</div>
                                                     </td>
 
                                                     <td class="text-end">
 
-                                                        <a @click="editar(item.fatura_id)" title="Para Visualizar da um click"
+                                                        <a @click="editar(item.fatura_id)"
+                                                            title="Para Visualizar da um click"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
                                                             style="margin: 2px;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
