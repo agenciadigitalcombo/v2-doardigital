@@ -92,7 +92,7 @@
                 <div class="col-12 col-lg-6 p-5">
                     <div class="card-title mb-10">
                         <h1>
-                            Total a doar: R$ {{ ver }} reais
+                            Total a doar: R$ {{ ver | is_price }} reais
                             <span v-show="recorrente == '1'">
                                 por mês
                             </span>

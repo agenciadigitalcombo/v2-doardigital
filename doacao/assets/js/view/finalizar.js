@@ -58,6 +58,11 @@ export default {
 
 
     filters: {
+        is_price(valor) {
+            valor = valor.replace(',', '.')
+			let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+			return `${price}`
+		},
         money: val => {
             val = `${val}`
             val = val?.replace('\.', '')
