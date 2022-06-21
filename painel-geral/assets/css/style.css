@@ -91,3 +91,34 @@ span .menu  {
 .xxbtn { 
     width: 200px !important;
 }
+
+ /* MEDIA QUERYS */
+ @media screen and (max-width: 943px) {
+  
+    .modal-overlay {
+        background-color: rgba(0, 0, 0, 0.342);
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto;
+      }
+      
+      .btnJms{
+        z-index: 2;
+      }
+
+      .meu_modal {
+        position: relative;
+        display: none;
+        overflow: hidden;
+        -webkit-animation: scale-in-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        animation: scale-in-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+  }
+ 

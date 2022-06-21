@@ -7,10 +7,11 @@
      
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                 <a href="/../painel-geral/">
-                    <img alt="Logo" src="https://doardigital.com.br/wp-content/uploads/2021/05/logotipo1-tam-medio-1024x240-1-300x70.png" class="h-35px" />
-                </a>
+                    <img src="../painel-geral/assets/logo/logotipo.png" class="h-35px" />
+                </a> 
             </div> 
-            <button class="btn btn-icon btn-active-color-primary" id="kt_aside_toggle">
+  
+            <button v-if="mdTrue" @click="modalPainel()" class="btn btn-icon btn-active-color-primary">
           
                 <span class="svg-icon svg-icon-2x me-n1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -21,9 +22,11 @@
                             fill="black" />
                     </svg>
                 </span>
-              
             </button>
-           
+            
+        </div> 
+
+
         </div>
        
     </div>
