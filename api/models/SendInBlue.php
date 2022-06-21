@@ -11,7 +11,7 @@ class SendInBlue {
 
     function __construct()
     {
-        $this->key = "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";
+        $this->key = "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";
         $this->path = "https://api.sendinblue.com/v3/smtp/email";
         $this->header = [
             "accept: application/json",
