@@ -18,6 +18,7 @@ class SendInBlue {
             "api-key:{$this->key}",
             "content-type: application/json",
         ];
+        var_dump($this->header);
     }
 
     function send($nome, $email, $subject, $content) {
