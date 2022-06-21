@@ -28,8 +28,8 @@ class SendInBlue {
             ],
             "to" => [  
                [  
-                  "email" => $nome,
-                  "name" => $email
+                  "email" => $email,
+                  "name" => $nome
                ]
             ],
             "subject" => $subject,
