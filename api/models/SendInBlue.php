@@ -6,7 +6,7 @@
 
 class SendInBlue {
     private $key;
-    private $uri;
+    private $path;
     private $header;
 
     function __construct()
@@ -15,10 +15,9 @@ class SendInBlue {
         $this->path = "https://api.sendinblue.com/v3/smtp/email";
         $this->header = [
             "accept: application/json",
-            "api-key:{$this->key}",
+            "api-key: {$this->key}",
             "content-type: application/json",
         ];
-        var_dump($this->header);
     }
 
     function send($nome, $email, $subject, $content) {
