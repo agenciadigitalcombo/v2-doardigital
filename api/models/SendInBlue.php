@@ -33,7 +33,7 @@ class SendInBlue {
                ]
             ],
             "subject" => $subject,
-            "htmlContent" => "<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Sendinblue.</p></body></html>"
+            "htmlContent" => $content
         ];
         return $this->post( $payload );
     }
