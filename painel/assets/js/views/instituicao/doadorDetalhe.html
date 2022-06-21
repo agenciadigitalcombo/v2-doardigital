@@ -1,33 +1,25 @@
 <div>
     <div>
-
         <c-header></c-header>
         <c-aside></c-aside>
 
-        <!--begin::Root-->
         <div class="d-flex flex-column flex-root">
-            <!--begin::Page-->
             <div class="page d-flex flex-row flex-column-fluid">
 
                 <div class="wrapper d-flex flex-column flex-row-fluid">
 
                     <div class="content d-flex flex-column flex-column-fluid">
-                        <!--begin::Post-->
-                        <div class="post d-flex flex-column-fluid">
-                            <!--begin::Container-->
-                            <div class="container-xxl">
 
-                                <!--begin::details View-->
-                                <div class="card mb-5 mb-xl-10" >
-                                    <!--begin::Card header-->
+                        <div class="post d-flex flex-column-fluid">
+
+                            <div class="container-xxl">
+                                <div class="card mb-5 mb-xl-10">
                                     <div class="card-header cursor-pointer">
-                                        <!--begin::Card title-->
                                         <div class="card-title m-0">
                                             <h3 class="fw-bolder m-0">Detalhe da Doação</h3>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="card-body p-9">
-                                        <!--begin::Row-->
                                         <div class="row mb-7">
 
                                             <div class="col-lg-5">
@@ -104,17 +96,9 @@
 
 
                                     </div>
-
-
                                 </div>
-
-
                             </div>
-
                         </div>
-
-
-
                         <div class="post d-flex flex-column-fluid" v-if="tipo !=='CREDIT_CARD'">
                             <div class="container-xxl">
                                 <div class="card">
@@ -273,7 +257,7 @@
                                                             R$ 0.49
                                                         </td>
                                                         <td>
-                                                             {{valorLiquido | is_price}}
+                                                            {{valorLiquido | is_price}}
                                                         </td>
 
                                                     </tr>
@@ -289,11 +273,8 @@
                 </div>
 
             </div>
-            <!--end::Wrapper-->
         </div>
-        <!--end::Page-->
     </div>
-
 
     <c-footer />
 </div>

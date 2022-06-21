@@ -1,342 +1,339 @@
-<div>
+<div>  
     <c-header></c-header>
     <c-aside></c-aside>
     <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
             <div class="wrapper d-flex flex-column flex-row-fluid">
                 <div class="content d-flex flex-column flex-column-fluid">
-                    <div class="post d-flex flex-column-fluid">
-                        <div class="container-xxl">
 
+                    <div class="container-xxl">
+                        <div class="row g-5 g-xl-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                        <span class="fs-4 fw-bold text-primary pb-1 px-2">Total de Doações</span>
 
-                            <div class="row g-5 g-xl-8">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-primary pb-1 px-2">Total de Doações</span>
-
-                                            <span>
-                                                {{ total | este_valor }}
-                                            </span>
-                                        </div>
+                                        <span>
+                                            {{ total | este_valor }}
+                                        </span>
                                     </div>
-                                    <div class="col">
-                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-success pb-1 px-2">Total Pago</span>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                        <span class="fs-4 fw-bold text-success pb-1 px-2">Total Pago</span>
 
-                                            <span> {{ pago | este_valor }} </span></span>
-                                        </div>
+                                        <span> {{ pago | este_valor }} </span></span>
                                     </div>
-                                    <div class="col">
-                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                        <span class="fs-4 fw-bold text-warning pb-1 px-2">Total Aberto</span>
 
-                                            <span>{{ aberto | este_valor }}</span></span>
-                                        </div>
+                                        <span>{{ aberto | este_valor }}</span></span>
                                     </div>
-                                    <div class="col">
-                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                        <span class="fs-4 fw-bold text-danger pb-1 px-2">Vencido/Cancelado</span>
 
-                                            <span> {{ vencido | este_valor }} </span></span>
-                                        </div>
+                                        <span> {{ vencido | este_valor }} </span></span>
                                     </div>
+                                </div>
 
-                                    <div class="col">
-                                        <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                            <span class="fs-4 fw-bold text-danger pb-1 px-2">Estornado </span>
+                                <div class="col">
+                                    <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                        <span class="fs-4 fw-bold text-danger pb-1 px-2">Estornado </span>
 
-                                            <span> {{ estorno | este_valor }} </span></span>
-                                        </div>
+                                        <span> {{ estorno | este_valor }} </span></span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header border-0 pt-6">
+
+                                <div class="card-title">
+
+                                    <div class="d-flex align-items-center position-relative my-1">
+                                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
+                                                    rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+                                                <path
+                                                    d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                                    fill="black" />
+                                            </svg>
+                                        </span>
+                                        <input type="text" v-model="search"
+                                            class="form-control form-control-solid w-250px ps-14"
+                                            placeholder="Buscar Doadores ..." />
+                                    </div>
+                                </div>
+
+                                <div class="card-toolbar">
 
 
+                                    <div class="d-flex justify-content-end">
 
-                            <div class="card">
-                                <div class="card-header border-0 pt-6">
+                                        <div class="modals">
 
-                                    <div class="card-title">
-
-                                        <div class="d-flex align-items-center position-relative my-1">
-                                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            <button type="button" class="btn btn-light-primary me-3" v-once
+                                                @click="modalExporta()">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                        height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
-                                                        fill="black" />
                                                     <path
-                                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                                        d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
                                                         fill="black" />
                                                 </svg>
-                                            </span>
-                                            <input type="text" data-kt-subscription-table-filter="search"
-                                                v-model="search" class="form-control form-control-solid w-250px ps-14"
-                                                placeholder="Buscar Doadores ..." />
-                                        </div>
-                                    </div>
-
-                                    <div class="card-toolbar">
+                                                </span>
+                                                Filtros
+                                            </button>
 
 
-                                        <div class="d-flex justify-content-end">
+                                            <div class="modal-overlay" id="exporta">
+                                                <div class="meu_modal w-300px w-md-325px" id="exporta_modal">
 
-                                            <div class="modals">
+                                                    <div class="px-7 py-5">
+                                                        <div class="fs-5 text-dark fw-bolder">Opção de Filtros</div>
+                                                    </div>
+                                                    <div class="separator border-gray-200"></div>
 
-                                                <button type="button" class="btn btn-light-primary me-3" v-once
-                                                    @click="modalExporta()" data-kt-menu-trigger="click"
-                                                    data-kt-menu-placement="bottom-end">
-                                                    Filtros
-                                                </button>
+                                                    <div class="px-7 py-5">
 
-
-                                                <div class="modal-overlay" id="exporta">
-                                                    <div class="meu_modal w-300px w-md-325px" id="exporta_modal">
-
-                                                        <div class="px-7 py-5">
-                                                            <div class="fs-5 text-dark fw-bolder">Opção de Filtros</div>
+                                                        <div class="mb-10">
+                                                            <label class="form-label fs-6 fw-bold">Periodo:</label>
+                                                            <select class="form-select form-select-solid fw-bolder"
+                                                                data-hide-search="true">
+                                                                <option>selecione a Opção</option>
+                                                                <option value="0">Hoje</option>
+                                                                <option value="1">Ontem</option>
+                                                                <option value="7">Últimos 7 dias</option>
+                                                                <option value="30">Últimos 30 dias</option>
+                                                                <option value="365">Este Ano</option>
+                                                                <option value="366">Escolher Periodo</option>
+                                                            </select>
                                                         </div>
-                                                        <div class="separator border-gray-200"></div>
-
-                                                        <div class="px-7 py-5" data-kt-subscription-table-filter="form">
-
-                                                            <div class="mb-10">
-                                                                <label class="form-label fs-6 fw-bold">Periodo:</label>
-                                                                <select class="form-select form-select-solid fw-bolder"
-                                                                    data-hide-search="true">
-                                                                    <option>selecione a Opção</option>
-                                                                    <option value="0">Hoje</option>
-                                                                    <option value="1">Ontem</option>
-                                                                    <option value="7">Últimos 7 dias</option>
-                                                                    <option value="30">Últimos 30 dias</option>
-                                                                    <option value="365">Este Ano</option>
-                                                                    <option value="366">Escolher Periodo</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-10">
-                                                                <div class="row">
-                                                                    <label
-                                                                        class="form-label fs-6 fw-bold">Valor:</label>
-                                                                    <div class="col-sm-6 col-6 ">
-                                                                        <div class="card">
-                                                                            <input
-                                                                                class="form-control form-control-solid"
-                                                                                type="text" placeholder="de:">
-                                                                        </div>
+                                                        <div class="mb-10">
+                                                            <div class="row">
+                                                                <label class="form-label fs-6 fw-bold">Valor:</label>
+                                                                <div class="col-sm-6 col-6 ">
+                                                                    <div class="card">
+                                                                        <input class="form-control form-control-solid"
+                                                                            type="text" placeholder="de:">
                                                                     </div>
-                                                                    <div class="col-sm-6 col-6 ">
-                                                                        <div class="card">
-                                                                            <input
-                                                                                class="form-control form-control-solid"
-                                                                                type="text" placeholder="até:">
+                                                                </div>
+                                                                <div class="col-sm-6 col-6 ">
+                                                                    <div class="card">
+                                                                        <input class="form-control form-control-solid"
+                                                                            type="text" placeholder="até:">
 
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
 
-                                                            <div class="mb-10">
-                                                                <label
-                                                                    class="form-label fs-6 fw-bold">Recorrente:</label>
-                                                                <select class="form-select form-select-solid fw-bolder"
-                                                                    data-hide-search="true">
-                                                                    <option>selecione a Opção</option>
-                                                                    <option value="1">SIM</option>
-                                                                    <option value="0">NÃO</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="d-flex justify-content-end">
-                                                                <button type="reset"
-                                                                    class="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
-                                                                    data-kt-menu-dismiss="true"
-                                                                    data-kt-subscription-table-filter="reset">Reset</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary fw-bold px-6">Aplicar</button>
-                                                            </div>
-
+                                                        <div class="mb-10">
+                                                            <label class="form-label fs-6 fw-bold">Recorrente:</label>
+                                                            <select class="form-select form-select-solid fw-bolder"
+                                                                data-hide-search="true">
+                                                                <option>selecione a Opção</option>
+                                                                <option value="1">SIM</option>
+                                                                <option value="0">NÃO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="reset"
+                                                                class="btn btn-light btn-active-light-primary fw-bold me-2 px-6">Reset</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary fw-bold px-6">Aplicar</button>
                                                         </div>
 
                                                     </div>
-                                                </div>
 
-                                            </div>
-
-                                            <button type="button" class="btn btn-light-primary me-3" v-once
-                                                @click="modalImportar()" data-kt-menu-trigger="click"
-                                                data-kt-menu-placement="bottom-end">
-                                                Importar
-                                            </button>
-
-                                            <div class="modal-overlay" id="importar">
-                                                <div class="meu_modal " id="importar_modal">
-                                                    <form class="form">
-
-                                                        <div class="modal-header">
-                                                            <h2 class="fw-bolder">Importar arquivo</h2>
-
-                                                            <div class="btn btn-icon btn-sm btn-active-icon-primary"
-                                                                data-bs-dismiss="modal">
-                                                                <span class="svg-icon svg-icon-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                                                            height="2" rx="1"
-                                                                            transform="rotate(-45 6 17.3137)"
-                                                                            fill="currentColor"></rect>
-                                                                        <rect x="7.41422" y="6" width="16" height="2"
-                                                                            rx="1" transform="rotate(45 7.41422 6)"
-                                                                            fill="currentColor"></rect>
-                                                                    </svg>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-body pt-10">
-                                                            <div class="form-group">
-                                                             
-                                                                    <input class="form-control" type="file"
-                                                                    ref="file" required accept=".csv" id="formFile">
-                                                                        
-                                                                    <span class="form-text fs-6 text-muted mb-4">Tamanho
-                                                                        maximo 1MB por arquivo.</span>
-
-                                                                    <div class="mt-4">
-                                                                        <a @click="Importa()"
-                                                                            class="btn btn-sm btn-light-primary me-2">Importar</a>
-                                                                        <a
-                                                                            class="btn btn-sm btn-light-primary">Remover</a>
-                                                                    </div> 
-                                                            </div>
-
-                                                    </form>
                                                 </div>
                                             </div>
 
-
-                                            <a type="button" class="btn btn-light-primary me-3 js-baixar"
-                                                @click="exportar()" download="relatorio.csv" data-bs-toggle="modal"
-                                                data-bs-target="#kt_subscriptions_export_modal">
-                                                <span class="svg-icon svg-icon-2">
-
-                                                </span>
-                                                Exportar
-                                            </a>
                                         </div>
 
+                                        <button type="button" class="btn btn-light-primary me-3" v-once
+                                            @click="modalImportar()">
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
+                                                    <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+                                                  </svg>
+                                            </span>
+                                            Importar
+                                        </button>
 
+                                        <div class="modal-overlay" id="importar">
+                                            <div class="meu_modal " id="importar_modal">
+                                                <form class="form">
 
-                                    </div>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5">
-                                            <thead>
-                                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                                    <div class="modal-header">
+                                                        <h2 class="fw-bolder">Importar arquivo</h2>
 
-                                                    <th class="min-w-125px">Doador</th>
-                                                    <th class="min-w-100px">Valor</th>
-                                                    <th class="min-w-125px">Status</th>
-                                                    <th class="min-w-100px">Tipo</th>
-                                                    <th class="text-end min-w-70px">Ação</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="text-gray-600 fw-bold">
-                                                <tr v-for="item in filtraDoacoes">
-                                                    <!--<tr v-for="item in dadosPagina">-->
-
-                                                    <td class="d-flex align-items-center">
-                                                        <div
-                                                            class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                            <a
-                                                                href="../../demo8/dist/apps/user-management/users/view.html">
-                                                                <div class="symbol-label">
-                                                                    <img :src="item.doador_gravatar" alt="Emma Smith"
-                                                                        class="w-100" />
-                                                                </div>
-                                                            </a>
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary">
+                                                            <span class="svg-icon svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.5" x="6" y="17.3137" width="16"
+                                                                        height="2" rx="1"
+                                                                        transform="rotate(-45 6 17.3137)"
+                                                                        fill="currentColor"></rect>
+                                                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                                        transform="rotate(45 7.41422 6)"
+                                                                        fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
                                                         </div>
-                                                        <div class="d-flex flex-column">
-                                                            <a class="text-gray-800 text-hover-primary mb-1">
-                                                                {{ item.doador_nome }}
-                                                            </a>
-                                                            <span> {{ item.doador_email }}</span>
+                                                    </div>
+                                                    <div class="modal-body pt-10">
+                                                        <div class="form-group"> 
+                                                            <input class="form-control" type="file" ref="file" required
+                                                                accept=".csv" id="file">
+
+                                                            <span class="form-text fs-6 text-muted mb-4">Tamanho
+                                                                maximo 1MB por arquivo.</span>
+
+                                                            <div class="mt-4">
+                                                                <a @click="Importa()"
+                                                                    class="btn btn-sm btn-light-primary me-2">Importar</a>
+                                                                <a class="btn btn-sm btn-light-primary">Remover</a>
+                                                            </div>
                                                         </div>
-                                                    </td>
-                                                    <td> {{ item.valor | este_valor }} </td>
 
-                                                    <td>
-                                                        <div class="badge" :class="'status_'+item.status_pagamento">
-                                                            {{item.status_pagamento | este_status}}</div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="badge badge-light"> {{item.tipo_pagamento |
-                                                            este_tipo}}</div>
-                                                    </td>
-
-                                                    <td class="text-end">
-
-                                                        <a @click="editar(item.fatura_id)"
-                                                            title="Para Visualizar da um click"
-                                                            class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
-                                                            style="margin: 2px;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" fill="currentColor" class="bi bi-eye-fill"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                                                <path
-                                                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                                            </svg>
-                                                        </a>
-
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-
-
-
-
-
-                                        <div class="d-flex flex-stack flex-wrap pt-10">
-                                            <div class="fs-6 fw-bold text-gray-700">Mostrando de 1 a
-                                                {{elementoPaginacao}} de 200 entradas
-
-                                                <select class="selectpagina" v-model="elementoPaginacao"
-                                                    @change="atualizarPag()">
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                    <option value="200">200</option>
-                                                </select>
-                                                linhas por página
-
+                                                </form>
                                             </div>
-
-                                            <ul class="pagination">
-
-                                                <li @click="getAnterior()" class="page-item previous disabled"><a
-                                                        class="page-link"><i class="previous"></i></a></li>
-                                                <li @click="getPagina(pagina)" v-for="pagina in botaoJmsPaginacao()"
-                                                    v-bind:class="estaActivo(pagina)" class="page-item "><a
-                                                        class="page-link ">
-                                                        <div> {{pagina}}</div>
-                                                    </a></li>
-                                                <li class="page-item "><a href="#" class="page-link">...</a></li>
-                                                <li @click="getUltima()" class="page-item "><a href="#"
-                                                        class="page-link">{{totalPagina()}}</a></li>
-                                                <li @click="getProximo()" class="page-item next"><a class="page-link"><i
-                                                            class="next"></i></a></li>
-
-                                            </ul>
-
                                         </div>
+
+
+                                        <a type="button" class="btn btn-light-primary me-3 js-baixar"
+                                            @click="exportar()" download="relatorio.csv">
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+                                                    <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                                                  </svg>
+                                            </span>
+                                            Exportar
+                                        </a>
                                     </div>
+
+
 
                                 </div>
                             </div>
+                            <div class="card-body pt-0">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                        <thead>
+                                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+
+                                                <th class="min-w-125px">Doador</th>
+                                                <th class="min-w-100px">Valor</th>
+                                                <th class="min-w-125px">Status</th>
+                                                <th class="min-w-100px">Tipo</th>
+                                                <th class="text-end min-w-70px">Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-600 fw-bold">
+                                            <tr v-for="item in filtraDoacoes">
+                                                <!--<tr v-for="item in dadosPagina">-->
+
+                                                <td class="d-flex align-items-center">
+                                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                        <a href="../../demo8/dist/apps/user-management/users/view.html">
+                                                            <div class="symbol-label">
+                                                                <img :src="item.doador_gravatar" alt="Emma Smith"
+                                                                    class="w-100" />
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <a class="text-gray-800 text-hover-primary mb-1">
+                                                            {{ item.doador_nome }}
+                                                        </a>
+                                                        <span> {{ item.doador_email }}</span>
+                                                    </div>
+                                                </td>
+                                                <td> {{ item.valor | este_valor }} </td>
+
+                                                <td>
+                                                    <div class="badge" :class="'status_'+item.status_pagamento">
+                                                        {{item.status_pagamento | este_status}}</div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="badge badge-light"> {{item.tipo_pagamento |
+                                                        este_tipo}}</div>
+                                                </td>
+
+                                                <td class="text-end">
+
+                                                    <a @click="editar(item.fatura_id)"
+                                                        title="Para Visualizar da um click"
+                                                        class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
+                                                        style="margin: 2px;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-eye-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                            <path
+                                                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+
+
+
+                                    <div class="d-flex flex-stack flex-wrap pt-10">
+                                        <div class="fs-6 fw-bold text-gray-700">Mostrando de 1 a
+                                            {{elementoPaginacao}} de 200 entradas
+
+                                            <select class="selectpagina" v-model="elementoPaginacao"
+                                                @change="atualizarPag()">
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                <option value="200">200</option>
+                                            </select>
+                                            linhas por página
+
+                                        </div>
+
+                                        <ul class="pagination">
+
+                                            <li @click="getAnterior()" class="page-item previous disabled"><a
+                                                    class="page-link"><i class="previous"></i></a></li>
+                                            <li @click="getPagina(pagina)" v-for="pagina in botaoJmsPaginacao()"
+                                                v-bind:class="estaActivo(pagina)" class="page-item "><a
+                                                    class="page-link ">
+                                                    <div> {{pagina}}</div>
+                                                </a></li>
+                                            <li class="page-item "><a href="#" class="page-link">...</a></li>
+                                            <li @click="getUltima()" class="page-item "><a href="#"
+                                                    class="page-link">{{totalPagina()}}</a></li>
+                                            <li @click="getProximo()" class="page-item next"><a class="page-link"><i
+                                                        class="next"></i></a></li>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

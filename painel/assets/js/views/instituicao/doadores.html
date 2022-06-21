@@ -1,17 +1,13 @@
-<div>
+<div> 
 
 	<c-header></c-header>
 	<c-aside></c-aside>
 
 	<div class="d-flex flex-column flex-root">
 		<div class="page d-flex flex-row flex-column-fluid">
-
 			<div class="wrapper d-flex flex-column flex-row-fluid">
-
 				<div class="content d-flex flex-column flex-column-fluid" >
-
-					<div class="post d-flex flex-column-fluid">
-
+					 
 						<div class="container-xxl">
 
 							<div class="row g-5 g-xl-8"> 
@@ -66,8 +62,7 @@
 														fill="black" />
 												</svg>
 											</span>
-											<input type="text" data-kt-subscription-table-filter="search"
-												v-model="search" class="form-control form-control-solid w-250px ps-14"
+											<input type="text" v-model="search" class="form-control form-control-solid w-250px ps-14"
 												placeholder="Buscar Doadores ..." />
 										</div>
 									</div>
@@ -80,8 +75,15 @@
 											<div class="modals">
 
 												<button type="button" class="btn btn-light-primary me-3" v-once
-													@click="openModal()" data-kt-menu-trigger="click"
-													data-kt-menu-placement="bottom-end">
+													@click="openModal()">
+													<span class="svg-icon svg-icon-2">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none">
+														<path
+															d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+															fill="black" />
+													</svg>
+													</span>
 													Filtros
 												</button>
 
@@ -94,7 +96,7 @@
 														</div>
 														<div class="separator border-gray-200"></div>
 
-														<div class="px-7 py-5" data-kt-subscription-table-filter="form">
+														<div class="px-7 py-5">
 
 															<div class="mb-10">
 																<label class="form-label fs-6 fw-bold">Periodo:</label>
@@ -142,16 +144,25 @@
 											</div>
 
 											<button type="button" class="btn btn-light-primary me-3" v-once
-												@click="modal()" data-kt-menu-trigger="click"
-												data-kt-menu-placement="bottom-end">
+												@click="modal()">
+												<span class="svg-icon svg-icon-2">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
+														<path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
+														<path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+													  </svg>
+												</span>
 												Importar
 											</button>
 
 											<a type="button" class="btn btn-light-primary me-3 js-baixar"
-												@click="exportar()" download="relatorio.csv" data-bs-toggle="modal"
-												data-bs-target="#kt_subscriptions_export_modal">
+												@click="exportar()" download="relatorio.csv">
 												<span class="svg-icon svg-icon-2">
-
+													<span class="svg-icon svg-icon-2">
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
+															<path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+															<path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
+														  </svg>
+													</span>
 												</span>
 												Exportar
 											</a>
@@ -229,13 +240,11 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
+						</div> 
 				</div>
 			</div>
 		</div>
-	</div>
-	<!--end:: Root-->
+	</div> 
 
 	<c-footer />
 
