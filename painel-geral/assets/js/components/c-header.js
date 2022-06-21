@@ -25,7 +25,6 @@ export default {
 
       
         modalPainel() {
-            alert('olaa')
             let overlay = document.getElementById("jmsMenu");
             let modal = document.getElementById("jmsMenu_modal");
             overlay.style.display = 'flex'
