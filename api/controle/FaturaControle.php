@@ -267,42 +267,42 @@ class FaturaControle extends Controle
             $doador_email
         );
 
-        $notification = new Message();
-        $notification->save(
-            "EMAIL",
-            time(),
-            [
-                "instituicao" => $institution->info($instituicao_fk),
-                "nome" => $nome,
-                "email" => $email,
-                "telefone" => $telefone,
-                "valor" => $valor,
-                "status_payment" => $status_pagamento,
-                "type_payment" => $tipo_pagamento,
-                "url" => $url,
-                "code" => $codigo,
-            ]
-        );
-        $notification->save(
-            "WHATS",
-            time(),
-            [
-                "instituicao" => $institution->info($instituicao_fk),
-                "nome" => $nome,
-                "email" => $email,
-                "telefone" => $telefone,
-                "ddd" => $telefone,
-                "valor" => $valor,
-                "status_payment" => $status_pagamento,
-                "type_payment" => $tipo_pagamento,
-                "boleto_url" => $url,
-                "url_pix" => $codigo,
-                "code_boleto" => $codigo,
-                "logradouro" => $logadouro,
-                "token" => $env['evendas'],
-                "external_id" => $pay_external_fk,
-            ]
-        );
+        // $notification = new Message();
+        // $notification->save(
+        //     "EMAIL",
+        //     time(),
+        //     [
+        //         "instituicao" => $institution->info($instituicao_fk),
+        //         "nome" => $nome,
+        //         "email" => $email,
+        //         "telefone" => $telefone,
+        //         "valor" => $valor,
+        //         "status_payment" => $status_pagamento,
+        //         "type_payment" => $tipo_pagamento,
+        //         "url" => $url,
+        //         "code" => $codigo,
+        //     ]
+        // );
+        // $notification->save(
+        //     "WHATS",
+        //     time(),
+        //     [
+        //         "instituicao" => $institution->info($instituicao_fk),
+        //         "nome" => $nome,
+        //         "email" => $email,
+        //         "telefone" => $telefone,
+        //         "ddd" => $telefone,
+        //         "valor" => $valor,
+        //         "status_payment" => $status_pagamento,
+        //         "type_payment" => $tipo_pagamento,
+        //         "boleto_url" => $url,
+        //         "url_pix" => $codigo,
+        //         "code_boleto" => $codigo,
+        //         "logradouro" => $logadouro,
+        //         "token" => $env['evendas'],
+        //         "external_id" => $pay_external_fk,
+        //     ]
+        // );
 
         self::printSuccess(
             "Fatura registrada com sucesso",

@@ -13,8 +13,8 @@
 @bairro=JD Margarida
 @cidade=Taboão da serra
 @estado=SP
-@valor=41.8
-@recorrente=1
+@valor=41.7
+@recorrente=0
 @tipo_pagamento=PIX
 @card_nome=Bruno Ap Vieira
 @card_numero=5119 4054 5033 2489
