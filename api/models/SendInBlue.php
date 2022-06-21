@@ -11,7 +11,8 @@ class SendInBlue {
 
     function __construct()
     {
-        $this->key = "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";
+        $env = include __DIR__ . "/../../env.php";
+        $this->key = $env["SendInBlue"];
         $this->path = "https://api.sendinblue.com/v3/smtp/email";
         $this->header = [
             "accept: application/json",
