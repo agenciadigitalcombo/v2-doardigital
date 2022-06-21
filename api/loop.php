@@ -58,6 +58,9 @@ if (empty($action)) {
     die;
 }
 
+$db->where(["id" => $action["id"]]);
+$db->delete();
+
 $action = [
     "id" => $action["id"] ?? 0,
     "hoje" => time(),
@@ -153,8 +156,7 @@ if ($action["tipo"] == "WHATS") {
     $response = json_decode($response);
 }
 
-$db->where(["id" => $action["id"]]);
-$db->delete();
+
 
 echo json_encode([
     "next" => true,
