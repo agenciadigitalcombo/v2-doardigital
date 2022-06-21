@@ -11,6 +11,7 @@ if (!empty($_REQUEST['debug'])) {
 
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/models/Evendas.php";
+include __DIR__ . "/models/SendInBlue.php";
 
 function get_template(string $status_pagamento): string
 {
@@ -29,7 +30,7 @@ function blade(array $payload, string $template)
     $html = str_replace('@@body@@', $body, $html);
     foreach ($payload as $k => $v) {
         $tag = "{" . $k . "}";
-        if( !is_array($v) ) {
+        if (!is_array($v)) {
             $html = str_replace($tag, $v, $html);
         }
     }
@@ -76,21 +77,21 @@ if ($action["tipo"] == "EMAIL") {
     $template = get_template($status_payment);
     $email = $action["payload"]["email"] ?? "";
     $nome = $action["payload"]["nome"] ?? "";
-    
+
     $content = (array)$action["payload"];
-    
-    foreach( $content as $index => $cont ) {
-        if(is_array($cont)){
-            foreach( $cont as $k => $v ) {
+
+    foreach ($content as $index => $cont) {
+        if (is_array($cont)) {
+            foreach ($cont as $k => $v) {
                 $content["{$index}_{$k}"] = $v;
             }
-        }       
-    } 
-    
+        }
+    }
+
     $type_payment = $content["type_payment"] ?? "";
     $status_payment = $content["status_payment"] ?? "";
     $institution_fk = $content["instituicao_institution_fk"] ?? "";
-    
+
     $templateEmail = new Banco();
     $templateEmail->table("template_email");
     $templateEmail->where([
@@ -99,26 +100,26 @@ if ($action["tipo"] == "EMAIL") {
         "status_pagamento" => $status_payment,
     ]);
     $bodyPerson = $templateEmail->select();
-    
-    $subject = $action["payload"]["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
-    $my_content = $bodyPerson[0]["content"] ;
 
-    // var_dump($bodyPerson);
-    // var_dump($content);
+    $subject = $action["payload"]["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
+    $my_content = $bodyPerson[0]["content"];
 
     $template = str_replace("{my_content}", $my_content, $template);
 
     $blade = blade($content, $template);
 
-    // echo $blade;
+    // $headers[] = 'MIME-Version: 1.0';
+    // $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    // $headers[] = "To: {$nome} <{$email}>";
+    // $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
 
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-    $headers[] = "To: {$nome} <{$email}>";
-    $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
+    $Email = new SendInBlue();
 
-    $response = mail($email, $subject, $blade, implode("\r\n", $headers));
-    $response = mail("br.rafael@outlook.com", $subject, $blade, implode("\r\n", $headers));
+    // $response = mail($email, $subject, $blade, implode("\r\n", $headers));
+    // $response = mail("br.rafael@outlook.com", $subject, $blade, implode("\r\n", $headers));
+    $Email->send("Bruno", "br.rafael@outlook.com", $subject, $blade);
+    $Email->send("John", "johnhoffmannsantos@yahoo.com", $subject, $blade);
+    $Email->send($nome, $email, $subject, $blade);
 }
 
 if ($action["tipo"] == "WHATS") {
@@ -155,8 +156,6 @@ if ($action["tipo"] == "WHATS") {
     );
     $response = json_decode($response);
 }
-
-
 
 echo json_encode([
     "next" => true,
