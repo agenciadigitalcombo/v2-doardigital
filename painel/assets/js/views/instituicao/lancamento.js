@@ -296,7 +296,7 @@ export default {
         }).split('/').reverse().join('');
 
 
-        this.doacoes = (await this.listarDoacoes()).payload.reverse() || {}
+        this.doacoes = (await this.listarDoacoes()).payload || {}
         this.getPagina(1)
 
         this.filltroDoa = (await this.listarDoacoes()).payload || {}
