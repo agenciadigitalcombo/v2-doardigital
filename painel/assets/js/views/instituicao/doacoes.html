@@ -1,4 +1,4 @@
-<div>  
+<div>
     <c-header></c-header>
     <c-aside></c-aside>
     <div class="d-flex flex-column flex-root">
@@ -75,7 +75,7 @@
                                 <div class="card-toolbar">
 
 
-                                    <div class="d-flex justify-content-end">
+                                    <!-- <div class="d-flex justify-content-end">
 
                                         <div class="modals">
 
@@ -221,7 +221,7 @@
                                             </span>
                                             Exportar
                                         </a>
-                                    </div>
+                                    </div> -->
 
 
 
@@ -237,6 +237,7 @@
                                                 <th class="min-w-100px">Valor</th>
                                                 <th class="min-w-125px">Status</th>
                                                 <th class="min-w-100px">Tipo</th>
+                                                <th class="min-w-100px">Data</th>
                                                 <th class="text-end min-w-70px">Ação</th>
                                             </tr>
                                         </thead>
@@ -268,8 +269,14 @@
                                                 </td>
 
                                                 <td>
-                                                    <div class="badge badge-light"> {{item.tipo_pagamento |
-                                                        este_tipo}}</div>
+                                                    <div class="badge badge-light">
+                                                        {{item.tipo_pagamento | este_tipo}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="badge badge-light">
+                                                        {{data}}
+                                                    </div>
                                                 </td>
 
                                                 <td class="text-end">
