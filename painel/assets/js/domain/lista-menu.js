@@ -8,7 +8,7 @@ export default [
 
     { id: 'doadores', nome: 'Doadores', icon: 'doadores.svg', link: '#/doadores', feature_flag: true, permisao1: "1", permisao2: "adm" },
     { id: 'doacoes', nome: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true, permisao1: "1", permisao2: "adm" },
-    { id: 'lancamento', nome: 'Lançamento', icon: 'doacoes.svg', link: '#/lancamento', feature_flag: true, permisao1: "1", permisao2: "adm" },
+    { id: 'lancamento', nome: 'Recorrente', icon: 'doacoes.svg', link: '#/lancamento', feature_flag: true, permisao1: "1", permisao2: "adm" },
     
     { id: 'planos', nome: 'Planos', icon: 'planos.svg', link: '#/planos', feature_flag: true, permisao1: "1", permisao2: "adm" },
     { id: 'divisao', nome: 'Divisão Pagamento', icon: 'coins.svg', link: '#/divisao-pagamento', feature_flag: true },
