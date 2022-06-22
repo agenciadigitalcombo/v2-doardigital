@@ -237,7 +237,7 @@
                                                 <th class="min-w-100px">Valor</th>
                                                 <th class="min-w-125px">Status</th>
                                                 <th class="min-w-100px">Tipo</th>
-                                                <th class="min-w-100px">Data</th>
+                                                <th class="min-w-125px">Data</th>
                                                 <th class="text-end min-w-70px">Ação</th>
                                             </tr>
                                         </thead>
@@ -274,9 +274,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="badge badge-light">
-                                                        {{item.data}}
-                                                    </div>
+                                                    {{item.data | esta_data}} {{item.hora}}
                                                 </td>
 
                                                 <td class="text-end">
