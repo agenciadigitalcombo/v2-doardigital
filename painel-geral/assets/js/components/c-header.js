@@ -5,7 +5,33 @@ export default {
         return {
             titulo: "",
             msg: "",
+            mdTrue: true,
         }
+    },
+
+    methods: {
+
+        fechaModal(event) {
+            let overlay = document.getElementById("jmsMenu");
+            let modal = document.getElementById("jmsMenu_modal"); 
+            if (!modal.contains(event.target)) {
+                modal.style.display = 'none';
+                overlay.style.display = 'none'; 
+                document.removeEventListener('click', this.fechaModal, false);
+                this.mdTrue = true
+            } 
+        },
+ 
+
+      
+        modalPainel() {
+            let overlay = document.getElementById("jmsMenu");
+            let modal = document.getElementById("jmsMenu_modal");
+            overlay.style.display = 'flex'
+            modal.style.display = 'flex'
+            setTimeout(() => { document.addEventListener('click', this.fechaModal, false) }, 200);
+            this.mdTrue = false
+        },
     },
 
     created() {

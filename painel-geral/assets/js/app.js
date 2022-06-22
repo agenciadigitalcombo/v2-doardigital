@@ -32,8 +32,6 @@ Vue.component('p-recuperar_senha', page_recuperar_senha)
 import page_home from './view/home/home.js'
 Vue.component('p-home', page_home)
 
-import page_contato from './view/contato/home.js'
-Vue.component('p-contato', page_contato)
 
 import page_instituicoes from './view/instituicoes/home.js'
 Vue.component('p-instituicoes', page_instituicoes)
@@ -97,8 +95,7 @@ const routes = [
     { path: '/login', component: { template: '<p-login></p-login>' } },
     { path: '/recuperar_senha', component: { template: '<p-recuperar_senha></p-recuperar_senha>' } },
 
-    { path: '/', component: { template: '<p-home></p-home>' } },
-    { path: '/contato', component: { template: '<p-contato></p-contato>' } },
+    { path: '/', component: { template: '<p-home></p-home>' } }, 
     { path: '/instituicoes', component: { template: '<p-instituicoes></p-instituicoes>' } },
     { path: '/instituicoesNova', component: { template: '<p-nova_instituicoes></p-nova_instituicoes>' } },
     { path: '/editarInstituicoes', component: { template: '<p-editar_instituicoes></p-editar_instituicoes>' } }, 
