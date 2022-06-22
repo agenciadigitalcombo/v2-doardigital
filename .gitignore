@@ -2,6 +2,7 @@
 ref.txt
 ref
 .vscode/
+env.php
 Criacao-Contas-Bancarias
 Envio-Documentos-v3
 /api/upload/*.jpg
