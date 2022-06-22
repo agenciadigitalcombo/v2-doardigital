@@ -21,28 +21,29 @@
 									</div>
 									<div class="col">
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-											<span class="fs-4 fw-bold text-success pb-1 px-2">Valor Recorrente</span>
-
-											<span> {{ valorRecorrente | este_valor }} </span>
-
-										</div>
-									</div>
-									<div class="col">
-										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-info pb-1 px-2">Quantidade Único</span>
 
 										<span> {{ quantUnico }} </span>
 
 										</div>
 									</div>
-									<div class="col">
+									<!-- <div class="col">
+										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
+											<span class="fs-4 fw-bold text-success pb-1 px-2">Valor Recorrente</span>
+
+											<span> {{ valorRecorrente | este_valor }} </span>
+
+										</div>
+									</div> -->
+									
+									<!-- <div class="col">
 										<div class="card card-dashed flex-center min-w-175px my-3 p-6">
 											<span class="fs-4 fw-bold text-danger pb-1 px-2">Valor Único</span>
 
 											<span> {{ valorUnico | este_valor }}</span>
 
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 							<div class="card">
@@ -71,7 +72,7 @@
 
 
 										<div class="d-flex justify-content-end">
-
+<!-- 
 											<div class="modals">
 
 												<button type="button" class="btn btn-light-primary me-3" v-once
@@ -141,9 +142,9 @@
 													</div>
 												</div>
 
-											</div>
+											</div> -->
 
-											<button type="button" class="btn btn-light-primary me-3" v-once
+											<!-- <button type="button" class="btn btn-light-primary me-3" v-once
 												@click="modal()">
 												<span class="svg-icon svg-icon-2">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
@@ -152,7 +153,7 @@
 													  </svg>
 												</span>
 												Importar
-											</button>
+											</button> -->
 
 											<a type="button" class="btn btn-light-primary me-3 js-baixar"
 												@click="exportar()" download="relatorio.csv">
@@ -181,7 +182,9 @@
 													<th class="min-w-100px">Tipo Doador</th>
 													<th class="min-w-175px">Data Cadastro </th>
 													<th class="min-w-150px">CPF</th>
-													<th class="text-end min-w-100px">Ação</th>
+													<th class="text-end min-w-100px">
+														<!-- Ação -->
+													</th>
 												</tr>
 											</thead>
 											<tbody class="text-gray-600 fw-bold">
@@ -218,7 +221,7 @@
 
 													<td class="text-end">
 
-                                                        <a @click="editar(item.cpf)" title="Para Visualizar da um click"
+                                                        <!-- <a @click="editar(item.cpf)" title="Para Visualizar da um click"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
                                                             style="margin: 2px;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -229,7 +232,7 @@
                                                                 <path
                                                                     d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                                             </svg>
-                                                        </a>
+                                                        </a> -->
 
                                                     </td>
 
