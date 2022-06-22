@@ -18,10 +18,22 @@ class DoadorControle extends Controle
         ]);
         self::privateRouter();
         $instituicao_fk = $_REQUEST['instituicao_fk'];
+        $assinatura = new Banco();
+        $assinatura->table("assinatura");
+        $assinatura->where(["instituicao_fk" => $instituicao_fk]);
+        $todasAssinaturas = $assinatura->select();
+        $fkAssinantes = array_map(fn ($d) => $d["doador_fk"], $todasAssinaturas);
         $doador = new Doador();
+        $todosDoadores = $doador->listAll($instituicao_fk);
+        $todosDoadores = array_map(function ($d) use ($fkAssinantes) {
+            if (in_array($d["external_fk"], $fkAssinantes)) {
+                $d["recorrente"] = true;
+            }
+            return $d;
+        }, $todosDoadores);
         self::printSuccess(
             "Lista de doadores",
-            $doador->listAll($instituicao_fk)
+            array_reverse($todosDoadores)
         );
     }
 
