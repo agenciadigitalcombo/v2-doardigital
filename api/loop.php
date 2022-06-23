@@ -154,5 +154,5 @@ echo json_encode([
     "next" => true,
     "message" => "Lista de agendamentos",
     "payload" => $action,
-    "response" => $response
+    "response" => $content
 ]);
