@@ -59,8 +59,8 @@ if (empty($action)) {
     die;
 }
 
-$db->where(["id" => $action["id"]]);
-$db->delete();
+// $db->where(["id" => $action["id"]]);
+// $db->delete();
 
 $action = [
     "id" => $action["id"] ?? 0,
@@ -108,15 +108,8 @@ if ($action["tipo"] == "EMAIL") {
 
     $blade = blade($content, $template);
 
-    // $headers[] = 'MIME-Version: 1.0';
-    // $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-    // $headers[] = "To: {$nome} <{$email}>";
-    // $headers[] = 'From: Doar Digital <contato@doardigital.com.br>';
-
     $Email = new SendInBlue();
 
-    // $response = mail($email, $subject, $blade, implode("\r\n", $headers));
-    // $response = mail("br.rafael@outlook.com", $subject, $blade, implode("\r\n", $headers));
     $Email->send("Bruno", "br.rafael@outlook.com", $subject, $blade);
     $Email->send("John", "johnhoffmannsantos@yahoo.com", $subject, $blade);
     $Email->send($nome, $email, $subject, $blade);
