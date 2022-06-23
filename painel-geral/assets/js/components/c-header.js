@@ -35,7 +35,7 @@ export default {
     },
 
     created() {
-        
+      
         this.titulo = [window.location.href.split('#/')[1]] || window.location.href.split('#/')[1]
       
     },

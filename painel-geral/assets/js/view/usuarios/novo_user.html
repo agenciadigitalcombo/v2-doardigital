@@ -13,192 +13,186 @@
 
                     <div class="container-xxl">
 
-                            <div class="card mb-5 mb-xl-10">
-                                <div class="card-header border-0 cursor-pointer" role="button">
-                                    <div class="card-title m-0">
-                                        <h3 class="fw-bolder m-0">Novo Usuário</h3>
-                                    </div>
-                                </div> 
-                                    <div class="card-body border-top p-9">
-                                        <div class="d-flex flex-wrap align-items-center mb-10">
+                        <div class="card mb-5 mb-xl-10">
+                            <div class="card-header border-0 cursor-pointer" role="button">
+                                <div class="card-title m-0">
+                                    <h3 class="fw-bolder m-0">Novo Usuário</h3>
+                                </div>
+                            </div>
+                            <div class="card-body border-top p-9">
+                                <div class="d-flex flex-wrap align-items-center mb-10">
 
-                                           <div class="flex-row-fluid ">
+                                    <div class="flex-row-fluid ">
 
-                                                <form class="form" @submit.prevent="addUsuario">
-                                                    <div class="row mb-1">
+                                        <form class="form" @submit.prevent="addUsuario">
+                                            <div class="row mb-1">
 
-                                                        <div class="col-lg-6">
-                                                            <div class="fv-row mb-5">
-                                                                <label for="nome"
-                                                                    class="form-label fs-6 fw-bolder mb-3">Nome</label>
-                                                                <input type="text" v-model="nome" required
-                                                                    class="form-control form-control-lg form-control-solid" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="fv-row mb-5">
-                                                                <label for="Email"
-                                                                    class="form-label fs-6 fw-bolder mb-3">Email</label>
-                                                                <input type="email" v-model="email" required
-                                                                    class="form-control form-control-lg form-control-solid" />
-                                                            </div>
-                                                        </div>
+                                                <div class="col-lg-6">
+                                                    <div class="fv-row mb-5">
+                                                        <label for="nome"
+                                                            class="form-label fs-6 fw-bolder mb-3">Nome</label>
+                                                        <input type="text" v-model="nome" required
+                                                            class="form-control form-control-lg form-control-solid" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="fv-row mb-5">
+                                                        <label for="Email"
+                                                            class="form-label fs-6 fw-bolder mb-3">Email</label>
+                                                        <input type="email" v-model="email" required
+                                                            class="form-control form-control-lg form-control-solid" />
+                                                    </div>
+                                                </div>
 
-                                                        <div class="col-lg-6">
-                                                            <div class="fv-row mb-5">
-                                                                <label for="Telefone"
-                                                                    class="form-label fs-6 fw-bolder mb-3">Telefone</label>
+                                                <div class="col-lg-6">
+                                                    <div class="fv-row mb-5">
+                                                        <label for="Telefone"
+                                                            class="form-label fs-6 fw-bolder mb-3">Telefone</label>
+                                                        </label>
+                                                        </label>
+                                                        <input type="text" v-model="telefone" v-mask="'(##) #####-####'"
+                                                            placeholder="(41) 99999-9999"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="fv-row mb-5">
+                                                        <label for="Credencial"
+                                                            class="form-label fs-6 fw-bolder mb-3 ">Credencial</label>
+                                                        <select v-model="credencial"
+                                                            class="form-select form-control form-control-lg form-control-solid"
+                                                            required>
+                                                            <option selected>Qual a sua Credencial</option>
+                                                            <option v-for="dado in lista_credencial" :key="dado.id"
+                                                                :value="dado.id">{{
+                                                                dado.nome_identificacao }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row mb-1">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-10 fv-row">
+                                                            <div class="mb-1">
+                                                                <label class="form-label fw-bold  fs-6 mb-2 required  ">
+                                                                    Nova Senha
                                                                 </label>
-                                                                </label>
-                                                                <input type="text" v-model="telefone"
-                                                                    v-mask="'(##) #####-####'"
-                                                                    placeholder="(41) 99999-9999"
-                                                                    class="form-control form-control-lg form-control-solid"
-                                                                    required />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="fv-row mb-5">
-                                                                <label for="Credencial"
-                                                                    class="form-label fs-6 fw-bolder mb-3 ">Credencial</label>
-                                                                <select v-model="credencial"
-                                                                    class="form-select form-control form-control-lg form-control-solid"
-                                                                    required>
-                                                                    <option selected>Qual a sua Credencial</option>
-                                                                    <option v-for="dado in lista_credencial"
-                                                                        :key="dado.id" :value="dado.id">{{
-                                                                        dado.nome_identificacao }}</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="row mb-1">
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-10 fv-row">
-                                                                    <div class="mb-1">
-                                                                        <label
-                                                                            class="form-label fw-bold  fs-6 mb-2 required  ">
-                                                                            Nova Senha
-                                                                        </label>
-                                                                        <div class="position-relative mb-3">
-                                                                            <input id="senha"
-                                                                                v-model.trin="$v.senha.$model" required
-                                                                                :class=" {'is-invalid':$v.senha.$error, 'is-valid':!$v.senha.$invalid }"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="password" />
-                                                                            <div class="erros" v-if="$v.senha.$error">
-                                                                                <div class="erro_texte"
-                                                                                    v-if="!$v.senha.required">
-                                                                                    A Senha é necessária</div>
-                                                                                <div class="erro_texte"
-                                                                                    v-if="!$v.senha.minLength">
-                                                                                    Use 8 ou mais caracteres com uma
-                                                                                    mistura de letras, números e
-                                                                                    símbolos.
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="sucesso_texte" v-else>
-                                                                            </div>
+                                                                <div class="position-relative mb-3">
+                                                                    <input id="senha" v-model.trin="$v.senha.$model"
+                                                                        required
+                                                                        :class=" {'is-invalid':$v.senha.$error, 'is-valid':!$v.senha.$invalid }"
+                                                                        class="form-control form-control-lg form-control-solid"
+                                                                        type="password" />
+                                                                    <div class="erros" v-if="$v.senha.$error">
+                                                                        <div class="erro_texte"
+                                                                            v-if="!$v.senha.required">
+                                                                            A Senha é necessária</div>
+                                                                        <div class="erro_texte"
+                                                                            v-if="!$v.senha.minLength">
+                                                                            Use 8 ou mais caracteres com uma
+                                                                            mistura de letras, números e
+                                                                            símbolos.
                                                                         </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="checkbox" id="mostrarsenha"
-                                                                            @click="togleMostraSenha"
-                                                                            v-model="mostrarsenha">
-                                                                        <label classe="" for="mostrarsenha">Mostrar
-                                                                            Senha</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="col-lg-6">
-                                                                <div class="fv-row mb-10">
-                                                                    <label
-                                                                        class="form-label fw-bold fs-6 mb-2 required">Confirma
-                                                                        Nova Senha</label>
-
-                                                                    <input type="password"
-                                                                        v-model.trin="$v.repetirsenha.$model"
-                                                                        :class=" {'is-invalid':$v.repetirsenha.$error, 'is-valid': (senha != '') ? !$v.repetirsenha.$invalid : ''}"
-                                                                        class="form-control form-control-lg form-control-solid" />
-
-
-                                                                    <div class="erro_texte"
-                                                                        v-if="!$v.repetirsenha.sameAsPassword">
-                                                                        As senhas devem ser idênticas
                                                                     </div>
 
                                                                     <div class="sucesso_texte" v-else>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="col-lg-12">
-                                                            <div class="fv-row mb-15">
-                                                                <label for="Credencial"
-                                                                    class="form-label fs-6 fw-bolder mb-10">Selecione a
-                                                                    instituições de acesso</label>
-
-                                                                <div class="text-center">
-
-                                                                    <div class="row g-5">
-                                                                        <div class="col-lg-4"
-                                                                            v-for="dado in lista_instituicao"
-                                                                            :key="dado.id">
-                                                                            <div class="card card-stretch mb-2">
-                                                                                <label
-                                                                                    class="form-check form-switch form-check-custom form-check-solid">
-
-                                                                                    <input class="form-check-input"
-                                                                                        v-model="instituicao_id"
-                                                                                        :value="dado.id"
-                                                                                        type="checkbox" />
-                                                                                    <span class="form-check-label">
-                                                                                        {{dado.nome_fantasia}} id
-                                                                                        {{dado.id}}
-                                                                                    </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        id {{instituicao_id}}
-
-                                                                    </div>
-
-                                                                </div>
+                                                            <div>
+                                                                <input type="checkbox" id="mostrarsenha"
+                                                                    @click="togleMostraSenha" v-model="mostrarsenha">
+                                                                <label classe="" for="mostrarsenha">Mostrar
+                                                                    Senha</label>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div v-if="jms===true">
-                                                            <c-mensagem :msg="msg"></c-mensagem>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="fv-row mb-10">
+                                                            <label
+                                                                class="form-label fw-bold fs-6 mb-2 required">Confirma
+                                                                Nova Senha</label>
+
+                                                            <input type="password" v-model.trin="$v.repetirsenha.$model"
+                                                                :class=" {'is-invalid':$v.repetirsenha.$error, 'is-valid': (senha != '') ? !$v.repetirsenha.$invalid : ''}"
+                                                                class="form-control form-control-lg form-control-solid" />
+
+
+                                                            <div class="erro_texte"
+                                                                v-if="!$v.repetirsenha.sameAsPassword">
+                                                                As senhas devem ser idênticas
+                                                            </div>
+
+                                                            <div class="sucesso_texte" v-else>
+
+                                                            </div>
                                                         </div>
-                                                        <div v-else>
-                                                            <c-mensagem :error="error"></c-mensagem>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="fv-row mb-15">
+                                                        <label for="Credencial"
+                                                            class="form-label fs-6 fw-bolder mb-10">Selecione a
+                                                            instituições de acesso</label>
+
+                                                        <div class="text-center">
+
+                                                            <div class="row g-5">
+                                                                <div class="col-lg-4" v-for="dado in lista_instituicao"
+                                                                    :key="dado.id">
+                                                                    <div class="card card-stretch mb-2">
+                                                                        <label
+                                                                            class="form-check form-switch form-check-custom form-check-solid">
+
+                                                                            <input class="form-check-input"
+                                                                                v-model="instituicao_id"
+                                                                                :value="dado.id" type="checkbox" />
+                                                                            <span class="form-check-label">
+                                                                                {{dado.nome_fantasia}} id
+                                                                                {{dado.id}}
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                id {{instituicao_id}}
+
+                                                            </div>
+
                                                         </div>
+                                                    </div>
+                                                </div>
 
-                                                        <div class="d-flex">
+                                                <div v-if="jms===true">
+                                                    <c-mensagem :msg="msg"></c-mensagem>
+                                                </div>
+                                                <div v-else>
+                                                    <c-mensagem :error="error"></c-mensagem>
+                                                </div>
 
-                                                            <button type="submit" class="btn btn-primary">
-                                                                <span class="indicator-label">SALVAR</span>
-                                                                <span class="indicator-progress">Por favor, aguarde...
-                                                                    <span
-                                                                        class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                            </button>
+                                                <div class="d-flex">
 
-                                                            <button id="kt_password_cancel" type="button"
-                                                                class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
-                                                        </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <span class="indicator-label">SALVAR</span>
+                                                        <span class="indicator-progress">Por favor, aguarde...
+                                                            <span
+                                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    </button>
+
+                                                    <button id="kt_password_cancel" type="button"
+                                                        class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancelar</button>
+                                                </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </div> 
-               
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
