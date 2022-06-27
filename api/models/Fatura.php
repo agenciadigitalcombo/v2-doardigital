@@ -35,6 +35,7 @@ class Fatura
     public function listAll(string $instituicao_fk): array
     {
         $this->con->where(["instituicao_fk" => $instituicao_fk]);
+        $this->con->orderByDesc('data');
         return array_map(["Fatura", "porter"], $this->con->select());
     }
 
