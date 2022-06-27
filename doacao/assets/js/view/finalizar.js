@@ -258,7 +258,8 @@ export default {
 
         this.token = localStorage.getItem('token')
         //this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
-        this.domain = "jms21122xxcr"
+        // this.domain = "jms21122xxcr"
+        this.domain = window.location.host
         // this.this.domain  = window.location.hostname
 
         let config = (await this.lisConfiguracao()).payload

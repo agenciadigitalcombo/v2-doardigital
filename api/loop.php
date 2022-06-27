@@ -59,8 +59,8 @@ if (empty($action)) {
     die;
 }
 
-// $db->where(["id" => $action["id"]]);
-// $db->delete();
+$db->where(["id" => $action["id"]]);
+$db->delete();
 
 $action = [
     "id" => $action["id"] ?? 0,
@@ -104,15 +104,18 @@ if ($action["tipo"] == "EMAIL") {
     $subject = $action["payload"]["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
     $my_content = $bodyPerson[0]["content"];
 
+    $my_content = str_replace("\n","<br >", $my_content);
     $template = str_replace("{my_content}", $my_content, $template);
-
+    unset($content["instituicao"]);
+    $content["NOME"] = $content["nome"];
+    $content["LINK"] = $content["type_payment"] == "PIX" ? $content["code"] : $content["url"];
     $blade = blade($content, $template);
 
     $Email = new SendInBlue();
 
     $Email->send("Bruno", "br.rafael@outlook.com", $subject, $blade);
     $Email->send("John", "johnhoffmannsantos@yahoo.com", $subject, $blade);
-    $Email->send($nome, $email, $subject, $blade);
+    $response = $Email->send($nome, $email, $subject, $blade);
 }
 
 if ($action["tipo"] == "WHATS") {
@@ -154,5 +157,6 @@ echo json_encode([
     "next" => true,
     "message" => "Lista de agendamentos",
     "payload" => $action,
-    "response" => $content
+    "payload_mail" => $content ?? [],
+    "response" => $response
 ]);

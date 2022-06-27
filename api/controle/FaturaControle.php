@@ -74,10 +74,8 @@ class FaturaControle extends Controle
             );
         }
 
-        if ($env['sandbox']) {
-            $clientAsa->set_api_key($carteira_fk);
-            $Pay->set_api_key($carteira_fk);
-        }
+        $clientAsa->set_api_key($carteira_fk);
+        $Pay->set_api_key($carteira_fk);
 
         $exist = $client->exist($cpf, $instituicao_fk);
         if (!$exist) {
