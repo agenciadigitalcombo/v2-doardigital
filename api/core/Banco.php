@@ -72,7 +72,7 @@ class Banco
     }
     
     function orderByDesc( string $col ) {
-       $this->order =  "ORDER BY {$col} DEC";
+       $this->order =  "ORDER BY {$col} DESC";
     }
 
     function select(): array
