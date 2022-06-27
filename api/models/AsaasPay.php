@@ -57,7 +57,7 @@ class AsaasPay extends Asaas
             "customer" => $customer,
             "billingType" => $tipo_pagamento,
             "value" => $valor,
-            "dueDate" => date('Y-m-d'),
+            "dueDate" => date('Y-m-d', strtotime('+7 days')),
             "description" => "Doação Unica",
             "externalReference" => $external_fk,
             "postalService" => false,
@@ -120,7 +120,7 @@ class AsaasPay extends Asaas
             "description" => "Assinatura",
             "externalReference" => $external_fk,
             "postalService" => false,
-            "nextDueDate" => date('Y-m-d'),
+            "nextDueDate" => date('Y-m-d', strtotime('+7 days')),
             "cycle" => "MONTHLY",
         ];
         if ($tipo_pagamento == "BOLETO") {
