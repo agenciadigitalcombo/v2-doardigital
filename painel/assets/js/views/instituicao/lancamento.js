@@ -296,7 +296,7 @@ export default {
             day: '2-digit',
         }).split('/').reverse().join('');
 
-        this.getPagina(1)
+        
         this.nowMonth = new Date().getMonth()
 
         let allDonations = (await this.listarDoacoes()).payload || []
@@ -308,6 +308,7 @@ export default {
         this.doacoes = allDonationsNowMonth
         this.filltroDoa = allDonationsNowMonth
 
+        this.getPagina(1)
 
         var tatalArray = [];
         length = this.filtraTotal.length;
