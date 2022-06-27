@@ -21,6 +21,7 @@ export default {
             vencido: "",
             estorno: "",
             search: "",
+            nowMonth: 0,
 
             elementoPaginacao: 25,
             maxVisibleButtons: 5,
@@ -76,7 +77,7 @@ export default {
             items = this.dadosPagina.filter((item) => {
                 return (
                     item.status_pagamento === 'CONFIRMED' ||
-                     item.status_pagamento === 'RECEIVED'
+                    item.status_pagamento === 'RECEIVED'
                 );
             });
             items = items.filter((item) => {
@@ -295,11 +296,18 @@ export default {
             day: '2-digit',
         }).split('/').reverse().join('');
 
-
-        this.doacoes = (await this.listarDoacoes()).payload || {}
         this.getPagina(1)
+        this.nowMonth = new Date().getMonth()
 
-        this.filltroDoa = (await this.listarDoacoes()).payload || {}
+        let allDonations = (await this.listarDoacoes()).payload || []
+
+        let allDonationsNowMonth = allDonations.filter(donation => {
+            return (new Date(donation.data).getMonth() ) == (this.nowMonth + 1)
+        })
+
+        this.doacoes = allDonationsNowMonth
+        this.filltroDoa = allDonationsNowMonth
+
 
         var tatalArray = [];
         length = this.filtraTotal.length;
