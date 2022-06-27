@@ -50,7 +50,6 @@ import page_banco_editar_instituicoes from './view/instituicoes/banco_editar_ins
 Vue.component('p-banco_editar_instituicoes', page_banco_editar_instituicoes)
 
 
-
 import page_usuarios from './view/usuarios/home.js'
 Vue.component('p-usuarios', page_usuarios)
 
