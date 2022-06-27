@@ -21,6 +21,7 @@ export default {
             vencido: "",
             estorno: "",
             search: "",
+            nowMonth: 0,
 
             elementoPaginacao: 25,
             maxVisibleButtons: 5,
@@ -341,6 +342,8 @@ export default {
             month: '2-digit',
             day: '2-digit',
         }).split('/').reverse().join('');
+
+        this.nowMonth = new Date().getMonth()
 
 
         this.doacoes = (await this.listarDoacoes()).payload || {}
