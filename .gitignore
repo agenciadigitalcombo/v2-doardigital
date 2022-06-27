@@ -9,3 +9,4 @@ Envio-Documentos-v3
 /api/upload/*.pdf
 /api/upload/*.png
 /api/upload/*.jpeg
+/api/config.php
