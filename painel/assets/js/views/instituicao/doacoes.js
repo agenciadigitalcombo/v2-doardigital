@@ -359,9 +359,9 @@ export default {
 
         let somar = lista => lista.reduce((acc, v) => (acc + v), 0)
 
-        let paga = allDonationsNowMonth.filter(d => d.status_pagamento == "CONFIRMED").map(d => +d.valor)
+        let paga = allDonationsNowMonth.filter(d => d.status_pagamento == "CONFIRMED" || d.status_pagamento == "RECEIVED").map(d => +d.valor)
         let aberto = allDonationsNowMonth.filter(d => d.status_pagamento == "PENDING").map(d => +d.valor)
-        let devolvida = allDonationsNowMonth.filter(d => d.status_pagamento == "RECEIVED").map(d => +d.valor)
+        let devolvida = allDonationsNowMonth.filter(d => d.status_pagamento == "REFUNDED").map(d => +d.valor)
         let vencidaCancelada = allDonationsNowMonth.filter(d => d.status_pagamento == "OVERDUE").map(d => +d.valor)
 
         let pagaTotal = somar(paga)
