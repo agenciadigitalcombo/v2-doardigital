@@ -310,48 +310,25 @@ export default {
 
         this.getPagina(1)
 
-        var tatalArray = [];
-        length = this.filtraTotal.length;
-        for (var i = 0; i < length; i++)
-            tatalArray.push(parseInt(this.filtraTotal[i].valor));
-        this.total = tatalArray.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
+        let somar = lista => lista.reduce((acc, v) => (acc + v), 0)
 
+        let paga = allDonationsNowMonth.filter(d => d.status_pagamento == "CONFIRMED").map(d => +d.valor)
+        let aberto = allDonationsNowMonth.filter(d => d.status_pagamento == "PENDING").map(d => +d.valor)
+        let devolvida = allDonationsNowMonth.filter(d => d.status_pagamento == "RECEIVED").map(d => +d.valor)
+        let vencidaCancelada = allDonationsNowMonth.filter(d => d.status_pagamento == "OVERDUE").map(d => +d.valor)
 
-        var abertoArray = [];
-        length = this.filtraAberto.length;
-        for (var i = 0; i < length; i++)
-            abertoArray.push(parseInt(this.filtraAberto[i].valor));
-        this.aberto = abertoArray.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
+        let pagaTotal = somar(paga)
+        let abertoTotal = somar(aberto)
+        let devolvidaTotal = somar(devolvida)
+        let vencidaCanceladaTotal = somar(vencidaCancelada)
 
+        let total = pagaTotal + abertoTotal + devolvidaTotal + vencidaCanceladaTotal
 
-        var abertoArray = [];
-        length = this.filtraPago.length;
-        for (var i = 0; i < length; i++)
-            abertoArray.push(parseInt(this.filtraPago[i].valor));
-        this.pago = abertoArray.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
-
-        var abertoVencido = [];
-        length = this.filtraVencido.length;
-        for (var i = 0; i < length; i++)
-            abertoVencido.push(parseInt(this.filtraVencido[i].valor));
-        this.vencido = abertoVencido.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
-
-        var abertoEstorno = [];
-        length = this.filtraEstorno.length;
-        for (var i = 0; i < length; i++)
-            abertoEstorno.push(parseInt(this.filtraEstorno[i].valor));
-        this.estorno = abertoEstorno.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
-
+        this.total = total
+        this.pago = pagaTotal
+        this.aberto = abertoTotal
+        this.vencido = vencidaCanceladaTotal
+        this.estorno = devolvidaTotal
 
 
     },
