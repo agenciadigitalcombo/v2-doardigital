@@ -45,6 +45,7 @@ class Doador
     public function listAll(string $instituicao_fk): array
     {
         $this->con->where(["instituicao_fk" => $instituicao_fk]);
+        $this->con->orderByDesc("registro");
         return array_map(["Doador", "porter"], $this->con->select());
     }
 

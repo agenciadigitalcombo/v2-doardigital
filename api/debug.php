@@ -1,10 +1,17 @@
 <?php
 
-include __DIR__ . "/models/SendInBlue.php";
+include __DIR__ . "/core/Banco.php";
 
-$Email = new SendInBlue();
+$donations = new Banco();
+$donations->table("fatura");
 
-$Email->send( "john", "johnhoffmannsantos@yahoo.com", "Teste API", "ok" );
-$res = $Email->send( "Bruno", "br.rafael@outlook.com", "Teste API", "ok" );
+$invoices = $donations->select();
 
-echo json_encode( $res );
+$subscribe = new Banco();
+$subscribe->table("assinatura");
+
+
+
+
+
+echo json_encode( $invoices );
