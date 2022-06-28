@@ -34,9 +34,8 @@ class Fatura
 
     public function listAll(string $instituicao_fk): array
     {
-        $this->con->where(["instituicao_fk" => $instituicao_fk]);
-        $this->con->orderByDesc('data');
-        return array_map(["Fatura", "porter"], $this->con->select());
+        $sql = "select *, concat(data, hora) as data_hora from fatura where instituicao_fk='{$instituicao_fk}' order by data_hora DESC";
+        return array_map(["Fatura", "porter"], $this->con->query($sql));
     }
 
     public function listAllByDoador(string $instituicao_fk, string $doador_fk): array
