@@ -345,11 +345,17 @@ export default {
 
         this.nowMonth = new Date().getMonth()
 
+        let allDonations = (await this.listarDoacoes()).payload || []
 
-        this.doacoes = (await this.listarDoacoes()).payload || {}
+        let allDonationsNowMonth = allDonations.filter(donation => {
+            return (new Date(donation.data).getMonth() ) == (this.nowMonth )
+        })
+
+
+        this.doacoes = allDonationsNowMonth
         this.getPagina(1)
 
-        this.filltroDoa = (await this.listarDoacoes()).payload || {}
+        this.filltroDoa = allDonationsNowMonth
 
         var tatalArray = [];
         length = this.filtraTotal.length;
