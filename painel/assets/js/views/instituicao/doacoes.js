@@ -169,20 +169,20 @@ export default {
 
         fechaModalExporta(event) {
             let overlay = document.getElementById("exporta");
-            let modal = document.getElementById("exporta_modal"); 
+            let modal = document.getElementById("exporta_modal");
             if (!modal.contains(event.target)) {
                 modal.style.display = 'none';
-                overlay.style.display = 'none'; 
+                overlay.style.display = 'none';
                 document.removeEventListener('click', this.fechaModalExporta, false);
-            } 
+            }
         },
 
 
-        fechaModalImporta(event) { 
+        fechaModalImporta(event) {
             let importarModal = document.getElementById("importar_modal");
-            let importar = document.getElementById("importar"); 
-           
-            if (!importarModal.contains(event.target)) { 
+            let importar = document.getElementById("importar");
+
+            if (!importarModal.contains(event.target)) {
                 importar.style.display = 'none';
                 importarModal.style.display = 'none';
                 document.removeEventListener('click', this.fechaModalImporta, false);
@@ -190,7 +190,7 @@ export default {
         },
 
 
-      
+
         modalExporta() {
             let overlay = document.getElementById("exporta");
             let modal = document.getElementById("exporta_modal");
@@ -234,7 +234,7 @@ export default {
 
         },
 
-        async Importa() { 
+        async Importa() {
             let file = new FormData();
 
             file.append('token', this.token,);
@@ -243,16 +243,16 @@ export default {
 
             this.error = null
 
-            let res = await adm.doacaoUploadCsv(  
-                file 
+            let res = await adm.doacaoUploadCsv(
+                file
             )
             if (!res.next) {
                 this.error = res.message
                 return null
             }
             this.logo = res.payload.nome,
-            globalThis._foto = res.payload.nome
-          
+                globalThis._foto = res.payload.nome
+
             this.msg = res.message,
                 setTimeout(() => this.msg = "", 3000);
         },
@@ -348,7 +348,7 @@ export default {
         let allDonations = (await this.listarDoacoes()).payload || []
 
         let allDonationsNowMonth = allDonations.filter(donation => {
-            return (new Date(donation.data).getMonth() ) == (this.nowMonth )
+            return (new Date(donation.data).getMonth()) == (this.nowMonth)
         })
 
 
@@ -357,47 +357,27 @@ export default {
 
         this.filltroDoa = allDonationsNowMonth
 
-        var tatalArray = [];
-        length = this.filtraTotal.length;
-        for (var i = 0; i < length; i++)
-            tatalArray.push(parseInt(this.filtraTotal[i].valor));
-        this.total = tatalArray.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
+        let somar = lista => lista.reduce((acc, v) => (acc + v), 0)
 
+        let paga = allDonationsNowMonth.filter(d => d.status_pagamento == "CONFIRMED").map(d => +d.valor)
+        let aberto = allDonationsNowMonth.filter(d => d.status_pagamento == "PENDING").map(d => +d.valor)
+        let devolvida = allDonationsNowMonth.filter(d => d.status_pagamento == "RECEIVED").map(d => +d.valor)
+        let vencidaCancelada = allDonationsNowMonth.filter(d => d.status_pagamento == "OVERDUE").map(d => +d.valor)
 
-        var abertoArray = [];
-        length = this.filtraAberto.length;
-        for (var i = 0; i < length; i++)
-            abertoArray.push(parseInt(this.filtraAberto[i].valor));
-        this.aberto = abertoArray.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
+        let pagaTotal = somar(paga)
+        let abertoTotal = somar(aberto)
+        let devolvidaTotal = somar(devolvida)
+        let vencidaCanceladaTotal = somar(vencidaCancelada)
 
+        let total = pagaTotal + abertoTotal + devolvidaTotal + vencidaCanceladaTotal
 
-        var abertoArray = [];
-        length = this.filtraPago.length;
-        for (var i = 0; i < length; i++)
-            abertoArray.push(parseInt(this.filtraPago[i].valor));
-        this.pago = abertoArray.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
+        this.total = total
+        this.pago = pagaTotal
+        this.aberto = abertoTotal
+        this.vencido = vencidaCanceladaTotal
+        this.estorno = devolvidaTotal
 
-        var abertoVencido = [];
-        length = this.filtraVencido.length;
-        for (var i = 0; i < length; i++)
-            abertoVencido.push(parseInt(this.filtraVencido[i].valor));
-        this.vencido = abertoVencido.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
-
-        var abertoEstorno = [];
-        length = this.filtraEstorno.length;
-        for (var i = 0; i < length; i++)
-            abertoEstorno.push(parseInt(this.filtraEstorno[i].valor));
-        this.estorno = abertoEstorno.reduce(function (total, numero) {
-            return total + numero;
-        }, 0);
+        
 
 
 
