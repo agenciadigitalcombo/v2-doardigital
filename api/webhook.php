@@ -141,6 +141,15 @@ $doador = $doadores->select()[0] ?? [];
 
 $telefone = $doador["telefone"] ?? "";
 
+$e_vendas = new Banco();
+$e_vendas->table("integration");
+$e_vendas->where([
+    "instituicao_fk" => $institution_fk,
+    "tipo" => " EVENDAS"
+]);
+$token_e_vendas = $e_vendas->select()[0];
+$token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
+
 $payload = json_encode([
     "instituicao" => $company,
     "nome" => $fatura["doador_nome"] ?? "",
@@ -165,6 +174,9 @@ $message->insert([
     "data" => strtotime($dueDate),
     "payload" => $payload,
 ]);
+
+
+
 $message->insert([
     "tipo" => "WHATS",
     "data" => strtotime($dueDate),
