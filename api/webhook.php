@@ -165,7 +165,7 @@ $payload = json_encode([
     "url_pix" => $code,
     "code_boleto" => $code,
     "logradouro" => $company["nome"] ??  "",
-    "token" => $env['evendas'] ?? "",
+    "token" => $token_e_vendas,
     "external_id" => $reference_key,
 ]);
 
