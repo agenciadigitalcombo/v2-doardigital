@@ -144,7 +144,7 @@ $telefone = $doador["telefone"] ?? "";
 $e_vendas = new Banco();
 $e_vendas->table("integration");
 $e_vendas->where([
-    "instituicao_fk" => $institution_fk,
+    "instituicao_fk" => $company["institution_fk"],
     "tipo" => " EVENDAS"
 ]);
 $token_e_vendas = $e_vendas->select()[0];
@@ -186,5 +186,5 @@ $message->insert([
 echo json_encode([
     "next" => true,
     "message" => "Web Hook",
-    "payload" => []
+    "payload" => [],
 ]);
