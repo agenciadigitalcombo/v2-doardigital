@@ -1,6 +1,6 @@
 @host=https://doardigital.tk
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
-@instituicao_fk=inst_62b241e7b444e
+@instituicao_fk=inst_62b5e40651747
 @nome=Bruno
 @cpf=197.239.140-26
 @sexo=MASCULINO
@@ -14,7 +14,7 @@
 @cidade=Taboão da serra
 @estado=SP
 @valor=38.1
-@recorrente=0
+@recorrente=1
 @tipo_pagamento=PIX
 @card_nome=Bruno Ap Vieira
 @card_numero=5119 4054 5033 2489
