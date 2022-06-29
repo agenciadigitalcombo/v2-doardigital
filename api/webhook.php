@@ -40,7 +40,7 @@ $payload = array_merge($getJson, $request);
 
 $subscription =  $payload['payment']['subscription'] ?? "";
 $reference_key = $payload['payment']['externalReference'] ?? "";
-$dueDate = $payload['payment']['dueDate'] ?? "";
+$dueDate = $payload['payment']['confirmedDate'] ?? "";
 $status = $payload['payment']['status'] ?? "";
 $tipo = $payload['payment']['billingType'] ?? "";
 $url = $payload['payment']['invoiceUrl'] ?? "";
