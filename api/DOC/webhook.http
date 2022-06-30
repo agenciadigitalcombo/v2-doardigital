@@ -1,15 +1,16 @@
-@host=https://doardigital.tk
-@ID=pay_3741427950078212
-@externalId=ref_62b500b57e341
+@host=http://doardigital.con
+
 ###
 
 POST {{host}}/api/webhook.php
+content-type: application/json
 
 {
     "event": "PAYMENT_CREATED",
     "payment": {
+        "id": "pay_8544539480798898",
+        "externalReference": "ref_62bd983c7ed57",
         "object": "payment",
-        "id": {{ID}},
         "dateCreated": "2022-05-09",
         "customer": "cus_000004862417",
         "paymentLink": null,
@@ -28,7 +29,6 @@ POST {{host}}/api/webhook.php
         "installmentNumber": null,
         "invoiceUrl": "https://sandbox.asaas.com/i/0654650368776757",
         "invoiceNumber": "01079879",
-        "externalReference": {{externalId}},
         "deleted": false,
         "anticipated": false,
         "creditDate": null,
