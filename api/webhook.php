@@ -168,7 +168,7 @@ $payload = json_encode([
     "logradouro" => $company["nome"] ??  "",
     "token" => $token_e_vendas,
     "external_id" => $reference_key,
-]);
+], JSON_UNESCAPED_UNICODE);
 
 $message->insert([
     "tipo" => "EMAIL",

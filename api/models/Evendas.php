@@ -9,7 +9,7 @@ class Evendas
             CURLOPT_HEADER         => 0,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL            => "https://api.e-vendas.net.br/api/pedidos",
-            CURLOPT_POSTFIELDS     => json_encode($payload),
+            CURLOPT_POSTFIELDS     => json_encode($payload, JSON_UNESCAPED_UNICODE),
             CURLOPT_HTTPHEADER     => [
                 'Content-Type:application/json',
                 'token:' . $token
