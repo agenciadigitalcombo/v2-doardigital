@@ -49,6 +49,19 @@ function porterCompany( $allCompany ) {
     }, [] );
 }
 
+function porterSubInvoice($invoices) {
+    return array_map( function($i) {
+        return [
+            "id" => $i["id"],
+            "subscription" => $i["subscription"],
+            "status" => $i["status"],
+            "dueDate" => $i["dueDate"],
+            "invoiceUrl" => $i["invoiceUrl"],
+            "invoiceNumber" => $i["invoiceNumber"],
+        ];
+    }, $invoices );
+}
+
 function render()
 {
     $invoice = new Banco();
@@ -66,10 +79,10 @@ function render()
         $key = $allCompanyKey[$fatura["instituicao_fk"]];
         $pay->set_api_key($key); 
         $subApiAsa = $pay->listSubs($fatura["sub_id"])["data"];
+        $subApiAsa = porterSubInvoice($subApiAsa);
         var_dump($subApiAsa);        
         die;
     }
-    // $subs = listSubs("ok");
 }
 
 render();
