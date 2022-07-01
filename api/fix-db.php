@@ -65,7 +65,7 @@ function render()
     foreach( $allSubscriptions as $fatura ) {
         $key = $allCompanyKey[$fatura["instituicao_fk"]];
         $pay->set_api_key($key); 
-        $subApiAsa = $pay->listSubs($fatura["sub_id"]);
+        $subApiAsa = $pay->listSubs($fatura["sub_id"])["data"];
         var_dump($subApiAsa);        
         die;
     }
