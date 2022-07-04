@@ -242,7 +242,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="text-gray-600 fw-bold">
-                                            <tr v-for="item in filtraDoacoes" v-if=" new Date(item.data).getMonth() == nowMonth ">
+                                            <tr v-for="item in filtraDoacoes" v-if=" new Date(item.data).getMonth() != (nowMonth+1) ">
                                                 <!--<tr v-for="item in dadosPagina">-->
 
                                                 <td class="d-flex align-items-center">
