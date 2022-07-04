@@ -353,7 +353,7 @@ export default {
 
 
         this.doacoes = allDonationsNowMonth        
-        this.getPagina(1)
+        this.getPagina(2)
         this.filltroDoa = allDonationsNowMonth
 
         let somar = lista => lista.reduce((acc, v) => (acc + v), 0)
