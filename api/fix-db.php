@@ -28,6 +28,7 @@ function porterInvoices($payload)
 {
     return array_map(function ($i) {
         return [
+            "id" => $i["id"],
             "instituicao_fk" => $i["instituicao_fk"],
             "sub_id" => $i["fatura_id"],
             "tipo_pagamento" => $i["tipo_pagamento"],
@@ -42,15 +43,17 @@ function porterInvoices($payload)
     }, $payload);
 }
 
-function porterCompany( $allCompany ) {
-    return array_reduce( $allCompany, function( $acc, $c ) {
+function porterCompany($allCompany)
+{
+    return array_reduce($allCompany, function ($acc, $c) {
         $acc[$c["institution_fk"]] = $c["carteira_fk"];
         return $acc;
-    }, [] );
+    }, []);
 }
 
-function porterSubInvoice($invoices) {
-    return array_map( function($i) {
+function porterSubInvoice($invoices)
+{
+    return array_map(function ($i) {
         return [
             "id" => $i["id"],
             "subscription" => $i["subscription"],
@@ -59,7 +62,7 @@ function porterSubInvoice($invoices) {
             "invoiceUrl" => $i["invoiceUrl"],
             "invoiceNumber" => $i["invoiceNumber"],
         ];
-    }, $invoices );
+    }, $invoices);
 }
 
 function render()
@@ -69,20 +72,119 @@ function render()
     $allInvoices = allInvoices($invoice);
     $allSubscriptions = allSubscriptions($allInvoices);
     $allSubscriptions = porterInvoices($allSubscriptions);
+    $allSubscriptions = array_values($allSubscriptions);
+    // $allSubscriptions = array_reverse($allSubscriptions);
     $company = new Banco();
     $company->table("institution");
     $allCompany = $company->select();
     $allCompanyKey = porterCompany($allCompany);
-    $sql = [];
+    $assinatura = new Banco();
+    $assinatura->table("assinatura");
+    $assinaturaIDs = $assinatura->select();
+    $assinaturaIDs = array_map(fn ($a) => $a["subscription_fk"], $assinaturaIDs);
+    $inserts = [];
+    $deletes = [];
+    $addAssinaturas = [];
+    $messages = [];
+    $totalFetch = 0;
     $pay = new AsaasPay();
-    foreach( $allSubscriptions as $fatura ) {
+    $fatura = $allSubscriptions[0] ?? [];
+
+    if (!empty($fatura)) {
         $key = $allCompanyKey[$fatura["instituicao_fk"]];
-        $pay->set_api_key($key); 
+        $pay->set_api_key($key);
         $subApiAsa = $pay->listSubs($fatura["sub_id"])["data"];
+        $totalFetch++;
         $subApiAsa = porterSubInvoice($subApiAsa);
-        var_dump($subApiAsa);        
-        die;
+        foreach ($subApiAsa as $f) {
+            $portContent = [
+                "instituicao_fk" => $fatura["instituicao_fk"],
+                "fatura_id" => $f["id"],
+                "tipo_pagamento" => $fatura["tipo_pagamento"],
+                "recorrente" => $fatura["recorrente"],
+                "external_fk" => $fatura["external_fk"],
+                "status_pagamento" => $f["status"],
+                "valor" => $fatura["valor"],
+                "codigo" => $f["invoiceNumber"],
+                "url" => $f["invoiceUrl"],
+                "data" =>  date('Y-m-d', strtotime('-7 days', strtotime($f["dueDate"]))),
+                "hora" => $fatura["hora"],
+                "doador_fk" => $fatura["doador_fk"],
+                "doador_nome" => $fatura["doador_nome"],
+                "doador_email" => $fatura["doador_email"],
+            ];
+            $keys = implode(",", array_keys($portContent));
+            $values = implode(",", array_map(fn ($v) => "'$v'", array_values($portContent)));
+            $inserts[] = "INSERT INTO fatura ($keys) VALUES ($values)";
+            $dataFatura = strtotime($portContent["data"]);
+            $dataAtual = strtotime("2022-07-01");
+            if($dataFatura >= $dataAtual ) {
+                $payloadMessage = [
+                    "tipo" => "WHATS",
+                    "data" => $dataFatura,
+                    "payload" => json_encode([
+                        "instituicao" => null,
+                        "nome" => $fatura["doador_nome"] ?? "",
+                        "email" => $fatura["doador_email"] ?? "",
+                        "telefone" => null,
+                        "valor" => $fatura["valor"] ?? "",
+                        "status_payment" => $f["status"],
+                        "type_payment" => $fatura["tipo_pagamento"],
+                        "url" => null,
+                        "code" => null,
+                        "ddd" => null,
+                        "boleto_url" => null,
+                        "url_pix" => null,
+                        "code_boleto" => null,
+                        "logradouro" => null ??  "",
+                        "token" => null,
+                        "external_id" => $fatura["external_fk"],
+                    ], JSON_UNESCAPED_UNICODE),
+                ];
+                $keysMessage = implode(",", array_keys($payloadMessage));
+                $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
+                $messages [] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+                $payloadMessage["tipo"] = "EMAIL";
+                $messages [] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+            }
+        }
+        if (!in_array($fatura["sub_id"], $assinaturaIDs)) {
+            $portContentSubscription = [
+                "instituicao_fk" => $fatura["instituicao_fk"],
+                "external_fk" => $fatura["external_fk"],
+                "doador_fk" => $fatura["doador_fk"],
+                "subscription_fk" => $fatura["sub_id"],
+                "tipo_pagamento" => $fatura["tipo_pagamento"],
+                "status_pagamento" => $fatura["status_pagamento"],
+                "valor" => $fatura["valor"],
+            ];
+            $keysSub = implode(",", array_keys($portContentSubscription));
+            $valuesSub = implode(",", array_map(fn ($v) => "'$v'", array_values($portContentSubscription)));
+            $addAssinaturas[] = "INSERT INTO assinatura ($keysSub) VALUES ($valuesSub)";
+        }
+        $ID = $fatura["id"];
+        $deletes[] = "DELETE FROM fatura WHERE id={$ID}";
     }
+    $allSQL = array_merge(
+        $inserts,
+        $deletes,
+        $addAssinaturas,
+        $messages
+    );
+    $query = implode(";", $allSQL);
+    $invoice->exec($query);
+    echo json_encode([
+        "next" => true,
+        "message" => "Script de correção",
+        "payload" => [
+            "falta" => count($allSubscriptions),
+            "totalProcessosSQL" => count($allSQL),
+            "totalFetch" => $totalFetch,
+            "mensagem" => count($messages),
+            "sql" => $allSQL
+        ]
+    ]);
+    die;
 }
 
 render();

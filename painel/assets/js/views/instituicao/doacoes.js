@@ -348,7 +348,7 @@ export default {
         let allDonations = (await this.listarDoacoes()).payload || []
 
         let allDonationsNowMonth = allDonations.filter(donation => {
-            return (new Date(donation.data).getMonth()) == (this.nowMonth)
+            return (new Date(donation.data).getMonth()) != (this.nowMonth+1)
         })
 
 
