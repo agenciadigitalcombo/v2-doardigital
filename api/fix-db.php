@@ -51,6 +51,14 @@ function porterCompany($allCompany)
     }, []);
 }
 
+function hashCompany($allCompany)
+{
+    return array_reduce($allCompany, function ($acc, $c) {
+        $acc[$c["institution_fk"]] = $c;
+        return $acc;
+    }, []);
+}
+
 function porterSubInvoice($invoices)
 {
     return array_map(function ($i) {
@@ -78,10 +86,29 @@ function render()
     $company->table("institution");
     $allCompany = $company->select();
     $allCompanyKey = porterCompany($allCompany);
+    $hashCompany = hashCompany($allCompany);
     $assinatura = new Banco();
     $assinatura->table("assinatura");
     $assinaturaIDs = $assinatura->select();
     $assinaturaIDs = array_map(fn ($a) => $a["subscription_fk"], $assinaturaIDs);
+
+    $whats = new Banco();
+    $whats->table("integration");
+    $whats->where(["tipo" => "EVENDAS"]);
+    $whatsKeys = $whats->select();
+    $whatsKeys = array_reduce( $whatsKeys, function($acc,$int) {
+        $acc[$int["instituicao_fk"]] = $int["key_1"];
+        return $acc;
+    }, [] );
+
+    $doador = new Banco();
+    $doador->table("doador");
+    $doadorFks = $doador->select();
+    $doadorFks = array_reduce( $doadorFks, function($acc,$do) {
+        $acc[$do["external_fk"]] = $do;
+        return $acc;
+    }, [] );
+
     $inserts = [];
     $deletes = [];
     $addAssinaturas = [];
@@ -97,6 +124,18 @@ function render()
         $totalFetch++;
         $subApiAsa = porterSubInvoice($subApiAsa);
         foreach ($subApiAsa as $f) {
+            $code = "";
+            if ($fatura["tipo_pagamento"] == "PIX") {
+                $resCode = $pay->getCodePix($f["id"]);
+                $code = $resCode["payload"] ?? "";
+                $totalFetch++;
+            }
+
+            if ($fatura["tipo_pagamento"] == "BOLETO") {
+                $resCode = $pay->getBarcodeBoleto($f["id"]);
+                $code = $resCode["identificationField"] ?? "";
+                $totalFetch++;
+            }
             $portContent = [
                 "instituicao_fk" => $fatura["instituicao_fk"],
                 "fatura_id" => $f["id"],
@@ -105,7 +144,7 @@ function render()
                 "external_fk" => $fatura["external_fk"],
                 "status_pagamento" => $f["status"],
                 "valor" => $fatura["valor"],
-                "codigo" => $f["invoiceNumber"],
+                "codigo" => $code,
                 "url" => $f["invoiceUrl"],
                 "data" =>  date('Y-m-d', strtotime('-7 days', strtotime($f["dueDate"]))),
                 "hora" => $fatura["hora"],
@@ -118,34 +157,35 @@ function render()
             $inserts[] = "INSERT INTO fatura ($keys) VALUES ($values)";
             $dataFatura = strtotime($portContent["data"]);
             $dataAtual = strtotime("2022-07-01");
-            if($dataFatura >= $dataAtual ) {
+            if ($dataFatura >= $dataAtual) {
+                $telefone = $doadorFks[$fatura["doador_fk"]]["telefone"];
                 $payloadMessage = [
                     "tipo" => "WHATS",
                     "data" => $dataFatura,
                     "payload" => json_encode([
-                        "instituicao" => null,
+                        "instituicao" => $hashCompany[$fatura["instituicao_fk"]],
                         "nome" => $fatura["doador_nome"] ?? "",
                         "email" => $fatura["doador_email"] ?? "",
-                        "telefone" => null,
+                        "telefone" => substr($telefone, 2, 11),
                         "valor" => $fatura["valor"] ?? "",
                         "status_payment" => $f["status"],
                         "type_payment" => $fatura["tipo_pagamento"],
-                        "url" => null,
-                        "code" => null,
-                        "ddd" => null,
-                        "boleto_url" => null,
-                        "url_pix" => null,
-                        "code_boleto" => null,
-                        "logradouro" => null ??  "",
-                        "token" => null,
+                        "url" => $f["invoiceUrl"],
+                        "code" => $code,
+                        "ddd" => substr($telefone, 0, 2),
+                        "boleto_url" => $f["invoiceUrl"],
+                        "url_pix" => $code,
+                        "code_boleto" => $code,
+                        "logradouro" => $hashCompany[$fatura["instituicao_fk"]]["nome"] ??  "",
+                        "token" => $whatsKeys[$fatura["external_fk"]],
                         "external_id" => $fatura["external_fk"],
                     ], JSON_UNESCAPED_UNICODE),
                 ];
                 $keysMessage = implode(",", array_keys($payloadMessage));
                 $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
-                $messages [] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+                $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
                 $payloadMessage["tipo"] = "EMAIL";
-                $messages [] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+                $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
             }
         }
         if (!in_array($fatura["sub_id"], $assinaturaIDs)) {
