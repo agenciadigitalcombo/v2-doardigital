@@ -73,11 +73,19 @@ function porterSubInvoice($invoices)
     }, $invoices);
 }
 
+function payIDs( $faturas ) {
+    return array_reduce($faturas, function ($acc, $f) {
+        $acc[] = $f["pagamento_fk"];
+        return $acc;
+    }, []); 
+}
+
 function render()
 {
     $invoice = new Banco();
     $invoice->table("fatura");
     $allInvoices = allInvoices($invoice);
+    $payIDs = payIDs($allInvoices);
     $allSubscriptions = allSubscriptions($allInvoices);
     $allSubscriptions = porterInvoices($allSubscriptions);
     $allSubscriptions = array_values($allSubscriptions);
@@ -154,7 +162,9 @@ function render()
             ];
             $keys = implode(",", array_keys($portContent));
             $values = implode(",", array_map(fn ($v) => "'$v'", array_values($portContent)));
-            $inserts[] = "INSERT INTO fatura ($keys) VALUES ($values)";
+            if( !in_array($f["id"], $payIDs) ) {
+                $inserts[] = "INSERT INTO fatura ($keys) VALUES ($values)";
+            }
             $dataFatura = strtotime($portContent["data"]);
             $dataAtual = strtotime("2022-07-01");
             if ($dataFatura >= $dataAtual) {
