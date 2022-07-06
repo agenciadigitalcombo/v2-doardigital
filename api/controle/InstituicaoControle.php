@@ -395,15 +395,15 @@ class InstituicaoControle extends Controle
         $institution_fk = $_REQUEST['institution_fk'];
         $company = new Instituicao();
         $asa = new AsaasConta();
-        $institution = $company->info($institution_fk);
-        $carteira_fk = $institution['carteira_fk'];
+        $carteira_fk  = $company->get_key($institution_fk);        
         $asa->set_api_key($carteira_fk);
         $statistic = $asa->statistic();
         self::printSuccess(
             "Saldo da Conta",
             [
                 "balance" => $asa->balance(),
-                "statistic" => $statistic
+                "statistic" => $statistic,
+                "extrato" => $asa->extrato()
             ]
         );
     }

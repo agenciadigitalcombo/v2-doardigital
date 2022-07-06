@@ -16,7 +16,23 @@ class AsaasConta extends Asaas
 
     function statistic()
     {
-        return $this->get("/finance/payment/statistics?customer=&billingType=&status=&anticipated=&dateCreated%5Bge%5D=&dateCreated%5Ble%5D=&dueDate%5Bge%5D=&dueDate%5Ble%5D=", []);
+        return $this->get("/finance/payment/statistics", [
+            "customer" => null,
+            "billingType" => null,
+            "status" => null,
+            "anticipated" => null,
+            "dateCreated[ge]" => null,
+            "dateCreated[le]" => null,
+            "dueDate[ge]" => null,
+            "dueDate[le]" => null,
+            "estimatedCreditDate[ge]" => null,
+            "estimatedCreditDate[le]" => null,
+            "externalReference" => null,
+        ]);
+    }
+
+    function extrato() {
+        return $this->get("/financialTransactions",[]);
     }
 
     function chavePix()

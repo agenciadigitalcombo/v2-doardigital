@@ -1,6 +1,6 @@
-@host=http://doardigital.con
+@host=https://doardigital.tk
 @token=eyJjb2RlIjoiYWRtXzYyYTFmOGUzNTI4ZWUifQ==.7653c77bff2b2c012545f7ec98df4a0ae7f39df7
-@institution_fk=inst_62b241e7b444e
+@institution_fk=inst_62b5e40651747
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
 @email=br.rafael18@outlook.com
@@ -92,7 +92,7 @@ token={{token}}
 
 
 ###
-GET {{host}}/api/instituicao/balance?token={{token}}&institution_fk={{institution_fk}}
+GET {{host}}/api/instituicao/balance?token={{token}}&institution_fk={{institution_fk}}&debug=1
 
 ###
 GET {{host}}/api/instituicao/donation?token={{token}}&institution_fk={{institution_fk}}

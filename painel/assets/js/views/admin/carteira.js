@@ -1,155 +1,14 @@
-import adm from "../../../../../static/js/api/adm.js" 
+import adm from "../../../../../static/js/api/adm.js"
+import get_template from '../../componentes/get_template.js'
 
 export default {
-	template: `
-	<div>
-
-    <c-header></c-header>
-    <c-aside></c-aside> 
-		<div class="d-flex flex-column flex-root"> 
-			<div class="page d-flex flex-row flex-column-fluid"> 
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
- 
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-					 
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-						 
-							<div id="kt_content_container" class="container-xxl">
-							 
-								<div class="row g-5 g-xl-8"> 
-									<div class="row"> 
-										<div class="col">
-											<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-												<span class="fs-4 fw-bold text-success pb-1 px-2">Saldo Liberado</span>
-												
-													<span > {{liberado | form_valor}}</span></span>
-											</div>
-										</div> 
-										<div class="col">
-											<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-												<span class="fs-4 fw-bold text-info pb-1 px-2">Saldo á liberar</span>
-												
-													<span >{{liberar | form_valor}}</span></span>
-											</div>
-										</div> 
-										<div class="col">
-											<div class="card card-dashed flex-center min-w-175px my-3 p-6">
-												<span class="fs-4 fw-bold text-danger pb-1 px-2">Total Retirado</span>
-												
-													<span >{{retirado | form_valor}}</span></span>
-											</div>
-										</div>  
-									</div> 
-								</div> 
-								<div class="row g-5 g-xl-8 pt-5"> 
-									<div class="col-xl-6"> 
-										<div class="card card-xl-stretch mb-xl-8"> 
-											<div class="card-header align-items-center border-0 mt-4">
-												<h3 class="card-title align-items-start flex-column">
-													<span class="fw-bolder mb-2 text-dark">Solicitar Saque</span>
-												</h3>
-
-											</div> 
-											<div class="card-body pt-5"> 
-												<form class="form" action="#" @submit.prevent="solicitarSaque"> 
-													<div class="py-10 px-lg-17"> 
-														<div class="mb-5"> 
-															<div class="fv-row"> 
-																<div class="btn-group w-100" data-kt-buttons="true"
-																	data-kt-buttons-target="[data-kt-button]"> 
-																	<label
-																		class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success" 
-																		:class="{ active: totalActive }"
-																		data-kt-button="true"> 
-																		<input @click="total()" class="btn-check"
-																			type="radio" name="method" value="1" />
-																	 
-																		Valor Total
-																	</label> 
-																	<label
-																		class="btn btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success" 
-																		:class="{ active: parcialActive }"
-																		data-kt-button="true">
-																		<!--begin::Input-->
-																		<input @click="parcial()" class="btn-check"
-																			type="radio" name="method" value="2" />
-																	 
-																		Valor Parcial  
-																	</label> 
-																</div> 
-																<div class="mb-2 mt-10" v-if="jms">
-																	<input type="text" v-model="amount"  @input="masc_money"
-																		class="form-control form-control-solid" />
-																</div>
-
-															</div> 
-														</div> 
-													</div> 
-													<div class="modal-footer flex-center">
- 
-														<button type="submit" class="btn btn-primary">
-															<span class="indicator-label">Solicitar Saque</span>
-														</button> 
-														<div class=""> 
-															<div class="timeline-content fw-bolder text-gray-800 ps-3">
-																*Será cobrado o valor de
-																<a class="text-primary"> R$5,00 </a>
-																por saque
-															</div> 
-														</div> 
-													</div> 
-												</form> 
-											</div> 
-										</div> 
-									</div>
-
-									<div class="col-xl-6"> 
-										<div class="card card-xl-stretch mb-xl-8">
-										 
-											<div class="card-header align-items-center border-0 mt-4">
-												<h3 class="card-title align-items-start flex-column">
-													<span class="fw-bolder mb-2 text-dark">Historico</span>
-												</h3>
-
-											</div> 
-											<div class="card-body pt-5"> 
-												<div class="timeline-label"> 
-													<div class="timeline-item" v-for=" (item, indice ) in historico" :key="item.id"> 
-														<div class="timeline-label fw-bolder text-gray-800 fs-6">{{item.date_created | form_hora }} 
-														</div> 
-														<div class="timeline-badge">
-															<i class="fa fa-genderless text-warning fs-1"></i>
-														</div> 
-														<div class="timeline-content fw-bolder text-gray-800 ps-3">
-															{{item.status}} 
-															<a href="#" class="text-primary">{{item.amount | form_valor}}</a>
-															<div class="timeline-content fw-bolder text-gray-800 fs-6">
-															{{item.date_created | form_data }}
-															</div>
-														</div> 
-													</div> 
-													
-												</div> 
-											</div> 
-										</div> 
-									</div> 
-								</div>  
-							</div> 
-						</div> 
-					</div> 
-				</div> 
-			</div> 
-		</div> 
-
-		<c-footer/>
-		
-	</div>
-    `,
-
 	data: function () {
-		return {  
+		return {
+			saldo_liberado: 0,
+			saldo_a_liberar: 0,
+			total_retirado: 0,
 			token: null,
-            id: null,
+			id: null,
 			jms: false,
 			liberado: null,
 			liberar: null,
@@ -160,104 +19,73 @@ export default {
 			status: null,
 			historico: [],
 			error: null,
-			msg: null, 
+			msg: null,
 			totalActive: true,
-			parcialActive: false
+			parcialActive: false,
+			active: true,
 		}
 	},
-	
 	filters: {
-        form_valor(price) {
-            let amount = (price / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            return `R$ ${amount}`
-        },
+		form_valor(valor) {
+			let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+			return `${price}`
+		},
 
 		form_data(datas) {
-           // let date_created = datas.split('-').reverse().join('/'); 
-		   let date_created = datas.substr(0, 10);
-             return `${date_created}`
-        },
+			return datas.substr(5,10).split("-").reverse().join("/")
+		},
 
-		form_hora(horas) { 
+		form_hora(horas) {
 			let date_created = horas.substr(11, 5);
-			  return `${date_created}`
-		 },
-    },
+			return `${date_created}`
+		},
+	},
 	methods: {
-
 		total() {
 			this.jms = false
 			this.totalActive = true,
-			this.parcialActive = false,
-			this.amount = "50000"
+				this.parcialActive = false,
+				this.amount = "50000"
 		},
-
 		parcial() {
 			this.jms = true
 			this.totalActive = false,
-			this.parcialActive = true,
-			this.amount = "00"
+				this.parcialActive = true,
+				this.amount = "00"
 		},
-
 		masc_money() {
-            let valor = this.amount.replace(/\D/gi, '')
-            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
-            this.amount = valor
-        },
-
-      async listar() {
-            let res = await adm.listarCarteira( 
+			valor = (valor+"").toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			this.amount = valor
+		},
+		async listar() {
+			let res = await adm.listarCarteira(
 				this.id,
 			)
-            return res
-        },
-		
+			return res
+		},
 		async solicitarSaque() {
+			this.active = false
 			this.error = null
-		
-				let res = await adm.antecipacao(
-					this.token,
-					this.instituicao_id,
-					this.amount,
+			setTimeout(() => {
+				this.active = true
+				this.error = "Função indisponível";
+			}, 1500);
 			
-				)
-				if (!res.next) {
-						setTimeout(() => this.msg = "", 5000);
-					this.error = res.message
-					return null
-				}
-				this.msg = res.message
 		},
 	},
-
-
-    async mounted() {
+	async mounted() {
 		this.id = window.localStorage.getItem('instituicao_id');
-		this.token = window.localStorage.getItem('token');
 
-        var carteira = (await this.listar()).dados.balance
-		var balance = String(carteira.toFixed(2)).split('.').join('')
-		
-		this.liberado =  balance
-		//this.liberar = carteira.waiting_funds.amount
-		//this.retirado = carteira.transferred.amount
+		let resApi = await this.listar()
 
-
-		this.historico = (await this.listar()).historico
-		var date_created = this.historico.date_created 
-	//	this.data = historico.date_created
-	//	this.valor = historico.amount
-	//	this.status = historico.status
-		 
-		
-    },
-
-
-	created() {
-
+		this.saldo_liberado = resApi.payload.balance
+		this.saldo_a_liberar = resApi.payload.statistic.netValue
+		this.total_retirado = resApi.payload.statistic.quantity
+		this.historico = resApi.payload.extrato.data
+		console.log(this.historico)
 
 	},
 
-
+	template: await get_template('./assets/js/views/admin/carteira'),
 }
 

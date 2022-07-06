@@ -915,7 +915,7 @@ export default {
         id,
     ) {
         return await http.get('/instituicao/balance', {
-            id,
+            institution_fk:id
         })
     },
 
