@@ -347,7 +347,6 @@ class AdmControle extends Controle
             "code" => "informe o código",
             "cep" => "Informe um CEP",
             "numero" => "Informe um Número",
-            "complemento" => "Informe um complemento",
             "bairro" => "Informe um bairro",
             "cidade" => "Informe uma cidade",
             "estado" => "Informe o estado",
@@ -358,7 +357,7 @@ class AdmControle extends Controle
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'] ?? "";
         $numero = $_REQUEST['numero'];
-        $complemento = $_REQUEST['complemento'];
+        $complemento = $_REQUEST['complemento'] ?? "";
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
