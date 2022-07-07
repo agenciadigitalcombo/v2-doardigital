@@ -105,7 +105,6 @@ export default {
 		}
 	},
 	methods: {
-
 		baixar() {
 			var tela = this.$refs.print_qr.querySelector('canvas')
 			var link = document.createElement('a')
@@ -114,52 +113,20 @@ export default {
 			link.href = tela.toDataURL();
 			link.click();
 		},
-
-		async infoSubdomain() {
-			//let res = await adm.todoSubdomain(this.subdomaim = "34edqwe21")
-			let res = await adm.todoSubdomain(this.subdomaim)
-			return res
-		},
 	},
 
 
 	async mounted() {
-		
-		this.subdomaim = window.localStorage.getItem("instituicao_subdomaim")
-	
-		let dados = (await this.infoSubdomain()).dados_instituicao
-		this.subdomaim = dados.subdomaim + '.doardigital.com.br/'
-		this.dominio = dados.dominio
-
-
-
-		if (this.dominio) {
-			let code_pix = `${this.dominio}`
-			var qrcode = new QRCode(this.$refs.print_qr, {
-				text: code_pix,
-				width: 230,
-				height: 230,
-				height: 230,
-				colorDark: "#000000",
-				colorLight: "#ffffff",
-				correctLevel: QRCode.CorrectLevel.L
-			});
-
-
-		} else {
-			let code_pix = `${this.subdomaim}`
-			var qrcode = new QRCode(this.$refs.print_qr, {
-				text: code_pix,
-				width: 230,
-				height: 230,
-				height: 230,
-				colorDark: "#000000",
-				colorLight: "#ffffff",
-				correctLevel: QRCode.CorrectLevel.L
-			});
-
-		}
-
+		let url_site = "https://" + window.location.host
+		var qrcode = new QRCode(this.$refs.print_qr, {
+			text: url_site,
+			width: 230,
+			height: 230,
+			height: 230,
+			colorDark: "#000000",
+			colorLight: "#ffffff",
+			correctLevel: QRCode.CorrectLevel.L
+		});
 	},
 
 }
