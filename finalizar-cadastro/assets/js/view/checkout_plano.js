@@ -166,30 +166,54 @@ export default {
             }
         },
 
+        async listar() {
+			let res = await adm.ListarPerfil(
+				this.token,
+				this.code,
+			)
+			return res
+		},
+
+		async listarEndereco() {
+			let res = await adm.listarEndereco(
+				this.token,
+				this.code,
+			)
+			return res
+		},
+
         descartavel() {
-            window.location.href = "/painel-geral/index.html#/perfil-editar";
+            window.location.href = "/painel-geral/#/perfil-editar";
         }
 
     },
 
-    created() {
-        this.token = localStorage.getItem('token'),
-        
-            this.instituicao_fk = 'inst_628ea77b60f3c',
-            this.recorrente = '1',
-            this.email = localStorage.getItem('email'),
-            this.nome = localStorage.getItem('nome'),
-            this.telefone = localStorage.getItem('telefone'),
-            this.sexo = globalThis._sexo,
-            this.cpf = globalThis._cpf,
+    async created() {
+        this.token = localStorage.getItem('token')
+		let str = this.token.split('.')[0]
+		let encodedStr = atob(str);
+		var res = JSON.parse(encodedStr);
+		this.code = res.code
 
-            this.cep = globalThis._cep,
-            this.logadouro = globalThis._logradouro,
-            this.numero = globalThis._numero,
-            this.complemento = globalThis._complemento,
-            this.bairro = globalThis._bairro,
-            this.cidade = globalThis._cidade,
-            this.estado = globalThis._estado
+        let MyAddress = (await this.listarEndereco()).payload
+        let AdmLogged = (await this.listar()).payload
+
+        console.log(AdmLogged)
+
+        this.instituicao_fk = 'inst_628ea77b60f3c'
+        this.recorrente = '1'
+        this.email = AdmLogged.email
+        this.nome = AdmLogged.nome
+        this.telefone = AdmLogged.telefone
+        this.cpf = AdmLogged.cpf
+
+        this.cep = MyAddress.cep
+        this.logadouro = MyAddress.logadouro
+        this.numero = MyAddress.numero
+        this.complemento = MyAddress.complemento
+        this.bairro = MyAddress.bairro
+        this.cidade = MyAddress.cidade
+        this.estado = MyAddress.estado
     },
 
 

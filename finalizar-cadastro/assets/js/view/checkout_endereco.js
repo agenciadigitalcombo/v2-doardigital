@@ -138,8 +138,5 @@ export default {
 
 	},
 
-
-
-
 	template: await get_template('./assets/js/view/checkout_endereco')
 }
