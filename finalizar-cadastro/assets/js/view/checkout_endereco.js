@@ -3,11 +3,11 @@ import adm from "../../../../../static/js/api/adm.js"
 const { required, minLength, maxLength } = window.validators
 
 export default {
-  
+
 	data: function () {
 		return {
-			
-			id: null, 
+
+			id: null,
 			cep: null,
 			logradouro: null,
 			numero: null,
@@ -20,8 +20,8 @@ export default {
 			cepErro: null,
 			disabled: false
 
-        }
-    },
+		}
+	},
 
 	validations: {
 		cep: {
@@ -32,13 +32,13 @@ export default {
 	},
 
 	methods: {
-	
+
 		async editarEndereco() {
 			this.error = null
 
 			let res = await adm.atualizarEndereco(
-				this.token, 
-				this.code, 
+				this.token,
+				this.code,
 				this.cep,
 				this.logradouro,
 				this.numero,
@@ -46,60 +46,60 @@ export default {
 				this.bairro,
 				this.cidade,
 				this.estado,
-				 
+
 			)
 			if (!res.next) {
 				// this.error = res.message
 				this.msg = res.message
 				return null
 			}
- 
+
 			globalThis._cep = this.cep
 			globalThis._logradouro = this.logradouro
 			globalThis._numero = this.numero
 			globalThis._complemento = this.complemento
-			globalThis._bairro = this.bairro 
-			globalThis._cidade= this.cidade
-			globalThis._estado = this.estado 
+			globalThis._bairro = this.bairro
+			globalThis._cidade = this.cidade
+			globalThis._estado = this.estado
 
 			window.location.href = `#/checkout_plano`
 		},
 
 		searchCep() {
-            let cep = this.cep
-            cep = cep.replace(/\D/gi, '')
-            if (cep.length == 8) {
-                axios.get(`https://viacep.com.br/ws/${cep}/json/`)
-                    .then(response => {
-                        this.error = ""
-                        this.logradouro = response.data.logradouro,
-                            this.bairro = response.data.bairro,
-                            this.cidade = response.data.localidade,
-                            this.estado = response.data.uf
+			let cep = this.cep
+			cep = cep.replace(/\D/gi, '')
+			if (cep.length == 8) {
+				axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+					.then(response => {
+						this.error = ""
+						this.logradouro = response.data.logradouro,
+							this.bairro = response.data.bairro,
+							this.cidade = response.data.localidade,
+							this.estado = response.data.uf
 
-                        if (response.data.erro) {
-                            this.cepErro = "Número do CEP inválido...!"
+						if (response.data.erro) {
+							this.cepErro = "Número do CEP inválido...!"
 							this.disabled = true
-                        } else {
+						} else {
 							this.cepErro = ""
 							this.disabled = false
 						}
-                    }
-                    )
-                    .catch(error =>
-                        error
-                    )
-            }
-        },
+					}
+					)
+					.catch(error =>
+						error
+					)
+			}
+		},
 
 		mask_cep() {
-            let mascara = this.cep
-            mascara = mascara.replace(/\D/gi, '')
-            mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
-            mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
-            this.cep = mascara
-        },
- 
+			let mascara = this.cep
+			mascara = mascara.replace(/\D/gi, '')
+			mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
+			mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
+			this.cep = mascara
+		},
+
 		async listar() {
 			let res = await adm.ListarPerfil(
 				this.token,
@@ -107,30 +107,39 @@ export default {
 			)
 			return res
 		},
+		async listarEndereco() {
+			let res = await adm.listarEndereco(
+				this.token,
+				this.code,
+			)
+			return res
+		},
 
-    },
+	},
 
 	async mounted() {
-		 this.token = localStorage.getItem('token')
-		 let str = this.token.split('.')[0]
-		 let encodedStr = atob(str); 
-		 var res =  JSON.parse(encodedStr);
-		 this.code = res.code
+		
+		this.token = localStorage.getItem('token')
+		let str = this.token.split('.')[0]
+		let encodedStr = atob(str);
+		var res = JSON.parse(encodedStr);
+		this.code = res.code
+
+		let MyAddress = (await this.listarEndereco()).payload
+
+		this.bairro = MyAddress.bairro
+		this.cidade = MyAddress.cidade
+		this.complemento = MyAddress.complemento
+		this.estado = MyAddress.estado
+		this.logradouro = MyAddress.logadouro
+		this.cep = MyAddress.nome
+		this.numero = MyAddress.numero
+		this.cep = MyAddress.cep
 
 	},
 
-	created() {
-		      this.token = localStorage.getItem('token')
 
- 				this.cep = globalThis._cep
- 				this.logradouro= globalThis._logradouro 
- 				this.numero= globalThis._numero
- 				this.complemento= globalThis._complemento
- 				this.bairro = globalThis._bairro 
- 				this.cidade= globalThis._cidade
- 				this.estado = globalThis._estado 
-	},
-	
 
-    template: await get_template('./assets/js/view/checkout_endereco')
+
+	template: await get_template('./assets/js/view/checkout_endereco')
 }

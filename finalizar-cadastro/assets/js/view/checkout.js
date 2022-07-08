@@ -81,6 +81,10 @@ export default {
 		let dados = (await this.listar()).payload
 		this.nome = dados.nome 
 		this.telefone = dados.telefone  
+
+		this.cpf = dados.cpf
+		this.nascimento = dados.nascimento.split('-').reverse().join('/')
+		this.sexo = dados.sexo || null
 	}, 
 
     template: await get_template('./assets/js/view/checkout')
