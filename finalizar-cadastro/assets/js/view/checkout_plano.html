@@ -222,6 +222,20 @@
                             </div>
                         </div>
                     </div>
+                    <label>
+                        <input type="checkbox" required>
+                        Aceito todos os Termos de Uso Doar Digital
+                        <a href="http://127.0.0.1:5500/cadastro/#/termos" target="_blank">clique para ler</a>
+                    </label>
+                    <label>
+                        <input type="checkbox" required>
+                        Aceito os valores e taxas Doar Digital
+                        <a href="http://127.0.0.1:5500/cadastro/#/termos" target="_blank">clique para ler</a>
+                    </label>
+
+                    <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row w-100 p-5 mb-10 mt-10" v-if="error">
+                        {{error}}
+                    </div>
 
                     <div class="d-flex flex-stack pt-15">
                         <div class="mr-2">

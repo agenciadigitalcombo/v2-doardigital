@@ -198,8 +198,6 @@ export default {
         let MyAddress = (await this.listarEndereco()).payload
         let AdmLogged = (await this.listar()).payload
 
-        console.log(AdmLogged)
-
         this.instituicao_fk = 'inst_628ea77b60f3c'
         this.recorrente = '1'
         this.email = AdmLogged.email
