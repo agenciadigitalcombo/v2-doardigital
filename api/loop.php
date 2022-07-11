@@ -45,7 +45,7 @@ $all = $db->select();
 $all = array_filter($all, function ($mem) {
     $hoje =  time();
     $data = $mem["data"] + 0;
-    return $hoje >= $data;
+    return $hoje > $data;
 });
 $all = array_values($all);
 $action = $all[0] ?? [];
