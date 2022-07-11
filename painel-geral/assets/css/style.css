@@ -1,10 +1,13 @@
 span .menu  {
-    position: relative;
-    overflow-y: auto;
+    display: block;
     width: 15px;
-    filter: invert(100);
+    height: 15px;
+    filter: opacity(.5);
+    margin: 5px auto;
 }
-
+.active .menu {
+    filter: opacity(1) invert(100);
+}
  
 .menux {
     background-color: rgba(32, 32, 32, 0.1) ;
@@ -15,7 +18,24 @@ span .menu  {
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
     padding-left: 20px;
-    color: #FFF;
+    color: #FFF !important;
+}
+.menu-link span {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+}
+.menu-link .menu-icon {
+    background-color: #bbb ;
+    display: grid;
+    justify-content: center;
+}
+.menu-link:hover .menu-icon {
+    /* background-color: aqua !important; */
+}
+.menu-link.active {
+    color: #FFF !important;
+
 }
 
 .modulos{

@@ -12,17 +12,18 @@
 			<div class="aside-menu flex-column-fluid pt-0 pb-5 py-lg-5">
 
 				<div class="w-100 hover-scroll-overlay-y scroll-ps d-flex">
-					<div class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-icon-gray-400 menu-arrow-gray-400 fw-bold fs-6">
+					<div class="menu menu-column menu-title-gray-900 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-icon-gray-400 menu-arrow-gray-400 fw-bold fs-6">
 
 
 						<div class="menu-item py-3" v-for="m in lista">
 							<a class="menu-link" @click="setar()" :class="{ active: m.id == selecionado }"
 								:href="m.link" :title="m.nome" >
 								<span class="menu-icon menux">
-									<span class="svg-icon svg-icon-2x">
+									<div class="svg-icon svg-icon-2x">
 										<img class="filter-green" class="menu"
 											:src="'../painel-geral/assets/icon/'+m.icon">
-									</span>
+											<span>{{m.nome}}</span>
+									</div>
 
 								</span>
 							</a>

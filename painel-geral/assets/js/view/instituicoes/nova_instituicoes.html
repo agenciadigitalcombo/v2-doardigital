@@ -32,8 +32,9 @@
                             </div>
                         </div>
                         <div class="card mb-5 mb-xl-10">
-                            <form class="form" @submit.prevent="addInstituicao">
-                                <div v-if="type === 'A'">
+                            <div class="form">
+
+                                <form v-if="type === 'A'" action="javascript:void(0)"  @submit="endereco">
                                     <div class="card-body border-top p-9">
                                         <div class="row mb-6">
                                             <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
@@ -162,13 +163,13 @@
                                     </div>
 
                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                        <button @click="endereco()" class="btn btn-primary">Continuar!</button>
+                                        <button type="submit" class="btn btn-primary">Continuar!</button>
 
                                     </div>
 
-                                </div>
+                                </form>
 
-                                <div v-else-if="type === 'B'">
+                                <form v-else-if="type === 'B'" action="javascript:void(0)"  @submit="banco">
                                     <div class="card-body border-top p-9">
 
 
@@ -277,15 +278,16 @@
                                             </div>
 
                                             <div>
-                                                <a @click="banco()" class="btn btn-lg btn-primary">Continuar </a>
+                                                <button type="submit" class="btn btn-lg btn-primary">Continuar</button>
+                                                
                                             </div>
                                         </div>
                                     </div>
 
 
-                                </div>
+                                </form>
 
-                                <div v-else-if="type === 'C'">
+                                <form v-else-if="type === 'C'" action="javascript:void(0)"  @submit="addInstituicao">
                                     <div class="card-body border-top p-9">
 
                                         <div class="row mb-6">
@@ -433,8 +435,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
