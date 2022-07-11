@@ -76,7 +76,7 @@ if( empty($fatura) ) {
         "status_pagamento" => $copy["status_pagamento"] ?? "",
         "valor" => $copy["valor"] ?? "",
         "codigo" => $copy["codigo"] ?? "",
-        "url" => $copy["url"] ?? "",
+        "url" => $url ?? "",
         "data" => $dueDate,
         "hora" => $copy["hora"] ?? "",
         "doador_fk" => $copy["doador_fk"] ?? "",
