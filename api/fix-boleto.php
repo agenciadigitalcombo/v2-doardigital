@@ -57,9 +57,32 @@ function getFaturas() {
     return $all;
 }
 
+function contador() {
+    $path = __DIR__ ."/fix-boleto-count.txt";
+    $count = intval( file_get_contents($path) ?? "0");
+    $count++;
+    file_put_contents($path, $count);
+    return $count;
+}
+
 $institutions = getInstitutionKey();
 $faturas = getFaturas();
+$step = contador();
+$fatura = $faturas[$step];
 
+if( empty($fatura)) {
+    echo json_encode([
+        "next" => true,
+        "message" => "Lista vazia",
+        "payload" => []
+    ]);
+}
+
+$pay = new AsaasPay();
+$key = $institutions[$fatura["instituicao_fk"]];
+$pay->set_api_key($key);
+
+$resFatura = $pay->getInvoice($fatura["fatura_id"]);
 
 
 echo json_encode([
@@ -68,6 +91,8 @@ echo json_encode([
     "payload" => [
         "dataInit" => "2022-06-21",
         "total" => count($faturas),
-        "debug" => $faturas[0]
+        "step" => $step,
+        "fatura" => $fatura,
+        "debug" => $resFatura
     ],
 ]);
