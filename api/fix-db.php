@@ -148,7 +148,7 @@ function render()
                 "instituicao_fk" => $fatura["instituicao_fk"],
                 "fatura_id" => $f["id"],
                 "tipo_pagamento" => $fatura["tipo_pagamento"],
-                "recorrente" => $fatura["recorrente"],
+                "recorrente" => 1,
                 "external_fk" => $fatura["external_fk"],
                 "status_pagamento" => $f["status"],
                 "valor" => $fatura["valor"],
