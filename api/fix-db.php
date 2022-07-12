@@ -195,6 +195,8 @@ function render()
                 $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
                 $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
                 $payloadMessage["tipo"] = "EMAIL";
+                $keysMessage = implode(",", array_keys($payloadMessage));
+                $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
                 $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
             }
         }
