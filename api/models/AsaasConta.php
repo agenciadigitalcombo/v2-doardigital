@@ -18,8 +18,8 @@ class AsaasConta extends Asaas
     {
         return $this->get("/finance/payment/statistics", [
             "customer" => null,
-            "billingType" => null,
-            "status" => null,
+            "billingType" => "CREDIT_CARD",
+            "status" => "CONFIRMED",
             "anticipated" => null,
             "dateCreated[ge]" => null,
             "dateCreated[le]" => null,
