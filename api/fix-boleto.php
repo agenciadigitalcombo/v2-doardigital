@@ -14,29 +14,31 @@ include __DIR__ . "/models/Asaas.php";
 include __DIR__ . "/models/AsaasPay.php";
 include __DIR__ . "/core/Banco.php";
 
-function getInstitutionKey() {
+function getInstitutionKey()
+{
     $inst = new Banco();
     $inst->table("institution");
     $all = $inst->select();
-    $all = array_reduce( $all, function($acc,$company) {
+    $all = array_reduce($all, function ($acc, $company) {
         $acc[$company["institution_fk"]] = $company["carteira_fk"];
         return $acc;
-    }, [] );
+    }, []);
     return $all;
 }
 
-function getFaturas() {
+function getFaturas()
+{
     $fatura = new Banco();
     $fatura->table("fatura");
     $fatura->where([
         "recorrente" => 1,
         "tipo_pagamento" => "BOLETO"
     ]);
-    $data = strtotime( "2022-06-21");
+    $data = strtotime("2022-06-21");
     $all = $fatura->select();
-    $all = array_filter( $all, fn($f) =>strtotime($f["data"]) >= $data  );
+    $all = array_filter($all, fn ($f) => strtotime($f["data"]) >= $data);
     $all = array_values($all);
-    $all = array_map(function($f){
+    $all = array_map(function ($f) {
         return [
             "id" => $f["id"],
             "instituicao_fk" => $f["instituicao_fk"],
@@ -57,9 +59,10 @@ function getFaturas() {
     return $all;
 }
 
-function contador() {
-    $path = __DIR__ ."/fix-boleto-count.txt";
-    $count = intval( file_get_contents($path) ?? "0");
+function contador()
+{
+    $path = __DIR__ . "/fix-boleto-count.txt";
+    $count = intval(file_get_contents($path) ?? "0");
     $count++;
     file_put_contents($path, $count);
     return $count;
@@ -70,11 +73,14 @@ $faturas = getFaturas();
 $step = contador();
 $fatura = $faturas[$step];
 
-if( empty($fatura)) {
+if (empty($fatura)) {
     echo json_encode([
         "next" => false,
         "message" => "Lista vazia",
-        "payload" => []
+        "payload" => [
+            "total" => count($faturas),
+            "step" => $step,
+        ]
     ]);
     die;
 }
@@ -83,11 +89,14 @@ $pay = new AsaasPay();
 $key = $institutions[$fatura["instituicao_fk"]] ?? "";
 $pay->set_api_key($key);
 
-if( empty($key) ) {
+if (empty($key)) {
     echo json_encode([
         "next" => false,
         "message" => "Instituição não possui chave api",
-        "payload" => []
+        "payload" => [
+            "total" => count($faturas),
+            "step" => $step,
+        ]
     ]);
     die;
 }
@@ -99,9 +108,9 @@ $url = $resFatura["invoiceUrl"];
 $db = new Banco();
 $db->table("fatura");
 $db->where(["id" => $fatura["id"]]);
-$db->update( [
+$db->update([
     "url" => $url
-] );
+]);
 
 echo json_encode([
     "next" => true,
