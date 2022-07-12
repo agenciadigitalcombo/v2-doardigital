@@ -166,7 +166,7 @@ function render()
                 $inserts[] = "INSERT INTO fatura ($keys) VALUES ($values)";
             }
             $dataFatura = strtotime($portContent["data"]);
-            $dataAtual = strtotime("2022-07-01");
+            $dataAtual = strtotime("2022-06-21");
             if ($dataFatura >= $dataAtual) {
                 $telefone = $doadorFks[$fatura["doador_fk"]]["telefone"];
                 $payloadMessage = [
