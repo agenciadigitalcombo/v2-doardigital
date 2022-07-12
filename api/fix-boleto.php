@@ -72,15 +72,25 @@ $fatura = $faturas[$step];
 
 if( empty($fatura)) {
     echo json_encode([
-        "next" => true,
+        "next" => false,
         "message" => "Lista vazia",
         "payload" => []
     ]);
+    die;
 }
 
 $pay = new AsaasPay();
-$key = $institutions[$fatura["instituicao_fk"]];
+$key = $institutions[$fatura["instituicao_fk"]] ?? "";
 $pay->set_api_key($key);
+
+if( empty($key) ) {
+    echo json_encode([
+        "next" => false,
+        "message" => "Instituição não possui chave api",
+        "payload" => []
+    ]);
+    die;
+}
 
 $resFatura = $pay->getInvoice($fatura["fatura_id"]);
 
