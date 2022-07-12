@@ -94,6 +94,14 @@ if( empty($key) ) {
 
 $resFatura = $pay->getInvoice($fatura["fatura_id"]);
 
+$url = $resFatura["invoiceUrl"];
+
+$db = new Banco();
+$db->table("fatura");
+$db->where(["id" => $fatura["id"]]);
+$db->update( [
+    "url" => $url
+] );
 
 echo json_encode([
     "next" => true,
@@ -102,7 +110,7 @@ echo json_encode([
         "dataInit" => "2022-06-21",
         "total" => count($faturas),
         "step" => $step,
+        "debugUrl" => $url,
         "fatura" => $fatura,
-        "debug" => $resFatura
     ],
 ]);
