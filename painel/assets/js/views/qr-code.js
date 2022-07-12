@@ -117,7 +117,8 @@ export default {
 
 
 	async mounted() {
-		let url_site = "https://" + window.location.host
+		let domain = localStorage.getItem('instituicao_subdomaim')
+		let url_site = "https://" + domain
 		var qrcode = new QRCode(this.$refs.print_qr, {
 			text: url_site,
 			width: 230,
