@@ -52,7 +52,6 @@ class InstituicaoControle extends Controle
             "email" => "Informe um email",
             "telefone" => "Informe um telefone",
             "subdomain" => "Informe um subdomain",
-            "tipoEmpresa" => "Informe tipo de empresa",
             "cep" => "Informe o CEP",
             "logradouro" => "Informe o endereço",
             "numero" => "Informe o numero",
@@ -82,7 +81,7 @@ class InstituicaoControle extends Controle
         $titulo = $_REQUEST['nome'];
         $tags = "site, doação, igreja";
         $descricao = "Um site sem fim lucrativos";
-        $tipoEmpresa = $_REQUEST['tipoEmpresa'];
+        $tipoEmpresa = $_REQUEST['tipoEmpresa'] ?? "";
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
         $numero = $_REQUEST['numero'];
