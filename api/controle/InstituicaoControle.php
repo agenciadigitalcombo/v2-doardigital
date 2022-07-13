@@ -371,7 +371,7 @@ class InstituicaoControle extends Controle
             "adm_fk" => $adm_fk
         ]);
         $list = [];
-        foreach ($con->select() as $inst) {
+        foreach ($con->select() ?? [] as $inst) {
             $instituition_fk = $inst['instituition_fk'];
             $con->table("institution");
             $con->where([
