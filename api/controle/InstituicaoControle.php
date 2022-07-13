@@ -377,7 +377,7 @@ class InstituicaoControle extends Controle
             $con->where([
                 "institution_fk" => $instituition_fk,
             ]);
-            $list[] = Instituicao::porter($con->select()[0]);
+            $list[] = Instituicao::porter($con->select()[0] ?? []);
         }
         self::printSuccess(
             "lista de instituição",

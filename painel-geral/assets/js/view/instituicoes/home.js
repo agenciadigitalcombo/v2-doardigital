@@ -35,6 +35,8 @@ export default {
 
 
 		this.dados = (await this.listar()).payload
+
+		console.log(this.dados)
 		 
  
 		this.filtraCredencial.reverse();
