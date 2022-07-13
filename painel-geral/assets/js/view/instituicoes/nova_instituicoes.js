@@ -198,15 +198,13 @@ export default {
 
 		async addInstituicao() {
 			this.error = null
-
-
 			let res = await adm.cadastrarInstituicao(
 				this.token,
 				this.nome,
 				this.cpfCnpj,
 				this.email,
 				this.telefone,
-				this.subdomain,
+				this.subdomain + window.location.hostname,
 				this.tipoEmpresa,
 				this.cep,
 				this.logradouro,
@@ -229,11 +227,8 @@ export default {
 				return null
 			}
 
-			this.submitStatus = 'PENDING'
-			setTimeout(() => {
-				this.submitStatus = 'OK'
-				window.location.href = "#/instituicoes"
-			}, 500)
+			window.location.href = "#/instituicoes"
+			this.delCache()
 
 
 		},
