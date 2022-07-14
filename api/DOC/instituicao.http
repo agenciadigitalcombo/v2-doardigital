@@ -28,6 +28,7 @@
 @agency=9313
 @bank=341
 @bankAccountType=CONTA_CORRENTE
+@action=1
 
 ##
 GET {{host}}/api/instituicao
@@ -96,3 +97,12 @@ GET {{host}}/api/instituicao/balance?token={{token}}&institution_fk={{institutio
 
 ###
 GET {{host}}/api/instituicao/donation?token={{token}}&institution_fk={{institution_fk}}
+
+###
+POST {{host}}/api/instituicao/set-adm
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&institution_fk={{institution_fk}}
+&adm_fk={{adm_fk}}
+&action={{action}}

@@ -3,7 +3,7 @@ import adm from "../../../../../static/js/api/adm.js"
 
 
 export default {
- 
+
 
 	data: function () {
 		return {
@@ -24,12 +24,14 @@ export default {
 			msg: null,
 			error: null,
 			jms: true,
+			institution: [],
+			sub_adm_fk: null
 
 		}
 	},
 
 	methods: {
-		
+
 		async editarUsuario() {
 			this.error = null
 
@@ -47,32 +49,54 @@ export default {
 				return null
 			}
 
-			this.jms= res.next,
-			this.msg = res.message
+			this.jms = res.next,
+				this.msg = res.message
 			setTimeout(() => {
-					window.location.href = "#/usuarios"
+				window.location.href = "#/usuarios"
 			}, 1200)
 		},
 
 		async listar() {
-		    let res = await adm.listarCredencial( localStorage.getItem('token') )
+			let res = await adm.listarCredencial(localStorage.getItem('token'))
 			return res
 		},
+		async listarInst() {
+			let res = await adm.listarInstutuicao(
+				this.token,
+				this.adm_fk,
+			)
+			return res
+		},
+		async setAdm($el) {
+			let adm_fk = this.sub_adm_fk
+			let inst_fk = $el.target.value
+			let isChecked = $el.target.checked
+			let resApi = await adm.setAdm(adm_fk, inst_fk, isChecked)
+
+			console.log(resApi)
+		}
 	},
 
 
 	async mounted() {
+
+		this.token = localStorage.getItem('token')
+		let str = this.token.split('.')[0]
+		let encodedStr = atob(str);
+		var res = JSON.parse(encodedStr);
+		this.adm_fk = res.code
+
+		this.institution = (await this.listarInst()).payload
+
 		this.nome = globalThis._usuario.nome
 		this.telefone = globalThis._usuario.telefone
 		this.credencial_id = globalThis._usuario.credencial_id
 		this.email = globalThis._usuario.email
-		this.secret = globalThis._usuario.secret
+		this.sub_adm_fk = globalThis._usuario.code
 
-		this.lista_dados = (await this.listar()).dados
-	
-		
+
 	},
 
-    template: await get_template('./assets/js/view/usuarios/editar')
+	template: await get_template('./assets/js/view/usuarios/editar')
 }
- 
+

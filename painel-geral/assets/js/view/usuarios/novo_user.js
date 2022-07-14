@@ -62,12 +62,8 @@ export default {
 				this.error = res.message
 				return null
 			}
-			this.submitStatus = 'PENDING'
-			setTimeout(() => {
-				this.submitStatus = 'OK'
-				window.location.href = `#/usuarios`
-				
-			}, 500)
+			
+			window.location.href = `#/usuarios`
 		}
 	},
 

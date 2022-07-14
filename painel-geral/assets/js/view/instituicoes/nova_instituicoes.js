@@ -12,7 +12,7 @@ export default {
 			email: null,
 			telefone: null,
 			subdomain: null,
-			tipoEmpresa: null,
+			tipoEmpresa: "",
 			razao_social: null,
 			submitStatus: null,
 
@@ -110,25 +110,59 @@ export default {
 				this.isBanco = false
 		},
 
+		saveCache() {
+			let payload = {
+				nome: this.nome,
+				cpfCnpj: this.cpfCnpj,
+				email: this.email,
+				telefone: this.telefone,
+				subdomain: this.subdomain,
+				tipoEmpresa: this.tipoEmpresa,
+				razao_social: this.razao_social,
+				cep: this.cep,
+				numero: this.numero,
+				logradouro: this.logradouro,
+				complemento: this.complemento,
+				bairro: this.bairro,
+				cidade: this.cidade,
+				estado: this.estado,
+				jms: this.jms,
+				type: this.type,
+			}
+			sessionStorage.setItem("cacheNewInst", JSON.stringify(payload))
+		},
+
+		getCache() {
+			let data = sessionStorage.getItem("cacheNewInst") || "{}"
+			data = JSON.parse(data)
+			Object.keys(data).forEach(k => {
+				this[k] = data[k]
+			})
+		},
+
+		delCache() {
+			sessionStorage.removeItem("cacheNewInst")
+		},
+
 		endereco() {
 			this.type = 'B'
-			this.isInforma = false,
-				this.isEndereco = true,
-				this.isBanco = false
+			this.isInforma = false
+			this.isEndereco = true
+			this.isBanco = false
+			this.saveCache()
 		},
 
 		banco() {
 			this.type = 'C'
-			this.isInforma = false,
-				this.isEndereco = false,
-				this.isBanco = true
+			this.isInforma = false
+			this.isEndereco = false
+			this.isBanco = true
+			this.saveCache()
 		},
 
 		validaTell(event) {
 			var phone = this.telefone.replace(/\D/g, "");
-
 			if (phone.length < 11) {
-
 				this.tell = '(##) ####-####'
 			} else {
 				this.tell = '(##) #####-####'
@@ -139,20 +173,7 @@ export default {
 			this.tell = '(##) #####-####'
 		},
 
-		async validDomain() {
-			this.error = null
-			let res = await adm.validarDomain(this.subdomain)
-			if (!res.next) {
-				// this.next = res.next
-				this.jms = res.next,
-					this.error = res.message
-				return null
-			}
-			// this.next = res.next
-			this.jms = res.next,
-				this.msg = res.message
-			return res
-		},
+		
 
 		searchCep() {
 			if (this.cep.length == 8) {
@@ -177,22 +198,20 @@ export default {
 
 		async addInstituicao() {
 			this.error = null
-
-
 			let res = await adm.cadastrarInstituicao(
 				this.token,
 				this.nome,
 				this.cpfCnpj,
 				this.email,
 				this.telefone,
-				this.subdomain,
+				this.subdomain + window.location.hostname,
 				this.tipoEmpresa,
 				this.cep,
 				this.logradouro,
 				this.numero,
 				this.complemento,
 				this.bairro,
-				this.cidade, 
+				this.cidade,
 				this.estado,
 
 				this.adm_fk,
@@ -205,15 +224,11 @@ export default {
 			)
 			if (!res.next) {
 				this.error = res.message
-				console.log(res)
 				return null
 			}
 
-			this.submitStatus = 'PENDING'
-			setTimeout(() => {
-				this.submitStatus = 'OK'
-					window.location.href = "#/instituicoes"
-			}, 500)
+			window.location.href = "#/instituicoes"
+			this.delCache()
 
 
 		},
@@ -237,6 +252,7 @@ export default {
 		let dados = (await this.listar()).payload
 		this.adm_fk = dados.code
 
+		this.getCache()
 
 	},
 

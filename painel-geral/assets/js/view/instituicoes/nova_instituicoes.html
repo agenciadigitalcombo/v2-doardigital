@@ -34,7 +34,7 @@
                         <div class="card mb-5 mb-xl-10">
                             <div class="form">
 
-                                <form v-if="type === 'A'" action="javascript:void(0)"  @submit="endereco">
+                                <form v-if="type === 'A'" action="javascript:void(0)" @submit="endereco">
                                     <div class="card-body border-top p-9">
                                         <div class="row mb-6">
                                             <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome
@@ -65,12 +65,12 @@
                                                     <div class="fw-bold text-gray-800">CPF</div>
                                                 </label>
                                                 <input checked @click="jms = true" class="form-check-input me-3"
-                                                    name="CPF" type="radio" value="1" />
+                                                    name="tipo_conta" type="radio" value="1" />
 
                                                 <label class="form-check-label" for="cnpj">
                                                     <div class="fw-bold text-gray-800">CNPJ</div>
                                                 </label>
-                                                <input @click="jms = false" class="form-check-input me-3" name="cnpj"
+                                                <input @click="jms = false" class="form-check-input me-3" name="tipo_conta"
                                                     type="radio" value="1" />
                                             </div>
 
@@ -93,6 +93,24 @@
                                             </div>
 
                                         </div>
+
+                                        <div class="row mb-6" v-if="!jms">
+                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                <span class="required">Tipo de Empresa</span>
+
+                                            </label>
+                                            <div class="col-lg-8 fv-row">
+                                                <select class="form-select form-select-solid" v-model="tipoEmpresa" required>
+                                                    <option value=""  selected>Seleciona Tipo de Empresa
+                                                    </option>
+                                                    <option value="MEI">MEI</option>
+                                                    <option value="LIMITED">Limitada (ltda.)</option>
+                                                    <option value="INDIVIDUAL">Individual</option>
+                                                    <option value="ASSOCIATION">Associação</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="row mb-6">
                                             <label class="col-lg-4 col-form-label fw-bold fs-6">
                                                 <span class="required">Telefone</span>
@@ -121,22 +139,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mb-6">
-                                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                <span class="required">Tipo de Empresa</span>
-
-                                            </label>
-                                            <div class="col-lg-8 fv-row">
-                                                <select class="form-select form-select-solid" v-model="tipoEmpresa">
-                                                    <option value="" disabled selected>Seleciona Tipo de Empresa
-                                                    </option>
-                                                    <option value="MEI">MEI</option>
-                                                    <option value="LIMITED">Limitada (ltda.)</option>
-                                                    <option value="INDIVIDUAL">Individual</option>
-                                                    <option value="ASSOCIATION">Associação</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                       
 
                                     </div>
                                     <div class="card  mb-xl-5">
@@ -154,7 +157,7 @@
 
                                                 <div class="input-group mb-3">
                                                     <input type="text" class="form-control form-control-lg " required
-                                                        v-on:blur="validDomain" v-model="subdomain" />
+                                                         v-model="subdomain" />
                                                     <span
                                                         class="input-group-text text-danger">.doardigital.com.br</span>
                                                 </div>
@@ -169,7 +172,7 @@
 
                                 </form>
 
-                                <form v-else-if="type === 'B'" action="javascript:void(0)"  @submit="banco">
+                                <form v-else-if="type === 'B'" action="javascript:void(0)" @submit="banco">
                                     <div class="card-body border-top p-9">
 
 
@@ -225,7 +228,7 @@
                                             <div class="col-lg-8 fv-row">
                                                 <input v-model="numero" type="text"
                                                     class="form-control form-control-lg form-control-solid"
-                                                    placeholder="Numero" />
+                                                    placeholder="Numero" required />
                                             </div>
                                         </div>
                                         <div class="row mb-6">
@@ -279,7 +282,7 @@
 
                                             <div>
                                                 <button type="submit" class="btn btn-lg btn-primary">Continuar</button>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -287,7 +290,7 @@
 
                                 </form>
 
-                                <form v-else-if="type === 'C'" action="javascript:void(0)"  @submit="addInstituicao">
+                                <form v-else-if="type === 'C'" action="javascript:void(0)" @submit="addInstituicao">
                                     <div class="card-body border-top p-9">
 
                                         <div class="row mb-6">
@@ -407,19 +410,9 @@
 
 
 
-                                        <div class=" d-flex justify-content-end py-2 px-9">
-                                            <p class="typo__p" v-if="submitStatus === 'OK'">
-                                            </p>
-                                            <p class="typo__p" v-if="submitStatus === 'ERROR'">
-                                                Por favor, preencha o formulário corretamente.</p>
-                                            <p class="typo__p" v-if="submitStatus === 'PENDING'">Salvando...
-                                            </p>
-                                        </div>
-                                        <div v-if="jms===true">
-                                            <c-mensagem :msg="msg"></c-mensagem>
-                                        </div>
-                                        <div v-else>
-                                            <c-mensagem :error="error"></c-mensagem>
+                                        
+                                        <div class="alert alert-danger" role="alert" v-if="error">
+                                            {{error}}
                                         </div>
 
                                         <div class="d-flex flex-stack pt-15 pb-5">

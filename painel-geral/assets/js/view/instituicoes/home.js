@@ -13,17 +13,14 @@ export default {
 			dominio: null,
 			search: "",
 			dados: [],
+			showBtnCreate: true
 		}
 
 	},
 
 	computed: {
  
-		filtraCredencial() {
-			return this.dados.filter((credencial) => {
-				return credencial.nome.match(this.search) || credencial.subdomain.match(this.search);
-			})
-		}
+		
 	},
 
 	async mounted() {
@@ -32,12 +29,8 @@ export default {
 		let encodedStr = atob(str); 
 		var res =  JSON.parse(encodedStr);
 		this.adm_fk = res.code
-
-
 		this.dados = (await this.listar()).payload
-		 
- 
-		this.filtraCredencial.reverse();
+		this.showBtnCreate = !this.dados[0].institution_fk  
 	},
 	 
 	methods: {

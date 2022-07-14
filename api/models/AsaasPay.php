@@ -33,6 +33,11 @@ class AsaasPay extends Asaas
         return $this->get("/subscriptions/{$id}/payments", []);
     }
 
+    function getInvoice(string $id): array
+    {
+        return $this->get("/payments/{$id}", []);
+    }
+
 
     function single(
         string $external_fk,

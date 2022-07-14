@@ -52,7 +52,6 @@ class InstituicaoControle extends Controle
             "email" => "Informe um email",
             "telefone" => "Informe um telefone",
             "subdomain" => "Informe um subdomain",
-            "tipoEmpresa" => "Informe tipo de empresa",
             "cep" => "Informe o CEP",
             "logradouro" => "Informe o endereço",
             "numero" => "Informe o numero",
@@ -82,7 +81,7 @@ class InstituicaoControle extends Controle
         $titulo = $_REQUEST['nome'];
         $tags = "site, doação, igreja";
         $descricao = "Um site sem fim lucrativos";
-        $tipoEmpresa = $_REQUEST['tipoEmpresa'];
+        $tipoEmpresa = $_REQUEST['tipoEmpresa'] ?? "";
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
         $numero = $_REQUEST['numero'];
@@ -371,13 +370,13 @@ class InstituicaoControle extends Controle
             "adm_fk" => $adm_fk
         ]);
         $list = [];
-        foreach ($con->select() as $inst) {
+        foreach ($con->select() ?? [] as $inst) {
             $instituition_fk = $inst['instituition_fk'];
             $con->table("institution");
             $con->where([
                 "institution_fk" => $instituition_fk,
             ]);
-            $list[] = Instituicao::porter($con->select()[0]);
+            $list[] = Instituicao::porter($con->select()[0] ?? []);
         }
         self::printSuccess(
             "lista de instituição",

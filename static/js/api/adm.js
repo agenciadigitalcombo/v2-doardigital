@@ -1,5 +1,5 @@
 import http from './http.js'
- 
+
 export default {
     async cadastrar(nome, email, senha, telefone) {
         return await http.post('/adm/register', {
@@ -221,7 +221,7 @@ export default {
     async alterarInstituicao(
         token,
         institution_fk,
-        nome, 
+        nome,
         email,
         telefone,
         domain,
@@ -230,7 +230,7 @@ export default {
         cor,
         titulo,
         tags,
-        descricao, 
+        descricao,
         cep,
         logradouro,
         numero,
@@ -238,12 +238,12 @@ export default {
         bairro,
         cidade,
         estado,
- 
+
     ) {
         return await http.post('/instituicao/update-info', {
             token,
             institution_fk,
-            nome, 
+            nome,
             email,
             telefone,
             domain,
@@ -252,7 +252,7 @@ export default {
             cor,
             titulo,
             tags,
-            descricao, 
+            descricao,
             cep,
             logradouro,
             numero,
@@ -333,10 +333,10 @@ export default {
         })
     },
 
-    async listConf(	
+    async listConf(
         token,
         domain
-        ) {
+    ) {
         return await http.post('/instituicao/info', {
             token,
             domain
@@ -344,12 +344,12 @@ export default {
     },
 
 
-    async uploadImg( 
+    async uploadImg(
         form
     ) {
         console.log(form)
         let res = await fetch(`https://doardigital.tk/api/upload-img`, {
-            
+
             method: 'POST',
             mode: 'cors',
             cache: 'default',
@@ -359,12 +359,12 @@ export default {
         return await res.json()
     },
 
-    async doacaoUploadCsv( 
+    async doacaoUploadCsv(
         form
     ) {
         console.log(form)
         let res = await fetch(`https://doardigital.tk/import/doacoes`, {
-            
+
             method: 'POST',
             mode: 'cors',
             cache: 'default',
@@ -435,10 +435,10 @@ export default {
             token,
         })
     },
-    
-    
+
+
     async transacao(
-        instituicao_fk, 
+        instituicao_fk,
         valor,
         recorrente,
         email,
@@ -459,12 +459,12 @@ export default {
         card_numero,
         card_cvv,
         card_validade,
-       
+
 
     ) {
         return await http.post('/fatura/create', {
             instituicao_fk,
-            valor, 
+            valor,
             recorrente,
             email,
             nome,
@@ -478,7 +478,7 @@ export default {
             complemento,
             bairro,
             cidade,
-    
+
             tipo_pagamento,
             card_nome,
             card_numero,
@@ -732,7 +732,7 @@ export default {
             documento_numero,
         })
     },
-     
+
     async listarDoacoes(
         token,
         institution_fk) {
@@ -766,19 +766,19 @@ export default {
         instituicao_fk
     ) {
         return await http.get('/email-template/list', {
-            
+
             token,
             instituicao_fk
         })
     },
- 
+
     async salvarEmail(
         token,
         tipo,
         instituicao_fk,
         status_pagamento,
         assunto,
-        content, 
+        content,
     ) {
         return await http.post('/email-template/save', {
             token,
@@ -786,7 +786,7 @@ export default {
             instituicao_fk,
             status_pagamento,
             assunto,
-            content, 
+            content,
         })
     },
 
@@ -835,14 +835,14 @@ export default {
     },
 
     async savarEvenda(
-         token,
-         instituicao_fk,
-         canal,
+        token,
+        instituicao_fk,
+        canal,
     ) {
         return await http.post('/evendas/save', {
-             token,
-             instituicao_fk,
-             canal,
+            token,
+            instituicao_fk,
+            canal,
         })
     },
 
@@ -857,28 +857,28 @@ export default {
     },
 
 
-    
+
     async savarTags(
         token,
         instituicao_fk,
         key,
-   ) {
-       return await http.post('/tag-manager/save', {
+    ) {
+        return await http.post('/tag-manager/save', {
             token,
             instituicao_fk,
             key,
-       })
-   },
+        })
+    },
 
-   async listarTags(
-       token,
-       instituicao_fk,
-   ) {
-       return await http.get('/tag-manager/info', {
-           token,
-           instituicao_fk,
-       })
-   },
+    async listarTags(
+        token,
+        instituicao_fk,
+    ) {
+        return await http.get('/tag-manager/info', {
+            token,
+            instituicao_fk,
+        })
+    },
     async savarMailBoss(
         instituicao_id,
         token,
@@ -915,7 +915,7 @@ export default {
         id,
     ) {
         return await http.get('/instituicao/balance', {
-            institution_fk:id
+            institution_fk: id
         })
     },
 
@@ -944,6 +944,18 @@ export default {
     ) {
         return await http.post('/dashboard', {
             token,
+        })
+    },
+
+    async setAdm(
+        adm_fk,
+        inst_fk,
+        isChecked
+    ) {
+        return await http.post('/instituicao/set-adm', {
+            adm_fk,
+            inst_fk,
+            isChecked
         })
     },
 

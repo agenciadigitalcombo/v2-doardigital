@@ -16,7 +16,7 @@
                            
                         </div>
                         <div class="card-toolbar">
-                            <a type="button" class="btn btn-primary" href="#/instituicoesNova">
+                            <a v-show="showBtnCreate" type="button" class="btn btn-primary" href="#/instituicoesNova">
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none">
@@ -44,7 +44,7 @@
                                 </thead>
 
                                 <tbody class="fw-bold text-gray-600">
-                                    <tr v-for="item in filtraCredencial" :key="item.id">
+                                    <tr v-for="item in dados" :key="item.id" v-show="item.institution_fk">
                                         <td>
                                             {{item.nome}}
                                             <br>
