@@ -70,10 +70,8 @@ export default {
 		async setAdm($el) {
 			let adm_fk = this.sub_adm_fk
 			let inst_fk = $el.target.value
-			let isChecked = $el.target.checked
+			let isChecked = $el.target.checked ? "1" : "0"
 			let resApi = await adm.setAdm(adm_fk, inst_fk, isChecked)
-
-			console.log(resApi)
 		}
 	},
 
