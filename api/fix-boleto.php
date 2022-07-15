@@ -103,7 +103,7 @@ if (empty($key)) {
 
 $resFatura = $pay->getInvoice($fatura["fatura_id"]);
 
-$url = $resFatura["invoiceUrl"];
+$url = $resFatura["bankSlipUrl"];
 
 $db = new Banco();
 $db->table("fatura");
@@ -121,5 +121,6 @@ echo json_encode([
         "step" => $step,
         "debugUrl" => $url,
         "fatura" => $fatura,
+        "faturaAsaas" => $resFatura,
     ],
 ]);

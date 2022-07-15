@@ -68,6 +68,7 @@ function porterSubInvoice($invoices)
             "status" => $i["status"],
             "dueDate" => $i["dueDate"],
             "invoiceUrl" => $i["invoiceUrl"],
+            "bankSlipUrl" => $i["bankSlipUrl"],
             "invoiceNumber" => $i["invoiceNumber"],
         ];
     }, $invoices);
@@ -153,7 +154,7 @@ function render()
                 "status_pagamento" => $f["status"],
                 "valor" => $fatura["valor"],
                 "codigo" => $code,
-                "url" => $f["invoiceUrl"],
+                "url" => $f["bankSlipUrl"],
                 "data" =>  date('Y-m-d', strtotime('-7 days', strtotime($f["dueDate"]))),
                 "hora" => $fatura["hora"],
                 "doador_fk" => $fatura["doador_fk"],
