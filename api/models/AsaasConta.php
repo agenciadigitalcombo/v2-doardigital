@@ -31,7 +31,6 @@ class AsaasConta extends Asaas
         ]);
     }
 
-
     function extrato() {
         return $this->get("/financialTransactions",[]);
     }
