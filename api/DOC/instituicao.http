@@ -1,6 +1,6 @@
-@host=https://doardigital.tk
+@host=http://doardigital.con
 @token=eyJjb2RlIjoiYWRtXzYyYTFmOGUzNTI4ZWUifQ==.7653c77bff2b2c012545f7ec98df4a0ae7f39df7
-@institution_fk=inst_62b5e40651747
+@institution_fk=inst_62ced3799a2bb
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
 @email=br.rafael18@outlook.com
@@ -21,16 +21,17 @@
 @bairro=JD Margaridas
 @cidade=Taboão da serra
 @estado=SP
-@adm_fk=adm_62b5e340c30da
+@adm_fk=sub_62d01a71a2b1a
 @account=54799
 @accountDigit=5
 @accountName=Itaú
 @agency=9313
 @bank=341
 @bankAccountType=CONTA_CORRENTE
-@action=1
+@action=0"
 
-##
+
+###
 GET {{host}}/api/instituicao
 
 ###
@@ -58,7 +59,7 @@ token={{token}}
 &agency={{agency}}
 &bank={{bank}}
 &bankAccountType={{bankAccountType}}
-&debug=1
+&debug=0
 
 
 ###

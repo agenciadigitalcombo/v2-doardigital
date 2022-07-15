@@ -25,6 +25,7 @@ export default {
 			error: null,
 			jms: true,
 			institution: [],
+			institutionSub: [],
 			sub_adm_fk: null
 
 		}
@@ -67,13 +68,21 @@ export default {
 			)
 			return res
 		},
+		async listarInst_sub() {
+			let res = await adm.listarInstutuicao(
+			    this.token,
+				this.sub_adm_fk,
+			)
+			return res
+		},
 		async setAdm($el) {
 			let adm_fk = this.sub_adm_fk
 			let inst_fk = $el.target.value
-			let isChecked = $el.target.checked
+			let isChecked = $el.target.checked ? "1" : "0"
 			let resApi = await adm.setAdm(adm_fk, inst_fk, isChecked)
-
-			console.log(resApi)
+		},
+		isAdministrate( inst_fk ) {
+			return this.institutionSub.find( i => i.institution_fk == inst_fk )
 		}
 	},
 
@@ -86,14 +95,18 @@ export default {
 		var res = JSON.parse(encodedStr);
 		this.adm_fk = res.code
 
-		this.institution = (await this.listarInst()).payload
+		
 
+		
 		this.nome = globalThis._usuario.nome
 		this.telefone = globalThis._usuario.telefone
 		this.credencial_id = globalThis._usuario.credencial_id
 		this.email = globalThis._usuario.email
 		this.sub_adm_fk = globalThis._usuario.code
-
+		
+		this.institution = (await this.listarInst()).payload
+		this.institutionSub = (await this.listarInst_sub()).payload
+		console.log(this.institutionSub)
 
 	},
 

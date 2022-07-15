@@ -38,9 +38,9 @@ export default {
         if (this.jms == 'super') {
             this.lista = this.menus
         } else if (this.jms == 'adm') {
-            this.lista = this.menus.filter(itens => this.jms.includes(itens.permisao2))
+            this.lista = this.menus.filter(itens => this.jms.includes(itens.permisao2) )
         } else {
-            this.lista = this.menus.filter(itens => recursos.includes(itens.id))
+            this.lista = this.menus.filter(itens => itens.id == "instituicoes" || recursos.includes(itens.id)   )
         }
     },
 

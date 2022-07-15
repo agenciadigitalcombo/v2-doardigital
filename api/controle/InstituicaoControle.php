@@ -429,4 +429,30 @@ class InstituicaoControle extends Controle
             $faturas
         );
     }
+
+    static function setAdm()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe uma Instituição",
+            "adm_fk" => "informe uma identificador de adm",
+        ]);
+        self::privateRouter();
+        $institution_fk = $_REQUEST['institution_fk'];
+        $adm_fk = $_REQUEST['adm_fk'];
+        $action = $_REQUEST['action'] ?? 0;
+        $action = !!$action;
+        $inst = new Instituicao();
+        if($action) {
+            $inst->setAdm($institution_fk,$adm_fk);
+        }else {
+            $inst->delAdm($institution_fk,$adm_fk);
+        }
+        self::printSuccess(
+            "Atualizado com sucesso",
+            [
+                "action" => $action
+            ]
+        );
+    }
 }

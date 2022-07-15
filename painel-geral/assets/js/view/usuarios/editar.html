@@ -69,7 +69,7 @@
 
                                                     <div class="">
                                                         <label v-for=" inst in institution " v-if="inst.nome" class="btn" >
-                                                            <input type="checkbox" :value="inst.institution_fk" @click="setAdm">
+                                                            <input type="checkbox" :value="inst.institution_fk" @click="setAdm" :checked="isAdministrate(inst.institution_fk)" >
                                                             <span>{{inst.nome}}</span>
                                                         </label>
                                                     </div>

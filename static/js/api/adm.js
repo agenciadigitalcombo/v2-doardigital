@@ -953,9 +953,9 @@ export default {
         isChecked
     ) {
         return await http.post('/instituicao/set-adm', {
-            adm_fk,
-            inst_fk,
-            isChecked
+            adm_fk: adm_fk,
+            institution_fk: inst_fk,
+            action: isChecked
         })
     },
 
