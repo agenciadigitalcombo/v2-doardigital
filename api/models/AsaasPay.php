@@ -92,6 +92,7 @@ class AsaasPay extends Asaas
                 "phone" => $this->clearNumber($telefone),
                 "mobilePhone" => $this->clearNumber($telefone)
             ];
+            $payload["dueDate"] = date('Y-m-d');
             $payload["remoteIp"] = $_SERVER['REMOTE_ADDR'];
         }
         if (!empty($split)) {
@@ -155,6 +156,7 @@ class AsaasPay extends Asaas
             ];
             $payload["remoteIp"] = $_SERVER['REMOTE_ADDR'];
             $payload["maxPayments"] = 24;
+            $payload["nextDueDate"] = date('Y-m-d');
         }
         if (!empty($split)) {
             $payload['split_rules'] = $split;
