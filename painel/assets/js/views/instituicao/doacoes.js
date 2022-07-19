@@ -28,93 +28,13 @@ export default {
             paginaAtual: 1,
             maxLeft: null,
             maxRight: null,
+            filtraDoacoes: [],
 
         }
     },
 
 
-    computed: {
 
-
-
-        filtraDoacoes() {
-            let items = [];
-            items = this.dadosPagina.filter((item) => {
-                return (
-                    item.doador_email.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
-                    item.doador_nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-                );
-            });
-            items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
-            });
-            return items;
-        },
-
-        filtraTotal() {
-            return this.filltroDoa.filter((doacao) => {
-                return (
-                    doacao.data.split('-').join('') <= this.dataFinal
-                )
-            })
-        },
-
-        filtraAberto() {
-            let items = [];
-            items = this.dadosPagina.filter((item) => {
-                return (
-                    item.status_pagamento === 'PENDING'
-                );
-            });
-            items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
-            });
-            return items;
-
-        },
-
-        filtraPago() {
-            let items = [];
-            items = this.dadosPagina.filter((item) => {
-                return (
-                    item.status_pagamento === 'CONFIRMED' ||
-                    item.status_pagamento === 'RECEIVED'
-                );
-            });
-            items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
-            });
-            return items;
-        },
-
-        filtraVencido() {
-            let items = [];
-            items = this.dadosPagina.filter((item) => {
-                return (
-                    item.status_pagamento === 'OVERDUE'
-                );
-            });
-            items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
-            });
-            return items;
-
-        },
-
-        filtraEstorno() {
-            let items = [];
-            items = this.dadosPagina.filter((item) => {
-                return (
-                    item.status_pagamento === 'OVERDUE'
-                );
-            });
-            items = items.filter((item) => {
-                return item.data.split('-').join('') <= this.dataFinal
-            });
-            return items;
-        },
-
-    },
 
 
     filters: {
@@ -166,6 +86,15 @@ export default {
     },
 
     methods: {
+        buscarNome() {
+            if (this.search.length === 0) {
+                this.filtraDoacoes = [...this.doacoes]
+                return null
+            }
+            this.filtraDoacoes = this.doacoes.filter(d => {
+                return (d.doador_nome).toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+            })
+        },
 
         fechaModalExporta(event) {
             let overlay = document.getElementById("exporta");
@@ -291,51 +220,21 @@ export default {
             return numbers;
         },
 
-        botaoJmsPaginacao() {
-            return this.calculateMaxVisible()
-        },
 
-        getPagina(semPagina) {
-            this.paginaAtual = semPagina;
-            this.dadosPagina = [];
-            let inicio = (semPagina * this.elementoPaginacao) - this.elementoPaginacao;
-            let fim = (semPagina * this.elementoPaginacao);
-            this.dadosPagina = this.doacoes.slice(inicio, fim);
 
-        },
 
-        getProximo() {
-            if (this.paginaAtual < this.totalPagina()) {
-                this.paginaAtual++
-            }
-            this.getPagina(this.paginaAtual)
-        },
 
-        getUltima() {
-            if (this.paginaAtual < this.totalPagina()) {
-                this.paginaAtual = this.totalPagina()
-            }
-            this.getPagina(this.paginaAtual)
-        },
 
-        getAnterior() {
-            if (this.paginaAtual > 1) {
-                this.paginaAtual--
-            }
-            this.getPagina(this.paginaAtual)
-        },
-        estaActivo(semPagina) {
-            return semPagina == this.paginaAtual ? "active" : ""
-            //        ou
-            //  if (semPagina == this.paginaAtual) {
-            //     return "active"
-            //   } else {
-            //    return "" 
-            //  }  
-        },
+
+
+
     },
 
     async mounted() {
+
+        this.token = window.localStorage.getItem("token")
+        this.institution_fk = window.localStorage.getItem("instituicao_id")
+
         let dateObj = new Date()
         this.dataFinal = dateObj.toLocaleString('en-GB', {
             year: 'numeric',
@@ -348,13 +247,12 @@ export default {
         let allDonations = (await this.listarDoacoes()).payload || []
 
         let allDonationsNowMonth = allDonations.filter(donation => {
-            return (new Date(donation.data).getMonth()) != (this.nowMonth+1)
+            return (new Date(donation.data).getMonth()) != (this.nowMonth + 1)
         })
 
-
-        this.doacoes = allDonationsNowMonth        
-        this.getPagina(2)
+        this.doacoes = allDonationsNowMonth
         this.filltroDoa = allDonationsNowMonth
+        this.filtraDoacoes = allDonationsNowMonth
 
         let somar = lista => lista.reduce((acc, v) => (acc + v), 0)
 
@@ -376,15 +274,6 @@ export default {
         this.vencido = vencidaCanceladaTotal
         this.estorno = devolvidaTotal
 
-        
-
-
-
-    },
-
-    created() {
-        this.token = window.localStorage.getItem("token")
-        this.institution_fk = window.localStorage.getItem("instituicao_id")
     },
 
     template: await get_template('./assets/js/views/instituicao/doacoes')
