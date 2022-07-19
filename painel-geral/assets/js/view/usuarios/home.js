@@ -36,7 +36,7 @@ export default {
 		},
 
 		async editar(secret) {
-			globalThis._usuario = this.dados.find(user => user.secret == secret)
+			globalThis._usuario = this.dados.find(user => user.code == secret)
 			window.location.href = "#/usuario-editar"
 		},
 	},
