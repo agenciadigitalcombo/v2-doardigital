@@ -32,7 +32,9 @@ class AsaasConta extends Asaas
     }
 
     function extrato() {
-        return $this->get("/financialTransactions",[]);
+        return $this->get("/transfers",[
+            "limit" => 100
+        ]);
     }
 
     function chavePix()
