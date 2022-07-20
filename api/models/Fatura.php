@@ -121,6 +121,7 @@ class Fatura
             "codigo" => $payload["codigo"] ?? null,
             "url" => $payload["url"] ?? null,
             "data" => $payload["data"] ??  date("Y-m-d"),
+            "dataTime" => strtotime( $payload["data"] ??  date("Y-m-d") ),
             "hora" => $payload["hora"] ?? date("H:i:s"),
             "doador_fk" => $payload["doador_fk"] ?? null,
             "doador_nome" => $payload["doador_nome"] ?? null,
