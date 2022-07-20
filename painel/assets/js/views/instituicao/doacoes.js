@@ -242,12 +242,21 @@ export default {
             day: '2-digit',
         }).split('/').reverse().join('');
 
-        this.nowMonth = new Date().getMonth()
+        this.nowMonth = (new Date()).getMonth()
 
         let allDonations = (await this.listarDoacoes()).payload || []
 
         let allDonationsNowMonth = allDonations.filter(donation => {
-            return (new Date(donation.data).getMonth()) != (this.nowMonth + 1)
+            let month_donation = +donation.data.substr(5, 2)
+            let month_now = this.nowMonth + 1
+            console.log({
+                
+                atual: month_now,
+                doacao: month_donation,
+                doacao_data: donation.data,
+                status: month_donation <= month_now
+            })
+            return month_donation == month_now 
         })
 
         this.doacoes = allDonationsNowMonth
