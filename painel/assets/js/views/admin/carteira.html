@@ -109,15 +109,16 @@
                                                 <div class="timeline-item" v-for=" (item, indice ) in historico"
                                                     :key="item.id">
                                                     <div class="timeline-label fw-bolder text-gray-800 fs-6">
-                                                        {{item.date | form_data }}
+                                                        {{item.dateCreated | form_data }}
                                                     </div>
                                                     <div class="timeline-badge">
                                                         <i class="fa fa-genderless text-warning fs-1"></i>
                                                     </div>
                                                     <div class="timeline-content  text-gray-800 ps-3">
-                                                        <b>{{item.type}}</b> 
+                                                        <b>{{item.type}}</b> -
+                                                        <b>{{item.status}}</b> 
                                                         <span class="text-primary fw-bolder">
-                                                         {{item.value | form_valor}}
+                                                         {{item.netValue | form_valor}}
                                                         </span> <br>
                                                         <small class="timeline-content  text-gray-800 fs-6">
                                                             {{item.description  }}
