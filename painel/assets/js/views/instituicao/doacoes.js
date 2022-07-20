@@ -248,7 +248,7 @@ export default {
 
         let allDonationsNowMonth = allDonations.filter(donation => {
             let month_donation = donation.dataTime
-            let month_now = this.nowMonth            
+            let month_now = donation.dataNow            
             return month_donation <= month_now 
         })
 
