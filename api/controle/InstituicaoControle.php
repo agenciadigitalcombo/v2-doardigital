@@ -455,4 +455,27 @@ class InstituicaoControle extends Controle
             ]
         );
     }
+
+    static function saque()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe uma Instituição",
+            "valor" => "informe um valor",
+        ]);
+        self::privateRouter();
+        $institution_fk = $_REQUEST['institution_fk'];
+        $taxa_transference = 5;
+
+        $company = new Instituicao();
+        $conta = new AsaasConta();
+        $institution = null;
+        $apiKey = $company->get_key($institution_fk);       
+        $conta->set_api_key($apiKey);
+        
+        self::printSuccess(
+            "Solicitação feia com sucesso",
+            []
+        );
+    }
 }
