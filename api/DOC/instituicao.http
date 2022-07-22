@@ -62,7 +62,6 @@ token={{token}}
 &bankAccountType={{bankAccountType}}
 &debug=0
 
-
 ###
 GET {{host}}/api/instituicao/list?token={{token}}&adm_fk={{adm_fk}}
 

@@ -63,12 +63,21 @@ export default {
 			)
 			return res
 		},
+		async saque() {
+			let res = await adm.saque(
+				this.id,
+				this.amount
+			)
+			return res
+		},
 		async solicitarSaque() {
 			this.active = false
 			this.error = null
+			let resApi = this.saque()
+			console.log( resApi )
 			setTimeout(() => {
 				this.active = true
-				this.error = "Função indisponível";
+				this.error = resApi.message;
 			}, 1500);
 			
 		},

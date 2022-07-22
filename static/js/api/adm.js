@@ -918,6 +918,15 @@ export default {
             institution_fk: id
         })
     },
+    async saque(
+        id,
+        valor
+    ) {
+        return await http.get('/instituicao/balance', {
+            institution_fk: id,
+            valor
+        })
+    },
 
     // DASHBOARD
 
