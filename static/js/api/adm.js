@@ -922,7 +922,7 @@ export default {
         id,
         valor
     ) {
-        return await http.get('/instituicao/balance', {
+        return await http.post('/instituicao/saque', {
             institution_fk: id,
             valor
         })

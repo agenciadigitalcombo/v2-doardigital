@@ -32,7 +32,7 @@ export default {
 		},
 
 		form_data(datas) {
-			return datas.substr(5,10).split("-").reverse().join("/")
+			return datas.substr(5, 10).split("-").reverse().join("/")
 		},
 
 		form_hora(horas) {
@@ -41,20 +41,28 @@ export default {
 		},
 	},
 	methods: {
+		valorReal(valor) {
+			let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+			price = price.replace(/R\$\s/gi, '')
+			return `${price}`
+		},
+
 		total() {
 			this.jms = false
-			this.totalActive = true,
-				this.parcialActive = false,
-				this.amount = "50000"
+			this.totalActive = true
+			this.parcialActive = false
+			this.amount = this.valorReal(this.saldo_liberado)
 		},
 		parcial() {
 			this.jms = true
-			this.totalActive = false,
-				this.parcialActive = true,
-				this.amount = "00"
+			this.totalActive = false
+			this.parcialActive = true
+			this.amount = "0"
 		},
 		masc_money() {
-			valor = (valor+"").toLocaleString('pt-br', { minimumFractionDigits: 2 })
+			let valor
+			valor = this.amount.replace(/\D/gi, '')
+			valor = (valor / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
 			this.amount = valor
 		},
 		async listar() {
@@ -73,21 +81,24 @@ export default {
 		async solicitarSaque() {
 			this.active = false
 			this.error = null
-			let resApi = this.saque()
-			console.log( resApi )
-			setTimeout(() => {
+			let resApi = await this.saque()
+			console.log(resApi)
+			setTimeout(async () => {
 				this.active = true
 				this.error = resApi.message;
 			}, 1500);
-			
+			resApi = await this.listar()
+			this.saldo_liberado = resApi.payload.balance
+			this.amount = this.valorReal(resApi.payload.balance)
+
 		},
 	},
 	async mounted() {
 		this.id = window.localStorage.getItem('instituicao_id');
 
 		let resApi = await this.listar()
-
 		this.saldo_liberado = resApi.payload.balance
+		this.amount = this.valorReal(resApi.payload.balance)
 		this.saldo_a_liberar = resApi.payload.statistic.netValue
 		this.total_retirado = resApi.payload.statistic.quantity
 		this.historico = resApi.payload.extrato.data
