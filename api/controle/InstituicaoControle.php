@@ -474,7 +474,7 @@ class InstituicaoControle extends Controle
 
         $company = new Instituicao();
         $conta = new AsaasConta();
-        $institution = null;
+        $institution = $company->info($institution_fk);
         $apiKey = $company->get_key($institution_fk);       
         $conta->set_api_key($apiKey);
         
@@ -485,6 +485,7 @@ class InstituicaoControle extends Controle
                 "valor" => $valor,
                 "apiKey" => $apiKey,
                 "walletId" => $walletId,
+                "institution" => $institution,
             ]
         );
     }

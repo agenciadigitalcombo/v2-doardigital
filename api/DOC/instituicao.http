@@ -5,8 +5,8 @@
 @cpfCnpj=673.904.610-71
 @email=br.rafael18@outlook.com
 @telefone=(11) 94949-9944
-@domain=rafael18.doardigital.tk
-@subdomain=rafael18.doardigital.con
+@domain=teste.hostdoar.tk
+@subdomain=teste.hostdoar.tk
 @logo=logo.png
 @icon=logo.png
 @cor=#C00
@@ -67,7 +67,7 @@ token={{token}}
 GET {{host}}/api/instituicao/list?token={{token}}&adm_fk={{adm_fk}}
 
 ###
-GET {{host}}/api/instituicao/info?domain={{domain}}&debug=1
+GET {{host}}/api/instituicao/info?domain={{domain}}
 
 ###
 POST {{host}}/api/instituicao/update-info
