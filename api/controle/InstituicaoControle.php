@@ -466,6 +466,11 @@ class InstituicaoControle extends Controle
         self::privateRouter();
         $institution_fk = $_REQUEST['institution_fk'];
         $taxa_transference = 5;
+        $valor = $_REQUEST["valor"];
+        $valor = str_replace( [".",","], ["","."], $valor );
+        $valor = +$valor - $taxa_transference;
+        $env = require __DIR__ . "/../config.php";
+        $walletId = $env["split"];
 
         $company = new Instituicao();
         $conta = new AsaasConta();
@@ -475,7 +480,12 @@ class InstituicaoControle extends Controle
         
         self::printSuccess(
             "Solicitação feia com sucesso",
-            []
+            [
+                "institution_fk" => $institution_fk,
+                "valor" => $valor,
+                "apiKey" => $apiKey,
+                "walletId" => $walletId,
+            ]
         );
     }
 }
