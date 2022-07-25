@@ -213,7 +213,7 @@ class AsaasConta extends Asaas
     }
 
     function getBank() {
-        return $this->post("/bankAccounts", []);        
+        return $this->get("/bankAccounts", []);        
     }
 
     function transferir(
