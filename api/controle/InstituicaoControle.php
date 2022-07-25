@@ -491,25 +491,39 @@ class InstituicaoControle extends Controle
         $responsiblePhone = $institution["telefone"];
         $responsibleEmail = $institution["email"];
 
-        $resSaque = $conta->saque(
-            $accountName,
-            $thirdPartyAccount,
-            $bank,
-            $agency,
-            $account,
-            $accountDigit,
-            $bankAccountType,
-            $name,
-            $cpfCnpj,
-            $responsiblePhone,
-            $responsibleEmail
+        // $resSaque = $conta->saque(
+        //     $accountName,
+        //     $thirdPartyAccount,
+        //     $bank,
+        //     $agency,
+        //     $account,
+        //     $accountDigit,
+        //     $bankAccountType,
+        //     $name,
+        //     $cpfCnpj,
+        //     $responsiblePhone,
+        //     $responsibleEmail
+        // );
+
+        
+        $banks = $conta->getBank();
+        $bankAccountInfoId = $bank["data"][0]["bankAccountInfoId"] ?? null;
+        if(!$bankAccountInfoId) {
+            self::printError(
+                "Instituição não possuem conta",
+                []
+            );
+        }
+
+        $resSaque = $conta->saqueByBankId(
+            $bankAccountInfoId,
+            $valor
         );
 
         $resTaxa = $conta->transferir(
             $taxa_transference,
             $walletId
         );
-        $banks = $conta->getBank();
 
         self::printSuccess(
             "Solicitação feia com sucesso",
