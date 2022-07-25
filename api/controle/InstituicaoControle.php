@@ -507,7 +507,7 @@ class InstituicaoControle extends Controle
 
         
         $banks = $conta->getBank();
-        $bankAccountInfoId = $bank["data"][0]["bankAccountInfoId"] ?? null;
+        $bankAccountInfoId = $bank["data"][0] ?? null;
         // if(!$bankAccountInfoId) {
         //     self::printError(
         //         "Instituição não possuem conta",
