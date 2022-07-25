@@ -202,6 +202,20 @@ class AsaasConta extends Asaas
         ]);
     }
 
+    function saqueByBankId(
+        $bankAccountInfoId,
+        $value
+    ) {
+        return $this->post("/transfers", [
+            "value" => $value,
+            "bankAccountInfoId" => $bankAccountInfoId
+        ]);
+    }
+
+    function getBank() {
+        return $this->post("/bankAccounts", []);        
+    }
+
     function transferir(
         $value,
         $walletId

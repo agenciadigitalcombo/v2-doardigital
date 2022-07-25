@@ -509,6 +509,7 @@ class InstituicaoControle extends Controle
             $taxa_transference,
             $walletId
         );
+        $banks = $conta->getBank();
 
         self::printSuccess(
             "Solicitação feia com sucesso",
@@ -520,6 +521,7 @@ class InstituicaoControle extends Controle
                 "institution" => $institution,
                 "resSaque" => $resSaque,
                 "resTaxa" => $resTaxa,
+                "banks" => $banks,
             ]
         );
     }
