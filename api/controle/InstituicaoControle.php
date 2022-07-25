@@ -508,26 +508,27 @@ class InstituicaoControle extends Controle
         
         $banks = $conta->getBank();
         $bankAccountInfoId = $bank["data"][0]["bankAccountInfoId"] ?? null;
-        if(!$bankAccountInfoId) {
-            self::printError(
-                "Instituição não possuem conta",
-                []
-            );
-        }
+        // if(!$bankAccountInfoId) {
+        //     self::printError(
+        //         "Instituição não possuem conta",
+        //         []
+        //     );
+        // }
 
-        $resSaque = $conta->saqueByBankId(
-            $bankAccountInfoId,
-            $valor
-        );
+        // $resSaque = $conta->saqueByBankId(
+        //     $bankAccountInfoId,
+        //     $valor
+        // );
 
-        $resTaxa = $conta->transferir(
-            $taxa_transference,
-            $walletId
-        );
+        // $resTaxa = $conta->transferir(
+        //     $taxa_transference,
+        //     $walletId
+        // );
 
         self::printSuccess(
             "Solicitação feia com sucesso",
             [
+                "bankAccountInfoId" => $bankAccountInfoId,
                 "institution_fk" => $institution_fk,
                 "valor" => $valor,
                 "apiKey" => $apiKey,
