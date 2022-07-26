@@ -101,7 +101,7 @@ export default {
 		this.amount = this.valorReal(resApi.payload.balance)
 		this.saldo_a_liberar = resApi.payload.statistic.netValue
 		this.total_retirado = resApi.payload.statistic.quantity
-		this.historico = resApi.payload.extrato.data
+		this.historico = resApi.payload.extrato.data.filter( t => t.operationType != "INTERNAL" )
 		console.log(this.historico)
 
 	},
