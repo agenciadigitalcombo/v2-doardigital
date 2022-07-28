@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel new</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+
+    <script src="./index.js" type="text/jsx" data-type="module" defer async></script>
+</head>
+
+<body>
+    <div id="app" class="bg-[#FFF]">
+        <router-link to="/">Inicio</router-link> -
+        <router-link to="/Sobre">Sobre</router-link>
+        <hr>
+        <router-view></router-view>
+    </div>
+</body>
+
+</html>
