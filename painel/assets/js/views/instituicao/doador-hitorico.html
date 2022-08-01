@@ -112,14 +112,14 @@
 											<!--end:::Tab item-->
 
 											<!--begin:::Tab item Security-->
-											<li class="nav-item" v-if="tipo !== 'UNICO'" >
+											<li class="nav-item" v-if="tipo !== 'UNICO'" hidden >
 												<a class="nav-link text-active-primary pb-4" @click="assinaturaV()"
 													data-bs-toggle="tab" :class="{ active: assinatura }">
 													Assinaturas</a>
 											</li>
 											<!--end:::Tab item-->
 											<!--begin:::Tab item-->
-											<li class="nav-item">
+											<li class="nav-item" hidden>
 												<a class="nav-link text-active-primary pb-4" @click="historicoV()"
 													data-bs-toggle="tab" :class="{ active: historico }">Histórico</a>
 											</li>
@@ -321,7 +321,7 @@
 																		<!--begin::Badge=-->
 																		<td class="min-w-70px">
 																			<div class="badge badge-light-success">200
-																				OK</div>
+																		OK</div>
 																		</td>
 																		<!--end::Badge=-->
 																		<!--begin::Status=-->

@@ -167,6 +167,7 @@ export default {
 
 		let dados = (await adm.detalheDoador(FK)).payload
 		console.log(dados)
+		this.filtraDoacao = dados.history
 		//this.doacoes = (await this.listar()).dados.doacoes
 
 		////	var assinaturas = (await this.listar()).dados.doacoes[0]
