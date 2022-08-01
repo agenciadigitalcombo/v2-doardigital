@@ -20,6 +20,7 @@ export default {
 			data: null,
 			doacoes: [],
 			assinaturas: [],
+			history: [],
 			end: {
 				cep: null,
 				logadouro: null,
@@ -135,7 +136,9 @@ export default {
 		},
 
 		async editar(instituicao_id) {
-			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
+			
+			globalThis._doacoes = this.history.find(doad => doad.instituicao_id == instituicao_id)
+			console.log(globalThis._doacoes)
 			window.location.href = "#/doador/detalhe"
 		},
 
@@ -167,7 +170,7 @@ export default {
 
 		let dados = (await adm.detalheDoador(FK)).payload
 		console.log(dados)
-		this.filtraDoacao = dados.history
+		this.history = dados.history
 		//this.doacoes = (await this.listar()).dados.doacoes
 
 		////	var assinaturas = (await this.listar()).dados.doacoes[0]

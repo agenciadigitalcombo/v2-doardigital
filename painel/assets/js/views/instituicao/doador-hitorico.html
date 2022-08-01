@@ -159,7 +159,7 @@
 															<tbody class="fs-6 fw-bold text-gray-600">
 
 																<!--begin::Table row-->
-																<tr v-for="item in filtraDoacao">
+																<tr v-for="item in history">
 
 																	<td>
 																		{{item.data | is_data}}
@@ -169,7 +169,7 @@
 																	</td>
 
 																	<td>
-																		<div class="badge badge-light"> {{item.tipo |
+																		<div class="badge badge-light"> {{item.tipo_pagamento |
 																			este_tipo}}</div>
 																	</td>
 
