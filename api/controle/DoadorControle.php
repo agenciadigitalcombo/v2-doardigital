@@ -53,4 +53,29 @@ class DoadorControle extends Controle
             $doador->info($cpf, $instituicao_fk)
         );
     }
+
+    static function detalhe()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "fk" => "Informe o identificador"
+        ]);
+        self::privateRouter();
+        $fk = $_REQUEST['fk'];
+        $doador = new Doador();
+        $address = new Endereco();
+        $payload = $doador->detalhe($fk);
+        $payload["address"] = $address->get($fk, "ADDRESS_COSTUMER");
+        $payload["fk"] = $fk;
+        $db = new Banco();
+        $db->table("fatura");
+        $db->where([
+            "external_fk" => $fk
+        ]);
+        $payload["history"] = array_map(["Instituicao", "porter"], $db->select() );
+        self::printSuccess(
+            "Informação doador",
+            $payload
+        );
+    }
 }

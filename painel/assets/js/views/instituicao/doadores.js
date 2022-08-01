@@ -17,7 +17,7 @@ export default {
 			doadores: [],
 			search: "",
 			paginaAtual: 1,
-          
+
 			modal: false
 
 		}
@@ -25,24 +25,24 @@ export default {
 
 	filters: {
 		este_valor(price) {
-			var price  = parseFloat(price); 
-            var valor = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-         
-            return `${valor}`
+			var price = parseFloat(price);
+			var valor = price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
+			return `${valor}`
 		},
- 
+
 		esta_data(datas) {
 			let data = datas.split('-').reverse().join('/');
 			return `${data}`
 		},
 
-	 cpf(v){
-		v=v.replace(/\D/g,"")                   
-    v=v.replace(/(\d{3})(\d)/,"$1.$2")      
-    v=v.replace(/(\d{3})(\d)/,"$1.$2")       
-                                          
-    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2")  
-    return v
+		cpf(v) {
+			v = v.replace(/\D/g, "")
+			v = v.replace(/(\d{3})(\d)/, "$1.$2")
+			v = v.replace(/(\d{3})(\d)/, "$1.$2")
+
+			v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+			return v
 		},
 
 		recorrente(status) {
@@ -87,7 +87,7 @@ export default {
 	},
 
 	methods: {
-		 handleClickOutside (event){
+		handleClickOutside(event) {
 			let overlay = document.getElementById("overlay");
 			let modal = document.getElementById("meu_modal");
 			if (!modal.contains(event.target)) {
@@ -96,8 +96,8 @@ export default {
 				document.removeEventListener('click', this.handleClickOutside, false);
 			}
 		},
-		
-		 openModal () {
+
+		openModal() {
 			let overlay = document.getElementById("overlay");
 			let modal = document.getElementById("meu_modal");
 			overlay.style.display = 'flex'
@@ -105,12 +105,12 @@ export default {
 			setTimeout(() => { document.addEventListener('click', this.handleClickOutside, false) }, 200);
 		},
 
-		modalAcao(){
-				if(this.modal == false){ 
-					this.modal = true 
-				}else{
-					this.modal = false 
-				}
+		modalAcao() {
+			if (this.modal == false) {
+				this.modal = true
+			} else {
+				this.modal = false
+			}
 
 		},
 
@@ -145,9 +145,9 @@ export default {
 			}
 		},
 
-		async editar(cpf) {
+		async editar(cpf, fk) {
 			globalThis._doador = this.doadores.find(doad => doad.cpf == cpf)
-			window.location.href = "#/doadorHitorico"
+			window.location.href = `?fk=${fk}#/doadorHitorico`
 		},
 
 		async istituicaoDashboard() {
@@ -164,7 +164,7 @@ export default {
 
 			this.jms = res.next,
 				this.msg = res.message
- 
+
 			return res
 
 		},
@@ -175,13 +175,13 @@ export default {
 		//this.istituicaoDashboard() 
 		this.doadores = (await this.listarDoadores()).payload.reverse() || {}
 
-	 
-        var QUnico = this.filtraUnica;
+
+		var QUnico = this.filtraUnica;
 		this.quantUnico = QUnico.length
 
-		 var QRecorente = this.filtraRecorente;
+		var QRecorente = this.filtraRecorente;
 		this.quantRec = QRecorente.length
-		 
+
 	},
 
 	created() {

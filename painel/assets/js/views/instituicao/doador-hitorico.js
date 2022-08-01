@@ -1,8 +1,8 @@
 import get_template from '../../componentes/get_template.js'
-import adm from "../../../../../static/js/api/adm.js" 
+import adm from "../../../../../static/js/api/adm.js"
 
 export default {
-     
+
 	data: function () {
 
 		return {
@@ -59,29 +59,29 @@ export default {
 
 
 		este_status(status) {
-            let apresentar = {
-                PENDING: 'Aguardando Pagamento',
-                refused: 'Cancelado',
-                CONFIRMED: 'Pago',
-                OVERDUE: 'Vencida',
-                REFUNDED: 'Reembolsado',
-                processing: 'Em processamento',
-                authorized: 'Autorizado ',
-                pending_refund: 'Reembolso pendente ',
-                chargedback: 'Estorno',
-            }
-            return apresentar[status]
-        },
+			let apresentar = {
+				PENDING: 'Aguardando Pagamento',
+				refused: 'Cancelado',
+				CONFIRMED: 'Pago',
+				OVERDUE: 'Vencida',
+				REFUNDED: 'Reembolsado',
+				processing: 'Em processamento',
+				authorized: 'Autorizado ',
+				pending_refund: 'Reembolso pendente ',
+				chargedback: 'Estorno',
+			}
+			return apresentar[status]
+		},
 
 
-        este_tipo(status) {
-            let apresentar = {
-                BOLETO: 'Boleto',
-                CREDIT_CARD: 'Crédito',
-                PIX: 'PIX',
-            }
-            return apresentar[status]
-        },
+		este_tipo(status) {
+			let apresentar = {
+				BOLETO: 'Boleto',
+				CREDIT_CARD: 'Crédito',
+				PIX: 'PIX',
+			}
+			return apresentar[status]
+		},
 
 	},
 
@@ -128,7 +128,7 @@ export default {
 		async listar() {
 			let res = await adm.visualizarDoador(
 				this.token,
-				this.instituicao_fk, 
+				this.instituicao_fk,
 				this.cpf
 			)
 			return res
@@ -139,36 +139,45 @@ export default {
 			window.location.href = "#/doador/detalhe"
 		},
 
+		getParams(name) {
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			return urlParams.get(name)
+		}
+
 	},
 
 	async mounted() {
 
+		console.log( this.getParams('fk') )
+
 		let dateObj = new Date()
-		 this.dataFinal = dateObj.toLocaleString('en-GB', {
+		this.dataFinal = dateObj.toLocaleString('en-GB', {
 			year: 'numeric',
 			month: '2-digit',
 			day: '2-digit',
 		}).split('/').reverse().join('');
-	
+
 		this.instituicao_fk = window.localStorage.getItem("instituicao_id")
 		this.cpf = globalThis._doador.cpf
-	 
+
+
 		//this.tipo = globalThis._doador.tipo
 
 		let dados = (await this.listar()).payload
-	//this.doacoes = (await this.listar()).dados.doacoes
+		//this.doacoes = (await this.listar()).dados.doacoes
 
-	////	var assinaturas = (await this.listar()).dados.doacoes[0]
-	//	this.assina.data = assinaturas.data,
-	//	this.assina.valor = assinaturas.valor,
-	//	this.assina.identificador = assinaturas.plano_id,
-                      
+		////	var assinaturas = (await this.listar()).dados.doacoes[0]
+		//	this.assina.data = assinaturas.data,
+		//	this.assina.valor = assinaturas.valor,
+		//	this.assina.identificador = assinaturas.plano_id,
+
 		this.nome = dados.nome
 		//this.cpf = dados.cpf
 		this.telefone = dados.telefone
 		this.email = dados.email
 		this.gravatar = dados.gravatar
-		
+
 		this.end.cep = dados.endereco.cep
 		this.end.logadouro = dados.endereco.logadouro
 		this.end.numero = dados.endereco.numero
@@ -179,5 +188,5 @@ export default {
 
 	},
 
-    template: await get_template('./assets/js/views/instituicao/doador-hitorico')
+	template: await get_template('./assets/js/views/instituicao/doador-hitorico')
 }
