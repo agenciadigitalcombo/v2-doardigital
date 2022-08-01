@@ -70,7 +70,7 @@ class DoadorControle extends Controle
         $db = new Banco();
         $db->table("fatura");
         $db->where([
-            "external_fk" => $fk
+            "doador_fk" => $fk
         ]);
         $payload["history"] = array_map(["Instituicao", "porter"], $db->select() );
         self::printSuccess(
