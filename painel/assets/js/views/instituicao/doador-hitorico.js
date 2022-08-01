@@ -149,7 +149,8 @@ export default {
 
 	async mounted() {
 
-		console.log( this.getParams('fk') )
+		
+		const FK = this.getParams('fk')
 
 		let dateObj = new Date()
 		this.dataFinal = dateObj.toLocaleString('en-GB', {
@@ -158,13 +159,14 @@ export default {
 			day: '2-digit',
 		}).split('/').reverse().join('');
 
-		this.instituicao_fk = window.localStorage.getItem("instituicao_id")
-		this.cpf = globalThis._doador.cpf
+		// this.instituicao_fk = window.localStorage.getItem("instituicao_id")
+		// this.cpf = globalThis._doador.cpf
 
 
 		//this.tipo = globalThis._doador.tipo
 
-		let dados = (await this.listar()).payload
+		let dados = (await adm.detalheDoador(FK)).payload
+		console.log(dados)
 		//this.doacoes = (await this.listar()).dados.doacoes
 
 		////	var assinaturas = (await this.listar()).dados.doacoes[0]
@@ -173,18 +175,18 @@ export default {
 		//	this.assina.identificador = assinaturas.plano_id,
 
 		this.nome = dados.nome
-		//this.cpf = dados.cpf
+		this.cpf = dados.cpf
 		this.telefone = dados.telefone
 		this.email = dados.email
 		this.gravatar = dados.gravatar
 
-		this.end.cep = dados.endereco.cep
-		this.end.logadouro = dados.endereco.logadouro
-		this.end.numero = dados.endereco.numero
-		this.end.complemento = dados.endereco.complemento
-		this.end.bairro = dados.endereco.bairro
-		this.end.cidade = dados.endereco.cidade
-		this.end.estado = dados.endereco.estado
+		this.end.cep = dados.address.cep
+		this.end.logadouro = dados.address.logadouro
+		this.end.numero = dados.address.numero
+		this.end.complemento = dados.address.complemento
+		this.end.bairro = dados.address.bairro
+		this.end.cidade = dados.address.cidade
+		this.end.estado = dados.address.estado
 
 	},
 

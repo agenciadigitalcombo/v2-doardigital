@@ -761,6 +761,10 @@ export default {
         })
     },
 
+    async detalheDoador(fk) {
+        return await http.post('/doador/detalhe', { fk })
+    },
+
     async listarEmail(
         token,
         instituicao_fk
