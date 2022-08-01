@@ -29,7 +29,7 @@ class Endereco
             "fk" => $fk,
             "tipo" => $tipo,
         ]);
-        return array_map( ["Endereco", "porter"], $this->con->select()[0] ?? [] );
+        return  $this->con->select()[0] ?? [] ;
     }
 
     function clearZipCode(string $zipCode): string

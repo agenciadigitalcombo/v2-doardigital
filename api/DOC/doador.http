@@ -11,7 +11,7 @@ GET {{host}}/api/doador/
 GET {{host}}/api/doador/list?token={{token}}&instituicao_fk={{instituicao_fk}}
 
 ###
-GET {{host}}/api/doador/detalhe?token={{token}}&fk={{fk}}
+GET {{host}}/api/doador/detalhe?token={{token}}&fk={{fk}}&debug=1
 
 ###
 GET {{host}}/api/doador/info?instituicao_fk={{instituicao_fk}}&token={{token}}&cpf={{cpf}}
