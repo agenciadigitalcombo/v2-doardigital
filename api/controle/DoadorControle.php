@@ -80,7 +80,7 @@ class DoadorControle extends Controle
         $db->orderByDesc("data");
         $payload["history"] = array_map(["Fatura", "porter"], $db->select() );
         $resAsa = $asa->getCliente($payload["cpf"]);
-        $payload["asa"] = $resAsa;
+        $payload["asa"] = $resAsa["data"][0];
         self::printSuccess(
             "Informação doador",
             $payload
