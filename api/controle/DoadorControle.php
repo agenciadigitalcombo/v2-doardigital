@@ -72,7 +72,7 @@ class DoadorControle extends Controle
         $db->where([
             "doador_fk" => $fk
         ]);
-        $db->orderByAsc("data");
+        $db->orderByDesc("data");
         $payload["history"] = array_map(["Fatura", "porter"], $db->select() );
         self::printSuccess(
             "Informação doador",
