@@ -126,7 +126,7 @@ export default {
 		},
 
 		async editar(instituicao_id) {
-			
+
 			globalThis._doacoes = this.history.find(doad => doad.instituicao_id == instituicao_id)
 			console.log(globalThis._doacoes)
 			window.location.href = "#/doador/detalhe"
@@ -142,7 +142,6 @@ export default {
 
 	async mounted() {
 
-		
 		const FK = this.getParams('fk')
 
 		let dateObj = new Date()
@@ -152,21 +151,9 @@ export default {
 			day: '2-digit',
 		}).split('/').reverse().join('');
 
-		// this.instituicao_fk = window.localStorage.getItem("instituicao_id")
-		// this.cpf = globalThis._doador.cpf
-
-
-		//this.tipo = globalThis._doador.tipo
 
 		let dados = (await adm.detalheDoador(FK)).payload
-		console.log(dados)
 		this.history = dados.history
-		//this.doacoes = (await this.listar()).dados.doacoes
-
-		////	var assinaturas = (await this.listar()).dados.doacoes[0]
-		//	this.assina.data = assinaturas.data,
-		//	this.assina.valor = assinaturas.valor,
-		//	this.assina.identificador = assinaturas.plano_id,
 
 		this.nome = dados.nome
 		this.cpf = dados.cpf
@@ -174,13 +161,13 @@ export default {
 		this.email = dados.email
 		this.gravatar = dados.gravatar
 
-		this.end.cep = dados.address.cep
-		this.end.logadouro = dados.address.logadouro
-		this.end.numero = dados.address.numero
+		this.end.cep = dados.address.cep || dados.asa.postalCode
+		this.end.logadouro = dados.address.logadouro || dados.asa.address
+		this.end.numero = dados.address.numero || dados.asa.addressNumber
 		this.end.complemento = dados.address.complemento
-		this.end.bairro = dados.address.bairro
+		this.end.bairro = dados.address.bairro || dados.asa.province
 		this.end.cidade = dados.address.cidade
-		this.end.estado = dados.address.estado
+		this.end.estado = dados.address.estado || dados.asa.state
 
 	},
 
