@@ -1,5 +1,6 @@
 import get_template from '../../componentes/get_template.js'
 import adm from "../../../../../static/js/api/adm.js"
+import translateStatus from "../../../../../components/adapiterStatus.js"
 
 export default {
 
@@ -60,18 +61,7 @@ export default {
 
 
 		este_status(status) {
-			let apresentar = {
-				PENDING: 'Aguardando Pagamento',
-				refused: 'Cancelado',
-				CONFIRMED: 'Pago',
-				OVERDUE: 'Vencida',
-				REFUNDED: 'Reembolsado',
-				processing: 'Em processamento',
-				authorized: 'Autorizado ',
-				pending_refund: 'Reembolso pendente ',
-				chargedback: 'Estorno',
-			}
-			return apresentar[status]
+			return translateStatus(status)
 		},
 
 
