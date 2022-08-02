@@ -64,7 +64,12 @@ class DoadorControle extends Controle
         $fk = $_REQUEST['fk'];
         $doador = new Doador();
         $address = new Endereco();
+        $asa = new AsaasCliente();
+        $company = new Instituicao();
         $payload = $doador->detalhe($fk);
+        $instituicao_fk = $payload["instituicao_fk"];
+        $api_key = $company->get_key($instituicao_fk);
+        $asa->set_api_key($api_key);
         $payload["address"] = $address->get($fk, "ADDRESS_COSTUMER");
         $payload["fk"] = $fk;
         $db = new Banco();
@@ -74,6 +79,8 @@ class DoadorControle extends Controle
         ]);
         $db->orderByDesc("data");
         $payload["history"] = array_map(["Fatura", "porter"], $db->select() );
+        $resAsa = $asa->getCliente($payload["cpf"]);
+        $payload["asa"] = $resAsa;
         self::printSuccess(
             "Informação doador",
             $payload
