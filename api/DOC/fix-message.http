@@ -1,0 +1,9 @@
+@host=http://doardigital.con
+@data_inicio=2022-07-01
+@data_fim=2022-08-05
+@status=PENDING
+@institution_fk=
+@save=0
+
+###
+GET {{host}}/api/fix-mensage
