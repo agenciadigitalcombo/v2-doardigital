@@ -63,6 +63,8 @@ $message = array_filter($message, function ($f) use ($data_inicio, $data_fim, $s
 
 $message = array_values($message);
 
+$total = count($message);
+
 echo json_encode([
     "next" => true,
     "message" => "lista de mensagem",

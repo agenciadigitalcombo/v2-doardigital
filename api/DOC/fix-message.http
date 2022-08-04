@@ -1,4 +1,4 @@
-@host=http://doardigital.con
+@host=https://hostdoar.tk
 @data_inicio=2022-07-01
 @data_fim=2022-08-05
 @status=PENDING
@@ -6,4 +6,4 @@
 @save=0
 
 ###
-GET {{host}}/api/fix-mensage
+GET {{host}}/api/fix-mensage.php
