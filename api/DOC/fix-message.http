@@ -6,4 +6,4 @@
 @save=0
 
 ###
-GET {{host}}/api/fix-mensage.php
+GET {{host}}/api/fix-mensage.php?data_inicio={{data_inicio}}&data_fim={{data_fim}}&status={{status}}&institution_fk={{institution_fk}}&save={{save}}
