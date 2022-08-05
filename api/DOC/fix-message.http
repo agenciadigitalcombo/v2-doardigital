@@ -1,9 +1,10 @@
 @host=http://doardigital.con
 @data_inicio=2022-05-1
 @data_fim=2022-09-1
-@status=OVERDUE
+@status=PENDING
 @institution_fk=inst_62d990c744f00
-@save=0
+@save=1
+@evendas=API_KEY
 
 ###
-GET {{host}}/api/fix-mensage.php?data_inicio={{data_inicio}}&data_fim={{data_fim}}&status={{status}}&institution_fk={{institution_fk}}&save={{save}}
+GET {{host}}/api/fix-mensage.php?data_inicio={{data_inicio}}&data_fim={{data_fim}}&status={{status}}&institution_fk={{institution_fk}}&save={{save}}&evendas={{evendas}}

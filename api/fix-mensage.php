@@ -17,6 +17,9 @@ $data_fim = $_REQUEST["data_fim"] ?? date('Y-m-d');
 $status = $_REQUEST["status"] ?? "PENDING";
 $institution_fk = $_REQUEST["institution_fk"] ?? "";
 $save = $_REQUEST["save"] ?? 0;
+$evendas = $_REQUEST["evendas"] ?? "";
+
+$save = !!$save;
 
 $invoice = new Banco();
 $invoice->table("fatura");
@@ -27,19 +30,29 @@ $total = count($allInvoices);
 
 $message = $allInvoices;
 
+function hashCompany($allCompany)
+{
+    return array_reduce($allCompany, function ($acc, $c) {
+        $acc[$c["institution_fk"]] = $c;
+        return $acc;
+    }, []);
+}
+
 $message = array_map(function ($payload) {
     return [
         "instituicao_fk" => $payload["instituicao_fk"],
-        // "fatura_id" => $payload["fatura_id"],
-        // "tipo_pagamento" => $payload["tipo_pagamento"],
-        // "recorrente" => $payload["recorrente"],
+        "fatura_id" => $payload["fatura_id"],
+        "tipo_pagamento" => $payload["tipo_pagamento"],
+        "recorrente" => $payload["recorrente"],
         "status_pagamento" => $payload["status_pagamento"],
-        // "valor" => $payload["valor"],
-        // "codigo" => $payload["codigo"],
-        // "url" => $payload["url"],
+        "valor" => $payload["valor"],
+        "external_fk" => $payload["external_fk"],
+        "codigo" => $payload["codigo"],
+        "url" => $payload["url"],
         "data" => $payload["data"],
-        // "doador_nome" => $payload["doador_nome"],
-        // "doador_email" => $payload["doador_email"],
+        "doador_fk" => $payload["doador_fk"],
+        "doador_nome" => $payload["doador_nome"],
+        "doador_email" => $payload["doador_email"],
     ];
 }, $message);
 
@@ -62,20 +75,71 @@ $message = array_filter($message, function ($f) use ($data_inicio, $data_fim, $s
     return true;
 });
 
+$doador = new Banco();
+$doador->table("doador");
+$doadorFks = $doador->select();
+$doadorFks = array_reduce( $doadorFks, function($acc,$do) {
+    $acc[$do["external_fk"]] = $do;
+    return $acc;
+}, [] );
+
+$company = new Banco();
+$company->table("institution");
+$allCompany = $company->select();
+
+$hashCompany = hashCompany($allCompany);
+
+$message =  array_map(function($fatura) use ($hashCompany, $evendas, $doadorFks) {
+    $telefone = $doadorFks[$fatura["doador_fk"]]["telefone"];
+    return [
+        "tipo" => "WHATS",
+        "data" => time(),
+        "payload" => json_encode([
+            "instituicao" => $hashCompany[$fatura["instituicao_fk"]],
+            "nome" => $fatura["doador_nome"] ?? "",
+            "email" => $fatura["doador_email"] ?? "",
+            "telefone" => substr($telefone, 2, 11),
+            "valor" => $fatura["valor"] ?? "",
+            "status_payment" => $fatura["status_pagamento"],
+            "type_payment" => $fatura["tipo_pagamento"],
+            "url" => $fatura["url"],
+            "code" => $fatura["codigo"],
+            "ddd" => substr($telefone, 0, 2),
+            "boleto_url" => $fatura["url"],
+            "url_pix" => $fatura["codigo"],
+            "code_boleto" => $fatura["codigo"],
+            "logradouro" => $hashCompany[$fatura["instituicao_fk"]]["nome"] ??  "",
+            "token" => $evendas,
+            "external_id" => $fatura["external_fk"],
+        ], JSON_UNESCAPED_UNICODE),
+    ];
+}, $message );
+
+
+$message = array_reduce( $message, function($messages, $payloadMessage) {
+    $keysMessage = implode(",", array_keys($payloadMessage));
+    $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
+    $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+    $payloadMessage["tipo"] = "EMAIL";
+    $keysMessage = implode(",", array_keys($payloadMessage));
+    $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
+    $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+    return $messages;
+}, [] );
+
 $message = array_values($message);
 
 $total = count($message);
 
+
+$query = implode(";", $message);
+if($save) {
+    $invoice->exec($query);
+}
+
 echo json_encode([
     "next" => true,
     "message" => "lista de mensagem",
-    "params" => [
-        "data_inicio",
-        "data_fim",
-        "status",
-        "institution_fk",
-        "save",
-    ],
     "payload" => [
         "total" => $total,
         "data_inicio" => $data_inicio,
@@ -83,6 +147,7 @@ echo json_encode([
         "status" => $status,
         "institution_fk" => $institution_fk,
         "save" => $save,
-        "message" => $message
+        // "message" => $message,
+        "query" => $query,
     ]
 ]);
