@@ -29,16 +29,16 @@ $message = $allInvoices;
 $message = array_map(function ($payload) {
     return [
         "instituicao_fk" => $payload["instituicao_fk"],
-        "fatura_id" => $payload["fatura_id"],
-        "tipo_pagamento" => $payload["tipo_pagamento"],
-        "recorrente" => $payload["recorrente"],
+        // "fatura_id" => $payload["fatura_id"],
+        // "tipo_pagamento" => $payload["tipo_pagamento"],
+        // "recorrente" => $payload["recorrente"],
         "status_pagamento" => $payload["status_pagamento"],
-        "valor" => $payload["valor"],
-        "codigo" => $payload["codigo"],
-        "url" => $payload["url"],
+        // "valor" => $payload["valor"],
+        // "codigo" => $payload["codigo"],
+        // "url" => $payload["url"],
         "data" => $payload["data"],
-        "doador_nome" => $payload["doador_nome"],
-        "doador_email" => $payload["doador_email"],
+        // "doador_nome" => $payload["doador_nome"],
+        // "doador_email" => $payload["doador_email"],
     ];
 }, $message);
 
@@ -46,13 +46,13 @@ $message = array_filter($message, function ($f) use ($data_inicio, $data_fim, $s
     $data_inicio_time = strtotime($data_inicio);
     $data_fim_time = strtotime($data_fim);
     $data_time = strtotime($f["data"]);
-    if ($f["status"] != $status) {
+    if ($f["status_pagamento"] != $status) {
         return false;
     }
-    if ($data_inicio_time < $data_time) {
+    if ( $data_time < $data_inicio_time ) {
         return false;
     }
-    if ($data_fim_time > $data_time) {
+    if ($data_time > $data_fim_time ) {
         return false;
     }
     if ($institution_fk != $f["instituicao_fk"]) {
