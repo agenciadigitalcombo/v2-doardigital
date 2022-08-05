@@ -20,6 +20,7 @@ $save = $_REQUEST["save"] ?? 0;
 
 $invoice = new Banco();
 $invoice->table("fatura");
+$invoice->orderByDesc("data");
 $allInvoices =  $invoice->select();
 
 $total = count($allInvoices);
