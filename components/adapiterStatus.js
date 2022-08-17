@@ -1,3 +1,5 @@
+
+
 export default function (status) {
     let lib = {
         PENDING: 'Aguardando Pagamento',
