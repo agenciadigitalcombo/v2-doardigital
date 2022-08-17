@@ -1,11 +1,11 @@
 const { createApp, h } = Vue
 
+import MenuAside from "../components/MenuAside.js"
+import Header from "../components/Header.js"
+import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
+
 import Sobre from "./sobre.js"
 import Inicio from "./home.js"
-
-
-
-
 
 const routes = [
     { path: '/', component: Inicio },
@@ -19,6 +19,13 @@ const router = VueRouter.createRouter({
 
 createApp({
     data() {
-        return {}
+        return {
+            itemsMenu: dataMenuPainelGeral
+        }
+    },
+    template: "<div> <div class='grid grid-cols-[270px_1fr]'> <MenuAside :lista='itemsMenu'/> <div> <Header /> <router-view></router-view> </div> </div> </div>",
+    components: {
+        MenuAside,
+        Header
     }
 }).use(router).mount('#app')

@@ -1,4 +1,6 @@
+import getTemplate from "./getTemplate.js"
+
 export default {
     props: ['link', 'ico','text'],
-    template : "<a :href=\"'#/'+link\"> <i :class='ico'></i>  {{text}} </a> "
+    template : await getTemplate( './../components/LinkMenu' )
 }
