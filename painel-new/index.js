@@ -21,13 +21,19 @@ const router = VueRouter.createRouter({
 createApp({
     data() {
         return {
-            itemsMenu: dataMenuPainelGeral
+            itemsMenu: dataMenuPainelGeral,
+            isOpen: false
         }
     },
-    template: "<div> <MenuMobile /> <div class='grid grid-cols-[270px_1fr]'> <MenuAside :lista='itemsMenu'/> <div> <Header /> <router-view></router-view> </div> </div> </div>",
+    template: "<div> <MenuMobile @check='toggleMenu' /> <div class='grid grid-cols-[270px_1fr]'> <MenuAside :isOpen='isOpen' :lista='itemsMenu'/> <div> <Header /> <div v-if='isOpen'>tafarelll</div> <router-view></router-view> </div> </div> </div>",
     components: {
         MenuAside,
         Header,
         MenuMobile
+    },
+    methods: {
+        toggleMenu() {
+            this.isOpen = !this.isOpen
+        }
     }
 }).use(router).mount('#app')
