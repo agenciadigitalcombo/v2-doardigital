@@ -1,3 +1,3 @@
 export default {
-    template : "<img src='../public/images/logo.png' alt='logo' />"
+    template : "<img src='../public/logo/logo-black.svg' class='invert h-[50px]' alt='Doar Digital' />"
 }

@@ -1,5 +1,6 @@
 const { createApp, h } = Vue
 
+import MenuMobile from "../components/MenuMobile.js"
 import MenuAside from "../components/MenuAside.js"
 import Header from "../components/Header.js"
 import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
@@ -23,9 +24,10 @@ createApp({
             itemsMenu: dataMenuPainelGeral
         }
     },
-    template: "<div> <div class='grid grid-cols-[270px_1fr]'> <MenuAside :lista='itemsMenu'/> <div> <Header /> <router-view></router-view> </div> </div> </div>",
+    template: "<div> <MenuMobile /> <div class='grid grid-cols-[270px_1fr]'> <MenuAside :lista='itemsMenu'/> <div> <Header /> <router-view></router-view> </div> </div> </div>",
     components: {
         MenuAside,
-        Header
+        Header,
+        MenuMobile
     }
 }).use(router).mount('#app')
