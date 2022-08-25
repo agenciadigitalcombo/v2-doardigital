@@ -22,10 +22,21 @@ createApp({
     data() {
         return {
             itemsMenu: dataMenuPainelGeral,
-            isOpen: false
+            isOpen: true
         }
     },
-    template: "<div> <MenuMobile @check='toggleMenu' /> <div class='grid grid-cols-[270px_1fr]'> <MenuAside :isOpen='isOpen' :lista='itemsMenu' @check='toggleMenu'/> <div> <Header /> <div v-if='isOpen'>tafarelll</div> <router-view></router-view> </div> </div> </div>",
+    template: `
+        <div> 
+            <MenuMobile @check='toggleMenu' /> 
+            <div class='grid grid-cols-1 lg:grid-cols-[270px_1fr]'> 
+                <MenuAside :isOpen='isOpen' :lista='itemsMenu' @check='toggleMenu'/> 
+                <div> 
+                    <Header />                     
+                    <router-view></router-view> 
+                </div> 
+            </div> 
+        </div>
+        `,
     components: {
         MenuAside,
         Header,
