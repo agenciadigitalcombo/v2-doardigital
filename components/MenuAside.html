@@ -1,11 +1,40 @@
 <div>
-    <div :class="{'bg-blue-600': true, 'w-[270px]': true, 'p-2': true, 'min-h-[100vh]': true, 'ml-[-270px]': isOpen, 'transition-all': true}">        
+    <div 
+        :class="{
+            'bg-blue-600': true, 
+            'w-[270px]': true, 
+            'p-2': true, 
+            'min-h-[100vh]': true, 
+            'ml-[-270px]': isOpen, 
+            'lg:ml-0': true, 
+            'transition-all': true, 
+            'fixed': true, 
+            'top-0': true, 
+            'lg:relative': true, 
+            'z-30':true
+        }">        
         <div class="p-2">
             <Logo />
         </div>
-        <LinkMenu v-for='item in lista' :link='item.link' :ico='item.ico' :text='item.text' />
+        <LinkMenu @click="clickMenu" v-for='item in lista' :link='item.link' :ico='item.ico' :text='item.text' />
     </div>
-    <div>
+    <div 
+        @click="clickMenu" 
+        :class="{
+            'hidden' : isOpen,
+            'lg:hidden': true,
+            'fixed':true, 
+            'right-0': true, 
+            'top-0':true, 
+            'bg-[#0006]': true, 
+            'w-full': true, 
+            'text-white': true, 
+            'h-[100vh]': true, 
+            'pl-[290px]': true, 
+            'pt-[10px]': true,  
+            'text-2xl': true, 
+            'z-20': true
+        }">
         x
     </div>
 </div>

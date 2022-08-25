@@ -8,5 +8,11 @@ export default {
     components: {
         Logo,
         LinkMenu
-    },   
+    },  
+    emits: ['check'],
+    methods: {
+        clickMenu() {
+            this.$emit('check')
+        }
+    } 
 }
