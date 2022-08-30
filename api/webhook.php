@@ -67,6 +67,15 @@ if( !in_array($event,$whiteList) ) {
     die;
 }
 
+if( empty($reference_key) ) {
+    echo json_encode([
+        "next" => false,
+        "message" => "É necessário um referencia",
+        "payload" => []
+    ]);
+    die;
+}
+
 $title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
     "br.rafael@outlook.com",
@@ -147,6 +156,8 @@ $carteira_fk = $company["carteira_fk"] ?? "";
 $pay->set_api_key($carteira_fk);
 
 $code = null;
+
+
 
 if ($tipo == "PIX") {
     $resCode = $pay->getCodePix($ID);

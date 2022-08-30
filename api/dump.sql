@@ -182,5 +182,12 @@ CREATE TABLE message (
     id int not null auto_increment primary key,
     tipo VARCHAR(255),
     data VARCHAR(255),
+    data_view VARCHAR(255), -- YYY-MM-DD
+    inst_fk VARCHAR(255), -- inst_FUJHGUYFGUYG
+    user_email VARCHAR(255), -- inst_FUJHGUYFGUYG
+    user_name VARCHAR(255), -- inst_FUJHGUYFGUYG
+    user_tel VARCHAR(255), -- inst_FUJHGUYFGUYG
+    send_message int, -- 1 ja foi, 0 não
+    response LONGTEXT, -- resposta do evendas e do send blue
     payload JSON
 );
