@@ -46,26 +46,26 @@ $status = $payload['payment']['status'] ?? "";
 $tipo = $payload['payment']['billingType'] ?? "";
 $url = $payload['payment']['invoiceUrl'] ?? "";
 $ID = $payload['payment']['id'] ?? "";
-$sub = "";
+$subPrefix = "";
 
-// $event = $payload['event'];
-// $whiteList = [
-//     "PAYMENT_CREATED", 
-//     "PAYMENT_UPDATED", 
-//     "PAYMENT_CONFIRMED", 
-//     "PAYMENT_RECEIVED", 
-//     "PAYMENT_OVERDUE",
-//     "PAYMENT_REFUNDED",
-// ];
+$event = $payload['event'];
+$whiteList = [
+    "PAYMENT_CREATED", 
+    "PAYMENT_UPDATED", 
+    "PAYMENT_CONFIRMED", 
+    "PAYMENT_RECEIVED", 
+    "PAYMENT_OVERDUE",
+    "PAYMENT_REFUNDED",
+];
 
-// if( !in_array($event,$whiteList) ) {
-//     echo json_encode([
-//         "next" => false,
-//         "message" => "evento desconhecido",
-//         "payload" => []
-//     ]);
-//     die;
-// }
+if( !in_array($event,$whiteList) ) {
+    echo json_encode([
+        "next" => false,
+        "message" => "evento desconhecido",
+        "payload" => []
+    ]);
+    die;
+}
 
 if( empty($reference_key) ) {
     echo json_encode([
@@ -189,7 +189,7 @@ $payload = json_encode([
     "email" => $fatura["doador_email"] ?? "",
     "telefone" => $telefone,
     "valor" => $fatura["valor"] ?? "",
-    "status_payment" => $sub.''.$status,
+    "status_payment" => $subPrefix.''.$status,
     "type_payment" => $tipo,
     "url" => $url,
     "code" => $code,
