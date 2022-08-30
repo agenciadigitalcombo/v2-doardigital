@@ -335,7 +335,7 @@ class InstituicaoControle extends Controle
         ]);
         $banco = new Banco();
         $domain = $_REQUEST["domain"];
-        
+
         $company = $banco->query(
             "SELECT * FROM institution WHERE domain='{$domain}' OR subdomain='{$domain}'"
         )[0] ?? [];
@@ -394,7 +394,7 @@ class InstituicaoControle extends Controle
         $institution_fk = $_REQUEST['institution_fk'];
         $company = new Instituicao();
         $asa = new AsaasConta();
-        $carteira_fk  = $company->get_key($institution_fk);        
+        $carteira_fk  = $company->get_key($institution_fk);
         $asa->set_api_key($carteira_fk);
         $statistic = $asa->statistic();
         self::printSuccess(
@@ -407,7 +407,8 @@ class InstituicaoControle extends Controle
         );
     }
 
-    static function donation() {
+    static function donation()
+    {
         self::requireInputs([
             "token" => "informe um token",
             "institution_fk" => "informe o identificador da instituição",
@@ -416,11 +417,11 @@ class InstituicaoControle extends Controle
         $assinatura = new Banco();
         $assinatura->table("assinatura");
         $assinantes = $assinatura->select();
-        $assinantes = array_map( fn($doador) => $doador["doador_fk"], $assinantes );
+        $assinantes = array_map(fn ($doador) => $doador["doador_fk"], $assinantes);
         $institution_fk =  $_REQUEST["institution_fk"];
         $fatura = new Fatura();
         $faturas = $fatura->listAll($institution_fk);
-        $faturas = array_map(function($charge) use ($assinantes) {
+        $faturas = array_map(function ($charge) use ($assinantes) {
             $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
             return $charge;
         }, $faturas);
@@ -443,15 +444,99 @@ class InstituicaoControle extends Controle
         $action = $_REQUEST['action'] ?? 0;
         $action = !!$action;
         $inst = new Instituicao();
-        if($action) {
-            $inst->setAdm($institution_fk,$adm_fk);
-        }else {
-            $inst->delAdm($institution_fk,$adm_fk);
+        if ($action) {
+            $inst->setAdm($institution_fk, $adm_fk);
+        } else {
+            $inst->delAdm($institution_fk, $adm_fk);
         }
         self::printSuccess(
             "Atualizado com sucesso",
             [
                 "action" => $action
+            ]
+        );
+    }
+
+    static function saque()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe uma Instituição",
+            "valor" => "informe um valor",
+        ]);
+        self::privateRouter();
+        $institution_fk = $_REQUEST['institution_fk'];
+        $taxa_transference = 5;
+        $valor = $_REQUEST["valor"];
+        $valor = str_replace([".", ","], ["", "."], $valor);
+        $valor = +$valor - $taxa_transference;
+        $env = require __DIR__ . "/../config.php";
+        $walletId = $env["split"];
+
+        $company = new Instituicao();
+        $conta = new AsaasConta();
+        $institution = $company->info($institution_fk);
+        $apiKey = $company->get_key($institution_fk);
+        $conta->set_api_key($apiKey);
+
+        $accountName = $institution["accountName"];
+        $thirdPartyAccount = true;
+        $bank = $institution["bank"];
+        $agency = $institution["agency"];
+        $account = $institution["account"];
+        $accountDigit = $institution["accountDigit"];
+        $bankAccountType = $institution["bankAccountType"];
+        $name = $institution["nome"];
+        $cpfCnpj = $institution["cpfCnpj"];
+        $responsiblePhone = $institution["telefone"];
+        $responsibleEmail = $institution["email"];
+
+        // $resSaque = $conta->saque(
+        //     $accountName,
+        //     $thirdPartyAccount,
+        //     $bank,
+        //     $agency,
+        //     $account,
+        //     $accountDigit,
+        //     $bankAccountType,
+        //     $name,
+        //     $cpfCnpj,
+        //     $responsiblePhone,
+        //     $responsibleEmail
+        // );
+
+        
+        $banks = $conta->getBank();
+        $bankAccountInfoId = $banks["data"][0]["bankAccountInfoId"] ?? null;
+        if(!$bankAccountInfoId) {
+            self::printError(
+                "Instituição não possuem conta",
+                []
+            );
+        }
+
+        $resSaque = $conta->saqueByBankId(
+            $bankAccountInfoId,
+            $valor
+        );
+
+        $resTaxa = $conta->transferir(
+            $taxa_transference,
+            $walletId
+        );
+
+        self::printSuccess(
+            "Solicitação feia com sucesso",
+            [
+                "bankAccountInfoId" => $bankAccountInfoId,
+                "institution_fk" => $institution_fk,
+                "valor" => $valor,
+                "apiKey" => $apiKey,
+                "walletId" => $walletId,
+                "institution" => $institution,
+                "resSaque" => $resSaque,
+                "resTaxa" => $resTaxa,
+                "banks" => $banks,
             ]
         );
     }

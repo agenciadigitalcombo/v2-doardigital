@@ -1,6 +1,13 @@
-# v2-doardigital
-V2 DOAR DIGITAL.
+# Doar Digital
 
-V2 Doar Digital.
 
-http://doardigital.com.br/#/
+
+https://tailwindcss.com
+
+https://vuejs.org
+
+https://router.vuejs.org/guide/#router-view
+
+https://github.com/vuejs/jsx-vue2
+
+https://br.vuejs.org/v2/guide/render-function.html

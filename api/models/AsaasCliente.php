@@ -46,4 +46,12 @@ class AsaasCliente extends Asaas
         ];
         return $this->post('/customers', $payload, false);
     }
+
+    function getCliente(string $cpfCnpj): array
+    {
+        return $this->get("/customers", [
+            "cpfCnpj" => $cpfCnpj
+        ]);
+        // return $this->get("/customers/{$ID}", []);
+    }
 }

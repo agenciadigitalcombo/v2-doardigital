@@ -1,12 +1,12 @@
-@host=http://doardigital.con
+@host=https://hostdoar.tk
 @token=eyJjb2RlIjoiYWRtXzYyYTFmOGUzNTI4ZWUifQ==.7653c77bff2b2c012545f7ec98df4a0ae7f39df7
-@institution_fk=inst_62ced3799a2bb
+@institution_fk=inst_62d990c744f00
 @nome=Bruno Ap. Vieira
 @cpfCnpj=673.904.610-71
 @email=br.rafael18@outlook.com
 @telefone=(11) 94949-9944
-@domain=rafael18.doardigital.tk
-@subdomain=rafael18.doardigital.con
+@domain=teste.hostdoar.tk
+@subdomain=teste.hostdoar.tk
 @logo=logo.png
 @icon=logo.png
 @cor=#C00
@@ -28,7 +28,8 @@
 @agency=9313
 @bank=341
 @bankAccountType=CONTA_CORRENTE
-@action=0"
+@action=0
+@valor=22,50
 
 
 ###
@@ -61,12 +62,11 @@ token={{token}}
 &bankAccountType={{bankAccountType}}
 &debug=0
 
-
 ###
 GET {{host}}/api/instituicao/list?token={{token}}&adm_fk={{adm_fk}}
 
 ###
-GET {{host}}/api/instituicao/info?domain={{domain}}&debug=1
+GET {{host}}/api/instituicao/info?domain={{domain}}
 
 ###
 POST {{host}}/api/instituicao/update-info
@@ -107,3 +107,11 @@ token={{token}}
 &institution_fk={{institution_fk}}
 &adm_fk={{adm_fk}}
 &action={{action}}
+
+###
+POST {{host}}/api/instituicao/saque
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&institution_fk={{institution_fk}}
+&valor={{valor}}

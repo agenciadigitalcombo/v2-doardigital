@@ -46,6 +46,35 @@ $status = $payload['payment']['status'] ?? "";
 $tipo = $payload['payment']['billingType'] ?? "";
 $url = $payload['payment']['invoiceUrl'] ?? "";
 $ID = $payload['payment']['id'] ?? "";
+$subPrefix = "";
+
+$event = $payload['event'];
+$whiteList = [
+    "PAYMENT_CREATED", 
+    "PAYMENT_UPDATED", 
+    "PAYMENT_CONFIRMED", 
+    "PAYMENT_RECEIVED", 
+    "PAYMENT_OVERDUE",
+    "PAYMENT_REFUNDED",
+];
+
+if( !in_array($event,$whiteList) ) {
+    echo json_encode([
+        "next" => false,
+        "message" => "evento desconhecido",
+        "payload" => []
+    ]);
+    die;
+}
+
+if( empty($reference_key) ) {
+    echo json_encode([
+        "next" => false,
+        "message" => "É necessário um referencia",
+        "payload" => []
+    ]);
+    die;
+}
 
 $title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
@@ -63,6 +92,7 @@ $faturas->where([
 $fatura = $faturas->select()[0];
 
 if( empty($fatura) ) {
+    $sub = "SUB_";
     $faturas->where([
         "external_fk" => $reference_key
     ]);
@@ -127,6 +157,8 @@ $pay->set_api_key($carteira_fk);
 
 $code = null;
 
+
+
 if ($tipo == "PIX") {
     $resCode = $pay->getCodePix($ID);
     $code = $resCode["payload"] ?? "";
@@ -157,7 +189,7 @@ $payload = json_encode([
     "email" => $fatura["doador_email"] ?? "",
     "telefone" => $telefone,
     "valor" => $fatura["valor"] ?? "",
-    "status_payment" => $status,
+    "status_payment" => $subPrefix.''.$status,
     "type_payment" => $tipo,
     "url" => $url,
     "code" => $code,

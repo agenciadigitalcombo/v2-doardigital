@@ -53,4 +53,37 @@ class DoadorControle extends Controle
             $doador->info($cpf, $instituicao_fk)
         );
     }
+
+    static function detalhe()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "fk" => "Informe o identificador"
+        ]);
+        self::privateRouter();
+        $fk = $_REQUEST['fk'];
+        $doador = new Doador();
+        $address = new Endereco();
+        $asa = new AsaasCliente();
+        $company = new Instituicao();
+        $payload = $doador->detalhe($fk);
+        $instituicao_fk = $payload["instituicao_fk"];
+        $api_key = $company->get_key($instituicao_fk);
+        $asa->set_api_key($api_key);
+        $payload["address"] = $address->get($fk, "ADDRESS_COSTUMER");
+        $payload["fk"] = $fk;
+        $db = new Banco();
+        $db->table("fatura");
+        $db->where([
+            "doador_fk" => $fk
+        ]);
+        $db->orderByDesc("data");
+        $payload["history"] = array_map(["Fatura", "porter"], $db->select() );
+        $resAsa = $asa->getCliente($payload["cpf"]);
+        $payload["asa"] = $resAsa["data"][0];
+        self::printSuccess(
+            "Informação doador",
+            $payload
+        );
+    }
 }

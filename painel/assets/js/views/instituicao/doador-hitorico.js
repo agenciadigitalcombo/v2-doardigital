@@ -1,8 +1,9 @@
 import get_template from '../../componentes/get_template.js'
-import adm from "../../../../../static/js/api/adm.js" 
+import adm from "../../../../../static/js/api/adm.js"
+import translateStatus from "../../../../../components/adapiterStatus.js"
 
 export default {
-     
+
 	data: function () {
 
 		return {
@@ -20,6 +21,7 @@ export default {
 			data: null,
 			doacoes: [],
 			assinaturas: [],
+			history: [],
 			end: {
 				cep: null,
 				logadouro: null,
@@ -59,29 +61,18 @@ export default {
 
 
 		este_status(status) {
-            let apresentar = {
-                PENDING: 'Aguardando Pagamento',
-                refused: 'Cancelado',
-                CONFIRMED: 'Pago',
-                OVERDUE: 'Vencida',
-                REFUNDED: 'Reembolsado',
-                processing: 'Em processamento',
-                authorized: 'Autorizado ',
-                pending_refund: 'Reembolso pendente ',
-                chargedback: 'Estorno',
-            }
-            return apresentar[status]
-        },
+			return translateStatus(status)
+		},
 
 
-        este_tipo(status) {
-            let apresentar = {
-                BOLETO: 'Boleto',
-                CREDIT_CARD: 'Crédito',
-                PIX: 'PIX',
-            }
-            return apresentar[status]
-        },
+		este_tipo(status) {
+			let apresentar = {
+				BOLETO: 'Boleto',
+				CREDIT_CARD: 'Crédito',
+				PIX: 'PIX',
+			}
+			return apresentar[status]
+		},
 
 	},
 
@@ -128,56 +119,57 @@ export default {
 		async listar() {
 			let res = await adm.visualizarDoador(
 				this.token,
-				this.instituicao_fk, 
+				this.instituicao_fk,
 				this.cpf
 			)
 			return res
 		},
 
 		async editar(instituicao_id) {
-			globalThis._doacoes = this.doacoes.find(doad => doad.instituicao_id == instituicao_id)
+
+			globalThis._doacoes = this.history.find(doad => doad.instituicao_id == instituicao_id)
+			console.log(globalThis._doacoes)
 			window.location.href = "#/doador/detalhe"
 		},
+
+		getParams(name) {
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			return urlParams.get(name)
+		}
 
 	},
 
 	async mounted() {
 
+		const FK = this.getParams('fk')
+
 		let dateObj = new Date()
-		 this.dataFinal = dateObj.toLocaleString('en-GB', {
+		this.dataFinal = dateObj.toLocaleString('en-GB', {
 			year: 'numeric',
 			month: '2-digit',
 			day: '2-digit',
 		}).split('/').reverse().join('');
-	
-		this.instituicao_fk = window.localStorage.getItem("instituicao_id")
-		this.cpf = globalThis._doador.cpf
-	 
-		//this.tipo = globalThis._doador.tipo
 
-		let dados = (await this.listar()).payload
-	//this.doacoes = (await this.listar()).dados.doacoes
 
-	////	var assinaturas = (await this.listar()).dados.doacoes[0]
-	//	this.assina.data = assinaturas.data,
-	//	this.assina.valor = assinaturas.valor,
-	//	this.assina.identificador = assinaturas.plano_id,
-                      
+		let dados = (await adm.detalheDoador(FK)).payload
+		this.history = dados.history
+
 		this.nome = dados.nome
-		//this.cpf = dados.cpf
+		this.cpf = dados.cpf
 		this.telefone = dados.telefone
 		this.email = dados.email
 		this.gravatar = dados.gravatar
-		
-		this.end.cep = dados.endereco.cep
-		this.end.logadouro = dados.endereco.logadouro
-		this.end.numero = dados.endereco.numero
-		this.end.complemento = dados.endereco.complemento
-		this.end.bairro = dados.endereco.bairro
-		this.end.cidade = dados.endereco.cidade
-		this.end.estado = dados.endereco.estado
+
+		this.end.cep = dados.address.cep || dados.asa.postalCode
+		this.end.logadouro = dados.address.logadouro || dados.asa.address
+		this.end.numero = dados.address.numero || dados.asa.addressNumber
+		this.end.complemento = dados.address.complemento
+		this.end.bairro = dados.address.bairro || dados.asa.province
+		this.end.cidade = dados.address.cidade
+		this.end.estado = dados.address.estado || dados.asa.state
 
 	},
 
-    template: await get_template('./assets/js/views/instituicao/doador-hitorico')
+	template: await get_template('./assets/js/views/instituicao/doador-hitorico')
 }

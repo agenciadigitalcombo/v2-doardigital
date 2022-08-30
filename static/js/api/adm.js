@@ -761,6 +761,10 @@ export default {
         })
     },
 
+    async detalheDoador(fk) {
+        return await http.post('/doador/detalhe', { fk })
+    },
+
     async listarEmail(
         token,
         instituicao_fk
@@ -916,6 +920,15 @@ export default {
     ) {
         return await http.get('/instituicao/balance', {
             institution_fk: id
+        })
+    },
+    async saque(
+        id,
+        valor
+    ) {
+        return await http.post('/instituicao/saque', {
+            institution_fk: id,
+            valor
         })
     },
 

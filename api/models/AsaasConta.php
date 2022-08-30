@@ -31,8 +31,9 @@ class AsaasConta extends Asaas
         ]);
     }
 
-    function extrato() {
-        return $this->get("/transfers",[
+    function extrato()
+    {
+        return $this->get("/transfers", [
             "limit" => 100
         ]);
     }
@@ -48,12 +49,12 @@ class AsaasConta extends Asaas
     function registerWebHook()
     {
         $env = require __DIR__ . "/../config.php";
-        $prefix = ".com.br";
+        $prefix = "https://doardigital.com.br";
         if ($env['sandbox']) {
-            $prefix = ".tk";
+            $prefix = "https://hostdoar.tk";
         }
         $payload = [
-            "url" => "https://doardigital{$prefix}/api/webhook.php",
+            "url" => "{$prefix}/api/webhook.php",
             "email" => "john@digitalcombo.com.br",
             "enabled" => true,
             "interrupted" => false,
@@ -105,13 +106,13 @@ class AsaasConta extends Asaas
                 "accountDigit" => $this->clearNumber($accountDigit),
                 "accountName" => $accountName,
                 "agency" => $this->clearNumber($agency),
-                "bank"=> $this->clearNumber($bank),
+                "bank" => $this->clearNumber($bank),
                 "bankAccountType" => $bankAccountType,
                 "cpfCnpj" => $this->clearNumber($cpfCnpj),
                 "name" => $name,
             ]
         ];
-        if($bankAccountType == "MEI") {
+        if ($bankAccountType == "MEI") {
             $payload["bankAccount"]["thirdPartyAccount"] = true;
         }
         return $this->post('/accounts', $payload);
@@ -165,11 +166,63 @@ class AsaasConta extends Asaas
     ): array {
         return $this->get("/myAccount/documents", []);
     }
-    
+
     function sendDocument(
         $id
     ): array {
         // anexar file send request
         return $this->post("/myAccount/documents/{$id}", []);
+    }
+
+    function saque(
+        $accountName,
+        $thirdPartyAccount,
+        $bank,
+        $agency,
+        $account,
+        $accountDigit,
+        $bankAccountType,
+        $name,
+        $cpfCnpj,
+        $responsiblePhone,
+        $responsibleEmail
+    ) {
+        return $this->post("/bankAccounts/mainAccount", [
+            "accountName" => $accountName,
+            "thirdPartyAccount" => $thirdPartyAccount,
+            "bank" => $bank,
+            "agency" => $agency,
+            "account" => $account,
+            "accountDigit" => $accountDigit,
+            "bankAccountType" => $bankAccountType,
+            "name" => $name,
+            "cpfCnpj" => $cpfCnpj,
+            "responsiblePhone" => $responsiblePhone,
+            "responsibleEmail" => $responsibleEmail,
+        ]);
+    }
+
+    function saqueByBankId(
+        $bankAccountInfoId,
+        $value
+    ) {
+        return $this->post("/transfers", [
+            "value" => $value,
+            "bankAccountInfoId" => $bankAccountInfoId
+        ]);
+    }
+
+    function getBank() {
+        return $this->get("/bankAccounts", []);        
+    }
+
+    function transferir(
+        $value,
+        $walletId
+    ) {
+        return $this->post("/transfers", [
+            "value" => $value,
+            "walletId" => $walletId,
+        ]);
     }
 }

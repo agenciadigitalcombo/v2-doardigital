@@ -96,7 +96,7 @@ class AsaasPay extends Asaas
             $payload["remoteIp"] = $_SERVER['REMOTE_ADDR'];
         }
         if (!empty($split)) {
-            $payload['split_rules'] = $split;
+            $payload['split'] = $split;
         }
         return $this->post('/payments', $payload);
     }
@@ -159,7 +159,7 @@ class AsaasPay extends Asaas
             $payload["nextDueDate"] = date('Y-m-d');
         }
         if (!empty($split)) {
-            $payload['split_rules'] = $split;
+            $payload['split'] = $split;
         }
         return $this->post('/subscriptions', $payload);
     }

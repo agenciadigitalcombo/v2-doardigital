@@ -47,7 +47,7 @@ class Evendas
             "COMPRADORENDERECO" => ($logradouro),
             "STATUSPEDIDO" => $status_payment,
             "TIPOPAGAMENTO" => $type_payment,
-            "DATAPEDIDO" => date('Y-m-d'),
+            "DATAPEDIDO" => date('Y-m-d H:i:s'),
             "BOLETOCODIGOBARRA" => $code_boleto,
             "VALORPEDIDO" => $valor,
             "URLCHECKOUT" => "",

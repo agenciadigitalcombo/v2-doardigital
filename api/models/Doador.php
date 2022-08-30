@@ -42,6 +42,14 @@ class Doador
         return self::porter($this->con->select()[0] ?? []);
     }
 
+    public function detalhe(string $fk): array
+    {
+        $this->con->where([
+            "external_fk" => $fk
+        ]);
+        return self::porter($this->con->select()[0] ?? []);
+    }
+
     public function listAll(string $instituicao_fk): array
     {
         $this->con->where(["instituicao_fk" => $instituicao_fk]);

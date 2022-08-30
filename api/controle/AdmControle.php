@@ -396,7 +396,7 @@ class AdmControle extends Controle
         }
         self::printSuccess(
             "Dados endereço",
-            $local->porter($address[0])
+            $local->porter($address ?? [])
         );
     }
 

@@ -85,8 +85,8 @@
 													<th class="min-w-100px">Tipo Doador</th>
 													<th class="min-w-175px">Data Cadastro </th>
 													<th class="min-w-150px">CPF</th>
-													<th class="text-end min-w-100px">
-														<!-- Ação -->
+													<th class="text-end ">
+														info
 													</th>
 												</tr>
 											</thead>
@@ -107,8 +107,7 @@
 
 
 														<div class="d-flex flex-column">
-															<a
-																class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
+															<a class="text-gray-800 text-hover-primary mb-1">{{item.nome}}</a>
 															<span>{{item.email}}</span>
 														</div>
 													</td>
@@ -121,10 +120,11 @@
 													</td>
 
 													<td> {{item.cpf | cpf}} </td>
+													<td> <span class="btn btn-info" @click="editar(item.cpf, item.external_fk)">VER</span> </td>
 
 													<td class="text-end">
-
-                                                        <!-- <a @click="editar(item.cpf)" title="Para Visualizar da um click"
+														
+                                                        <!-- <a  title="Para Visualizar da um click"
                                                             class="btn btn-icon btn-active-light-primary w-35px h-35px btn-primary"
                                                             style="margin: 2px;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
