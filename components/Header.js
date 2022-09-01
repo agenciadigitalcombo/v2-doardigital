@@ -3,7 +3,7 @@ import getTemplate from "./getTemplate.js"
 export default {
     data: function() {
         return {
-            statusSubMenu: true
+            statusSubMenu: false
         }
     },
     methods: {
