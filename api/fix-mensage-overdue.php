@@ -130,16 +130,16 @@ $message =  array_map(function($fatura) use ($hashCompany, $evendas, $doadorFks,
 }, $message );
 
 
-// $message = array_reduce( $message, function($messages, $payloadMessage) {
-//     $keysMessage = implode(",", array_keys($payloadMessage));
-//     $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
-//     $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
-//     $payloadMessage["tipo"] = "EMAIL";
-//     $keysMessage = implode(",", array_keys($payloadMessage));
-//     $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
-//     $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
-//     return $messages;
-// }, [] );
+$message = array_reduce( $message, function($messages, $payloadMessage) {
+    $keysMessage = implode(",", array_keys($payloadMessage));
+    $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
+    $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+    // $payloadMessage["tipo"] = "EMAIL";
+    // $keysMessage = implode(",", array_keys($payloadMessage));
+    // $valuesMessage = implode(",", array_map(fn ($v) => "'$v'", array_values($payloadMessage)));
+    // $messages[] = "INSERT INTO message ($keysMessage) VALUES ($valuesMessage)";
+    return $messages;
+}, [] );
 
 $message = array_values($message);
 
