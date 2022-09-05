@@ -32,6 +32,5 @@ export default class Tabela {
             })
             this.dataRender.push(row)
         })
-        console.log(this.dataRender)
     }
 }
