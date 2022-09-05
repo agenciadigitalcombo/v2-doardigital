@@ -13,11 +13,14 @@ export default class Tabela {
         this.dataRender = []
         let row = []
         Object.keys(this.cols).forEach(key => {
-            if (typeof this.cols[key] !== "function") {
+            if (typeof this.cols[key] !== "function" ) {
                 row.push(this.cols[key])
+            } else {
+                row.push(this.cols[key].name)
             }
         })
         this.dataRender.push(row)
+       
         this.data.forEach(tupla => {
             let row = []
             Object.keys(this.cols).forEach(colKey => {
@@ -29,5 +32,6 @@ export default class Tabela {
             })
             this.dataRender.push(row)
         })
+        console.log(this.dataRender)
     }
 }

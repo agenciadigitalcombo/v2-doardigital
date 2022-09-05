@@ -1,53 +1,84 @@
-<link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+<div>
 
-<section class="bg-white py-10 ">
-   <div class="container">
-      <div class="flex flex-wrap -mx-4">
-         <div class="w-full px-4">
-            <div class="max-w-full overflow-x-auto">
-               <table class="table-auto w-full">
-                  <thead>
-                     <tr class="bg-primary text-center">
-                        <th v-for="c in lista[0]"
-                           class="
-                           w-1/6
-                           min-w-[160px]
-                           text-lg
-                           font-semibold
-                           text-white
-                           py-4
-                           lg:py-7
-                           px-3
-                           lg:px-4
-                           border-l border-transparent
-                           "
-                           >
-                           {{c}}
-                        </th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr v-for="(tupla, i) in lista" v-show="i > 0">
-                        <td v-for=" text in tupla"                            
-                           class="
-                           text-center text-dark
-                           font-medium
-                           text-base
-                           py-5
-                           px-2
-                           bg-[#F3F6FF]
-                           border-b border-l border-[#E8E8E8]
-                           "
-                           >
-                           {{text}}
-                        </td>
-                        
-                        
-                     </tr>
-                  </tbody>
-               </table>
+
+    <div
+        class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+        <div class="w-full px-4">
+            <div class="bg-white shadow-md rounded my-6 ">
+                <table class="min-w-max w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left" v-for="c in lista[0]">
+                                {{c}}
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <tr v-for="(tupla, i) in lista" v-show="i > 0" :class="{
+                            'border-b' : true,
+                            'border-gray-200' : true,
+                            'hover:bg-gray-100' : true,
+                            'bg-gray-50' : i % 2 == 0 ? true : false
+                        }">
+                            <td class="py-3 px-6 text-left whitespace-nowrap" v-for=" text in tupla">
+                                <div class="flex items-center">
+                                    <span class="font-medium" v-html="text"></span>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
-         </div>
-      </div>
-   </div>
-</section>
+
+            <ul class="table border-collapse text-center bg-white mx-auto shadow-sm">
+                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100">
+                    <button
+                        @click="step=0"
+                        class="hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50">
+                        «
+                    </button>
+                </li>
+                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100">
+                    <button
+                    @click="step=step-1 > -1 ? step-1 : 0"
+                        class="hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50">
+                        ‹
+                    </button>
+                </li>
+
+                <div class="hidden">
+                    {{inativo = `hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2
+                    focus:ring-blue-500 focus:outline-none focus:ring-opacity-50` }}
+                    {{ativo = `bg-blue-500 w-full h-full text-white hover:bg-blue-600 transition duration-100
+                    ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50` }}
+                </div>
+
+                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
+                    v-for="(_,s) in Array(pages)">
+                    <button :class="step == s ? ativo : inativo"  @click="step=s">
+                        {{s+1}}
+                    </button>
+                </li>
+
+                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100">
+                    <button
+                    @click="step=step+1 < pages-1 ? step+1 :  pages-1"
+                        class="hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50">
+                        ›
+                    </button>
+                </li>
+                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100">
+                    <button
+                        @click="step=pages-1"
+                        class="hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50">
+                        »
+                    </button>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
