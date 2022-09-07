@@ -100,8 +100,8 @@ $message =  array_map(function($fatura) use ($hashCompany, $evendas, $doadorFks,
     $total_invoices = array_values($total_invoices);
 
     if( count($total_invoices) > 1 ) {
-        $sub = "SUB_";
     }
+    $sub = "SUB_";
 
     $dueDate = date('Y-m-d', strtotime('-7 days', strtotime($fatura["data"])));
 
