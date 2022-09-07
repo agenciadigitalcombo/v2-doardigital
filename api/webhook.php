@@ -92,7 +92,7 @@ $faturas->where([
 $fatura = $faturas->select()[0];
 
 if( empty($fatura) ) {
-    $sub = "SUB_";
+    $subPrefix = "SUB_";
     $faturas->where([
         "external_fk" => $reference_key
     ]);
