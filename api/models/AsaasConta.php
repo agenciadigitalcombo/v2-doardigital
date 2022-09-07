@@ -49,7 +49,7 @@ class AsaasConta extends Asaas
     function registerWebHook()
     {
         $env = require __DIR__ . "/../config.php";
-        $prefix = "https://doardigital.com.br";
+        $prefix = "https://painel.doardigital.com.br";
         if ($env['sandbox']) {
             $prefix = "https://hostdoar.tk";
         }
