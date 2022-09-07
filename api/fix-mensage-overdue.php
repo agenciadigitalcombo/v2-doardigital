@@ -89,19 +89,19 @@ $allCompany = $company->select();
 
 $hashCompany = hashCompany($allCompany);
 
-$message =  array_map(function($fatura) use ($hashCompany, $evendas, $doadorFks, $message) {
+$message =  array_map(function($fatura) use ($hashCompany, $evendas, $doadorFks, $allInvoices) {
     $telefone = $doadorFks[$fatura["doador_fk"]]["telefone"];
     $sub = "";
 
-    $total_invoices = array_filter( $message, function($i) use ($fatura) {
+    $total_invoices = array_filter( $allInvoices, function($i) use ($fatura) {
         return $fatura["external_fk"] == $i["external_fk"];
     } );
 
     $total_invoices = array_values($total_invoices);
 
     if( count($total_invoices) > 1 ) {
+        $sub = "SUB_";
     }
-    $sub = "SUB_";
 
     $dueDate = date('Y-m-d', strtotime('-7 days', strtotime($fatura["data"])));
 
