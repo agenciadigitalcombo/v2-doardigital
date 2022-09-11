@@ -7,10 +7,12 @@ import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
 
 import Sobre from "./sobre.js"
 import Inicio from "./home.js"
+import Doadores from "./doadores.js"
 
 const routes = [
     { path: '/', component: Inicio },
     { path: '/sobre', component: Sobre },
+    { path: '/doadores', component: Doadores },
 ]
 
 const router = VueRouter.createRouter({

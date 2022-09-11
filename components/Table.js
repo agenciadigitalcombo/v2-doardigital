@@ -7,7 +7,7 @@ export default {
         return {
             lista: [],
             pages: 0,
-            step: 1
+            step: 0
         }
     },
     watch: {
