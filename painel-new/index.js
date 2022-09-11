@@ -5,14 +5,17 @@ import MenuAside from "../components/MenuAside.js"
 import Header from "../components/Header.js"
 import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
 
+
 import Sobre from "./sobre.js"
 import Inicio from "./home.js"
 import Doadores from "./doadores.js"
+import Carteira from "./carteira.js"
 
 const routes = [
     { path: '/', component: Inicio },
     { path: '/sobre', component: Sobre },
     { path: '/doadores', component: Doadores },
+    { path: '/carteira', component: Carteira },
 ]
 
 const router = VueRouter.createRouter({
