@@ -1,11 +1,10 @@
 import getTemplate from "./getTemplate.js"
 
 export default {
-    props: ['link','text','value','variation','tax','icon'],
+    props: ['link','text','value','variation','tax','icon','dashboard'],
     template : await getTemplate( './../components/Card' ),
     data: function() {
         return {
-            dashboard: false,
             icons:{
                 home: "fas fa-arrow-up",
                 bar: "far fa-chart-bar",
