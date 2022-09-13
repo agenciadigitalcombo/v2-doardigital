@@ -10,12 +10,14 @@ import Sobre from "./sobre.js"
 import Inicio from "./home.js"
 import Doadores from "./doadores.js"
 import Carteira from "./carteira.js"
+import Perfil from "./perfil.js"
 
 const routes = [
     { path: '/', component: Inicio },
     { path: '/sobre', component: Sobre },
     { path: '/doadores', component: Doadores },
     { path: '/carteira', component: Carteira },
+    { path: '/meu-perfil', component: Perfil },
 ]
 
 const router = VueRouter.createRouter({
