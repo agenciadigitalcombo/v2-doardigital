@@ -30,7 +30,7 @@ export class Input {
     render() {
         
         return `
-        <div class="col-span-${this.col}">
+        <div class=" col-span-4  lg:col-span-${this.col}">
             <label class="${labCss}">${this.label}</label>
             <input type="${this.type}" value="${globalThis.Dados[this.name] || ''}" class="${inputCss}" name="${this.name}" ${this.require && 'required'} oninput="globalThis.Dados[this.name]=this.value" >
         </div>    

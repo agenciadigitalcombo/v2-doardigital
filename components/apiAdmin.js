@@ -28,7 +28,7 @@ export default class {
         })
     }
     
-    async atualizar(
+    async update(
         token,
         code,
         nome,
