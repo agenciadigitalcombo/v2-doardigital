@@ -1,5 +1,5 @@
 import { Form, Input, Button } from "../components/Form.js";
-
+import BreadCrumb from "../components/BreadCrumb.js"
 
 export default {
     data: function () {
@@ -15,6 +15,7 @@ export default {
             }
         }
     },
+    
     methods: {
         atualizar() {
             
@@ -37,9 +38,13 @@ export default {
         const form = new Form(inputs)
         this.inputs = form.render()
     },
+    components: {
+        BreadCrumb,
+    },
     template: `
-    <div>   
-        <div class="mx-auto w-[90%] lg:w-[500px] pt-8"> 
+    <div> 
+        <BreadCrumb text="Home" text2="Minha Conta" />
+        <div class="mx-auto w-[90%] lg:w-[760px] pt-8"> 
             <span class="block mb-4">
                 Olá {{formData.name}} 
             </span>
