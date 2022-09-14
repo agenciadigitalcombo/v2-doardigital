@@ -27,6 +27,7 @@ export default {
                 <Card text="Saldo Liberado" value="R$ 8.900,55" variation="blue" icon="bar" />
                 <Card text="Saldo á liberar" value="R$ 5.255,55" variation="yellow"/>
                 <Card text="Total Já Sacado" value="R$ 28.900,55" variation="green" icon="heart" />
+                
                 <CardCarteira />
                 
                 
