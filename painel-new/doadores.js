@@ -7,24 +7,26 @@ export default {
     data: function() {
         return { 
             donations : [
-                { name: "Mel", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
+                { name: "Mel Garcia de Souza", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Jo Santos", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Kleber", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Bruno", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Jhon", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Kleber", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Bruno", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Jhon", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Kleber", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Bruno", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
+                { name: "Jhon", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
             ],
             cols: {
                 name: "Nome Doador",
-                value: "Valor Doação",
-                status: t => `<span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                status: t => `<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
                 ${t.status}
                 </span>`,
+                value: "Data de Cadastro",
+                cpf: "CPF", 
+                email: "E-mail",               
                 editar: e => `
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,9 +58,9 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doadores" value="300" variation="blue" icon="bar" />
-                <Card text="Total Doadores Únicos" value="100" variation="yellow"/>
-                <Card text="Doadores Recorrentes" value="200" variation="green" icon="heart" />
+                <Card text="Total de Doadores" value="300" variation="blue" icon="bar" size="3" />
+                <Card text="Total Doadores Únicos" value="100" variation="yellow" size="3"/>
+                <Card text="Doadores Recorrentes" value="200" variation="green" icon="heart" size="3" />
                 
                 
                 <CardCarteira />

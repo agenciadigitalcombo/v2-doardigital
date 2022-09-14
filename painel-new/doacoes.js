@@ -7,23 +7,27 @@ export default {
     data: function() {
         return { 
             donations : [
-                { name: "Mel", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
+                { name: "Mel", value: "R$ 50", status: "PAGO", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 1000", status: "AGUARDANDO PAGAMENTO", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
+                { name: "Kleber", value: "R$ 500", status: "VENCIDO", tipo:"BOLETO", dataHora: "18/09/2022 08:20:34" },
+                { name: "Bruno", value: "R$ 500", status: "PAGO", tipo:"CREDIT_CARD", dataHora: "18/09/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 50", status: "ESTORNADO", tipo:"PIX", dataHora: "17/09/2022 08:20:34" },
+                { name: "Kleber", value: "R$ 500", status: "OVERDUE", tipo:"PIX", dataHora: "15/09/2022 08:20:34" },
+                { name: "Bruno", value: "R$ 500", status: "PAGO", tipo:"BOLETO", dataHora: "12/09/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 50", status: "VENCIDO", tipo:"PIX", dataHora: "20/08/2022 08:20:34" },
+                { name: "Kleber", value: "R$ 550", status: "PAGO", tipo:"CREDIT_CARD", dataHora: "20/08/2022 08:20:34" },
+                { name: "Bruno", value: "R$ 950", status: "PAGO", tipo:"BOLETO", dataHora: "15/08/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 50", status: "PAGO", tipo:"PIX", dataHora: "10/08/2022 08:20:34" },
             ],
             cols: {
                 name: "Nome Doador",
                 value: "Valor Doação",
                 status: t => `<span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
                 ${t.status}
+                </span>`,
+                dataHora: "Data e Hora cadastrada",
+                tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
+                ${t.tipo}
                 </span>`,
                 editar: e => `
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
@@ -56,11 +60,11 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doações" value="300" variation="blue" icon="bar" size="cinco" />
-                <Card text="Total Pago" value="100" variation="green" size="cinco" />
-                <Card text="Total Aberto" value="200" variation="yellow" icon="heart" size="cinco" />
-                <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="cinco" />
-                <Card text="Estornado" value="200" variation="purple" icon="heart" size="cinco" />
+                <Card text="Total de Doações" value="300" variation="blue" icon="bar" size="4" />
+                <Card text="Total Pago" value="100" variation="green" size="4" />
+                <Card text="Total Aberto" value="200" variation="yellow" icon="heart" size="6" />
+                <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="6" />
+                <Card text="Estornado" value="200" variation="purple" icon="heart" size="6" />
                 
                 <CardCarteira />
                 

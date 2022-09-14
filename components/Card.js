@@ -11,10 +11,10 @@ export default {
                 heart: "fa-solid fa-heart-circle-check"
             },
             sizes:{
-                dois: "w-full lg:w-6/12 xl:w-6/12 px-4",
-                tres: "w-full lg:w-4/12 xl:w-4/12 px-4",
-                quatro: "w-full lg:w-3/12 xl:w-3/12 px-4",
-                cinco: "w-full lg:w-2/12 xl:w-2/12 px-4",
+                2: "w-full lg:w-6/12 xl:w-6/12 px-4",
+                3: "w-full lg:w-4/12 xl:w-4/12 px-4",
+                4: "w-full lg:w-3/12 xl:w-3/12 px-4",
+                6: "w-full lg:w-2/12 xl:w-2/12 px-4",
 
             },
             variations:{

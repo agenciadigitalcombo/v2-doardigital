@@ -19,11 +19,12 @@ import Planos from "./planos.js"
 import Recorrencia from "./recorrencia.js"
 import Doacoes from "./doacoes.js"
 import PaginaQrCode from "./paginaQrCode.js"
+import Dashboard from "./dashboard.js"
 
 
 const routes = [
     { path: '/', component: Inicio },
-    { path: '/sobre', component: Sobre },
+    { path: '/dashboard', component: Dashboard },
     { path: '/doadores', component: Doadores },
     { path: '/carteira', component: Carteira },
     { path: '/meu-perfil', component: Perfil },
