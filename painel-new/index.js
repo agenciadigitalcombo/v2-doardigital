@@ -18,6 +18,7 @@ import Metas from "./metas.js"
 import Planos from "./planos.js"
 import Recorrencia from "./recorrencia.js"
 import Doacoes from "./doacoes.js"
+import PaginaQrCode from "./paginaQrCode.js"
 
 
 const routes = [
@@ -33,6 +34,7 @@ const routes = [
     { path: '/planos', component: Planos },
     { path: '/recorrencia', component: Recorrencia },
     { path: '/doacoes', component: Doacoes },
+    { path: '/qr-code', component: PaginaQrCode },
 
 ]
 

@@ -9,5 +9,5 @@ export default  [
     { text: "Modelo de E-mails", ico: "fa-solid fa-envelope-circle-check", link: "modelo-de-email" },
     { text: "Configuração", ico: "fa-solid fa-gear", link: "configuracao" },
     { text: "Carteira", ico: "fa-solid fa-vault", link: "carteira" },
-    { text: "QR CODE", ico: "fa-solid fa-qrcode", link: "qr-code " },
+    { text: "QR CODE", ico: "fa-solid fa-qrcode", link: "qr-code" },
 ]
