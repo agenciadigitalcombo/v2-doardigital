@@ -20,7 +20,7 @@ export default {
     
     <BreadCrumb text="Home" text2="Carteira" />
     
-    <div class="relative pt-10 pb-32  bg-lightBlue-500">
+    <div class="relative pt-10 pb-32 bg-[#f9fafb]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">

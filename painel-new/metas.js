@@ -20,7 +20,7 @@ export default {
     
     <BreadCrumb text="Home" text2="Metas" />
     
-    <div class="relative pt-10 pb-32 bg-lightBlue-500">
+    <div class="relative pt-10 pb-32 bg-[#f9fafb]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">

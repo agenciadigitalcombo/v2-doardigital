@@ -1,5 +1,6 @@
 <div>
-	<div class="flex justify-between items-center h-[60px] bg-[#DDD] py-2 px-4 relative">
+	<div class="flex justify-between items-center h-[60px] bg-[#133490] py-2 px-4 relative">
+		
 		<div class="xl:w-96">
 			<select class="form-select form-select-sm
     appearance-none
@@ -23,25 +24,25 @@
       <option value="3">CURITIBA</option>
     </select>
 		  </div>
-		<div class="flex items-center gap-4">
-			<div class="text-[#666]">
+		<div class="flex items-center gap-2">
+			<div class="mr-4 ml-2 text-[#fff]">
 				<i class="fa-solid fa-bell"></i>
 			</div>
-			<div class="flex gap-4 items-center h-[60px]">
+			<div class="flex gap-2 items-center h-[60px] text-[#fff]">
 				<img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
 					src="https://api.lorem.space/image/face?w=50&h=50" @click="toggleSubMenu">
 				<span @click="toggleSubMenu">User</span>
-				<i class="fa-solid fa-angle-down text-[#666]" @click="toggleSubMenu"></i>
+				<i class="fa-solid fa-angle-down text-[#fff]" @click="toggleSubMenu"></i>
 			</div>
 		</div>
 		<div @click="toggleSubMenu" v-show="statusSubMenu" class="z-10 absolute right-[20px] top-[50px] bg-[#EEE]  origin-top-right rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-			<div class="block px-4 py-2 text-sm text-gray-700">
+			<div class="block px-4 py-2 text-md text-gray-700">
 				<router-link to='meu-perfil'> Meu perfil</router-link>
 			</div>
-			<div class="block px-4 py-2 text-sm text-gray-700">
+			<div class="block px-4 py-2 text-md text-gray-700">
 				<router-link to='trocar-senha'> Trocar Senha </router-link>
 			</div>
-			<div class="block px-4 py-2 text-sm text-gray-700">
+			<div class="block px-4 py-2 text-md text-gray-700">
 				<router-link to='sair'> Sair </router-link>
 			</div>
 		</div>
