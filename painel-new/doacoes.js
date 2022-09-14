@@ -44,7 +44,7 @@ export default {
     },
     template: `
     <div>
-    <BreadCrumb text="Home" text2="Doadores" />
+    <BreadCrumb text="Home" text2="Doações" />
 
     
 
@@ -56,10 +56,11 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doadores" value="300" variation="blue" icon="bar" />
-                <Card text="Total Doadores Únicos" value="100" variation="yellow"/>
-                <Card text="Doadores Recorrentes" value="200" variation="green" icon="heart" />
-                
+                <Card text="Total de Doações" value="300" variation="blue" icon="bar" size="cinco" />
+                <Card text="Total Pago" value="100" variation="green" size="cinco" />
+                <Card text="Total Aberto" value="200" variation="yellow" icon="heart" size="cinco" />
+                <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="cinco" />
+                <Card text="Estornado" value="200" variation="purple" icon="heart" size="cinco" />
                 
                 <CardCarteira />
                 

@@ -11,6 +11,14 @@ import Inicio from "./home.js"
 import Doadores from "./doadores.js"
 import Carteira from "./carteira.js"
 import Perfil from "./perfil.js"
+import Configuracao from "./configuracao.js"
+import Modelos from "./modelosDeEmail.js"
+import Modulos from "./modulos.js"
+import Metas from "./metas.js"
+import Planos from "./planos.js"
+import Recorrencia from "./recorrencia.js"
+import Doacoes from "./doacoes.js"
+
 
 const routes = [
     { path: '/', component: Inicio },
@@ -18,6 +26,14 @@ const routes = [
     { path: '/doadores', component: Doadores },
     { path: '/carteira', component: Carteira },
     { path: '/meu-perfil', component: Perfil },
+    { path: '/configuracao', component: Configuracao },
+    { path: '/modelo-de-email', component: Modelos },
+    { path: '/modulos', component: Modulos },
+    { path: '/metas', component: Metas },
+    { path: '/planos', component: Planos },
+    { path: '/recorrencia', component: Recorrencia },
+    { path: '/doacoes', component: Doacoes },
+
 ]
 
 const router = VueRouter.createRouter({
