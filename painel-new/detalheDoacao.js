@@ -45,10 +45,16 @@ export default {
                     <p>Suzana Maria Aparecida Silva</p>
                     <br>
                     <h2 class="text-gray-500">Status</h2>
-                    <p>Aguardando Pagamento</p>
+                        <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
+                        PAGO
+                        </span>
+                    <br>    
                     <br>
                     <h2 class="text-gray-500">Tipo:</h2>
-                    <p>Tipo</p>
+                        <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                        PIX
+                        </span>
+                    <br>
                     <br>
                     <h2 class="text-gray-500">Data:</h2>
                     <p>14/09/2022 - 09:17:13</p>
