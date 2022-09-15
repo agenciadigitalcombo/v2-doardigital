@@ -46,7 +46,7 @@ export default {
         <BreadCrumb text="Home" text2="Minha Conta" />
 
 
-        <div class="relative pt-6 pb-32 bg-[#f9fafb]">
+        <div class="relative pt-6 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">

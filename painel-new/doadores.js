@@ -54,7 +54,7 @@ export default {
         
 
 
-        <div class="relative pt-10 pb-32 bg-[#f9fafb]">
+        <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">

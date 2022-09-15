@@ -20,6 +20,7 @@ import Recorrencia from "./recorrencia.js"
 import Doacoes from "./doacoes.js"
 import PaginaQrCode from "./paginaQrCode.js"
 import Dashboard from "./dashboard.js"
+import DetalheDoador from "./detalheDoador.js"
 
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
     { path: '/recorrencia', component: Recorrencia },
     { path: '/doacoes', component: Doacoes },
     { path: '/qr-code', component: PaginaQrCode },
+    { path: '/detalhe-doador', component: DetalheDoador },
 
 ]
 
@@ -53,11 +55,12 @@ createApp({
     },
     template: `
         <div> 
+        <Header />
             <MenuMobile @check='toggleMenu' /> 
             <div class='grid grid-cols-1 lg:grid-cols-[270px_1fr]'> 
                 <MenuAside :isOpen='isOpen' :lista='itemsMenu' @check='toggleMenu'/> 
                 <div> 
-                    <Header />                     
+                                         
                     <router-view></router-view> 
                 </div> 
             </div> 
