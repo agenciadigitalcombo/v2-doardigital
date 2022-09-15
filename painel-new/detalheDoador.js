@@ -5,10 +5,13 @@ import Card  from "../components/Card.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
 import CardPerfil from "../components/CardPerfil.js"
+import apiDoadores from "../components/apiDoadores.js"
+import {getUriData} from "../components/format.js"
 
 export default {
     data: function() {
         return { 
+            info: {},
             donations : [
                 { dataHora: "20/09/2022 08:20:34" ,value: "R$ 50", status: "PAGO", tipo: "PIX",  },
                 { value: "R$ 1000", status: "AGUARDANDO PAGAMENTO", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
@@ -73,6 +76,15 @@ export default {
         CardGeral,
         CardPerfil
     },
+    async mounted() {
+        let ID = getUriData('id')
+        let doador = new apiDoadores()
+        let request = await doador.detalhe(ID)
+        if(request.next) {
+            this.info = request.payload
+            console.log(this.info )
+        }
+    },
     template: `
     <div>
     <BreadCrumb text="Home" text2="Detalhe Doador" />
@@ -83,7 +95,7 @@ export default {
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <CardPerfil />
+                <CardPerfil :text="info.nome" />
                 <CardGeral text="Dados do Doador" size="tres" value=""></CardGeral>
                 <CardGeral text="Endereço" size="tres"></CardGeral>
                 <CardGeral text="Histórico de Doações" size="quatro">
