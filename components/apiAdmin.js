@@ -65,7 +65,6 @@ export default class {
             cidade,
             estado,
             token
-
         })
     }
 

@@ -2,24 +2,16 @@ import Table  from "../components/Table.js"
 import Botao  from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import Card  from "../components/Card.js"
+import ApiDoadores from "../components/apiDoadores.js"
+import MyInstitution from "../components/myInstitution.js"
+import {data} from "../components/format.js"
+
 
 export default {
     data: function() {
         return { 
-            donations : [
-                { name: "Mel Garcia de Souza", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Jo Santos", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Kleber", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Bruno", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Jhon", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Kleber", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Bruno", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Jhon", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Kleber", value: "15/09/2022", status: "RECORRENTE", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Bruno", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-                { name: "Jhon", value: "15/09/2022", status: "ÚNICO", cpf: "000.000.000-00", email: "teste@test.com" },
-            ],
-            cols: {
+            doadores : [],
+            cols: {                
                 name: "Nome Doador",
                 status: t => `<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
                 ${t.status}
@@ -44,6 +36,25 @@ export default {
         BreadCrumb,
         Card
     },
+    async mounted() {
+        let doadores = new ApiDoadores()
+        let institution = new MyInstitution()
+        let request = await doadores.lista(institution.get())
+        if(request.next) {
+            this.doadores = this.adapter( request.payload )
+        }
+
+    },
+    methods: {
+        adapter( listAll ) {
+            return listAll.map( d => ({
+                name: d.nome,
+                status: d.recorrente,
+                value: data(d.registro),
+                ...d,  
+            }) )
+        }
+    },
     template: `
     <div>
     <BreadCrumb text="Home" text2="Doadores" />
@@ -67,7 +78,7 @@ export default {
                 
                 
                 </div>
-                <Table :rows="donations" :cols="cols" pagination="10" />
+                <Table :rows="doadores" :cols="cols" pagination="10" />
              </div>
           </div>
        </div>

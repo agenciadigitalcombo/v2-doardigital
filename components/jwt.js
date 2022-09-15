@@ -1,6 +1,6 @@
 export default class {
     constructor() {
-        this.name = 'JWT'
+        this.name = 'token'
     }
     save( jwt ) {
         localStorage.setItem( this.name, jwt )

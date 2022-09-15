@@ -14,12 +14,17 @@ export default {
         step(nw,ol) {
             const myTable = new Tabela( this.freeze(this.rows), this.cols, this.pagination, +this.step )
             this.lista = this.freeze(myTable.dataRender)
+        },
+        rows( n, i) {
+            const myTable = new Tabela( this.freeze(this.rows), this.cols, this.pagination, this.step )
+            this.lista = this.freeze(myTable.dataRender)
         }
     },
     mounted() {
         const myTable = new Tabela( this.freeze(this.rows), this.cols, this.pagination, this.step )
         this.lista = this.freeze(myTable.dataRender)
         this.pages = myTable.pages
+        
     },
     methods: {
         freeze(payload) {
