@@ -21,6 +21,7 @@ import Doacoes from "./doacoes.js"
 import PaginaQrCode from "./paginaQrCode.js"
 import Dashboard from "./dashboard.js"
 import DetalheDoador from "./detalheDoador.js"
+import DetalheDoacao from "./detalheDoacao.js"
 
 
 const routes = [
@@ -38,6 +39,7 @@ const routes = [
     { path: '/doacoes', component: Doacoes },
     { path: '/qr-code', component: PaginaQrCode },
     { path: '/detalhe-doador', component: DetalheDoador },
+    { path: '/detalhe-doacao', component: DetalheDoacao },
 
 ]
 
