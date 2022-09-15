@@ -1,4 +1,4 @@
-import { Form, Input, Button } from "../components/Form.js";
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import BreadCrumb from "../components/BreadCrumb.js"
 
 export default {
@@ -32,6 +32,12 @@ export default {
             new Input('cpf', 'CPF', 'text', 2, true),
             new Input('CEP', 'CEP', 'text', 3, true),
             new Input('numero', 'Número', 'text', 1, true),
+            new Text('bio', 'Bio', 4, true),
+            new Select('status', 'Status', 3, [
+                new Option('1', 'Ativo'),
+                new Option('0', 'Inativo'),
+            ]),
+            new Input('cor', 'Color', 'color', 1),
             new Button('Enviar'),
         ]
         globalThis.Dados = this.formData

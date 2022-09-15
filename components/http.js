@@ -1,4 +1,4 @@
-import { path_api } from '../config.js'
+import config from '../../config.js'
 
 const options = {
     headers: {
@@ -36,7 +36,7 @@ function obj_to_url(obj, next_level = null) {
 }
 
 async function post(path, data) {
-    let base = path_api
+    let base = config.path_api
     let token = localStorage.getItem('token')
     if (token) {
         data.token = token
@@ -48,7 +48,7 @@ async function post(path, data) {
 }
 
 async function get(path, data = {}) {
-    let base = path_api
+    let base = config.path_api
     let token = localStorage.getItem('token')
     if (token) {
         data.token = token
