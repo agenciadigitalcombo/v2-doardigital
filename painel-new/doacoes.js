@@ -1,26 +1,16 @@
 import Table  from "../components/Table.js"
-import Botao  from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import Card  from "../components/Card.js"
 import status from "../components/status.js"
 import actions from "../components/actions.js"
+import ApiDoacoes from "../components/apiDoacoes.js"
+import MyInstitution from "../components/myInstitution.js"
+
 
 export default {
     data: function() {
         return { 
-            donations : [
-                { name: "Mel", value: "R$ 50", status: "CONFIRMED", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 1000", status: "PENDING", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 500", status: "RECEIVED", tipo:"BOLETO", dataHora: "18/09/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 500", status: "CONFIRMED", tipo:"CREDIT_CARD", dataHora: "18/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "REFUNDED", tipo:"PIX", dataHora: "17/09/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 500", status: "OVERDUE", tipo:"PIX", dataHora: "15/09/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 500", status: "RECEIVED", tipo:"BOLETO", dataHora: "12/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "VENCIDO", tipo:"PIX", dataHora: "20/08/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 550", status: "CONFIRMED", tipo:"CREDIT_CARD", dataHora: "20/08/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 950", status: "RECEIVED", tipo:"BOLETO", dataHora: "15/08/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "CONFIRMED", tipo:"PIX", dataHora: "10/08/2022 08:20:34" },
-            ],
+            donations : [],
             cols: {
                 name: "Nome Doador",
                 value: "Valor Doação",
@@ -31,36 +21,24 @@ export default {
                 </span>`,
                 action: e => actions( 'detalhe-doacao', 'fa-solid fa-info', 'red'  )
             },
-            async mounted() {
-                let allDonations = (await this.listarDoacoes()).payload || []
-                console.log()
-            },
-            methods: {
-                async listarDoacoes() {
-                    let res = await adm.listarDoacoes(
-                        this.token,
-                        this.institution_fk
-                    )
-                    return res
-                },
-            }
+           
         }
     },
     components: {
         Table,
-        Botao,
         BreadCrumb,
         Card
+    },
+    async mounted() {
+        let donations = new ApiDoacoes()
+        let institution = new MyInstitution()
+        let lista = await donations.lista(institution.get())
+        console.log(lista)
+
     },
     template: `
     <div>
     <BreadCrumb text="Home" text2="Doações" />
-
-    
-
-   
-        
-
 
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
