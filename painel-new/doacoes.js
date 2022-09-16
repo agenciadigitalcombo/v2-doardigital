@@ -9,17 +9,17 @@ export default {
     data: function() {
         return { 
             donations : [
-                { name: "Mel", value: "R$ 50", status: "PAID", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
+                { name: "Mel", value: "R$ 50", status: "CONFIRMED", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
                 { name: "Jhon", value: "R$ 1000", status: "PENDING", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
                 { name: "Kleber", value: "R$ 500", status: "RECEIVED", tipo:"BOLETO", dataHora: "18/09/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 500", status: "PAGO", tipo:"CREDIT_CARD", dataHora: "18/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "ESTORNADO", tipo:"PIX", dataHora: "17/09/2022 08:20:34" },
+                { name: "Bruno", value: "R$ 500", status: "CONFIRMED", tipo:"CREDIT_CARD", dataHora: "18/09/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 50", status: "REFUNDED", tipo:"PIX", dataHora: "17/09/2022 08:20:34" },
                 { name: "Kleber", value: "R$ 500", status: "OVERDUE", tipo:"PIX", dataHora: "15/09/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 500", status: "PAGO", tipo:"BOLETO", dataHora: "12/09/2022 08:20:34" },
+                { name: "Bruno", value: "R$ 500", status: "RECEIVED", tipo:"BOLETO", dataHora: "12/09/2022 08:20:34" },
                 { name: "Jhon", value: "R$ 50", status: "VENCIDO", tipo:"PIX", dataHora: "20/08/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 550", status: "PAGO", tipo:"CREDIT_CARD", dataHora: "20/08/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 950", status: "PAGO", tipo:"BOLETO", dataHora: "15/08/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "PAGO", tipo:"PIX", dataHora: "10/08/2022 08:20:34" },
+                { name: "Kleber", value: "R$ 550", status: "CONFIRMED", tipo:"CREDIT_CARD", dataHora: "20/08/2022 08:20:34" },
+                { name: "Bruno", value: "R$ 950", status: "RECEIVED", tipo:"BOLETO", dataHora: "15/08/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 50", status: "CONFIRMED", tipo:"PIX", dataHora: "10/08/2022 08:20:34" },
             ],
             cols: {
                 name: "Nome Doador",
@@ -31,6 +31,19 @@ export default {
                 </span>`,
                 action: e => actions( 'detalhe-doacao', 'fa-solid fa-info', 'red'  )
             },
+            async mounted() {
+                let allDonations = (await this.listarDoacoes()).payload || []
+                console.log()
+            },
+            methods: {
+                async listarDoacoes() {
+                    let res = await adm.listarDoacoes(
+                        this.token,
+                        this.institution_fk
+                    )
+                    return res
+                },
+            }
         }
     },
     components: {

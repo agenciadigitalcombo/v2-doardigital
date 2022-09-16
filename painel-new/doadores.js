@@ -67,7 +67,6 @@ export default {
                 <Card text="Doadores Recorrentes" value="200" variation="green" icon="heart" size="3" />
                 
                 
-                <CardCarteira />
                 
                 
                 </div>
