@@ -16,15 +16,6 @@ export default {
             donations : [
                 { value: "R$ 50", status: "CONFIRMED", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
                 { value: "R$ 1000", status: "PENDING", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
-                { value: "R$ 500", status: "OVERDUE", tipo:"BOLETO", dataHora: "18/09/2022 08:20:34" },
-                { value: "R$ 500", status: "REFUNDED", tipo:"CREDIT_CARD", dataHora: "18/09/2022 08:20:34" },
-                { value: "R$ 50", status: "ESTORNADO", tipo:"PIX", dataHora: "17/09/2022 08:20:34" },
-                { value: "R$ 500", status: "OVERDUE", tipo:"PIX", dataHora: "15/09/2022 08:20:34" },
-                { value: "R$ 500", status: "CONFIRMED", tipo:"BOLETO", dataHora: "12/09/2022 08:20:34" },
-                { value: "R$ 50", status: "OVERDUE", tipo:"PIX", dataHora: "20/08/2022 08:20:34" },
-                { value: "R$ 550", status: "CONFIRMED", tipo:"CREDIT_CARD", dataHora: "20/08/2022 08:20:34" },
-                { value: "R$ 950", status: "CONFIRMED", tipo:"BOLETO", dataHora: "15/08/2022 08:20:34" },
-                { value: "R$ 50", status: "RECEIVED", tipo:"PIX", dataHora: "10/08/2022 08:20:34" },
             ],
             assinaturas : [
                 { dataHora: "20/09/2022 08:20:34" ,value: "R$ 50", status: "ATIVO", tipo: "CRÉDITO",  },
@@ -62,6 +53,7 @@ export default {
         let ID = getUriData('id')
         let doador = new apiDoadores()
         let request = await doador.detalhe(ID)
+        console.log(this.info.gravatar)
         
         
         if(request.next) {
@@ -71,7 +63,7 @@ export default {
     },
     template: `
     <div>
-    {{info.address}}
+    {{info}}
     <BreadCrumb text="Home" text2="Detalhe Doador" />
 
        
@@ -80,7 +72,7 @@ export default {
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <CardPerfil :text="info.nome" />
+                <CardPerfil :text="info.nome" :recorrente="info.recorrente" :gravatar="info.gravatar"/>
                 <CardGeral text="Dados do Doador" size="tres" value="">
                     <h2 class="text-gray-500">Email:</h2>
                     <p>{{info.email}}</p>
@@ -90,6 +82,9 @@ export default {
                     <br>
                     <h2 class="text-gray-500">CPF:</h2>
                     <p>{{info.cpf}}</p>
+                    <br>                    
+                    <h2 class="text-gray-500">Cadastro em:</h2>
+                    <p>{{info.registro}}</p>
                     <br>                    
                 </CardGeral>
                 <CardGeral text="Endereço" size="tres">
