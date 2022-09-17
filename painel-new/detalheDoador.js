@@ -1,25 +1,25 @@
-import Table  from "../components/Table.js"
-import Botao  from "../components/Botao.js"
+import Table from "../components/Table.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import Card  from "../components/Card.js"
+import Card from "../components/Card.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
 import CardPerfil from "../components/CardPerfil.js"
 import apiDoadores from "../components/apiDoadores.js"
-import {getUriData} from "../components/format.js"
+import { getUriData } from "../components/format.js"
 import status from "../components/status.js"
 
 export default {
-    data: function() {
-        return { 
-            info: {address:{bairro: null}},
-            donations : [
+    data: function () {
+        return {
+            info: { address: { bairro: null } },
+            donations: [
                 { value: "R$ 50", status: "CONFIRMED", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
-                { value: "R$ 1000", status: "PENDING", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
+                { value: "R$ 1000", status: "PENDING", tipo: "PIX", dataHora: "19/09/2022 08:20:34" },
             ],
-            assinaturas : [
-                { dataHora: "20/09/2022 08:20:34" ,value: "R$ 50", status: "ATIVO", tipo: "CRÉDITO",  },
-                { value: "R$ 1000", status: "INATIVO", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
+            assinaturas: [
+                { dataHora: "20/09/2022 08:20:34", value: "R$ 50", status: "ATIVO", tipo: "CRÉDITO", },
+                { value: "R$ 1000", status: "INATIVO", tipo: "PIX", dataHora: "19/09/2022 08:20:34" },
             ],
             cols: {
                 dataHora: "Data e Hora cadastrada",
@@ -37,7 +37,7 @@ export default {
                                         </div>
                 `
             },
-           
+
         }
     },
     components: {
@@ -53,12 +53,10 @@ export default {
         let ID = getUriData('id')
         let doador = new apiDoadores()
         let request = await doador.detalhe(ID)
-        console.log(this.info.gravatar)
-        
-        
-        if(request.next) {
+
+
+        if (request.next) {
             this.info = request.payload
-            console.log(this.info.address.bairro)
         }
     },
     template: `

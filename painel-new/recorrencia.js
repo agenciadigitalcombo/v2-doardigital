@@ -1,23 +1,14 @@
-import Table  from "../components/Table.js"
-import Botao  from "../components/Botao.js"
+import Table from "../components/Table.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import Card  from "../components/Card.js"
+import Card from "../components/Card.js"
 
 export default {
-    data: function() {
-        return { 
-            donations : [
+    data: function () {
+        return {
+            donations: [
                 { name: "Mel", value: "R$ 50", status: "PAGO", tipo: "PIX", dataHora: "20/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 1000", status: "AGUARDANDO PAGAMENTO", tipo:"PIX", dataHora: "19/09/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 500", status: "VENCIDO", tipo:"BOLETO", dataHora: "18/09/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 500", status: "PAGO", tipo:"CREDIT_CARD", dataHora: "18/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "ESTORNADO", tipo:"PIX", dataHora: "17/09/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 500", status: "OVERDUE", tipo:"PIX", dataHora: "15/09/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 500", status: "PAGO", tipo:"BOLETO", dataHora: "12/09/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "VENCIDO", tipo:"PIX", dataHora: "20/08/2022 08:20:34" },
-                { name: "Kleber", value: "R$ 550", status: "PAGO", tipo:"CREDIT_CARD", dataHora: "20/08/2022 08:20:34" },
-                { name: "Bruno", value: "R$ 950", status: "PAGO", tipo:"BOLETO", dataHora: "15/08/2022 08:20:34" },
-                { name: "Jhon", value: "R$ 50", status: "PAGO", tipo:"PIX", dataHora: "10/08/2022 08:20:34" },
+                { name: "Jhon", value: "R$ 1000", status: "AGUARDANDO PAGAMENTO", tipo: "PIX", dataHora: "19/09/2022 08:20:34" },
             ],
             cols: {
                 name: "Nome Doador",

@@ -1,27 +1,27 @@
-import Table  from "../components/Table.js"
+import Table from "../components/Table.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import Card  from "../components/Card.js"
+import Card from "../components/Card.js"
 import status from "../components/status.js"
 import actions from "../components/actions.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
-
+import { data } from "../components/format.js"
 
 export default {
-    data: function() {
-        return { 
-            donations : [],
+    data: function () {
+        return {
+            donations: [],
             cols: {
-                name: "Nome Doador",
-                value: "Valor Doação",
+                name: d => `${d.name} <br/> ${d.email}`,
+                value: d => `${d.value}`,
                 status: t => status(t.status),
-                dataHora: "Data e Hora cadastrada",
+                dataHora: d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
-                action: e => actions( 'detalhe-doacao', 'fa-solid fa-info', 'red'  )
+                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
-           
+
         }
     },
     components: {
@@ -32,9 +32,25 @@ export default {
     async mounted() {
         let donations = new ApiDoacoes()
         let institution = new MyInstitution()
-        let lista = await donations.lista(institution.get())
-        console.log(lista)
+        let request = await donations.lista(institution.get())
+        console.log(request.payload)
+        if (request.next) {
+            this.donations = this.adapter(request.payload)
+        }
+    },
+    methods: {
+        adapter(listAll) {
+            return listAll.map(d => ({
+                name: d.doador_nome,
+                email: d.doador_email,
+                data: data(d.data),
+                value: d.valor,
+                status: d.status_pagamento,
+                tipo: d.tipo_pagamento,
+                id: d.fatura_id
+            }))
 
+        }
     },
     template: `
     <div>

@@ -1,9 +1,9 @@
 import http from './http.js'
 
 export default class {
-    async lista(instituicao_fk) {
+    async lista(institution_fk) {
         return await http.get('/instituicao/donation', {
-            instituicao_fk
+            institution_fk
         })
     }
 

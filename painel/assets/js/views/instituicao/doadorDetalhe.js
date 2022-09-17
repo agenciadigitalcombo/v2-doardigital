@@ -3,7 +3,7 @@ import adm from "../../../../../static/js/api/adm.js"
 
 export default {
 
- 
+
     data: function () {
 
         return {
@@ -28,10 +28,10 @@ export default {
 
     filters: {
 
-        is_price(price) { 
-            var price  = parseFloat(price); 
-            var valor = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-         
+        is_price(price) {
+            var price = parseFloat(price);
+            var valor = price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
             return `${valor}`
         },
 
@@ -89,9 +89,9 @@ export default {
     async mounted() {
 
         this.tipo = globalThis._doacoes.tipo_pagamento
-        var kim  = parseFloat(globalThis._doacoes.valor); 
+        var kim = parseFloat(globalThis._doacoes.valor);
 
-        this.valor = parseFloat(globalThis._doacoes.valor); 
+        this.valor = parseFloat(globalThis._doacoes.valor);
 
         this.data = globalThis._doacoes.data
         this.hora = globalThis._doacoes.hora
@@ -100,7 +100,7 @@ export default {
         this.url_geral = globalThis._doacoes.url
         this.nome = globalThis._doacoes.doador_nome
         this.recorente = globalThis._doacoes.recorrente
- 
+
 
         var doado = (this.valor)
         var valorDoado = doado;

@@ -35,6 +35,7 @@ export default {
         let request = await doadores.lista(institution.get())
         if(request.next) {
             this.doadores = this.adapter( request.payload )
+            console.log(institution.get())
         }
 
     },
