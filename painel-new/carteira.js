@@ -2,17 +2,29 @@ import Card  from "../components/Card.js"
 import Botao  from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
+import CardGeral from "../components/CardGeral.js"
+import Table from "../components/Table.js"
 
 export default {
     data: function() {
         return {
+            info: { address: { bairro: null } },
+            transferencias: [],
+            cols: {
+                data: "Data e Hora",
+                value: "Valor",
+                status: "Status",
+            },
+
         }
     },
     components: {
         Botao,
         Card,
         BreadCrumb,
-        CardCarteira
+        CardCarteira,
+        CardGeral,
+        Table
     },
     template: `
     <div>
@@ -28,7 +40,13 @@ export default {
                 <Card text="Saldo á liberar" value="R$ 5.255,55" variation="yellow" size="3"/>
                 <Card text="Total Já Sacado" value="R$ 28.900,55" variation="green" icon="heart" size="3"/>
                 
-                <CardCarteira />
+                <CardGeral text="Solicitação de Saque" size="quatro">   
+                    <p>Baixe Agora seu QRCODE personalizado, para divulgar em suas lives, redes sociais e banners.</p>
+                </CardGeral>
+
+                <CardGeral text="Histórico de Transferências" size="quatro">   
+                    <Table :rows="transferencias" :cols="cols" pagination="10" />
+                </CardGeral>
                 
                 
                 </div>
