@@ -2,7 +2,7 @@ export default  [
     { text: "Inicio", ico: "fa-solid fa-house-flag", link: "dashboard" },
     { text: "Doadores", ico: "fa-solid fa-user-group", link: "doadores" },
     { text: "Doações", ico: "fa-solid fa-hand-holding-dollar", link: "doacoes" },
-    { text: "Recorrência", ico: "fa-solid fa-credit-card", link: "recorrencia" },
+    { text: "Lançamentos", ico: "fa-solid fa-credit-card", link: "recorrencia" },
     { text: "Planos", ico: "fa-solid fa-clipboard-list", link: "planos" },
     { text: "Metas", ico: "fa-solid fa-chart-line", link: "metas" },
     { text: "Módulos", ico: "fa-solid fa-share-nodes", link: "modulos" },

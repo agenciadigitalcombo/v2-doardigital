@@ -41,7 +41,7 @@ export default {
                 <Card text="Total Já Sacado" value="R$ 28.900,55" variation="green" icon="heart" size="3"/>
                 
                 <CardGeral text="Solicitação de Saque" size="quatro">   
-                    <p>Baixe Agora seu QRCODE personalizado, para divulgar em suas lives, redes sociais e banners.</p>
+                    <p>Solicite o saque selecionando abaixo as opções:.</p>
                 </CardGeral>
 
                 <CardGeral text="Histórico de Transferências" size="quatro">   

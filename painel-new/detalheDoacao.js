@@ -108,9 +108,7 @@ export default {
                     </button>
                 </div>
                 </CardGeral>
-                <CardGeral text="Quadro de Anotações" size="sete">
-                    
-                </CardGeral>
+                
                 <CardGeral text="Detalhe da Transação" size="sete">
                     <Table :rows="donations" :cols="cols"/>
                 </CardGeral>

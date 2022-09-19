@@ -5,7 +5,7 @@ import status from "../components/status.js"
 import actions from "../components/actions.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
-import { data } from "../components/format.js"
+import { data, formataMoeda } from "../components/format.js"
 
 export default {
     data: function () {
@@ -15,6 +15,7 @@ export default {
                 name: d => `${d.name} <br/> ${d.email}`,
                 value: d => `${d.value}`,
                 status: t => status(t.status),
+                recorrente: "Recorrente",
                 dataHora: d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
@@ -44,10 +45,11 @@ export default {
                 name: d.doador_nome,
                 email: d.doador_email,
                 data: data(d.data),
-                value: d.valor,
+                value: formataMoeda(d.valor),
                 status: d.status_pagamento,
                 tipo: d.tipo_pagamento,
-                id: d.fatura_id
+                id: d.fatura_id,
+                recorrente: d.recorrente
             }))
 
         }
