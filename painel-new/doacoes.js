@@ -12,6 +12,8 @@ import CardGeral from "../components/CardGeral.js"
 export default {
     data: function () {
         return {
+            totalDonations: 0,
+            statusAguardando: 0,
             donations: [],
             cols: {
                 name: d => `${d.name} <br/> ${d.email}`,
@@ -41,14 +43,25 @@ export default {
         if (request.next) {
             this.donations = this.adapter(request.payload)
         }
+
+        this.statusAguardando = this.somaAll(this.donations.filter( d => d.status == 'PENDING' ))
+        
+        this.totalDonations = this.somaAll(this.donations) 
     },
     methods: {
+        somaAll( ar ) {
+            return formataMoeda(ar.reduce((acc, el) => {
+                acc += +el.price 
+                return acc
+            }, 0) )
+        },
         adapter(listAll) {
             return listAll.map(d => ({
                 name: d.doador_nome,
                 email: d.doador_email,
                 data: data(d.data),
                 value: formataMoeda(d.valor),
+                price: d.valor,
                 status: d.status_pagamento,
                 tipo: d.tipo_pagamento,
                 id: d.fatura_id,
@@ -64,9 +77,9 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doações" value="300" variation="blue" icon="bar" size="4" />
+                <Card text="Total de Doações" :value="totalDonations" variation="blue" icon="bar" size="4" />
                 <Card text="Total Pago" value="100" variation="green" size="4" />
-                <Card text="Total Aberto" value="200" variation="yellow" icon="heart" size="6" />
+                <Card text="Total Aberto" :value="statusAguardando" variation="yellow" icon="heart" size="6" />
                 <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="6" />
                 <Card text="Estornado" value="200" variation="purple" icon="heart" size="6" />
                 

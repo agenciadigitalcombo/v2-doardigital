@@ -1,7 +1,7 @@
 export default function () { }
 
 export function data(data) {
-    return data.split('-').reverse().join('/')
+    return data?.split('-')?.reverse()?.join('/') || ''
 }
 
 export function getUriData(name) {
@@ -38,13 +38,10 @@ export function formatCpf(cpf) {
     }
 }
 
-
 export function copy($element) {
     $element.select()
     document.execCommand('copy')
 }
-
-
 
 export function taxas(valor, method = 'PIX', percentage_split = 4) {
     const porcentagem = (percent, total) => (percent / 100) * total

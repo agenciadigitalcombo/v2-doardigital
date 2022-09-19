@@ -12,11 +12,15 @@ import status from "../components/status.js"
 import { data, formataMoeda } from "../components/format.js"
 import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
+import {cpf,tel, cep} from "../components/mask.js"
 
 export default {
     data: function () {
         return {
-            info: { address: { bairro: null } },
+            totalFaturas: 0,
+            info: { 
+                 address: { bairro: null } 
+                },
             donations: [],
             assinaturas: [],
             cols: {
@@ -67,6 +71,7 @@ export default {
             this.donations = this.adapter(ids)
             console.log(formatRequestDoador)
         }
+        this.totalFaturas = this.donations.length
     },
     
     methods: {
@@ -82,12 +87,16 @@ export default {
                 ... d,
             }))
 
-        }
+        },
+        cpf,
+        tel,
+        cep,
+        formData: data,
     },
     template: `
     <div>
     <BreadCrumb text="Home" text2="Detalhe Doador" />
-    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" />
+    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" />
        
 
     <div class="relative pt-2 pb-32 bg-[#fff]">
@@ -99,18 +108,18 @@ export default {
                     <p>{{info.email}}</p>
                     <br>
                     <h2 class="text-gray-500">Telefone:</h2>
-                    <p>{{info.telefone}}</p>
+                    <p>{{tel(info.telefone)}}</p>
                     <br>
                     <h2 class="text-gray-500">CPF:</h2>
-                    <p>{{info.cpf}}</p>
+                    <p>{{ cpf(info.cpf) }}</p>
                     <br>                    
                     <h2 class="text-gray-500">Cadastro em:</h2>
-                    <p>{{info.registro}}</p>
+                    <p>{{formData(info.registro)}}</p>
                     <br>                    
                 </CardGeral>
                 <CardGeral text="Endereço" size="tres">
                 <h2 class="text-gray-500">CEP:</h2>
-                    <p>{{info.address.cep}}</p>
+                    <p>{{cep(info.address.cep)}}</p>
                     <br>
                     <h2 class="text-gray-500">Rua:</h2>
                     <p>{{info.address.logadouro}}</p>
@@ -130,10 +139,10 @@ export default {
                 </CardGeral>
                 <CardGeral text="Anotações" size="tres">
                 </CardGeral>
-                <CardGeral text="Histórico de Doações" size="quatro">
+                <CardGeral text="Histórico de Doações" size="sete">
                 <Table :rows="donations" :cols="cols" pagination="10" />
                 </CardGeral>
-                <CardGeral text="Assinaturas" size="quatro">
+                <CardGeral text="Assinaturas" size="sete">
                 <Table :rows="assinaturas" :cols="colsSub" pagination="10" />
                 </CardGeral>
                 

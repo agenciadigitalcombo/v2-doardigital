@@ -22,6 +22,7 @@ export default {
                 value: null,
                 recorrente: null,
                 codigo: null,
+                split: 4,
             },
             donations: [],
             cols: {
@@ -42,19 +43,18 @@ export default {
         CardCarteira,
         CardGeral,
     },
-    async mounted() {
+    async mounted() {        
         let ID = getUriData('id')        
         let institution = new MyInstitution()
         let donations = new ApiDoacoes()
+        let inst = new Institution()
+        let requestInfoInst = await inst.get(institution.get())
+        this.split = +requestInfoInst.payload.split.porcentagem
         let request = await donations.lista(institution.get())
         let minRequest = request.payload
         this.info = minRequest.find(p => p.fatura_id === ID) 
         this.donations.push(this.info)        
-        this.donations = this.adapter(this.donations)
-
-        let inst = new Institution()
-        let requestInfoInst = await inst.get(institution.get())
-        console.log(requestInfoInst)
+        this.donations = this.adapter(this.donations)      
         
     },
     methods: {
@@ -64,16 +64,16 @@ export default {
                 id: d.fatura_id,
                 tipo: d.tipo_pagamento,
                 ... d,
-                ...taxas(d.valor, d.tipo_pagamento)
+                ...taxas(d.valor, d.tipo_pagamento, this.split)
             }))
         },
         formataMoeda,
         formatData: data,
         formatRecorrente,
         copyPix() {
-            copy(this.$refs.codePix)
-            
-        }
+            copy(this.$refs.codePix)            
+        },
+        status,
     },
     template: `
     <div>
@@ -93,9 +93,7 @@ export default {
                     </router-link >
                     <br>
                     <h2 class="text-gray-500">Status</h2>
-                        <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
-                        {{info.status_pagamento}}
-                        </span>
+                        <span v-html=" status(info.status_pagamento )"></span>
                     <br>    
                     <br>
                     <h2 class="text-gray-500">Tipo:</h2>
