@@ -5,9 +5,10 @@ import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
 import MyInstitution from "../components/myInstitution.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
-import { getUriData, formataMoeda, data, formatRecorrente } from "../components/format.js"
+import { getUriData, formataMoeda, data, formatRecorrente, copy, taxas } from "../components/format.js"
 import status from "../components/status.js"
 import actions from "../components/actions.js"
+import Institution from "../components/apiInstitution.js"
 
 export default {
     data: function () {
@@ -28,7 +29,9 @@ export default {
                 ${t.tipo}
                 </span>`,
                 value: d => `${d.value}`,
-                doar: "Doar",
+                doar: t => formataMoeda(t.doar),
+                "Tipo Pagamento": t => formataMoeda(t.fix),
+                "Valor liquido": t => formataMoeda(t.liquid),
             },
         }
     },
@@ -40,8 +43,7 @@ export default {
         CardGeral,
     },
     async mounted() {
-        let ID = getUriData('id')
-        
+        let ID = getUriData('id')        
         let institution = new MyInstitution()
         let donations = new ApiDoacoes()
         let request = await donations.lista(institution.get())
@@ -49,6 +51,11 @@ export default {
         this.info = minRequest.find(p => p.fatura_id === ID) 
         this.donations.push(this.info)        
         this.donations = this.adapter(this.donations)
+
+        let inst = new Institution()
+        let requestInfoInst = await inst.get(institution.get())
+        console.log(requestInfoInst)
+        
     },
     methods: {
         adapter(listAll) {
@@ -57,11 +64,16 @@ export default {
                 id: d.fatura_id,
                 tipo: d.tipo_pagamento,
                 ... d,
+                ...taxas(d.valor, d.tipo_pagamento)
             }))
         },
         formataMoeda,
         formatData: data,
         formatRecorrente,
+        copyPix() {
+            copy(this.$refs.codePix)
+            
+        }
     },
     template: `
     <div>
@@ -104,9 +116,9 @@ export default {
                     
                 </CardGeral>
                 <CardGeral text="Código Pix / Boleto" size="quatro">
-                <div class="flex flex-col mt-8 space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
-                    <input id="email" type="text" class="px-6 py-3 text-gray-700 bg-white border rounded-md text-gray-300 border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring sm:mx-2" :value="info.codigo" />
-                    <button class="px-8 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none sm:mx-2">
+                <div  class="flex flex-col mt-8 space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
+                    <input ref="codePix" id="email" type="text" class="px-6 py-3 text-gray-700 bg-white border rounded-md text-gray-300 border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring sm:mx-2" :value="info.codigo" />
+                    <button @click="copyPix" class="px-8 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none sm:mx-2">
                         COPIAR CÓDIGO
                     </button>
                 </div>
