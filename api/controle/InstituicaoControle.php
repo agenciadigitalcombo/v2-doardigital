@@ -350,6 +350,13 @@ class InstituicaoControle extends Controle
             "fk" => $company["institution_fk"]
         ]);
         $company['planos'] = array_map(['Plano', 'porter'], $banco->select());
+
+        $banco->table("split");
+        $banco->where([
+            "fk" => $company["institution_fk"]
+        ]);        
+        $company["split"] = Split::porter($banco->select()[0] ?? []);
+
         self::printSuccess(
             "Informações da Instituição",
             $company
