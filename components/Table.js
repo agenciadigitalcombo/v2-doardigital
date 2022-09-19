@@ -18,6 +18,7 @@ export default {
         rows( n, i) {
             const myTable = new Tabela( this.freeze(this.rows), this.cols, this.pagination, this.step )
             this.lista = this.freeze(myTable.dataRender)
+            this.pages = myTable.pages
         }
     },
     mounted() {

@@ -34,6 +34,9 @@ export default {
 
         }
     },
+    filters: {
+        formataMoeda
+    },
     components: {
         Table,
         BreadCrumb,

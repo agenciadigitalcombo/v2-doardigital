@@ -62,7 +62,6 @@ export default {
         async SendWhatsapp(tel) {
             let format_tel = '55'
             format_tel += this.telefone
-            console.log(format_tel)
             let form = {
                 sender: 'primary',
                 number: format_tel,

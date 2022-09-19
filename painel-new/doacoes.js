@@ -38,7 +38,6 @@ export default {
         let donations = new ApiDoacoes()
         let institution = new MyInstitution()
         let request = await donations.lista(institution.get())
-        console.log(request.payload)
         if (request.next) {
             this.donations = this.adapter(request.payload)
         }
@@ -55,7 +54,6 @@ export default {
                 id: d.fatura_id,
                 recorrente: formatRecorrente(d.recorrente)
             }))
-
         }
     },
     template: `
@@ -77,7 +75,7 @@ export default {
                 
                 
                 </div>
-                <Table :rows="donations" :cols="cols" pagination="10" />
+                <Table :rows="donations" :cols="cols" pagination="5" />
              </div>
           </div>
        </div>

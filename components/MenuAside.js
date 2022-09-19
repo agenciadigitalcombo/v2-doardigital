@@ -7,12 +7,24 @@ export default {
     template: await getTemplate( './../components/MenuAside' ),
     components: {
         Logo,
-        LinkMenu
+        LinkMenu,
     },  
     emits: ['check'],
+    data: function() {
+        return {
+            page: ""
+        }
+    },
     methods: {
         clickMenu() {
             this.$emit('check')
+        },
+        atualizarPagina(data) {
+            this.page = data.link
         }
-    } 
+    },
+    mounted() {
+        this.page = window.location.hash
+    },
+   
 }
