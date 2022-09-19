@@ -1,7 +1,7 @@
 export default function ( status ) {
     let styleBase = "py-1 px-3 rounded-full text-xs"
     let translate = {
-        PENDING: "Aguardando",
+        PENDING: "Pendente",
         RECEIVED: "Pago",
         CONFIRMED: "Pago",
         OVERDUE: "Vencida",
@@ -21,3 +21,4 @@ export default function ( status ) {
     let styleColor = `bg-${colors[status] || 'blue'}-200 text-${colors[status] || 'blue'}-600`
     return `<span class="${styleBase} ${styleColor}">${translate[status] || status}</span>`
 }
+

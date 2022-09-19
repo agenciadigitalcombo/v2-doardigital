@@ -9,8 +9,9 @@ import ApiDoacoes from "../components/apiDoacoes.js"
 import { getUriData } from "../components/format.js"
 import MyInstitution from "../components/myInstitution.js"
 import status from "../components/status.js"
-import { data } from "../components/format.js"
+import { data, formataMoeda } from "../components/format.js"
 import actions from "../components/actions.js"
+import HeaderDoador from "../components/HeaderDoador.js"
 
 export default {
     data: function () {
@@ -19,7 +20,7 @@ export default {
             donations: [],
             assinaturas: [],
             cols: {
-                dataHora: d => `${d.data}`,
+                data: d => `${d.datas}`,
                 value: d => `${d.value}`,
                 status: t => status(t.status),
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
@@ -39,14 +40,15 @@ export default {
         Card,
         CardCarteira,
         CardGeral,
-        CardPerfil
+        CardPerfil,
+        HeaderDoador
     },
     async mounted() {
         let ID = getUriData('id')
-        
         let institution = new MyInstitution()
         let doador = new apiDoadores()
-        let request = await doador.detalhe(ID)   
+        let request = await doador.detalhe(ID)  
+        let formatRequestDoador = request.payload
       //  
         let donations = new ApiDoacoes()
         let requestDoacao = await donations.lista(institution.get())
@@ -55,13 +57,12 @@ export default {
         const ids = minRequest.filter(p => p.doador_fk === ID)
         
 
-        console.log(ids)
 
 
         if (request.next) {
-            this.info = request.payload
+            this.info = formatRequestDoador
             this.donations = this.adapter(ids)
-            console.log(donations)
+            console.log(formatRequestDoador)
         }
     },
     
@@ -70,11 +71,12 @@ export default {
             return listAll.map(d => ({
                 name: d.doador_nome,
                 email: d.doador_email,
-                data: data(d.data),
-                value: d.valor,
+                datas: data(d.data),
+                value: formataMoeda(d.valor),
                 status: d.status_pagamento,
                 tipo: d.tipo_pagamento,
-                id: d.fatura_id
+                id: d.fatura_id,
+                ... d,
             }))
 
         }
@@ -82,13 +84,13 @@ export default {
     template: `
     <div>
     <BreadCrumb text="Home" text2="Detalhe Doador" />
+    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" />
        
 
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <CardPerfil :text="info.nome" :recorrente="info.recorrente" :gravatar="info.gravatar"/>
                 <CardGeral text="Dados do Doador" size="tres" value="">
                     <h2 class="text-gray-500">Email:</h2>
                     <p>{{info.email}}</p>
@@ -123,14 +125,15 @@ export default {
                     <p>{{info.address.estado}}</p>
                     <br>
                 </CardGeral>
-                <CardGeral text="Histórico de Doações" size="sete">
+                <CardGeral text="Anotações" size="tres">
+                </CardGeral>
+                <CardGeral text="Histórico de Doações" size="quatro">
                 <Table :rows="donations" :cols="cols" pagination="10" />
                 </CardGeral>
-                <CardGeral text="Assinaturas" size="sete">
+                <CardGeral text="Assinaturas" size="quatro">
                 <Table :rows="assinaturas" :cols="colsSub" pagination="10" />
                 </CardGeral>
-                <CardGeral text="Anotações" size="sete">
-                </CardGeral>
+                
                 
                 
                

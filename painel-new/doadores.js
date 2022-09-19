@@ -4,7 +4,7 @@ import BreadCrumb from "../components/BreadCrumb.js"
 import Card  from "../components/Card.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
-import {data} from "../components/format.js"
+import {data, formatRecorrente, formatCpf} from "../components/format.js"
 import actions from "../components/actions.js"
 
 
@@ -18,7 +18,7 @@ export default {
                 ${t.status}
                 </span>`,
                 value: "Data de Cadastro",
-                cpf: "CPF", 
+                cpf: d => `${d.cpf}`,
                 action: e => actions( `detalhe-doador?id=${e.external_fk}`, 'fa-solid fa-eye','blue')
             },
         }
@@ -43,8 +43,9 @@ export default {
         adapter( listAll ) {
             return listAll.map( d => ({
                 name: d.nome,
-                status: d.recorrente,
+                status: formatRecorrente(d.recorrente),
                 value: data(d.registro),
+                cpf: d.cpf,
                 ...d,  
             }) )
         }

@@ -5,7 +5,9 @@ import status from "../components/status.js"
 import actions from "../components/actions.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
-import { data, formataMoeda } from "../components/format.js"
+import { data, formataMoeda, formatRecorrente } from "../components/format.js"
+import Filtro from "../components/Filtro.js"
+import CardGeral from "../components/CardGeral.js"
 
 export default {
     data: function () {
@@ -28,7 +30,9 @@ export default {
     components: {
         Table,
         BreadCrumb,
-        Card
+        Card,
+        Filtro,
+        CardGeral
     },
     async mounted() {
         let donations = new ApiDoacoes()
@@ -49,7 +53,7 @@ export default {
                 status: d.status_pagamento,
                 tipo: d.tipo_pagamento,
                 id: d.fatura_id,
-                recorrente: d.recorrente
+                recorrente: formatRecorrente(d.recorrente)
             }))
 
         }
@@ -68,7 +72,8 @@ export default {
                 <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="6" />
                 <Card text="Estornado" value="200" variation="purple" icon="heart" size="6" />
                 
-                <CardCarteira />
+                
+                <Filtro />
                 
                 
                 </div>

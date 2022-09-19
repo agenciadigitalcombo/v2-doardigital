@@ -4,6 +4,7 @@ import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
 import Table from "../components/Table.js"
+import BotaoGrupo from "../components/BotaoGrupo.js"
 
 export default {
     data: function() {
@@ -24,7 +25,8 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        BotaoGrupo
     },
     template: `
     <div>
@@ -41,9 +43,15 @@ export default {
                 <Card text="Total Já Sacado" value="R$ 28.900,55" variation="green" icon="heart" size="3"/>
                 
                 <CardGeral text="Solicitação de Saque" size="quatro">   
-                    <p>Solicite o saque selecionando abaixo as opções:.</p>
+                    <p>Selecione a opção desejada:</p>
+                
+                    <BotaoGrupo />
+                    <br>
+                    <p>Confirmar:</p>
+                    <Botao text="Solicitar Saque" variation="green"/>
+                    
                 </CardGeral>
-
+                
                 <CardGeral text="Histórico de Transferências" size="quatro">   
                     <Table :rows="transferencias" :cols="cols" pagination="10" />
                 </CardGeral>
