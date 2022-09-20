@@ -16,6 +16,7 @@ export default {
             totalDonations: 0,
             statusAguardando: 0,
             donations: [],
+            donationsCopy: [],
             cols: {
                 "Doador": d => `${d.name} <br/> ${d.email}`,
                 "Valor": d => `${d.value}`,
@@ -43,6 +44,7 @@ export default {
         let request = await donations.lista(institution.get())
         if (request.next) {
             this.donations = this.adapter(request.payload)
+            this.donationsCopy = this.adapter(request.payload)
         }
 
         this.statusAguardando = this.somaAll(this.donations.filter( d => d.status == 'PENDING' ))
@@ -52,7 +54,6 @@ export default {
         
         this.totalDonations = this.somaAll(this.donations) 
         this.totalFaturas = this.somaQnt(this.doadores)
-        console.log(this.totalFaturas)
     },
     methods: {
         somaAll( ar ) {
@@ -71,6 +72,7 @@ export default {
             return listAll.map(d => ({
                 name: d.doador_nome,
                 email: d.doador_email,
+                cpf: d.cpf,
                 data: data(d.data),
                 value: formataMoeda(d.valor),
                 price: d.valor,
@@ -79,6 +81,32 @@ export default {
                 id: d.fatura_id,
                 recorrente: formatRecorrente(d.recorrente)
             }))
+        },
+        filtrar(payload) {
+            "Maria"
+            let dados = Array.from( this.donationsCopy.map( x => x) )
+            if( payload.search ) {
+                dados = dados.filter( t => {
+                    
+                    let search = payload.search
+                    let termo = t.name + " " + t.email + " " + t.cpf
+                    search = search.toLowerCase()
+                    termo = termo.toLowerCase()                    
+                    search = search.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+                    termo = termo.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+                    console.clear()
+                    console.table({
+                        search,
+                        termo                        
+                    })
+
+                    return termo.indexOf(search) > -1
+
+                } )
+                console.log(  dados)
+            }
+            this.donations = dados
         }
     },
     template: `
@@ -100,7 +128,7 @@ export default {
                 <Card text="Total Único" :value="statusEstorno" variation="yellow" icon="heart" size="4" />
                 
                 
-                <Filtro />
+                <Filtro @filter="filtrar" />
                 
                 
                 </div>
