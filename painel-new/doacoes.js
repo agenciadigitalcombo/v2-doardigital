@@ -12,19 +12,20 @@ import CardGeral from "../components/CardGeral.js"
 export default {
     data: function () {
         return {
+            totalFaturas: 0,
             totalDonations: 0,
             statusAguardando: 0,
             donations: [],
             cols: {
-                name: d => `${d.name} <br/> ${d.email}`,
-                value: d => `${d.value}`,
+                "Doador": d => `${d.name} <br/> ${d.email}`,
+                "Valor": d => `${d.value}`,
                 status: t => status(t.status),
                 recorrente: "Recorrente",
-                dataHora: d => `${d.data}`,
+                "Data": d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Ação": e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -45,8 +46,13 @@ export default {
         }
 
         this.statusAguardando = this.somaAll(this.donations.filter( d => d.status == 'PENDING' ))
+        this.statusOverdue = this.somaAll(this.donations.filter( d => d.status == 'OVERDUE' ))
+        this.statusRecebido = this.somaAll(this.donations.filter( d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
+        this.statusEstorno = this.somaAll(this.donations.filter( d => d.status == 'REFUNDED' ))
         
         this.totalDonations = this.somaAll(this.donations) 
+        this.totalFaturas = this.somaQnt(this.doadores)
+        console.log(this.totalFaturas)
     },
     methods: {
         somaAll( ar ) {
@@ -54,6 +60,12 @@ export default {
                 acc += +el.price 
                 return acc
             }, 0) )
+        },
+        somaQnt( arr ) {
+            return arr.reduce((acc, el) => {
+                acc += 1
+                return acc 
+            }, 0)
         },
         adapter(listAll) {
             return listAll.map(d => ({
@@ -77,11 +89,15 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doações" :value="totalDonations" variation="blue" icon="bar" size="4" />
-                <Card text="Total Pago" value="100" variation="green" size="4" />
-                <Card text="Total Aberto" :value="statusAguardando" variation="yellow" icon="heart" size="6" />
-                <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="6" />
-                <Card text="Estornado" value="200" variation="purple" icon="heart" size="6" />
+                <Card text="Total de Doações" :value="totalFaturas" variation="blue" icon="bar" size="4" />
+                <Card text="Total em Doações" :value="totalDonations" variation="blue" icon="bar" size="4" />
+                <Card text="Total Pago" :value="statusRecebido" icon="heart" variation="green" size="4" />
+                <Card text="Total Aberto" :value="statusAguardando" variation="yellow" icon="heart" size="4" />
+                <br><br><br><br>
+                <Card text="Vencido / Cancelado" :value="statusOverdue" variation="red" icon="heart" size="4" />
+                <Card text="Estornado" :value="statusEstorno" variation="purple" icon="heart" size="4" />
+                <Card text="Total Recorrente" :value="statusEstorno" variation="green" icon="heart" size="4" />
+                <Card text="Total Único" :value="statusEstorno" variation="yellow" icon="heart" size="4" />
                 
                 
                 <Filtro />

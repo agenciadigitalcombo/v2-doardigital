@@ -13,15 +13,15 @@ export default {
         return {
             donations: [],
             cols: {
-                name: d => `${d.name} <br/> ${d.email}`,
-                value: d => `${d.value}`,
+                "Doador": d => `${d.name} <br/> ${d.email}`,
+                "Valor": d => `${d.value}`,
                 status: t => status(t.status),
                 recorrente: "Recorrente",
-                dataHora: d => `${d.data}`,
+                "Data": d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Ação": e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -71,9 +71,7 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 <Card text="Total de Doações Previstas" value="300" variation="blue" icon="bar" size="4" />
-                <Card text="Total Pago" value="100" variation="green" size="4" />
-                <Card text="Total Aberto" value="200" variation="yellow" icon="heart" size="4" />
-                <Card text="Vencido / Cancelado" value="200" variation="red" icon="heart" size="4" />
+                <Card text="Total em Doações Previstas" value="300" variation="blue" icon="bar" size="4" />
                 
                 </div>
                 <Table :rows="donations" :cols="cols" pagination="12" />

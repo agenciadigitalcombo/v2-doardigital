@@ -25,12 +25,12 @@ export default {
             assinaturas: [],
             cols: {
                 data: d => `${d.datas}`,
-                value: d => `${d.value}`,
+                "valor": d => `${d.value}`,
                 status: t => status(t.status),
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Ação": e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
             colsSub: {
                 

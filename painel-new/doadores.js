@@ -11,15 +11,18 @@ import actions from "../components/actions.js"
 export default {
     data: function() {
         return { 
+            statusUnico: 0,
+            statusRecorrente: 0,
+            totalDoadores: 0,
             doadores : [],
             cols: {                
-                name: d => `${d.name} <br/> ${d.email}` ,
-                status: t => `<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
+                "Nome do Doador": d => `${d.name} <br/> ${d.email}` ,
+                "Recorrencia": t => `<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
                 ${t.status}
                 </span>`,
                 value: "Data de Cadastro",
                 cpf: d => `${d.cpf}`,
-                action: e => actions( `detalhe-doador?id=${e.external_fk}`, 'fa-solid fa-eye','blue')
+                "Ação": e => actions( `detalhe-doador?id=${e.external_fk}`, 'fa-solid fa-eye','blue')
             },
         }
     },
@@ -35,11 +38,23 @@ export default {
         let request = await doadores.lista(institution.get())
         if(request.next) {
             this.doadores = this.adapter( request.payload )
-            console.log(institution.get())
         }
+        this.statusRecorrente = this.somaAll(this.doadores.filter( d => d.recorrente === true ))
+        this.statusUnico = this.somaAll(this.doadores.filter( d => d.recorrente === false ))
+
+        this.totalDoadores = this.somaAll(this.doadores)
+
+        console.log(statusRecorrente)
+    
 
     },
     methods: {
+        somaAll( ar ) {
+            return ar.reduce((acc, el) => {
+                acc += 1
+                return acc 
+            }, 0)
+        },
         adapter( listAll ) {
             return listAll.map( d => ({
                 name: d.nome,
@@ -47,7 +62,7 @@ export default {
                 value: data(d.registro),
                 cpf: d.cpf,
                 ...d,  
-            }) )
+            }))
         }
     },
     template: `
@@ -64,9 +79,9 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doadores" value="300" variation="blue" icon="bar" size="3" />
-                <Card text="Total Doadores Únicos" value="100" variation="yellow" size="3"/>
-                <Card text="Doadores Recorrentes" value="200" variation="green" icon="heart" size="3" />
+                <Card text="Total de Doadores" :value="totalDoadores" variation="blue" icon="bar" size="3" />
+                <Card text="Doadores Recorrentes" :value="statusRecorrente" variation="green" icon="heart" size="3" />
+                <Card text="Total Doadores Únicos" :value="statusUnico" variation="yellow" size="3"/>
                 
                 
                 

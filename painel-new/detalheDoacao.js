@@ -29,9 +29,9 @@ export default {
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
-                value: d => `${d.value}`,
-                doar: t => formataMoeda(t.doar),
-                "Tipo Pagamento": t => formataMoeda(t.fix),
+                "Valor": d => `${d.value}`,
+                "Taxa Doar Digital": t => formataMoeda(t.doar),
+                "Taxa Gateway": t => formataMoeda(t.fix),
                 "Valor liquido": t => formataMoeda(t.liquid),
             },
         }
@@ -97,7 +97,7 @@ export default {
                     <br>    
                     <br>
                     <h2 class="text-gray-500">Tipo:</h2>
-                        <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                        <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">
                         {{info.tipo_pagamento}}
                         </span>
                     <br>
