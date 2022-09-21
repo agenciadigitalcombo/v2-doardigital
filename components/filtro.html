@@ -25,15 +25,11 @@
 
   <div>
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-      <select
+      <select v-model="date" @change="filter"
         class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Data</option>
-        <option value="for-rent">Hoje</option>
-        <option value="for-sale">Ontem</option>
-        <option value="for-sale">Essa semana</option>
-        <option value="for-sale">Semana passada</option>
-        <option value="for-sale">Esse mês</option>
-        <option value="for-sale">Mês passado</option>
+        <option v-for="d in dataLabel" :value="d.value">{{d.label}}</option>
+        
       </select>
 
       <select
@@ -45,12 +41,12 @@
         <option value="partially-furnished">Estornado</option>
       </select>
 
-      <select
+      <select v-model="tipo" @change="filter"
         class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Tipo</option>
-        <option value="1000">PIX</option>
-        <option value="2000">Boleto</option>
-        <option value="2000">Crédito</option>
+        <option value="PIX">PIX</option>
+        <option value="BOLETO">Boleto</option>
+        <option value="CREDIT_CARD">Crédito</option>
       </select>
 
       <select

@@ -21,6 +21,7 @@ export default {
         setInstitution() {
             let institution = new MyInstitution()
             institution.save(this.institution)
+            window.location.reload()
         }
     },
     template : await getTemplate( './../components/Header' )

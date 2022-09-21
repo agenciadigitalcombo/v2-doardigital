@@ -12,6 +12,7 @@ import CardGeral from "../components/CardGeral.js"
 export default {
     data: function () {
         return {
+            hoje: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).valueOf(),
             totalFaturas: 0,
             totalDonations: 0,
             statusAguardando: 0,
@@ -47,65 +48,98 @@ export default {
             this.donationsCopy = this.adapter(request.payload)
         }
 
-        this.statusAguardando = this.somaAll(this.donations.filter( d => d.status == 'PENDING' ))
-        this.statusOverdue = this.somaAll(this.donations.filter( d => d.status == 'OVERDUE' ))
-        this.statusRecebido = this.somaAll(this.donations.filter( d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
-        this.statusEstorno = this.somaAll(this.donations.filter( d => d.status == 'REFUNDED' ))
-        
-        this.totalDonations = this.somaAll(this.donations) 
-        this.totalFaturas = this.somaQnt(this.doadores)
+        this.statusAguardando = this.somaAll(this.donations.filter(d => d.status == 'PENDING'))
+        this.statusOverdue = this.somaAll(this.donations.filter(d => d.status == 'OVERDUE'))
+        this.statusRecebido = this.somaAll(this.donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
+        this.statusEstorno = this.somaAll(this.donations.filter(d => d.status == 'REFUNDED'))
+
+        this.totalDonations = this.somaAll(this.donations)
+        this.totalFaturas = this.donations.length
     },
     methods: {
-        somaAll( ar ) {
+        somaAll(ar) {
             return formataMoeda(ar.reduce((acc, el) => {
-                acc += +el.price 
+                acc += +el.price
                 return acc
-            }, 0) )
+            }, 0))
         },
-        somaQnt( arr ) {
+        somaQnt(arr) {
             return arr.reduce((acc, el) => {
                 acc += 1
-                return acc 
+                return acc
             }, 0)
         },
         adapter(listAll) {
-            return listAll.map(d => ({
-                name: d.doador_nome,
-                email: d.doador_email,
-                cpf: d.cpf,
-                data: data(d.data),
-                value: formataMoeda(d.valor),
-                price: d.valor,
-                status: d.status_pagamento,
-                tipo: d.tipo_pagamento,
-                id: d.fatura_id,
-                recorrente: formatRecorrente(d.recorrente)
-            }))
+            return listAll.map(d => {
+                let [Y, M, D] = d.data.split('-')
+                return {
+                    name: d.doador_nome,
+                    email: d.doador_email,
+                    cpf: d.cpf,
+                    data: data(d.data),
+                    value: formataMoeda(d.valor),
+                    price: d.valor,
+                    status: d.status_pagamento,
+                    tipo: d.tipo_pagamento,
+                    id: d.fatura_id,
+                    timestamp: new Date(Y, (M - 1), D).valueOf(),
+                    recorrente: formatRecorrente(d.recorrente)
+                }
+            })
         },
         filtrar(payload) {
-            "Maria"
-            let dados = Array.from( this.donationsCopy.map( x => x) )
-            if( payload.search ) {
-                dados = dados.filter( t => {
-                    
+
+            function timeStempToDate(time) {
+                var date = new Date(time);
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var d = date.getDate();
+                return `${d}/${m}/${y}`
+            }
+
+            let dados = Array.from(this.donationsCopy.map(x => x))
+            if (payload.search) {
+                dados = dados.filter(t => {
                     let search = payload.search
                     let termo = t.name + " " + t.email + " " + t.cpf
                     search = search.toLowerCase()
-                    termo = termo.toLowerCase()                    
+                    termo = termo.toLowerCase()
                     search = search.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
                     termo = termo.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-
-                    console.clear()
-                    console.table({
-                        search,
-                        termo                        
-                    })
-
                     return termo.indexOf(search) > -1
-
-                } )
-                console.log(  dados)
+                })
             }
+            if (payload.tipo.length > 2) {
+                dados = dados.filter(t => {
+                    return t.tipo == payload.tipo
+                })
+            }
+            if (payload.date) {
+                let hoje = this.hoje
+                let dataSelecionada = +payload.date
+                let dia = 86400 * 1000
+                let amanha = hoje + dia
+                let presente = hoje == dataSelecionada
+                let ontem = (hoje - dia) == dataSelecionada
+                if (presente) {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.timestamp
+                        return dataDonation == hoje
+                    })
+                } else if (ontem) {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.timestamp
+                        return dataDonation == dataSelecionada
+                    })
+                } else {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.timestamp
+                        return dataDonation >= dataSelecionada && dataDonation <= hoje
+                    })
+                }
+            }
+            this.totalFaturas = dados.length
+            this.totalDonations = this.somaAll(dados)
             this.donations = dados
         }
     },

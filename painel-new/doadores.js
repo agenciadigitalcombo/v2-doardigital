@@ -4,8 +4,9 @@ import BreadCrumb from "../components/BreadCrumb.js"
 import Card  from "../components/Card.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
-import {data, formatRecorrente, formatCpf} from "../components/format.js"
+import {data, formatRecorrente} from "../components/format.js"
 import actions from "../components/actions.js"
+import {cpf} from "../components/mask.js"
 
 
 export default {
@@ -44,7 +45,7 @@ export default {
 
         this.totalDoadores = this.somaAll(this.doadores)
 
-        console.log(statusRecorrente)
+        
     
 
     },
@@ -56,12 +57,13 @@ export default {
             }, 0)
         },
         adapter( listAll ) {
+            
             return listAll.map( d => ({
+                ...d,  
                 name: d.nome,
                 status: formatRecorrente(d.recorrente),
                 value: data(d.registro),
-                cpf: d.cpf,
-                ...d,  
+                cpf: cpf(d.cpf),
             }))
         }
     },

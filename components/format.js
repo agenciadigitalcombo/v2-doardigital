@@ -29,14 +29,7 @@ export function formatRecorrente(recorrente) {
     }
 }
 
-export function formatCpf(cpf) {
-    var cpfFormat = cpf
-    if (cpfFormat.value.length == 3 || cpfFormat.value.length == 7) {
-        cpfFormat += "."
-    } else if (cpfFormat.value.length == 11) {
-        cpfFormat += "-"
-    }
-}
+
 
 export function copy($element) {
     $element.select()
