@@ -8,13 +8,13 @@ export default class {
     }
 
     async info(instituicao_fk, cpf) {
-        return await http.post('/doador/info', {
+        return await http.get('/doador/info', {
             instituicao_fk,
             cpf
         })
     }
     
     async detalhe(fk) {
-        return await http.post('/doador/detalhe', { fk })
+        return await http.get('/doador/detalhe', { fk })
     }
 }

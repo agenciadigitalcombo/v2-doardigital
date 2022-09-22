@@ -8,36 +8,45 @@ export default class {
         })
     }
 
+    async cadastrar_sub(nome, fk_admin, email, senha, telefone, credencial) {
+        return await http.post('/adm/sub/register', {
+            nome,
+            code: fk_admin,
+            email,
+            senha,
+            telefone,
+            credencial,
+        })
+    }
+
     async login(email, senha) {
         return await http.post('/adm/login', {
             email, senha
         })
     }
 
-    async recuperarSenha(email) {
+    async recuperar_senha(email) {
         return await http.post('/adm/recover-pass', {
             email
         })
     }
 
-    async alterarSenha(token, code, senha) {
+    async alterar_senha(fk_admin, new_senha) {
         return await http.post('/adm/alter-pass', {
-            token,
-            code,
-            senha
+            code: fk_admin,
+            senha: new_senha
         })
     }
-    
+
     async update(
-        token,
         code,
         nome,
         cpf,
         nascimento,
         telefone,
-        credencial) {
+        credencial
+    ) {
         return await http.post('/adm/update-info', {
-            token,
             code,
             nome,
             cpf,
@@ -47,41 +56,15 @@ export default class {
         })
     }
 
-    async getPerfil(token, code) {
+    async info(token, code) {
         return await http.get('/adm/info', {
             token, code
         })
     }
 
-    async addAddress(
-        nome_identificacao, cep, logradouro, numero, complemento, bairro, cidade, estado, token) {
-        return await http.post('/create-endereco', {
-            nome_identificacao,
-            cep,
-            logradouro,
-            numero,
-            complemento,
-            bairro,
-            cidade,
-            estado,
-            token
-        })
-    }
-
-    async updateAddress(
-        token,
-        code,
-        cep,
-        logradouro,
-        numero,
-        complemento,
-        bairro,
-        cidade,
-        estado,
-    ) {
+    async save_address(fk_admin, cep, logradouro, numero, complemento, bairro, cidade, estado) {
         return await http.post('/adm/address', {
-            token,
-            code,
+            code: fk_admin,
             cep,
             logradouro,
             numero,
@@ -92,9 +75,30 @@ export default class {
         })
     }
 
-    async getAddress(token, code,) {
+    async info_address(fk_admin) {
         return await http.get('/adm/address-info', {
-            token, code,
+            code: fk_admin,
         })
+    }
+
+    async step(fk_admin, number) {
+        return await http.post('/adm/step', {
+            number,
+            code: fk_admin,
+        })
+    }
+
+    async list_all() {
+        return await http.get('/adm/list', {})
+    }
+
+    async list_all_subs(fk_admin) {
+        return await http.get('/adm/list/sub', {
+            code: fk_admin,
+        })
+    }
+
+    async is_logged() {
+        return await http.get('/adm/logged', {})
     }
 }

@@ -3,10 +3,14 @@ import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
+import Qr from "../components/Qr.js"
+import Inst from "../components/apiInstitution.js"
+import MyInstitution from "../components/myInstitution.js"
 
 export default {
    data: function () {
       return {
+         link: null
       }
    },
    components: {
@@ -14,7 +18,19 @@ export default {
       Card,
       BreadCrumb,
       CardCarteira,
-      CardGeral
+      CardGeral,
+      Qr
+   },
+   async mounted() {
+      let institution = new MyInstitution()
+      let inst = new Inst()
+      let request = await inst.get(institution.get())
+      let url = "https://" + (request.payload.domain ? request.payload.domain : request.payload.subdomain)
+      console.log( request.payload.domain )
+      console.log( request.payload.subdomain )
+      console.log( url )
+      this.link = url
+
    },
    template: `
     <div> 
@@ -27,9 +43,10 @@ export default {
                 <CardGeral text="QR CODE" size="sete">   
          <p>Baixe Agora seu QRCODE personalizado, para divulgar em suas lives, redes sociais e banners.</p>
          <br>
-         <img src="/../assets/image/qrcode.png" alt="QR CODE" width="200" height="300">
+            <div v-if="link">
+               <Qr :qr="link" />
+            </div>
              <br>
-             <botao text="Fazer Download" />
       </CardGeral>
                 
                 
