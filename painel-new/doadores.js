@@ -1,29 +1,30 @@
-import Table  from "../components/Table.js"
-import Botao  from "../components/Botao.js"
+import Table from "../components/Table.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import Card  from "../components/Card.js"
+import Card from "../components/Card.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
-import {data, formatRecorrente} from "../components/format.js"
+import { data, formatRecorrente } from "../components/format.js"
 import actions from "../components/actions.js"
-import {cpf} from "../components/mask.js"
+import { cpf } from "../components/mask.js"
+import FiltroDoador from "../components/FiltroDoador.js"
 
 
 export default {
-    data: function() {
-        return { 
+    data: function () {
+        return {
             statusUnico: 0,
             statusRecorrente: 0,
             totalDoadores: 0,
-            doadores : [],
-            cols: {                
-                "Nome do Doador": d => `${d.name} <br/> ${d.email}` ,
-                "Recorrencia": t => `<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
+            doadores: [],
+            cols: {
+                "Nome do Doador": d => `${d.name} <br/> ${d.email}`,
+                "Recorrencia": t => `<span class="bg-${t.status == 'Ativa' ? 'green' : 'yellow'}-200 text-${t.status == 'Ativa' ? 'green' : 'yellow'}-600 py-1 px-3 rounded-full text-xs">
                 ${t.status}
                 </span>`,
                 value: "Data de Cadastro",
                 cpf: d => `${d.cpf}`,
-                "Ação": e => actions( `detalhe-doador?id=${e.external_fk}`, 'fa-solid fa-eye','blue')
+                "Ação": e => actions(`detalhe-doador?id=${e.external_fk}`, 'fa-solid fa-eye', 'blue')
             },
         }
     },
@@ -31,35 +32,60 @@ export default {
         Table,
         Botao,
         BreadCrumb,
-        Card
+        Card,
+        FiltroDoador
     },
     async mounted() {
         let doadores = new ApiDoadores()
         let institution = new MyInstitution()
         let request = await doadores.lista(institution.get())
-        if(request.next) {
-            this.doadores = this.adapter( request.payload )
+        if (request.next) {
+            this.doadores = this.adapter(request.payload)
+            this.doadoresCopy = this.adapter(request.payload)
         }
-        this.statusRecorrente = this.somaAll(this.doadores.filter( d => d.recorrente === true ))
-        this.statusUnico = this.somaAll(this.doadores.filter( d => d.recorrente === false ))
+        this.statusRecorrente = this.somaAll(this.doadores.filter(d => d.recorrente === true))
+        this.statusUnico = this.somaAll(this.doadores.filter(d => d.recorrente === false))
 
         this.totalDoadores = this.somaAll(this.doadores)
 
-        
-    
+
+
 
     },
     methods: {
-        somaAll( ar ) {
+        somaAll(ar) {
             return ar.reduce((acc, el) => {
                 acc += 1
-                return acc 
+                return acc
             }, 0)
         },
-        adapter( listAll ) {
+        filtrar(payload) {
+            let dados = Array.from(this.doadoresCopy.map(x => x))
+            if (payload.search) {
+                dados = dados.filter(t => {
+                    let search = payload.search
+                    let termo = t.name + " " + t.email + " " + t.cpf
+                    search = search.toLowerCase()
+                    termo = termo.toLowerCase()
+                    search = search.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+                    termo = termo.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+                    return termo.indexOf(search) > -1
+                })
+
+            }            
+            if (payload.recorrente == "ativo") {
+                dados = dados.filter(d => d.recorrente === true)
+            }
+            if (payload.recorrente == "inativo") { 
+                dados = dados.filter(d => d.recorrente === false)
+            }
+            this.doadores = dados
             
-            return listAll.map( d => ({
-                ...d,  
+        },
+        adapter(listAll) {
+
+            return listAll.map(d => ({
+                ...d,
                 name: d.nome,
                 status: formatRecorrente(d.recorrente),
                 value: data(d.registro),
@@ -75,7 +101,7 @@ export default {
 
    
         
-
+        <FiltroDoador @filter="filtrar" />
 
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
