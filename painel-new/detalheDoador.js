@@ -1,26 +1,22 @@
 import Table from "../components/Table.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import Card from "../components/Card.js"
-import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
-import CardPerfil from "../components/CardPerfil.js"
 import apiDoadores from "../components/apiDoadores.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
-import { getUriData } from "../components/format.js"
 import MyInstitution from "../components/myInstitution.js"
 import status from "../components/status.js"
-import { data, formataMoeda } from "../components/format.js"
+import { getUriData, data, formataMoeda } from "../components/format.js"
 import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
-import {cpf,tel, cep} from "../components/mask.js"
+import { cpf, tel, cep } from "../components/mask.js"
 
 export default {
     data: function () {
         return {
             totalFaturas: 0,
-            info: { 
-                 address: { bairro: null } 
-                },
+            info: {
+                address: { bairro: null }
+            },
             donations: [],
             assinaturas: [],
             cols: {
@@ -33,7 +29,7 @@ export default {
                 "Ação": e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
             colsSub: {
-                
+
             },
 
         }
@@ -44,25 +40,22 @@ export default {
     components: {
         Table,
         BreadCrumb,
-        Card,
-        CardCarteira,
         CardGeral,
-        CardPerfil,
         HeaderDoador
     },
     async mounted() {
         let ID = getUriData('id')
         let institution = new MyInstitution()
         let doador = new apiDoadores()
-        let request = await doador.detalhe(ID)  
+        let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
-      //  
+        //  
         let donations = new ApiDoacoes()
         let requestDoacao = await donations.lista(institution.get())
         let formatRequest = Object.values(requestDoacao)
         let minRequest = formatRequest[2]
         const ids = minRequest.filter(p => p.doador_fk === ID)
-        
+
 
 
 
@@ -73,7 +66,7 @@ export default {
         }
         this.totalFaturas = this.donations.length
     },
-    
+
     methods: {
         adapter(listAll) {
             return listAll.map(d => ({
@@ -84,7 +77,7 @@ export default {
                 status: d.status_pagamento,
                 tipo: d.tipo_pagamento,
                 id: d.fatura_id,
-                ... d,
+                ...d,
             }))
 
         },

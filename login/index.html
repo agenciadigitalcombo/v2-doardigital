@@ -26,22 +26,31 @@
 
 <body>
     <div id="app">
-        <form class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12" action="javascript:void(0)" method="POST" @submit="login">
+        <form class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12" action="javascript:void(0)"
+            method="POST" @submit="login">
             <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-                <h1 class="font-bold text-center text-2xl mb-5">Your Logo</h1>
+                <img src="../public/logo/logo.svg" style="max-width: 200px; display: block; margin: 0 auto; margin-bottom: 40px;" alt="doar digital">
+
                 <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
                     <div class="px-5 py-7">
-                        <label class="font-semibold text-sm text-gray-600 pb-1 block" >E-mail</label>
-                        <input type="text" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" v-model="email" />
+                        <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
+                        <input type="text" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                            v-model="email" />
                         <label class="font-semibold text-sm text-gray-600 pb-1 block">Senha</label>
-                        <input type="password" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" v-model="pass" />
+                        <input type="password" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                            v-model="pass" />
                         <div v-show="onerror" @click="onerror=null">
                             <div class="flex bg-yellow-100 rounded-lg p-4 mb-4 text-sm text-yellow-700" role="alert">
-                                <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 <div>
                                     <span class="font-medium">Error!</span> {{onerror}}
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <button type="submit" :disabled="!statusBtn"
                             class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
@@ -97,7 +106,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                 </svg>
-                                <span class="inline-block ml-1">Back to your-app.com</span>
+                                <span class="inline-block ml-1">Voltar para o Site</span>
                             </button>
                         </div>
                     </div>
