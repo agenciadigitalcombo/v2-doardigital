@@ -101,7 +101,7 @@ export default {
 
    
         
-        <FiltroDoador @filter="filtrar" />
+        
 
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
@@ -110,11 +110,9 @@ export default {
                 <Card text="Total de Doadores" :value="totalDoadores" variation="blue" icon="bar" size="3" />
                 <Card text="Doadores Recorrentes" :value="statusRecorrente" variation="green" icon="heart" size="3" />
                 <Card text="Total Doadores Únicos" :value="statusUnico" variation="yellow" size="3"/>
-                
-                
-                
-                
                 </div>
+                <br>
+                <FiltroDoador @filter="filtrar" />
                 <Table :rows="doadores" :cols="cols" pagination="10" />
              </div>
           </div>

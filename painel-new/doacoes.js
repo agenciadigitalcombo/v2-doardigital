@@ -55,6 +55,7 @@ export default {
 
         this.totalDonations = this.somaAll(this.donations)
         this.totalFaturas = this.donations.length
+        console.log(request.payload)
     },
     methods: {
         somaAll(ar) {
@@ -141,6 +142,7 @@ export default {
             this.totalFaturas = dados.length
             this.totalDonations = this.somaAll(dados)
             this.donations = dados
+            
         }
     },
     template: `
@@ -160,7 +162,7 @@ export default {
                 <Card text="Estornado" :value="statusEstorno" variation="purple" icon="heart" size="4" />
                 <Card text="Total Recorrente" :value="statusEstorno" variation="green" icon="heart" size="4" />
                 <Card text="Total Único" :value="statusEstorno" variation="yellow" icon="heart" size="4" />
-                
+                <br><br><br><br>
                 
                 <Filtro @filter="filtrar" />
                 

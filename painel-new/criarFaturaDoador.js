@@ -9,6 +9,7 @@ import { getUriData, data, formataMoeda } from "../components/format.js"
 import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
 import { cpf, tel, cep } from "../components/mask.js"
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 
 export default {
     data: function () {
@@ -31,6 +32,16 @@ export default {
             colsSub: {
 
             },
+            inputs: "",
+            name: "",
+            lastName: "",
+            email: "",
+            data: "",
+            cpf: "",
+            formData: {
+                name: "John",
+                lastName: "Hoffmann"
+            }
 
         }
     },
@@ -44,6 +55,23 @@ export default {
         HeaderDoador
     },
     async mounted() {
+        const inputs = [
+            new Input('valor', 'Valor', 'text', 1, true),
+            new Input('data', 'Data Vencimento', 'date', 1, true),
+            new Select('tipo', 'Tipo', 1, [
+                new Option('1', 'PIX'),
+                new Option('0', 'Boleto'),
+            ]),
+            new Select('recorrencia', 'Recorrente', 1, [
+                new Option('1', 'Sim'),
+                new Option('0', 'Não'),
+            ]),
+            new Button('Enviar'),
+        ]
+        globalThis.Dados = this.formData
+        const form = new Form(inputs)
+        this.inputs = form.render()
+        //
         let ID = getUriData('id')
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
@@ -88,7 +116,7 @@ export default {
     },
     template: `
     <div>
-    <BreadCrumb text="Home" text2="Detalhe Doador" />
+    <BreadCrumb text="Home" text2="Criar Fatura Doador" />
     <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" />
        
 
@@ -96,49 +124,10 @@ export default {
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <CardGeral text="Dados do Doador" size="tres" value="">
-                    <h2 class="text-gray-500">Email:</h2>
-                    <p>{{info.email}}</p>
-                    <br>
-                    <h2 class="text-gray-500">Telefone:</h2>
-                    <p>{{tel(info.telefone)}}</p>
-                    <br>
-                    <h2 class="text-gray-500">CPF:</h2>
-                    <p>{{ cpf(info.cpf) }}</p>
-                    <br>                    
-                    <h2 class="text-gray-500">Cadastro em:</h2>
-                    <p>{{formData(info.registro)}}</p>
-                    <br>                    
+                <CardGeral text="Criar Fatura" size="seis" value="">
+                    <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
                 </CardGeral>
-                <CardGeral text="Endereço" size="tres">
-                <h2 class="text-gray-500">CEP:</h2>
-                    <p>{{cep(info.address.cep)}}</p>
-                    <br>
-                    <h2 class="text-gray-500">Rua:</h2>
-                    <p>{{info.address.logadouro}}</p>
-                    <br>
-                    <h2 class="text-gray-500">Número:</h2>
-                    <p>{{info.address.numero}}</p>
-                    <br>
-                    <h2 class="text-gray-500">Bairro:</h2>
-                    <p>{{info.address.bairro}}</p>
-                    <br>
-                    <h2 class="text-gray-500">Cidade:</h2>
-                    <p>{{info.address.cidade}}</p>
-                    <br>
-                    <h2 class="text-gray-500">Estado:</h2>
-                    <p>{{info.address.estado}}</p>
-                    <br>
-                </CardGeral>
-                <CardGeral text="Anotações" size="tres">
-                </CardGeral>
-                <CardGeral text="Histórico de Doações" size="sete">
-                <Table :rows="donations" :cols="cols" pagination="10" />
-                </CardGeral>
-                <CardGeral text="Assinaturas" size="sete">
-                <Table :rows="assinaturas" :cols="colsSub" pagination="10" />
-                </CardGeral>
-                
+
                 
                 
                

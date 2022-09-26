@@ -1,20 +1,23 @@
 import BreadCrumb from "../components/BreadCrumb.js"
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
+import { Form, Input, Button, Text } from "../components/Form.js";
 import CardGeral from "../components/CardGeral.js";
 import HeaderDoador from "../components/HeaderDoador.js"
 import MyInstitution from "../components/myInstitution.js"
 import ApiDoadores from "../components/apiDoadores.js"
-import { getUriData, data, formataMoeda } from "../components/format.js"
+import { getUriData } from "../components/format.js"
 
 export default {
     data: function () {
         return {
             totalFaturas: 0,
+            info: {
+                address: { bairro: null }
+            },
             inputs: "",
             inputsEndereco: "",
             inputsAnotacoes: "",
             formData: {
-                name: "",
+                nome: "",
                 scripts: ""
             },
             formDataEndereco: {
@@ -26,6 +29,11 @@ export default {
                 rua: "056000",
             }
         }
+    },
+    components: {
+        BreadCrumb,
+        CardGeral,
+        HeaderDoador
     },
     async mounted() {
         const inputs = [
@@ -59,30 +67,42 @@ export default {
         this.inputsAnotacoes = formAnotacoes.render()
         //
         let ID = getUriData('id')
-        let doadores = new ApiDoadores()
         let institution = new MyInstitution()
-        let request = await doadores.lista(institution.get(ID))
+        let doador = new ApiDoadores()
+        let request = await doador.detalhe(ID)
+        let formatRequestDoador = request.payload
         
         if (request.next) {
-            this.info = request.payload
-            console.log(request.payload)
+            this.info = formatRequestDoador
+            console.log(formatRequestDoador)
         }
     },
-    components: {
-        BreadCrumb,
-        CardGeral,
-        HeaderDoador
+    methods: {
+        adapter(listAll) {
+            return listAll.map(d => ({
+                name: d.doador_nome,
+                email: d.doador_email,
+                datas: d.data,
+                value: d.valor,
+                status: d.status_pagamento,
+                tipo: d.tipo_pagamento,
+                id: d.fatura_id,
+                ...d,
+            }))
+
+        },
     },
     template: `
     <div> 
       <BreadCrumb text="Home" text2="Editar Doador" />
-      <HeaderDoador />
+      <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :gravatar="info.gravatar" />
       <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
 
                 <CardGeral text="Editar Dados do Doador" size="tres" value="">
+                
                 <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>                           
                 </CardGeral>
                 
