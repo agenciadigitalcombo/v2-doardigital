@@ -72,7 +72,7 @@ export class Select {
         this.label = label
         this.value = value
         this.require = !!require
-        this.renderOption = option.map(o => `<option value="${o.value}">${o.text}</option>`).join('')
+        this.renderOption = option.map(o => `<option value="${o.value}" ${this.value == o.value && "SELECTED"}>${o.text}</option>`).join('')
     }
     render() {
         return `

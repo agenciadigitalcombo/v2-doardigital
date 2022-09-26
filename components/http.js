@@ -35,27 +35,45 @@ function obj_to_url(obj, next_level = null) {
     return query.join('');
 }
 
-async function post(path, data) {
-    let base = config.path_api
-    let token = localStorage.getItem('token')
-    if (token) {
-        data.token = token
+function super_error() {
+    return {
+        next: false,
+        message: "Rota não implementada",
+        payload: {}
     }
-    options.body = obj_to_url(data)
-    let res = await fetch(`${base}${path}`, options)
-    let status_code = res.status
-    return await res.json()
+}
+
+async function post(path, data) {
+    try {
+        let base = config.path_api
+        let token = localStorage.getItem('token')
+        if (token) {
+            data.token = token
+        }
+        options.body = obj_to_url(data)
+        let res = await fetch(`${base}${path}`, options)
+        let status_code = res.status
+        return await res.json()
+        
+    } catch (error) {
+        return super_error()
+    }
 }
 
 async function get(path, data = {}) {
-    let base = config.path_api
-    let token = localStorage.getItem('token')
-    if (token) {
-        data.token = token
+    try {
+        
+        let base = config.path_api
+        let token = localStorage.getItem('token')
+        if (token) {
+            data.token = token
+        }
+        let res = await fetch(`${base}${path}?${obj_to_url(data)}`)
+        let res_in_json = await res.json()
+        return res_in_json
+    } catch (error) {
+        return super_error()
     }
-    let res = await fetch(`${base}${path}?${obj_to_url(data)}`)
-    let res_in_json = await res.json()
-    return res_in_json
 }
 
 export default {

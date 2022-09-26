@@ -11,6 +11,7 @@ import status from "../components/status.js"
 import actions from "../components/actions.js"
 import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
+import ApiDoadores from "../components/apiDoadores.js"
 
 export default {
     data: function () {
@@ -21,10 +22,15 @@ export default {
             email: "",
             data: "",
             cpf: "",
+            id_sub: "",
+            fk_inst: "",
+            fk_doador: "",
             formData: {
-                name: "John",
-                lastName: "Hoffmann"
+                data: "",
+                numero: "",
+                tipo: "",
             },
+            error: null,
             info: {
                 doador_nome: null,
                 status_pagamento: null,
@@ -57,31 +63,49 @@ export default {
         Botao
     },
     async mounted() {
+
+        let institution = new MyInstitution()
+        let doador = new ApiDoadores()
+
+        let id_sub = getUriData('sub_id')
+        let fk_doador = getUriData('doador_fk')
+        let fk_inst = institution.get()
+
+        this.id_sub = id_sub
+        this.fk_inst = fk_inst
+        this.fk_doador = fk_doador
+
+        let request = await doador.detalhe(fk_doador)
+        let formatRequestDoador = request.payload
+
+        let sub_info = formatRequestDoador.subs.find(s => s.id == id_sub)
+
+        this.info.doador_nome = formatRequestDoador.nome
+        this.info.status_pagamento = sub_info.status
+        this.info.tipo_pagamento = sub_info.billingType
+        this.info.valor = sub_info.value
+        this.info.data = sub_info.dateCreated
+        this.info.proxima = sub_info.nextDueDate
+
+        this.formData.data = this.info.proxima
+        this.formData.numero = this.info.valor
+        this.formData.tipo = this.info.billingType
+
         const inputs = [
             new Input('data', 'Vencimento', 'date', 2, true),
             new Input('numero', 'Valor', 'text', 2, true),
-            new Select('status', 'Tipo', 2, [
-                new Option('0', 'Boleto'),
-                new Option('1', 'Pix'),
-            ]),
+            new Select('tipo', 'Tipo', 2, [
+                new Option('BOLETO', 'Boleto'),
+                new Option('PIX', 'Pix'),
+            ], true, sub_info.billingType),
             new Button('Modificar'),
         ]
+
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
-        //
-        let ID = getUriData('id')        
-        let institution = new MyInstitution()
-        let donations = new ApiDoacoes()
-        let inst = new Institution()
-        let requestInfoInst = await inst.get(institution.get())
-        this.split = +requestInfoInst.payload.split.porcentagem
-        let request = await donations.lista(institution.get())
-        let minRequest = request.payload
-        this.info = minRequest.find(p => p.fatura_id === ID) 
-        this.donations.push(this.info)        
-        this.donations = this.adapter(this.donations)      
-        
+
+
     },
     methods: {
         adapter(listAll) {
@@ -89,7 +113,7 @@ export default {
                 value: this.formataMoeda(d.valor),
                 id: d.fatura_id,
                 tipo: d.tipo_pagamento,
-                ... d,
+                ...d,
                 ...taxas(d.valor, d.tipo_pagamento, this.split)
             }))
         },
@@ -97,13 +121,39 @@ export default {
         formatData: data,
         formatRecorrente,
         copyPix() {
-            copy(this.$refs.codePix)            
+            copy(this.$refs.codePix)
         },
         status,
+        async cancelar() {
+            this.error = null
+            let api = new ApiDoacoes()
+            let request = await api.sub_cancel(this.fk_inst, this.id_sub)
+            if( request.next ) {
+                window.location.href  = `/detalhe-doador?id=${this.fk_doador}`
+            }else {
+                this.error = request.message
+            }
+        },
+        async atualizar() {
+            this.error = null
+            let api = new ApiDoacoes()            
+            let request = await api.sub_update(
+                this.fk_inst, 
+                this.id_sub, 
+                this.formData.tipo,
+                this.formData.numero,
+                this.formData.data
+            )
+            if( request.next ) {
+                window.location.href  = `/detalhe-doador?id=${this.fk_doador}`
+            }else {
+                this.error = request.message
+            }
+        },
     },
     template: `
     <div>
-    {{info}}
+   
     <BreadCrumb text="Home" text2="Detalhe Assinatura" />
    
        
@@ -131,10 +181,10 @@ export default {
                     <p>{{ formataMoeda( info.valor ) }}</p>
                     <br>
                     <h2 class="text-gray-500">Iniciado em:</h2>
-                    <p>{{ formatData( info.data ) }}  - {{info.hora}}</p>
+                    <p>{{ formatData( info.data ) }} </p>
                     <br>
                     <h2 class="text-gray-500">Próxima Cobrança em:</h2>
-                    <p>{{ formatData( info.data ) }}  - {{info.hora}}</p>
+                    <p>{{ formatData( info.proxima ) }} </p>
                     <br>
                     
                     
@@ -142,18 +192,15 @@ export default {
                 <CardGeral text="Modificar Assinatura" size="quatro">
                 <p>Os dados modificados serão referente a fatura mais recente. Demais faturas serão criadas com a mesma regra.</p>
                 <br>
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                
+                <p v-show="error">{{error}}</p>
+                
                 <br><br>
                 
                 </CardGeral>
                 
-                <Botao text="Cancelar Assinatura" variation="red" />
-                
-                
-                
-               
-
-       
+                <Botao text="Cancelar Assinatura" variation="red" @click="cancelar" />
 
     </div>`,
 }

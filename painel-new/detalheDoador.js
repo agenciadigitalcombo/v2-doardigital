@@ -19,6 +19,7 @@ export default {
             },
             donations: [],
             assinaturas: [],
+            subs: [],
             cols: {
                 data: d => `${d.datas}`,
                 "valor": d => `${d.value}`,
@@ -29,9 +30,12 @@ export default {
                 "Ação": e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
             colsSub: {
-
+                "Data": s => s.dateCreated,
+                "Valor": s => s.value,
+                "Tipo": s => s.type,
+                "Status": s => s.status,
+                "Ação": s => actions(`detalhe-assinatura?sub_id=${s.id}&doador_fk=${this.ID}`, 'fa-solid fa-eye', 'blue'),
             },
-
         }
     },
     filters: {
@@ -50,20 +54,23 @@ export default {
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
-        //  
+
         let donations = new ApiDoacoes()
         let requestDoacao = await donations.lista(institution.get())
         let formatRequest = Object.values(requestDoacao)
         let minRequest = formatRequest[2]
         const ids = minRequest.filter(p => p.doador_fk === ID)
 
-
-
-
         if (request.next) {
             this.info = formatRequestDoador
             this.donations = this.adapter(ids)
-            console.log(formatRequestDoador)
+            this.subs = request.payload.subs.map( s => ({
+                dateCreated: data(s.dateCreated),
+                id: s.id,
+                status: s.status,
+                value: formataMoeda(s.value),
+                type: s.billingType,
+            }) )
         }
         this.totalFaturas = this.donations.length
     },
@@ -80,7 +87,6 @@ export default {
                 id: d.fatura_id,
                 ...d,
             }))
-
         },
         cpf,
         tel,
@@ -137,14 +143,8 @@ export default {
                 <Table :rows="donations" :cols="cols" pagination="10" />
                 </CardGeral>
                 <CardGeral text="Assinaturas" size="sete">
-                <Table :rows="assinaturas" :cols="colsSub" pagination="10" />
+                <Table :rows="subs" :cols="colsSub" pagination="10" />
                 </CardGeral>
-                
-                
-                
-               
-
-       
 
     </div>`,
 }
