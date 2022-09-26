@@ -29,13 +29,19 @@ export default {
     },
     async mounted() {
         const inputs = [
+            new Input('nome', 'Nome', 'text', 4),
             new Input('email', 'Email', 'email', 4, true),
-            new Input('siteName', 'Título do Site', 'text', 4),
+            new Input('telefone', 'Telefone', 'text', 4),
+            new Input('cpf', 'CPF', 'text', 4),
             new Button('Salvar Alterações'),
         ]
         const inputsEndereco = [
             new Input('cep', 'CEP', 'text', 4),
-            new Input('rua', 'Logradouro', 'email', 4, true),
+            new Input('rua', 'Logradouro', 'text', 4, true),
+            new Input('numero', 'Número', 'text', 4, true),
+            new Input('bairro', 'Bairro', 'text', 4, true),
+            new Input('cidade', 'Cidade', 'text', 4, true),
+            new Input('estado', 'Estado', 'text', 4, true),
             new Button('Salvar Alterações'),
         ]
         const inputsAnotacoes = [
