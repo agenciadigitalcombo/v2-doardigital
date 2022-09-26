@@ -41,6 +41,7 @@ $payload = array_merge($getJson, $request);
 $subscription =  $payload['payment']['subscription'] ?? "";
 $reference_key = $payload['payment']['externalReference'] ?? "";
 $dueDate = $payload['payment']['dueDate'] ?? "";
+$dueDateInvoice = $payload['payment']['dueDate'] ?? "";
 $dueDate = date('Y-m-d', strtotime('-7 days', strtotime($dueDate)));
 $status = $payload['payment']['status'] ?? "";
 $tipo = $payload['payment']['billingType'] ?? "";
@@ -132,6 +133,7 @@ $token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 
 $faturas->update([
     "status_pagamento" => $status,
+    "data" => $dueDateInvoice,
 ]);
 
 $sub->where([

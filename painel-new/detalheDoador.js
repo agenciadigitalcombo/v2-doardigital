@@ -45,6 +45,7 @@ export default {
     },
     async mounted() {
         let ID = getUriData('id')
+        this.ID =  ID
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
@@ -89,7 +90,7 @@ export default {
     template: `
     <div>
     <BreadCrumb text="Home" text2="Detalhe Doador" />
-    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" />
+    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" :ID="ID" />
        
 
     <div class="relative pt-2 pb-32 bg-[#fff]">

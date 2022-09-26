@@ -54,4 +54,13 @@ class AsaasCliente extends Asaas
         ]);
         // return $this->get("/customers/{$ID}", []);
     }
+
+    public function subsByCustomer( $customer_id ): array
+    {
+        return $this->get("/subscriptions", [
+            "customer_id" => $customer_id,
+            "limit" => '100',
+            "includeDeleted" => 'true',
+        ]);
+    }
 }
