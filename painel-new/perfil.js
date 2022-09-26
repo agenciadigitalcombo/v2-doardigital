@@ -5,13 +5,14 @@ export default {
     data: function () {
         return {
             inputs: "",
-            name: "Bruno",
+            name: "",
             lastName: "",
             email: "",
             data: "",
             cpf: "",
             formData: {
-                name: "Bruno"
+                name: "John",
+                lastName: "Hoffmann"
             }
         }
     },

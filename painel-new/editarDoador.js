@@ -1,5 +1,5 @@
 import BreadCrumb from "../components/BreadCrumb.js"
-import { Form, Input, Button } from "../components/Form.js";
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import CardGeral from "../components/CardGeral.js";
 import HeaderDoador from "../components/HeaderDoador.js"
 import MyInstitution from "../components/myInstitution.js"
@@ -12,32 +12,45 @@ export default {
             totalFaturas: 0,
             inputs: "",
             inputsEndereco: "",
-            scripts: "",
+            inputsAnotacoes: "",
             formData: {
-                name: "Bruno"
+                name: "",
+                scripts: ""
             },
             formDataEndereco: {
-                name: "Bruno"
+                cep: "056000",
+                rua: "056000",
+            },
+            formDataAnotacoes: {
+                cep: "056000",
+                rua: "056000",
             }
         }
     },
     async mounted() {
         const inputs = [
+            new Input('email', 'Email', 'email', 4, true),
             new Input('siteName', 'Título do Site', 'text', 4),
-            new Input('scripts', 'Scripts Javascript (Header)', 'email', 4, true),
             new Button('Salvar Alterações'),
         ]
         const inputsEndereco = [
-            new Input('CEP', 'CEP', 'text', 4),
-            new Input('Rua', 'Logradouro', 'email', 4, true),
+            new Input('cep', 'CEP', 'text', 4),
+            new Input('rua', 'Logradouro', 'email', 4, true),
             new Button('Salvar Alterações'),
+        ]
+        const inputsAnotacoes = [
+            new Text('mensagem', 'Mensagem', 4, true),
+            new Button('Criar Anotação'),
         ]
         globalThis.Dados = this.formData
         globalThis.DadosEndereco = this.formDataEndereco
+        globalThis.DadosAnotacoes = this.formDataAnotacoes
         const form = new Form(inputs)
         const formEndereco = new Form(inputsEndereco)
+        const formAnotacoes = new Form(inputsAnotacoes)
         this.inputs = form.render()
         this.inputsEndereco = formEndereco.render()
+        this.inputsAnotacoes = formAnotacoes.render()
         //
         let ID = getUriData('id')
         let doadores = new ApiDoadores()
@@ -72,7 +85,7 @@ export default {
                 </CardGeral>
 
                 <CardGeral text="Criar Anotação" size="tres">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="atualizar"></form>
                 </CardGeral>
                 
     </div>`,
