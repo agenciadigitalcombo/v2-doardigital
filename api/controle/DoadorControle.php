@@ -82,6 +82,7 @@ class DoadorControle extends Controle
         $resAsa = $asa->getCliente($payload["cpf"]);
         $payload["asa"] = $resAsa["data"][0];
         $payload["subs"] = $asa->subsByCustomer($payload["asa"]['id'])["data"];
+        $payload["payload"] = json_decode( $payload["payload"] ) ?? [];
         self::printSuccess(
             "Informação doador",
             $payload
