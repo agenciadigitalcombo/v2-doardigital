@@ -4,12 +4,19 @@ import CardGeral from "../components/CardGeral.js";
 import HeaderDoador from "../components/HeaderDoador.js"
 import MyInstitution from "../components/myInstitution.js"
 import ApiDoadores from "../components/apiDoadores.js"
+import ApiAdmin from "../components/apiAdmin.js";
 import { getUriData } from "../components/format.js"
+import Jwt from "../components/jwt.js";
 
 export default {
     data: function () {
         return {
             totalFaturas: 0,
+            ID: 0,
+            Inst: 0,
+            error_note: null,
+            error_info: null,
+            customer: null,
             info: {
                 address: { bairro: null }
             },
@@ -43,13 +50,17 @@ export default {
 
 
         let ID = getUriData('id')
+        this.ID = ID
         let institution = new MyInstitution()
+        this.Inst = institution.get()
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
 
         if (request.next) {
             this.info = formatRequestDoador
+            this.customer = formatRequestDoador.asa.id
+            console.log(this.customer)
             
             globalThis.Dados = this.formData
             this.renderInfo()
@@ -88,7 +99,6 @@ export default {
             this.inputs = form.render()
         },
         renderAddress() {
-            console.log(this.info.nome)
             this.formData.cep = this.info.address.cep
             this.formData.rua = this.info.address.logadouro
             this.formData.numero = this.info.address.numero
@@ -120,8 +130,60 @@ export default {
             }))
 
         },
-        atualizar() { },
-        add_note() { },
+        async atualizar() { 
+            let api_doador = new ApiDoadores()
+            let request = await api_doador.update_info(
+                this.Inst,
+                this.ID,
+                this.customer,
+                this.formData.nome,
+                this.formData.cpf,
+                this.formData.telefone,
+                this.formData.email,
+                this.formData.cep,
+                this.formData.rua,
+                this.formData.numero,
+                null,
+                this.formData.bairro,
+                this.formData.cidade,
+                this.formData.estado
+            )
+            this.error_info = request.message
+            if( request.next ) {
+                window.location.href = `#/detalhe-doador?id=${this.ID}`
+            }
+
+            console.log(this.error_info)
+
+
+
+
+
+
+
+
+
+            
+        },
+        async add_note() { 
+            this.error_note = null
+            let api_doador = new ApiDoadores()
+            let api = new ApiAdmin()
+            let jwt = new Jwt()
+            let dados = jwt.get()
+            let info_adm = await api.info(dados.code)
+            let request_note = await api_doador.new_note(
+                this.ID,
+                dados.code,
+                info_adm.payload.nome,
+                this.formData.mensagem
+            )
+            this.error_note = request_note.message
+            if( request_note.next ) {
+                window.location.href = `#/detalhe-doador?id=${this.ID}`
+            }
+
+        },
     },
     template: `
     <div> 
@@ -130,6 +192,7 @@ export default {
       <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
+             <p v-show="error_info">{{error_info}}</p>
                 <div class="flex flex-wrap">
 
                 <CardGeral text="Editar Dados do Doador" size="tres" value="">
@@ -138,11 +201,12 @@ export default {
                 </CardGeral>
                 
                 <CardGeral text="Editar Endereço do Doador" size="tres">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsEndereco" @submit="atualizar"></form>
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputsEndereco" @submit="atualizar"></form>
                 </CardGeral>
 
                 <CardGeral text="Criar Anotação" size="tres">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="add_note"></form>
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="add_note"></form>
+                <p v-show="error_note">{{error_note}}</p>
                 </CardGeral>
                 
     </div>`,

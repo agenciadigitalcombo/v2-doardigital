@@ -18,12 +18,46 @@ export default class {
         return await http.get('/doador/detalhe', { fk })
     }
 
-    async new_note(doador_fk, author_fk, author_name, message ) {
+    async new_note(doador_fk, author_fk, author_name, message) {
         return await http.post('/doador/note', {
             doador_fk,
             author_fk,
             author_name,
             message,
+        })
+    }
+
+    async update_info(
+        instituicao_fk,
+        doador_fk,
+        customer_id,
+        nome,
+        cpf,
+        telefone,
+        email,
+        cep,
+        logadouro,
+        numero,
+        complemento,
+        bairro,
+        cidade,
+        estado
+    ) {
+        return await http.post('/doador/update-info', {
+            instituicao_fk,
+            external_fk: doador_fk,
+            customer_id,
+            nome,
+            cpf,
+            telefone,
+            email,
+            cep,
+            logadouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
         })
     }
 }

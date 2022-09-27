@@ -7,6 +7,17 @@
 @author_fk=adm_62d9731a12030
 @author_name=John
 @message=teste 2
+@external_fk=
+@nome=
+@telefone=
+@email=
+@cep=
+@logadouro=
+@numero=
+@bairro=
+@cidade=
+@estado=
+@customer_id=
 
 ##
 GET {{host}}/api/doador/
@@ -29,4 +40,22 @@ token={{token}}
 &author_fk={{author_fk}}
 &author_name={{author_name}}
 &message={{message}}
-# &debug=1
+
+###
+POST {{host}}/api/doador/update-info
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&instituicao_fk={{instituicao_fk}}
+&external_fk={{external_fk}}
+&nome={{nome}}
+&cpf={{cpf}}
+&telefone={{telefone}}
+&email={{email}}
+&cep={{cep}}
+&logadouro={{logadouro}}
+&numero={{numero}}
+&bairro={{bairro}}
+&cidade={{cidade}}
+&estado={{estado}}
+&customer_id={{customer_id}}

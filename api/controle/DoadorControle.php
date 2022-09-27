@@ -129,4 +129,91 @@ class DoadorControle extends Controle
         );        
     }
 
+    static function update() {
+        self::requireInputs([
+            "token" => "informe um token",
+            "instituicao_fk" => "Informe uma instituição",
+            "external_fk" => "Informe o identificado do doador",
+            "nome" => "Informe o nome",
+            "cpf" => "Informe o cpf",
+            "telefone" => "Informe um telefone",
+            "email" => "Informe o email",
+            "cep" => "Informe o cep",
+            "logadouro" => "Informe o endereço ",
+            "numero" => "Informe o número ",
+            "bairro" => "Informe o bairro ",
+            "cidade" => "Informe a cidade ",
+            "estado" => "Informe o estado ",
+            "customer_id" => "Informe o identificador do costumer",
+        ]);
+        self::privateRouter();
+
+        $instituicao_fk = $_REQUEST['instituicao_fk'];
+        $external_fk = $_REQUEST['external_fk'];
+        $nome = $_REQUEST['nome'];
+        $cpf = $_REQUEST['cpf'];
+        $telefone = $_REQUEST['telefone'];
+        $email = $_REQUEST['email'];
+        $cep = $_REQUEST['cep'];
+        $logadouro = $_REQUEST['logadouro'];
+        $numero = $_REQUEST['numero'];
+        $complemento = $_REQUEST['complemento'] ?? "";
+        $bairro = $_REQUEST['bairro'];
+        $cidade = $_REQUEST['cidade'];
+        $estado = $_REQUEST['estado'];
+        $customer_id = $_REQUEST['customer_id'];
+
+        $inst = new Instituicao();
+        $asa_cliente = new AsaasCliente();
+        $doador = new Banco();
+        $doador->table("doador");
+        $address = new Banco();
+        $address->table("endereco");
+
+        $key_asa = $inst->get_key($instituicao_fk);
+        $asa_cliente->set_api_key($key_asa);
+        $rest = $asa_cliente->updateCostumer(
+            $customer_id,
+            $nome,
+            $email,
+            $telefone,
+            $cpf,
+            $cep,
+            $logadouro,
+            $numero,
+            $complemento,
+            $cidade,
+            $external_fk           
+        );
+
+        $doador->where([
+            "external_fk" => $external_fk
+        ]);
+        $doador->update([
+            "nome" => $nome,
+            "cpf" => $cpf,
+            "telefone" => $telefone,
+            "email" => $email,
+        ]);
+        
+        $address->where([
+            "fk" => $external_fk
+        ]);
+        $address->update([
+            "cep" => $cep,
+            "logadouro" => $logadouro,
+            "numero" => $numero,
+            "complemento" => $complemento,
+            "bairro" => $bairro,
+            "cidade" => $cidade,
+            "estado" => $estado,
+        ]);
+        
+        self::printSuccess(
+            "Atualizado com sucesso",
+            $rest
+        );      
+    }
+
+
 }

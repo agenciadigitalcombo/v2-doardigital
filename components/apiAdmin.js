@@ -56,9 +56,9 @@ export default class {
         })
     }
 
-    async info(token, code) {
+    async info(code) {
         return await http.get('/adm/info', {
-            token, code
+            code,
         })
     }
 

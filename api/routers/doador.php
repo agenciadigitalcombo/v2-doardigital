@@ -5,3 +5,4 @@ router('/doador/list', 'DoadorControle@list');
 router('/doador/info', 'DoadorControle@info');
 router('/doador/detalhe', 'DoadorControle@detalhe');
 router('/doador/note', 'DoadorControle@note');
+router('/doador/update-info', 'DoadorControle@update');
