@@ -87,4 +87,45 @@ class DoadorControle extends Controle
             $payload
         );
     }
+
+    static function note() {
+        self::requireInputs([
+            "token" => "informe um token",
+            "doador_fk" => "Informe um identificador de doador",
+            "author_fk" => "Informe um identificador de author",
+            "author_name" => "Informe um nome do author",
+            "message" => "Informe a mensagem",
+        ]);
+        self::privateRouter();        
+        $doador_fk = $_REQUEST['doador_fk'];
+        $author_fk = $_REQUEST['author_fk'];
+        $author_name = $_REQUEST['author_name'];
+        $message = $_REQUEST['message'];
+        $db = new Banco();
+        $db->table('doador');
+        $db->where([
+            "external_fk" => $doador_fk
+        ]);
+        $doador = $db->select()[0] ?? [];
+        $notes = $doador["payload"] ?? "{}";
+        $notes = json_decode( $notes, true );
+        $notes["notes"] = $notes["notes"] ?? [];        
+        $notes["notes"][] = [
+            "author_fk" => $author_fk,
+            "author_name" => $author_name,
+            "message" => $message,
+            "date" => date('d/m/Y'),
+        ];
+        $db->where([
+            "external_fk" => $doador_fk
+        ]);
+        $db->update([
+            "payload" => json_encode($notes),
+        ]);
+        self::printSuccess(
+            "Anotação adicionada",
+            []
+        );        
+    }
+
 }

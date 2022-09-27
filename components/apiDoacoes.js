@@ -19,8 +19,6 @@ export default class {
         return await http.post('/instituicao/subscription-update', {
             institution_fk,
             sub_fk,
-            cycle: "MONTHLY",
-            updatePendingPayments: true,
             billingType: type,
             value,
             nextDueDate: data,

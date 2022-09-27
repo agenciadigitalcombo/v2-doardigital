@@ -1,8 +1,12 @@
 @host=https://hostdoar.tk/api
-@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@token=eyJjb2RlIjoiYWRtXzYyZDk3MzFhMTIwMzAifQ==.f28ebb285d23f0ff5b23270e73aeb13d2c6c2b80
 @instituicao_fk=inst_62b241e7b444e
 @cpf=197.239.140-26
 @fk=do_62d9a303ef248
+@doador_fk=do_630cbd3d908a6
+@author_fk=adm_62d9731a12030
+@author_name=John
+@message=teste 1
 
 ##
 GET {{host}}/api/doador/
@@ -15,3 +19,13 @@ GET {{host}}/api/doador/detalhe?token={{token}}&fk={{fk}}&debug=1
 
 ###
 GET {{host}}/api/doador/info?instituicao_fk={{instituicao_fk}}&token={{token}}&cpf={{cpf}}
+
+###
+POST {{host}}/api/doador/note
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&doador_fk={{doador_fk}}
+&author_fk={{author_fk}}
+&author_name={{author_name}}
+&message={{message}}

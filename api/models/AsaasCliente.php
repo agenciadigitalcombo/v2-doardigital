@@ -52,15 +52,61 @@ class AsaasCliente extends Asaas
         return $this->get("/customers", [
             "cpfCnpj" => $cpfCnpj
         ]);
-        // return $this->get("/customers/{$ID}", []);
     }
 
-    public function subsByCustomer( $customer_id ): array
+    public function subsByCustomer($customer_id): array
     {
         return $this->get("/subscriptions", [
             "customer_id" => $customer_id,
             "limit" => '100',
             "includeDeleted" => 'true',
+        ]);
+    }
+
+    public function updateCostumer(
+        $customer_id,
+        $name,
+        $email,
+        $mobilePhone,
+        $cpfCnpj,
+        $postalCode,
+        $address,
+        $addressNumber,
+        $complement,
+        $cidade,
+        $external_fk,
+    ): array {
+        return $this->post("/customers/{$customer_id}", [
+            "name" => $name,
+            "email" => $email,
+            "mobilePhone" => $mobilePhone,
+            "cpfCnpj" => $cpfCnpj,
+            "postalCode" => $postalCode,
+            "address" => $address,
+            "addressNumber" => $addressNumber,
+            "complement" => $complement,
+            "province" => $cidade,
+            "externalReference" => $external_fk,
+        ]);
+    }
+
+    public function cancel($customer_id): array
+    {
+        return $this->post("/subscriptions/{$customer_id}", [], 'DELETE');
+    }
+
+    public function updateSubscription(
+        $sub_id,
+        $billingType,
+        $value,
+        $nextDueDate,
+    ): array {
+        return $this->post("/subscriptions/{$sub_id}", [
+            "cycle" => "MONTHLY",
+            "updatePendingPayments" => true,
+            "billingType" => $billingType,
+            "value" => $value,
+            "nextDueDate" => $nextDueDate,
         ]);
     }
 }

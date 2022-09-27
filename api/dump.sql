@@ -65,7 +65,8 @@ CREATE TABLE doador (
     email VARCHAR(75),
     senha VARCHAR(255),
     nascimento VARCHAR(10),
-    registro VARCHAR(19)
+    registro VARCHAR(19),
+    payload JSON
 );
 
 CREATE TABLE fatura (

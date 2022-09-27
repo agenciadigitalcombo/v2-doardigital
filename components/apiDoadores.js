@@ -13,8 +13,17 @@ export default class {
             cpf
         })
     }
-    
+
     async detalhe(fk) {
         return await http.get('/doador/detalhe', { fk })
+    }
+
+    async new_note(doador_fk, author_fk, author_name, message ) {
+        return await http.post('/doador/note', {
+            doador_fk,
+            author_fk,
+            author_name,
+            message,
+        })
     }
 }
