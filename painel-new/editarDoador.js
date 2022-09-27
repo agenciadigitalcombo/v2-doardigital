@@ -60,7 +60,6 @@ export default {
         if (request.next) {
             this.info = formatRequestDoador
             this.customer = formatRequestDoador.asa.id
-            console.log(this.customer)
             
             globalThis.Dados = this.formData
             this.renderInfo()
@@ -152,17 +151,6 @@ export default {
             if( request.next ) {
                 window.location.href = `#/detalhe-doador?id=${this.ID}`
             }
-
-            console.log(this.error_info)
-
-
-
-
-
-
-
-
-
             
         },
         async add_note() { 
@@ -182,7 +170,6 @@ export default {
             if( request_note.next ) {
                 window.location.href = `#/detalhe-doador?id=${this.ID}`
             }
-
         },
     },
     template: `
