@@ -74,7 +74,7 @@ class AsaasCliente extends Asaas
         $addressNumber,
         $complement,
         $cidade,
-        $external_fk,
+        $external_fk
     ): array {
         return $this->post("/customers/{$customer_id}", [
             "name" => $name,
@@ -99,7 +99,7 @@ class AsaasCliente extends Asaas
         $sub_id,
         $billingType,
         $value,
-        $nextDueDate,
+        $nextDueDate
     ): array {
         return $this->post("/subscriptions/{$sub_id}", [
             "cycle" => "MONTHLY",

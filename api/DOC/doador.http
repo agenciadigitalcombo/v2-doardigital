@@ -29,3 +29,4 @@ token={{token}}
 &author_fk={{author_fk}}
 &author_name={{author_name}}
 &message={{message}}
+&debug=1
