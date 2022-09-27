@@ -17,7 +17,7 @@ export default {
             inputsEndereco: "",
             inputsAnotacoes: "",
             formData: {
-                nome: "",
+                nome: "ok",
                 scripts: ""
             },
             formDataEndereco: {
@@ -36,48 +36,77 @@ export default {
         HeaderDoador
     },
     async mounted() {
-        const inputs = [
-            new Input('nome', 'Nome', 'text', 4),
-            new Input('email', 'Email', 'email', 4, true),
-            new Input('telefone', 'Telefone', 'text', 4),
-            new Input('cpf', 'CPF', 'text', 4),
-            new Button('Salvar Alterações'),
-        ]
-        const inputsEndereco = [
-            new Input('cep', 'CEP', 'text', 4),
-            new Input('rua', 'Logradouro', 'text', 4, true),
-            new Input('numero', 'Número', 'text', 4, true),
-            new Input('bairro', 'Bairro', 'text', 4, true),
-            new Input('cidade', 'Cidade', 'text', 4, true),
-            new Input('estado', 'Estado', 'text', 4, true),
-            new Button('Salvar Alterações'),
-        ]
-        const inputsAnotacoes = [
-            new Text('mensagem', 'Mensagem', 4, true),
-            new Button('Criar Anotação'),
-        ]
-        globalThis.Dados = this.formData
-        globalThis.DadosEndereco = this.formDataEndereco
+
+
+
         globalThis.DadosAnotacoes = this.formDataAnotacoes
-        const form = new Form(inputs)
-        const formEndereco = new Form(inputsEndereco)
-        const formAnotacoes = new Form(inputsAnotacoes)
-        this.inputs = form.render()
-        this.inputsEndereco = formEndereco.render()
-        this.inputsAnotacoes = formAnotacoes.render()
-        //
+
+
         let ID = getUriData('id')
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
-        
+
         if (request.next) {
             this.info = formatRequestDoador
-            console.log(formatRequestDoador)
+            
+            globalThis.Dados = this.formData
+            this.renderInfo()
+            this.renderAddress()
+            this.renderNote()
+            
         }
+
+
+
+        
+
     },
     methods: {
+        renderNote() {
+            const inputsAnotacoes = [
+                new Text('mensagem', 'Mensagem', 4, true),
+                new Button('Criar Anotação'),
+            ]
+            const formAnotacoes = new Form(inputsAnotacoes)
+            this.inputsAnotacoes = formAnotacoes.render()
+        },
+        renderInfo() {            
+            this.formData.nome = this.info.nome
+            this.formData.email = this.info.email
+            this.formData.telefone = this.info.telefone
+            this.formData.cpf = this.info.cpf            
+            const inputs = [
+                new Input('nome', 'Nome', 'text', 4),
+                new Input('email', 'Email', 'email', 4, true),
+                new Input('telefone', 'Telefone', 'text', 4),
+                new Input('cpf', 'CPF', 'text', 4),
+                new Button('Salvar Alterações'),
+            ]
+            const form = new Form(inputs)
+            this.inputs = form.render()
+        },
+        renderAddress() {
+            console.log(this.info.nome)
+            this.formData.cep = this.info.address.cep
+            this.formData.rua = this.info.address.logadouro
+            this.formData.numero = this.info.address.numero
+            this.formData.bairro = this.info.address.bairro
+            this.formData.cidade = this.info.address.cidade
+            this.formData.estado = this.info.address.estado            
+            const inputsEndereco = [
+                new Input('cep', 'CEP', 'text', 4),
+                new Input('rua', 'Logradouro', 'text', 4, true ),
+                new Input('numero', 'Número', 'text', 4, true),
+                new Input('bairro', 'Bairro', 'text', 4, true),
+                new Input('cidade', 'Cidade', 'text', 4, true),
+                new Input('estado', 'Estado', 'text', 4, true),
+                new Button('Salvar Alterações'),
+            ]
+            const formEndereco = new Form(inputsEndereco)
+            this.inputsEndereco = formEndereco.render()
+        },
         adapter(listAll) {
             return listAll.map(d => ({
                 name: d.doador_nome,
@@ -91,6 +120,8 @@ export default {
             }))
 
         },
+        atualizar() { },
+        add_note() { },
     },
     template: `
     <div> 
@@ -103,7 +134,7 @@ export default {
 
                 <CardGeral text="Editar Dados do Doador" size="tres" value="">
                 
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>                           
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>                           
                 </CardGeral>
                 
                 <CardGeral text="Editar Endereço do Doador" size="tres">
@@ -111,7 +142,7 @@ export default {
                 </CardGeral>
 
                 <CardGeral text="Criar Anotação" size="tres">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="atualizar"></form>
+                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="add_note"></form>
                 </CardGeral>
                 
     </div>`,
