@@ -11,7 +11,7 @@ export default class {
     async sub_cancel(institution_fk, sub_fk) {
         return await http.post('/instituicao/subscription-cancel', {
             institution_fk,
-            sub_fk
+            sub_fk,
         })
     }
     

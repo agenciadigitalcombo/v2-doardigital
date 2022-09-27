@@ -572,7 +572,7 @@ class InstituicaoControle extends Controle
         $asa_cliente = new AsaasCliente();
         $key_asa = $inst->get_key($institution_fk);
         $asa_cliente->set_api_key($key_asa);
-        $res_asa = $asa_cliente->cancel($sub_fk );
+        $res_asa = $asa_cliente->cancel($sub_fk);
         self::printSuccess(
             "Cancelado com sucesso",
             $res_asa

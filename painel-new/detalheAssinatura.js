@@ -129,7 +129,7 @@ export default {
             let api = new ApiDoacoes()
             let request = await api.sub_cancel(this.fk_inst, this.id_sub)
             if( request.next ) {
-                window.location.href  = `/detalhe-doador?id=${this.fk_doador}`
+                window.location.href  = `#/detalhe-doador?id=${this.fk_doador}`
             }else {
                 this.error = request.message
             }
