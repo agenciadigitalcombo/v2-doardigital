@@ -25,6 +25,7 @@ import DetalheDoacao from "./detalheDoacao.js"
 import EditarDoador from "./editarDoador.js"
 import DetalheAssinatura from "./detalheAssinatura.js"
 import CriarFaturaDoador from "./criarFaturaDoador.js"
+import MinhasInstituicoes from "./minhasInstituicoes.js"
 
 
 const routes = [
@@ -46,6 +47,7 @@ const routes = [
     { path: '/editar-doador', component: EditarDoador },
     { path: '/detalhe-assinatura', component: DetalheAssinatura },
     { path: '/criar-fatura-doador', component: CriarFaturaDoador },
+    { path: '/minhas-instituicoes', component: MinhasInstituicoes },
 
 ]
 

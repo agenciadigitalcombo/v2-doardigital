@@ -52,10 +52,25 @@ export default {
         this.statusOverdue = this.somaAll(this.donations.filter(d => d.status == 'OVERDUE'))
         this.statusRecebido = this.somaAll(this.donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
         this.statusEstorno = this.somaAll(this.donations.filter(d => d.status == 'REFUNDED'))
-
+        this.statusRecorrenciaAtiva = this.somaAll(this.donations.filter(d => d.recorrente == 'Ativa'))
+        this.statusRecorrenciaInativo = this.somaAll(this.donations.filter(d => d.recorrente == 'Inativo'))
+        //
+        this.qntStatusAguardando = this.donations.filter(d => d.status == 'PENDING')
+        this.qntStatusVencido = this.donations.filter(d => d.status == 'OVERDUE')
+        this.qntStatusPago = this.donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED')
+        this.qntStatusEstornado = this.donations.filter(d => d.status == 'REFUNDED')
+        this.qntRecorrenteAtivo = this.donations.filter(d => d.recorrente == 'Ativa')
+        this.qntRecorrenteInativo = this.donations.filter(d => d.recorrente == 'Inativo')
+        //
+        this.totalRecorrente = this.qntRecorrenteAtivo.length
+        this.totalRecorrenteInativo = this.qntRecorrenteInativo.length
         this.totalDonations = this.somaAll(this.donations)
         this.totalFaturas = this.donations.length
-        console.log(request.payload)
+        this.totalQntAguardando = this.qntStatusAguardando.length
+        this.totalQntVencido = this.qntStatusVencido.length
+        this.totalQntPago = this.qntStatusPago.length
+        this.totalQntEstornado = this.qntStatusEstornado.length
+        console.log(this.donations)
     },
     methods: {
         somaAll(ar) {
@@ -153,15 +168,14 @@ export default {
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doações" :value="totalFaturas" variation="blue" icon="bar" size="4" />
-                <Card text="Total em Doações" :value="totalDonations" variation="blue" icon="bar" size="4" />
-                <Card text="Total Pago" :value="statusRecebido" icon="heart" variation="green" size="4" />
-                <Card text="Total Aberto" :value="statusAguardando" variation="yellow" icon="heart" size="4" />
-                <br><br><br><br>
-                <Card text="Vencido / Cancelado" :value="statusOverdue" variation="red" icon="heart" size="4" />
-                <Card text="Estornado" :value="statusEstorno" variation="purple" icon="heart" size="4" />
-                <Card text="Total Recorrente" :value="statusEstorno" variation="green" icon="heart" size="4" />
-                <Card text="Total Único" :value="statusEstorno" variation="yellow" icon="heart" size="4" />
+                <Card :tax="totalDonations" text="Total de Doações" :value="totalFaturas" variation="blue" icon="bar" size="4" />
+                <Card :tax="statusRecebido" text="Total Pago" :value="totalQntPago" icon="heart" variation="green" size="4" />
+                <Card :tax="statusAguardando" text="Total Aberto" :value="totalQntAguardando" variation="yellow" icon="heart" size="4" />
+                <br><br><br><br><br>
+                <Card :tax="statusOverdue" text="Vencido / Cancelado" :value="totalQntVencido" variation="red" icon="heart" size="4" />
+                <Card :tax="statusEstorno" text="Estornado" :value="totalQntEstornado" variation="purple" icon="heart" size="4" />
+                <Card :tax="statusRecorrenciaAtiva" tax="AQQQ" text="Total Recorrente" :value="totalRecorrente" variation="green" icon="heart" size="4" />
+                <Card :tax="statusRecorrenciaInativo" text="Total Único" :value="totalRecorrenteInativo" variation="yellow" icon="heart" size="4" />
                 <br><br><br><br>
                 
                 <Filtro @filter="filtrar" />

@@ -9,7 +9,8 @@ import { getUriData, data, formataMoeda } from "../components/format.js"
 import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
 import { cpf, tel, cep } from "../components/mask.js"
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import HeaderAlt from "../components/HeaderAlt.js"
 
 export default {
     data: function () {
@@ -52,13 +53,16 @@ export default {
         Table,
         BreadCrumb,
         CardGeral,
-        HeaderDoador
+        HeaderDoador,
+        HeaderAlt
     },
     async mounted() {
         const inputs = [
             new Input('valor', 'Valor', 'text', 1, true),
             new Input('data', 'Data Vencimento', 'date', 1, true),
-            new Select('tipo', 'Tipo', 1, [
+            new Select('tipo', 'Forma de Pagamento', 1, [
+                new Option('3', 'Todos'),
+                new Option('2', 'Crédito'),
                 new Option('1', 'PIX'),
                 new Option('0', 'Boleto'),
             ]),
@@ -77,6 +81,7 @@ export default {
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
+        let fkDoador = formatRequestDoador.fk
         //  
         let donations = new ApiDoacoes()
         let requestDoacao = await donations.lista(institution.get())
@@ -90,7 +95,8 @@ export default {
         if (request.next) {
             this.info = formatRequestDoador
             this.donations = this.adapter(ids)
-            console.log(formatRequestDoador)
+            this.fkDoador = fkDoador
+            console.log(this.fkDoador)
         }
         this.totalFaturas = this.donations.length
     },
@@ -117,7 +123,8 @@ export default {
     template: `
     <div>
     <BreadCrumb text="Home" text2="Criar Fatura Doador" />
-    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" />
+    <HeaderAlt :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" :ID="fkDoador"/>
+
        
 
     <div class="relative pt-2 pb-32 bg-[#fff]">

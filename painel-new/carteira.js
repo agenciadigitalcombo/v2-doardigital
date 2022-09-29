@@ -7,6 +7,9 @@ import Table from "../components/Table.js"
 import BotaoGrupo from "../components/BotaoGrupo.js"
 import MyInstitution from "../components/myInstitution.js"
 import apiCarteira from "../components/apiCarteira.js"
+import status from "../components/status.js"
+import { data, formataMoeda, formatRecorrente } from "../components/format.js"
+
 
 export default {
     data: function() {
@@ -17,11 +20,11 @@ export default {
                 balance: null
             },
             info: { address: { bairro: null } },
-            transferencias: [],
+            extrato: [],
             cols: {
-                data: "Data e Hora",
-                value: "Valor",
-                status: "Status",
+                "Data Solicitada": d => `${d.data}`,
+                "Valor": d => `${d.valor}`,
+                status: t => status(t.status),
             },
 
         }
@@ -40,12 +43,24 @@ export default {
         let institution = new MyInstitution()
         let request = await carteira.listarCarteira(institution.get())
         let requestPayload = request.payload
+        let requestExtrato = request.payload.extrato.data
         if (request.next) {
+            this.extrato = this.adapter(requestExtrato)
             this.dados = requestPayload
             this.saldo = requestPayload.balance
             this.aLiberar = requestPayload.statistic.netValue
 
-            console.log(this.dados)
+            console.log(this.extrato)
+            
+        }
+    },
+    methods: {
+        adapter( listAll ) {
+            return listAll.map( d => ({
+                valor: formataMoeda(d.value),
+                data: data(d.dateCreated),
+                ...d,  
+            }) )
         }
     },
     template: `
@@ -72,7 +87,7 @@ export default {
                     </CardGeral>
                     
                     <CardGeral text="Histórico de Transferências" size="quatro">   
-                        <Table :rows="transferencias" :cols="cols" pagination="10" />
+                        <Table :rows="extrato" :cols="cols" pagination="10" />
                     </CardGeral>
                     
                     

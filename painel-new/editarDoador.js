@@ -7,6 +7,7 @@ import ApiDoadores from "../components/apiDoadores.js"
 import ApiAdmin from "../components/apiAdmin.js";
 import { getUriData } from "../components/format.js"
 import Jwt from "../components/jwt.js";
+import HeaderAlt from "../components/HeaderAlt.js";
 
 export default {
     data: function () {
@@ -40,7 +41,8 @@ export default {
     components: {
         BreadCrumb,
         CardGeral,
-        HeaderDoador
+        HeaderDoador,
+        HeaderAlt
     },
     async mounted() {
 
@@ -49,12 +51,12 @@ export default {
         globalThis.DadosAnotacoes = this.formDataAnotacoes
 
 
-        let ID = getUriData('id')
-        this.ID = ID
+        let CustomerID = getUriData('id')
+        this.CustomerID = CustomerID
         let institution = new MyInstitution()
         this.Inst = institution.get()
         let doador = new ApiDoadores()
-        let request = await doador.detalhe(ID)
+        let request = await doador.detalhe(CustomerID)
         let formatRequestDoador = request.payload
 
         if (request.next) {
@@ -68,6 +70,7 @@ export default {
             
         }
 
+        console.log(CustomerID)
 
 
         
@@ -133,7 +136,7 @@ export default {
             let api_doador = new ApiDoadores()
             let request = await api_doador.update_info(
                 this.Inst,
-                this.ID,
+                this.CustomerID,
                 this.customer,
                 this.formData.nome,
                 this.formData.cpf,
@@ -149,7 +152,7 @@ export default {
             )
             this.error_info = request.message
             if( request.next ) {
-                window.location.href = `#/detalhe-doador?id=${this.ID}`
+                window.location.href = `#/detalhe-doador?id=${this.CustomerID}`
             }
             
         },
@@ -161,21 +164,21 @@ export default {
             let dados = jwt.get()
             let info_adm = await api.info(dados.code)
             let request_note = await api_doador.new_note(
-                this.ID,
+                this.CustomerID,
                 dados.code,
                 info_adm.payload.nome,
                 this.formData.mensagem
             )
             this.error_note = request_note.message
             if( request_note.next ) {
-                window.location.href = `#/detalhe-doador?id=${this.ID}`
+                window.location.href = `#/detalhe-doador?id=${this.CustomerID}`
             }
         },
     },
     template: `
     <div> 
       <BreadCrumb text="Home" text2="Editar Doador" />
-      <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :gravatar="info.gravatar" />
+      <HeaderAlt :recorrente="info.recorrente" :name="info.nome" :gravatar="info.gravatar" :ID="CustomerID"/>
       <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>

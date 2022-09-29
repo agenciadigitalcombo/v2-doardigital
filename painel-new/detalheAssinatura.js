@@ -77,6 +77,7 @@ export default {
 
         let request = await doador.detalhe(fk_doador)
         let formatRequestDoador = request.payload
+        let fkDoador = formatRequestDoador.fk
 
         let sub_info = formatRequestDoador.subs.find(s => s.id == id_sub)
 
@@ -90,6 +91,8 @@ export default {
         this.formData.data = this.info.proxima
         this.formData.numero = this.info.valor
         this.formData.tipo = this.info.billingType
+        this.fkDoador = fkDoador
+        console.log(this.fkDoador)
 
         const inputs = [
             new Input('data', 'Vencimento', 'date', 2, true),
@@ -129,7 +132,7 @@ export default {
             let api = new ApiDoacoes()
             let request = await api.sub_cancel(this.fk_inst, this.id_sub)
             if( request.next ) {
-                window.location.href  = `#/detalhe-doador?id=${this.fk_doador}`
+                window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
             }else {
                 this.error = request.message
             }
@@ -145,7 +148,7 @@ export default {
                 this.formData.data
             )
             if( request.next ) {
-                window.location.href  = `/detalhe-doador?id=${this.fk_doador}`
+                window.location.href  = `/detalhe-doador?id=${this.fkDoador}`
             }else {
                 this.error = request.message
             }
@@ -164,7 +167,7 @@ export default {
 
                 <CardGeral text="Detalhe da Assinatura" size="quatro">
                     <h2 class="text-gray-500">Nome:</h2>                    
-                    <router-link :to="'detalhe-doador?id='+info.doador_fk" > 
+                    <router-link :to="'detalhe-doador?id='+this.fkDoador" > 
                         <p>{{info.doador_nome}}</p>
                     </router-link >
                     <br>

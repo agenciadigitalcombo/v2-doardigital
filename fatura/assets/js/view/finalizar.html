@@ -1,0 +1,210 @@
+<div :style="{ backgroundColor: backgroundColor }" class="d-block pt-5">
+    <c-loading v-if="submitStatus === 'CARREGAR'"></c-loading>
+    <div class="container">
+        <img class="d-block mx-auto" style="width: 250px;" v-bind:src="logo">
+        <div class="card p-5 mt-5">
+            <form method="POST" action="javascript:void(0)" class="row form" autocomplete="off" @submit="transacao">
+                <div class="col-12 col-lg-6 p-5">
+                    <div class="card-title mb-10">
+                        <h2>DIGITE SUAS INFORMAÇÕES</h2>
+                    </div>
+                    <label class="required form-label">Nome</label>
+                    <input v-model="nome" class="form-control form-control-solid" placeholder="Nome" required />
+                    <div class="mb-7"></div>
+                    <label class="required form-label">CPF</label>
+                    <input v-model="cpf" v-mask="'###.###.###-##'" placeholder="000.000.000-00"
+                        class="form-control form-control-solid" required />
+                    <div class="mb-7"></div>
+                    <label class="required form-label">E-mail</label>
+                    <input v-model="email" type="email" class="form-control form-control-solid" required
+                        placeholder="Email" />
+                    <div class="mb-7"></div>
+                    <label class="required form-label">Telefone</label>
+                    <input v-model.trin="$v.telefone.$model" v-mask="'(##) # ####-####'" placeholder="(00) 0 0000-0000"
+                        class="form-control form-control-solid" required />
+                    <div class="erros" v-if="$v.telefone.$error">
+                        <div class="erro_texte" v-if="!$v.telefone.required">
+                            O Telefone é necessária
+                        </div>
+                        <div class="erro_texte" v-if="!$v.telefone.minLength">
+                            Telefone tem de ter no minimo 10 número.
+                        </div>
+                    </div>
+                    <div class="mb-7"></div>
+                    <div class="card-title mb-10">
+                        <h2>INFORME SEU ENDEREÇO</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <label class="required form-label">CEP</label>
+                            <input v-model.trin="$v.cep.$model" @blur="searchCep" @input="mask_cep"
+                                class="form-control form-control-solid" required v-mask="'########'"
+                                placeholder="00000-000" />
+                            <div class="erros" v-if="$v.cep.$error">
+                                <div class="erro_texte" v-if="!$v.cep.required">
+                                    O CEP é necessária
+                                </div>
+                                <div class="erro_texte" v-if="!$v.cep.minLength">
+                                    O CEP São 8 números.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="required form-label">Endereço</label>
+                            <input v-model="logadouro" class="form-control form-control-solid" required
+                                placeholder="Endereço" />
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="required form-label">Número </label>
+                            <input v-model="numero" class="form-control form-control-solid" required
+                                placeholder="Numero" />
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="required form-label">Bairro</label>
+                            <input v-model="bairro" class="form-control form-control-solid" required
+                                placeholder="Bairro" />
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="required form-label">Estado</label>
+                            <input v-model="estado" required class="form-control form-control-solid"
+                                placeholder="Estado" />
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="required form-label">Cidade</label>
+                            <input v-model="cidade" required class="form-control form-control-solid"
+                                placeholder="Cidade" />
+                        </div>
+                    </div>
+                    <div class="mb-5"></div>
+                    <label class="required form-label">
+                        <input type="checkbox" required />
+                        Aceito receber as notificações no WhatsApp
+                    </label>
+                    <label class="required form-label">
+                        <input type="checkbox" required />
+                        Aceito receber as notificações por e-mail
+                    </label>
+                    <label class="form-label">
+                        <input type="checkbox" />
+                        Aceito receber e-mails e WhatsApp com novidades
+                    </label>
+                </div>
+                <div class="col-12 col-lg-6 p-5">
+                    <div class="card-title mb-10">
+                        <h1>
+                            Total a doar: R$ {{ ver | is_price }} reais
+                            <span v-show="recorrente == '1'">
+                                por mês
+                            </span>
+                        </h1>
+                    </div>
+                    <div class="gap-5 d-flex">
+                        <label class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
+                            <i class="fs-1 mb-2 bi bi-credit-card"></i> <br>
+                            <input type="radio" v-model="tipo_pagamento" name="tipo" value="CREDIT_CARD">
+                            CARTÃO
+                        </label>
+                        <label class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
+                            <i class="fs-1 mb-2 bi bi-upc"></i> <br>
+                            <input type="radio" v-model="tipo_pagamento" name="tipo" value="BOLETO">
+                            BOLETO
+                        </label>
+                        <label class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
+                            <i class="fs-1 mb-2 bi bi-qr-code"></i> <br>
+                            <input type="radio" v-model="tipo_pagamento" name="tipo" value="PIX">
+                            PIX
+                        </label>
+                    </div>
+                    <div class="mb-5"></div>
+                    <p v-show="tipo_pagamento == 'PIX'">
+                        Sua chave <b>PIX</b> será gerada em instantes e você já pode copia-lá na próxima página.
+                    </p>
+                    <p v-show="tipo_pagamento == 'BOLETO'">
+                        Seu <b>boleto</b> será gerado em instantes e você já pode vê-lo na próxima página.
+                    </p>
+                    <p v-show="tipo_pagamento == 'CREDIT_CARD'">
+                        Todas as transações são <b>segura</b> e <b>criptografadas</b>.
+                        As informações do cartão de credito <b>nunca</b>  são
+                        armazenado em nossos servidores.
+                    </p>
+                    <div v-if="tipo_pagamento == 'CREDIT_CARD'" class="text-center">
+                        <c-card :card_numero="card_numero" :card_nome="card_nome" :card_validade="card_validade"
+                            :card_cvv="card_cvv"></c-card>
+                    </div>
+                    <div v-if="tipo_pagamento == 'CREDIT_CARD'" class="row mb-5">
+                        <div class="col-12">
+                            <label class="col-lg-10 col-form-label required fw-bold fs-6">
+                                Número cartão
+                            </label>
+                            <input v-model="card_numero" v-mask="'#### #### #### ####'"
+                                placeholder="0000 0000 0000 0000"
+                                class="form-control form-control-lg form-control-solid" required />
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="col-lg-12 col-form-label required fw-bold fs-6">
+                                    Validade
+                                </label>
+                                <input v-model="card_validade"
+                                    class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                    v-mask="'##/##'" placeholder="MM/YY" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="col-lg-12 col-form-label required fw-bold fs-6">CVV</label>
+                                <input v-model="card_cvv" type="text" name="cvv" v-mask="'###'" placeholder="123"
+                                    required class="form-control form-control-lg form-control-solid" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="col-lg-10 col-form-label required fw-bold fs-6">
+                                Nome Completo
+                            </label>
+                            <input v-model="card_nome" class="form-control form-control-lg form-control-solid"
+                                placeholder="Nome Completo" required />
+                        </div>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-center py-6 px-9">
+                        <button type="submit" class="btn btn-success p-5">
+                            DOAR AGORA!
+                        </button>
+                    </div>
+                    <div class="col-12 text-center">
+                        <img width="250" src="../doacao/assets/image/bandeiras.png" class="mt-4 mx-auto mb-5">
+                    </div>
+                    <span class="alert alert-warning mt-1 d-flex" v-if="error">
+                        {{error}}
+                    </span>
+                    <div class="text-center">
+                        <img height="30" src="../doacao/assets/logo/logo-dc-doar.png">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+        <div class="card text-center">
+            <p class="d-block mb-2 py-5">
+                Os seus dados pessoais serão utilizados para processar a sua compra, <br>
+                apoiar a sua experiência em todo este site e para outros <br>
+                fins descritos na nossa
+                <a href="/cadastro/#/termos" target="_blank">
+                    política de privacidade.
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+    <div class="footer py-4 d-flex flex-lg-column a-footer">
+        <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <div class="text-dark order-2 order-md-1">
+                <span class="text-muted fw-bold me-1"> 2022&copy; - </span>
+                <a href="https://doardigital.com.br" target="_blank" class="text-gray-800 text-hover-primary">
+                    Doar Digital
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

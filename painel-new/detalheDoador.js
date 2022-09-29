@@ -9,14 +9,17 @@ import { getUriData, data, formataMoeda } from "../components/format.js"
 import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
 import { cpf, tel, cep } from "../components/mask.js"
+import Anotacao from "../components/Anotacao.js"
 
 export default {
     data: function () {
         return {
             totalFaturas: 0,
             info: {
-                address: { bairro: null }
+                address: { bairro: null },
+                payload: { notes: { message: null }}
             },
+            totalAnotacoes: [],
             donations: [],
             assinaturas: [],
             subs: [],
@@ -32,7 +35,9 @@ export default {
             colsSub: {
                 "Data": s => s.dateCreated,
                 "Valor": s => s.value,
-                "Tipo": s => s.type,
+                "Tipo": s => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
+                ${s.type}
+                </span>`,
                 "Status": s => s.status,
                 "Ação": s => actions(`detalhe-assinatura?sub_id=${s.id}&doador_fk=${this.ID}`, 'fa-solid fa-eye', 'blue'),
             },
@@ -45,7 +50,8 @@ export default {
         Table,
         BreadCrumb,
         CardGeral,
-        HeaderDoador
+        HeaderDoador,
+        Anotacao
     },
     async mounted() {
         let ID = getUriData('id')
@@ -72,7 +78,11 @@ export default {
                 type: s.billingType,
             }) )
         }
+        this.numeroAssinatura = request.payload.subs.length
+        this.numeroAnotacoes = request.payload.payload.notes.length
         this.totalFaturas = this.donations.length
+        this.totalAnotacoes = formatRequestDoador.payload.notes.reverse()
+        console.log(request.payload.subs)
     },
 
     methods: {
@@ -96,7 +106,7 @@ export default {
     template: `
     <div>
     <BreadCrumb text="Home" text2="Detalhe Doador" />
-    <HeaderDoador :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" :ID="ID" />
+    <HeaderDoador :anotacoes="numeroAnotacoes" :assinaturas="numeroAssinatura" :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" :ID="ID" />
        
 
     <div class="relative pt-2 pb-32 bg-[#fff]">
@@ -138,6 +148,9 @@ export default {
                     <br>
                 </CardGeral>
                 <CardGeral text="Anotações" size="tres">
+
+                <Anotacao v-for="item in totalAnotacoes" :text="item.message" :data="item.date" :autor="item.author_name" />
+
                 </CardGeral>
                 <CardGeral text="Histórico de Doações" size="sete">
                 <Table :rows="donations" :cols="cols" pagination="10" />
