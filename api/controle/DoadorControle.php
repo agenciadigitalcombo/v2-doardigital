@@ -57,10 +57,10 @@ class DoadorControle extends Controle
     static function detalhe()
     {
         self::requireInputs([
-            "token" => "informe um token",
+            // "token" => "informe um token",
             "fk" => "Informe o identificador"
         ]);
-        self::privateRouter();
+        // self::privateRouter();
         $fk = $_REQUEST['fk'];
         $doador = new Doador();
         $address = new Endereco();

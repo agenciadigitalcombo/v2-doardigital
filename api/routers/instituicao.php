@@ -10,3 +10,4 @@ router('/instituicao/balance', 'InstituicaoControle@balance');
 router('/instituicao/set-adm', 'InstituicaoControle@setAdm');
 router('/instituicao/saque', 'InstituicaoControle@saque');
 router('/instituicao/subscription-cancel', 'InstituicaoControle@cancel');
+router('/instituicao/subscription-update', 'InstituicaoControle@subUpdate');

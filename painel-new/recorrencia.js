@@ -12,6 +12,8 @@ export default {
     data: function () {
         return {
             donations: [],
+            totalQuantidade: 0,
+            totalMoney:  0,
             cols: {
                 "Doador": d => `${d.name} <br/> ${d.email}`,
                 "Valor": d => `${d.value}`,
@@ -23,7 +25,6 @@ export default {
                 </span>`,
                 "Ação": e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
-
         }
     },
     components: {
@@ -36,9 +37,18 @@ export default {
         let donations = new ApiDoacoes()
         let institution = new MyInstitution()
         let request = await donations.lista(institution.get())
-        console.log(request.payload)
         if (request.next) {
-            this.donations = this.adapter(request.payload)
+            let hoje = moment().format('YYYY-MM-DD')
+            let all_donations = request.payload
+            all_donations = this.adapter(all_donations)
+            all_donations = all_donations.filter(d => {
+                let data_donation = d.data
+                return hoje > data_donation
+            })
+            all_donations = all_donations.reverse()
+            this.donations = all_donations
+            this.totalQuantidade = all_donations.length
+            this.totalMoney = this.somaAll(all_donations)
         }
     },
     methods: {
@@ -48,37 +58,33 @@ export default {
                 email: d.doador_email,
                 data: data(d.data),
                 value: formataMoeda(d.valor),
+                price: d.valor,
                 status: d.status_pagamento,
                 tipo: d.tipo_pagamento,
                 id: d.fatura_id,
                 recorrente: formatRecorrente(d.recorrente)
             }))
-
-        }
+        },
+        somaAll(ar) {
+            return formataMoeda(ar.reduce((acc, el) => {
+                acc += +el.price
+                return acc
+            }, 0))
+        },
     },
     template: `
     <div>
-    <BreadCrumb text="Home" text2="Doações Recorrentes" />
-
-    
-
-   
-        
-
-
+        <BreadCrumb text="Home" text2="Doações Recorrentes" />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                <Card text="Total de Doações Previstas" value="300" variation="blue" icon="bar" size="4" />
-                <Card text="Total em Doações Previstas" value="300" variation="blue" icon="bar" size="4" />
-                
+                    <Card text="Total de Doações Previstas" :value="totalQuantidade" variation="blue" icon="bar" size="2" />
+                    <Card text="Total em Doações Previstas" :value="totalMoney" variation="blue" icon="bar" size="2" />
                 </div>
                 <Table :rows="donations" :cols="cols" pagination="12" />
              </div>
           </div>
-       </div>
-
-       
+       </div>       
     </div>`,
 }

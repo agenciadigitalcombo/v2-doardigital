@@ -113,7 +113,6 @@ export default {
             })
         },
         filtrar(payload) {
-
             let dados = Array.from(this.donationsCopy.map(x => x))
             if (payload.search) {
                 dados = dados.filter(t => {
@@ -186,13 +185,11 @@ export default {
             this.totalFaturas = dados.length
             this.donations = dados
             this.resumos(this.donations)
-
         }
     },
     template: `
     <div>
-    <BreadCrumb text="Home" text2="Doações" />
-
+        <BreadCrumb text="Home" text2="Doações" />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
@@ -205,17 +202,12 @@ export default {
                 <Card :tax="statusEstorno" text="Estornado" :value="totalQntEstornado" variation="purple" icon="heart" size="4" />
                 <Card :tax="statusRecorrenciaAtiva" tax="AQQQ" text="Total Recorrente" :value="totalRecorrente" variation="green" icon="heart" size="4" />
                 <Card :tax="statusRecorrenciaInativo" text="Total Único" :value="totalRecorrenteInativo" variation="yellow" icon="heart" size="4" />
-                <br><br><br><br>
-                
+                <br><br><br><br>                
                 <Filtro @filter="filtrar" />
-                
-                
                 </div>
                 <Table :rows="donations" :cols="cols" pagination="50" />
              </div>
           </div>
        </div>
-
-       
     </div>`,
 }

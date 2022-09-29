@@ -354,7 +354,7 @@ class InstituicaoControle extends Controle
         $banco->table("split");
         $banco->where([
             "fk" => $company["institution_fk"]
-        ]);        
+        ]);
         $company["split"] = Split::porter($banco->select()[0] ?? []);
 
         self::printSuccess(
@@ -432,10 +432,10 @@ class InstituicaoControle extends Controle
         $doador = new Banco();
         $doador->table('doador');
         $allDoador = $doador->select();
-        $allCpf = array_reduce($allDoador, function($acc, $d) {
+        $allCpf = array_reduce($allDoador, function ($acc, $d) {
             $acc[$d['external_fk']] = $d['cpf'];
             return $acc;
-        },[]);
+        }, []);
 
         $faturas = array_map(function ($charge) use ($assinantes, $allCpf) {
             $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
@@ -522,10 +522,10 @@ class InstituicaoControle extends Controle
         //     $responsibleEmail
         // );
 
-        
+
         $banks = $conta->getBank();
         $bankAccountInfoId = $banks["data"][0]["bankAccountInfoId"] ?? null;
-        if(!$bankAccountInfoId) {
+        if (!$bankAccountInfoId) {
             self::printError(
                 "Instituição não possuem conta",
                 []
@@ -558,7 +558,8 @@ class InstituicaoControle extends Controle
         );
     }
 
-    static function cancel() {
+    static function cancel()
+    {
 
         self::requireInputs([
             "token" => "informe um token",
@@ -575,6 +576,43 @@ class InstituicaoControle extends Controle
         $res_asa = $asa_cliente->cancel($sub_fk);
         self::printSuccess(
             "Cancelado com sucesso",
+            $res_asa
+        );
+    }
+
+    static function subUpdate()
+    {
+
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe uma Instituição",
+            "sub_fk" => "Informe a subscrição",
+            "value" => "Informe o valor",
+            "tipo" => "Informe um tipo",
+            "nextDueDate" => "Informe uma data",
+        ]);
+        self::privateRouter();
+
+        $institution_fk = $_REQUEST["institution_fk"];
+        $sub_fk = $_REQUEST["sub_fk"];
+        $value = $_REQUEST["value"];
+        $nextDueDate = $_REQUEST["nextDueDate"];
+        $tipo = $_REQUEST["tipo"];
+
+        $inst = new Instituicao();
+        $asa_cliente = new AsaasCliente();
+
+        $key_asa = $inst->get_key($institution_fk);
+        $asa_cliente->set_api_key($key_asa);
+        $res_asa = $asa_cliente->updateSubscription(
+            $sub_fk,
+            $tipo,
+            $value,
+            $nextDueDate
+        );
+
+        self::printSuccess(
+            "Atualizado com sucesso",
             $res_asa
         );
     }
