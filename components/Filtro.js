@@ -8,9 +8,9 @@ export default {
         return {
             search: null,
             date: "",
-            status: null,
+            status: "",
             tipo: "",
-            recorrencia: null,
+            recorrencia: '',
             dashboard: false,
             dataLabel: [],
             icons:{
@@ -31,27 +31,14 @@ export default {
         }
     },
     mounted() {
-
-        function timeStempToDate( time ) {
-            var date = new Date(time);
-            var m = date.getMonth() + 1;
-            var y = date.getFullYear();
-            var d = date.getDate();
-            return `${d}/${m}/${y}`
-        }
-
-        let dataObj =  new Date()
-        let dia = 86400 * 1000
-        let hoje = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).valueOf()
-
+        let format_data = 'YYYY-MM-DD' 
         this.dataLabel = [
-            {label: "Hoje", value: hoje },
-            {label: "Ontem", value: hoje - dia },
-            {label: "Essa semana", value: hoje - (dia*dataObj.getDay()) },
-            {label: "Semana passada", value: hoje - ((dataObj.getDay()+7) *dia)  },
-            {label: "Esse mês", value: hoje - (dia*(dataObj.getDate()-1)) },
-            // {label: "Mês passado", value: hoje - ((dataObj.getDate()+28)*dia) },
-        ]
-       
+            {label: "Hoje", value: moment().format(format_data) },
+            {label: "Ontem", value: moment().subtract(1, 'day').format(format_data) },
+            {label: "Essa semana", value: moment().startOf('week').format(format_data) },
+            {label: "Semana passada", value: moment().startOf('week').subtract(1, 'week').format(format_data)  },
+            {label: "Esse mês", value: moment().startOf('month').format(format_data) },
+            {label: "Mês passado", value: moment().startOf('month').subtract(1, 'month').format(format_data) },
+        ]       
     }
 }

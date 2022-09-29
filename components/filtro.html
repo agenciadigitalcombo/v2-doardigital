@@ -24,13 +24,13 @@
         
       </select>
 
-      <select
+      <select v-model="status" @change="filter"
         class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Status</option>
-        <option value="fully-furnished">Vencido</option>
-        <option value="partially-furnished">Pendente</option>
-        <option value="partially-furnished">Pago</option>
-        <option value="partially-furnished">Estornado</option>
+        <option value="vencido">Vencido</option>
+        <option value="pendente">Pendente</option>
+        <option value="pago">Pago</option>
+        <option value="estornado">Estornado</option>
       </select>
 
       <select v-model="tipo" @change="filter"
@@ -41,11 +41,11 @@
         <option value="CREDIT_CARD">Crédito</option>
       </select>
 
-      <select
+      <select  v-model="recorrencia" @change="filter"
         class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Recorrente</option>
-        <option value="200">Ativo</option>
-        <option value="400">Inativo</option>
+        <option value="Ativa">Ativa</option>
+        <option value="Inativo">Inativo</option>
       </select>
 
 

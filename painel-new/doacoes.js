@@ -44,35 +44,45 @@ export default {
         let institution = new MyInstitution()
         let request = await donations.lista(institution.get())
         if (request.next) {
-            this.donations = this.adapter(request.payload)
-            this.donationsCopy = this.adapter(request.payload)
+            let hoje = moment().format('YYYY-MM-DD')
+            let all_donations = request.payload
+            all_donations = this.adapter(all_donations)
+            all_donations = all_donations.filter(d => {
+                let data_donation = d.data
+                return hoje <= data_donation
+            })
+            this.donations = all_donations
+            this.donationsCopy = all_donations
         }
+        this.resumos(this.donations)
 
-        this.statusAguardando = this.somaAll(this.donations.filter(d => d.status == 'PENDING'))
-        this.statusOverdue = this.somaAll(this.donations.filter(d => d.status == 'OVERDUE'))
-        this.statusRecebido = this.somaAll(this.donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
-        this.statusEstorno = this.somaAll(this.donations.filter(d => d.status == 'REFUNDED'))
-        this.statusRecorrenciaAtiva = this.somaAll(this.donations.filter(d => d.recorrente == 'Ativa'))
-        this.statusRecorrenciaInativo = this.somaAll(this.donations.filter(d => d.recorrente == 'Inativo'))
-        //
-        this.qntStatusAguardando = this.donations.filter(d => d.status == 'PENDING')
-        this.qntStatusVencido = this.donations.filter(d => d.status == 'OVERDUE')
-        this.qntStatusPago = this.donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED')
-        this.qntStatusEstornado = this.donations.filter(d => d.status == 'REFUNDED')
-        this.qntRecorrenteAtivo = this.donations.filter(d => d.recorrente == 'Ativa')
-        this.qntRecorrenteInativo = this.donations.filter(d => d.recorrente == 'Inativo')
-        //
-        this.totalRecorrente = this.qntRecorrenteAtivo.length
-        this.totalRecorrenteInativo = this.qntRecorrenteInativo.length
-        this.totalDonations = this.somaAll(this.donations)
-        this.totalFaturas = this.donations.length
-        this.totalQntAguardando = this.qntStatusAguardando.length
-        this.totalQntVencido = this.qntStatusVencido.length
-        this.totalQntPago = this.qntStatusPago.length
-        this.totalQntEstornado = this.qntStatusEstornado.length
-        console.log(this.donations)
+
     },
     methods: {
+        resumos(all_donations) {
+            this.statusAguardando = this.somaAll(all_donations.filter(d => d.status == 'PENDING'))
+            this.statusOverdue = this.somaAll(all_donations.filter(d => d.status == 'OVERDUE'))
+            this.statusRecebido = this.somaAll(all_donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
+            this.statusEstorno = this.somaAll(all_donations.filter(d => d.status == 'REFUNDED'))
+            this.statusRecorrenciaAtiva = this.somaAll(all_donations.filter(d => d.recorrente == 'Ativa'))
+            this.statusRecorrenciaInativo = this.somaAll(all_donations.filter(d => d.recorrente == 'Inativo'))
+            //
+            this.qntStatusAguardando = all_donations.filter(d => d.status == 'PENDING')
+            this.qntStatusVencido = all_donations.filter(d => d.status == 'OVERDUE')
+            this.qntStatusPago = all_donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED')
+            this.qntStatusEstornado = all_donations.filter(d => d.status == 'REFUNDED')
+            this.qntRecorrenteAtivo = all_donations.filter(d => d.recorrente == 'Ativa')
+            this.qntRecorrenteInativo = all_donations.filter(d => d.recorrente == 'Inativo')
+            //
+            this.totalRecorrente = this.qntRecorrenteAtivo.length
+            this.totalRecorrenteInativo = this.qntRecorrenteInativo.length
+            this.totalDonations = this.somaAll(all_donations)
+            this.totalFaturas = all_donations.length
+            this.totalQntAguardando = this.qntStatusAguardando.length
+            this.totalQntVencido = this.qntStatusVencido.length
+            this.totalQntPago = this.qntStatusPago.length
+            this.totalQntEstornado = this.qntStatusEstornado.length
+        },
         somaAll(ar) {
             return formataMoeda(ar.reduce((acc, el) => {
                 acc += +el.price
@@ -87,7 +97,6 @@ export default {
         },
         adapter(listAll) {
             return listAll.map(d => {
-                let [Y, M, D] = d.data.split('-')
                 return {
                     name: d.doador_nome,
                     email: d.doador_email,
@@ -98,20 +107,12 @@ export default {
                     status: d.status_pagamento,
                     tipo: d.tipo_pagamento,
                     id: d.fatura_id,
-                    timestamp: new Date(Y, (M - 1), D).valueOf(),
+                    timestamp: d.data,
                     recorrente: formatRecorrente(d.recorrente)
                 }
             })
         },
         filtrar(payload) {
-
-            function timeStempToDate(time) {
-                var date = new Date(time);
-                var m = date.getMonth() + 1;
-                var y = date.getFullYear();
-                var d = date.getDate();
-                return `${d}/${m}/${y}`
-            }
 
             let dados = Array.from(this.donationsCopy.map(x => x))
             if (payload.search) {
@@ -130,13 +131,41 @@ export default {
                     return t.tipo == payload.tipo
                 })
             }
-            if (payload.date) {
-                let hoje = this.hoje
-                let dataSelecionada = +payload.date
-                let dia = 86400 * 1000
-                let amanha = hoje + dia
+            if (payload.recorrencia.length > 2) {
+                dados = dados.filter(t => {
+                    return t.recorrente == payload.recorrencia
+                })
+            }            
+            if (payload.status.length > 2) { 
+
+                if( payload.status == 'vencido' ) {
+                    dados = dados.filter(t => {
+                        return t.status == 'OVERDUE'
+                    })
+                }
+                if( payload.status == 'pendente' ) {
+                    dados = dados.filter(t => {
+                        return t.status == 'PENDING'
+                    })
+                }
+                if( payload.status == 'pago' ) {
+                    dados = dados.filter(t => {
+                        return t.status == 'RECEIVED' || t.status == 'CONFIRMED'
+                    })
+                }
+                if( payload.status == 'estornado' ) {
+                    dados = dados.filter(t => {
+                        return t.status == 'REFUNDED'
+                    })
+                }                
+            }
+            if (payload.date) {                 
+ 
+                let hoje = moment().format('YYYY-MM-DD')
+                let dataSelecionada = payload.date
+
                 let presente = hoje == dataSelecionada
-                let ontem = (hoje - dia) == dataSelecionada
+                let ontem = dataSelecionada == moment().subtract(1, 'day').format('YYYY-MM-DD')
                 if (presente) {
                     dados = dados.filter(t => {
                         let dataDonation = t.timestamp
@@ -150,14 +179,14 @@ export default {
                 } else {
                     dados = dados.filter(t => {
                         let dataDonation = t.timestamp
-                        return dataDonation >= dataSelecionada && dataDonation <= hoje
+                        return dataDonation >= dataSelecionada
                     })
                 }
             }
             this.totalFaturas = dados.length
-            this.totalDonations = this.somaAll(dados)
             this.donations = dados
-            
+            this.resumos(this.donations)
+
         }
     },
     template: `
@@ -182,7 +211,7 @@ export default {
                 
                 
                 </div>
-                <Table :rows="donations" :cols="cols" pagination="5" />
+                <Table :rows="donations" :cols="cols" pagination="50" />
              </div>
           </div>
        </div>
