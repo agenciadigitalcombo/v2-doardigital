@@ -15,7 +15,8 @@ export default {
             transferencias: [],
             cols: {
                 "Valor": d => `${d.value}`,
-                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue'),
+                "Apagar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue'),
             },
 
         }
@@ -47,6 +48,9 @@ export default {
                 value: formataMoeda(d.price),
                 ...d,  
             }) )
+        },
+        deletar() {
+            alert('tafarel')
         }
     },
     formataMoeda,

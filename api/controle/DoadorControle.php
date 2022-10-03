@@ -84,6 +84,7 @@ class DoadorControle extends Controle
         $payload["subs"] = $asa->subsByCustomer($payload["pagamento_fk"])["data"];
         $payload["subs"] = array_values( array_filter( $payload["subs"], function($s) use ($payload) { return $s['customer'] == $payload["pagamento_fk"];} ) );
         $payload["payload"] = json_decode( $payload["payload"] ) ?? [];
+        $payload["recorrente"] = count( $payload["subs"] ) > 0
         self::printSuccess(
             "Informação doador",
             $payload

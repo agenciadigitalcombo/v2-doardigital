@@ -30,7 +30,7 @@ export default {
     methods: {
         freeze(payload) {
             return JSON.parse( JSON.stringify(payload) )
-        }
+        },
     }
     
 }

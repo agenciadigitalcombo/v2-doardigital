@@ -61,6 +61,9 @@ export default {
         let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
 
+        console.clear()
+        console.log(formatRequestDoador)
+
         let donations = new ApiDoacoes()
         let requestDoacao = await donations.lista(institution.get())
         let formatRequest = Object.values(requestDoacao)
@@ -80,9 +83,8 @@ export default {
         }
         this.numeroAssinatura = request.payload.subs.length
         this.totalFaturas = this.donations.length
-        this.totalAnotacoes = formatRequestDoador.payload.notes.reverse()
-        this.numeroAnotacoes = request.payload.payload.notes.length 
-        console.log(totalFaturas)
+        this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
+        this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
     },
 
     methods: {

@@ -20,18 +20,13 @@ export default {
         CardGeral,
     },
     async mounted() {
-
         let institution = new MyInstitution()
         let Api = new ApiPlanos()
-
         this.inst_fk = institution.get()
         this.ID = getUriData('id')
-
         let request = await Api.info(this.ID)
         this.formData.price = request.payload.price
-
         this.renderForm()
-
     },
     methods: {
         renderForm() {
@@ -42,7 +37,7 @@ export default {
             const form = new Form(inputs)
             globalThis.Dados = this.formData
             this.inputs = form.render()
-        },        
+        },
         async atualizar() {
             this.error = null
             let Api = new ApiPlanos()
@@ -52,10 +47,9 @@ export default {
                 this.formData.price
             )
             this.error = request.message
-            if(request.next) {
+            if (request.next) {
                 window.location.href = "#/planos"
             }
-           
         }
     },
     filters: {
@@ -69,13 +63,12 @@ export default {
              <div>
                 <div class="flex flex-wrap">                
                     <CardGeral text="Editar Plano" size="quatro">
-                        <form class="js-form grid grid-cols-4 gap-4"  action="javascript:void(0)" method="POST" v-html="inputs" @submit="atualizar"></form>
+                        <form class="js-form grid grid-cols-4 gap-4" action="javascript:void(0)" method="POST" v-html="inputs" @submit="atualizar"></form>
                         <div v-show="error">{{error}}</div>
                     </CardGeral>
                 </div>
              </div>
           </div>
-       </div>
-    
+       </div>    
     </div>`,
 }
