@@ -61,9 +61,6 @@ export default {
         let request = await doador.detalhe(ID)
         let formatRequestDoador = request.payload
 
-        console.clear()
-        console.log(formatRequestDoador)
-
         let donations = new ApiDoacoes()
         let requestDoacao = await donations.lista(institution.get())
         let formatRequest = Object.values(requestDoacao)
