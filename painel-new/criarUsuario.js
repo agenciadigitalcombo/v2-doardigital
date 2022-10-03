@@ -8,10 +8,22 @@ import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
+import apiAdmin from "../components/apiAdmin.js"
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 
 export default {
     data: function() {
         return {
+            inputs: "",
+            name: "",
+            lastName: "",
+            email: "",
+            data: "",
+            cpf: "",
+            formData: {
+                name: "John",
+                lastName: "Hoffmann"
+            },
             transferencias: [],
             cols: {
                 value: d => `${d.value}`,
@@ -30,38 +42,50 @@ export default {
         Table
     },
     async mounted() {
-        let transferencias = new ApiPlanos()
+        let admin = new apiAdmin()
         let institution = new MyInstitution()
         let apiinstituicao = new ApiInstitution()
-        let request = await apiinstituicao.list(institution.get())
+        let request = await admin.list_all_subs(institution.get())
         let requestTransform = request.payload
         if(request.next) {
-            console.log(request)
+            console.log(requestTransform)
 
         }
+        const inputs = [
+            new Input('name', 'Nome', 'text', 2),
+            new Input('email', 'Email', 'email', 2, true),
+            new Input('phone', 'Telefone', 'text', 2),
+            new Input('password', 'Senha', 'text', 2, true),
+            new Button('Criar Usuário'),
+        ]
+        globalThis.Dados = this.formData
+        const form = new Form(inputs)
+        this.inputs = form.render()
 
     },
     methods: {
         adapter( listAll ) {
             return listAll.map( d => ({
-                value: d.price,
                 ...d,  
             }) )
+        },
+        atualizar() {
+            
+            alert('tafarellll')
         }
     },
     template: `
     <div>
     
     
-    <BreadCrumb text="Home" text2="Minhas Instituições" />
-    {{planos}}
+    <BreadCrumb text="Home" text2="Criar Usuário" />
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Instituições" size="quatro">
-                <Table :rows="transferencias" :cols="cols" pagination="10" />
+                <CardGeral text="Criar Usuário" size="quatro">
+                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
                 </CardGeral>
                 
                 

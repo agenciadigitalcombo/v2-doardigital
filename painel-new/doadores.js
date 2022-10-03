@@ -40,7 +40,7 @@ export default {
         let institution = new MyInstitution()
         let request = await doadores.lista(institution.get())
         if (request.next) {
-            this.doadores = this.adapter(request.payload)
+            this.doadores = this.adapter(request.payload.reverse())
             this.doadoresCopy = this.adapter(request.payload)
         }
         this.statusRecorrente = this.somaAll(this.doadores.filter(d => d.recorrente === true))

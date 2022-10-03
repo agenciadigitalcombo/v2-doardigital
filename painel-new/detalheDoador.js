@@ -79,10 +79,10 @@ export default {
             }) )
         }
         this.numeroAssinatura = request.payload.subs.length
-        this.numeroAnotacoes = request.payload.payload.notes.length
         this.totalFaturas = this.donations.length
         this.totalAnotacoes = formatRequestDoador.payload.notes.reverse()
-        console.log(request.payload.subs)
+        this.numeroAnotacoes = request.payload.payload.notes.length 
+        console.log(totalFaturas)
     },
 
     methods: {

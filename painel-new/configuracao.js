@@ -2,8 +2,8 @@ import Card from "../components/Card.js"
 import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
-import { Form, Input, Button } from "../components/Form.js";
-import CardGeral from "../components/CardGeral.js";
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import CardGeral from "../components/CardGeral.js"
 
 export default {
    data: function () {
@@ -22,7 +22,12 @@ export default {
    mounted() {
       const inputs = [
          new Input('siteName', 'Título do Site', 'text', 4),
-         new Input('scripts', 'Scripts Javascript (Header)', 'email', 4, true),
+         new Text('scripts', 'Scripts Javascript (Header)', 4, true),
+         new Select('status', 'Status', 3, [
+             new Option('1', 'Ativo'),
+             new Option('0', 'Inativo'),
+         ]),
+         new Input('cor', 'Cor do Site', 'color', 1),
          new Button('Atualizar'),
       ]
       globalThis.Dados = this.formData
@@ -45,7 +50,7 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Alterar Configurações" size="quatro">   
+                <CardGeral text="Alterar Configurações do Site" size="quatro">   
         <div class="mx-auto w-[90%] lg:w-[95%] pt-8"> 
              <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>    
          </div>

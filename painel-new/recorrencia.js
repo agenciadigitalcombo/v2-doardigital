@@ -39,7 +39,7 @@ export default {
         let request = await donations.lista(institution.get())
         if (request.next) {
             let hoje = moment().format('YYYY-MM-DD')
-            let all_donations = request.payload
+            let all_donations = request.payload.reverse()
             all_donations = this.adapter(all_donations)
             all_donations = all_donations.filter(d => {
                 let data_donation = d.data

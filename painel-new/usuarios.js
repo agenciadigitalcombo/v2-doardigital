@@ -7,15 +7,16 @@ import Table from "../components/Table.js"
 import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
-import { getUriData, formataMoeda } from "../components/format.js"
+import ApiInstitution from "../components/apiInstitution.js"
+import apiAdmin from "../components/apiAdmin.js"
 
 export default {
     data: function() {
         return {
             transferencias: [],
             cols: {
-                "Valor": d => `${d.value}`,
-                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                value: d => `${d.value}`,
+                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -30,38 +31,36 @@ export default {
         Table
     },
     async mounted() {
-        let transferencias = new ApiPlanos()
+        let admin = new apiAdmin()
         let institution = new MyInstitution()
-        let request = await transferencias.listarPlanoDigital(institution.get())
+        let apiinstituicao = new ApiInstitution()
+        let request = await admin.list_all_subs(institution.get())
         let requestTransform = request.payload
         if(request.next) {
-            this.transferencias = this.adapter(requestTransform)
-
             console.log(requestTransform)
+
         }
 
     },
     methods: {
         adapter( listAll ) {
             return listAll.map( d => ({
-                value: formataMoeda(d.price),
                 ...d,  
             }) )
         }
     },
-    formataMoeda,
     template: `
     <div>
     
     
-    <BreadCrumb text="Home" text2="Planos" />
+    <BreadCrumb text="Home" text2="Usuários" />
+    {{planos}}
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Planos" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
+                <CardGeral text="Lista de Usuários" size="quatro">
                 <Table :rows="transferencias" :cols="cols" pagination="10" />
                 </CardGeral>
                 

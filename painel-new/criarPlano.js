@@ -7,15 +7,19 @@ import Table from "../components/Table.js"
 import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
-import { getUriData, formataMoeda } from "../components/format.js"
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 
 export default {
     data: function() {
         return {
+            inputs: "",
+            formData: {
+                price: "",
+            },
             transferencias: [],
             cols: {
-                "Valor": d => `${d.value}`,
-                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                value: d => `${d.value}`,
+                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -40,29 +44,40 @@ export default {
             console.log(requestTransform)
         }
 
+        const inputs = [
+            new Input('price', 'Valor', 'text', 2),
+            new Button('Criar'),
+        ]
+        globalThis.Dados = this.formData
+        const form = new Form(inputs)
+        this.inputs = form.render()
+
     },
     methods: {
         adapter( listAll ) {
             return listAll.map( d => ({
-                value: formataMoeda(d.price),
+                value: d.price,
                 ...d,  
             }) )
+        },
+        atualizar() {
+            
+            alert('tafarellll')
         }
     },
-    formataMoeda,
     template: `
     <div>
     
     
-    <BreadCrumb text="Home" text2="Planos" />
+    <BreadCrumb text="Home" text2="Criar Planos" />
+    {{planos}}
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Planos" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
-                <Table :rows="transferencias" :cols="cols" pagination="10" />
+                <CardGeral text="Criar Plano" size="quatro">
+                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
                 </CardGeral>
                 
                 

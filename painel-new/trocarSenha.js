@@ -1,4 +1,4 @@
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import BreadCrumb from "../components/BreadCrumb.js"
 
 export default {
@@ -11,8 +11,8 @@ export default {
             data: "",
             cpf: "",
             formData: {
-                name: "John",
-                lastName: "Hoffmann"
+                name: "",
+                lastName: ""
             }
         }
     },
@@ -25,11 +25,10 @@ export default {
     },
     mounted() {
         const inputs = [
-            new Input('name', 'Nome', 'text', 2),
-            new Input('email', 'email', 'email', 2, true),
-            new Input('data', 'data nascimento', 'date', 2, true),
-            new Input('cpf', 'CPF', 'text', 2, true),
-            new Button('Atualizar Perfil'),
+            new Input('novasenha', 'Nova senha', 'text', 2),
+            new Input('repitasenha', 'Repita nova senha', 'text', 2),
+           
+            new Button('Atualizar Senha'),
         ]
         globalThis.Dados = this.formData
         const form = new Form(inputs)
@@ -40,7 +39,7 @@ export default {
     },
     template: `
     <div> 
-        <BreadCrumb text="Home" text2="Minha Conta" />
+        <BreadCrumb text="Home" text2="Trocar Senha" />
 
 
         <div class="relative pt-6 pb-32 bg-[#fff]">
@@ -57,7 +56,7 @@ export default {
              <div class="px-6 py-4 border-0">
                 <div class="flex flex-wrap items-center">
                    <div class="relative w-full max-w-full flex-grow flex-1">
-                      <h3 class="font-bold text-lg text-blueGray-700">Atualizar Perfil</h3>
+                      <h3 class="font-bold text-lg text-blueGray-700">Trocar Senha</h3>
                    </div>
                 </div>
              </div>
