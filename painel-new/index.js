@@ -32,6 +32,7 @@ import TrocarSenha from "./trocarSenha.js"
 import Usuarios from "./usuarios.js"
 import CriarUsuario from "./criarUsuario.js"
 import EditarUsuario from "./editarUsuario.js"
+import Credenciais from "./credenciais.js"
 
 
 const routes = [
@@ -60,6 +61,7 @@ const routes = [
     { path: '/usuarios', component: Usuarios },
     { path: '/criar-usuario', component: CriarUsuario },
     { path: '/editar-usuario', component: EditarUsuario },
+    { path: '/credenciais', component: Credenciais },
 
 ]
 
