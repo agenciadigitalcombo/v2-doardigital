@@ -1,74 +1,61 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
-import Table from "../components/Table.js"
 import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
-import actions from "../components/actions.js"
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
-import { getUriData, data, formataMoeda } from "../components/format.js"
+import { Form, Input, Button } from "../components/Form.js";
+import { getUriData, formataMoeda } from "../components/format.js"
 
 export default {
-    data: function() {
+    data: function () {
         return {
+            error: null,
             inputs: "",
-            name: "",
-            lastName: "",
-            email: "",
-            data: "",
-            cpf: "",
             formData: {
-                name: "",
-                lastName: ""
-            },
-            transferencias: [],
-            cols: {
-                value: d => `${d.value}`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
-            },
-
+                price: null,
+            }
         }
     },
-    
     components: {
-        Botao,
-        Card,
         BreadCrumb,
-        CardCarteira,
         CardGeral,
-        Table
     },
     async mounted() {
-        let transferencias = new ApiPlanos()
-        let institution = new MyInstitution()
-        let request = await transferencias.listarPlanoDigital(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            this.transferencias = this.adapter(requestTransform)
 
-            console.log(requestTransform)
-        }
-        const inputs = [
-            new Input('price', 'Valor', 'text', 2),
-            new Button('Atualizar'),
-        ]
-        globalThis.Dados = this.formData
-        const form = new Form(inputs)
-        this.inputs = form.render()
+        let institution = new MyInstitution()
+        let Api = new ApiPlanos()
+
+        this.inst_fk = institution.get()
+        this.ID = getUriData('id')
+
+        let request = await Api.info(this.ID)
+        this.formData.price = request.payload.price
+
+        this.renderForm()
 
     },
     methods: {
-        adapter( listAll ) {
-            return listAll.map( d => ({
-                value: formataMoeda(d.price),
-                ...d,  
-            }) )
-        },
-        atualizar() {
-            
-            alert('tafarellll')
+        renderForm() {
+            const inputs = [
+                new Input('price', 'Valor', 'text', 2, true),
+                new Button('Atualizar'),
+            ]
+            const form = new Form(inputs)
+            globalThis.Dados = this.formData
+            this.inputs = form.render()
+        },        
+        async atualizar() {
+            this.error = null
+            let Api = new ApiPlanos()
+            let request = await Api.update(
+                this.ID,
+                this.inst_fk,
+                this.formData.price
+            )
+            this.error = request.message
+            if(request.next) {
+                window.location.href = "#/planos"
+            }
+           
         }
     },
     filters: {
@@ -76,20 +63,15 @@ export default {
     },
     template: `
     <div>
-    
-    
-    <BreadCrumb text="Home" text2="Editar Plano" />
-    {{planos}}
-    <div class="relative pt-2 pb-32 bg-[#fff]">
+        <BreadCrumb text="Home" text2="Editar Plano" />
+        <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
-                <div class="flex flex-wrap">
-                
-                <CardGeral text="Editar Plano" size="quatro">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
-                </CardGeral>
-                
-                
+                <div class="flex flex-wrap">                
+                    <CardGeral text="Editar Plano" size="quatro">
+                        <form class="js-form grid grid-cols-4 gap-4"  action="javascript:void(0)" method="POST" v-html="inputs" @submit="atualizar"></form>
+                        <div v-show="error">{{error}}</div>
+                    </CardGeral>
                 </div>
              </div>
           </div>

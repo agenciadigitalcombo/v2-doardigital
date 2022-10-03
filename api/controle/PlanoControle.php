@@ -108,6 +108,13 @@ class PlanoControle extends Controle
         $institution = (int) $_REQUEST['institution'] ?? 0;
         $trial = (int) $_REQUEST['trial'] ?? 0;
         $subadm = (int) $_REQUEST['subadm'] ?? 0;
+        $valor_min = 10;
+        if( $price < $valor_min ) {
+            self::printError( 
+                "So é permitidos planos a partir de {$valor_min}",
+                []
+            );
+        }
         $plan = new Plano();
         $plan->update(
             $id,
