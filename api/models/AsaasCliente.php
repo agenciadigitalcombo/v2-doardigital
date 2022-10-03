@@ -94,7 +94,7 @@ class AsaasCliente extends Asaas
     {
         return $this->post("/subscriptions/{$sub_id}", [
             "status" => 'INACTIVE'
-        ], 'DELETE');
+        ]);
     }
 
     public function updateSubscription(
