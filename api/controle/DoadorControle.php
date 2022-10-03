@@ -84,7 +84,12 @@ class DoadorControle extends Controle
         $payload["subs"] = $asa->subsByCustomer($payload["pagamento_fk"])["data"];
         $payload["subs"] = array_values( array_filter( $payload["subs"], function($s) use ($payload) { return $s['customer'] == $payload["pagamento_fk"];} ) );
         $payload["payload"] = json_decode( $payload["payload"] ) ?? [];
-        $payload["recorrente"] = count( $payload["subs"] ) > 0;
+
+        $subs_active = array_filter( $payload["subs"], function($s) {
+            return $s['status'] == "ACTIVE";
+        } );
+        $subs_active = array_values($subs_active);
+        $payload["recorrente"] = count( $subs_active ) > 0;
         self::printSuccess(
             "Informação doador",
             $payload
