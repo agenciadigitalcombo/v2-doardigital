@@ -13,6 +13,7 @@ export default {
     data: function() {
         return {
             inputs: "",
+            inst_fk: "",
             formData: {
                 price: "",
             },
@@ -34,15 +35,17 @@ export default {
         Table
     },
     async mounted() {
-        let transferencias = new ApiPlanos()
+        // let transferencias = new ApiPlanos()
         let institution = new MyInstitution()
-        let request = await transferencias.listarPlanoDigital(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            this.transferencias = this.adapter(requestTransform)
+        this.inst_fk = institution.get()
 
-            console.log(requestTransform)
-        }
+        // let request = await transferencias.listarPlanoDigital()
+        // let requestTransform = request.payload
+        // if(request.next) {
+        //     this.transferencias = this.adapter(requestTransform)
+
+        //     console.log(requestTransform)
+        // }
 
         const inputs = [
             new Input('price', 'Valor', 'text', 2),
@@ -60,9 +63,14 @@ export default {
                 ...d,  
             }) )
         },
-        atualizar() {
-            
-            alert('tafarellll')
+        async save() {
+            let Api = new ApiPlanos()
+            let request =  await Api.criar(
+                this.inst_fk,
+                this.formData.price
+            )
+            console.log( request )
+           
         }
     },
     template: `
@@ -77,7 +85,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Criar Plano" size="quatro">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                <form class="js-form grid grid-cols-4 gap-4" action="javascript:void(0)" method="POST" v-html="inputs" @submit="save"></form>
                 </CardGeral>
                 
                 
