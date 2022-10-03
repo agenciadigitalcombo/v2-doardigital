@@ -33,6 +33,12 @@ import Usuarios from "./usuarios.js"
 import CriarUsuario from "./criarUsuario.js"
 import EditarUsuario from "./editarUsuario.js"
 import Credenciais from "./credenciais.js"
+import CriarCredencial from "./criarCredencial.js"
+import EditarCredencial from "./editarCredencial.js"
+import CriarInstituicao from "./criarInstituicao.js"
+import CriarInstituicaoEndereco from "./criarInstituicaoEndereco.js"
+import CriarInstituicaoDominio from "./criarInstituicaoDominio.js"
+import CriarInstituicaoBanco from "./criarInstituicaoBanco.js"
 
 
 const routes = [
@@ -55,6 +61,10 @@ const routes = [
     { path: '/detalhe-assinatura', component: DetalheAssinatura },
     { path: '/criar-fatura-doador', component: CriarFaturaDoador },
     { path: '/minhas-instituicoes', component: MinhasInstituicoes },
+    { path: '/criar-instituicao', component: CriarInstituicao },
+    { path: '/criar-instituicao-endereco', component: CriarInstituicaoEndereco },
+    { path: '/criar-instituicao-dominio', component: CriarInstituicaoDominio },
+    { path: '/criar-instituicao-banco', component: CriarInstituicaoBanco },
     { path: '/criar-plano', component: CriarPlano },
     { path: '/editar-plano', component: EditarPlano },
     { path: '/trocar-senha', component: TrocarSenha },
@@ -62,6 +72,9 @@ const routes = [
     { path: '/criar-usuario', component: CriarUsuario },
     { path: '/editar-usuario', component: EditarUsuario },
     { path: '/credenciais', component: Credenciais },
+    { path: '/criar-credencial', component: CriarCredencial },
+    { path: '/editar-credencial', component: EditarCredencial },
+    
 
 ]
 
