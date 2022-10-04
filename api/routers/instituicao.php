@@ -11,3 +11,4 @@ router('/instituicao/set-adm', 'InstituicaoControle@setAdm');
 router('/instituicao/saque', 'InstituicaoControle@saque');
 router('/instituicao/subscription-cancel', 'InstituicaoControle@cancel');
 router('/instituicao/subscription-update', 'InstituicaoControle@subUpdate');
+router('/instituicao/fatura-update', 'InstituicaoControle@faturaUpdate');

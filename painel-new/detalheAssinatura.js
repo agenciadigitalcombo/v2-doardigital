@@ -92,8 +92,9 @@ export default {
 
         this.formData.data = this.info.proxima
         this.formData.numero = this.info.valor
-        this.formData.tipo = this.info.billingType
+        this.formData.tipo = this.info.tipo_pagamento
         this.fkDoador = fkDoador
+        
 
         const inputs = [
             new Input('data', 'Vencimento', 'date', 2, true),
@@ -152,7 +153,7 @@ export default {
                 this.formData.data
             )
             if( request.next ) {
-                window.location.href  = `/detalhe-doador?id=${this.fkDoador}`
+                window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
             }else {
                 this.error = request.message
             }
@@ -219,4 +220,5 @@ export default {
 
     </div>`,
 }
+
 

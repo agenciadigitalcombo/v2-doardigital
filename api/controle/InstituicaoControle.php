@@ -616,4 +616,45 @@ class InstituicaoControle extends Controle
             $res_asa
         );
     }
+    
+    static function faturaUpdate()
+    {
+
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe uma Instituição",
+            "fatura_fk" => "Informe a subscrição",
+            "value" => "Informe o valor",
+            "billingType" => "Informe um tipo",
+            "dueDate" => "Informe uma data",
+            "customer" => "Informe o identificador de doador",
+        ]);
+        self::privateRouter();
+
+        $institution_fk = $_REQUEST["institution_fk"];
+        $fatura_fk = $_REQUEST["fatura_fk"];
+        $value = $_REQUEST["value"];
+        $dueDate = $_REQUEST["dueDate"];
+        $tipo = $_REQUEST["billingType"];
+        $customer = $_REQUEST["customer"];
+
+        $inst = new Instituicao();
+        $asa_cliente = new AsaasCliente();
+
+        $key_asa = $inst->get_key($institution_fk);
+        $asa_cliente->set_api_key($key_asa);
+        $res_asa = $asa_cliente->updateFatura(
+            $fatura_fk,
+            $tipo,
+            $value,
+            $dueDate,
+            $customer
+        );
+
+        self::printSuccess(
+            "Atualizado com sucesso",
+            $res_asa
+        );
+    }
 }
+

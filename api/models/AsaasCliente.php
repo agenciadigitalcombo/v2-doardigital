@@ -110,5 +110,20 @@ class AsaasCliente extends Asaas
             "value" => $value,
             "nextDueDate" => $nextDueDate,
         ]);
+    } 
+    
+    public function updateFatura(
+        $fatura_id,
+        $billingType,
+        $value,
+        $dueDate,
+        $customer
+    ): array {
+        return $this->post("/payments/{$fatura_id}", [
+            "billingType" => $billingType,
+            "value" => $value,
+            "dueDate" => $dueDate,
+            "customer" => $customer
+        ]);
     }
 }
