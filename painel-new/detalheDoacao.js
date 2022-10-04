@@ -10,6 +10,7 @@ import status from "../components/status.js"
 import actions from "../components/actions.js"
 import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
+import ApiDoadores from "../components/apiDoadores.js"
 
 export default {
     data: function () {
@@ -18,6 +19,7 @@ export default {
             inputs: "",
             id_fatura: null,
             fk_inst: null,
+            pagamento_fk: "",
             info: {
                 doador_nome: null,
                 status_pagamento: null,
@@ -65,11 +67,12 @@ export default {
         this.info = minRequest.find(p => p.fatura_id === ID)
         this.donations.push(this.info)
         this.donations = this.adapter(this.donations)
-        
+
         console.log(this.info)
 
         this.id_fatura = ID
         this.fk_inst = institution.get()
+        this.pagamento_fk = this.info.pagamento_fk
 
         this.formData.data = this.info.data
         this.formData.numero = this.info.valor
@@ -109,21 +112,23 @@ export default {
             const form = new Form(inputs)
             this.inputs = form.render()
         },
-        atualizar() {
-            // this.error = null
-            // let api = new ApiDoacoes()
-            // let request = await api.sub_update(
-            //     this.fk_inst,
-            //     this.id_fatura,
-            //     this.formData.tipo,
-            //     this.formData.numero,
-            //     this.formData.data
-            // )
-            // if (request.next) {
-            //     window.location.href = `#/detalhe-doador?id=${this.fkDoador}`
-            // } else {
-            //     this.error = request.message
-            // }
+        async atualizar() {
+            this.error = null
+            let api = new ApiDoacoes()          
+
+            let request = await api.fatura_update(
+                this.fk_inst,
+                this.id_fatura,
+                this.formData.numero,
+                this.formData.tipo,
+                this.formData.data,
+                this.pagamento_fk
+            )
+            if (!request.payload.errors) {
+                window.location.href = `#/doacoes`
+            } else {
+                this.error = request.payload.errors[0].description
+            }
         }
     },
     template: `
