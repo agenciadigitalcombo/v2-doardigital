@@ -436,10 +436,16 @@ class InstituicaoControle extends Controle
             $acc[$d['external_fk']] = $d['cpf'];
             return $acc;
         }, []);
+        
+        $allFk = array_reduce($allDoador, function ($acc, $d) {
+            $acc[$d['external_fk']] = $d['pagamento_fk'];
+            return $acc;
+        }, []);
 
-        $faturas = array_map(function ($charge) use ($assinantes, $allCpf) {
+        $faturas = array_map(function ($charge) use ($assinantes, $allCpf, $allFk) {
             $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
             $charge["cpf"] = $allCpf[$charge["doador_fk"]];
+            $charge["pagamento_fk"] = $allFk[$charge["doador_fk"]];
             return $charge;
         }, $faturas);
         self::printSuccess(

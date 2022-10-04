@@ -9,10 +9,15 @@ import { getUriData, formataMoeda, data, formatRecorrente, copy, taxas } from ".
 import status from "../components/status.js"
 import actions from "../components/actions.js"
 import Institution from "../components/apiInstitution.js"
+import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 
 export default {
     data: function () {
         return {
+            error: null,
+            inputs: "",
+            id_fatura: null,
+            fk_inst: null,
             info: {
                 doador_nome: null,
                 status_pagamento: null,
@@ -23,6 +28,11 @@ export default {
                 recorrente: null,
                 codigo: null,
                 split: 4,
+            },
+            formData: {
+                data: null,
+                numero: null,
+                tipo: null,
             },
             donations: [],
             cols: {
@@ -43,8 +53,8 @@ export default {
         CardCarteira,
         CardGeral,
     },
-    async mounted() {        
-        let ID = getUriData('id')        
+    async mounted() {
+        let ID = getUriData('id')
         let institution = new MyInstitution()
         let donations = new ApiDoacoes()
         let inst = new Institution()
@@ -52,11 +62,21 @@ export default {
         this.split = +requestInfoInst.payload.split.porcentagem
         let request = await donations.lista(institution.get())
         let minRequest = request.payload
-        this.info = minRequest.find(p => p.fatura_id === ID) 
-        this.donations.push(this.info)        
-        this.donations = this.adapter(this.donations) 
-        console.log(this.info.tipo_pagamento)     
+        this.info = minRequest.find(p => p.fatura_id === ID)
+        this.donations.push(this.info)
+        this.donations = this.adapter(this.donations)
         
+        console.log(this.info)
+
+        this.id_fatura = ID
+        this.fk_inst = institution.get()
+
+        this.formData.data = this.info.data
+        this.formData.numero = this.info.valor
+        this.formData.tipo = this.info.tipo_pagamento
+
+        this.renderForm()
+
     },
     methods: {
         adapter(listAll) {
@@ -64,7 +84,7 @@ export default {
                 value: this.formataMoeda(d.valor),
                 id: d.fatura_id,
                 tipo: d.tipo_pagamento,
-                ... d,
+                ...d,
                 ...taxas(d.valor, d.tipo_pagamento, this.split)
             }))
         },
@@ -72,9 +92,39 @@ export default {
         formatData: data,
         formatRecorrente,
         copyPix() {
-            copy(this.$refs.codePix)            
+            copy(this.$refs.codePix)
         },
         status,
+        renderForm() {
+            const inputs = [
+                new Input('data', 'Vencimento', 'date', 2, true),
+                new Input('numero', 'Valor', 'text', 2, true),
+                new Select('tipo', 'Tipo', 2, [
+                    new Option('BOLETO', 'Boleto'),
+                    new Option('PIX', 'Pix'),
+                ], true, this.info.tipo_pagamento),
+                new Button('Modificar'),
+            ]
+            globalThis.Dados = this.formData
+            const form = new Form(inputs)
+            this.inputs = form.render()
+        },
+        atualizar() {
+            // this.error = null
+            // let api = new ApiDoacoes()
+            // let request = await api.sub_update(
+            //     this.fk_inst,
+            //     this.id_fatura,
+            //     this.formData.tipo,
+            //     this.formData.numero,
+            //     this.formData.data
+            // )
+            // if (request.next) {
+            //     window.location.href = `#/detalhe-doador?id=${this.fkDoador}`
+            // } else {
+            //     this.error = request.message
+            // }
+        }
     },
     template: `
     <div>
@@ -127,6 +177,14 @@ export default {
                             COPIAR LINK
                         </button>
                     </div>
+                </CardGeral>
+
+                <CardGeral text="Modificar Fatura" size="quatro">
+                    <p>Os dados modificados serão referente a fatura mais recente. Demais faturas serão criadas com a mesma regra.</p>
+                    <br>
+                    <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                    <p v-show="error">{{error}}</p>                
+                    <br><br>                
                 </CardGeral>
                 
                 <CardGeral text="Detalhe da Transação" size="sete">
