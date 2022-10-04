@@ -12,6 +12,7 @@ import actions from "../components/actions.js"
 import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import ApiDoadores from "../components/apiDoadores.js"
+import Popup from "../components/popup.js"
 
 export default {
     data: function () {
@@ -60,7 +61,8 @@ export default {
         Card,
         CardCarteira,
         CardGeral,
-        Botao
+        Botao,
+        Popup,
     },
     async mounted() {
 
@@ -92,7 +94,6 @@ export default {
         this.formData.numero = this.info.valor
         this.formData.tipo = this.info.billingType
         this.fkDoador = fkDoador
-        console.log(this.fkDoador)
 
         const inputs = [
             new Input('data', 'Vencimento', 'date', 2, true),
@@ -119,6 +120,9 @@ export default {
                 ...d,
                 ...taxas(d.valor, d.tipo_pagamento, this.split)
             }))
+        },
+        popConfirm() {
+            this.cancelar()
         },
         formataMoeda,
         formatData: data,
@@ -202,8 +206,16 @@ export default {
                 <br><br>
                 
                 </CardGeral>
-                
-                <Botao text="Cancelar Assinatura" variation="red" @click="cancelar" />
+
+                <Popup 
+                    title="Cancelar Assinatura"
+                    description="Você deseja realmente cancelar a assinatura?"
+                    text_close="Não"
+                    text_submit="Sim"
+                    text_btn="Cancelar assinatura"
+                    color="red"
+                    @submit="popConfirm"
+                />
 
     </div>`,
 }

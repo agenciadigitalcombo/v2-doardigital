@@ -543,7 +543,7 @@ class InstituicaoControle extends Controle
         );
 
         self::printSuccess(
-            "Solicitação feia com sucesso",
+            "Solicitação feita com sucesso",
             [
                 "bankAccountInfoId" => $bankAccountInfoId,
                 "institution_fk" => $institution_fk,
@@ -588,7 +588,7 @@ class InstituicaoControle extends Controle
             "institution_fk" => "informe uma Instituição",
             "sub_fk" => "Informe a subscrição",
             "value" => "Informe o valor",
-            "tipo" => "Informe um tipo",
+            "billingType" => "Informe um tipo",
             "nextDueDate" => "Informe uma data",
         ]);
         self::privateRouter();
@@ -597,7 +597,7 @@ class InstituicaoControle extends Controle
         $sub_fk = $_REQUEST["sub_fk"];
         $value = $_REQUEST["value"];
         $nextDueDate = $_REQUEST["nextDueDate"];
-        $tipo = $_REQUEST["tipo"];
+        $tipo = $_REQUEST["billingType"];
 
         $inst = new Instituicao();
         $asa_cliente = new AsaasCliente();
