@@ -10,6 +10,7 @@ import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import Tmp from "../components/tmp.js"
 
 export default {
     data: function() {
@@ -21,8 +22,6 @@ export default {
             data: "",
             cpf: "",
             formData: {
-                name: "",
-                lastName: ""
             },
             transferencias: [],
             cols: {
@@ -32,7 +31,15 @@ export default {
 
         }
     },
-    
+    watch: {
+      formData: {
+        handler(newValue, oldValue) {
+          let tmp = new Tmp()
+          tmp.save(this.formData)
+        },
+        deep: true
+      }
+    },
     components: {
         Botao,
         Card,
@@ -58,6 +65,9 @@ export default {
             new Input('phone', 'Telefone', 'text', 2),
             new Button('Avançar Cadastro'),
         ]
+        let tmp = new Tmp()
+        this.formData = {...this.formData, ...tmp.info() }
+        tmp.save({step: 1})
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
@@ -69,14 +79,13 @@ export default {
                 ...d,  
             }) )
         },
-        atualizar() {
-            
-            alert('tafarellll')
+        atualizar() {            
+            window.location.href = "#/criar-instituicao-endereco"
         }
     },
     template: `
     <div>
-    
+    {{formData}}
     
     <BreadCrumb text="Home" text2="Criar Instituição" />
 

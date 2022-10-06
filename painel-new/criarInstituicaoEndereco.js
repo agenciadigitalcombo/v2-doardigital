@@ -10,6 +10,7 @@ import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import Tmp from "../components/tmp.js"
 
 export default {
     data: function() {
@@ -41,6 +42,15 @@ export default {
         CardGeral,
         Table
     },
+    watch: {
+      formData: {
+        handler(newValue, oldValue) {
+          let tmp = new Tmp()
+          tmp.save(this.formData)
+        },
+        deep: true
+      }
+    },
     async mounted() {
         let admin = new apiAdmin()
         let institution = new MyInstitution()
@@ -54,13 +64,16 @@ export default {
         const inputs = [
             new Input('cep', 'CEP', 'text', 1),
             new Input('logradouro', 'Logradouro', 'text', 2),
-            new Input('numero', 'Número', 'email', 1, true),
+            new Input('numero', 'Número', 'text', 1, true),
             new Input('complemento', 'Complemento', 'text', 1),
             new Input('bairro', 'Bairro', 'text', 1),
             new Input('cidade', 'Cidade', 'text', 1),
             new Input('estado', 'Estado', 'text', 1),
             new Button('Avançar Cadastro'),
         ]
+        let tmp = new Tmp()
+        this.formData = {...this.formData, ...tmp.info() }
+        tmp.save({step: 2})
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
@@ -74,7 +87,7 @@ export default {
         },
         atualizar() {
             
-            alert('tafarellll')
+          window.location.href = "#/criar-instituicao-endereco"
         }
     },
     template: `

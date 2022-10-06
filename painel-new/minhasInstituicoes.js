@@ -8,14 +8,16 @@ import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
+import Jw from "../components/jwt.js"
+
 
 export default {
     data: function() {
         return {
-            transferencias: [],
+            list: [],
             cols: {
-                value: d => `${d.value}`,
-                action: e => actions(`editar-instituicao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                value: d => `${d.nome}`,
+                action: e => actions(`editar-instituicao?id=${e.institution_fk}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -30,14 +32,16 @@ export default {
         Table
     },
     async mounted() {
-        let transferencias = new ApiPlanos()
-        let institution = new MyInstitution()
-        let apiinstituicao = new ApiInstitution()
-        let request = await apiinstituicao.list(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            console.log(request)
+        
+        let jwt = new Jw()
+        let Inst = new ApiInstitution()
+        
+        let ID = jwt.get().code
+        let request = await Inst.list(ID)
 
+        console.log(request)
+        if(request.next) {
+            this.list = request.payload
         }
 
     },
@@ -62,7 +66,7 @@ export default {
                 
                 <CardGeral text="Instituições" size="quatro">
                 <Botao text="Criar Novo" variation="green" link="#/criar-instituicao"/>
-                <Table :rows="transferencias" :cols="cols" pagination="10" />
+                <Table :rows="list" :cols="cols" pagination="10" />
                 </CardGeral>
                 
                 
