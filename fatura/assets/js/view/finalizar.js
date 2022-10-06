@@ -2,7 +2,7 @@ import get_template from '../componentes/get_template.js'
 import adm from '../../../../static/js/api/adm.js'
 const { required, minLength, between } = window.validators
 
-import ApiDoadores from '../../../../components/apiDoadores.js'
+// import ApiDoadores from '../../../../components/apiDoadores.js'
 
 export default {
 
