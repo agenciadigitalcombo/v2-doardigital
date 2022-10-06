@@ -262,25 +262,25 @@ export default {
         let recorrencia = this.getUriData('recorrencia')
         let doador = this.getUriData('doador')
 
-        // this.ver = ((+valor + 0) > 9) ? valor : "10"
-        // this.recorrente = recorrencia == 'sim' ? 1 : 0
-        // this.tipo_pagamento = lb[tipo] || 'CREDIT_CARD'
-        // this.todos = tipo == 'all' ? 1 : 0
+        this.ver = ((+valor + 0) > 9) ? valor : "10"
+        this.recorrente = recorrencia == 'sim' ? 1 : 0
+        this.tipo_pagamento = lb[tipo] || 'CREDIT_CARD'
+        this.todos = tipo == 'all' ? 1 : 0
 
-        // let Api = new ApiDoadores()
-        // let infoDoador = (await Api.detalhe(doador)).payload
+        let Api = new ApiDoadores()
+        let infoDoador = (await Api.detalhe(doador)).payload
 
-        // this.nome = infoDoador.nome
-        // this.email = infoDoador.email
-        // this.cpf = infoDoador.cpf
-        // this.telefone = infoDoador.telefone
-        // this.cep = infoDoador.address.cep
-        // this.numero = infoDoador.address.numero
-        // this.estado = infoDoador.address.estado
-        // this.logadouro = infoDoador.address.logadouro
-        // this.complemento = infoDoador.address.complemento
-        // this.bairro = infoDoador.address.bairro
-        // this.cidade = infoDoador.address.cidade
+        this.nome = infoDoador.nome
+        this.email = infoDoador.email
+        this.cpf = infoDoador.cpf
+        this.telefone = infoDoador.telefone
+        this.cep = infoDoador.address.cep
+        this.numero = infoDoador.address.numero
+        this.estado = infoDoador.address.estado
+        this.logadouro = infoDoador.address.logadouro
+        this.complemento = infoDoador.address.complemento
+        this.bairro = infoDoador.address.bairro
+        this.cidade = infoDoador.address.cidade
 
     },
     template: await get_template('./assets/js/view/finalizar')
