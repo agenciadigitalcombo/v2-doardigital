@@ -1,4 +1,4 @@
-import config2 from '../../config2.js'
+import config from '../../config.js'
 
 const options = {
     headers: {
@@ -45,7 +45,7 @@ function super_error() {
 
 async function post(path, data) {
     try {
-        let base = config2.path_api
+        let base = config.path_api
         let token = localStorage.getItem('token')
         if (token) {
             data.token = token
@@ -63,7 +63,7 @@ async function post(path, data) {
 async function get(path, data = {}) {
     try {
         
-        let base = config2.path_api
+        let base = config.path_api
         let token = localStorage.getItem('token')
         if (token) {
             data.token = token
