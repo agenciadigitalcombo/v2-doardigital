@@ -2,6 +2,8 @@ import get_template from '../componentes/get_template.js'
 import adm from '../../../../static/js/api/adm.js'
 const { required, minLength, between } = window.validators
 
+import ApiDoadores from '../../../../components/apiDoadores.js'
+
 export default {
 
     data: function () {
@@ -99,8 +101,6 @@ export default {
             return val
         }
     },
-
-
     validations: {
         cep: {
             required,
@@ -110,8 +110,6 @@ export default {
             required,
             minLength: minLength(15)
         },
-
-
     },
 
     methods: {
@@ -135,12 +133,7 @@ export default {
                 this.txto_pix = ""
                 this.txto_pix2 = ""
             }
-
-
-
         },
-
-
         async transacao() {
             try {
                 this.error = null
@@ -181,7 +174,6 @@ export default {
                         this.error = res.message
                         return null
                     }
-
                     this.submitStatus = 'OK'
                     this.msg = res.message
                     window.localStorage.setItem("codigo", res.payload.code)
@@ -197,7 +189,6 @@ export default {
                 }, 1500)
             }
         },
-
         async lisConfiguracao() {
             let res = await adm.listConf(
                 this.token,
@@ -205,8 +196,6 @@ export default {
             )
             return res
         },
-
-
         searchCep() {
             let cep = this.cep
             cep = cep.replace(/\D/gi, '')
@@ -229,7 +218,6 @@ export default {
                     )
             }
         },
-
         mask_cep() {
             let mascara = this.cep
             mascara = mascara.replace(/\D/gi, '')
@@ -241,9 +229,6 @@ export default {
     },
 
     async mounted() {
-
-        
-
         this.recorrente = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
@@ -254,30 +239,20 @@ export default {
             this.valor = window.localStorage.getItem("price_digitado")
         }
 
-
-
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
-        // this.instituicao_fk = localStorage.getItem('instituicao_fk')
-
-
-
         this.token = localStorage.getItem('token')
-        //this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
-        // this.domain = "jms21122xxcr"
         this.domain = window.location.host
-        // this.this.domain  = window.location.hostname
 
         let config = (await this.lisConfiguracao()).payload
         this.logo = "https://doardigital.tk/api/upload/" + config.logo
         this.backgroundColor = config.cor
         this.instituicao_fk = config.institution_fk
 
-        
         let lb = {
-            credit:"CREDIT_CARD",
-            boleto:"BOLETO",
-            pix:"PIX",
+            credit: "CREDIT_CARD",
+            boleto: "BOLETO",
+            pix: "PIX",
             all: "CREDIT_CARD",
         }
 
@@ -292,8 +267,21 @@ export default {
         this.tipo_pagamento = lb[tipo] || 'CREDIT_CARD'
         this.todos = tipo == 'all' ? 1 : 0
 
+        let Api = new ApiDoadores()
+        let infoDoador = (await Api.detalhe(doador)).payload
+
+        this.nome = infoDoador.nome
+        this.email = infoDoador.email
+        this.cpf = infoDoador.cpf
+        this.telefone = infoDoador.telefone
+        this.cep = infoDoador.address.cep
+        this.numero = infoDoador.address.numero
+        this.estado = infoDoador.address.estado
+        this.logadouro = infoDoador.address.logadouro
+        this.complemento = infoDoador.address.complemento
+        this.bairro = infoDoador.address.bairro
+        this.cidade = infoDoador.address.cidade
+
     },
-
-
     template: await get_template('./assets/js/view/finalizar')
 }
