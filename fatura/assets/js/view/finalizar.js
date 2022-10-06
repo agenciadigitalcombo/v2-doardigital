@@ -262,7 +262,9 @@ export default {
         let recorrencia = this.getUriData('recorrencia')
         let doador = this.getUriData('doador')
 
-        this.ver = ((+valor + 0) > 9) ? valor : "10"
+        let get_valor = ((+valor + 0) > 9) ? valor : "10"
+        this.ver = get_valor
+        this.valor = get_valor
         this.recorrente = recorrencia == 'sim' ? 1 : 0
         this.tipo_pagamento = lb[tipo] || 'CREDIT_CARD'
         this.todos = tipo == 'all' ? 1 : 0
