@@ -99,17 +99,17 @@
                         </h1>
                     </div>
                     <div class="gap-5 d-flex">
-                        <label class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
+                        <label v-show="tipo_pagamento == 'CREDIT_CARD' || todos" class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
                             <i class="fs-1 mb-2 bi bi-credit-card"></i> <br>
                             <input type="radio" v-model="tipo_pagamento" name="tipo" value="CREDIT_CARD">
                             CARTÃO
                         </label>
-                        <label class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
+                        <label v-show="tipo_pagamento == 'BOLETO' || todos" class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
                             <i class="fs-1 mb-2 bi bi-upc"></i> <br>
                             <input type="radio" v-model="tipo_pagamento" name="tipo" value="BOLETO">
                             BOLETO
                         </label>
-                        <label class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
+                        <label v-show="tipo_pagamento == 'PIX' || todos" class="btn btn-outline btn-outline-dashed btn-outline-default text-center w-100 ">
                             <i class="fs-1 mb-2 bi bi-qr-code"></i> <br>
                             <input type="radio" v-model="tipo_pagamento" name="tipo" value="PIX">
                             PIX

@@ -49,7 +49,8 @@ export default {
             dados: [],
             txto_pix: "",
             txto_pix2: "",
-            jms: ""
+            jms: "",
+            todos: 0,
         }
     },
 
@@ -60,9 +61,9 @@ export default {
     filters: {
         is_price(valor) {
             valor = valor.replace(',', '.')
-			let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
-			return `${price}`
-		},
+            let price = (+valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+            return `${price}`
+        },
         money: val => {
             val = `${val}`
             val = val?.replace('\.', '')
@@ -114,7 +115,10 @@ export default {
     },
 
     methods: {
-
+        getUriData(name) {
+            const url = new URL(window.location.href.replace('#/'))
+            return url.searchParams.get(name)
+        },
 
         consultar() {
             if (this.type_pagamento == "PIX") {
@@ -135,7 +139,7 @@ export default {
 
 
         },
- 
+
 
         async transacao() {
             try {
@@ -184,7 +188,7 @@ export default {
                     window.localStorage.setItem("url", res.payload.url)
                     window.localStorage.setItem("type_pagamento", res.payload.tipo_pagamento)
                     window.localStorage.setItem("recorrente", res.payload.recorrente)
-                     window.location.href = "#/obrigado"
+                    window.location.href = "#/obrigado"
                 }
             }
             catch (e) {
@@ -238,6 +242,8 @@ export default {
 
     async mounted() {
 
+        
+
         this.recorrente = window.localStorage.getItem("mensal")
         this.planos_id = window.localStorage.getItem("planos_id")
 
@@ -249,7 +255,7 @@ export default {
         }
 
 
-        
+
         this.email = window.localStorage.getItem("email")
         this.token = localStorage.getItem('token')
         // this.instituicao_fk = localStorage.getItem('instituicao_fk')
@@ -267,8 +273,24 @@ export default {
         this.backgroundColor = config.cor
         this.instituicao_fk = config.institution_fk
 
-        console.log("OKAY")
+        
+        let lb = {
+            credit:"CREDIT_CARD",
+            boleto:"BOLETO",
+            pix:"PIX",
+            all: "CREDIT_CARD",
+        }
 
+        let valor = this.getUriData('valor')
+        let data = this.getUriData('data')
+        let tipo = this.getUriData('tipo')
+        let recorrencia = this.getUriData('recorrencia')
+        let doador = this.getUriData('doador')
+
+        this.ver = ((+valor + 0) > 9) ? valor : "10"
+        this.recorrente = recorrencia == 'sim' ? 1 : 0
+        this.tipo_pagamento = lb[tipo] || 'CREDIT_CARD'
+        this.todos = tipo == 'all' ? 1 : 0
 
     },
 
