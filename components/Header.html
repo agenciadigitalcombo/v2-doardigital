@@ -8,9 +8,7 @@
 			<label for="countries">Instituição:</label>
 			<select id="countries" v-model="institution" @change="setInstitution">
 				<option value="">Selecione</option>
-				<option value="inst_62d98175c7e51">1 </option>
-				<option value="inst_62d990c744f00">2 </option>
-
+				<option v-for="i in list" :value="i.institution_fk"> {{i.nome}} </option>
 			</select>
 			<div class="relative inline-block ltr:ml-8 rtl:mr-8 right-1">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6 bi bi-bell"

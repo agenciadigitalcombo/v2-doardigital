@@ -87,7 +87,7 @@ export default {
         },
         atualizar() {
             
-          window.location.href = "#/criar-instituicao-endereco"
+          window.location.href = "#/criar-instituicao-dominio"
         }
     },
     template: `
@@ -181,7 +181,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Criar Instituição - Endereço" size="cinco">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
                 </CardGeral>
                 
                 

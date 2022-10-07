@@ -58,8 +58,15 @@ export default {
             console.log(requestTransform)
 
         }
+       
         const inputs = [
             new Input('name', 'Nome Fantasia', 'text', 2),
+            new Select('tipoEmpresa', 'Conta Tipo', 1, [
+              new Option('ASSOCIATION', 'ASSOCIATION'),
+              new Option('MEI', 'MEI'),
+              new Option('LIMITED', 'LIMITED'),
+              new Option('INDIVIDUAL', 'INDIVIDUAL'),
+            ]),
             new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2),
             new Input('email', 'Email', 'email', 2, true),
             new Input('phone', 'Telefone', 'text', 2),
@@ -174,7 +181,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Criar Instituição - Info. Geral" size="cinco">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
                 </CardGeral>
                 
                 

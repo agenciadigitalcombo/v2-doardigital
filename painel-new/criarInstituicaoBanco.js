@@ -1,5 +1,5 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
+import Card from "../components/Card.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
@@ -10,76 +10,122 @@ import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import Tmp from "../components/tmp.js"
+import Jwt from "../components/jwt.js"
 
 export default {
-    data: function() {
-        return {
-            inputs: "",
-            name: "",
-            lastName: "",
-            email: "",
-            data: "",
-            cpf: "",
-            formData: {
-                name: "",
-                lastName: ""
-            },
-            transferencias: [],
-            cols: {
-                value: d => `${d.value}`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
-            },
+  data: function () {
+    return {
+      error: null,
+      inputs: "",
+      name: "",
+      lastName: "",
+      email: "",
+      data: "",
+      cpf: "",
+      formData: {
+        step: 4
+      },
+      transferencias: [],
+      cols: {
+        value: d => `${d.value}`,
+        action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+      },
 
-        }
-    },
-    
-    components: {
-        Botao,
-        Card,
-        BreadCrumb,
-        CardCarteira,
-        CardGeral,
-        Table
-    },
-    async mounted() {
-        let admin = new apiAdmin()
-        let institution = new MyInstitution()
-        let apiinstituicao = new ApiInstitution()
-        let request = await admin.list_all_subs(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            console.log(requestTransform)
+    }
+  },
+  watch: {
+    formData: {
+      handler(newValue, oldValue) {
+        let tmp = new Tmp()
+        tmp.save(this.formData)
+      },
+      deep: true
+    }
+  },
+  components: {
+    Botao,
+    Card,
+    BreadCrumb,
+    CardCarteira,
+    CardGeral,
+    Table
+  },
+  async mounted() {
+    let admin = new apiAdmin()
+    let institution = new MyInstitution()
+    let apiinstituicao = new ApiInstitution()
+    let request = await admin.list_all_subs(institution.get())
+    let requestTransform = request.payload
+    if (request.next) {
+      console.log(requestTransform)
 
-        }
-        const inputs = [
-            new Input('name', 'Nome Conta', 'text', 2),
-            new Input('conta', 'Conta', 'text', 1),
-            new Input('digitoConta', 'Conta Dígito', 'email', 1, true),
-            new Input('agencia', 'Agência', 'text', 1),
-            new Input('banco', 'Banco', 'text', 1),
-            new Select('contaTipo', 'Conta Tipo', 1, [
-              new Option('1', 'Ativo'),
-              new Option('0', 'Inativo'),
-          ]),
-            new Button('Avançar Cadastro'),
-        ]
-        globalThis.Dados = this.formData
-        const form = new Form(inputs)
-        this.inputs = form.render()
+    }
+    const inputs = [
+      new Input('name', 'Nome Conta', 'text', 2),
+      new Input('conta', 'Conta', 'text', 1),
+      new Input('digitoConta', 'Conta Dígito', 'text', 1, true),
+      new Input('agencia', 'Agência', 'text', 1),
+      new Input('banco', 'Banco', 'text', 1),
+      new Select('contaTipo', 'Conta Tipo', 1, [
+        new Option('CONTA_CORRENTE', 'Corrente'),
+        new Option('CONTA_POUPANCA', 'Poupança'),
+      ]),
+      new Button('Avançar Cadastro'),
+    ]
+    let tmp = new Tmp()
+    this.formData = { ...this.formData, ...tmp.info() }
+    globalThis.Dados = this.formData
+    const form = new Form(inputs)
+    this.inputs = form.render()
 
+  },
+  methods: {
+    adapter(listAll) {
+      return listAll.map(d => ({
+        ...d,
+      }))
     },
-    methods: {
-        adapter( listAll ) {
-            return listAll.map( d => ({
-                ...d,  
-            }) )
-        },
-        atualizar() {
-            
-            alert('tafarellll')
-        }
-    },
-    template: `
+    async atualizar() {
+      this.error = null
+      let Api = new ApiInstitution()
+      let tmp = new Tmp()
+      let jwt = new Jwt()
+      let dados = tmp.info()
+      dados.adm_fk = jwt.get().code
+     
+      let request = await Api.cadastrar(
+        dados.name,
+        dados.cpfCnpj,
+        dados.email,
+        dados.phone,
+        dados.subdominio,
+        dados.tipoEmpresa,
+        dados.cep,
+        dados.logradouro,
+        dados.numero,
+        dados.complemento,
+        dados.bairro,
+        dados.cidade,
+        dados.estado,
+        dados.adm_fk,
+        dados.conta,
+        dados.digitoConta,
+        dados.name,
+        dados.agencia,
+        dados.banco,
+        dados.contaTipo
+      )
+      
+      this.error = request.message
+      if( request.next ) {
+        tmp.clear()
+        window.location.href = "#/minhas-instituicoes"
+      }
+     
+    }
+  },
+  template: `
     <div>
     
     
@@ -172,7 +218,9 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Criar Instituição" size="cinco">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                <div v-show="error">{{error}}</div>
+                ok
                 </CardGeral>
                 
                 

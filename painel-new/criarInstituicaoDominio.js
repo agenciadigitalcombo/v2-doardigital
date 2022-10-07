@@ -10,6 +10,7 @@ import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import Tmp from "../components/tmp.js"
 
 export default {
     data: function() {
@@ -32,7 +33,15 @@ export default {
 
         }
     },
-    
+    watch: {
+      formData: {
+        handler(newValue, oldValue) {
+          let tmp = new Tmp()
+          tmp.save(this.formData)
+        },
+        deep: true
+      }
+    },
     components: {
         Botao,
         Card,
@@ -55,6 +64,9 @@ export default {
             new Input('subdominio', 'Subdomínio', 'text', 4),
             new Button('Avançar Cadastro'),
         ]
+        let tmp = new Tmp()
+        this.formData = {...this.formData, ...tmp.info() }
+        tmp.save({step: 3})
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
@@ -68,7 +80,7 @@ export default {
         },
         atualizar() {
             
-            alert('tafarellll')
+          window.location.href = "#/criar-instituicao-banco"
         }
     },
     template: `
@@ -162,7 +174,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Criar Instituição - Domínio" size="cinco">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
                 </CardGeral>
                 
                 

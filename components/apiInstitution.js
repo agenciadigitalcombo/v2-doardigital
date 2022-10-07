@@ -62,5 +62,50 @@ export default class myInstitution {
             estado,
         })
     }
+    async cadastrar(
+        nome,
+        cpfCnpj,
+        email,
+        telefone,
+        subdomain,
+        tipoEmpresa,
+        cep,
+        logradouro,
+        numero,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+        adm_fk,
+        account,
+        accountDigit,
+        accountName,
+        agency,
+        bank,
+        bankAccountType
+    ) {
+        return await http.post('/instituicao/register', {
+            nome,
+            cpfCnpj,
+            email,
+            telefone,
+            subdomain,
+            tipoEmpresa,
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            adm_fk,
+            account,
+            accountDigit,
+            accountName,
+            agency,
+            bank,
+            bankAccountType
+        })
+    }
 
 }
