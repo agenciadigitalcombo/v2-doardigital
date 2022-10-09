@@ -16,7 +16,7 @@ export default {
             cols: {
                 "Valor": d => `${d.value}`,
                 "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue'),
-                "Apagar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue'),
+                "Apagar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-trash', 'blue'),
             },
 
         }

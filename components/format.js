@@ -22,10 +22,10 @@ export function formataMoeda(value) {
 
 export function formatRecorrente(recorrente) {
     var recorrencia = recorrente
-    if (recorrencia == true) {
-        return "Ativa"
-    } else if (recorrencia == false) {
-        return "Inativo"
+    if (recorrencia == true || recorrencia == "ACTIVE" ) {
+        return "ATIVA"
+    } else if (recorrencia == false || recorrencia == "INACTIVE") {
+        return "INATIVO"
     }
 }
 

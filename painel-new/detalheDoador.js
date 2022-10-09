@@ -5,7 +5,7 @@ import ApiDoadores from "../components/apiDoadores.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
 import status from "../components/status.js"
-import { getUriData, data, formataMoeda } from "../components/format.js"
+import { getUriData, data, formataMoeda, formatRecorrente } from "../components/format.js"
 import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
 import { cpf, tel, cep } from "../components/mask.js"
@@ -44,7 +44,9 @@ export default {
         }
     },
     filters: {
-        formataMoeda
+        formataMoeda,
+        formatRecorrente
+        
     },
     components: {
         Table,
@@ -73,7 +75,7 @@ export default {
             this.subs = request.payload.subs.map( s => ({
                 dateCreated: data(s.dateCreated),
                 id: s.id,
-                status: s.status,
+                status: formatRecorrente(s.status),
                 value: formataMoeda(s.value),
                 type: s.billingType,
             }) )
@@ -82,6 +84,7 @@ export default {
         this.totalFaturas = this.donations.length
         this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
         this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
+        console.log(this.subs)
     },
 
     methods: {
@@ -151,11 +154,11 @@ export default {
                 <Anotacao v-for="item in totalAnotacoes" :text="item.message" :data="item.date" :autor="item.author_name" />
 
                 </CardGeral>
-                <CardGeral text="Histórico de Doações" size="sete">
-                <Table :rows="donations" :cols="cols" pagination="10" />
-                </CardGeral>
                 <CardGeral text="Assinaturas" size="sete">
                 <Table :rows="subs" :cols="colsSub" pagination="10" />
+                </CardGeral>
+                <CardGeral text="Histórico de Doações" size="sete">
+                <Table :rows="donations" :cols="cols" pagination="10" />
                 </CardGeral>
 
     </div>`,

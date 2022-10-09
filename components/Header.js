@@ -34,7 +34,6 @@ export default {
         let ID = jwt.get().code
         let request = await Inst.list(ID)
 
-        console.log(request)
         if(request.next) {
             this.list = request.payload
         }

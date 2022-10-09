@@ -19,7 +19,7 @@ export default {
             doadores: [],
             cols: {
                 "Nome do Doador": d => `${d.name} <br/> ${d.email}`,
-                "Recorrencia": t => `<span class="bg-${t.status == 'Ativa' ? 'green' : 'yellow'}-200 text-${t.status == 'Ativa' ? 'green' : 'yellow'}-600 py-1 px-3 rounded-full text-xs">
+                "Recorrencia": t => `<span class="bg-${t.status == 'ATIVA' ? 'green' : 'yellow'}-200 text-${t.status == 'ATIVA' ? 'green' : 'yellow'}-600 py-1 px-3 rounded-full text-xs">
                 ${t.status}
                 </span>`,
                 value: "Data de Cadastro",

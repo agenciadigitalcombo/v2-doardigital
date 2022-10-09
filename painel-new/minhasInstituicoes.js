@@ -16,8 +16,8 @@ export default {
         return {
             list: [],
             cols: {
-                value: d => `${d.nome}`,
-                action: e => actions(`editar-instituicao?id=${e.institution_fk}`, 'fa-solid fa-eye', 'blue')
+                "Nome": d => `${d.nome}`,
+                "Ações": e => actions(`editar-instituicao?id=${e.institution_fk}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
