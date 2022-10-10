@@ -74,8 +74,6 @@ const routes = [
     { path: '/credenciais', component: Credenciais },
     { path: '/criar-credencial', component: CriarCredencial },
     { path: '/editar-credencial', component: EditarCredencial },
-    
-
 ]
 
 const router = VueRouter.createRouter({

@@ -15,8 +15,8 @@ export default {
         return {
             transferencias: [],
             cols: {
-                "Valor": d => `${d.value}`,
-                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Nome": d => `${d.nome_identificacao}`,
+                "Editar": e => actions(`editar-credencial?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -34,12 +34,10 @@ export default {
         let transferencias = new ApiPlanos()
         let institution = new MyInstitution()
         let credenciais = new ApiCredencial()
-        let request = await credenciais.listarCredencial(institution.get())
+        let request = await credenciais.listar(institution.get())
         let requestTransform = request.payload
         if(request.next) {
             this.transferencias = this.adapter(requestTransform)
-
-            console.log(request)
         }
 
     },

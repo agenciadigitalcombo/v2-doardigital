@@ -1,3 +1,4 @@
+const CheckCss = "rounded border border-gray-300 inline-block w-[18px] py-2 px-4 text-gray-700 focus:outline-blue-700 "
 const inputCss = "rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 "
 const colorCss = "rounded border border-gray-300 block w-full h-[41px] text-gray-700 focus:outline-blue-700 "
 const btnCss = "rounded w-full p-2 bg-blue-500 hover:bg-blue-600 text-white uppercase font-black"
@@ -25,7 +26,7 @@ export class Input {
         this.name = name
         this.label = label
         this.value = value
-        this.type = ["email", "number", "text", "url", "date", "color", "password", "checkbox", "radio"].includes(type) ? type : 'text'
+        this.type = ["email", "number", "text", "url", "date", "color", "password"].includes(type) ? type : 'text'
         this.require = !!require
     }
     render() {
@@ -54,6 +55,29 @@ export class Text {
             <label class="${labCss}">${this.label}</label>
             <textarea  class="${inputCss} min-h-[150px]" name="${this.name}" ${this.require && 'required'} oninput="globalThis.Dados[this.name]=this.value">${globalThis.Dados[this.name] || ''}</textarea>
         </div>    
+        `
+    }
+}
+
+export class Check {
+    constructor(name, label, col = 4, value = false) {
+        this.col = col > 0 && col < 5 ? col : 4
+        this.name = name
+        this.label = label
+        this.value = value
+    }
+    render() {
+        return `
+        <label class=" col-span-4  lg:col-span-${this.col}">
+            <input 
+                type="checkbox" 
+                value="${globalThis.Dados[this.name] || ''}" 
+                name="${this.name}" 
+                ${this.value && 'checked'}
+                oninput="globalThis.Dados[this.name]=this.checked"
+                >
+            <span class="${labCss}">${this.label}</span>           
+        </label>    
         `
     }
 }

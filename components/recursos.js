@@ -1,0 +1,16 @@
+export default [
+    { slug: 'dashboard', name: "Dashboard" },
+    { slug: 'doadores', name: "Doadores" },
+    { slug: 'carteira', name: "Carteira" },
+    { slug: 'configuracao', name: "Configuração" },
+    { slug: 'modelo-de-email', name: "Modelo de Email" },
+    { slug: 'modulos', name: "Módulos" },
+    { slug: 'metas', name: "Metas" },
+    { slug: 'planos', name: "Planos" },
+    { slug: 'recorrencia', name: "Recorrência" },
+    { slug: 'doacoes', name: "Doações" },
+    { slug: 'qr-code', name: "QR Code" },
+    { slug: 'minhas-instituicoes', name: "Minhas Instituições" },
+    { slug: 'usuarios', name: "Usuários" },
+    { slug: 'credenciais', name: "Credenciais" },
+]
