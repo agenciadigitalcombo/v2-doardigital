@@ -182,7 +182,7 @@ export default {
                     <div v-show="info.tipo_pagamento === 'BOLETO'" class="flex flex-col mt-8 space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
                         <input ref="codeLink" id="email" type="text" class="px-6 py-3 text-700 bg-white border rounded-md text-300 border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring sm:mx-2" :value="info.url" />
                         <button @click="copyLink" class="px-8 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none sm:mx-2">
-                            COPIAR LINK
+                            COPIAR LINK  
                         </button>
                     </div>
                 </CardGeral>
