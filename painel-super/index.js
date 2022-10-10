@@ -121,11 +121,12 @@ createApp({
         if (requestInfo?.payload?.sass == '1') {
             level = 'super'
         }
-        if (!jwt.logged() || level != "adm" ) {
+        if (!jwt.logged() || level != "super" ) {
             window.location.href = `//${window.location.host}/login`
         }
     },
     methods: {
+        
         toggleMenu() {
             this.isOpen = !this.isOpen
         }

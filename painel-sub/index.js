@@ -3,7 +3,7 @@ const { createApp, h } = Vue
 import MenuMobile from "../components/MenuMobile.js"
 import MenuAside from "../components/MenuAside.js"
 import Header from "../components/Header.js"
-import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
+import dataMenuPainelGeral from "../components/dataMenuPainelSub.js"
 import apiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
 
@@ -121,7 +121,7 @@ createApp({
         if (requestInfo?.payload?.sass == '1') {
             level = 'super'
         }
-        if (!jwt.logged() || level != "adm" ) {
+        if (!jwt.logged() || level != "sub" ) {
             window.location.href = `//${window.location.host}/login`
         }
     },

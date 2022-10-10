@@ -15,7 +15,7 @@ createApp({
         redirect(level) {
             let lb = {
                 sub: 'painel-sub',
-                adm: 'painel-new-adm',
+                adm: 'painel-new',
                 super: 'painel-super',
             }
             window.location.href = `//${window.location.host}/${lb[level]}`
@@ -45,10 +45,20 @@ createApp({
             this.redirect(level)
         }
     },
-    mounted() {
-        let jwt = new Jwt()
+    async mounted() {
+        let api = new apiAdmin()
+        let jwt = new Jwt() 
+        let code = jwt.get()?.code
+        let requestInfo = await api.info(code)      
+        let level = 'sub'
+        if (requestInfo?.payload?.adm?.length == 0) {
+            level = 'adm'
+        }
+        if (requestInfo?.payload?.sass == '1') {
+            level = 'super'
+        }
         if (jwt.logged()) {
-            this.redirect()
+            this.redirect(level)
         }
     }
 }).mount('#app')
