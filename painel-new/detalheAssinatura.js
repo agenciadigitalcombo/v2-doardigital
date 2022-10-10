@@ -17,6 +17,8 @@ import Popup from "../components/popup.js"
 export default {
     data: function () {
         return {
+            customer: null,
+            assinatura_open: [],
             inputs: "",
             name: "",
             lastName: "",
@@ -81,7 +83,15 @@ export default {
         let formatRequestDoador = request.payload
         let fkDoador = formatRequestDoador.fk
 
+        
+
         let sub_info = formatRequestDoador.subs.find(s => s.id == id_sub)
+
+        let assinatura_open = formatRequestDoador.history.filter( i => {
+            return i.external_fk == sub_info.externalReference && i.status_pagamento == "PENDING"
+        } )
+        this.assinatura_open = assinatura_open
+        this.customer = formatRequestDoador.asa.id
 
         this.info.doador_nome = formatRequestDoador.nome
         this.info.status_pagamento = sub_info.status
@@ -152,11 +162,26 @@ export default {
                 this.formData.numero,
                 this.formData.data
             )
-            if( request.next ) {
-                window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
-            }else {
+            if( !request.next ) {
                 this.error = request.message
+                return
             }
+
+            this.assinatura_open.forEach( async i => {
+                let request = await api.fatura_update(
+                    this.fk_inst,
+                    i.fatura_id,
+                    this.formData.numero,
+                    this.formData.tipo,
+                    i.data,
+                    this.customer 
+                )
+                if( !request.next ) {
+                    this.error = request.message
+                    return
+                }
+            });
+            window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
         },
     },
     template: `

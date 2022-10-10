@@ -25,7 +25,7 @@ export class Input {
         this.name = name
         this.label = label
         this.value = value
-        this.type = ["email", "number", "text", "url", "date", "color"].includes(type) ? type : 'text'
+        this.type = ["email", "number", "text", "url", "date", "color", "password", "checkbox", "radio"].includes(type) ? type : 'text'
         this.require = !!require
     }
     render() {
