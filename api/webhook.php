@@ -49,9 +49,12 @@ $url = $payload['payment']['invoiceUrl'] ?? "";
 $ID = $payload['payment']['id'] ?? "";
 $subPrefix = "";
 
+$value = $payload['payment']['value'];
+$billingType = $tipo;
+
 $event = $payload['event'];
 $whiteList = [
-    "PAYMENT_CREATED", 
+    "PAYMENT_CREATED",
     "PAYMENT_UPDATED", 
     "PAYMENT_CONFIRMED", 
     "PAYMENT_RECEIVED", 
@@ -134,6 +137,8 @@ $token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 $faturas->update([
     "status_pagamento" => $status,
     "data" => $dueDateInvoice,
+    "valor" => $value,
+    "tipo_pagamento"=> $billingType,
 ]);
 
 $sub->where([
