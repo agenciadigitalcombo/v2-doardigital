@@ -38,6 +38,7 @@ class Adm
             "ativo" => $payload['ativo'] ?? null,
             "credencial" => $payload['credencial'] ?? null,
             "adm" => $payload['adm'] ?? null,
+            "sass" => $payload['sass'] ?? false,
             "gravatar" => self::gravatar($payload['email'] ?? '123@123.com.br'),
         ];
     }

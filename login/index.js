@@ -4,35 +4,50 @@ import Jwt from "../components/jwt.js"
 
 createApp({
     data() {
-        return { 
+        return {
             email: 'super@digitalcombo.com.br',
-            pass: 'Seraph@121',
+            pass: '123456789',
             onerror: null,
             statusBtn: true
         }
-    },   
+    },
     methods: {
-        redirect() {
-            window.location.href = `//${window.location.host}/painel-new`
+        redirect(level) {
+            let lb = {
+                sub: 'painel-sub',
+                adm: 'painel-new-adm',
+                super: 'painel-super',
+            }
+            window.location.href = `//${window.location.host}/${lb[level]}`
         },
         async login() {
             this.onerror = null
             this.statusBtn = false
             let api = new apiAdmin()
             let jwt = new Jwt()
-            let request = await api.login(this.email,this.pass)
+            let request = await api.login(this.email, this.pass)
             this.statusBtn = true
-            if( !request.next ) {
+            if (!request.next) {
                 this.onerror = request.message
                 return null
             }
-            jwt.save( request.payload.token )
-            this.redirect()            
+            jwt.save(request.payload.token)
+            let code = jwt.get().code
+            let requestInfo = await api.info(code)
+            console.log(requestInfo)
+            let level = 'sub'
+            if (requestInfo.payload.adm.length == 0) {
+                level = 'adm'
+            }
+            if (requestInfo.payload.sass == '1') {
+                level = 'super'
+            }
+            this.redirect(level)
         }
     },
     mounted() {
         let jwt = new Jwt()
-        if(jwt.logged()) {
+        if (jwt.logged()) {
             this.redirect()
         }
     }
