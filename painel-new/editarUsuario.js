@@ -9,7 +9,9 @@ import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import { Form, Input, Button, Text, Select, Option, Check } from "../components/Form.js"
+import { getUriData, data, formataMoeda, formatRecorrente } from "../components/format.js"
+import Jwt from "../components/jwt.js"
 
 export default {
     data: function() {
@@ -20,9 +22,10 @@ export default {
             email: "",
             data: "",
             cpf: "",
+            inputsAnotacoes: "",
+            lista: [],
+            listaInst: [],
             formData: {
-                name: "John",
-                lastName: "Hoffmann"
             },
             transferencias: [],
             cols: {
@@ -42,13 +45,29 @@ export default {
         Table
     },
     async mounted() {
+        let ID = getUriData('id')
+        this.ID =  ID
         let admin = new apiAdmin()
-        let institution = new MyInstitution()
-        let apiinstituicao = new ApiInstitution()
-        let request = await admin.list_all_subs(institution.get())
-        let requestTransform = request.payload
+        let Inst = new ApiInstitution()
+        let jwt = new Jwt()
+        let adm_fk = jwt.get().code
+        let requestInst = await Inst.list(adm_fk)
+        let request = await admin.list_all_subs(adm_fk)
+        let lista = request.payload
+        let ids = lista.filter(p => p.code === ID)
+        let transformIds = ids[0]
+
+        this.formData.name = transformIds.nome
+        this.formData.email = transformIds.email
+        this.formData.phone = transformIds.telefone
+
+        
+
         if(request.next) {
-            console.log(requestTransform)
+            this.renderInst()
+            console.log(transformIds)
+            console.log(requestInst)
+
 
         }
         const inputs = [
@@ -67,10 +86,23 @@ export default {
 
     },
     methods: {
+        renderInst() {
+            const inputsAnotacoes = [
+                new Text('mensagem', 'Mensagem', 4, true),
+                new Button('Criar Anotação'),
+            ]
+            const formAnotacoes = new Form(inputsAnotacoes)
+            this.inputsAnotacoes = formAnotacoes.render()
+        },
         adapter( listAll ) {
             return listAll.map( d => ({
                 ...d,  
             }) )
+        },
+        adapter(listAll) {
+            return listAll.map(d => ({
+                ...d,
+            }))
         },
         atualizar() {
             
@@ -79,9 +111,10 @@ export default {
     },
     template: `
     <div>
-    
+    {{listaInst}}
     
     <BreadCrumb text="Home" text2="Editar Usuário" />
+    {{Ids}}
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
@@ -89,6 +122,10 @@ export default {
                 
                 <CardGeral text="Editar Usuário" size="quatro">
                 <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                </CardGeral>
+
+                <CardGeral text="Acessos" size="quatro">
+                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="atualizar"></form> 
                 </CardGeral>
                 
                 

@@ -56,9 +56,7 @@ export default {
     template: `
     <div>
     
-    
     <BreadCrumb text="Home" text2="Minhas Instituições" />
-    {{planos}}
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>

@@ -17,7 +17,7 @@ export default {
             lista: [],
             cols: {
                 "Nome": d => `${d.nome}`,
-                action: e => actions(`editar-usuario?id=${e.code}`, 'fa-solid fa-eye', 'blue')
+                "Ações": e => actions(`editar-usuario?id=${e.code}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
@@ -59,6 +59,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Lista de Usuários" size="quatro">
+                <Botao text="Criar Novo" variation="green" link="#/criar-usuario"/>
                 <Table :rows="lista" :cols="cols" pagination="10" />
                 </CardGeral>
                 
