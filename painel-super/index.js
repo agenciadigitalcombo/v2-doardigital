@@ -3,7 +3,7 @@ const { createApp, h } = Vue
 import MenuMobile from "../components/MenuMobile.js"
 import MenuAside from "../components/MenuAside.js"
 import Header from "../components/Header.js"
-import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
+import dataMenuPainelGeral from "../components/dataMenuPainelSuper.js"
 import apiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
 

@@ -1,18 +1,23 @@
 import Logo from "./Logo.js"
 import LinkMenu from "./LinkMenu.js"
 import getTemplate from "./getTemplate.js"
+import ApiAdmin from "../components/apiAdmin.js"
+import Jwt from "../components/jwt.js"
+import ApiCredencial from "../components/apiCredencial.js"
 
 export default {
     props: ['lista', 'isOpen'],
-    template: await getTemplate( './../components/MenuAside' ),
+    template: await getTemplate('./../components/MenuAside'),
     components: {
         Logo,
         LinkMenu,
-    },  
+    },
     emits: ['check'],
-    data: function() {
+    data: function () {
         return {
-            page: ""
+            page: "",
+            cred: [],
+            showAll: true
         }
     },
     methods: {
@@ -23,8 +28,21 @@ export default {
             this.page = data.link
         }
     },
-    mounted() {
+    async mounted() {
+        let api = new ApiAdmin()
+        let jwt = new Jwt()
+        let apiCred = new ApiCredencial()
+        this.adm_fk = jwt.get().code
+        let credencial_ID = (await api.info(this.adm_fk)).payload.credencial
+        if (!!credencial_ID) {
+            let credenciais = (await apiCred.info(credencial_ID)).payload.recursos.split(',')
+            this.cred = credenciais
+            let listReal = JSON.parse(JSON.stringify(this.lista))
+            this.showAll = false
+            console.log(listReal)
+            credencial_ID
+        }
         this.page = window.location.hash
     },
-   
+
 }

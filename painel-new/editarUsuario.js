@@ -1,5 +1,5 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
+import Card from "../components/Card.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
@@ -12,10 +12,12 @@ import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option, Check } from "../components/Form.js"
 import { getUriData, data, formataMoeda, formatRecorrente } from "../components/format.js"
 import Jwt from "../components/jwt.js"
+import ApiCredencial from "../components/apiCredencial.js"
 
 export default {
-    data: function() {
+    data: function () {
         return {
+            error: null,
             inputs: "",
             name: "",
             lastName: "",
@@ -24,18 +26,17 @@ export default {
             cpf: "",
             inputsAnotacoes: "",
             lista: [],
+            inst_sub: [],
             listaInst: [],
-            formData: {
-            },
+            formData: {},
             transferencias: [],
             cols: {
                 value: d => `${d.value}`,
                 action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
             },
-
         }
     },
-    
+
     components: {
         Botao,
         Card,
@@ -46,7 +47,7 @@ export default {
     },
     async mounted() {
         let ID = getUriData('id')
-        this.ID =  ID
+        this.ID = ID
         let admin = new apiAdmin()
         let Inst = new ApiInstitution()
         let jwt = new Jwt()
@@ -60,24 +61,24 @@ export default {
         this.formData.name = transformIds.nome
         this.formData.email = transformIds.email
         this.formData.phone = transformIds.telefone
+        this.formData.credencial = transformIds.credencial
 
-        
+        let apiCred = new ApiCredencial()
+        let allCredencial = await apiCred.listar()
+        let arrCred = allCredencial.payload.map(c => new Option(c.id, c.nome_identificacao))
+        this.formData.credencial = allCredencial.payload[0].id
 
-        if(request.next) {
+        this.inst_sub = (await Inst.list(this.ID)).payload.map(i => i.institution_fk)
+
+        if (request.next) {
             this.renderInst()
-            console.log(transformIds)
-            console.log(requestInst)
-
-
+            this.listaInst = requestInst.payload
         }
         const inputs = [
-            new Input('name', 'Nome', 'text', 2),
-            new Input('email', 'Email', 'email', 2, true),
+            new Input('name', 'Nome', 'text', 4),
+            new Input('email', 'Email', 'email', 2, true, '', true),
             new Input('phone', 'Telefone', 'text', 2),
-            new Input('password', 'Senha', 'text', 2, true),
-            new Select('credencial',"Credencial", 4, [
-                new Option( '1', 'teste')
-            ]),
+            new Select('credencial', "Credencial", 4, arrCred, true, transformIds.credencial),
             new Button('Atualizar Usuário'),
         ]
         globalThis.Dados = this.formData
@@ -94,45 +95,67 @@ export default {
             const formAnotacoes = new Form(inputsAnotacoes)
             this.inputsAnotacoes = formAnotacoes.render()
         },
-        adapter( listAll ) {
-            return listAll.map( d => ({
-                ...d,  
-            }) )
+        adapter(listAll) {
+            return listAll.map(d => ({
+                ...d,
+            }))
         },
         adapter(listAll) {
             return listAll.map(d => ({
                 ...d,
             }))
         },
-        atualizar() {
+        async atualizar() {
+            this.error = null
+            let admin = new apiAdmin()
+            let request = await admin.update(
+                this.ID,
+                this.formData.name,
+                '00000000000',
+                '0000-00-00',
+                this.formData.phone,
+                this.formData.credencial
+            )
+            this.error = request.message
+            if( !request.next ) {
+                return
+            }
+            window.location.href = "#/usuarios"
             
-            alert('tafarellll')
+        },
+        async toggleAdm(e) {
+            let action = e.target.checked ? "1" : "0"
+            let inst_fk = e.target.getAttribute('data-fk')
+            let adm_fk = this.ID
+            let inst = new ApiInstitution()
+            let request = await inst.add_admin(
+                inst_fk,
+                adm_fk,
+                action
+            )
         }
     },
     template: `
     <div>
-    {{listaInst}}
-    
-    <BreadCrumb text="Home" text2="Editar Usuário" />
-    {{Ids}}
-    <div class="relative pt-2 pb-32 bg-[#fff]">
-          <div class="px-4 md:px-6 mx-auto w-full">
-             <div>
-                <div class="flex flex-wrap">
-                
-                <CardGeral text="Editar Usuário" size="quatro">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
-                </CardGeral>
-
-                <CardGeral text="Acessos" size="quatro">
-                <form class="js-form grid grid-cols-4 gap-4" v-html="inputsAnotacoes" @submit="atualizar"></form> 
-                </CardGeral>
-                
-                
+        <BreadCrumb text="Home" text2="Editar Usuário" />
+        <div class="relative pt-2 pb-32 bg-[#fff]">
+            <div class="px-4 md:px-6 mx-auto w-full">
+                <div>
+                    <div class="flex flex-wrap">
+                        <CardGeral text="Editar Usuário" size="quatro">
+                            <form method="POST" action="javascript:void(0)" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                            <div v-show="error">{{error}}</div>
+                        </CardGeral>
+                        <CardGeral text="Acessos" size="quatro">
+                            <label v-for="i in listaInst" class="block">
+                                <input type="checkbox" @click="toggleAdm" :checked="inst_sub.includes(i.institution_fk)"
+                                    :data-fk="i.institution_fk" />
+                                {{ i.nome }}
+                            </label>
+                        </CardGeral>
+                    </div>
                 </div>
-             </div>
-          </div>
-       </div>
-    
+            </div>
+        </div>
     </div>`,
 }
