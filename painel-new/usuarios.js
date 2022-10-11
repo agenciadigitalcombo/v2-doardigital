@@ -1,5 +1,5 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
+import Card from "../components/Card.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
@@ -9,19 +9,20 @@ import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
+import Jwt from "../components/jwt.js"
 
 export default {
-    data: function() {
+    data: function () {
         return {
-            transferencias: [],
+            lista: [],
             cols: {
-                value: d => `${d.value}`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Nome": d => `${d.nome}`,
+                action: e => actions(`editar-usuario?id=${e.code}`, 'fa-solid fa-eye', 'blue')
             },
 
         }
     },
-    
+
     components: {
         Botao,
         Card,
@@ -32,21 +33,18 @@ export default {
     },
     async mounted() {
         let admin = new apiAdmin()
-        let institution = new MyInstitution()
-        let apiinstituicao = new ApiInstitution()
-        let request = await admin.list_all_subs(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            console.log(requestTransform)
-
-        }
-
+        let jwt = new Jwt()
+        let adm_fk = jwt.get().code
+        let request = await admin.list_all_subs(adm_fk)
+        this.lista = request.payload
+        console.log(this.lista)
+        
     },
     methods: {
-        adapter( listAll ) {
-            return listAll.map( d => ({
-                ...d,  
-            }) )
+        adapter(listAll) {
+            return listAll.map(d => ({
+                ...d,
+            }))
         }
     },
     template: `
@@ -61,7 +59,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Lista de Usuários" size="quatro">
-                <Table :rows="transferencias" :cols="cols" pagination="10" />
+                <Table :rows="lista" :cols="cols" pagination="10" />
                 </CardGeral>
                 
                 

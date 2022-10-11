@@ -56,6 +56,9 @@ export default {
             new Input('email', 'Email', 'email', 2, true),
             new Input('phone', 'Telefone', 'text', 2),
             new Input('password', 'Senha', 'text', 2, true),
+            new Select('credencial',"Credencial", 4, [
+                new Option( '1', 'teste')
+            ]),
             new Button('Atualizar Usuário'),
         ]
         globalThis.Dados = this.formData

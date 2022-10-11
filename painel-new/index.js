@@ -7,7 +7,6 @@ import dataMenuPainelGeral from "../components/dataMenuPainelGeral.js"
 import apiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
 
-
 import Sobre from "./sobre.js"
 import Inicio from "./home.js"
 import Doadores from "./doadores.js"
@@ -41,7 +40,6 @@ import CriarInstituicao from "./criarInstituicao.js"
 import CriarInstituicaoEndereco from "./criarInstituicaoEndereco.js"
 import CriarInstituicaoDominio from "./criarInstituicaoDominio.js"
 import CriarInstituicaoBanco from "./criarInstituicaoBanco.js"
-
 
 const routes = [
     { path: '/', component: Inicio },
