@@ -34,7 +34,7 @@ export default {
         let apiCred = new ApiCredencial()
         this.adm_fk = jwt.get().code
         let credencial_ID = (await api.info(this.adm_fk)).payload.credencial
-        if (!!credencial_ID) {
+        if (credencial_ID.length == 0) {
             let credenciais = (await apiCred.info(credencial_ID))?.payload?.recursos?.split(',')
             this.cred = credenciais
             let listReal = JSON.parse(JSON.stringify(this.lista))
