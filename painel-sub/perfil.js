@@ -1,4 +1,4 @@
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import { Form, Input, Button, Text, Select, Option, Upload } from "../components/Form.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import ApiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
@@ -53,6 +53,7 @@ export default {
             new Input('data', 'data nascimento', 'date', 2, true),
             new Input('cpf', 'CPF', 'text', 2, true),
             new Input('telefone', 'Telefone', 'text', 2, true),
+           
             new Button('Atualizar Perfil'),
         ]
         globalThis.Dados = this.formData
@@ -64,6 +65,7 @@ export default {
     },
     template: `
     <div>
+    {{formData}}
         <BreadCrumb text="Home" text2="Minha Conta" />
         <div class="relative pt-6 pb-32 bg-[#fff]">
             <div class="px-4 md:px-6 mx-auto w-full">
@@ -88,6 +90,7 @@ export default {
                                                 <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs"
                                                     @submit="atualizar">
                                                 </form>
+                                                
                                             </div>
                                         </div>
                                     </div>

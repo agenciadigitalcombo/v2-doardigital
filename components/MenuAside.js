@@ -35,12 +35,10 @@ export default {
         this.adm_fk = jwt.get().code
         let credencial_ID = (await api.info(this.adm_fk)).payload.credencial
         if (!!credencial_ID) {
-            let credenciais = (await apiCred.info(credencial_ID)).payload.recursos.split(',')
+            let credenciais = (await apiCred.info(credencial_ID))?.payload?.recursos?.split(',')
             this.cred = credenciais
             let listReal = JSON.parse(JSON.stringify(this.lista))
             this.showAll = false
-            console.log(listReal)
-            credencial_ID
         }
         this.page = window.location.hash
     },

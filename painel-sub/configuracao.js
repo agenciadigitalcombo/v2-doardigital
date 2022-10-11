@@ -2,7 +2,7 @@ import Card from "../components/Card.js"
 import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
-import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import { Form, Input, Button, Text, Select, Option, Upload } from "../components/Form.js"
 import CardGeral from "../components/CardGeral.js"
 
 export default {
@@ -25,7 +25,8 @@ export default {
          new Text('scripts', 'Scripts Javascript (Header)', 4, true),
          new Select('status', 'Status', 3, [
              new Option('1', 'Ativo'),
-             new Option('0', 'Inativo'),
+             new Option('0', 'Inativo'), 
+             
          ]),
          new Input('cor', 'Cor do Site', 'color', 1),
          new Button('Atualizar'),
@@ -47,7 +48,7 @@ export default {
 
       <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
-             <div>
+             <div><img :src="formData?.gravatar_uri" />
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Alterar Configurações do Site" size="quatro">   

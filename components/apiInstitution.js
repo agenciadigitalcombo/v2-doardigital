@@ -39,7 +39,8 @@ export default class myInstitution {
         numero,
         complemento,
         bairro,
-        cidade
+        cidade,
+        estado
     ) {
         return await http.post('/instituicao/update-info', {
             institution_fk,

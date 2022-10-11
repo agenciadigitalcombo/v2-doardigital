@@ -19,7 +19,7 @@
         <div class="p-2">
             
         </div>
-        <LinkMenu @click="clickMenu" @setPage="atualizarPagina" v-for='item in lista' :link='item.link' :ico='item.ico' :text='item.text' v-show="cred.includes(item.link) || showAll" :page="page" />
+        <LinkMenu @click="clickMenu" @setPage="atualizarPagina" v-for='item in lista' :link='item.link' :ico='item.ico' :text='item.text' v-show="cred?.includes(item.link) || showAll" :page="page" />
     </div>
     <div 
         @click="clickMenu" 
