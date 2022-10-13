@@ -158,11 +158,10 @@ export default {
 		//this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
 		this.domain = "jms21122xxcr"
 		this.domain = window.location.host
-		let dominio = window.location.host
 		// this.this.domain  = window.location.hostname
 
 		let config = (await this.lisConfiguracao()).payload
-		this.logo = dominio + "/api/upload/" + config.logo
+		this.logo = "https://hostdoar.tk/api/upload/" + config.logo
 		this.backgroundColor = config.cor
 
 
