@@ -113,6 +113,8 @@ class Fatura
         $payload["data"] = $payload["data"] ??  date("Y-m-d");
         if($payload["tipo_pagamento"] == "PIX" || $payload["tipo_pagamento"] == "BOLETO") {
             $dataCreated = date("Y-m-d", strtotime('-7 days', strtotime($payload["data"])));
+        }else {
+            $dataCreated = $payload["data"];
         }
         return [
             "instituicao_fk" => $payload["instituicao_fk"] ?? null,
