@@ -1,5 +1,7 @@
 export default async  function (path) {
-    return await fetch(`${path}.html`).then(function (response) {
+    let dir = window.location.pathname.replace(/\//gi, '')
+    dir = window.location.port == '' ? dir + '/' : ''
+    return await fetch(`${dir}${path}.html`).then(function (response) {
         return response.text()
     }).then(function (html) {
         console.log(html)
