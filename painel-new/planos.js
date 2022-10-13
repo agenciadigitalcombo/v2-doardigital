@@ -15,7 +15,7 @@ export default {
             transferencias: [],
             cols: {
                 "Valor": d => `${d.value}`,
-                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue'),
+                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa fa-pencil', 'blue'),
                 "Apagar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-trash', 'blue'),
             },
 
@@ -59,13 +59,27 @@ export default {
     
     
     <BreadCrumb text="Home" text2="Planos" />
+    
+    
     <div class="relative pt-2 pb-32 bg-[#fff]">
+    
           <div class="px-4 md:px-6 mx-auto w-full">
+          
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Planos" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
+                <CardGeral text="" size="quatro">
+                <!-- Code block starts -->
+                    <div class=" container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-300">
+                        <div>
+                            <h4 class="text-2xl font-bold leading-tight text-gray-800">Planos</h4>
+                        </div>
+                        <div class="mt-6 md:mt-0">
+                            <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
+                        </div>
+                    </div>
+                <!-- Code block ends -->
+                
                 <Table :rows="transferencias" :cols="cols" pagination="15" />
                 </CardGeral>
                 

@@ -8,6 +8,8 @@ export default [
   { text: "Módulos", ico: "fa-solid fa-share-nodes", link: "modulos" },
   { text: "Modelo de E-mails", ico: "fa-solid fa-envelope-circle-check", link: "modelo-de-email" },
   { text: "Configuração", ico: "fa-solid fa-gear", link: "configuracao" },
+  { text: "Usuários", ico: "fas fa-user-edit", link: "usuarios" },
+  { text: "Minhas Instituições", ico: "fa-solid fa-house-laptop", link: "minhas-instituicoes" },
   { text: "Carteira", ico: "fa-solid fa-vault", link: "carteira" },
   { text: "QR CODE", ico: "fa-solid fa-qrcode", link: "qr-code" },
 ]

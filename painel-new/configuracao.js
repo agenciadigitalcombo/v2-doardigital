@@ -112,7 +112,7 @@ export default {
          <div class="px-4 md:px-6 mx-auto w-full">
             <div>
                   <div class="flex flex-wrap">
-                     <CardGeral text="Alterar Configurações do Site" size="quatro">
+                     <CardGeral text="Alterar Configurações do Site" size="cinco">
                         <img :src="formData.logo_uri ? formData.logo_uri : base + formData.logo" />
                         <div class="mx-auto w-[90%] lg:w-[95%] pt-8">
                               <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>

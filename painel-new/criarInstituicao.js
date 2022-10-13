@@ -61,7 +61,7 @@ export default {
        
         const inputs = [
             new Input('name', 'Nome Fantasia', 'text', 2),
-            new Select('tipoEmpresa', 'Conta Tipo', 1, [
+            new Select('tipoEmpresa', 'Conta Tipo', 2, [
               new Option('ASSOCIATION', 'ASSOCIATION'),
               new Option('MEI', 'MEI'),
               new Option('LIMITED', 'LIMITED'),

@@ -17,7 +17,9 @@ export default {
             list: [],
             cols: {
                 "Nome": d => `${d.nome}`,
-                "Ações": e => actions(`editar-instituicao?id=${e.institution_fk}`, 'fa-solid fa-eye', 'blue')
+                "Registro": d => `${d.registro}`,
+                "SubDomain": d => `${d.subdomain}`,
+                "Ações": e => actions(`editar-instituicao?id=${e.institution_fk}`, 'fa fa-pencil', 'blue')
             },
 
         }
@@ -62,8 +64,17 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Instituições" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-instituicao"/>
+                <CardGeral text="" size="full">
+                <!-- Code block starts -->
+                    <div class=" container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-300">
+                        <div>
+                            <h4 class="text-2xl font-bold leading-tight text-gray-800">Instituições</h4>
+                        </div>
+                        <div class="mt-6 md:mt-0">
+                            <Botao text="Criar novo" variation="green" link="#/criar-instituicao"/>
+                        </div>
+                    </div>
+                <!-- Code block ends -->
                 <Table :rows="list" :cols="cols" pagination="10" />
                 </CardGeral>
                 

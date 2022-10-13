@@ -29,25 +29,53 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Domínio Personalizado" size="tres">
-                <img src="https://painel.doardigital.com.br/painel/assets/logo/logo-modulos/registro-dominios.png" alt="QR CODE" width="200" height="300">
+                <CardGeral text="Domínio Personalizado" size="tres" class="text-center content-center">
+                
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
+                </section>
                 <br>
-                <botao text="Fazer Download" />              
+                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>            
                 </CardGeral>
             
-                <CardGeral text="Configuração E-mail" size="tres">   
+                <CardGeral text="Configuração E-mail" size="tres" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
                 </CardGeral>
             
-                <CardGeral text="Tag Manager" size="tres">   
+                <CardGeral text="Tag Manager" size="tres" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
                 </CardGeral>
             
-                <CardGeral text="E-vendas" size="tres">   
+                <CardGeral text="E-vendas" size="tres" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>  
                 </CardGeral>
             
-                <CardGeral text="RD Station" size="tres">   
+                <CardGeral text="RD Station" size="tres" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
                 </CardGeral>
             
-                <CardGeral text="Mailling Boss" size="tres">   
+                <CardGeral text="Mailling Boss" size="tres" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
                 </CardGeral>
                         
                 </div>

@@ -17,7 +17,8 @@ export default {
             lista: [],
             cols: {
                 "Nome": d => `${d.nome}`,
-                "Ações": e => actions(`editar-usuario?id=${e.code}`, 'fa-solid fa-eye', 'blue')
+                "Credencial": d => `${d.credencial}`,
+                "Ações": e => actions(`editar-usuario?id=${e.code}`, 'fa fa-pencil', 'blue')
             },
 
         }
@@ -52,14 +53,22 @@ export default {
     
     
     <BreadCrumb text="Home" text2="Usuários" />
-    {{planos}}
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Lista de Usuários" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-usuario"/>
+                <CardGeral text="" size="cinco">
+                <!-- Code block starts -->
+                    <div class=" container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-300">
+                        <div>
+                            <h4 class="text-2xl font-bold leading-tight text-gray-800">Lista de Usuários</h4>
+                        </div>
+                        <div class="mt-6 md:mt-0">
+                            <Botao text="Criar novo" variation="green" link="#/criar-usuario"/>
+                        </div>
+                    </div>
+                <!-- Code block ends -->
                 <Table :rows="lista" :cols="cols" pagination="10" />
                 </CardGeral>
                 

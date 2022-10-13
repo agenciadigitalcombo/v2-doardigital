@@ -18,6 +18,7 @@ export default {
                 cinco: "w-full md:w-1/2 xl:w-4/6 p-6",
                 seis: "w-full md:w-1/2 xl:w-5/6 p-6",
                 sete: "w-full md:w-1/2 xl:w-full p-6",
+                full: "w-full p-6",
 
             },
             variations:{

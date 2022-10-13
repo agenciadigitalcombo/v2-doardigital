@@ -44,121 +44,11 @@ export default {
     },
     template: `
     <div>
-<!-- Jumbotron -->
-<div
-  class="p-12 text-center relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
-  style="
-    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
-    height: 400px;
-  "
->
-  <div
-    class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
-    style="background-color: rgba(0, 0, 0, 0.6)"
-  >
-    <div class="flex justify-center items-center h-full">
-      <div class="text-white">
-        <h2 class="font-semibold text-4xl mb-4">Heading</h2>
-        <h4 class="font-semibold text-xl mb-6">Subheading</h4>
-        <a
-          class="inline-block px-7 py-3 mb-1 border-2 border-gray-200 text-gray-200 font-medium text-sm leading-snug uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-          href="#!"
-          role="button"
-          data-mdb-ripple="true"
-          data-mdb-ripple-color="light"
-          >Call to action</a
-        >
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Jumbotron -->
-<br><br>
-
-
-
-<!-- Modal -->
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog relative w-auto pointer-events-none">
-    <div
-      class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-      <div
-        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">Modal title</h5>
-        <button type="button"
-          class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-          data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body relative p-4">
-        Modal body text goes here.
-      </div>
-      <div
-        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-        <button type="button" class="px-6
-          py-2.5
-          bg-purple-600
-          text-white
-          font-medium
-          text-xs
-          leading-tight
-          uppercase
-          rounded
-          shadow-md
-          hover:bg-purple-700 hover:shadow-lg
-          focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0
-          active:bg-purple-800 active:shadow-lg
-          transition
-          duration-150
-          ease-in-out" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="px-6
-      py-2.5
-      bg-blue-600
-      text-white
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      rounded
-      shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
-      transition
-      duration-150
-      ease-in-out
-      ml-1">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Button trigger modal -->
-<button type="button"
-  class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
-
-
-
-<br><br>
-
-
-<div
-  class="relative overflow-hidden bg-no-repeat bg-cover max-w-xs"
-  data-mdb-ripple="true" data-mdb-ripple-color="light"
->
-  <img src="https://mdbcdn.b-cdn.net/img/new/fluid/city/113.webp" class="max-w-xs" alt="Louvre" />
-  
-    <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-
-</div>
-
-
 
     <div class="flex flex-wrap">
+    
                     <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                    
                         <!--Metric Card-->
                         <div class="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
                             <div class="flex flex-row items-center">
@@ -256,39 +146,91 @@ export default {
                     <!--Graph Card-->
                     <div class="bg-white border-transparent rounded-lg shadow-xl">
                         <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
-                            <h class="font-bold uppercase text-gray-600">Graph</h>
+                            <h class="font-bold uppercase text-gray-600">Grapsh</h>
                         </div>
                         <div class="p-5">
-                            <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>
-                            <script>
-                                new Chart(document.getElementById("chartjs-7"), {
-                                    "type": "bar",
-                                    "data": {
-                                        "labels": ["January", "February", "March", "April"],
-                                        "datasets": [{
-                                            "label": "Page Impressions",
-                                            "data": [10, 20, 30, 40],
-                                            "borderColor": "rgb(255, 99, 132)",
-                                            "backgroundColor": "rgba(255, 99, 132, 0.2)"
-                                        }, {
-                                            "label": "Adsense Clicks",
-                                            "data": [5, 15, 10, 30],
-                                            "type": "line",
-                                            "fill": false,
-                                            "borderColor": "rgb(54, 162, 235)"
-                                        }]
-                                    },
-                                    "options": {
-                                        "scales": {
-                                            "yAxes": [{
-                                                "ticks": {
-                                                    "beginAtZero": true
-                                                }
-                                            }]
-                                        }
-                                    }
-                                });
-                            </script>
+                        <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+  <p class="ml-4">
+    Total de Doações /p>
+    <br />
+    <div class=" flex flex-col gap-1 items-center justify-center bg-white">
+
+
+  <!-- Card 2 -->
+  <a href="#" class="w-[30rem] border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-50">
+
+    <div class="grid grid-cols-6 p-5 gap-y-2">
+
+      <!-- Profile Picture -->
+      <div>
+        <img src="https://picsum.photos/seed/2/200/200" class="max-w-16 max-h-12 rounded-full" />
+      </div>
+
+      <!-- Description -->
+      <div class="col-span-5 md:col-span-4 ml-4">
+
+        <p class="text-sky-500 font-bold text-xs"> PIX </p>
+
+        <p class="text-gray-600 font-bold"> R$ 24.500,00</p>
+
+
+      </div>
+
+    </div>
+
+  </a>
+  <!-- Card 2 -->
+  <a href="#" class="w-[30rem] border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-50">
+
+    <div class="grid grid-cols-6 p-5 gap-y-2">
+
+      <!-- Profile Picture -->
+      <div>
+        <img src="https://picsum.photos/seed/2/200/200" class="max-w-16 max-h-12 rounded-full" />
+      </div>
+
+      <!-- Description -->
+      <div class="col-span-5 md:col-span-4 ml-4">
+
+        <p class="text-sky-500 font-bold text-xs"> PIX </p>
+
+        <p class="text-gray-600 font-bold"> R$ 24.500,00</p>
+
+
+      </div>
+
+    </div>
+
+  </a>
+  <!-- Card 2 -->
+  <a href="#" class="w-[30rem] border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-50">
+
+    <div class="grid grid-cols-6 p-5 gap-y-2">
+
+      <!-- Profile Picture -->
+      <div>
+        <img src="https://picsum.photos/seed/2/200/200" class="max-w-16 max-h-12 rounded-full" />
+      </div>
+
+      <!-- Description -->
+      <div class="col-span-5 md:col-span-4 ml-4">
+
+        <p class="text-sky-500 font-bold text-xs"> PIX </p>
+
+        <p class="text-gray-600 font-bold"> R$ 24.500,00</p>
+
+
+      </div>
+
+    </div>
+
+  </a>
+
+</div>
+  </p>
+</div>
+
+
                         </div>
                     </div>
                     <!--/Graph Card-->
