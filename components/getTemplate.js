@@ -3,6 +3,7 @@ export default async  function (path) {
     if(window.location.port == '') {        
         let dir = window.location.pathname.replace(/\//gi, '')
         path = path.replace(/.\/..\//gi, '')
+        path = path.replace(`${dir}/`, '')
         full_url = `${path}`
     }
     console.log(full_url)
