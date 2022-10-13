@@ -19,7 +19,7 @@ export default {
                 "Valor": d => `${d.value}`,
                 status: t => status(t.status),
                 recorrente: "Recorrente",
-                "Data": d => `${d.dataCreated}`,
+                "Data": d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
@@ -57,7 +57,6 @@ export default {
                 name: d.doador_nome,
                 email: d.doador_email,
                 data: data(d.data),
-                dataCreated: data(d.dataCreated),
                 value: formataMoeda(d.valor),
                 price: d.valor,
                 status: d.status_pagamento,
