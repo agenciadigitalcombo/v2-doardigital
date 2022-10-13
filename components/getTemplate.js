@@ -4,7 +4,7 @@ export default async  function (path) {
         let dir = window.location.pathname.replace(/\//gi, '')
         path = path.replace(/.\/..\//gi, '')
         path = path.replace(`${dir}/`, '')
-        full_url = `${path}`
+        full_url = `../${path}`
     }
     console.log(full_url)
     return await fetch(`${full_url}.html`).then(function (response) {
