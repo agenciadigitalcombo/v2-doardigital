@@ -2,7 +2,7 @@ import getTemplate from "./getTemplate.js"
 
 export default {
     props: ['autor','text','data','variation','tax','icon','dashboard','size'],
-    template : await getTemplate( './../components/Anotacao' ),
+    template : await getTemplate( './../components/anotacao' ),
     data: function() {
         return {
             icons:{
