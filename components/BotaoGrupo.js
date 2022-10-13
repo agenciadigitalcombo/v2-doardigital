@@ -2,7 +2,7 @@ import getTemplate from "./getTemplate.js"
 
 export default {
     props: ['link','text','value','variation','tax','icon','dashboard','size'],
-    template : await getTemplate( './../components/BotaoGrupo' ),
+    template : await getTemplate( './../components/botaogrupo' ),
     data: function() {
         return {
             icons:{
