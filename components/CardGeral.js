@@ -3,7 +3,7 @@ import Table from "./Table.js"
 
 export default {
     props: ['link','text','value','variation','tax','icon','dashboard','size'],
-    template : await getTemplate( './../components/CardGeral' ),
+    template : await getTemplate( './../components/cardGeral' ), 
     data: function() {
         return {
             icons:{
