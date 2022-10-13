@@ -1,8 +1,12 @@
 export default async  function (path) {
-    let dir = window.location.pathname.replace(/\//gi, '')
-    dir = window.location.port == '' ? dir + '/' : ''
-    console.log(`${dir}${path}.html`)
-    return await fetch(`${dir}${path}.html`).then(function (response) {
+    let full_url = path
+    if(window.location.port == '') {        
+        let dir = window.location.pathname.replace(/\//gi, '')
+        path = path.replace(/.\/..\//gi, '')
+        full_url = `${dir}/${path}`
+    }
+    console.log(full_url)
+    return await fetch(`${full_url}.html`).then(function (response) {
         return response.text()
     }).then(function (html) {
         console.log(html)
