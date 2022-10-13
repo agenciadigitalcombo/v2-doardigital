@@ -2,7 +2,7 @@ import getTemplate from "./getTemplate.js"
 
 export default {
     props: ['link','text','value','variation','tax','icon'],
-    template : await getTemplate( './../components/Filtro' ),
+    template : await getTemplate( './../components/filtro' ),
     emits: ['filter'],
     data: function() {
         return {
