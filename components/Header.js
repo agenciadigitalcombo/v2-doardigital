@@ -8,6 +8,7 @@ export default {
     data: function() {
         return {
             statusSubMenu: false,
+            statusSubMenu1: false,
             institution: null,
             list: []
         }
@@ -15,6 +16,9 @@ export default {
     methods: {
         toggleSubMenu() {
             this.statusSubMenu = !this.statusSubMenu
+        },
+        toggleSubMenu1() {
+            this.statusSubMenu1 = !this.statusSubMenu1
         },
         sair() {
             let jwt = new Jwt()

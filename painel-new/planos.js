@@ -66,7 +66,7 @@ export default {
                 
                 <CardGeral text="Planos" size="quatro">
                 <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
-                <Table :rows="transferencias" :cols="cols" pagination="10" />
+                <Table :rows="transferencias" :cols="cols" pagination="15" />
                 </CardGeral>
                 
                 
