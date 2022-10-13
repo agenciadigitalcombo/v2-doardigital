@@ -9,6 +9,12 @@ import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import { getUriData, formataMoeda } from "../components/format.js"
 
+globalThis.apagaPlano = async function($id) {
+    let api = new ApiPlanos()
+    let request = await api.delete($id)
+    window.location.reload()
+}
+
 export default {
     data: function() {
         return {
@@ -16,7 +22,7 @@ export default {
             cols: {
                 "Valor": d => `${d.value}`,
                 "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa fa-pencil', 'blue'),
-                "Apagar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-trash', 'blue'),
+                "Apagar": e => actions(`planos`, 'fa-solid fa-trash', 'blue', "apagaPlano", e.id ),
             },
 
         }

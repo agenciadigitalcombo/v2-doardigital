@@ -1,5 +1,6 @@
 import config from "../config.js"
 import Jwt from "./jwt.js"
+import mask from "./mask.js"
 
 const CheckCss = "rounded border border-gray-300 inline-block w-[18px] py-2 px-4 text-gray-700 focus:outline-blue-700 "
 const inputCss = "rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 "
@@ -26,7 +27,7 @@ export class Form {
 }
 
 export class Input {
-    constructor(name, label, type = 'text', col = 4, require = false, value = '', disable = false) {
+    constructor(name, label, type = 'text', col = 4, require = false, value = '', disable = false, mask = null) {
         this.col = col > 0 && col < 5 ? col : 4
         this.name = name
         this.label = label
@@ -34,12 +35,13 @@ export class Input {
         this.disable = disable
         this.type = ["email", "number", "text", "url", "date", "color", "password"].includes(type) ? type : 'text'
         this.require = !!require
+        this.mask = mask
     }
     render() {
         return `
         <div class=" col-span-4  lg:col-span-${this.col}">
             <label class="${labCss}">${this.label}</label>
-            <input type="${this.type}" ${this.disable && 'disabled'} value="${globalThis.Dados[this.name] || ''}" class="${this.type != 'color' ? inputCss : colorCss}" name="${this.name}" ${this.require && 'required'} oninput="globalThis.Dados[this.name]=this.value" >
+            <input type="${this.type}" ${this.disable && 'disabled'} value="${globalThis.Dados[this.name] || ''}" class="${this.type != 'color' ? inputCss : colorCss}" name="${this.name}" ${this.require && 'required'} oninput="${this.mask && 'globalThis.'+this.mask+'(this);' }globalThis.Dados[this.name]=this.value" >
         </div>    
         `
     }
