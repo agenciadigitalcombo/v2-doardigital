@@ -19,7 +19,7 @@ export default {
                 "Valor": d => `${d.value}`,
                 status: t => status(t.status),
                 recorrente: "Recorrente",
-                "Data": d => `${d.data}`,
+                "Data": d => `${d.dataRegistro}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
@@ -42,8 +42,8 @@ export default {
             let all_donations = request.payload.reverse()
             all_donations = this.adapter(all_donations)
             all_donations = all_donations.filter(d => {
-                let data_donation = d.data
-                return hoje > data_donation
+                let data_donation = d.dataCreated
+                return hoje < data_donation
             })
             all_donations = all_donations.reverse()
             this.donations = all_donations
@@ -57,6 +57,8 @@ export default {
                 name: d.doador_nome,
                 email: d.doador_email,
                 data: data(d.data),
+                dataCreated: d.dataCreated,
+                dataRegistro: data(d.dataCreated),
                 value: formataMoeda(d.valor),
                 price: d.valor,
                 status: d.status_pagamento,

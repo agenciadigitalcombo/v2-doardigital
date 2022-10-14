@@ -23,7 +23,7 @@ export default {
                 "Valor": d => `${d.value}`,
                 status: t => status(t.status),
                 recorrente: "Recorrente",
-                "Data": d => `${d.data}`,
+                "Data": d => `${d.dataRegistro}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
@@ -48,8 +48,8 @@ export default {
             let all_donations = request.payload
             all_donations = this.adapter(all_donations)
             all_donations = all_donations.filter(d => {
-                let data_donation = d.data
-                return hoje <= data_donation
+                let data_donation = d.dataCreated
+                return data_donation <= hoje 
             })
             this.donations = all_donations
             this.donationsCopy = all_donations
@@ -102,6 +102,8 @@ export default {
                     email: d.doador_email,
                     cpf: d.cpf,
                     data: data(d.data),
+                    dataCreated: d.dataCreated,
+                    dataRegistro: data(d.dataCreated),
                     value: formataMoeda(d.valor),
                     price: d.valor,
                     status: d.status_pagamento,
@@ -134,32 +136,32 @@ export default {
                 dados = dados.filter(t => {
                     return t.recorrente == payload.recorrencia
                 })
-            }            
-            if (payload.status.length > 2) { 
+            }
+            if (payload.status.length > 2) {
 
-                if( payload.status == 'vencido' ) {
+                if (payload.status == 'vencido') {
                     dados = dados.filter(t => {
                         return t.status == 'OVERDUE'
                     })
                 }
-                if( payload.status == 'pendente' ) {
+                if (payload.status == 'pendente') {
                     dados = dados.filter(t => {
                         return t.status == 'PENDING'
                     })
                 }
-                if( payload.status == 'pago' ) {
+                if (payload.status == 'pago') {
                     dados = dados.filter(t => {
                         return t.status == 'RECEIVED' || t.status == 'CONFIRMED'
                     })
                 }
-                if( payload.status == 'estornado' ) {
+                if (payload.status == 'estornado') {
                     dados = dados.filter(t => {
                         return t.status == 'REFUNDED'
                     })
-                }                
+                }
             }
-            if (payload.date) {                 
- 
+            if (payload.date) {
+                
                 let hoje = moment().format('YYYY-MM-DD')
                 let dataSelecionada = payload.date
 
@@ -167,17 +169,18 @@ export default {
                 let ontem = dataSelecionada == moment().subtract(1, 'day').format('YYYY-MM-DD')
                 if (presente) {
                     dados = dados.filter(t => {
-                        let dataDonation = t.timestamp
+                        let dataDonation = t.dataCreated
                         return dataDonation == hoje
                     })
                 } else if (ontem) {
+                    
                     dados = dados.filter(t => {
-                        let dataDonation = t.timestamp
+                        let dataDonation = t.dataCreated
                         return dataDonation == dataSelecionada
                     })
                 } else {
                     dados = dados.filter(t => {
-                        let dataDonation = t.timestamp
+                        let dataDonation = t.dataCreated
                         return dataDonation >= dataSelecionada
                     })
                 }
