@@ -38,7 +38,7 @@ export default {
             {label: "Essa semana", value: moment().startOf('week').format(format_data) },
             {label: "Semana passada", value: moment().startOf('week').subtract(1, 'week').format(format_data)  },
             {label: "Esse mês", value: moment().startOf('month').format(format_data) },
-            {label: "Mês passado", value: moment().startOf('month').subtract(1, 'month').format(format_data) },
+            {label: "Mês passado", value: moment().subtract(1, 'month').format(format_data) },
         ]       
     }
 }

@@ -112,7 +112,7 @@ export default {
                 <Card text="Total Doadores Únicos" :value="statusUnico" variation="yellow" size="3"/>
                 </div>
                 <br>
-                <FiltroDoador @filter="filtrar" />
+                <FiltroDoador @filter="filtrar"/>
                 <Table :rows="doadores" :cols="cols" pagination="10" />
              </div>
           </div>

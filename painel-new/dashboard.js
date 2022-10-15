@@ -2,6 +2,7 @@ import Table  from "../components/Table.js"
 import Botao  from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import Card  from "../components/Card.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function() {
@@ -40,11 +41,13 @@ export default {
         Table,
         Botao,
         BreadCrumb,
-        Card
+        Card,
+        Loader
     },
     template: `
     <div>
 
+    
     <div class="flex flex-wrap">
     
                     <div class="w-full md:w-1/2 xl:w-1/3 p-6">
@@ -379,7 +382,7 @@ export default {
                         <div class="p-5 text-center">
 
 
-                            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7D52JJ&placement=wwwtailwindtoolboxcom" id="_carbonads_js"></script>
+                            
 
 
                         </div>
