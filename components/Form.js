@@ -27,21 +27,46 @@ export class Form {
 }
 
 export class Input {
-    constructor(name, label, type = 'text', col = 4, require = false, value = '', disable = false, mask = null) {
+    constructor(name, label, type = 'text', col = 4, require = false, value = '', disable = false, id = null) {
         this.col = col > 0 && col < 5 ? col : 4
         this.name = name
         this.label = label
         this.value = value
-        this.disable = disable
+        this.id = id
         this.type = ["email", "number", "text", "url", "date", "color", "password"].includes(type) ? type : 'text'
         this.require = !!require
-        this.mask = mask
     }
     render() {
         return `
         <div class=" col-span-4  lg:col-span-${this.col}">
             <label class="${labCss}">${this.label}</label>
-            <input type="${this.type}" ${this.disable && 'disabled'} value="${globalThis.Dados[this.name] || ''}" class="${this.type != 'color' ? inputCss : colorCss}" name="${this.name}" ${this.require && 'required'} oninput="${this.mask && 'globalThis.'+this.mask+'(this);' }globalThis.Dados[this.name]=this.value" >
+            <input type="${this.type}" value="${globalThis.Dados[this.name] || ''}" class="${this.type != 'color' ? inputCss : colorCss}" name="${this.name}" ${this.require && 'required'} oninput="globalThis.Dados[this.name]=this.value" >
+        </div>    
+        `
+    }
+
+}
+
+export class Input2 {
+    constructor(name, label, type = 'text', col = 4, require = false, value = '', disable = false, id = null) {
+        this.col = col > 0 && col < 5 ? col : 4
+        this.name = name
+        this.label = label
+        this.value = value
+        this.id = id
+        this.type = ["email", "number", "text", "url", "date", "color", "password"].includes(type) ? type : 'text'
+        this.require = !!require
+    }
+    render() {
+        return `
+        <div class=" col-span-4  lg:col-span-${this.col}">
+        <label class="${labCss}">${this.label}</label>
+        <div class="flex flex-wrap items-stretch w-full mb-4 relative">
+        <input type="${this.type}" value="${globalThis.Dados[this.name] || ''}" class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border h-10 border-blue rounded rounded-r-none px-3 relative" name="${this.name}" ${this.require && 'required'} oninput="globalThis.Dados[this.name]=this.value">
+        <div class="flex -mr-px">
+            <span class="flex items-center leading-normal bg-grey-lighter rounded rounded-l-none border border-l-0 border-blue px-3 whitespace-no-wrap text-grey-dark text-sm">.doardigital.com.br</span>
+        </div>	
+    </div>
         </div>    
         `
     }

@@ -62,9 +62,10 @@ export default {
         const inputs = [
             new Input('name', 'Nome Fantasia', 'text', 2),
             new Select('tipoEmpresa', 'Conta Tipo', 2, [
-              new Option('ASSOCIATION', 'ASSOCIATION'),
+              new Option('SELECIONE', 'SELECIONE'),
+              new Option('ASSOCIATION', 'ASSOCIAÇÃO'),
               new Option('MEI', 'MEI'),
-              new Option('LIMITED', 'LIMITED'),
+              new Option('LIMITED', 'LIMITADA'),
               new Option('INDIVIDUAL', 'INDIVIDUAL'),
             ]),
             new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2),
@@ -91,9 +92,7 @@ export default {
         }
     },
     template: `
-    <div>
-    {{formData}}
-    
+    <div>    
     <BreadCrumb text="Home" text2="Criar Instituição" />
 
     <div class="w-full py-6">
@@ -178,7 +177,7 @@ export default {
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap place-content-center">
                 
                 <CardGeral text="Criar Instituição - Info. Geral" size="cinco">
                 <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 

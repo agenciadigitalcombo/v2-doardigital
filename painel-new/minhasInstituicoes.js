@@ -64,7 +64,7 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="" size="full">
+                <CardGeral text="" size="seis">
                 <!-- Code block starts -->
                     <div class=" container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-300">
                         <div>
