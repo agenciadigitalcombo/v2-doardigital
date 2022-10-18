@@ -1,64 +1,30 @@
 const { createApp, h } = Vue
-import apiAdmin from "../components/apiAdmin.js"
-import Jwt from "../components/jwt.js"
+
+import Inicio from "./inicio.js"
+import Recuperar from "./recuperar.js"
+
+const routes = [
+    { path: '/', component: Inicio },
+    { path: '/recuperar', component: Recuperar },
+]
+
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes,
+})
 
 createApp({
     data() {
         return {
-            email: 'super@digitalcombo.com.br',
-            pass: '123456789',
-            onerror: null,
-            statusBtn: true
         }
+    },
+    template: `
+        <div> 
+            <router-view></router-view> 
+        </div>
+        `,
+    components: {
     },
     methods: {
-        redirect(level) {
-            let lb = {
-                sub: 'painel-sub',
-                adm: 'painel-new',
-                super: 'painel-super',
-            }
-            window.location.href = `//${window.location.host}/${lb[level]}`
-        },
-        async login() {
-            this.onerror = null
-            this.statusBtn = false
-            let api = new apiAdmin()
-            let jwt = new Jwt()
-            let request = await api.login(this.email, this.pass)
-            this.statusBtn = true
-            if (!request.next) {
-                this.onerror = request.message
-                return null
-            }
-            jwt.save(request.payload.token)
-            let code = jwt.get().code
-            let requestInfo = await api.info(code)
-            console.log(requestInfo)
-            let level = 'sub'
-            if (requestInfo.payload.adm.length == 0) {
-                level = 'adm'
-            }
-            if (requestInfo.payload.sass == '1') {
-                level = 'super'
-            }
-            this.redirect(level)
-        }
-    },
-    async mounted() {
-        let api = new apiAdmin()
-        let jwt = new Jwt() 
-        let code = jwt.get()?.code
-        let requestInfo = await api.info(code)      
-        let level = 'sub'
-        if (requestInfo?.payload?.adm?.length == 0) {
-            level = 'adm'
-        }
-        if (requestInfo?.payload?.sass == '1') {
-            level = 'super'
-        }
-        if (jwt.logged()) {
-            this.redirect(level)
-        }
     }
-}).mount('#app')
+}).use(router).mount('#app')

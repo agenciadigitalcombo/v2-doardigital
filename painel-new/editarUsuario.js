@@ -145,6 +145,7 @@ export default {
                         <CardGeral text="Editar Usuário" size="quatro">
                             <form method="POST" action="javascript:void(0)" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
                             <div v-show="error">{{error}}</div>
+                            
                         </CardGeral>
                         <CardGeral text="Acessos" size="quatro">
                             <label v-for="i in listaInst" class="block">

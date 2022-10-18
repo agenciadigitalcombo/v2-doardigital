@@ -1,5 +1,6 @@
 const { createApp, h } = Vue
 
+
 import MenuMobile from "../components/MenuMobile.js"
 import MenuAside from "../components/MenuAside.js"
 import Header from "../components/Header.js"
