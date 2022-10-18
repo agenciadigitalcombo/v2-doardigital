@@ -1,6 +1,6 @@
 export default class Tabela {
     constructor(data, cols, pagination = 10, step = 0) {
-        this.pages = Math.floor(data.length / pagination)
+        this.pages = Math.ceil(data.length / pagination)
         this.step = step <= this.pages ? step : this.pages
         this.start = this.step * pagination
         this.rows = data.length
