@@ -8,6 +8,13 @@ import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import { getUriData, formataMoeda } from "../components/format.js"
+import BotaoAdicionar from "../components/BotaoAdicionar.js"
+
+globalThis.apagaPlano = async function($id) {
+    let api = new ApiPlanos()
+    let request = await api.delete($id)
+    window.location.reload()
+}
 
 export default {
     data: function() {
@@ -15,8 +22,8 @@ export default {
             transferencias: [],
             cols: {
                 "Valor": d => `${d.value}`,
-                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-eye', 'blue'),
-                "Apagar": e => actions(`editar-plano?id=${e.id}`, 'fa-solid fa-trash', 'blue'),
+                "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa fa-pencil', 'blue'),
+                "Apagar": e => actions(`planos`, 'fa-solid fa-trash', 'blue', "apagaPlano", e.id ),
             },
 
         }
@@ -28,7 +35,8 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        BotaoAdicionar
     },
     async mounted() {
         let transferencias = new ApiPlanos()
@@ -59,14 +67,28 @@ export default {
     
     
     <BreadCrumb text="Home" text2="Planos" />
+    
+    
     <div class="relative pt-2 pb-32 bg-[#fff]">
+    
           <div class="px-4 md:px-6 mx-auto w-full">
+          
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Planos" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
-                <Table :rows="transferencias" :cols="cols" pagination="10" />
+                <CardGeral text="" size="quatro">
+                <!-- Code block starts -->
+                    <div class=" container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-300">
+                        <div>
+                            <h4 class="text-2xl font-bold leading-tight text-gray-800">Planos</h4>
+                        </div>
+                        <div class="mt-6 md:mt-0">
+                            <BotaoAdicionar text="Criar Novo" variation="green" link="#/criar-plano"/>
+                        </div>
+                    </div>
+                <!-- Code block ends -->
+                
+                <Table :rows="transferencias" :cols="cols" pagination="15" />
                 </CardGeral>
                 
                 
