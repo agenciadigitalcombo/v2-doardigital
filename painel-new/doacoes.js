@@ -64,15 +64,15 @@ export default {
             this.statusOverdue = this.somaAll(all_donations.filter(d => d.status == 'OVERDUE'))
             this.statusRecebido = this.somaAll(all_donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED'))
             this.statusEstorno = this.somaAll(all_donations.filter(d => d.status == 'REFUNDED'))
-            this.statusRecorrenciaAtiva = this.somaAll(all_donations.filter(d => d.recorrente == 'Ativa'))
-            this.statusRecorrenciaInativo = this.somaAll(all_donations.filter(d => d.recorrente == 'Inativo'))
+            this.statusRecorrenciaAtiva = this.somaAll(all_donations.filter(d => d.recorrente == 'ATIVA'))
+            this.statusRecorrenciaInativo = this.somaAll(all_donations.filter(d => d.recorrente == 'INATIVO'))
             //
             this.qntStatusAguardando = all_donations.filter(d => d.status == 'PENDING')
             this.qntStatusVencido = all_donations.filter(d => d.status == 'OVERDUE')
             this.qntStatusPago = all_donations.filter(d => d.status == 'CONFIRMED' || d.status == 'RECEIVED')
             this.qntStatusEstornado = all_donations.filter(d => d.status == 'REFUNDED')
-            this.qntRecorrenteAtivo = all_donations.filter(d => d.recorrente == 'Ativa')
-            this.qntRecorrenteInativo = all_donations.filter(d => d.recorrente == 'Inativo')
+            this.qntRecorrenteAtivo = all_donations.filter(d => d.recorrente == 'ATIVA')
+            this.qntRecorrenteInativo = all_donations.filter(d => d.recorrente == 'INATIVO')
             //
             this.totalRecorrente = this.qntRecorrenteAtivo.length
             this.totalRecorrenteInativo = this.qntRecorrenteInativo.length
