@@ -41,6 +41,7 @@ import CriarInstituicao from "./criarInstituicao.js"
 import CriarInstituicaoEndereco from "./criarInstituicaoEndereco.js"
 import CriarInstituicaoDominio from "./criarInstituicaoDominio.js"
 import CriarInstituicaoBanco from "./criarInstituicaoBanco.js"
+import EditarInstituicao from "./editarInstituicao.js"
 
 const routes = [
     { path: '/', component: Inicio },
@@ -75,6 +76,7 @@ const routes = [
     { path: '/credenciais', component: Credenciais },
     { path: '/criar-credencial', component: CriarCredencial },
     { path: '/editar-credencial', component: EditarCredencial },
+    { path: '/editar-instituicao', component: EditarInstituicao },
 ]
 
 const router = VueRouter.createRouter({

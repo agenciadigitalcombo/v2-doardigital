@@ -113,7 +113,7 @@ export default {
                 </div>
                 <br>
                 <FiltroDoador @filter="filtrar"/>
-                <Table :rows="doadores" :cols="cols" pagination="10" />
+                <Table :rows="doadores" :cols="cols" pagination="5" />
              </div>
           </div>
        </div>

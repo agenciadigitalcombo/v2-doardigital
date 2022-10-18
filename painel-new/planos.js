@@ -8,6 +8,7 @@ import MyInstitution from "../components/myInstitution.js"
 import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import { getUriData, formataMoeda } from "../components/format.js"
+import BotaoAdicionar from "../components/BotaoAdicionar.js"
 
 globalThis.apagaPlano = async function($id) {
     let api = new ApiPlanos()
@@ -34,7 +35,8 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        BotaoAdicionar
     },
     async mounted() {
         let transferencias = new ApiPlanos()
@@ -81,7 +83,7 @@ export default {
                             <h4 class="text-2xl font-bold leading-tight text-gray-800">Planos</h4>
                         </div>
                         <div class="mt-6 md:mt-0">
-                            <Botao text="Criar Novo" variation="green" link="#/criar-plano"/>
+                            <BotaoAdicionar text="Criar Novo" variation="green" link="#/criar-plano"/>
                         </div>
                     </div>
                 <!-- Code block ends -->

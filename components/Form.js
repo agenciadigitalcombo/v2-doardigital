@@ -5,7 +5,7 @@ import mask from "./mask.js"
 const CheckCss = "rounded border border-gray-300 inline-block w-[18px] py-2 px-4 text-gray-700 focus:outline-blue-700 "
 const inputCss = "rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 "
 const colorCss = "rounded border border-gray-300 block w-full h-[41px] text-gray-700 focus:outline-blue-700 "
-const btnCss = "rounded w-full p-2 bg-blue-500 hover:bg-blue-600 text-white uppercase font-black"
+const btnCss = "rounded w-full p-2 bg-blue-500 hover:bg-blue-600 text-white uppercase font-black transform active:scale-95 transition-transform"
 const labCss = "text-gray-700"
 
 

@@ -54,9 +54,9 @@ export default {
                 <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
                 </CardGeral>
             
-                <CardGeral text="E-vendas" size="tres" class="text-center content-center">
+                <CardGeral text="Disparo Whats" size="tres" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/634e600666c2e1666080774.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>  
@@ -67,10 +67,10 @@ export default {
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
+                <Botao text="Configurar" variation="bg-blue-600" link="#/criar-instituicao"/>   
                 </CardGeral>
             
-                <CardGeral text="Mailling Boss" size="tres" class="text-center content-center">
+                <CardGeral text="SES AWS" size="tres" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
                 </section>

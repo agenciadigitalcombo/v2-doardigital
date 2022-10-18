@@ -9,6 +9,7 @@ import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import Jw from "../components/jwt.js"
+import BotaoAdicionar from "../components/BotaoAdicionar.js"
 
 
 export default {
@@ -19,7 +20,7 @@ export default {
                 "Nome": d => `${d.nome}`,
                 "Registro": d => `${d.registro}`,
                 "SubDomain": d => `${d.subdomain}`,
-                "Ações": e => actions(`editar-instituicao?id=${e.institution_fk}`, 'fa fa-pencil', 'blue')
+                "Ações": e => actions(`editar-instituicao?id=${e.subdomain}`, 'fa fa-pencil', 'blue')
             },
 
         }
@@ -31,7 +32,8 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        BotaoAdicionar
     },
     async mounted() {
         
@@ -71,7 +73,7 @@ export default {
                             <h4 class="text-2xl font-bold leading-tight text-gray-800">Instituições</h4>
                         </div>
                         <div class="mt-6 md:mt-0">
-                            <Botao text="Criar novo" variation="green" link="#/criar-instituicao"/>
+                            <BotaoAdicionar text="Criar novo" variation="green" link="#/criar-instituicao" svg="empty"/>
                         </div>
                     </div>
                 <!-- Code block ends -->

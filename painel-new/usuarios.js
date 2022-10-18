@@ -10,6 +10,7 @@ import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
+import BotaoAdicionar from "../components/BotaoAdicionar.js"
 
 export default {
     data: function () {
@@ -30,7 +31,8 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        BotaoAdicionar
     },
     async mounted() {
         let admin = new apiAdmin()
@@ -65,7 +67,7 @@ export default {
                             <h4 class="text-2xl font-bold leading-tight text-gray-800">Lista de Usuários</h4>
                         </div>
                         <div class="mt-6 md:mt-0">
-                            <Botao text="Criar novo" variation="green" link="#/criar-usuario"/>
+                            <BotaoAdicionar text="Criar novo" variation="green" link="#/criar-usuario"/>
                         </div>
                     </div>
                 <!-- Code block ends -->
