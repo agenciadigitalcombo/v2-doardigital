@@ -12,4 +12,5 @@ export default [
   { text: "Minhas Instituições", ico: "fa-solid fa-house-laptop", link: "minhas-instituicoes" },
   { text: "Carteira", ico: "fa-solid fa-vault", link: "carteira" },
   { text: "QR CODE", ico: "fa-solid fa-qrcode", link: "qr-code" },
+  { text: "Credenciais", ico: "fa-solid fa-qrcode", link: "credenciais" },
 ]

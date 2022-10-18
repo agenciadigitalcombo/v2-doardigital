@@ -208,7 +208,7 @@ export default {
                 <br><br><br><br>                
                 <Filtro @filter="filtrar" />
                 </div>
-                <Table :rows="donations" :cols="cols" pagination="50" />
+                <Table :rows="donations" :cols="cols" pagination="5" />
              </div>
           </div>
        </div>
