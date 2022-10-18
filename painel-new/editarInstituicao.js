@@ -50,16 +50,15 @@ export default {
         let thisInstitution = new ApiInstitution()
         let request = await thisInstitution.get(ID)
         let formatRequestDoador = request.payload
-
         if (request.next) {
+            this.Inst = formatRequestDoador.institution_fk
             this.info = formatRequestDoador
-            console.log(formatRequestDoador)
-            
+            this.formData = formatRequestDoador
             globalThis.Dados = this.formData
             this.renderInfo()
             this.renderAddress()
             this.renderBank()
-            
+
         }
     },
 
@@ -68,27 +67,25 @@ export default {
             this.formData.agencia = this.info.agency
             this.formData.conta = this.info.account
             this.formData.contaDigito = this.info.accountDigit
+            this.formData.bank = this.info.bank
             const inputsAnotacoes = [
-                new Input('conta', 'Conta', 'text', 2),
-                new Input('contaDigito', 'Digito', 'email', 1, true),
-                new Input('agencia', 'Agência', 'text', 1),
-                new Select('banco', 'Banco', 2, [
-                    new Option('BOLETO', 'Boleto'),
-                    new Option('POUPANCA', 'Pix'),
-                ], true, this.info.tipo_pagamento),
-                new Select('tipo', 'Tidpo', 2, [
+                new Input('conta', 'Conta', 'text', 3, false, '', true),
+                new Input('contaDigito', 'Digito', 'text', 1, false, '', true),
+                new Input('agencia', 'Agência', 'text', 2, false, '', true),
+                new Input('bank', 'Banco', 'text', 2, false, '', true),
+                new Select('tipo', 'Tidpo', 4, [
                     new Option('CONTA_CORRENTE', 'Corrente'),
                     new Option('POUPANCA', 'Poupança'),
-                ], true, this.info.bankAccountType),
+                ], false, this.formData.bankAccountType, true),
             ]
             const formBank = new Form(inputsAnotacoes)
             this.inputsAnotacoes = formBank.render()
         },
-        renderInfo() {            
+        renderInfo() {
             this.formData.nome = this.info.nome
             this.formData.email = this.info.email
             this.formData.telefone = this.info.telefone
-            this.formData.cpfCnpj = this.info.cpfCnpj            
+            this.formData.cpfCnpj = this.info.cpfCnpj
             const inputs = [
                 new Input('nome', 'Nome Fantasia', 'text', 4),
                 new Input('email', 'Email', 'email', 4, true),
@@ -106,10 +103,10 @@ export default {
             this.formData.bairro = this.info.endereco.bairro
             this.formData.complemento = this.info.endereco.complemento
             this.formData.cidade = this.info.endereco.cidade
-            this.formData.estado = this.info.endereco.estado            
+            this.formData.estado = this.info.endereco.estado
             const inputsEndereco = [
                 new Input('cep', 'CEP', 'text', 4),
-                new Input('rua', 'Logradouro', 'text', 4, true ),
+                new Input('rua', 'Logradouro', 'text', 4, true),
                 new Input('numero', 'Número', 'text', 4, true),
                 new Input('complemento', 'Complemento', 'text', 4, true),
                 new Input('bairro', 'Bairro', 'text', 4, true),
@@ -126,29 +123,38 @@ export default {
             }))
 
         },
-        async atualizar() { 
-            let api_doador = new ApiDoadores()
-            let request = await api_doador.update_info(
+        async atualizar() {
+            this.error_info = null
+            console.log(this.formData)
+
+            let api = new ApiInstitution()
+            let request = await api.update(
                 this.Inst,
-                this.CustomerID,
-                this.customer,
                 this.formData.nome,
-                this.formData.cpf,
-                this.formData.telefone,
                 this.formData.email,
+                this.formData.telefone,
+                this.formData.domain,
+                this.formData.logo,
+                this.formData.logo,
+                this.formData.cor,
+                this.formData.nome,
+                this.formData.tags,
+                'instituição',
                 this.formData.cep,
                 this.formData.rua,
                 this.formData.numero,
-                null,
+                this.formData.complemento,
                 this.formData.bairro,
                 this.formData.cidade,
                 this.formData.estado
+
             )
+
             this.error_info = request.message
-            if( request.next ) {
-                window.location.href = `#/detalhe-doador?id=${this.CustomerID}`
+            if (request.next) {
+                window.location.href = `#/minhas-instituicoes`
             }
-            
+
         },
     },
     template: `
