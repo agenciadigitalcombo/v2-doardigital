@@ -139,6 +139,8 @@ export default {
                         <input v-model="price" class="rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 mb-4">
                         <Botao :text="load ? 'Carregando...' : 'Solicitar Saque'" variation="green" @click="sacar"/>
                         <div v-show="error">{{error}}</div>
+                        <br>
+                        <p>*Será cobrado o valor de R$5,00 por saque</p>
                     </CardGeral>
                     <CardGeral text="Histórico de Transferências" size="quatro">   
                         <Table :rows="extrato" :cols="cols" pagination="10" step="1" />
