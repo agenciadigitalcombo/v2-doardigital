@@ -36,7 +36,7 @@ class SendInBlue {
             "subject" => $subject,
             "htmlContent" => $content
         ];
-        $this->postAwsMail();
+        $this->postAwsMail($payload);
         return $this->post( $payload );
     }
 
