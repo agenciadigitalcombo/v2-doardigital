@@ -1,4 +1,4 @@
-<div class="w-full shadow p-5 rounded-lg bg-white">
+<div class="w-full p-5 rounded-lg bg-white">
   <div class="relative">
     <div class="absolute flex items-center ml-2 h-full">
       <svg class="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none"
@@ -10,7 +10,7 @@
     </div>
 
     <input type="text" placeholder="Procurar por Nome, CPF ou E-mail..." v-model="search" @input="filter"
-      class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+      class="placeholder-black px-8 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
   </div>
 
  
@@ -18,14 +18,14 @@
   <div>
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
       <select v-model="date" @change="filter"
-        class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+        class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Data</option>
         <option v-for="d in dataLabel" :value="d.value">{{d.label}}</option>
         
       </select>
 
       <select v-model="status" @change="filter"
-        class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+        class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Status</option>
         <option value="vencido">Vencido</option>
         <option value="pendente">Pendente</option>
@@ -34,7 +34,7 @@
       </select>
 
       <select v-model="tipo" @change="filter"
-        class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+        class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Tipo</option>
         <option value="PIX">PIX</option>
         <option value="BOLETO">Boleto</option>
@@ -42,7 +42,7 @@
       </select>
 
       <select  v-model="recorrencia" @change="filter"
-        class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+        class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Recorrente</option>
         <option value="ATIVA">Ativa</option>
         <option value="INATIVO">Inativo</option>

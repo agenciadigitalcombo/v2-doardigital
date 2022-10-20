@@ -206,7 +206,7 @@ export default {
                 <Card :tax="statusEstorno" text="Estornado" :value="totalQntEstornado" variation="purple" icon="heart" size="4" />
                 <Card :tax="statusRecorrenciaAtiva" tax="AQQQ" text="Total Recorrente" :value="totalRecorrente" variation="green" icon="heart" size="4" />
                 <Card :tax="statusRecorrenciaInativo" text="Total Único" :value="totalRecorrenteInativo" variation="yellow" icon="heart" size="4" />
-                <br><br><br><br>                
+                <br><br><br><br><br>                
                 <Filtro @filter="filtrar" />
                 </div>
                 <Table :rows="donations" :cols="cols" pagination="25" />

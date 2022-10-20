@@ -7,6 +7,7 @@ import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
 import { data, formataMoeda, formatRecorrente } from "../components/format.js"
 import Filtro from "../components/Filtro.js"
+import FiltroNome from "../components/FiltroNome.js"
 
 export default {
     data: function () {
@@ -31,7 +32,8 @@ export default {
         Table,
         BreadCrumb,
         Card,
-        Filtro
+        Filtro,
+        FiltroNome
     },
     async mounted() {
         let donations = new ApiDoacoes()
@@ -84,6 +86,8 @@ export default {
                     <Card text="Total de Doações Previstas" :value="totalQuantidade" variation="blue" icon="bar" size="2" />
                     <Card text="Total em Doações Previstas" :value="totalMoney" variation="blue" icon="bar" size="2" />
                 </div>
+                <br>
+                <FiltroNome />
                 <Table :rows="donations" :cols="cols" pagination="12" />
              </div>
           </div>
