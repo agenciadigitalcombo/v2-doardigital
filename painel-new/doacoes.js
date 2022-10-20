@@ -5,7 +5,7 @@ import status from "../components/status.js"
 import actions from "../components/actions.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
-import { data, formataMoeda, formatRecorrente } from "../components/format.js"
+import { data, formataMoeda, formatRecorrente, formatTipoPagamento } from "../components/format.js"
 import Filtro from "../components/Filtro.js"
 import CardGeral from "../components/CardGeral.js"
 
@@ -55,6 +55,7 @@ export default {
             this.donationsCopy = all_donations
         }
         this.resumos(this.donations)
+        console.log(this.donations)
 
 
     },
@@ -107,7 +108,7 @@ export default {
                     value: formataMoeda(d.valor),
                     price: d.valor,
                     status: d.status_pagamento,
-                    tipo: d.tipo_pagamento,
+                    tipo: formatTipoPagamento(d.tipo_pagamento),
                     id: d.fatura_id,
                     timestamp: d.data,
                     recorrente: formatRecorrente(d.recorrente)

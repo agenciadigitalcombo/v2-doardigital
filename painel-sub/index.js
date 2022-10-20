@@ -44,7 +44,7 @@ import CriarInstituicaoBanco from "./criarInstituicaoBanco.js"
 
 
 const routes = [
-    { path: '/', component: Inicio },
+    { path: '/', component: Dashboard },
     { path: '/dashboard', component: Dashboard },
     { path: '/doadores', component: Doadores },
     { path: '/carteira', component: Carteira },

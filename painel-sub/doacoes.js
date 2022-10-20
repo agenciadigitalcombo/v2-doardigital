@@ -55,6 +55,7 @@ export default {
             this.donationsCopy = all_donations
         }
         this.resumos(this.donations)
+       
 
 
     },

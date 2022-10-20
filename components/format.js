@@ -30,6 +30,18 @@ export function formatRecorrente(recorrente) {
 }
 
 
+export function formatTipoPagamento(tipo) {
+    var tipo = tipo
+    if (tipo == true || tipo == "BOLETO" ) {
+        return "BOLETO"
+    } else if (tipo == false || tipo == "CREDIT_CARD") {
+        return "CRÉDITO"
+    } else if (tipo == false || tipo == "PIX") {
+        return "PIX"
+    }
+}
+
+
 
 export function copy($element) {
     $element.select()
