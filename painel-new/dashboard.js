@@ -42,73 +42,73 @@ export default {
     },
     mounted(){
         var options = {
-            chart: {
-              width: "100%",
-              height: 380,
-              type: "bar"
-            },
-            plotOptions: {
-              bar: {
-                horizontal: true
-              }
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              width: 1,
-              colors: ["#fff"]
-            },
-            series: [
-              {
-                data: [44, 55, 41, 64, 22, 43, 21]
-              },
-              {
-                data: [53, 32, 33, 52, 13, 44, 32]
-              }
-            ],
-            xaxis: {
-              categories: [
-                "Korea",
-                "Canada",
-                "Poland",
-                "Italy",
-                "France",
-                "Japan",
-                "China"
-              ]
-            },
-            legend: {
-              position: "right",
-              verticalAlign: "top",
-              containerMargin: {
-                left: 35,
-                right: 60
-              }
-            },
-            responsive: [
-              {
-                breakpoint: 1000,
-                options: {
-                  plotOptions: {
-                    bar: {
-                      horizontal: false
-                    }
-                  },
-                  legend: {
-                    position: "bottom"
-                  }
-                }
-              }
-            ]
-          };
-          
-          var chart = new ApexCharts(
-            document.querySelector("#responsive-chart"),
-            options
-          );
-          
-          chart.render();
+  chart: {
+    width: "100%",
+    height: 380,
+    type: "bar"
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    width: 1,
+    colors: ["#fff"]
+  },
+  series: [
+    {
+      data: [44, 55, 41, 64, 22, 43, 21]
+    },
+    {
+      data: [53, 32, 33, 52, 13, 44, 32]
+    }
+  ],
+  xaxis: {
+    categories: [
+      "Korea",
+      "Canada",
+      "Poland",
+      "Italy",
+      "France",
+      "Japan",
+      "China"
+    ]
+  },
+  legend: {
+    position: "right",
+    verticalAlign: "top",
+    containerMargin: {
+      left: 35,
+      right: 60
+    }
+  },
+  responsive: [
+    {
+      breakpoint: 1000,
+      options: {
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        legend: {
+          position: "bottom"
+        }
+      }
+    }
+  ]
+};
+
+var chart = new ApexCharts(
+  document.querySelector("#responsive-chart"),
+  options
+);
+
+chart.render();
     },
     components: {
         Table,
@@ -132,13 +132,11 @@ export default {
             <Card2 :tax="statusEstorno" value="20" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
             <Card2 :tax="statusEstorno" value="RS 87.000" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <Card2 :tax="statusEstorno" value="RS 10.000" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
-            <CardGeral text="Faturamento" size="full>
-            
-            </CardGeral >
+            <CardGeral text="Faturamento" size="full"/>
             <CardGeral text="Quantidade de Doações" size="full"/>
             <CardGeral text="Formas de Pagamentos" size="quatro"/>
             <CardGeral text="Quantidade por Planos" size="quatro"> 
-            <div id="chart" style="max-width: 760px;">
+            <div id="chart">
             <div id="responsive-chart"></div>
             </div>
             </CardGeral>
