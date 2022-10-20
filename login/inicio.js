@@ -1,43 +1,57 @@
 import apiAdmin from "../components/apiAdmin.js"
+import ApiInstitution from "../components/apiInstitution.js"
+import myInstitution from "../components/myInstitution.js"
 import Jwt from "../components/jwt.js"
 
 
 
 
 
+
 export default {
-    data: function() {
-        return {
-            email: 'super@digitalcombo.com.br',
-            pass: '123456789',
-            onerror: null,
-            statusBtn: true
-        }
-    },
-    methods: {
+   data: function () {
+      return {
+         email: 'super@digitalcombo.com.br',
+         pass: '123456789',
+         onerror: null,
+         statusBtn: true
+      }
+   },
+   methods: {
       redirect(level) {
-          let lb = {
-              sub: 'painel-sub',
-              adm: 'painel-new',
-              super: 'painel-super',
-          }
-          window.location.href = `//${window.location.host}/${lb[level]}`
+         let lb = {
+            sub: 'painel-sub',
+            adm: 'painel-new',
+            super: 'painel-super',
+         }
+         window.location.href = `//${window.location.host}/${lb[level]}`
       },
       async login() {
-          this.onerror = null
-          this.statusBtn = false
-          let api = new apiAdmin()
-          let jwt = new Jwt()
-          let request = await api.login(this.email, this.pass)
-          this.statusBtn = true
-          if (!request.next) {
-              this.onerror = request.message
-              return null
-          }
-          jwt.save(request.payload.token)
-          let code = jwt.get().code
-          let requestInfo = await api.info(code)
-          console.log(requestInfo)
+         this.onerror = null
+         this.statusBtn = false
+         let api = new apiAdmin()
+         let jwt = new Jwt()
+         let request = await api.login(this.email, this.pass)
+         this.statusBtn = true
+         if (!request.next) {
+            this.onerror = request.message
+            return null
+         }
+         jwt.save(request.payload.token)
+         let code = jwt.get().code
+         let requestInfo = await api.info(code)
+
+         let apiInst = new ApiInstitution()
+         let allInst = await apiInst.list(code)
+         let defaultInst = allInst.payload[0].institution_fk
+
+         let myInst = new myInstitution()
+         let selectInst = myInst.get()
+
+         if(!selectInst) {
+            myInst.save(defaultInst)
+         }
+
           let level = 'sub'
           if (requestInfo.payload.adm.length == 0) {
               level = 'adm'
@@ -47,25 +61,25 @@ export default {
           }
           this.redirect(level)
       }
-  },
-  async mounted() {
+   },
+   async mounted() {
       let api = new apiAdmin()
-      let jwt = new Jwt() 
+      let jwt = new Jwt()
       let code = jwt.get()?.code
-      let requestInfo = await api.info(code)      
+      let requestInfo = await api.info(code)
       let level = 'sub'
       if (requestInfo?.payload?.adm?.length == 0) {
-          level = 'adm'
+         level = 'adm'
       }
       if (requestInfo?.payload?.sass == '1') {
-          level = 'super'
+         level = 'super'
       }
       if (jwt.logged()) {
-          this.redirect(level)
+         this.redirect(level)
       }
-  },
+   },
 
-    template: `
+   template: `
     <div>
     <!DOCTYPE html>
    <html lang="pt-br">

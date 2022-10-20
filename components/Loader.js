@@ -1,7 +1,7 @@
 import getTemplate from "./getTemplate.js"
 
 export default {
-    props: ['autor','text','data','variation','tax','icon','dashboard','size'],
+    props: ['open'],
     template : await getTemplate( './../components/Loader' ),
     data: function() {
         return {

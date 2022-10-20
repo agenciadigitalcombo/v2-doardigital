@@ -8,10 +8,12 @@ import MyInstitution from "../components/myInstitution.js"
 import { data, formataMoeda, formatRecorrente, formatTipoPagamento } from "../components/format.js"
 import Filtro from "../components/Filtro.js"
 import CardGeral from "../components/CardGeral.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             hoje: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).valueOf(),
             totalFaturas: 0,
             totalDonations: 0,
@@ -37,9 +39,11 @@ export default {
         BreadCrumb,
         Card,
         Filtro,
-        CardGeral
+        CardGeral, 
+        Loader,
     },
     async mounted() {
+        this.isLoad = 'true'
         let donations = new ApiDoacoes()
         let institution = new MyInstitution()
         let request = await donations.lista(institution.get())
@@ -55,7 +59,7 @@ export default {
             this.donationsCopy = all_donations
         }
         this.resumos(this.donations)
-        console.log(this.donations)
+        this.isLoad = 'false'
 
 
     },
@@ -193,6 +197,7 @@ export default {
     },
     template: `
     <div>
+        <Loader :open="isLoad" />
         <BreadCrumb text="Home" text2="Doações" />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">

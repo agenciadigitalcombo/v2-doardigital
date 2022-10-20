@@ -6,7 +6,6 @@ export default async  function (path) {
         path = path.replace(`${dir}/`, '')
         full_url = `../${path}`
     }
-    console.log(full_url)
     return await fetch(`${full_url}.html`).then(function (response) {
         return response.text()
     }).then(function (html) {
