@@ -8,7 +8,11 @@ export default {
             icons:{
                 home: "fas fa-arrow-up fa-2x fa-inverse",
                 bar: "far fa-chart-bar fa-2x fa-inverse",
-                heart: "fa-solid fa-heart-circle-check fa-2x fa-inverse"
+                heart: "fa-solid fa-heart-circle-check fa-2x fa-inverse",
+                dollar: "fa-solid fa-circle-dollar-to-slot fa-2x fa-inverse",
+                adimplente: "fa-solid fa-person-circle-check fa-2x fa-inverse",
+                inadimplente: "fa-solid fa-person-circle-exclamation fa-2x fa-inverse",
+                grupo: "fa-solid fa-people-group fa-2x fa-inverse"
             },
             sizes:{
                 2: "w-full lg:w-6/12 xl:w-6/12 px-4",
@@ -25,11 +29,11 @@ export default {
                purple: "rounded-full p-5 bg-purple-600", 
             },
             cores:{
-                blue: "bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-600 rounded-lg shadow-xl p-5",
-                yellow: "bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5",           
-                green: "bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5", 
+                blue: "bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-600 rounded-lg shadow-xl p-5 my-2",
+                yellow: "bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5 my-2",           
+                green: "bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5 my-2", 
                 red: "bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-600 rounded-lg shadow-xl p-4 my-2", 
-                purple: "bg-gradient-to-b from-purple-200 to-purple-100 border-b-4 border-purple-600 rounded-lg shadow-xl p-5", 
+                purple: "bg-gradient-to-b from-purple-200 to-purple-100 border-b-4 border-purple-600 rounded-lg shadow-xl p-5 my-2", 
              }
         }
     },

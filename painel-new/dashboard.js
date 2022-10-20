@@ -51,14 +51,14 @@ export default {
 
     <br>
     <div class="flex flex-wrap">
-        <Card2 :tax="statusEstorno" value="123" text="Total de Doadores" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Novos Doadores" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Doadores Recorrentes" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Doadores Ùnico" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Doadores Adimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Doação Média" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
-        <Card2 :tax="statusEstorno" value="123" text="Doações Previstas" :value="totalQntEstornado" variation="red" cor="red" icon="heart" size="4" />
+        <Card2 :tax="statusEstorno" value="57" text="Total de Doadores" :value="totalQntEstornado" variation="blue" cor="blue" icon="grupo" size="4" />
+        <Card2 :tax="statusEstorno" value="35" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
+        <Card2 :tax="statusEstorno" value="20" text="Doadores Recorrentes" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
+        <Card2 :tax="statusEstorno" value="30" text="Doadores Ùnico" :value="totalQntEstornado" variation="yellow" cor="yellow" icon="heart" size="4" />
+        <Card2 :tax="statusEstorno" value="50" text="Doadores Adimplentes" :value="totalQntEstornado" variation="green" cor="green" icon="adimplente" size="4" />
+        <Card2 :tax="statusEstorno" value="20" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
+        <Card2 :tax="statusEstorno" value="RS 87.000" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
+        <Card2 :tax="statusEstorno" value="RS 10.000" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
 
         <div class="flex flex-row flex-wrap flex-grow mt-2">
             
