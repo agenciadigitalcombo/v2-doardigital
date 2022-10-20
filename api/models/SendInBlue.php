@@ -23,21 +23,12 @@ class SendInBlue {
 
     function send($nome, $email, $subject, $content) {
         $payload = [  
-            "sender" => [  
-               "name" => "Doar Digital",
-               "email" => "contato@doardigital.com.br"
-            ],
-            "to" => [  
-               [  
-                  "email" => $email,
-                  "name" => $nome
-               ]
-            ],
+            "email" => "contato@doardigital.com.br",            
             "subject" => $subject,
             "htmlContent" => $content
         ];
-        $this->postAwsMail($payload);
-        return $this->post( $payload );
+        return $this->postAwsMail($payload);
+        
     }
 
     public function post(array $payload): array
