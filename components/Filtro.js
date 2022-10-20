@@ -36,7 +36,7 @@ export default {
             {label: "Hoje", value: moment().format(format_data) },
             {label: "Ontem", value: moment().subtract(1, 'day').format(format_data) },
             {label: "Essa semana", value: moment().startOf('week').format(format_data) },
-            {label: "Semana passada", value: moment().startOf('week').subtract(1, 'week').format(format_data)  },
+            {label: "Semana passada", value: moment().startOf('week').subtract(1, 'w').format(format_data)  },
             {label: "Esse mês", value: moment().startOf('month').format(format_data) },
             {label: "Mês passado", value: moment().subtract(1, 'month').format(format_data) },
         ]       
