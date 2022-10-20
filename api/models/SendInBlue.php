@@ -23,9 +23,9 @@ class SendInBlue {
 
     function send($nome, $email, $subject, $content) {
         $payload = [  
-            "email" => "contato@doardigital.com.br",            
+            "email" => "teste@digitalcombo.com.br",            
             "subject" => $subject,
-            "htmlContent" => $content
+            "htmlContent" => base64_encode( $content )
         ];
         return $this->postAwsMail($payload);
         
