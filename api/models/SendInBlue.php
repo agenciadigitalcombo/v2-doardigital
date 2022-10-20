@@ -75,7 +75,7 @@ class SendInBlue {
                 CURLOPT_POST           => true,
                 CURLOPT_HEADER         => 0,
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL            => "https://14fpuojlqf.execute-api.us-east-1.amazonaws.com/prod/",
+                CURLOPT_URL            => "https://4tbhbnkp20.execute-api.us-east-1.amazonaws.com/dev/",
                 CURLOPT_POSTFIELDS     => json_encode($payload),
                 CURLOPT_HTTPHEADER     => $this->header,
             ];           
