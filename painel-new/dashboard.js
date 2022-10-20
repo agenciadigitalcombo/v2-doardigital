@@ -133,8 +133,8 @@ export default {
             <Card2 :tax="statusEstorno" value="RS 87.000" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <Card2 :tax="statusEstorno" value="RS 10.000" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <CardGeral text="Faturamento" size="full>
-            <div id="faturamentos"></div>
-            </CardGeral>
+            
+            </CardGeral >
             <CardGeral text="Quantidade de Doações" size="full"/>
             <CardGeral text="Formas de Pagamentos" size="quatro"/>
             <CardGeral text="Quantidade por Planos" size="quatro"> 
