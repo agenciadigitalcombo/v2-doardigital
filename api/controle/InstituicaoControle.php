@@ -261,7 +261,6 @@ class InstituicaoControle extends Controle
             "icon" => "Informe ícone",
             "cor" => "Informe a cor",
             "titulo" => "Informe o titulo",
-            "tags" => "Informe a tag",
             "descricao" => "Informe uma descrição",
         ]);
 
@@ -275,7 +274,7 @@ class InstituicaoControle extends Controle
         $icon = $_REQUEST['icon'];
         $cor = $_REQUEST['cor'];
         $titulo = $_REQUEST['titulo'];
-        $tags = $_REQUEST['tags'];
+        $tags = $_REQUEST['tags'] ?? '';
         $descricao = $_REQUEST['descricao'];
         $cep = $_REQUEST['cep'];
         $logradouro = $_REQUEST['logradouro'];
