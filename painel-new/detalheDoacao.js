@@ -11,10 +11,12 @@ import actions from "../components/actions.js"
 import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import ApiDoadores from "../components/apiDoadores.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             error: null,
             inputs: "",
             id_fatura: null,
@@ -54,8 +56,10 @@ export default {
         Card,
         CardCarteira,
         CardGeral,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let ID = getUriData('id')
         let institution = new MyInstitution()
         let donations = new ApiDoacoes()
@@ -79,6 +83,7 @@ export default {
         this.formData.tipo = this.info.tipo_pagamento
 
         this.renderForm()
+        this.isLoad = 'false'
 
     },
     methods: {
@@ -136,6 +141,7 @@ export default {
     },
     template: `
     <div>
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Detalhe Doação" />
    
        
@@ -167,7 +173,15 @@ export default {
                     <p>{{ formataMoeda( info.valor ) }}</p>
                     <br>
                     <h2 class="text-gray-500">Recorrente</h2>
+                    <div v-show="info.recorrente === true">
+                  
                     <p>{{ formatRecorrente( info.recorrente ) }}</p>
+                    </div>
+                    <div v-show="info.recorrente === false">
+                  
+                    <p>{{ formatRecorrente( info.recorrente ) }}</p>
+                    </div>
+                    
                     <br>
                     
                 </CardGeral>

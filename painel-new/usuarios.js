@@ -11,10 +11,12 @@ import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
 import BotaoAdicionar from "../components/BotaoAdicionar.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             lista: [],
             cols: {
                 "Nome": d => `${d.nome}`,
@@ -32,15 +34,18 @@ export default {
         CardCarteira,
         CardGeral,
         Table,
-        BotaoAdicionar
+        BotaoAdicionar,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let admin = new apiAdmin()
         let jwt = new Jwt()
         let adm_fk = jwt.get().code
         let request = await admin.list_all_subs(adm_fk)
         this.lista = request.payload
         console.log(this.lista)
+        this.isLoad = 'false'
         
     },
     methods: {
@@ -53,7 +58,7 @@ export default {
     template: `
     <div>
     
-    
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Usuários" />
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">

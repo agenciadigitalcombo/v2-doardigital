@@ -9,11 +9,12 @@ import MyInstitution from "../components/myInstitution.js"
 import ApiCarteira from "../components/apiCarteira.js"
 import status from "../components/status.js"
 import { data, formataMoeda, formatRecorrente } from "../components/format.js"
-
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             saldo: 0,
             aLiberar: 0,
             totalSacado: 0,
@@ -51,9 +52,11 @@ export default {
         CardCarteira,
         CardGeral,
         Table,
-        BotaoGrupo
+        BotaoGrupo,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let carteira = new ApiCarteira()
         let institution = new MyInstitution()
         let request = await carteira.listarCarteira(institution.get())
@@ -61,6 +64,7 @@ export default {
         let requestExtrato = request.payload.extrato.data
         this.inst_fk = institution.get()
         requestExtrato = requestExtrato.filter(i => (i.status == "PENDING" || i.status == 'DONE') && i.type == 'BANK_ACCOUNT')
+        
         if (request.next) {
             this.extrato = this.adapter(requestExtrato)
             this.dados = requestPayload
@@ -69,6 +73,8 @@ export default {
             this.aLiberar = formataMoeda(requestPayload.statistic.netValue)
             this.totalSacado = this.somaAll(this.extrato.filter(i => i.status == 'DONE'))
         }
+        this.isLoad = 'false'
+        
     },
     methods: {
         adapter(listAll) {
@@ -125,7 +131,8 @@ export default {
         }
     },
     template: `
-    <div>    
+    <div>
+    <Loader :open="isLoad" />    
         <BreadCrumb text="Home" text2="Carteira" />        
         <div class="relative pt-10 pb-32 bg-[#fff]">
             <div class="px-4 md:px-6 mx-auto w-full">

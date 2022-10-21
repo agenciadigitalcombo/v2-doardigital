@@ -9,6 +9,7 @@ import ApiPlanos from "../components/apiPlanos.js"
 import actions from "../components/actions.js"
 import { getUriData, formataMoeda } from "../components/format.js"
 import BotaoAdicionar from "../components/BotaoAdicionar.js"
+import Loader from "../components/Loader.js"
 
 globalThis.apagaPlano = async function($id) {
     let api = new ApiPlanos()
@@ -19,6 +20,7 @@ globalThis.apagaPlano = async function($id) {
 export default {
     data: function() {
         return {
+            isLoad: 'true',
             transferencias: [],
             cols: {
                 "Valor": d => `${d.value}`,
@@ -36,9 +38,11 @@ export default {
         CardCarteira,
         CardGeral,
         Table,
-        BotaoAdicionar
+        BotaoAdicionar,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let transferencias = new ApiPlanos()
         let institution = new MyInstitution()
         let request = await transferencias.listarPlanoDigital(institution.get())
@@ -48,6 +52,7 @@ export default {
 
             console.log(requestTransform)
         }
+        this.isLoad = 'false'
 
     },
     methods: {
@@ -65,7 +70,7 @@ export default {
     template: `
     <div>
     
-    
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Planos" />
     
     

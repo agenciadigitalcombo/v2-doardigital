@@ -8,11 +8,13 @@ import { data, formatRecorrente } from "../components/format.js"
 import actions from "../components/actions.js"
 import { cpf } from "../components/mask.js"
 import FiltroDoador from "../components/FiltroDoador.js"
+import Loader from "../components/Loader.js"
 
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             statusUnico: 0,
             statusRecorrente: 0,
             totalDoadores: 0,
@@ -33,9 +35,11 @@ export default {
         Botao,
         BreadCrumb,
         Card,
-        FiltroDoador
+        FiltroDoador,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let doadores = new ApiDoadores()
         let institution = new MyInstitution()
         let request = await doadores.lista(institution.get())
@@ -47,6 +51,7 @@ export default {
         this.statusUnico = this.somaAll(this.doadores.filter(d => d.recorrente === false))
 
         this.totalDoadores = this.somaAll(this.doadores)
+        this.isLoad = 'false'
 
 
 
@@ -95,13 +100,8 @@ export default {
     },
     template: `
     <div>
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Doadores" />
-
-    
-
-   
-        
-        
 
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">

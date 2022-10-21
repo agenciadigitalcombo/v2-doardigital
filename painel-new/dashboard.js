@@ -5,10 +5,22 @@ import Card  from "../components/Card.js"
 import Loader from "../components/Loader.js"
 import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
+import ApiDoadores from "../components/apiDoadores.js"
+import MyInstitution from "../components/myInstitution.js"
+
+
+
 
 export default {
     data: function() {
-        return { 
+        return {
+            isLoad: 'true', 
+            statusUnico: 0,
+            statusRecorrente: 0,
+            totalDoadores: 0,
+            doadorTotal: 0,
+            totalDoadorUnico: 0,
+            requisicao: null,
             donations : [
                 { name: "Mel", value: 2.50, status: "PAID" },
                 { name: "Jhon", value: 15.50, status: "AWAITING" },
@@ -40,7 +52,30 @@ export default {
         
         }
     },
-    mounted(){
+    async mounted(){
+      this.isLoad = 'true'
+      let doadores = new ApiDoadores()
+      let institution = new MyInstitution()
+      let request = await doadores.lista(institution.get())
+      let requestPayload = request.payload
+      let requestTotal = requestPayload.length
+      let doadorUnico = requestPayload.filter(d => d.recorrente === false)
+      let doadorRecorrente = requestPayload.filter(d => d.recorrente === true)
+      let doadorUnicoTransform = Object.keys(doadorUnico)
+      let doadorRecorrenteTransform = Object.keys(doadorRecorrente)
+      let totalDoadorUnico = doadorUnicoTransform.length
+      let totalDoadorRecorrente = doadorRecorrenteTransform.length
+
+      if (request.next) {
+        this.doadorTotal = requestTotal
+        this.totalDoadorUnico = totalDoadorUnico
+        this.totalDoadorRecorrente = totalDoadorRecorrente
+        this.requisicao = request
+        this.isLoad = 'false'
+      }
+
+
+
         var options = {
             chart: {
               width: "100%",
@@ -119,19 +154,28 @@ export default {
         Card2,
         CardGeral
     },
+    methods: {
+      somaAll(ar) {
+          return ar.reduce((acc, el) => {
+              acc += 1
+              return acc
+          }, 0)
+      },
+    },
     template: `
     <div>
 
     <br>
+        <Loader :open="isLoad" />
         <div class="flex flex-wrap">
-            <Card2 :tax="statusEstorno" value="57" text="Total de Doadores" :value="totalQntEstornado" variation="blue" cor="blue" icon="grupo" size="4" />
-            <Card2 :tax="statusEstorno" value="35" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
-            <Card2 :tax="statusEstorno" value="20" text="Doadores Recorrentes" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
-            <Card2 :tax="statusEstorno" value="30" text="Doadores Ùnico" :value="totalQntEstornado" variation="yellow" cor="yellow" icon="heart" size="4" />
-            <Card2 :tax="statusEstorno" value="50" text="Doadores Adimplentes" :value="totalQntEstornado" variation="green" cor="green" icon="adimplente" size="4" />
-            <Card2 :tax="statusEstorno" value="20" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
-            <Card2 :tax="statusEstorno" value="RS 87.000" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
-            <Card2 :tax="statusEstorno" value="RS 10.000" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
+            <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
+            <Card2 value="??" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
+            <Card2 text="Doadores Recorrentes" :value="totalDoadorRecorrente" variation="green" cor="green" icon="heart" size="4" />
+            <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
+            <Card2 value="??" text="Doadores Adimplentes" :value="totalQntEstornado" variation="green" cor="green" icon="adimplente" size="4" />
+            <Card2 value="??" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
+            <Card2 value="??" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
+            <Card2 value="??" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <CardGeral text="Faturamento" size="full"/>
             <CardGeral text="Quantidade de Doações" size="full"/>
             <CardGeral text="Formas de Pagamentos" size="quatro"/>

@@ -66,7 +66,7 @@
 				<label for="countries">Instituição:</label>
 				<select id="countries" v-model="institution" @change="setInstitution">
 					<option value="">Selecione</option>
-					<option v-for="i in list" :value="i.institution_fk"> {{i.nome}} </option>
+					<option v-for="i in list" :value="i.institution_fk" :selected="editInst == i.institution_fk"> {{i.nome}} </option>
 				</select>
 			</div>
 			<div

@@ -7,6 +7,7 @@ import ApiInstitution from "./apiInstitution.js"
 export default {
     data: function() {
         return {
+            editInst: "",
             statusSubMenu: false,
             statusSubMenu1: false,
             institution: null,
@@ -37,9 +38,11 @@ export default {
         
         let ID = jwt.get().code
         let request = await Inst.list(ID)
+        this.editInst = Inst.get()
 
         if(request.next) {
             this.list = request.payload
+
         }
     },
     template : await getTemplate( './../components/Header' )

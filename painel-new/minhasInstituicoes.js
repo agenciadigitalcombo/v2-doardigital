@@ -10,11 +10,13 @@ import actions from "../components/actions.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import Jw from "../components/jwt.js"
 import BotaoAdicionar from "../components/BotaoAdicionar.js"
+import Loader from "../components/Loader.js"
 
 
 export default {
     data: function() {
         return {
+            isLoad: 'true',
             list: [],
             cols: {
                 "Nome": d => `${d.nome}`,
@@ -33,10 +35,11 @@ export default {
         CardCarteira,
         CardGeral,
         Table,
-        BotaoAdicionar
+        BotaoAdicionar,
+        Loader
     },
     async mounted() {
-        
+        this.isLoad = 'true'
         let jwt = new Jw()
         let Inst = new ApiInstitution()
         
@@ -47,6 +50,7 @@ export default {
         if(request.next) {
             this.list = request.payload
         }
+        this.isLoad = 'false'
 
     },
     methods: {
@@ -59,7 +63,7 @@ export default {
     },
     template: `
     <div>
-    
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Minhas Instituições" />
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">

@@ -4,10 +4,12 @@ import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function() {
         return {
+            isLoad: 'true',
         }
     },
     components: {
@@ -16,7 +18,11 @@ export default {
         Card2,
         BreadCrumb,
         CardCarteira,
-        CardGeral
+        CardGeral,
+        Loader
+    },
+    async mounted() {
+
     },
     template: `
     <div>

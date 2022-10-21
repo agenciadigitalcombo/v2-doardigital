@@ -7,10 +7,12 @@ import CardGeral from "../components/CardGeral.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import MyInstitution from "../components/myInstitution.js"
 import config from "../config.js"
+import Loader from "../components/Loader.js"
 
 export default {
    data: function () {
       return {
+         isLoad: 'true',
          inputs: "",
          scripts: "",
          lastName: "",
@@ -79,6 +81,7 @@ export default {
       }
    },
    async mounted() {
+      this.isLoad = 'true'
       let api = new ApiInstitution()
       let inst = new MyInstitution()
       let inst_fk = inst.get()
@@ -97,16 +100,19 @@ export default {
       globalThis.Dados = this.formData
       const form = new Form(inputs)
       this.inputs = form.render()
+      this.isLoad = 'false'
    },
    components: {
       Botao,
       Card,
       BreadCrumb,
       CardCarteira,
-      CardGeral
+      CardGeral,
+      Loader
    },
    template: `
    <div>
+      <Loader :open="isLoad" />
       <BreadCrumb text="Home" text2="Configurações" />
       <div class="relative pt-2 pb-32 bg-[#fff]">
          <div class="px-4 md:px-6 mx-auto w-full">

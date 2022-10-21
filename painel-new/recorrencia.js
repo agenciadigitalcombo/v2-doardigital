@@ -7,10 +7,12 @@ import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
 import { data, formataMoeda, formatRecorrente } from "../components/format.js"
 import FiltroNome from "../components/FiltroNome.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             donations: [],
             donationsCopy: [],
             totalQuantidade: 0,
@@ -32,9 +34,11 @@ export default {
         Table,
         BreadCrumb,
         Card,
-        FiltroNome
+        FiltroNome,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let donations = new ApiDoacoes()
         let institution = new MyInstitution()
         let request = await donations.lista(institution.get())
@@ -50,6 +54,7 @@ export default {
             this.donationsCopy = all_donations
             this.totalQuantidade = all_donations.length
             this.totalMoney = this.somaAll(all_donations)
+            this.isLoad = 'false'
         }
     },
     methods: {
@@ -151,6 +156,7 @@ export default {
     },
     template: `
     <div>
+        <Loader :open="isLoad" />
         <BreadCrumb text="Home" text2="Doações Recorrentes" />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">

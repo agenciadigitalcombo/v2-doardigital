@@ -10,10 +10,12 @@ import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
 import { cpf, tel, cep } from "../components/mask.js"
 import Anotacao from "../components/Anotacao.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             totalFaturas: 0,
             info: {
                 address: { bairro: null },
@@ -53,9 +55,11 @@ export default {
         BreadCrumb,
         CardGeral,
         HeaderDoador,
-        Anotacao
+        Anotacao,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let ID = getUriData('id')
         this.ID =  ID
         let institution = new MyInstitution()
@@ -84,6 +88,7 @@ export default {
         this.totalFaturas = this.donations.length
         this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
         this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
+        this.isLoad = 'false'
         console.log(this.subs)
     },
 
@@ -107,6 +112,7 @@ export default {
     },
     template: `
     <div>
+    <Loader :open="isLoad" /> 
     <BreadCrumb text="Home" text2="Detalhe Doador" />
     <HeaderDoador :anotacoes="numeroAnotacoes" :assinaturas="numeroAssinatura" :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" :ID="ID" />
        
