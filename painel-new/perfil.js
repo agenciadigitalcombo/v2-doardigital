@@ -5,14 +5,12 @@ import Jwt from "../components/jwt.js"
 import CardGeral from "../components/CardGeral.js"
 import { cpf, tel } from "../components/mask.js"
 import Loader from "../components/Loader.js"
+import CEP from "../components/ApiViaCep.js"
 
-globalThis.trolMask = $input => {
-    $input.value = cpf($input.value)
-}
 
-globalThis.telMask = $input => {
-    $input.value = tel($input.value)
-}
+globalThis.MaskCpf = cpf
+
+globalThis.MaskTel = tel
 
 export default {
     data: function () {
@@ -66,16 +64,15 @@ export default {
         this.formData.telefone = tel(request.payload.telefone)
         
 
-
-        
         const inputs = [
             new Input('name', 'Nome', 'text', 2),
             new Input('email', 'Email', 'email', 2, true, '', true),
             new Input('data', 'Data nascimento', 'date', 2, true),
-            new Input('cpf', 'CPF', 'text', 2, true, '', false, 'trolMask'),
-            new Input('telefone', 'Telefone', 'text', 2, true, '', false, 'telMask'),
+            new Input('cpf', 'CPF', 'text', 2, true, '', false, null, 'MaskCpf'),
+            new Input('telefone', 'Telefone', 'text', 2, true, '', false, null, 'MaskTel'),
             new Button('Atualizar Perfil'),
         ]
+
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()

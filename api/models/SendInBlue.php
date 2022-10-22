@@ -27,7 +27,15 @@ class SendInBlue {
             "subject" => $subject,
             "htmlContent" => base64_encode( $content )
         ];
-        return $this->postAwsMail($payload);
+        // $this->postAwsMail($payload);
+        $email = "teste@digitalcombo.com.br";
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $status = mail($email, $subject, $content, $headers);
+        $status = mail($email, $subject, $content);
+        return [
+            "next" => $status
+        ];
         
     }
 
