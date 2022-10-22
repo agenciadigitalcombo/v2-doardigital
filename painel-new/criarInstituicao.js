@@ -70,7 +70,7 @@ export default {
             ]),
             new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2),
             new Input('email', 'Email', 'email', 2, true),
-            new Input('phone', 'Telefone', 'text', 2),
+            new Input('phone', 'DDD + Celular', 'text', 2),
             new Button('Avançar Cadastro'),
         ]
         let tmp = new Tmp()

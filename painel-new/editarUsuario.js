@@ -13,10 +13,12 @@ import { Form, Input, Button, Text, Select, Option, Check } from "../components/
 import { getUriData, data, formataMoeda, formatRecorrente } from "../components/format.js"
 import Jwt from "../components/jwt.js"
 import ApiCredencial from "../components/apiCredencial.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             error: null,
             inputs: "",
             name: "",
@@ -43,9 +45,11 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let ID = getUriData('id')
         this.ID = ID
         let admin = new apiAdmin()
@@ -84,6 +88,7 @@ export default {
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
+        this.isLoad = 'false'
 
     },
     methods: {
@@ -137,6 +142,7 @@ export default {
     },
     template: `
     <div>
+        <Loader :open="isLoad" />
         <BreadCrumb text="Home" text2="Editar Usuário" />
         <div class="relative pt-2 pb-32 bg-[#fff]">
             <div class="px-4 md:px-6 mx-auto w-full">

@@ -141,8 +141,9 @@ export default {
                     <Card text="Saldo Liberado" :value="saldo" variation="blue" icon="bar" size="3"/>
                     <Card text="Saldo á liberar" :value="aLiberar" variation="yellow" size="3"/>
                     <Card text="Total Já Sacado" :value="totalSacado" variation="green" icon="heart" size="3"/>
-                    <CardGeral text="Solicitação de Saque" size="quatro">   
+                    <CardGeral text="Solicitação de Saque" size="quatro">
                         <button @click="setValorTotal" class="mb-4 rounded-l px-6 py-2.5 bg-blue-800 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">Valor Total</button> <br>
+                        <p>Informe valor abaixo ou selecione valor total.</p>   
                         <input v-model="price" class="rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 mb-4">
                         <Botao :text="load ? 'Carregando...' : 'Solicitar Saque'" variation="green" @click="sacar"/>
                         <div v-show="error">{{error}}</div>

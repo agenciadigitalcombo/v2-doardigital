@@ -41,7 +41,7 @@ export default {
          this.formData.subdomain
          this.formData.logo
          this.formData.icon
-                  this.formData.account
+         this.formData.account
          this.formData.accountDigit
          this.formData.accountName
          this.formData.agency

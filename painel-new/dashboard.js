@@ -155,12 +155,6 @@ export default {
         CardGeral
     },
     methods: {
-      somaAll(ar) {
-          return ar.reduce((acc, el) => {
-              acc += 1
-              return acc
-          }, 0)
-      },
     },
     template: `
     <div>

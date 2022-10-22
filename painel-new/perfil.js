@@ -4,6 +4,7 @@ import ApiAdmin from "../components/apiAdmin.js"
 import Jwt from "../components/jwt.js"
 import CardGeral from "../components/CardGeral.js"
 import { cpf, tel } from "../components/mask.js"
+import Loader from "../components/Loader.js"
 
 globalThis.trolMask = $input => {
     $input.value = cpf($input.value)
@@ -16,6 +17,8 @@ globalThis.telMask = $input => {
 export default {
     data: function () {
         return {
+            isLoad: 'true',
+            error: null,
             inputs: "",
             name: "",
             lastName: "",
@@ -37,10 +40,12 @@ export default {
                 this.formData.data,
                 this.formData.telefone
             )
+            this.error = request.message
 
         }
     },
     async mounted() {
+        this.isLoad = 'true'
         let api = new ApiAdmin()
         let jwt = new Jwt()
         this.adm_fk = jwt.get().code
@@ -59,6 +64,7 @@ export default {
         this.formData.data = request.payload.nascimento
         this.formData.name = request.payload.nome
         this.formData.telefone = tel(request.payload.telefone)
+        
 
 
         
@@ -73,10 +79,12 @@ export default {
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
+        this.isLoad = 'false'
     },
     components: {
         BreadCrumb,
         CardGeral,
+        Loader
     },
     computed: {
         // a computed getter
@@ -94,20 +102,16 @@ export default {
     },
     template: `
     <div>
+        <Loader :open="isLoad" />
         <BreadCrumb text="Home" text2="Minha Conta" />
         <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
                 <div class="flex flex-wrap">
-                
                 <CardGeral text="Atualizar Perfil" size="quatro">
-                
-                <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs"
-                                                    @submit="atualizar">
-                                                </form>
+                <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                  <div v-show="error">{{error}}</div>
                 </CardGeral>
-                
-                
                 </div>
              </div>
           </div>

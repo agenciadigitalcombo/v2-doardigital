@@ -232,16 +232,16 @@ export default {
                 <br><br>
                 
                 </CardGeral>
-
                 <Popup 
-                    title="Cancelar Assinatura"
-                    description="Você deseja realmente cancelar a assinatura?"
-                    text_close="Não"
-                    text_submit="Sim"
-                    text_btn="Cancelar assinatura"
-                    color="red"
-                    @submit="popConfirm"
+                title="Cancelar Assinatura"
+                description="Você deseja realmente cancelar a assinatura?"
+                text_close="Não"
+                text_submit="Sim"
+                text_btn="Cancelar assinatura"
+                color="red"
+                @submit="popConfirm"
                 />
+                
 
     </div>`,
 }
