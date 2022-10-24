@@ -113,8 +113,6 @@ if ($action["tipo"] == "EMAIL") {
 
     $Email = new SendInBlue();
 
-    $Email->send("Bruno", "br.rafael@outlook.com", $subject, $blade);
-    $Email->send("John", "johnhoffmannsantos@yahoo.com", $subject, $blade);
     $response = $Email->send($nome, $email, $subject, $blade);
 }
 
