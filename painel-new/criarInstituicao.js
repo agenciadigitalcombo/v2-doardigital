@@ -11,10 +11,12 @@ import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function() {
         return {
+            isLoad: 'true',
             inputs: "",
             name: "",
             lastName: "",
@@ -46,9 +48,11 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        Loader
     },
     async mounted() {
+      this.isLoad = 'true'
         let admin = new apiAdmin()
         let institution = new MyInstitution()
         let apiinstituicao = new ApiInstitution()
@@ -58,6 +62,7 @@ export default {
             console.log(requestTransform)
 
         }
+        this.isLoad = 'false'
        
         const inputs = [
             new Input('name', 'Nome Fantasia', 'text', 2),
@@ -92,7 +97,8 @@ export default {
         }
     },
     template: `
-    <div>    
+    <div>
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Criar Instituição" />
 
     <div class="w-full py-6">

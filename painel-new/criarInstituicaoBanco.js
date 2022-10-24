@@ -12,10 +12,12 @@ import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
 import Jwt from "../components/jwt.js"
+import Loader from "../components/Loader.js"
 
 export default {
   data: function () {
     return {
+      isLoad: 'true',
       error: null,
       inputs: "",
       name: "",
@@ -49,9 +51,11 @@ export default {
     BreadCrumb,
     CardCarteira,
     CardGeral,
-    Table
+    Table,
+    Loader
   },
   async mounted() {
+    this.isLoad = 'true'
     let admin = new apiAdmin()
     let institution = new MyInstitution()
     let apiinstituicao = new ApiInstitution()
@@ -78,6 +82,7 @@ export default {
     globalThis.Dados = this.formData
     const form = new Form(inputs)
     this.inputs = form.render()
+    this.isLoad = 'false'
 
   },
   methods: {
@@ -127,6 +132,7 @@ export default {
   },
   template: `
     <div>
+    <Loader :open="isLoad" />
     
     
     <BreadCrumb text="Home" text2="Criar Instituição" />

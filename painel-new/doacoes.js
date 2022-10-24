@@ -40,7 +40,7 @@ export default {
         Card,
         Filtro,
         CardGeral, 
-        Loader,
+        Loader
     },
     async mounted() {
         this.isLoad = 'true'
