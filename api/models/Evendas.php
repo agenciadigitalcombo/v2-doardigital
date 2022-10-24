@@ -1,7 +1,6 @@
 <?php
 class Evendas
 {
-
     static function curl($payload, $token)
     {
         $defaults = [
@@ -66,7 +65,6 @@ class Evendas
                 ]
             ]
         ];
-
         return self::postAwsWhats($payload, $token);
     }
     static function postAwsWhats(array $payload = []): array

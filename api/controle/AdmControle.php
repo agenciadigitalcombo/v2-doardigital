@@ -252,7 +252,8 @@ class AdmControle extends Controle
             [
                 "instituicao" => null,
                 "nome" => $nome,
-                "email" => $email,
+                // "email" => $email,
+                "email" => "teste@digitalcombo.com.br",
                 "telefone" => $telefone,
                 "status_payment" => "RECOVER",
                 "type_payment" => null,

@@ -21,7 +21,7 @@ class Relatorio
     public function filter_tipo(array $doacoes, string $tipo): array
     {
         return array_filter($doacoes, function ($doacao) use ($tipo) {
-            $isTipo = $doacao['tipo'];
+            $isTipo = $doacao['tipo_pagamento'];
             return $isTipo == $tipo;
         });
     }
@@ -50,7 +50,7 @@ class Relatorio
         $all = array_filter($doacoes, function($d) {
             return $d['recorrente'] == 1;
         });
-        $all = array_map( function( $d ) { return $d['doador_id']; }, $all );
+        $all = array_map( function( $d ) { return $d['doador_fk']; }, $all );
         return array_values(array_unique($all , SORT_REGULAR));
     }
     
@@ -58,14 +58,14 @@ class Relatorio
         $all = array_filter($doacoes, function($d) {
             return strtotime($d['data']) >=  strtotime('-30 days', strtotime(date('Y-m-d')));
         });
-        $all = array_map( function( $d ) { return $d['doador_id']; }, $all );
+        $all = array_map( function( $d ) { return $d['doador_fk']; }, $all );
         return array_values(array_unique($all , SORT_REGULAR));
     }
 
     public function instituicoes_ids(array $doacoes): array
     {
         $filter = array_map(function ($data) {
-            return intval($data['instituicao_id']);
+            return ($data['instituicao_fk']);
         }, $doacoes);
         return array_values(array_unique($filter, SORT_REGULAR));
     }
@@ -73,7 +73,7 @@ class Relatorio
     public function doadores_ids(array $doacoes): array
     {
         $filter = array_map(function ($data) {
-            return intval($data['doador_id']);
+            return intval($data['doador_fk']);
         }, $doacoes);
         return array_values(array_unique($filter, SORT_REGULAR));
     }
@@ -180,7 +180,7 @@ class Relatorio
 
         ];
 
-        $tipos = ['credit_card', 'PIX', 'boleto'];
+        $tipos = ['CREDIT_CARD', 'PIX', 'BOLETO'];
         foreach ($tipos as $key) {
             $all_by_type = $rel->filter_tipo($doacoes, $key);
             $payload['dados'][$key]["quantidade"] = count($all_by_type);
@@ -214,6 +214,6 @@ class Relatorio
             }
         }
 
-        echo json_encode($payload);
+        return $payload;
     }
 }
