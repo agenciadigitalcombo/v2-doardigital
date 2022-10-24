@@ -7,6 +7,7 @@ import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
+import GraphStatusAssinatura from "../components/GraphStatusAssinatura.js"
 
 
 
@@ -144,6 +145,11 @@ export default {
           );
           
           chart.render();
+          
+          GraphStatusAssinatura(this.$refs.statusAssinatura,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
     },
     components: {
         Table,
@@ -181,7 +187,11 @@ export default {
             <CardGeral text="Status das Doações" size="quatro"/>
             <CardGeral text="Tipos dos Doadores" size="quatro"/>
             <CardGeral text="Status dos Doadores" size="quatro"/>
-            <CardGeral text="Status das Assinaturas" size="quatro"/>
+            <CardGeral text="Status das Assinaturas" size="quatro">            
+            <div id="chart" style="max-width: 760px;">
+            <div ref="statusAssinatura"></div>
+            </div>
+            </CardGeral>
 
         </div>
     </div>`,
