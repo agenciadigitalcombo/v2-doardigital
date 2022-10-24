@@ -37,6 +37,7 @@ class Evendas
         $external_id = 1
     ) {
         $payload = [
+            "TOKEN" => $token,
             "NUMERO" => $external_id,
             "NUMEROID" => $external_id,
             "TRANSACAO" => intval((time() / 50) + rand(1, 99)),
