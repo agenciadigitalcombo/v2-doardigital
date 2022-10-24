@@ -39,9 +39,9 @@ class Evendas
         $payload = [
             "NUMERO" => $external_id,
             "NUMEROID" => $external_id,
-            "TRANSACAO" => intval( (time() / 50) + rand(1, 99) ),
+            "TRANSACAO" => intval((time() / 50) + rand(1, 99)),
             "COMPRADOREMAIL" => $email,
-            "COMPRADORNOME" => ( $nome ),
+            "COMPRADORNOME" => ($nome),
             "COMPRADORDDD" => $ddd,
             "COMPRADORTELEFONE" => $telefone,
             "COMPRADORENDERECO" => ($logradouro),
@@ -65,6 +65,30 @@ class Evendas
                 ]
             ]
         ];
-        return self::curl($payload, $token);
+
+        return self::postAwsWhats($payload, $token);
+    }
+    static function postAwsWhats(array $payload = []): array
+    {
+        $header = [
+            "accept: application/json",
+            "content-type: application/json",
+        ];
+        try {
+            $options = [
+                CURLOPT_POST           => true,
+                CURLOPT_HEADER         => 0,
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL            => "https://btr9rmxyg2.execute-api.us-east-1.amazonaws.com/prod/send",
+                CURLOPT_POSTFIELDS     => json_encode($payload),
+                CURLOPT_HTTPHEADER     => $header,
+            ];
+            $con = curl_init();
+            curl_setopt_array($con, $options);
+            $ex = curl_exec($con);
+            curl_close($con);
+            return json_decode($ex, true);
+        } catch (\Throwable $th) {
+        }
     }
 }
