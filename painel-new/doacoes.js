@@ -191,6 +191,7 @@ export default {
                     })
                 }
             }
+            console.log(dados)
             this.totalFaturas = dados.length
             this.donations = dados
             this.resumos(this.donations)
