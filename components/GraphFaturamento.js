@@ -26,9 +26,6 @@ export default function ($div, data) {
       width: [1, 1, 4]
     },
     title: {
-      text: 'Faturamentos',
-      align: 'left',
-      offsetX: 110
     },
 
     colors: ['#4792fc', '#13b385', '#fbd866', '#bc275f'],

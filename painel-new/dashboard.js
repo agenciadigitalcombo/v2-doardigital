@@ -112,31 +112,29 @@ export default {
         <div class="flex flex-wrap">
             <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
             <Card2 value="??" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
-            <Card2 text="Doadores Recorrentes" :value="totalDoadorRecorrente" variation="green" cor="green" icon="heart" size="4" />
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
+            <Card2 text="Doadores Recorrentes" :value="totalDoadorRecorrente" variation="green" cor="green" icon="heart" size="4" />
             <Card2 value="??" text="Doadores Adimplentes" :value="totalQntEstornado" variation="green" cor="green" icon="adimplente" size="4" />
-            <Card2 value="??" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
             <Card2 value="??" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
+            <Card2 value="??" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
             <Card2 value="??" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <CardGeral text="Faturamento" size="full">
-            <div id="chart" style="max-width: 760px;">
             <div ref="GraphFaturamento"></div>
-            </div>
             </CardGeral>
             <CardGeral text="Quantidade de Doações" size="full">
-            <div id="chart" style="max-width: 760px;">
+
             <div ref="quantidadeDoacoes"></div>
-            </div>
+
             </CardGeral>
             <CardGeral text="Formas de Pagamentos" size="quatro">
-            <div id="chart" style="max-width: 760px;">
+
             <div ref="formasPagamentos"></div>
-            </div>
+
             </CardGeral>
             <CardGeral text="Quantidade por Planos" size="quatro"> 
-            <div id="chart" style="max-width: 760px;">
+
             <div ref="quantidadePlanos"></div>
-            </div>
+
             </CardGeral>
             <CardGeral text="Status das Doações" size="quatro">
             <div id="chart" style="max-width: 760px;">
