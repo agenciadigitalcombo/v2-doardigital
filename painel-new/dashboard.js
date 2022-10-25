@@ -78,15 +78,8 @@ export default {
         this.isLoad = 'false'
       }
           
-          GraphStatusAssinatura(this.$refs.statusAssinatura,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
-            
-          ])
-          statusDoadores(this.$refs.statusDoadores,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
-          ])
+         
+          
           tiposDoadores(this.$refs.tiposDoadores,[
             this.totalDoadorUnico,
             this.totalDoadorRecorrente
@@ -155,16 +148,7 @@ export default {
             <div ref="tiposDoadores"></div>
             </div>
             </CardGeral>
-            <CardGeral text="Status dos Doadores" size="quatro">
-            <div id="chart" style="max-width: 760px;">
-            <div ref="statusDoadores"></div>
-            </div>
-            </CardGeral>
-            <CardGeral text="Status das Assinaturas" size="quatro">            
-            <div id="chart" style="max-width: 760px;">
-            <div ref="statusAssinatura"></div>
-            </div>
-            </CardGeral>
+            
 
         </div>
     </div>`,
