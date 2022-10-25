@@ -23,13 +23,45 @@ class RelatorioControle extends Controle
         $metas = array_map(['Metas','porter'], $metas);
         $inst = Instituicao::porter($inst);
 
-        $render = $relatorio->teste($donations, $metas);
+        
         
 
         self::printSuccess(
             "Relatório",
-            $render
+            [
+                "faturamento" => self::faturamento($donations, $metas)
+            ]
         );
+    }
+
+    static function faturamento($donations, $metas) {
+        $data = [];        
+        $metas = array_values($metas[0]);
+        unset($metas[0]);
+        $metas = array_values($metas);
+        $data["metas"] = $metas;
+        $data["total"] = [];
+        $data["total_pago"] = [];
+        $data["total_aberto"] = [];
+        for( $ic = 1; $ic < 13; $ic++ ) {
+            $pad = str_pad($ic, 2, 0, STR_PAD_LEFT);
+            $data["total"][$pad] = 0;
+            $data["total_pago"][$pad] = 0;
+            $data["total_aberto"][$pad] = 0;            
+        }
+        
+        foreach( $donations as $d ) {            
+            $mes = substr($d["dataCreated"],5,2);
+            $data["total"][$mes] += $d["valor"];
+            if($d['status_pagamento']=='RECEIVED' || $d['status_pagamento']=='CONFIRMED' ){
+                $data["total_pago"][$mes] += $d["valor"];                
+            }
+            if($d['status_pagamento']!='RECEIVED' || $d['status_pagamento']!='CONFIRMED' ){
+                $data["total_aberto"][$mes] += $d["valor"];                
+            }
+        }
+        
+        return $data;
     }
 
     static function inst($fk)
