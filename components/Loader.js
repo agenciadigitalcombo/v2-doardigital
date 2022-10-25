@@ -2,7 +2,7 @@ import getTemplate from "./getTemplate.js"
 
 export default {
     props: ['open'],
-    template : await getTemplate( './../components/Loader' ),
+    template : await getTemplate( './../components/loader' ),
     data: function() {
         return {
             icons:{
