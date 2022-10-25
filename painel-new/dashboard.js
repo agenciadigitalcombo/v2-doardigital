@@ -66,6 +66,7 @@ export default {
       let reqResumo = (await Resumo.info(institution.get())).payload
 
       let faturamento = reqResumo.faturamento
+      let formaPagamento = request.formaPagamento
       console.log(faturamento)
 
       if (request.next) {
@@ -97,10 +98,7 @@ export default {
             this.totalDoadorUnico,
             this.totalDoadorRecorrente
           ])
-          formasPagamentos(this.$refs.formasPagamentos,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
-          ])
+          formasPagamentos(this.$refs.formasPagamentos,formaPagamento)
           quantidadeDoacoes(this.$refs.quantidadeDoacoes,[
             this.totalDoadorUnico,
             this.totalDoadorRecorrente

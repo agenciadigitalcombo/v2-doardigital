@@ -29,9 +29,22 @@ class RelatorioControle extends Controle
         self::printSuccess(
             "Relatório",
             [
-                "faturamento" => self::faturamento($donations, $metas)
+                "faturamento" => self::faturamento($donations, $metas),
+                "formaPagamento" => self::formaPagamento($donations),
             ]
         );
+    }
+
+    static function formaPagamento($donations) {
+        $data = [
+            "PIX" => 0,
+            "BOLETO" => 0,
+            "CREDIT_CARD" => 0,
+        ];
+        foreach($donations as $d) {
+            $data[$d['tipo_pagamento']] += 1;
+        }
+        return $data;
     }
 
     static function faturamento($donations, $metas) {

@@ -6,15 +6,15 @@ export default function($div, data) {
     series: [
       {
         name: 'Boleto',
-        data: [30]
+        data: [data.BOLETO]
       },
       {
         name: 'Pix',
-        data: [40]
+        data: [data.PIX]
       },
       {
         name: 'Cartao',
-        data: [45]
+        data: [data.CREDIT_CARD]
       }
     ],
 
