@@ -32,6 +32,7 @@ class RelatorioControle extends Controle
                 "faturamento" => self::faturamento($donations, $metas),
                 "formaPagamento" => self::formaPagamento($donations),
                 "quantPlanos" => self::quantPlanos($donations),
+                "status" => self::status($donations),
             ]
         );
     }
@@ -47,6 +48,29 @@ class RelatorioControle extends Controle
             "quant" => array_values($data),
             "valor" => array_keys($data),
         ];
+    }     
+    
+    static function status($donations) {
+        
+        $data = [
+            "pago" => 0,
+            "vencido" => 0,
+            "aberto" => 0,
+        ];
+        
+        foreach($donations as $d) {
+            if($d['status_pagamento']=='RECEIVED' || $d['status_pagamento']=='CONFIRMED' ){           
+                $data['pago'] += 1;
+            }
+            if($d['status_pagamento']=='OVERDUE' ){           
+                $data['vencido'] += 1;
+            }
+            if($d['status_pagamento']=='PENDING' ){           
+                $data['aberto'] += 1;
+            }
+        }
+        
+        return $data;
     }    
     
     static function formaPagamento($donations) {

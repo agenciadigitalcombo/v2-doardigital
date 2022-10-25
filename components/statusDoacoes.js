@@ -1,6 +1,6 @@
 export default function($div, data) {
     var options = {
-        series: [60, 20, 20],
+        series: [data.pago, data.aberto, data.vencido],
         chart: {
             width: 380,
             type: 'pie',

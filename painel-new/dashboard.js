@@ -68,6 +68,7 @@ export default {
       let faturamento = reqResumo.faturamento
       let formaPagamento = reqResumo.formaPagamento
       let quantPlanos = reqResumo.quantPlanos
+      let status = reqResumo.status
 
       if (request.next) {
         this.doadorTotal = requestTotal
@@ -90,10 +91,7 @@ export default {
             this.totalDoadorUnico,
             this.totalDoadorRecorrente
           ])
-          statusDoacoes(this.$refs.statusDoacoes,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
-          ])
+          statusDoacoes(this.$refs.statusDoacoes,status)
           quantidadePlanos(this.$refs.quantidadePlanos,quantPlanos)
           formasPagamentos(this.$refs.formasPagamentos,formaPagamento)
           quantidadeDoacoes(this.$refs.quantidadeDoacoes,[

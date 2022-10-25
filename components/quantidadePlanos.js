@@ -19,7 +19,7 @@ export default function($div, data) {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return "Rs " + val ;
+          return val ;
         },
         offsetY: -20,
         style: {
@@ -42,7 +42,7 @@ export default function($div, data) {
         labels: {
           show: false,
           formatter: function (val) {
-            return val + "RS";
+            return val ;
           }
         }
       
