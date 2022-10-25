@@ -8,7 +8,13 @@ import CardGeral from "../components/CardGeral.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
 import GraphStatusAssinatura from "../components/GraphStatusAssinatura.js"
-
+import statusDoadores from "../components/statusDoadores.js"
+import tiposDoadores from "../components/tiposDoadores.js"
+import statusDoacoes from "../components/statusDoacoes.js"
+import quantidadePlanos from "../components/quantidadePlanos.js"
+import formasPagamentos from "../components/formasPagamentos.js"
+import quantidadeDoacoes from "../components/quantidadeDoacoes.js"
+import GraphFaturamento from "../components/GraphFaturamento.js"
 
 
 
@@ -23,17 +29,6 @@ export default {
             totalDoadorUnico: 0,
             requisicao: null,
             donations : [
-                { name: "Mel", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
-                { name: "Kleber", value: 32, status: "RECUSED" },
-                { name: "Bruno", value: 2.50, status: "PAID" },
-                { name: "Jhon", value: 15.50, status: "AWAITING" },
             ],
             cols: {
                 name: "Nome Doador",
@@ -74,79 +69,37 @@ export default {
         this.requisicao = request
         this.isLoad = 'false'
       }
-
-
-
-        var options = {
-            chart: {
-              width: "100%",
-              height: 380,
-              type: "bar"
-            },
-            plotOptions: {
-              bar: {
-                horizontal: true
-              }
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              width: 1,
-              colors: ["#fff"]
-            },
-            series: [
-              {
-                data: [44, 55, 41, 64, 22, 43, 21]
-              },
-              {
-                data: [53, 32, 33, 52, 13, 44, 32]
-              }
-            ],
-            xaxis: {
-              categories: [
-                "Korea",
-                "Canada",
-                "Poland",
-                "Italy",
-                "France",
-                "Japan",
-                "China"
-              ]
-            },
-            legend: {
-              position: "right",
-              verticalAlign: "top",
-              containerMargin: {
-                left: 35,
-                right: 60
-              }
-            },
-            responsive: [
-              {
-                breakpoint: 1000,
-                options: {
-                  plotOptions: {
-                    bar: {
-                      horizontal: false
-                    }
-                  },
-                  legend: {
-                    position: "bottom"
-                  }
-                }
-              }
-            ]
-          };
-          
-          var chart = new ApexCharts(
-            document.querySelector("#responsive-chart"),
-            options
-          );
-          
-          chart.render();
           
           GraphStatusAssinatura(this.$refs.statusAssinatura,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+            
+          ])
+          statusDoadores(this.$refs.statusDoadores,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
+          tiposDoadores(this.$refs.tiposDoadores,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
+          statusDoacoes(this.$refs.statusDoacoes,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
+          quantidadePlanos(this.$refs.quantidadePlanos,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
+          formasPagamentos(this.$refs.formasPagamentos,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
+          quantidadeDoacoes(this.$refs.quantidadeDoacoes,[
+            this.totalDoadorUnico,
+            this.totalDoadorRecorrente
+          ])
+          GraphFaturamento(this.$refs.GraphFaturamento,[
             this.totalDoadorUnico,
             this.totalDoadorRecorrente
           ])
@@ -176,17 +129,41 @@ export default {
             <Card2 value="??" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
             <Card2 value="??" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <Card2 value="??" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
-            <CardGeral text="Faturamento" size="full"/>
-            <CardGeral text="Quantidade de Doações" size="full"/>
-            <CardGeral text="Formas de Pagamentos" size="quatro"/>
-            <CardGeral text="Quantidade por Planos" size="quatro"> 
+            <CardGeral text="Faturamento" size="full">
             <div id="chart" style="max-width: 760px;">
-            <div id="responsive-chart"></div>
+            <div ref="GraphFaturamento"></div>
             </div>
             </CardGeral>
-            <CardGeral text="Status das Doações" size="quatro"/>
-            <CardGeral text="Tipos dos Doadores" size="quatro"/>
-            <CardGeral text="Status dos Doadores" size="quatro"/>
+            <CardGeral text="Quantidade de Doações" size="full">
+            <div id="chart" style="max-width: 760px;">
+            <div ref="quantidadeDoacoes"></div>
+            </div>
+            </CardGeral>
+            <CardGeral text="Formas de Pagamentos" size="quatro">
+            <div id="chart" style="max-width: 760px;">
+            <div ref="formasPagamentos"></div>
+            </div>
+            </CardGeral>
+            <CardGeral text="Quantidade por Planos" size="quatro"> 
+            <div id="chart" style="max-width: 760px;">
+            <div ref="quantidadePlanos"></div>
+            </div>
+            </CardGeral>
+            <CardGeral text="Status das Doações" size="quatro">
+            <div id="chart" style="max-width: 760px;">
+            <div ref="statusDoacoes"></div>
+            </div>
+            </CardGeral>
+            <CardGeral text="Tipos dos Doadores" size="quatro">
+            <div id="chart" style="max-width: 760px;">
+            <div ref="tiposDoadores"></div>
+            </div>
+            </CardGeral>
+            <CardGeral text="Status dos Doadores" size="quatro">
+            <div id="chart" style="max-width: 760px;">
+            <div ref="statusDoadores"></div>
+            </div>
+            </CardGeral>
             <CardGeral text="Status das Assinaturas" size="quatro">            
             <div id="chart" style="max-width: 760px;">
             <div ref="statusAssinatura"></div>

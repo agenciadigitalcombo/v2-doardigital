@@ -5,8 +5,8 @@ export default function($div, data) {
             width: 380,
             type: 'pie',
         },
-        colors: ['#6aa84f', '#f1c232'],
-        labels: ['Ativo', 'Inativo'],
+        colors: ['#39539E', '#4fa8ff'],
+        labels: ['Recorrente', 'Unico'],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -14,7 +14,8 @@ export default function($div, data) {
                     width: 200
                 },
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
+
                 }
             }
         }],
@@ -23,4 +24,5 @@ export default function($div, data) {
     };
     var chart = new ApexCharts($div, options);
     chart.render();
+
 }
