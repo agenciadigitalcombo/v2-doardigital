@@ -2,7 +2,7 @@ export default function($div, data) {
     var options = {
         series: [{
         name: 'Valor',
-        data:  ["25", "50", "75", "100", "150", "200", "250", "300"],
+        data:  data.quant,
       }],
         chart: {
         height: 350,
@@ -29,7 +29,7 @@ export default function($div, data) {
       },
       
       xaxis: {
-        categories: ["25", "50", "75", "100", "150", "200", "250", "300"],
+        categories: data.valor,
       
       },
       yaxis: {

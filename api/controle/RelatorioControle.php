@@ -31,10 +31,24 @@ class RelatorioControle extends Controle
             [
                 "faturamento" => self::faturamento($donations, $metas),
                 "formaPagamento" => self::formaPagamento($donations),
+                "quantPlanos" => self::quantPlanos($donations),
             ]
         );
     }
 
+    static function quantPlanos($donations) {
+        
+        $data = [];
+        foreach($donations as $d) {
+            @$data[$d['valor']] += 1;
+        }
+        ksort($data);
+        return [
+            "quant" => array_values($data),
+            "valor" => array_keys($data),
+        ];
+    }    
+    
     static function formaPagamento($donations) {
         $data = [
             "PIX" => 0,
