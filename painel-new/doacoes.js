@@ -57,6 +57,7 @@ export default {
             })
             this.donations = all_donations
             this.donationsCopy = all_donations
+            console.log(all_donations)
         }
         this.resumos(this.donations)
         this.isLoad = 'false'

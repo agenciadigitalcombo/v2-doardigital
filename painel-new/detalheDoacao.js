@@ -167,7 +167,7 @@ export default {
                     <br>
                     <br>
                     <h2 class="text-gray-500">Data:</h2>
-                    <p>{{ formatData( info.data ) }}  - {{info.hora}}</p>
+                    <p>{{ formatData( info.dataCreated ) }}  - {{info.hora}}</p>
                     <br>
                     <h2 class="text-gray-500">Valor</h2>
                     <p>{{ formataMoeda( info.valor ) }}</p>
