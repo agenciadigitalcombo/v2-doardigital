@@ -1,7 +1,7 @@
 export default function($div, data) {
   var options = {
     series: [{
-    name: 'Dia',
+    name: 'Valor',
     data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35, 31, 87, 65, 43, 21, 31, 87, 65, 35, 31, 87,12, 35, 31, 87,12]
     }],
    

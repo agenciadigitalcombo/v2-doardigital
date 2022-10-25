@@ -2,7 +2,7 @@ export default function($div, data) {
     var options = {
         series: [data.pago, data.aberto, data.vencido],
         chart: {
-            width: 380,
+            width: 420,
             type: 'pie',
         },
         colors: ['#37be00', '#ffd752', '#fe504f'],

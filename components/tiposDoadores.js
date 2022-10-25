@@ -2,7 +2,7 @@ export default function($div, data) {
     var options = {
         series: data,
         chart: {
-            width: 380,
+            width: 420,
             type: 'pie',
         },
         colors: ['#39539E', '#4fa8ff'],
