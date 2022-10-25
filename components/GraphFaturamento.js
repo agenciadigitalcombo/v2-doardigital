@@ -3,19 +3,19 @@ export default function ($div, data) {
     series: [{
       name: 'Total Arrecadado',
       type: 'column',
-      data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6, 5, 8, 8, 6]
+      data: data.total
     }, {
       name: 'Total Pago',
       type: 'column',
-      data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5, 5, 8, 8, 4]
+      data: data.total_pago
     }, {
       name: 'Total Aberto',
       type: 'column',
-      data: [2, 3, 3.1, 8, 4.1, 9, 6.5, 8.5, 2.5, 2.8, 3.8, 4.6]
+      data: data.total_aberto
     }, {
       name: 'Meta',
       type: 'line',
-      data: [5, 9, 7, 9, 10, 14, 17, 18, 14, 18, 19, 8]
+      data: data.metas
     }],
     chart: {
       height: 350,

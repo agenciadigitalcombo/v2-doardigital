@@ -15,6 +15,7 @@ import quantidadePlanos from "../components/quantidadePlanos.js"
 import formasPagamentos from "../components/formasPagamentos.js"
 import quantidadeDoacoes from "../components/quantidadeDoacoes.js"
 import GraphFaturamento from "../components/GraphFaturamento.js"
+import ApiRelatorio from "../components/apiRelatorio.js"
 
 
 
@@ -50,6 +51,7 @@ export default {
     },
     async mounted(){
       this.isLoad = 'true'
+      let Resumo = new ApiRelatorio()
       let doadores = new ApiDoadores()
       let institution = new MyInstitution()
       let request = await doadores.lista(institution.get())
@@ -61,6 +63,10 @@ export default {
       let doadorRecorrenteTransform = Object.keys(doadorRecorrente)
       let totalDoadorUnico = doadorUnicoTransform.length
       let totalDoadorRecorrente = doadorRecorrenteTransform.length
+      let reqResumo = (await Resumo.info(institution.get())).payload
+
+      let faturamento = reqResumo.faturamento
+      console.log(faturamento)
 
       if (request.next) {
         this.doadorTotal = requestTotal
@@ -99,10 +105,7 @@ export default {
             this.totalDoadorUnico,
             this.totalDoadorRecorrente
           ])
-          GraphFaturamento(this.$refs.GraphFaturamento,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
-          ])
+          GraphFaturamento(this.$refs.GraphFaturamento, faturamento)
     },
     components: {
         Table,

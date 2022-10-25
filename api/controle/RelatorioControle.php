@@ -60,6 +60,10 @@ class RelatorioControle extends Controle
                 $data["total_aberto"][$mes] += $d["valor"];                
             }
         }
+
+        $data["total"] = array_values($data["total"]);
+        $data["total_pago"] = array_values($data["total_pago"]);
+        $data["total_aberto"] = array_values($data["total_aberto"]);
         
         return $data;
     }
