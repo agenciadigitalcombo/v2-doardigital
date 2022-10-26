@@ -115,7 +115,7 @@ export default {
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
             <Card2 text="Doadores Recorrentes" :value="totalDoadorRecorrente" variation="green" cor="green" icon="heart" size="4" />
             <Card2 value="??" text="Doadores Adimplentes" :value="totalQntEstornado" variation="green" cor="green" icon="adimplente" size="4" />
-            <Card2 value="??" text="Doação Média" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
+            <Card2 value="??" text="Doadores Médios" :value="totalQntEstornado" variation="yellow" cor="yellow" icon="heart" size="4" />
             <Card2 value="??" text="Doadores Inadimplentes" :value="totalQntEstornado" variation="red" cor="red" icon="inadimplente" size="4" />
             <Card2 value="??" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
             <CardGeral text="Faturamento" size="full">
