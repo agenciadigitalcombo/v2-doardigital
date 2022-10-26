@@ -6,7 +6,7 @@ export default [
   { text: "Planos", ico: "fa-solid fa-clipboard-list", link: "planos" },
   { text: "Metas", ico: "fa-solid fa-chart-line", link: "metas" },
   { text: "Módulos", ico: "fa-solid fa-share-nodes", link: "modulos" },
-  { text: "Modelo de E-mails", ico: "fa-solid fa-envelope-circle-check", link: "modelo-de-email" },
+  { text: "Modelo de E-mails", ico: "fa-solid fa-envelope-circle-check", link: "modelo-de-emails" },
   { text: "Configuração", ico: "fa-solid fa-gear", link: "configuracao" },
   { text: "Usuários", ico: "fas fa-user-edit", link: "usuarios" },
   { text: "Minhas Instituições", ico: "fa-solid fa-house-laptop", link: "minhas-instituicoes" },
