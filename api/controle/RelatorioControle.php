@@ -22,7 +22,6 @@ class RelatorioControle extends Controle
         $donations = array_map([ 'Fatura', 'porter' ], $donations);
         $metas = array_map(['Metas','porter'], $metas);
         $inst = Instituicao::porter($inst);
-
         
         $donations = array_filter($donations, function($d) {
             $data = strtotime( $d["dataCreated"] );
@@ -30,19 +29,53 @@ class RelatorioControle extends Controle
             return $data <= $hoje;
         });
         $donations = array_values($donations);
-        
-        
+        $invoicesByDoador = self::groupDoador($donations);
 
         self::printSuccess(
             "Relatório",
-            [
-                "debug" => $donations[0],
+            [                
                 "faturamento" => self::faturamento($donations, $metas),
                 "formaPagamento" => self::formaPagamento($donations),
                 "quantPlanos" => self::quantPlanos($donations),
                 "status" => self::status($donations),
+                "adimplente" => self::adimplente($invoicesByDoador),
+                "inadimplente" => self::inadimplente($invoicesByDoador),
+                "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::inadimplente($invoicesByDoador)),
             ]
         );
+    }
+
+    static function inadimplente($invoices) {       
+        $statusCount = array_map(function($status) {
+            return array_count_values($status);
+        }, $invoices);
+        $statusCount = array_map(function($status) {
+            return array_keys($status);
+        }, $statusCount);
+        $statusCount = array_filter($statusCount, function($status) {
+            return in_array('OVERDUE', $status );
+        });
+        $statusCount = array_filter($statusCount, function($status) {
+            return count($status) == 1;
+        });        
+        return count( $statusCount );
+    }
+    
+    static function adimplente($invoices) {
+        $doadores = array_filter($invoices, function($status) {
+            return !in_array('OVERDUE', $status );
+        });
+        return count($doadores);
+    }
+
+    static function groupDoador($donations) {
+        $doadores = [];
+
+        foreach($donations as $d) {
+            @$doadores[$d["doador_fk"]][] = $d["status_pagamento"];
+        }
+
+        return $doadores;
     }
 
     static function quantPlanos($donations) {
@@ -135,6 +168,7 @@ class RelatorioControle extends Controle
         ]);
         return $db_inst->select()[0] ?? [];
     }
+
     static function allDonation($fk)
     {
         $db_inst = new Banco();
@@ -144,6 +178,7 @@ class RelatorioControle extends Controle
         ]);
         return $db_inst->select();
     }
+
     static function allMetas($fk)
     {
         $db_inst = new Banco();
