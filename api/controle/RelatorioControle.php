@@ -106,8 +106,7 @@ class RelatorioControle extends Controle
             $data["total"][$mes] += $d["valor"];
             if($d['status_pagamento']=='RECEIVED' || $d['status_pagamento']=='CONFIRMED' ){
                 $data["total_pago"][$mes] += $d["valor"];                
-            }
-            if($d['status_pagamento']!='RECEIVED' || $d['status_pagamento']!='CONFIRMED' ){
+            }else{
                 $data["total_aberto"][$mes] += $d["valor"];                
             }
         }

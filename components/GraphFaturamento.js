@@ -1,4 +1,4 @@
-export default function ($div, data) {
+export default function ($div, data) { 
   var options = {
     series: [{
       name: 'Total Arrecadado',
