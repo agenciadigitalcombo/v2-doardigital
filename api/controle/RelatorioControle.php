@@ -34,13 +34,13 @@ class RelatorioControle extends Controle
         self::printSuccess(
             "Relatório",
             [                
-                // "faturamento" => self::faturamento($donations, $metas),
-                // "formaPagamento" => self::formaPagamento($donations),
-                // "quantPlanos" => self::quantPlanos($donations),
-                // "status" => self::status($donations),
-                // "adimplente" => self::adimplente($invoicesByDoador),
-                // "inadimplente" => self::inadimplente($invoicesByDoador),
-                // "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::inadimplente($invoicesByDoador)),
+                "faturamento" => self::faturamento($donations, $metas),
+                "formaPagamento" => self::formaPagamento($donations),
+                "quantPlanos" => self::quantPlanos($donations),
+                "status" => self::status($donations),
+                "adimplente" => self::adimplente($invoicesByDoador),
+                "inadimplente" => self::inadimplente($invoicesByDoador),
+                "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::inadimplente($invoicesByDoador)),
                 "previsto" =>  $previsto,
             ]
         );
