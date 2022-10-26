@@ -22,7 +22,7 @@ class RelatorioControle extends Controle
         $donations = array_map([ 'Fatura', 'porter' ], $donations);
         $metas = array_map(['Metas','porter'], $metas);
         $inst = Instituicao::porter($inst);
-        
+        $previsto = self::previsto($donations);
         $donations = array_filter($donations, function($d) {
             $data = strtotime( $d["dataCreated"] );
             $hoje = strtotime( date('Y-m-d') );
@@ -34,15 +34,33 @@ class RelatorioControle extends Controle
         self::printSuccess(
             "Relatório",
             [                
-                "faturamento" => self::faturamento($donations, $metas),
-                "formaPagamento" => self::formaPagamento($donations),
-                "quantPlanos" => self::quantPlanos($donations),
-                "status" => self::status($donations),
-                "adimplente" => self::adimplente($invoicesByDoador),
-                "inadimplente" => self::inadimplente($invoicesByDoador),
-                "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::inadimplente($invoicesByDoador)),
+                // "faturamento" => self::faturamento($donations, $metas),
+                // "formaPagamento" => self::formaPagamento($donations),
+                // "quantPlanos" => self::quantPlanos($donations),
+                // "status" => self::status($donations),
+                // "adimplente" => self::adimplente($invoicesByDoador),
+                // "inadimplente" => self::inadimplente($invoicesByDoador),
+                // "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::inadimplente($invoicesByDoador)),
+                "previsto" =>  $previsto,
             ]
         );
+    }
+
+    static function previsto($donations) {
+        $donations = array_filter($donations, function($d) {
+            $data = strtotime( $d["dataCreated"] );
+            $hoje = strtotime( date('Y-m-d') );
+            return $data > $hoje;
+        });
+        $donations = array_filter($donations, function($d) {
+            return $d["status_pagamento"] == "PENDING";
+        });
+        $donations = array_values($donations);
+        $donations = array_reduce($donations, function($acc, $d) {
+            $acc = $acc + $d["valor"];
+            return $acc;
+        }, 0);
+        return $donations;
     }
 
     static function inadimplente($invoices) {       

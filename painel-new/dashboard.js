@@ -34,6 +34,7 @@ export default {
             adimplente: 0,
             inadimplente: 0,
             normal: 0,
+            previsto: 0,
             cols: {
                 name: "Nome Doador",
                 value: "Valor Doação",
@@ -76,6 +77,7 @@ export default {
       this.adimplente = reqResumo.adimplente
       this.inadimplente = reqResumo.inadimplente
       this.normal = reqResumo.normal
+      this.previsto = reqResumo.previsto
 
       if (request.next) {
         this.doadorTotal = requestTotal
@@ -125,7 +127,7 @@ export default {
             <Card2  text="Doadores Adimplentes" :value="adimplente" variation="green" cor="green" icon="adimplente" size="4" />
             <Card2 text="Doadores Médios" :value="normal" variation="yellow" cor="yellow" icon="heart" size="4" />
             <Card2  text="Doadores Inadimplentes" :value="inadimplente" variation="red" cor="red" icon="inadimplente" size="4" />
-            <Card2 value="??" text="Doações Previstas" :value="totalQntEstornado" variation="blue" cor="blue" icon="heart" size="4" />
+            <Card2 text="Doações Previstas" :value="previsto" variation="blue" cor="blue" icon="heart" size="4" />
             <CardGeral text="Faturamento" size="full">
             <div ref="GraphFaturamento"></div>
             </CardGeral>
