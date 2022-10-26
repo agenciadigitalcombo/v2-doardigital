@@ -65,19 +65,24 @@ export default {
       console.log(requestTransform)
 
     }
+    let tmp = new Tmp()
+    let defaultBanco = tmp.info()?.tipoEmpresa || '001'
     const inputs = [
       new Input('name', 'Nome Conta', 'text', 2),
       new Input('conta', 'Conta', 'text', 1),
       new Input('digitoConta', 'Conta Dígito', 'text', 1, true),
       new Input('agencia', 'Agência', 'text', 1),
-      new Input('banco', 'Banco', 'text', 1),
+      new Select('banco', 'Banco', 2, [
+        new Option('001', 'Banco do Brasil'),
+        new Option('237', 'Banco Bradesco'),
+      ], true, defaultBanco),
       new Select('contaTipo', 'Conta Tipo', 1, [
         new Option('CONTA_CORRENTE', 'Corrente'),
         new Option('CONTA_POUPANCA', 'Poupança'),
       ]),
       new Button('Avançar Cadastro'),
     ]
-    let tmp = new Tmp()
+    
     this.formData = { ...this.formData, ...tmp.info() }
     globalThis.Dados = this.formData
     const form = new Form(inputs)

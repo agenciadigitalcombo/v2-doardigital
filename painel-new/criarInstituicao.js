@@ -63,7 +63,8 @@ export default {
 
         }
         this.isLoad = 'false'
-       
+        let tmp = new Tmp()
+        let defaultTipoEmpresa = tmp.info()?.tipoEmpresa || SELECIONE       
         const inputs = [
             new Input('name', 'Nome Fantasia', 'text', 2),
             new Select('tipoEmpresa', 'Conta Tipo', 2, [
@@ -72,13 +73,13 @@ export default {
               new Option('MEI', 'MEI'),
               new Option('LIMITED', 'LIMITADA'),
               new Option('INDIVIDUAL', 'INDIVIDUAL'),
-            ]),
+            ], true, defaultTipoEmpresa),
             new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2),
             new Input('email', 'Email', 'email', 2, true),
             new Input('phone', 'DDD + Celular', 'text', 2),
             new Button('Avançar Cadastro'),
         ]
-        let tmp = new Tmp()
+       
         this.formData = {...this.formData, ...tmp.info() }
         tmp.save({step: 1})
         globalThis.Dados = this.formData
