@@ -12,6 +12,22 @@ import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
 import Loader from "../components/Loader.js"
+import {cep} from "../components/mask.js"
+import ApiViaCep from "../components/ApiViaCep.js"
+
+
+globalThis.MaskCep = v => {
+  let applyMasc = cep(v)
+  if( applyMasc.length == 9 ) {
+    ApiViaCep(v).then( res => {
+      console.log(res)
+      document.querySelector(`[name="estado"]`).value = res.uf
+      globalThis.Dados.estado = res.uf
+    } )
+  }
+  return applyMasc  
+}
+
 
 export default {
     data: function() {
@@ -68,7 +84,7 @@ export default {
 
         }
         const inputs = [
-            new Input('cep', 'CEP', 'text', 1, 1, null, 0, "cep"),
+            new Input('cep', 'CEP', 'text', 1, 1, null, 0, "cep", 'MaskCep'),
             new Input('logradouro', 'Logradouro', 'text', 2, 1, null, ),
             new Input('numero', 'Número', 'text', 1, true),
             new Input('complemento', 'Complemento', 'text', 1),

@@ -60,7 +60,6 @@ export default {
         let requestTransform = request.payload
         if(request.next) {
             console.log(requestTransform)
-
         }
         this.isLoad = 'false'
         let tmp = new Tmp()
