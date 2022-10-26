@@ -24,11 +24,19 @@ class RelatorioControle extends Controle
         $inst = Instituicao::porter($inst);
 
         
+        $donations = array_filter($donations, function($d) {
+            $data = strtotime( $d["dataCreated"] );
+            $hoje = strtotime( date('Y-m-d') );
+            return $data <= $hoje;
+        });
+        $donations = array_values($donations);
+        
         
 
         self::printSuccess(
             "Relatório",
             [
+                "debug" => $donations[0],
                 "faturamento" => self::faturamento($donations, $metas),
                 "formaPagamento" => self::formaPagamento($donations),
                 "quantPlanos" => self::quantPlanos($donations),
