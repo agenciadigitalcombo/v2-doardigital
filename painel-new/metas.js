@@ -10,11 +10,12 @@ import MyInstitution from "../components/myInstitution.js"
 export default {
    data: function () {
       return {
-
+         error: null,
          inputs: "",
          formData: {}
       }
    },
+   
    async mounted() {
       
      
@@ -56,10 +57,37 @@ export default {
       const form = new Form(inputs)
       this.inputs = form.render()
       
-      console.log(request)
+      
 
 
    },
+   methods: {
+      async atualizar() {
+          let api = new ApiMetas()
+          let institution = new MyInstitution()
+          let myInstitution = institution.get()
+
+          let request = await api.save(
+            myInstitution,
+            2022,
+            this.formData.janeiro,
+            this.formData.fevereiro,
+            this.formData.marco,
+            this.formData.abril,
+            this.formData.maio,
+            this.formData.junho,
+            this.formData.julho,
+            this.formData.agosto,
+            this.formData.setembro,
+            this.formData.outubro,
+            this.formData.novembro,
+            this.formData.dezembro,
+          )
+          console.log(request)
+          this.error = request.message
+
+      }
+  },
    components: {
       Botao,
       Card,
@@ -78,7 +106,8 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 <CardGeral text="Metas" size="sete">   
-                    <form class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
+                <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                <div v-show="error">{{error}}</div>
                 </CardGeral>
              
                 
