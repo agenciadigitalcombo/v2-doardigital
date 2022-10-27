@@ -16,6 +16,7 @@ import formasPagamentos from "../components/formasPagamentos.js"
 import quantidadeDoacoes from "../components/quantidadeDoacoes.js"
 import GraphFaturamento from "../components/GraphFaturamento.js"
 import ApiRelatorio from "../components/apiRelatorio.js"
+import { data, formataMoeda, formatRecorrente, formatTipoPagamento } from "../components/format.js"
 
 
 
@@ -77,7 +78,7 @@ export default {
       this.adimplente = reqResumo.adimplente
       this.inadimplente = reqResumo.inadimplente
       this.normal = reqResumo.normal
-      this.previsto = reqResumo.previsto
+      this.previsto = formataMoeda(reqResumo.previsto)
       this.donationByDay = reqResumo.donationByDay
 
       if (request.next) {
@@ -86,6 +87,7 @@ export default {
         this.totalDoadorRecorrente = totalDoadorRecorrente
         this.requisicao = request
         this.isLoad = 'false'
+        console.log(reqResumo)
       }
           
          ''

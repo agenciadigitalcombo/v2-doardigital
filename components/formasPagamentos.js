@@ -1,5 +1,4 @@
 export default function($div, data) {
-  console.log(data)
   var options = {
     chart: {
       height: 350,
