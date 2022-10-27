@@ -447,6 +447,7 @@ class InstituicaoControle extends Controle
             $charge["pagamento_fk"] = $allFk[$charge["doador_fk"]];
             return $charge;
         }, $faturas);
+
         self::printSuccess(
             "Lista de doações",
             $faturas
