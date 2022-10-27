@@ -31,6 +31,22 @@ export default {
         freeze(payload) {
             return JSON.parse( JSON.stringify(payload) )
         },
+        showStep( totalPaginas, btn, step ) {
+            if(totalPaginas < 11) {
+                return true                
+            }else {
+                let init = step - 5
+                let final = step + 5
+                let noShow = btn >= init && btn <= final
+                console.log( {step, init, final, noShow})
+                if( noShow ) {
+                    return true
+                }else {
+                    return false
+                }
+            }
+            return false
+        }
     }
     
 }

@@ -54,46 +54,22 @@
                     ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50` }}
                 </div>
 
-                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
+                <!-- <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
                     v-for="(_,s) in Array(pages)">
                     <button :class="step == s ? ativo : inativo"  @click="step=s">
                         {{s+1}}
                     </button>
-                </li>
+                </li> -->
 
-
-
-
-
-
-
-
-<!-- 
-                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
-                    v-for="(_,s) in Array(1000)" v-show="s < 10">
+                <li 
+                    class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
+                    v-for="(_,s) in Array(pages)" 
+                    v-show="showStep(pages,s, step)"
+                    >
                     <button :class="step == s ? ativo : inativo"  @click="step=s">
                         {{s+1}}
                     </button>
-                </li> 
-                <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
-                    >
-                    <button :class="step == s ? ativo : inativo"  @click="step=s">
-                        ...
-                    </button>
-                </li> <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100"
-                   >
-                    <button :class="step == s ? ativo : inativo"  @click="step=s">
-                        {{step+1}}
-                    </button>
                 </li>
- -->
-
-
-
-
-
-
-
 
 
                 <li class="w-8 h-8 border border-gray-200 table-cell hover:border-blue-100">
