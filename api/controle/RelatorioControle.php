@@ -106,15 +106,20 @@ class RelatorioControle extends Controle
         $allPlanos = $db->select();
         $planos = array_map(function($p) { return $p['price']; }, $allPlanos );
         $data = [];
+        foreach($planos as $planoDefault) {
+            $data[$planoDefault] = 0;
+        }
+        $outros = 0;
         foreach($donations as $d) {
             $valor = $d['valor'];
             if(in_array($valor, $planos )) {
                 @$data[$d['valor']] += 1;
             }else{
-                @$data['outros'] += 1;
+                @$outros += 1;
             }
         }
         ksort($data);
+        $data['Outros'] = $outros;
         return [
             "quant" => array_values($data),
             "valor" => array_keys($data),
