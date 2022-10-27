@@ -78,6 +78,7 @@ export default {
       this.inadimplente = reqResumo.inadimplente
       this.normal = reqResumo.normal
       this.previsto = reqResumo.previsto
+      this.donationByDay = reqResumo.donationByDay
 
       if (request.next) {
         this.doadorTotal = requestTotal
@@ -96,10 +97,7 @@ export default {
           statusDoacoes(this.$refs.statusDoacoes,status)
           quantidadePlanos(this.$refs.quantidadePlanos,quantPlanos)
           formasPagamentos(this.$refs.formasPagamentos,formaPagamento)
-          quantidadeDoacoes(this.$refs.quantidadeDoacoes,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
-          ])
+          quantidadeDoacoes(this.$refs.quantidadeDoacoes,this.donationByDay)
           GraphFaturamento(this.$refs.GraphFaturamento, faturamento)
     },
     components: {

@@ -43,8 +43,44 @@ class RelatorioControle extends Controle
                 "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::adimplente($invoicesByDoador)),
                 "previsto" =>  $previsto,
                 "totalDoadores" => count($invoicesByDoador),
+                "donationByDay" => self::donationByDay($donations),
             ]
         );
+    }
+
+    static function donationByDay($donations) {
+        $mes = [
+            "01" => 31, 
+            "02" => 28, 
+            "03" => 31, 
+            "04" => 30, 
+            "05" => 31, 
+            "06" => 30, 
+            "07" => 31, 
+            "08" => 31, 
+            "09" => 30, 
+            "10" => 31, 
+            "11" => 30, 
+            "12" => 31, 
+        ];
+        $mes = array_map( function($num) {
+            $data = [];
+            for( $d = 1; $d <= $num; $d++ ) {
+                $data[$d] = 0;  
+            }
+            return $data;
+        }, $mes);
+        foreach( $donations as $do ) {            
+            $date = explode("-", $do["dataCreated"]);
+            $m = $date[1];
+            $d = $date[2]+0;
+            @$mes[$m][$d] += 1;
+        }
+        return [
+            "label" => array_keys($mes[date('m')]),
+            "value" => array_values($mes[date('m')]),
+        ];
+         
     }
 
     static function previsto($donations) {
