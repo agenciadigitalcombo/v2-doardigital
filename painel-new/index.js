@@ -43,6 +43,7 @@ import CriarInstituicaoDominio from "./criarInstituicaoDominio.js"
 import CriarInstituicaoBanco from "./criarInstituicaoBanco.js"
 import EditarInstituicao from "./editarInstituicao.js"
 import ModelosDeEmail from "./modelosDeEmail.js"
+import EditarEmail from "./editarEmail.js"
 
 const routes = [
     { path: '/', component: Dashboard },
@@ -79,6 +80,7 @@ const routes = [
     { path: '/editar-credencial', component: EditarCredencial },
     { path: '/editar-instituicao', component: EditarInstituicao },
     { path: '/modelo-de-emails', component: ModelosDeEmail },
+    { path: '/editar-email', component: EditarEmail },
 ]
 
 const router = VueRouter.createRouter({

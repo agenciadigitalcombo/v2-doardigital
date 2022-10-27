@@ -55,6 +55,7 @@ export default {
             this.totalQuantidade = all_donations.length
             this.totalMoney = this.somaAll(all_donations)
             this.isLoad = 'false'
+            console.log(request)
         }
     },
     methods: {

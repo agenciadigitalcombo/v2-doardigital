@@ -88,11 +88,11 @@ export default {
         this.isLoad = 'false'
       }
           
-         
+         ''
           
           tiposDoadores(this.$refs.tiposDoadores,[
-            this.totalDoadorUnico,
-            this.totalDoadorRecorrente
+            this.totalDoadorRecorrente,
+            this.totalDoadorUnico
           ])
           statusDoacoes(this.$refs.statusDoacoes,status)
           quantidadePlanos(this.$refs.quantidadePlanos,quantPlanos)
