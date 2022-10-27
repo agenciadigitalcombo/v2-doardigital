@@ -40,7 +40,7 @@ class RelatorioControle extends Controle
                 "status" => self::status($donations),
                 "adimplente" => self::adimplente($invoicesByDoador),
                 "inadimplente" => self::inadimplente($invoicesByDoador),
-                "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::inadimplente($invoicesByDoador)),
+                "normal" => count($invoicesByDoador) - (self::inadimplente($invoicesByDoador) + self::adimplente($invoicesByDoador)),
                 "previsto" =>  $previsto,
                 "totalDoadores" => count($invoicesByDoador),
             ]
