@@ -37,7 +37,7 @@ class Fatura
         $sql = "select *, concat(data, hora) as data_hora from fatura where instituicao_fk='{$instituicao_fk}' order by data_hora DESC";
         $adapter = array_map(["Fatura", "porter"], $this->con->query($sql));
         function orderByData($a, $b) {
-            return $a['dataCreated'] > $b['dataCreated'];
+            return $a['dataCreated'] < $b['dataCreated'];
         }
         usort($adapter, 'orderByData');
         return $adapter;
