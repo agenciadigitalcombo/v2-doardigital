@@ -36,7 +36,7 @@ class RelatorioControle extends Controle
             [                
                 "faturamento" => self::faturamento($donations, $metas),
                 "formaPagamento" => self::formaPagamento($donations),
-                "quantPlanos" => self::quantPlanos($donations),
+                "quantPlanos" => self::quantPlanos($donations, $fk),
                 "status" => self::status($donations),
                 "adimplente" => self::adimplente($invoicesByDoador),
                 "inadimplente" => self::inadimplente($invoicesByDoador),
@@ -97,11 +97,22 @@ class RelatorioControle extends Controle
         return $doadores;
     }
 
-    static function quantPlanos($donations) {
-        
+    static function quantPlanos($donations, $fk) {
+        $db = new Banco();
+        $db->table('plano');
+        $db->where([
+            "fk" => $fk,
+        ]);
+        $allPlanos = $db->select();
+        $planos = array_map(function($p) { return $p['price']; }, $allPlanos );
         $data = [];
         foreach($donations as $d) {
-            @$data[$d['valor']] += 1;
+            $valor = $d['valor'];
+            if(in_array($valor, $planos )) {
+                @$data[$d['valor']] += 1;
+            }else{
+                @$data['outros'] += 1;
+            }
         }
         ksort($data);
         return [
