@@ -121,10 +121,10 @@ export default {
     <br>
         <Loader :open="isLoad" />
         <div class="flex flex-wrap">
-            <CardDash size="4" cor="blue" variation="blue" text="Total em Doações"/>
-            <CardDash size="4" cor="green" variation="green" text="Total Pago"/>
-            <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto"/>
-            <CardDash size="4" cor="red" variation="red" text="Total Vencido"/>
+            <CardDash size="4" cor="blue" variation="blue" text="Total em Doações" value="R$ 45900"/>
+            <CardDash size="4" cor="green" variation="green" text="Total Pago" value="R$ 3900"/>
+            <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto" value="R$ 1900"/>
+            <CardDash size="4" cor="red" variation="red" text="Total Vencido" value="R$ 900"/>
             <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
             <Card2 value="??" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
