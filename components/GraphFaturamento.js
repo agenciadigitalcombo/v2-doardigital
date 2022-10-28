@@ -20,7 +20,10 @@ export default function ($div, data) {
     chart: {
       height: 350,
       type: 'line',
-      stacked: false
+      stacked: false,
+      toolbar: {
+        show: false,
+      }
     },
     stroke: {
       width: [1, 1, 4]
