@@ -1,0 +1,54 @@
+<div :class="sizes[size]||sizes.tres">
+    <div :class="cores[cor]">
+        <div class="mb-4 items-center justify-between">
+
+            <br>
+            <h1 class="text-center text-2xl font-semibold">{{text}}</h1>
+
+        </div>
+        <div class="space-y-2 text-center">
+            <div class="text-2xl font-semibold tracking-wider">R$ 239.800,00</div>
+
+        </div>
+    </div>
+
+    <div class="-mt-40 p-5">
+
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+            <div :class="variations[variation]||variations.blue">
+                <i class="fa-sharp fa-solid fa-qrcode"></i>
+            </div>
+            <div class="flex flex-col flex-grow ml-4">
+                <div class="text-sm text-gray-600">PIX</div>
+                <div class="font-bold text-lg">R$ 12.059,00</div>
+            </div>
+        </div>
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+            <div :class="variations[variation]||variations.blue">
+                <i class="fa-solid fa-barcode"></i>
+            </div>
+            <div class="flex flex-col flex-grow ml-4">
+                <div class="text-sm text-gray-600">BOLETO</div>
+                <div class="font-bold text-lg">R$ 12.059,00</div>
+            </div>
+        </div>
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+            <div :class="variations[variation]||variations.blue">
+                <i class="fa-solid fa-credit-card"></i>
+            </div>
+            <div class="flex flex-col flex-grow ml-4">
+                <div class="text-sm text-gray-600">CRÉDITO</div>
+                <div class="font-bold text-lg">R$ 12.059,00</div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<br>
+</div>
+<br>
+<br>

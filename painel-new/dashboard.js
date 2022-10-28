@@ -17,6 +17,7 @@ import quantidadeDoacoes from "../components/quantidadeDoacoes.js"
 import GraphFaturamento from "../components/GraphFaturamento.js"
 import ApiRelatorio from "../components/apiRelatorio.js"
 import { data, formataMoeda, formatRecorrente, formatTipoPagamento } from "../components/format.js"
+import CardDash from "../components/CardDash.js"
 
 
 
@@ -109,7 +110,8 @@ export default {
         Card,
         Loader,
         Card2,
-        CardGeral
+        CardGeral,
+        CardDash
     },
     methods: {
     },
@@ -119,7 +121,10 @@ export default {
     <br>
         <Loader :open="isLoad" />
         <div class="flex flex-wrap">
-
+            <CardDash size="4" cor="blue" variation="blue" text="Total em Doações"/>
+            <CardDash size="4" cor="green" variation="green" text="Total Pago"/>
+            <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto"/>
+            <CardDash size="4" cor="red" variation="red" text="Total Vencido"/>
             <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
             <Card2 value="??" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
