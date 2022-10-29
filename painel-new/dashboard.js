@@ -27,7 +27,19 @@ export default {
             isLoad: 'true', 
             statusUnico: 0,
             statusRecorrente: 0,
+            totalEmDoacoes: 0,
+            totalEmPix: 0,
+            totalEmBoleto: 0,
+            totalEmCredito: 0,
             totalDoadores: 0,
+            totalPago: 0,
+            totalPagoPix: 0,
+            totalPagoBoleto: 0,
+            totalPagoCredito: 0,
+            totalAberto: 0,
+            totalAbertoPix: 0,
+            totalAbertoBoleto: 0,
+            totalAbertoCredito: 0,
             doadorTotal: 0,
             totalDoadorUnico: 0,
             requisicao: null,
@@ -86,9 +98,26 @@ export default {
         this.doadorTotal = requestTotal
         this.totalDoadorUnico = totalDoadorUnico
         this.totalDoadorRecorrente = totalDoadorRecorrente
+        this.totalEmDoacoes = formataMoeda(reqResumo.totalGeral.total)
+        this.totalEmPix = formataMoeda(reqResumo.totalGeral.PIX)
+        this.totalEmBoleto = formataMoeda(reqResumo.totalGeral.BOLETO)
+        this.totalEmCredito = formataMoeda(reqResumo.totalGeral.CREDIT_CARD)
+        this.totalPago = formataMoeda(reqResumo.totalPagos.total)
+        this.totalPagoPix = formataMoeda(reqResumo.totalPagos.PIX)
+        this.totalPagoBoleto = formataMoeda(reqResumo.totalPagos.BOLETO)
+        this.totalPagoCredito = formataMoeda(reqResumo.totalPagos.CREDIT_CARD)
+        this.totalAberto = formataMoeda(reqResumo.totalAberto.total)
+        this.totalAbertoPix = formataMoeda(reqResumo.totalAberto.PIX)
+        this.totalAbertoBoleto = formataMoeda(reqResumo.totalAberto.BOLETO)
+        this.totalAbertoCredito = formataMoeda(reqResumo.totalAberto.CREDIT_CARD)
+        this.totalACancelado = formataMoeda(reqResumo.totalACancelado.total)
+        this.totalACanceladoPix = formataMoeda(reqResumo.totalACancelado.PIX)
+        this.totalACanceladoBoleto = formataMoeda(reqResumo.totalACancelado.BOLETO)
+        this.totalACanceladoCredito = formataMoeda(reqResumo.totalACancelado.CREDIT_CARD)
         this.requisicao = request
         this.isLoad = 'false'
         console.log(reqResumo)
+        console.log(this.totalPago)
       }
           
          ''
@@ -121,10 +150,10 @@ export default {
     <br>
         <Loader :open="isLoad" />
         <div class="flex flex-wrap">
-            <CardDash size="4" cor="blue" variation="blue" text="Total em Doações" value="R$ 45900"/>
-            <CardDash size="4" cor="green" variation="green" text="Total Pago" value="R$ 3900"/>
-            <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto" value="R$ 1900"/>
-            <CardDash size="4" cor="red" variation="red" text="Total Vencido" value="R$ 900"/>
+            <CardDash size="4" cor="blue" variation="blue" text="Total em Doações" :value="totalEmDoacoes" :valuepix="totalEmPix" :valueboleto="totalEmBoleto" :valuecredito="totalEmCredito"/>
+            <CardDash size="4" cor="green" variation="green" text="Total Pago" :value="totalPago" :valuepix="totalPagoPix" :valueboleto="totalPagoBoleto" :valuecredito="totalPagoCredito"/>
+            <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto" :value="totalAberto" :valuepix="totalAbertoPix" :valueboleto="totalAbertoBoleto" :valuecredito="totalAbertoCredito"/>
+            <CardDash size="4" cor="red" variation="red" text="Total Vencido" :value="totalACancelado" :valuepix="totalACanceladoPix" :valueboleto="totalACanceladoBoleto" :valuecredito="totalACanceladoCredito"/>
             <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
             <Card2 value="??" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
