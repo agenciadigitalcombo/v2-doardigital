@@ -1,34 +1,34 @@
-export default function($div, data) {
+export default function ($div, data) {
   var options = {
     series: [{
-    name: 'Valor',
-    data: data.value
+      name: 'Valor',
+      data: data.value
     }],
-   
+
     chart: {
-    height: 350,
-    type: 'bar',
+      height: 350,
+      type: 'bar',
     },
     plotOptions: {
-    bar: {
-      borderRadius: 5,
-      columnWidth: '50%',
-    }
-    },  
+      bar: {
+        borderRadius: 5,
+        columnWidth: '50%',
+      }
+    },
     colors: ['#4792fc'],
     xaxis: {
-    labels: {
-      rotate: -15
-    },
-    categories: data.label,
-     
-    },
- 
-    title: {
-  },
-    };
+      labels: {
+        rotate: -15
+      },
+      categories: data.label,
 
-    var chart = new ApexCharts($div, options);
-    chart.render();
+    },
+
+    title: {
+    },
+  };
+
+  var chart = new ApexCharts($div, options);
+  chart.render();
 
 }

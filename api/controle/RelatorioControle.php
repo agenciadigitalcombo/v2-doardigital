@@ -44,8 +44,39 @@ class RelatorioControle extends Controle
                 "previsto" =>  $previsto,
                 "totalDoadores" => count($invoicesByDoador),
                 "donationByDay" => self::donationByDay($donations),
+                "totalGeral" => self::totalGeral($donations),
+                "totalPagos" => self::totalStatus($donations, ['RECEIVED','CONFIRMED'] ),
+                "totalAberto" => self::totalStatus($donations, ['PENDING'] ),
+                "totalACancelado" => self::totalStatus($donations, ['OVERDUE'] ),
+                
             ]
         );
+    }
+
+    static function totalStatus($donations, $status = []) {
+        $list = array_filter($donations, function($d) use ( $status) { 
+            return in_array( $d['status_pagamento'], $status); 
+        });
+        return self::totalGeral($list);
+    }
+
+    static function totalGeral($donations) {
+        $boleto = array_filter($donations, function($d) { return $d['tipo_pagamento'] == 'BOLETO'; });
+        $pix = array_filter($donations, function($d) { return $d['tipo_pagamento'] == 'PIX'; });
+        $card = array_filter($donations, function($d) { return $d['tipo_pagamento'] == 'CREDIT_CARD'; });
+        return [
+            "total" =>self::somaAll($donations),
+            "PIX" =>self::somaAll($pix),
+            "BOLETO" =>self::somaAll($boleto),
+            "CREDIT_CARD" =>self::somaAll($card),
+        ];
+    }
+
+    static function somaAll($donations) {
+        return array_reduce($donations, function($acc, $d) {
+            $acc = $acc + $d["valor"];
+            return $acc;
+        }, 0);
     }
 
     static function donationByDay($donations) {
