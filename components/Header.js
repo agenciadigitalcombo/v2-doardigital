@@ -24,6 +24,7 @@ export default {
         sair() {
             let jwt = new Jwt()
             jwt.logout()
+            localStorage.removeItem('institution')
             window.location.href = `//${window.location.host}/login`
         },
         setInstitution() {
