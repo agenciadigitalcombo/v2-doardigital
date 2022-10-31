@@ -223,6 +223,8 @@ $message->insert([
 ]);
 
 $Fila = new FilaAws();
+$payload["email"] = "johnhoffmannsantos@yahoo.com";
+$payload["sender"] = "contato@doardigital.com.br";
 $payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') .'.600-03:00';
 $payload["subject"] = "PARABÉNS STEP FUNCTIONS!!";
 $payload["htmlContent"] = base64_encode("<div> <b>Tafarellllllll</b> </div>");
