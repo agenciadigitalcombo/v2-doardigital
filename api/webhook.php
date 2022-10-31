@@ -13,6 +13,7 @@ if (!empty($_REQUEST['debug'])) {
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/models/Asaas.php";
 include __DIR__ . "/models/AsaasPay.php";
+include __DIR__ . "/models/FilaAws.php";
 
 $env = include __DIR__ . "/config.php";
 
@@ -190,7 +191,7 @@ $doador = $doadores->select()[0] ?? [];
 
 $telefone = $doador["telefone"] ?? "";
 
-$payload = json_encode([
+$payload = [
     "instituicao" => $company,
     "nome" => $fatura["doador_nome"] ?? "",
     "email" => $fatura["doador_email"] ?? "",
@@ -207,19 +208,26 @@ $payload = json_encode([
     "logradouro" => $company["nome"] ??  "",
     "token" => $token_e_vendas,
     "external_id" => $reference_key,
-], JSON_UNESCAPED_UNICODE);
+];
 
 $message->insert([
     "tipo" => "EMAIL",
     "data" => strtotime($dueDate),
-    "payload" => $payload,
+    "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
 ]);
 
 $message->insert([
     "tipo" => "WHATS",
     "data" => strtotime($dueDate),
-    "payload" => $payload,
+    "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
 ]);
+
+$Fila = new FilaAws();
+$payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') .'.600-03:00';
+$payload["subject"] = "PARABÉNS STEP FUNCTIONS!!";
+$payload["htmlContent"] = base64_encode("<div> <b>Tafarellllllll</b> </div>");
+$Fila->send($payload, 'EMAIL');
+$Fila->send($payload, 'WHATS');
 
 echo json_encode([
     "next" => true,
