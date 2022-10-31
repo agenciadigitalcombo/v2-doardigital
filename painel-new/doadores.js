@@ -1,6 +1,7 @@
 import Table from "../components/Table.js"
 import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
+import Bread from "../components/Bread.js"
 import Card from "../components/Card.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
@@ -34,6 +35,7 @@ export default {
         Table,
         Botao,
         BreadCrumb,
+        Bread,
         Card,
         FiltroDoador,
         Loader
@@ -101,7 +103,15 @@ export default {
     template: `
     <div>
     <Loader :open="isLoad" />
-    <BreadCrumb text="Home" text2="Doadores" />
+        <BreadCrumb text="Home" text2="Doadores" />
+        
+        <Bread :steps="[
+                ['home','#/'],
+                ['Contato','#/s'],
+                ['sobre','#/s'],
+                ['About','#/about'],
+            ]" 
+        />
 
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
