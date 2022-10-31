@@ -10,6 +10,7 @@ import ApiCarteira from "../components/apiCarteira.js"
 import status from "../components/status.js"
 import { data, formataMoeda, formatRecorrente } from "../components/format.js"
 import Loader from "../components/Loader.js"
+import Popup from "../components/popup.js"
 
 export default {
     data: function () {
@@ -53,7 +54,8 @@ export default {
         CardGeral,
         Table,
         BotaoGrupo,
-        Loader
+        Loader,
+        Popup
     },
     async mounted() {
         this.isLoad = 'true'
@@ -128,34 +130,49 @@ export default {
 
             this.error = request.message
 
+            window.location.reload()
+
         }
     },
     template: `
     <div>
-    <Loader :open="isLoad" />    
-        <BreadCrumb text="Home" text2="Carteira" />        
-        <div class="relative pt-10 pb-32 bg-[#fff]">
-            <div class="px-4 md:px-6 mx-auto w-full">
-                <div>
-                    <div class="flex flex-wrap">
-                    <Card text="Saldo Liberado" :value="saldo" variation="blue" icon="bar" size="3"/>
-                    <Card text="Saldo á liberar" :value="aLiberar" variation="yellow" size="3"/>
-                    <Card text="Total Já Sacado" :value="totalSacado" variation="green" icon="heart" size="3"/>
-                    <CardGeral text="Solicitação de Saque" size="quatro">
-                        <button @click="setValorTotal" class="mb-4 rounded-l px-6 py-2.5 bg-blue-800 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">Valor Total</button> <br>
-                        <p>Informe valor abaixo ou selecione valor total.</p>   
-                        <input v-model="price" class="rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 mb-4">
-                        <Botao :text="load ? 'Carregando...' : 'Solicitar Saque'" variation="green" @click="sacar"/>
-                        <div v-show="error">{{error}}</div>
-                        <br>
-                        <p>*Será cobrado o valor de R$5,00 por saque</p>
-                    </CardGeral>
-                    <CardGeral text="Histórico de Transferências" size="quatro">   
-                        <Table :rows="extrato" :cols="cols" pagination="10" step="1" />
-                    </CardGeral>
+        <Loader :open="isLoad" />    
+            <BreadCrumb text="Home" text2="Carteira" />        
+            <div class="relative pt-10 pb-32 bg-[#fff]">
+                <div class="px-4 md:px-6 mx-auto w-full">
+                    <div>
+                        <div class="flex flex-wrap">
+                        <Card text="Saldo Liberado" :value="saldo" variation="blue" icon="bar" size="3"/>
+                        <Card text="Saldo á liberar" :value="aLiberar" variation="yellow" size="3"/>
+                        <Card text="Total Já Sacado" :value="totalSacado" variation="green" icon="heart" size="3"/>
+                        <CardGeral text="Solicitação de Saque" size="quatro">
+                            <button @click="setValorTotal" class="mb-4 rounded-l px-6 py-2.5 bg-blue-800 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">Valor Total</button> <br>
+                            <p>Informe valor abaixo ou selecione valor total.</p>   
+                            <input v-model="price" class="rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 mb-4">
+
+
+
+                            <Popup 
+                            title="Solicitação de saque"
+                            description="Você realmente deseja realizar o saque?"
+                            text_close="Não"
+                            text_submit="Sim"
+                            text_btn="Solicitar saque"
+                            color="green"
+                            @submit="sacar"
+                            />
+
+
+                            <div v-show="error">{{error}}</div>
+                            <br>
+                            <p>*Será cobrado o valor de R$5,00 por saque</p>
+                        </CardGeral>
+                        <CardGeral text="Histórico de Transferências" size="quatro">   
+                            <Table :rows="extrato" :cols="cols" pagination="10" step="1" />
+                        </CardGeral>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>`,
+        </div>`,
 }
