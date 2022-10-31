@@ -7,10 +7,11 @@ import ApiInstitution from "./apiInstitution.js"
 export default {
     data: function() {
         return {
+            Inst: "",
             editInst: "",
             statusSubMenu: false,
             statusSubMenu1: false,
-            institution: null,
+            institution: '',
             list: []
         }
     },
@@ -36,6 +37,9 @@ export default {
     async mounted() {
         let jwt = new Jwt()
         let Inst = new ApiInstitution()
+        let MyInst = new MyInstitution()
+
+        this.Inst = MyInst.get()
         
         let ID = jwt.get().code
         let request = await Inst.list(ID)
@@ -43,8 +47,8 @@ export default {
 
         if(request.next) {
             this.list = request.payload
-
         }
+        this.institution = this.Inst
     },
     template : await getTemplate( './../components/Header' )
 }
