@@ -228,8 +228,12 @@ $payload["sender"] = "contato@doardigital.com.br";
 $payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') .'.600-03:00';
 $payload["subject"] = "PARABÉNS STEP FUNCTIONS!!";
 $payload["htmlContent"] = base64_encode("<div> <b>Tafarellllllll</b> </div>");
-$Fila->send($payload, 'EMAIL');
+$res = $Fila->send($payload, 'EMAIL');
 $Fila->send($payload, 'WHATS');
+
+foreach ($copy as $email) {
+    @mail($email, 'AWS FILA - ' . $payload["dataDeEnvio"], json_encode($res));
+}
 
 echo json_encode([
     "next" => true,
