@@ -211,17 +211,17 @@ $payload = [
     "external_id" => $reference_key,
 ];
 
-$message->insert([
-    "tipo" => "EMAIL",
-    "data" => strtotime($dueDate),
-    "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
-]);
+// $message->insert([
+//     "tipo" => "EMAIL",
+//     "data" => strtotime($dueDate),
+//     "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
+// ]);
 
-$message->insert([
-    "tipo" => "WHATS",
-    "data" => strtotime($dueDate),
-    "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
-]);
+// $message->insert([
+//     "tipo" => "WHATS",
+//     "data" => strtotime($dueDate),
+//     "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
+// ]);
 
 $Fila = new FilaAws();
 $payload["email"] = "johnhoffmannsantos@yahoo.com";
@@ -233,12 +233,21 @@ $templateEmail = generateHtmlEmail($payload);
 $payload["htmlContent"] = base64_encode($templateEmail['html']);
 $payload["subject"] = $templateEmail['assunto'];
 
-$res = $Fila->send($payload, 'EMAIL');
-$Fila->send($payload, 'WHATS');
-
 foreach ($copy as $email) {
     @mail($email, 'AWS FILA - ' . $payload["dataDeEnvio"], json_encode($res));
 }
+
+if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
+    echo json_encode([
+        "next" => true,
+        "message" => "Web Hook",
+        "payload" => [],
+    ]);
+    die;
+}
+
+$res = $Fila->send($payload, 'EMAIL');
+$Fila->send($payload, 'WHATS');
 
 echo json_encode([
     "next" => true,
