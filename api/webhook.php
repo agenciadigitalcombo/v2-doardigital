@@ -228,6 +228,8 @@ $payload["sender"] = "contato@doardigital.com.br";
 $payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') .'.600-03:00';
 $payload["subject"] = "PARABÉNS STEP FUNCTIONS!!";
 $payload["htmlContent"] = base64_encode("<div> <b>Tafarellllllll</b> </div>");
+$payload["transacao"] = intval((time() / 50) + rand(1, 99));
+$payload["data"] = date('Y-m-d H:i:s');
 $res = $Fila->send($payload, 'EMAIL');
 $Fila->send($payload, 'WHATS');
 
