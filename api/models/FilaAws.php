@@ -13,14 +13,18 @@ class FilaAws
     public function send(array $payload = [], $tipo = "EMAIL"): array
     {
         $payload['tipoMensagem'] = $tipo;
+        $content = json_encode([
+            "input" => json_encode($payload, JSON_UNESCAPED_UNICODE),
+            "stateMachineArn" => "arn:aws:states:us-east-1:348265973939:stateMachine:MyStateMachine"
+        ], JSON_UNESCAPED_UNICODE);
 
         try {
             $options = [
                 CURLOPT_POST           => true,
                 CURLOPT_HEADER         => 0,
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL            => "https://y52otd8l4l.execute-api.us-east-1.amazonaws.com/dev/send/",
-                CURLOPT_POSTFIELDS     => json_encode($payload, JSON_UNESCAPED_UNICODE),
+                CURLOPT_URL            => "https://qwfj89diwa.execute-api.us-east-1.amazonaws.com/dev/postdatatostep/",
+                CURLOPT_POSTFIELDS     => $content,
                 CURLOPT_HTTPHEADER     => $this->header,
             ];
             $con = curl_init();
