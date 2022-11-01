@@ -14,6 +14,7 @@ include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/models/Asaas.php";
 include __DIR__ . "/models/AsaasPay.php";
 include __DIR__ . "/models/FilaAws.php";
+include __DIR__ . "/webHookTemplateEmail.php";
 
 $env = include __DIR__ . "/config.php";
 
@@ -226,10 +227,12 @@ $Fila = new FilaAws();
 $payload["email"] = "johnhoffmannsantos@yahoo.com";
 $payload["sender"] = "contato@doardigital.com.br";
 $payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') . '.600-03:00';
-$payload["subject"] = "PARABÉNS STEP FUNCTIONS!!";
-$payload["htmlContent"] = base64_encode("<div> <b>Tafarellllllll</b> </div>");
 $payload["transacao"] = intval((time() / 50) + rand(1, 99));
 $payload["data"] = date('Y-m-d H:i:s');
+$templateEmail = generateHtmlEmail($payload);
+$payload["htmlContent"] = base64_encode($templateEmail['html']);
+$payload["subject"] = $templateEmail['assunto'];
+
 $res = $Fila->send($payload, 'EMAIL');
 $Fila->send($payload, 'WHATS');
 
