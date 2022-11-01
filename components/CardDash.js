@@ -2,7 +2,7 @@ import getTemplate from "./getTemplate.js"
 
 export default {
     props: ['link','text','value','variation','tax','icon','dashboard','size','cor', 'valuepix', 'valueboleto', 'valuecredito'],
-    template : await getTemplate( './../components/CardDash' ),
+    template : await getTemplate( './../components/cardDash' ),
     data: function() {
         return {
             sizes:{
