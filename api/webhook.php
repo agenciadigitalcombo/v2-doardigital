@@ -56,14 +56,14 @@ $billingType = $tipo;
 $event = $payload['event'];
 $whiteList = [
     "PAYMENT_CREATED",
-    "PAYMENT_UPDATED", 
-    "PAYMENT_CONFIRMED", 
-    "PAYMENT_RECEIVED", 
+    "PAYMENT_UPDATED",
+    "PAYMENT_CONFIRMED",
+    "PAYMENT_RECEIVED",
     "PAYMENT_OVERDUE",
     "PAYMENT_REFUNDED",
 ];
 
-if( !in_array($event,$whiteList) ) {
+if (!in_array($event, $whiteList)) {
     echo json_encode([
         "next" => false,
         "message" => "evento desconhecido",
@@ -72,7 +72,7 @@ if( !in_array($event,$whiteList) ) {
     die;
 }
 
-if( empty($reference_key) ) {
+if (empty($reference_key)) {
     echo json_encode([
         "next" => false,
         "message" => "É necessário um referencia",
@@ -96,7 +96,7 @@ $faturas->where([
 
 $fatura = $faturas->select()[0];
 
-if( empty($fatura) ) {
+if (empty($fatura)) {
     $subPrefix = "SUB_";
     $faturas->where([
         "external_fk" => $reference_key
@@ -139,7 +139,7 @@ $faturas->update([
     "status_pagamento" => $status,
     "data" => $dueDateInvoice,
     "valor" => $value,
-    "tipo_pagamento"=> $billingType,
+    "tipo_pagamento" => $billingType,
 ]);
 
 $sub->where([
@@ -185,7 +185,7 @@ $faturas->update([
 ]);
 
 $doadores->where([
-    "external_fk"=> $doador_fk
+    "external_fk" => $doador_fk
 ]);
 $doador = $doadores->select()[0] ?? [];
 
@@ -195,13 +195,13 @@ $payload = [
     "instituicao" => $company,
     "nome" => $fatura["doador_nome"] ?? "",
     "email" => $fatura["doador_email"] ?? "",
-    "telefone" => $telefone,
+    "telefone" => substr($telefone, 2, 20),
     "valor" => $fatura["valor"] ?? "",
-    "status_payment" => $subPrefix.''.$status,
+    "status_payment" => $subPrefix . '' . $status,
     "type_payment" => $tipo,
     "url" => $url,
     "code" => $code,
-    "ddd" => $telefone,
+    "ddd" => substr($telefone, 0, 2),
     "boleto_url" => $url,
     "url_pix" => $code,
     "code_boleto" => $code,
@@ -225,7 +225,7 @@ $message->insert([
 $Fila = new FilaAws();
 $payload["email"] = "johnhoffmannsantos@yahoo.com";
 $payload["sender"] = "contato@doardigital.com.br";
-$payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') .'.600-03:00';
+$payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') . '.600-03:00';
 $payload["subject"] = "PARABÉNS STEP FUNCTIONS!!";
 $payload["htmlContent"] = base64_encode("<div> <b>Tafarellllllll</b> </div>");
 $payload["transacao"] = intval((time() / 50) + rand(1, 99));
