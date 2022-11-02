@@ -162,34 +162,39 @@ export default {
             <Card2 text="Doadores Médios" :value="normal" variation="yellow" cor="yellow" icon="heart" size="4" />
             <Card2  text="Doadores Inadimplentes" :value="inadimplente" variation="red" cor="red" icon="inadimplente" size="4" />
             <Card2 text="Doações Previstas" :value="previsto" variation="blue" cor="blue" icon="heart" size="4" />
-            <CardGeral text="Faturamento" size="full">
+            <CardGeral text="Faturamento Anual" size="full">
             <div ref="GraphFaturamento"></div>
             </CardGeral>
-            <CardGeral text="Quantidade de Doações" size="full">
+            <CardGeral text="Quantidade de Doações este Mês" size="full">
 
             <div ref="quantidadeDoacoes"></div>
 
             </CardGeral>
-            <CardGeral text="Formas de Pagamentos" size="quatro">
 
-            <div ref="formasPagamentos"></div>
-
-            </CardGeral>
-            <CardGeral text="Quantidade por Planos" size="quatro"> 
-
-            <div ref="quantidadePlanos"></div>
-
-            </CardGeral>
-            <CardGeral text="Status das Doações" size="quatro">
+            <CardGeral text="Total em Status das Doações" size="quatro">
             <div id="chart" style="max-width: 760px;">
             <div ref="statusDoacoes"></div>
             </div>
             </CardGeral>
-            <CardGeral text="Tipos dos Doadores" size="quatro">
+            <CardGeral text="Total em Tipos de Doadores" size="quatro">
             <div id="chart" style="max-width: 760px;">
             <div ref="tiposDoadores"></div>
             </div>
             </CardGeral>
+
+            <CardGeral text="Total em Planos Aderidos" size="quatro"> 
+
+            <div ref="quantidadePlanos"></div>
+
+            </CardGeral>
+
+            <CardGeral text="Total em Formas de Pagamentos" size="quatro">
+
+            <div ref="formasPagamentos"></div>
+
+            </CardGeral>
+            
+            
             
 
         </div>

@@ -9,6 +9,7 @@ import { data, formataMoeda, formatRecorrente, formatTipoPagamento } from "../co
 import Filtro from "../components/Filtro.js"
 import CardGeral from "../components/CardGeral.js"
 import Loader from "../components/Loader.js"
+import Bread from "../components/Bread.js"
 
 export default {
     data: function () {
@@ -40,7 +41,8 @@ export default {
         Card,
         Filtro,
         CardGeral, 
-        Loader
+        Loader,
+        Bread
     },
     async mounted() {
         this.isLoad = 'true'
@@ -200,6 +202,11 @@ export default {
     template: `
     <div>
         <Loader :open="isLoad" />
+        <Bread :steps="[
+            ['Home','#/dashboard'],
+            ['Doações','#/s'],
+        ]" 
+        />
         <BreadCrumb text="Home" text2="Doações" />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
