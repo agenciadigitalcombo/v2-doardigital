@@ -113,6 +113,7 @@ export default {
                 new Select('tipo', 'Tipo', 2, [
                     new Option('BOLETO', 'Boleto'),
                     new Option('PIX', 'Pix'),
+                    new Option('CREDIT_CARD', 'Cartão'),
                 ], true, this.info.tipo_pagamento),
                 new Button('Modificar'),
             ]
