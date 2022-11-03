@@ -577,9 +577,35 @@ class InstituicaoControle extends Controle
         $sub_fk = $_REQUEST["sub_fk"];
         $inst = new Instituicao();
         $asa_cliente = new AsaasCliente();
+
+        $sub = new Banco();
+        $sub->table('assinatura');
+        $sub->where([
+            "subscription_fk" => $sub_fk
+        ]);
+        $subscription = $sub->select()[0];
+        $external_fk = $subscription["external_fk"];
+
+        $invoice = new Banco();
+        $invoice->table('fatura');
+        $invoice->where([
+            "external_fk" => $external_fk,
+            "status_pagamento" => "PENDING"
+        ]);
+        $listInvoice = $invoice->select();
+        unset($listInvoice[0]);
+        $listInvoice = array_values($listInvoice);
+        foreach( $listInvoice as $i ) {
+            $invoice->where([
+                "id" => $i["id"],
+            ]);
+            $invoice->delete();
+        }
+
         $key_asa = $inst->get_key($institution_fk);
         $asa_cliente->set_api_key($key_asa);
         $res_asa = $asa_cliente->cancel($sub_fk);
+
         self::printSuccess(
             "Cancelado com sucesso",
             $res_asa
