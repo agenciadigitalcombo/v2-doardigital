@@ -58,8 +58,8 @@ class AsaasCliente extends Asaas
     {
         return $this->get("/subscriptions", [
             "customer" => $customer_id,
-            "limit" => '100',
-            "includeDeleted" => 'true',
+            // "limit" => '100',
+            // "includeDeleted" => 'true',
         ]);
     }
 
