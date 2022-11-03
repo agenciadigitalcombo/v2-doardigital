@@ -57,7 +57,7 @@ class AsaasCliente extends Asaas
     public function subsByCustomer($customer_id): array
     {
         return $this->get("/subscriptions", [
-            "customer_id" => $customer_id,
+            "customer" => $customer_id,
             "limit" => '100',
             "includeDeleted" => 'true',
         ]);
