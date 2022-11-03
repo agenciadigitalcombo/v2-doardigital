@@ -35,7 +35,7 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Domínio Personalizado" size="5" class="text-center content-center">
+                <CardGeral text="Domínio Personalizado" size="dois" class="text-center content-center">
                 
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
@@ -44,7 +44,7 @@ export default {
                 <Botao text="Configurar" variation="blue" link="#/dominio-personalizado"/>            
                 </CardGeral>
             
-                <CardGeral text="Configuração E-mail" size="5" class="text-center content-center">
+                <CardGeral text="Configuração E-mail" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
                 </section>
@@ -52,7 +52,7 @@ export default {
                 <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
                 </CardGeral>
             
-                <CardGeral text="Disparo Whats" size="5" class="text-center content-center">
+                <CardGeral text="Disparo Whats" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/634e600666c2e1666080774.png">
                 </section>
@@ -60,7 +60,7 @@ export default {
                 <Botao text="Configurar" variation="blue" link="#/configuracao-whats"/>  
                 </CardGeral>
             
-                <CardGeral text="RD Station" size="5" class="text-center content-center">
+                <CardGeral text="RD Station" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
                 </section>
@@ -68,7 +68,7 @@ export default {
                 <Botao text="Configurar" variation="bg-blue-600" link="#/rd-station"/>   
                 </CardGeral>
 
-                <CardGeral text="Scripts" size="5" class="text-center content-center">
+                <CardGeral text="Scripts" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
                 </section>

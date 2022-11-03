@@ -19,6 +19,11 @@ export default {
                 seis: "w-full md:w-1/2 xl:w-5/6 p-6",
                 sete: "w-full md:w-1/2 xl:w-full p-6",
                 full: "w-full p-6",
+                2: "w-full lg:w-6/12 xl:w-6/12 px-4",
+                3: "w-full lg:w-4/12 xl:w-4/12 px-4",
+                4: "w-full lg:w-3/12 xl:w-3/12 px-4",
+                5: "w-full p-6 lg:w-1/2 xl:w-1/5 px-4",
+                6: "w-full lg:w-2/12 xl:w-2/12 px-4",
 
             },
             variations:{
