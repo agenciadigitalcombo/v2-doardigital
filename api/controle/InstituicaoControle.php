@@ -435,7 +435,7 @@ class InstituicaoControle extends Controle
             $acc[$d['external_fk']] = $d['cpf'];
             return $acc;
         }, []);
-        
+
         $allFk = array_reduce($allDoador, function ($acc, $d) {
             $acc[$d['external_fk']] = $d['pagamento_fk'];
             return $acc;
@@ -593,9 +593,10 @@ class InstituicaoControle extends Controle
             "status_pagamento" => "PENDING"
         ]);
         $listInvoice = $invoice->select();
+        $defaultInvoice = $listInvoice[0];
         unset($listInvoice[0]);
         $listInvoice = array_values($listInvoice);
-        foreach( $listInvoice as $i ) {
+        foreach ($listInvoice as $i) {
             $invoice->where([
                 "id" => $i["id"],
             ]);
@@ -605,6 +606,15 @@ class InstituicaoControle extends Controle
         $key_asa = $inst->get_key($institution_fk);
         $asa_cliente->set_api_key($key_asa);
         $res_asa = $asa_cliente->cancel($sub_fk);
+
+        $Fila = new FilaAws();
+        $Fila->send([
+            "email" => $defaultInvoice['doador_email'],
+            "sender" => "contato@doardigital.com.br",
+            "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
+            "htmlContent" => base64_encode("<div>confirmação de cancelamento</div>"),
+            "subject" => 'Cancelamento assinatura'
+        ], 'EMAIL');
 
         self::printSuccess(
             "Cancelado com sucesso",
@@ -648,7 +658,7 @@ class InstituicaoControle extends Controle
             $res_asa
         );
     }
-    
+
     static function faturaUpdate()
     {
 
@@ -689,4 +699,3 @@ class InstituicaoControle extends Controle
         );
     }
 }
-
