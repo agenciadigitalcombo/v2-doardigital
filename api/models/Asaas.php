@@ -112,9 +112,7 @@ class Asaas
             $ex = curl_exec($con);
             $info = curl_getinfo($con);
             curl_close($con);
-            $response = json_decode($ex, true);
-            $response["full_uri"] = $full_path;
-            return $response;
+            return json_decode($ex, true);
         } catch (\Throwable $th) {
             echo json_encode([
                 "next" => false,
