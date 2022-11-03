@@ -35,54 +35,48 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Domínio Personalizado" size="tres" class="text-center content-center">
+                <CardGeral text="Domínio Personalizado" size="dois" class="text-center content-center">
                 
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>            
+                <Botao text="Configurar" variation="blue" link="#/dominio-personalizado"/>            
                 </CardGeral>
             
-                <CardGeral text="Configuração E-mail" size="tres" class="text-center content-center">
+                <CardGeral text="Configuração E-mail" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
+                <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
                 </CardGeral>
             
-                <CardGeral text="Tag Manager" size="tres" class="text-center content-center">
-                <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
-                </section>
-                <br>
-                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
-                </CardGeral>
-            
-                <CardGeral text="Disparo Whats" size="tres" class="text-center content-center">
+                <CardGeral text="Disparo Whats" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/634e600666c2e1666080774.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>  
+                <Botao text="Configurar" variation="blue" link="#/configuracao-whats"/>  
                 </CardGeral>
             
-                <CardGeral text="RD Station" size="tres" class="text-center content-center">
+                <CardGeral text="RD Station" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="bg-blue-600" link="#/criar-instituicao"/>   
+                <Botao text="Configurar" variation="bg-blue-600" link="#/rd-station"/>   
                 </CardGeral>
-            
-                <CardGeral text="SES AWS" size="tres" class="text-center content-center">
+
+                <CardGeral text="Scripts" size="dois" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/criar-instituicao"/>   
+                <Botao text="Configurar" variation="blue" link="#/scripts"/>   
                 </CardGeral>
+            
+               
                         
                 </div>
              </div>
