@@ -612,9 +612,9 @@ class InstituicaoControle extends Controle
 
         $Fila = new FilaAws();
         $texto = "
-            Que pena que você não esta mais conosco. <br/>
-            Agradecemos pelo seu apoio ate aqui. <br/>
-            Caso vc receba algum email de cobrança por favor desconsidere. <br/>
+            Que pena que você não esta mais conosco. <br/> <br/>
+            Agradecemos pelo seu apoio ate aqui. <br/> <br/>
+            Caso vc receba algum email de cobrança por favor desconsidere. <br/> <br/>
         ";
 
         $template = get_template('default');
@@ -664,6 +664,14 @@ class InstituicaoControle extends Controle
             "htmlContent" => base64_encode($blade),
             "subject" => 'Seu cancelamento foi realizado com sucesso'
         ], 'EMAIL');
+
+        $Fila->send([
+            "email" => $defaultInvoice['doador_email'],
+            "sender" => "contato@doardigital.com.br",
+            "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
+            "htmlContent" => base64_encode($blade),
+            "subject" => 'Seu cancelamento foi realizado com sucesso'
+        ], 'WHATS');
 
         self::printSuccess(
             "Cancelado com sucesso",
