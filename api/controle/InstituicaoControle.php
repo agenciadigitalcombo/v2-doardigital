@@ -671,6 +671,8 @@ class InstituicaoControle extends Controle
         $payload["dataDeEnvio"] = date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00';
         $payload["htmlContent"] = base64_encode($blade);
         $payload["subject"] = 'Seu cancelamento foi realizado com sucesso';
+        $payload["transacao"] = intval((time() / 50) + rand(1, 99));
+        $payload["data"] = date('Y-m-d H:i:s');
         $Fila->send($payload , 'WHATS');
 
         self::printSuccess(
