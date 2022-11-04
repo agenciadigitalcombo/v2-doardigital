@@ -612,9 +612,19 @@ class InstituicaoControle extends Controle
 
         $Fila = new FilaAws();
         $texto = "
-            Que pena que você não esta mais conosco. <br/> <br/>
-            Agradecemos pelo seu apoio ate aqui. <br/> <br/>
-            Caso vc receba algum email de cobrança por favor desconsidere. <br/> <br/>
+        Olá {NOME} paz e bem!
+
+        Estamos passando para avisar que sua doação mensal acabou de ser cancelada definitivamente.
+        
+        Caso queira voltar a nos ajudar, agora precisa fazer uma nova doação.
+        
+        Pedimos perdão pelas falhas que tivemos nesse meio tempo pois estamos buscando melhorar a cada dia.
+        
+        Caso você ainda receba alguma mensagem pode desconsiderar, pois ela seria refente a algo que já estava lançado no sistema, mas agora sem validade nenhuma.
+        
+        Gratidão pelo tempo que você esteve conosco.
+        
+        Deus te abençoe poderosamente!
         ";
 
         $template = get_template('default');

@@ -204,10 +204,9 @@ export default {
         <Loader :open="isLoad" />
         <Bread :steps="[
             ['Home','#/dashboard'],
-            ['Doações','#/s'],
+            ['Doações'],
         ]" 
         />
-        <BreadCrumb text="Home" text2="Doações" />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
