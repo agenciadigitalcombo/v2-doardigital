@@ -573,7 +573,7 @@ class InstituicaoControle extends Controle
             "sub_fk" => "Informe a subscrição",
         ]);
         self::privateRouter();
-        include __DIR__ . "/webHookTemplateEmail.php";
+        include __DIR__ . "/../webHookTemplateEmail.php";
         $institution_fk = $_REQUEST["institution_fk"];
         $sub_fk = $_REQUEST["sub_fk"];
         $inst = new Instituicao();
