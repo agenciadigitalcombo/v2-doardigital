@@ -573,10 +573,13 @@ class InstituicaoControle extends Controle
             "sub_fk" => "Informe a subscrição",
         ]);
         self::privateRouter();
+        include __DIR__ . "/webHookTemplateEmail.php";
         $institution_fk = $_REQUEST["institution_fk"];
         $sub_fk = $_REQUEST["sub_fk"];
         $inst = new Instituicao();
         $asa_cliente = new AsaasCliente();
+        $doador = new Doador();
+        $integrate = new Integration();
 
         $sub = new Banco();
         $sub->table('assinatura');
@@ -608,12 +611,58 @@ class InstituicaoControle extends Controle
         $res_asa = $asa_cliente->cancel($sub_fk);
 
         $Fila = new FilaAws();
+        $texto = "
+            Que pena que você não esta mais conosco. <br/>
+            Agradecemos pelo seu apoio ate aqui. <br/>
+            Caso vc receba algum email de cobrança por favor desconsidere. <br/>
+        ";
+
+        $template = get_template('default');
+        $template = str_replace("{my_content}", $texto, $template);
+
+        $fatura = $defaultInvoice;
+        $company = $inst->info($institution_fk);
+        $contribuidor = $doador->detalhe($fatura['doador_fk']);
+        $evendas = $integrate->info($institution_fk, 'EVENDAS');
+        
+
+        $payload = [
+            "instituicao" => $company,
+            "nome" => $contribuidor["nome"] ?? "",
+            "email" => $contribuidor["email"] ?? "",
+            "telefone" => substr($contribuidor["telefone"], 2, 20),
+            "valor" => $fatura["valor"] ?? "",
+            "status_payment" => 'CANCEL_ASSINATURA',
+            "type_payment" => $fatura["status_pagamento"],
+            "url" => $fatura["url"],
+            "code" => $fatura["codigo"],
+            "ddd" => substr($contribuidor["telefone"], 0, 2),
+            "boleto_url" => $fatura["url"],
+            "url_pix" => $fatura["codigo"],
+            "code_boleto" => $fatura["codigo"],
+            "logradouro" => $company["nome"] ??  "",
+            "token" => $evendas['key_1'],
+            "external_id" => $fatura["external_fk"],
+        ];
+
+        $content = (array)$payload;
+
+        foreach ($content as $index => $cont) {
+            if (is_array($cont)) {
+                foreach ($cont as $k => $v) {
+                    $content["{$index}_{$k}"] = $v;
+                }
+            }
+        }
+
+        $blade = blade($content, $template);
+
         $Fila->send([
             "email" => $defaultInvoice['doador_email'],
             "sender" => "contato@doardigital.com.br",
             "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
-            "htmlContent" => base64_encode("<div>confirmação de cancelamento</div>"),
-            "subject" => 'Cancelamento assinatura'
+            "htmlContent" => base64_encode($blade),
+            "subject" => 'Seu cancelamento foi realizado com sucesso'
         ], 'EMAIL');
 
         self::printSuccess(
