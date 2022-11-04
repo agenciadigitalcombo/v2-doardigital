@@ -13,10 +13,12 @@ import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import ApiDoadores from "../components/apiDoadores.js"
 import Popup from "../components/popup.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             customer: null,
             assinatura_open: [],
             inputs: "",
@@ -64,9 +66,12 @@ export default {
         CardCarteira,
         CardGeral,
         Botao,
+        Loader,
         Popup,
     },
     async mounted() {
+
+        this.isLoad = 'true'
 
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
@@ -119,6 +124,8 @@ export default {
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
+
+        this.isLoad = 'false'
 
 
     },
@@ -189,7 +196,7 @@ export default {
    
     <BreadCrumb text="Home" text2="Detalhe Assinatura" />
    
-       
+    <Loader :open="isLoad" />   
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
@@ -218,8 +225,16 @@ export default {
                     <br>
                     <h2 class="text-gray-500">Próxima Cobrança em:</h2>
                     <p>{{ formatData( info.proxima ) }} </p>
-                    <br>
-                    
+                    <br><br>
+                    <Popup 
+                title="Cancelar Assinatura"
+                description="Você deseja realmente cancelar a assinatura?"
+                text_close="Não"
+                text_submit="Sim"
+                text_btn="Cancelar assinatura"
+                color="red"
+                @submit="popConfirm"
+                />
                     
                 </CardGeral>
                 <CardGeral text="Modificar Assinatura" size="quatro">
@@ -232,15 +247,8 @@ export default {
                 <br><br>
                 
                 </CardGeral>
-                <Popup 
-                title="Cancelar Assinatura"
-                description="Você deseja realmente cancelar a assinatura?"
-                text_close="Não"
-                text_submit="Sim"
-                text_btn="Cancelar assinatura"
-                color="red"
-                @submit="popConfirm"
-                />
+                
+               
                 
 
     </div>`,

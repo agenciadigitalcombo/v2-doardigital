@@ -20,7 +20,7 @@ export default {
             cores:{
                 blue: "rounded-md bg-gradient-to-b from-blue-600 to-blue-200 p-5 pb-44 text-white",
                 green: "rounded-md bg-gradient-to-b from-[#16a34a] to-[#50cd89] p-5 pb-44 text-white",           
-                yellow: "rounded-md bg-gradient-to-b from-[#ffc700] to-[#ca8a04] p-5 pb-44 text-white", 
+                yellow: "rounded-md bg-gradient-to-b from-[#ca8a04] to-[#ffc700] p-5 pb-44 text-white", 
                 red: "rounded-md bg-gradient-to-b from-[#dc2626] to-[#fed4d4] p-5 pb-44 text-white", 
                 purple: "rounded-md bg-[#0006] p-5 pb-44 text-white", 
              }

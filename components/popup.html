@@ -1,4 +1,5 @@
-<button type="button" :class="`px-6
+<div class="">
+    <button type="button" :class="`px-6
     py-2.5
     bg-${color}-600
     text-white
@@ -13,9 +14,12 @@
     active:bg-${color}-800 active:shadow-lg
     transition
     duration-150
-    ease-in-out`" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    ease-in-out
+    content-end`" data-bs-toggle="modal" data-bs-target="#exampleModal">
   {{text_btn}}
 </button>
+</div>
+
 
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"

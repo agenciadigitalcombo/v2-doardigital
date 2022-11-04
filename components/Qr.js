@@ -2,9 +2,11 @@ export default {
     props: ['qr'],
     template: `
         <div ref="print_qr"> </div>
-        <span @click="baixar" class="mt-8 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-            Fazer Download
-        </span>
+        <br>
+        <button @click="baixar" class="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none inline-flex items-center">
+            <i class="fa-solid fa-download"></i>
+            <span class="ml-2">Download</span>
+        </button>
     `,
     data: function () {
         return {

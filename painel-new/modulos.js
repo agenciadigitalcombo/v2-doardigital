@@ -41,7 +41,7 @@ export default {
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/dominio-personalizado"/>            
+                <Botao text="Configurar" variation="blueNot" />            
                 </CardGeral>
             
                 <CardGeral text="Configuração E-mail" size="5" class="text-center content-center">
@@ -57,7 +57,7 @@ export default {
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/634e600666c2e1666080774.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/configuracao-whats"/>  
+                <Botao text="Configurar" variation="blueNot" />  
                 </CardGeral>
             
                 <CardGeral text="RD Station" size="5" class="text-center content-center">
@@ -65,7 +65,7 @@ export default {
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="bg-blue-600" link="#/rd-station"/>   
+                <Botao text="Configurar" variation="blueNot" />   
                 </CardGeral>
 
                 <CardGeral text="Scripts" size="5" class="text-center content-center">
@@ -73,7 +73,7 @@ export default {
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/scripts"/>   
+                <Botao text="Configurar" variation="blueNot">   
                 </CardGeral>
             
                
