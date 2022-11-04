@@ -665,13 +665,13 @@ class InstituicaoControle extends Controle
             "subject" => 'Seu cancelamento foi realizado com sucesso'
         ], 'EMAIL');
 
-        $Fila->send([
-            "email" => $defaultInvoice['doador_email'],
-            "sender" => "contato@doardigital.com.br",
-            "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
-            "htmlContent" => base64_encode($blade),
-            "subject" => 'Seu cancelamento foi realizado com sucesso'
-        ], 'WHATS');
+   
+        $payload["email"] = $defaultInvoice['doador_email'];
+        $payload["sender"] = "contato@doardigital.com.br";
+        $payload["dataDeEnvio"] = date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00';
+        $payload["htmlContent"] = base64_encode($blade);
+        $payload["subject"] = 'Seu cancelamento foi realizado com sucesso';
+        $Fila->send($payload , 'WHATS');
 
         self::printSuccess(
             "Cancelado com sucesso",

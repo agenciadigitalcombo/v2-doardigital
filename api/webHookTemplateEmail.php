@@ -57,7 +57,7 @@ function generateHtmlEmail($payload) {
     $subject = $payload["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
     $my_content = $bodyPerson[0]["content"];
 
-    $my_content = str_replace("\n","<br >", $my_content);
+    $my_content = str_replace("\n","<br /> <br />", $my_content);
     $template = str_replace("{my_content}", $my_content, $template);
 
     unset($content["instituicao"]);
