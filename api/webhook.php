@@ -98,7 +98,7 @@ $faturas->where([
 $fatura = $faturas->select()[0];
 
 if (empty($fatura)) {
-    $subPrefix = "SUB_";
+    $subPrefix = "_SIGNATURE";
     $faturas->where([
         "external_fk" => $reference_key
     ]);
@@ -198,8 +198,8 @@ $payload = [
     "email" => $fatura["doador_email"] ?? "",
     "telefone" => substr($telefone, 2, 20),
     "valor" => $fatura["valor"] ?? "",
-    "status_payment" => $subPrefix . '' . $status,
-    "type_payment" => $tipo,
+    "status_payment" => $status,
+    "type_payment" => $tipo .''. $subPrefix,
     "url" => $url,
     "code" => $code,
     "ddd" => substr($telefone, 0, 2),

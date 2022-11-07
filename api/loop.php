@@ -92,6 +92,8 @@ if ($action["tipo"] == "EMAIL") {
     $status_payment = $content["status_payment"] ?? "";
     $institution_fk = $content["instituicao_institution_fk"] ?? "";
 
+    
+
     $templateEmail = new Banco();
     $templateEmail->table("template_email");
     $templateEmail->where([
