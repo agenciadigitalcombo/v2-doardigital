@@ -113,7 +113,7 @@ if (empty($fatura)) {
         "valor" => $copy["valor"] ?? "",
         "codigo" => $copy["codigo"] ?? "",
         "url" => $url ?? "",
-        "data" => $dueDate,
+        "data" => $copy["tipo_pagamento"] != "CREDIT_CARD" ? $dueDate : $dueDateInvoice,
         "hora" => $copy["hora"] ?? "",
         "doador_fk" => $copy["doador_fk"] ?? "",
         "doador_nome" => $copy["doador_nome"] ?? "",
