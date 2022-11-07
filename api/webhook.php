@@ -227,7 +227,7 @@ $Fila = new FilaAws();
 
 
 @$mailActive = $company['mailActive'] ?? 0;
-@$emailInst = $company['email'] ?? "contato@doardigital.com.br";
+@$emailInst = $company['mailSender'] ?? "contato@doardigital.com.br";
 
 $payload["sender"] = $mailActive == "1" ? $emailInst : "contato@doardigital.com.br";
 $payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') . '.600-03:00';
