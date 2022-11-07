@@ -428,6 +428,15 @@ class InstituicaoControle extends Controle
         $fatura = new Fatura();
         $faturas = $fatura->listAll($institution_fk);
 
+        $ass = new Banco();
+        $ass->table('assinatura');
+        $assAll = $ass->select();
+      
+        $assByRef = array_reduce($assAll, function ($acc, $a) {
+            $acc[$a['external_fk']] = $a['subscription_fk'];
+            return $acc;
+        }, []);
+
         $doador = new Banco();
         $doador->table('doador');
         $allDoador = $doador->select();
@@ -441,9 +450,10 @@ class InstituicaoControle extends Controle
             return $acc;
         }, []);
 
-        $faturas = array_map(function ($charge) use ($assinantes, $allCpf, $allFk) {
+        $faturas = array_map(function ($charge) use ($assinantes, $allCpf, $allFk, $assByRef) {
             $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
             $charge["cpf"] = $allCpf[$charge["doador_fk"]];
+            @$charge["assinatura_fk"] = $assByRef[$charge["external_fk"]] ?? null;
             $charge["pagamento_fk"] = $allFk[$charge["doador_fk"]];
             return $charge;
         }, $faturas);
