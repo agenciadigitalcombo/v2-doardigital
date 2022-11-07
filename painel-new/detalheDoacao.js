@@ -175,8 +175,9 @@ export default {
                     <br>
                     <h2 class="text-gray-500">Recorrente</h2>
                     <div v-show="info.recorrente === true">
-                  
-                    <p>{{ formatRecorrente( info.recorrente ) }}</p>
+                    <a :href="'#/detalhe-assinatura?sub_id='+info.assinatura_fk+'&doador_fk='+info.doador_fk">
+                    <p>{{ formatRecorrente( info.recorrente ) }}</p> 
+                    </a>
                     </div>
                     <div v-show="info.recorrente === false">
                   
