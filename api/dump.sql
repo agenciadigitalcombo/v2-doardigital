@@ -201,5 +201,6 @@ CREATE TABLE message_aws (
     doador_fk VARCHAR(255),
     fatura_fk VARCHAR(255),
     ref_fk VARCHAR(255),
-    execution_arn VARCHAR(255)
+    execution_arn VARCHAR(255),
+    institution_fk VARCHAR(255)
 );

@@ -266,6 +266,7 @@ $menAws->insert([
     "fatura_fk" => $ID,
     "ref_fk" => $reference_key,
     "execution_arn" => $resEmail['executionArn'],
+    "institution_fk" => $institution_fk,
 ]);
 
 $menAws->table('message_aws');
@@ -277,6 +278,7 @@ $menAws->insert([
     "fatura_fk" => $ID,
     "ref_fk" => $reference_key,
     "execution_arn" => $resWhats['executionArn'],
+    "institution_fk" => $institution_fk,
 ]);
 
 echo json_encode([
