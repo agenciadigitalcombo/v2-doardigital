@@ -192,3 +192,14 @@ CREATE TABLE message (
     response LONGTEXT, -- resposta do evendas e do send blue
     payload JSON
 );
+
+CREATE TABLE message_aws (
+    id int not null auto_increment primary key,
+    tipo VARCHAR(255),
+    status VARCHAR(255),
+    data VARCHAR(255),
+    doador_fk VARCHAR(255),
+    fatura_fk VARCHAR(255),
+    ref_fk VARCHAR(255),
+    execution_arn VARCHAR(255)
+);

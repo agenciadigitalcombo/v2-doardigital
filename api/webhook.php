@@ -249,16 +249,40 @@ if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
     die;
 }
 
-$res = $Fila->send($payload, 'EMAIL');
-$Fila->send($payload, 'WHATS');
+$resEmail = $Fila->send($payload, 'EMAIL');
+$resWhats = $Fila->send($payload, 'WHATS');
 
 foreach ($copy as $email) {
     @mail($email, 'AWS FILA - ' . $payload["dataDeEnvio"], json_encode($res));
 }
 
+$menAws = new Banco();
+$menAws->table('message_aws');
+$menAws->insert([
+    "tipo" => 'EMAIL',
+    "status" => 'Succeeded',
+    "data" => $payload["dataDeEnvio"],
+    "doador_fk" => $doador_fk,
+    "fatura_fk" => $ID,
+    "ref_fk" => $reference_key,
+    "execution_arn" => $resEmail['executionArn'],
+]);
+
+$menAws->table('message_aws');
+$menAws->insert([
+    "tipo" => 'WHATS',
+    "status" => 'Succeeded',
+    "data" => $payload["dataDeEnvio"],
+    "doador_fk" => $doador_fk,
+    "fatura_fk" => $ID,
+    "ref_fk" => $reference_key,
+    "execution_arn" => $resWhats['executionArn'],
+]);
+
 echo json_encode([
     "next" => true,
     "message" => "Web Hook",
     "payload" => [],
-    "resAws" => $res,
+    "resAwsWhats" => $resWhats,
+    "resAwsEmail" => $resEmail,
 ]);
