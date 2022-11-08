@@ -136,10 +136,13 @@ $token_e_vendas = $e_vendas->select()[0] ?? [];
 
 $token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 
+$faturas->where([
+    "fatura_id" => $ID
+]);
 $faturas->update([
     "status_pagamento" => $status,
     "data" => $dueDate,
-    "valor" => $value,
+    "valor" => (float) $value,
     "tipo_pagamento" => $billingType,
 ]);
 
