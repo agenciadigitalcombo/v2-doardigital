@@ -260,4 +260,5 @@ echo json_encode([
     "next" => true,
     "message" => "Web Hook",
     "payload" => [],
+    "resAws" => $res,
 ]);
