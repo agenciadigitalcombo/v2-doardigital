@@ -138,7 +138,7 @@ $token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 
 $faturas->update([
     "status_pagamento" => $status,
-    "data" => $dueDateInvoice,
+    "data" => $dueDate,
     "valor" => $value,
     "tipo_pagamento" => $billingType,
 ]);
