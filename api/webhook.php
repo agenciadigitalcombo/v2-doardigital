@@ -113,7 +113,7 @@ if (empty($fatura)) {
         "valor" => $copy["valor"] ?? "",
         "codigo" => $copy["codigo"] ?? "",
         "url" => $url ?? "",
-        "data" => $copy["tipo_pagamento"] != "CREDIT_CARD" ? $dueDateInvoice : $dueDate,
+        "data" => $copy["tipo_pagamento"] == "CREDIT_CARD" ? $dueDateInvoice : $dueDate,
         "hora" => $copy["hora"] ?? "",
         "doador_fk" => $copy["doador_fk"] ?? "",
         "doador_nome" => $copy["doador_nome"] ?? "",
@@ -165,8 +165,6 @@ $carteira_fk = $company["carteira_fk"] ?? "";
 $pay->set_api_key($carteira_fk);
 
 $code = null;
-
-
 
 if ($tipo == "PIX") {
     $resCode = $pay->getCodePix($ID);
