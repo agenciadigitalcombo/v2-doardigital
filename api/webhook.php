@@ -238,9 +238,7 @@ $templateEmail = generateHtmlEmail($payload);
 $payload["htmlContent"] = base64_encode($templateEmail['html']);
 $payload["subject"] = $templateEmail['assunto'];
 
-foreach ($copy as $email) {
-    @mail($email, 'AWS FILA - ' . $payload["dataDeEnvio"], json_encode($res));
-}
+
 
 if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
     echo json_encode([
@@ -253,6 +251,10 @@ if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
 
 $res = $Fila->send($payload, 'EMAIL');
 $Fila->send($payload, 'WHATS');
+
+foreach ($copy as $email) {
+    @mail($email, 'AWS FILA - ' . $payload["dataDeEnvio"], json_encode($res));
+}
 
 echo json_encode([
     "next" => true,
