@@ -73,14 +73,14 @@ if (!in_array($event, $whiteList)) {
     die;
 }
 
-if (empty($reference_key)) {
-    echo json_encode([
-        "next" => false,
-        "message" => "É necessário um referencia",
-        "payload" => []
-    ]);
-    die;
-}
+// if (empty($reference_key)) {
+//     echo json_encode([
+//         "next" => false,
+//         "message" => "É necessário um referencia",
+//         "payload" => []
+//     ]);
+//     die;
+// }
 
 $title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
