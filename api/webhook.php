@@ -73,14 +73,14 @@ if (!in_array($event, $whiteList)) {
     die;
 }
 
-// if (empty($reference_key)) {
-//     echo json_encode([
-//         "next" => false,
-//         "message" => "É necessário um referencia",
-//         "payload" => []
-//     ]);
-//     die;
-// }
+if (empty($reference_key)) {
+    echo json_encode([
+        "next" => false,
+        "message" => "É necessário um referencia",
+        "payload" => []
+    ]);
+    die;
+}
 
 $title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
@@ -136,10 +136,13 @@ $token_e_vendas = $e_vendas->select()[0] ?? [];
 
 $token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 
-$faturas->where([
+sleep(1);
+$fa = new Banco();
+$fa->table("fatura");
+$fa->where([
     "fatura_id" => $ID
 ]);
-$faturas->update([
+$fa->update([
     "status_pagamento" => $status,
     "data" => $dueDate,
     "valor" => (float) $value,
@@ -200,7 +203,7 @@ $payload = [
     "telefone" => substr($telefone, 2, 20),
     "valor" => $fatura["valor"] ?? "",
     "status_payment" => $status,
-    "type_payment" => $tipo .''. $subPrefix,
+    "type_payment" => $tipo . '' . $subPrefix,
     "url" => $url,
     "code" => $code,
     "ddd" => substr($telefone, 0, 2),
@@ -212,20 +215,7 @@ $payload = [
     "external_id" => $reference_key,
 ];
 
-// $message->insert([
-//     "tipo" => "EMAIL",
-//     "data" => strtotime($dueDate),
-//     "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
-// ]);
-
-// $message->insert([
-//     "tipo" => "WHATS",
-//     "data" => strtotime($dueDate),
-//     "payload" => json_encode($payload, JSON_UNESCAPED_UNICODE),
-// ]);
-
 $Fila = new FilaAws();
-
 
 @$mailActive = $company['mailActive'] ?? 0;
 @$emailInst = $company['mailSender'] ?? "contato@doardigital.com.br";
@@ -237,7 +227,6 @@ $payload["data"] = date('Y-m-d H:i:s');
 $templateEmail = generateHtmlEmail($payload);
 $payload["htmlContent"] = base64_encode($templateEmail['html']);
 $payload["subject"] = $templateEmail['assunto'];
-
 
 
 if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
@@ -287,4 +276,10 @@ echo json_encode([
     "payload" => [],
     "resAwsWhats" => $resWhats,
     "resAwsEmail" => $resEmail,
+    "update" => [
+        "status_pagamento" => $status,
+        "data" => $dueDate,
+        "valor" => (float) $value,
+        "tipo_pagamento" => $billingType,
+    ]
 ]);
