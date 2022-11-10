@@ -55,7 +55,13 @@ function generateHtmlEmail($payload) {
     $bodyPerson = $templateEmail->select();
 
     $subject = $payload["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
-    $my_content = $bodyPerson[0]["content"];
+    $my_content = $bodyPerson[0]["content"] ?? '';
+
+    if(strlen($my_content) < 20) {
+        $filePath = __DIR__ . "/email/{$type_payment}/{$status_payment}.txt";
+        $subject = file($filePath)[0] ?? "Doar Digital";
+        $my_content = file_get_contents( $filePath );
+    }
 
     $my_content = str_replace("\n","<br /> <br />", $my_content);
     $template = str_replace("{my_content}", $my_content, $template);
