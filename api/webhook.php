@@ -44,7 +44,6 @@ $subscription =  $payload['payment']['subscription'] ?? "";
 $reference_key = $payload['payment']['externalReference'] ?? "";
 $dueDate = $payload['payment']['dueDate'] ?? "";
 $dueDateInvoice = $payload['payment']['dueDate'] ?? "";
-// $dueDate = date('Y-m-d', strtotime('-7 days', strtotime($dueDate)));
 $status = $payload['payment']['status'] ?? "";
 $tipo = $payload['payment']['billingType'] ?? "";
 $url = $payload['payment']['invoiceUrl'] ?? "";
@@ -220,14 +219,15 @@ $Fila = new FilaAws();
 @$mailActive = $company['mailActive'] ?? 0;
 @$emailInst = $company['mailSender'] ?? "contato@doardigital.com.br";
 
+$dueDateAws = $tipo == 'CREDIT_CARD' ? $dueDate : date('Y-m-d', strtotime('-7 days', strtotime($dueDate)));
+
 $payload["sender"] = $mailActive == "1" ? $emailInst : "contato@doardigital.com.br";
-$payload["dataDeEnvio"] = $dueDate . "T" . date('H:i:s') . '.600-03:00';
+$payload["dataDeEnvio"] = $dueDateAws . "T" . date('H:i:s') . '.600-03:00';
 $payload["transacao"] = intval((time() / 50) + rand(1, 99));
 $payload["data"] = date('Y-m-d H:i:s');
 $templateEmail = generateHtmlEmail($payload);
 $payload["htmlContent"] = base64_encode($templateEmail['html']);
 $payload["subject"] = $templateEmail['assunto'];
-
 
 if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
     echo json_encode([
