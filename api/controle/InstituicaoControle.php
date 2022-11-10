@@ -451,6 +451,7 @@ class InstituicaoControle extends Controle
         }, []);
 
         $faturas = array_map(function ($charge) use ($assinantes, $allCpf, $allFk, $assByRef) {
+            $charge["isRecorrente"] = $charge["recorrente"];
             $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
             $charge["cpf"] = $allCpf[$charge["doador_fk"]];
             @$charge["assinatura_fk"] = $assByRef[$charge["external_fk"]] ?? null;
