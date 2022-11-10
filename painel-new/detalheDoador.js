@@ -26,7 +26,8 @@ export default {
             assinaturas: [],
             subs: [],
             cols: {
-                data: d => `${d.datas}`,
+                "Data": d => `${d.dataCreated.split('-').reverse().join('/')}`,
+                "vencimento": d => `${d.datas}`,
                 "valor": d => `${d.value}`,
                 status: t => status(t.status),
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
@@ -36,6 +37,7 @@ export default {
             },
             colsSub: {
                 "Data": s => s.dateCreated,
+                
                 "Valor": s => s.value,
                 "Tipo": s => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${s.type}
@@ -89,7 +91,7 @@ export default {
         this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
         this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
         this.isLoad = 'false'
-        console.log(this.subs)
+        console.log(this.donations)
     },
 
     methods: {

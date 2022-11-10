@@ -27,6 +27,7 @@ export default {
                 status: t => status(t.status),
                 recorrente: "Recorrente",
                 "Data": d => `${d.dataRegistro}`,
+                "vencimento": d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
@@ -59,7 +60,7 @@ export default {
             })
             this.donations = all_donations
             this.donationsCopy = all_donations
-            console.log(all_donations)
+            
         }
         this.resumos(this.donations)
         this.isLoad = 'false'
@@ -193,7 +194,6 @@ export default {
                     })
                 }
             }
-            console.log(dados)
             this.totalFaturas = dados.length
             this.donations = dados
             this.resumos(this.donations)
