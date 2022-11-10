@@ -623,19 +623,17 @@ class InstituicaoControle extends Controle
 
         $Fila = new FilaAws();
         $texto = "
-        Olá {NOME} paz e bem!
-
-        Estamos passando para avisar que sua doação mensal acabou de ser cancelada definitivamente.
-        
-        Caso queira voltar a nos ajudar, agora precisa fazer uma nova doação.
-        
-        Pedimos perdão pelas falhas que tivemos nesse meio tempo pois estamos buscando melhorar a cada dia.
-        
-        Caso você ainda receba alguma mensagem pode desconsiderar, pois ela seria refente a algo que já estava lançado no sistema, mas agora sem validade nenhuma.
-        
-        Gratidão pelo tempo que você esteve conosco.
-        
-        Deus te abençoe poderosamente!
+            Olá {NOME} paz e bem! 
+            <br> <br>
+            Estamos passando para avisar que sua doação mensal acabou de ser cancelada definitivamente.
+            <br> <br>
+            Caso queira voltar a nos ajudar, agora precisa fazer uma nova doação.
+            <br> <br>
+            Pedimos perdão pelas falhas que tivemos nesse meio tempo pois estamos buscando melhorar a cada dia.
+            <br> <br>
+            Gratidão pelo tempo que você esteve conosco.
+            <br> <br>
+            Deus te abençoe poderosamente!
         ";
 
         $template = get_template('default');
@@ -678,9 +676,11 @@ class InstituicaoControle extends Controle
 
         $blade = blade($content, $template);
 
+        $sender = $company["mailActive"] == "1" ? $company["mailSender"] : "contato@doardigital.com.br";
+
         $Fila->send([
             "email" => $defaultInvoice['doador_email'],
-            "sender" => "contato@doardigital.com.br",
+            "sender" => $sender,
             "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
             "htmlContent" => base64_encode($blade),
             "subject" => 'Seu cancelamento foi realizado com sucesso'
@@ -688,7 +688,7 @@ class InstituicaoControle extends Controle
 
    
         $payload["email"] = $defaultInvoice['doador_email'];
-        $payload["sender"] = "contato@doardigital.com.br";
+        $payload["sender"] = $sender;
         $payload["dataDeEnvio"] = date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00';
         $payload["htmlContent"] = base64_encode($blade);
         $payload["subject"] = 'Seu cancelamento foi realizado com sucesso';

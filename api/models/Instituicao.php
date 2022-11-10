@@ -199,6 +199,8 @@ class Instituicao
             "nome" => $payload["nome"] ?? null,
             "cpfCnpj" => $payload["cpfCnpj"] ?? null,
             "email" => $payload["email"] ?? null,
+            "mailActive" => $payload["mailActive"] ?? 0,
+            "mailSender" => $payload["mailSender"] ?? "contato@doardigital.com.br",
             "telefone" => $payload["telefone"] ?? null,
             "registro" => $payload["registro"] ?? null,
             "visible" => $payload["visible"] ?? null,

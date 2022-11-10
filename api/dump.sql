@@ -112,6 +112,8 @@ CREATE TABLE institution (
     nome VARCHAR(255),
     cpfCnpj VARCHAR(14),
     email VARCHAR(75),
+    mailSender VARCHAR(75),
+    mailActive int,
     telefone VARCHAR(11),
     registro VARCHAR(19),
     visible int,
