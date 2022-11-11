@@ -209,6 +209,7 @@ export default {
                     </router-link >
                     <br>
                     <h2 class="text-gray-500">Status</h2>
+                    
                         <span v-html=" status(info.status_pagamento )"></span>
                     <br>    
                     <br>
@@ -226,15 +227,24 @@ export default {
                     <h2 class="text-gray-500">Próxima Cobrança em:</h2>
                     <p>{{ formatData( info.proxima ) }} </p>
                     <br><br>
-                    <Popup 
-                title="Cancelar Assinatura"
-                description="Você deseja realmente cancelar a assinatura?"
-                text_close="Não"
-                text_submit="Sim"
-                text_btn="Cancelar assinatura"
-                color="red"
-                @submit="popConfirm"
-                />
+
+                    <div 
+                        class="cursor-not-allowed border-2 border-[#C00] text-[#C00] w-[230px] font-bold rounded text-center py-2"
+                        v-show="info.status_pagamento == 'INACTIVE'" >
+                        ASSINATURA CANCELADA
+                    </div>
+
+                    <div v-show="info.status_pagamento != 'INACTIVE'" >
+                        <Popup                         
+                            title="Cancelar Assinatura"
+                            description="Você deseja realmente cancelar a assinatura?"
+                            text_close="Não"
+                            text_submit="Sim"
+                            text_btn="Cancelar assinatura"
+                            color="red"
+                            @submit="popConfirm"
+                            />
+                    </div>
                     
                 </CardGeral>
                 <CardGeral text="Modificar Assinatura" size="quatro">
