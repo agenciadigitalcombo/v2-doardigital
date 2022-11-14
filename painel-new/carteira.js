@@ -39,6 +39,7 @@ export default {
             extrato: [],
             cols: {
                 "Data Solicitada": d => `${d.data}`,
+                "Tipo": t => t.operationType == 'INTERNAL' ? 'TAXA' : t.operationType,
                 "Valor": d => `
                     ${d.valor}
                     <br /> 
@@ -50,6 +51,7 @@ export default {
                         Comprovante
                     </a>
                 `,
+                
                 status: t => status(t.status),
             },
         }
@@ -78,7 +80,7 @@ export default {
         let requestPayload = request.payload
         let requestExtrato = request.payload.extrato.data
         this.inst_fk = institution.get()
-        requestExtrato = requestExtrato.filter(i => (i.status == "PENDING" || i.status == 'DONE') && i.type == 'BANK_ACCOUNT')
+        requestExtrato = requestExtrato.filter(i => (i.status == "PENDING" || i.status == 'DONE') && i.type == 'BANK_ACCOUNT' || i.type == 'ASAAS_ACCOUNT' )
 
         if (request.next) {
             this.dadosInst = requestInstitution.payload
