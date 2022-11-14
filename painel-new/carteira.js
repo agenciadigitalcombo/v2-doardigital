@@ -89,9 +89,9 @@ export default {
             this.maxSaque = requestPayload.balance
             this.aLiberar = formataMoeda(requestPayload.statistic.netValue)
             this.totalSacado = this.somaAll(this.extrato.filter(i => i.status == 'DONE'))
+            globalThis.Dados = this.formData
             this.renderBank()
         }
-        console.log(this.dadosInst)
         this.isLoad = 'false'
         
     },
@@ -102,7 +102,7 @@ export default {
             this.formData.contaDigito = this.dadosInst.accountDigit
             this.formData.bank = this.dadosInst.bank
             const inputsAnotacoes = [
-                new Input('conta', 'Conta', 'text', 3, false, '', true),
+                new Input('account', 'Conta', 'text', 3, false, '', true),
                 new Input('contaDigito', 'Digito', 'text', 1, false, '', true),
                 new Input('agencia', 'Agência', 'text', 2, false, '', true),
                 new Input('bank', 'Banco', 'text', 2, false, '', true),
