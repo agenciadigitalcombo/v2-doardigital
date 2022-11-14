@@ -94,7 +94,7 @@ export default {
                 new Input('nome', 'Nome', 'text', 4),
                 new Input('email', 'Email', 'email', 4, true),
                 new Input('telefone', 'Telefone', 'text', 4),
-                new Input('cpf', 'CPF', 'text', 4),
+                new Input('cpf', 'CPF', 'text', 4, true,'',true),
                 new Button('Salvar Alterações'),
             ]
             const form = new Form(inputs)
