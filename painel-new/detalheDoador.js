@@ -42,7 +42,7 @@ export default {
                 "Tipo": s => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${s.type}
                 </span>`,
-                "Status": s => s.status,
+                "Status": s => status(s.deleted == true ? 'INACTIVE' : s.status),
                 "Ação": s => actions(`detalhe-assinatura?sub_id=${s.id}&doador_fk=${this.ID}`, 'fa-solid fa-eye', 'blue'),
             },
         }
@@ -84,6 +84,7 @@ export default {
                 status: formatRecorrente(s.status),
                 value: formataMoeda(s.value),
                 type: s.billingType,
+                deleted: s.deleted
             }) )
         }
         this.numeroAssinatura = request.payload.subs.length
@@ -91,7 +92,7 @@ export default {
         this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
         this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
         this.isLoad = 'false'
-        console.log(this.donations)
+        console.log(this.subs)
     },
 
     methods: {
