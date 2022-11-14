@@ -36,7 +36,7 @@ class FilaAws
         }
     }
 
-    public function email($email, $subject, $html): array
+    public function email($email, $subject, $html)
     {
 
         $content = json_encode([
