@@ -237,40 +237,27 @@ class AdmControle extends Controle
         ]);
         $adm = new Adm();
         $email = $_REQUEST['email'];
+        $subject = "Recuperação de senha";
         if (!$adm->exist($email)) {
             self::printError(
                 "Email não encontrado",
                 []
             );
         }
+
         $tempPass = $adm->recoverPass($email);
-        $env = require __DIR__ . "/../config.php";
-        $notification = new Message();
-        $notification->save(
-            "EMAIL",
-            time(),
-            [
-                "instituicao" => null,
-                "nome" => $nome,
-                // "email" => $email,
-                "email" => "teste@digitalcombo.com.br",
-                "telefone" => $telefone,
-                "status_payment" => "RECOVER",
-                "type_payment" => null,
-                "subject" => "Doar Digital - Senha Temporária",
-                "tmp_pass" => $tempPass,
-                "smtp" => [
-                    "host" => $env["email_host"],
-                    "protocolo" => $env["email_protocolo"],
-                    "port" => $env["email_port"],
-                    "user" => $env["email_user"],
-                    "pass" => $env["email_pass"],
-                ],
-            ]
-        );
+        $notification = new FilaAws();
+
+        $html = file_get_contents(__DIR__ . "/../template/RECOVER.html");
+        $html = blade([
+            "SENHA" => $tempPass
+        ], $html);
+
+        $notification->email($email, $subject, $html);
+
         self::printSuccess(
             "Senha temporária enviado por email",
-            ["tmp" => $tempPass]
+            []
         );
     }
 
