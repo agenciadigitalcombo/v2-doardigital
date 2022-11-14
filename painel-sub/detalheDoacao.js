@@ -11,10 +11,12 @@ import actions from "../components/actions.js"
 import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import ApiDoadores from "../components/apiDoadores.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             error: null,
             inputs: "",
             id_fatura: null,
@@ -54,8 +56,10 @@ export default {
         Card,
         CardCarteira,
         CardGeral,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let ID = getUriData('id')
         let institution = new MyInstitution()
         let donations = new ApiDoacoes()
@@ -79,6 +83,7 @@ export default {
         this.formData.tipo = this.info.tipo_pagamento
 
         this.renderForm()
+        this.isLoad = 'false'
 
     },
     methods: {
@@ -108,6 +113,7 @@ export default {
                 new Select('tipo', 'Tipo', 2, [
                     new Option('BOLETO', 'Boleto'),
                     new Option('PIX', 'Pix'),
+                    new Option('CREDIT_CARD', 'Cartão'),
                 ], true, this.info.tipo_pagamento),
                 new Button('Modificar'),
             ]
@@ -117,7 +123,7 @@ export default {
         },
         async atualizar() {
             this.error = null
-            let api = new ApiDoacoes()          
+            let api = new ApiDoacoes()
 
             let request = await api.fatura_update(
                 this.fk_inst,
@@ -136,6 +142,7 @@ export default {
     },
     template: `
     <div>
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Detalhe Doação" />
    
        
@@ -161,13 +168,22 @@ export default {
                     <br>
                     <br>
                     <h2 class="text-gray-500">Data:</h2>
-                    <p>{{ formatData( info.data ) }}  - {{info.hora}}</p>
+                    <p>{{ formatData( info.dataCreated ) }}  - {{info.hora}}</p>
                     <br>
                     <h2 class="text-gray-500">Valor</h2>
                     <p>{{ formataMoeda( info.valor ) }}</p>
                     <br>
                     <h2 class="text-gray-500">Recorrente</h2>
+                    <div v-show="info.recorrente === true">
+                    <a :href="'#/detalhe-assinatura?sub_id='+info.assinatura_fk+'&doador_fk='+info.doador_fk">
+                    <p>{{ formatRecorrente( info.recorrente ) }}</p> 
+                    </a>
+                    </div>
+                    <div v-show="info.recorrente === false">
+                  
                     <p>{{ formatRecorrente( info.recorrente ) }}</p>
+                    </div>
+                    
                     <br>
                     
                 </CardGeral>

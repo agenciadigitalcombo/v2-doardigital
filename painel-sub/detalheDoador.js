@@ -10,21 +10,24 @@ import actions from "../components/actions.js"
 import HeaderDoador from "../components/HeaderDoador.js"
 import { cpf, tel, cep } from "../components/mask.js"
 import Anotacao from "../components/Anotacao.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             totalFaturas: 0,
             info: {
                 address: { bairro: null },
-                payload: { notes: { message: null }}
+                payload: { notes: { message: null } }
             },
             totalAnotacoes: [],
             donations: [],
             assinaturas: [],
             subs: [],
             cols: {
-                data: d => `${d.datas}`,
+                "Data": d => `${d.dataCreated.split('-').reverse().join('/')}`,
+                "vencimento": d => `${d.datas}`,
                 "valor": d => `${d.value}`,
                 status: t => status(t.status),
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
@@ -34,6 +37,7 @@ export default {
             },
             colsSub: {
                 "Data": s => s.dateCreated,
+
                 "Valor": s => s.value,
                 "Tipo": s => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${s.type}
@@ -46,18 +50,20 @@ export default {
     filters: {
         formataMoeda,
         formatRecorrente
-        
+
     },
     components: {
         Table,
         BreadCrumb,
         CardGeral,
         HeaderDoador,
-        Anotacao
+        Anotacao,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let ID = getUriData('id')
-        this.ID =  ID
+        this.ID = ID
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
@@ -72,19 +78,20 @@ export default {
         if (request.next) {
             this.info = formatRequestDoador
             this.donations = this.adapter(ids)
-            this.subs = request.payload.subs.map( s => ({
+            this.subs = request.payload.subs.map(s => ({
                 dateCreated: data(s.dateCreated),
                 id: s.id,
                 status: formatRecorrente(s.status),
                 value: formataMoeda(s.value),
                 type: s.billingType,
-            }) )
+            }))
         }
         this.numeroAssinatura = request.payload.subs.length
         this.totalFaturas = this.donations.length
         this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
         this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
-        console.log(this.subs)
+        this.isLoad = 'false'
+        console.log(this.donations)
     },
 
     methods: {
@@ -107,6 +114,7 @@ export default {
     },
     template: `
     <div>
+    <Loader :open="isLoad" /> 
     <BreadCrumb text="Home" text2="Detalhe Doador" />
     <HeaderDoador :anotacoes="numeroAnotacoes" :assinaturas="numeroAssinatura" :recorrente="info.recorrente" :name="info.nome" :faturas="totalFaturas" :gravatar="info.gravatar" :ID="ID" />
        

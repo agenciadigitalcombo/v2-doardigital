@@ -13,10 +13,12 @@ import Institution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js";
 import ApiDoadores from "../components/apiDoadores.js"
 import Popup from "../components/popup.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             customer: null,
             assinatura_open: [],
             inputs: "",
@@ -64,9 +66,12 @@ export default {
         CardCarteira,
         CardGeral,
         Botao,
+        Loader,
         Popup,
     },
     async mounted() {
+
+        this.isLoad = 'true'
 
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
@@ -83,13 +88,13 @@ export default {
         let formatRequestDoador = request.payload
         let fkDoador = formatRequestDoador.fk
 
-        
+
 
         let sub_info = formatRequestDoador.subs.find(s => s.id == id_sub)
 
-        let assinatura_open = formatRequestDoador.history.filter( i => {
+        let assinatura_open = formatRequestDoador.history.filter(i => {
             return i.external_fk == sub_info.externalReference && i.status_pagamento == "PENDING"
-        } )
+        })
         this.assinatura_open = assinatura_open
         this.customer = formatRequestDoador.asa.id
 
@@ -104,7 +109,7 @@ export default {
         this.formData.numero = this.info.valor
         this.formData.tipo = this.info.tipo_pagamento
         this.fkDoador = fkDoador
-        
+
 
         const inputs = [
             new Input('data', 'Vencimento', 'date', 2, true),
@@ -119,6 +124,8 @@ export default {
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
+
+        this.isLoad = 'false'
 
 
     },
@@ -146,42 +153,42 @@ export default {
             this.error = null
             let api = new ApiDoacoes()
             let request = await api.sub_cancel(this.fk_inst, this.id_sub)
-            if( request.next ) {
-                window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
-            }else {
+            if (request.next) {
+                window.location.href = `#/detalhe-doador?id=${this.fkDoador}`
+            } else {
                 this.error = request.message
             }
         },
         async atualizar() {
             this.error = null
-            let api = new ApiDoacoes()            
+            let api = new ApiDoacoes()
             let request = await api.sub_update(
-                this.fk_inst, 
-                this.id_sub, 
+                this.fk_inst,
+                this.id_sub,
                 this.formData.tipo,
                 this.formData.numero,
                 this.formData.data
             )
-            if( !request.next ) {
+            if (!request.next) {
                 this.error = request.message
                 return
             }
 
-            this.assinatura_open.forEach( async i => {
+            this.assinatura_open.forEach(async i => {
                 let request = await api.fatura_update(
                     this.fk_inst,
                     i.fatura_id,
                     this.formData.numero,
                     this.formData.tipo,
                     i.data,
-                    this.customer 
+                    this.customer
                 )
-                if( !request.next ) {
+                if (!request.next) {
                     this.error = request.message
                     return
                 }
             });
-            window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
+            window.location.href = `#/detalhe-doador?id=${this.fkDoador}`
         },
     },
     template: `
@@ -189,7 +196,7 @@ export default {
    
     <BreadCrumb text="Home" text2="Detalhe Assinatura" />
    
-       
+    <Loader :open="isLoad" />   
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
@@ -202,6 +209,7 @@ export default {
                     </router-link >
                     <br>
                     <h2 class="text-gray-500">Status</h2>
+                    
                         <span v-html=" status(info.status_pagamento )"></span>
                     <br>    
                     <br>
@@ -218,8 +226,25 @@ export default {
                     <br>
                     <h2 class="text-gray-500">Próxima Cobrança em:</h2>
                     <p>{{ formatData( info.proxima ) }} </p>
-                    <br>
-                    
+                    <br><br>
+
+                    <div 
+                        class="cursor-not-allowed border-2 border-[#C00] text-[#C00] w-[230px] font-bold rounded text-center py-2"
+                        v-show="info.status_pagamento == 'INACTIVE'" >
+                        ASSINATURA CANCELADA
+                    </div>
+
+                    <div v-show="info.status_pagamento != 'INACTIVE'" >
+                        <Popup                         
+                            title="Cancelar Assinatura"
+                            description="Você deseja realmente cancelar a assinatura?"
+                            text_close="Não"
+                            text_submit="Sim"
+                            text_btn="Cancelar assinatura"
+                            color="red"
+                            @submit="popConfirm"
+                            />
+                    </div>
                     
                 </CardGeral>
                 <CardGeral text="Modificar Assinatura" size="quatro">
@@ -232,16 +257,9 @@ export default {
                 <br><br>
                 
                 </CardGeral>
-
-                <Popup 
-                    title="Cancelar Assinatura"
-                    description="Você deseja realmente cancelar a assinatura?"
-                    text_close="Não"
-                    text_submit="Sim"
-                    text_btn="Cancelar assinatura"
-                    color="red"
-                    @submit="popConfirm"
-                />
+                
+               
+                
 
     </div>`,
 }

@@ -1,4 +1,4 @@
-export default function($div, data) {
+export default function ($div, data) {
     var options = {
         series: data,
         chart: {
@@ -14,8 +14,7 @@ export default function($div, data) {
                     width: 200
                 },
                 legend: {
-                    position: 'bottom',
-
+                    position: 'bottom'
                 }
             }
         }],

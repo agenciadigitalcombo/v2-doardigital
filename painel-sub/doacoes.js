@@ -5,13 +5,16 @@ import status from "../components/status.js"
 import actions from "../components/actions.js"
 import ApiDoacoes from "../components/apiDoacoes.js"
 import MyInstitution from "../components/myInstitution.js"
-import { data, formataMoeda, formatRecorrente } from "../components/format.js"
+import { data, formataMoeda, formatRecorrente, formatTipoPagamento } from "../components/format.js"
 import Filtro from "../components/Filtro.js"
 import CardGeral from "../components/CardGeral.js"
+import Loader from "../components/Loader.js"
+import Bread from "../components/Bread.js"
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             hoje: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).valueOf(),
             totalFaturas: 0,
             totalDonations: 0,
@@ -24,6 +27,7 @@ export default {
                 status: t => status(t.status),
                 recorrente: "Recorrente",
                 "Data": d => `${d.dataRegistro}`,
+                "vencimento": d => `${d.data}`,
                 tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
@@ -37,9 +41,12 @@ export default {
         BreadCrumb,
         Card,
         Filtro,
-        CardGeral
+        CardGeral,
+        Loader,
+        Bread
     },
     async mounted() {
+        this.isLoad = 'true'
         let donations = new ApiDoacoes()
         let institution = new MyInstitution()
         let request = await donations.lista(institution.get())
@@ -49,13 +56,14 @@ export default {
             all_donations = this.adapter(all_donations)
             all_donations = all_donations.filter(d => {
                 let data_donation = d.dataCreated
-                return data_donation <= hoje 
+                return data_donation <= hoje
             })
             this.donations = all_donations
             this.donationsCopy = all_donations
+
         }
         this.resumos(this.donations)
-       
+        this.isLoad = 'false'
 
 
     },
@@ -108,7 +116,7 @@ export default {
                     value: formataMoeda(d.valor),
                     price: d.valor,
                     status: d.status_pagamento,
-                    tipo: d.tipo_pagamento,
+                    tipo: formatTipoPagamento(d.tipo_pagamento),
                     id: d.fatura_id,
                     timestamp: d.data,
                     recorrente: formatRecorrente(d.recorrente)
@@ -162,7 +170,7 @@ export default {
                 }
             }
             if (payload.date) {
-                
+
                 let hoje = moment().format('YYYY-MM-DD')
                 let dataSelecionada = payload.date
 
@@ -174,7 +182,7 @@ export default {
                         return dataDonation == hoje
                     })
                 } else if (ontem) {
-                    
+
                     dados = dados.filter(t => {
                         let dataDonation = t.dataCreated
                         return dataDonation == dataSelecionada
@@ -193,7 +201,12 @@ export default {
     },
     template: `
     <div>
-        <BreadCrumb text="Home" text2="Doações" />
+        <Loader :open="isLoad" />
+        <Bread :steps="[
+            ['Home','#/dashboard'],
+            ['Doações'],
+        ]" 
+        />
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
              <div>
@@ -206,7 +219,8 @@ export default {
                 <Card :tax="statusEstorno" text="Estornado" :value="totalQntEstornado" variation="purple" icon="heart" size="4" />
                 <Card :tax="statusRecorrenciaAtiva" tax="AQQQ" text="Total Recorrente" :value="totalRecorrente" variation="green" icon="heart" size="4" />
                 <Card :tax="statusRecorrenciaInativo" text="Total Único" :value="totalRecorrenteInativo" variation="yellow" icon="heart" size="4" />
-                <br><br><br><br>                
+                <Card :tax="totalDonations" text="1° Doação" :value="totalFaturas" variation="blue" icon="heart" size="4" />
+                <br><br><br><br><br>                
                 <Filtro @filter="filtrar" />
                 </div>
                 <Table :rows="donations" :cols="cols" pagination="25" />

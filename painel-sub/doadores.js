@@ -1,6 +1,6 @@
 import Table from "../components/Table.js"
 import Botao from "../components/Botao.js"
-import BreadCrumb from "../components/BreadCrumb.js"
+import Bread from "../components/Bread.js"
 import Card from "../components/Card.js"
 import ApiDoadores from "../components/apiDoadores.js"
 import MyInstitution from "../components/myInstitution.js"
@@ -8,11 +8,13 @@ import { data, formatRecorrente } from "../components/format.js"
 import actions from "../components/actions.js"
 import { cpf } from "../components/mask.js"
 import FiltroDoador from "../components/FiltroDoador.js"
+import Loader from "../components/Loader.js"
 
 
 export default {
     data: function () {
         return {
+            isLoad: 'true',
             statusUnico: 0,
             statusRecorrente: 0,
             totalDoadores: 0,
@@ -31,11 +33,13 @@ export default {
     components: {
         Table,
         Botao,
-        BreadCrumb,
+        Bread,
         Card,
-        FiltroDoador
+        FiltroDoador,
+        Loader
     },
     async mounted() {
+        this.isLoad = 'true'
         let doadores = new ApiDoadores()
         let institution = new MyInstitution()
         let request = await doadores.lista(institution.get())
@@ -47,6 +51,7 @@ export default {
         this.statusUnico = this.somaAll(this.doadores.filter(d => d.recorrente === false))
 
         this.totalDoadores = this.somaAll(this.doadores)
+        this.isLoad = 'false'
 
 
 
@@ -72,15 +77,15 @@ export default {
                     return termo.indexOf(search) > -1
                 })
 
-            }            
+            }
             if (payload.recorrente == "ativo") {
                 dados = dados.filter(d => d.recorrente === true)
             }
-            if (payload.recorrente == "inativo") { 
+            if (payload.recorrente == "inativo") {
                 dados = dados.filter(d => d.recorrente === false)
             }
             this.doadores = dados
-            
+
         },
         adapter(listAll) {
 
@@ -95,13 +100,13 @@ export default {
     },
     template: `
     <div>
-    <BreadCrumb text="Home" text2="Doadores" />
-
-    
-
-   
+    <Loader :open="isLoad" />
         
-        
+        <Bread :steps="[
+                ['Home','#/dashboard'],
+                ['Doadores','#/s'],
+            ]" 
+        />
 
         <div class="relative pt-10 pb-32 bg-[#fff]">
           <div class="bg-blackpx-4 md:px-6 mx-auto w-full">
@@ -112,8 +117,8 @@ export default {
                 <Card text="Total Doadores Únicos" :value="statusUnico" variation="yellow" size="3"/>
                 </div>
                 <br>
-                <FiltroDoador @filter="filtrar" />
-                <Table :rows="doadores" :cols="cols" pagination="10" />
+                <FiltroDoador @filter="filtrar"/>
+                <Table :rows="doadores" :cols="cols" pagination="20" />
              </div>
           </div>
        </div>
