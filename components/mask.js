@@ -9,7 +9,10 @@ export function cpf(valor) {
 }
 
 export function cnpj(valor) {
-    return (valor+'').replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,"\$1.\$2.\$3\/\$4\-\$5");
+    return (valor+'')
+    .replace(/\D/gi, '')
+    .replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,"\$1.\$2.\$3\/\$4\-\$5")
+    .substring(0, 18)
 }
 
 export function tel(valor) {
@@ -20,5 +23,9 @@ export function tel(valor) {
 }
 
 export function cep(valor) {
-    return (valor+'').replace(/(\d{5})(\d{3})/g,"\$1-\$2")
+    return (valor+'')
+    .replace(/\D/gi, '')
+    .replace(/(\d{5})(\d{3})/gi,"\$1-\$2")
+    .substring(0, 9);
+    
 }

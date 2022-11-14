@@ -21,8 +21,23 @@ globalThis.MaskCep = v => {
   if( applyMasc.length == 9 ) {
     ApiViaCep(v).then( res => {
       console.log(res)
-      document.querySelector(`[name="estado"]`).value = res.uf
+      
       globalThis.Dados.estado = res.uf
+      globalThis.Dados.logradouro = res.logradouro
+      globalThis.Dados.bairro = res.bairro
+      globalThis.Dados.cidade = res.localidade
+
+      document.querySelector(`[name="estado"]`).value = res.uf
+      document.querySelector(`[name="logradouro"]`).value = res.logradouro
+      document.querySelector(`[name="bairro"]`).value = res.bairro
+      document.querySelector(`[name="cidade"]`).value = res.localidade
+
+
+
+
+      
+      
+
     } )
   }
   return applyMasc  

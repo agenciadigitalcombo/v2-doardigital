@@ -1,5 +1,5 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
+import Card from "../components/Card.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
@@ -12,91 +12,103 @@ import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
 import Loader from "../components/Loader.js"
+import { cpf, tel, cnpj } from "../components/mask.js"
+
+globalThis.MaskCpfCnpj = v => {
+  let tipoMask = v.replace(/\D/gi, '')
+  if (tipoMask.length < 12) {
+    return cpf(v)
+  } else {
+    return cnpj(v)
+  }
+}
+
+globalThis.MaskTel = tel
 
 export default {
-    data: function() {
-        return {
-            isLoad: 'true',
-            inputs: "",
-            name: "",
-            lastName: "",
-            email: "",
-            data: "",
-            cpf: "",
-            formData: {
-            },
-            transferencias: [],
-            cols: {
-                value: d => `${d.value}`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
-            },
-
-        }
-    },
-    watch: {
+  data: function () {
+    return {
+      isLoad: 'true',
+      inputs: "",
+      name: "",
+      lastName: "",
+      email: "",
+      data: "",
+      cpf: "",
       formData: {
-        handler(newValue, oldValue) {
-          let tmp = new Tmp()
-          tmp.save(this.formData)
-        },
-        deep: true
-      }
-    },
-    components: {
-        Botao,
-        Card,
-        BreadCrumb,
-        CardCarteira,
-        CardGeral,
-        Table,
-        Loader
-    },
-    async mounted() {
-      this.isLoad = 'true'
-        let admin = new apiAdmin()
-        let institution = new MyInstitution()
-        let apiinstituicao = new ApiInstitution()
-        let request = await admin.list_all_subs(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            console.log(requestTransform)
-        }
-        this.isLoad = 'false'
-        let tmp = new Tmp()
-        let defaultTipoEmpresa = tmp.info()?.tipoEmpresa || SELECIONE       
-        const inputs = [
-            new Input('name', 'Nome Fantasia', 'text', 2),
-            new Select('tipoEmpresa', 'Conta Tipo', 2, [
-              new Option('SELECIONE', 'SELECIONE'),
-              new Option('ASSOCIATION', 'ASSOCIAÇÃO'),
-              new Option('MEI', 'MEI'),
-              new Option('LIMITED', 'LIMITADA'),
-              new Option('INDIVIDUAL', 'INDIVIDUAL'),
-            ], true, defaultTipoEmpresa),
-            new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2),
-            new Input('email', 'Email', 'email', 2, true),
-            new Input('phone', 'DDD + Celular', 'text', 2),
-            new Button('Avançar Cadastro'),
-        ]
-       
-        this.formData = {...this.formData, ...tmp.info() }
-        tmp.save({step: 1})
-        globalThis.Dados = this.formData
-        const form = new Form(inputs)
-        this.inputs = form.render()
+      },
+      transferencias: [],
+      cols: {
+        value: d => `${d.value}`,
+        action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+      },
 
+    }
+  },
+  watch: {
+    formData: {
+      handler(newValue, oldValue) {
+        let tmp = new Tmp()
+        tmp.save(this.formData)
+      },
+      deep: true
+    }
+  },
+  components: {
+    Botao,
+    Card,
+    BreadCrumb,
+    CardCarteira,
+    CardGeral,
+    Table,
+    Loader
+  },
+  async mounted() {
+    this.isLoad = 'true'
+    let admin = new apiAdmin()
+    let institution = new MyInstitution()
+    let apiinstituicao = new ApiInstitution()
+    let request = await admin.list_all_subs(institution.get())
+    let requestTransform = request.payload
+    if (request.next) {
+      console.log(requestTransform)
+    }
+    this.isLoad = 'false'
+    let tmp = new Tmp()
+    let defaultTipoEmpresa = tmp.info()?.tipoEmpresa || 'SELECIONE'
+    const inputs = [
+      new Input('name', 'Nome Fantasia', 'text', 2),
+      new Select('tipoEmpresa', 'Conta Tipo', 2, [
+        new Option('SELECIONE', 'SELECIONE'),
+        new Option('ASSOCIATION', 'ASSOCIAÇÃO'),
+        new Option('MEI', 'MEI'),
+        new Option('LIMITED', 'LIMITADA'),
+        new Option('INDIVIDUAL', 'INDIVIDUAL'),
+      ], true, defaultTipoEmpresa),
+      new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2, true, '', false, null, 'MaskCpfCnpj'),
+      new Input('email', 'Email', 'email', 2, true),
+      new Input('phone', 'DDD + Celular', 'text', 2, true, '', false, null, 'MaskTel'),
+      new Button('Avançar Cadastro'),
+    ]
+
+    this.formData = { ...this.formData, ...tmp.info() }
+    tmp.save({ step: 1 })
+    globalThis.Dados = this.formData
+    const form = new Form(inputs)
+    this.inputs = form.render()
+
+  },
+  methods: {
+    adapter(listAll) {
+      return listAll.map(d => ({
+        ...d,
+      }))
     },
-    methods: {
-        adapter( listAll ) {
-            return listAll.map( d => ({
-                ...d,  
-            }) )
-        },
-        atualizar() {            
-            window.location.href = "#/criar-instituicao-endereco"
-        }
-    },
-    template: `
+    atualizar() {
+      window.location.href = "#/criar-instituicao-endereco"
+    }
+  },
+  template: `
     <div>
     <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Criar Instituição" />
