@@ -46,7 +46,7 @@ $dueDate = $payload['payment']['dueDate'] ?? "";
 $dueDateInvoice = $payload['payment']['dueDate'] ?? "";
 $status = $payload['payment']['status'] ?? "";
 $tipo = $payload['payment']['billingType'] ?? "";
-$url = $payload['payment']['invoiceUrl'] ?? "";
+$url = $payload['payment']['bankSlipUrl'] ?? "";
 $ID = $payload['payment']['id'] ?? "";
 $subPrefix = "";
 
