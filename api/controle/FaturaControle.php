@@ -204,7 +204,7 @@ class FaturaControle extends Controle
         $external_fk = $pay_external_fk;
         $status_pagamento = $response["status"];
 
-        $codigo = $response["nossoNumero"] ?? $response["invoiceNumber"] ?? "";
+        $codigo = $response["identificationField"] ?? $response["invoiceNumber"] ?? "";
         $url = $response["bankSlipUrl"] ?? $response["invoiceUrl"] ?? "";
 
         $ID = false;
