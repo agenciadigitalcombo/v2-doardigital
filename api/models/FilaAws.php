@@ -10,7 +10,7 @@ class FilaAws
         ];
     }
 
-    public function send(array $payload = [], $tipo = "EMAIL"): array
+    public function send(array $payload = [], $tipo = "EMAIL")
     {
         $payload['tipoMensagem'] = $tipo;
         $content = json_encode([
