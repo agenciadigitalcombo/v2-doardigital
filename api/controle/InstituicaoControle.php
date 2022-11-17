@@ -74,7 +74,7 @@ class InstituicaoControle extends Controle
         $cpfCnpj = $_REQUEST['cpfCnpj'];
         $email = $_REQUEST['email'];
         $telefone = $_REQUEST['telefone'];
-        $subdomain = $_REQUEST['subdomain'];
+        $subdomain = $_REQUEST['subdomain'] . '.doardigital.com.br';
         $logo = "logo.png";
         $icon = "logo.png";
         $cor = "#777";
