@@ -1,1 +1,15 @@
 POST https://14fpuojlqf.execute-api.us-east-1.amazonaws.com/prod/
+
+###
+POST https://r3nmn03mmk.execute-api.us-east-1.amazonaws.com/default/VerificarIdentidadeEmail 
+
+{
+    "EMAIL" : ""
+}
+
+###
+POST https://cjylc0fag4.execute-api.us-east-1.amazonaws.com/default/ApagarIdentidadeEmail
+
+{
+    "EMAIL" : ""
+}
