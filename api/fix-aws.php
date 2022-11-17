@@ -76,6 +76,7 @@ $tipo_asa = $invoice_asa_api['billingType'];
 
 $subscribe_key = $invoice_asa_api['subscription'] ?? false;
 
+$subscribe_asa_api = null;
 if ($subscribe_key) {
     $subscribe_asa_api = $asaPay->getSubscribe($subscribe_key);
     $sub_status_asa = $subscribe_asa_api['status'];
@@ -123,4 +124,7 @@ echo json_encode([
     "next" => true,
     "total" => count($all),
     "message" => "Lista de agendamentos",
+    "payload" => $payload,
+    "invoice_asa_api" => $invoice_asa_api,
+    "subscribe_asa_api" => $subscribe_asa_api,
 ]);
