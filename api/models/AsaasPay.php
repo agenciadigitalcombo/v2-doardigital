@@ -39,6 +39,13 @@ class AsaasPay extends Asaas
     {
         return $this->get("/payments/{$id}", []);
     }
+    
+    function getSubscribe(string $id): array
+    {
+        return $this->get("/subscriptions/{$id}", []);
+    }
+
+
 
 
     function single(

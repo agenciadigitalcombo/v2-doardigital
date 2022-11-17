@@ -71,6 +71,12 @@ $doador_fk = $dbDoador->select()[0]['external_fk'];
 $ID = 'pay_' . array_reverse( explode('/', $payload['url']) )[0];
 
 $invoice_asa_api = $asaPay->getInvoice($ID);
+$data_asa = $invoice_asa_api['dueDate'];
+$tipo_asa = $invoice_asa_api['billingType'];
+
+$subscribe_key = $invoice_asa_api['subscription'];
+
+$subscribe_asa_api = $asaPay->getSubscribe($subscribe_key);
 
 // $Fila = new FilaAws();
 // $resAws = $Fila->send((array) $payload, $action["tipo"]);
@@ -98,6 +104,7 @@ echo json_encode([
     "message" => "Lista de agendamentos",
     // "payload" => $payload,
     // "doador_fk" => $doador_fk,
-    "ID" => $ID,
-    "invoice_asa_api" => $invoice_asa_api,
+    // "ID" => $ID,
+    // "invoice_asa_api" => $invoice_asa_api,
+    "subscribe_asa_api" => $subscribe_asa_api,
 ]);
