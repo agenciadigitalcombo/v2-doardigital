@@ -68,23 +68,23 @@ $dbFatura->where([
 ]);
 
 $doador_fk = $dbDoador->select()[0]['external_fk'];
-$ID = $dbFatura->select()[0]['fatura_id'];
+$ID = $dbFatura->select();
 
-$Fila = new FilaAws();
-$resAws = $Fila->send((array) $payload, $action["tipo"]);
+// $Fila = new FilaAws();
+// $resAws = $Fila->send((array) $payload, $action["tipo"]);
 
-$menAws = new Banco();
-$menAws->table('message_aws');
-$menAws->insert([
-    "tipo" => $action["tipo"],
-    "status" => 'Succeeded',
-    "data" => $payload["dataDeEnvio"],
-    "doador_fk" => $doador_fk,
-    "fatura_fk" => $ID,
-    "ref_fk" => $payload['external_id'],
-    "execution_arn" => $resAws['executionArn'],
-    "institution_fk" => $payload['instituicao']['institution_fk'],
-]);
+// $menAws = new Banco();
+// $menAws->table('message_aws');
+// $menAws->insert([
+//     "tipo" => $action["tipo"],
+//     "status" => 'Succeeded',
+//     "data" => $payload["dataDeEnvio"],
+//     "doador_fk" => $doador_fk,
+//     "fatura_fk" => $ID,
+//     "ref_fk" => $payload['external_id'],
+//     "execution_arn" => $resAws['executionArn'],
+//     "institution_fk" => $payload['instituicao']['institution_fk'],
+// ]);
 
 // $db->where(["id" => $action["id"]]);
 // $db->delete();
@@ -96,5 +96,5 @@ echo json_encode([
     // "payload" => $payload,
     // "doador_fk" => $doador_fk,
     "ID" => $ID,
-    "url" => $payload['url']
+    "url" => str_replace('\\', '',$payload['url'])
 ]);
