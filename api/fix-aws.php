@@ -105,7 +105,7 @@ $resAws = $Fila->send((array) $payload, $action["tipo"]);
 
 $menAws = new Banco();
 $menAws->table('message_aws');
-$menAws->insert([
+$save_aws = [
     "tipo" => $action["tipo"],
     "status" => 'Succeeded',
     "data" => $payload["dataDeEnvio"],
@@ -114,7 +114,8 @@ $menAws->insert([
     "ref_fk" => $payload['external_id'],
     "execution_arn" => $resAws['executionArn'],
     "institution_fk" => $payload['instituicao']['institution_fk'],
-]);
+];
+$menAws->insert($save_aws);
 
 $db->where(["id" => $action["id"]]);
 $db->delete();
@@ -127,4 +128,5 @@ echo json_encode([
     "payload" => $payload,
     "invoice_asa_api" => $invoice_asa_api,
     "subscribe_asa_api" => $subscribe_asa_api,
+    "save_aws" => $save_aws,
 ]);
