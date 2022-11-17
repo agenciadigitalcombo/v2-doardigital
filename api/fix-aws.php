@@ -68,43 +68,59 @@ $dbDoador->where([
 // ]);
 
 $doador_fk = $dbDoador->select()[0]['external_fk'];
-$ID = 'pay_' . array_reverse( explode('/', $payload['url']) )[0];
+$ID = 'pay_' . array_reverse(explode('/', $payload['url']))[0];
 
 $invoice_asa_api = $asaPay->getInvoice($ID);
 $data_asa = $invoice_asa_api['dueDate'];
 $tipo_asa = $invoice_asa_api['billingType'];
 
-$subscribe_key = $invoice_asa_api['subscription'];
+$subscribe_key = $invoice_asa_api['subscription'] ?? false;
 
-$subscribe_asa_api = $asaPay->getSubscribe($subscribe_key);
+if ($subscribe_key) {
+    $subscribe_asa_api = $asaPay->getSubscribe($subscribe_key);
+    $sub_status_asa = $subscribe_asa_api['status'];
+    if ($sub_status_asa == 'INACTIVE') {
+        $db->where(["id" => $action["id"]]);
+        $db->delete();
+        echo json_encode([
+            "next" => true,
+            "total" => count($all),
+            "message" => "Lista de agendamentos",
+        ]);
+        die;
+    }
+}
 
-// $Fila = new FilaAws();
-// $resAws = $Fila->send((array) $payload, $action["tipo"]);
+$tmp_data = $data_asa;
+if($tipo_asa != 'CREDIT_CARD') {
+    $tmp_data = date("Y-m-d", strtotime('-7 days', strtotime($tmp_data)));
+}
+$payload["dataDeEnvio"] =  $tmp_data . "T09:00:00.600-03:00";
 
-// $menAws = new Banco();
-// $menAws->table('message_aws');
-// $menAws->insert([
-//     "tipo" => $action["tipo"],
-//     "status" => 'Succeeded',
-//     "data" => $payload["dataDeEnvio"],
-//     "doador_fk" => $doador_fk,
-//     "fatura_fk" => $ID,
-//     "ref_fk" => $payload['external_id'],
-//     "execution_arn" => $resAws['executionArn'],
-//     "institution_fk" => $payload['instituicao']['institution_fk'],
-// ]);
 
-// $db->where(["id" => $action["id"]]);
-// $db->delete();
+
+$Fila = new FilaAws();
+$resAws = $Fila->send((array) $payload, $action["tipo"]);
+
+$menAws = new Banco();
+$menAws->table('message_aws');
+$menAws->insert([
+    "tipo" => $action["tipo"],
+    "status" => 'Succeeded',
+    "data" => $payload["dataDeEnvio"],
+    "doador_fk" => $doador_fk,
+    "fatura_fk" => $ID,
+    "ref_fk" => $payload['external_id'],
+    "execution_arn" => $resAws['executionArn'],
+    "institution_fk" => $payload['instituicao']['institution_fk'],
+]);
+
+$db->where(["id" => $action["id"]]);
+$db->delete();
 
 
 echo json_encode([
     "next" => true,
     "total" => count($all),
     "message" => "Lista de agendamentos",
-    // "payload" => $payload,
-    // "doador_fk" => $doador_fk,
-    // "ID" => $ID,
-    // "invoice_asa_api" => $invoice_asa_api,
-    "subscribe_asa_api" => $subscribe_asa_api,
 ]);
