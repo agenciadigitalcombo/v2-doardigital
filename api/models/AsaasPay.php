@@ -27,6 +27,8 @@ class AsaasPay extends Asaas
         return $this->get("/payments/{$fatura_id}/pixQrCode", []);
     }
 
+  
+
 
     function listSubs(string $id): array
     {

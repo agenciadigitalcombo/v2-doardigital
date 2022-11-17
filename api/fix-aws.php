@@ -11,13 +11,15 @@ if (!empty($_REQUEST['debug'])) {
 
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/models/FilaAws.php";
+include __DIR__ . "/models/Asaas.php";
+include __DIR__ . "/models/AsaasPay.php";
+
 include __DIR__ . "/webHookTemplateEmail.php";
 
 $db = new Banco();
 $response = null;
 $db->table("message");
 $all = $db->select();
-
 
 $action = $all[0] ?? [];
 
@@ -47,6 +49,11 @@ $templateEmail = generateHtmlEmail($payload);
 $payload["htmlContent"] = base64_encode($templateEmail['html']);
 $payload["subject"] = $templateEmail['assunto'];
 
+$accessToken = $payload['instituicao']['carteira_fk'];
+
+$asaPay = new AsaasPay();
+$asaPay->set_api_key($accessToken);
+
 $dbDoador = new Banco();
 $dbDoador->table('doador');
 $dbDoador->where([
@@ -57,8 +64,7 @@ $dbDoador->where([
 $dbFatura = new Banco();
 $dbFatura->table('fatura');
 $dbFatura->where([
-    "instituicao_fk" => $payload['instituicao']['institution_fk'],
-    "url" => $payload['boleto_url'],
+    "url" => $payload['url'],
 ]);
 
 $doador_fk = $dbDoador->select()[0]['external_fk'];
@@ -80,14 +86,14 @@ $menAws->insert([
     "institution_fk" => $payload['instituicao']['institution_fk'],
 ]);
 
-$db->where(["id" => $action["id"]]);
-$db->delete();
+// $db->where(["id" => $action["id"]]);
+// $db->delete();
 
 echo json_encode([
     "next" => true,
     "total" => count($all),
     "message" => "Lista de agendamentos",
-    "payload" => $payload,
-    "doador_fk" => $doador_fk,
+    // "payload" => $payload,
+    // "doador_fk" => $doador_fk,
     "ID" => $ID,
 ]);
