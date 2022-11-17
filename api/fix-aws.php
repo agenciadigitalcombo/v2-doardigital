@@ -93,7 +93,7 @@ echo json_encode([
     "next" => true,
     "total" => count($all),
     "message" => "Lista de agendamentos",
-    // "payload" => $payload,
+    "payload" => $payload,
     // "doador_fk" => $doador_fk,
     "ID" => $ID,
     "url" => $payload['url']
