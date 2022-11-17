@@ -61,14 +61,16 @@ $dbDoador->where([
     "email" => $payload['email'],
 ]);
 
-$dbFatura = new Banco();
-$dbFatura->table('fatura');
-$dbFatura->where([
-    "external_fk" => $payload['external_id'],
-]);
+// $dbFatura = new Banco();
+// $dbFatura->table('fatura');
+// $dbFatura->where([
+//     "external_fk" => $payload['external_id'],
+// ]);
 
 $doador_fk = $dbDoador->select()[0]['external_fk'];
-$ID = $dbFatura->select();
+$ID = 'pay_' . array_reverse( explode('/', $payload['url']) )[0];
+
+$invoice_asa_api = $asaPay->getInvoice($ID);
 
 // $Fila = new FilaAws();
 // $resAws = $Fila->send((array) $payload, $action["tipo"]);
@@ -97,5 +99,5 @@ echo json_encode([
     // "payload" => $payload,
     // "doador_fk" => $doador_fk,
     "ID" => $ID,
-    "url" => $payload['url'],
+    "invoice_asa_api" => $invoice_asa_api,
 ]);
