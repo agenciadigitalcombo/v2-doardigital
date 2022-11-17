@@ -64,7 +64,7 @@ $dbDoador->where([
 $dbFatura = new Banco();
 $dbFatura->table('fatura');
 $dbFatura->where([
-    "url" => str_replace('\\', '',$payload['url']) ,
+    "external_fk" => $payload['external_id'],
 ]);
 
 $doador_fk = $dbDoador->select()[0]['external_fk'];
@@ -89,6 +89,7 @@ $ID = $dbFatura->select();
 // $db->where(["id" => $action["id"]]);
 // $db->delete();
 
+
 echo json_encode([
     "next" => true,
     "total" => count($all),
@@ -96,5 +97,4 @@ echo json_encode([
     // "payload" => $payload,
     // "doador_fk" => $doador_fk,
     "ID" => $ID,
-    "url" => str_replace('\\', '',$payload['url'])
 ]);
