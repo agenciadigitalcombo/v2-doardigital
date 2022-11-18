@@ -76,6 +76,19 @@ $tipo_asa = $invoice_asa_api['billingType'];
 
 $subscribe_key = $invoice_asa_api['subscription'] ?? false;
 
+$status = $payload['status_payment'];
+
+if( $status == 'SUB_PENDING' && $tipo_asa == 'CREDIT_CARD' ) {
+    $db->where(["id" => $action["id"]]);
+    $db->delete();
+    echo json_encode([
+        "next" => true,
+        "total" => count($all),
+        "message" => "Lista de agendamentos",
+    ]);
+    die;
+}
+
 $subscribe_asa_api = null;
 if ($subscribe_key) {
     $subscribe_asa_api = $asaPay->getSubscribe($subscribe_key);
