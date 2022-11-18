@@ -132,7 +132,8 @@ export default {
         },
         convertUrl(payload) {
             let base = (this.info_inst?.payload?.domain || this.info_inst?.payload?.subdomain)
-            console.log(base)
+            payload.valor = payload.valor ? payload.valor +'' : ''
+            payload.valor = (payload.valor.replace(',','.'))
             let keys = Object.keys(payload)
             let url = keys.map(e => `${e}=${payload[e]}`).join('&')
             return `https://${base || ''}/fatura/#/?${url}`
