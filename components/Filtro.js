@@ -11,6 +11,7 @@ export default {
             status: "",
             tipo: "",
             recorrencia: '',
+            primeiraDonation: '',
             data_inicio: moment().format('YYYY-MM-DD'),
             data_final: moment().format('YYYY-MM-DD'),
             dashboard: false,
@@ -31,6 +32,7 @@ export default {
                 recorrencia: this.recorrencia,
                 data_inicio: this.data_inicio,
                 data_final: this.data_final,
+                primeiraDonation: this.primeiraDonation,
             } )            
         }
     },

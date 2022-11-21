@@ -16,7 +16,7 @@
  
 
   <div>
-    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-4">
       <select v-model="date" @change="filter"
         class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
         <option value="">Data</option>
@@ -57,6 +57,14 @@
         <label for="">data Final</label>
         <input v-model="data_final" @change="filter" type="date" class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" >
       </div>
+
+
+      <select v-model="primeiraDonation" @change="filter"
+        class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+        <option value="">Primeira Doação</option>
+        <option value="1">Sim</option>
+        <option value="0">Não</option>
+      </select>
 
 
 

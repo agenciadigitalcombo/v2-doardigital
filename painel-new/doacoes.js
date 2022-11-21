@@ -119,6 +119,7 @@ export default {
                     tipo: formatTipoPagamento(d.tipo_pagamento),
                     id: d.fatura_id,
                     timestamp: d.data,
+                    primeiraDonation: d.primeiraDonation,
                     recorrente: formatRecorrente(d.recorrente)
                 }
             })
@@ -171,6 +172,13 @@ export default {
                     })
                 }
             }
+
+            if(payload.primeiraDonation.length > 0) {
+                dados = dados.filter(t => {
+                    return t.primeiraDonation == payload.primeiraDonation
+                })
+            }
+
             if (payload.date) {
 
                 let format_data = 'YYYY-MM-DD'
