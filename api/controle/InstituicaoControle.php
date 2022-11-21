@@ -427,6 +427,15 @@ class InstituicaoControle extends Controle
         $institution_fk =  $_REQUEST["institution_fk"];
         $fatura = new Fatura();
         $faturas = $fatura->listAll($institution_fk);
+           
+        $group = array_reduce( $faturas, function($acc, $t) {
+            @$acc[$t['doador_fk']][] = $t['fatura_id'];
+            return $acc;
+        }, [] );
+
+        $primeiraDonation = array_map(function($list) {
+            return array_reverse($list)[0];
+        }, $group );
 
         $ass = new Banco();
         $ass->table('assinatura');
@@ -450,12 +459,13 @@ class InstituicaoControle extends Controle
             return $acc;
         }, []);
 
-        $faturas = array_map(function ($charge) use ($assinantes, $allCpf, $allFk, $assByRef) {
+        $faturas = array_map(function ($charge) use ($assinantes, $allCpf, $allFk, $assByRef, $primeiraDonation) {
             $charge["isRecorrente"] = $charge["recorrente"];
             $charge["recorrente"] = in_array($charge["doador_fk"], $assinantes);
             $charge["cpf"] = $allCpf[$charge["doador_fk"]];
             @$charge["assinatura_fk"] = $assByRef[$charge["external_fk"]] ?? null;
             $charge["pagamento_fk"] = $allFk[$charge["doador_fk"]];
+            $charge['primeiraDonation'] = $primeiraDonation[$charge["doador_fk"]] == $charge["fatura_id"] ? 1 : 0;
             return $charge;
         }, $faturas);
 
