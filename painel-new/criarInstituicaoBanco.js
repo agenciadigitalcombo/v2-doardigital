@@ -74,8 +74,16 @@ export default {
       new Input('agencia', 'Agência', 'text', 1),
       new Select('banco', 'Banco', 2, [
         new Option('', 'Selecione o banco'),
-        new Option('001', 'Banco do Brasil'),
-        new Option('237', 'Banco Bradesco'),
+        new Option('001', 'BANCO DO BRASIL'),
+        new Option('104', 'CAIXA ECONÔMICA FEDERAL'),
+        new Option('033', 'BCO SANTANDER  S.A.'),
+        new Option('237', 'BCO BRADESCO S.A.'),
+        new Option('041', 'BCO DO ESTADO DO RS S.A.'),
+        new Option('748', 'BCO COOPERATIVO SICREDI S.A.'),
+        new Option('756', 'BCO SICOOB'),
+        new Option('341', 'BCO ITAÚ UNIBANCO'),
+        new Option('077', 'BCO INTER'),
+        new Option('756', 'BCO SICOOB'),
       ], true, defaultBanco),
       new Select('contaTipo', 'Conta Tipo', 1, [
         new Option('', 'Escolha um tipo de conta'),
