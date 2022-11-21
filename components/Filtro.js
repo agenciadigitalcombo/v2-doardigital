@@ -11,6 +11,8 @@ export default {
             status: "",
             tipo: "",
             recorrencia: '',
+            data_inicio: moment().format('YYYY-MM-DD'),
+            data_final: moment().format('YYYY-MM-DD'),
             dashboard: false,
             dataLabel: [],
             icons:{
@@ -27,18 +29,20 @@ export default {
                 status: this.status,
                 tipo: this.tipo,
                 recorrencia: this.recorrencia,
+                data_inicio: this.data_inicio,
+                data_final: this.data_final,
             } )            
         }
     },
     mounted() {
-        let format_data = 'YYYY-MM-DD' 
         this.dataLabel = [
-            {label: "Hoje", value: moment().format(format_data) },
-            {label: "Ontem", value: moment().subtract(1, 'day').format(format_data) },
-            {label: "Essa semana", value: moment().startOf('week').format(format_data) },
-            {label: "Semana passada", value: moment().startOf('week').subtract(1, 'w').format(format_data)  },
-            {label: "Esse mês", value: moment().startOf('month').format(format_data) },
-            {label: "Mês passado", value: moment().subtract(1, 'month').format(format_data) },
+            {label: "Hoje", value: "hoje" },
+            {label: "Ontem", value: "ontem" },
+            {label: "Essa semana", value: "essa_semana" },
+            {label: "Semana passada", value: "semana_passada" },
+            {label: "Esse mês", value: "esse_mes" },
+            {label: "Mês passado", value: "mes_passado" },
+            {label: "Personalizado", value: "personalizado" },
         ]       
     }
 }

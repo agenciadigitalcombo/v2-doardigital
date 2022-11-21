@@ -48,6 +48,17 @@
         <option value="INATIVO">Inativo</option>
       </select>
 
+      <div v-if="date == 'personalizado'">
+        <label for="">data Inicio</label>
+        <input v-model="data_inicio" @change="filter" type="date" class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" >
+      </div>
+      
+      <div v-if="date == 'personalizado'">
+        <label for="">data Final</label>
+        <input v-model="data_final" @change="filter" type="date" class="px-4 py-3 w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" >
+      </div>
+
+
 
     </div>
   </div>

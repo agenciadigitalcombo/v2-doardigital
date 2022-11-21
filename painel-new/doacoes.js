@@ -41,7 +41,7 @@ export default {
         BreadCrumb,
         Card,
         Filtro,
-        CardGeral, 
+        CardGeral,
         Loader,
         Bread
     },
@@ -56,11 +56,11 @@ export default {
             all_donations = this.adapter(all_donations)
             all_donations = all_donations.filter(d => {
                 let data_donation = d.dataCreated
-                return data_donation <= hoje 
+                return data_donation <= hoje
             })
             this.donations = all_donations
             this.donationsCopy = all_donations
-            
+
         }
         this.resumos(this.donations)
         this.isLoad = 'false'
@@ -124,6 +124,8 @@ export default {
             })
         },
         filtrar(payload) {
+
+
             let dados = Array.from(this.donationsCopy.map(x => x))
             if (payload.search) {
                 dados = dados.filter(t => {
@@ -170,29 +172,70 @@ export default {
                 }
             }
             if (payload.date) {
-                
-                let hoje = moment().format('YYYY-MM-DD')
+
+                let format_data = 'YYYY-MM-DD'
                 let dataSelecionada = payload.date
 
-                let presente = hoje == dataSelecionada
-                let ontem = dataSelecionada == moment().subtract(1, 'day').format('YYYY-MM-DD')
-                if (presente) {
+                let data_inicio = payload.data_inicio
+                let data_final = payload.data_final
+                
+
+                let hoje = moment().format(format_data)
+                let ontem = moment().subtract(1, 'day').format(format_data)
+                let essa_semana = moment().startOf('week').format(format_data)
+                let semana_passada = moment().startOf('week').subtract(1, 'w').format(format_data)
+                let esse_mes = moment().startOf('month').format(format_data)
+                let mes_passado = moment().subtract(1, 'month').format(format_data)
+
+                if (dataSelecionada == 'hoje') {
                     dados = dados.filter(t => {
                         let dataDonation = t.dataCreated
                         return dataDonation == hoje
                     })
-                } else if (ontem) {
-                    
+                }
+
+                if (dataSelecionada == 'ontem') {
                     dados = dados.filter(t => {
                         let dataDonation = t.dataCreated
-                        return dataDonation == dataSelecionada
-                    })
-                } else {
-                    dados = dados.filter(t => {
-                        let dataDonation = t.dataCreated
-                        return dataDonation >= dataSelecionada
+                        return dataDonation == ontem
                     })
                 }
+
+                if (dataSelecionada == 'essa_semana') {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.dataCreated
+                        return dataDonation >= essa_semana
+                    })
+                }
+
+                if (dataSelecionada == 'semana_passada') {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.dataCreated
+                        return dataDonation >= semana_passada && dataDonation < essa_semana
+                    })
+                } 
+                
+                if (dataSelecionada == 'esse_mes') {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.dataCreated
+                        return dataDonation >= esse_mes
+                    })
+                }
+
+                if (dataSelecionada == 'mes_passado') {
+                    dados = dados.filter(t => {
+                        let dataDonation = t.dataCreated
+                        return dataDonation >= mes_passado && dataDonation < esse_mes
+                    })
+                } 
+
+                if (dataSelecionada == 'personalizado') { 
+                    dados = dados.filter(t => {
+                        let dataDonation = t.dataCreated
+                        return dataDonation >= data_inicio && dataDonation <= data_final
+                    })
+                }
+                
             }
             this.totalFaturas = dados.length
             this.donations = dados
