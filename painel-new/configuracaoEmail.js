@@ -6,6 +6,8 @@ import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
 import Loader from "../components/Loader.js"
 import Bread from "../components/Bread.js"
+import Aws from "../components/apiAws.js"
+import MyInstitution from "../components/myInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 
 export default {
@@ -13,7 +15,10 @@ export default {
         return {
             isLoad: 'true',
             inputs: "",
-            formData: {}
+            message: null,
+            formData: {
+                email: 'br.rafael@outlook.com'
+            }
         }
     },
     components: {
@@ -30,7 +35,7 @@ export default {
         this.isLoad = 'true'
 
         const inputs = [
-            new Input('email', 'Email', 'email', 4),
+            new Input('email', 'Email', 'email', 4, true),
             new Button('Configurar E-mail'),
         ]
 
@@ -40,6 +45,18 @@ export default {
         this.isLoad = 'false'
 
     },
+    methods: {
+        async atualizar() {
+            this.message = null
+            let inst = new MyInstitution()
+            let inst_fk = inst.get()
+            let email = this.formData.email
+            let aws = new Aws()
+            let res = await aws.registrar(inst_fk, email)
+            
+            this.message = res.message
+        }
+    }, 
     template: `
     <div>
     <Loader :open="isLoad" />
@@ -59,6 +76,7 @@ export default {
                 <CardGeral text="Configuração E-mail de Disparo" size="cinco">
                 <p>Adicione o e-mail que quer utilizar para disparar as mensagens do sistema:</p><br>
                 <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>   
+                <div v-show="message">{{message}}</div>
                 </CardGeral>
             
                
