@@ -66,7 +66,15 @@ CREATE TABLE doador (
     senha VARCHAR(255),
     nascimento VARCHAR(10),
     registro VARCHAR(19),
+    hora VARCHAR(8),
+    ip VARCHAR(255),
     payload JSON
+);
+
+CREATE TABLE contador_ip (
+    id int not null auto_increment primary key,
+    ip VARCHAR(255),
+    total int
 );
 
 CREATE TABLE fatura (
@@ -84,7 +92,8 @@ CREATE TABLE fatura (
     hora VARCHAR(8),
     doador_fk VARCHAR(255),
     doador_nome VARCHAR(255),
-    doador_email VARCHAR(255)
+    doador_email VARCHAR(255),
+    ip VARCHAR(255)
 );
 
 CREATE TABLE assinatura (

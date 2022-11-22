@@ -11,6 +11,39 @@ class FaturaControle extends Controle
         // self::privateRouter();
     }
 
+    static function contator() {
+
+        $maxTentativas = 5;
+        $ip = $_SERVER['REMOTE_ADDR'];
+
+        $contador = new Banco();
+        $contador->table('contador_ip');
+        $contador->where([
+            "ip" => $ip
+        ]);
+        @$total = $contador->select()[0]['total'] ?? 0;
+        if($total) {
+            $total = intval($total) + 1;
+            $contador->where([
+                "ip" => $ip
+            ]);
+            $contador->update([
+                "total" => $total
+            ]);
+        } else {
+            $contador->insert([
+                "ip" => $ip,
+                "total" => 1
+            ]);
+        }        
+        if( $total > $maxTentativas ) {
+            self::printError(
+                "Você atingiu o máximo de tentativas",
+                []
+            );
+        }
+    }
+
     static function register()
     {
 
@@ -29,6 +62,8 @@ class FaturaControle extends Controle
             "valor" => "Informe o valor",
             "tipo_pagamento" => "Informe um tipo de pagamento",
         ]);
+       
+        self::contator();
 
         $instituicao_fk = $_REQUEST['instituicao_fk'] ?? "";
         $nome = $_REQUEST['nome'] ?? "";
