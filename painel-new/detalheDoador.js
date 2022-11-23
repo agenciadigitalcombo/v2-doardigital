@@ -77,7 +77,7 @@ export default {
 
         if (request.next) {
             this.info = formatRequestDoador
-            this.donations = this.adapter(ids)
+            this.donations = this.adapter(request.payload.history)
             this.subs = request.payload.subs.map( s => ({
                 dateCreated: data(s.dateCreated),
                 id: s.id,
