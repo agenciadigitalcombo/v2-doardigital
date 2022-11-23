@@ -13,6 +13,7 @@ import Loader from "../components/Loader.js"
 import Popup from "../components/popup.js"
 import ApiInstitution from "../components/apiInstitution.js"
 import { Form, Input, Button, Text, Select } from "../components/Form.js";
+import { Money } from "../components/mask.js"
 
 export default {
     data: function () {
@@ -116,6 +117,9 @@ export default {
             const formBank = new Form(inputsAnotacoes)
             this.inputsAnotacoes = formBank.render()
         },
+        Money(ev) {
+            ev.target.value = Money(ev.target.value)
+        },
         adapter(listAll) {
             return listAll.map(d => ({
                 valor: formataMoeda(d.value),
@@ -134,12 +138,13 @@ export default {
             this.price = this.maxSaque + 0
         },
         async sacar() {
-            this.load = true
+            this.isLoad = 'true'
             this.error = null
             let api = new ApiCarteira()
 
             let min = 50
             let max = this.maxSaque
+            this.price = Money(this.price)
             let price = parseFloat( this.price.replace(/\D/gi, '') ) || 0
 
             if(price < min) {
@@ -163,7 +168,7 @@ export default {
                 this.price = 0
             }
 
-            this.load = false
+            this.isLoad = 'false'
 
             this.error = request.message
 
@@ -198,8 +203,9 @@ export default {
             <div class="">
             <CardGeral text="Solicitação de Saque" size="full">
             <button @click="setValorTotal" class="mb-4 rounded-l px-6 py-2.5 bg-blue-800 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">Valor Total</button> <br>
-            <p>Informe valor abaixo ou selecione valor total.</p>   
-            <input v-model="price" class="rounded border border-gray-300 block w-64 py-2 px-4 text-gray-700 focus:outline-blue-700 mb-4">
+            <p>Informe valor abaixo ou selecione valor total.</p>  
+            
+            <input @input="Money" v-model="price" class="rounded border border-gray-300 block w-64 py-2 px-4 text-gray-700 focus:outline-blue-700 mb-4">
 
 
 
