@@ -88,6 +88,7 @@ class Fatura
             "doador_fk" => $doador_fk,
             "doador_nome" => $doador_nome,
             "doador_email" => $doador_email,
+            "ip" => $_SERVER['REMOTE_ADDR'],
         ]);
     }
 

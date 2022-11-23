@@ -89,6 +89,8 @@ class Doador
             "nascimento" => $nascimento,
             "registro" => date("Y-m-d"),
             "senha" => md5(uniqid()),
+            "ip" => $_SERVER['REMOTE_ADDR'],
+            "hora" => date("H:i:s"),
         ]);
     }
 
