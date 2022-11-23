@@ -161,13 +161,14 @@ export class Select {
 }
 
 export class Button {
-    constructor(text) {
+    constructor(text, disabled = false) {
         this.text = text
+        this.disabled = disabled
     }
     render() {
         return `
         <div class="col-span-4">
-            <Button type="submit" class="${btnCss}" > ${this.text} </Button>
+            <Button type="submit" class="${btnCss}" ${this.disabled ? 'disabled' : ''} > ${this.text} </Button>
         </div>    
         `
     }

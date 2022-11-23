@@ -15,5 +15,11 @@ export default class {
             email,
         })
     }
+    
+    async status(email) {
+        return await http.post('/aws/status-email', {
+            email,
+        })
+    }
 
 }

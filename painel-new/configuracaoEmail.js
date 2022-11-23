@@ -9,6 +9,7 @@ import Bread from "../components/Bread.js"
 import Aws from "../components/apiAws.js"
 import MyInstitution from "../components/myInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
+import ApiInstitution from "../components/apiInstitution.js"
 
 export default {
     data: function() {
@@ -16,8 +17,9 @@ export default {
             isLoad: 'true',
             inputs: "",
             message: null,
+            resAws: null,
             formData: {
-                email: 'br.rafael@outlook.com'
+                email: null
             }
         }
     },
@@ -32,13 +34,32 @@ export default {
         Loader
     },
     async mounted() {
-        this.isLoad = 'true'
+        this.isLoad = 'true'       
 
-        const inputs = [
-            new Input('email', 'Email', 'email', 4, true),
-            new Button('Configurar E-mail'),
-        ]
+        let institution = new MyInstitution()
+        let thisInstitution = new ApiInstitution()
+        let request = await thisInstitution.get(institution.get())
 
+        this.mailActive = request.payload.mailActive
+        this.mailSender = request.payload.mailSender
+
+        this.formData.email = this.mailSender
+
+        const inputs = []
+
+        if(this.mailActive == 1) {
+            inputs.push( new Input('email', 'Email', 'email', 4, true, '', true))            
+            inputs.push( new Button('Email já configurado', true))
+            let aws = new Aws()
+            this.resAws = await aws.status(this.mailSender)
+
+            console.log(  this.resAws )
+            
+        }else {            
+            inputs.push( new Input('email', 'Email', 'email', 4, true))            
+            inputs.push( new Button('Configurar email'))
+        }
+        
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
@@ -74,6 +95,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Configuração E-mail de Disparo" size="cinco">
+                <span style="rounded bg-[#C00]"> Email Não confirmado </span>
                 <p>Adicione o e-mail que quer utilizar para disparar as mensagens do sistema:</p><br>
                 <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>   
                 <div v-show="message">{{message}}</div>

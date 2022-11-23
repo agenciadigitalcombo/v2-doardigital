@@ -77,4 +77,26 @@ class AwsControle extends Controle
             []
         );
     }
+    
+    static function statusEmail()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "email" => "informe uma email",
+        ]);
+        self::privateRouter();
+
+        $EMAIL = $_REQUEST["email"];
+        
+        $aws = new Aws();
+        $path = "https://znz4okv2u2.execute-api.us-east-1.amazonaws.com/default/ListarIdentidadesSES";
+        $response = $aws->post($path, [
+            "EMAIL" => $EMAIL
+        ]);
+
+        self::printSuccess(
+            "Status Email",
+            $response
+        );
+    }
 }
