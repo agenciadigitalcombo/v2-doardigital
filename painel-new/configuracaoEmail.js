@@ -20,7 +20,13 @@ export default {
             resAws: null,
             formData: {
                 email: null
-            }
+            },
+            color: {
+                Pending: "bg-[#05f]",
+                Success: "bg-[#080]",
+                Failed: "bg-[#c00]",
+            },
+            isColor: 'bg-[#CCC]'
         }
     },
     components: {
@@ -52,8 +58,8 @@ export default {
             inputs.push( new Button('Email já configurado', true))
             let aws = new Aws()
             this.resAws = await aws.status(this.mailSender)
-
-            console.log(  this.resAws )
+            this.status = this.resAws.payload.VerificationStatus
+            this.isColor = this.color[this.status]
             
         }else {            
             inputs.push( new Input('email', 'Email', 'email', 4, true))            
@@ -95,7 +101,7 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Configuração E-mail de Disparo" size="cinco">
-                <span style="rounded bg-[#C00]"> Email Não confirmado </span>
+                <span :class="'block w-full text-center mb-4 text-white rounded ' + isColor + ' p-2'"> o email se encontra com status <b>{{status}}</b> </span>
                 <p>Adicione o e-mail que quer utilizar para disparar as mensagens do sistema:</p><br>
                 <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>   
                 <div v-show="message">{{message}}</div>
