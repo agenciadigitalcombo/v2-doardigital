@@ -147,7 +147,11 @@ export default {
             let max = this.maxSaque
             this.price = Money(this.price)
             let price = parseFloat( this.price.replace(/\D/gi, '') ) || 0
-
+            console.log({
+                min,
+                max,
+                price
+            })
             if(price < min) {
                 this.error = "O valor mínimo para saque é " + min
                 this.load = false
