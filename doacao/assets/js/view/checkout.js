@@ -57,6 +57,11 @@ export default {
 
 	methods: {
 
+		getUriData(name) {
+            const url = new URL(window.location.href.replace('#/'))
+            return url.searchParams.get(name)
+        },
+
 		changejmsColorHouver(index) {
 			this.jmsColorHouver = index;
 		},
@@ -153,6 +158,14 @@ export default {
 
 	async mounted() {
 
+		let token = this.getUriData('token') 
+		if( token ) {
+			localStorage.setItem('token', token )
+			let host = window.location.host 
+			let protocol = window.location.protocol 
+			let base = protocol + '//' + host + '/doacao/#/'
+			window.location.href = base
+		}
 
 		this.token = localStorage.getItem('token')
 		//this.domain = globalThis._instituicao.subdomain || globalThis._instituicao.domain
@@ -170,6 +183,7 @@ export default {
  
 		this.valor_digitado = "0"
 		this.valor = this.price
+
 
 	},
 

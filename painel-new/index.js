@@ -45,6 +45,7 @@ import EditarInstituicao from "./editarInstituicao.js"
 import ModelosDeEmail from "./modelosDeEmail.js"
 import EditarEmail from "./editarEmail.js"
 import ConfiguracaoEmail from "./configuracaoEmail.js"
+import Checkout from "./checkout.js"
 
 const routes = [
     { path: '/', component: Dashboard },
@@ -83,6 +84,7 @@ const routes = [
     { path: '/modelo-de-emails', component: ModelosDeEmail },
     { path: '/editar-email', component: EditarEmail },
     { path: '/configuracao-email', component: ConfiguracaoEmail },
+    { path: '/checkout', component: Checkout },
 ]
 
 const router = VueRouter.createRouter({
@@ -119,8 +121,8 @@ createApp({
         let api = new apiAdmin()
         let jwt = new Jwt() 
         let code = jwt.get()?.code
-        let requestInfo = await api.info(code)      
-        
+        let requestInfo = await api.info(code)  
+
         let level = 'sub'
         if (requestInfo?.payload?.adm?.length == 0) {
             level = 'adm'

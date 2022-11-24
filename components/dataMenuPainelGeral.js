@@ -13,4 +13,5 @@ export default [
   { text: "Carteira", ico: "fa-solid fa-vault", link: "carteira" },
   { text: "QR CODE", ico: "fa-solid fa-qrcode", link: "qr-code" },
   { text: "Credenciais", ico: "fa-solid fa-qrcode", link: "credenciais" },
+  { text: "Checkout", ico: "fa-solid fa-cart-shopping", link: "checkout" },
 ]

@@ -13,6 +13,8 @@ class FaturaControle extends Controle
 
     static function contator() {
 
+        @$token = $_REQUEST['token'] ?? null;
+
         $maxTentativas = 5;
         $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -37,10 +39,14 @@ class FaturaControle extends Controle
             ]);
         }        
         if( $total > $maxTentativas ) {
-            self::printError(
-                "Você atingiu o máximo de tentativas",
-                []
-            );
+            if($token) {
+                self::privateRouter();
+            }else {
+                self::printError(
+                    "Você atingiu o máximo de tentativas",
+                    []
+                );
+            }
         }
     }
 

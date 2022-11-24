@@ -462,7 +462,8 @@ export default {
 
 
     ) {
-        return await http.post('/fatura/create', {
+
+        let payload = {
             instituicao_fk,
             valor,
             recorrente,
@@ -485,7 +486,14 @@ export default {
             card_cvv,
             card_validade,
 
-        })
+        }
+
+        let token = localStorage.getItem('token')
+        if(token) {
+            payload.token = token
+        }
+
+        return await http.post('/fatura/create', payload)
     },
 
 
