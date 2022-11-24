@@ -139,6 +139,7 @@ export default {
         },
         async sacar() {
             // this.isLoad = 'true'
+            console.log('tafarelll')
             this.error = null
             let api = new ApiCarteira()
 
