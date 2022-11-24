@@ -138,11 +138,11 @@ export default {
             this.price = this.maxSaque + 0
         },
         async sacar() {
-            this.isLoad = 'true'
+            // this.isLoad = 'true'
             this.error = null
             let api = new ApiCarteira()
 
-            let min = 50
+            let min = 10
             let max = this.maxSaque
             this.price = Money(this.price)
             let price = parseFloat( this.price.replace(/\D/gi, '') ) || 0
@@ -168,7 +168,7 @@ export default {
                 this.price = 0
             }
 
-            this.isLoad = 'false'
+            // this.isLoad = 'false'
 
             this.error = request.message
 

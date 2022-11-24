@@ -52,7 +52,6 @@ class FaturaControle extends Controle
 
     static function register()
     {
-
         self::requireInputs([
             "instituicao_fk" => "Informe a referencia da instituição",
             "nome" => "Informe seu nome",
