@@ -150,7 +150,8 @@ export default {
             console.log({
                 min,
                 max,
-                price
+                price,
+                peice2: this.price
             })
             if(price < min) {
                 this.error = "O valor mínimo para saque é " + min
