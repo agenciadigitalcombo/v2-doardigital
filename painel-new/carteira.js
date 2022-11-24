@@ -138,7 +138,7 @@ export default {
             this.price = this.maxSaque + 0
         },
         async sacar() {
-            // this.isLoad = 'true'
+            this.isLoad = 'true'
            
             this.error = null
             let api = new ApiCarteira()
@@ -147,11 +147,7 @@ export default {
             let max = this.maxSaque
             this.price = Money(this.price)
             let price = parseFloat( this.price.replace('.', '').replace(',', '.') ) || 0
-            console.log({
-                min,
-                max,
-                price
-            })
+ 
             if(price < min) {
                 this.error = "O valor mínimo para saque é " + min
                 this.load = false
@@ -164,20 +160,18 @@ export default {
                 return null
             }
 
-            // let request = await api.saque(
-            //     this.inst_fk,
-            //     this.price
-            // )
+            let request = await api.saque(
+                this.inst_fk,
+                this.price
+            )
 
             if( request.next ) {
                 this.price = 0
             }
 
-            // this.isLoad = 'false'
+            this.isLoad = 'false'
 
-            // this.error = request.message
-
-            console.log('tafarelll')
+            this.error = request.message
 
             window.location.reload()
 
