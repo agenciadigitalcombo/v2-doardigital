@@ -26,7 +26,6 @@ function blade(array $payload, string $template)
 }
 
 
-
 function generateHtmlEmail($payload) {
 
     $status_payment = $payload["status_payment"];

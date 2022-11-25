@@ -235,7 +235,6 @@ class AdmControle extends Controle
         self::requireInputs([
             "email" => "informe um email"
         ]);
-
         $adm = new Adm();
         $email = $_REQUEST['email'];
         $subject = "Recuperação de senha";
