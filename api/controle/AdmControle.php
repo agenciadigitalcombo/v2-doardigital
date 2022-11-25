@@ -236,8 +236,6 @@ class AdmControle extends Controle
             "email" => "informe um email"
         ]);
 
-        include __DIR__ . "/../webHookTemplateEmail.php";
-
         $adm = new Adm();
         $email = $_REQUEST['email'];
         $subject = "Recuperação de senha";
