@@ -1,4 +1,5 @@
 <?php
 
-router('/zap', 'ApiZapControle@start');
+router('/zap', 'ApiZapControle@init');
 router('/zap/generate', 'ApiZapControle@generate');
+router('/zap/start', 'ApiZapControle@start');
