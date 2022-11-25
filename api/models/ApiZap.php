@@ -10,7 +10,7 @@ class ApiZap
         ];
     }
 
-    public function post(string $path, array $payload = [],)
+    public function post(string $path, array $payload = [])
     {
         $content = json_encode($payload, JSON_UNESCAPED_UNICODE);
         try {
