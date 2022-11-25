@@ -10,21 +10,19 @@ function get_template(string $status_pagamento): string
     return file_get_contents($path);
 }
 
-if( !function_exists('blade') ) {
-    function blade(array $payload, string $template)
-    {
-        $html = $template;
-        $body = $payload['body'] ?? "";
-        $html = str_replace('@@body@@', $body, $html);
-        foreach ($payload as $k => $v) {
-            $tag = "{" . $k . "}";
-            if (!is_array($v)) {
-                $html = str_replace($tag, $v, $html);
-            }
+function blade(array $payload, string $template)
+{
+    $html = $template;
+    $body = $payload['body'] ?? "";
+    $html = str_replace('@@body@@', $body, $html);
+    foreach ($payload as $k => $v) {
+        $tag = "{" . $k . "}";
+        if (!is_array($v)) {
+            $html = str_replace($tag, $v, $html);
         }
-        $html = trim(str_replace("%20", ' ', $html));
-        return $html;
     }
+    $html = trim(str_replace("%20", ' ', $html));
+    return $html;
 }
 
 

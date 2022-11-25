@@ -36,16 +36,3 @@ function get_domain(): string
 {
     return $_SERVER['REQUEST_SCHEME'] . "//" . $_SERVER['HTTP_HOST'];
 }
-
-function blade(array $payload, string $template)
-{
-    $html = $template;
-    foreach ($payload as $k => $v) {
-        $tag = "{" . $k . "}";
-        if (!is_array($v)) {
-            $html = str_replace($tag, $v, $html);
-        }
-    }
-    $html = trim(str_replace("%20", ' ', $html));
-    return $html;
-}
