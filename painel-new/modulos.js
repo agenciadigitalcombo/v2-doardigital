@@ -54,7 +54,7 @@ export default {
             
                 <CardGeral text="Disparo Whats" size="5" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/634e600666c2e1666080774.png">
+                    <img class="mx-auto" src="/assets/image/chat-whatsapp.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blueNot" />  

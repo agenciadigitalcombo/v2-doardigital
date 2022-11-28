@@ -46,6 +46,10 @@ import ModelosDeEmail from "./modelosDeEmail.js"
 import EditarEmail from "./editarEmail.js"
 import ConfiguracaoEmail from "./configuracaoEmail.js"
 import Checkout from "./checkout.js"
+import Configuracoes from "./configuracoes.js"
+import Mensageria from "./mensageria.js"
+import ConfiguracaoWhats from "./configuracaoWhats.js"
+
 
 const routes = [
     { path: '/', component: Dashboard },
@@ -85,6 +89,9 @@ const routes = [
     { path: '/editar-email', component: EditarEmail },
     { path: '/configuracao-email', component: ConfiguracaoEmail },
     { path: '/checkout', component: Checkout },
+    { path: '/configuracoes', component: Configuracoes },
+    { path: '/mensageria', component: Mensageria },
+    { path: '/configuracao-whats', component: ConfiguracaoWhats },
 ]
 
 const router = VueRouter.createRouter({
