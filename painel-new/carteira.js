@@ -223,7 +223,8 @@ export default {
 
             <div v-show="error">{{error}}</div>
             <br>
-            <p>*Será cobrado o valor de R$5,00 por saque</p>
+            <strong><p>*Será cobrado o valor de R$5,00 por saque</p></strong>
+            <br><br><u>Liberação de valores:</u><br>Boleto e Pix D+ 1<br>Cartão de crédito D+30
         </CardGeral>
 
 
