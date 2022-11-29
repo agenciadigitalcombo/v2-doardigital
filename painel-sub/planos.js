@@ -1,5 +1,5 @@
-import Card from "../components/Card.js"
-import Botao from "../components/Botao.js"
+import Card  from "../components/Card.js"
+import Botao  from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
@@ -11,26 +11,26 @@ import { getUriData, formataMoeda } from "../components/format.js"
 import BotaoAdicionar from "../components/BotaoAdicionar.js"
 import Loader from "../components/Loader.js"
 
-globalThis.apagaPlano = async function ($id) {
+globalThis.apagaPlano = async function($id) {
     let api = new ApiPlanos()
     let request = await api.delete($id)
     window.location.reload()
 }
 
 export default {
-    data: function () {
+    data: function() {
         return {
             isLoad: 'true',
             transferencias: [],
             cols: {
                 "Valor": d => `${d.value}`,
                 "Editar": e => actions(`editar-plano?id=${e.id}`, 'fa fa-pencil', 'blue'),
-                "Apagar": e => actions(`planos`, 'fa-solid fa-trash', 'blue', "apagaPlano", e.id),
+                "Apagar": e => actions(`planos`, 'fa-solid fa-trash', 'blue', "apagaPlano", e.id ),
             },
 
         }
     },
-
+    
     components: {
         Botao,
         Card,
@@ -47,7 +47,7 @@ export default {
         let institution = new MyInstitution()
         let request = await transferencias.listarPlanoDigital(institution.get())
         let requestTransform = request.payload
-        if (request.next) {
+        if(request.next) {
             this.transferencias = this.adapter(requestTransform)
 
             console.log(requestTransform)
@@ -56,11 +56,11 @@ export default {
 
     },
     methods: {
-        adapter(listAll) {
-            return listAll.map(d => ({
+        adapter( listAll ) {
+            return listAll.map( d => ({
                 value: formataMoeda(d.price),
-                ...d,
-            }))
+                ...d,  
+            }) )
         },
         deletar() {
             alert('tafarel')

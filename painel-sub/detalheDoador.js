@@ -19,7 +19,7 @@ export default {
             totalFaturas: 0,
             info: {
                 address: { bairro: null },
-                payload: { notes: { message: null } }
+                payload: { notes: { message: null }}
             },
             totalAnotacoes: [],
             donations: [],
@@ -37,12 +37,12 @@ export default {
             },
             colsSub: {
                 "Data": s => s.dateCreated,
-
+                
                 "Valor": s => s.value,
                 "Tipo": s => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${s.type}
                 </span>`,
-                "Status": s => s.status,
+                "Status": s => status(s.deleted == true ? 'INACTIVE' : s.status),
                 "Ação": s => actions(`detalhe-assinatura?sub_id=${s.id}&doador_fk=${this.ID}`, 'fa-solid fa-eye', 'blue'),
             },
         }
@@ -50,7 +50,7 @@ export default {
     filters: {
         formataMoeda,
         formatRecorrente
-
+        
     },
     components: {
         Table,
@@ -63,7 +63,7 @@ export default {
     async mounted() {
         this.isLoad = 'true'
         let ID = getUriData('id')
-        this.ID = ID
+        this.ID =  ID
         let institution = new MyInstitution()
         let doador = new ApiDoadores()
         let request = await doador.detalhe(ID)
@@ -77,21 +77,22 @@ export default {
 
         if (request.next) {
             this.info = formatRequestDoador
-            this.donations = this.adapter(ids)
-            this.subs = request.payload.subs.map(s => ({
+            this.donations = this.adapter(request.payload.history)
+            this.subs = request.payload.subs.map( s => ({
                 dateCreated: data(s.dateCreated),
                 id: s.id,
                 status: formatRecorrente(s.status),
                 value: formataMoeda(s.value),
                 type: s.billingType,
-            }))
+                deleted: s.deleted
+            }) )
         }
         this.numeroAssinatura = request.payload.subs.length
         this.totalFaturas = this.donations.length
         this.totalAnotacoes = formatRequestDoador.payload?.notes?.reverse()
         this.numeroAnotacoes = request.payload.payload?.notes?.length || 0
         this.isLoad = 'false'
-        console.log(this.donations)
+        console.log(this.subs)
     },
 
     methods: {

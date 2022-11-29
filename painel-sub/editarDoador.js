@@ -62,18 +62,18 @@ export default {
         if (request.next) {
             this.info = formatRequestDoador
             this.customer = formatRequestDoador.asa.id
-
+            
             globalThis.Dados = this.formData
             this.renderInfo()
             this.renderAddress()
             this.renderNote()
-
+            
         }
 
         console.log(CustomerID)
 
 
-
+        
 
     },
     methods: {
@@ -85,16 +85,16 @@ export default {
             const formAnotacoes = new Form(inputsAnotacoes)
             this.inputsAnotacoes = formAnotacoes.render()
         },
-        renderInfo() {
+        renderInfo() {            
             this.formData.nome = this.info.nome
             this.formData.email = this.info.email
             this.formData.telefone = this.info.telefone
-            this.formData.cpf = this.info.cpf
+            this.formData.cpf = this.info.cpf            
             const inputs = [
                 new Input('nome', 'Nome', 'text', 4),
                 new Input('email', 'Email', 'email', 4, true),
                 new Input('telefone', 'Telefone', 'text', 4),
-                new Input('cpf', 'CPF', 'text', 4),
+                new Input('cpf', 'CPF', 'text', 4, true,'',true),
                 new Button('Salvar Alterações'),
             ]
             const form = new Form(inputs)
@@ -106,10 +106,10 @@ export default {
             this.formData.numero = this.info.address.numero
             this.formData.bairro = this.info.address.bairro
             this.formData.cidade = this.info.address.cidade
-            this.formData.estado = this.info.address.estado
+            this.formData.estado = this.info.address.estado            
             const inputsEndereco = [
                 new Input('cep', 'CEP', 'text', 4),
-                new Input('rua', 'Logradouro', 'text', 4, true),
+                new Input('rua', 'Logradouro', 'text', 4, true ),
                 new Input('numero', 'Número', 'text', 4, true),
                 new Input('bairro', 'Bairro', 'text', 4, true),
                 new Input('cidade', 'Cidade', 'text', 4, true),
@@ -132,7 +132,7 @@ export default {
             }))
 
         },
-        async atualizar() {
+        async atualizar() { 
             let api_doador = new ApiDoadores()
             let request = await api_doador.update_info(
                 this.Inst,
@@ -151,12 +151,12 @@ export default {
                 this.formData.estado
             )
             this.error_info = request.message
-            if (request.next) {
+            if( request.next ) {
                 window.location.href = `#/detalhe-doador?id=${this.CustomerID}`
             }
-
+            
         },
-        async add_note() {
+        async add_note() { 
             this.error_note = null
             let api_doador = new ApiDoadores()
             let api = new ApiAdmin()
@@ -170,7 +170,7 @@ export default {
                 this.formData.mensagem
             )
             this.error_note = request_note.message
-            if (request_note.next) {
+            if( request_note.next ) {
                 window.location.href = `#/detalhe-doador?id=${this.CustomerID}`
             }
         },

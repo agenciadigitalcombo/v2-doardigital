@@ -14,27 +14,27 @@ export default {
             data: "",
             cpf: "",
             formData: {
-
+               
             }
         }
     },
-
+    
     methods: {
         async atualizar() {
             this.error = null
             let senha = this.formData.novasenha
             let replica = this.formData.repitasenha
 
-            if (senha != replica) {
+            if(senha != replica) {
                 this.error = "As senhas tem que ser iguais"
                 return
             }
-
-            if (senha.length < 8) {
+            
+            if(senha.length < 8) {
                 this.error = "As senhas tem que no mínimo 8 caracteres"
                 return
             }
-
+            
             let api = new ApiAdmin()
             let request = await api.alterar_senha(
                 this.adm_fk,
@@ -50,7 +50,7 @@ export default {
         this.adm_fk = jwt.get().code
         const inputs = [
             new Input('novasenha', 'Nova senha', 'password', 2),
-            new Input('repitasenha', 'Repita nova senha', 'password', 2),
+            new Input('repitasenha', 'Repita nova senha', 'password', 2),           
             new Button('Atualizar Senha'),
         ]
         globalThis.Dados = this.formData

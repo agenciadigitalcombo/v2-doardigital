@@ -16,7 +16,7 @@ export default {
             donations: [],
             donationsCopy: [],
             totalQuantidade: 0,
-            totalMoney: 0,
+            totalMoney:  0,
             cols: {
                 "Doador": d => `${d.name} <br/> ${d.email}`,
                 "Valor": d => `${d.value}`,
@@ -127,7 +127,7 @@ export default {
                 }
             }
             if (payload.date) {
-
+                
                 let hoje = moment().format('YYYY-MM-DD')
                 let dataSelecionada = payload.date
 
@@ -139,7 +139,7 @@ export default {
                         return dataDonation == hoje
                     })
                 } else if (ontem) {
-
+                    
                     dados = dados.filter(t => {
                         let dataDonation = t.dataCreated
                         return dataDonation == dataSelecionada

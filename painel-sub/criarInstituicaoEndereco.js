@@ -11,19 +11,54 @@ import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
+import Loader from "../components/Loader.js"
+import {cep} from "../components/mask.js"
+import ApiViaCep from "../components/ApiViaCep.js"
+
+
+globalThis.MaskCep = v => {
+  let applyMasc = cep(v)
+  if( applyMasc.length == 9 ) {
+    ApiViaCep(v).then( res => {
+      console.log(res)
+      
+      globalThis.Dados.estado = res.uf
+      globalThis.Dados.logradouro = res.logradouro
+      globalThis.Dados.bairro = res.bairro
+      globalThis.Dados.cidade = res.localidade
+
+      document.querySelector(`[name="estado"]`).value = res.uf
+      document.querySelector(`[name="logradouro"]`).value = res.logradouro
+      document.querySelector(`[name="bairro"]`).value = res.bairro
+      document.querySelector(`[name="cidade"]`).value = res.localidade
+
+
+
+
+      
+      
+
+    } )
+  }
+  return applyMasc  
+}
+
 
 export default {
     data: function() {
         return {
+            isLoad: 'true',
             inputs: "",
-            name: "",
-            lastName: "",
-            email: "",
             data: "",
-            cpf: "",
             formData: {
-                name: "",
-                lastName: ""
+                cep: null,
+                logradouro: null,
+                numero: null,
+                complemento: null,
+                bairro: null,
+                cidade: null,
+                estado: null,
+
             },
             transferencias: [],
             cols: {
@@ -40,7 +75,8 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
-        Table
+        Table,
+        Loader
     },
     watch: {
       formData: {
@@ -52,6 +88,7 @@ export default {
       }
     },
     async mounted() {
+        this.isLoad = 'true'
         let admin = new apiAdmin()
         let institution = new MyInstitution()
         let apiinstituicao = new ApiInstitution()
@@ -62,8 +99,8 @@ export default {
 
         }
         const inputs = [
-            new Input('cep', 'CEP', 'text', 1),
-            new Input('logradouro', 'Logradouro', 'text', 2),
+            new Input('cep', 'CEP', 'text', 1, 1, null, 0, "cep", 'MaskCep'),
+            new Input('logradouro', 'Logradouro', 'text', 2, 1, null, ),
             new Input('numero', 'Número', 'text', 1, true),
             new Input('complemento', 'Complemento', 'text', 1),
             new Input('bairro', 'Bairro', 'text', 1),
@@ -77,6 +114,7 @@ export default {
         globalThis.Dados = this.formData
         const form = new Form(inputs)
         this.inputs = form.render()
+        this.isLoad = 'false'
 
     },
     methods: {
@@ -88,11 +126,15 @@ export default {
         atualizar() {
             
           window.location.href = "#/criar-instituicao-dominio"
+        },
+        consultaCep(){
+          let cep = document.querySelector('#cep')
+          cep = "82540091"
         }
     },
     template: `
     <div>
-    
+    <Loader :open="isLoad" />
     
     <BreadCrumb text="Home" text2="Criar Instituição" />
 
@@ -120,8 +162,8 @@ export default {
             </div>
           </div>
   
-          <div class="w-10 h-10 mx-auto bg-green-500 rounded-full text-lg text-white flex items-center">
-            <span class="text-center text-white w-full">
+          <div class="w-10 h-10 mx-auto bg-white border-2 border-gray-200 rounded-full text-lg text-white flex items-center">
+            <span class="text-center text-gray-600 w-full">
               <svg class="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path class="heroicon-ui" d="M19 10h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2h-2a1 1 0 0 1 0-2h2V8a1 1 0 0 1 2 0v2zM9 12A5 5 0 1 1 9 2a5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h5a5 5 0 0 1 5 5v2z"/>
               </svg>
@@ -136,7 +178,7 @@ export default {
         <div class="relative mb-2">
           <div class="absolute flex align-center items-center align-middle content-center" style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
             <div class="w-full bg-gray-200 rounded items-center align-middle align-center flex-1">
-              <div class="w-0 bg-green-300 py-1 rounded" style="width: 33%;"></div>
+              <div class="w-0 bg-green-300 py-1 rounded" style="width: 0%;"></div>
             </div>
           </div>
   
@@ -178,7 +220,7 @@ export default {
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap place-content-center">
                 
                 <CardGeral text="Criar Instituição - Endereço" size="cinco">
                 <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
@@ -186,6 +228,23 @@ export default {
                 
                 
                 </div>
+                <div class="flex place-content-center">
+                <button onclick="location.href='#/criar-instituicao'" class="border border-blue-500 text-blue-500 block rounded-sm font-bold py-4 px-6 mr-2 flex items-center hover:bg-blue-500 hover:text-white">
+                    <svg class="h-5 w-5 mr-2 fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-49 141 512 512" style="enable-background:new -49 141 512 512;" xml:space="preserve">
+                        <path id="XMLID_10_" d="M438,372H36.355l72.822-72.822c9.763-9.763,9.763-25.592,0-35.355c-9.763-9.764-25.593-9.762-35.355,0 l-115.5,115.5C-46.366,384.01-49,390.369-49,397s2.634,12.989,7.322,17.678l115.5,115.5c9.763,9.762,25.593,9.763,35.355,0 c9.763-9.763,9.763-25.592,0-35.355L36.355,422H438c13.808,0,25-11.193,25-25S451.808,372,438,372z"></path>
+                    </svg>
+                    Página Anterior
+                </button>
+                <button onclick="location.href='#/criar-instituicao-dominio'" class="border border-blue-500 text-blue-500 block rounded-sm font-bold py-4 px-6 mr-2 flex items-center hover:bg-blue-500 hover:text-white">
+                    Página Seguinte
+                    <svg class="h-5 w-5 ml-2 fill-current" clasversion="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="-49 141 512 512" style="enable-background:new -49 141 512 512;" xml:space="preserve">
+                    <path id="XMLID_11_" d="M-24,422h401.645l-72.822,72.822c-9.763,9.763-9.763,25.592,0,35.355c9.763,9.764,25.593,9.762,35.355,0
+                        l115.5-115.5C460.366,409.989,463,403.63,463,397s-2.634-12.989-7.322-17.678l-115.5-115.5c-9.763-9.762-25.593-9.763-35.355,0
+                        c-9.763,9.763-9.763,25.592,0,35.355l72.822,72.822H-24c-13.808,0-25,11.193-25,25S-37.808,422-24,422z"/>
+                    </svg>
+                </button>
+            </div>
              </div>
           </div>
        </div>

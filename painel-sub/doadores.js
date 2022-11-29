@@ -77,15 +77,15 @@ export default {
                     return termo.indexOf(search) > -1
                 })
 
-            }
+            }            
             if (payload.recorrente == "ativo") {
                 dados = dados.filter(d => d.recorrente === true)
             }
-            if (payload.recorrente == "inativo") {
+            if (payload.recorrente == "inativo") { 
                 dados = dados.filter(d => d.recorrente === false)
             }
             this.doadores = dados
-
+            
         },
         adapter(listAll) {
 

@@ -4,10 +4,12 @@ import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
+import Loader from "../components/Loader.js"
 
 export default {
     data: function() {
         return {
+            isLoad: 'true',
         }
     },
     components: {
@@ -16,7 +18,11 @@ export default {
         Card2,
         BreadCrumb,
         CardCarteira,
-        CardGeral
+        CardGeral,
+        Loader
+    },
+    async mounted() {
+
     },
     template: `
     <div>
@@ -29,26 +35,48 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Domínio Personalizado" size="tres">
-                <img src="https://painel.doardigital.com.br/painel/assets/logo/logo-modulos/registro-dominios.png" alt="QR CODE" width="200" height="300">
+                <CardGeral text="Domínio Personalizado" size="5" class="text-center content-center">
+                
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
+                </section>
                 <br>
-                <botao text="Fazer Download" />              
+                <Botao text="Configurar" variation="blueNot" />            
                 </CardGeral>
             
-                <CardGeral text="Configuração E-mail" size="tres">   
+                <CardGeral text="Configuração E-mail" size="5" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
                 </CardGeral>
             
-                <CardGeral text="Tag Manager" size="tres">   
+                <CardGeral text="Disparo Whats" size="5" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="/assets/image/chat-whatsapp.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blueNot" />  
                 </CardGeral>
             
-                <CardGeral text="E-vendas" size="tres">   
+                <CardGeral text="RD Station" size="5" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blueNot" />   
+                </CardGeral>
+
+                <CardGeral text="Scripts" size="5" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blueNot">   
                 </CardGeral>
             
-                <CardGeral text="RD Station" size="tres">   
-                </CardGeral>
-            
-                <CardGeral text="Mailling Boss" size="tres">   
-                </CardGeral>
+               
                         
                 </div>
              </div>

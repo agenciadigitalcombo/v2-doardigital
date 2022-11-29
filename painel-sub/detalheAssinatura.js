@@ -88,13 +88,13 @@ export default {
         let formatRequestDoador = request.payload
         let fkDoador = formatRequestDoador.fk
 
-
+        
 
         let sub_info = formatRequestDoador.subs.find(s => s.id == id_sub)
 
-        let assinatura_open = formatRequestDoador.history.filter(i => {
+        let assinatura_open = formatRequestDoador.history.filter( i => {
             return i.external_fk == sub_info.externalReference && i.status_pagamento == "PENDING"
-        })
+        } )
         this.assinatura_open = assinatura_open
         this.customer = formatRequestDoador.asa.id
 
@@ -109,7 +109,7 @@ export default {
         this.formData.numero = this.info.valor
         this.formData.tipo = this.info.tipo_pagamento
         this.fkDoador = fkDoador
-
+        
 
         const inputs = [
             new Input('data', 'Vencimento', 'date', 2, true),
@@ -153,42 +153,42 @@ export default {
             this.error = null
             let api = new ApiDoacoes()
             let request = await api.sub_cancel(this.fk_inst, this.id_sub)
-            if (request.next) {
-                window.location.href = `#/detalhe-doador?id=${this.fkDoador}`
-            } else {
+            if( request.next ) {
+                window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
+            }else {
                 this.error = request.message
             }
         },
         async atualizar() {
             this.error = null
-            let api = new ApiDoacoes()
+            let api = new ApiDoacoes()            
             let request = await api.sub_update(
-                this.fk_inst,
-                this.id_sub,
+                this.fk_inst, 
+                this.id_sub, 
                 this.formData.tipo,
                 this.formData.numero,
                 this.formData.data
             )
-            if (!request.next) {
+            if( !request.next ) {
                 this.error = request.message
                 return
             }
 
-            this.assinatura_open.forEach(async i => {
+            this.assinatura_open.forEach( async i => {
                 let request = await api.fatura_update(
                     this.fk_inst,
                     i.fatura_id,
                     this.formData.numero,
                     this.formData.tipo,
                     i.data,
-                    this.customer
+                    this.customer 
                 )
-                if (!request.next) {
+                if( !request.next ) {
                     this.error = request.message
                     return
                 }
             });
-            window.location.href = `#/detalhe-doador?id=${this.fkDoador}`
+            window.location.href  = `#/detalhe-doador?id=${this.fkDoador}`
         },
     },
     template: `

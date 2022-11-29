@@ -16,7 +16,7 @@ export default {
             transferencias: [],
             cols: {
                 "Nome": d => `${d.nome_identificacao}`,
-                "Editar": e => actions(`editar-credencial?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+                "Editar": e => actions(`editar-credencial?id=${e.id}`, 'fa fa-pencil', 'blue')
             },
 
         }
@@ -60,8 +60,17 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Lista de Credenciais" size="quatro">
-                <Botao text="Criar Novo" variation="green" link="#/criar-credencial"/>
+                <CardGeral text="" size="quatro">
+                <!-- Code block starts -->
+                    <div class=" container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-300">
+                        <div>
+                            <h4 class="text-2xl font-bold leading-tight text-gray-800">Credenciais</h4>
+                        </div>
+                        <div class="mt-6 md:mt-0">
+                            <Botao text="Criar novo" variation="green" link="#/criar-credencial"/>
+                        </div>
+                    </div>
+                <!-- Code block ends -->
                 <Table :rows="transferencias" :cols="cols" pagination="10" />
                 </CardGeral>
                 

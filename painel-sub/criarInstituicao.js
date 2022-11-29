@@ -1,5 +1,5 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
+import Card from "../components/Card.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import CardGeral from "../components/CardGeral.js"
@@ -11,97 +11,114 @@ import ApiInstitution from "../components/apiInstitution.js"
 import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
+import Loader from "../components/Loader.js"
+import { cpf, tel, cnpj } from "../components/mask.js"
+
+globalThis.MaskCpfCnpj = v => {
+  let tipoMask = v.replace(/\D/gi, '')
+  if (tipoMask.length < 12) {
+    return cpf(v)
+  } else {
+    return cnpj(v)
+  }
+}
+
+globalThis.MaskTel = tel
 
 export default {
-    data: function() {
-        return {
-            inputs: "",
-            name: "",
-            lastName: "",
-            email: "",
-            data: "",
-            cpf: "",
-            formData: {
-            },
-            transferencias: [],
-            cols: {
-                value: d => `${d.value}`,
-                action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
-            },
-
-        }
-    },
-    watch: {
+  data: function () {
+    return {
+      isLoad: 'true',
+      inputs: "",
+      name: "",
+      lastName: "",
+      email: "",
+      data: "",
+      cpf: "",
       formData: {
-        handler(newValue, oldValue) {
-          let tmp = new Tmp()
-          tmp.save(this.formData)
-        },
-        deep: true
-      }
-    },
-    components: {
-        Botao,
-        Card,
-        BreadCrumb,
-        CardCarteira,
-        CardGeral,
-        Table
-    },
-    async mounted() {
-        let admin = new apiAdmin()
-        let institution = new MyInstitution()
-        let apiinstituicao = new ApiInstitution()
-        let request = await admin.list_all_subs(institution.get())
-        let requestTransform = request.payload
-        if(request.next) {
-            console.log(requestTransform)
+      },
+      transferencias: [],
+      cols: {
+        value: d => `${d.value}`,
+        action: e => actions(`detalhe-doacao?id=${e.id}`, 'fa-solid fa-eye', 'blue')
+      },
 
-        }
-       
-        const inputs = [
-            new Input('name', 'Nome Fantasia', 'text', 2),
-            new Select('tipoEmpresa', 'Conta Tipo', 1, [
-              new Option('ASSOCIATION', 'ASSOCIATION'),
-              new Option('MEI', 'MEI'),
-              new Option('LIMITED', 'LIMITED'),
-              new Option('INDIVIDUAL', 'INDIVIDUAL'),
-            ]),
-            new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2),
-            new Input('email', 'Email', 'email', 2, true),
-            new Input('phone', 'Telefone', 'text', 2),
-            new Button('Avançar Cadastro'),
-        ]
+    }
+  },
+  watch: {
+    formData: {
+      handler(newValue, oldValue) {
         let tmp = new Tmp()
-        this.formData = {...this.formData, ...tmp.info() }
-        tmp.save({step: 1})
-        globalThis.Dados = this.formData
-        const form = new Form(inputs)
-        this.inputs = form.render()
+        tmp.save(this.formData)
+      },
+      deep: true
+    }
+  },
+  components: {
+    Botao,
+    Card,
+    BreadCrumb,
+    CardCarteira,
+    CardGeral,
+    Table,
+    Loader
+  },
+  async mounted() {
+    this.isLoad = 'true'
+    let admin = new apiAdmin()
+    let institution = new MyInstitution()
+    let apiinstituicao = new ApiInstitution()
+    let request = await admin.list_all_subs(institution.get())
+    let requestTransform = request.payload
+    if (request.next) {
+      console.log(requestTransform)
+    }
+    this.isLoad = 'false'
+    let tmp = new Tmp()
+    let defaultTipoEmpresa = tmp.info()?.tipoEmpresa || 'SELECIONE'
+    const inputs = [
+      new Input('name', 'Nome Fantasia', 'text', 2),
+      new Select('tipoEmpresa', 'Conta Tipo', 2, [
+        new Option('SELECIONE', 'SELECIONE'),
+        new Option('ASSOCIATION', 'ASSOCIAÇÃO'),
+        new Option('MEI', 'MEI'),
+        new Option('LIMITED', 'LIMITADA'),
+        new Option('INDIVIDUAL', 'INDIVIDUAL'),
+      ], true, defaultTipoEmpresa),
+      new Input('cpfCnpj', 'CPF / CNPJ', 'text', 2, true, '', false, null, 'MaskCpfCnpj'),
+      new Input('email', 'Email', 'email', 2, true),
+      new Input('phone', 'DDD + Celular', 'text', 2, true, '', false, null, 'MaskTel'),
+      new Button('Avançar Cadastro'),
+    ]
 
+    this.formData = { ...this.formData, ...tmp.info() }
+    tmp.save({ step: 1 })
+    globalThis.Dados = this.formData
+    const form = new Form(inputs)
+    this.inputs = form.render()
+
+  },
+  methods: {
+    adapter(listAll) {
+      return listAll.map(d => ({
+        ...d,
+      }))
     },
-    methods: {
-        adapter( listAll ) {
-            return listAll.map( d => ({
-                ...d,  
-            }) )
-        },
-        atualizar() {            
-            window.location.href = "#/criar-instituicao-endereco"
-        }
-    },
-    template: `
+    atualizar() {
+      window.location.href = "#/criar-instituicao-endereco"
+    }
+  },
+  template: `
     <div>
-    {{formData}}
-    
+    <Loader :open="isLoad" />
     <BreadCrumb text="Home" text2="Criar Instituição" />
 
     <div class="w-full py-6">
     <div class="flex">
       <div class="w-1/4">
         <div class="relative mb-2">
-          <div class="w-10 h-10 mx-auto bg-green-500 rounded-full text-lg text-white flex items-center">
-            <span class="text-center text-white w-full">
+         <div class="w-10 h-10 mx-auto bg-white border-2 border-gray-200 rounded-full text-lg text-white flex items-center">
+            <span class="text-center text-gray-600 w-full">
               <svg class="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm14 8V5H5v6h14zm0 2H5v6h14v-6zM8 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
               </svg>
@@ -116,12 +133,12 @@ export default {
         <div class="relative mb-2">
           <div class="absolute flex align-center items-center align-middle content-center" style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
             <div class="w-full bg-gray-200 rounded items-center align-middle align-center flex-1">
-              <div class="w-0 bg-green-300 py-1 rounded" style="width: 100%;"></div>
+              <div class="w-0 bg-green-300 py-1 rounded" style="width: 0%;"></div>
             </div>
           </div>
   
-          <div class="w-10 h-10 mx-auto bg-green-500 rounded-full text-lg text-white flex items-center">
-            <span class="text-center text-white w-full">
+          <div class="w-10 h-10 mx-auto bg-white border-2 border-gray-200 rounded-full text-lg text-white flex items-center">
+            <span class="text-center text-gray-600 w-full">
               <svg class="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path class="heroicon-ui" d="M19 10h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2h-2a1 1 0 0 1 0-2h2V8a1 1 0 0 1 2 0v2zM9 12A5 5 0 1 1 9 2a5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h5a5 5 0 0 1 5 5v2z"/>
               </svg>
@@ -136,7 +153,7 @@ export default {
         <div class="relative mb-2">
           <div class="absolute flex align-center items-center align-middle content-center" style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
             <div class="w-full bg-gray-200 rounded items-center align-middle align-center flex-1">
-              <div class="w-0 bg-green-300 py-1 rounded" style="width: 33%;"></div>
+              <div class="w-0 bg-green-300 py-1 rounded" style="width: 0%;"></div>
             </div>
           </div>
   
@@ -178,7 +195,7 @@ export default {
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap place-content-center">
                 
                 <CardGeral text="Criar Instituição - Info. Geral" size="cinco">
                 <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 

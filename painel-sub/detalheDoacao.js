@@ -123,7 +123,7 @@ export default {
         },
         async atualizar() {
             this.error = null
-            let api = new ApiDoacoes()
+            let api = new ApiDoacoes()          
 
             let request = await api.fatura_update(
                 this.fk_inst,

@@ -12,10 +12,12 @@ import apiAdmin from "../components/apiAdmin.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import Tmp from "../components/tmp.js"
 import Jwt from "../components/jwt.js"
+import Loader from "../components/Loader.js"
 
 export default {
   data: function () {
     return {
+      isLoad: 'true',
       error: null,
       inputs: "",
       name: "",
@@ -49,9 +51,11 @@ export default {
     BreadCrumb,
     CardCarteira,
     CardGeral,
-    Table
+    Table,
+    Loader
   },
   async mounted() {
+    this.isLoad = 'true'
     let admin = new apiAdmin()
     let institution = new MyInstitution()
     let apiinstituicao = new ApiInstitution()
@@ -61,23 +65,39 @@ export default {
       console.log(requestTransform)
 
     }
+    let tmp = new Tmp()
+    let defaultBanco = tmp.info()?.tipoEmpresa || '001'
     const inputs = [
       new Input('name', 'Nome Conta', 'text', 2),
       new Input('conta', 'Conta', 'text', 1),
       new Input('digitoConta', 'Conta Dígito', 'text', 1, true),
       new Input('agencia', 'Agência', 'text', 1),
-      new Input('banco', 'Banco', 'text', 1),
+      new Select('banco', 'Banco', 2, [
+        new Option('', 'Selecione o banco'),
+        new Option('001', 'BANCO DO BRASIL - 001'),
+        new Option('104', 'CAIXA ECONÔMICA FEDERAL - 104'),
+        new Option('033', 'BCO SANTANDER  S.A. - 033'),
+        new Option('237', 'BCO BRADESCO S.A. - 237'),
+        new Option('041', 'BCO DO ESTADO DO RS S.A. - 041'),
+        new Option('748', 'BCO COOPERATIVO SICREDI S.A. - 748'),
+        new Option('756', 'BCO SICOOB - 756'),
+        new Option('341', 'BCO ITAÚ UNIBANCO - 341'),
+        new Option('077', 'BCO INTER - 077'),
+        new Option('756', 'BCO SICOOB - 756'),
+      ], true, defaultBanco),
       new Select('contaTipo', 'Conta Tipo', 1, [
+        new Option('', 'Escolha um tipo de conta'),
         new Option('CONTA_CORRENTE', 'Corrente'),
         new Option('CONTA_POUPANCA', 'Poupança'),
       ]),
       new Button('Avançar Cadastro'),
     ]
-    let tmp = new Tmp()
+    
     this.formData = { ...this.formData, ...tmp.info() }
     globalThis.Dados = this.formData
     const form = new Form(inputs)
     this.inputs = form.render()
+    this.isLoad = 'false'
 
   },
   methods: {
@@ -127,6 +147,7 @@ export default {
   },
   template: `
     <div>
+    <Loader :open="isLoad" />
     
     
     <BreadCrumb text="Home" text2="Criar Instituição" />
@@ -173,12 +194,12 @@ export default {
         <div class="relative mb-2">
           <div class="absolute flex align-center items-center align-middle content-center" style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
             <div class="w-full bg-gray-200 rounded items-center align-middle align-center flex-1">
-              <div class="w-0 bg-green-300 py-1 rounded" style="width: 33%;"></div>
+              <div class="w-0 bg-green-300 py-1 rounded" style="width: 100%;"></div>
             </div>
           </div>
   
-          <div class="w-10 h-10 mx-auto bg-white border-2 border-gray-200 rounded-full text-lg text-white flex items-center">
-            <span class="text-center text-gray-600 w-full">
+          <div class="w-10 h-10 mx-auto bg-green-500 rounded-full text-lg text-white flex items-center">
+            <span class="text-center text-white w-full">
               <svg class="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path class="heroicon-ui" d="M9 4.58V4c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2v.58a8 8 0 0 1 1.92 1.11l.5-.29a2 2 0 0 1 2.74.73l1 1.74a2 2 0 0 1-.73 2.73l-.5.29a8.06 8.06 0 0 1 0 2.22l.5.3a2 2 0 0 1 .73 2.72l-1 1.74a2 2 0 0 1-2.73.73l-.5-.3A8 8 0 0 1 15 19.43V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.58a8 8 0 0 1-1.92-1.11l-.5.29a2 2 0 0 1-2.74-.73l-1-1.74a2 2 0 0 1 .73-2.73l.5-.29a8.06 8.06 0 0 1 0-2.22l-.5-.3a2 2 0 0 1-.73-2.72l1-1.74a2 2 0 0 1 2.73-.73l.5.3A8 8 0 0 1 9 4.57zM7.88 7.64l-.54.51-1.77-1.02-1 1.74 1.76 1.01-.17.73a6.02 6.02 0 0 0 0 2.78l.17.73-1.76 1.01 1 1.74 1.77-1.02.54.51a6 6 0 0 0 2.4 1.4l.72.2V20h2v-2.04l.71-.2a6 6 0 0 0 2.41-1.4l.54-.51 1.77 1.02 1-1.74-1.76-1.01.17-.73a6.02 6.02 0 0 0 0-2.78l-.17-.73 1.76-1.01-1-1.74-1.77 1.02-.54-.51a6 6 0 0 0-2.4-1.4l-.72-.2V4h-2v2.04l-.71.2a6 6 0 0 0-2.41 1.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
               </svg>
@@ -193,7 +214,7 @@ export default {
         <div class="relative mb-2">
           <div class="absolute flex align-center items-center align-middle content-center" style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
             <div class="w-full bg-gray-200 rounded items-center align-middle align-center flex-1">
-              <div class="w-0 bg-green-300 py-1 rounded" style="width: 0%;"></div>
+              <div class="w-0 bg-green-300 py-1 rounded" style="width: 100%;"></div>
             </div>
           </div>
           
@@ -215,16 +236,23 @@ export default {
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap place-content-center">
                 
-                <CardGeral text="Criar Instituição" size="cinco">
+                <CardGeral text="Criar Instituição - Dados Bancários" size="cinco">
                 <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form> 
                 <div v-show="error">{{error}}</div>
-                ok
                 </CardGeral>
                 
                 
                 </div>
+                <div class="flex place-content-center">
+                <button onclick="location.href='#/criar-instituicao-dominio'" class="border border-blue-500 text-blue-500 block rounded-sm font-bold py-4 px-6 mr-2 flex items-center hover:bg-blue-500 hover:text-white">
+                    <svg class="h-5 w-5 mr-2 fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-49 141 512 512" style="enable-background:new -49 141 512 512;" xml:space="preserve">
+                        <path id="XMLID_10_" d="M438,372H36.355l72.822-72.822c9.763-9.763,9.763-25.592,0-35.355c-9.763-9.764-25.593-9.762-35.355,0 l-115.5,115.5C-46.366,384.01-49,390.369-49,397s2.634,12.989,7.322,17.678l115.5,115.5c9.763,9.762,25.593,9.763,35.355,0 c9.763-9.763,9.763-25.592,0-35.355L36.355,422H438c13.808,0,25-11.193,25-25S451.808,372,438,372z"></path>
+                    </svg>
+                    Página Anterior
+                </button> 
+            </div>
              </div>
           </div>
        </div>

@@ -50,7 +50,7 @@ export default {
         let request = await api.info(this.adm_fk)
 
         if (request.next) {
-
+            
         }
 
         this.formData.code = request.payload.code
@@ -62,7 +62,7 @@ export default {
         this.formData.data = request.payload.nascimento
         this.formData.name = request.payload.nome
         this.formData.telefone = tel(request.payload.telefone)
-
+        
 
         const inputs = [
             new Input('name', 'Nome', 'text', 2),
@@ -86,10 +86,10 @@ export default {
     computed: {
         // a computed getter
         formData() {
-            // `this` points to the component instance
-            this.formData.name = ok
+          // `this` points to the component instance
+          this.formData.name = ok
         }
-    },
+      },
     adapter(listAll) {
 
         return listAll.map(d => ({

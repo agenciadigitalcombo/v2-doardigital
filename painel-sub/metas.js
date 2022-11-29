@@ -15,15 +15,15 @@ export default {
          formData: {}
       }
    },
-
+   
    async mounted() {
-
-
+      
+     
       let institution = new MyInstitution()
       let metas = new ApiMetas()
       let request = (await metas.get(institution.get(), 2022)).payload
-
-
+      
+      
 
       this.formData.janeiro = request.janeiro
       this.formData.fevereiro = request.fevereiro
@@ -37,7 +37,7 @@ export default {
       this.formData.outubro = request.outubro
       this.formData.novembro = request.novembro
       this.formData.dezembro = request.dezembro
-
+         
       const inputs = [
          new Input('janeiro', 'Janeiro', 'text', 1),
          new Input('fevereiro', 'Fevereiro', 'text', 1),
@@ -56,18 +56,18 @@ export default {
       globalThis.Dados = this.formData
       const form = new Form(inputs)
       this.inputs = form.render()
-
-
+      
+      
 
 
    },
    methods: {
       async atualizar() {
-         let api = new ApiMetas()
-         let institution = new MyInstitution()
-         let myInstitution = institution.get()
+          let api = new ApiMetas()
+          let institution = new MyInstitution()
+          let myInstitution = institution.get()
 
-         let request = await api.save(
+          let request = await api.save(
             myInstitution,
             2022,
             this.formData.janeiro,
@@ -82,12 +82,12 @@ export default {
             this.formData.outubro,
             this.formData.novembro,
             this.formData.dezembro,
-         )
-         console.log(request)
-         this.error = request.message
+          )
+          console.log(request)
+          this.error = request.message
 
       }
-   },
+  },
    components: {
       Botao,
       Card,

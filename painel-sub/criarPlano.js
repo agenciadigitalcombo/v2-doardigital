@@ -52,7 +52,7 @@ export default {
                 this.formData.price
             )
             this.error = request.message
-            if (request.next) {
+            if(request.next) {
                 window.location.href = "#/planos"
             }
         }
