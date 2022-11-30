@@ -1,9 +1,9 @@
 import http from './http.js'
 
 export default {
-    async cadastrar(nome, email, senha, telefone) {
+    async cadastrar(nome, email, senha, telefone, cpf) {
         return await http.post('/adm/register', {
-            nome, email, senha, telefone
+            nome, email, senha, telefone, cpf
         })
     },
     async login(email, senha) {

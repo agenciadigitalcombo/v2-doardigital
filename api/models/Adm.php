@@ -90,13 +90,14 @@ class Adm
         return preg_replace('/\D/', '', $phone);
     }
 
-    public function register(string $nome, string $email, string $senha, string $telefone): void
+    public function register(string $nome, string $email, string $senha, string $telefone, string $cpf): void
     {
         $this->con->table('administrador');
         $this->con->insert([
             "code" => $this->code('adm_'),
             "nome" => $nome,
             "telefone" => $this->clearPhone($telefone),
+            "cpf" => $this->clearPhone($cpf),
             "email" => $email,
             "senha" => $this->pass($senha),
             "registro" => $this->dateNow(),

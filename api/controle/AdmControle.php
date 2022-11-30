@@ -17,7 +17,8 @@ class AdmControle extends Controle
             "nome" => "Informe seu nome",
             "email" => "Informe seu email",
             "senha" => "Informe sua senha",
-            "telefone" => "Informe seu telefone"
+            "telefone" => "Informe seu telefone",
+            "cpf" => "Informe o numero documento",
         ]);
         $adm = new Adm();
         $jwt = new Jwt();
@@ -25,6 +26,7 @@ class AdmControle extends Controle
         $email = $_REQUEST['email'];
         $senha = $_REQUEST['senha'];
         $telefone = $_REQUEST['telefone'];
+        $cpf = $_REQUEST['cpf'];
         if (strlen($senha) < 8) {
             self::printError(
                 "A senha deve ter no mínimo 8 caracteres",
@@ -37,7 +39,7 @@ class AdmControle extends Controle
                 []
             );
         }
-        $adm->register($nome, $email, $senha, $telefone);
+        $adm->register($nome, $email, $senha, $telefone, $cpf);
         $code = $adm->login($email, $senha);
         $jwt = $jwt->maker(["code" => $code]);
         $env = require __DIR__ . "/../config.php";

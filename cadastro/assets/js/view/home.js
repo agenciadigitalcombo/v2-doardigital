@@ -1,6 +1,7 @@
 import get_template from '../components/get_template.js'
 import adm from '../../../../static/js/api/adm.js'
 const { required, sameAs, minLength } = window.validators
+import {cpf, cnpj } from '../../../../components/mask.js'
 
 export default {
     data: function () {
@@ -12,6 +13,7 @@ export default {
             telefone: null,
             error: null,
             submitStatus: null,
+            cpf: null,
         }
     },
 
@@ -24,8 +26,15 @@ export default {
 			sameAsPassword: sameAs('senha')
 		}
 	},
-
     methods: { 
+        maskCpf() {
+            this.cpf = this.cpf.replace( /\D/gi, '' )            
+            if(this.cpf.length == 11) {                
+                this.cpf = cpf( this.cpf )
+            } else {
+                this.cpf = cnpj( this.cpf )
+            }
+        },
         async cadastrar() {
             this.error = null
 			this.$v.$touch() 
@@ -40,20 +49,19 @@ export default {
                 this.email,
                 this.senha,
                 this.telefone,
-                this.error
+                this.cpf
             )
             if (!res.next) {
                 this.submitStatus = 'FALHA'
                 this.error = res.message
                 return null
-            }
-        
+            }        
             localStorage.setItem('token', res.payload.token)
             localStorage.setItem('nome', this.nome)
             localStorage.setItem('email', this.email)
-            localStorage.setItem('telefone', this.telefone) 
+            localStorage.setItem('telefone', this.telefone)
  
-          window.location.href = "/finalizar-cadastro/index.html#/";
+            window.location.href = "/finalizar-cadastro/index.html#/";
 
         }
         },

@@ -42,7 +42,7 @@
                         <input v-model="email" type="email" name="email" placeholder="Email" required>
                         <input v-model="telefone" type="text" name="phone" v-mask="'(##) # ####-####'"
                             placeholder="Telefone" required>
-                        <input v-model="email" type="cpf" name="cpf" placeholder="CPF" required>
+                        <input v-model="cpf" @input="maskCpf" type="cpf" name="cpf" placeholder="CPF" required>
 
 
                         <div>
