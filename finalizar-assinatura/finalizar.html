@@ -7,7 +7,7 @@
                             class="max-h-16 object-center" />
                     </div>
                 </div>
-                <form class="bg-white rounded-md shadow-2xl p-5">
+                <form @submit="fazerAssinatura" class="bg-white rounded-md shadow-2xl p-5" action="javascript:void(0)" method="POST">
                     <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Iniciar Assinatura</h1>
                     <p class="text-sm font-normal text-gray-600 mb-8 text-center">
                         Inicie sua Jornada com seu próprio
@@ -22,7 +22,7 @@
                     </div>
                     <ul class="grid grid-cols-2 gap-2 max-w-md mx-auto">
                         <li class="relative" v-for="(p,i) in planos">
-                            <input class="sr-only peer" v-model="plano" type="radio" name="plano" :value="p.id"
+                            <input class="sr-only peer" v-model="plano" type="radio" :value="p.id"
                                 :id="'plan_'+i">
                             <label
                                 class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
@@ -44,7 +44,7 @@
                     </ul>
                     <br>
 
-                    <div class="w-full md:w-2/2 lg:w-3/3">
+                    <div v-if="!isPix" class="w-full md:w-2/2 lg:w-3/3">
                         <div class="px-3">
                             <label class="mb-1 block text-base font-medium text-black">
                                 Nome igual no cartão
@@ -56,34 +56,32 @@
                                     <i class="fa-regular fa-circle-check"></i>
                                 </span>
                             </div>
-                            <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                         </div>
                     </div>
 
-                    <div class="w-full md:w-2/2 lg:w-3/3">
+                    <div v-if="!isPix" class="w-full md:w-2/2 lg:w-3/3">
                         <div class="px-3">
                             <label class="mb-1 block text-base font-medium text-black">
                                 Número cartão
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="0000 0000 0000 0000"
+                                <input type="text" required v-model="numero" placeholder="0000 0000 0000 0000"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                    <i class="fa-solid fa-circle-exclamation"></i>
                                 </span>
                             </div>
-                            <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                         </div>
                     </div>
 
-                    <div class="-mx-4 flex flex-wrap">
+                    <div v-if="!isPix" class="-mx-4 flex flex-wrap">
                         <div class="w-full px-4 md:w-1/2 lg:w-1/2">
                             <div class="mb-6 px-3">
                                 <label class="mb-1 block text-base font-medium text-black">
                                     Vencimento
                                 </label>
                                 <div class="relative">
-                                    <input type="email" placeholder="MM/AA"
+                                    <input v-model="vencimento" type="text" required placeholder="MM/AA"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                        <i class="fa-solid fa-circle-exclamation"></i>
@@ -97,7 +95,7 @@
                                     CVV
                                 </label>
                                 <div class="relative">
-                                    <input type="email" placeholder="123"
+                                    <input v-model="cvv" required type="text" placeholder="123"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                        <i class="fa-solid fa-circle-exclamation"></i>
@@ -107,19 +105,23 @@
                         </div>
                     </div>
 
+                    <div v-if="isPix" class="p-8 text-center">
+                        Modo de pagamento PIX
+                    </div>
+
 
                     <label class="relative flex items-center group p-2 text-base font-medium text-black px-3">
                         Possui um cupom?
-                        <input type="checkbox" class="left-1/2 -translate-x-1/2 peer appearance-none rounded-md" />
+                        <input type="checkbox" v-model="isCupom" class="left-1/2 -translate-x-1/2 peer appearance-none rounded-md" />
                         <span
                             class="w-16 h-10 flex items-center flex-shrink-0 ml-4 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-400 after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1"></span>
                     </label>
 
-                    <div class="-mx-4 flex flex-wrap">
+                    <div v-show="isCupom" class="-mx-4 flex flex-wrap">
                         <div class="w-full px-4 md:w-1/2 lg:w-1/2">
                             <div class="mb-6 px-3">
                                 <div class="relative">
-                                    <input type="email" placeholder="Código"
+                                    <input v-model="cupom" type="text" placeholder="Código"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                         <i class="fa-solid fa-circle-exclamation"></i>
@@ -133,26 +135,28 @@
 
                     <div class="flex flex-col mt-3 px-3">
                         <label class="inline-flex items-center">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" required ><span
                                 class="ml-2 text-sm text-gray-700"> Aceito todos os Termos de Uso Doar Digital. <a
                                     style="color:blue" href="" target="_blank">Ver.</a></span>
                         </label>
 
                         <label class="inline-flex items-center mt-3">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" checked><span
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" required ><span
                                 class="ml-2 text-sm text-gray-700">Aceito os valores e taxas Doar Digital. <a
                                     style="color:blue" href="" target="_blank">Ver.</a> </span>
                         </label>
 
 
                     </div>
-
-
                     <button type="submit"
-                        class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">REALIZAR
-                        PAGAMENTO: R$ {{valorAssinaturaPrint}}</button>
-
-
+                        class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">
+                        <div v-if="nextDueDate != 0">
+                            TESTAR POR 30 DIAS GRATUITAMENTE
+                        </div>
+                        <div v-else>
+                            REALIZAR PAGAMENTO: R$ {{valorAssinaturaPrint}}
+                        </div>
+                    </button>
                 </form>
             </div>
         </div>
