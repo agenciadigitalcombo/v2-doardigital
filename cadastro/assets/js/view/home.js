@@ -61,7 +61,7 @@ export default {
             localStorage.setItem('email', this.email)
             localStorage.setItem('telefone', this.telefone)
  
-            window.location.href = "/finalizar-cadastro/index.html#/";
+            window.location.href = "/finalizar-assinatura/#/";
 
         }
         },
