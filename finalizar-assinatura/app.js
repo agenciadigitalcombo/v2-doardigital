@@ -1,9 +1,11 @@
 const { createApp, h } = Vue
 
 import finalizar from "./finalizar.js"
+import obrigado from "./obrigado.js"
 
 const routes = [
     { path: '/', component: finalizar },    
+    { path: '/obrigado', component: obrigado },    
 ]
 
 const router = VueRouter.createRouter({

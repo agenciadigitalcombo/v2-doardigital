@@ -65,7 +65,7 @@
                                 Número cartão
                             </label>
                             <div class="relative">
-                                <input type="text" required v-model="numero" placeholder="0000 0000 0000 0000"
+                                <input type="text" @input="maskNumero" required v-model="numero" placeholder="0000 0000 0000 0000"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                    <i class="fa-solid fa-circle-exclamation"></i>
@@ -81,7 +81,7 @@
                                     Vencimento
                                 </label>
                                 <div class="relative">
-                                    <input v-model="vencimento" type="text" required placeholder="MM/AA"
+                                    <input @input="maskValidade" v-model="vencimento" type="text" required placeholder="MM/AA"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                        <i class="fa-solid fa-circle-exclamation"></i>
@@ -95,7 +95,7 @@
                                     CVV
                                 </label>
                                 <div class="relative">
-                                    <input v-model="cvv" required type="text" placeholder="123"
+                                    <input v-model="cvv" @input="maskCvv" required type="text" placeholder="123"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
                                        <i class="fa-solid fa-circle-exclamation"></i>
