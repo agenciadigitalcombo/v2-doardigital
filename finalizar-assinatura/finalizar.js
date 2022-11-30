@@ -1,6 +1,9 @@
 import getTemplate from '../components/getTemplate.js'
+import Jwt from '../components/jwt.js'
+import Admin from '../components/apiAdmin.js'
 
-const html = await getTemplate( './finalizar' )
+
+const html = await getTemplate('./finalizar')
 
 export default {
     data: function () {
@@ -10,6 +13,10 @@ export default {
             isCupom: false,
             cupom: null,
             nome: null,
+            nomeCadastro: null,
+            email: null,
+            telefone: null,
+            cpf: null,
             numero: null,
             cvv: null,
             vencimento: null,
@@ -19,55 +26,74 @@ export default {
             typePayment: 'CREDIT_CARD',
             recorrente: 1,
             nextDueDate: 0,
+            cep: null,
+            addressNumber: null,
             planos: [
-                { id: 'instituicao', name: 'Instituição' ,value: 98.90, printValue: '98,90', disparos: 1000 },
-                { id: 'igreja', name: 'Paróquia / Igreja' ,value: 98.90, printValue: '98,90', disparos: 1000 },
-                { id: 'oracao', name: 'Grupo de Oração' ,value: 49.90, printValue: '49,90', disparos: 500 },
-                { id: 'missionario', name: 'Missionário' ,value: 49.90, printValue: '49,90', disparos: 500 },
+                { id: 'instituicao', name: 'Instituição', value: 98.90, printValue: '98,90', disparos: 1000 },
+                { id: 'igreja', name: 'Paróquia / Igreja', value: 98.90, printValue: '98,90', disparos: 1000 },
+                { id: 'oracao', name: 'Grupo de Oração', value: 49.90, printValue: '49,90', disparos: 500 },
+                { id: 'missionario', name: 'Missionário', value: 49.90, printValue: '49,90', disparos: 500 },
             ],
             listCupom: [
-                { code: "PIXDOAR", action: 'pix'},
-                { code: "30DOAR", action: 'trial'},
+                { code: "PIXDOAR", action: 'pix' },
+                { code: "30DOAR", action: 'trial' },
             ]
         }
     },
     watch: {
-        plano( idPlanos ) {
-            let plano = this.planos.find( p => p.id == idPlanos )
+        plano(idPlanos) {
+            let plano = this.planos.find(p => p.id == idPlanos)
             this.valorAssinatura = plano.value
-            this.valorAssinaturaPrint = plano.printValue           
+            this.valorAssinaturaPrint = plano.printValue
         },
         cupom(c) {
             this.isPix = false
             this.nextDueDate = 0
             this.typePayment = 'CREDIT_CARD'
 
-            let myCupom = this.listCupom.find( i => i.code == (c.toUpperCase()) )
+            let myCupom = this.listCupom.find(i => i.code == (c.toUpperCase()))
             let action = myCupom?.action || 'default'
-            if( action == 'pix' ) {
+            if (action == 'pix') {
                 this.isPix = true
                 this.typePayment = 'PIX'
-
+                this.nome = this.nomeCadastro
             }
-            if( action == 'trial' ) {
+            if (action == 'trial') {
                 this.nextDueDate = 30
             }
         }
     },
     components: {},
-    async mounted() {},
+    async mounted() {
+        let jwt = new Jwt()
+        let { code } = jwt.get()
+
+        let adm = new Admin()
+        let info = (await adm.info(code)).payload
+
+        this.telefone = info.telefone
+        this.cpf = info.cpf
+        this.email = info.email
+        this.nomeCadastro = info.nome
+
+        
+        
+    },
     methods: {
         fazerAssinatura() {
             this.$router.push('obrigado')
         },
         maskCvv() {
-            this.cvv = this.cvv.replace(/\D/gi, '').substr(0,3)            
+            this.cvv = this.cvv.replace(/\D/gi, '').substr(0, 3)
         },
         maskValidade() {
-            this.vencimento = this.vencimento.replace(/\D/gi, '').replace(/(\d{2,2})(\d{2,2})/gi, '$1/$2').substr(0,5)            
+            this.vencimento = this.vencimento.replace(/\D/gi, '').replace(/(\d{2,2})(\d{2,2})/gi, '$1/$2').substr(0, 5)
         },
         maskNumero() {
-            this.numero = this.numero.replace(/\D/gi, '').replace(/(\d{4,4})(\d{4,4})(\d{4,4})(\d{4,4})/gi, '$1 $2 $3 $4').substr(0,19) 
+            this.numero = this.numero.replace(/\D/gi, '').replace(/(\d{4,4})(\d{4,4})(\d{4,4})(\d{4,4})/gi, '$1 $2 $3 $4').substr(0, 19)
+        },
+        maskCep() {
+            this.cep = this.cep.replace(/\D/gi, '').replace(/(\d{5,5})(\d{3,3})/gi, '$1-$2').substr(0, 9)
         }
     },
     template: html,
