@@ -17,10 +17,8 @@ createApp({
     data() {
         return {}
     },
-    template: `
-                                             
-        <router-view></router-view> 
-    
+    template: `                                             
+        <router-view></router-view>     
     `,
     components: {},
     async mounted() {},

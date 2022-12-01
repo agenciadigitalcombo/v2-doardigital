@@ -427,20 +427,20 @@ class InstituicaoControle extends Controle
         $institution_fk =  $_REQUEST["institution_fk"];
         $fatura = new Fatura();
         $faturas = $fatura->listAll($institution_fk);
-           
-        $group = array_reduce( $faturas, function($acc, $t) {
+
+        $group = array_reduce($faturas, function ($acc, $t) {
             @$acc[$t['doador_fk']][] = $t['fatura_id'];
             return $acc;
-        }, [] );
+        }, []);
 
-        $primeiraDonation = array_map(function($list) {
+        $primeiraDonation = array_map(function ($list) {
             return array_reverse($list)[0];
-        }, $group );
+        }, $group);
 
         $ass = new Banco();
         $ass->table('assinatura');
         $assAll = $ass->select();
-      
+
         $assByRef = array_reduce($assAll, function ($acc, $a) {
             $acc[$a['external_fk']] = $a['subscription_fk'];
             return $acc;
@@ -653,7 +653,7 @@ class InstituicaoControle extends Controle
         $company = $inst->info($institution_fk);
         $contribuidor = $doador->detalhe($fatura['doador_fk']);
         $evendas = $integrate->info($institution_fk, 'EVENDAS');
-        
+
 
         $payload = [
             "instituicao" => $company,
@@ -696,7 +696,7 @@ class InstituicaoControle extends Controle
             "subject" => 'Seu cancelamento foi realizado com sucesso'
         ], 'EMAIL');
 
-   
+
         $payload["email"] = $defaultInvoice['doador_email'];
         $payload["sender"] = $sender;
         $payload["dataDeEnvio"] = date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00';
@@ -704,7 +704,7 @@ class InstituicaoControle extends Controle
         $payload["subject"] = 'Seu cancelamento foi realizado com sucesso';
         $payload["transacao"] = intval((time() / 50) + rand(1, 99));
         $payload["data"] = date('Y-m-d H:i:s');
-        $Fila->send($payload , 'WHATS');
+        $Fila->send($payload, 'WHATS');
 
         self::printSuccess(
             "Cancelado com sucesso",
@@ -786,6 +786,31 @@ class InstituicaoControle extends Controle
         self::printSuccess(
             "Atualizado com sucesso",
             $res_asa
+        );
+    }
+
+    static function faturaStatus()
+    {
+
+        self::requireInputs([
+            "id" => "informe um identificador"
+        ]);
+
+        $id = $_REQUEST['id'];
+
+        $db = new Banco();
+        $db->table('fatura');
+        $db->where([
+            "fatura_id" => $id
+        ]);
+
+        @$status = $db->select()[0]['status_pagamento'] ?? 'PENDING';
+
+        self::printSuccess(
+            "Status Fatura",
+            [
+                "status" => $status
+            ]
         );
     }
 }

@@ -8,10 +8,30 @@
                     </div>
                 </div>
                 <form class="bg-white rounded-md shadow-2xl p-5">
-                    <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Assinatura Realizada!</h1>
-                    <p class="text-sm font-normal text-gray-600 mb-8 text-center">Parabéns agora você tem acesso a
-                        plataforma Doar Digital.<br>Clique abaixo para finalizar o cadastro de sua conta:</p>
-                    <button type="submit"
+                    <div v-show="code">
+                        <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
+                            Realize o seu pagamento PIX
+                        </h1>
+                        <p class="text-sm font-normal text-gray-600 mb-2 text-center">
+                            Mire no QR CODE abaixo
+                        </p>
+                        <img class="w-[250px] mx-auto" :src="'https://api-qrcode.digitalcombo.com.br/?code='+code">
+                        <div class="border-2 border-gray-200 flex justify-between items-center mt-4 py-2">
+                            <i class="fa-solid fa-link mx-4"></i>
+                            <input class="w-full outline-none bg-transparent" type="text" v-model="code" ref="codePix"
+                                >
+
+                            <button @click="copyPix" class="bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600">
+                                Copiar
+                            </button>
+                        </div>
+                    </div>
+                    <div v-show="!code">
+                        <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Assinatura Realizada!</h1>
+                        <p class="text-sm font-normal text-gray-600 mb-8 text-center">Parabéns agora você tem acesso a
+                            plataforma Doar Digital.<br>Clique abaixo para finalizar o cadastro de sua conta:</p>
+                    </div>
+                    <button v-show="!code" type="submit"
                         class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">AVANÇAR</button>
                     <div class="flex justify-between mt-4">
                     </div>

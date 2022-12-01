@@ -1,6 +1,10 @@
 import getTemplate from '../components/getTemplate.js'
 import Jwt from '../components/jwt.js'
 import Admin from '../components/apiAdmin.js'
+import Fatura from '../components/apiFatura.js'
+import apiFatura from '../components/apiFatura.js'
+import Tmp from '../components/Temp.js'
+
 
 
 const html = await getTemplate('./finalizar')
@@ -8,6 +12,8 @@ const html = await getTemplate('./finalizar')
 export default {
     data: function () {
         return {
+            message: null,
+            load: false,
             plano: 'instituicao',
             isPix: false,
             isCupom: false,
@@ -22,11 +28,11 @@ export default {
             vencimento: null,
             valorAssinatura: 98.90,
             valorAssinaturaPrint: '98,90',
-            institution_fk: '',
+            institution_fk: 'inst_62d98175c7e51',
             typePayment: 'CREDIT_CARD',
             recorrente: 1,
             nextDueDate: 0,
-            cep: null,
+            cep: '',
             addressNumber: null,
             planos: [
                 { id: 'instituicao', name: 'Instituição', value: 98.90, printValue: '98,90', disparos: 1000 },
@@ -76,12 +82,39 @@ export default {
         this.email = info.email
         this.nomeCadastro = info.nome
 
-        
-        
     },
     methods: {
-        fazerAssinatura() {
-            this.$router.push('obrigado')
+        async fazerAssinatura() {
+            this.message = null
+            this.load = true
+            let api = new apiFatura()
+            let res = await api.finalizar(
+                this.institution_fk,
+                this.valorAssinatura,
+                this.recorrente,
+                this.email,
+                this.nome,
+                this.cpf,
+                this.telefone,
+                this.cep,
+                this.addressNumber,
+                this.typePayment,
+                this.nome,
+                this.numero,
+                this.cvv,
+                this.vencimento,
+                this.nextDueDate
+            )
+            this.load = false
+            this.message = res.message
+            if (res.next) {
+                let tmp = new Tmp()
+                tmp.save({
+                    code: res?.payload?.code,
+                    id: 'pay_' + res?.payload?.url?.split('/')?.reverse?.()?.[0]
+                })
+                this.$router.push('obrigado')
+            }
         },
         maskCvv() {
             this.cvv = this.cvv.replace(/\D/gi, '').substr(0, 3)

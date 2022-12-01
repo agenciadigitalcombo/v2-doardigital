@@ -7,7 +7,8 @@
                             class="max-h-16 object-center" />
                     </div>
                 </div>
-                <form @submit="fazerAssinatura" class="bg-white rounded-md shadow-2xl p-5" action="javascript:void(0)" method="POST">
+                <form @submit="fazerAssinatura" class="bg-white rounded-md shadow-2xl p-5" action="javascript:void(0)"
+                    method="POST">
                     <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Iniciar Assinatura</h1>
                     <p class="text-sm font-normal text-gray-600 mb-8 text-center">
                         Inicie sua Jornada com seu próprio
@@ -22,8 +23,7 @@
                     </div>
                     <ul class="grid grid-cols-2 gap-2 max-w-md mx-auto">
                         <li class="relative" v-for="(p,i) in planos">
-                            <input class="sr-only peer" v-model="plano" type="radio" :value="p.id"
-                                :id="'plan_'+i">
+                            <input class="sr-only peer" v-model="plano" type="radio" :value="p.id" :id="'plan_'+i">
                             <label
                                 class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
                                 :for="'plan_'+i">{{p.name}}</label>
@@ -53,7 +53,7 @@
                                 <input type="text" v-model="nome" required placeholder="Nome igual no cartão"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                    <i class="fa-regular fa-circle-check"></i>
+                                    <i class="fa-regular fa-circle-check text-[#0C0]"></i>
                                 </span>
                             </div>
                         </div>
@@ -65,10 +65,11 @@
                                 Número cartão
                             </label>
                             <div class="relative">
-                                <input type="text" @input="maskNumero" required v-model="numero" placeholder="0000 0000 0000 0000"
+                                <input type="text" @input="maskNumero" required v-model="numero"
+                                    placeholder="0000 0000 0000 0000"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                   <i class="fa-solid fa-circle-exclamation"></i>
+                                    <i class="fa-solid fa-circle-exclamation text-[#C00]"></i>
                                 </span>
                             </div>
                         </div>
@@ -81,10 +82,11 @@
                                     Vencimento
                                 </label>
                                 <div class="relative">
-                                    <input @input="maskValidade" v-model="vencimento" type="text" required placeholder="MM/AA"
+                                    <input @input="maskValidade" v-model="vencimento" type="text" required
+                                        placeholder="MM/AA"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                       <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-circle-exclamation text-[#C00]"></i>
                                     </span>
                                 </div>
                             </div>
@@ -98,7 +100,7 @@
                                     <input v-model="cvv" @input="maskCvv" required type="text" placeholder="123"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                       <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-circle-exclamation text-[#C00]"></i>
                                     </span>
                                 </div>
                             </div>
@@ -112,10 +114,10 @@
                                     CEP
                                 </label>
                                 <div class="relative">
-                                    <input @input="maskCep"  v-model="cep" type="text" required placeholder="00000-000"
+                                    <input @input="maskCep" v-model="cep" type="text" required placeholder="00000-000"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                       <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-circle-exclamation text-[#C00]"></i>
                                     </span>
                                 </div>
                             </div>
@@ -129,7 +131,7 @@
                                     <input v-model="addressNumber" required type="text" placeholder="00"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                       <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-circle-exclamation text-[#C00]"></i>
                                     </span>
                                 </div>
                             </div>
@@ -140,10 +142,10 @@
                         Modo de pagamento PIX
                     </div>
 
-
                     <label class="relative flex items-center group p-2 text-base font-medium text-black px-3">
                         Possui um cupom?
-                        <input type="checkbox" v-model="isCupom" class="left-1/2 -translate-x-1/2 peer appearance-none rounded-md" />
+                        <input type="checkbox" v-model="isCupom"
+                            class="left-1/2 -translate-x-1/2 peer appearance-none rounded-md" />
                         <span
                             class="w-16 h-10 flex items-center flex-shrink-0 ml-4 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-400 after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1"></span>
                     </label>
@@ -155,43 +157,42 @@
                                     <input v-model="cupom" type="text" placeholder="Código"
                                         class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                     <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-circle-exclamation text-[#C00]"></i>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-
                     <div class="flex flex-col mt-3 px-3">
                         <label class="inline-flex items-center">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" required ><span
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" required><span
                                 class="ml-2 text-sm text-gray-700"> Aceito todos os Termos de Uso Doar Digital. <a
                                     style="color:blue" href="" target="_blank">Ver.</a></span>
                         </label>
 
                         <label class="inline-flex items-center mt-3">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" required ><span
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" required><span
                                 class="ml-2 text-sm text-gray-700">Aceito os valores e taxas Doar Digital. <a
                                     style="color:blue" href="" target="_blank">Ver.</a> </span>
                         </label>
 
-
                     </div>
-                    <button type="submit"
+                    <button :disabled="load" type="submit"
                         class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">
                         <div v-if="nextDueDate != 0">
-                            TESTAR POR 30 DIAS GRATUITAMENTE
+                            {{ load ? 'Processando...' : 'TESTAR POR 30 DIAS GRATUITAMENTE' }}
                         </div>
                         <div v-else>
-                            REALIZAR PAGAMENTO: R$ {{valorAssinaturaPrint}}
+                            {{ load ? 'Processando...' : 'REALIZAR PAGAMENTO: R$ ' + valorAssinaturaPrint}}
                         </div>
                     </button>
+                    <div class="w-full rounded bg-[#0F5] text-cente p-4" v-show="message">
+                        {{message}}
+                    </div>
                 </form>
             </div>
         </div>
-
 
         <div class="hidden bg-cover lg:block lg:w-3/5"
             style="background-image: url(/assets/image/doardigital-assinaturadigital.jpg)">
@@ -203,7 +204,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 </div>
