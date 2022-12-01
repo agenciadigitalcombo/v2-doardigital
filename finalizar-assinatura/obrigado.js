@@ -21,8 +21,14 @@ export default {
         let api = new apiFatura()
         let validador = async () => {
             let res = await api.status(this.id)
-            console.log(res)
-            // setTimeout( validador, 3000 )
+            console.log({status: res.payload.status, id: this.id })
+            if(res.payload.status == 'RECEIVED') {
+                tmp.delete()
+                window.location.href = "/painel-new/#/criar-instituicao"
+            }else{
+                setTimeout( validador, 3000 )
+            }
+
         }
         validador()
     },

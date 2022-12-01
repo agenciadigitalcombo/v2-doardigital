@@ -7,7 +7,7 @@
                             class="object-center max-h-16" />
                     </div>
                 </div>
-                <form class="bg-white rounded-md shadow-2xl p-5">
+                <div class="bg-white rounded-md shadow-2xl p-5">
                     <div v-show="code">
                         <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
                             Realize o seu pagamento PIX
@@ -31,11 +31,13 @@
                         <p class="text-sm font-normal text-gray-600 mb-8 text-center">Parabéns agora você tem acesso a
                             plataforma Doar Digital.<br>Clique abaixo para finalizar o cadastro de sua conta:</p>
                     </div>
-                    <button v-show="!code" type="submit"
-                        class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">AVANÇAR</button>
+                    <a v-show="!code" href="/painel-new/#/criar-instituicao"
+                        class="block text-center w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">
+                        AVANÇAR
+                    </a>
                     <div class="flex justify-between mt-4">
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
