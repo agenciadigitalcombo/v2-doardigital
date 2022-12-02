@@ -1,29 +1,50 @@
-<div style="background-color: #0f2936" class="">
-    <div class="flex justify-center min-h-screen">
-        <div class="flex items-center w-full max-w-lg mx-auto lg:w-3/6">
-            <div class="flex-1">
-                <div class="text-center">
-                    <div class="pt-3 flex flex-wrap justify-center mb-3"><img
-                            src="https://painel.doardigital.com.br/api/upload/logomarca-bethania.png"
-                            class="object-center" />
+<div  :style="{'background-color': cor }" >
+
+    <div class="block w-full lg:w-[50%] px-[20px] lg:px-[75px] py-[25px]">
+        <div class="flex-1">
+            <div class="text-center">
+                <div class="pt-3 flex flex-wrap justify-center mb-3">
+                    <img :src="logo" class="object-center" onerror="logoDefault(this)" />
+                </div>
+            </div>
+
+            <form class="bg-white rounded-md shadow-2xl p-5">
+                <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Finalize sua Doação</h1>
+                <p class="text-sm font-normal text-gray-600 mb-8 text-center">Sua Doação Ajuda a Salvar
+                    Vidas.<br>Preencha abaixo e clique em avançar:</p>
+
+
+                <div class="w-full px-3 md:w-2/2 lg:w-3/3">
+                    <div class="">
+                        <label class=" block text-base font-medium text-black ">
+                            Nome
+                        </label>
+                        <div class="relative">
+                            <input type="email" placeholder="Qual seu nome?"
+                                class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                            <span class="absolute top-1/2 left-4 -translate-y-1/2">
+
+                            </span>
+                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
+
+                            </span>
+                        </div>
+                        <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                     </div>
-
-
                 </div>
 
-                <form class="bg-white rounded-md shadow-2xl p-5">
-                    <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Finalize sua Doação</h1>
-                    <p class="text-sm font-normal text-gray-600 mb-8 text-center">Sua Doação Ajuda a Salvar
-                        Vidas.<br>Preencha abaixo e clique em avançar:</p>
 
 
-                    <div class="w-full px-3 md:w-2/2 lg:w-3/3">
+
+                <div class="-mx-4 px-3 flex flex-wrap">
+
+                    <div class="w-full px-3 md:w-1/2 lg:w-1/2">
                         <div class="">
                             <label class=" block text-base font-medium text-black ">
-                                Nome
+                                Celular
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="Qual seu nome?"
+                                <input type="email" placeholder="DDD+Celular"
                                     class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
 
@@ -32,231 +53,195 @@
 
                                 </span>
                             </div>
-                            <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
+                            <p class="invisible text-sm text-red-500 mb-2">E-mail inválido</p>
                         </div>
                     </div>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+                        <label class=" block text-base font-medium text-black ">
+                            CPF
+                        </label>
+                        <div class="mb-6 ">
+                            <div class="relative">
+                                <input type="email" placeholder="000.000.000-00"
+                                    class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
+                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
 
-
-
-
-                    <div class="-mx-4 px-3 flex flex-wrap">
-
-                        <div class="w-full px-3 md:w-1/2 lg:w-1/2">
-                            <div class="">
-                                <label class=" block text-base font-medium text-black ">
-                                    Celular
-                                </label>
-                                <div class="relative">
-                                    <input type="email" placeholder="DDD+Celular"
-                                        class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
-                                    <span class="absolute top-1/2 left-4 -translate-y-1/2">
-
-                                    </span>
-                                    <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                    </span>
-                                </div>
-                                <p class="invisible text-sm text-red-500 mb-2">E-mail inválido</p>
-                            </div>
-                        </div>
-                        <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                            <label class=" block text-base font-medium text-black ">
-                                CPF
-                            </label>
-                            <div class="mb-6 ">
-                                <div class="relative">
-                                    <input type="email" placeholder="000.000.000-00"
-                                        class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                    <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                    </span>
-                                </div>
+                                </span>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="-mx-4 px-3 flex flex-wrap">
+                <div class="-mx-4 px-3 flex flex-wrap">
 
-                        <div class="w-full px-3 md:w-1/2 lg:w-1/2">
-                            <div class="">
-                                <label class=" block text-base font-medium text-black ">
-                                    CEP
-                                </label>
-                                <div class="relative">
-                                    <input type="email" placeholder="00000-000"
-                                        class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
-                                    <span class="absolute top-1/2 left-4 -translate-y-1/2">
-
-                                    </span>
-                                    <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                    </span>
-                                </div>
-                                <p class="invisible text-sm text-red-500 mb-2">E-mail inválido</p>
-                            </div>
-                        </div>
-                        <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                            <label class=" block text-base font-medium text-black ">
-                                Número Residência
-                            </label>
-                            <div class="mb-6 ">
-                                <div class="relative">
-                                    <input type="email" placeholder="N° Casa / AP"
-                                        class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                    <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <p>*Será utilizado para enviar nossos materiais.</p>
-                    <br>
-                    <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3">
+                    <div class="w-full px-3 md:w-1/2 lg:w-1/2">
                         <div class="">
                             <label class=" block text-base font-medium text-black ">
-                                Selecione valor da Doação
-                            </label>
-                        </div>
-                    </div>
-                    <ul class="grid grid-cols-3 gap-x-2 max-w-md mx-auto">
-
-                        <li class="relative">
-                            <input class="sr-only peer" type="radio" value="yes" name="answer" id="answer_yes">
-                            <label
-                                class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
-                                for="answer_yes">Cartão</label>
-
-                            <div class="absolute  w-5 h-5 peer-checked:block top-6 right-3">
-                                <i class="fa fa-credit-card-alt" style="font-size:18px;"></i>
-                            </div>
-                        </li>
-
-                        <li class="relative">
-                            <input class="sr-only peer" type="radio" value="no" name="answer" id="answer_no">
-                            <label
-                                class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
-                                for="answer_no">PIX</label>
-
-                            <div class="absolute w-5 h-5 peer-checked:block top-6 right-3">
-                                <i class="fa fa-qrcode" style="font-size:24px;"></i>
-                            </div>
-                        </li>
-
-                        <li class="relative">
-                            <input class="sr-only peer" type="radio" value="maybe" name="answer" id="answer_maybe">
-                            <label
-                                class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
-                                for="answer_maybe">Boleto</label>
-
-                            <div class="absolute w-5 h-5 peer-checked:block top-6 right-3">
-                                <i class="fa fa-barcode" style="font-size:20px;"></i>
-                            </div>
-                        </li>
-                    </ul>
-                    <br>
-
-                    <div class="w-full md:w-2/2 lg:w-3/3">
-                        <div class="px-3">
-                            <label class="mb-1 px-3block text-base font-medium text-black">
-                                Nome igual no cartão
+                                CEP
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="Nome igual no cartão"
+                                <input type="email" placeholder="00000-000"
+                                    class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                                <span class="absolute top-1/2 left-4 -translate-y-1/2">
+
+                                </span>
+                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
+
+                                </span>
+                            </div>
+                            <p class="invisible text-sm text-red-500 mb-2">E-mail inválido</p>
+                        </div>
+                    </div>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+                        <label class=" block text-base font-medium text-black ">
+                            Número Residência
+                        </label>
+                        <div class="mb-6 ">
+                            <div class="relative">
+                                <input type="email" placeholder="N° Casa / AP"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 right-4 -translate-y-1/2">
 
                                 </span>
                             </div>
-                            <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                         </div>
-                    </div>
-
-                    <div class="w-full md:w-2/2 lg:w-3/3">
-                        <div class="px-3">
-                            <label class="mb-1 block text-base font-medium text-black">
-                                Número cartão
-                            </label>
-                            <div class="relative">
-                                <input type="email" placeholder="0000 0000 0000 0000"
-                                    class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
-                            </div>
-                            <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
-                        </div>
-                    </div>
-
-                    <div class="-mx-4 flex flex-wrap">
-                        <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                            <div class="mb-6 px-3">
-                                <label class="mb-3 block text-base font-medium text-black">
-                                    Vencimento
-                                </label>
-                                <div class="relative">
-                                    <input type="email" placeholder="MM/AA"
-                                        class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                    <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                            <div class="mb-3 px-3">
-                                <label class="mb-3 block text-base font-medium text-black">
-                                    CVV
-                                </label>
-                                <div class="relative">
-                                    <input type="email" placeholder="123"
-                                        class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                    <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col mt-3 px-1">
-                        <label class="inline-flex items-center mt-3">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span
-                                class="ml-2 text-sm text-gray-700"> Aceito receber confirmações de pagamento "Sobre
-                                minhas Doações” *</span>
-                        </label>
-
-                        <label class="inline-flex items-center mt-3">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" checked><span
-                                class="ml-2 text-sm text-gray-700">Aceito receber novos e-mails com
-                                novidades.</span>
-                        </label>
 
                     </div>
 
-                    <button type="submit"
-                        class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">DOAR
-                        R$ 1.000,00 MENSAL</button>
-                    <div class="flex justify-between mt-4">
-
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
-        <div class="hidden bg-cover lg:block lg:w-3/5"
-            style="background-image: url(https://doardigital.com.br/wp-content/uploads/2022/11/1616586757e-book_acolhimento_que_gera_e_transforma_vidas_-_comunidade_bethania-01.jpg)">
-            <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-0">
-                <div>
-                    <h2 class="text-4xl font-bold text-white"></h2>
-
-                    <p class="max-w-xl mt-3 text-gray-300"></p>
                 </div>
-            </div>
-        </div>
+                <p>*Será utilizado para enviar nossos materiais.</p>
+                <br>
+                <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3">
+                    <div class="">
+                        <label class=" block text-base font-medium text-black ">
+                            Selecione valor da Doação
+                        </label>
+                    </div>
+                </div>
+                <ul class="grid grid-cols-3 gap-x-2 max-w-md mx-auto">
 
+                    <li class="relative">
+                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="CREDIT_CARD" name="answer" id="answer_yes">
+                        <label
+                            class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
+                            for="answer_yes">Cartão</label>
+
+                        <div class="absolute  w-5 h-5 peer-checked:block top-6 right-3">
+                            <i class="fa fa-credit-card-alt" style="font-size:18px;"></i>
+                        </div>
+                    </li>
+
+                    <li class="relative">
+                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="PIX" name="answer" id="answer_no">
+                        <label
+                            class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
+                            for="answer_no">PIX</label>
+
+                        <div class="absolute w-5 h-5 peer-checked:block top-6 right-3">
+                            <i class="fa fa-qrcode" style="font-size:24px;"></i>
+                        </div>
+                    </li>
+
+                    <li class="relative">
+                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="BOLETO" name="answer" id="answer_maybe">
+                        <label
+                            class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
+                            for="answer_maybe">Boleto</label>
+
+                        <div class="absolute w-5 h-5 peer-checked:block top-6 right-3">
+                            <i class="fa fa-barcode" style="font-size:20px;"></i>
+                        </div>
+                    </li>
+                </ul>
+                <br>
+
+                <div class="w-full md:w-2/2 lg:w-3/3">
+                    <div class="px-3">
+                        <label class="mb-1 px-3block text-base font-medium text-black">
+                            Nome igual no cartão
+                        </label>
+                        <div class="relative">
+                            <input type="email" placeholder="Nome igual no cartão"
+                                class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
+                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
+
+                            </span>
+                        </div>
+                        <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-2/2 lg:w-3/3">
+                    <div class="px-3">
+                        <label class="mb-1 block text-base font-medium text-black">
+                            Número cartão
+                        </label>
+                        <div class="relative">
+                            <input type="email" placeholder="0000 0000 0000 0000"
+                                class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
+                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
+
+                            </span>
+                        </div>
+                        <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
+                    </div>
+                </div>
+
+                <div class="-mx-4 flex flex-wrap">
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+                        <div class="mb-6 px-3">
+                            <label class="mb-3 block text-base font-medium text-black">
+                                Vencimento
+                            </label>
+                            <div class="relative">
+                                <input type="email" placeholder="MM/AA"
+                                    class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
+                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+                        <div class="mb-3 px-3">
+                            <label class="mb-3 block text-base font-medium text-black">
+                                CVV
+                            </label>
+                            <div class="relative">
+                                <input type="email" placeholder="123"
+                                    class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
+                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col mt-3 px-1">
+                    <label class="inline-flex items-center mt-3">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span
+                            class="ml-2 text-sm text-gray-700"> Aceito receber confirmações de pagamento "Sobre
+                            minhas Doações” *</span>
+                    </label>
+
+                    <label class="inline-flex items-center mt-3">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" checked>
+                        <span class="ml-2 text-sm text-gray-700">
+                            Aceito receber novos e-mails com novidades.
+                        </span>
+                    </label>
+
+                </div>
+
+                <button type="submit"
+                    class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">
+                    DOAR R$ {{ printValor }} MENSAL
+                </button>
+                <div class="flex justify-between mt-4"></div>
+            </form>
+        </div>
     </div>
+  
+    <img class="hidden lg:block z-index-[-1] fixed top-0 right-0 w-[50%] h-[100vh] object-cover" :src="bg" onerror="imgDefault(this)" >
 </div>

@@ -2,10 +2,7 @@ import getTemplate from '../components/getTemplate.js'
 import Temp from '../components/Temp.js'
 import api from './api.js'
 
-
 const html = await getTemplate( './plano' )
-
-console.log(api)
 
 export default {
     data: function () {
@@ -21,13 +18,11 @@ export default {
     },
     components: {},
     async mounted() {
-
         let tmp = new Temp();  
         let data = tmp.info() 
         this.email = data.email
-        this.typeDonation = data.typeDonation
-        this.valor = data.valor
-
+        this.typeDonation = data?.typeDonation || 'subscribe'
+        this.valor = data?.valor || api.planos[0].price
     },
     methods: {
         goToEnd() {

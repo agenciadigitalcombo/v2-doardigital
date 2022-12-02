@@ -1,6 +1,5 @@
 import Inst from '../components/apiInstitution.js'
 
-
 const domain = window.location.hostname == '127.0.0.1' ? 'teste.hostdoar.tk' : window.location.hostname
 const inst = new Inst()
 const info = await inst.get(domain)
