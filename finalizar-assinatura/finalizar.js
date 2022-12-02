@@ -113,6 +113,12 @@ export default {
                     code: res?.payload?.code,
                     id: 'pay_' + res?.payload?.url?.split('/')?.reverse?.()?.[0]
                 })
+                if (this.typePayment == 'CREDIT_CARD') {
+                    let adm = new Admin()
+                    let jwt = new Jwt()
+                    let { code } = jwt.get()
+                    adm.step(code, 1)
+                }
                 this.$router.push('obrigado')
             }
         },

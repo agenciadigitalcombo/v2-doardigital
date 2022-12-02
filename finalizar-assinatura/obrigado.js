@@ -1,6 +1,8 @@
 import getTemplate from '../components/getTemplate.js'
 import apiFatura from '../components/apiFatura.js'
 import Tmp from '../components/Temp.js'
+import Admin from '../components/apiAdmin.js'
+import Jwt from '../components/jwt.js'
 
 
 const html = await getTemplate( './obrigado' )
@@ -23,6 +25,10 @@ export default {
             let res = await api.status(this.id)
             console.log({status: res.payload.status, id: this.id })
             if(res.payload.status == 'RECEIVED') {
+                let adm = new Admin()
+                let jwt = new Jwt()
+                let { code } = jwt.get()
+                adm.step(code, 1)
                 tmp.delete()
                 window.location.href = "/painel-new/#/criar-instituicao"
             }else{

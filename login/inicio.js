@@ -43,20 +43,26 @@ export default {
          let myInst = new myInstitution()
          let selectInst = myInst.get()
 
-         if(!selectInst) {
-            if(defaultInst) {
+         if (!selectInst) {
+            if (defaultInst) {
                myInst.save(defaultInst)
             }
          }
 
-          let level = 'sub'
-          if (requestInfo.payload.adm.length == 0) {
-              level = 'adm'
-          }
-          if (requestInfo.payload.sass == '1') {
-              level = 'super'
-          }
-          this.redirect(level)
+         let level = 'sub'
+         if (requestInfo.payload.adm.length == 0) {
+            level = 'adm'
+         }
+         if (requestInfo.payload.sass == '1') {
+            level = 'super'
+         }
+
+         let etapa = requestInfo?.payload?.etapa || 0
+         if (etapa == 0) {
+            window.location.href = "/finalizar-assinatura/#/"
+            return 0
+         }
+         this.redirect(level)
       }
    },
    async mounted() {
@@ -64,6 +70,7 @@ export default {
       let jwt = new Jwt()
       let code = jwt.get()?.code
       let requestInfo = await api.info(code)
+
       let level = 'sub'
       if (requestInfo?.payload?.adm?.length == 0) {
          level = 'adm'
@@ -72,6 +79,11 @@ export default {
          level = 'super'
       }
       if (jwt.logged()) {
+         let etapa = requestInfo?.payload?.etapa || 0
+         if (etapa == 0) {
+            window.location.href = "/finalizar-assinatura/#/"
+            return 0
+         }
          this.redirect(level)
       }
    },
