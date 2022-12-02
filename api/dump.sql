@@ -11,7 +11,7 @@ CREATE TABLE administrador (
     etapa int,
     ativo int,
     sass int,
-    credencial int,
+    credencial int not null,
     adm VARCHAR(255)
 );
 

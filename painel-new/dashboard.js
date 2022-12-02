@@ -72,6 +72,9 @@ export default {
       let Resumo = new ApiRelatorio()
       let doadores = new ApiDoadores()
       let institution = new MyInstitution()
+      if(!institution.get()) {
+        this.$router.push('criar-instituicao')
+      }
       let request = await doadores.lista(institution.get())
       let requestPayload = request.payload
       let requestTotal = requestPayload.length

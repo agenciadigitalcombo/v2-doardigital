@@ -3,11 +3,6 @@ import ApiInstitution from "../components/apiInstitution.js"
 import myInstitution from "../components/myInstitution.js"
 import Jwt from "../components/jwt.js"
 
-
-
-
-
-
 export default {
    data: function () {
       return {
@@ -43,13 +38,15 @@ export default {
 
          let apiInst = new ApiInstitution()
          let allInst = await apiInst.list(code)
-         let defaultInst = allInst.payload[0].institution_fk
+         let defaultInst = allInst.payload?.[0]?.institution_fk
 
          let myInst = new myInstitution()
          let selectInst = myInst.get()
 
          if(!selectInst) {
-            myInst.save(defaultInst)
+            if(defaultInst) {
+               myInst.save(defaultInst)
+            }
          }
 
           let level = 'sub'
