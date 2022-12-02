@@ -155,7 +155,7 @@
                 </ul>
                 <br>
 
-                <div class="w-full md:w-2/2 lg:w-3/3">
+                <div v-if="tipoPagamento=='CREDIT_CARD'" class="w-full md:w-2/2 lg:w-3/3">
                     <div class="px-3">
                         <label class="mb-1 px-3block text-base font-medium text-black">
                             Nome igual no cartão
@@ -171,7 +171,7 @@
                     </div>
                 </div>
 
-                <div class="w-full md:w-2/2 lg:w-3/3">
+                <div v-if="tipoPagamento=='CREDIT_CARD'" class="w-full md:w-2/2 lg:w-3/3">
                     <div class="px-3">
                         <label class="mb-1 block text-base font-medium text-black">
                             Número cartão
@@ -187,7 +187,7 @@
                     </div>
                 </div>
 
-                <div class="-mx-4 flex flex-wrap">
+                <div v-if="tipoPagamento=='CREDIT_CARD'" class="-mx-4 flex flex-wrap">
                     <div class="w-full px-4 md:w-1/2 lg:w-1/2">
                         <div class="mb-6 px-3">
                             <label class="mb-3 block text-base font-medium text-black">
