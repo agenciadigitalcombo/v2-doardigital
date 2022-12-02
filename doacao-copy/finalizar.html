@@ -1,10 +1,10 @@
 <div  :style="{'background-color': cor }" >
 
     <div class="block w-full lg:w-[50%] px-[20px] lg:px-[75px] py-[25px]">
-        <div class="flex-1">
+        <div class="block w-[500px] max-w-[100%] mx-auto">
             <div class="text-center">
                 <div class="pt-3 flex flex-wrap justify-center mb-3">
-                    <img :src="logo" class="object-center" onerror="logoDefault(this)" />
+                    <img :src="logo" class="h-[60px] mx-auto mb-4" class="object-center" onerror="logoDefault(this)" />
                 </div>
             </div>
 
@@ -177,7 +177,7 @@
                             Número cartão
                         </label>
                         <div class="relative">
-                            <input type="email" placeholder="0000 0000 0000 0000"
+                            <input @input="maskNumero" v-model="numero" type="text" required placeholder="0000 0000 0000 0000"
                                 class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                             <span class="absolute top-1/2 right-4 -translate-y-1/2">
 
