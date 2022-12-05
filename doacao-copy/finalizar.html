@@ -1,192 +1,145 @@
-<div  :style="{'background-color': cor }" >
-
+<div :style="{'background-color': cor }">
     <div class="block w-full lg:w-[50%] px-[20px] lg:px-[75px] py-[25px]">
         <div class="block w-[500px] max-w-[100%] mx-auto">
             <div class="text-center">
                 <div class="pt-3 flex flex-wrap justify-center mb-3">
-                    <img :src="logo" class="h-[60px] mx-auto mb-4" class="object-center" onerror="logoDefault(this)" />
+                    <img :src="logo" class="h-[60px] mx-auto mb-4 object-center" onerror="logoDefault(this)" />
                 </div>
             </div>
-
-            <form class="bg-white rounded-md shadow-2xl p-5">
-                <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">Finalize sua Doação</h1>
-                <p class="text-sm font-normal text-gray-600 mb-8 text-center">Sua Doação Ajuda a Salvar
-                    Vidas.<br>Preencha abaixo e clique em avançar:</p>
-
-
+            <form class="bg-white rounded-md shadow-2xl p-5" action="javascript:void(0)" method="POST" @submit="fazerAssinatura">
+                <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
+                    Finalize sua Doação
+                </h1>
+                <p class="text-sm font-normal text-gray-600 mb-8 text-center">
+                    Sua Doação Ajuda a Salvar
+                    Vidas.<br>Preencha abaixo e clique em avançar:
+                </p>
                 <div class="w-full px-3 md:w-2/2 lg:w-3/3">
-                    <div class="">
-                        <label class=" block text-base font-medium text-black ">
+                    <div>
+                        <label class="block text-base font-medium text-black">
                             Nome
                         </label>
                         <div class="relative">
-                            <input type="email" placeholder="Qual seu nome?"
+                            <input required v-model="nameDonation" placeholder="Qual seu nome?"
                                 class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
-                            <span class="absolute top-1/2 left-4 -translate-y-1/2">
-
-                            </span>
-                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                            </span>
                         </div>
-                        <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                     </div>
                 </div>
-
-
-
-
                 <div class="-mx-4 px-3 flex flex-wrap">
-
                     <div class="w-full px-3 md:w-1/2 lg:w-1/2">
-                        <div class="">
-                            <label class=" block text-base font-medium text-black ">
+                        <div>
+                            <label class="block text-base font-medium text-black">
                                 Celular
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="DDD+Celular"
+                                <input required @input="maskTel" v-model="telefone" placeholder="DDD+Celular"
                                     class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 left-4 -translate-y-1/2">
-
-                                </span>
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
                             </div>
-                            <p class="invisible text-sm text-red-500 mb-2">E-mail inválido</p>
                         </div>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                        <label class=" block text-base font-medium text-black ">
+                        <label class="block text-base font-medium text-black ">
                             CPF
                         </label>
                         <div class="mb-6 ">
                             <div class="relative">
-                                <input type="email" placeholder="000.000.000-00"
+                                <input required v-model="cpf" @input="maskCpf" placeholder="000.000.000-00"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="-mx-4 px-3 flex flex-wrap">
-
                     <div class="w-full px-3 md:w-1/2 lg:w-1/2">
-                        <div class="">
+                        <div>
                             <label class=" block text-base font-medium text-black ">
                                 CEP
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="00000-000"
+                                <input v-model="cep" @input="maskCep" placeholder="00000-000"
                                     class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 left-4 -translate-y-1/2">
-
-                                </span>
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
                             </div>
-                            <p class="invisible text-sm text-red-500 mb-2">E-mail inválido</p>
                         </div>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                        <label class=" block text-base font-medium text-black ">
+                        <label class="block text-base font-medium text-black">
                             Número Residência
                         </label>
                         <div class="mb-6 ">
                             <div class="relative">
-                                <input type="email" placeholder="N° Casa / AP"
+                                <input v-model="addressNumber" placeholder="N° Casa / AP"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-                <p>*Será utilizado para enviar nossos materiais.</p>
-                <br>
+                <p>*Será utilizado para enviar nossos materiais.</p> <br>
                 <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3">
-                    <div class="">
-                        <label class=" block text-base font-medium text-black ">
+                    <div>
+                        <label class="block text-base font-medium text-black">
                             Selecione valor da Doação
                         </label>
                     </div>
                 </div>
                 <ul class="grid grid-cols-3 gap-x-2 max-w-md mx-auto">
-
                     <li class="relative">
-                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="CREDIT_CARD" name="answer" id="answer_yes">
+                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="CREDIT_CARD"
+                            id="tipo_card">
                         <label
                             class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
-                            for="answer_yes">Cartão</label>
-
+                            for="tipo_card">
+                            Cartão
+                        </label>
                         <div class="absolute  w-5 h-5 peer-checked:block top-6 right-3">
                             <i class="fa fa-credit-card-alt" style="font-size:18px;"></i>
                         </div>
                     </li>
-
                     <li class="relative">
-                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="PIX" name="answer" id="answer_no">
+                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="PIX" id="tipo_pix">
                         <label
                             class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
-                            for="answer_no">PIX</label>
-
+                            for="tipo_pix">
+                            PIX
+                        </label>
                         <div class="absolute w-5 h-5 peer-checked:block top-6 right-3">
                             <i class="fa fa-qrcode" style="font-size:24px;"></i>
                         </div>
                     </li>
-
                     <li class="relative">
-                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="BOLETO" name="answer" id="answer_maybe">
+                        <input v-model="tipoPagamento" class="sr-only peer" type="radio" value="BOLETO"
+                            id="tipo_boleto">
                         <label
                             class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent"
-                            for="answer_maybe">Boleto</label>
-
+                            for="tipo_boleto">
+                            Boleto
+                        </label>
                         <div class="absolute w-5 h-5 peer-checked:block top-6 right-3">
                             <i class="fa fa-barcode" style="font-size:20px;"></i>
                         </div>
                     </li>
-                </ul>
-                <br>
-
+                </ul> <br>
                 <div v-if="tipoPagamento=='CREDIT_CARD'" class="w-full md:w-2/2 lg:w-3/3">
                     <div class="px-3">
                         <label class="mb-1 px-3block text-base font-medium text-black">
                             Nome igual no cartão
                         </label>
                         <div class="relative">
-                            <input type="email" placeholder="Nome igual no cartão"
+                            <input required v-model="nome" placeholder="Nome igual no cartão"
                                 class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                            </span>
                         </div>
-                        <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                     </div>
                 </div>
-
                 <div v-if="tipoPagamento=='CREDIT_CARD'" class="w-full md:w-2/2 lg:w-3/3">
                     <div class="px-3">
                         <label class="mb-1 block text-base font-medium text-black">
                             Número cartão
                         </label>
                         <div class="relative">
-                            <input @input="maskNumero" v-model="numero" type="text" required placeholder="0000 0000 0000 0000"
+                            <input required @input="maskNumero" v-model="numero" placeholder="0000 0000 0000 0000"
                                 class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                            </span>
                         </div>
-                        <p class="invisible text-sm text-red-500 mb-1">Preencha seu Nome</p>
                     </div>
                 </div>
-
                 <div v-if="tipoPagamento=='CREDIT_CARD'" class="-mx-4 flex flex-wrap">
                     <div class="w-full px-4 md:w-1/2 lg:w-1/2">
                         <div class="mb-6 px-3">
@@ -194,54 +147,53 @@
                                 Vencimento
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="MM/AA"
+                                <input required @input="maskValidade" v-model="vencimento" placeholder="MM/AA"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/2">
                         <div class="mb-3 px-3">
                             <label class="mb-3 block text-base font-medium text-black">
-                                CVV
+                                CCV
                             </label>
                             <div class="relative">
-                                <input type="email" placeholder="123"
+                                <input required @input="maskCvv" v-model="cvv" placeholder="123"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                                <span class="absolute top-1/2 right-4 -translate-y-1/2">
-
-                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="flex flex-col mt-3 px-1">
                     <label class="inline-flex items-center mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span
-                            class="ml-2 text-sm text-gray-700"> Aceito receber confirmações de pagamento "Sobre
-                            minhas Doações” *</span>
+                        <input required type="checkbox" class="form-checkbox h-5 w-5 text-gray-600">
+                        <span class="ml-2 text-sm text-gray-700">
+                            Aceito receber confirmações de pagamento "Sobre minhas Doações” *
+                        </span>
                     </label>
-
                     <label class="inline-flex items-center mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" checked>
+                        <input required type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
                         <span class="ml-2 text-sm text-gray-700">
                             Aceito receber novos e-mails com novidades.
                         </span>
                     </label>
-
                 </div>
-
-                <button type="submit"
+                <button type="submit" :disabled="load"
                     class="block w-full bg-green-600 mt-5 py-2 rounded-2xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">
-                    DOAR R$ {{ printValor }} MENSAL
+                    <div v-if="load">
+                        Processando...
+                    </div>
+                    <div v-else>
+                        DOAR R$ {{ printValor }} MENSAL
+                    </div>
                 </button>
+                <div v-show="message" class="rounded bg-[#0F5] px-8 py-4 text-center">
+                    {{message}}
+                </div>
                 <div class="flex justify-between mt-4"></div>
-            </form>
+            </form>            
         </div>
     </div>
-  
-    <img class="hidden lg:block z-index-[-1] fixed top-0 right-0 w-[50%] h-[100vh] object-cover" :src="bg" onerror="imgDefault(this)" >
+    <img class="hidden lg:block z-index-[-1] fixed top-0 right-0 w-[50%] h-[100vh] object-cover" :src="bg"
+        onerror="imgDefault(this)">
 </div>

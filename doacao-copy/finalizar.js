@@ -1,10 +1,10 @@
 import getTemplate from '../components/getTemplate.js'
 import Temp from '../components/Temp.js'
+import { cpf, tel } from '../components/mask.js'
+import apiFatura from '../components/apiFatura.js'
 import api from './api.js'
 
-const html = await getTemplate( './finalizar' )
-
-console.log(api)
+const html = await getTemplate('./finalizar')
 
 export default {
     data: function () {
@@ -17,11 +17,13 @@ export default {
             logo: api.logo,
             cor: api.cor ? api.cor : '#232d7b',
             bg: api?.bg,
+            recorrente: null,
 
+            nameDonation: null,
             name: null,
             telefone: null,
-            cpf: null,
-
+            cpf: '',
+            institution_fk: api.institution_fk,
             addressNumber: null,
             cep: null,
 
@@ -29,22 +31,25 @@ export default {
             numero: null,
             vencimento: null,
             cvv: null,
+            message: null,
+            load: false,
+
+            nextDueDate: 0,
         }
     },
-    components: {
-        
-    },
+    components: {},
     async mounted() {
-        let tmp = new Temp();  
-        let data = tmp.info() 
+        let tmp = new Temp();
+        let data = tmp.info()
         this.email = data.email
         this.typeDonation = data?.typeDonation || 'subscribe'
         this.valor = data?.valor || api.planos[0].price
         this.printValor = this.price(this.valor)
+        this.recorrente = this.typeDonation == 'single' ? 0 : 1
     },
     methods: {
-        price(v) {            
-            return (+v).toLocaleString('pt-br', {minimumFractionDigits: 2})
+        price(v) {
+            return (+v).toLocaleString('pt-br', { minimumFractionDigits: 2 })
         },
         async fazerAssinatura() {
             this.message = null
@@ -52,15 +57,15 @@ export default {
             let api = new apiFatura()
             let res = await api.finalizar(
                 this.institution_fk,
-                this.valorAssinatura,
+                this.valor,
                 this.recorrente,
                 this.email,
-                this.nome,
+                this.nameDonation,
                 this.cpf,
                 this.telefone,
                 this.cep,
                 this.addressNumber,
-                this.typePayment,
+                this.tipoPagamento,
                 this.nome,
                 this.numero,
                 this.cvv,
@@ -70,17 +75,11 @@ export default {
             this.load = false
             this.message = res.message
             if (res.next) {
-                let tmp = new Tmp()
+                let tmp = new Temp()
                 tmp.save({
                     code: res?.payload?.code,
                     id: 'pay_' + res?.payload?.url?.split('/')?.reverse?.()?.[0]
                 })
-                if (this.typePayment == 'CREDIT_CARD') {
-                    let adm = new Admin()
-                    let jwt = new Jwt()
-                    let { code } = jwt.get()
-                    adm.step(code, 1)
-                }
                 this.$router.push('obrigado')
             }
         },
@@ -95,7 +94,13 @@ export default {
         },
         maskCep() {
             this.cep = this.cep.replace(/\D/gi, '').replace(/(\d{5,5})(\d{3,3})/gi, '$1-$2').substr(0, 9)
-        }
+        },
+        maskCpf() {
+            this.cpf = cpf(this.cpf)
+        },
+        maskTel() {
+            this.telefone = tel(this.telefone)
+        },
     },
     template: html,
 }

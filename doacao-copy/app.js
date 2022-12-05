@@ -7,8 +7,7 @@ import obrigado from "./obrigado.js"
 const routes = [
     { path: '/', component: plano },
     { path: '/finalizar', component: finalizar },
-    { path: '/obrigado', component: obrigado },
-    
+    { path: '/obrigado', component: obrigado },    
 ]
 
 const router = VueRouter.createRouter({
@@ -21,9 +20,9 @@ createApp({
         return {}
     },
     template: `
-                                             
-        <router-view></router-view> 
-    
+        <div>
+            <router-view></router-view>
+        </div>    
     `,
     components: {},
     async mounted() {},
