@@ -56,7 +56,9 @@ export function Money(val) {
             val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
             break;
         case 6:
-            val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
+        case 7:
+        case 8:
+            val = val.replace(/(\d{1,3})(\d{3})(\d{2})/gi, '$1.$2,$3')
             break;
         default:
             val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
