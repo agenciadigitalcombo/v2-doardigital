@@ -1,27 +1,26 @@
 import getTemplate from '../components/getTemplate.js'
-import apiFatura from '../components/apiFatura.js'
 import Tmp from '../components/Temp.js'
-import Admin from '../components/apiAdmin.js'
-import Jwt from '../components/jwt.js'
-
+import api from './api.js'
 
 const html = await getTemplate( './obrigado' )
 
 export default {
     data: function () {
         return { 
+            logo: api.logo,
+            cor: api.cor,
             code: null,
-            id: null,
+            tipo: null,
+            url: null,
         }
     },
     components: {},
     async mounted() {
         let tmp = new Tmp()
         let info = tmp.info()
-        this.code = info.code
-        this.id = info.id
-        
-
+        this.code = info?.code
+        this.tipo = info?.tipo
+        this.url = info?.url
     },
     methods: {
         copyPix() {

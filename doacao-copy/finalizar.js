@@ -78,7 +78,8 @@ export default {
                 let tmp = new Temp()
                 tmp.save({
                     code: res?.payload?.code,
-                    id: 'pay_' + res?.payload?.url?.split('/')?.reverse?.()?.[0]
+                    tipo: this.tipoPagamento,
+                    url: res?.payload?.url
                 })
                 this.$router.push('obrigado')
             }
