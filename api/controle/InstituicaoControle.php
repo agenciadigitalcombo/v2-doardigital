@@ -307,7 +307,8 @@ class InstituicaoControle extends Controle
             $cor,
             $titulo,
             $tags,
-            $descricao
+            $descricao,
+            $showCep
         );
 
         $address->save(
