@@ -58,12 +58,6 @@ class FaturaControle extends Controle
             "cpf" => "informe CPF",
             "telefone" => "Informe seu telefone",
             "email" => "Informe seu email",
-            "cep" => "Informe seu CEP",
-            "logadouro" => "Informe seu Logadouro",
-            "numero" => "Informe o numero do Logadouro",
-            "bairro" => "INforme seu bairro",
-            "cidade" => "Informe sua cidade",
-            "estado" => "Informe seu estado",
             "valor" => "Informe o valor",
             "tipo_pagamento" => "Informe um tipo de pagamento",
         ]);
@@ -160,17 +154,20 @@ class FaturaControle extends Controle
             $email,
             $nascimento
         );
-        $address->save(
-            $clientInfo["external_fk"],
-            "ADDRESS_COSTUMER",
-            $cep,
-            $logadouro,
-            $numero,
-            $complemento,
-            $bairro,
-            $cidade,
-            $estado
-        );
+
+        if(!empty($cep)) {
+            $address->save(
+                $clientInfo["external_fk"],
+                "ADDRESS_COSTUMER",
+                $cep,
+                $logadouro,
+                $numero,
+                $complemento,
+                $bairro,
+                $cidade,
+                $estado
+            );
+        } 
 
         $pay_external_fk = $fatura->maker_fk();
         $customer = $clientInfo['pagamento_fk'];

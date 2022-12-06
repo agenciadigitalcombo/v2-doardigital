@@ -6,6 +6,8 @@ import api from './api.js'
 
 const html = await getTemplate('./finalizar')
 
+console.log(api)
+
 export default {
     data: function () {
         return {
@@ -25,7 +27,7 @@ export default {
             cpf: '',
             institution_fk: api.institution_fk,
             addressNumber: null,
-            cep: null,
+            cep: '',
 
             tipoPagamento: 'CREDIT_CARD',
             numero: null,
@@ -35,6 +37,7 @@ export default {
             load: false,
 
             nextDueDate: 0,
+            showCep: api?.showCep == 0 ? false : true
         }
     },
     components: {},

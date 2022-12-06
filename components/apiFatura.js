@@ -21,10 +21,7 @@ export default class {
     ) {
         cep = cep.replace(/\D/gi, '')
         let address = {}
-        if (cep.length != 8) {
-            cep = '82540091'
-            numero = '11'
-        }
+        
         if (cep.length == 8) {
             let requestViaCep = await ApiViaCep(cep)
             address = {

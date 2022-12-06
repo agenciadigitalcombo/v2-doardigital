@@ -49,35 +49,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="-mx-4 px-3 flex flex-wrap">
-                    <div class="w-full px-3 md:w-1/2 lg:w-1/2">
-                        <div>
-                            <label class=" block text-base font-medium text-black ">
-                                CEP
-                            </label>
-                            <div class="relative">
-                                <input v-model="cep" @input="maskCep" placeholder="00000-000"
-                                    class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full px-4 md:w-1/2 lg:w-1/2">
-                        <label class="block text-base font-medium text-black">
-                            Número Residência
-                        </label>
-                        <div class="mb-6 ">
-                            <div class="relative">
-                                <input v-model="addressNumber" placeholder="N° Casa / AP"
-                                    class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p>*Será utilizado para enviar nossos materiais.</p> <br>
+
                 <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3">
                     <div>
                         <label class="block text-base font-medium text-black">
-                            Selecione valor da Doação
+                            Selecione Tipo da Doação
                         </label>
                     </div>
                 </div>
@@ -118,6 +94,49 @@
                         </div>
                     </li>
                 </ul> <br>
+
+
+
+                <div class="-mx-4 px-3 flex flex-wrap" v-if="showCep || tipoPagamento == 'CREDIT_CARD'">
+                    <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3">
+                        <div>
+                            <label class="block text-base font-medium text-black">
+                                Informe o endereço
+                            </label>
+                        </div>
+                    </div>
+                    <div class="w-full px-3 md:w-1/2 lg:w-1/2">
+                        <div>
+                            <label class=" block text-base font-medium text-black ">
+                                CEP
+                            </label>
+                            <div class="relative">
+                                <input v-model="cep" @input="maskCep" placeholder="00000-000"
+                                    class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+                        <label class="block text-base font-medium text-black">
+                            Número Residência
+                        </label>
+                        <div class="mb-6 ">
+                            <div class="relative">
+                                <input v-model="addressNumber" placeholder="N° Casa / AP"
+                                    class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3" v-if="tipoPagamento=='CREDIT_CARD'">
+                    <div>
+                        <label class="block text-base font-medium text-black">
+                            Informe os dados do cartão
+                        </label>
+                    </div>
+                </div>
+                
                 <div v-if="tipoPagamento=='CREDIT_CARD'" class="w-full md:w-2/2 lg:w-3/3">
                     <div class="px-3">
                         <label class="mb-1 px-3block text-base font-medium text-black">
