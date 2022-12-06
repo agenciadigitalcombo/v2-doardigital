@@ -139,7 +139,8 @@ CREATE TABLE institution (
     accountName VARCHAR(75),
     agency VARCHAR(75),
     bank VARCHAR(75),
-    bankAccountType VARCHAR(75)
+    bankAccountType VARCHAR(75),
+    showCep int not null
 );
 
 CREATE TABLE meta (

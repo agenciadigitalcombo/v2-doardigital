@@ -283,6 +283,7 @@ class InstituicaoControle extends Controle
         $bairro = $_REQUEST['bairro'];
         $cidade = $_REQUEST['cidade'];
         $estado = $_REQUEST['estado'];
+        @$showCep = $_REQUEST['showCep'] ?? 0;
 
         $company = new Instituicao();
         $address = new Endereco();

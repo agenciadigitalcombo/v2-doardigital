@@ -136,7 +136,8 @@ class Instituicao
         string $cor,
         string $titulo,
         string $tags,
-        string $descricao
+        string $descricao,
+        $showCep = 0
     ): void {
         $this->con->where([
             "institution_fk" => $institution_fk
@@ -152,6 +153,7 @@ class Instituicao
             "titulo" => $titulo,
             "tags" => $tags,
             "descricao" => $descricao,
+            "showCep" => $showCep,
         ]);
     }
 
@@ -218,6 +220,7 @@ class Instituicao
             "agency" => $payload["agency"] ?? null,
             "bank" => $payload["bank"] ?? null,
             "bankAccountType" => $payload["bankAccountType"] ?? null,
+            "showCep" => $payload["showCep"] ?? 0,
         ];
     }
 }

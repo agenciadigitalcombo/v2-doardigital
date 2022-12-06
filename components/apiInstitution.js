@@ -40,7 +40,8 @@ export default class myInstitution {
         complemento,
         bairro,
         cidade,
-        estado
+        estado,
+        showCep = 0
     ) {
         return await http.post('/instituicao/update-info', {
             institution_fk,
@@ -61,6 +62,7 @@ export default class myInstitution {
             bairro,
             cidade,
             estado,
+            showCep,
         })
     }
     async cadastrar(

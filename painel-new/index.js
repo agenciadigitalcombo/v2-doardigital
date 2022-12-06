@@ -14,6 +14,7 @@ import Doadores from "./doadores.js"
 import Carteira from "./carteira.js"
 import Perfil from "./perfil.js"
 import Configuracao from "./configuracao.js"
+import ConfiguracaoCheckout from "./configuracaoCheckout.js"
 import Modelos from "./modelosDeEmail.js"
 import Modulos from "./modulos.js"
 import Metas from "./metas.js"
@@ -92,6 +93,7 @@ const routes = [
     { path: '/configuracoes', component: Configuracoes },
     { path: '/mensageria', component: Mensageria },
     { path: '/configuracao-whats', component: ConfiguracaoWhats },
+    { path: '/configuracao-checkout', component: ConfiguracaoCheckout },
 ]
 
 const router = VueRouter.createRouter({
