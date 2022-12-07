@@ -216,3 +216,20 @@ CREATE TABLE message_aws (
     execution_arn VARCHAR(255),
     institution_fk VARCHAR(255)
 );
+
+CREATE TABLE recover (
+    id int not null auto_increment primary key,
+    protocolo VARCHAR(255),
+    finalizado int not null,
+    recuperado int not null,
+    nome VARCHAR(255),
+    email VARCHAR(255),
+    telefone VARCHAR(255),
+    cpf VARCHAR(255),
+    tipo_pagamento VARCHAR(255),
+    valor VARCHAR(255),
+    recorrente int not null,
+    dataHoraRegistro VARCHAR(255),
+    dataHoraUpdate VARCHAR(255),
+    institution_fk VARCHAR(255)
+);
