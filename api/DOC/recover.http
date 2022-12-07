@@ -8,6 +8,7 @@
 @telefone=
 @cpf=
 @tipo_pagamento=
+@institution_fk=
 
 ###
 GET {{host}}/api/recover
