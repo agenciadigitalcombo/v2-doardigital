@@ -1,0 +1,46 @@
+@host=https://doardigital.tk
+
+@protocolo=
+@email=
+@valor=
+@recorrente=
+@nome=
+@telefone=
+@cpf=
+@tipo_pagamento=
+
+###
+GET {{host}}/api/recover
+
+###
+POST {{host}}/api/recover/save
+Content-Type: application/x-www-form-urlencoded;
+
+email={{email}}
+&valor={{valor}}
+&recorrente={{recorrente}}
+
+###
+POST {{host}}/api/recover/save
+Content-Type: application/x-www-form-urlencoded;
+
+email={{email}}
+&valor={{valor}}
+&recorrente={{recorrente}}
+&protocolo={{protocolo}}
+&nome={{nome}}
+&telefone={{telefone}}
+&cpf={{cpf}}
+&tipo_pagamento={{tipo_pagamento}}
+
+###
+POST {{host}}/api/recover/finalizar
+Content-Type: application/x-www-form-urlencoded;
+
+protocolo={{protocolo}}
+
+###
+POST {{host}}/api/recover/info
+Content-Type: application/x-www-form-urlencoded;
+
+protocolo={{protocolo}}
