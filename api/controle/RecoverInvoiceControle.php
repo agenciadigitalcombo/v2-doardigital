@@ -14,8 +14,8 @@ class RecoverInvoiceControle extends Controle
         self::requireInputs([
             "institution_fk" => "Informe a instituição",
             "email" => "Informe seu email",
-            "valor" => "Informe sua senha",
-            "recorrente" => "Informe seu telefone",
+            "valor" => "Informe um valor",
+            "recorrente" => "Informe se é uma doação unica ou recorrente",
         ]);
         $protocolo = $_REQUEST['protocolo'] ?? '';
         if (empty($protocolo)) {

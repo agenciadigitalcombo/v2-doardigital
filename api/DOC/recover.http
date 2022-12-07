@@ -1,14 +1,14 @@
-@host=https://doardigital.tk
+@host=https://hostdoar.tk
 
 @protocolo=
-@email=
-@valor=
+@email=br.rafael@outlook.com
+@valor=10
 @recorrente=
 @nome=
 @telefone=
 @cpf=
 @tipo_pagamento=
-@institution_fk=
+@institution_fk=inst_62d98175c7e51
 
 ###
 GET {{host}}/api/recover
@@ -17,7 +17,8 @@ GET {{host}}/api/recover
 POST {{host}}/api/recover/save
 Content-Type: application/x-www-form-urlencoded;
 
-email={{email}}
+institution_fk={{institution_fk}}
+&email={{email}}
 &valor={{valor}}
 &recorrente={{recorrente}}
 
