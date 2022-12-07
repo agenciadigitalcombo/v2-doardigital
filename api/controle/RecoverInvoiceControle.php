@@ -82,7 +82,7 @@ class RecoverInvoiceControle extends Controle
         $protocoloSelect = self::getRecover();
         self::printSuccess(
             "Informações",
-            self::porter( $protocoloSelect)
+            self::porter( (array) $protocoloSelect)
         );
     }
 
