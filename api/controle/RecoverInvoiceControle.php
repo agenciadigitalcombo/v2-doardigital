@@ -15,7 +15,6 @@ class RecoverInvoiceControle extends Controle
             "institution_fk" => "Informe a instituição",
             "email" => "Informe seu email",
             "valor" => "Informe um valor",
-            "recorrente" => "Informe se é uma doação unica ou recorrente",
         ]);
         $protocolo = $_REQUEST['protocolo'] ?? '';
         if (empty($protocolo)) {
@@ -108,7 +107,7 @@ class RecoverInvoiceControle extends Controle
         $institution_fk = $_REQUEST['institution_fk'] ?? '';
         $email = $_REQUEST['email'] ?? '';
         $valor = $_REQUEST['valor'] ?? '';
-        $recorrente = $_REQUEST['recorrente'] ?? '';
+        $recorrente = $_REQUEST['recorrente'] ?? 0;
         $protocolo = 'rec_' . sha1(uniqid());
         $dbNew = new Banco();
         $dbNew->table('recover');
@@ -135,7 +134,7 @@ class RecoverInvoiceControle extends Controle
         $cpf = $_REQUEST['cpf'] ?? '';
         $tipo_pagamento = $_REQUEST['tipo_pagamento'] ?? '';
         $valor = $_REQUEST['valor'] ?? '';
-        $recorrente = $_REQUEST['recorrente'] ?? '';
+        $recorrente = $_REQUEST['recorrente'] ?? 0;
         $dbNew = new Banco();
         $dbNew->table('recover');
         $dbNew->where([

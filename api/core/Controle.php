@@ -26,7 +26,7 @@ class Controle
     {
         $requireInputsKeys = array_keys($payload);
         foreach ($requireInputsKeys as $inputName) {
-            if (isset($_REQUEST[$inputName])) {
+            if (empty($_REQUEST[$inputName])) {
                 self::printError(
                     $payload[$inputName],
                     []

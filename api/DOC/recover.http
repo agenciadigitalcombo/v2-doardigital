@@ -11,7 +11,7 @@
 @institution_fk=inst_62d98175c7e51
 
 ###
-GET {{host}}/api/recover
+GET {{host}}/api/recover/
 
 ###
 POST {{host}}/api/recover/save
