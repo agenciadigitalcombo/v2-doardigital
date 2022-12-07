@@ -4,10 +4,10 @@
 @email=br.rafael@outlook.com
 @valor=10
 @recorrente=0
-@nome=
-@telefone=
-@cpf=
-@tipo_pagamento=
+@nome=Bruno Vieira
+@telefone=(11) 9 4949-9944
+@cpf=962.250.040-41
+@tipo_pagamento=PIX
 @institution_fk=inst_62d98175c7e51
 
 ###
@@ -26,7 +26,8 @@ institution_fk={{institution_fk}}
 POST {{host}}/api/recover/save
 Content-Type: application/x-www-form-urlencoded;
 
-email={{email}}
+institution_fk={{institution_fk}}
+&email={{email}}
 &valor={{valor}}
 &recorrente={{recorrente}}
 &protocolo={{protocolo}}
@@ -46,3 +47,4 @@ POST {{host}}/api/recover/info
 Content-Type: application/x-www-form-urlencoded;
 
 protocolo={{protocolo}}
+&debug=1

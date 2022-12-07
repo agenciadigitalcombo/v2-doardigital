@@ -80,9 +80,6 @@ class RecoverInvoiceControle extends Controle
             "protocolo" => "Informe a instituição",
         ]);
         $protocoloSelect = self::getRecover();
-        if ($protocoloSelect['finalizado'] == 1) {
-            $protocoloSelect = self::registerNewProtocolo();
-        }
         self::printSuccess(
             "Informações",
             self::porter( $protocoloSelect)
