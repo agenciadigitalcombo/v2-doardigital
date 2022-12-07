@@ -85,7 +85,7 @@ class RecoverInvoiceControle extends Controle
         }
         self::printSuccess(
             "Informações",
-            $protocoloSelect
+            self::porter( $protocoloSelect)
         );
     }
 
@@ -98,7 +98,7 @@ class RecoverInvoiceControle extends Controle
         $dbNew->where([
             "protocolo" => $protocolo,
         ]);
-        return  $dbNew->select()[0] ?? null;
+        return  $dbNew->select()[0] ?? [];
     }
 
     static function registerNewProtocolo()
@@ -151,5 +151,22 @@ class RecoverInvoiceControle extends Controle
             "dataHoraUpdate" =>  date('Y-m-d H:i:s'),
         ]);
         return $protocolo;
+    }
+    static function porter( array $payload ) {
+        return [
+            "protocolo" => $payload["protocolo"] ?? null,
+            "finalizado" => $payload["finalizado"] ?? 0,
+            "recuperado" => $payload["recuperado"] ?? 0,
+            "nome" => $payload["nome"] ?? null,
+            "email" => $payload["email"] ?? null,
+            "telefone" => $payload["telefone"] ?? null,
+            "cpf" => $payload["cpf"] ?? null,
+            "tipo_pagamento" => $payload["tipo_pagamento"] ?? null,
+            "valor" => $payload["valor"] ?? 0,
+            "recorrente" => $payload["recorrente"] ?? 0,
+            "dataHoraRegistro" => $payload["dataHoraRegistro"] ?? null,
+            "dataHoraUpdate" => $payload["dataHoraUpdate"] ?? null,
+            "institution_fk" => $payload["institution_fk"] ?? null,
+        ];
     }
 }
