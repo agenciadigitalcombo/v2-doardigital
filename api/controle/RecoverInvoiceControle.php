@@ -1,7 +1,14 @@
 <?php
 
-class RecoverInvoice extends Controle
+class RecoverInvoiceControle extends Controle
 {
+    static function start()
+    {
+        self::printError(
+            "Você não tem permissão",
+            []
+        );
+    }
     static function save()
     {
         self::requireInputs([
@@ -32,7 +39,6 @@ class RecoverInvoice extends Controle
             ]
         );
     }
-
     static function finalizar()
     {
         self::requireInputs([

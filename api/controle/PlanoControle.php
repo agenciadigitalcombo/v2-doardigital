@@ -2,7 +2,6 @@
 
 class PlanoControle extends Controle
 {
-
     static function start()
     {
         self::printError(
@@ -10,7 +9,6 @@ class PlanoControle extends Controle
             []
         );
     }
-
     static function register()
     {
         self::requireInputs([
