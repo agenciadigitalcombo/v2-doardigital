@@ -5,6 +5,8 @@ import Fatura from '../components/apiFatura.js'
 import apiFatura from '../components/apiFatura.js'
 import Tmp from '../components/Temp.js'
 
+import config from '../config.js'
+
 
 
 const html = await getTemplate('./finalizar')
@@ -28,7 +30,7 @@ export default {
             vencimento: null,
             valorAssinatura: 98.90,
             valorAssinaturaPrint: '98,90',
-            institution_fk: 'inst_62d98175c7e51',
+            institution_fk: config.fk_sass,
             typePayment: 'CREDIT_CARD',
             recorrente: 1,
             nextDueDate: 0,
