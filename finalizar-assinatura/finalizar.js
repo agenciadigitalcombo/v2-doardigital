@@ -7,7 +7,7 @@ import Tmp from '../components/Temp.js'
 
 
 
-const html = await getTemplate('ok/finalizar')
+const html = await getTemplate('finalizar')
 
 export default {
     data: function () {
