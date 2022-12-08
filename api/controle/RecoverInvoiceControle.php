@@ -82,10 +82,9 @@ class RecoverInvoiceControle extends Controle
         $protocoloSelect = self::getRecover();
         self::printSuccess(
             "Informações",
-            self::porter( (array) $protocoloSelect)
+            self::porter((array) $protocoloSelect)
         );
     }
-
 
     static function getRecover()
     {
@@ -149,7 +148,8 @@ class RecoverInvoiceControle extends Controle
         ]);
         return $protocolo;
     }
-    static function porter( array $payload ) {
+    static function porter(array $payload)
+    {
         return [
             "protocolo" => $payload["protocolo"] ?? null,
             "finalizado" => $payload["finalizado"] ?? 0,
