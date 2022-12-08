@@ -4,10 +4,9 @@ import Admin from '../components/apiAdmin.js'
 import Fatura from '../components/apiFatura.js'
 import apiFatura from '../components/apiFatura.js'
 import Tmp from '../components/Temp.js'
-
 import config from '../config.js'
 
-
+console.log(config);
 
 const html = await getTemplate('./finalizar')
 
