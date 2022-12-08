@@ -3,11 +3,11 @@ import Jwt from '../components/jwt.js'
 import Admin from '../components/apiAdmin.js'
 import Fatura from '../components/apiFatura.js'
 import apiFatura from '../components/apiFatura.js'
-import Tmp from './../components/Temp.js'
+import Tmp from '../components/Temp.js'
 
 
 
-const html = await getTemplate('./finalizar')
+const html = await getTemplate('finalizar')
 
 export default {
     data: function () {
