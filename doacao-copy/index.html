@@ -38,13 +38,18 @@
 </head>
 
 <body>
-    <script>
-        iframeGoogle.src = `https://www.googletagmanager.com/ns.html?id=` + idGoogle
-    </script>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe id="iframeGoogle" src=""
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+    <script>
+        function setSrc($e) {
+            console.log('teste')
+        }
+        
+        $e.src = `https://www.googletagmanager.com/ns.html?id=` + idGoogle
+    </script>
+    <iframe class="iframeGoogle" onload="setSrc(this)" src="" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    <noscript>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="app"></div>
 </body>
 
