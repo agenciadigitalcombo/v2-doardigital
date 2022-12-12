@@ -366,6 +366,7 @@ class InstituicaoControle extends Controle
         ]);
 
         $company["tag_manager"] = $conTagManager->select()[0]['key_1'] ?? null;
+        $company["tag_debug"] = $conTagManager->select();
 
         self::printSuccess(
             "Informações da Instituição",

@@ -6,10 +6,10 @@ import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
 import Loader from "../components/Loader.js"
 import Bread from "../components/Bread.js"
-import Aws from "../components/apiAws.js"
 import MyInstitution from "../components/myInstitution.js"
 import { Form, Input, Button, Text, Select, Option } from "../components/Form.js"
 import ApiInstitution from "../components/apiInstitution.js"
+import apiTagManager from "../components/apiTagManager.js"
 
 export default {
     data: function() {
@@ -19,7 +19,7 @@ export default {
             message: null,
             resAws: null,
             formData: {
-                email: null
+                key: null
             },
             color: {
                 Pending: "bg-[#05f]",
@@ -45,9 +45,9 @@ export default {
         let institution = new MyInstitution()
         let thisInstitution = new ApiInstitution()
         let request = await thisInstitution.get(institution.get())
-
-        console.log( request )
-
+        
+        this.formData.key = request.payload.tag_manager
+        
         this.mailActive = request.payload.mailActive
         this.mailSender = request.payload.mailSender
 
@@ -55,9 +55,8 @@ export default {
 
         const inputs = []
 
-        inputs.push( new Input('key', 'ID Tag Manager', 'text', 4, true, '', true))            
-        inputs.push( new Button('Salvar', true))
-        
+        inputs.push( new Input('key', 'ID Tag Manager', 'text', 4, true))            
+        inputs.push( new Button('Salvar'))        
         
         globalThis.Dados = this.formData
         const form = new Form(inputs)
@@ -70,10 +69,10 @@ export default {
             this.message = null
             let inst = new MyInstitution()
             let inst_fk = inst.get()
-            let email = this.formData.email
-            let aws = new Aws()
-            let res = await aws.registrar(inst_fk, email)
-            
+            let key = this.formData.key
+            let tag = new apiTagManager()
+            let res = await tag.save(inst_fk, key)
+            console.log( res )
             this.message = res.message
         }
     }, 
