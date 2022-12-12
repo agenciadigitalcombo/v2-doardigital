@@ -14,7 +14,7 @@
         let domain = window.location.host == 'http://127.0.0.1:5500' ? 'teste.hostdoar.tk' : window.location.host
         let res = await api.get(domain)
         let idGoogle = res.tag_manager
-        console.log(idGoogle)
+        console.log(res)
         if(idGoogle) {
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
