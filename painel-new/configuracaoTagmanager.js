@@ -45,6 +45,7 @@ export default {
         let institution = new MyInstitution()
         let thisInstitution = new ApiInstitution()
         let request = await thisInstitution.get(institution.get())
+        console.log(request.payload)
         
         this.formData.key = request.payload.tag_manager
         

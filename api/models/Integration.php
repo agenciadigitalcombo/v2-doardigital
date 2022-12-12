@@ -28,10 +28,11 @@ class Integration
         string $key_5 = null
     ): void {
 
-        $res = $this->con->where([
+        $this->con->where([
             "instituicao_fk" => $instituicao_fk,
             "tipo" => $tipo,
         ]);
+        $res = $this->con->select();
         if (empty($res)) {
             $this->register(
                 $instituicao_fk,
