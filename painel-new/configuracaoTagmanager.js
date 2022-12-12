@@ -45,7 +45,6 @@ export default {
         let institution = new MyInstitution()
         let thisInstitution = new ApiInstitution()
         let request = await thisInstitution.get(institution.get())
-        console.log(request.payload)
         
         this.formData.key = request.payload.tag_manager
         
@@ -73,7 +72,6 @@ export default {
             let key = this.formData.key
             let tag = new apiTagManager()
             let res = await tag.save(inst_fk, key)
-            console.log( res )
             this.message = res.message
         }
     }, 
@@ -84,7 +82,7 @@ export default {
     <Bread :steps="[
         ['Home','#/dashboard'],
         ['Módulos','#/modulos'],
-        ['Configuração E-mail','#/configuracao-email'],
+        ['Tag Manager','#/configuracao-tagmanager'],
     ]" 
     />
 
