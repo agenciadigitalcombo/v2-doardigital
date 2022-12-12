@@ -358,6 +358,15 @@ class InstituicaoControle extends Controle
         ]);
         $company["split"] = Split::porter($banco->select()[0] ?? []);
 
+        $conTagManager = new Banco();
+        $conTagManager->table('integration');
+        $conTagManager->where([
+            "instituicao_fk" => $company["institution_fk"],
+            "tipo" =>"TAG_MANAGER"
+        ]);
+
+        $company["tag_manager"] = $conTagManager->select()[0]['key_1'] ?? null;
+
         self::printSuccess(
             "Informações da Instituição",
             $company

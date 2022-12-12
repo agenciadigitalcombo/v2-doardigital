@@ -46,6 +46,7 @@ import EditarInstituicao from "./editarInstituicao.js"
 import ModelosDeEmail from "./modelosDeEmail.js"
 import EditarEmail from "./editarEmail.js"
 import ConfiguracaoEmail from "./configuracaoEmail.js"
+import configuracaoTagmanager from "./configuracaoTagmanager.js"
 import Checkout from "./checkout.js"
 import Configuracoes from "./configuracoes.js"
 import Mensageria from "./mensageria.js"
@@ -94,6 +95,7 @@ const routes = [
     { path: '/mensageria', component: Mensageria },
     { path: '/configuracao-whats', component: ConfiguracaoWhats },
     { path: '/configuracao-checkout', component: ConfiguracaoCheckout },
+    { path: '/configuracao-tagmanager', component: configuracaoTagmanager },
 ]
 
 const router = VueRouter.createRouter({

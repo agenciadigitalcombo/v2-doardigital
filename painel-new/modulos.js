@@ -35,7 +35,7 @@ export default {
              <div>
                 <div class="flex flex-wrap">
                 
-                <CardGeral text="Domínio Personalizado" size="5" class="text-center content-center">
+                <CardGeral text="Domínio" size="5" class="text-center content-center">
                 
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
@@ -44,12 +44,20 @@ export default {
                 <Botao text="Configurar" variation="blueNot" />            
                 </CardGeral>
             
-                <CardGeral text="Configuração E-mail" size="5" class="text-center content-center">
+                <CardGeral text="E-mail" size="5" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
+                </CardGeral>
+                
+                <CardGeral text="Tag Manager" size="5" class="text-center content-center">
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto h-[54px]" src="//www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg">
+                </section>
+                <br>
+                <Botao text="Configurar" variation="blue" link="#/configuracao-tagmanager"/>   
                 </CardGeral>
             
                 <CardGeral text="Disparo Whats" size="5" class="text-center content-center">
