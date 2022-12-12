@@ -7,14 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escolha um Plano</title>
 
-    <script> var idGoogle = 'GTM-MCN9RTF'; </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer', idGoogle);</script>
-    <!-- End Google Tag Manager -->
+   
+    <script type="module" async>
+        import ApiInst  from '../components/apiInstitution.js'
+        let api = new ApiInst()
+        let domain = window.location.host == 'http://127.0.0.1:5500' ? 'teste.hostdoar.tk' : window.location.host
+        let res = await api.get(domain)
+        let idGoogle = res.tag_manager
+        if(idGoogle) {
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer', idGoogle);
+        }        
+        globalThis.setSrcIframe(idGoogle)
+    </script>
 
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://unpkg.com/vue-router@4"></script>
@@ -38,18 +46,16 @@
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
+    <iframe class="iframeGoogle" src="" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <script>
-        function setSrc($e) {
-            console.log('teste')
+        function setSrcIframe(idGoogle) {          
+            if(idGoogle) {
+                document.querySelector('.iframeGoogle').src = `https://www.googletagmanager.com/ns.html?id=` + idGoogle
+            }
         }
         
-        $e.src = `https://www.googletagmanager.com/ns.html?id=` + idGoogle
     </script>
-    <iframe class="iframeGoogle" onload="setSrc(this)" src="" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    <noscript>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    
     <div id="app"></div>
 </body>
 
