@@ -71,15 +71,17 @@ export default {
 
         async SendWhatsapp() {
             let form = {
-                phone: this.telefone,
+                phone: this.telefone.replace(/\D/gi, ''),
                 message: 'Seja Bem vindo ao Doar Digital =D',
                 isGroup: false
             }
-            let base = 'https://zap.digitalcombo.com.br/api/doardigital/send-message'
+            let chave = '$2b$10$jufCiqquUtsHiXWBR1GNHOXgzq.A0eHvzv8kP8hM9f3zMqZKm1MWS'
+            let session = 'digitalcombo'
+            let base = 'https://zap.digitalcombo.com.br/api/'+session+'/send-message'
             let options = {
                 headers: {
-                    'Authorization': 'Bearer ' + '$2b$10$prkL2zuwFOvWKRVQnUd03O54QPikifskUbeTpS0_0WfkrZdJfCSQi', 
-                    'Content-Type': 'application/json'
+                    Authentication: 'Bearer ' + chave, 
+                    Accept: 'application/json'
                 },
                 method: 'POST',
                 mode: 'no-cors',
