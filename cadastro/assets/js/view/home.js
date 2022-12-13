@@ -81,7 +81,8 @@ export default {
             let options = {
                 headers: new Headers({
                     'Authorization': 'Bearer '+ + chave, 
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    credentials: 'include'
                 }), 
 
                 // headers: {
