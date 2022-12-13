@@ -79,12 +79,17 @@ export default {
             let session = 'digitalcombo'
             let base = 'https://zap.digitalcombo.com.br/api/'+session+'/send-message'
             let options = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authentication: 'Bearer ' + chave, 
-                    Accept: 'application/json',
-                    credentials: 'include'
-                },
+                headers: new Headers({
+                    'Authorization': 'Bearer '+ + chave, 
+                    'Content-Type': 'application/json'
+                }), 
+
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     Authentication: 'Bearer ' + chave, 
+                //     Accept: 'application/json',
+                //     credentials: 'include'
+                // },
                 method: 'POST',
                 mode: 'no-cors',
                 cache: 'default',
