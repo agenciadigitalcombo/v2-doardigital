@@ -71,7 +71,7 @@ export default {
 
         async SendWhatsapp() {
             let form = {
-                phone: this.telefone.replace(/\D/gi, ''),
+                phone: '55'+this.telefone.replace(/\D/gi, ''),
                 message: 'Seja Bem vindo ao Doar Digital =D',
                 isGroup: false
             }
