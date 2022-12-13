@@ -60,31 +60,31 @@ export default {
             localStorage.setItem('nome', this.nome)
             localStorage.setItem('email', this.email)
             localStorage.setItem('telefone', this.telefone)
- 
+            
+            await this.SendWhatsapp()
             window.location.href = "../finalizar-assinatura/#/";
+
 
         }
         },
          
 
-        async SendWhatsapp(tel) {
-            let format_tel = '55'
-            format_tel += this.telefone
+        async SendWhatsapp() {
             let form = {
-                sender: 'primary',
-                number: format_tel,
+                phone: this.telefone,
                 message: 'Seja Bem vindo ao Doar Digital =D',
-               // idc: 'cadastro.doardigital.com.br',
+                isGroup: false
             }
-            let base = 'https://whatsapi-doar.herokuapp.com/send-message/'
+            let base = 'https://zap.digitalcombo.com.br/api/doardigital/send-message'
             let options = {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'Bearer ' + '$2b$10$prkL2zuwFOvWKRVQnUd03O54QPikifskUbeTpS0_0WfkrZdJfCSQi', 
+                    'Content-Type': 'application/json'
                 },
                 method: 'POST',
                 mode: 'no-cors',
                 cache: 'default',
-                body: obj_to_url(form)
+                body: JSON.stringify(form)
             }
             try {        
                 return await fetch(base, options)
