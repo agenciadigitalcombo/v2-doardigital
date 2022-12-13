@@ -8,9 +8,10 @@ class Aws
             "content-type: application/json",
         ];
     }
-    public function post(string $path, array $payload = [])
+    public function post(string $path, array $payload = [], $header = [])
     {
         $content = json_encode($payload, JSON_UNESCAPED_UNICODE);
+        $this->header = array_merge($this->header, $header );
         try {
             $options = [
                 CURLOPT_POST           => true,
