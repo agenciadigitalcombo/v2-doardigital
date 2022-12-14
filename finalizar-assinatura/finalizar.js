@@ -4,6 +4,7 @@ import Admin from '../components/apiAdmin.js'
 import Fatura from '../components/apiFatura.js'
 import apiFatura from '../components/apiFatura.js'
 import Tmp from '../components/Temp.js'
+import ApiAwsWhats from '../components/apiAwsWhats.js'
 import config from '../config.js'
 
 const html = await getTemplate('./finalizar')
@@ -117,6 +118,8 @@ export default {
                     let jwt = new Jwt()
                     let { code } = jwt.get()
                     adm.step(code, 1)
+                    let apiWhats = new ApiAwsWhats()
+                    await apiWhats.create()
                 }
                 this.$router.push('obrigado')
             }
