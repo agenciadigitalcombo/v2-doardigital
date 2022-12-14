@@ -36,23 +36,23 @@ export default {
         CardGeral,
         Loader
     },
-    async mounted() {
-        this.isLoad = 'true'       
-        let api = new ApiAwsWhats()
-        let res = await api.status()
-        if( res.payload?.qrcode?.length > 7 && res.payload?.status == 'QRCODE'  ) {
-            this.src = res.payload.qrcode
-            this.status = res.payload.status
-        }
-        this.isLoad = 'false'
-    },
     methods: { 
+        async UpdateStatus() {
+            let api = new ApiAwsWhats()
+            let res = await api.status()
+            this.src = res.payload?.qrcode
+            this.status = res.payload?.status
+            if(  res.payload?.status != 'QRCODE'  ) {
+                this.src = null
+            }
+        },
         async connect() {            
             let api = new ApiAwsWhats()
             let res = await api.connect()
             if( res.payload?.message == 'Token is not present. Check your header and try again' ) {
                 await api.create()
                 res = await api.connect()
+                
             }
             if( res.payload?.qrcode?.length > 7 ) {
                 this.src = res.payload.qrcode
@@ -61,8 +61,21 @@ export default {
                     this.connect()
                 }, 750);
             }
+        },
+        async close() {            
+            let api = new ApiAwsWhats()
+            let res = await api.close()
         }
-    }, 
+    },
+    async mounted() {
+        this.isLoad = 'true'
+        this.UpdateStatus()
+        setInterval(() => {
+            this.UpdateStatus()            
+        }, 20000);     
+        
+        this.isLoad = 'false'
+    },
     template: `
     <div>
     <Loader :open="isLoad" />
@@ -84,7 +97,10 @@ export default {
                             <h2 class="block text-center mb-2">{{status}}</h2>                
                             <img :src="src" class="w-[300px] mx-auto">
                         </div>
+                        <div class="flex justify-between">
                         <Botao text="Conectar" @click="connect" /></Botao>
+                        <Botao text="Encerrar" @click="close" variation="red" /></Botao>
+                        </div>
                     </CardGeral>
 
                 </div>
