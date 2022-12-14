@@ -34,12 +34,10 @@ class Aws
         $content = json_encode($payload, JSON_UNESCAPED_UNICODE);
         $this->header = array_merge($this->header, $header );
         try {
-            $options = [
-                
+            $options = [                
                 CURLOPT_HEADER         => 0,
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL            => $path,
-                
+                CURLOPT_URL            => $path,                
                 CURLOPT_HTTPHEADER     => $this->header,
             ];
             $con = curl_init();
