@@ -71,6 +71,34 @@ class AwsWhatsControle extends Controle
             $resConnect
         );
     }
+    
+    static function close()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+        ]);
+        self::privateRouter();
+        $token = $_REQUEST['token'];
+        $code_name_session = Jwt::ler($token)['code'];
+
+        $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/close-session";
+
+        $aws = new Aws();
+        $inter =  new Integration();
+
+        $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];
+
+        $resConnect = (array) $aws->post(
+            $path,
+            [],
+            ["Authorization: Bearer {$tokenWhats}"]
+        );
+
+        self::printSuccess(
+            "Conexão realizada com sucesso",
+            $resConnect
+        );
+    }
 
     static function status()
     {

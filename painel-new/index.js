@@ -51,6 +51,7 @@ import Checkout from "./checkout.js"
 import Configuracoes from "./configuracoes.js"
 import Mensageria from "./mensageria.js"
 import ConfiguracaoWhats from "./configuracaoWhats.js"
+import configuracaoWhatsapp from "./configuracaoWhatsapp.js"
 
 
 const routes = [
@@ -96,6 +97,7 @@ const routes = [
     { path: '/configuracao-whats', component: ConfiguracaoWhats },
     { path: '/configuracao-checkout', component: ConfiguracaoCheckout },
     { path: '/configuracao-tagmanager', component: configuracaoTagmanager },
+    { path: '/configuracao-whatsapp', component: configuracaoWhatsapp },
 ]
 
 const router = VueRouter.createRouter({

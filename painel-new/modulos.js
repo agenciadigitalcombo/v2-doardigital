@@ -65,7 +65,7 @@ export default {
                     <img class="mx-auto" src="/assets/image/chat-whatsapp.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blueNot" />  
+                <Botao text="Configurar" variation="blue" link="#/configuracao-whatsapp" />  
                 </CardGeral>
             
                 <CardGeral text="RD Station" size="5" class="text-center content-center">

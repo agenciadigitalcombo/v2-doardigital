@@ -7,11 +7,15 @@ export default class {
     }
 
     async connect() {
-        return await http.get('/aws-whats/connect', {})
+        return await http.post('/aws-whats/connect', {})
     }
 
     async status() {
         return await http.post('/aws-whats/status', {})
+    }
+
+    async close() {
+        return await http.post('/aws-whats/close', {})
     }
 
 }
