@@ -126,7 +126,7 @@ class AwsWhatsControle extends Controle
             "Status de conexão",
             // $resStatus
             [
-                "origin" =>  $_SERVER['HTTP_ORIGIN']
+                "origin" =>  $_SERVER
             ]
         );
     }
