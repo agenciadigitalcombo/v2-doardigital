@@ -124,10 +124,7 @@ class AwsWhatsControle extends Controle
 
         self::printSuccess(
             "Status de conexão",
-            // $resStatus
-            [
-                "origin" =>  $_SERVER
-            ]
+            $resStatus
         );
     }
 }
