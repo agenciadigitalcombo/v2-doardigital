@@ -53,8 +53,7 @@ class AwsWhatsControle extends Controle
         $token = $_REQUEST['token'];
         $code_name_session = Jwt::ler($token)['code'];
 
-        $path = "https://zap.digitalcombo.com.br/api/$code_name_session/start-session";
-
+        $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/start-session";
 
         $aws = new Aws();
         $inter =  new Integration();
@@ -68,8 +67,36 @@ class AwsWhatsControle extends Controle
         );
 
         self::printSuccess(
-            "Salvo com sucesso",
+            "Conexão realizada com sucesso",
             $resConnect
+        );
+    }
+
+    static function status()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+        ]);
+        self::privateRouter();
+        $token = $_REQUEST['token'];
+        $code_name_session = Jwt::ler($token)['code'];
+
+        $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/check-connection-session";
+
+        $aws = new Aws();
+        $inter =  new Integration();
+
+        $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];
+
+        $resStatus = (array) $aws->post(
+            $path,
+            [],
+            ["Authorization: Bearer {$tokenWhats}"]
+        );
+
+        self::printSuccess(
+            "Status de conexão",
+            $resStatus
         );
     }
 }
