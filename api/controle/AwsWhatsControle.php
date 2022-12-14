@@ -88,7 +88,7 @@ class AwsWhatsControle extends Controle
 
         $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];
 
-        $resStatus = (array) $aws->post(
+        $resStatus = (array) $aws->get(
             $path,
             [],
             ["Authorization: Bearer {$tokenWhats}"]
