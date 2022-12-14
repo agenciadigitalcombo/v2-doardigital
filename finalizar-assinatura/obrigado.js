@@ -37,7 +37,7 @@ export default {
                 setTimeout( validador, 3000 )
             }
         }
-        if( code ) {
+        if( this.code ) {
             validador()
         }
     },
