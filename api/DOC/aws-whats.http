@@ -1,5 +1,6 @@
 @host=http://hostdoar.tk
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+# @token=eyJjb2RlIjoiYWRtXzYyZDk3MzFhMTIwMzAifQ==.f28ebb285d23f0ff5b23270e73aeb13d2c6c2b80
 @instituicao_fk=inst_62d990c744f00
 @key=GTM-MCN9RTF
 

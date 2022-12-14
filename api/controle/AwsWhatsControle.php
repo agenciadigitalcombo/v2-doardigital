@@ -96,10 +96,7 @@ class AwsWhatsControle extends Controle
 
         self::printSuccess(
             "Status de conexão",
-            [
-                "link" => $path,
-                "res" => $resStatus
-            ]
+            $resStatus
         );
     }
 }
