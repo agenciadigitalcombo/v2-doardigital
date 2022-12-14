@@ -35,11 +35,11 @@ class Aws
         $this->header = array_merge($this->header, $header );
         try {
             $options = [
-                CURLOPT_POST           => false,
+                
                 CURLOPT_HEADER         => 0,
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL            => $path,
-                CURLOPT_POSTFIELDS     => $content,
+                
                 CURLOPT_HTTPHEADER     => $this->header,
             ];
             $con = curl_init();
