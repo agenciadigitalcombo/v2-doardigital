@@ -81,7 +81,7 @@ class AwsWhatsControle extends Controle
         $token = $_REQUEST['token'];
         $code_name_session = Jwt::ler($token)['code'];
 
-        $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/check-connection-session";
+        $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/status-session";
 
         $aws = new Aws();
         $inter =  new Integration();
