@@ -34,7 +34,7 @@ class MessagesWhats
                     "body" => file_get_contents($email),
                 ];
             }, $templates);
-            $templates = array_filter($templates, fn ($email) => $email["subject"]);
+            
             $templates = array_values($templates);
             $messages[] = [
                 "tipo" => $tipo,
@@ -53,7 +53,7 @@ class MessagesWhats
         $templates = MessagesWhats::default();
         foreach ($templates as $template) {
             $tipo = $template["tipo"];
-            foreach ($template["email"] as $email) {
+            foreach ($template["messages"] as $email) {
                 $status = $email["status"] ?? null;
                 $subject = $email["subject"] ?? null;
                 $body = $email["body"] ?? null;
