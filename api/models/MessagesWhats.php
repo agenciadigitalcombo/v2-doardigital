@@ -30,11 +30,11 @@ class MessagesWhats
             $templates = glob(__DIR__ . "/../whatsapp/{$tipo}/*.txt*");
             $templates = array_map(function ($email) {
                 return [
-                    "status" => str_replace(".txt", "", basename($email)),                
+                    "status" => str_replace(".txt", "", basename($email)),
                     "body" => file_get_contents($email),
                 ];
             }, $templates);
-            
+
             $templates = array_values($templates);
             $messages[] = [
                 "tipo" => $tipo,
@@ -67,16 +67,15 @@ class MessagesWhats
         $tipo,
         $status
     ) {
-        foreach( self::default() as $template ) {
-            if( $template["tipo"] == $tipo) {
-                foreach( $template["messages"] as $email ) {
-                    if( $email["status"] == $status) {
+        foreach (self::default() as $template) {
+            if ($template["tipo"] == $tipo) {
+                foreach ($template["messages"] as $email) {
+                    if ($email["status"] == $status) {
                         return $email;
                     }
                 }
             }
         }
-        
     }
 
     public function save(
@@ -116,7 +115,7 @@ class MessagesWhats
             "tipo" => $tipo,
             "status_pagamento" => $status_pagamento,
         ]);
-        $this->con->update([            
+        $this->con->update([
             "content" => $content,
         ]);
     }
