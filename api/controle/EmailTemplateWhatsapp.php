@@ -90,4 +90,20 @@ class EmailTemplateWhatsapp  extends Controle
             $template->list($instituicao_fk)
         );
     }
+    
+    static function install()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "instituicao_fk" => "Informe uma identificação de instituição",
+        ]);
+        self::privateRouter();
+        $instituicao_fk = $_REQUEST['instituicao_fk'];
+        $template = new MessagesWhats();
+        $template->maker($instituicao_fk);
+        self::printSuccess(
+            "Instalação feita com sucesso",
+            []
+        );
+    }
 }
