@@ -1,6 +1,6 @@
 <?php
 
-class EmailTemplateWhatsapp  extends Controle
+class TemplateWhatsapp  extends Controle
 {
     static function start()
     {
@@ -52,7 +52,7 @@ class EmailTemplateWhatsapp  extends Controle
         $template = new MessagesWhats();
         self::printSuccess(
             "Dados",
-            $template->info( $instituicao_fk, $tipo, $status_pagamento)
+            $template->info($instituicao_fk, $tipo, $status_pagamento)
         );
     }
 
@@ -69,7 +69,7 @@ class EmailTemplateWhatsapp  extends Controle
         $tipo = $_REQUEST["tipo"];
         $status_pagamento = $_REQUEST["status_pagamento"];
         $template = new MessagesWhats();
-        $template->recover($instituicao_fk,$tipo, $status_pagamento); 
+        $template->recover($instituicao_fk, $tipo, $status_pagamento);
         self::printSuccess(
             "Atualizado com sucesso",
             []
@@ -86,11 +86,11 @@ class EmailTemplateWhatsapp  extends Controle
         $instituicao_fk = $_REQUEST['instituicao_fk'];
         $template = new MessagesWhats();
         self::printSuccess(
-            "Lista de Email",
+            "Lista de messages",
             $template->list($instituicao_fk)
         );
     }
-    
+
     static function install()
     {
         self::requireInputs([
