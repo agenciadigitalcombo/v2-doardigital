@@ -1,0 +1,13 @@
+Olá {{NOME}}, tudo bem?
+\n
+Passando para deixar sua nova CHAVE PIX  de sua doação mensal da (instituição).
+\n
+Queremos te agradecer por você ser providência divina ajudando esta causa.
+\n
+*SUA CHAVE PIX ABAIXO*
+\n
+Que os Santos do céu intercedam por você!
+\n
+Gratidão.
+\n
+{{CODE}}

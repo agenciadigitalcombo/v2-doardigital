@@ -1,0 +1,17 @@
+Olá {{NOME}}, queremos te agradecer por seu gesto com nossa missão.
+\n
+Agradecemos por ter feito seu cadastro em nosso "sistema de doações".
+\n
+Estamos encaminhando o link por aqui de cadastro, para que você possa imprimir seu boleto e fazer o pagamento da sua doação! 
+\n
+Se você escolheu ajudar mensalmente, no próximo mês, você receberá seu boleto no e-mail e por este whatsapp que utilizou no cadastro.
+\n
+Seu boleto: {{LINK}}
+\n
+Você pode clicar nesse "link" acima que abrirá o boleto pra você em qualquer momento que você precisar, assim fica melhor para você pode efetuar seu pagamento, online ou em seu banco.
+\n
+Esta é uma mensagem automática, e  se você precisar de uma ajuda é só entrar em contato direta com a instituição.
+\n
+Agradece  sua generosidade com esta missão.
+\n
+Deus o abençoe!

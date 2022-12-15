@@ -191,6 +191,14 @@ CREATE TABLE template_email (
     content LONGTEXT
 );
 
+CREATE TABLE template_whats (
+    id int not null auto_increment primary key,
+    instituicao_fk VARCHAR(255),
+    tipo VARCHAR(255),
+    status_pagamento VARCHAR(255),
+    content LONGTEXT
+);
+
 CREATE TABLE message (
     id int not null auto_increment primary key,
     tipo VARCHAR(255),

@@ -1,0 +1,29 @@
+Olá {{NOME}} 
+\n
+Passando hoje e trazendo para você a oração do Salmo 121
+\n
+1. Elevo os meus olhos para os montes; de onde me vem o socorro?
+\n
+2. O meu socorro vem do Senhor, que fez os céus e a terra.
+\n
+3. Não deixará vacilar o teu pé; aquele que te guarda não dormitará.
+\n
+4. Eis que não dormitará nem dormirá aquele que guarda a Israel.
+\n
+5. O Senhor é quem te guarda; o Senhor é a tua sombra à tua mão direita.
+\n
+6. De dia o sol não te ferirá, nem a lua de noite.
+\n
+7. O Senhor te guardará de todo o mal; ele guardará a tua vida.
+\n
+8. O Senhor guardará a tua saída e a tua entrada, desde agora e para sempre.
+\n
+Fica Senhor comigo, pois é só a Ti que procuro o Teu amor, a Tua graça, a Tua vontade, o Teu coração, o Teu Espírito, porque te amo, e a única recompensa que te peço é poder amar-te sempre mais.
+\n
+Como este amor resoluto, desejo amar-te de todo o coração enquanto estiver na terra, para continuar a te amar perfeitamente por toda a eternidade. Assim seja.
+\n
+Nossa Senhora, intercedei por nós!
+\n
+PIX URL -----------
+\n
+{{CODE}}
