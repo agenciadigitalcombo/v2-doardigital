@@ -37,5 +37,17 @@ export default class {
             status_pagamento
         })
     }
+    
+    async info(
+        tipo,
+        instituicao_fk,
+        status_pagamento
+    ) {
+        return await http.post('/email-template/info', {
+            tipo,
+            instituicao_fk,
+            status_pagamento
+        })
+    }
 
 }
