@@ -18,18 +18,14 @@ class MessageAwsControle extends Controle
             "institution_fk" => "Informe a instituição",
         ]);
         self::privateRouter();
-
         $institution_fk = $_REQUEST['institution_fk'];
         $db = new Banco();
         $db->table('message_aws');
         $db->where([
             "institution_fk" => $institution_fk,
         ]);
-
         $select =  $db->select();
-
         $select = (array) array_map(["MessageAwsControle","porter"], $select);
-
         self::printSuccess(
             "Lista de mensagens",
             $select
