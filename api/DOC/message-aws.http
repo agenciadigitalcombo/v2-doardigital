@@ -1,0 +1,9 @@
+@host=http://hostdoar.tk
+@token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
+@instituicao_fk=inst_62a891e95ac6b
+
+###
+GET {{host}}/api/message-aws
+
+###
+GET {{host}}/api/message-aws/link?token={{token}}&instituicao_fk={{instituicao_fk}}
