@@ -79,9 +79,19 @@ export default {
             let inst_fk = inst.get()
             let email = this.formData.email
             let aws = new Aws()
-            let res = await aws.registrar(inst_fk, email)
-            
+            let res = await aws.registrar(inst_fk, email)            
             this.message = res.message
+            window.location.reload()
+        },
+        async remover() {
+            this.message = null
+            let inst = new MyInstitution()
+            let inst_fk = inst.get()
+            let email = this.formData.email
+            let aws = new Aws()
+            let res = await aws.apagar(inst_fk, email)
+            this.message = res.message
+            window.location.reload()
         }
     }, 
     template: `
@@ -101,10 +111,18 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Configuração E-mail de Disparo" size="cinco">
-                <span :class="'block w-full text-center mb-4 text-white rounded ' + isColor + ' p-2'"> o email se encontra com status <b>{{status}}</b> </span>
+                <span v-show="status"  :class="'block w-full text-center mb-4 text-white rounded ' + isColor + ' p-2'"> 
+                    o email se encontra com status <b>{{status}}</b> 
+                </span>
                 <p>Adicione o e-mail que quer utilizar para disparar as mensagens do sistema:</p><br>
                 <form action="javascript:void(0)" methods="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>   
                 <div v-show="message">{{message}}</div>
+                <div v-show="status">
+
+                    <Botao class="mt-5" @click="remover" text="REMOVER EMAIL" variation="red" />
+                
+                </div>
+                
                 </CardGeral>
             
                

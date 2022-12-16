@@ -241,10 +241,6 @@ if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
 $resEmail = $Fila->send($payload, 'EMAIL');
 $resWhats = $Fila->send($payload, 'WHATS');
 
-foreach ($copy as $email) {
-    @mail($email, 'AWS FILA - ' . $payload["dataDeEnvio"], json_encode($res));
-}
-
 $menAws = new Banco();
 $menAws->table('message_aws');
 $menAws->insert([
