@@ -55,7 +55,7 @@ export default {
                     <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
+                <Botao text="Configurar" variation="blue" link="#/modelo-de-emails"/>   
                 </CardGeral>
             
                 <CardGeral text="Disparo Whats" size="4" class="text-center content-center">
