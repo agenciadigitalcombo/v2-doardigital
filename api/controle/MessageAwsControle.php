@@ -31,7 +31,7 @@ class MessageAwsControle extends Controle
         $select = (array) array_map(["MessageAwsControle","porter"], $select);
 
         self::printSuccess(
-            "Instituição Cadastrada com sucesso",
+            "Lista de mensagens",
             $select
         );
     }
