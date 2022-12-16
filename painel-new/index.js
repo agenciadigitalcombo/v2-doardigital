@@ -52,7 +52,7 @@ import Configuracoes from "./configuracoes.js"
 import Mensageria from "./mensageria.js"
 import ConfiguracaoWhats from "./configuracaoWhats.js"
 import configuracaoWhatsapp from "./configuracaoWhatsapp.js"
-
+import modelosDeWhats from "./modelosDeWhats.js"
 
 const routes = [
     { path: '/', component: Dashboard },
@@ -98,6 +98,7 @@ const routes = [
     { path: '/configuracao-checkout', component: ConfiguracaoCheckout },
     { path: '/configuracao-tagmanager', component: configuracaoTagmanager },
     { path: '/configuracao-whatsapp', component: configuracaoWhatsapp },
+    { path: '/template-whatsapp', component: modelosDeWhats },
 ]
 
 const router = VueRouter.createRouter({

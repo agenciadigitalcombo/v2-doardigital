@@ -71,7 +71,7 @@ export default {
                     <img class="mx-auto" src="/assets/image/chat-whatsapp.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blueNot" />  
+                <Botao text="Configurar" variation="blue" link="#/template-whatsapp" />  
                 </CardGeral>
             
                 <CardGeral text="Quantidade de Disparos este Mês" size="full">
