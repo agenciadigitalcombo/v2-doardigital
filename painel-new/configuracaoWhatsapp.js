@@ -47,7 +47,7 @@ export default {
                 this.src = null
             }
             if(res.payload?.status == 'CONNECTED') {
-                window.location.reload()
+                // window.location.reload()
             }
         },
         async connect() { 
