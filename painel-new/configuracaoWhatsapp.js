@@ -18,6 +18,7 @@ export default {
             formData: {},
             src: null,
             status: null,
+            carregando: false,
             color: {
                 Pending: "bg-[#05f]",
                 Success: "bg-[#080]",
@@ -45,8 +46,12 @@ export default {
             if(  res.payload?.status != 'QRCODE'  ) {
                 this.src = null
             }
+            if(res.payload?.status == 'CONNECTED') {
+                window.location.reload()
+            }
         },
-        async connect() {            
+        async connect() { 
+            this.carregando = true           
             let api = new ApiAwsWhats()
             let res = await api.connect()
             if( res.payload?.message == 'Token is not present. Check your header and try again' ) {
@@ -61,6 +66,7 @@ export default {
                     this.connect()
                 }, 750);
             }
+            this.carregando = false
         },
         async close() {            
             let api = new ApiAwsWhats()
@@ -93,13 +99,14 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="Configuração WhatsApp" size="cinco">
-                        <div v-if="src">
-                            <h2 class="block text-center mb-2">{{status}}</h2>                
+                        <div v-if="src">               
                             <img :src="src" class="w-[300px] mx-auto">
                         </div>
-                        <div class="flex justify-between">
-                        <Botao text="Conectar" @click="connect" /></Botao>
-                        <Botao text="Encerrar" @click="close" variation="red" /></Botao>
+                        <div class="flex justify-center">
+                        <div :class="carregando && 'cursor-progress'">
+                            <Botao :class="src && 'cursor-not-allowed'" :text="carregando ? 'Conectando...' : 'Conectar'" @click="connect" /></Botao>
+                        </div>
+                        <Botao class="hidden" text="Encerrar" @click="close" variation="red" /></Botao>
                         </div>
                     </CardGeral>
 
