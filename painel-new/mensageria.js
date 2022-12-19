@@ -1,15 +1,21 @@
-import Card  from "../components/Card.js"
-import Botao  from "../components/Botao.js"
+import Card from "../components/Card.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
 import CardCarteira from "../components/CardCarteira.js"
 import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
 import Loader from "../components/Loader.js"
+import ApiMensagem from "../components/apiMensagem.js"
+import MyInstitution from "../components/myInstitution.js"
 
 export default {
-    data: function() {
+    data: function () {
         return {
             isLoad: 'true',
+            emails: 0,
+            whats: 0,
+            restantes: 0,
+            sucesso: 0,
         }
     },
     components: {
@@ -22,6 +28,26 @@ export default {
         Loader
     },
     async mounted() {
+        let institution = new MyInstitution()
+        let inst_fk = institution.get();
+        let api = new ApiMensagem()
+        let res = await api.info(inst_fk)
+
+        let totalDisparos = 1000
+        this.restantes = totalDisparos - res.payload.length
+
+        let emails = res.payload.filter(m => m.tipo == "EMAIL")
+        let whats = res.payload.filter(m => m.tipo == "WHATS")
+        let statusSucesso = res.payload.filter(m => m.status == 'Succeeded')
+
+        this.sucesso = statusSucesso.length * 100 / res.payload.length || 0
+
+      
+        this.emails = emails.length
+        this.whats = whats.length
+
+        console.log(res)
+       
 
     },
     template: `
@@ -36,11 +62,11 @@ export default {
                 <div class="flex flex-wrap">
 
                 <div class="flex flex-wrap">
-                <Card :tax="totalDonations" text="Total de Disparos E-mail" value="500" variation="blue" icon="bar" size="4" />
-                <Card :tax="statusRecebido" text="Total de Disparos Whats" value="500" icon="heart" variation="green" size="4" />
-                <Card :tax="statusAguardando" text="Disparos Restantes" value="500" variation="yellow" icon="heart" size="4" />
+                <Card :tax="totalDonations" text="Total de Disparos E-mail" :value="emails" variation="blue" icon="bar" size="4" />
+                <Card :tax="statusRecebido" text="Total de Disparos Whats" :value="whats" icon="heart" variation="green" size="4" />
+                <Card :tax="statusAguardando" text="Disparos Restantes" :value="restantes" variation="yellow" icon="heart" size="4" />
                 <br><br><br><br><br>
-                <Card :tax="statusOverdue" text="Taxa de Sucesso" value="100%" variation="red" icon="heart" size="4" />
+                <Card :tax="statusOverdue" text="Taxa de Sucesso" :value="sucesso +'%'" variation="red" icon="heart" size="4" />
                           
                 <CardGeral text="Configuração E-mail" size="4" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
@@ -63,7 +89,7 @@ export default {
                     <img class="mx-auto" src="/assets/image/chat-whatsapp.png">
                 </section>
                 <br>
-                <Botao text="Configurar" variation="blueNot" />  
+                <Botao text="Configurar" variation="blue" link="#/configuracao-whatsapp"/>  
                 </CardGeral>
 
                 <CardGeral text="Modelo de Whats" size="4" class="text-center content-center">

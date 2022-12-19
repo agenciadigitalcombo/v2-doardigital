@@ -2,6 +2,7 @@ import getTemplate from "./getTemplate.js"
 import Jwt from "./jwt.js"
 import MyInstitution from "./myInstitution.js"
 import ApiInstitution from "./apiInstitution.js"
+import ApiAwsWhats from "../components/apiAwsWhats.js"
 
 
 export default {
@@ -12,6 +13,7 @@ export default {
             statusSubMenu: false,
             statusSubMenu1: false,
             institution: '',
+            corWhats: '',
             list: []
         }
     },
@@ -32,12 +34,31 @@ export default {
             let institution = new MyInstitution()
             institution.save(this.institution)
             window.location.reload()
+        },
+        async statusWhats() {
+            let apiWhats = new ApiAwsWhats()
+            let lbWhats = {
+                CONNECTED: '#25d366',
+                CLOSED: '#CC0000',
+            }    
+            let res = await apiWhats.status()
+            let status =  res.payload.status
+            this.corWhats = lbWhats[status]
         }
     },
+    watch: { 
+        '$route.params.search': {
+          handler: function(search) {
+            this.statusWhats()
+          },
+          deep: true,
+          immediate: true
+        }
+      },
     async mounted() {
         let jwt = new Jwt()
         let Inst = new ApiInstitution()
-        let MyInst = new MyInstitution()
+        let MyInst = new MyInstitution()        
 
         this.Inst = MyInst.get()
         
@@ -49,6 +70,9 @@ export default {
             this.list = request.payload
         }
         this.institution = this.Inst
+
+        this.statusWhats()        
+       
     },
     template : await getTemplate( './../components/Header' )
 }
