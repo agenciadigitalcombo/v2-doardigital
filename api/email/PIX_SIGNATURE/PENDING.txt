@@ -1,3 +1,4 @@
+pagamento em aberto
 Seu código PIX mensal chegou!
 
 Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.

@@ -1,3 +1,4 @@
+Pagamento em aberto
 Doação Processada seu Boleto chegou!
 
 Olá {NOME}, Obrigada por visitar nossa página e fazer sua doação.

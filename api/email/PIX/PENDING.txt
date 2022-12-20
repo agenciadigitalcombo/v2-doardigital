@@ -1,3 +1,4 @@
+pagamento em aberto
 Doação Processada seu Pix chegou!
 
 Olá {NOME}, Obrigada por visitar nossa página! 

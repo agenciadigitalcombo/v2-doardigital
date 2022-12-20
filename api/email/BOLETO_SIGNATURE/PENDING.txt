@@ -1,3 +1,4 @@
+pagamento em aberto
 Seu boleto mensal chegou!
 
 Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.

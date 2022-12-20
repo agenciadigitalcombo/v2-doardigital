@@ -1,3 +1,4 @@
+Pagamento confirmado
 Doação concluída com sucesso!
 
 Olá {NOME}, sua Doação foi concluída com sucesso.
