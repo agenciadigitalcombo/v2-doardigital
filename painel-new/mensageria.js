@@ -33,21 +33,18 @@ export default {
         let api = new ApiMensagem()
         let res = await api.info(inst_fk)
 
-        let totalDisparos = 1000
-        this.restantes = totalDisparos - res.payload.length
-
+        
         let emails = res.payload.filter(m => m.tipo == "EMAIL")
         let whats = res.payload.filter(m => m.tipo == "WHATS")
         let statusSucesso = res.payload.filter(m => m.status == 'Succeeded')
-
+        
         this.sucesso = statusSucesso.length * 100 / res.payload.length || 0
-
-      
+        
+        let totalDisparos = 1000
+        
         this.emails = emails.length
         this.whats = whats.length
-
-        console.log(res)
-       
+        this.restantes = totalDisparos - this.whats  
 
     },
     template: `

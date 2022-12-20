@@ -127,4 +127,37 @@ class AwsWhatsControle extends Controle
             $resStatus
         );
     }
+
+    static function sendMessage() {
+        self::requireInputs([
+            "token" => "informe um token",
+        ]);
+        self::privateRouter();
+        $token = $_REQUEST['token'];
+        $code_name_session = Jwt::ler($token)['code'];
+
+        
+
+        $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/send-message";
+
+        $aws = new Aws();
+        $inter =  new Integration();
+
+        $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];
+
+        $resSend = (array) $aws->get(
+            $path,
+            [                
+                "phone" => "5541996283086",
+                "message" => "Hello World",
+                "isGroup" => false                  
+            ],
+            ["Authorization: Bearer {$tokenWhats}"]
+        );
+
+        self::printSuccess(
+            "Status de conexão",
+            $resSend
+        );
+    }
 }

@@ -24,3 +24,9 @@ POST {{host}}/api/aws-whats/status
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
+
+###
+POST {{host}}/api/aws-whats/send
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
