@@ -31,12 +31,15 @@ class EmailTemplate
             $templates = glob(__DIR__ . "/../email/{$tipo}/*.txt*");
             $templates = array_map(function ($email) {
                 $body = file($email);
-                $subject = $body[0] ?? null;
+                $name = $body[0] ?? null;
+                $subject = $body[1] ?? null;
                 unset($body[0]);
+                unset($body[1]);
                 return [
                     "status" => str_replace(".txt", "", basename($email)),
                     "subject" => $subject,
-                    "body" => implode("", $body),
+                    "body" => implode("\n", $body),
+                    "name" => $name,
                 ];
             }, $templates);
             $templates = array_filter($templates, fn ($email) => $email["subject"]);
@@ -62,7 +65,8 @@ class EmailTemplate
                 $status = $email["status"] ?? null;
                 $subject = $email["subject"] ?? null;
                 $body = $email["body"] ?? null;
-                $insertEmails[] = "INSERT INTO template_email (instituicao_fk,tipo,status_pagamento,assunto,content) VALUES ('$instituicao_fK','$tipo','$status','$subject','$body')";
+                $name = $email["name"] ?? null;
+                $insertEmails[] = "INSERT INTO template_email (instituicao_fk,tipo,status_pagamento,assunto,content, name) VALUES ('$instituicao_fK','$tipo','$status','$subject','$body', '$name')";
             }
         }
         $bc->exec(implode(";", $insertEmails));
@@ -118,9 +122,11 @@ class EmailTemplate
     ): void {
         $fullPath = __DIR__ . "/../email/{$tipo}/{$status_pagamento}.txt";
         $file = file($fullPath) ?? [];
-        $assunto = $file[0] ?? "Titulo padrão";
+        $name = $file[0] ?? "Titulo padrão";
+        $assunto = $file[1] ?? "Titulo padrão";
         unset($file[0]);
-        $content = implode("\r\n", $file);
+        unset($file[1]);
+        $content = implode("\n", $file);
         $this->con->where([
             "instituicao_fk" => $instituicao_fk,
             "tipo" => $tipo,
@@ -129,6 +135,7 @@ class EmailTemplate
         $this->con->update([
             "assunto" => $assunto,
             "content" => $content,
+            "name" => $name,
         ]);
     }
 

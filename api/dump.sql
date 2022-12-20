@@ -187,7 +187,7 @@ CREATE TABLE template_email (
     instituicao_fk VARCHAR(255),
     tipo VARCHAR(255),
     status_pagamento VARCHAR(255),
-    nome VARCHAR(255),
+    name VARCHAR(255),
     assunto VARCHAR(255),
     content LONGTEXT
 );
@@ -196,7 +196,7 @@ CREATE TABLE template_whats (
     id int not null auto_increment primary key,
     instituicao_fk VARCHAR(255),
     tipo VARCHAR(255),
-    nome VARCHAR(255),
+    name VARCHAR(255),
     status_pagamento VARCHAR(255),
     content LONGTEXT
 );

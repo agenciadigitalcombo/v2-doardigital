@@ -29,9 +29,14 @@ class MessagesWhats
         foreach ($tipos as $tipo) {
             $templates = glob(__DIR__ . "/../whatsapp/{$tipo}/*.txt*");
             $templates = array_map(function ($email) {
+                $tmp_file = file($email);
+                $name = $tmp_file[0];
+                unset($tmp_file[0]);
+                $body = implode("\n", $tmp_file );
                 return [
                     "status" => str_replace(".txt", "", basename($email)),
-                    "body" => file_get_contents($email),
+                    "body" => $body,
+                    "name" => $name
                 ];
             }, $templates);
 
@@ -55,9 +60,9 @@ class MessagesWhats
             $tipo = $template["tipo"];
             foreach ($template["messages"] as $email) {
                 $status = $email["status"] ?? null;
-                $subject = $email["subject"] ?? null;
                 $body = $email["body"] ?? null;
-                $insertEmails[] = "INSERT INTO template_whats (instituicao_fk,tipo,status_pagamento,content) VALUES ('$instituicao_fK','$tipo','$status','$body')";
+                $name = $email["name"] ?? null;
+                $insertEmails[] = "INSERT INTO template_whats (instituicao_fk,tipo,status_pagamento,content, name) VALUES ('$instituicao_fK','$tipo','$status','$body', '$name')";
             }
         }
         $bc->exec(implode(";", $insertEmails));
