@@ -131,12 +131,14 @@ class AwsWhatsControle extends Controle
     static function sendMessage() {
         self::requireInputs([
             "token" => "informe um token",
+            "phone" => "informe um Telefone",
+            "message" => "informe uma mensagem",
         ]);
         self::privateRouter();
         $token = $_REQUEST['token'];
-        $code_name_session = Jwt::ler($token)['code'];
-
-        
+        $phone = $_REQUEST['phone'];
+        $message = $_REQUEST['message'];
+        $code_name_session = Jwt::ler($token)['code'];        
 
         $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/send-message";
 
@@ -145,11 +147,11 @@ class AwsWhatsControle extends Controle
 
         $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];
 
-        $resSend = (array) $aws->get(
+        $resSend = (array) $aws->post(
             $path,
             [                
-                "phone" => "5541996283086",
-                "message" => "Hello World",
+                "phone" => $phone,
+                "message" => $message,
                 "isGroup" => false                  
             ],
             ["Authorization: Bearer {$tokenWhats}"]

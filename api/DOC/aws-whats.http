@@ -3,6 +3,8 @@
 # @token=eyJjb2RlIjoiYWRtXzYyZDk3MzFhMTIwMzAifQ==.f28ebb285d23f0ff5b23270e73aeb13d2c6c2b80
 @instituicao_fk=inst_62d990c744f00
 @key=GTM-MCN9RTF
+@phone=5541996283086
+@message=Hello World
 
 ##
 GET {{host}}/api/aws-whats/
@@ -30,3 +32,4 @@ POST {{host}}/api/aws-whats/send
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
+&phone={{phone}}
