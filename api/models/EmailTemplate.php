@@ -84,8 +84,7 @@ class EmailTemplate
                     }
                 }
             }
-        }
-        
+        }        
     }
 
     public function save(
@@ -162,5 +161,15 @@ class EmailTemplate
             "assunto" => $payload["assunto"] ?? null,
             "content" => $payload["content"] ?? null,
         ];
+    }
+
+    function resetInst( $instituicao_fK ) {
+        $bc = new Banco();
+        $bc->table("template_email");
+        $bc->where([
+            "instituicao_fk" => $instituicao_fK,
+        ]);
+        $bc->delete();
+        $this->maker($instituicao_fK);
     }
 }

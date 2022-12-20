@@ -148,4 +148,14 @@ class MessagesWhats
             "content" => $payload["content"] ?? null,
         ];
     }
+
+    function resetInst( $instituicao_fK ) {
+        $bc = new Banco();
+        $bc->table("template_whats");
+        $bc->where([
+            "instituicao_fk" => $instituicao_fK,
+        ]);
+        $bc->delete();
+        $this->maker($instituicao_fK);
+    }
 }
