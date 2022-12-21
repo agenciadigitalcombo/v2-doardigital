@@ -1,22 +1,12 @@
 Pagamento em aberto
 Doação Processada seu Boleto chegou!
-
 Olá {NOME}, Obrigada por visitar nossa página e fazer sua doação.
-
 Somos uma instituição que vive de doações recebidas, para manter a obra funcionando. Os recursos são escassos e a providência divina tem tocado muitos corações desejosos de fazer essa experiência da doação, para que tudo se mantenha ativo e que mais vidas sejam salvas para Jesus! 
-
 Por vezes queremos fazer muito mais, entretanto temos que aguardar que as promessas de Deus se cumpram, no tempo dele e não no nosso. Mas Ele nos surpreende e cuida de nós com muito carinho, quando você chega até nós e se mostra interessado em ajudar. Apenas por você ter nos visitado aqui, já somos gratos. 
-
 Esperamos que a providência divina também se faça presente na sua vida e que você consiga finalizar a intenção de fazer parte dos doadores. Já rezamos muito nas necessidades de cada um, pois acreditamos que juntos podemos fazer maravilhas pelos que precisam.
-
 Nós não existiríamos sem vocês e todo nosso trabalho ficaria sem sentido se não tivéssemos a ajuda de irmãos tão comprometidos! Estamos falando de um exército de doadores, fortalecidos pelo poder da oração, sustentando filhos necessitados de amor e atenção, gerando mais e mais almas restauradas para o reino de Deus. Obrigada por estar conosco! Um abraço fraterno
-
 Copie seu código de Boleto  abaixo para efetuar o pagamento
-
 Boleto:
-
 {LINK}
-
 Gratidão a Deus por sua generosidade.
-
 Deus lhe abençoe poderosamente!

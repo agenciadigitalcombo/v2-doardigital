@@ -1,16 +1,9 @@
 pagamento vencido
 Estamos esperando sua presença, você vem?
-
 Olá  {NOME},
-
 Estamos ansiosos e contando os minutos para que você esteja conosco nessa missão maravilhosa que vivemos. Amar é nosso lema e servir nossa missão. 
-
 Seja você também parte integrante dessa grande missão, contribua com nossa obra e veja os frutos que ela gera.
-
 Junte-se a nós nessa tão grandiosa missão e faça a diferença no mundo.
-
 Contamos com você!
-
 {LINK}
-
 Deus abençoe poderosamente!

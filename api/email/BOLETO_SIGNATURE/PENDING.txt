@@ -1,22 +1,12 @@
 pagamento em aberto
 Seu boleto mensal chegou!
-
 Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.
-
 Estamos passando pra deixar o seu novo boleto mensal.
-
 Esperamos que alegremente você continue firme conosco em toda essa jornada que estamos trilhando sendo benção e sinal de Deus para nós.
-
 Sua contribuição mensal nos ajuda a continuar essa linda e árdua missão.
-
 Que os anjos e santos do céu intercedam por sua vida e sua família.
-
 Deus lhe abençoe poderosamente!
-
 Copie seu código de Boleto  abaixo para efetuar o pagamento
-
 Boleto:
-
 {LINK}
-
 Gratidão a Deus por sua generosidade.

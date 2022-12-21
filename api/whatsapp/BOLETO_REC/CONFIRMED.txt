@@ -1,10 +1,6 @@
 pagamento confirmando
 Olá {{NOME}}, tudo bem?
-\n
 Passando para avisar que o pagamento de sua doação mensal da {{INSTITUTION}} foi concluída.
-\n
 Temos a certeza que de onde Padre Léo está, tem orado por você assim como nós.
-\n
 Sua contribuição ajuda a manter toda obra de Padre Léo viva resgatando vidas e almas para Cristo.
-\n
 Deus seja louvado por sua vida!

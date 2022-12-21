@@ -1,22 +1,12 @@
 pagamento aguardando pagamento
 Olá {{NOME}}, queremos te agradecer por seu gesto com {{INSTITUTION}}
-\n
 Agradecemos por ter feito seu cadastro em nosso "sistema de doações".
-\n
 Estamos encaminhando por aqui o código para que você possa *Copiar e Colar* no app de seu banco para fazer o pagamento da sua doação! 
-\n
 Se você escolheu ajudar mensalmente, no próximo mês, você receberá seu Pix no e-mail e por este whatsapp que utilizou no cadastro. 
-\n
 *Favor  copiar o código inteiro a baixo assim você terá o código corretamente  para efetuar seu pagamento online em seu app bank. 
-\n
 CONFIRA SE NA HORA DE COLAR NO SEU APP ESTÁ COM MESMO NÚMERO INICIAL E ULTIMO DO LINK PARA EFETUAR CORRETAMENTE.
-\n
 Esta é uma mensagem automática do sistema de doações, e se você precisar de  qualquer informação adicional é só entrar em contato direto com a instituição.
-\n
 Agradecemos  sua generosidade com esta missão.
-\n
 Deus o Abençoe poderosamente!
-\n
 PIX URL -----------
-\n
 {{CODE}}

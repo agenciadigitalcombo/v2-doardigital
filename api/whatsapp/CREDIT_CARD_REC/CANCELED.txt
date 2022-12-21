@@ -1,16 +1,9 @@
 pagamento cancelada
 Olá {{NOME}} paz e bem!
-\n
 Estamos passando para avisar que sua doação mensal "duplicada" ou "solicitada" acabou de ser cancelada.
-\n
 1 - Se você solicitou cancelamento e você ainda receber alguma mensagem pode *desconsiderar*, pois ela seria refente a algo que já estava lançado no sistema.
-\n
 2 - Se você tem doações duplicadas ou em várias formas de pagamento, uma já foi cancelada ficando somente a que vc está efetuando seus pagamentos.
-\n
 Fique tranquilo, estamos lhe auxiliando da melhor forma.
-\n
 E por isso estamos melhorando nosso sistema de doações e pedimos perdão pelas falhas que tivemos nesse meio tempo pois  buscamos melhorar a cada dia para melhor atendê-lo.
-\n
 Gratidão pelo tempo que você esteve conosco.
-\n
 Deus te abençoe poderosamente!
