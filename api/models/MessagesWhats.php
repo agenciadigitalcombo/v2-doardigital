@@ -146,6 +146,7 @@ class MessagesWhats
             "tipo" => $payload["tipo"] ?? null,
             "status_pagamento" => $payload["status_pagamento"] ?? null,
             "content" => $payload["content"] ?? null,
+            "name" => $payload["name"] ?? null,
         ];
     }
 

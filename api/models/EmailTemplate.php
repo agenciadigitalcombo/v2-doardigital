@@ -160,6 +160,7 @@ class EmailTemplate
             "status_pagamento" => $payload["status_pagamento"] ?? null,
             "assunto" => $payload["assunto"] ?? null,
             "content" => $payload["content"] ?? null,
+            "name" => $payload["name"] ?? null,
         ];
     }
 
