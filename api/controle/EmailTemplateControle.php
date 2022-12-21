@@ -55,7 +55,7 @@ class EmailTemplateControle  extends Controle
         $template = new EmailTemplate();
         self::printSuccess(
             "Dados",
-            $template->info( $instituicao_fk, $tipo, $status_pagamento)
+            $template->info($instituicao_fk, $tipo, $status_pagamento)
         );
     }
 
@@ -72,7 +72,7 @@ class EmailTemplateControle  extends Controle
         $tipo = $_REQUEST["tipo"];
         $status_pagamento = $_REQUEST["status_pagamento"];
         $template = new EmailTemplate();
-        $template->recover($instituicao_fk,$tipo, $status_pagamento); 
+        $template->recover($instituicao_fk, $tipo, $status_pagamento);
         self::printSuccess(
             "Atualizado com sucesso",
             []
@@ -91,6 +91,21 @@ class EmailTemplateControle  extends Controle
         self::printSuccess(
             "Lista de Email",
             $template->list($instituicao_fk)
+        );
+    }
+    static function reset()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "instituicao_fk" => "Informe uma identificação de instituição",
+        ]);
+        self::privateRouter();
+        $instituicao_fk = $_REQUEST['instituicao_fk'];
+        $template = new EmailTemplate();
+        $template->resetInst($instituicao_fk);
+        self::printSuccess(
+            "Dados restaurados",
+            []
         );
     }
 }

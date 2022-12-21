@@ -34,3 +34,10 @@ token={{token}}
 &tipo={{tipo}}
 &status_pagamento={{status_pagamento}}
 &instituicao_fk={{instituicao_fk}}
+
+###
+POST {{host}}/api/email-template/reset
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&instituicao_fk={{instituicao_fk}}
