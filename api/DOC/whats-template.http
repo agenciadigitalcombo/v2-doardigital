@@ -39,3 +39,10 @@ Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
 &instituicao_fk={{instituicao_fk}}
+
+###
+POST {{host}}/api/whats-template/reset
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&instituicao_fk={{instituicao_fk}}

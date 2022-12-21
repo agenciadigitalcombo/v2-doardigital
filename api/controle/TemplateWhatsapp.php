@@ -106,4 +106,20 @@ class TemplateWhatsapp  extends Controle
             []
         );
     }
+    
+    static function reset()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "instituicao_fk" => "Informe uma identificação de instituição",
+        ]);
+        self::privateRouter();
+        $instituicao_fk = $_REQUEST['instituicao_fk'];
+        $template = new MessagesWhats();
+        $template->resetInst($instituicao_fk);
+        self::printSuccess(
+            "Dados restaurados",
+            []
+        );
+    }
 }
