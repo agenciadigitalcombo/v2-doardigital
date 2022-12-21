@@ -1,3 +1,4 @@
+pagamento aguardando
 Olá {{NOME}}, 
 \n
 Passando hoje e trazendo para você a oração do Salmo 121

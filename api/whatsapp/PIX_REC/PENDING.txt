@@ -1,3 +1,4 @@
+pagamento aguardando pagamento
 Olá {{NOME}}, tudo bem?
 \n
 Passando para deixar sua nova CHAVE PIX  de sua doação mensal da (instituição).

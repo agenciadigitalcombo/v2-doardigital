@@ -1,3 +1,4 @@
+pagamento confirmando
 Obrigado(a) {{NOME}}!
 \n
 Sua doação é uma manifestação concreta da Providência Divina em nossa Missão! 

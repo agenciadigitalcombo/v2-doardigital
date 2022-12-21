@@ -1,3 +1,4 @@
+pagamento aguardando pagamento
 Olá {{NOME}}, queremos te agradecer por seu gesto com {{INSTITUTION}}
 \n
 Agradecemos por ter feito seu cadastro em nosso "sistema de doações".

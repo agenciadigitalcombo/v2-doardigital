@@ -1,3 +1,4 @@
+pagamento cancelada
 Olá {{NOME}} paz e bem!
 \n
 Estamos passando para avisar que sua doação mensal "duplicada" ou "solicitada" acabou de ser cancelada.

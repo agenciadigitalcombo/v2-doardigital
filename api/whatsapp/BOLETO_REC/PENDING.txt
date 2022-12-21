@@ -1,3 +1,4 @@
+pagamento em aberto
 Olá {{NOME}}, tudo bem?
 \n
 Passando para deixar seu novo boleto de sua doação mensal da {{INSTITUTION}}
