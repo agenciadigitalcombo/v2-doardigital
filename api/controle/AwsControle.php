@@ -127,6 +127,14 @@ class AwsControle extends Controle
             "definition" => $body,
             "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
         ]);
+        $db = new Banco();
+        $db->table('institution');
+        $db->where([
+            "institution_fk" => $INST
+        ]);
+        $db->update([
+            "state_machine" => $response["stateMachineArn"]
+        ]);
         self::printSuccess(
             "Status Email",
             $response

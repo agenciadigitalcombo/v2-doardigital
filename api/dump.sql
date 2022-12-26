@@ -139,6 +139,7 @@ CREATE TABLE institution (
     accountName VARCHAR(75),
     agency VARCHAR(75),
     bank VARCHAR(75),
+    state_machine VARCHAR(255),
     bankAccountType VARCHAR(75),
     showCep int not null
 );
