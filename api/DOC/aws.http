@@ -1,3 +1,7 @@
+@host=http://hostdoar.tk
+@token=eyJjb2RlIjoiYWRtXzYyZDk3MzFhMTIwMzAifQ==.f28ebb285d23f0ff5b23270e73aeb13d2c6c2b80
+@instituicao_fk=inst_62d990c744f00
+
 POST https://14fpuojlqf.execute-api.us-east-1.amazonaws.com/prod/
 
 ###
@@ -13,3 +17,10 @@ POST https://cjylc0fag4.execute-api.us-east-1.amazonaws.com/default/ApagarIdenti
 {
     "EMAIL" : ""
 }
+
+###
+POST {{host}}/aws/create-state-machine
+Content-Type: application/x-www-form-urlencoded;
+
+token={{token}}
+&instituicao_fk={{instituicao_fk}}

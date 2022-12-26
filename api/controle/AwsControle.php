@@ -31,7 +31,7 @@ class AwsControle extends Controle
             "mailSender" => $EMAIL,
             "mailActive" => 1,
         ]);
-        
+
         $aws = new Aws();
         $path = "https://r3nmn03mmk.execute-api.us-east-1.amazonaws.com/default/VerificarIdentidadeEmail";
         $aws->post($path, [
@@ -65,7 +65,7 @@ class AwsControle extends Controle
             "mailSender" => "",
             "mailActive" => 0,
         ]);
-        
+
         $aws = new Aws();
         $path = "https://cjylc0fag4.execute-api.us-east-1.amazonaws.com/default/ApagarIdentidadeEmail";
         $aws->post($path, [
@@ -77,7 +77,7 @@ class AwsControle extends Controle
             []
         );
     }
-    
+
     static function statusEmail()
     {
         self::requireInputs([
@@ -87,13 +87,46 @@ class AwsControle extends Controle
         self::privateRouter();
 
         $EMAIL = $_REQUEST["email"];
-        
+
         $aws = new Aws();
         $path = "https://znz4okv2u2.execute-api.us-east-1.amazonaws.com/default/ListarIdentidadesSES";
         $response = $aws->post($path, [
             "EMAIL" => $EMAIL
         ]);
 
+        self::printSuccess(
+            "Status Email",
+            $response
+        );
+    }
+
+    static function createStateMachine()
+    {
+        self::requireInputs([
+            "token" => "informe um token",
+            "institution_fk" => "informe uma identificação de instituição",
+        ]);
+        self::privateRouter();
+        $INST = $_REQUEST["institution_fk"];
+        $aws = new Aws();
+        $path = "https://5fdmf9sck5.execute-api.us-east-1.amazonaws.com/dev";
+        $body = [
+            "Comment" => "A Hello World example of the Amazon States Language using a Pass state",
+            "StartAt" => "HelloWorld",
+            "States" => [
+                "HelloWorld" => [
+                    "Type" => "Pass",
+                    "Result" => "Hello World!",
+                    "End" => true
+                ]
+            ]
+        ];
+        $body = json_encode($body);
+        $response = $aws->post($path,  [
+            "name" => "Teste-de-API9",
+            "definition" => $body,
+            "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
+        ]);
         self::printSuccess(
             "Status Email",
             $response
