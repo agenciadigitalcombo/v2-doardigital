@@ -56,6 +56,7 @@ function generateHtmlEmail($payload) {
 
     $subject = $payload["subject"] ?? $bodyPerson[0]["assunto"] ?? "Doar Digital";
     $my_content = $bodyPerson[0]["content"] ?? '';
+    $name = $bodyPerson[0]["name"] || 'Padrão';
 
     if(strlen($my_content) < 20) {
         $filePath = __DIR__ . "/email/{$type_payment}/{$status_payment}.txt";
@@ -73,7 +74,8 @@ function generateHtmlEmail($payload) {
 
     return [
         "assunto" => $subject,
-        "html" => $blade
+        "html" => $blade,
+        "name" => $name
     ];
 
 }

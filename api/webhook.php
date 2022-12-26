@@ -217,6 +217,8 @@ $payload = [
     "external_id" => $reference_key,
 ];
 
+
+
 $Fila = new FilaAws();
 
 @$mailActive = $company['mailActive'] ?? 0;
@@ -246,7 +248,9 @@ if( strlen($state_machine) < 70 ) {
     $resArn = AwsControle::createArn($institution_fk);
     $state_machine = $resArn["stateMachineArn"];
 }
-$resEmail = $Fila->send($payload, $state_machine );
+
+$resExecution = $Fila->send($payload, $state_machine );
+$label = $templateEmail['name'];
 
 $menAws = new Banco();
 $menAws->table('message_aws');
@@ -257,8 +261,9 @@ $menAws->insert([
     "doador_fk" => $doador_fk,
     "fatura_fk" => $ID,
     "ref_fk" => $reference_key,
-    "execution_arn" => $resEmail['executionArn'],
+    "execution_arn" => $resExecution['executionArn'],
     "institution_fk" => $institution_fk,
+    "label" => $label,
 ]);
 
 $menAws->table('message_aws');
@@ -269,8 +274,9 @@ $menAws->insert([
     "doador_fk" => $doador_fk,
     "fatura_fk" => $ID,
     "ref_fk" => $reference_key,
-    "execution_arn" => $resWhats['executionArn'],
+    "execution_arn" => $resExecution['executionArn'],
     "institution_fk" => $institution_fk,
+    "label" => $label,
 ]);
 
 echo json_encode([

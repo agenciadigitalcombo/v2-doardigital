@@ -218,6 +218,7 @@ CREATE TABLE message (
 
 CREATE TABLE message_aws (
     id int not null auto_increment primary key,
+    label VARCHAR(255),
     tipo VARCHAR(255),
     status VARCHAR(255),
     data VARCHAR(255),
