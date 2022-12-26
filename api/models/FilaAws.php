@@ -10,12 +10,12 @@ class FilaAws
         ];
     }
 
-    public function send(array $payload = [], $tipo = "EMAIL")
+    public function send(array $payload = [], $state_machine)
     {
-        $payload['tipoMensagem'] = $tipo;
+        $payload['tipoMensagem'] = 'EMAIL/WHATS';
         $content = json_encode([
             "input" => json_encode($payload, JSON_UNESCAPED_UNICODE),
-            "stateMachineArn" => "arn:aws:states:us-east-1:348265973939:stateMachine:MyStateMachine"
+            "stateMachineArn" => $state_machine
         ], JSON_UNESCAPED_UNICODE);
 
         try {

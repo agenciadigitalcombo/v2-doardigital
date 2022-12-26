@@ -23,4 +23,4 @@ POST {{host}}/api/aws/create-state-machine
 Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
-&institution_fk={{institution_fk}}5
+&institution_fk={{institution_fk}}

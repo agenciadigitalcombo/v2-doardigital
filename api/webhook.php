@@ -11,9 +11,12 @@ if (!empty($_REQUEST['debug'])) {
 }
 
 include __DIR__ . "/core/Banco.php";
+include __DIR__ . "/core/Controle.php";
 include __DIR__ . "/models/Asaas.php";
 include __DIR__ . "/models/AsaasPay.php";
 include __DIR__ . "/models/FilaAws.php";
+include __DIR__ . "/models/Aws.php";
+include __DIR__ . "/controle/AwsControle.php";
 include __DIR__ . "/webHookTemplateEmail.php";
 
 $env = include __DIR__ . "/config.php";
@@ -238,8 +241,12 @@ if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
     die;
 }
 
-$resEmail = $Fila->send($payload, 'EMAIL');
-$resWhats = $Fila->send($payload, 'WHATS');
+$state_machine = $company['state_machine'];
+if( strlen($state_machine) < 70 ) {
+    $resArn = AwsControle::createArn($institution_fk);
+    $state_machine = $resArn["stateMachineArn"];
+}
+$resEmail = $Fila->send($payload, $state_machine );
 
 $menAws = new Banco();
 $menAws->table('message_aws');

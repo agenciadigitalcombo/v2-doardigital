@@ -107,7 +107,17 @@ class AwsControle extends Controle
             "institution_fk" => "informe uma identificação de instituição",
         ]);
         self::privateRouter();
-        $INST = $_REQUEST["institution_fk"];
+        $INST = $_REQUEST["institution_fk"];        
+        $response = self::createArn($INST);        
+        self::printSuccess(
+            "Status Email",
+            $response
+        );
+    }
+
+    static function createArn($inst_fk)
+    {
+        $INST = $inst_fk;
         $aws = new Aws();
         $path = "https://5fdmf9sck5.execute-api.us-east-1.amazonaws.com/dev";
         $body = [
@@ -121,7 +131,7 @@ class AwsControle extends Controle
                 ]
             ]
         ];
-        $body = json_encode($body);
+        $body = json_encode($body);        
         $response = $aws->post($path,  [
             "name" => "name-" . $INST,
             "definition" => $body,
@@ -135,9 +145,6 @@ class AwsControle extends Controle
         $db->update([
             "state_machine" => $response["stateMachineArn"]
         ]);
-        self::printSuccess(
-            "Status Email",
-            $response
-        );
+        return $response;
     }
 }
