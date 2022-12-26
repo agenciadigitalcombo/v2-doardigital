@@ -123,7 +123,7 @@ class AwsControle extends Controle
         ];
         $body = json_encode($body);
         $response = $aws->post($path,  [
-            "name" => "Teste-de-API9",
+            "name" => "name-" . $INST,
             "definition" => $body,
             "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
         ]);
