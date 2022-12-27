@@ -215,6 +215,10 @@ $payload = [
     "logradouro" => $company["nome"] ??  "",
     "token" => $token_e_vendas,
     "external_id" => $reference_key,
+    "SESSAO" => "digitalcombo",
+    "BEARER" => '$2b$10$A8yG7E9Z1dD1tdAe02TljerI2vwX1WiwSgvsAha.N1ZD4MZyYgKBe',
+    "PHONE" => "5582999776698",
+    "MESSAGE_WHATS" => "Olá isso é um teste"
 ];
 
 

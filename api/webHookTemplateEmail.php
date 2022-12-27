@@ -25,7 +25,6 @@ function blade(array $payload, string $template)
     return $html;
 }
 
-
 function generateHtmlEmail($payload) {
 
     $status_payment = $payload["status_payment"];
@@ -71,9 +70,6 @@ function generateHtmlEmail($payload) {
     $content["NOME"] = $content["nome"];
     $content["LINK"] = $content["type_payment"] == "PIX" ? $content["code"] : $content["url"];
     $blade = blade($content, $template);
-
-
-
 
     return [
         "assunto" => $subject,

@@ -1,6 +1,9 @@
 # Doar Digital
 
 
+base 
+https://doarv2.tk
+
 
 https://tailwindcss.com
 
