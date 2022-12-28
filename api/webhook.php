@@ -203,14 +203,14 @@ $integrate->where([
     "tipo" => "CANAL_WHATS",
     "instituicao_fk" => $institution_fk,
 ]);
-$integrateWhatsBearer = $integrate->select()[0]['key_1'];
+@$integrateWhatsBearer = $integrate->select()[0]['key_1'] ?? 'BEARER_NOT';
 
 $admins = new Banco();
 $admins->table('institution_adm');
 $admins->where([
     "instituition_fk" => $institution_fk,
 ]);
-$adminFk = $admins->select()[0]['adm_fk'];
+@$adminFk = $admins->select()[0]['adm_fk'] ?? 'ADM_FAIL';
 
 $payload = [
     "instituicao" => $company,
