@@ -135,7 +135,6 @@ $e_vendas->where([
     "tipo" => "EVENDAS"
 ]);
 $token_e_vendas = $e_vendas->select()[0] ?? [];
-
 $token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 
 sleep(1);
@@ -220,8 +219,6 @@ $payload = [
     "PHONE" => "5582999776698",
     "MESSAGE_WHATS" => "Olá isso é um teste"
 ];
-
-
 
 $Fila = new FilaAws();
 

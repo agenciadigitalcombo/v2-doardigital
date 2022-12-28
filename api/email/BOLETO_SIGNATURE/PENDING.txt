@@ -1,4 +1,4 @@
-pagamento em aberto
+*Boleto Recorrente  (pendente- imediato) 
 Seu boleto mensal chegou!
 Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.
 Estamos passando pra deixar o seu novo boleto mensal.
@@ -7,6 +7,5 @@ Sua contribuição mensal nos ajuda a continuar essa linda e árdua missão.
 Que os anjos e santos do céu intercedam por sua vida e sua família.
 Deus lhe abençoe poderosamente!
 Copie seu código de Boleto  abaixo para efetuar o pagamento
-Boleto:
-{LINK}
+<a href="{LINK}" {STYLE_BTN}> Visualizar Boleto </a>
 Gratidão a Deus por sua generosidade.
