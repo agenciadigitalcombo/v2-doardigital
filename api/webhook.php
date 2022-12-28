@@ -197,6 +197,21 @@ $doador = $doadores->select()[0] ?? [];
 
 $telefone = $doador["telefone"] ?? "";
 
+$integrate = new Banco();
+$integrate->table('integration');
+$integrate->where([
+    "tipo" => "CANAL_WHATS",
+    "instituicao_fk" => $institution_fk,
+]);
+$integrateWhatsBearer = $integrate->select()[0]['key_1'];
+
+$admins = new Banco();
+$admins->table('institution_adm');
+$admins->where([
+    "instituition_fk" => $institution_fk,
+]);
+$adminFk = $admins->select()[0]['adm_fk'];
+
 $payload = [
     "instituicao" => $company,
     "nome" => $fatura["doador_nome"] ?? "",
@@ -214,11 +229,12 @@ $payload = [
     "logradouro" => $company["nome"] ??  "",
     "token" => $token_e_vendas,
     "external_id" => $reference_key,
-    "SESSAO" => "digitalcombo",
-    "BEARER" => '$2b$10$A8yG7E9Z1dD1tdAe02TljerI2vwX1WiwSgvsAha.N1ZD4MZyYgKBe',
-    "PHONE" => "5582999776698",
-    "MESSAGE_WHATS" => "Olá isso é um teste"
+    "SESSAO" => $adminFk,
+    "BEARER" => $integrateWhatsBearer,
+    "PHONE" => "55".$telefone,
 ];
+
+$payload['MESSAGE_WHATS'] = generateMessageWhats($payload);
 
 $Fila = new FilaAws();
 

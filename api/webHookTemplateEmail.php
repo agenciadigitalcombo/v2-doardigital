@@ -78,3 +78,51 @@ function generateHtmlEmail($payload) {
     ];
 
 }
+
+
+function generateMessageWhats($payload) {
+
+    $status_payment = $payload["status_payment"];
+    $template = '{my_content}';    
+
+    $content = (array)$payload;
+
+    foreach ($content as $index => $cont) {
+        if (is_array($cont)) {
+            foreach ($cont as $k => $v) {
+                $content["{$index}_{$k}"] = $v;
+            }
+        }
+    }
+
+    $type_payment = $content["type_payment"] ?? "";
+    $status_payment = $content["status_payment"] ?? "";
+    $institution_fk = $content["instituicao_institution_fk"] ?? "";
+
+    $templateEmail = new Banco();
+    $templateEmail->table("template_whats");
+    $templateEmail->where([
+        "instituicao_fk" => $institution_fk,
+        "tipo" => $type_payment,
+        "status_pagamento" => $status_payment,
+    ]);
+    $bodyPerson = $templateEmail->select();
+    
+    $my_content = $bodyPerson[0]["content"] ?? '';
+
+    if(strlen($my_content) < 20) {
+        $filePath = __DIR__ . "/whatsapp/{$type_payment}/{$status_payment}.txt";
+        $my_content = file_get_contents( $filePath );
+    }
+
+    $my_content = str_replace("\n","<br /> <br />", $my_content);
+    $template = str_replace("{my_content}", $my_content, $template);
+
+    unset($content["instituicao"]);
+    $content["NOME"] = $content["nome"];
+    $content["LINK"] = $content["type_payment"] == "PIX" ? $content["code"] : $content["url"];
+    $blade = blade($content, $template);
+
+    return trim( strip_tags( $blade ) );
+
+}
