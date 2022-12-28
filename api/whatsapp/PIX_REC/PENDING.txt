@@ -1,8 +1,0 @@
-pagamento aguardando pagamento
-Olá {{NOME}}, tudo bem?
-Passando para deixar sua nova CHAVE PIX  de sua doação mensal da (instituição).
-Queremos te agradecer por você ser providência divina ajudando esta causa.
-*SUA CHAVE PIX ABAIXO*
-Que os Santos do céu intercedam por você!
-Gratidão.
-{{CODE}}

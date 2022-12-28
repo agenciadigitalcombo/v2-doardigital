@@ -1,7 +1,0 @@
-pagamento em aberto
-Olá {{NOME}}, tudo bem?
-Passando para deixar seu novo boleto de sua doação mensal da {{INSTITUTION}}
-Queremos te agradecer por você ser canal de Deus para nós e contribuir para esta causa.
-Seu boleto {{LINK}}
-Que os Santos do Céu intercedam por você!
-Gratidão.

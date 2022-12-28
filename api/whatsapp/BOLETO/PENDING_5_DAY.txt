@@ -1,0 +1,6 @@
+*Boleto Vencido (recuperação 5 dias depois)
+Bênçãos para você.
+Olá {{NOME}},
+Ainda não conseguimos identificar o seu pagamento. Podemos ajudar de alguma forma?
+Estamos orando por você para que muitas bençãos sejam derramadas sobre você. Pois você merece muitas glórias e muitas bençãos.
+<a href="{LINK}" {STYLE_BTN} > Visualizar Boleto </a>
