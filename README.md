@@ -3,4 +3,4 @@ V2 DOAR DIGITAL.
 
 V2 Doar Digital.
 
-http://doardigital.com.br/#/
+https://painel.doardigital.com.br/#/
