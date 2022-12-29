@@ -1,0 +1,27 @@
+<div class="min-h-screen">
+  <div class="flex justify-center min-h-screen py-8" :style="{'background-color': cor}">
+    <div class="flex items-center w-full max-w-lg mx-auto lg:w-3/6">
+      <div class="flex-1">
+        <div class="text-center">
+          <div class="flex flex-wrap justify-center mb-3">
+            <img :src="logo" class="h-[60px] mx-auto mb-4 object-center" onerror="logoDefault(this)" />
+          </div>
+        </div>
+        <div class="bg-white rounded-md shadow-2xl p-5">
+          <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
+            Clique no botão para copiar o código inteiro
+          </h1>
+          <img class="w-[250px] mx-auto" :src="'https://api-qrcode.digitalcombo.com.br/?code='+code">
+          <div class="border-2 border-gray-200 flex justify-between items-center mt-4 py-2">
+            <i class="fa-solid fa-link px-4"></i>
+            <input class="w-full outline-none bg-transparent" ref="codePix" v-model="code">
+            <button @click="copyPix"
+              class="bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600">
+              Copiar
+            </button>
+          </div>
+        </div> <br>
+      </div>
+    </div>
+  </div>
+</div>

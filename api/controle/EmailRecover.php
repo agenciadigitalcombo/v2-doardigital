@@ -80,6 +80,7 @@ class EmailRecover  extends Controle
             "NOME" => $fatura["doador_nome"],
             "instituicao" => $inst,
             "doador" => $do,
+            "LINK" => '//' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
         ];
 
         foreach ($payload as $index => $cont) {
@@ -120,6 +121,8 @@ class EmailRecover  extends Controle
                 "fatura" => $fatura,
                 "institution" => $inst,
                 "doador" => $do,
+                "LINK" => '//' . $inst['domain'] . "/api/pix/#/?code=" . $fatura['codigo'],
+
             ]
         );
     }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copie o código PIX</title>   
+    <script type="module" async>
+        import ApiInst  from '../components/apiInstitution.js'
+        let api = new ApiInst()
+        let domain = window.location.host == 'http://127.0.0.1:5500' ? 'teste.hostdoar.tk' : window.location.host
+        let res = await api.get(domain)
+        let idGoogle = res.payload.tag_manager
+        console.log(idGoogle)
+        if(idGoogle) {
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer', idGoogle);
+        }        
+        globalThis.setSrcIframe(idGoogle)
+    </script>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="./app.js" type="module" defer async></script>
+    <link rel="shortcut icon" href="../public/logo/ico.pnga" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <iframe class="iframeGoogle" src="" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    <script>
+        function setSrcIframe(idGoogle) {          
+            if(idGoogle) {
+                document.querySelector('.iframeGoogle').src = `https://www.googletagmanager.com/ns.html?id=` + idGoogle
+            }
+        }
+        
+    </script>
+    
+    <div id="app"></div>
+</body>
+
+</html>
