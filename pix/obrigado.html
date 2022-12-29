@@ -1,4 +1,12 @@
 <div class="min-h-screen">
+
+  <button v-if="successes" type="button" class="fixed top-4 right-4 z-50 rounded-md bg-green-500 px-4 py-2 text-white transition hover:bg-green-600">
+    <div class="flex items-center space-x-2">
+      <span class="text-3xl"><i class="bx bx-check"></i></span>
+      <p class="font-bold">copiado com sucesso</p>
+    </div>
+  </button>
+
   <div class="flex justify-center min-h-screen py-8" :style="{'background-color': cor}">
     <div class="flex items-center w-full max-w-lg mx-auto lg:w-3/6">
       <div class="flex-1">
@@ -17,7 +25,7 @@
             <input class="w-full outline-none bg-transparent" ref="codePix" v-model="code">
             <button @click="copyPix"
               class="bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600">
-              Copiar
+              copiar
             </button>
           </div>
         </div> <br>

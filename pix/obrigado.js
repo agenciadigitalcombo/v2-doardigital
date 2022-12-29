@@ -12,6 +12,7 @@ export default {
             code: null,
             tipo: null,
             url: null,
+            successes: false, 
         }
     },
     components: {},
@@ -28,6 +29,11 @@ export default {
             return url.searchParams.get(name)
         },
         copyPix() {
+            this.successes =  true
+            setTimeout( _ => {
+                this.successes = false
+            }, 5000 )
+            this.text = "COPIADO!!!"
             this.$refs.codePix.select()
             this.$refs.codePix.setSelectionRange(0, 99999)
             navigator.clipboard.writeText(this.$refs.codePix.value)
