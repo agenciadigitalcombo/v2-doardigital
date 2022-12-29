@@ -117,7 +117,8 @@ class Fatura
     static function porter(array $payload): array
     {
         $payload["data"] = $payload["data"] ??  date("Y-m-d");
-        if($payload["tipo_pagamento"] == "PIX" || $payload["tipo_pagamento"] == "BOLETO") {
+        $tipo_pagamento = $payload["tipo_pagamento"] ?? '';
+        if( $tipo_pagamento == "PIX" || $tipo_pagamento == "BOLETO") {
             $dataCreated = date("Y-m-d", strtotime('-7 days', strtotime($payload["data"])));
         }else {
             $dataCreated = $payload["data"];

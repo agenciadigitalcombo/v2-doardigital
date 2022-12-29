@@ -25,7 +25,7 @@ content-type: application/json
             "creditCardBrand": "AMEX"
         },
         "pixTransaction": null,
-        "status": "CONFIRMED",
+        "status": "RECEIVED",
         "dueDate": "2022-11-21",
         "originalDueDate": "2022-11-21",
         "paymentDate": null,
