@@ -302,6 +302,7 @@ echo json_encode([
     "payload" => [],
     "resAwsWhats" => $resWhats,
     "resAwsEmail" => $resEmail,
+    "resStateMachine" => $resArn,
     "update" => [
         "status_pagamento" => $status,
         "data" => $dueDate,

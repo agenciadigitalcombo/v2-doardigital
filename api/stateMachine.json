@@ -1,95 +1,95 @@
 {
-    "Comment": "A description of my state machine",
-    "StartAt": "Wait",
-    "States": {
-      "Wait": {
-        "Type": "Wait",
-        "Seconds": 5,
-        "Next": "Parallel"
-      },
-      "Parallel": {
-        "Type": "Parallel",
-        "Branches": [
-          {
-            "StartAt": "Lambda Invoke",
-            "States": {
-              "Lambda Invoke": {
-                "Type": "Task",
-                "Resource": "arn:aws:states:::lambda:invoke",
-                "OutputPath": "$.Payload",
-                "Parameters": {
-                  "Payload.$": "$",
-                  "FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:DoarDigital-Enviar-Email:$LATEST"
-                },
-                "Retry": [
-                  {
-                    "ErrorEquals": [
-                      "Lambda.ServiceException",
-                      "Lambda.AWSLambdaException",
-                      "Lambda.SdkClientException",
-                      "Lambda.TooManyRequestsException"
-                    ],
-                    "IntervalSeconds": 2,
-                    "MaxAttempts": 6,
-                    "BackoffRate": 2
-                  }
-                ],
-                "Next": "Wait (1)"
+  "Comment": "A description of my state machine",
+  "StartAt": "Wait",
+  "States": {
+    "Wait": {
+      "Type": "Wait",
+      "Seconds": 5,
+      "Next": "Parallel"
+    },
+    "Parallel": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "Lambda Invoke",
+          "States": {
+            "Lambda Invoke": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:DoarDigital-Enviar-Email:$LATEST"
               },
-              "Wait (1)": {
-                "Type": "Wait",
-                "Seconds": 5,
-                "Next": "Pass (1)"
-              },
-              "Pass (1)": {
-                "Type": "Pass",
-                "End": true
-              }
-            }
-          },
-          {
-            "StartAt": "Lambda Invoke (1)",
-            "States": {
-              "Lambda Invoke (1)": {
-                "Type": "Task",
-                "Resource": "arn:aws:states:::lambda:invoke",
-                "OutputPath": "$.Payload",
-                "Parameters": {
-                  "Payload.$": "$",
-                  "FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ZapDoarDigital-1:$LATEST"
-                },
-                "Retry": [
-                  {
-                    "ErrorEquals": [
-                      "Lambda.ServiceException",
-                      "Lambda.AWSLambdaException",
-                      "Lambda.SdkClientException",
-                      "Lambda.TooManyRequestsException"
-                    ],
-                    "IntervalSeconds": 2,
-                    "MaxAttempts": 6,
-                    "BackoffRate": 2
-                  }
-                ],
-                "Next": "Pass (2)"
-              },
-              "Pass (2)": {
-                "Type": "Pass",
-                "End": true
-              }
+              "Retry": [
+                {
+                  "ErrorEquals": [
+                    "Lambda.ServiceException",
+                    "Lambda.AWSLambdaException",
+                    "Lambda.SdkClientException",
+                    "Lambda.TooManyRequestsException"
+                  ],
+                  "IntervalSeconds": 2,
+                  "MaxAttempts": 6,
+                  "BackoffRate": 2
+                }
+              ],
+              "Next": "Wait (1)"
+            },
+            "Wait (1)": {
+              "Type": "Wait",
+              "Seconds": 5,
+              "Next": "Pass (1)"
+            },
+            "Pass (1)": {
+              "Type": "Pass",
+              "End": true
             }
           }
-        ],
-        "Next": "Wait (2)"
-      },
-      "Wait (2)": {
-        "Type": "Wait",
-        "Seconds": 5,
-        "Next": "Pass"
-      },
-      "Pass": {
-        "Type": "Pass",
-        "End": true
-      }
+        },
+        {
+          "StartAt": "Lambda Invoke (1)",
+          "States": {
+            "Lambda Invoke (1)": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ZapDoarDigital-1:$LATEST"
+              },
+              "Retry": [
+                {
+                  "ErrorEquals": [
+                    "Lambda.ServiceException",
+                    "Lambda.AWSLambdaException",
+                    "Lambda.SdkClientException",
+                    "Lambda.TooManyRequestsException"
+                  ],
+                  "IntervalSeconds": 2,
+                  "MaxAttempts": 6,
+                  "BackoffRate": 2
+                }
+              ],
+              "Next": "Pass (2)"
+            },
+            "Pass (2)": {
+              "Type": "Pass",
+              "End": true
+            }
+          }
+        }
+      ],
+      "Next": "Wait (2)"
+    },
+    "Wait (2)": {
+      "Type": "Wait",
+      "Seconds": 5,
+      "Next": "Pass"
+    },
+    "Pass": {
+      "Type": "Pass",
+      "End": true
     }
   }
+}
