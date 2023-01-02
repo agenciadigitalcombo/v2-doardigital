@@ -120,17 +120,7 @@ class AwsControle extends Controle
         $INST = $inst_fk;
         $aws = new Aws();
         $path = "https://5fdmf9sck5.execute-api.us-east-1.amazonaws.com/dev";
-        $body = [
-            "Comment" => "A Hello World example of the Amazon States Language using a Pass state",
-            "StartAt" => "HelloWorld",
-            "States" => [
-                "HelloWorld" => [
-                    "Type" => "Pass",
-                    "Result" => "Hello World!",
-                    "End" => true
-                ]
-            ]
-        ];
+        $body = json_decode(file_get_contents(__DIR__ . "/../stateMachine.json"));
         $body = json_encode($body);        
         $response = $aws->post($path,  [
             "name" => "name-" . $INST,

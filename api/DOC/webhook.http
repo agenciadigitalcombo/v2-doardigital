@@ -1,4 +1,5 @@
-@host=http://hostdoar.tk
+# @host=http://hostdoar.tk
+@host=http://localhost/v2-doardigital
 
 ###
 
