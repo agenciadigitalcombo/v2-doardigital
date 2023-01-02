@@ -20,7 +20,8 @@ export default {
             isLoad: 'true',
             lista: [],
             cols: {
-                tipo: t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
+                "Descrição": d => `${d.name}`,
+                "Tipo": t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
                 ${t.tipo}
                 </span>`,
                 status: t => status(t.status_pagamento),
