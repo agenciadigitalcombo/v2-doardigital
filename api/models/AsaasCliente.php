@@ -93,6 +93,7 @@ class AsaasCliente extends Asaas
     public function cancel($sub_id): array
     {
         $response = $this->post("/subscriptions/{$sub_id}", [
+            "id" => $sub_id,
             "status" => 'INACTIVE'
         ]); 
         // $this->post("/subscriptions/{$sub_id}", [], 'DELETE');
