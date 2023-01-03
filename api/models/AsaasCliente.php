@@ -94,7 +94,7 @@ class AsaasCliente extends Asaas
     {
         $response = $this->post("/subscriptions/{$sub_id}", [
             "id" => $sub_id,
-            "status" => 'INACTIVE'
+            "endDate" => date('Y-m-d')
         ]); 
         // $this->post("/subscriptions/{$sub_id}", [], 'DELETE');
         return $response;
