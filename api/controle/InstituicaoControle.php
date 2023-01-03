@@ -481,6 +481,11 @@ class InstituicaoControle extends Controle
             return $charge;
         }, $faturas);
 
+        $faturas = array_map(function($d) {
+            unset($d['doador_gravatar']);
+            return $d;
+        }, $faturas);
+
         self::printSuccess(
             "Lista de doações",
             $faturas
