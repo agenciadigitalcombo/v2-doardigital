@@ -483,6 +483,8 @@ class InstituicaoControle extends Controle
 
         $faturas = array_map(function($d) {
             unset($d['doador_gravatar']);
+            unset($d['dataNow']);
+            unset($d['dataTime']);
             return $d;
         }, $faturas);
 
