@@ -4,6 +4,9 @@ header("Access-Control-Allow-Headers: Authorization, Content-Type");
 header("Access-Control-Allow-Origin: *");
 // header('content-type: application/json; charset=utf-8');
 
+ini_set('memory_limit', '-1');
+set_time_limit(0);
+
 set_time_limit(20);
 
 date_default_timezone_set('America/Sao_Paulo');
