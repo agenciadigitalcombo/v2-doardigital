@@ -237,6 +237,7 @@ class InstituicaoControle extends Controle
         $conta->chavePix();
         $conta->registerWebHook();
         EmailTemplate::maker($institution_fk);
+        $resConta['institution_fk'] = $institution_fk;
         self::printSuccess(
             "Instituição Cadastrada com sucesso",
             $resConta
@@ -673,7 +674,6 @@ class InstituicaoControle extends Controle
         // $contribuidor = $doador->detalhe($fatura['doador_fk']);
         // $evendas = $integrate->info($institution_fk, 'EVENDAS');
 
-
         // $payload = [
         //     "instituicao" => $company,
         //     "nome" => $contribuidor["nome"] ?? "",
@@ -714,7 +714,6 @@ class InstituicaoControle extends Controle
         //     "htmlContent" => base64_encode($blade),
         //     "subject" => 'Seu cancelamento foi realizado com sucesso'
         // ], 'EMAIL');
-
 
         // $payload["email"] = $defaultInvoice['doador_email'];
         // $payload["sender"] = $sender;
@@ -831,5 +830,38 @@ class InstituicaoControle extends Controle
                 "status" => $status
             ]
         );
+    }
+
+    static function faturaSendMessage() {
+        self::requireInputs([
+            "payment_id" => "informe um identificação de pagamento"
+        ]);
+
+        $payment_id = $_REQUEST['payment_id'];
+
+        $donation = new Banco();
+        $donation->table('fatura');
+        $donation->where([
+            "fatura_id" => $payment_id
+        ]);
+
+        $fatura = $donation->select()[0] ?? [];
+        $inst_fk = $fatura['instituicao_fk'] ?? '';
+
+        $institution = new Banco();
+        $institution->table('institution');
+        $institution->where([
+            "institution_fk" => $inst_fk
+        ]);
+
+        $inst = $institution->select()[0] ?? [];
+
+        $token = $inst['carteira_fk'] ?? '';
+        $external_fk = $inst['external_fk'];
+
+        if() {
+
+        }
+
     }
 }

@@ -140,6 +140,7 @@ export default {
       this.error = request.message
       if( request.next ) {
         tmp.clear()
+        localStorage.setItem('institution', request.payload.institution_fk)        
         window.location.href = "#/minhas-instituicoes"
       }
      

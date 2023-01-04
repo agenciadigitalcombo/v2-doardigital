@@ -10,7 +10,7 @@ content-type: application/json
     "event": "PAYMENT_UPDATED",
     "payment": {
         "object": "payment",
-        "id": "pay_3606916593556760",
+        "id": "pay_3017231036586246",
         "dateCreated": "2022-11-21",
         "customer": "cus_000043039152",
         "paymentLink": null,
@@ -19,14 +19,14 @@ content-type: application/json
         "originalValue": null,
         "interestValue": null,
         "description": "Doa\u00e7\u00e3o Unica",
-        "billingType": "PIX",
+        "billingType": "BOLETO",
         "confirmedDate": "2022-11-21",
         "creditCard": {
             "creditCardNumber": "1905",
             "creditCardBrand": "AMEX"
         },
         "pixTransaction": null,
-        "status": "RECEIVED",
+        "status": "PENDING",
         "dueDate": "2022-11-21",
         "originalDueDate": "2022-11-21",
         "paymentDate": null,
