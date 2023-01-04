@@ -650,80 +650,80 @@ class InstituicaoControle extends Controle
         $asa_cliente->set_api_key($key_asa);
         $res_asa = $asa_cliente->cancel($sub_fk);
 
-        $Fila = new FilaAws();
-        $texto = "
-            Olá {NOME} paz e bem! 
-            <br> <br>
-            Estamos passando para avisar que sua doação mensal acabou de ser cancelada definitivamente.
-            <br> <br>
-            Caso queira voltar a nos ajudar, agora precisa fazer uma nova doação.
-            <br> <br>
-            Pedimos perdão pelas falhas que tivemos nesse meio tempo pois estamos buscando melhorar a cada dia.
-            <br> <br>
-            Gratidão pelo tempo que você esteve conosco.
-            <br> <br>
-            Deus te abençoe poderosamente!
-        ";
+        // $Fila = new FilaAws();
+        // $texto = "
+        //     Olá {NOME} paz e bem! 
+        //     <br> <br>
+        //     Estamos passando para avisar que sua doação mensal acabou de ser cancelada definitivamente.
+        //     <br> <br>
+        //     Caso queira voltar a nos ajudar, agora precisa fazer uma nova doação.
+        //     <br> <br>
+        //     Pedimos perdão pelas falhas que tivemos nesse meio tempo pois estamos buscando melhorar a cada dia.
+        //     <br> <br>
+        //     Gratidão pelo tempo que você esteve conosco.
+        //     <br> <br>
+        //     Deus te abençoe poderosamente!
+        // ";
 
-        $template = get_template('default');
-        $template = str_replace("{my_content}", $texto, $template);
+        // $template = get_template('default');
+        // $template = str_replace("{my_content}", $texto, $template);
 
-        $fatura = $defaultInvoice;
-        $company = $inst->info($institution_fk);
-        $contribuidor = $doador->detalhe($fatura['doador_fk']);
-        $evendas = $integrate->info($institution_fk, 'EVENDAS');
-
-
-        $payload = [
-            "instituicao" => $company,
-            "nome" => $contribuidor["nome"] ?? "",
-            "email" => $contribuidor["email"] ?? "",
-            "telefone" => substr($contribuidor["telefone"], 2, 20),
-            "valor" => $fatura["valor"] ?? "",
-            "status_payment" => 'CANCEL_ASSINATURA',
-            "type_payment" => $fatura["status_pagamento"],
-            "url" => $fatura["url"],
-            "code" => $fatura["codigo"],
-            "ddd" => substr($contribuidor["telefone"], 0, 2),
-            "boleto_url" => $fatura["url"],
-            "url_pix" => $fatura["codigo"],
-            "code_boleto" => $fatura["codigo"],
-            "logradouro" => $company["nome"] ??  "",
-            "token" => $evendas['key_1'],
-            "external_id" => $fatura["external_fk"],
-        ];
-
-        $content = (array)$payload;
-
-        foreach ($content as $index => $cont) {
-            if (is_array($cont)) {
-                foreach ($cont as $k => $v) {
-                    $content["{$index}_{$k}"] = $v;
-                }
-            }
-        }
-
-        $blade = blade($content, $template);
-
-        $sender = $company["mailActive"] == "1" ? $company["mailSender"] : "contato@doardigital.com.br";
-
-        $Fila->send([
-            "email" => $defaultInvoice['doador_email'],
-            "sender" => $sender,
-            "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
-            "htmlContent" => base64_encode($blade),
-            "subject" => 'Seu cancelamento foi realizado com sucesso'
-        ], 'EMAIL');
+        // $fatura = $defaultInvoice;
+        // $company = $inst->info($institution_fk);
+        // $contribuidor = $doador->detalhe($fatura['doador_fk']);
+        // $evendas = $integrate->info($institution_fk, 'EVENDAS');
 
 
-        $payload["email"] = $defaultInvoice['doador_email'];
-        $payload["sender"] = $sender;
-        $payload["dataDeEnvio"] = date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00';
-        $payload["htmlContent"] = base64_encode($blade);
-        $payload["subject"] = 'Seu cancelamento foi realizado com sucesso';
-        $payload["transacao"] = intval((time() / 50) + rand(1, 99));
-        $payload["data"] = date('Y-m-d H:i:s');
-        $Fila->send($payload, 'WHATS');
+        // $payload = [
+        //     "instituicao" => $company,
+        //     "nome" => $contribuidor["nome"] ?? "",
+        //     "email" => $contribuidor["email"] ?? "",
+        //     "telefone" => substr($contribuidor["telefone"], 2, 20),
+        //     "valor" => $fatura["valor"] ?? "",
+        //     "status_payment" => 'CANCEL_ASSINATURA',
+        //     "type_payment" => $fatura["status_pagamento"],
+        //     "url" => $fatura["url"],
+        //     "code" => $fatura["codigo"],
+        //     "ddd" => substr($contribuidor["telefone"], 0, 2),
+        //     "boleto_url" => $fatura["url"],
+        //     "url_pix" => $fatura["codigo"],
+        //     "code_boleto" => $fatura["codigo"],
+        //     "logradouro" => $company["nome"] ??  "",
+        //     "token" => $evendas['key_1'],
+        //     "external_id" => $fatura["external_fk"],
+        // ];
+
+        // $content = (array)$payload;
+
+        // foreach ($content as $index => $cont) {
+        //     if (is_array($cont)) {
+        //         foreach ($cont as $k => $v) {
+        //             $content["{$index}_{$k}"] = $v;
+        //         }
+        //     }
+        // }
+
+        // $blade = blade($content, $template);
+
+        // $sender = $company["mailActive"] == "1" ? $company["mailSender"] : "contato@doardigital.com.br";
+
+        // $Fila->send([
+        //     "email" => $defaultInvoice['doador_email'],
+        //     "sender" => $sender,
+        //     "dataDeEnvio" => date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00',
+        //     "htmlContent" => base64_encode($blade),
+        //     "subject" => 'Seu cancelamento foi realizado com sucesso'
+        // ], 'EMAIL');
+
+
+        // $payload["email"] = $defaultInvoice['doador_email'];
+        // $payload["sender"] = $sender;
+        // $payload["dataDeEnvio"] = date('Y-m-d') . "T" . date('H:i:s') . '.600-03:00';
+        // $payload["htmlContent"] = base64_encode($blade);
+        // $payload["subject"] = 'Seu cancelamento foi realizado com sucesso';
+        // $payload["transacao"] = intval((time() / 50) + rand(1, 99));
+        // $payload["data"] = date('Y-m-d H:i:s');
+        // $Fila->send($payload, 'WHATS');
 
         self::printSuccess(
             "Cancelado com sucesso",
