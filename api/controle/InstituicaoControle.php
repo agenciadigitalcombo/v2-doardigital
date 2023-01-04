@@ -859,9 +859,9 @@ class InstituicaoControle extends Controle
         $token = $inst['carteira_fk'] ?? '';
         $fatura_external_fk = $inst['external_fk'];
 
-        if() {
+        // if() {
 
-        }
+        // }
 
     }
 }
