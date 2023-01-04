@@ -888,9 +888,11 @@ class InstituicaoControle extends Controle
                     "recorrente" => $recorrente,
                     "token" => $token,
                     "fatura_external_fk" => $fatura_external_fk,
+                    "sub_id" => $sub_id,
                 ],
                 "fatura" =>  $fatura,
                 "inst" => $inst,
+                "sub" => $subscribe,
             ]
         );
         
