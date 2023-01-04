@@ -863,6 +863,22 @@ class InstituicaoControle extends Controle
         $token = $inst['carteira_fk'] ?? '';
         $fatura_external_fk = $fatura['external_fk'] ?? '';
 
+        self::printSuccess(
+            "debug",
+            [
+                "dados" => [
+                    "payment_id" => $payment_id,
+                    "inst_fk" => $inst_fk,
+                    "doador_fk" => $doador_fk,
+                    "recorrente" => $recorrente,
+                    "token" => $token,
+                    "fatura_external_fk" => $fatura_external_fk,
+                ],
+                "fatura" =>  $fatura,
+                "inst" => $inst,
+            ]
+        );
+
         if($recorrente == 0) {
             self::printSuccess(
                 "Pode seguir",
