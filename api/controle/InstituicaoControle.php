@@ -899,7 +899,7 @@ class InstituicaoControle extends Controle
                     "token" => $token,
                     "fatura_external_fk" => $fatura_external_fk,
                     "sub_id" => $sub_id,
-                    "customer_id" => $customer_id,
+                    // "customer_id" => $customer_id,
                 ],
                 "fatura" =>  $fatura,
                 "inst" => $inst,
