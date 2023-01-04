@@ -60,7 +60,6 @@ export default {
          let etapa = requestInfo?.payload?.etapa || 0
          if (etapa == 0) {
             window.location.href = "/finalizar-assinatura/#/"
-            alert('pego')
             return 0
          }
          this.redirect(level)
