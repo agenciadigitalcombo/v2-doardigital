@@ -126,4 +126,4 @@ token={{token}}
 &sub_fk=sub_figg9YEedPAk
 
 ###
-GET {{host}}/api/instituicao/validar-envio?payment_id={{payment_id}}
+GET {{host}}/api/instituicao/validar-envio?payment_id={{payment_id}}&debug=1
