@@ -886,27 +886,27 @@ class InstituicaoControle extends Controle
             "external_fk" => $doador_fk
         ]);
         $doadorData = $doador->select()[0] ?? [];
-        // $customer_id = $doador['pagamento_fk'];
+        $customer_id = $doadorData['pagamento_fk'];
 
-        self::printSuccess(
-            "debug",
-            [
-                "dados" => [
-                    "payment_id" => $payment_id,
-                    "inst_fk" => $inst_fk,
-                    "doador_fk" => $doador_fk,
-                    "recorrente" => $recorrente,
-                    "token" => $token,
-                    "fatura_external_fk" => $fatura_external_fk,
-                    "sub_id" => $sub_id,
-                    // "customer_id" => $customer_id,
-                ],
-                "fatura" =>  $fatura,
-                "inst" => $inst,
-                "sub" => $subscribe,
-                "doadorData" => $doadorData,
-            ]
-        );
+        // self::printSuccess(
+        //     "debug",
+        //     [
+        //         "dados" => [
+        //             "payment_id" => $payment_id,
+        //             "inst_fk" => $inst_fk,
+        //             "doador_fk" => $doador_fk,
+        //             "recorrente" => $recorrente,
+        //             "token" => $token,
+        //             "fatura_external_fk" => $fatura_external_fk,
+        //             "sub_id" => $sub_id,
+        //             "customer_id" => $customer_id,
+        //         ],
+        //         "fatura" =>  $fatura,
+        //         "inst" => $inst,
+        //         "sub" => $subscribe,
+        //         "doadorData" => $doadorData,
+        //     ]
+        // );
 
         $asa = new AsaasCliente();
         $asa->set_api_key($token);
