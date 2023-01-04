@@ -918,11 +918,17 @@ class InstituicaoControle extends Controle
 
         $assinatura_by_pay_id = array_values($assinatura_by_pay_id);
 
+        $status = $assinatura_by_pay_id[0]['status'] ?? '';
 
-       
+        if( $status == 'ACTIVE') {
+            self::printSuccess(
+                "Pode seguir",
+                []
+            );
+        }       
 
-        self::printSuccess(
-            "debug",
+        self::printError(
+            "Não prosseguir a assinatura esta cancelada",
             $assinatura_by_pay_id
         );
 
