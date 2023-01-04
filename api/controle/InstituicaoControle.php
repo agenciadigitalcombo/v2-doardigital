@@ -847,6 +847,8 @@ class InstituicaoControle extends Controle
 
         $fatura = $donation->select()[0] ?? [];
         $inst_fk = $fatura['instituicao_fk'] ?? '';
+        $doador_fk = $fatura['doador_fk'] ?? '';
+        $recorrente = $fatura['recorrente'];
 
         $institution = new Banco();
         $institution->table('institution');
@@ -859,9 +861,39 @@ class InstituicaoControle extends Controle
         $token = $inst['carteira_fk'] ?? '';
         $fatura_external_fk = $inst['external_fk'];
 
-        // if() {
+        if($recorrente == 0) {
+            self::printSuccess(
+                "Pode seguir",
+                []
+            );
+        }
 
-        // }
+        $sub = new Banco();
+        $sub->table('assinatura');
+        $sub->where([
+            "external_fk" => $fatura_external_fk
+        ]);
+        $subscribe = $sub->select()[0] ?? [];
+        $sub_id = $subscribe['subscription_fk'];
+        
+        $doador = new Banco();
+        $doador->table('doador');
+        $doador->where([
+            "external_fk" => $doador_fk
+        ]);
+        $doadorData = $doador->select()[0] ?? [];
+        $customer_id = $doador['pagamento_fk'];
+
+        $asa = new AsaasCliente();
+        $asa->set_api_key($token);
+        $todasAssinatura = $asa->subsByCustomer($customer_id);
+
+        self::printSuccess(
+            "debug",
+            [
+                "subs" => $todasAssinatura
+            ]
+        );
 
     }
 }

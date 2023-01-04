@@ -13,3 +13,4 @@ router('/instituicao/subscription-cancel', 'InstituicaoControle@cancel');
 router('/instituicao/subscription-update', 'InstituicaoControle@subUpdate');
 router('/instituicao/fatura-update', 'InstituicaoControle@faturaUpdate');
 router('/instituicao/fatura-status', 'InstituicaoControle@faturaStatus');
+router('/instituicao/validar-envio', 'InstituicaoControle@faturaSendMessage');
