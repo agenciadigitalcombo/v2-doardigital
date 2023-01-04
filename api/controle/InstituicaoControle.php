@@ -912,11 +912,18 @@ class InstituicaoControle extends Controle
         $asa->set_api_key($token);
         $todasAssinatura = $asa->subsByCustomer($customer_id);
 
+        $assinatura_by_pay_id = array_filter($todasAssinatura['data'], function($a) use( $fatura_external_fk) {
+            return $a['externalReference'] == $fatura_external_fk;
+        });
+
+        $assinatura_by_pay_id = array_values($assinatura_by_pay_id);
+
+
+       
+
         self::printSuccess(
             "debug",
-            [
-                "subs" => $todasAssinatura
-            ]
+            $assinatura_by_pay_id
         );
 
     }
