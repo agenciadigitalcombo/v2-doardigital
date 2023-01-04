@@ -863,6 +863,21 @@ class InstituicaoControle extends Controle
         $token = $inst['carteira_fk'] ?? '';
         $fatura_external_fk = $fatura['external_fk'] ?? '';
 
+        if($recorrente == 0) {
+            self::printSuccess(
+                "Pode seguir",
+                []
+            );
+        }
+
+        $sub = new Banco();
+        $sub->table('assinatura');
+        $sub->where([
+            "external_fk" => $fatura_external_fk
+        ]);
+        $subscribe = $sub->select()[0] ?? [];
+        $sub_id = $subscribe['subscription_fk'];
+
         self::printSuccess(
             "debug",
             [
@@ -878,21 +893,6 @@ class InstituicaoControle extends Controle
                 "inst" => $inst,
             ]
         );
-
-        if($recorrente == 0) {
-            self::printSuccess(
-                "Pode seguir",
-                []
-            );
-        }
-
-        $sub = new Banco();
-        $sub->table('assinatura');
-        $sub->where([
-            "external_fk" => $fatura_external_fk
-        ]);
-        $subscribe = $sub->select()[0] ?? [];
-        $sub_id = $subscribe['subscription_fk'];
         
         $doador = new Banco();
         $doador->table('doador');
