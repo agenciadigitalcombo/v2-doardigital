@@ -851,10 +851,6 @@ class InstituicaoControle extends Controle
         $doador_fk = $fatura['doador_fk'] ?? '';
         $recorrente = $fatura['recorrente'];
 
-        self::printSuccess(
-            "debug",
-            $fatura
-        );
 
         $institution = new Banco();
         $institution->table('institution');
@@ -863,6 +859,11 @@ class InstituicaoControle extends Controle
         ]);
 
         $inst = $institution->select()[0] ?? [];
+
+        self::printSuccess(
+            "debug",
+            $inst
+        );
 
         $token = $inst['carteira_fk'] ?? '';
         $fatura_external_fk = $inst['external_fk'] ?? '';
