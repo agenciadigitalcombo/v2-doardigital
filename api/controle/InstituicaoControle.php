@@ -886,7 +886,7 @@ class InstituicaoControle extends Controle
             "external_fk" => $doador_fk
         ]);
         $doadorData = $doador->select()[0] ?? [];
-        $customer_id = $doador['pagamento_fk'];
+        // $customer_id = $doador['pagamento_fk'];
 
         self::printSuccess(
             "debug",
