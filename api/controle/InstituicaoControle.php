@@ -878,6 +878,16 @@ class InstituicaoControle extends Controle
         $subscribe = $sub->select()[0] ?? [];
         $sub_id = $subscribe['subscription_fk'];
 
+        
+        
+        $doador = new Banco();
+        $doador->table('doador');
+        $doador->where([
+            "external_fk" => $doador_fk
+        ]);
+        $doadorData = $doador->select()[0] ?? [];
+        $customer_id = $doador['pagamento_fk'];
+
         self::printSuccess(
             "debug",
             [
@@ -889,20 +899,14 @@ class InstituicaoControle extends Controle
                     "token" => $token,
                     "fatura_external_fk" => $fatura_external_fk,
                     "sub_id" => $sub_id,
+                    "customer_id" => $customer_id,
                 ],
                 "fatura" =>  $fatura,
                 "inst" => $inst,
                 "sub" => $subscribe,
+                "doadorData" => $doadorData,
             ]
         );
-        
-        $doador = new Banco();
-        $doador->table('doador');
-        $doador->where([
-            "external_fk" => $doador_fk
-        ]);
-        $doadorData = $doador->select()[0] ?? [];
-        $customer_id = $doador['pagamento_fk'];
 
         $asa = new AsaasCliente();
         $asa->set_api_key($token);
