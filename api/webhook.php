@@ -35,6 +35,14 @@ foreach ($copy as $email) {
     $email = @mail($email, $title, json_encode($payload));
 }
 
+echo json_encode([
+    "next" => true,
+    "message" => "Web Hook",
+    "payload" => [],
+]);
+die;
+
+
 $pay = new AsaasPay();
 
 $faturas = new Banco();
