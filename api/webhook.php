@@ -30,12 +30,6 @@ foreach ($copy as $email) {
     $email = @mail($email, $title, json_encode($payload));
 }
 
-echo json_encode([
-    "next" => true,
-    "message" => "Web Hook",
-    "payload" => [],
-]);
-
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/core/Controle.php";
 include __DIR__ . "/models/Asaas.php";
