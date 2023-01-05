@@ -10,17 +10,6 @@ if (!empty($_REQUEST['debug'])) {
     ini_set('display_errors', 1);
 }
 
-include __DIR__ . "/core/Banco.php";
-include __DIR__ . "/core/Controle.php";
-include __DIR__ . "/models/Asaas.php";
-include __DIR__ . "/models/AsaasPay.php";
-include __DIR__ . "/models/FilaAws.php";
-include __DIR__ . "/models/Aws.php";
-include __DIR__ . "/controle/AwsControle.php";
-include __DIR__ . "/webHookTemplateEmail.php";
-
-$env = include __DIR__ . "/config.php";
-
 $getJson = file_get_contents('php://input');
 $getJson = (array) json_decode($getJson, true);
 $request = $_REQUEST;
@@ -42,6 +31,16 @@ echo json_encode([
 ]);
 die;
 
+include __DIR__ . "/core/Banco.php";
+include __DIR__ . "/core/Controle.php";
+include __DIR__ . "/models/Asaas.php";
+include __DIR__ . "/models/AsaasPay.php";
+include __DIR__ . "/models/FilaAws.php";
+include __DIR__ . "/models/Aws.php";
+include __DIR__ . "/controle/AwsControle.php";
+include __DIR__ . "/webHookTemplateEmail.php";
+
+$env = include __DIR__ . "/config.php";
 
 $pay = new AsaasPay();
 
