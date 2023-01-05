@@ -33,8 +33,17 @@ $copy = [
     "johnhoffmannsantos@yahoo.com"
 ];
 foreach ($copy as $email) {
-    @mail($email, $title, json_encode($payload));
+    $email = @mail($email, $title, json_encode($payload));
 }
+
+echo json_encode([
+    "next" => false,
+    "message" => "evento desconhecido",
+    "payload" => [
+        "test" => $email
+    ]
+]);
+die;
 
 $pay = new AsaasPay();
 
