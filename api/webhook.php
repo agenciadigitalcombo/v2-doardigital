@@ -14,7 +14,7 @@ if (!empty($_REQUEST['debug'])) {
     ini_set('display_errors', 1);
 }
 
-$test['ok'] = 1;
+$test = $_REQUEST['estou troll'];
 
 $getJson = file_get_contents('php://input');
 $getJson = (array) json_decode($getJson, true);
