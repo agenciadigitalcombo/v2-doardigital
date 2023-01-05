@@ -30,7 +30,6 @@ echo json_encode([
     "message" => "Web Hook",
     "payload" => [],
 ]);
-die;
 
 include __DIR__ . "/core/Banco.php";
 include __DIR__ . "/core/Controle.php";

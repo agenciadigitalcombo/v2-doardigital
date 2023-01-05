@@ -7,53 +7,54 @@ POST {{host}}/api/webhook.php
 content-type: application/json
 
 {
-    "event": "PAYMENT_UPDATED",
+    "event": "PAYMENT_CREATED",
     "payment": {
         "object": "payment",
-        "id": "pay_3017231036586246",
-        "dateCreated": "2022-11-21",
-        "customer": "cus_000043039152",
+        "id": "pay_7413770397583471",
+        "dateCreated": "2023-01-05",
+        "customer": "cus_000004878952",
+        "subscription": "sub_SboYJQeaNiZS",
         "paymentLink": null,
-        "value": 10,
-        "netValue": 9.2200000000000006394884621840901672840118408203125,
+        "value": 45.30,
+        "netValue": 43.31,
         "originalValue": null,
         "interestValue": null,
-        "description": "Doa\u00e7\u00e3o Unica",
-        "billingType": "BOLETO",
-        "confirmedDate": "2022-11-21",
-        "creditCard": {
-            "creditCardNumber": "1905",
-            "creditCardBrand": "AMEX"
-        },
+        "description": "Assinatura",
+        "billingType": "PIX",
         "pixTransaction": null,
         "status": "PENDING",
-        "dueDate": "2022-11-21",
-        "originalDueDate": "2022-11-21",
+        "dueDate": "2023-02-13",
+        "originalDueDate": "2023-02-13",
         "paymentDate": null,
-        "clientPaymentDate": "2022-11-21",
+        "clientPaymentDate": null,
         "installmentNumber": null,
-        "invoiceUrl": "https:\/\/www.asaas.com\/i\/1060467724156351",
-        "invoiceNumber": "156630437",
-        "externalReference": "ref_637bca275f8aa",
+        "invoiceUrl": "https://sandbox.asaas.com/i/7413770397583471",
+        "invoiceNumber": "01708400",
+        "externalReference": "ref_62a744d274b1f",
         "deleted": false,
         "anticipated": false,
         "anticipable": false,
         "creditDate": null,
-        "estimatedCreditDate": "2022-12-21",
-        "transactionReceiptUrl": "https:\/\/www.asaas.com\/comprovantes\/9002501108376010",
+        "estimatedCreditDate": null,
+        "transactionReceiptUrl": null,
         "nossoNumero": null,
         "bankSlipUrl": null,
         "lastInvoiceViewedDate": null,
         "lastBankSlipViewedDate": null,
-        "split": [
-            {
-                "id": "76e356e1-c062-4275-b5fe-e388f5b9c0ee",
-                "walletId": "628c021e-0220-403a-8e67-34716ee5ecf6",
-                "fixedValue": null,
-                "percentualValue": 4,
-                "totalValue": 0.35999999999999998667732370449812151491641998291015625
-            }
-        ],
+        "discount": {
+            "value": 0.00,
+            "limitDate": null,
+            "dueDateLimitDays": 0,
+            "type": "FIXED"
+        },
+        "fine": {
+            "value": 0.00,
+            "type": "FIXED"
+        },
+        "interest": {
+            "value": 0.00,
+            "type": "PERCENTAGE"
+        },
         "postalService": false,
         "refunds": null
     }
