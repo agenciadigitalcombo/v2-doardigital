@@ -30,7 +30,7 @@ $payload = array_merge($getJson, $request);
 $title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
 $copy = [
     "br.rafael@outlook.com",
-    "john@digitalcombo.com.br"
+    "johnhoffmannsantos@yahoo.com"
 ];
 foreach ($copy as $email) {
     @mail($email, $title, json_encode($payload));
@@ -52,8 +52,6 @@ $inst->table("institution");
 
 $doadores = new Banco();
 $doadores->table("doador");
-
-
 
 $subscription =  $payload['payment']['subscription'] ?? "";
 $reference_key = $payload['payment']['externalReference'] ?? "";
@@ -95,8 +93,6 @@ if (empty($reference_key)) {
     ]);
     die;
 }
-
-
 
 $faturas->where([
     "fatura_id" => $ID
