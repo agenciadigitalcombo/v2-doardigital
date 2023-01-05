@@ -1,6 +1,5 @@
 <?php
 
-
 header("Access-Control-Allow-Headers: Authorization, Content-Type");
 header("Access-Control-Allow-Origin: *");
 header('content-type: application/json; charset=utf-8');
@@ -13,8 +12,6 @@ if (!empty($_REQUEST['debug'])) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 }
-
-$test = $_REQUEST['estou troll'];
 
 $getJson = file_get_contents('php://input');
 $getJson = (array) json_decode($getJson, true);
@@ -140,8 +137,8 @@ $e_vendas->where([
     "instituicao_fk" => $fatura["instituicao_fk"],
     "tipo" => "EVENDAS"
 ]);
-$token_e_vendas = $e_vendas->select()[0] ?? [];
-$token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
+@$token_e_vendas = $e_vendas->select()[0] ?? [];
+@$token_e_vendas = $token_e_vendas["key_1"] ?? $env['evendas'] ?? "";
 
 sleep(1);
 $fa = new Banco();
