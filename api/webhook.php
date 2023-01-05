@@ -260,7 +260,7 @@ if ($event == 'PAYMENT_CREATED' && $tipo == 'CREDIT_CARD') {
     die;
 }
 
-$state_machine = $company['state_machine'];
+@$state_machine = $company['state_machine'] ?? "";
 if( strlen($state_machine) < 70 ) {
     $resArn = AwsControle::createArn($institution_fk);
     $state_machine = $resArn["stateMachineArn"];
