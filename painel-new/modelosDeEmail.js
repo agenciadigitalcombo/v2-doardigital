@@ -77,6 +77,9 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="" size="full">
+                <div class="fex">
+                    <button>Restaurar ao padrão</button>
+                </div>
                 <Table :rows="lista" :cols="cols" pagination="10" />
                 </CardGeral>
                 
