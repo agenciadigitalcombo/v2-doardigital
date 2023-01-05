@@ -21,6 +21,21 @@ include __DIR__ . "/webHookTemplateEmail.php";
 
 $env = include __DIR__ . "/config.php";
 
+
+$getJson = file_get_contents('php://input');
+$getJson = (array) json_decode($getJson, true);
+$request = $_REQUEST;
+$payload = array_merge($getJson, $request);
+
+$title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
+$copy = [
+    "br.rafael@outlook.com",
+    "john@digitalcombo.com.br"
+];
+foreach ($copy as $email) {
+    @mail($email, $title, json_encode($payload));
+}
+
 $pay = new AsaasPay();
 
 $faturas = new Banco();
@@ -38,10 +53,7 @@ $inst->table("institution");
 $doadores = new Banco();
 $doadores->table("doador");
 
-$getJson = file_get_contents('php://input');
-$getJson = (array) json_decode($getJson, true);
-$request = $_REQUEST;
-$payload = array_merge($getJson, $request);
+
 
 $subscription =  $payload['payment']['subscription'] ?? "";
 $reference_key = $payload['payment']['externalReference'] ?? "";
@@ -84,14 +96,7 @@ if (empty($reference_key)) {
     die;
 }
 
-$title = "WEBHOOK ASAAS - " . date("d/m/Y H:i");
-$copy = [
-    "br.rafael@outlook.com",
-    "john@digitalcombo.com.br"
-];
-foreach ($copy as $email) {
-    @mail($email, $title, json_encode($payload));
-}
+
 
 $faturas->where([
     "fatura_id" => $ID
