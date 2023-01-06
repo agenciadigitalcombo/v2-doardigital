@@ -238,7 +238,8 @@ $payload = [
 ];
 
 $payload['MESSAGE_WHATS'] = generateMessageWhats($payload);
-
+$payload['LINK'] = 'https://' . $company['domain'] . "/pix/#/?code=" . $code;
+ 
 $Fila = new FilaAws();
 
 @$mailActive = $company['mailActive'] ?? 0;
