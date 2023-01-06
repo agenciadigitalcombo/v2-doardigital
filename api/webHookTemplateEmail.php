@@ -118,7 +118,7 @@ function generateMessageWhats($payload) {
         $my_content = file_get_contents( $filePath );
     }
 
-    $my_content = str_replace("\n","<br /> <br />", $my_content);
+    
     $template = str_replace("{my_content}", $my_content, $template);
 
     unset($content["instituicao"]);
