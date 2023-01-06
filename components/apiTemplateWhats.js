@@ -50,4 +50,11 @@ export default class {
             status_pagamento
         })
     }
+    async reset(
+        instituicao_fk,
+    ) {
+        return await http.post('/whats-template/reset', {
+            instituicao_fk
+        })
+    }
 }

@@ -22,6 +22,9 @@ export default {
         return {
             isLoad: 'true',
             lista: [],
+            inst: '',
+            loading: false,
+            textReset: 'Restaurar ao padrão',
             cols: {
                 "Descrição": d => `${d.name}`,
                 "Tipo": t => `<span class="bg-white text-grey-600 py-1 px-3 rounded-full text-xs">
@@ -52,9 +55,9 @@ export default {
         let jwt = new Jwt()
         let adm_fk = jwt.get().code
         let institutionFk = institution.get()
+        this.inst = institutionFk
         let request = await templates.listarEmail(institutionFk)
         this.lista = request.payload
-        console.log(request)
         this.isLoad = 'false'
         
     },
@@ -64,6 +67,17 @@ export default {
                 tipo: formatTipoPagamento(d.tipo),
                 ...d,
             }))
+        },
+        async reset() {
+            this.loading = true
+            this.textReset = 'Carregando...'
+            let templates = new ApiTemplateEmails()
+            await templates.reset(this.inst)
+            this.textReset = 'Email resetados com sucesso'
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000);
+            this.loading = false
         }
     },
     template: `
@@ -77,8 +91,10 @@ export default {
                 <div class="flex flex-wrap">
                 
                 <CardGeral text="" size="full">
-                <div class="fex justify-end">
-                    <button class="">Restaurar ao padrão</button>
+                <div class="flex justify-end w-full">
+                    <button :disabled="loading" @click="reset" class="bg-[#C00] hover:bg-[#800] text-white rounded text-[11px] py-1 px-2 pointer">
+                        {{textReset}}
+                    </button>
                 </div>
                 <Table :rows="lista" :cols="cols" pagination="10" />
                 </CardGeral>

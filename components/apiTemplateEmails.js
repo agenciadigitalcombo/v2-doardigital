@@ -37,7 +37,7 @@ export default class {
             status_pagamento
         })
     }
-    
+
     async info(
         tipo,
         instituicao_fk,
@@ -47,6 +47,14 @@ export default class {
             tipo,
             instituicao_fk,
             status_pagamento
+        })
+    }
+
+    async reset(
+        instituicao_fk,
+    ) {
+        return await http.post('/email-template/reset', {
+            instituicao_fk
         })
     }
 
