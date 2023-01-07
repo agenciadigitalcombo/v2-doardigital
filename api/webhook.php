@@ -220,6 +220,7 @@ $payload = [
     "nome" => $fatura["doador_nome"] ?? "",
     "email" => $fatura["doador_email"] ?? "",
     "telefone" => substr($telefone, 2, 20),
+    "fatura_id" => $ID,
     "valor" => $fatura["valor"] ?? "",
     "status_payment" => $status,
     "type_payment" => $tipo . '' . $subPrefix,
