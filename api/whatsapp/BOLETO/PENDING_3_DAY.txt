@@ -1,8 +1,14 @@
 *Boleto 2º mensagem lembrança (3 dias)
-Uma oração especial para você!
-A Rainha dos céus hoje está com você, reze conosco!
-Ó incomparável Senhora da Conceição Aparecida, Mãe de Deus, Rainha dos Anjos, Advogada dos pecadores, refúgio e consolação dos aflitos e atribulados, Virgem Santíssima, cheia de poder e de bondade, lançai sobre nós um olhar favorável, para que sejamos socorridos por vós, em todas as necessidades em que nos acharmos.
-Lembrai-vos, ó clementíssima Mãe Aparecida, que nunca se ouviu dizer que algum daqueles que têm a vós recorrido, invocado vosso santíssimo nome e implorado a vossa singular protecção, fosse por vós abandonado. Animados com esta confiança, a vós recorremos. Tomamo-vos para sempre por nossa Mãe, nossa protectora, consolação e guia, esperança e luz na hora da morte. Livrai-nos de tudo o que possa ofender-vos e ao vosso Santíssimo Filho, Jesus.
-Preservai-nos de todos os perigos da alma e do corpo; dirigi-nos em todos os assuntos espirituais e temporais. Livrai-nos da tentação do demónio, para que, trilhando o caminho da virtude, possamos um dia ver-vos e amar-vos na eterna glória, por todos os séculos dos séculos.
-Amém.
-<a href="{LINK}" {STYLE_BTN} > Visualizar Boleto </a>
+Olá {NOME}, 👋
+Passando hoje e trazendo para você a oração do Salmo 121
+1. Elevo os meus olhos para os montes; de onde me vem o socorro?
+2. O meu socorro vem do Senhor, que fez os céus e a terra.
+3. Não deixará vacilar o teu pé; aquele que te guarda não dormitará.
+4. Eis que não dormitará nem dormirá aquele que guarda a Israel.
+5. O Senhor é quem te guarda; o Senhor é a tua sombra à tua mão direita.
+6. De dia o sol não te ferirá, nem a lua de noite.
+7. O Senhor te guardará de todo o mal; ele guardará a tua vida.
+8. O Senhor guardará a tua saída e a tua entrada, desde agora e para sempre.
+Fica Senhor comigo, pois é só a Ti que procuro o Teu amor, a Tua graça, a Tua vontade, o Teu coração, o Teu Espírito, porque te amo, e a única recompensa que te peço é poder amar-te sempre mais.
+Como este amor resoluto, desejo amar-te de todo o coração enquanto estiver na terra, para continuar a te amar perfeitamente por toda a eternidade. Assim seja.
+Que Nossa Senhora nos Proteja e nos guarde com Amor!

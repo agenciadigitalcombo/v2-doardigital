@@ -1,11 +1,7 @@
-*Boleto Recorrente  (pendente- imediato) 
-Seu boleto mensal chegou!
-Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.
-Estamos passando pra deixar o seu novo boleto mensal.
-Esperamos que alegremente você continue firme conosco em toda essa jornada que estamos trilhando sendo benção e sinal de Deus para nós.
-Sua contribuição mensal nos ajuda a continuar essa linda e árdua missão.
-Que os anjos e santos do céu intercedam por sua vida e sua família.
-Deus lhe abençoe poderosamente!
-Copie seu código de Boleto  abaixo para efetuar o pagamento
-<a href="{LINK}" {STYLE_BTN}> Visualizar Boleto </a>
-Gratidão a Deus por sua generosidade.
+*Boleto 1º mensagem agradecimento (imediato)
+Olá {NOME}, tudo bem?
+Passando para deixar seu novo boleto de sua doação mensal.
+Queremos te agradecer por você ser canal de Deus para nós e contribuir para esta causa.
+*Clique no botão e veja seu boleto* 
+Que os Santos do Céu intercedam por você!
+Gratidão.

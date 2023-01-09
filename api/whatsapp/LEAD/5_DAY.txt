@@ -1,4 +1,4 @@
-*Recuperação de Carrinho (lead) (5 dias depois)   
+*Recuperação lead (5 dia depois) 
 Você é Pedra Viva para a missão.
 Olá {NOME},
 Seja parte viva desta missão tão linda que pertencemos.

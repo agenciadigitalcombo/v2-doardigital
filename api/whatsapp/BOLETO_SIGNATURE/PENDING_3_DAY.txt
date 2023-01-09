@@ -1,6 +1,14 @@
-*Boleto Recorrente (pendente - 3 dias depois)
-Sua oração chegou como um presente pra você.
-Hoje trazemos uma belíssima oração pra você com todo amor e carinho.
-“Ó, Santa Teresinha do Menino Jesus, modelo de humildade, de confiança e de amor! Do alto dos céus, despeje sobre nós estas rosas que levas em teus braços: a rosa da humildade para que vençamos nosso orgulho e aceitemos o jugo do Evangelho; a rosa da confiança para que nos abandonemos à vontade de Deus e descansemos em Sua Misericórdia; a rosa do amor para que, abrindo nossas almas sem medida à graça, realizemos o único fim para o qual Deus nos criou à sua imagem : Amar- Lhe e fazer- Lhe amar. Tu que passas teu Céu fazendo o bem na terra, ajuda-me nesta necessidade e concede-me do Senhor o que te peço, se for para glória de Deus e para o bem de minha alma. Amém.”
-Reze um Pai Nosso.
-<a href="{LINK}" {STYLE_BTN}> Visualizar Boleto </a>
+*Boleto 2º mensagem lembrança (3 dias)
+Olá {NOME}, 👋
+Passando hoje e trazendo para você a oração do Salmo 121
+1. Elevo os meus olhos para os montes; de onde me vem o socorro?
+2. O meu socorro vem do Senhor, que fez os céus e a terra.
+3. Não deixará vacilar o teu pé; aquele que te guarda não dormitará.
+4. Eis que não dormitará nem dormirá aquele que guarda a Israel.
+5. O Senhor é quem te guarda; o Senhor é a tua sombra à tua mão direita.
+6. De dia o sol não te ferirá, nem a lua de noite.
+7. O Senhor te guardará de todo o mal; ele guardará a tua vida.
+8. O Senhor guardará a tua saída e a tua entrada, desde agora e para sempre.
+Fica Senhor comigo, pois é só a Ti que procuro o Teu amor, a Tua graça, a Tua vontade, o Teu coração, o Teu Espírito, porque te amo, e a única recompensa que te peço é poder amar-te sempre mais.
+Como este amor resoluto, desejo amar-te de todo o coração enquanto estiver na terra, para continuar a te amar perfeitamente por toda a eternidade. Assim seja.
+Que Nossa Senhora nos Proteja e nos guarde com Amor!

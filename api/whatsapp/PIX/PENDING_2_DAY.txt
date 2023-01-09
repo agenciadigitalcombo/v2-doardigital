@@ -1,9 +1,5 @@
-*PIX  Vencido (recuperação 2 dias depois)
-Estamos esperando sua presença, você vem?
-Olá  {nome_doador},
-Estamos ansiosos e contando os minutos para que você esteja conosco nessa missão maravilhosa que vivemos. Amar é nosso lema e servir nossa missão. 
-Seja você também parte integrante dessa grande missão, contribua com nossa obra e veja os frutos que ela gera  e vem transformando vidas pelo mundo a fora.
-Junte-se a nós nessa tão grandiosa missão e faça a diferença no mundo.
-Contamos com você!
-CÓDIGO: 
-{CODE}
+PIX 1º mensagem de recuperação (2 dias)
+Olá, {NOME} paz e bem!
+Dando uma passadinha para lembrar que seu boleto está vencido, porém mesmo vencido você consegue efetuar seu pagamento em até 10 dias depois do vencimento
+*Clique no botão e copie seu código PIX * 
+Que Deus lhe abençoe por sua generosidade.

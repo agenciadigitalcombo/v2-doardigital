@@ -1,6 +1,4 @@
-*Cartão mensal Falhado
-Sua doação mensal falhou, vamos verificar?
-Olá {NOME}, sua doação mensal não foi concluída.
-Houve alguma falha no processamento de sua doação.Possivelmente, seu limite chegou ou seu cartão venceu , sendo assim pedimos a gentileza de verificar esses dados ou  se preferir pode nos chamar no suporte via whatsapp para que nossa equipe possa te auxiliar em sua doação.
-Continuamos firmes na missão e queremos contar com você junto de mãos dadas.
-Deus abençoe poderosamente!
+*Cartão vencido
+Olá {NOME} Salve Maria.
+Estamos passando para avisar que sua doação mensal  falhou por algum motivo no seu cartão, ou cartão vencido ou cartão cancelado.
+Ficamos a sua disposição para auxiliar em algum detalhe.

@@ -1,8 +1,5 @@
-*Recuperação de PIX recorrentes (5 dias depois)
-Estamos te convidando, você vem?
-{NOME}, seu coração bate mais forte para estar unido conosco nesta missão. Ouça sua voz e seja força viva junto a nossa missão.
-Você já faz parte de um grande exército de pessoas do bem que ajudam a transformar o mundo com pequenos gestos de Amor e Gratidão.
-Nesse exército que Deus levantou, você já faz parte constante e já se tornou uma pessoa fundamental nesse processo, ou seja já se tornou pedra edificante junto conosco.
-Gratidão por você continuar firme junto conosco de mãos dadas até o fim.
-{CODE}
-Venha, continue caminhando conosco.
+*PIX 2º mensagem de recuperação(5 dias)
+Olá, {NOME} que Pae. Léo interceda por vós.
+Somos fruto do ESPÍRITO SANTO e queremos levar ao mundo as grandezas de Deus para nosso povo amado. Saiba que estamos sempre unidos com você nessa missão e na oração.
+*Veja seu Código PIX* 
+Que Deus lhe abençoe por sua generosidade.

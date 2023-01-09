@@ -1,9 +1,8 @@
-*Cancelamento de assinatura
-Sua assinatura conosco foi cancelada.
+*cancelamento de assinatura
 Olá {NOME} paz e bem!
 Estamos passando para avisar que sua doação mensal "duplicada" ou "solicitada" acabou de ser cancelada.
-1 - Se você solicitou o cancelamento de sua doação mensal, ele acabou de ser efetuado por nossa atendente. 
-Fique tranquilo, estamos lhe auxiliando da melhor forma
-E por isso, estamos melhorando nosso sistema de doações e pedimos perdão pelas falhas que tivemos nesse meio tempo, pois  buscamos melhorar a cada dia para melhor atendê-lo.
+1 - Se você solicitou cancelamento e você ainda receber alguma mensagem, possivelmente seja doação duplicada no sistema que foi cancelada.
+2 - Se você solicitou um cancelamento total, fique tranquilo(a) pois já foi cancelada.
+Pedimos perdão pelas falhas que tivemos nesse meio tempo pois  estamos buscando melhorar a cada dia para melhor atendê-lo.
 Gratidão pelo tempo que você esteve conosco.
 Deus te abençoe poderosamente!

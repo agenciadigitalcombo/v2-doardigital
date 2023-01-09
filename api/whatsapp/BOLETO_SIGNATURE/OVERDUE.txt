@@ -1,6 +1,10 @@
-*Boleto Recorrente (imediato)
-Sua oração chegou como um presente pra você.
-Hoje trazemos uma belíssima oração pra você com todo amor e carinho.
-“Ó, Santa Teresinha do Menino Jesus, modelo de humildade, de confiança e de amor! Do alto dos céus, despeje sobre nós estas rosas que levas em teus braços: a rosa da humildade para que vençamos nosso orgulho e aceitemos o jugo do Evangelho; a rosa da confiança para que nos abandonemos à vontade de Deus e descansemos em Sua Misericórdia; a rosa do amor para que, abrindo nossas almas sem medida à graça, realizemos o único fim para o qual Deus nos criou à sua imagem : Amar- Lhe e fazer- Lhe amar. Tu que passas teu Céu fazendo o bem na terra, ajuda-me nesta necessidade e concede-me do Senhor o que te peço, se for para glória de Deus e para o bem de minha alma. Amém.”
-Reze um Pai Nosso.
-<a href="{LINK}" {STYLE_BTN}> Visualizar Boleto </a>
+*Boleto 1º mensagem de recuperação(2 dias)
+Olá, {NOME}
+Dando uma passadinha para lembrar que seu Boleto está vencido, porém mesmo vencido você consegue efetuar seu pagamento em até 10 dias após o vencimento.
+*Clique no botão e veja seu boleto* 
+Que Deus lhe abençoe por sua generosidade.
+Boleto 2º mensagem de recuperação (5 dias)
+Olá, #nome que Pae. Léo interceda por vós.
+Somos fruto do ESPÍRITO SANTO e queremos levar ao mundo as grandezas de Deus para nosso povo amado. Saiba que estamos sempre unidos com você nessa missão e na oração.
+*Veja seu boleto* 
+Que Deus lhe abençoe por sua generosidade.
