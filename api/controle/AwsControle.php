@@ -154,7 +154,7 @@ class AwsControle extends Controle
         $label = $_REQUEST['label'];
         $tipo = $_REQUEST['tipo'];
         $status = $_REQUEST['status'];
-        $data = date('Y-m-d');
+        $data = date('Y-m-d H:i:s');
         $doador_fk = $_REQUEST['doador_fk'];
         $fatura_fk = $_REQUEST['fatura_fk'];
         $ref_fk = $_REQUEST['ref_fk'];

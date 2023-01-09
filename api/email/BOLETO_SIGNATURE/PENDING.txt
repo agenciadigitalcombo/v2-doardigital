@@ -1,4 +1,4 @@
-*Boleto Recorrente  (pendente- imediato) 
+*Boleto 1º mensagem agradecimento (imediato)
 Seu boleto mensal chegou!
 Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.
 Estamos passando pra deixar o seu novo boleto mensal.

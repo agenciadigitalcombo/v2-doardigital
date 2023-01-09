@@ -1,4 +1,4 @@
-*PIX Vencido (recuperação 5 dias depois)
+PIX 2º mensagem de recuperação (5 dias)
 Bênçãos para você.
 Olá {NOME},
 Ainda não conseguimos identificar o seu pagamento. Podemos ajudar de alguma forma?

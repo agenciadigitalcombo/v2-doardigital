@@ -1,4 +1,4 @@
-*PIX Recorrente (pendente)(imediato)
+*PIX 1º mensagem agradecimento( imediato)
 Seu código PIX mensal chegou!
 Olá {NOME}, Obrigada por ser um amigo tão forte nesta causa.
 Estamos passando pra deixar o seu código de PIX mensal.

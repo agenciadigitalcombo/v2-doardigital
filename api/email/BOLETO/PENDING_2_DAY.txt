@@ -1,4 +1,4 @@
-*Boleto Vencido (recuperação 2 dias depois)
+Boleto 1º mensagem de recuperação (2 dias)
 Estamos esperando sua presença, você vem?
 Olá {NOME},
 Estamos ansiosos e contando os minutos para que você esteja conosco nessa missão maravilhosa que vivemos. Amar é nosso lema e servir nossa missão. 

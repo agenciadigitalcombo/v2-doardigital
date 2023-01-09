@@ -1,4 +1,4 @@
-*Cancelamento de assinatura
+*cancelamento de assinatura
 Sua assinatura conosco foi cancelada.
 Olá {NOME} paz e bem!
 Estamos passando para avisar que sua doação mensal "duplicada" ou "solicitada" acabou de ser cancelada.

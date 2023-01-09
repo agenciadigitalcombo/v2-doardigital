@@ -1,4 +1,4 @@
-*Doação mensal Recorrente paga
+*Doação mensal paga
 Doação mensal concluída com sucesso!
 Olá {NOME}, sua Doação foi concluída com sucesso.
 Somos imensamente gratos por mais uma doação mensal concluída. 

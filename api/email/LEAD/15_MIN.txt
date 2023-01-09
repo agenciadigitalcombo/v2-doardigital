@@ -1,4 +1,4 @@
-*Recuperação de Carrinho (lead)(15 minutos depois)  
+*Recuperação lead (15 minutos depois)
 Obrigado por ser providência para {INSTITUICAO}
 Olá {NOME},
 Obrigada por visitar nossa página! Somos uma instituição que vive exclusivamente das doações recebidas, para manter a obra funcionando. 

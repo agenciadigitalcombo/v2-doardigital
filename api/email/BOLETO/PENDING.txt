@@ -1,4 +1,4 @@
-*Boleto 1º mensagem agradecimento (imediato)
+*Boleto 1º mensagem agradecimento(imediato)
 Doação Processada seu Boleto chegou!
 Olá {NOME}, Obrigada por visitar nossa página e fazer sua doação.
 Somos uma instituição que vive de doações recebidas, para manter a obra funcionando. Os recursos são escassos e a providência divina tem tocado muitos corações desejosos de fazer essa experiência da doação, para que tudo se mantenha ativo e que mais vidas sejam salvas para Jesus! 
