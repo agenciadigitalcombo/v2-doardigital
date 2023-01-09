@@ -1,6 +1,13 @@
 @host=http://hostdoar.tk
 @token=eyJjb2RlIjoiYWRtXzYyZDk3MzFhMTIwMzAifQ==.f28ebb285d23f0ff5b23270e73aeb13d2c6c2b80
 @institution_fk=inst_62d990c744f00
+@label=Cadatro
+@tipo=EMAIL
+@status=200
+@doador_fk=do_FFFFFFFFFFFFFFFFFFFF1
+@fatura_fk=pay_FFFFFFFFFFFFFFFFFFFF1
+@ref_fk=ref_FFFFFFFFFFFFFFFFFFFF1
+@execution_arn=arn_FFFFFFFFFFFFFFFFFFFF1
 
 POST https://14fpuojlqf.execute-api.us-east-1.amazonaws.com/prod/
 
@@ -24,3 +31,16 @@ Content-Type: application/x-www-form-urlencoded;
 
 token={{token}}
 &institution_fk={{institution_fk}}
+
+###
+POST {{host}}/api/aws/create-state-machine
+Content-Type: application/x-www-form-urlencoded;
+
+&institution_fk={{institution_fk}}
+&label={{label}}
+&tipo={{tipo}}
+&status={{status}}
+&doador_fk={{doador_fk}}
+&fatura_fk={{fatura_fk}}
+&ref_fk={{ref_fk}}
+&execution_arn={{execution_arn}}

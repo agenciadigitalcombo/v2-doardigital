@@ -272,34 +272,6 @@ if( strlen($state_machine) < 70 ) {
 }
 
 $resExecution = $Fila->send($payload, $state_machine );
-$label = $templateEmail['name'];
-
-$menAws = new Banco();
-$menAws->table('message_aws');
-$menAws->insert([
-    "tipo" => 'EMAIL',
-    "status" => 'Succeeded',
-    "data" => $payload["dataDeEnvio"],
-    "doador_fk" => $doador_fk,
-    "fatura_fk" => $ID,
-    "ref_fk" => $reference_key,
-    "execution_arn" => $resExecution['executionArn'],
-    "institution_fk" => $institution_fk,
-    "label" => $label,
-]);
-
-$menAws->table('message_aws');
-$menAws->insert([
-    "tipo" => 'WHATS',
-    "status" => 'Succeeded',
-    "data" => $payload["dataDeEnvio"],
-    "doador_fk" => $doador_fk,
-    "fatura_fk" => $ID,
-    "ref_fk" => $reference_key,
-    "execution_arn" => $resExecution['executionArn'],
-    "institution_fk" => $institution_fk,
-    "label" => $label,
-]);
 
 echo json_encode([
     "next" => true,

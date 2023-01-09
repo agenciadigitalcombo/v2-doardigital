@@ -137,4 +137,48 @@ class AwsControle extends Controle
         ]);
         return $response;
     }
+
+    static function saveMessage()
+    {
+        self::requireInputs([
+            "institution_fk" => "informe uma identificação de instituição",
+            "label" => "Informe uma legenda",
+            "tipo" => "Informe um tipo de envio",
+            "status" => "Informe o status code",
+            "doador_fk" => "Informe a identificação de doador",
+            "fatura_fk" => "Informe a identificação da fatura",
+            "ref_fk" => "Informe a referencia",
+            "execution_arn" => "Informe o código de execução ARN",
+        ]);
+
+        $label = $_REQUEST['label'];
+        $tipo = $_REQUEST['tipo'];
+        $status = $_REQUEST['status'];
+        $data = date('Y-m-d');
+        $doador_fk = $_REQUEST['doador_fk'];
+        $fatura_fk = $_REQUEST['fatura_fk'];
+        $ref_fk = $_REQUEST['ref_fk'];
+        $execution_arn = $_REQUEST['execution_arn'];
+        $institution_fk = $_REQUEST['institution_fk'];
+
+        $menAws = new Banco();
+        $menAws->table('message_aws');
+        $menAws->insert([
+            "tipo" => $tipo,
+            "status" => $status,
+            "data" => $data,
+            "doador_fk" => $doador_fk,
+            "fatura_fk" => $fatura_fk,
+            "ref_fk" => $ref_fk,
+            "execution_arn" => $execution_arn,
+            "institution_fk" => $institution_fk,
+            "label" => $label,
+        ]);
+
+        self::printSuccess(
+            "Salvo com sucesso",
+            []
+        );
+    }
+
 }
