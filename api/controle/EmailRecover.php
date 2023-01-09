@@ -96,14 +96,22 @@ class EmailRecover  extends Controle
         $template = str_replace("{my_content}", $blade_mail, $content);
 
         $blade = self::blade($payload , $template);
-        $blade_whats = self::blade($payload , $whats["content"]);        
+        $blade_whats = self::blade($payload , $whats["content"]);
+        
+        $message_arn = new Banco();
+        $message_arn->table('message_aws');
+        $message_arn->where([
+            "fatura_fk" => $pay_id,
+        ]);
+        $select_arn = $message_arn->select()[0] ?? [];
+        $arn = $select_arn["execution_arn"] ?? 'arn_fail';
 
         if($preview) {
             header("Content-Type: text/html");
             echo $blade;
             die;
         }
-
+       
         self::printSuccess(
             "Dados para email de recuperação",
             [
@@ -122,6 +130,7 @@ class EmailRecover  extends Controle
                 "institution" => $inst,
                 "doador" => $do,
                 "LINK" => '//' . $inst['domain'] . "/api/pix/#/?code=" . $fatura['codigo'],
+                'arn' => $arn
 
             ]
         );
