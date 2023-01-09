@@ -33,7 +33,7 @@ token={{token}}
 &institution_fk={{institution_fk}}
 
 ###
-POST {{host}}/api/aws/create-state-machine
+POST {{host}}/api/aws/save-message
 Content-Type: application/x-www-form-urlencoded;
 
 &institution_fk={{institution_fk}}
