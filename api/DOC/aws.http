@@ -36,7 +36,7 @@ token={{token}}
 POST {{host}}/api/aws/save-message
 Content-Type: application/x-www-form-urlencoded;
 
-&institution_fk={{institution_fk}}
+institution_fk={{institution_fk}}
 &label={{label}}
 &tipo={{tipo}}
 &status={{status}}
