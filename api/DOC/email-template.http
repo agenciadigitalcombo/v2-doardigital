@@ -1,7 +1,7 @@
-@host=http://painel.doardigital.com.br
-# @host=http://hostdoar.tk
+# @host=http://painel.doardigital.com.br
+@host=http://hostdoar.tk
 @token=eyJjb2RlIjoiYWRtXzYyNWViY2JkNWFkYjcifQ==.31ff8c14441f6bd1bf68836cf901ceba675fc350
-@instituicao_fk=inst_62b5e40651747
+@instituicao_fk=inst_62d98175c7e51
 @tipo=PIX
 @status_pagamento=CONFIRMED
 @assunto=Doação concluída com sucesso!
