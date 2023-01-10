@@ -899,13 +899,7 @@ class InstituicaoControle extends Controle
             $todasAssinatura
         );
 
-        $assinatura_by_pay_id = array_filter($todasAssinatura['data'], function($a) use( $fatura_external_fk) {
-            return $a['externalReference'] == $fatura_external_fk;
-        });
-
-        $assinatura_by_pay_id = array_values($assinatura_by_pay_id);
-
-        $status = $assinatura_by_pay_id[0]['status'] ?? '';
+        $status = $todasAssinatura['status'];
 
         if( $status == 'ACTIVE') {
             self::printSuccess(
@@ -916,7 +910,7 @@ class InstituicaoControle extends Controle
 
         self::printError(
             "Não prosseguir a assinatura esta cancelada",
-            $assinatura_by_pay_id
+            $todasAssinatura
         );
 
     }
