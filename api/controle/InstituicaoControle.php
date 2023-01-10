@@ -892,7 +892,7 @@ class InstituicaoControle extends Controle
 
         $asa = new AsaasCliente();
         $asa->set_api_key($token);
-        $todasAssinatura = $asa->subsByCustomer($customer_id);
+        $todasAssinatura = $asa->subsInfo($sub_id);
 
         self::printSuccess(
             "debug",

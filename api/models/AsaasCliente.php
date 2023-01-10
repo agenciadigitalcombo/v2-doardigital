@@ -62,6 +62,11 @@ class AsaasCliente extends Asaas
             "includeDeleted" => 'true',
         ]);
     }
+    
+    public function subsInfo($sub_id): array
+    {
+        return $this->get("/subscriptions/{$sub_id}", []);
+    }
 
     public function updateCostumer(
         $customer_id,
