@@ -888,14 +888,16 @@ class InstituicaoControle extends Controle
         $doadorData = $doador->select()[0] ?? [];
         $customer_id = $doadorData['pagamento_fk'];
 
-        self::printSuccess(
-            "debug",
-            $subscribe
-        );
+        
 
         $asa = new AsaasCliente();
         $asa->set_api_key($token);
         $todasAssinatura = $asa->subsByCustomer($customer_id);
+
+        self::printSuccess(
+            "debug",
+            $todasAssinatura
+        );
 
         $assinatura_by_pay_id = array_filter($todasAssinatura['data'], function($a) use( $fatura_external_fk) {
             return $a['externalReference'] == $fatura_external_fk;
