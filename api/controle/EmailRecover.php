@@ -9,10 +9,10 @@ class EmailRecover  extends Controle
         ]);
         $pay_id = $_REQUEST["pay_id"];
         $preview = isset($_REQUEST["preview"]);
-        $content = file_get_contents(__DIR__ . "/../template/DEFAULT.html"); 
-        
-        
-        
+        $content = file_get_contents(__DIR__ . "/../template/DEFAULT.html");
+
+
+
 
         $donation = new Banco();
         $donation->table('fatura');
@@ -21,38 +21,29 @@ class EmailRecover  extends Controle
         ]);
         $fatura = $donation->select()[0] ?? [];
 
-        if(!$fatura) {
+        if (!$fatura) {
             self::printError(
                 "Fatura não existe",
                 []
             );
         }
 
-        $fatura = Fatura::porter($fatura); 
+        $fatura = Fatura::porter($fatura);
 
-        $sufixo = '';        
-        $dataFatura = strtotime( $fatura['dataCreated'] );
+        $sufixo = '';
+        $dataFatura = strtotime($fatura['dataCreated']);
         $hoje = time();
-        $intervalo = ($hoje - $dataFatura) / 86400;
+        $intervalo = intval(($hoje - $dataFatura) / 86400);
 
-        if($fatura['status_pagamento'] == 'PENDING' || $fatura['status_pagamento'] == 'OVERDUE') {
-
-
-            if( $intervalo == 2) {
-                $sufixo = "_2_DAY";
-            }
-            
-            if( $intervalo == 3) {
+        if ($fatura['status_pagamento'] == 'PENDING' || $fatura['status_pagamento'] == 'OVERDUE') {
+            if ($intervalo == 3) {
                 $sufixo = "_3_DAY";
             }
-            
-            if( $intervalo == 5) {
+            if ($intervalo == 13) {
                 $sufixo = "_5_DAY";
             }
-
         }
 
-        
         $institution = new Banco();
         $institution->table('institution');
         $institution->where([
@@ -75,7 +66,7 @@ class EmailRecover  extends Controle
         $email->where([
             "instituicao_fk" => $fatura['instituicao_fk'],
             "tipo" => $fatura['tipo_pagamento'],
-            "status_pagamento" => $fatura['status_pagamento'].$sufixo,
+            "status_pagamento" => $fatura['status_pagamento'] . $sufixo,
         ]);
         $mail = $email->select()[0] ?? [];
         $mail = EmailTemplate::porter($mail);
@@ -85,7 +76,7 @@ class EmailRecover  extends Controle
         $WhatsApp->where([
             "instituicao_fk" => $fatura['instituicao_fk'],
             "tipo" => $fatura['tipo_pagamento'],
-            "status_pagamento" => $fatura['status_pagamento'].$sufixo,
+            "status_pagamento" => $fatura['status_pagamento'] . $sufixo,
         ]);
         $whats = $WhatsApp->select()[0] ?? [];
         $whats = MessagesWhats::porter($whats);
@@ -118,12 +109,12 @@ class EmailRecover  extends Controle
         }
 
         $blade_mail = $mail["content"];
-        $blade_mail = str_replace("\n","<br /> <br />", $blade_mail);
+        $blade_mail = str_replace("\n", "<br /> <br />", $blade_mail);
         $template = str_replace("{my_content}", $blade_mail, $content);
 
-        $blade = self::blade($payload , $template);
-        $blade_whats = self::blade($payload , $whats["content"]);
-        
+        $blade = self::blade($payload, $template);
+        $blade_whats = self::blade($payload, $whats["content"]);
+
         $message_arn = new Banco();
         $message_arn->table('message_aws');
         $message_arn->where([
@@ -132,19 +123,19 @@ class EmailRecover  extends Controle
         $select_arn = $message_arn->select()[0] ?? [];
         $arn = $select_arn["execution_arn"] ?? 'arn_fail';
 
-        if($preview) {
+        if ($preview) {
             header("Content-Type: text/html");
             echo $blade;
             die;
         }
-       
+
         self::printSuccess(
             "Dados para email de recuperação",
             [
                 "intervalo" => $intervalo,
-                "status_temp" => $fatura['status_pagamento'].$sufixo,
+                "status_temp" => $fatura['status_pagamento'] . $sufixo,
                 "message" => [
-                    "email" => base64_encode( $blade ),
+                    "email" => base64_encode($blade),
                     "whats" => $blade_whats
                 ],
                 "template" => [
