@@ -39,7 +39,8 @@ class EmailRecover  extends Controle
             if ($intervalo == 3) {
                 $sufixo = "_3_DAY";
             }
-            if ($intervalo == 13) {
+           
+            if ($intervalo == 12) {
                 $sufixo = "_5_DAY";
             }
         }
