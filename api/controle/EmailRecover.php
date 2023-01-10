@@ -11,7 +11,7 @@ class EmailRecover  extends Controle
         $preview = isset($_REQUEST["preview"]);
         $content = file_get_contents(__DIR__ . "/../template/DEFAULT.html"); 
         
-        $sufixo = $_REQUEST['sufixo'] ?? '';
+        
         
 
         $donation = new Banco();
@@ -29,6 +29,29 @@ class EmailRecover  extends Controle
         }
 
         $fatura = Fatura::porter($fatura); 
+
+        $sufixo = '';        
+        $dataFatura = strtotime( $fatura['data'] );
+        $hoje = time();
+        $intervalo = ($hoje - $dataFatura) / 86400;
+
+        if($fatura['status_pagamento'] == 'PENDING' || $fatura['status_pagamento'] == 'OVERDUE') {
+
+
+            if( $intervalo == 2) {
+                $sufixo = "_2_DAY";
+            }
+            
+            if( $intervalo == 3) {
+                $sufixo = "_3_DAY";
+            }
+            
+            if( $intervalo == 5) {
+                $sufixo = "_5_DAY";
+            }
+
+        }
+
         
         $institution = new Banco();
         $institution->table('institution');
@@ -118,6 +141,7 @@ class EmailRecover  extends Controle
         self::printSuccess(
             "Dados para email de recuperação",
             [
+                "intervalo" => $intervalo,
                 "status_temp" => $fatura['status_pagamento'].$sufixo,
                 "message" => [
                     "email" => base64_encode( $blade ),
