@@ -845,11 +845,17 @@ class InstituicaoControle extends Controle
             "fatura_id" => $payment_id
         ]);
 
+        
 
         $fatura = $donation->select()[0] ?? [];
         $inst_fk = $fatura['instituicao_fk'] ?? '';
         $doador_fk = $fatura['doador_fk'] ?? '';
         $recorrente = $fatura['recorrente'];
+        self::printSuccess(
+            "debug",
+            $fatura
+        );
+
 
 
         $institution = new Banco();
