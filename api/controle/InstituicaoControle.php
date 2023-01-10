@@ -888,16 +888,9 @@ class InstituicaoControle extends Controle
         $doadorData = $doador->select()[0] ?? [];
         $customer_id = $doadorData['pagamento_fk'];
 
-        
-
         $asa = new AsaasCliente();
         $asa->set_api_key($token);
         $todasAssinatura = $asa->subsInfo($sub_id);
-
-        self::printSuccess(
-            "debug",
-            $todasAssinatura
-        );
 
         $status = $todasAssinatura['status'];
 
