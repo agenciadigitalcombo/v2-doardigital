@@ -31,7 +31,7 @@ class EmailRecover  extends Controle
         $fatura = Fatura::porter($fatura); 
 
         $sufixo = '';        
-        $dataFatura = strtotime( $fatura['data'] );
+        $dataFatura = strtotime( $fatura['dataCreated'] );
         $hoje = time();
         $intervalo = ($hoje - $dataFatura) / 86400;
 
