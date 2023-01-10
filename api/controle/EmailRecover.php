@@ -51,8 +51,8 @@ class EmailRecover  extends Controle
         $email->table('template_email');
         $email->where([
             "instituicao_fk" => $fatura['instituicao_fk'],
-            "tipo" => $fatura['tipo_pagamento'].$sufixo,
-            "status_pagamento" => $fatura['status_pagamento'],
+            "tipo" => $fatura['tipo_pagamento'],
+            "status_pagamento" => $fatura['status_pagamento'].$sufixo,
         ]);
         $mail = $email->select()[0] ?? [];
         $mail = EmailTemplate::porter($mail);
@@ -61,8 +61,8 @@ class EmailRecover  extends Controle
         $WhatsApp->table('template_whats');
         $WhatsApp->where([
             "instituicao_fk" => $fatura['instituicao_fk'],
-            "tipo" => $fatura['tipo_pagamento'].$sufixo,
-            "status_pagamento" => $fatura['status_pagamento'],
+            "tipo" => $fatura['tipo_pagamento'],
+            "status_pagamento" => $fatura['status_pagamento'].$sufixo,
         ]);
         $whats = $WhatsApp->select()[0] ?? [];
         $whats = MessagesWhats::porter($whats);
