@@ -860,10 +860,7 @@ class InstituicaoControle extends Controle
 
         $inst = $institution->select()[0] ?? [];
 
-        // self::printSuccess(
-        //     "debug",
-        //     $inst
-        // );
+        
 
         $token = $inst['carteira_fk'] ?? '';
         $fatura_external_fk = $fatura['external_fk'] ?? '';
@@ -890,6 +887,11 @@ class InstituicaoControle extends Controle
         ]);
         $doadorData = $doador->select()[0] ?? [];
         $customer_id = $doadorData['pagamento_fk'];
+
+        self::printSuccess(
+            "debug",
+            $subscribe
+        );
 
         $asa = new AsaasCliente();
         $asa->set_api_key($token);
