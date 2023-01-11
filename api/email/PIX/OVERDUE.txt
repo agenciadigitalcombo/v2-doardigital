@@ -1,9 +1,9 @@
-*Doação PIX (pendente)(imediato)
-Uma oração especial para você!
-Reze conosco essa linda oração a mãe do céu.
-Ó incomparável Senhora da Conceição Aparecida, Mãe de Deus, Rainha dos Anjos, Advogada dos pecadores, refúgio e consolação dos aflitos e atribulados, Virgem Santíssima, cheia de poder e de bondade, lançai sobre nós um olhar favorável, para que sejamos socorridos por vós, em todas as necessidades em que nos acharmos.
-Lembrai-vos, ó clementíssima Mãe Aparecida, que nunca se ouviu dizer que algum daqueles que têm a vós recorrido, invocado vosso santíssimo nome e implorado a vossa singular protecção, fosse por vós abandonado. Animados com esta confiança, a vós recorremos. Tomamo-vos para sempre por nossa Mãe, nossa protectora, consolação e guia, esperança e luz na hora da morte. Livrai-nos de tudo o que possa ofender-vos e ao vosso Santíssimo Filho, Jesus.
-Preservai-nos de todos os perigos da alma e do corpo; dirigi-nos em todos os assuntos espirituais e temporais. Livrai-nos da tentação do demónio, para que, trilhando o caminho da virtude, possamos um dia ver-vos e amar-vos na eterna glória, por todos os séculos dos séculos.
-Amém.
-CÓDIGO: 
-{CODE}
+PIX 1º mensagem de recuperação (imediato)
+Estamos esperando sua presença, você vem?
+Olá  {nome_doador},
+Estamos ansiosos e contando os minutos para que você esteja conosco nessa missão maravilhosa que vivemos. Amar é nosso lema e servir nossa missão. 
+Seja você também parte integrante dessa grande missão, contribua com nossa obra e veja os frutos que ela gera  e vem transformando vidas pelo mundo a fora.
+Junte-se a nós nessa tão grandiosa missão e faça a diferença no mundo.
+Contamos com você!
+CÓDIGO: {CODE}
+<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>

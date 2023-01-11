@@ -1,6 +1,8 @@
-*Boleto Recorrente (imediato)
-Sua oração chegou como um presente pra você.
-Hoje trazemos uma belíssima oração pra você com todo amor e carinho.
-“Ó, Santa Teresinha do Menino Jesus, modelo de humildade, de confiança e de amor! Do alto dos céus, despeje sobre nós estas rosas que levas em teus braços: a rosa da humildade para que vençamos nosso orgulho e aceitemos o jugo do Evangelho; a rosa da confiança para que nos abandonemos à vontade de Deus e descansemos em Sua Misericórdia; a rosa do amor para que, abrindo nossas almas sem medida à graça, realizemos o único fim para o qual Deus nos criou à sua imagem : Amar- Lhe e fazer- Lhe amar. Tu que passas teu Céu fazendo o bem na terra, ajuda-me nesta necessidade e concede-me do Senhor o que te peço, se for para glória de Deus e para o bem de minha alma. Amém.”
-Reze um Pai Nosso.
+*Boleto 1º mensagem de recuperação(imediato)
+Você tem a chave?
+{NOME},.você tem uma chave poderosa que pode nos abrir muitos caminhos entre as dificuldades da vida.
+Sua doação transformará vidas, levando amor, caridade e esperança, sentimentos que só você pode ajudar a construir nessa fase difícil em que vivemos.
+Milhares de pessoas hoje tem muitas dificuldades em lidar consigo mesmas, e por isso a missão precisa estar unida com Deus para ter forças e se manter firmes no caminho. 
+Nós contamos com você nessa jornada e assim conseguir ajudar o máximo de pessoas possível.
 <a href="{LINK}" {STYLE_BTN}> Visualizar Boleto </a>
+Obrigado por sua Doação, ela move montanhas.

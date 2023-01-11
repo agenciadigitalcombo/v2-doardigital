@@ -1,9 +1,0 @@
-PIX 1º mensagem de recuperação (2 dias)
-Estamos esperando sua presença, você vem?
-Olá  {nome_doador},
-Estamos ansiosos e contando os minutos para que você esteja conosco nessa missão maravilhosa que vivemos. Amar é nosso lema e servir nossa missão. 
-Seja você também parte integrante dessa grande missão, contribua com nossa obra e veja os frutos que ela gera  e vem transformando vidas pelo mundo a fora.
-Junte-se a nós nessa tão grandiosa missão e faça a diferença no mundo.
-Contamos com você!
-CÓDIGO: {CODE}
-<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>
