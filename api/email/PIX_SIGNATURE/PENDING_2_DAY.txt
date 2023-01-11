@@ -1,8 +1,9 @@
 *PIX  1º mensagem de recuperação (2 dias)
 Você tem a chave?
-{NOME},.você tem uma chave poderosa que pode nos abrir muitos caminhos entre as dificuldades da vida.
+{NOME}, você tem uma chave poderosa que pode nos abrir muitos caminhos entre as dificuldades da vida.
 Sua doação transformará vidas, levando amor, caridade e esperança, sentimentos que só você pode ajudar a construir nessa fase difícil em que vivemos.
 Milhares de pessoas hoje têm muitas dificuldades em lidar consigo mesmas, e por isso a missão precisa estar unida com Deus para ter forças e se manter firmes no caminho. 
 Nós contamos com você nessa jornada e assim conseguir ajudar o máximo de pessoas possível.
-{CODE}
+CÓDIGO: {CODE}
+<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>
 Obrigado por sua doação, ela move montanhas.

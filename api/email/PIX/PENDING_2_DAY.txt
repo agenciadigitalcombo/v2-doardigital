@@ -5,5 +5,5 @@ Estamos ansiosos e contando os minutos para que você esteja conosco nessa miss�
 Seja você também parte integrante dessa grande missão, contribua com nossa obra e veja os frutos que ela gera  e vem transformando vidas pelo mundo a fora.
 Junte-se a nós nessa tão grandiosa missão e faça a diferença no mundo.
 Contamos com você!
-CÓDIGO: 
-{CODE}
+CÓDIGO: {CODE}
+<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>

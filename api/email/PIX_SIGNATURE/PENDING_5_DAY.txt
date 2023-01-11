@@ -4,5 +4,6 @@ Estamos te convidando, você vem?
 Você já faz parte de um grande exército de pessoas do bem que ajudam a transformar o mundo com pequenos gestos de Amor e Gratidão.
 Nesse exército que Deus levantou, você já faz parte constante e já se tornou uma pessoa fundamental nesse processo, ou seja já se tornou pedra edificante junto conosco.
 Gratidão por você continuar firme junto conosco de mãos dadas até o fim.
-{CODE}
+CÓDIGO: {CODE}
+<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>
 Venha, continue caminhando conosco.

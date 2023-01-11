@@ -3,5 +3,5 @@ Bênçãos para você.
 Olá {NOME},
 Ainda não conseguimos identificar o seu pagamento. Podemos ajudar de alguma forma?
 Estamos orando por você para que muitas bençãos sejam derramadas sobre você e toda sua família. Pois você merece muitas glórias e muitas bençãos.
-CÓDIGO: 
-{CODE}
+CÓDIGO: {CODE}
+<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>

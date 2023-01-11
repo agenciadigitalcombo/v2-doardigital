@@ -6,7 +6,7 @@ Por vezes queremos fazer muito mais, entretanto temos que aguardar que as promes
 Esperamos que a providência divina também se faça presente na sua vida e que você consiga finalizar a intenção de fazer parte dos doadores. Já rezamos muito nas necessidades de cada um, pois acreditamos que juntos podemos fazer maravilhas pelos que precisam.
 Nós não existiríamos sem vocês e todo nosso trabalho ficaria sem sentido se não tivéssemos a ajuda de irmãos tão comprometidos! Estamos falando de um exército de doadores, fortalecidos pelo poder da oração, sustentando filhos necessitados de amor e atenção, gerando mais e mais almas restauradas para o reino de Deus. Obrigada por estar conosco! Um abraço fraterno
 Copie o código PIX abaixo (PARTE AZUL E PRETA JUNTAS) para efetuar o pagamento
-CÓDIGO: 
-{CODE}
+CÓDIGO: {CODE}
+<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>
 Gratidão a Deus por sua generosidade.
 Deus lhe abençoe poderosamente!

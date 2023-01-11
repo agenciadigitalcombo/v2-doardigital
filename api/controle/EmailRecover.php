@@ -98,8 +98,16 @@ class EmailRecover  extends Controle
             "NOME" => $fatura["doador_nome"],
             "instituicao" => $inst,
             "doador" => $do,
+            "CODE" => $fatura['codigo'],
             "LINK" => '//' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
+            "STYLE_BTN" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"'
         ];
+
+        if( $fatura['tipo_pagamento'] == "BOLETO") {
+            $payload["LINK"] =  $fatura['url'];
+        }
+
+        
 
         foreach ($payload as $index => $cont) {
             if (is_array($cont)) {
@@ -149,9 +157,8 @@ class EmailRecover  extends Controle
                 "fatura" => $fatura,
                 "institution" => $inst,
                 "doador" => $do,
-                "LINK" => '//' . $inst['domain'] . "/api/pix/#/?code=" . $fatura['codigo'],
+                "LINK" => '//' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
                 'arn' => $arn
-
             ]
         );
     }
