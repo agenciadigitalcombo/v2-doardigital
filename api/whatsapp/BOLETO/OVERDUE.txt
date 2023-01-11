@@ -1,4 +1,4 @@
-*Boleto 1º mensagem lembrança (imediato)
+Boleto 1º mensagem de recuperação (imediato)
 Olá, {NOME} paz e bem!
 Dando uma passadinha para lembrar que seu boleto está vencido, porém mesmo vencido você consegue efetuar seu pagamento em até 10 dias depois do vencimento
 *Clique no botão e veja seu boleto* 

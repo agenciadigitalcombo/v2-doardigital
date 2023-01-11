@@ -1,4 +1,4 @@
-*PIX  1º mensagem de recuperação (2 dias)
+*PIX  1º mensagem de recuperação (imediato)
 Olá, {NOME}
 Dando uma passadinha para lembrar que seu Boleto está vencido, porém mesmo vencido você consegue efetuar seu pagamento em até 10 dias após o vencimento.
 *Clique no botão e veja seu código PIX* 
