@@ -110,7 +110,7 @@ class EmailRecover  extends Controle
         }
 
         $blade_mail = $mail["content"];
-        $blade_mail = str_replace("\n", "<br /> <br />", $blade_mail);
+        $blade_mail = str_replace("\n", "<br />", $blade_mail);
         $template = str_replace("{my_content}", $blade_mail, $content);
 
         $blade = self::blade($payload, $template);
