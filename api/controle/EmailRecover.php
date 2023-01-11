@@ -99,7 +99,7 @@ class EmailRecover  extends Controle
             "instituicao" => $inst,
             "doador" => $do,
             "CODE" => $fatura['codigo'],
-            "LINK" => '//' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
+            "LINK" => 'https://' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
             "STYLE_BTN" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"'
         ];
 
