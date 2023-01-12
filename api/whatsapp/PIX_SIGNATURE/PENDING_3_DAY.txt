@@ -1,5 +1,5 @@
 *PIX 2º mensagem lembrança ( 3 dias) 
-Olá {NOME}, 👋
+Olá {NOME},
 Passando hoje e trazendo para você a oração do Salmo 121
 1. Elevo os meus olhos para os montes; de onde me vem o socorro?
 2. O meu socorro vem do Senhor, que fez os céus e a terra.
