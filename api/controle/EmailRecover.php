@@ -40,7 +40,7 @@ class EmailRecover  extends Controle
                 $sufixo = "_3_DAY";
             }
            
-            if ($intervalo == 12) {
+            if ($intervalo == 12 && $fatura['status_pagamento'] == 'OVERDUE' ) {
                 $sufixo = "_5_DAY";
             }
         }
