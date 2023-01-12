@@ -121,8 +121,8 @@ class EmailRecover  extends Controle
         $blade_mail = str_replace("\n", "<br />", $blade_mail);
         $template = str_replace("{my_content}", $blade_mail, $content);
 
-        $blade = self::blade($payload, $template);
-        $blade_whats = self::blade($payload, $whats["content"]);
+        $blade = self::blade($payload, $template . "");
+        $blade_whats = self::blade($payload, $whats["content"] . "");
 
         $message_arn = new Banco();
         $message_arn->table('message_aws');

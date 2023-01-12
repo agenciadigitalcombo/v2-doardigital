@@ -1,6 +1,7 @@
 @host=http://hostdoar.tk
-@pay_id=pay_6395970247331808
+@pay_id=pay_1190173311472450
 
 
 ###
-GET {{host}}/api/email-recover?pay_id={{pay_id}}
+GET {{host}}/api/email-recover?pay_id={{pay_id}}&debug=1
+
