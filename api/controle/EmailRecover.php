@@ -30,17 +30,29 @@ class EmailRecover  extends Controle
 
         $fatura = Fatura::porter($fatura);
 
+        $allFaturas = new Banco();
+        $allFaturas->table('fatura');
+        $allFaturas->where([
+            "external_fk" => $fatura["external_fk"],
+        ]);
+        $allFaturasByRef = $allFaturas->select() ?? [];
+        $allFaturasByRefTotal = count($allFaturasByRef);
+
         $sufixo = '';
+        $sufixoTipo = '';
         $dataFatura = strtotime($fatura['dataCreated']);
         $hoje = time();
         $intervalo = intval(($hoje - $dataFatura) / 86400);
 
+        if($allFaturasByRefTotal > 1) {
+            $sufixoTipo = '_SIGNATURE';
+        }
+
         if ($fatura['status_pagamento'] == 'PENDING' || $fatura['status_pagamento'] == 'OVERDUE') {
-            if ($intervalo == 3) {
+            if ($intervalo >= 3 && $intervalo <= 7 ) {
                 $sufixo = "_3_DAY";
-            }
-           
-            if ($intervalo == 12 && $fatura['status_pagamento'] == 'OVERDUE' ) {
+            }           
+            if ($intervalo >= 12 && $fatura['status_pagamento'] == 'OVERDUE' ) {
                 $sufixo = "_5_DAY";
             }
         }
@@ -66,7 +78,7 @@ class EmailRecover  extends Controle
         $email->table('template_email');
         $email->where([
             "instituicao_fk" => $fatura['instituicao_fk'],
-            "tipo" => $fatura['tipo_pagamento'],
+            "tipo" => $fatura['tipo_pagamento'].$sufixoTipo,
             "status_pagamento" => $fatura['status_pagamento'] . $sufixo,
         ]);
         $mail = $email->select()[0] ?? [];
@@ -76,7 +88,7 @@ class EmailRecover  extends Controle
         $WhatsApp->table('template_whats');
         $WhatsApp->where([
             "instituicao_fk" => $fatura['instituicao_fk'],
-            "tipo" => $fatura['tipo_pagamento'],
+            "tipo" => $fatura['tipo_pagamento'].$sufixoTipo,
             "status_pagamento" => $fatura['status_pagamento'] . $sufixo,
         ]);
         $whats = $WhatsApp->select()[0] ?? [];
@@ -104,10 +116,11 @@ class EmailRecover  extends Controle
         ];
 
         if( $fatura['tipo_pagamento'] == "BOLETO") {
-            $payload["LINK"] =  $fatura['url'];
-        }
-
-        
+            $url = 'https://' . $inst['domain'] . "/pix/#/";
+            $url .= '?code=' . $fatura['codigo'];
+            $url .= '&url=' . $fatura['url'];
+            $payload["LINK"] =  $url;
+        }        
 
         foreach ($payload as $index => $cont) {
             if (is_array($cont)) {

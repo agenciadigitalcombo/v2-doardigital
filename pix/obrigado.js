@@ -10,7 +10,6 @@ export default {
             logo: api.logo,
             cor: api.cor,
             code: null,
-            tipo: null,
             url: null,
             successes: false, 
         }
@@ -20,8 +19,8 @@ export default {
         let tmp = new Tmp()
         let info = tmp.info()
         this.code = this.getUriData('code')
-        this.tipo = info?.tipo
-        this.url = info?.url
+        this.url = this.getUriData('url')      
+       
     },
     methods: {
         getUriData(name) {

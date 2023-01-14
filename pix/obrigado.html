@@ -19,7 +19,9 @@
           <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
             Clique no botão para copiar o código inteiro
           </h1>
-          <img class="w-[250px] mx-auto" :src="'https://api-qrcode.digitalcombo.com.br/?code='+code">
+          <div v-if="!url">
+            <img class="w-[250px] mx-auto" :src="'https://api-qrcode.digitalcombo.com.br/?code='+code">
+          </div>
           <div class="border-2 border-gray-200 flex justify-between items-center mt-4 py-2">
             <i class="fa-solid fa-link px-4"></i>
             <input class="w-full outline-none bg-transparent" ref="codePix" v-model="code">
@@ -27,6 +29,14 @@
               class="bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600">
               copiar
             </button>
+          </div>
+          <div v-if="url">
+            <a 
+            :href="url"
+            class="block mt-4 text-center bg-green-500 text-white rounded text-sm py-2 px-5 mx-auto hover:bg-green-600"
+            >
+              CLIQUE PARA VISUALIZAR O BOLETO
+            </a>
           </div>
         </div> <br>
       </div>
