@@ -244,7 +244,7 @@ $payload['LINK'] = 'https://' . $company['domain'] . "/pix/#/?code=" . $code;
 if($tipo == "BOLETO") {
     $payload['LINK'] = 'https://' . $company['domain'] . "/pix/#/?code=" . $code . '&url=' . $url;
 }
- 
+
 $Fila = new FilaAws();
 
 @$mailActive = $company['mailActive'] ?? 0;
