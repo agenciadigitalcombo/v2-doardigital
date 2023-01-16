@@ -170,7 +170,7 @@ class EmailRecover  extends Controle
                 "fatura" => $fatura,
                 "institution" => $inst,
                 "doador" => $do,
-                "LINK" => 'https://' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
+                "LINK" => $payload["LINK"],
                 'arn' => $arn
             ]
         );
