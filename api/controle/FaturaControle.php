@@ -62,7 +62,7 @@ class FaturaControle extends Controle
             "tipo_pagamento" => "Informe um tipo de pagamento",
         ]);
        
-        self::contator();
+        // self::contator();
 
         $instituicao_fk = $_REQUEST['instituicao_fk'] ?? "";
         $nome = $_REQUEST['nome'] ?? "";
@@ -231,7 +231,7 @@ class FaturaControle extends Controle
 
         $creditCardToken = '';
         if($tipo_pagamento == "CREDIT_CARD" && $recorrente == 1) {
-            $creditCardToken = $response['creditCard']['creditCardToken'];
+            @$creditCardToken = $response['creditCard']['creditCardToken'] ?? '';
         }
 
         $client->update(
