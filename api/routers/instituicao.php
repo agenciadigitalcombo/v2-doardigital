@@ -15,3 +15,4 @@ router('/instituicao/fatura-update', 'InstituicaoControle@faturaUpdate');
 router('/instituicao/fatura-status', 'InstituicaoControle@faturaStatus');
 router('/instituicao/validar-envio', 'InstituicaoControle@faturaSendMessage');
 router('/instituicao/resgata-status-fatura', 'InstituicaoControle@resgataStatusFatura');
+router('/instituicao/re-tentativa', 'InstituicaoControle@reTentativa');

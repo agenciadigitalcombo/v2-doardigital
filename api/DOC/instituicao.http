@@ -130,3 +130,6 @@ GET {{host}}/api/instituicao/validar-envio?payment_id={{payment_id}}&debug=1
 
 ###
 GET {{host}}/api/instituicao/resgata-status-fatura?payment_id={{payment_id}}
+
+###
+GET {{host}}/api/instituicao/re-tentativa?payment_id={{payment_id}}
