@@ -137,6 +137,52 @@ class AwsControle extends Controle
         ]);
         return $response;
     }
+    
+    static function createArnLead($inst_fk)
+    {
+        $INST = $inst_fk;
+        $aws = new Aws();
+        $path = "https://5fdmf9sck5.execute-api.us-east-1.amazonaws.com/dev";
+        $body = json_decode(file_get_contents(__DIR__ . "/../stateMachine_lead.json"));
+        $body = json_encode($body);        
+        $response = $aws->post($path,  [
+            "name" => "name-" . $INST . "-overdue",
+            "definition" => $body,
+            "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
+        ]);
+        $db = new Banco();
+        $db->table('institution');
+        $db->where([
+            "institution_fk" => $INST
+        ]);
+        $db->update([
+            "state_machine_lead" => $response["stateMachineArn"]
+        ]);
+        return $response;
+    } 
+    
+    static function createArnOverdue($inst_fk)
+    {
+        $INST = $inst_fk;
+        $aws = new Aws();
+        $path = "https://5fdmf9sck5.execute-api.us-east-1.amazonaws.com/dev";
+        $body = json_decode(file_get_contents(__DIR__ . "/../stateMachine_overdue.json"));
+        $body = json_encode($body);        
+        $response = $aws->post($path,  [
+            "name" => "name-" . $INST . "-overdue",
+            "definition" => $body,
+            "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
+        ]);
+        $db = new Banco();
+        $db->table('institution');
+        $db->where([
+            "institution_fk" => $INST
+        ]);
+        $db->update([
+            "state_machine_overdue" => $response["stateMachineArn"]
+        ]);
+        return $response;
+    }
 
     static function saveMessage()
     {

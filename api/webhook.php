@@ -275,8 +275,28 @@ if( strlen($state_machine) < 70 ) {
     $state_machine = $resArn["stateMachineArn"];
 }
 
+@$state_machine_lead = $company['state_machine_lead'] ?? "";
+if( strlen($state_machine_lead) < 70 ) {
+    $resArn = AwsControle::createArnLead($institution_fk);
+    $state_machine_lead = $resArn["stateMachineArn"];
+}
+
+@$state_machine_overdue = $company['state_machine_overdue'] ?? "";
+if( strlen($state_machine_overdue) < 70 ) {
+    $resArn = AwsControle::createArnOverdue($institution_fk);
+    $state_machine_overdue = $resArn["stateMachineArn"];
+}
+
 $resExecution = $Fila->send($payload, $state_machine );
 $label = $templateEmail['name'];
+
+if($status == 'OVERDUE' && $tipo == 'CREDIT_CARD' ) {
+    $data = [
+        "payment_id" => $ID,
+        "external_id" => $reference_key,
+    ];
+    $Fila->send($data, $state_machine_overdue );
+}
 
 $menAws = new Banco();
 $menAws->table('message_aws');

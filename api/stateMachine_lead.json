@@ -1,0 +1,475 @@
+{
+	"Comment": "A description of my state machine",
+	"StartAt": "Espera 15 minutos",
+	"States": {
+		"Espera 15 minutos": {
+			"Type": "Wait",
+			"Seconds": 5,
+			"Next": "Ver Status Lead"
+		},
+		"Ver Status Lead": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:carregarmensagemPRODUCAO_doardigital:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Ainda é Lead?"
+		},
+		"Ainda é Lead?": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.leadStatus",
+					"BooleanEquals": false,
+					"Next": "Pass"
+				},
+				{
+					"Variable": "$.leadStatus",
+					"BooleanEquals": true,
+					"Next": "Primeiro Ciclo"
+				}
+			]
+		},
+		"Pass": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Primeiro Ciclo": {
+			"Type": "Parallel",
+			"Branches": [
+				{
+					"StartAt": "Email Zap",
+					"States": {
+						"Email Zap": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:EmailPython:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Salvar Info"
+						},
+						"Salvar Info": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				},
+				{
+					"StartAt": "Enviar Zap",
+					"States": {
+						"Enviar Zap": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiZapDoar:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Salvar Infos"
+						},
+						"Salvar Infos": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				}
+			],
+			"Next": "Espera 1 dia"
+		},
+		"Espera 1 dia": {
+			"Type": "Wait",
+			"Seconds": 5,
+			"Next": "Ver Status Lead (1)"
+		},
+		"Ver Status Lead (1)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:carregarmensagemPRODUCAO_doardigital:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice"
+		},
+		"Choice": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.leadStatus",
+					"BooleanEquals": false,
+					"Next": "Pass (1)"
+				},
+				{
+					"Variable": "$.leadStatus",
+					"BooleanEquals": true,
+					"Next": "Parallelf"
+				}
+			]
+		},
+		"Pass (1)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Parallelf": {
+			"Type": "Parallel",
+			"Branches": [
+				{
+					"StartAt": "Email Zap (1)",
+					"States": {
+						"Email Zap (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:EmailPython:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Salvar Info (1)"
+						},
+						"Salvar Info (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				},
+				{
+					"StartAt": "Enviar Zap (1)",
+					"States": {
+						"Enviar Zap (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiZapDoar:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Salvar Infos (1)"
+						},
+						"Salvar Infos (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				}
+			],
+			"Next": "Aguarda 4 dias"
+		},
+		"Aguarda 4 dias": {
+			"Type": "Wait",
+			"Seconds": 5,
+			"Next": "Ver Status Lead (2)"
+		},
+		"Ver Status Lead (2)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:carregarmensagemPRODUCAO_doardigital:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice (1)"
+		},
+		"Choice (1)": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.leadStatus",
+					"StringEquals": "false",
+					"Next": "Pass (2)"
+				},
+				{
+					"Variable": "$.leadStatus",
+					"BooleanEquals": true,
+					"Next": "Parallel"
+				}
+			]
+		},
+		"Parallel": {
+			"Type": "Parallel",
+			"Next": "Pass (3)",
+			"Branches": [
+				{
+					"StartAt": "Email Zap (2)",
+					"States": {
+						"Email Zap (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:EmailPython:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Salvar Info (2)"
+						},
+						"Salvar Info (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				},
+				{
+					"StartAt": "Enviar Zap (2)",
+					"States": {
+						"Enviar Zap (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiZapDoar:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Salvar Infos (2)"
+						},
+						"Salvar Infos (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				}
+			]
+		},
+		"Pass (2)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Pass (3)": {
+			"Type": "Pass",
+			"End": true
+		}
+	}
+}

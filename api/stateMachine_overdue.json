@@ -1,0 +1,196 @@
+{
+	"Comment": "A description of my state machine",
+	"StartAt": "Espera 4 dia",
+	"States": {
+		"Status Code 200": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Espera 4 dia": {
+			"Type": "Wait",
+			"Seconds": 5,
+			"Next": "Regatar dados Atualizados"
+		},
+		"Regatar dados Atualizados": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiEmail:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice"
+		},
+		"Choice": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Not": {
+						"Variable": "$.StatusFatura",
+						"StringEquals": "OVERDUE"
+					},
+					"Next": "Pass"
+				},
+				{
+					"Variable": "$.StatusFatura",
+					"StringEquals": "OVERDUE",
+					"Next": "Endpoint Tokenização"
+				}
+			]
+		},
+		"Pass": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Endpoint Tokenização": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiEmail:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Qual Status?"
+		},
+		"Qual Status?": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.StatusCode",
+					"StringEquals": "200",
+					"Next": "Status Code 200"
+				},
+				{
+					"Variable": "$.StatusCode",
+					"StringEquals": "400",
+					"Next": "Status Code 400"
+				}
+			]
+		},
+		"Status Code 400": {
+			"Type": "Pass",
+			"Next": "Esperar 10 dias"
+		},
+		"Esperar 10 dias": {
+			"Type": "Wait",
+			"Seconds": 5,
+			"Next": "Regatar dados Atualizados (1)"
+		},
+		"Regatar dados Atualizados (1)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiZapDoarKleber:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice (1)"
+		},
+		"Choice (1)": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Not": {
+						"Variable": "$.StatusFatura",
+						"StringEquals": "OVERDUE"
+					},
+					"Next": "Pass (3)"
+				},
+				{
+					"Variable": "$.StatusFatura",
+					"StringEquals": "OVERDUE",
+					"Next": "Endpoint Tokenização (1)"
+				}
+			]
+		},
+		"Pass (3)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Endpoint Tokenização (1)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ApiZapDoarKleber:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice (2)"
+		},
+		"Choice (2)": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.StatusCode",
+					"StringEquals": "200",
+					"Next": "Pass (1)"
+				},
+				{
+					"Variable": "$.StatusCode",
+					"StringEquals": "400",
+					"Next": "Pass (2)"
+				}
+			]
+		},
+		"Pass (1)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Pass (2)": {
+			"Type": "Pass",
+			"End": true
+		}
+	}
+}
