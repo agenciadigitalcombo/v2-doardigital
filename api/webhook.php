@@ -319,6 +319,8 @@ echo json_encode([
     "resAwsWhats" => $resWhats,
     "resAwsEmail" => $resEmail,
     "resStateMachine" => $resArn,
+    "state_machine_overdue" => $state_machine_overdue,
+    "state_machine_lead" => $state_machine_lead,
     "update" => [
         "status_pagamento" => $status,
         "data" => $dueDate,
