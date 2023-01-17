@@ -937,4 +937,76 @@ class InstituicaoControle extends Controle
         );
 
     }
+
+    static function reTentativa() {
+        self::requireInputs([
+            "payment_id" => "informe um identificação de pagamento"
+        ]);
+
+        $payment_id = $_REQUEST['payment_id'];
+        $donation = new Banco();
+        $donation->table('fatura');
+        $donation->where([
+            "fatura_id" => $payment_id
+        ]);
+        @$fatura = $donation->select()[0] ?? [];       
+
+        if(empty($fatura)) {
+            self::printError(
+                "Fatura não encontrada",
+                []
+            );
+        }
+
+        $doadores = new Banco();
+        $doadores->table('doador');
+        $doadores->where([
+            "external_fk" => $fatura['doador_fk']
+        ]);
+        $doador = $doadores->select()[0];
+
+        $token_card = $doador["card_token"];
+
+        $institution = new Banco();
+        $institution->table('institution');
+        $institution->where([
+            "institution_fk" => $fatura['instituicao_fk']
+        ]);
+        $inst = $institution->select()[0];
+
+        $token_inst = $inst["carteira_fk"];
+
+        $assas = new AsaasCliente();
+        $assas->set_api_key($token_inst);
+
+        $sub = new Banco();
+        $sub->table('assinatura');
+        $sub->where([
+            "external_fk" => $fatura['external_fk']
+        ]);
+        $subscribe = $sub->select()[0] ?? [];
+        $sub_id = $subscribe['subscription_fk'];
+        $todasAssinatura = $assas->subsInfo($sub_id);
+
+        $status = $todasAssinatura['status'];
+
+        if( $status != 'ACTIVE') {
+            self::printSuccess(
+                "Assinatura cancelada",
+                []
+            );
+        }
+
+        $resRetryPayment = $assas->retryPayment($token_card, $payment_id);
+
+        self::printSuccess(
+            "Dados fatura",
+            [
+                "resRetryPayment" => $resRetryPayment,
+            ]
+        );
+
+    }
+
+
 }

@@ -131,7 +131,16 @@ class AsaasCliente extends Asaas
             "billingType" => $billingType,
             "value" => $value,
             "dueDate" => $dueDate,
-            "customer" => $customer
+            "customer" => $customer,
+        ]);
+    }
+    
+    public function retryPayment(
+        $token_card,
+        $payment_id
+    ): array {
+        return $this->post("/payments/{$payment_id}/payWithCreditCard", [
+            "creditCardToken" => $token_card,
         ]);
     }
 }

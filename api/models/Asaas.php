@@ -74,6 +74,7 @@ class Asaas
             curl_close($con);
             return json_decode($ex, true);
         } catch (\Throwable $th) {
+            http_response_code(400);
             echo json_encode([
                 "next" => false,
                 "message" => "error ao chamar meio pagamento",
