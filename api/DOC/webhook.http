@@ -7,54 +7,69 @@ POST {{host}}/api/webhook.php
 content-type: application/json
 
 {
-    "event": "PAYMENT_CREATED",
+    "event": "PAYMENT_UPDATED",
     "payment": {
         "object": "payment",
-        "id": "pay_1846384180984833",
-        "dateCreated": "2023-01-05",
-        "customer": "cus_000004878952",
-        "subscription": "sub_SboYJQeaNiZS",
+        "id": "pay_5943999415617448",
+        "dateCreated": "2023-01-17",
+        "customer": "cus_000005085750",
+        "subscription": "sub_LPHyrQazp822",
         "paymentLink": null,
-        "value": 45.30,
-        "netValue": 43.31,
+        "value": 100,
+        "netValue": 96.5199999999999960209606797434389591217041015625,
         "originalValue": null,
         "interestValue": null,
         "description": "Assinatura",
-        "billingType": "PIX",
+        "billingType": "CREDIT_CARD",
+        "confirmedDate": "2023-01-17",
+        "creditCard": {
+            "creditCardNumber": "8366",
+            "creditCardBrand": "MASTERCARD",
+            "creditCardToken": "388c60e7-4e6b-4524-9fab-cf351bede6ec"
+        },
         "pixTransaction": null,
-        "status": "PENDING",
-        "dueDate": "2023-02-13",
-        "originalDueDate": "2023-02-13",
+        "status": "OVERDUE",
+        "dueDate": "2023-01-17",
+        "originalDueDate": "2023-01-17",
         "paymentDate": null,
-        "clientPaymentDate": null,
+        "clientPaymentDate": "2023-01-17",
         "installmentNumber": null,
-        "invoiceUrl": "https://sandbox.asaas.com/i/7413770397583471",
-        "invoiceNumber": "01708400",
-        "externalReference": "ref_62a744d274b1f",
+        "invoiceUrl": "https:\/\/sandbox.asaas.com\/i\/5943999415617448",
+        "invoiceNumber": "01764962",
+        "externalReference": "ref_63c6f05500b8f",
         "deleted": false,
         "anticipated": false,
-        "anticipable": false,
-        "creditDate": null,
-        "estimatedCreditDate": null,
-        "transactionReceiptUrl": null,
+        "anticipable": true,
+        "creditDate": "2023-02-20",
+        "estimatedCreditDate": "2023-02-20",
+        "transactionReceiptUrl": "https:\/\/sandbox.asaas.com\/comprovantes\/7765352266517850",
         "nossoNumero": null,
         "bankSlipUrl": null,
         "lastInvoiceViewedDate": null,
         "lastBankSlipViewedDate": null,
         "discount": {
-            "value": 0.00,
+            "value": 0,
             "limitDate": null,
             "dueDateLimitDays": 0,
             "type": "FIXED"
         },
         "fine": {
-            "value": 0.00,
+            "value": 0,
             "type": "FIXED"
         },
         "interest": {
-            "value": 0.00,
+            "value": 0,
             "type": "PERCENTAGE"
         },
+        "split": [
+            {
+                "id": "9933a2d7-6310-4a0c-8172-f5facf1811a4",
+                "walletId": "531ed4e4-f2fe-49cc-85b9-d97b9457f5f0",
+                "fixedValue": null,
+                "percentualValue": 4,
+                "totalValue": 3.859999999999999875655021241982467472553253173828125
+            }
+        ],
         "postalService": false,
         "refunds": null
     }

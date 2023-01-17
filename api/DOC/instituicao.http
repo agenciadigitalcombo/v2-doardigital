@@ -30,7 +30,7 @@
 @bankAccountType=CONTA_CORRENTE
 @action=0
 @valor=22,50
-@payment_id=pay_3231946865747405
+@payment_id=pay_5943999415617448
 
 
 ###
@@ -127,3 +127,6 @@ token={{token}}
 
 ###
 GET {{host}}/api/instituicao/validar-envio?payment_id={{payment_id}}&debug=1
+
+###
+GET {{host}}/api/instituicao/resgata-status-fatura?payment_id={{payment_id}}

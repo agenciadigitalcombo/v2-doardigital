@@ -907,4 +907,34 @@ class InstituicaoControle extends Controle
         );
 
     }
+
+    static function resgataStatusFatura() {
+        self::requireInputs([
+            "payment_id" => "informe um identificação de pagamento"
+        ]);
+        $payment_id = $_REQUEST['payment_id'];
+
+        $donation = new Banco();
+        $donation->table('fatura');
+        $donation->where([
+            "fatura_id" => $payment_id
+        ]);
+        @$fatura = $donation->select()[0] ?? [];
+
+        if(empty($fatura)) {
+            self::printError(
+                "Fatura não encontrada",
+                []
+            );
+        }
+        self::printSuccess(
+            "Dados fatura",
+            [
+                "payment_id" => $payment_id,
+                "external_id" => $fatura['external_fk'],
+                "status" => $fatura['status_pagamento'],
+            ]
+        );
+
+    }
 }
