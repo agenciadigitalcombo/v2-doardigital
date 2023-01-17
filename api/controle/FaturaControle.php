@@ -146,15 +146,7 @@ class FaturaControle extends Controle
         }
 
         $clientInfo = $client->info($cpf, $instituicao_fk);
-        $client->update(
-            $instituicao_fk,
-            $nome,
-            $cpf,
-            $telefone,
-            $email,
-            $nascimento
-        );
-
+        
         if(!empty($cep)) {
             $address->save(
                 $clientInfo["external_fk"],
@@ -236,6 +228,21 @@ class FaturaControle extends Controle
         }
 
         $debug = $response;
+
+        $creditCardToken = '';
+        if($tipo_pagamento == "CREDIT_CARD" && $recorrente == 1) {
+            $creditCardToken = $response['creditCard']['creditCardToken'];
+        }
+
+        $client->update(
+            $instituicao_fk,
+            $nome,
+            $cpf,
+            $telefone,
+            $email,
+            $nascimento,
+            $creditCardToken
+        );
 
         $fatura_id = $response["id"];
         $external_fk = $pay_external_fk;

@@ -100,18 +100,23 @@ class Doador
         string $cpf,
         string $telefone,
         string $email,
-        string $nascimento
+        string $nascimento,
+        string $card_token = ''
     ): void {
         $this->con->where([
             "cpf" => $this->clearNumber($cpf),
             "instituicao_fk" => $instituicao_fk
         ]);
-        $this->con->update([
+        $data = [
             "nome" => $nome,
             "telefone" => $this->clearNumber($telefone),
             "email" => $email,
-            "nascimento" => $nascimento,
-        ]);
+            "nascimento" => $nascimento,            
+        ];
+        if( $card_token ) {
+            $data["card_token"] = $card_token;
+        }
+        $this->con->update($data);
     }
 
     public function maker_external_fk(): string

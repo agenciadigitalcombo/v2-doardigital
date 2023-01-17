@@ -68,7 +68,8 @@ CREATE TABLE doador (
     registro VARCHAR(19),
     hora VARCHAR(8),
     ip VARCHAR(255),
-    payload JSON
+    payload JSON,
+    card_token VARCHAR(255)
 );
 
 CREATE TABLE contador_ip (
