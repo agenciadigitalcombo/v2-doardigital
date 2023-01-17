@@ -146,7 +146,7 @@ class AwsControle extends Controle
         $body = json_decode(file_get_contents(__DIR__ . "/../stateMachine_lead.json"));
         $body = json_encode($body);        
         $response = $aws->post($path,  [
-            "name" => "name-" . $INST . "-overdue",
+            "name" => "name-" . $INST . "-lead",
             "definition" => $body,
             "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
         ]);
