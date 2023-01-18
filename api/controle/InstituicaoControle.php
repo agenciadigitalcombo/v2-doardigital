@@ -999,6 +999,15 @@ class InstituicaoControle extends Controle
 
         $resRetryPayment = $assas->retryPayment($token_card, $payment_id);
 
+        if(isset( $resRetryPayment["errors"] )) {
+            http_response_code(400);
+            self::printError(
+                "Error ao fazer tentativa",
+                []
+            );
+
+        }
+
         self::printSuccess(
             "Dados fatura",
             [
