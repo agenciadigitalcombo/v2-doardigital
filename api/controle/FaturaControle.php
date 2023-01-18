@@ -230,7 +230,7 @@ class FaturaControle extends Controle
         $debug = $response;
 
         $creditCardToken = '';
-        if($tipo_pagamento == "CREDIT_CARD" && $recorrente == 1) {
+        if($tipo_pagamento == "CREDIT_CARD") {
             @$creditCardToken = $response['creditCard']['creditCardToken'] ?? '';
         }
 
