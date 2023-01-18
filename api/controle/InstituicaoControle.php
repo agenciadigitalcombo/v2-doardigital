@@ -991,7 +991,8 @@ class InstituicaoControle extends Controle
         $status = $todasAssinatura['status'];
 
         if( $status != 'ACTIVE') {
-            self::printSuccess(
+            http_response_code(400);
+            self::printError(
                 "Assinatura cancelada",
                 []
             );
