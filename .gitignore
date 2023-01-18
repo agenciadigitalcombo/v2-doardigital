@@ -11,3 +11,4 @@ Envio-Documentos-v3
 /api/upload/*.png
 /api/upload/*.jpeg
 /api/config.php
+/api/migrate-dados.csv
