@@ -125,7 +125,7 @@ class AwsControle extends Controle
         $response = $aws->post($path,  [
             "name" => "name-" . $INST,
             "definition" => $body,
-            "roleArn" => "arn:aws:iam::348265973939:role/StepFunction-demo-test"
+            "roleArn" => "arn:aws:iam::348265973939:role/step_functions_basic_execution"
         ]);
         $db = new Banco();
         $db->table('institution');

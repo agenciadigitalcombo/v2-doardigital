@@ -28,9 +28,9 @@
 					"BackoffRate": 2
 				}
 			],
-			"Next": "Ainda é Lead?"
+			"Next": "Ainda \u00e9 Lead?"
 		},
-		"Ainda é Lead?": {
+		"Ainda \u00e9 Lead?": {
 			"Type": "Choice",
 			"Choices": [
 				{

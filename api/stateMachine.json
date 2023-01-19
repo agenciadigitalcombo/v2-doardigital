@@ -1,95 +1,608 @@
 {
-  "Comment": "A description of my state machine",
-  "StartAt": "Wait",
-  "States": {
-    "Wait": {
-      "Type": "Wait",
-      "Seconds": 5,
-      "Next": "Parallel"
-    },
-    "Parallel": {
-      "Type": "Parallel",
-      "Branches": [
-        {
-          "StartAt": "Lambda Invoke",
-          "States": {
-            "Lambda Invoke": {
-              "Type": "Task",
-              "Resource": "arn:aws:states:::lambda:invoke",
-              "OutputPath": "$.Payload",
-              "Parameters": {
-                "Payload.$": "$",
-                "FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:DoarDigital-Enviar-Email:$LATEST"
-              },
-              "Retry": [
-                {
-                  "ErrorEquals": [
-                    "Lambda.ServiceException",
-                    "Lambda.AWSLambdaException",
-                    "Lambda.SdkClientException",
-                    "Lambda.TooManyRequestsException"
-                  ],
-                  "IntervalSeconds": 2,
-                  "MaxAttempts": 6,
-                  "BackoffRate": 2
-                }
-              ],
-              "Next": "Wait (1)"
-            },
-            "Wait (1)": {
-              "Type": "Wait",
-              "Seconds": 5,
-              "Next": "Pass (1)"
-            },
-            "Pass (1)": {
-              "Type": "Pass",
-              "End": true
-            }
-          }
-        },
-        {
-          "StartAt": "Lambda Invoke (1)",
-          "States": {
-            "Lambda Invoke (1)": {
-              "Type": "Task",
-              "Resource": "arn:aws:states:::lambda:invoke",
-              "OutputPath": "$.Payload",
-              "Parameters": {
-                "Payload.$": "$",
-                "FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ZapDoarDigital-1:$LATEST"
-              },
-              "Retry": [
-                {
-                  "ErrorEquals": [
-                    "Lambda.ServiceException",
-                    "Lambda.AWSLambdaException",
-                    "Lambda.SdkClientException",
-                    "Lambda.TooManyRequestsException"
-                  ],
-                  "IntervalSeconds": 2,
-                  "MaxAttempts": 6,
-                  "BackoffRate": 2
-                }
-              ],
-              "Next": "Pass (2)"
-            },
-            "Pass (2)": {
-              "Type": "Pass",
-              "End": true
-            }
-          }
-        }
-      ],
-      "Next": "Wait (2)"
-    },
-    "Wait (2)": {
-      "Type": "Wait",
-      "Seconds": 5,
-      "Next": "Pass"
-    },
-    "Pass": {
-      "Type": "Pass",
-      "End": true
-    }
-  }
+	"Comment": "A description of my state machine",
+	"StartAt": "Espera TimeStamp",
+	"States": {
+		"Espera TimeStamp": {
+			"Type": "Wait",
+			"Next": "Fazer consulta",
+			"TimestampPath": "$.dataDeEnvio"
+		},
+		"Fazer consulta": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ConfirmaEnvioEmail-DoarDigital:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Deve Enviar Mensagem?"
+		},
+		"Deve Enviar Mensagem?": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.Payload.test.next",
+					"BooleanEquals": true,
+					"Next": "Carregar Mensagem"
+				},
+				{
+					"Variable": "$.Payload.test.next",
+					"BooleanEquals": false,
+					"Next": "Pass"
+				}
+			]
+		},
+		"Carregar Mensagem": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ConsultaDadosEmail:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Bloco Webhook"
+		},
+		"Pass": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Bloco Webhook": {
+			"Type": "Parallel",
+			"Branches": [
+				{
+					"StartAt": "Enviar Email",
+					"States": {
+						"Enviar Email": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:Enviar-Email-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Lambda Invoke"
+						},
+						"Lambda Invoke": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				},
+				{
+					"StartAt": "Enviar Zap",
+					"States": {
+						"Enviar Zap": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:Enviar-Zap-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Lambda Invoke (1)"
+						},
+						"Lambda Invoke (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				}
+			],
+			"Next": "Esperar 2 dias"
+		},
+		"Esperar 2 dias": {
+			"Type": "Wait",
+			"Seconds": 80,
+			"Next": "Carregar Mensagem (1)"
+		},
+		"Carregar Mensagem (1)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:carregarmensagemPRODUCAO_doardigital:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice (1)"
+		},
+		"Choice (1)": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.test.payload.fatura.status_pagamento",
+					"StringEquals": "PENDING",
+					"Next": "Fazer consulta (1)"
+				},
+				{
+					"Not": {
+						"Variable": "$.test.payload.fatura.status_pagamento",
+						"StringEquals": "PENDING"
+					},
+					"Next": "Finalizar."
+				}
+			]
+		},
+		"Fazer consulta (1)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ConfirmaEnvioEmail-DoarDigital:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Choice"
+		},
+		"Choice": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Not": {
+						"Variable": "$.Payload.test.next",
+						"BooleanEquals": true
+					},
+					"Next": "Pass (1)"
+				},
+				{
+					"Variable": "$.Payload.test.next",
+					"BooleanEquals": true,
+					"Next": "Carregar Mensagem (2)"
+				}
+			]
+		},
+		"Carregar Mensagem (2)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ConsultaDadosEmail:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Parallel"
+		},
+		"Pass (1)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Finalizar.": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Parallel": {
+			"Type": "Parallel",
+			"Branches": [
+				{
+					"StartAt": "Enviar Email (1)",
+					"States": {
+						"Enviar Email (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:Enviar-Email-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Lambda Invoke (2)"
+						},
+						"Lambda Invoke (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				},
+				{
+					"StartAt": "Enviar Zap (1)",
+					"States": {
+						"Enviar Zap (1)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:Enviar-Zap-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Lambda Invoke (3)"
+						},
+						"Lambda Invoke (3)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				}
+			],
+			"Next": "Espera 9 dias"
+		},
+		"Espera 9 dias": {
+			"Type": "Wait",
+			"Seconds": 45,
+			"Next": "Fazer consulta (Email Válido?)"
+		},
+		"Fazer consulta (Email Válido?)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ConfirmaEnvioEmail-DoarDigital2:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "Está Vencido?"
+		},
+		"Está Vencido?": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Variable": "$.Payload.test.next",
+					"BooleanEquals": false,
+					"Next": "Pass (2)"
+				},
+				{
+					"Variable": "$.Payload.test.next",
+					"BooleanEquals": true,
+					"Next": "Carregar Mensagem (3)"
+				}
+			]
+		},
+		"Carregar Mensagem (3)": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::lambda:invoke",
+			"OutputPath": "$.Payload",
+			"Parameters": {
+				"Payload.$": "$",
+				"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:ConsultaDadosEmail-DoarDigital-PENDING:$LATEST"
+			},
+			"Retry": [
+				{
+					"ErrorEquals": [
+						"Lambda.ServiceException",
+						"Lambda.AWSLambdaException",
+						"Lambda.SdkClientException",
+						"Lambda.TooManyRequestsException"
+					],
+					"IntervalSeconds": 2,
+					"MaxAttempts": 6,
+					"BackoffRate": 2
+				}
+			],
+			"Next": "E-mail Válido"
+		},
+		"Pass (2)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"E-mail Válido": {
+			"Type": "Choice",
+			"Choices": [
+				{
+					"Not": {
+						"Variable": "$.test.payload.fatura.status_pagamento",
+						"StringEquals": "OVERDUE"
+					},
+					"Next": "Pass (3)"
+				},
+				{
+					"Variable": "$.test.payload.fatura.status_pagamento",
+					"StringEquals": "OVERDUE",
+					"Next": "Parallel (1)"
+				}
+			]
+		},
+		"Parallel (1)": {
+			"Type": "Parallel",
+			"Next": "Pass (4)",
+			"Branches": [
+				{
+					"StartAt": "Enviar Email (2)",
+					"States": {
+						"Enviar Email (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:Enviar-Email-DoarDigital-PRODUCAO-OVERDUE:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Lambda Invoke (5)"
+						},
+						"Lambda Invoke (5)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				},
+				{
+					"StartAt": "Enviar Zap (2)",
+					"States": {
+						"Enviar Zap (2)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:Enviar-Zap-DoarDigital-PRODUCAO-OVERDUE:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"Next": "Lambda Invoke (4)"
+						},
+						"Lambda Invoke (4)": {
+							"Type": "Task",
+							"Resource": "arn:aws:states:::lambda:invoke",
+							"OutputPath": "$.Payload",
+							"Parameters": {
+								"Payload.$": "$",
+								"FunctionName": "arn:aws:lambda:us-east-1:348265973939:function:SalvaDados-DoarDigital-PRODUCAO:$LATEST"
+							},
+							"Retry": [
+								{
+									"ErrorEquals": [
+										"Lambda.ServiceException",
+										"Lambda.AWSLambdaException",
+										"Lambda.SdkClientException",
+										"Lambda.TooManyRequestsException"
+									],
+									"IntervalSeconds": 2,
+									"MaxAttempts": 6,
+									"BackoffRate": 2
+								}
+							],
+							"End": true
+						}
+					}
+				}
+			]
+		},
+		"Pass (3)": {
+			"Type": "Pass",
+			"End": true
+		},
+		"Pass (4)": {
+			"Type": "Pass",
+			"End": true
+		}
+	}
 }
