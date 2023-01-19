@@ -56,9 +56,9 @@ $exec = $lines[$step] ?? [];
 
 $fila = new FilaAws();
 $arn = "arn:aws:states:us-east-1:348265973939:stateMachine:Recupera-Cartao-Overdue";
-
+$resAws = [];
 if( !empty($exec) ) {
-    $fila->send( $exec, $arn );
+    $resAws = $fila->send( $exec, $arn );
 }
 
 echo json_encode([
@@ -68,5 +68,6 @@ echo json_encode([
         "total" => count($lines),
         "step" => $step,
         "lines" => $exec,
+        "resAws" => $resAws,
     ]
 ]);
