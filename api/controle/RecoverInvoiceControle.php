@@ -54,12 +54,12 @@ class RecoverInvoiceControle extends Controle
             ]);
             $dataHoraUpdate =  date('Y-m-d H:i:s');
             $recuperado = 0;
-            $intervaloMaxEmMinutos = 120;
+            $intervaloMaxEmMinutos = 15;
             $dataHoraRegistroTime = strtotime($protocolo['dataHoraRegistro']);
             $dataHoraUpdateTime = strtotime(date('Y-m-d H:i:s'));
             $calc = date('H:i', $dataHoraRegistroTime - $dataHoraUpdateTime);
             $calc = explode(':', $calc);
-            $calc = (intval($calc[0]) * 15) + intval($calc[1]);
+            $calc = (intval($calc[0]) * 60) + intval($calc[1]);
             if ($calc > $intervaloMaxEmMinutos) {
                 $recuperado = 1;
             }
