@@ -19,6 +19,7 @@ class RecoverInvoiceControle extends Controle
         $protocolo = $_REQUEST['protocolo'] ?? '';
         if (empty($protocolo)) {
             $protocolo = self::registerNewProtocolo();
+            self::registerExecArn($protocolo);
         } else {
             $protocoloSelect = self::getRecover();
             if ($protocoloSelect) {
@@ -147,6 +148,23 @@ class RecoverInvoiceControle extends Controle
             "dataHoraUpdate" =>  date('Y-m-d H:i:s'),
         ]);
         return $protocolo;
+    }
+
+    static function registerExecArn($protocolo)
+    {
+        $institution_fk = $_REQUEST['institution_fk'] ?? '';
+        $inst = new Banco();
+        $inst->table("institution");
+        $inst->where([
+            "institution_fk" => $institution_fk,
+        ]);
+        $company = $inst->select()[0] ?? [];
+        $state_machine_lead = $company['state_machine_lead'];
+        $data = [
+            "protocolo" => $protocolo,
+        ];
+        $Fila = new FilaAws();
+        $Fila->send($data, $state_machine_lead);
     }
     static function porter(array $payload)
     {
