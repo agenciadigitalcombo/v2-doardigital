@@ -12,6 +12,17 @@ if (!empty($_REQUEST['debug'])) {
 }
 
 include __DIR__ . "/core/Banco.php";
+include __DIR__ . "/models/FilaAws.php";
+
+function contador( $max ) {
+    $file = __DIR__ . "/fix-overdue.txt";
+    $step = (int) file_get_contents( $file );
+    if($step < $max ) {
+        $step++;
+    }
+    file_put_contents($file, $step );
+    return $step;
+}
 
 function filter_date( $payload ) {
     $data_now = date('Y-m');
@@ -40,11 +51,22 @@ $lines = array_filter($lines, 'filter_date');
 $lines = array_values($lines);
 $lines = array_map('porter', $lines);
 
+$step = contador(count($lines));
+$exec = $lines[$step] ?? [];
+
+$fila = new FilaAws();
+$arn = "arn:aws:states:us-east-1:348265973939:stateMachine:Recupera-Cartao-Overdue";
+
+if( !empty($exec) ) {
+    $fila->send( $exec, $arn );
+}
+
 echo json_encode([
     "next" => true,
     "message" => "Migrate dados",
     "payload" => [
         "total" => count($lines),
-        "lines" => $lines,
+        "step" => $step,
+        "lines" => $exec,
     ]
 ]);
