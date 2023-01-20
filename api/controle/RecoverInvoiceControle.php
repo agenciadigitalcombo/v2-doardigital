@@ -111,6 +111,13 @@ class RecoverInvoiceControle extends Controle
         ];
     }
 
+    static function tplWhats( $tipo ) {
+        $path = __DIR__ . "/../whatsapp/LEAD/{$tipo}.txt";
+        $file = file($path);
+        unset($file[0]);
+        return implode( '', $file);
+    }
+
     static function info()
     {
         self::requireInputs([
@@ -127,9 +134,9 @@ class RecoverInvoiceControle extends Controle
                 "15_MIN" => self::tplEmailLead('15_MIN', $instData),
             ],
             "whats" => [
-                "1_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/1_DAY.txt"),
-                "5_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/5_DAY.txt"),
-                "15_MIN" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/15_MIN.txt"),
+                "1_DAY" => self::tplWhats('1_DAY'),
+                "5_DAY" => self::tplWhats('5_DAY'),
+                "15_MIN" => self::tplWhats('15_MIN'),
             ],
         ];
         self::printSuccess(
