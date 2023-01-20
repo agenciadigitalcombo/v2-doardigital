@@ -88,6 +88,7 @@ class RecoverInvoiceControle extends Controle
         $html = str_replace('{my_content}', $body, $html );
         foreach( $instData as $k => $v ) {
             $html = str_replace($k, $v, $html );
+            $subject = str_replace($k, $v, $subject );
         }
         return [
             "subject" => $subject,
@@ -106,6 +107,7 @@ class RecoverInvoiceControle extends Controle
             "{instituicao_logo}" => $inst["logo"],
             "@@body@@" => '',
             "{instituicao_cor}" => $inst["cor"],
+            "{INSTITUICAO}" => $inst["nome"],
         ];
     }
 
