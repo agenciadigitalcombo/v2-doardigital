@@ -75,7 +75,7 @@ class RecoverInvoiceControle extends Controle
         );
     }
 
-    static function tplEmailLead($tipo)
+    static function tplEmailLead($tipo, $instData)
     {
         $path = __DIR__ . "/../email/LEAD/{$tipo}.txt";
         $path_template = __DIR__ . "/../template/DEFAULT.html";
@@ -86,9 +86,26 @@ class RecoverInvoiceControle extends Controle
         unset($file[1]);
         $body = implode('', $file);
         $html = str_replace('{my_content}', $body, $html );
+        foreach( $instData as $k => $v ) {
+            $html = str_replace($k, $v, $html );
+        }
         return [
             "subject" => $subject,
             "body" => $html
+        ];
+    }
+
+    static function getInfoInstTpl( $inst_fk ) {
+        $db = new Banco();
+        $db->table('institution');
+        $db->where([
+            "institution_fk" => $inst_fk
+        ]);
+        $inst = $db->select()[0];
+        return [
+            "{instituicao_logo}" => $inst["logo"],
+            "@@body@@" => '',
+            "{instituicao_cor}" => $inst["cor"],
         ];
     }
 
@@ -99,11 +116,13 @@ class RecoverInvoiceControle extends Controle
         ]);
         $protocoloSelect = self::getRecover();
         $payload = self::porter((array) $protocoloSelect);
+        $inst_fk = $payload['institution_fk'];
+        $instData = self::getInfoInstTpl($inst_fk);
         $payload["messages"] = [
             "email" => [
-                "1_DAY" => self::tplEmailLead('1_DAY'),
-                "5_DAY" => self::tplEmailLead('5_DAY'),
-                "15_MIN" => self::tplEmailLead('15_MIN'),
+                "1_DAY" => self::tplEmailLead('1_DAY', $instData),
+                "5_DAY" => self::tplEmailLead('5_DAY', $instData),
+                "15_MIN" => self::tplEmailLead('15_MIN', $instData),
             ],
             "whats" => [
                 "1_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/1_DAY.txt"),
