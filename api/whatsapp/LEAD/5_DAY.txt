@@ -1,9 +1,7 @@
-*Recuperação lead (5 dia depois) 
-Você é Pedra Viva para a missão.
-Olá {NOME},
-Seja parte viva desta missão tão linda que pertencemos.
-Hoje você pode ser parte integrante e muito fundamental para nós.
-Ninguém pode mudar sonhos, mas podemos ajudar a concretizá-los com forte e vitalidade. Venha e seja mais uma pessoa feliz junto a nós.
-Contamos muito com você, Deus te abençoe poderosamente.
-Clique e finalize sua doação.
-<a href="{LINK}" {STYLE_BTN} > Finalizar Doação </a>
+*Recuperação lead ( 5 dia depois)
+Oração:
+Querido Deus, oramos por este filho amado para ele ele esteja sempre firme na fé, inabalável no amor, na caridade e no servir a ti Senhor.
+Cuidai da sua família e dê o conforto e o amor necessário para uma vida firme contigo.
+Abra seus olhos espirituais e sempre fortaleza para olhar com firmeza as atrocidades deste mundo.
+Assim oramos a ti Senhor e te agradecemos por este filho amado.
+Em nome do Pai, Filho e Espírito Santo, amém.

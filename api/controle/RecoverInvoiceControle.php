@@ -81,9 +81,22 @@ class RecoverInvoiceControle extends Controle
             "protocolo" => "Informe a instituição",
         ]);
         $protocoloSelect = self::getRecover();
+        $payload = self::porter((array) $protocoloSelect);
+        $payload["messages"] = [
+            "email" => [
+                "1_DAY" => ["subject" => null, "body" => null],
+                "5_DAY" => ["subject" => null, "body" => null],
+                "15_MIN" => ["subject" => null, "body" => null],
+            ], 
+            "whats" => [
+                "1_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/1_DAY.txt"),
+                "5_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/5_DAY.txt"),
+                "15_MIN" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/15_MIN.txt"),
+            ],
+        ];
         self::printSuccess(
             "Informações",
-            self::porter((array) $protocoloSelect)
+            $payload
         );
     }
 

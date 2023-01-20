@@ -952,6 +952,7 @@ class InstituicaoControle extends Controle
         @$fatura = $donation->select()[0] ?? [];       
 
         if(empty($fatura)) {
+            http_response_code(402);
             self::printError(
                 "Fatura não encontrada",
                 []
@@ -1004,7 +1005,7 @@ class InstituicaoControle extends Controle
             http_response_code(400);
             self::printError(
                 "Error ao fazer tentativa",
-                []
+                $resRetryPayment
             );
 
         }

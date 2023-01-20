@@ -1,8 +1,6 @@
-*Recuperação lead (1 dia depois) 
-Você já faz parte desta missão!
-Hoje temos um recadinho precioso para você.
-Em tempos tão difíceis, sua doação é para nós sinal de Deus como providência divina.
-Um amor que motiva todos nós a continuar firme. Pois através de sua doação, conseguimos restaurar e salvar vidas no país todo.
-Quando você faz sua doação, você está fazendo parte da restauração de vidas, sendo na evangelização ou nos cuidados com o próximo que chega até nós.
-Contamos muito com você, Deus te abençoe poderosamente.
-<a href="{LINK}" {STYLE_BTN} > Finalizar Doação </a>
+*Recuperação lead (1 dia depois)
+Olá, doador.
+Você já parou pra pensar que você pode transformar vidas, resgatar almas, levar comida a quem precisa, levar amor a pessoas carentes, levar oração a que procura, levar abraços a pessoas sofridas e muito mais ainda unido junto a nossa missão?
+Por isso sua doação faz tanta diferença para nós. Nos impulsiona, nós permite ir além de nossas forças.
+Nos dê a mão e caminhe conosco!
+Que Padre Léo interceda por vós.
