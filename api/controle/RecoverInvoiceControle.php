@@ -75,6 +75,23 @@ class RecoverInvoiceControle extends Controle
         );
     }
 
+    static function tplEmailLead($tipo)
+    {
+        $path = __DIR__ . "/../email/LEAD/{$tipo}.txt";
+        $path_template = __DIR__ . "/../template/DEFAULT.html";
+        $html = file_get_contents($path_template);
+        $file = file($path);
+        $subject = $file[1];
+        unset($file[0]);
+        unset($file[1]);
+        $body = implode('', $file);
+        $html = str_replace('{my_content}', $body, $html );
+        return [
+            "subject" => $subject,
+            "body" => $html
+        ];
+    }
+
     static function info()
     {
         self::requireInputs([
@@ -84,10 +101,10 @@ class RecoverInvoiceControle extends Controle
         $payload = self::porter((array) $protocoloSelect);
         $payload["messages"] = [
             "email" => [
-                "1_DAY" => ["subject" => null, "body" => null],
-                "5_DAY" => ["subject" => null, "body" => null],
-                "15_MIN" => ["subject" => null, "body" => null],
-            ], 
+                "1_DAY" => self::tplEmailLead('1_DAY'),
+                "5_DAY" => self::tplEmailLead('5_DAY'),
+                "15_MIN" => self::tplEmailLead('15_MIN'),
+            ],
             "whats" => [
                 "1_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/1_DAY.txt"),
                 "5_DAY" => file_get_contents(__DIR__ . "/../whatsapp/LEAD/5_DAY.txt"),
