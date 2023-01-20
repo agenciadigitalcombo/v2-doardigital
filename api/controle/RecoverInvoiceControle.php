@@ -91,7 +91,7 @@ class RecoverInvoiceControle extends Controle
         }
         return [
             "subject" => $subject,
-            "body" => $html
+            "body" => base64_encode( $html )
         ];
     }
 
