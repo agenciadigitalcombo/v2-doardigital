@@ -3,7 +3,7 @@ name: Deploy to SFTP
 on:
   push:
     branches:
-      - master
+      - sandbox
 
 jobs:
   deploy:
