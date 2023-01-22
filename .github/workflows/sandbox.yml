@@ -1,20 +1,32 @@
-on: 
-  push: 
+name: Deploy to SFTP 🚀 
+
+on:
+  push:
     branches:
-     - sandbox
-name: 🚀 Deploy website on push
+      - sandbox
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
+    - name: Checkout code
       uses: actions/checkout@v2
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+
+    - name: Setup SFTP Connection
+      uses: appleboy/sftp-action@v1
       with:
-        server: ${{ secrets.ftp_host_sandbox }}
-        username: ${{ secrets.ftp_user_sandbox }}
-        password: ${{ secrets.ftp_password_sandbox }}
-        server-dir: public_html/
+        host: ${{ secrets.FTP_HOST_SANDBOX }}
+        port: 22
+        username: ${{ secrets.FTP_USER_SANDBOX }}
+        key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
+
+    - name: Deploy to SFTP
+      run: |
+        rsync -avz -e "ssh -p ${{ secrets.SFTP_PORT }}" \
+          --delete \
+          --exclude ".git" \
+          --exclude ".github" \
+          --exclude "node_modules" \
+          . ${{ secrets.FTP_USER_SANDBOX }}@${{ secrets.FTP_HOST_SANDBOX }}:${{ secrets.SFTP_PATH }}
+        
