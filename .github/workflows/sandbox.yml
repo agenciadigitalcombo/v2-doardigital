@@ -15,5 +15,5 @@ jobs:
           port: 22
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
           sftp_only: true
-          local_pash: './*'
+          local_path: './*'
           remote_path: '/public_html/'
