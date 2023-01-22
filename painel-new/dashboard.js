@@ -158,7 +158,7 @@ export default {
             <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto" :value="totalAberto" :valuepix="totalAbertoPix" :valueboleto="totalAbertoBoleto" :valuecredito="totalAbertoCredito"/>
             <CardDash size="4" cor="red" variation="red" text="Total Vencido" :value="totalACancelado" :valuepix="totalACanceladoPix" :valueboleto="totalACanceladoBoleto" :valuecredito="totalACanceladoCredito"/>
             <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
-            <Card2 value="????" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
+            <Card2 value="???" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
             <Card2 text="Doadores Recorrentes" :value="totalDoadorRecorrente" variation="green" cor="green" icon="heart" size="4" />
             <Card2  text="Doadores Adimplentes" :value="adimplente" variation="green" cor="green" icon="adimplente" size="4" />
