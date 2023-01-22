@@ -1,19 +1,21 @@
-name: SFTP-Deploy
 on:
   push:
     branches:
       - sandbox
+
 jobs:
-  release:
+  upload_to_sftp:
+    name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: SFTP Sync
+        uses: swillner/sftp-sync-action@v1.0
         with:
-          username: '${{ secrets.FTP_USER_SANDBOX }}'
           server: '${{ secrets.FTP_HOST_SANDBOX }}'
-          port: 22
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
-          sftp_only: true
-          local_path: './*'
-          remote_path: '/public_html/'
+          user: '${{ secrets.FTP_USER_SANDBOX }}'
+          user_private_key: "${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}"
+          host_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGXLBF7MNrm3QueGfvqI50afBelAofpuHggtdoPo2HLwNgJwnyI6sEmmiW9CP2PT0IrXZXipgE0kD3lPt2+EJatKjuqJAJ3Orl1bv+hnD1FmZH0N9kYkaZ272H/fmQ90KASddNgZFGpfG0dkJIvbKfnHMFEuB3TLqXamwHsxGdFMlEcDA+hT6aXBlDHFa8zAJIhMTXMrydp9cs6e6zaY+YyzU4cY7ihB90gNxigQC7Y6jaA7sRnj6HqYgU9sIi0zk5aGinsAWeammg5r1n9GgZaWBZu0cJsmK4pOLAzpGLLRKUJGiO5Att4pCJqC4xuGuD9RafiQJk6N8gnIKqFkNNwpFxo7UYvqAcQZ3CcrhbBTzlB0+xy1bUoLR+sZ7irBL8EsHcibNrVLC9rqiHYxK/XLtCSZqKF02p19Q5c1EtjwuSSDtsTquXvdq+D23D+EuJAqS0sJc5y4zR59hdedTZlNN8SL4C+QAtTVTBp806PFIiILd0T1+Da1c9u6L3y74d4WSbs9Cy99f9bktaLgLcrN8VnwCLO1oydydJpyMM9GmysUNjskRlVkfxMAiu74LIW0STo/llAKfkB5wGeUoDdVVbYEzKbDkY/bmXCXsQEm30fD8xL6S+bJFrTweHUOyHZaJ05ladKn1gYkOv+Zf1PluBbDyf/PgV5mdNjLdUqQ== doarv2@whmdoar.digitalcombo.com.br"
+          remote: /home/doarv2/public_html
+          mirror_options: "--exclude-glob=.git*/ --verbose"
