@@ -1,32 +1,22 @@
-name: Deploy to SFTP 🚀 
-
 on:
   push:
     branches:
       - sandbox
 
 jobs:
-  deploy:
+    deploy_job:
     runs-on: ubuntu-latest
-
+    name: build&deploy
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+        - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Setup SFTP Connection
-      uses: appleboy/sftp-action@v1
-      with:
-        host: ${{ secrets.FTP_HOST_SANDBOX }}
-        port: 22
-        username: ${{ secrets.FTP_USER_SANDBOX }}
-        key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
-
-    - name: Deploy to SFTP
-      run: |
-        rsync -avz -e "ssh -p ${{ secrets.SFTP_PORT }}" \
-          --delete \
-          --exclude ".git" \
-          --exclude ".github" \
-          --exclude "node_modules" \
-          . ${{ secrets.FTP_USER_SANDBOX }}@${{ secrets.FTP_HOST_SANDBOX }}:${{ secrets.SFTP_PATH }}
-        
+        - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: '${{ secrets.FTP_USER_SANDBOX }}' 
+            server: '${{ secrets.FTP_HOST_SANDBOX }}'
+            port: 22
+            ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
+            local_path: './*'
+            remote_path: 'public_html/'
