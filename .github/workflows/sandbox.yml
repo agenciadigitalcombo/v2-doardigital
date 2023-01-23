@@ -4,17 +4,16 @@ on:
       - sandbox
 
 jobs:
-    deploy_job:
+    deploy-via-sftp:
     runs-on: ubuntu-latest
-
     steps:
-        - name: Checkout
-        uses: actions/checkout@v2
+        - uses: actions/checkout@v2
+
         - name: deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-            username: 'doarv2'
-            server: '18.218.96.249'
+            username: doarv2
+            server: 18.218.96.249
             port: 22
             ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }} 
             local_path: './*'
