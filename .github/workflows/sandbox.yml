@@ -1,21 +1,24 @@
+name: Deploy to SFTP
+
 on:
   push:
     branches:
       - sandbox
 
 jobs:
-    deploy-via-sftp:
-      runs-on: ubuntu-latest
-      steps:
-          - uses: actions/checkout@v2
+  deploy:
+    runs-on: ubuntu-latest
 
-          - name: deploy file
-          uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-          with:
-              username: doarv2
-              server: 18.218.96.249
-              port: 22
-              ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }} 
-              local_path: ./*
-              remote_path: /home/doarv2/public_html
-              sftpArgs: '-o ConnectTimeout=5'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to SFTP
+      uses: samuelmeuli/action-sftp@v1
+      with:
+        host: 18.218.96.249
+        port: 22
+        username: doarv2
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
+        local_dir: ./*
+        remote_dir: /home/doarv2/public_html
