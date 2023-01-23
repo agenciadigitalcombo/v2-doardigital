@@ -8,6 +8,8 @@ import Loader from "../components/Loader.js"
 import ApiMensagem from "../components/apiMensagem.js"
 import MyInstitution from "../components/myInstitution.js"
 import Table from "../components/Table.js"
+import tiposDoadores from "../components/tiposDoadores.js"
+import quantidadeDoacoes from "../components/quantidadeDoacoes.js"
 
 export default {
     data: function () {
@@ -19,13 +21,13 @@ export default {
             sucesso: 0,
             lista: [],
             cols: {
-                "Data e hora" : d => d.data.substr(0,10).split('-').reverse().join('/'), //2022-11-01
-                "label" : d => d.label,
-                "status" : d => d.status == 200 ? "Sucesso" : "Falhado",
-                "doador" : d => `<a class="text-[#05f]" href="#/detalhe-doador?id=${d.doador_fk}">Detalhe doador</a>`,
-                "tipo" : d => d.tipo,
-                "fatura" : d => `<a class="text-[#05f]" href="#/detalhe-doacao?id=${d.fatura_fk}">Veja a fatura </a>`,
-            }, 
+                "Data e hora": d => d.data.substr(0, 10).split('-').reverse().join('/'), //2022-11-01
+                "label": d => d.label,
+                "status": d => d.status == 200 ? "Sucesso" : "Falhado",
+                "doador": d => `<a class="text-[#05f]" href="#/detalhe-doador?id=${d.doador_fk}">Detalhe doador</a>`,
+                "tipo": d => d.tipo,
+                "fatura": d => `<a class="text-[#05f]" href="#/detalhe-doacao?id=${d.fatura_fk}">Veja a fatura </a>`,
+            },
         }
     },
     components: {
@@ -44,26 +46,54 @@ export default {
         let api = new ApiMensagem()
         let res = await api.info(inst_fk)
 
-        
+
 
         console.log(this.lista)
 
 
-        
+
         let emails = res.payload.filter(m => m.tipo == "EMAIL")
         let whats = res.payload.filter(m => m.tipo == "WHATS")
 
         this.lista = res.payload.filter(m => m.tipo == "EMAIL" || m.tipo == "WHATS").reverse()
 
-        let statusSucesso = res.payload.filter(m => m.status == 200 )
-        
-        this.sucesso = parseInt( statusSucesso.length * 100 / res.payload.length || 0 )
-        
+        let statusSucesso = res.payload.filter(m => m.status == 200)
+
+        this.sucesso = parseInt(statusSucesso.length * 100 / res.payload.length || 0)
+
         let totalDisparos = 1000
-        
+
         this.emails = emails.length
         this.whats = whats.length
-        this.restantes = totalDisparos - this.whats  
+        this.restantes = totalDisparos - this.whats
+
+        tiposDoadores(this.$refs.tiposDoadores, [
+            this.sucesso,
+            res.payload.length
+        ])
+
+        tiposDoadores(this.$refs.disparados, [
+            1000,
+            res.payload.length
+        ])
+
+        let totalDayMonth = Array(moment().daysInMonth()).fill('').map((_, i) => i + 1)
+        let DisparosPorDia = Array(moment().daysInMonth()).fill(0)
+
+        let month = (moment().month() + 1) < 10 ? `2023-0${moment().month() + 1}`: `2023-${moment().month() + 1}`
+        let allMonth = res.payload.filter( m => m.data.substr(0,7) == month )
+
+        allMonth.forEach( m => {
+            let day = parseInt( m.data.substr(8, 2) ) - 1 
+            DisparosPorDia[day]++            
+        });
+
+        quantidadeDoacoes(this.$refs.totalDisparosByDay, {
+            label: totalDayMonth,
+            value: DisparosPorDia,
+        })
+
+        console.log(allMonth)
 
     },
     template: `
@@ -117,20 +147,19 @@ export default {
                 </CardGeral>
             
                 <CardGeral text="Quantidade de Disparos este Mês" size="full">
-
-                <div ref="quantidadeDoacoes"></div>
-    
+                    <div ref="totalDisparosByDay"></div>    
                 </CardGeral>
     
                 <CardGeral text="Total em Disparos" size="quatro">
-                <div id="chart" style="max-width: 760px;">
-                <div ref="statusDoacoes"></div>
-                </div>
+                    <div id="chart" style="max-width: 760px;">
+                        <div ref="disparados"></div>
+                    </div>
                 </CardGeral>
+
                 <CardGeral text="Status" size="quatro">
-                <div id="chart" style="max-width: 760px;">
-                <div ref="tiposDoadores"></div>
-                </div>
+                    <div id="chart" style="max-width: 760px;">
+                        <div ref="tiposDoadores"></div>
+                    </div>                
                 </CardGeral> 
                 
                 <CardGeral text="Tabela" size="full">

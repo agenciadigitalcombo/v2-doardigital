@@ -96,7 +96,7 @@ export default {
       this.normal = reqResumo.normal
       this.previsto = formataMoeda(reqResumo.previsto)
       this.donationByDay = reqResumo.donationByDay
-
+      
       if (request.next) {
         this.doadorTotal = requestTotal
         this.totalDoadorUnico = totalDoadorUnico
@@ -119,8 +119,6 @@ export default {
         this.totalACanceladoCredito = formataMoeda(reqResumo.totalACancelado.CREDIT_CARD)
         this.requisicao = request
         this.isLoad = 'false'
-        console.log(reqResumo)
-        console.log(this.totalPago)
       }
           
          ''
