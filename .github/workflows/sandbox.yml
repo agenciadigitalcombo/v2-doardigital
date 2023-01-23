@@ -16,6 +16,6 @@ jobs:
             server: 18.218.96.249
             port: 22
             ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }} 
-            local_path: './*'
-            remote_path: '/home/doarv2/public_html'
+            local_path: ./*
+            remote_path: /home/doarv2/public_html
             sftpArgs: '-o ConnectTimeout=5'
