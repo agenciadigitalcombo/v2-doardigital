@@ -16,9 +16,10 @@ jobs:
     - name: Deploy to SFTP
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        host: 18.218.96.249
+        username: 'doarv2'
+        server: '18.218.96.249'
         port: 22
-        username: doarv2
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }}
-        local_dir: ./*
-        remote_dir: /home/doarv2/public_html
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }} 
+        local_path: './*'
+        remote_path: '/home/doarv2/public_html'
+        sftpArgs: '-o ConnectTimeout=5'
