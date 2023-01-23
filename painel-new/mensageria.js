@@ -7,6 +7,7 @@ import CardGeral from "../components/CardGeral.js"
 import Loader from "../components/Loader.js"
 import ApiMensagem from "../components/apiMensagem.js"
 import MyInstitution from "../components/myInstitution.js"
+import Table from "../components/Table.js"
 
 export default {
     data: function () {
@@ -16,6 +17,15 @@ export default {
             whats: 0,
             restantes: 0,
             sucesso: 0,
+            lista: [],
+            cols: {
+                "Data e hora" : d => d.data,
+                "label" : d => `Indefinida`,
+                "status" : d => d.status == 200 ? "Sucesso" : "Falhado",
+                "doador" : d => `<a href="${d.doador_fk}">Detalhe doador</a>`,
+                "tipo" : d => d.tipo,
+                "fatura" : d => `<a href="${d.fatura_fk}">Veja a fatura </a>`,
+            }, 
         }
     },
     components: {
@@ -25,6 +35,7 @@ export default {
         BreadCrumb,
         CardCarteira,
         CardGeral,
+        Table,
         Loader
     },
     async mounted() {
@@ -32,6 +43,11 @@ export default {
         let inst_fk = institution.get();
         let api = new ApiMensagem()
         let res = await api.info(inst_fk)
+
+        this.lista = res.payload.reverse()
+
+        console.log(this.lista)
+
 
         
         let emails = res.payload.filter(m => m.tipo == "EMAIL")
@@ -112,6 +128,10 @@ export default {
                 <div id="chart" style="max-width: 760px;">
                 <div ref="tiposDoadores"></div>
                 </div>
+                </CardGeral> 
+                
+                <CardGeral text="Tabela" size="full">
+                    <Table :rows="lista" :cols="cols" pagination="10" />
                 </CardGeral>
                 
 

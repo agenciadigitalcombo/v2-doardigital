@@ -38,7 +38,6 @@ export default {
                 let init = step - 5
                 let final = step + 5
                 let noShow = btn >= init && btn <= final
-                console.log( {step, init, final, noShow})
                 if( noShow ) {
                     return true
                 }else {
