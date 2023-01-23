@@ -1,22 +1,22 @@
-name: Push-to-AWS
 on:
   push:
     branches:
       - sandbox
-jobs:
-  deploy:
-    name: Deploy to AWS
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout the files
-      uses: actions/checkout@v3
 
-    - name: Copy files with SSH
-      uses: easingthemes/ssh-deploy@main
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY_SANDBOX}}
-        ARGS: "-rltgoDzvO --delete"
-        SOURCE: "./"
-        REMOTE_HOST: "18.218.96.249"
-        REMOTE_USER: ${{secrets.FTP_USER_SANDBOX}}
-        TARGET: "/home/doarv2/public_html"
+jobs:
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+        - name: Checkout
+        uses: actions/checkout@v2
+        - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: 'doarv2'
+            server: '18.218.96.249'
+            port: 22
+            ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_SANDBOX }} 
+            local_path: './*'
+            remote_path: '/home/doarv2/public_html'
+            sftpArgs: '-o ConnectTimeout=5'
