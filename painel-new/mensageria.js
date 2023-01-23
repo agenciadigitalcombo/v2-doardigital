@@ -36,9 +36,9 @@ export default {
         
         let emails = res.payload.filter(m => m.tipo == "EMAIL")
         let whats = res.payload.filter(m => m.tipo == "WHATS")
-        let statusSucesso = res.payload.filter(m => m.status == 'Succeeded')
+        let statusSucesso = res.payload.filter(m => m.status == 200 )
         
-        this.sucesso = statusSucesso.length * 100 / res.payload.length || 0
+        this.sucesso = parseInt( statusSucesso.length * 100 / res.payload.length || 0 )
         
         let totalDisparos = 1000
         
