@@ -19,12 +19,12 @@ export default {
             sucesso: 0,
             lista: [],
             cols: {
-                "Data e hora" : d => d.data,
-                "label" : d => `Indefinida`,
+                "Data e hora" : d => d.data.substr(0,10).split('-').reverse().join('/'), //2022-11-01
+                "label" : d => d.label,
                 "status" : d => d.status == 200 ? "Sucesso" : "Falhado",
-                "doador" : d => `<a href="${d.doador_fk}">Detalhe doador</a>`,
+                "doador" : d => `<a class="text-[#05f]" href="#/detalhe-doador?id=${d.doador_fk}">Detalhe doador</a>`,
                 "tipo" : d => d.tipo,
-                "fatura" : d => `<a href="${d.fatura_fk}">Veja a fatura </a>`,
+                "fatura" : d => `<a class="text-[#05f]" href="#/detalhe-doacao?id=${d.fatura_fk}">Veja a fatura </a>`,
             }, 
         }
     },
@@ -44,7 +44,7 @@ export default {
         let api = new ApiMensagem()
         let res = await api.info(inst_fk)
 
-        this.lista = res.payload.reverse()
+        
 
         console.log(this.lista)
 
@@ -52,6 +52,9 @@ export default {
         
         let emails = res.payload.filter(m => m.tipo == "EMAIL")
         let whats = res.payload.filter(m => m.tipo == "WHATS")
+
+        this.lista = res.payload.filter(m => m.tipo == "EMAIL" || m.tipo == "WHATS").reverse()
+
         let statusSucesso = res.payload.filter(m => m.status == 200 )
         
         this.sucesso = parseInt( statusSucesso.length * 100 / res.payload.length || 0 )

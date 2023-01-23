@@ -43,6 +43,7 @@ class MessageAwsControle extends Controle
             "ref_fk" => $payload["ref_fk"] ?? null,
             "execution_arn" => $payload["execution_arn"] ?? null,
             "institution_fk" => $payload["institution_fk"] ?? null,
+            "label" => $payload["label"] ?? null,
         ];
     }
 }
