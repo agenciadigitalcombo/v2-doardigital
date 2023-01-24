@@ -139,6 +139,7 @@ class RecoverInvoiceControle extends Controle
         $inst_fk = $payload['institution_fk'];
         $instData = self::getInfoInstTpl($inst_fk);        
         $payload["institution"] = self::getInfoInst($inst_fk);
+        $payload["tpl"] = $instData;
         $payload["messages"] = [
             "email" => [
                 "1_DAY" => self::tplEmailLead('1_DAY', $instData),
