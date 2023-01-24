@@ -67,25 +67,34 @@ export default {
         this.whats = whats.length
         this.restantes = totalDisparos - this.whats
 
-        tiposDoadores(this.$refs.tiposDoadores, [
-            this.sucesso,
-            res.payload.length
-        ])
+        tiposDoadores(this.$refs.tiposDoadores,
+            [
+                this.sucesso,
+                100 - this.sucesso
+            ],
+            ["#060", "#C00"],
+            ["Sucesso", "Falhas"]
+        )
 
-        tiposDoadores(this.$refs.disparados, [
-            1000,
-            res.payload.length
-        ])
+        tiposDoadores(
+            this.$refs.disparados,
+            [
+                1000,
+                res.payload.length,
+            ],
+            ["#05f", "#070"],
+            ["Total de mensagens", "Enviadas"]
+        )
 
         let totalDayMonth = Array(moment().daysInMonth()).fill('').map((_, i) => i + 1)
         let DisparosPorDia = Array(moment().daysInMonth()).fill(0)
 
-        let month = (moment().month() + 1) < 10 ? `2023-0${moment().month() + 1}`: `2023-${moment().month() + 1}`
-        let allMonth = res.payload.filter( m => m.data.substr(0,7) == month )
+        let month = (moment().month() + 1) < 10 ? `2023-0${moment().month() + 1}` : `2023-${moment().month() + 1}`
+        let allMonth = res.payload.filter(m => m.data.substr(0, 7) == month)
 
-        allMonth.forEach( m => {
-            let day = parseInt( m.data.substr(8, 2) ) - 1 
-            DisparosPorDia[day]++            
+        allMonth.forEach(m => {
+            let day = parseInt(m.data.substr(8, 2)) - 1
+            DisparosPorDia[day]++
         });
 
         quantidadeDoacoes(this.$refs.totalDisparosByDay, {

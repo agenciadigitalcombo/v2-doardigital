@@ -1,12 +1,17 @@
-export default function ($div, data) {
+export default function (
+    $div,
+    data,
+    colors = ['#39539E', '#4fa8ff'],
+    labels = ['Recorrente', 'Único']
+) {
     var options = {
         series: data,
         chart: {
             width: 420,
             type: 'pie',
         },
-        colors: ['#39539E', '#4fa8ff'],
-        labels: ['Recorrente', 'Unico'],
+        colors: colors,
+        labels: labels,
         responsive: [{
             breakpoint: 480,
             options: {
