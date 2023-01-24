@@ -85,7 +85,7 @@ class RecoverInvoiceControle extends Controle
         unset($file[0]);
         unset($file[1]);
         $body = implode('', $file);
-        $body = str_replace("\n", "<br>", $body);
+        $body = str_replace("\n", "<br> ok", $body);
         $html = str_replace('{my_content}', $body, $html);
         foreach ($instData as $k => $v) {
             $html = str_replace($k, $v, $html);
@@ -116,8 +116,8 @@ class RecoverInvoiceControle extends Controle
             "@@body@@" => '',
             "{instituicao_cor}" => $inst["cor"],
             "{INSTITUICAO}" => $inst["nome"],
-            "STYLE_BTN" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"',
-            "LINK" => 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $_REQUEST['protocolo'],
+            "{STYLE_BTN}" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"',
+            "{LINK}" => 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $_REQUEST['protocolo'],
         ];
     }
 
