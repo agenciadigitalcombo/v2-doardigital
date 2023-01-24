@@ -105,7 +105,25 @@ class RecoverInvoiceControle extends Controle
             "institution_fk" => $inst_fk
         ]);
         $inst = $db->select()[0];
-        return Instituicao::porter($inst);
+        $payload = Instituicao::porter($inst);
+
+        $admins = new Banco();
+        $admins->table('institution_adm');
+        $admins->where([
+            "instituition_fk" => $inst_fk,
+        ]);
+        @$adminFk = $admins->select()[0]['adm_fk'] ?? 'ADM_FAIL';
+
+        $integrate = new Banco();
+        $integrate->table('integration');
+        $integrate->where([
+            "tipo" => "CANAL_WHATS",
+            "instituicao_fk" => $adminFk,
+        ]);
+        @$integrateWhatsBearer = $integrate->select()[0]['key_1'] ?? 'BEARER_NOT';
+        $payload["section"] = $adminFk;
+        $payload["bearer"] = $integrateWhatsBearer;
+        return $payload;
     }
 
     static function getInfoInstTpl($inst_fk)
@@ -137,7 +155,7 @@ class RecoverInvoiceControle extends Controle
         $protocoloSelect = self::getRecover();
         $payload = self::porter((array) $protocoloSelect);
         $inst_fk = $payload['institution_fk'];
-        $instData = self::getInfoInstTpl($inst_fk);        
+        $instData = self::getInfoInstTpl($inst_fk);
         $payload["institution"] = self::getInfoInst($inst_fk);
         $payload["tpl"] = $instData;
         $payload["messages"] = [
