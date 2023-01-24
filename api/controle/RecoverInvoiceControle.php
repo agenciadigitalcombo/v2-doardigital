@@ -85,24 +85,31 @@ class RecoverInvoiceControle extends Controle
         unset($file[0]);
         unset($file[1]);
         $body = implode('', $file);
-        $html = str_replace('{my_content}', $body, $html );
-        foreach( $instData as $k => $v ) {
-            $html = str_replace($k, $v, $html );
-            $subject = str_replace($k, $v, $subject );
+        $html = str_replace('{my_content}', $body, $html);
+        foreach ($instData as $k => $v) {
+            $html = str_replace($k, $v, $html);
+            $subject = str_replace($k, $v, $subject);
         }
         return [
             "subject" => $subject,
-            "body" => base64_encode( $html )
+            "body" => base64_encode($html)
         ];
     }
 
-    static function getInfoInstTpl( $inst_fk ) {
+    static function getInfoInst($inst_fk)
+    {
         $db = new Banco();
         $db->table('institution');
         $db->where([
             "institution_fk" => $inst_fk
         ]);
         $inst = $db->select()[0];
+        return Instituicao::porter($inst);
+    }
+
+    static function getInfoInstTpl($inst_fk)
+    {
+        $inst = self::getInfoInst($inst_fk);
         return [
             "{instituicao_logo}" => $inst["logo"],
             "@@body@@" => '',
@@ -111,11 +118,12 @@ class RecoverInvoiceControle extends Controle
         ];
     }
 
-    static function tplWhats( $tipo ) {
+    static function tplWhats($tipo)
+    {
         $path = __DIR__ . "/../whatsapp/LEAD/{$tipo}.txt";
         $file = file($path);
         unset($file[0]);
-        return implode( '', $file);
+        return implode('', $file);
     }
 
     static function info()
@@ -127,6 +135,7 @@ class RecoverInvoiceControle extends Controle
         $payload = self::porter((array) $protocoloSelect);
         $inst_fk = $payload['institution_fk'];
         $instData = self::getInfoInstTpl($inst_fk);
+        $payload["institution"] = self::getInfoInst($inst_fk);
         $payload["messages"] = [
             "email" => [
                 "1_DAY" => self::tplEmailLead('1_DAY', $instData),
