@@ -116,7 +116,8 @@ class RecoverInvoiceControle extends Controle
             "@@body@@" => '',
             "{instituicao_cor}" => $inst["cor"],
             "{INSTITUICAO}" => $inst["nome"],
-            "STYLE_BTN" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"'
+            "STYLE_BTN" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"',
+            "LINK" => 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $_REQUEST['protocolo'],
         ];
     }
 
@@ -136,10 +137,8 @@ class RecoverInvoiceControle extends Controle
         $protocoloSelect = self::getRecover();
         $payload = self::porter((array) $protocoloSelect);
         $inst_fk = $payload['institution_fk'];
-        $instData = self::getInfoInstTpl($inst_fk);
-        $instData["LINK"] = 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $protocoloSelect,
+        $instData = self::getInfoInstTpl($inst_fk);        
         $payload["institution"] = self::getInfoInst($inst_fk);
-        $payload["LINK"] = $instData["LINK"];
         $payload["messages"] = [
             "email" => [
                 "1_DAY" => self::tplEmailLead('1_DAY', $instData),
