@@ -85,6 +85,7 @@ class RecoverInvoiceControle extends Controle
         unset($file[0]);
         unset($file[1]);
         $body = implode('', $file);
+        $body = str_replace("\n", "<br>", $body);
         $html = str_replace('{my_content}', $body, $html);
         foreach ($instData as $k => $v) {
             $html = str_replace($k, $v, $html);
@@ -115,6 +116,7 @@ class RecoverInvoiceControle extends Controle
             "@@body@@" => '',
             "{instituicao_cor}" => $inst["cor"],
             "{INSTITUICAO}" => $inst["nome"],
+            "STYLE_BTN" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"'
         ];
     }
 
@@ -135,6 +137,7 @@ class RecoverInvoiceControle extends Controle
         $payload = self::porter((array) $protocoloSelect);
         $inst_fk = $payload['institution_fk'];
         $instData = self::getInfoInstTpl($inst_fk);
+        $instData["LINK"] = 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $protocoloSelect,
         $payload["institution"] = self::getInfoInst($inst_fk);
         $payload["messages"] = [
             "email" => [
