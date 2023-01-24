@@ -85,7 +85,7 @@ class RecoverInvoiceControle extends Controle
         unset($file[0]);
         unset($file[1]);
         $body = implode('', $file);
-        $body = str_replace("\n", "<br> ok", $body);
+        $body = str_replace("\n", "<br><br>", $body);
         $html = str_replace('{my_content}', $body, $html);
         foreach ($instData as $k => $v) {
             $html = str_replace($k, $v, $html);
