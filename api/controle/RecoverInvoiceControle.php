@@ -139,6 +139,7 @@ class RecoverInvoiceControle extends Controle
         $instData = self::getInfoInstTpl($inst_fk);
         $instData["LINK"] = 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $protocoloSelect,
         $payload["institution"] = self::getInfoInst($inst_fk);
+        $payload["LINK"] = $instData["LINK"];
         $payload["messages"] = [
             "email" => [
                 "1_DAY" => self::tplEmailLead('1_DAY', $instData),
