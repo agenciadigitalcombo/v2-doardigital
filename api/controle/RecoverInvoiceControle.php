@@ -39,6 +39,17 @@ class RecoverInvoiceControle extends Controle
             ]
         );
     }
+
+    static function intervalTime( $dataCreate, $dataLastUpdate ) {
+        $data1 = $dataCreate;
+        $data2 = $dataLastUpdate;
+        $unix_data1 = strtotime($data1);
+        $unix_data2 = strtotime($data2);
+        $nHoras   = ($unix_data2 - $unix_data1) / 3600;
+        $nMinutos = (($unix_data2 - $unix_data1) % 3600) / 60;
+        return $nHoras * 60 + $nMinutos; 
+    }
+
     static function finalizar()
     {
         self::requireInputs([
@@ -57,9 +68,7 @@ class RecoverInvoiceControle extends Controle
             $intervaloMaxEmMinutos = 15;
             $dataHoraRegistroTime = strtotime($protocolo['dataHoraRegistro']);
             $dataHoraUpdateTime = strtotime(date('Y-m-d H:i:s'));
-            $calc = date('H:i', $dataHoraRegistroTime - $dataHoraUpdateTime);
-            $calc = explode(':', $calc);
-            $calc = (intval($calc[0]) * 60) + intval($calc[1]);
+            $calc = self::intervalTime( $dataHoraRegistroTime , $dataHoraUpdateTime);             
             if ($calc > $intervaloMaxEmMinutos) {
                 $recuperado = 1;
             }

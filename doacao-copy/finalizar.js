@@ -119,6 +119,9 @@ export default {
                     tipo: this.tipoPagamento,
                     url: res?.payload?.url
                 })
+                let apiProto = new ApiRecover()
+                await apiProto.finalizar(apiProto.getProtocolo())
+                apiProto.clearProtocolo()
                 this.$router.push('obrigado')
             }
         },
