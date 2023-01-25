@@ -143,8 +143,8 @@ class RecoverInvoiceControle extends Controle
             "@@body@@" => '',
             "{instituicao_cor}" => $inst["cor"],
             "{INSTITUICAO}" => $inst["nome"],
-            "{STYLE_BTN}" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"',
-            "{LINK}" => 'https://' . $inst['domain'] . "/doacao-copy/#/finalizar?protocolo=" . $_REQUEST['protocolo'],
+            "{STYLE_BTN}" => 'style="background:#20e277;text-decoration:none !important; font-weight:700; margin-top:35px; color:#fff;text-transform:uppercase; font-size:19px;padding:20px 30px;display:inline-block;border-radius:50px;"',
+            "{LINK}" => 'https://' . $inst['domain'] . "/doacao/#/finalizar?protocolo=" . $_REQUEST['protocolo'],
         ];
     }
 
