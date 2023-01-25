@@ -47,4 +47,3 @@ POST {{host}}/api/recover/info
 Content-Type: application/x-www-form-urlencoded;
 
 protocolo={{protocolo}}
-

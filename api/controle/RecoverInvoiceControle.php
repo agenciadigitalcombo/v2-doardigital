@@ -135,7 +135,7 @@ class RecoverInvoiceControle extends Controle
             "{instituicao_cor}" => $inst["cor"],
             "{INSTITUICAO}" => $inst["nome"],
             "{STYLE_BTN}" => 'style="border-radius: 20px; background-color: green; color: #FFF; display:block; width: 200px; margin: 0 auto; padding: 10px 20px; text-align: center; text-decoration: none;"',
-            "{LINK}" => 'https://' . $inst['domain'] . "/doacao-copy/#/?protocolo=" . $_REQUEST['protocolo'],
+            "{LINK}" => 'https://' . $inst['domain'] . "/doacao-copy/#/finalizar?protocolo=" . $_REQUEST['protocolo'],
         ];
     }
 
