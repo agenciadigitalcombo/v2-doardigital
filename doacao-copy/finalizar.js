@@ -3,10 +3,11 @@ import Temp from '../components/Temp.js'
 import { cpf, tel } from '../components/mask.js'
 import apiFatura from '../components/apiFatura.js'
 import api from './api.js'
-
-const html = await getTemplate('./finalizar')
+import ApiRecover from '../components/apiRecover.js'
 
 console.log(api)
+
+const html = await getTemplate('./finalizar')
 
 export default {
     data: function () {
@@ -49,10 +50,44 @@ export default {
         this.valor = data?.valor || api.planos[0].price
         this.printValor = this.price(this.valor)
         this.recorrente = this.typeDonation == 'single' ? 0 : 1
+
+        let protocolo = this.getProtocoloUrl() 
+
+        if(protocolo) {
+            let apiProto = new ApiRecover()
+            let {next, payload} = await apiProto.info(protocolo)
+            if(next) {
+                this.email = payload.email
+                this.valor = payload.valor
+                this.nameDonation = payload.nome
+                this.telefone = payload.telefone
+                this.cpf = payload.cpf
+            }
+
+        }
+
     },
     methods: {
+        getProtocoloUrl() {
+            const url = new URL(window.location.href.replace('#/'))
+            return url.searchParams.get('protocolo')
+        },
         price(v) {
             return (+v).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        },
+        async atualizaRecover() {
+            let apiProto = new ApiRecover()
+            await apiProto.save(
+                this.institution_fk,
+                this.email,
+                this.valor == 'outro' ? this.toFloat(this.outro) : this.valor,
+                this.typeDonation == 'subscribe' ? 1 : 0,
+                apiProto.getProtocolo(),
+                this.nameDonation,
+                this.telefone,
+                this.cpf,
+                this.tipoPagamento
+            )
         },
         async fazerAssinatura() {
             this.message = null

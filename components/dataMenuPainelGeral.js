@@ -7,7 +7,7 @@ export default [
   { text: "Metas", ico: "fa-solid fa-chart-line", link: "metas" },
   { text: "Módulos", ico: "fa-solid fa-share-nodes", link: "modulos" },
   { text: "Mensageria", ico: "fa-solid fa-message", link: "mensageria" },
-  { text: "Configuração", ico: "fa-solid fa-gear", link: "configuracao" },
+  { text: "Configuração", ico: "fa-solid fa-gear", link: "configuracoes" },
   { text: "Usuários", ico: "fas fa-user-edit", link: "usuarios" },
   { text: "Minhas Instituições", ico: "fa-solid fa-house-laptop", link: "minhas-instituicoes" },
   { text: "Carteira", ico: "fa-solid fa-vault", link: "carteira" },

@@ -20,8 +20,8 @@
                             Nome
                         </label>
                         <div class="relative">
-                            <input required v-model="nameDonation" placeholder="Qual seu nome?"
-                                class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                            <input @blur="atualizaRecover" required v-model="nameDonation" placeholder="Qual seu nome?"
+                                class="w-full rounded-md border border-success py-3 px-3 text-black placeholder-[#929DA7] outline-none transition">
                         </div>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                                 Celular
                             </label>
                             <div class="relative">
-                                <input required @input="maskTel" v-model="telefone" placeholder="DDD+Celular"
-                                    class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                                <input @blur="atualizaRecover" required @input="maskTel" v-model="telefone" placeholder="DDD+Celular"
+                                    class="w-full rounded-md border border-success py-3 px-3 text-black placeholder-[#929DA7] outline-none transition">
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         </label>
                         <div class="mb-6 ">
                             <div class="relative">
-                                <input required v-model="cpf" @input="maskCpf" placeholder="000.000.000-00"
+                                <input @blur="atualizaRecover" required v-model="cpf" @input="maskCpf" placeholder="000.000.000-00"
                                     class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition">
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                             </label>
                             <div class="relative">
                                 <input v-model="cep" @input="maskCep" placeholder="00000-000"
-                                    class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                                    class="w-full rounded-md border border-success py-3 px-3 text-black placeholder-[#929DA7] outline-none transition">
                             </div>
                         </div>
                     </div>

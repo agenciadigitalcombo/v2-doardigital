@@ -19,6 +19,7 @@ export default {
             email: "",
             data: "",
             cpf: "",
+            message: null,
             formData: {
                 name: "Bruno",
                 showCep: 0
@@ -27,6 +28,8 @@ export default {
     },
     methods: {
         async atualizar() {
+            this.isLoad = true
+            this.message = null
             let api = new ApiInstitution()
             let inst = new MyInstitution()
             let inst_fk = inst.get()
@@ -52,12 +55,6 @@ export default {
             this.formData.endereco.tipo
             this.formData.endereco.nome
 
-
-
-
-
-
-
             let request = await api.update(
                 inst_fk,
                 this.formData.nome,
@@ -79,6 +76,10 @@ export default {
                 this.formData.endereco.estado,
                 this.formData.showCep
             )
+
+            this.message = request.message
+
+            this.isLoad = 'false'
         }
     },
     async mounted() {
@@ -116,24 +117,28 @@ export default {
         Loader
     },
     template: `
-   <div>
-      <Loader :open="isLoad" />
-      <BreadCrumb text="Home" text2="Configurações" />
-      <div class="relative pt-2 pb-32 bg-[#fff]">
-         <div class="px-4 md:px-6 mx-auto w-full">
+    <div>
+        <Loader :open="isLoad" />
+        <BreadCrumb text="Home" text2="Configurações" />
+        <div class="relative pt-2 pb-32 bg-[#fff]">
+        <div class="px-4 md:px-6 mx-auto w-full">
             <div>
-                  <div class="flex flex-wrap">
-                     <CardGeral text="Alterar Configurações do Site" size="cinco">
-                        <img :src="formData.logo_uri ? formData.logo_uri : base + formData.logo" />
-                        <div class="mx-auto w-[90%] lg:w-[95%] pt-8">
-                              <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4" v-html="inputs" @submit="atualizar"></form>
+                <div class="flex flex-wrap">
+                    <CardGeral text="Alterar Configurações do Site" size="cinco">
+                    <img :src="formData.logo_uri ? formData.logo_uri : base + formData.logo" />
+                    <div class="mx-auto w-[90%] lg:w-[95%] pt-8">
+                        <form action="javascript:void(0)" method="POST" class="js-form grid grid-cols-4 gap-4"
+                            v-html="inputs" @submit="atualizar"></form>
+                        <div v-if="message" class="block rounded bg-[#0F5] text-center mt-4"> 
+                        {{message}} 
                         </div>
-                        <canvas width="20" height="20" style="display: block; box-sizing: border-box; height: 65px;"
-                              id="line-chart"></canvas>
-                  </div>
-                  </CardGeral>
+                    </div>
+                    <canvas width="20" height="20" style="display: block; box-sizing: border-box; height: 65px;"
+                        id="line-chart"></canvas>
+                    </CardGeral>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>`,
+        </div>
+        </div>
+    </div>`,
 }
