@@ -117,7 +117,9 @@ export default {
                 tmp.save({
                     code: res?.payload?.code,
                     tipo: this.tipoPagamento,
-                    url: res?.payload?.url
+                    url: res?.payload?.url,
+                    email:null,
+                    valor: null
                 })
                 let apiProto = new ApiRecover()
                 await apiProto.finalizar(apiProto.getProtocolo())

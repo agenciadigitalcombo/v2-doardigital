@@ -2,13 +2,11 @@
   <div class="flex justify-center min-h-screen py-8" :style="{'background-color': cor}">
     <div class="flex items-center w-full max-w-lg mx-auto lg:w-3/6">
       <div class="flex-1">
-
         <div class="text-center">
           <div class="flex flex-wrap justify-center mb-3">
             <img :src="logo" class="h-[60px] mx-auto mb-4 object-center" onerror="logoDefault(this)" />
           </div>
         </div>
-
         <div class="bg-white rounded-md shadow-2xl p-5">
           <div v-if="tipo == 'CREDIT_CARD'">
             <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
@@ -41,7 +39,6 @@
             </div>
           </div>
         </div> <br>
-
         <div class="bg-white rounded-md shadow-2xl p-5">
           <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
             Compartilhe essa Causa!
@@ -51,7 +48,6 @@
             que possamos<br>alcançar mais pessoas e multiplicar o bem.
           </p>
           <div class="flex justify-around my-4">
-           
             <a :href="links?.facebook" target="_blank" rel="noopener noreferrer"
               class="border hover:bg-[#1877f2] w-12 h-12 fill-[#1877f2] hover:fill-white border-blue-200 rounded-full flex items-center justify-center shadow-xl hover:shadow-blue-500/50 cursor-pointer">
               <i class="fa-brands fa-facebook-f"></i>

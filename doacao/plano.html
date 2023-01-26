@@ -1,7 +1,7 @@
 <div :style="{'background-color': cor }">
     <div class="flex justify-center h-screen">
         <div class="flex items-center w-full max-w-lg mx-auto lg:w-3/6">
-            <div class="flex-1">
+            <div class="flex-1 ">
                 <div class="text-center">
                     <div class="flex flex-wrap justify-center mb-3">
                         <img :src="logo" class="object-center" onerror="logoDefault(this)" />
@@ -23,7 +23,7 @@
                             <div class="relative">
                                 <input @blur="autoSave" v-model="email" required type="email"
                                     placeholder="seuemail@exemplo.com.br"
-                                    class="w-full rounded-md border border-success py-3 px-12 text-black placeholder-[#929DA7] outline-none transition">
+                                    class="w-full rounded-md border border-success py-3 px-3 text-black placeholder-[#929DA7] outline-none transition">
                                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
                                 </span>
                                 <span class="absolute top-1/2 right-4 -translate-y-1/2">

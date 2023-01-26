@@ -112,7 +112,7 @@ class EmailRecover  extends Controle
             "doador" => $do,
             "CODE" => $fatura['codigo'],
             "LINK" => 'https://' . $inst['domain'] . "/pix/#/?code=" . $fatura['codigo'],
-            "STYLE_BTN" => 'style="background:#20e277;text-decoration:none !important; font-weight:700; margin-top:35px; color:#fff;text-transform:uppercase; font-size:19px;padding:20px 30px;display:inline-block;border-radius:50px;"'
+            "STYLE_BTN" => 'style="background:#20e277;text-decoration:none !important; font-weight:700; margin-top:35px; color:#fff;text-transform:uppercase; font-size:19px;padding:20px 30px;display:block;border-radius:50px; margin: 0 auto; width: 200px;"'
         ];
 
         if( $fatura['tipo_pagamento'] == "BOLETO") {

@@ -12,7 +12,7 @@ export default {
             email: null,
             typeDonation: 'subscribe',
             valor: api.planos[0].price,
-            planos: api.planos,
+            planos: api.planos.reverse(),
             logo: api.logo,
             cor: api.cor ? api.cor : '#232d7b',
             bg: api?.bg,
