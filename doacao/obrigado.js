@@ -12,6 +12,7 @@ export default {
             code: null,
             tipo: null,
             url: null,
+            links: {}
         }
     },
     components: {},
@@ -21,6 +22,8 @@ export default {
         this.code = info?.code
         this.tipo = info?.tipo
         this.url = info?.url
+        this.links = this.compartilhar(api.domain)
+       
     },
     methods: {
         copyPix() {
@@ -28,6 +31,14 @@ export default {
             this.$refs.codePix.setSelectionRange(0, 99999)
             navigator.clipboard.writeText(this.$refs.codePix.value)
         },
+        compartilhar( domain ) {
+            return {
+                facebook: encodeURI( `https://www.facebook.com/sharer/sharer.php?u=https://${domain}`),
+                whats: encodeURI(`https://web.whatsapp.com/send?text=https://${domain}`),
+                twitter: encodeURI(`https://twitter.com/intent/tweet?text=https://${domain}`),
+                telegram: encodeURI(`https://t.me/share/url?url=https://${domain}&text=`),
+            }
+        }
     },
     template: html,
 }
