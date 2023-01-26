@@ -84,6 +84,7 @@ export default {
         new Option('341', 'BCO ITAÚ UNIBANCO - 341'),
         new Option('077', 'BCO INTER - 077'),
         new Option('756', 'BCO SICOOB - 756'),
+        new Option('260', 'NUBANK - 260'),
       ], true, defaultBanco),
       new Select('contaTipo', 'Conta Tipo', 1, [
         new Option('', 'Escolha um tipo de conta'),
