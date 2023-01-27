@@ -132,9 +132,10 @@
                 <div class="w-full mb-1 px-3 md:w-2/2 lg:w-3/3" v-if="tipoPagamento=='CREDIT_CARD'">
                     <div>
                         <label class="block text-base font-medium text-black">
-                            Informe os dados do cartão
+                            Informe os dados do cartão (Cartões Aceitos)
                         </label>
                     </div>
+                    <img src="../assets/image/bandeiras-aceitas.png" class="w-full block" alt="bandeira">
                 </div>
                 
                 <div v-if="tipoPagamento=='CREDIT_CARD'" class="w-full md:w-2/2 lg:w-3/3">
@@ -221,6 +222,11 @@
                 <div class="flex justify-between mt-4"></div>
             </form>            
         </div>
+        <div class="block text-center py-2">
+            <a href="javascript:void(history.back())" class=" inline text-[#EEE] underline ">
+                Voltar a página anterior
+            </a>
+        </div>        
     </div>
     <img class="hidden lg:block z-index-[-1] fixed top-0 right-0 w-[50%] h-[100vh] object-cover" :src="bg"
         onerror="imgDefault(this)">
