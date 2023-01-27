@@ -7,6 +7,5 @@ Sua contribuição mensal nos ajuda a continuar essa linda e árdua missão.
 Que os anjos e santos do céu intercedam por sua vida e sua família.
 Deus lhe abençoe poderosamente!
 Copie seu código de PIX  abaixo para efetuar o pagamento
-CÓDIGO: {CODE}
-<a href="{LINK}" {STYLE_BTN}> Clique para copiar </a>
+<a href="{LINK}" {STYLE_BTN}> Clique aqui para copiar seu pix </a>
 Gratidão a Deus por sua generosidade.

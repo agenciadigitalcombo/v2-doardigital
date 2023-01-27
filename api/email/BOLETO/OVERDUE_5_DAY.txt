@@ -1,4 +1,4 @@
-Boleto 2º mensagem de recuperação (5 dias)
+Boleto 4º mensagem de recuperação (5 dias)
 Bênçãos para você.
 Olá {NOME},
 Ainda não conseguimos identificar o seu pagamento. Podemos ajudar de alguma forma?

@@ -48,6 +48,9 @@ export default {
         this.email = data.email
         this.typeDonation = data?.typeDonation || 'subscribe'
         this.valor = data?.valor || api.planos[0].price
+        if(data.valor == 'outro') {
+            this.valor = data.outro.replace(',','.')
+        }
         this.printValor = this.price(this.valor)
         this.recorrente = this.typeDonation == 'single' ? 0 : 1
 

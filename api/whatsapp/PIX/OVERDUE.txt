@@ -1,4 +1,4 @@
-PIX 1º mensagem de recuperação (imediato)
+PIX 3º mensagem vencido
 Olá, {NOME} paz e bem!
 Dando uma passadinha para lembrar que seu boleto está vencido, porém mesmo vencido você consegue efetuar seu pagamento em até 10 dias depois do vencimento
 *Clique no botão e copie seu código PIX * 
