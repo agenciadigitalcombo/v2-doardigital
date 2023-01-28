@@ -4,7 +4,7 @@
 	"States": {
 	  "Espera 15 minutos": {
 		"Type": "Wait",
-		"Seconds": 5,
+		"Seconds": 900,
 		"Next": "Ver Status Lead"
 	  },
 	  "Ver Status Lead": {
@@ -158,7 +158,7 @@
 	  },
 	  "Espera 1 dia": {
 		"Type": "Wait",
-		"Seconds": 5,
+		"Seconds": 86400,
 		"Next": "Ver Status Lead (1)"
 	  },
 	  "Ver Status Lead (1)": {
@@ -289,7 +289,7 @@
 	  },
 	  "Aguarda 4 dias": {
 		"Type": "Wait",
-		"Seconds": 5,
+		"Seconds": 345600,
 		"Next": "Ver Status Lead (2)"
 	  },
 	  "Ver Status Lead (2)": {
