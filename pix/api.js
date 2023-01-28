@@ -10,8 +10,8 @@ info.payload.planos = (info.payload.planos.sort(orderPrice)).reverse()
 
 info.payload.planos = info.payload.planos.map( p => ({...p, printPrice: (+p.price).toLocaleString('pt-br', {minimumFractionDigits: 2}) }) )
 
-globalThis.logoDefault = e => e.src = "https://hostdoar.tk/api/upload/6384429d56bf91669612189.png"
-globalThis.imgDefault = e => e.src = "https://hostdoar.tk/assets/image/doardigital-assinaturadigital.jpg"
+globalThis.logoDefault = e => e.src = "https://painel.doardigital.com.br/api/upload/6384429d56bf91669612189.png"
+globalThis.imgDefault = e => e.src = "https://painel.doardigital.com.br/assets/image/doardigital-assinaturadigital.jpg"
 
 export default {
     ...info.payload,

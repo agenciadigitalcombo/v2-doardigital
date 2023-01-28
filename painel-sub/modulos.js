@@ -38,7 +38,7 @@ export default {
                 <CardGeral text="Domínio Personalizado" size="5" class="text-center content-center">
                 
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb57cfa5a1665645399.png">
+                    <img class="mx-auto" src="https://painel.doardigital.com.br/api/upload/6347bb57cfa5a1665645399.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blueNot" />            
@@ -46,7 +46,7 @@ export default {
             
                 <CardGeral text="Configuração E-mail" size="5" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
+                    <img class="mx-auto" src="https://painel.doardigital.com.br/api/upload/6347bb630fa7c1665645411.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
@@ -62,7 +62,7 @@ export default {
             
                 <CardGeral text="RD Station" size="5" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6eeaa721665645422.png">
+                    <img class="mx-auto" src="https://painel.doardigital.com.br/api/upload/6347bb6eeaa721665645422.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blueNot" />   
@@ -70,7 +70,7 @@ export default {
 
                 <CardGeral text="Scripts" size="5" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb6a2aca01665645418.png">
+                    <img class="mx-auto" src="https://painel.doardigital.com.br/api/upload/6347bb6a2aca01665645418.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blueNot">   

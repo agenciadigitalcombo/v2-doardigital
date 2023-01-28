@@ -125,7 +125,7 @@ export default {
                           
                 <CardGeral text="Configuração E-mail" size="4" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
+                    <img class="mx-auto" src="https://painel.doardigital.com.br/api/upload/6347bb630fa7c1665645411.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blue" link="#/configuracao-email"/>   
@@ -133,7 +133,7 @@ export default {
 
                 <CardGeral text="Modelo de e-mails" size="4" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="https://hostdoar.tk/api/upload/6347bb630fa7c1665645411.png">
+                    <img class="mx-auto" src="https://painel.doardigital.com.br/api/upload/6347bb630fa7c1665645411.png">
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blue" link="#/modelo-de-emails"/>   
