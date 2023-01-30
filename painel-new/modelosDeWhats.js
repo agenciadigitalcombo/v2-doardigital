@@ -90,7 +90,7 @@ export default {
                     <div class="flex flex-wrap">                
                         <CardGeral text="" size="full">
                             <div class="flex justify-end w-full">
-                                <button :disabled="loading" @click="reset" class="bg-[#C00] hover:bg-[#800] text-white rounded text-[11px] py-1 px-2 pointer">
+                                <button :disabled="loading" @click="reset" class="bg-[#C00] hover:bg-[#800] text-white rounded text-[11px] py-1 px-2 pointer hidden">
                                     {{textReset}}
                                 </button>
                             </div>
