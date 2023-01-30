@@ -205,7 +205,7 @@ $admins->table('institution_adm');
 $admins->where([
     "instituition_fk" => $institution_fk,
 ]);
-@$adminFk = $admins->select()[0]['adm_fk'] ?? 'ADM_FAIL';
+@$adminFk = $admins->select()[0]['adm_fk'] ?? '';
 
 $integrate = new Banco();
 $integrate->table('integration');
@@ -213,7 +213,7 @@ $integrate->where([
     "tipo" => "CANAL_WHATS",
     "instituicao_fk" => $adminFk,
 ]);
-@$integrateWhatsBearer = $integrate->select()[0]['key_1'] ?? 'BEARER_NOT';
+@$integrateWhatsBearer = $integrate->select()[0]['key_1'] ?? '';
 
 $payload = [
     "instituicao" => $company,
