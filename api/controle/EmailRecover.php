@@ -154,6 +154,7 @@ class EmailRecover  extends Controle
         self::printSuccess(
             "Dados para email de recuperação",
             [
+                "recorrente" => $sufixoTipo == '_SIGNATURE',
                 "intervalo" => $intervalo,
                 "status_temp" => $fatura['status_pagamento'] . $sufixo,
                 "message" => [
