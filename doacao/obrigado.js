@@ -2,6 +2,8 @@ import getTemplate from '../components/getTemplate.js'
 import Tmp from '../components/Temp.js'
 import api from './api.js'
 
+console.log(api)
+
 const html = await getTemplate( './obrigado' )
 
 export default {
@@ -12,7 +14,8 @@ export default {
             code: null,
             tipo: null,
             url: null,
-            links: {}
+            links: {},
+            inst: api
         }
     },
     components: {},

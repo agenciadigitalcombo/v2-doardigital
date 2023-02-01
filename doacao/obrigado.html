@@ -69,7 +69,14 @@
       </div>
     </div>
   </div>
-  <div class="hidden sticky top-[100vh] bg-blue-500 text-center">
-    Obrigado por<br>asa<br>asa
+  <div class="sticky top-[100vh] bg-white text-center py-4 text-[11px]">
+    {{inst.nome}} - CPF/CNPJ: {{inst.cpfCnpj}} |
+    Endereço: {{inst.endereco.logadouro}} Nº {{inst.endereco.numero}} , {{inst.endereco.complemento}} - {{inst.endereco.bairro}}, <br>
+    {{inst.endereco.cidade}} - {{inst.endereco.estado}} - CEP: {{inst.endereco.cep}} |
+    Para dúvidas e cancelamentos entre em contato com nossa <br>
+    central de relacionamento no telefone {{inst.telefone}}
+    ou pelo e-mail: {{inst.email}} |
+    Em até 30 dias após o processamento da transação, <br>
+    realizaremos o ressarcimento integral dos valores doados
   </div>
 </div>
