@@ -93,32 +93,32 @@ export default {
         let quantPlanos = reqResumo.quantPlanos
         let status = reqResumo.status
 
-        this.adimplente = reqResumo.adimplente
-        this.inadimplente = reqResumo.inadimplente
-        this.normal = reqResumo.normal
-        this.previsto = formataMoeda(reqResumo.previsto)
+        this.adimplente = reqResumo?.adimplente || 0
+        this.inadimplente = reqResumo?.inadimplente || 0
+        this.normal = reqResumo?.normal || 0
+        this.previsto = formataMoeda(reqResumo?.previsto || 0)
         this.donationByDay = reqResumo.donationByDay
 
         if (request.next) {
             this.doadorTotal = requestTotal
             this.totalDoadorUnico = totalDoadorUnico
             this.totalDoadorRecorrente = totalDoadorRecorrente
-            this.totalEmDoacoes = formataMoeda(reqResumo.totalGeral.total)
-            this.totalEmPix = formataMoeda(reqResumo.totalGeral.PIX)
-            this.totalEmBoleto = formataMoeda(reqResumo.totalGeral.BOLETO)
-            this.totalEmCredito = formataMoeda(reqResumo.totalGeral.CREDIT_CARD)
-            this.totalPago = formataMoeda(reqResumo.totalPagos.total)
-            this.totalPagoPix = formataMoeda(reqResumo.totalPagos.PIX)
-            this.totalPagoBoleto = formataMoeda(reqResumo.totalPagos.BOLETO)
-            this.totalPagoCredito = formataMoeda(reqResumo.totalPagos.CREDIT_CARD)
-            this.totalAberto = formataMoeda(reqResumo.totalAberto.total)
-            this.totalAbertoPix = formataMoeda(reqResumo.totalAberto.PIX)
-            this.totalAbertoBoleto = formataMoeda(reqResumo.totalAberto.BOLETO)
-            this.totalAbertoCredito = formataMoeda(reqResumo.totalAberto.CREDIT_CARD)
-            this.totalACancelado = formataMoeda(reqResumo.totalACancelado.total)
-            this.totalACanceladoPix = formataMoeda(reqResumo.totalACancelado.PIX)
-            this.totalACanceladoBoleto = formataMoeda(reqResumo.totalACancelado.BOLETO)
-            this.totalACanceladoCredito = formataMoeda(reqResumo.totalACancelado.CREDIT_CARD)
+            this.totalEmDoacoes = formataMoeda(reqResumo?.totalGeral?.total||0)
+            this.totalEmPix = formataMoeda(reqResumo?.totalGeral?.PIX || 0)
+            this.totalEmBoleto = formataMoeda(reqResumo?.totalGeral?.BOLETO || 0)
+            this.totalEmCredito = formataMoeda(reqResumo?.totalGeral?.CREDIT_CARD || 0)
+            this.totalPago = formataMoeda(reqResumo?.totalPagos?.total || 0)
+            this.totalPagoPix = formataMoeda(reqResumo?.totalPagos?.PIX || 0)
+            this.totalPagoBoleto = formataMoeda(reqResumo?.totalPagos?.BOLETO || 0)
+            this.totalPagoCredito = formataMoeda(reqResumo?.totalPagos?.CREDIT_CARD || 0)
+            this.totalAberto = formataMoeda(reqResumo?.totalAberto?.total || 0)
+            this.totalAbertoPix = formataMoeda(reqResumo?.totalAberto?.PIX || 0)
+            this.totalAbertoBoleto = formataMoeda(reqResumo?.totalAberto?.BOLETO|| 0)
+            this.totalAbertoCredito = formataMoeda(reqResumo?.totalAberto?.CREDIT_CARD||0)
+            this.totalACancelado = formataMoeda(reqResumo?.totalACancelado?.total||0)
+            this.totalACanceladoPix = formataMoeda(reqResumo?.totalACancelado?.PIX||0)
+            this.totalACanceladoBoleto = formataMoeda(reqResumo?.totalACancelado?.BOLETO||0)
+            this.totalACanceladoCredito = formataMoeda(reqResumo?.totalACancelado?.CREDIT_CARD||0)
             this.requisicao = request
             this.isLoad = 'false'
         }
@@ -146,20 +146,30 @@ export default {
         CardDash
     },
     methods: {
+        async loadYer() {
+
+        },
     },
     template: `
     <div>
 
     <br>
         <Loader :open="isLoad" />
-        <div class="flex flex-wrap">
-        
+        <label class="block mb-8">
+            <small>Selecione o Ano</small>
+            <select @change="loadYer" v-model="ano" class="rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 ">
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            </select>
+        </label>
+        <div class="flex flex-wrap">        
             <CardDash size="4" cor="blue" variation="blue" text="Total em Doações" :value="totalEmDoacoes" :valuepix="totalEmPix" :valueboleto="totalEmBoleto" :valuecredito="totalEmCredito"/>
             <CardDash size="4" cor="green" variation="green" text="Total Pago" :value="totalPago" :valuepix="totalPagoPix" :valueboleto="totalPagoBoleto" :valuecredito="totalPagoCredito"/>
             <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto" :value="totalAberto" :valuepix="totalAbertoPix" :valueboleto="totalAbertoBoleto" :valuecredito="totalAbertoCredito"/>
             <CardDash size="4" cor="red" variation="red" text="Total Vencido" :value="totalACancelado" :valuepix="totalACanceladoPix" :valueboleto="totalACanceladoBoleto" :valuecredito="totalACanceladoCredito"/>
             <Card2 text="Total de Doadores" :value="doadorTotal" variation="blue" cor="blue" icon="grupo" size="4" />
-            <Card2 value="??" text="Novos Doadores" :value="totalQntEstornado" variation="green" cor="green" icon="heart" size="4" />
+            <Card2 value="??" text="Novos Doadores"  variation="green" cor="green" icon="heart" size="4" />
             <Card2 text="Doadores Ùnico" :value="totalDoadorUnico" variation="yellow" cor="yellow" icon="heart" size="4" />
             <Card2 text="Doadores Recorrentes" :value="totalDoadorRecorrente" variation="green" cor="green" icon="heart" size="4" />
             <Card2  text="Doadores Adimplentes" :value="adimplente" variation="green" cor="green" icon="adimplente" size="4" />
