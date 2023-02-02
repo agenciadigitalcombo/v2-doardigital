@@ -12,21 +12,22 @@ class RelatorioControle extends Controle
         // self::privateRouter();
 
         $fk = $_REQUEST["institution_fk"];
+        @$ano = $_REQUEST["ano"] ?? date('Y');
 
         $relatorio = new Relatorio();
 
         $inst = self::inst($fk);
         $donations = self::allDonation($fk);
-        $metas = self::allMetas($fk);
+        $metas = self::allMetas($fk, $ano);
 
         $donations = array_map(['Fatura', 'porter'], $donations);
         $metas = array_map(['Metas', 'porter'], $metas);
         $inst = Instituicao::porter($inst);
         $previsto = self::previsto($donations);
-        $donations = array_filter($donations, function ($d) {
+        $donations = array_filter($donations, function ($d) use ($ano) {
             $data = strtotime($d["dataCreated"]);
             $hoje = strtotime(date('Y-m-d'));
-            return $data <= $hoje;
+            return $data <= $hoje && $ano == substr(0, 4,$d["dataCreated"] ) ;
         });
         $donations = array_values($donations);
         $invoicesByDoador = self::groupDoador($donations);
@@ -301,13 +302,13 @@ class RelatorioControle extends Controle
         return $db_inst->select();
     }
 
-    static function allMetas($fk)
+    static function allMetas($fk, $ano)
     {
         $db_inst = new Banco();
         $db_inst->table('meta');
         $db_inst->where([
             "instituicao_fk" => $fk,
-            "ano" => "2022"
+            "ano" => $ano
         ]);
         return $db_inst->select();
     }

@@ -24,6 +24,7 @@ import CardDash from "../components/CardDash.js"
 export default {
     data: function () {
         return {
+            ano: null,
             isLoad: 'true',
             statusUnico: 0,
             statusRecorrente: 0,
@@ -152,6 +153,7 @@ export default {
     <br>
         <Loader :open="isLoad" />
         <div class="flex flex-wrap">
+        
             <CardDash size="4" cor="blue" variation="blue" text="Total em Doações" :value="totalEmDoacoes" :valuepix="totalEmPix" :valueboleto="totalEmBoleto" :valuecredito="totalEmCredito"/>
             <CardDash size="4" cor="green" variation="green" text="Total Pago" :value="totalPago" :valuepix="totalPagoPix" :valueboleto="totalPagoBoleto" :valuecredito="totalPagoCredito"/>
             <CardDash size="4" cor="yellow" variation="yellow" text="Total em Aberto" :value="totalAberto" :valuepix="totalAbertoPix" :valueboleto="totalAbertoBoleto" :valuecredito="totalAbertoCredito"/>
