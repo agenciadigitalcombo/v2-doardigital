@@ -70,70 +70,8 @@ export default {
     },
     async mounted() {
         this.ano = (new Date()).getFullYear()
-        this.isLoad = 'true'
-        let Resumo = new ApiRelatorio()
-        let doadores = new ApiDoadores()
-        let institution = new MyInstitution()
-        if (!institution.get()) {
-            this.$router.push('criar-instituicao')
-        }
-        let request = await doadores.lista(institution.get())
-        let requestPayload = request.payload
-        let requestTotal = requestPayload.length
-        let doadorUnico = requestPayload.filter(d => d.recorrente === false)
-        let doadorRecorrente = requestPayload.filter(d => d.recorrente === true)
-        let doadorUnicoTransform = Object.keys(doadorUnico)
-        let doadorRecorrenteTransform = Object.keys(doadorRecorrente)
-        let totalDoadorUnico = doadorUnicoTransform.length
-        let totalDoadorRecorrente = doadorRecorrenteTransform.length
-        let reqResumo = (await Resumo.info(institution.get())).payload
+        await this.loadYer()
 
-        let faturamento = reqResumo.faturamento
-        let formaPagamento = reqResumo.formaPagamento
-        let quantPlanos = reqResumo.quantPlanos
-        let status = reqResumo.status
-
-        this.adimplente = reqResumo?.adimplente || 0
-        this.inadimplente = reqResumo?.inadimplente || 0
-        this.normal = reqResumo?.normal || 0
-        this.previsto = formataMoeda(reqResumo?.previsto || 0)
-        this.donationByDay = reqResumo.donationByDay
-
-        if (request.next) {
-            this.doadorTotal = requestTotal
-            this.totalDoadorUnico = totalDoadorUnico
-            this.totalDoadorRecorrente = totalDoadorRecorrente
-            this.totalEmDoacoes = formataMoeda(reqResumo?.totalGeral?.total||0)
-            this.totalEmPix = formataMoeda(reqResumo?.totalGeral?.PIX || 0)
-            this.totalEmBoleto = formataMoeda(reqResumo?.totalGeral?.BOLETO || 0)
-            this.totalEmCredito = formataMoeda(reqResumo?.totalGeral?.CREDIT_CARD || 0)
-            this.totalPago = formataMoeda(reqResumo?.totalPagos?.total || 0)
-            this.totalPagoPix = formataMoeda(reqResumo?.totalPagos?.PIX || 0)
-            this.totalPagoBoleto = formataMoeda(reqResumo?.totalPagos?.BOLETO || 0)
-            this.totalPagoCredito = formataMoeda(reqResumo?.totalPagos?.CREDIT_CARD || 0)
-            this.totalAberto = formataMoeda(reqResumo?.totalAberto?.total || 0)
-            this.totalAbertoPix = formataMoeda(reqResumo?.totalAberto?.PIX || 0)
-            this.totalAbertoBoleto = formataMoeda(reqResumo?.totalAberto?.BOLETO|| 0)
-            this.totalAbertoCredito = formataMoeda(reqResumo?.totalAberto?.CREDIT_CARD||0)
-            this.totalACancelado = formataMoeda(reqResumo?.totalACancelado?.total||0)
-            this.totalACanceladoPix = formataMoeda(reqResumo?.totalACancelado?.PIX||0)
-            this.totalACanceladoBoleto = formataMoeda(reqResumo?.totalACancelado?.BOLETO||0)
-            this.totalACanceladoCredito = formataMoeda(reqResumo?.totalACancelado?.CREDIT_CARD||0)
-            this.requisicao = request
-            this.isLoad = 'false'
-        }
-
-        ''
-
-        tiposDoadores(this.$refs.tiposDoadores, [
-            this.totalDoadorRecorrente,
-            this.totalDoadorUnico
-        ])
-        statusDoacoes(this.$refs.statusDoacoes, status)
-        quantidadePlanos(this.$refs.quantidadePlanos, quantPlanos)
-        formasPagamentos(this.$refs.formasPagamentos, formaPagamento)
-        quantidadeDoacoes(this.$refs.quantidadeDoacoes, this.donationByDay)
-        GraphFaturamento(this.$refs.GraphFaturamento, faturamento)
     },
     components: {
         Table,
@@ -147,7 +85,70 @@ export default {
     },
     methods: {
         async loadYer() {
+            this.isLoad = 'true'
+            let Resumo = new ApiRelatorio()
+            let doadores = new ApiDoadores()
+            let institution = new MyInstitution()
+            if (!institution.get()) {
+                this.$router.push('criar-instituicao')
+            }
+            let request = await doadores.lista(institution.get())
+            let requestPayload = request.payload
+            let requestTotal = requestPayload.length
+            let doadorUnico = requestPayload.filter(d => d.recorrente === false)
+            let doadorRecorrente = requestPayload.filter(d => d.recorrente === true)
+            let doadorUnicoTransform = Object.keys(doadorUnico)
+            let doadorRecorrenteTransform = Object.keys(doadorRecorrente)
+            let totalDoadorUnico = doadorUnicoTransform.length
+            let totalDoadorRecorrente = doadorRecorrenteTransform.length
+            let reqResumo = (await Resumo.info(institution.get(), this.ano)).payload
 
+            let faturamento = reqResumo.faturamento
+            let formaPagamento = reqResumo.formaPagamento
+            let quantPlanos = reqResumo.quantPlanos
+            let status = reqResumo.status
+
+            this.adimplente = reqResumo?.adimplente || 0
+            this.inadimplente = reqResumo?.inadimplente || 0
+            this.normal = reqResumo?.normal || 0
+            this.previsto = formataMoeda(reqResumo?.previsto || 0)
+            this.donationByDay = reqResumo.donationByDay
+
+            if (request.next) {
+                this.doadorTotal = requestTotal
+                this.totalDoadorUnico = totalDoadorUnico
+                this.totalDoadorRecorrente = totalDoadorRecorrente
+                this.totalEmDoacoes = formataMoeda(reqResumo?.totalGeral?.total || 0)
+                this.totalEmPix = formataMoeda(reqResumo?.totalGeral?.PIX || 0)
+                this.totalEmBoleto = formataMoeda(reqResumo?.totalGeral?.BOLETO || 0)
+                this.totalEmCredito = formataMoeda(reqResumo?.totalGeral?.CREDIT_CARD || 0)
+                this.totalPago = formataMoeda(reqResumo?.totalPagos?.total || 0)
+                this.totalPagoPix = formataMoeda(reqResumo?.totalPagos?.PIX || 0)
+                this.totalPagoBoleto = formataMoeda(reqResumo?.totalPagos?.BOLETO || 0)
+                this.totalPagoCredito = formataMoeda(reqResumo?.totalPagos?.CREDIT_CARD || 0)
+                this.totalAberto = formataMoeda(reqResumo?.totalAberto?.total || 0)
+                this.totalAbertoPix = formataMoeda(reqResumo?.totalAberto?.PIX || 0)
+                this.totalAbertoBoleto = formataMoeda(reqResumo?.totalAberto?.BOLETO || 0)
+                this.totalAbertoCredito = formataMoeda(reqResumo?.totalAberto?.CREDIT_CARD || 0)
+                this.totalACancelado = formataMoeda(reqResumo?.totalACancelado?.total || 0)
+                this.totalACanceladoPix = formataMoeda(reqResumo?.totalACancelado?.PIX || 0)
+                this.totalACanceladoBoleto = formataMoeda(reqResumo?.totalACancelado?.BOLETO || 0)
+                this.totalACanceladoCredito = formataMoeda(reqResumo?.totalACancelado?.CREDIT_CARD || 0)
+                this.requisicao = request
+                this.isLoad = 'false'
+            }
+
+            ''
+
+            tiposDoadores(this.$refs.tiposDoadores, [
+                this.totalDoadorRecorrente,
+                this.totalDoadorUnico
+            ])
+            statusDoacoes(this.$refs.statusDoacoes, status)
+            quantidadePlanos(this.$refs.quantidadePlanos, quantPlanos)
+            formasPagamentos(this.$refs.formasPagamentos, formaPagamento)
+            quantidadeDoacoes(this.$refs.quantidadeDoacoes, this.donationByDay)
+            GraphFaturamento(this.$refs.GraphFaturamento, faturamento)
         },
     },
     template: `
@@ -155,7 +156,7 @@ export default {
 
     <br>
         <Loader :open="isLoad" />
-        <label class="block mb-8">
+        <label class="block mb-8 mx-4">
             <small>Selecione o Ano</small>
             <select @change="loadYer" v-model="ano" class="rounded border border-gray-300 block w-full py-2 px-4 text-gray-700 focus:outline-blue-700 ">
             <option value="2021">2021</option>
