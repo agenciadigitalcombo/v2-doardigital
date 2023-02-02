@@ -27,8 +27,8 @@ class RelatorioControle extends Controle
         $donations = array_filter($donations, function ($d) use ($ano) {
             $data = strtotime($d["dataCreated"]);
             $hoje = strtotime(date('Y-m-d'));
-            $ano_ = substr(0, 4,$d["dataCreated"] );
-            return $data <= $hoje && $ano == $ano_ ;
+            $ano_ = substr(0, 4, $d["dataCreated"] );
+            return $data <= $hoje and $ano == $ano_ ;
         });
         $donations = array_values($donations);
         $invoicesByDoador = self::groupDoador($donations);
