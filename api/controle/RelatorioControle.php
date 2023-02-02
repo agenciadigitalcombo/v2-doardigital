@@ -27,7 +27,7 @@ class RelatorioControle extends Controle
         $donations = array_filter($donations, function ($d) use ($ano) {
             $data = strtotime($d["dataCreated"]);
             $hoje = strtotime(date('Y-m-d'));
-            $ano_ = substr($d["data"], 0, 4 );
+            $ano_ = substr($d["dataCreated"], 0, 4 );
             return $data <= $hoje and $ano == $ano_ ;
         });
         $donations = array_values($donations);
