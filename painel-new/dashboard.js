@@ -1,7 +1,7 @@
-import Table  from "../components/Table.js"
-import Botao  from "../components/Botao.js"
+import Table from "../components/Table.js"
+import Botao from "../components/Botao.js"
 import BreadCrumb from "../components/BreadCrumb.js"
-import Card  from "../components/Card.js"
+import Card from "../components/Card.js"
 import Loader from "../components/Loader.js"
 import Card2 from "../components/Card2.js"
 import CardGeral from "../components/CardGeral.js"
@@ -22,9 +22,9 @@ import CardDash from "../components/CardDash.js"
 
 
 export default {
-    data: function() {
+    data: function () {
         return {
-            isLoad: 'true', 
+            isLoad: 'true',
             statusUnico: 0,
             statusRecorrente: 0,
             totalEmDoacoes: 0,
@@ -43,7 +43,7 @@ export default {
             doadorTotal: 0,
             totalDoadorUnico: 0,
             requisicao: null,
-            donations : [
+            donations: [
             ],
             adimplente: 0,
             inadimplente: 0,
@@ -57,81 +57,82 @@ export default {
                 </span>`,
                 editar: e => `
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                            </svg>
-                                        </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </div>
                 `
             },
-        
+
         }
     },
-    async mounted(){
-      this.isLoad = 'true'
-      let Resumo = new ApiRelatorio()
-      let doadores = new ApiDoadores()
-      let institution = new MyInstitution()
-      if(!institution.get()) {
-        this.$router.push('criar-instituicao')
-      }
-      let request = await doadores.lista(institution.get())
-      let requestPayload = request.payload
-      let requestTotal = requestPayload.length
-      let doadorUnico = requestPayload.filter(d => d.recorrente === false)
-      let doadorRecorrente = requestPayload.filter(d => d.recorrente === true)
-      let doadorUnicoTransform = Object.keys(doadorUnico)
-      let doadorRecorrenteTransform = Object.keys(doadorRecorrente)
-      let totalDoadorUnico = doadorUnicoTransform.length
-      let totalDoadorRecorrente = doadorRecorrenteTransform.length
-      let reqResumo = (await Resumo.info(institution.get())).payload
+    async mounted() {
+        this.ano = (new Date()).getFullYear()
+        this.isLoad = 'true'
+        let Resumo = new ApiRelatorio()
+        let doadores = new ApiDoadores()
+        let institution = new MyInstitution()
+        if (!institution.get()) {
+            this.$router.push('criar-instituicao')
+        }
+        let request = await doadores.lista(institution.get())
+        let requestPayload = request.payload
+        let requestTotal = requestPayload.length
+        let doadorUnico = requestPayload.filter(d => d.recorrente === false)
+        let doadorRecorrente = requestPayload.filter(d => d.recorrente === true)
+        let doadorUnicoTransform = Object.keys(doadorUnico)
+        let doadorRecorrenteTransform = Object.keys(doadorRecorrente)
+        let totalDoadorUnico = doadorUnicoTransform.length
+        let totalDoadorRecorrente = doadorRecorrenteTransform.length
+        let reqResumo = (await Resumo.info(institution.get())).payload
 
-      let faturamento = reqResumo.faturamento
-      let formaPagamento = reqResumo.formaPagamento
-      let quantPlanos = reqResumo.quantPlanos
-      let status = reqResumo.status
+        let faturamento = reqResumo.faturamento
+        let formaPagamento = reqResumo.formaPagamento
+        let quantPlanos = reqResumo.quantPlanos
+        let status = reqResumo.status
 
-      this.adimplente = reqResumo.adimplente
-      this.inadimplente = reqResumo.inadimplente
-      this.normal = reqResumo.normal
-      this.previsto = formataMoeda(reqResumo.previsto)
-      this.donationByDay = reqResumo.donationByDay
-      
-      if (request.next) {
-        this.doadorTotal = requestTotal
-        this.totalDoadorUnico = totalDoadorUnico
-        this.totalDoadorRecorrente = totalDoadorRecorrente
-        this.totalEmDoacoes = formataMoeda(reqResumo.totalGeral.total)
-        this.totalEmPix = formataMoeda(reqResumo.totalGeral.PIX)
-        this.totalEmBoleto = formataMoeda(reqResumo.totalGeral.BOLETO)
-        this.totalEmCredito = formataMoeda(reqResumo.totalGeral.CREDIT_CARD)
-        this.totalPago = formataMoeda(reqResumo.totalPagos.total)
-        this.totalPagoPix = formataMoeda(reqResumo.totalPagos.PIX)
-        this.totalPagoBoleto = formataMoeda(reqResumo.totalPagos.BOLETO)
-        this.totalPagoCredito = formataMoeda(reqResumo.totalPagos.CREDIT_CARD)
-        this.totalAberto = formataMoeda(reqResumo.totalAberto.total)
-        this.totalAbertoPix = formataMoeda(reqResumo.totalAberto.PIX)
-        this.totalAbertoBoleto = formataMoeda(reqResumo.totalAberto.BOLETO)
-        this.totalAbertoCredito = formataMoeda(reqResumo.totalAberto.CREDIT_CARD)
-        this.totalACancelado = formataMoeda(reqResumo.totalACancelado.total)
-        this.totalACanceladoPix = formataMoeda(reqResumo.totalACancelado.PIX)
-        this.totalACanceladoBoleto = formataMoeda(reqResumo.totalACancelado.BOLETO)
-        this.totalACanceladoCredito = formataMoeda(reqResumo.totalACancelado.CREDIT_CARD)
-        this.requisicao = request
-        this.isLoad = 'false'
-      }
-          
-         ''
-          
-          tiposDoadores(this.$refs.tiposDoadores,[
+        this.adimplente = reqResumo.adimplente
+        this.inadimplente = reqResumo.inadimplente
+        this.normal = reqResumo.normal
+        this.previsto = formataMoeda(reqResumo.previsto)
+        this.donationByDay = reqResumo.donationByDay
+
+        if (request.next) {
+            this.doadorTotal = requestTotal
+            this.totalDoadorUnico = totalDoadorUnico
+            this.totalDoadorRecorrente = totalDoadorRecorrente
+            this.totalEmDoacoes = formataMoeda(reqResumo.totalGeral.total)
+            this.totalEmPix = formataMoeda(reqResumo.totalGeral.PIX)
+            this.totalEmBoleto = formataMoeda(reqResumo.totalGeral.BOLETO)
+            this.totalEmCredito = formataMoeda(reqResumo.totalGeral.CREDIT_CARD)
+            this.totalPago = formataMoeda(reqResumo.totalPagos.total)
+            this.totalPagoPix = formataMoeda(reqResumo.totalPagos.PIX)
+            this.totalPagoBoleto = formataMoeda(reqResumo.totalPagos.BOLETO)
+            this.totalPagoCredito = formataMoeda(reqResumo.totalPagos.CREDIT_CARD)
+            this.totalAberto = formataMoeda(reqResumo.totalAberto.total)
+            this.totalAbertoPix = formataMoeda(reqResumo.totalAberto.PIX)
+            this.totalAbertoBoleto = formataMoeda(reqResumo.totalAberto.BOLETO)
+            this.totalAbertoCredito = formataMoeda(reqResumo.totalAberto.CREDIT_CARD)
+            this.totalACancelado = formataMoeda(reqResumo.totalACancelado.total)
+            this.totalACanceladoPix = formataMoeda(reqResumo.totalACancelado.PIX)
+            this.totalACanceladoBoleto = formataMoeda(reqResumo.totalACancelado.BOLETO)
+            this.totalACanceladoCredito = formataMoeda(reqResumo.totalACancelado.CREDIT_CARD)
+            this.requisicao = request
+            this.isLoad = 'false'
+        }
+
+        ''
+
+        tiposDoadores(this.$refs.tiposDoadores, [
             this.totalDoadorRecorrente,
             this.totalDoadorUnico
-          ])
-          statusDoacoes(this.$refs.statusDoacoes,status)
-          quantidadePlanos(this.$refs.quantidadePlanos,quantPlanos)
-          formasPagamentos(this.$refs.formasPagamentos,formaPagamento)
-          quantidadeDoacoes(this.$refs.quantidadeDoacoes,this.donationByDay)
-          GraphFaturamento(this.$refs.GraphFaturamento, faturamento)
+        ])
+        statusDoacoes(this.$refs.statusDoacoes, status)
+        quantidadePlanos(this.$refs.quantidadePlanos, quantPlanos)
+        formasPagamentos(this.$refs.formasPagamentos, formaPagamento)
+        quantidadeDoacoes(this.$refs.quantidadeDoacoes, this.donationByDay)
+        GraphFaturamento(this.$refs.GraphFaturamento, faturamento)
     },
     components: {
         Table,

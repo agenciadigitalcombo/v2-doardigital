@@ -24,10 +24,9 @@ function contador( $max ) {
     return $step;
 }
 
-function filter_date( $payload ) {
-    $data_now = date('Y-m');
+function filter_date( $payload ) {    
     $data_donation = substr($payload['data'], 0, 7) ;
-    return $data_now == $data_donation;
+    return $data_donation == '2023-02' || $data_donation == '2023-01' ;
 }
 
 function porter($payload) {
