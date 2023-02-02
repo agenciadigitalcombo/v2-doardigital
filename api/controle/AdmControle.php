@@ -33,85 +33,27 @@ class AdmControle extends Controle
                 []
             );
         }
+        
         if ($adm->exist($email)) {
             self::printError(
                 "Email ja em uso",
                 []
             );
         }
+
         $adm->register($nome, $email, $senha, $telefone, $cpf);
         $code = $adm->login($email, $senha);
         $jwt = $jwt->maker(["code" => $code]);
-        $env = require __DIR__ . "/../config.php";
-        $notification = new Message();
-
+        
         $payload = [
-            "instituicao" => null,
-            "nome" => $nome,
-            "email" => $email,
-            "subject" => "Seja bem vindo a Doar Digital",
-            "telefone" => $telefone,
-            "status_payment" => "CADASTRO",
-            "type_payment" => null,
-            "smtp" => [
-                "host" => $env["email_host"],
-                "protocolo" => $env["email_protocolo"],
-                "port" => $env["email_port"],
-                "user" => $env["email_user"],
-                "pass" => $env["email_pass"],
-            ],
-        ];
-
-        $notification->save(
-            "EMAIL",
-            time(),
-            $payload
-        );
-
-        $payload["nome"] = "Bruno";
-        $payload["email"] = "br.rafael@outlook.com";
-        $notification->save(
-            "EMAIL",
-            time(),
-            $payload
-        );
-
-        $payload["subject"] = "Um novo cadastro foi realizado";
-        $payload["status_payment"] = "NEWADM";
-        $notification->save(
-            "EMAIL",
-            time(),
-            $payload
-        );
-
-        $payload = [
-            "instituicao" => null,
             "nome" => $nome,
             "email" => $email,
             "telefone" => $telefone,
-            "ddd" => $telefone,
-            "valor" => 1,
-            "status_payment" => "CADASTRADO",
-            "type_payment" => "PIX",
-            "boleto_url" => "",
-            "url_pix" => "",
-            "code_boleto" => "",
-            "logradouro" => "",
-            "token" => $env["evendas"],
-            "external_id" => "register_" . uniqid(),
-        ];
-        $notification->save(
-            "WHATS",
-            time(),
-            $payload
-        );
-        $payload["telefone"] = "82999776698";
-        $payload["ddd"] = "82999776698";
-        $notification->save(
-            "WHATS",
-            time(),
-            $payload
-        );
+        ]; 
+
+        $state_machine = '';
+        $Fila = new FilaAws();
+        $Fila->send($payload, $state_machine );
 
         self::printSuccess(
             "cadastrado com sucesso",
