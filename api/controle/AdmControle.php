@@ -33,7 +33,7 @@ class AdmControle extends Controle
                 []
             );
         }
-        
+
         if ($adm->exist($email)) {
             self::printError(
                 "Email ja em uso",
@@ -51,7 +51,7 @@ class AdmControle extends Controle
             "telefone" => $telefone,
         ]; 
 
-        $state_machine = '';
+        $state_machine = 'arn:aws:states:us-east-1:348265973939:stateMachine:DoarDigital-Cadastro-Instituicao-Cliente';
         $Fila = new FilaAws();
         $Fila->send($payload, $state_machine );
 
