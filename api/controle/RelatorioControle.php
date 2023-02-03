@@ -20,8 +20,9 @@ class RelatorioControle extends Controle
         $donations = self::allDonation($fk);
         $metas = self::allMetas($fk, $ano);
 
+        
         $donations = array_map(['Fatura', 'porter'], $donations);
-        $metas = array_map(['Metas', 'porter'], $metas ?? []);
+        $metas = Metas::porter($metas);
         $inst = Instituicao::porter($inst);
         $previsto = self::previsto($donations);
         $donations = array_filter($donations, function ($d) use ($ano) {
@@ -252,7 +253,7 @@ class RelatorioControle extends Controle
     static function faturamento($donations, $metas)
     {
         $data = [];
-        $metas = array_values($metas[0]);
+        $metas = array_values($metas);
         unset($metas[0]);
         $metas = array_values($metas);
         $data["metas"] = $metas;
@@ -311,7 +312,7 @@ class RelatorioControle extends Controle
             "instituicao_fk" => $fk,
             "ano" => $ano
         ]);
-        return $db_inst->select();
+        return $db_inst->select()[0] ?? [];
     }
 
     static function all_doadores($fk, $donations)
