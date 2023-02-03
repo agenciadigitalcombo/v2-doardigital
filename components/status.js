@@ -9,11 +9,13 @@ export default function ( status ) {
         REFUND_REQUESTED: "Estornado",
         CHARGEBACK_REQUESTED: "Estornado",  
         DONE: "Realizado",      
+        BANK_PROCESSING: "Aguardando",      
         INACTIVE: "Inativo",      
         ACTIVE: "Ativo",      
     }
     let colors = {
         PENDING: "yellow",
+        BANK_PROCESSING: "yellow",
         RECEIVED: "green",
         CONFIRMED: "green",
         OVERDUE: "red",
