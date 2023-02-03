@@ -22,6 +22,7 @@ class RelatorioControle extends Controle
 
         $donations = array_map(['Fatura', 'porter'], $donations);
         $metas = array_map(['Metas', 'porter'], $metas);
+        $metas = $metas ? $metas : [0,0,0,0,0,0,0,0,0,0,0,0];
         $inst = Instituicao::porter($inst);
         $previsto = self::previsto($donations);
         $donations = array_filter($donations, function ($d) use ($ano) {
