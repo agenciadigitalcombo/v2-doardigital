@@ -281,6 +281,10 @@ class RelatorioControle extends Controle
         $data["total_pago"] = array_values($data["total_pago"]);
         $data["total_aberto"] = array_values($data["total_aberto"]);
 
+        $data["total"] = array_map('intval',$data["total"]);
+        $data["total_pago"] = array_map('intval',$data["total_pago"]);
+        $data["total_aberto"] = array_map('intval',$data["total_aberto"]);
+
         return $data;
     }
 
