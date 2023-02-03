@@ -1,4 +1,4 @@
-export default function($div, data) {
+export default function ($div, data) {
     var options = {
         series: [data.pago, data.aberto, data.vencido],
         chart: {
@@ -21,7 +21,7 @@ export default function($div, data) {
         title: {
         },
     };
-
+    $div.innerHTML = ''
     var chart = new ApexCharts($div, options);
     chart.render();
 

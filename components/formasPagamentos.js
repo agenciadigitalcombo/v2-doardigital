@@ -1,4 +1,4 @@
-export default function($div, data) {
+export default function ($div, data) {
   var options = {
     chart: {
       height: 350,
@@ -35,7 +35,7 @@ export default function($div, data) {
     labels: [''],
 
   }
-
+  $div.innerHTML = ''
   var pagamento = new ApexCharts($div, options);
   pagamento.render();
 

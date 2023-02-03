@@ -27,7 +27,7 @@ export default function ($div, data) {
     title: {
     },
   };
-
+  $div.innerHTML = ''
   var chart = new ApexCharts($div, options);
   chart.render();
 

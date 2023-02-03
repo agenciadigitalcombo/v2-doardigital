@@ -1,4 +1,4 @@
-export default function ($div, data) { 
+export default function ($div, data) {
   var options = {
     series: [{
       name: 'Total Arrecadado',
@@ -39,7 +39,7 @@ export default function ($div, data) {
     },
 
   };
-
+  $div.innerHTML = ''
   var chart = new ApexCharts($div, options);
   chart.render();
 }
