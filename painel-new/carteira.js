@@ -81,7 +81,7 @@ export default {
         let requestPayload = request.payload
         let requestExtrato = request.payload.extrato.data
         this.inst_fk = institution.get()
-        requestExtrato = requestExtrato.filter(i => (i.status == "PENDING" || i.status == 'DONE') && i.type == 'BANK_ACCOUNT' || i.type == 'ASAAS_ACCOUNT' )
+        requestExtrato = requestExtrato.filter(i => (i.status == "PENDING" || i.status == 'DONE') && i.type == 'BANK_ACCOUNT' || i.type == 'ASAAS_ACCOUNT' || i.type == 'BANK_PROCESSING' )
 
         if (request.next) {
             this.dadosInst = requestInstitution.payload
