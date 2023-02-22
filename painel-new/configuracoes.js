@@ -33,16 +33,8 @@ export default {
     <div class="relative pt-2 pb-32 bg-[#fff]">
           <div class="px-4 md:px-6 mx-auto w-full">
              <div>
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap">              
                 
-                <CardGeral text="Configuração LandPage" size="3" class="text-center content-center">
-                
-                <section class="hero container max-w-screen-lg mx-auto">
-                    <img class="mx-auto" src="/assets/image/gerenciador-de-temas.png">
-                </section>
-                <br>
-                <Botao text="Configurar" variation="blue" link="#/configuracao-landpage"/>            
-                </CardGeral>
             
                 <CardGeral text="Checkout" size="3" class="text-center content-center">
                 <section class="hero container max-w-screen-lg mx-auto">
@@ -50,6 +42,16 @@ export default {
                 </section>
                 <br>
                 <Botao text="Configurar" variation="blue" link="#/configuracao-checkout"/>   
+                </CardGeral>
+
+                <CardGeral text="Configuração LandPage" size="3" class="text-center content-center">
+                
+                <section class="hero container max-w-screen-lg mx-auto">
+                    <img class="mx-auto" src="/assets/image/gerenciador-de-temas.png">
+                </section>
+                <br>
+                <!-- link="#/configuracao-landpage" -->
+                <Botao text="Configurar" variation="blueNot" />            
                 </CardGeral>
                
                         
