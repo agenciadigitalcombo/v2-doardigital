@@ -26,7 +26,7 @@ function contador( $max ) {
 
 function filter_date( $payload ) {    
     $data_donation = substr($payload['data'], 0, 7);
-    return $data_donation == '2023-02' || $data_donation == '2023-01';
+    return $data_donation == '2023-02' ;
 }
 
 function porter($payload) {

@@ -29,7 +29,16 @@ class Fatura
 
     function maker_fk(): string
     {
-        return "ref_" . uniqid();
+        $serve_name = $_SERVER['SERVER_NAME'];
+        $black_list = [
+            ".com",
+            ".br",
+            "curso.",
+            ".org"
+        ];
+        $name = str_replace($black_list, '', $serve_name);
+        $prefix = "doar@";
+        return $prefix . $name . "_" . uniqid();        
     }
 
     public function listAll(string $instituicao_fk): array
