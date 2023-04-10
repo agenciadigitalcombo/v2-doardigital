@@ -87,6 +87,15 @@ if (!in_array($event, $whiteList)) {
     die;
 }
 
+if( $status == 'RECEIVED' && $tipo == 'CREDIT_CARD' ) {
+    echo json_encode([
+        "next" => false,
+        "message" => "evento desconhecido",
+        "payload" => []
+    ]);
+    die;
+}
+
 if (empty($reference_key)) {
     echo json_encode([
         "next" => false,
