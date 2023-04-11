@@ -207,6 +207,44 @@ class AwsControle extends Controle
         $execution_arn = $_REQUEST['execution_arn'];
         $institution_fk = $_REQUEST['institution_fk'];
 
+        if($status == 400) {
+            $db = new Banco();
+            $db->table('institution_adm');
+            $db->where([
+                "instituition_fk" => $institution_fk
+            ]);
+            $select = $db->select();
+            $code_name_session = $select[0]['adm_fk'];
+            $db->table('administrador');
+            $db->where([
+                'code' => $code_name_session
+            ]);
+            $phone = $select[0]['telefone'];
+            $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/check-connection-session";
+            $aws = new Aws();
+            $inter =  new Integration();    
+            $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];    
+            $resStatus = (array) $aws->get(
+                $path,
+                [],
+                ["Authorization: Bearer {$tokenWhats}"]
+            );
+            $isConnected = (bool) $resStatus['status'];
+            if(!$isConnected) {
+                $aws->post(
+                    "https://ohfzr5l0i3.execute-api.us-east-1.amazonaws.com/default/Notifica-Zap-Desconectado-DOARDIGITAL",
+                    [
+                        "phone" => $phone,
+                        "message" => "Sua conta WhatsApp esta desconectada da plataforma"
+                    ],
+                    []
+                );
+            }
+            if($isConnected) {
+                $status = 403;
+            }
+        }
+
         $menAws = new Banco();
         $menAws->table('message_aws');
         $menAws->insert([

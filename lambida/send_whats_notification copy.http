@@ -1,0 +1,7 @@
+POST https://ohfzr5l0i3.execute-api.us-east-1.amazonaws.com/default/Notifica-Zap-Desconectado-DOARDIGITAL
+content-type: application/json
+
+{
+    "phone": "82999776698",
+    "message": "Sua conta whatsapp esta desconectada da plataforma"
+}
