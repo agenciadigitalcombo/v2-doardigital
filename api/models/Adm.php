@@ -101,7 +101,7 @@ class Adm
             "email" => $email,
             "senha" => $this->pass($senha),
             "registro" => $this->dateNow(),
-            "etapa" => 0,
+            "etapa" => 1,
             "ativo" => 1,
             "sass" => 0,
             "adm" => null
