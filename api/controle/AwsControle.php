@@ -206,8 +206,9 @@ class AwsControle extends Controle
         $ref_fk = $_REQUEST['ref_fk'];
         $execution_arn = $_REQUEST['execution_arn'];
         $institution_fk = $_REQUEST['institution_fk'];
+        @$teste = $_REQUEST['teste'] ?? 0;
 
-        if($status == 400) {
+        if($status == 400 && $tipo == "WHATS") {
             $db = new Banco();
             $db->table('institution_adm');
             $db->where([
@@ -222,23 +223,51 @@ class AwsControle extends Controle
             $phone = $select[0]['telefone'];
             $path = "https://zap.digitalcombo.com.br/api/{$code_name_session}/check-connection-session";
             $aws = new Aws();
-            $inter =  new Integration();    
-            $tokenWhats = $inter->info($code_name_session, "CANAL_WHATS")['key_1'];    
+            $inter =  new Integration();
+            $getIntegration = $inter->info($code_name_session, "CANAL_WHATS");
+            $tokenWhats = $getIntegration['key_1'];    
             $resStatus = (array) $aws->get(
                 $path,
                 [],
                 ["Authorization: Bearer {$tokenWhats}"]
             );
             $isConnected = (bool) $resStatus['status'];
+            $isSend = false;
+
+
             if(!$isConnected) {
-                $aws->post(
-                    "https://ohfzr5l0i3.execute-api.us-east-1.amazonaws.com/default/Notifica-Zap-Desconectado-DOARDIGITAL",
-                    [
-                        "phone" => $phone,
-                        "message" => "Sua conta WhatsApp esta desconectada da plataforma"
-                    ],
-                    []
-                );
+                if($teste == 1) {
+                    if( $getIntegration['key_4'] == 0 ){
+                        $intervaloHoras = 4;
+                        $getLastUpdate = date( 'H',  strtotime( $getIntegration['key_4'] ));
+                        $hourNow = date('H', time());
+                        $resultado = $hourNow - $getLastUpdate;
+                        if( $resultado > $intervaloHoras) {
+                            $isSend = true;
+                        }
+                    }else {
+                        $isSend = true;
+                    }
+                    if($isSend) {
+                        $inter->update(
+                            $code_name_session,
+                            "CANAL_WHATS_teste",
+                            $getIntegration['key_1'],
+                            $getIntegration['key_2'],
+                            $getIntegration['key_3'],
+                            '0',
+                            date('Y-m-d H:i:s')
+                        );
+                        $aws->post(
+                            "https://ohfzr5l0i3.execute-api.us-east-1.amazonaws.com/default/Notifica-Zap-Desconectado-DOARDIGITAL",
+                            [
+                                "phone" => $phone,
+                                "message" => "Sua conta WhatsApp esta desconectada da plataforma"
+                            ],
+                            []
+                        );
+                    }
+                }
             }
             if($isConnected) {
                 $status = 403;

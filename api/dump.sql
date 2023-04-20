@@ -248,3 +248,6 @@ CREATE TABLE recover (
     dataHoraUpdate VARCHAR(255),
     institution_fk VARCHAR(255)
 );
+
+
+

@@ -1,9 +1,9 @@
-@host=http://hostdoar.tk
+@host=https://painel.doardigital.com.br
 @token=eyJjb2RlIjoiYWRtXzYyZDk3MzFhMTIwMzAifQ==.f28ebb285d23f0ff5b23270e73aeb13d2c6c2b80
-@institution_fk=inst_62d990c744f00
-@label=Cadatro
-@tipo=EMAIL
-@status=200
+@institution_fk=inst_63d98fd54291a
+@label=*Doação mensal paga
+@tipo=WHATS
+@status=400
 @doador_fk=do_FFFFFFFFFFFFFFFFFFFF1
 @fatura_fk=pay_FFFFFFFFFFFFFFFFFFFF1
 @ref_fk=ref_FFFFFFFFFFFFFFFFFFFF1
@@ -44,3 +44,7 @@ institution_fk={{institution_fk}}
 &fatura_fk={{fatura_fk}}
 &ref_fk={{ref_fk}}
 &execution_arn={{execution_arn}}
+&teste=1
+# &debug=true
+
+
