@@ -135,9 +135,9 @@ createApp({
     },
     async mounted() {
         let api = new apiAdmin()
-        let jwt = new Jwt() 
+        let jwt = new Jwt()
         let code = jwt.get()?.code
-        let requestInfo = await api.info(code)  
+        let requestInfo = await api.info(code)
 
         let level = 'sub'
         if (requestInfo?.payload?.adm?.length == 0) {
@@ -146,7 +146,7 @@ createApp({
         if (requestInfo?.payload?.sass == '1') {
             level = 'super'
         }
-        if (!jwt.logged() || level != "adm" ) {
+        if (!jwt.logged() || level != "adm") {
             window.location.href = `//${window.location.host}/login`
         }
     },
@@ -156,3 +156,12 @@ createApp({
         }
     }
 }).use(router).mount('#app')
+
+import {
+    Modal,
+    Ripple,
+    initTE,
+} from "./../components/tw-elements.es.min.js";
+
+initTE({ Modal, Ripple });
+console.log(Modal)
