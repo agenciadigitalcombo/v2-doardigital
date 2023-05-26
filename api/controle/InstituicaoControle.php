@@ -842,6 +842,9 @@ class InstituicaoControle extends Controle
             [
                 "payment_id" => $payment_id,
                 "external_id" => $fatura['external_fk'],
+                "type" => $fatura['tipo_pagamento'],
+                "url" => $fatura['url'],
+                "code" => $fatura['codigo'],
                 "status" => $fatura['status_pagamento'],
             ]
         );
