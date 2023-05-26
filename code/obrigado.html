@@ -19,7 +19,7 @@
           <h1 class="text-gray-800 font-bold text-2xl mb-1 text-center">
             Clique no botão para copiar o código inteiro
           </h1>
-          <div v-if="!url">
+          <div v-if="type=='PIX'">
             <img class="w-[250px] mx-auto" :src="'https://api-qrcode.digitalcombo.com.br/?code='+code">
           </div>
           <div class="border-2 border-gray-200 flex justify-between items-center mt-4 py-2">
@@ -30,7 +30,7 @@
               copiar
             </button>
           </div>
-          <div v-if="url">
+          <div v-if="type=='BOLETO'">
             <a 
             :href="url"
             class="block mt-4 text-center bg-green-500 text-white rounded text-sm py-2 px-5 mx-auto hover:bg-green-600"

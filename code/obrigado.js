@@ -11,15 +11,21 @@ export default {
             cor: api.cor,
             code: null,
             url: null,
-            successes: false, 
+            successes: false,
+            type: 'BOLETO',
         }
     },
     components: {},
     async mounted() {
+        
+        const path = "https://painel.doardigital.com.br/api/instituicao/resgata-status-fatura?payment_id="
+        const code = this.getUriData('code')
         let tmp = new Tmp()
         let info = tmp.info()
-        this.code = this.getUriData('code')
-        this.url = this.getUriData('url')      
+        let api = (await (await fetch(path + code)).json()).payload  
+        this.code = api.code
+        this.url = api.url  
+        this.type = api.type  
        
     },
     methods: {
